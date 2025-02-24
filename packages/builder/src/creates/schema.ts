@@ -9,16 +9,18 @@ import { createComponent, getTagName, COMPONENTS_FOLDER } from './component';
 const EMPTY_API_TS = ({
   pkgName,
   compName,
+  sourceName,
   title,
   description,
   type,
-}: { pkgName: string, compName: string, title: string, description: string, type: string }) => {
+}: { pkgName: string, sourceName: string, compName: string, title: string, description: string, type: string }) => {
   return `/// <reference types="@nasl/types" />
 namespace extensions.${pkgName}.viewComponents {
   const { Component, Prop, ViewComponent, Slot, Method, Event, ViewComponentOptions } = nasl.ui;
 
   @ExtensionComponent({
     type: '${type}',
+    sourceName: '${sourceName}',
     ideusage: {
       idetype: 'element',
     }
@@ -141,6 +143,7 @@ export async function createForSchema(rootPath: string, metaInfo: ProjectMetaInf
     pkgName: metaInfo.name,
     compName,
     title,
+    sourceName: component.name,
     description: component.description || title,
     type,
   }), 'utf-8');

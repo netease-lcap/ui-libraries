@@ -59,13 +59,13 @@ export async function parseNPM(options: any) {
 function addPkg(root: string, pkgManager: ParseCommandOptions['npmClient'], pkg: string) {
   switch (pkgManager) {
     case 'npm':
-      execSync(`npm install ${pkg} --save`, root);
+      execSync(`npm install ${pkg} --save`);
       break;
     case 'pnpm':
-      execSync(`pnpm add ${pkg}`, root);
+      execSync(`pnpm add ${pkg}`);
       break;
     case 'yarn':
-      execSync(`yarn add ${pkg}`, root);
+      execSync(`yarn add ${pkg}`);
       break;
     default: break;
   }
@@ -97,7 +97,7 @@ export default async function executeParse(rootPath: string, options: ParseComma
       name,
       version,
       output,
-      npmClient,
+      npmClient: 'npm',
     });
 
     console.log(picocolors.green(`解析包 ${pkg} 成功，生成文件 ${options.output || 'schema.json'}`));
