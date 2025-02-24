@@ -72,7 +72,7 @@ namespace nasl.ui {
           useRef: 'argus?.[0]?.index === 0',
         },
       },
-      childAccept: "target.tag === 'el-table-column-pro'",
+      childAccept: "target.tag === 'el-table-column'",
     },
   })
   @Component({
@@ -935,10 +935,16 @@ namespace nasl.ui {
       parentAccept: "['el-table'].includes(target.tag)",
       // childAccept: false,
       useTemplateInDefaultSlot: true,
-      selector: {
-        expression: 'this',
-        cssSelector: 'td',
-      },
+      selector: [
+        {
+          expression: 'this',
+          cssSelector: 'td',
+        },
+        {
+          expression: 'this.getElement(el=>el.slotTarget==="header")',
+          cssSelector: 'th',
+        },
+      ],
       forceUpdateWhenAttributeChange: 'parent',
       disableSlotAutoFill: [
         {
