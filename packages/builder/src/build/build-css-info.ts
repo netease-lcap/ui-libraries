@@ -1,6 +1,7 @@
 /* eslint-disable no-cond-assign */
 /* eslint-disable no-multi-assign */
 /* eslint-disable prefer-destructuring */
+/* eslint-disable no-restricted-syntax */
 
 import fs from 'fs-extra';
 import path from 'path';
@@ -20,8 +21,8 @@ function getChildrenValue(val: Record<string, any>) {
   return val.nodes.map((node) => node.toString());
 }
 
-function isStartWithPrefix(hiddenSelectorPreFixList, selectorKey) {
-  return hiddenSelectorPreFixList.some((selectorPrefix) => selectorKey.startsWith(selectorPrefix) || selectorKey.startsWith(`[class*=${selectorPrefix}`));
+function startsWithPrefix(hideSelectorPrefixes: Array<string>, selectorKey: string) {
+  return hideSelectorPrefixes.some((selectorPrefix) => selectorKey.startsWith(selectorPrefix) || selectorKey.startsWith(`[class*=${selectorPrefix}`));
 }
 
 function parseCSSInfo(cssContent: string, componentNameMap: Record<string, string | undefined>, cssRulesDesc: Record<string, Record<string, string>>, options: LcapBuildOptions) {
@@ -403,22 +404,22 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
   if (options.reportCSSInfo?.extraComponentMap) {
     const compKeys = Object.keys(options.reportCSSInfo.extraComponentMap);
     compKeys.forEach((curCompName) => {
-      const hiddenSelectorPreFixList = options.reportCSSInfo?.extraComponentMap?.[curCompName]?.hiddenSelectorPreFixList;
-      if (hiddenSelectorPreFixList) {
+      const hideSelectorPrefixes = options.reportCSSInfo?.extraComponentMap?.[curCompName]?.hideSelectorPrefixes;
+      if (hideSelectorPrefixes) {
         const compCssDesc = cssRulesDesc[curCompName];
         const compCssInfo = componentCSSInfoMap[curCompName];
         Object.keys(compCssDesc).forEach((selectorKey) => {
-          if (isStartWithPrefix(hiddenSelectorPreFixList, selectorKey)) {
+          if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
             delete compCssDesc[selectorKey];
           }
         });
         Object.keys(compCssInfo.mainSelectorMap).forEach((selectorKey) => {
-          if (isStartWithPrefix(hiddenSelectorPreFixList, selectorKey)) {
+          if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
             delete compCssInfo.mainSelectorMap[selectorKey];
           }
         });
         compCssInfo.cssRules = compCssInfo.cssRules.filter((rule) => {
-          return !isStartWithPrefix(hiddenSelectorPreFixList, rule.selector);
+          return !startsWithPrefix(hideSelectorPrefixes, rule.selector);
         });
       }
     });
@@ -427,45 +428,41 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
   // 整合
   if (options.reportCSSInfo?.extraComponentMap) {
     const compKeys = Object.keys(options.reportCSSInfo.extraComponentMap);
-    for (let i = 0; i < compKeys.length; i++) {
-      const curCompName = compKeys[i];
-      const { depCompList } = options.reportCSSInfo.extraComponentMap[compKeys[i]];
-      if (depCompList && depCompList.length) {
-        for (let j = 0; j < depCompList.length; j++) {
-          const depCompItem = depCompList[j];
-          let depCompName = '';
-          let isResetRoot = true;
-          if (typeof depCompItem !== 'string') {
-            depCompName = depCompItem.compName;
-            isResetRoot = depCompItem.isResetRoot;
-          } else {
-            depCompName = depCompItem;
-          }
-          const depCompCssDesc = cssRulesDesc[depCompName];
-          cssRulesDesc[curCompName] = { ...cssRulesDesc[curCompName], ...depCompCssDesc };
-          const depCompCssInfo = componentCSSInfoMap[depCompName];
-          const resetCssRules = depCompCssInfo.cssRules.map((rule) => {
-            return {
-              ...rule,
-              isStartRoot: isResetRoot ? false : rule.isStartRoot,
-            };
-          });
-          const resetMainSelectorMap = isResetRoot ? Object.keys(depCompCssInfo.mainSelectorMap).reduce((acc, selector) => {
-            acc[selector] = false;
-            return acc;
-          }, {}) : { ...depCompCssInfo.mainSelectorMap };
-
-          if (!componentCSSInfoMap[curCompName]) {
-            componentCSSInfoMap[curCompName] = {
-              cssRules: [],
-              cssRuleMap: new Map(),
-              mainSelectorMap: new Map(),
-            };
-          }
-          componentCSSInfoMap[curCompName].cssRules = [...componentCSSInfoMap[curCompName].cssRules, ...resetCssRules];
-          componentCSSInfoMap[curCompName].mainSelectorMap = { ...componentCSSInfoMap[curCompName].mainSelectorMap, ...resetMainSelectorMap };
+    for (const curCompName of compKeys) {
+      const { depComponents } = options.reportCSSInfo.extraComponentMap[curCompName];
+      depComponents?.forEach((depCompItem) => {
+        let depComponentName = '';
+        let stillRoot = false;
+        if (typeof depCompItem !== 'string') {
+          depComponentName = depCompItem.componentName;
+          stillRoot = depCompItem.stillRoot;
+        } else {
+          depComponentName = depCompItem;
         }
-      }
+        const depCompCssDesc = cssRulesDesc[depComponentName];
+        cssRulesDesc[curCompName] = { ...cssRulesDesc[curCompName], ...depCompCssDesc };
+        const depCompCssInfo = componentCSSInfoMap[depComponentName];
+        const resetCssRules = depCompCssInfo.cssRules.map((rule) => {
+          return {
+            ...rule,
+            isStartRoot: stillRoot && rule.isStartRoot,
+          };
+        });
+        const resetMainSelectorMap = stillRoot ? { ...depCompCssInfo.mainSelectorMap } : Object.keys(depCompCssInfo.mainSelectorMap).reduce((acc, selector) => {
+          acc[selector] = false;
+          return acc;
+        }, {});
+
+        if (!componentCSSInfoMap[curCompName]) {
+          componentCSSInfoMap[curCompName] = {
+            cssRules: [],
+            cssRuleMap: new Map(),
+            mainSelectorMap: new Map(),
+          };
+        }
+        componentCSSInfoMap[curCompName].cssRules = [...componentCSSInfoMap[curCompName].cssRules, ...resetCssRules];
+        componentCSSInfoMap[curCompName].mainSelectorMap = { ...componentCSSInfoMap[curCompName].mainSelectorMap, ...resetMainSelectorMap };
+      });
     }
   }
 
