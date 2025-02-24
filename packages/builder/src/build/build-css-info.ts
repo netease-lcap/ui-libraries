@@ -7,6 +7,7 @@ import path from 'path';
 import * as postcss from 'postcss';
 import { parse } from 'postcss-values-parser';
 import { camelCase, kebabCase, capitalize } from 'lodash';
+import { getComponentMetaInfos } from '../utils/lcap';
 import type {
   LcapBuildOptions, CSSValue, CSSRule, SupportedCSSProperty,
 } from './types';
@@ -471,40 +472,19 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
   return { componentCSSInfoMap, cssRulesDesc, cssContent: root.toResult().css };
 }
 
-// function collectComponentNames(componentList: any) {
-//   const componentNames: string[] = [];
-//   componentList.forEach((component) => {
-//     if (component.ignore) return;
-//     componentNames.push(component.name);
-//     if (component.children) {
-//       componentNames.push(...collectComponentNames(component.children));
-//     }
-//   });
-//   return componentNames;
-// }
-
-// { componentName: parentName }
-function collectComponentNameMap(
-  componentList: Array<{ name: string, ignore: boolean, children?: Array<{ name: string, ignore: boolean }> }>,
-  parentName?: string,
-) {
-  const componentNameMap: Record<string, string | undefined> = {};
-  componentList.forEach((component) => {
-    if (component.ignore) return;
-    // 这里用了个技巧，先匹配子组件
-    component.children && Object.assign(componentNameMap, collectComponentNameMap(component.children, component.name));
-    componentNameMap[component.name] = parentName;
-  });
-  return componentNameMap;
-}
-
 export default function buildCSSInfo(options: LcapBuildOptions) {
   if (!options.reportCSSInfo || !options.reportCSSInfo.enabled) {
     return;
   }
 
-  const componentList = fs.readJSONSync(path.resolve(options.rootPath, options.destDir, 'nasl.ui.json'), 'utf-8');
-  const componentNameMap = collectComponentNameMap(componentList);
+  const components = getComponentMetaInfos(options.rootPath, true);
+  const componentNameMap: Record<string, string | undefined> = {}; // { componentName: parentName }
+  components.forEach((component) => {
+    componentNameMap[component.name] = undefined;
+    component.children?.forEach((child) => {
+      componentNameMap[child.name] = component.name;
+    });
+  });
 
   const cssContent = fs.readFileSync(path.resolve(options.rootPath, options.destDir, 'index.css'), 'utf-8');
 
