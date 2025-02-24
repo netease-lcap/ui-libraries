@@ -1,7 +1,8 @@
 /* eslint-disable no-shadow */
 import { $formProvide } from '@/components/el-form/constants';
+import { useState } from '@/plugins/hooks';
 
-export function handleModelValue(props, { useState, componentRef }) {
+export function handleModelValue(props, { componentRef }) {
   const modelValue = props.get('model') ?? {};
   const [value, setFormValue] = useState(modelValue);
   const provide = props.get('provide');
@@ -12,11 +13,10 @@ export function handleModelValue(props, { useState, componentRef }) {
       [$formProvide]: {
         isInForm: true,
         value,
-        setValue: (value) =>
-          setFormValue((state) => ({
-            ...state,
-            ...value,
-          })),
+        setValue: (value) => setFormValue((state) => ({
+          ...state,
+          ...value,
+        })),
       },
     }),
     ref: Object.assign(ref, {

@@ -706,7 +706,12 @@
     ".el-table-column--selection .cell": "选择列单元格",
     ".el-table-column--selection .cell:active,.el-table-column--selection .cell._active": "选择列单元格:鼠标按下",
     ".el-table-column--selection .cell:focus,.el-table-column--selection .cell._focus": "选择列单元格:获得焦点",
-    ".el-table-column--selection .cell:hover,.el-table-column--selection .cell._hover": "选择列单元格:鼠标移入"
+    ".el-table-column--selection .cell:hover,.el-table-column--selection .cell._hover": "选择列单元格:鼠标移入",
+    ".el-table-column--selection .empty-slot": "选择列空单元格",
+    ".el-table-column--selection .empty-slot:active,.el-table-column--selection .empty-slot._active": "选择列空单元格:鼠标按下",
+    ".el-table-column--selection .empty-slot:focus,.el-table-column--selection .empty-slot._focus": "选择列空单元格:获得焦点",
+    ".el-table-column--selection .empty-slot:hover,.el-table-column--selection .empty-slot._hover": "选择列空单元格:鼠标移入",
+    ".el-table-column--selection .empty-slot.empty-slot.empty-slot": "选择列空单元格:空单元格"
   },
   "ElTable": {
     ".el-table": "表格",

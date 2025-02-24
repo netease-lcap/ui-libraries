@@ -939,11 +939,11 @@ namespace nasl.ui {
         expression: 'this',
         cssSelector: 'td',
       },
-      forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: 'parent',
       disableSlotAutoFill: [
         {
           slot: 'default',
-          expression: "this.getAttribute('type')?.value !== 'selection'",
+          expression: "this.getAttribute('type')?.value === 'selection'",
         },
       ],
       slotInlineStyle: {
@@ -984,11 +984,12 @@ namespace nasl.ui {
     //   title: '排序',
     //   description: '设置该列是否可以排序',
     //   docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
-    //   setter: {
-    //     concept: 'SwitchSetter',
+    //        setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '前端排序' }, { title: '后端排序' }],
     //   },
     // })
-    // sorter: nasl.core.Boolean = false;
+    // sortable: nasl.core.Boolean = false;
 
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',

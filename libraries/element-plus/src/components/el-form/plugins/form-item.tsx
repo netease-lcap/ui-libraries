@@ -6,8 +6,9 @@ import {
 } from 'vue';
 import { $formProvide } from '@/components/el-form/constants';
 import { $provide } from '@/plugins/constants';
+import { useEffect, useMemo, useRef } from '@/plugins/hooks';
 
-export function handleRules(props, { useState, useEffect, useMemo }) {
+export function handleRules(props) {
   const propName = useMemo(() => _.uniqueId('formItemPropName'), []);
   const rules = props.get('rules');
   const prop = props.get('prop') ?? propName;
@@ -110,30 +111,32 @@ export function withFormItem(Component, name) {
       const rules = computed(() => {
         const rules = props.rules ?? [];
         const required = isRequired.value ? { required: true, message: '表单项不得为空' } : {};
-        return rules.map((item) => {
-          return {
-            message: item.message,
-            required: item.required,
-            trigger: 'blur',
-            validator: (rule, value, callback) => {
-              const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
-              return new Promise((resolve) => {
-                validator
-                  .validate(value)
-                  .then(() => {
-                    resolve(true);
-                  })
-                  .catch((errorMessage) => {
-                    callback(new Error(errorMessage));
-                    resolve({
-                      result: false,
-                      message: errorMessage,
+        return rules
+          .map((item) => {
+            return {
+              message: item.message,
+              required: item.required,
+              trigger: 'blur',
+              validator: (rule, value, callback) => {
+                const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
+                return new Promise((resolve) => {
+                  validator
+                    .validate(value)
+                    .then(() => {
+                      resolve(true);
+                    })
+                    .catch((errorMessage) => {
+                      callback(new Error(errorMessage));
+                      resolve({
+                        result: false,
+                        message: errorMessage,
+                      });
                     });
-                  });
-              });
-            },
-          };
-        }).concat(required);
+                });
+              },
+            };
+          })
+          .concat(required);
       });
       const myInject = inject($provide) as Ref<{ [$formProvide]: { value: any; setValue: (value: any) => void } }>;
       const formProvide = computed(() => myInject?.value?.[$formProvide] ?? { value: undefined, setValue: () => {} });
@@ -172,19 +175,17 @@ export function withFormItem(Component, name) {
   };
 }
 
-export function handleComponentInForm(props, { useMemo, useEffect }) {
+export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
   const formTagName = props.get('formTagName');
   useEffect(() => {
-    nextTick(() => {
-      const inject = props.get('inject');
-      const { isInForm } = inject?.value?.[$formProvide] ?? {};
-      const isInIDE = isInForm && nodePath;
-      if (!isInIDE) return;
-      const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
-      elem?.setAttribute('data-element-tag', formTagName);
-      elem?.setAttribute('data-has-mutation', 'true');
-    });
+    const inject = props.get('inject');
+    const { isInForm } = inject?.value?.[$formProvide] ?? {};
+    const isInIDE = isInForm && nodePath;
+    if (!isInIDE) return;
+    const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
+    elem?.setAttribute('data-element-tag', formTagName);
+    elem?.setAttribute('data-has-mutation', 'true');
   }, []);
 }
 
