@@ -74,6 +74,8 @@ export function handleDataSource(props) {
       ]),
     [dataSource],
   );
+  emit('sync:state', 'currentPage', currentPage);
+  emit('sync:state', 'pageSize', pageSize);
   const {
     data: resultData = { list: [], total: 0 },
     run: reload,
