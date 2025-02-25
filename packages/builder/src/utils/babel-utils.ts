@@ -127,3 +127,22 @@ export const getComponentMetaByApiTs = (tsPath) => {
 
   return metaInfo;
 };
+
+const TEMP_IDEUSAGE_VAR_NAME = '_TEMP_VAR';
+
+export function getAST(obj: any) {
+  const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(obj)};`;
+  const tempAST = babel.parseSync(code);
+  let ast;
+  if (tempAST) {
+    traverse(tempAST, {
+      VariableDeclarator(p) {
+        if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init) {
+          ast = p.node.init;
+        }
+      },
+    });
+  }
+
+  return ast;
+}

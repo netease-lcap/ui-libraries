@@ -6,25 +6,7 @@ import traverse from '@babel/traverse';
 import { OverloadComponentContext } from './context';
 import { LCAP_UI_PATH } from './constants';
 import { addPrefix } from './utils';
-
-const TEMP_IDEUSAGE_VAR_NAME = '_TEMP_VAR';
-
-function getAST(obj: any) {
-  const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(obj)};`;
-  const tempAST = babel.parseSync(code);
-  let ast;
-  if (tempAST) {
-    traverse(tempAST, {
-      VariableDeclarator(p) {
-        if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init) {
-          ast = p.node.init;
-        }
-      }
-    });
-  }
-
-  return ast;
-}
+import { getAST } from '../utils/babel-utils';
 
 export function transformAPITs(tsCode, context: OverloadComponentContext, all: boolean = false) {
   const ast = babel.parse(tsCode, {

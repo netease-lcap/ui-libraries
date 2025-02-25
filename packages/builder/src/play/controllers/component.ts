@@ -5,6 +5,7 @@ import { createAPIHandler } from '../middleware';
 import { getComponentMetaInfos, removeComponentFiles } from '../../utils/lcap';
 import { executeCreateForSchema } from '../../creates/schema';
 import { getExtensionProjectMeta } from '../../utils/project';
+import updateAPIFile from '../../utils/api-update';
 
 export const getComponentList = createAPIHandler('/api/component/list', 'GET', async (req) => {
   const list = getComponentMetaInfos(req.context.rootPath, true);
@@ -68,6 +69,14 @@ export const removeComponent = createAPIHandler('/api/component/remove', 'POST',
   const { rootPath } = req.context;
 
   removeComponentFiles(rootPath, name);
+
+  return true;
+});
+
+export const updateComponent = createAPIHandler('/api/component/update', 'POST', async (req) => {
+  const { tsPath, actions } = req.data;
+
+  updateAPIFile(tsPath, actions);
 
   return true;
 });
