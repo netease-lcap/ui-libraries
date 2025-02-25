@@ -23,7 +23,7 @@ export function handleHeight(props) {
 }
 
 function useControllableValue(props, options) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(options.defaultValue);
   const { valuePropsName, tigger = `onUpdate:${valuePropsName}`, onChange } = options;
   const isControlled = props.get(valuePropsName);
   const myChange = (...arg) => {
@@ -39,7 +39,9 @@ function useControllableValue(props, options) {
 export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
-  const { currentPage = 1, pageSize, onChange = () => {} } = pageProps;
+  const currentPage = pageProps.currentPage || 1;
+  const pageSize = pageProps.pageSize || 10;
+  const onChange = pageProps.onChange || (() => {});
   const sort = props.get('field');
   const order = props.get('order');
   const emit = props.get('emit');
@@ -140,6 +142,7 @@ export function handlePage(props, { childrenRef }) {
   });
   const [pageSizeProps, pageSize, setPageSize] = useControllableValue(props, {
     valuePropsName: 'pageSize',
+    defaultValue: 10,
   });
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
   let pageSizeOptions: number[] = [];
