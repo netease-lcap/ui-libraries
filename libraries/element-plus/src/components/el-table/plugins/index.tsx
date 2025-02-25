@@ -39,9 +39,10 @@ function useControllableValue(props, options) {
 export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
-  const currentPage = pageProps.currentPage || 1;
-  const pageSize = pageProps.pageSize || 10;
-  const onChange = pageProps.onChange || (() => {});
+  // const currentPage = pageProps.currentPage || 1;
+  // const pageSize = pageProps.pageSize || 10;
+  // const onChange = pageProps.onChange || (() => {});
+  const { defaultCurrentPage: currentPage, defaultPageSize: pageSize, onChange = () => {} } = pageProps;
   const sort = props.get('field');
   const order = props.get('order');
   const emit = props.get('emit');
@@ -113,9 +114,8 @@ export function handleDataSource(props) {
         order: getOrder(order),
       }),
     pageProps: {
+      ...pageProps,
       total,
-      pageSizes: pageProps.pageSizes,
-      layout: pageProps.layout,
       onChange: _.wrap(onChange, (fn, currentPage, pageSize) => {
         emit('sync:state', 'currentPage', currentPage);
         emit('sync:state', 'pageSize', pageSize);
@@ -131,20 +131,14 @@ export function handlePage(props, { childrenRef }) {
   const Component = props.get('render');
   const pagination = props.get('pagination');
   const pageSizes = props.get('pageSizes');
+  const defaultPageSize = props.get('pageSize') || 5;
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
+  const defaultCurrentPage = props.get('currentPage') || 1;
   const onSelectionChange = props.get('onSelectionChange', () => {});
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-  const [currentPageProps] = useControllableValue(props, {
-    valuePropsName: 'currentPage',
-    defaultValue: 1,
-  });
-  const [pageSizeProps, pageSize, setPageSize] = useControllableValue(props, {
-    valuePropsName: 'pageSize',
-    defaultValue: 10,
-  });
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
   let pageSizeOptions: number[] = [];
   try {
@@ -161,9 +155,8 @@ export function handlePage(props, { childrenRef }) {
   }
   return {
     pageProps: {
-      ...currentPageProps,
-      // ...pageSizeProps,
-      pageSize,
+      defaultCurrentPage,
+      defaultPageSize,
       pageSizes: pageSizeOptions,
       layout,
     },
