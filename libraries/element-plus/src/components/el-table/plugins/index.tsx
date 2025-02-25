@@ -139,6 +139,7 @@ export function handlePage(props, { childrenRef }) {
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const [currentPageProps] = useControllableValue(props, {
     valuePropsName: 'currentPage',
+    defaultValue: 1,
   });
   const [pageSizeProps, pageSize, setPageSize] = useControllableValue(props, {
     valuePropsName: 'pageSize',
