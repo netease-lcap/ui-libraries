@@ -78,3 +78,43 @@ export function getComponentMetaInfos(rootPath: string, parseAPI: boolean = fals
 
   return metaInfos as ComponentMetaInfo[];
 }
+
+export function removeComponentFiles(rootPath: string, name: string) {
+  const components = getComponentMetaInfos(rootPath, true);
+
+  const compMeta = components.find((c) => c.name === name);
+
+  if (!compMeta) {
+    throw new Error(`未找到组件 ${name}`);
+  }
+
+  const componentFolder = path.dirname(compMeta.tsPath);
+  const componentFolderName = path.basename(componentFolder);
+  const exportsFilePath = ['index.ts', 'index.js'].map((fileName) => path.resolve(componentFolder, '../', fileName)).filter((p) => fs.existsSync(p))[0];
+
+  // 重写文件导入
+  if (exportsFilePath) {
+    const codes: string[] = [];
+    fs.readFileSync(exportsFilePath, 'utf-8').toString().split('\n').forEach((code) => {
+      const s = code.trim();
+      const fromKey = ' from ';
+      const fromIndex = s.indexOf(fromKey);
+      if (fromIndex > -1 && (s.startsWith('import') || s.startsWith('export'))) {
+        const formSource = s.substring(fromIndex + fromKey.length);
+        if (formSource.includes(`/${componentFolderName}'`) || formSource.includes(`/${componentFolderName}"`) || formSource.includes(`/${componentFolderName}/`)) {
+          return;
+        }
+      }
+
+      if (s === name || s === `${name},`) {
+        return;
+      }
+
+      codes.push(code);
+    });
+
+    fs.writeFileSync(exportsFilePath, codes.join('\n'), 'utf-8');
+  }
+
+  fs.rmSync(componentFolder, { recursive: true });
+}

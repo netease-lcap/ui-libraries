@@ -163,7 +163,7 @@ export async function createForSchema(rootPath: string, metaInfo: ProjectMetaInf
 }
 
 export async function executeCreateForSchema(rootPath: string, metaInfo: ProjectMetaInfo, schema: string, name?: string) {
-  if (!fs.existsSync(path.resolve(rootPath, schema))) {
+  if (!schema || !fs.existsSync(path.resolve(rootPath, schema))) {
     throw new Error(`schema 文件 ${schema} 不存在`);
   }
 
