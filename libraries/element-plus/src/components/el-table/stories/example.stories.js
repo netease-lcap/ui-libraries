@@ -118,7 +118,6 @@ v-model:selectedRowKeys="selectedRowKeys"
 dragSort="row"
 :selection="true"
 :stripe="true"
-@cellClick="logCellClick"
 >
 
 <el-table-column label="申请人" >

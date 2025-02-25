@@ -111,8 +111,9 @@ export function handleDataSource(props) {
         order: getOrder(order),
       }),
     pageProps: {
-      ...pageProps,
       total,
+      pageSizes: pageProps.pageSizes,
+      layout: pageProps.layout,
       onChange: _.wrap(onChange, (fn, currentPage, pageSize) => {
         emit('sync:state', 'currentPage', currentPage);
         emit('sync:state', 'pageSize', pageSize);
@@ -137,7 +138,7 @@ export function handlePage(props, { childrenRef }) {
   const [currentPageProps] = useControllableValue(props, {
     valuePropsName: 'currentPage',
   });
-  const [pageSizeProps] = useControllableValue(props, {
+  const [pageSize, setPageSize, pageSizeProps] = useControllableValue(props, {
     valuePropsName: 'pageSize',
   });
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
@@ -155,7 +156,8 @@ export function handlePage(props, { childrenRef }) {
   return {
     pageProps: {
       ...currentPageProps,
-      ...pageSizeProps,
+      // ...pageSizeProps,
+      pageSize,
       pageSizes: pageSizeOptions,
       layout,
     },
