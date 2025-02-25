@@ -39,7 +39,7 @@ function useControllableValue(props, options) {
 export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
-  const { currentPage, pageSize, onChange = () => {} } = pageProps;
+  const { currentPage = 1, pageSize, onChange = () => {} } = pageProps;
   const sort = props.get('field');
   const order = props.get('order');
   const emit = props.get('emit');
