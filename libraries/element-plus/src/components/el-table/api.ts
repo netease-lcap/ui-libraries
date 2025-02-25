@@ -72,7 +72,7 @@ namespace nasl.ui {
           useRef: 'argus?.[0]?.index === 0',
         },
       },
-      childAccept: "target.tag === 'el-table-column-pro'",
+      childAccept: "target.tag === 'el-table-column'",
     },
   })
   @Component({
@@ -90,12 +90,12 @@ namespace nasl.ui {
     @Prop({
       title: '分页大小',
     })
-    size: ElTableOptions<T, V, P, M>['pageSize'];
+    pageSize: ElTableOptions<T, V, P, M>['pageSize'];
 
     @Prop({
       title: '当前页数',
     })
-    page: ElTableOptions<T, V, P, M>['currentPage'];
+    currentPage: ElTableOptions<T, V, P, M>['currentPage'];
 
     @Prop({
       title: '排序属性',
@@ -935,11 +935,18 @@ namespace nasl.ui {
       parentAccept: "['el-table'].includes(target.tag)",
       // childAccept: false,
       useTemplateInDefaultSlot: true,
-      selector: {
-        expression: 'this',
-        cssSelector: 'td',
-      },
+      selector: [
+        {
+          expression: 'this',
+          cssSelector: 'td',
+        },
+        {
+          expression: 'this.getElement(el=>el.slotTarget==="header")',
+          cssSelector: 'th',
+        },
+      ],
       forceUpdateWhenAttributeChange: 'parent',
+      forceRefresh:'parent',
       disableSlotAutoFill: [
         {
           slot: 'default',

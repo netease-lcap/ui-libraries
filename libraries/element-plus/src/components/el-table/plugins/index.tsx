@@ -7,9 +7,7 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 import fp from 'lodash/fp';
 import omit from 'lodash/omit';
-import {
-  useState, useEffect, useMemo, useRef,
-} from '@/plugins/hooks';
+import { useState, useEffect, useMemo, useRef } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
@@ -41,9 +39,10 @@ function useControllableValue(props, options) {
 export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
-  const { currentPage, pageSize, onChange = () => {} } = pageProps;
+  const { currentPage = 1, pageSize, onChange = () => {} } = pageProps;
   const sort = props.get('field');
   const order = props.get('order');
+  const emit = props.get('emit');
 
   const onBefore = props.get('onBefore', () => {});
   const onSuccess = props.get('onSuccess', () => {});
@@ -68,13 +67,15 @@ export function handleDataSource(props) {
   ]);
   const transformOption = useMemo(
     () => fp.cond([
-      [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
-      [_.isPlainObject, (data) => () => data],
-      [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
-      [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
-    ]),
+        [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
+        [_.isPlainObject, (data) => () => data],
+        [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
+        [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
+      ]),
     [dataSource],
   );
+  emit('sync:state', 'currentPage', currentPage);
+  emit('sync:state', 'pageSize', pageSize);
   const {
     data: resultData = { list: [], total: 0 },
     run: reload,
@@ -104,15 +105,17 @@ export function handleDataSource(props) {
       order: getOrder(order),
     },
     onSortChange: ({ prop, order }) => reload({
-      currentPage,
-      pageSize,
-      sort: getOrder(order) ? prop : undefined,
-      order: getOrder(order),
-    }),
+        currentPage,
+        pageSize,
+        sort: getOrder(order) ? prop : undefined,
+        order: getOrder(order),
+      }),
     pageProps: {
       ...pageProps,
       total,
       onChange: _.wrap(onChange, (fn, currentPage, pageSize) => {
+        emit('sync:state', 'currentPage', currentPage);
+        emit('sync:state', 'pageSize', pageSize);
         _.attempt(fn, currentPage, pageSize);
         _.attempt(reload, { currentPage, pageSize });
       }),

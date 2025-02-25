@@ -83,7 +83,7 @@ export const Example1 = {
         width.value = '1000px';
         console.log('object');
       }, 1000);
-      const logCellClick = (el) => {
+      const logCellClick = (...el) => {
         console.log(el, 'logCellClick');
       };
       return {
@@ -104,6 +104,7 @@ row-key="name"
 :pagination="true"
 v-model:currentPage="currentPage"
 v-model:pageSize="pageSize2"
+@sync:state="logCellClick"
 :showTotal="true"
 height=""
 :style="{'width':width}"

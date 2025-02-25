@@ -1137,7 +1137,7 @@
     ".el-table--default:active,.el-table--default._active": "默认表格:鼠标按下",
     ".el-table--default:focus,.el-table--default._focus": "默认表格:获得焦点",
     ".el-table--default:hover,.el-table--default._hover": "默认表格:鼠标移入",
-    ".el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell,.el-table--enable-row-hover .el-table__body tr._hover>td.el-table__cell": "启用行悬停表格>表体行>单元格",
+    ".el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell,.el-table--enable-row-hover .el-table__body tr._hover>td.el-table__cell": "启用行悬停表格>表体行>表格单元",
     ".el-table--enable-row-hover .el-table__body tr>td": "启用行悬停表格>表体行>单元格",
     ".el-table--enable-row-hover .el-table__body tr>td:active,.el-table--enable-row-hover .el-table__body tr>td._active": "启用行悬停表格>表体行>单元格:鼠标按下",
     ".el-table--enable-row-hover .el-table__body tr>td:focus,.el-table--enable-row-hover .el-table__body tr>td._focus": "启用行悬停表格>表体行>单元格:获得焦点",

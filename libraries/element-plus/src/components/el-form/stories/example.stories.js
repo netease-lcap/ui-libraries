@@ -139,6 +139,7 @@ export const Example2 = {
     <el-input  v-model="inputName" data-nodepath="input21" />
 
     <a @click="handleClick(formRef)" >Submit</a>
+    <el-form-checkbox-group label="ww" :isRequired="true" :dataSource="[{},{},{}]"></el-form-checkox-group>
     </el-form>
 
 
