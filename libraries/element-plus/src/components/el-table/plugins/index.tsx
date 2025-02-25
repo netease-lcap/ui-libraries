@@ -66,8 +66,7 @@ export function handleDataSource(props) {
     [_.stubTrue, _.constant(undefined)],
   ]);
   const transformOption = useMemo(
-    () =>
-      fp.cond([
+    () => fp.cond([
         [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
         [_.isPlainObject, (data) => () => data],
         [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
@@ -105,8 +104,7 @@ export function handleDataSource(props) {
       prop: sort,
       order: getOrder(order),
     },
-    onSortChange: ({ prop, order }) =>
-      reload({
+    onSortChange: ({ prop, order }) => reload({
         currentPage,
         pageSize,
         sort: getOrder(order) ? prop : undefined,
@@ -151,6 +149,8 @@ export function handlePage(props, { childrenRef }) {
       pageSizeOptions = Array.isArray(list) ? list : [10, 20, 50];
     } else if (_.isArray(pageSizes)) {
       pageSizeOptions = pageSizes;
+    } else {
+      pageSizeOptions = [10, 20, 50];
     }
   } catch (error) {
     pageSizeOptions = [10, 20, 50];
