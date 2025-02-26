@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useState, useMemo, useRef } from '@/plugins/hooks';
+import { useState, useMemo } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
@@ -17,13 +17,16 @@ export function handleDataSource(props) {
 
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
-  const dataSourceSlots = _.isNil(dataConfig)
-    ? {}
-    : {
-      default: () => _.map(dataSource, (item) => (
-        <el-checkbox {...item}>{slots.item ? slots.item({ item }) : item.label}</el-checkbox>
-      )),
-    };
+  const dataSourceSlots = useMemo(
+    () => (_.isNil(dataConfig)
+        ? {}
+        : {
+            default: () => _.map(dataSource, (item) => (
+              <el-checkbox {...item}>{slots.item ? slots.item({ item }) : item.label}</el-checkbox>
+              )),
+          }),
+    [dataSource, slots, dataConfig],
+  );
 
   return {
     [$deletePropsList]: deletePropsList,

@@ -131,7 +131,7 @@ export function handlePage(props, { childrenRef }) {
   const Component = props.get('render');
   const pagination = props.get('pagination');
   const pageSizes = props.get('pageSizes');
-  const defaultPageSize = props.get('pageSize') || 5;
+  const defaultPageSize = props.get('pageSize') || 10;
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
   const defaultCurrentPage = props.get('currentPage') || 1;
