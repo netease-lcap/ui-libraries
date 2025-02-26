@@ -22,6 +22,7 @@
       :key="columnIndex"
       :vm="columnVM"
       :item="getRealItem(item, rowIndex + virtualIndex)"
+      :wrapItem="item"
       :rowIndex="rowIndex + virtualIndex"
       :index="rowIndex + virtualIndex"
       :columnIndex="columnIndex"
