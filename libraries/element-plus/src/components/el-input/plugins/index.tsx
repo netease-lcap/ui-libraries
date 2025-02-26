@@ -1,13 +1,9 @@
 /* eslint-disable no-shadow */
-import {
-  watch, h, inject, nextTick,
-} from 'vue';
 import _ from 'lodash';
 
 import { $deletePropsList } from '@/plugins/constants';
 import { useEffect, useMemo, useState } from '@/plugins/hooks';
-// import { useFormItem } from 'element-plus/es/components/form/src/hooks/index';
-// import { formItemContextKey } from 'element-plus/es/components/form/src/constants';
+
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 function handleValue(props) {

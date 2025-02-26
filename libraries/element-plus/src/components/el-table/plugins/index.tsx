@@ -23,7 +23,7 @@ export function handleHeight(props) {
 }
 
 function useControllableValue(props, options) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(options.defaultValue);
   const { valuePropsName, tigger = `onUpdate:${valuePropsName}`, onChange } = options;
   const isControlled = props.get(valuePropsName);
   const myChange = (...arg) => {
@@ -39,7 +39,10 @@ function useControllableValue(props, options) {
 export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
-  const { currentPage, pageSize, onChange = () => {} } = pageProps;
+  // const currentPage = pageProps.currentPage || 1;
+  // const pageSize = pageProps.pageSize || 10;
+  // const onChange = pageProps.onChange || (() => {});
+  const { defaultCurrentPage: currentPage, defaultPageSize: pageSize, onChange = () => {} } = pageProps;
   const sort = props.get('field');
   const order = props.get('order');
   const emit = props.get('emit');
@@ -128,18 +131,14 @@ export function handlePage(props, { childrenRef }) {
   const Component = props.get('render');
   const pagination = props.get('pagination');
   const pageSizes = props.get('pageSizes');
+  const defaultPageSize = props.get('pageSize') || 10;
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
+  const defaultCurrentPage = props.get('currentPage') || 1;
   const onSelectionChange = props.get('onSelectionChange', () => {});
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-  const [currentPageProps] = useControllableValue(props, {
-    valuePropsName: 'currentPage',
-  });
-  const [pageSizeProps] = useControllableValue(props, {
-    valuePropsName: 'pageSize',
-  });
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
   let pageSizeOptions: number[] = [];
   try {
@@ -148,14 +147,16 @@ export function handlePage(props, { childrenRef }) {
       pageSizeOptions = Array.isArray(list) ? list : [10, 20, 50];
     } else if (_.isArray(pageSizes)) {
       pageSizeOptions = pageSizes;
+    } else {
+      pageSizeOptions = [10, 20, 50];
     }
   } catch (error) {
     pageSizeOptions = [10, 20, 50];
   }
   return {
     pageProps: {
-      ...currentPageProps,
-      ...pageSizeProps,
+      defaultCurrentPage,
+      defaultPageSize,
       pageSizes: pageSizeOptions,
       layout,
     },

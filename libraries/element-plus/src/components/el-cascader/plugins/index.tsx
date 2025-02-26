@@ -1,6 +1,5 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
-import { nextTick } from 'vue';
 import { $deletePropsList } from '@/plugins/constants';
 import {
   useRequestDataSource,
@@ -8,9 +7,7 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
-import {
-  useState, useEffect, useMemo, useRef,
-} from '@/plugins/hooks';
+import { useEffect, useMemo } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export function handleDataSource(props) {
@@ -22,11 +19,7 @@ export function handleDataSource(props) {
     .get($deletePropsList, [])
     .concat(['textField', 'valueField', 'parentField', 'childrenField']);
   const ref = props.get('ref');
-  const {
-    data,
-    run: reload,
-    loading,
-  } = useRequestDataSource(dataConfig, {});
+  const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const TreeData = useDataSourceToTree(dataSource, parentField, valueField);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
@@ -37,21 +30,6 @@ export function handleDataSource(props) {
     ref: selfRef,
     loading,
     ...dataSourceResult,
-  };
-}
-function handleValue(props, { useState }) {
-  const [value, setValue] = useState('');
-  const propsValue = props.get('modelValue') || value;
-  const onChangeProps = props.get('onChange', () => {});
-  const emit = props.get('emit');
-  const changeValue = props.get('modelValue') ? _.bind(emit, 'update:modelValue') : setValue;
-
-  return {
-    onChange: _.wrap(onChangeProps, (fn, value) => {
-      _.attempt(fn, value);
-      changeValue(value);
-    }),
-    modelValue: propsValue,
   };
 }
 

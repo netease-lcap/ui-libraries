@@ -1,4 +1,4 @@
-import _, { result } from 'lodash';
+import _ from 'lodash';
 import { onMounted, onUnmounted } from 'vue';
 
 interface Hook {
@@ -90,7 +90,7 @@ export function useState(initialstate) {
     if (_.isEqual(value, state.value)) {
       return;
     }
-    //  TODO:哪里用了 check 优化一下
+    //  TODO:表单临时hack用了 后期优化一下
     if (_.isFunction(value)) {
       value = value(state);
     }

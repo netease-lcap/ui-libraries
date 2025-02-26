@@ -6,55 +6,6 @@ import { $formProvide } from '@/components/el-form/constants';
 import { $provide } from '@/plugins/constants';
 import { useEffect, useMemo, useRef } from '@/plugins/hooks';
 
-// function handleRules(props) {
-//   const propName = useMemo(() => _.uniqueId('formItemPropName'), []);
-//   const rules = props.get('rules');
-//   const prop = props.get('prop') ?? propName;
-//   const inject = props.get('inject');
-//   const provide = props.get('provide');
-//   const { value, setValue: setFormValue } = inject?.value?.[$formProvide] ?? {};
-//   return {
-//     prop,
-//     rules: _.map(rules, (item) => {
-//       return {
-//         message: item.message,
-//         required: item.required,
-//         trigger: 'blur',
-//         validator: (rule, value, callback) => {
-//           const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
-//           return new Promise((resolve) => {
-//             validator
-//               .validate(value)
-//               .then(() => {
-//                 resolve(true);
-//               })
-//               .catch((errorMessage) => {
-//                 callback(new Error(errorMessage));
-//                 resolve({
-//                   result: false,
-//                   message: errorMessage,
-//                 });
-//               });
-//           });
-//         },
-//       };
-//     }),
-//     name: 'formItem',
-//     provide: Object.assign(provide, {
-//       [$formProvide]: {
-//         value,
-//         name: 'formitemname',
-//         setValue(arg) {
-//           setFormValue({
-//             ...value.value,
-//             [prop]: arg,
-//           });
-//         },
-//       },
-//     }),
-//   };
-// }
-
 function getStyles(style: Record<string, string> = {}) {
   const rootStyle = {};
   const inputStyle = {};
