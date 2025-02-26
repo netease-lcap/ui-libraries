@@ -76,7 +76,7 @@ export const removeComponent = createAPIHandler('/api/component/remove', 'POST',
 export const updateComponent = createAPIHandler('/api/component/update', 'POST', async (req) => {
   const { tsPath, actions } = req.data;
 
-  updateAPIFile(tsPath, actions);
+  await updateAPIFile(tsPath, actions);
 
   return true;
 });

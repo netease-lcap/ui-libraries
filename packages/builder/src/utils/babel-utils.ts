@@ -1,9 +1,11 @@
 /* eslint-disable global-require */
 import fs from 'fs-extra';
+import path from 'path';
 import * as babel from '@babel/core';
 import * as babelTypes from '@babel/types';
 import traverse from '@babel/traverse';
 import generate from '@babel/generator';
+import * as prettier from 'prettier';
 import { isNil, lowerFirst } from 'lodash';
 import logger from './logger';
 import { ComponentMetaInfo } from './types';
@@ -78,9 +80,7 @@ export const getComponentMetaByApiTs = (tsPath) => {
   const ast = babel.parse(tsCode, {
     filename: 'result.ts',
     presets: [require('@babel/preset-typescript')],
-    plugins: [
-      [require('@babel/plugin-proposal-decorators'), { legacy: true }],
-    ],
+    plugins: [[require('@babel/plugin-proposal-decorators'), { legacy: true }]],
     rootMode: 'root',
     root: __dirname,
   }) as babelTypes.File;
@@ -89,7 +89,13 @@ export const getComponentMetaByApiTs = (tsPath) => {
 
   traverse(ast, {
     ClassDeclaration(p) {
-      if (!p.node.superClass || !p.node.id || p.node.id.type !== 'Identifier' || p.node.superClass.type !== 'Identifier' || p.node.superClass.name !== 'ViewComponent') {
+      if (
+        !p.node.superClass
+        || !p.node.id
+        || p.node.id.type !== 'Identifier'
+        || p.node.superClass.type !== 'Identifier'
+        || p.node.superClass.name !== 'ViewComponent'
+      ) {
         return;
       }
 
@@ -99,7 +105,10 @@ export const getComponentMetaByApiTs = (tsPath) => {
       };
 
       (p.node.decorators as any[]).forEach((decorator) => {
-        if (decorator.expression.type === 'CallExpression' && (decorator.expression.callee as babelTypes.Identifier).name === 'Component') {
+        if (
+          decorator.expression.type === 'CallExpression'
+          && (decorator.expression.callee as babelTypes.Identifier).name === 'Component'
+        ) {
           decorator.expression.arguments.forEach((arg) => {
             if (arg.type === 'ObjectExpression') {
               const config = evalOptions(arg) || {};
@@ -145,4 +154,36 @@ export function getAST(obj: any) {
   }
 
   return ast;
+}
+
+export async function formatCode(code: string, parser: any = 'babel') {
+  let options: any = {
+    printWidth: 120,
+    tabWidth: 2,
+    useTabs: false,
+    singleQuote: true,
+    vueIndentScriptAndStyle: false,
+    trailingComma: 'all',
+    bracketSpacing: true,
+    bracketSameLine: true,
+    arrowParens: 'always',
+    semi: true,
+  };
+
+  const configFilePath = path.resolve(process.cwd(), '.prettierrc');
+
+  if (fs.existsSync(configFilePath)) {
+    const customOptions = await prettier.resolveConfig(configFilePath, {
+      editorconfig: fs.existsSync('.editorconfig'),
+    });
+
+    if (customOptions) {
+      options = customOptions;
+    }
+  }
+
+  return prettier.format(code, {
+    ...options,
+    parser,
+  });
 }

@@ -11,7 +11,7 @@ import type {
 } from '@lcap/material-parser';
 import { omit, pick } from 'lodash';
 import fs from 'fs-extra';
-import { evalOptions, getAST } from './babel-utils';
+import { evalOptions, formatCode, getAST } from './babel-utils';
 
 export interface APIEditorBaseOptions {
   type: 'add' | 'update' | 'remove';
@@ -280,7 +280,7 @@ export type APIUpdateOptions = APIUpdateInfoOptions
   | APIUpdateReadablePropOptions | APIRemoveReadablePropOptions
   | APIAddMethodOptions | APIUpdateMethodOptions | APIRemoveMethodOptions;
 
-export default function updateAPIFile(tsPath: string, actions: APIUpdateOptions[]) {
+export default async function updateAPIFile(tsPath: string, actions: APIUpdateOptions[]) {
   if (!tsPath || !fs.existsSync(tsPath)) {
     throw new Error(`未找到 api.ts 文件，${tsPath}`);
   }
@@ -297,7 +297,6 @@ export default function updateAPIFile(tsPath: string, actions: APIUpdateOptions[
   }) as bt.File;
 
   actions.forEach((options) => {
-    console.log('options', options);
     switch (true) {
       case options.module === 'info' && options.type === 'update':
         return updateInfo(ast, options);
@@ -340,5 +339,8 @@ export default function updateAPIFile(tsPath: string, actions: APIUpdateOptions[
     }
   });
 
-  fs.writeFileSync(tsPath, generate(ast).code, 'utf-8');
+  let { code } = generate(ast);
+
+  code = await formatCode(code, 'typescript');
+  fs.writeFileSync(tsPath, code, 'utf-8');
 }
