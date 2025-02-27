@@ -13,7 +13,7 @@
         <!-- type === 'radio' -->
         <span v-if="vm.type === 'radio'">
             <u-radio
-                :value="item.radioChecked"
+                :value="wrapItem.radioChecked"
                 :disabled="item.disabled"
                 @click.native="select(item, rowIndex)"
                 :readonly="readonly">
@@ -22,10 +22,10 @@
         <!-- type === 'checkbox' -->
         <span v-if="vm.type === 'checkbox'">
             <u-checkbox
-                :value="item.checked"
+                :value="wrapItem.checked"
                 :label="$at(item, valueField)"
                 :disabled="item.disabled || disabled"
-                @check="check(item, $event.value)" :readonly="readonly">
+                @check="check(wrapItem, $event.value)" :readonly="readonly">
             </u-checkbox>
         </span>
         <!-- type === 'expander' left -->
@@ -34,7 +34,7 @@
             name="expander"
             :vm="vm"
             :props="{
-                item: { ...item, __toggle: () => toggleExpanded(item) },
+                item: { ...wrapItem, __toggle: () => toggleExpanded(item) },
                 value: $at(item, vm.field),
                 vm,
                 rowIndex,
@@ -45,7 +45,7 @@
             }">
             <u-table-view-expander
                v-if="!vm.$scopedSlots.expander"
-                :item="{ ...item, __toggle: () => toggleExpanded(item) }"
+                :item="{ ...wrapItem, __toggle: () => toggleExpanded(item) }"
                 @toggle="() => toggleExpanded(item)">
             </u-table-view-expander>
         </f-slot>
@@ -119,7 +119,8 @@ export default {
         index: Number,
         columnIndex: Number,
         columnItem: Object,
-        item: Object,
+        item: [Object, String, Number],
+        wrapItem: Object,
         valueField: String,
 
         readonly: Boolean,
