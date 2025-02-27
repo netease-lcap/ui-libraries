@@ -9,9 +9,15 @@ import type {
   MaterialComponentSlot,
   MaterialComponentAttr,
 } from '@lcap/material-parser';
-import { omit, pick } from 'lodash';
+import {
+  kebabCase,
+  omit,
+  pick,
+  upperFirst,
+} from 'lodash';
 import fs from 'fs-extra';
 import { evalOptions, formatCode, getAST } from './babel-utils';
+import { getProjectSourceSchema } from './lcap';
 
 export interface APIEditorBaseOptions {
   type: 'add' | 'update' | 'remove';
@@ -57,19 +63,106 @@ export function updateInfo(ast: bt.File, options: APIUpdateInfoOptions) {
 export interface APIAddSubComponentOptions extends APIEditorBaseOptions {
   type: 'add',
   module: 'subComponent',
+  data: {
+    name?: string;
+    sourceName?: string;
+    title?: string;
+    description?: string;
+    type?: any;
+  }
 }
 
 export function addSubComponent(ast: bt.File, options: APIAddSubComponentOptions) {
+  const { sourceName } = options.data;
+  let {
+    name,
+    title = '',
+    description = '',
+    type = 'pc',
+  } = options.data;
 
+  if (sourceName) {
+    const schema = getProjectSourceSchema();
+    const sourceComponent = schema.components.find((n) => n.name === sourceName);
+
+    if (!sourceComponent) {
+      throw new Error(`未找到组件 ${sourceName} 对应的解析结果`);
+    }
+    title = kebabCase(sourceName).split('-').map((s) => upperFirst(s)).join(' ');
+    description = sourceComponent.description;
+    name = upperFirst((schema.write && schema.write.prefix) || '') + sourceName;
+    if (schema.write && schema.write.type) {
+      type = schema.write.type;
+    }
+  }
+
+  const codeTemplate = `namespace extensions.de.viewComponents {
+  const { Component, Prop, ViewComponent, Slot, Method, Event, ViewComponentOptions } = nasl.ui;
+
+  @ExtensionComponent({
+    type: '${type}',
+    ${sourceName ? `sourceName: '${sourceName}'` : ''}
+    ideusage: {
+      idetype: 'element',
+    }
+  })
+  @Component({
+    title: '${title}',
+    description: '${description || title}',
+  })
+  export class ${name} extends ViewComponent {
+    constructor(options?: Partial<${name}Options>) {
+      super();
+    }
+  }
+
+  export class ${name}Options extends ViewComponentOptions {
+  }
+}`;
+
+  const tplAst = babel.parse(codeTemplate, {
+    filename: 'result.ts',
+    presets: [require('@babel/preset-typescript')],
+    plugins: [
+      [require('@babel/plugin-proposal-decorators'), { legacy: true }],
+    ],
+    rootMode: 'root',
+    root: __dirname,
+  }) as bt.File;
+
+  const exportClassASTs: bt.ExportNamedDeclaration[] = [];
+  traverse(tplAst, {
+    ExportNamedDeclaration(path) {
+      if (bt.isClassDeclaration(path.node.declaration)) {
+        exportClassASTs.push(path.node);
+      }
+    },
+  });
+
+  traverse(ast, {
+    TSModuleBlock(path) {
+      path.node.body.push(...exportClassASTs);
+    },
+  });
 }
 
 export interface APIRemoveSubComponentOptions extends APIEditorBaseOptions {
   type: 'remove',
   module: 'subComponent',
+  data: {
+    name: string;
+  },
 }
 
 export function removeSubComponent(ast: bt.File, options: APIRemoveSubComponentOptions) {
-
+  const { name } = options.data;
+  traverse(ast, {
+    ExportNamedDeclaration(path) {
+      if (bt.isClassDeclaration(path.node.declaration) && bt.isIdentifier(path.node.declaration.id) && [name, `${name}Options`].includes(path.node.declaration.id.name)) {
+        path.remove();
+      }
+    },
+  });
 }
 
 export interface APIAddPropOptions extends APIEditorBaseOptions {

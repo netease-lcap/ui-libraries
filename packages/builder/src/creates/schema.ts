@@ -5,6 +5,7 @@ import prompts from 'prompts';
 import { kebabCase, upperFirst } from 'lodash';
 import { ProjectMetaInfo } from '../utils/project';
 import { createComponent, getTagName, COMPONENTS_FOLDER } from './component';
+import { Schema, WriteOptions } from '../utils/lcap';
 
 const EMPTY_API_TS = ({
   pkgName,
@@ -40,19 +41,10 @@ namespace extensions.${pkgName}.viewComponents {
 }`;
 };
 
-export interface WriteOptions {
-  type: 'pc' | 'h5' | 'both';
-  prefix: string;
-}
-
 export interface MaterialComponentSchema {
   meta: Omit<MaterialSchema, 'components'>;
   component: MaterialComponent;
   write: WriteOptions;
-}
-
-export interface Schema extends MaterialSchema {
-  write?: WriteOptions;
 }
 
 function generateVue2Component(meta: MaterialComponentSchema['meta'], component: MaterialComponent, { tagName, componentFolder }: any) {

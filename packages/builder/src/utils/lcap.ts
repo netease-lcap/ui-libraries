@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import glob from 'fast-glob';
 import { normalizePath } from 'vite';
 import { camelCase, upperFirst } from 'lodash';
+import { MaterialSchema } from '@lcap/material-parser';
 import { type NaslUIComponentConfig } from '../overload';
 import { getComponentPathInfo } from './component-path';
 import logger from './logger';
@@ -117,4 +118,34 @@ export function removeComponentFiles(rootPath: string, name: string) {
   }
 
   fs.rmSync(componentFolder, { recursive: true });
+}
+
+export interface WriteOptions {
+  type: 'pc' | 'h5' | 'both';
+  prefix: string;
+}
+
+export interface Schema extends MaterialSchema {
+  write?: WriteOptions;
+}
+
+export function getProjectSourceSchema(rootPath: string = process.cwd()) {
+  const pkgInfo = fs.readJSONSync(path.resolve(rootPath, 'package.json'));
+
+  if (!pkgInfo.lcap?.schema) {
+    throw new Error('未找到本地NPM扫描结果文件');
+  }
+
+  const schema = pkgInfo.lcap?.schema;
+
+  if (!schema || !fs.existsSync(path.resolve(rootPath, schema))) {
+    throw new Error(`schema 文件 ${schema} 不存在`);
+  }
+
+  const material: Schema = fs.readJSONSync(path.resolve(rootPath, schema), 'utf-8');
+  if (!material.components || material.components.length === 0) {
+    throw new Error(`schema 文件 ${schema} 中没有组件`);
+  }
+
+  return material;
 }
