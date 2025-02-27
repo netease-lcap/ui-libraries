@@ -660,6 +660,18 @@
   },
   "VanCapsules": {
     ".van-capsules": "胶囊",
+    ".van-capsules:active,.van-capsules._active": "胶囊:鼠标按下",
+    ".van-capsules:focus,.van-capsules._focus": "胶囊:获得焦点",
+    ".van-capsules:hover,.van-capsules._hover": "胶囊:鼠标移入"
+  },
+  "VanCapsulesGroup": {
+    ".van-capsules-group": "胶囊组",
+    ".van-capsules-group:active,.van-capsules-group._active": "胶囊组:鼠标按下",
+    ".van-capsules-group:first-child": "胶囊组:第一个子元素",
+    ".van-capsules-group:focus,.van-capsules-group._focus": "胶囊组:获得焦点",
+    ".van-capsules-group:hover,.van-capsules-group._hover": "胶囊组:鼠标移入"
+  },
+  "VanCapsulesItem": {
     ".van-capsules-item": "胶囊项",
     ".van-capsules-item__label": "胶囊项标签",
     ".van-capsules-item__label:active,.van-capsules-item__label._active": "胶囊项标签:鼠标按下",
@@ -672,17 +684,7 @@
     ".van-capsules-item:last-child": "胶囊项:最后一个子元素",
     ".van-capsules-item[active]": "胶囊项:激活态",
     ".van-capsules-item[active][disabled]": "胶囊项:激活禁用态",
-    ".van-capsules-item[disabled]": "胶囊项:禁用态",
-    ".van-capsules:active,.van-capsules._active": "胶囊:鼠标按下",
-    ".van-capsules:focus,.van-capsules._focus": "胶囊:获得焦点",
-    ".van-capsules:hover,.van-capsules._hover": "胶囊:鼠标移入"
-  },
-  "VanCapsulesGroup": {
-    ".van-capsules-group": "胶囊组",
-    ".van-capsules-group:active,.van-capsules-group._active": "胶囊组:鼠标按下",
-    ".van-capsules-group:first-child": "胶囊组:第一个子元素",
-    ".van-capsules-group:focus,.van-capsules-group._focus": "胶囊组:获得焦点",
-    ".van-capsules-group:hover,.van-capsules-group._hover": "胶囊组:鼠标移入"
+    ".van-capsules-item[disabled]": "胶囊项:禁用态"
   },
   "VanCardu": {
     ".van-cardu__content": "卡片内容",
