@@ -134,6 +134,7 @@ export function handlePage(props, { childrenRef }) {
   const defaultPageSize = props.get('pageSize') || 10;
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
+  const onChange = props.get('onPageChange', () => {});
   const defaultCurrentPage = props.get('currentPage') || 1;
   const onSelectionChange = props.get('onSelectionChange', () => {});
   const ref = props.get('ref');
@@ -159,6 +160,7 @@ export function handlePage(props, { childrenRef }) {
       defaultPageSize,
       pageSizes: pageSizeOptions,
       layout,
+      onChange,
     },
     ref,
     [$deletePropsList]: deletePropsList,
