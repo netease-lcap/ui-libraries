@@ -53,37 +53,36 @@ export function withFormItem(Component, name) {
       const componentRef = ref({});
       const myRef = ref({});
       const prop = computed(() => props.prop ?? propName);
-      const isRequired = computed(() => attrs.isRequired ?? false);
+      // const isRequired = computed(() => attrs.isRequired ?? false);
       const styleProps = computed(() => getStyles(props.inputStyle));
       const rules = computed(() => {
         const rules = props.rules ?? [];
-        const required = isRequired.value ? { required: true, message: '表单项不得为空', trigger: 'blur' } : {};
-        return rules
-          .map((item) => {
-            return {
-              message: item.message,
-              required: item.required,
-              trigger: 'blur',
-              validator: (rule, value, callback) => {
-                const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
-                return new Promise((resolve) => {
-                  validator
-                    .validate(value)
-                    .then(() => {
-                      resolve(true);
-                    })
-                    .catch((errorMessage) => {
-                      callback(new Error(errorMessage));
-                      resolve({
-                        result: false,
-                        message: errorMessage,
-                      });
+        // const required = isRequired.value ? { required: true, message: '表单项不得为空', trigger: 'blur' } : {};
+        return rules.map((item) => {
+          return {
+            message: item.message,
+            required: item.required,
+            trigger: 'blur',
+            validator: (rule, value, callback) => {
+              const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
+              return new Promise((resolve) => {
+                validator
+                  .validate(value)
+                  .then(() => {
+                    resolve(true);
+                  })
+                  .catch((errorMessage) => {
+                    callback(new Error(errorMessage));
+                    resolve({
+                      result: false,
+                      message: errorMessage,
                     });
-                });
-              },
-            };
-          })
-          .concat(required);
+                  });
+              });
+            },
+          };
+        });
+        // .concat(required);
       });
       const myInject = inject($provide) as Ref<{ [$formProvide]: { value: any; setValue: (value: any) => void } }>;
       const formProvide = computed(() => myInject?.value?.[$formProvide] ?? { value: undefined, setValue: () => {} });

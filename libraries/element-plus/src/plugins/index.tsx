@@ -125,7 +125,7 @@ export function registerComponet(Component, options) {
       watch(
         () => [props, attrs, slots, emit],
         (value, oldValue) => {
-          if (!_.isEqual(value, oldValue)) {
+          // if (!_.isEqual(value, oldValue)) {
             const [props, attrs, slots, emit] = value;
             setValue((state) => ({
               props: {
@@ -137,7 +137,7 @@ export function registerComponet(Component, options) {
             }));
             const expandProps = useStore() as any;
             Object.assign(myRef.value, expandProps.state.ref);
-          }
+          // }
         },
         { deep: true, immediate: true },
       );
