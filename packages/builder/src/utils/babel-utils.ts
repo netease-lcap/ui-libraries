@@ -139,8 +139,8 @@ export const getComponentMetaByApiTs = (tsPath) => {
 
 const TEMP_IDEUSAGE_VAR_NAME = '_TEMP_VAR';
 
-export function getAST(obj: any) {
-  const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(obj)};`;
+export function getAST(obj: any, stringify = true) {
+  const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${stringify ? JSON.stringify(obj) : obj};`;
   const tempAST = babel.parseSync(code);
   let ast;
   if (tempAST) {
@@ -154,6 +154,68 @@ export function getAST(obj: any) {
   }
 
   return ast;
+}
+
+export function getTypeAST(type: string) {
+  const TypeAliasName = '_T';
+  const code = `type ${TypeAliasName} = ${type};`;
+  const ast = babel.parse(code, {
+    filename: 'result.ts',
+    presets: [require('@babel/preset-typescript')],
+    plugins: [[require('@babel/plugin-proposal-decorators'), { legacy: true }]],
+    rootMode: 'root',
+    root: __dirname,
+  }) as babelTypes.File;
+
+  let tsType: babelTypes.TSType = {
+    type: 'TSAnyKeyword',
+  };
+
+  traverse(ast, {
+    TSTypeAliasDeclaration(path) {
+      if (path.node.id && path.node.id.name === TypeAliasName) {
+        tsType = path.node.typeAnnotation;
+      }
+    },
+  });
+
+  return tsType as babelTypes.TSType;
+}
+
+export function getAPIPropAST(code: string, name) {
+  const templateAPICode = `namespace nasl.ui {
+    export class Test extends ViewComponent {
+      ${code}
+
+      constructor(options?: Partial<TestOptions>) {
+        super();
+      }
+    }
+  }`;
+
+  const ast = babel.parse(templateAPICode, {
+    filename: 'result.ts',
+    presets: [require('@babel/preset-typescript')],
+    plugins: [[require('@babel/plugin-proposal-decorators'), { legacy: true }]],
+    rootMode: 'root',
+    root: __dirname,
+  }) as babelTypes.File;
+
+  let propAST: any = null;
+  traverse(ast, {
+    ClassProperty(path) {
+      if (path.node.key.type === 'Identifier' && path.node.key.name === name) {
+        propAST = path.node;
+      }
+    },
+    ClassMethod(path) {
+      if (path.node.key.type === 'Identifier' && path.node.key.name === name) {
+        propAST = path.node;
+      }
+    },
+  });
+
+  return propAST;
 }
 
 export async function formatCode(code: string, parser: any = 'babel') {

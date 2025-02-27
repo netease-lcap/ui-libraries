@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable global-require */
 import * as babel from '@babel/core';
 import * as bt from '@babel/types';
@@ -10,13 +11,27 @@ import type {
   MaterialComponentAttr,
 } from '@lcap/material-parser';
 import {
+  isNil,
   kebabCase,
   omit,
   pick,
   upperFirst,
 } from 'lodash';
 import fs from 'fs-extra';
-import { evalOptions, formatCode, getAST } from './babel-utils';
+import {
+  evalOptions,
+  formatCode,
+  getAPIPropAST,
+  getAST,
+  getTypeAST,
+} from './babel-utils';
+import {
+  genAttrCode,
+  genTitle,
+  genEventCode,
+  genSlotCode,
+  genMethodCode,
+} from './schema-utils';
 import { getProjectSourceSchema } from './lcap';
 
 export interface APIEditorBaseOptions {
@@ -165,6 +180,145 @@ export function removeSubComponent(ast: bt.File, options: APIRemoveSubComponentO
   });
 }
 
+function getPropertyMeta(componentName: string, type: APIEditorBaseOptions['module']) {
+  const isStateProp = ['method', 'readableProp'].includes(type);
+  const className = isStateProp ? componentName : `${componentName}Options`;
+  const decoratorName = type === 'readableProp' ? 'Prop' : upperFirst(type);
+
+  return {
+    className,
+    decoratorName,
+  };
+}
+
+function insertProperty(ast: bt.File, property: bt.ClassProperty | bt.ClassMethod, componentName: string, type: APIEditorBaseOptions['module']) {
+  const { className, decoratorName } = getPropertyMeta(componentName, type);
+
+  traverse(ast, {
+    ClassDeclaration(path) {
+      if (bt.isIdentifier(path.node.id) && path.node.id.name === className) {
+        const lastPropIndex = path.node.body.body.findLastIndex((n) => (
+          bt.isClassProperty(n) && n.decorators
+          && n.decorators.some((d) => (
+            bt.isCallExpression(d.expression)
+            && bt.isIdentifier(d.expression.callee)
+            && d.expression.callee.name === decoratorName
+          ))
+        ));
+        path.node.body.body.splice(lastPropIndex + 1, 0, property);
+      }
+    },
+  });
+}
+
+function removeProperty(ast: bt.File, componentName: string, propName: string, type: APIEditorBaseOptions['module']) {
+  const { className, decoratorName } = getPropertyMeta(componentName, type);
+
+  traverse(ast, {
+    ClassDeclaration(path) {
+      if (bt.isIdentifier(path.node.id) && path.node.id.name === className) {
+        path.traverse({
+          ClassProperty(p) {
+            if (
+              bt.isIdentifier(p.node.key)
+              && p.node.key.name === propName
+              && (p.node.decorators || []).some((d) => (
+                bt.isCallExpression(d.expression)
+                && bt.isIdentifier(d.expression.callee)
+                && d.expression.callee.name === decoratorName
+              ))
+            ) {
+              p.remove();
+            }
+          },
+        });
+      }
+    },
+  });
+}
+
+function findPropertyAST(ast: bt.File, componentName: string, propName: string, type: APIEditorBaseOptions['module']) {
+  const isStateProp = ['method', 'readableProp'].includes(type);
+  const className = isStateProp ? componentName : `${componentName}Options`;
+  const decoratorName = type === 'readableProp' ? 'Prop' : upperFirst(type);
+
+  let propAST: bt.ClassProperty | bt.ClassMethod | undefined;
+  let propOptionsAST: bt.ObjectExpression | undefined;
+  traverse(ast, {
+    ClassDeclaration(path) {
+      if (bt.isIdentifier(path.node.id) && path.node.id.name === className) {
+        propAST = path.node.body.body.find((n) => (
+          (bt.isClassProperty(n) || bt.isClassMethod(n))
+          && bt.isIdentifier(n.key)
+          && n.key.name === propName
+          && n.decorators
+          && n.decorators.some((d) => bt.isCallExpression(d.expression) && bt.isIdentifier(d.expression.callee) && d.expression.callee.name === decoratorName)
+        )) as any;
+
+        if (propAST && propAST.decorators) {
+          const propDecorator = propAST.decorators.find((d) => bt.isCallExpression(d.expression) && bt.isIdentifier(d.expression.callee) && d.expression.callee.name === decoratorName);
+          propOptionsAST = (propDecorator?.expression as bt.CallExpression).arguments[0] as bt.ObjectExpression;
+        }
+      }
+    },
+  });
+
+  return {
+    propAST,
+    propOptionsAST,
+  };
+}
+
+function updatePropertyOptions(propOptionsAST: bt.ObjectExpression, rest: Record<string, any>) {
+  const keys = Object.keys(rest);
+
+  const stringifyKeys = ['onChange', 'if', 'disabledIf', 'setter'];
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const value = rest[key];
+    const propIndex = propOptionsAST.properties.findIndex((p) => (
+      (bt.isObjectProperty(p) || bt.isObjectMethod(p))
+        && p.key.type === 'Identifier'
+        && p.key.name === key
+    ));
+
+    if (value === null) {
+      propOptionsAST.properties.splice(propIndex, 1);
+      continue;
+    }
+
+    const prop = propOptionsAST.properties[propIndex] as bt.ObjectProperty | bt.ClassMethod;
+    const requireStringify = !stringifyKeys.includes(key);
+
+    if (!prop) {
+      propOptionsAST.properties.push({
+        type: 'ObjectProperty',
+        key: {
+          type: 'Identifier',
+          name: key,
+        },
+        value: getAST(value, requireStringify),
+        computed: false,
+        shorthand: false,
+      });
+    } else if (bt.isClassMethod(prop)) {
+      propOptionsAST.properties[propIndex] = {
+        type: 'ObjectProperty',
+        key: {
+          type: 'Identifier',
+          name: key,
+        },
+        value: getAST(value, requireStringify),
+        computed: false,
+        shorthand: false,
+      };
+    } else {
+      prop.value = getAST(value, requireStringify);
+    }
+  }
+}
+
 export interface APIAddPropOptions extends APIEditorBaseOptions {
   type: 'add',
   module: 'prop',
@@ -175,34 +329,26 @@ export interface APIAddPropOptions extends APIEditorBaseOptions {
 }
 
 export function addProp(ast: bt.File, options: APIAddPropOptions) {
+  const { name: componentName } = options;
+  const { name, schema } = options.data;
+  let code = '';
 
-}
+  if (schema) {
+    code = genAttrCode(schema);
+  } else {
+    code = `@Prop({
+      title: '${genTitle(name)}',
+      description: '${genTitle(name)}',
+      setter: {
+        concept: 'InputSetter',
+      },
+    })
+    ${name}: any;
+    `;
+  }
+  const propAST = getAPIPropAST(code, name);
 
-export interface APIUpdatePropOptions extends APIEditorBaseOptions {
-  type: 'update',
-  module: 'prop',
-  data: {
-    name: string;
-    tsType?: string; // any;
-    defaultValue?: string; // any;
-    [key: string]: any;
-  };
-}
-
-export function updateProp(ast: bt.File, options: APIUpdatePropOptions) {
-
-}
-
-export interface APIRemovePropOptions extends APIEditorBaseOptions {
-  type: 'remove',
-  module: 'prop',
-  data: {
-    name: string; // 属性名称
-  },
-}
-
-export function removeProp(ast: bt.File, options: APIRemovePropOptions) {
-
+  insertProperty(ast, propAST, componentName, 'prop');
 }
 
 export interface APIAddEventOptions extends APIEditorBaseOptions {
@@ -215,33 +361,23 @@ export interface APIAddEventOptions extends APIEditorBaseOptions {
 }
 
 export function addEvent(ast: bt.File, options: APIAddEventOptions) {
+  const { name: componentName } = options;
+  const { name, schema } = options.data;
+  let code = '';
 
-}
+  if (schema) {
+    code = genEventCode(schema);
+  } else {
+    code = `@Event({
+      title: '${genTitle(name)}',
+      description: '${genTitle(name)}',
+    })
+    ${name}: (event: {}) => any;
+    `;
+  }
+  const propAST = getAPIPropAST(code, name);
 
-export interface APIUpdateEventOptions extends APIEditorBaseOptions {
-  type: 'update',
-  module: 'event',
-  data: {
-    name: string;
-    eventTsType?: string; // any;
-    [key: string]: any;
-  };
-}
-
-export function updateEvent(ast: bt.File, options: APIUpdateEventOptions) {
-
-}
-
-export interface APIRemoveEventOptions extends APIEditorBaseOptions {
-  type: 'remove',
-  module: 'event',
-  data: {
-    name: string; // 属性名称
-  },
-}
-
-export function removeEvent(ast: bt.File, options: APIRemoveEventOptions) {
-
+  insertProperty(ast, propAST, componentName, 'event');
 }
 
 export interface APIAddSlotOptions extends APIEditorBaseOptions {
@@ -254,33 +390,23 @@ export interface APIAddSlotOptions extends APIEditorBaseOptions {
 }
 
 export function addSlot(ast: bt.File, options: APIAddSlotOptions) {
+  const { name: componentName } = options;
+  const { name, schema } = options.data;
+  let code = '';
 
-}
+  if (schema) {
+    code = genSlotCode(schema);
+  } else {
+    code = `@Slot({
+      title: '${genTitle(name)}',
+      description: '${genTitle(name)}',
+    })
+    ${name}: (current: {}) => Array<nasl.ui.ViewComponent>;
+    `;
+  }
+  const propAST = getAPIPropAST(code, name);
 
-export interface APIUpdateSlotOptions extends APIEditorBaseOptions {
-  type: 'update',
-  module: 'slot',
-  data: {
-    name: string;
-    currentTsType?: string; // any;
-    [key: string]: any;
-  };
-}
-
-export function updateSlot(ast: bt.File, options: APIUpdateSlotOptions) {
-
-}
-
-export interface APIRemoveSlotOptions extends APIEditorBaseOptions {
-  type: 'remove',
-  module: 'slot',
-  data: {
-    name: string; // 属性名称
-  },
-}
-
-export function removeSlot(ast: bt.File, options: APIRemoveSlotOptions) {
-
+  insertProperty(ast, propAST, componentName, options.module);
 }
 
 export interface APIAddReadablePropOptions extends APIEditorBaseOptions {
@@ -292,34 +418,19 @@ export interface APIAddReadablePropOptions extends APIEditorBaseOptions {
 }
 
 export function addReadableProp(ast: bt.File, options: APIAddReadablePropOptions) {
+  const { name: componentName } = options;
+  const { name } = options.data;
 
-}
+  const code = `@Prop({
+    title: '${genTitle(name)}',
+    description: '${genTitle(name)}',
+  })
+  ${name}: () => any;
+  `;
 
-export interface APIUpdateReadablePropOptions extends APIEditorBaseOptions {
-  type: 'update',
-  module: 'readableProp',
-  data: {
-    name: string;
-    tsType?: string; // any;
-    defaultValue?: string; // any;
-    [key: string]: any;
-  };
-}
+  const propAST = getAPIPropAST(code, name);
 
-export function updateReadableProp(ast: bt.File, options: APIUpdateReadablePropOptions) {
-
-}
-
-export interface APIRemoveReadablePropOptions extends APIEditorBaseOptions {
-  type: 'remove',
-  module: 'readableProp',
-  data: {
-    name: string; // 属性名称
-  },
-}
-
-export function removeReadableProp(ast: bt.File, options: APIRemoveReadablePropOptions) {
-
+  insertProperty(ast, propAST, componentName, options.module);
 }
 
 export interface APIAddMethodOptions extends APIEditorBaseOptions {
@@ -332,46 +443,123 @@ export interface APIAddMethodOptions extends APIEditorBaseOptions {
 }
 
 export function addMethod(ast: bt.File, options: APIAddMethodOptions) {
+  const { name: componentName } = options;
+  const { name, schema } = options.data;
+  let code = '';
 
+  if (schema) {
+    code = genMethodCode(schema);
+  } else {
+    code = `@Method({
+      title: '${genTitle(name)}',
+      description: '${genTitle(name)}',
+    })
+    ${name}(): void {
+    }`;
+  }
+
+  const propAST = getAPIPropAST(code, name);
+
+  insertProperty(ast, propAST, componentName, options.module);
 }
 
-export interface APIUpdateMethodOptions extends APIEditorBaseOptions {
+export interface APIUpdatePropOptions extends APIEditorBaseOptions {
   type: 'update',
-  module: 'method',
+  module: 'prop' | 'event' | 'slot' | 'readableProp' | 'method',
+  propName: string;
   data: {
-    name: string;
-    params?: ({ name: string, tsType: string })[]; // any;
-    returnTsType?: string;
+    name?: string;
+    tsType?: string; // any;
     defaultValue?: string; // any;
     [key: string]: any;
   };
 }
 
-export function updateMethod(ast: bt.File, options: APIUpdateMethodOptions) {
+export function updateProp(ast: bt.File, options: APIUpdatePropOptions) {
+  const { name: componentName, propName } = options;
+  const {
+    name,
+    tsType,
+    defaultValue,
+    ...rest
+  } = options.data;
 
+  const { propAST, propOptionsAST } = findPropertyAST(ast, componentName, propName, 'prop');
+
+  if (!propAST || !propOptionsAST) {
+    throw new Error(`${name} 组件中未找到属性 ${propName} 的属性声明`);
+  }
+
+  if (name) {
+    (propAST.key as bt.Identifier).name = name;
+  }
+
+  if (tsType) {
+    const typeAST = getTypeAST(tsType);
+    if (options.module === 'method' && bt.isClassMethod(propAST) && typeAST.type === 'TSFunctionType') {
+      propAST.params = typeAST.parameters as any;
+      if (typeAST.typeAnnotation) {
+        propAST.returnType = typeAST.typeAnnotation;
+        propAST.body.body = [
+          {
+            type: 'ReturnStatement',
+            argument: {
+              type: 'TSAsExpression',
+              expression: {
+                type: 'NullLiteral',
+              },
+              typeAnnotation: {
+                type: 'TSAnyKeyword',
+              },
+            },
+          },
+        ];
+      } else {
+        propAST.returnType = {
+          type: 'TSTypeAnnotation',
+          typeAnnotation: {
+            type: 'TSVoidKeyword',
+          },
+        } as bt.TSTypeAnnotation;
+        propAST.body.body = [];
+      }
+    } else if (bt.isClassProperty(propAST)) {
+      if (!propAST.typeAnnotation || propAST.typeAnnotation.type !== 'TSTypeAnnotation') {
+        propAST.typeAnnotation = {
+          type: 'TSTypeAnnotation',
+          typeAnnotation: {
+            type: 'TSAnyKeyword',
+          },
+        };
+      }
+      propAST.typeAnnotation.typeAnnotation = getTypeAST(tsType);
+    }
+  }
+
+  if (!isNil(defaultValue) && bt.isClassProperty(propAST)) {
+    propAST.value = getAST(defaultValue, false);
+  }
+
+  updatePropertyOptions(propOptionsAST, rest);
 }
 
-export interface APIRemoveMethodOptions extends APIEditorBaseOptions {
+export interface APIRemovePropOptions extends APIEditorBaseOptions {
   type: 'remove',
-  module: 'method',
-  data: {
-    name: string; // 属性名称
-  },
+  module: 'prop' | 'event' | 'slot' | 'readableProp' | 'method',
+  propName: string;
 }
 
-export function removeMethod(ast: bt.File, options: APIRemoveMethodOptions) {
-
+export function removeProp(ast: bt.File, options: APIRemovePropOptions) {
+  const { name: componentName, propName } = options;
+  removeProperty(ast, componentName, propName, options.module);
 }
 
 export type APIUpdateOptions = APIUpdateInfoOptions
   | APIAddSubComponentOptions | APIRemoveSubComponentOptions
   | APIAddPropOptions | APIUpdatePropOptions
   | APIRemovePropOptions | APIAddEventOptions
-  | APIUpdateEventOptions | APIRemoveEventOptions
-  | APIAddSlotOptions | APIUpdateSlotOptions
-  | APIRemoveSlotOptions | APIAddReadablePropOptions
-  | APIUpdateReadablePropOptions | APIRemoveReadablePropOptions
-  | APIAddMethodOptions | APIUpdateMethodOptions | APIRemoveMethodOptions;
+  | APIAddSlotOptions | APIAddReadablePropOptions
+  | APIAddMethodOptions
 
 export default async function updateAPIFile(tsPath: string, actions: APIUpdateOptions[]) {
   if (!tsPath || !fs.existsSync(tsPath)) {
@@ -399,34 +587,18 @@ export default async function updateAPIFile(tsPath: string, actions: APIUpdateOp
         return removeSubComponent(ast, options);
       case options.module === 'prop' && options.type === 'add':
         return addProp(ast, options);
-      case options.module === 'prop' && options.type === 'update':
-        return updateProp(ast, options);
-      case options.module === 'prop' && options.type === 'remove':
-        return removeProp(ast, options);
       case options.module === 'event' && options.type === 'add':
         return addEvent(ast, options);
-      case options.module === 'event' && options.type === 'update':
-        return updateEvent(ast, options);
-      case options.module === 'event' && options.type === 'remove':
-        return removeEvent(ast, options);
       case options.module === 'slot' && options.type === 'add':
         return addSlot(ast, options);
-      case options.module === 'slot' && options.type === 'update':
-        return updateSlot(ast, options);
-      case options.module === 'slot' && options.type === 'remove':
-        return removeSlot(ast, options);
       case options.module === 'readableProp' && options.type === 'add':
         return addReadableProp(ast, options);
-      case options.module === 'readableProp' && options.type === 'update':
-        return updateReadableProp(ast, options);
-      case options.module === 'readableProp' && options.type === 'remove':
-        return removeReadableProp(ast, options);
       case options.module === 'method' && options.type === 'add':
         return addMethod(ast, options);
-      case options.module === 'method' && options.type === 'update':
-        return updateMethod(ast, options);
-      case options.module === 'method' && options.type === 'remove':
-        return removeMethod(ast, options);
+      case options.type === 'update':
+        return updateProp(ast, options);
+      case options.type === 'remove':
+        return removeProp(ast, options);
       default:
         throw new Error(`未找到匹配的更新操作，${JSON.stringify(options)}`);
     }
