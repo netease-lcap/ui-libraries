@@ -477,10 +477,11 @@ export default function buildCSSInfo(options: LcapBuildOptions) {
   const components = getComponentMetaInfos(options.rootPath, true);
   const componentNameMap: Record<string, string | undefined> = {}; // { componentName: parentName }
   components.forEach((component) => {
-    componentNameMap[component.name] = undefined;
+    // 这里用了个技巧，先匹配子组件
     component.children?.forEach((child) => {
       componentNameMap[child.name] = component.name;
     });
+    componentNameMap[component.name] = undefined;
   });
 
   const cssContent = fs.readFileSync(path.resolve(options.rootPath, options.destDir, 'index.css'), 'utf-8');
