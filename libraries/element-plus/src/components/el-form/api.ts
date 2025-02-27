@@ -511,13 +511,13 @@ namespace nasl.ui {
     })
     rules: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '必填标记',
-      description: '是否为必填项,并显示必填标记',
-      setter: { concept: 'SwitchSetter' },
-    })
-    isRequired: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '必填标记',
+    //   description: '是否为必填项,并显示必填标记',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // isRequired: nasl.core.Boolean = false;
 
 
     // @Prop({
