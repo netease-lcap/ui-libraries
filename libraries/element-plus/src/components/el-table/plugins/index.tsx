@@ -130,7 +130,7 @@ export function handleDataSource(props) {
 export function handlePage(props, { childrenRef }) {
   const Component = props.get('render');
   const pagination = props.get('pagination');
-  const pageSizes = props.get('pageSizes');
+  const pageSizesProps = props.get('pageSizes');
   const defaultPageSize = props.get('pageSize') || 10;
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
@@ -141,24 +141,16 @@ export function handlePage(props, { childrenRef }) {
   const nodepath = props.get('data-nodepath');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
-  let pageSizeOptions: number[] = [];
-  try {
-    if (_.isString(pageSizes)) {
-      const list = JSON.parse(pageSizes);
-      pageSizeOptions = Array.isArray(list) ? list : [10, 20, 50];
-    } else if (_.isArray(pageSizes)) {
-      pageSizeOptions = pageSizes;
-    } else {
-      pageSizeOptions = [10, 20, 50];
-    }
-  } catch (error) {
-    pageSizeOptions = [10, 20, 50];
-  }
+  const pageSizes = useMemo(() => {
+    const jsonPageSizes = _.attempt(JSON.parse, pageSizesProps);
+    return _.isArray(jsonPageSizes) ? jsonPageSizes : [10, 20, 50];
+  }, [pageSizesProps]);
+
   return {
     pageProps: {
       defaultCurrentPage,
       defaultPageSize,
-      pageSizes: pageSizeOptions,
+      pageSizes,
       layout,
       onChange,
     },
