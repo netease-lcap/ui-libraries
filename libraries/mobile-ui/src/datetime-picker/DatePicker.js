@@ -274,13 +274,12 @@ export default createComponent({
         try {
           if (!value || value === '') {
             value = new Date();
-          } else if (typeof value === 'string' && !value.includes('T')) {
+          } else if (typeof value === 'string' && !value.includes('T') && !value.includes(':')) {
             let temp = value;
             const arr = temp.split('-');
-            if (arr.length === 1 && this.unit === 'year' && temp.length === 4) {
-              temp = `${temp}-01-01`;
-            } else if (arr.length === 2 && this.unit === 'month') {
-              temp = `${temp}-01`;
+
+            if (['month', 'year'].includes(this.unit) && arr.length < 3) {
+              temp = arr.concat(new Array(3 - arr.length).fill('01')).join('-');
             }
 
             temp = temp.replace(/-/g, '/');

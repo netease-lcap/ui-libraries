@@ -168,12 +168,10 @@ export function showFormat(value: string | number | Date, options: Record<string
     if (!value) {
       date = new Date();
     } else {
-      if (typeof value === 'string' && !value.includes('T')) {
+      if (typeof value === 'string' && !value.includes('T') && !value.includes(':')) {
         const arr = value.split('-');
-        if (arr.length === 1 && options.unit === 'year' && options.length === 4) {
-          value = `${value}-01-01`;
-        } else if (arr.length === 2 && options.unit === 'month') {
-          value = `${value}-01`;
+        if (['month', 'year'].includes(options.unit) && arr.length < 3) {
+          value = arr.concat(new Array(3 - arr.length).fill('01')).join('-');
         }
 
         value = value.replace(/-/g, '/');
