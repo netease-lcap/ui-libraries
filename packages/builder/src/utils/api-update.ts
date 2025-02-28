@@ -35,7 +35,7 @@ import {
 import { getProjectSourceSchema } from './lcap';
 
 export interface APIEditorBaseOptions {
-  type: 'add' | 'update' | 'remove';
+  type: 'add' | 'update' | 'remove' | 'order';
   module: 'info' | 'subComponent' | 'prop' | 'event' | 'slot' | 'method' | 'readableProp';
   name: string;
 }
@@ -554,12 +554,46 @@ export function removeProp(ast: bt.File, options: APIRemovePropOptions) {
   removeProperty(ast, componentName, propName, options.module);
 }
 
+export interface APIOrderPropOptions extends APIEditorBaseOptions {
+  type: 'order',
+  data: {
+    names: string[];
+    isOptions?: boolean;
+  }
+}
+
+export function orderProp(ast: bt.File, options: APIOrderPropOptions) {
+  const { name: componentName } = options;
+  const { names, isOptions } = options.data;
+  const className = isOptions ? `${componentName}Options` : componentName;
+
+  traverse(ast, {
+    ClassDeclaration(path) {
+      if (bt.isIdentifier(path.node.id) && path.node.id.name === className) {
+        path.node.body.body = [...path.node.body.body].sort((ast1: any, ast2: any) => {
+          let index1 = ast1.key && ast1.key.name ? names.indexOf(ast1.key.name) : 1000;
+          let index2 = ast2.key && ast2.key.name ? names.indexOf(ast2.key.name) : 1000;
+
+          if (index1 === -1) {
+            index1 = 1000;
+          }
+          if (index2 === -1) {
+            index2 = 1000;
+          }
+
+          return index1 - index2;
+        });
+      }
+    },
+  });
+}
+
 export type APIUpdateOptions = APIUpdateInfoOptions
   | APIAddSubComponentOptions | APIRemoveSubComponentOptions
   | APIAddPropOptions | APIUpdatePropOptions
   | APIRemovePropOptions | APIAddEventOptions
   | APIAddSlotOptions | APIAddReadablePropOptions
-  | APIAddMethodOptions
+  | APIAddMethodOptions | APIOrderPropOptions;
 
 export default async function updateAPIFile(tsPath: string, actions: APIUpdateOptions[]) {
   if (!tsPath || !fs.existsSync(tsPath)) {
@@ -599,6 +633,8 @@ export default async function updateAPIFile(tsPath: string, actions: APIUpdateOp
         return updateProp(ast, options);
       case options.type === 'remove':
         return removeProp(ast, options);
+      case options.type === 'order':
+        return orderProp(ast, options);
       default:
         throw new Error(`未找到匹配的更新操作，${JSON.stringify(options)}`);
     }
