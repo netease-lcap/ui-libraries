@@ -503,13 +503,19 @@
             "dataSource": {
                 "display": 3,
                 "dismiss": "this.filterElement(el => el.tag!=='template').length > 0",
-                "loopElem": "> div",
+                "loopElem": "[class^='u-timeline'] > [class^='u-timeline_item']",
                 "emptySlot": {
                   "display": "inline",
                   "condition": "!this.getAttribute('dataSource')",
                   "accept": false
                 }
             },
+            "style": [
+                {
+                    "selector": "[class^='u-timeline'] > [class^='u-timeline_item']:nth-last-child(-n+2)",
+                    "declaration": "opacity: unset !important"
+                }
+            ],
             "namedSlotOmitWrapper": ["item"]
         }
     },
