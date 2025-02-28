@@ -415,6 +415,7 @@ export default {
   },
   computed: {
     currentDisabled() {
+      if (this.isPreview) return false;
       if (this.disabled) return true;
       else if (this.emptyDisabled)
         return this.currentData
