@@ -324,19 +324,21 @@ export interface APIAddPropOptions extends APIEditorBaseOptions {
   module: 'prop',
   data: {
     name: string; // 属性名称
+    group?: string; // 属性分组
     schema?: MaterialComponentAttr;
   }
 }
 
 export function addProp(ast: bt.File, options: APIAddPropOptions) {
   const { name: componentName } = options;
-  const { name, schema } = options.data;
+  const { name, schema, group = '主要属性' } = options.data;
   let code = '';
 
   if (schema) {
-    code = genAttrCode(schema);
+    code = genAttrCode(schema, group);
   } else {
     code = `@Prop({
+      group: '${group}',
       title: '${genTitle(name)}',
       description: '${genTitle(name)}',
       setter: {

@@ -97,7 +97,7 @@ export function genSetterCode(attr: MaterialComponentAttr) {
   },`;
 }
 
-export function genAttrCode(attr: MaterialComponentAttr) {
+export function genAttrCode(attr: MaterialComponentAttr, group: string = '主要属性') {
   const {
     name,
     description,
@@ -107,6 +107,7 @@ export function genAttrCode(attr: MaterialComponentAttr) {
   } = attr;
   const title = genTitle(name);
   const propOptions: string[] = [
+    `group: '${group}',`,
     `title: '${title}',`,
     `description: '${description || title}',`,
     genSetterCode(attr),
