@@ -70,7 +70,7 @@ export const Example2 = {
       const select = ref('');
 
       const handleClick = (tab) => {
-        console.log(tab);
+        console.log(tab,'====');
       };
 
       setTimeout(() => {
@@ -88,8 +88,8 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-select ref="select"  @onClear="handleClick" clearable :dataSource="list" multiple >
-     <el-option label="item.value" value="item.value" :name="name" / >
+    <el-select ref="select" v-model="activeName"  @change="handleClick" @onClear="handleClick" clearable :dataSource="list" multiple >
+     <el-option label="item.value" :value="item.value" :name="name" / >
 
     </el-select>
     {{ activeName }}
