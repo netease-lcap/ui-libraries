@@ -54,7 +54,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '可关闭',
       description: '标签页是否可关闭',
-      setter: { concept: 'SwitchSetter' },
+      setter: { concept: 'InputSetter' },
     })
     closable: nasl.core.Boolean = false;
 
