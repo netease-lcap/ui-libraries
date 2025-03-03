@@ -4,7 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 1,
     ideusage: {
-      idetype: 'container',
+      idetype: 'element',
       structured: true,
       childAccept: "target.tag === 'el-tab-pane'",
       displaySlotInline: {
