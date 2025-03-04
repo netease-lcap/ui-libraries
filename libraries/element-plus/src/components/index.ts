@@ -13,3 +13,4 @@ export { ElRouterView } from './el-router-view';
 export { ElIframe } from './el-iframe';
 export { ElMessage, ElMessageDesigner } from './el-message';
 export { ElTree } from './el-tree';
+export { ElSteps, ElStep } from './el-steps';
