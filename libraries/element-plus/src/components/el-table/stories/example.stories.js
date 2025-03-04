@@ -187,9 +187,9 @@ export const Example2 = {
       watch(selectedRowKeys, (el) => {
         console.log(el, 'log');
       });
-      // setTimeout(() => {
-      //   console.log(selectedRowKeys,'selectedRowKeys');
-      // }, 1000);
+      setTimeout(() => {
+        console.log(mytable, 'mytable====');
+      }, 1000);
       return {
         tableData,
         pageSize2,
@@ -204,7 +204,6 @@ ref="mytable"
 row-key="index"
 :dataSource="tableData"
 :pagination="true"
-v-model:currentPage="currentPage"
 :showTotal="true"
 :sorting="{ field: 'createTime', order: 'desc' }"
 :showJumper="true"

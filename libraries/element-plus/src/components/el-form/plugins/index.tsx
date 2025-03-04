@@ -2,7 +2,7 @@
 import { $formProvide } from '@/components/el-form/constants';
 import { useState } from '@/plugins/hooks';
 
-export function handleModelValue(props, { componentRef }) {
+export function handleModelValue(props) {
   const modelValue = props.get('model') ?? {};
   const [value, setFormValue] = useState(modelValue);
   const provide = props.get('provide');
@@ -14,19 +14,19 @@ export function handleModelValue(props, { componentRef }) {
         isInForm: true,
         value,
         setValue: (value) => setFormValue((state) => ({
-          ...state,
-          ...value,
-        })),
+            ...state,
+            ...value,
+          })),
       },
     }),
     ref: Object.assign(ref, {
       validate: async () => {
-        const result = await componentRef.value
+        const result = await ref.value
           .validate()
-          .then((result) => {
+          .then(() => {
             return true;
           })
-          .catch((err) => {
+          .catch(() => {
             return false;
           });
         return result;
