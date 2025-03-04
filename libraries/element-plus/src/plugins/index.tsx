@@ -118,7 +118,7 @@ export function registerComponent(Component, options) {
       provide($provide, provideRef);
 
       return () => {
-        const RenderComponent = render.value ?? Component;
+        const RenderComponent = render.value;
         return (
           <RenderComponent
             {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}
