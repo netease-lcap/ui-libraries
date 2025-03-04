@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, markRaw } from 'vue';
+import { ref, Ref, watch, provide, inject, markRaw, computed } from 'vue';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
@@ -66,7 +67,7 @@ export function registerComponent(Component, options) {
           inject: injectRef,
           provide: {},
           ref: {},
-          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render', 'slots', 'emit', $deletePropsList],
+          [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
         props: {
           ...props,
@@ -116,11 +117,11 @@ export function registerComponent(Component, options) {
       expose(exposeRef.value);
 
       provide($provide, provideRef);
+      const RenderComponent = computed(() => render.value) as any;
 
       return () => {
-        const RenderComponent = render.value;
         return (
-          <RenderComponent
+          <RenderComponent.value
             {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(componentState, 'value.state.slots', {}) }}
             ref={componentRef}
