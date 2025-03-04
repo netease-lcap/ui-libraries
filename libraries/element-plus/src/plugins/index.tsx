@@ -87,11 +87,10 @@ export function registerComponent(Component, options) {
       const setValue = useStore((state: any) => state.setvalue);
 
       useStore.subscribe((props: any) => {
-        const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value });
-        const ImmutableCommit = ImmutableProps.merge({ render: Component });
-        const commitState = scheduler(pluginHooks, ImmutableCommit, fiberMap, useStore);
-        const ref = commitState.get('ref');
+        const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
+        const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap, useStore);
         const commitJsState = commitState.delete('ref').toJS();
+        const ref = commitState.get('ref');
         render.value = commitJsState.render;
         componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
         Object.assign(exposeRef.value, ref);
