@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 import { $formProvide } from '@/components/el-form/constants';
 import { useState } from '@/plugins/hooks';
-import { useMemo } from '../../../plugins/hooks';
 
 export function handleModelValue(props) {
   const modelValue = props.get('model') ?? {};

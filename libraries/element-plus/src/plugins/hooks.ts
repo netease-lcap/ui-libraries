@@ -144,15 +144,15 @@ export function useEffect(callBack, dep) {
       currentFiber.workInProgressEffect.next = hook;
     }
     currentFiber.workInProgressEffect = hook;
-    if (dep.length === 0) {
-      onMounted(() => {
-        const result = callBack(...dep);
-        hook.result = _.isFunction(result) ? result : () => {};
-      });
-    } else {
+    // if (dep.length === 0) {
+    onMounted(() => {
       const result = callBack(...dep);
       hook.result = _.isFunction(result) ? result : () => {};
-    }
+    });
+    // } else {
+    //   const result = callBack(...dep);
+    //   hook.result = _.isFunction(result) ? result : () => {};
+    // }
     onUnmounted(() => {
       _.attempt(hook.result);
     });
