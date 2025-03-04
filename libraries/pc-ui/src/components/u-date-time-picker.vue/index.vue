@@ -562,8 +562,10 @@ export default {
             this.$emit('input', this.handleEmptyValue( newDateTime ));
         },
         onPopperOpen() {
-            if (!this.finalDateTime)
-                return;
+            if (!this.finalDateTime) {
+              this.dateTime = undefined;
+              return;
+            }
             this.dateTime = this.format(new Date(this.finalDateTime.replace(/-/g, '/')), 'YYYY-MM-DD HH:mm:ss');
             this.showDate = this.format(this.dateTime, 'YYYY-MM-DD');
             this.showTime = this.format(this.dateTime, 'HH:mm:ss');
