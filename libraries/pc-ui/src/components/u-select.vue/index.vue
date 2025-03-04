@@ -910,7 +910,7 @@ export default {
           return;
         }
         if (this.preventRootBlur) return (this.preventRootBlur = false);
-        this.close();
+        // this.close();
         this.$emit('blur', e);
       }, 400);
 
