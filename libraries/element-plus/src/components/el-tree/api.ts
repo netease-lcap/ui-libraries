@@ -21,7 +21,7 @@ namespace nasl.ui {
     }
   })
   @Component({
-    title: '树形视图123',
+    title: '树形视图',
     icon: 'tree-view-new',
     description: '用于承载有父子关系的结构化内容，提供内容层级的展示。',
     group: 'Selector',

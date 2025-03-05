@@ -21,7 +21,7 @@ namespace nasl.ui {
     }
   })
   @Component({
-    title: '弹出消息123',
+    title: '弹出消息',
     icon: 'toast',
     description: '常用于主动操作后的反馈提示。与 Notification 的区别是后者更多用于系统级通知的被动提醒。',
     group: 'Feedback',

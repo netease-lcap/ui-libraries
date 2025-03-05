@@ -1,7 +1,5 @@
 import { ElMessage as Message } from 'element-plus';
 import { h } from 'vue';
-// import ElIcon from '../el-icon/icon';
-// import { setElStyle } from '../../utils/dom';
 
 export default {
   name: 'ElMessage',
@@ -66,17 +64,6 @@ export default {
         this.closeMessage();
       }
       const vnodes = this.$slots.default ? this.$slots.default() : [];
-
-      if (this.icon) {
-        // vnodes.unshift(
-        //   h(ElIcon, {
-        //     attrs: {
-        //       name: this.icon,
-        //     },
-        //     class: `el-message__icon el-icon-${this.type}`,
-        //   }),
-        // );
-      }
 
       const message = h('div', {
         class: 'el-message__content',

@@ -23,7 +23,7 @@ namespace nasl.ui {
     },
   })
   @Component({
-    title: '步骤条123',
+    title: '步骤条',
     icon: 'steps',
     description: '引导用户按照流程完成任务的分步导航条，可根据实际应用场景设定步骤，步骤不得少于 2 步。',
     group: 'Navigation',
