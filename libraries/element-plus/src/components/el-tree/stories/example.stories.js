@@ -13,6 +13,50 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-tree valueField="value" childrenField="children" textField="value" :dataSource="[{},{},{}]"></el-tree>',
+    data() {
+      return {
+        dataSource: [
+          {
+            label: '一级节点 1',
+            children: [
+              {
+                label: '二级节点 1-1',
+                children: [
+                  { label: '三级节点 1-1-1' },
+                  { label: '三级节点 1-1-2' },
+                ],
+              },
+              {
+                label: '二级节点 1-2',
+                children: [
+                  { label: '三级节点 1-2-1' },
+                  { label: '三级节点 1-2-2' },
+                ],
+              },
+            ],
+          },
+          {
+            label: '一级节点 2',
+            children: [
+              {
+                label: '二级节点 2-1',
+                children: [
+                  { label: '三级节点 2-1-1' },
+                  { label: '三级节点 2-1-2' },
+                ],
+              },
+            ],
+          },
+          {
+            label: '一级节点 3',
+            children: [
+              { label: '二级节点 3-1' },
+              { label: '二级节点 3-2' },
+            ],
+          },
+        ],
+      };
+    },
+    template: '<el-tree valueField="label" childrenField="children" textField="label" :dataSource="dataSource"></el-tree>',
   }),
 };
