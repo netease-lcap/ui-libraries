@@ -7,6 +7,5 @@ import './index.css';
 
 const ElSelect = registerComponent(ElSelectV2Plus, { plugin: basicsPlugin });
 const ElFormSelect = withFormItem(ElSelect, 'el-form-select');
-// const ElSelect = ElSelectV2Plus;
 export { ElSelect, ElOption, ElFormSelect };
 export default ElSelect;
