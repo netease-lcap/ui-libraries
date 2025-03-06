@@ -24,8 +24,7 @@
       "require": "./dist-theme/index.cjs",
       "default": "./dist-theme/index.js"
     },
-    "./index.css": "./dist-theme/index.css",
-    "./dist-theme/index.css": "./dist-theme/index.css"
+    "./*": "./*"
   },
   "scripts": {
     "dev": "npm run storybook",
