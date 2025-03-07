@@ -6,7 +6,7 @@ import { $deletePropList, $ref } from '../constants';
 export type LoadDataFunc = (params: { [key: string]: any }) => Promise<{ list: any[], total: number }>;
 
 export const useDataSource: NaslComponentPluginOptions = {
-  props: ['dataSource', 'dataSchema', 'data', 'total'],
+  props: ['dataSource', 'dataSchema', 'data', 'total', 'loading'],
   setup: (props, { setupContext: ctx }) => {
     const loading = props.useRef('loading');
     const instance = getCurrentInstance();
