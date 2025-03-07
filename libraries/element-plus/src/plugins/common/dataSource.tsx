@@ -100,8 +100,8 @@ export function useRequestDataSource(dataSource, options = {}) {
     () => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSource] }),
     [dataSourceFn],
   ) as any;
-  stop.current();
-  stop.current = watch(
+  stop.value();
+  stop.value = watch(
     () => result,
     (value) => {
       setResult(value);

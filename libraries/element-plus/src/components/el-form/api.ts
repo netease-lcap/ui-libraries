@@ -31,7 +31,7 @@ namespace nasl.ui {
       title: '校验函数',
       description: '校验函数，包含错误文本提示等功能',
     })
-    validate	(): {
+    validated	(): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;

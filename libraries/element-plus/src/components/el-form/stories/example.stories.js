@@ -89,15 +89,15 @@ export const Example2 = {
       };
       const handleClick = async (tab) => {
         // console.log('====', formData, tab);
-
-        tab.validate().then(
-          (res) => {
-            console.log(res, 'res');
-          },
-          (err) => {
-            console.log(err, 'err');
-          },
-        );
+        console.log(tab, 'tab', tab.validated());
+        // tab.validate().then(
+        //   (res) => {
+        //     console.log(res, 'res');
+        //   },
+        //   (err) => {
+        //     console.log(err, 'err');
+        //   },
+        // );
 
         // tab.resetForm();
         // const result= await tab.validate();
@@ -136,7 +136,7 @@ export const Example2 = {
     <el-form  ref="formRef">
 
 
-    <el-input  v-model="inputName" data-nodepath="input21" />
+    <el-form-input :rules="rules"  label="input21" v-model="inputName" data-nodepath="input21" />
 
     <a @click="handleClick(formRef)" >Submit</a>
     <el-form-checkbox-group label="ww" :isRequired="true" :dataSource="[{},{},{}]"></el-form-checkox-group>

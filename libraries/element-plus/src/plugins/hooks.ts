@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 interface Hook {
   next: Hook;
@@ -112,7 +112,8 @@ export function useRef(initialstate) {
   if (isMount) {
     hook = {
       next: null,
-      value: { current: initialstate },
+      // value: { current: initialstate },
+      value: ref(initialstate),
     };
     hook.next = hook;
     if (currentFiber.workInProgressState) {
@@ -143,15 +144,15 @@ export function useEffect(callBack, dep) {
       currentFiber.workInProgressEffect.next = hook;
     }
     currentFiber.workInProgressEffect = hook;
-    if (dep.length === 0) {
-      onMounted(() => {
-        const result = callBack(...dep);
-        hook.result = _.isFunction(result) ? result : () => {};
-      });
-    } else {
+    // if (dep.length === 0) {
+    onMounted(() => {
       const result = callBack(...dep);
       hook.result = _.isFunction(result) ? result : () => {};
-    }
+    });
+    // } else {
+    //   const result = callBack(...dep);
+    //   hook.result = _.isFunction(result) ? result : () => {};
+    // }
     onUnmounted(() => {
       _.attempt(hook.result);
     });
@@ -223,4 +224,26 @@ export function useCallback(callBack, dep) {
     }
   }
   return hook.callBack;
+}
+
+export function scheduler(pluginHooks, ImmutableProps, fiberMap, useStore) {
+  const setValue = useStore((state: any) => state.setvalue);
+  return pluginHooks?.reduce((ImmutableProps, handleFn) => {
+    const isMount = !fiberMap.has(handleFn);
+    const storeKey = _.uniqueId('storeKey');
+    const fiber = isMount
+      ? {
+          workInProgressState: null,
+          workInProgressEffect: null,
+          updateQueen: [],
+          useStore,
+          setValue,
+          storeKey,
+        }
+      : fiberMap.get(handleFn);
+    fiberNode.setCurrentFiber(fiber, isMount);
+    const result = _.attempt(_.bind(handleFn, fiber), ImmutableProps);
+    fiberMap.set(handleFn, fiber);
+    return ImmutableProps.merge(result);
+  }, ImmutableProps);
 }

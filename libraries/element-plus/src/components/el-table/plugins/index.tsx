@@ -127,7 +127,7 @@ export function handleDataSource(props) {
   };
 }
 
-export function handlePage(props, { childrenRef }) {
+export function handlePage(props) {
   const Component = props.get('render');
   const pagination = props.get('pagination');
   const pageSizesProps = props.get('pageSizes');
@@ -138,7 +138,9 @@ export function handlePage(props, { childrenRef }) {
   const defaultCurrentPage = props.get('currentPage') || 1;
   const onSelectionChange = props.get('onSelectionChange', () => {});
   const ref = props.get('ref');
+
   const nodepath = props.get('data-nodepath');
+  const tableRef = useRef({});
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
   const pageSizes = useMemo(() => {
@@ -154,7 +156,7 @@ export function handlePage(props, { childrenRef }) {
       layout,
       onChange,
     },
-    ref,
+    ref: Object.assign(ref, tableRef.value),
     [$deletePropsList]: deletePropsList,
     pagination,
     onSelectionChange: _.wrap(onSelectionChange, (fn, value) => {
@@ -164,7 +166,7 @@ export function handlePage(props, { childrenRef }) {
       return [
         <div data-nodepath={nodepath} style={props.style}>
           <Component
-            ref={childrenRef}
+            ref={tableRef}
             {...omit({ ...props, ...attrs }, ['style'])}
             style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
             v-slots={slots}

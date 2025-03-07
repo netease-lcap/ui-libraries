@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable jsx-a11y/iframe-has-title */
-import { registerComponet } from '@/plugins';
+import { registerComponent } from '@/plugins';
 // import Iframe from './iframe';
 import * as plugins from './plugins';
 import './index.css';
@@ -15,6 +15,6 @@ function Iframe(props, { slots }) {
   );
 }
 
-export const ElIframe = registerComponet(Iframe, plugins);
+export const ElIframe = registerComponent(Iframe, plugins);
 
 export default ElIframe;

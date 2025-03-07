@@ -532,8 +532,6 @@ export default {
             setTimeout(() => { // 为了不触发input的blur，否则会有两次blur
                 this.preventBlur = false;
             }, 0);
-            this.showDate = undefined;
-            this.showTime = undefined;
         },
         onCancel() {
             this.toggle(false);
@@ -562,8 +560,12 @@ export default {
             this.$emit('input', this.handleEmptyValue( newDateTime ));
         },
         onPopperOpen() {
-            if (!this.finalDateTime)
-                return;
+            if (!this.finalDateTime) {
+              this.dateTime = undefined;
+              this.showDate = undefined;
+              this.showTime = undefined;
+              return;
+            }
             this.dateTime = this.format(new Date(this.finalDateTime.replace(/-/g, '/')), 'YYYY-MM-DD HH:mm:ss');
             this.showDate = this.format(this.dateTime, 'YYYY-MM-DD');
             this.showTime = this.format(this.dateTime, 'HH:mm:ss');
