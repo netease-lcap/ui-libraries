@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, markRaw, computed } from 'vue';
+import { ref, Ref, watch, provide, inject, markRaw, computed, defineComponent } from 'vue';
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
@@ -45,8 +45,8 @@ export class PluginOptions {
   };
 }
 
-export function registerComponent(Component, options) {
-  return {
+export function registerComponent<T>(Component, options) {
+  return defineComponent<T>({
     name: 'HocBaseComponents',
     components: { Component },
     inheritAttrs: false,
@@ -129,5 +129,5 @@ export function registerComponent(Component, options) {
         );
       };
     },
-  };
+  });
 }

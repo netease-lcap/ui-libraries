@@ -1,15 +1,16 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
+import { useMemo, GetAccumulatedMapType } from '@/plugins/hooks';
+import { SelectAccumulateTypes } from './type';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useMemo } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
-export function handleDataSource(props) {
+export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccumulateTypes>) {
   const dataConfig = props.get('dataSource');
-  const textField = props.get('textField', 'label');
-  const valueField = props.get('valueField', 'value');
+  const textField = props.get('textField') || 'label';
+  const valueField = props.get('valueField') || 'value';
   const slots = props.get('slots');
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName']);
   const ref = props.get('ref');
