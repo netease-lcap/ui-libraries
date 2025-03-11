@@ -1,2 +1,2 @@
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
-export * from './link.ts';
+export * from './ide.ts';

@@ -7,7 +7,7 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
-import { useEffect, useMemo } from '@/plugins/hooks';
+import { useMemo } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export function handleDataSource(props) {
@@ -42,19 +42,5 @@ export function handleCascaderProps(props) {
       multiple,
       checkStrictly,
     },
-  };
-}
-
-export function handleNodePath(props) {
-  const nodePath = props.get('data-nodepath');
-  const myClass = props.get('class', '');
-  const nodeId = useMemo(() => _.uniqueId('Cascader_'), []);
-  useEffect(() => {
-    const node = document.querySelector(`.${nodeId}`);
-    node?.setAttribute('data-nodepath', nodePath);
-  }, []);
-  return {
-    class: `${myClass} ${nodeId}`,
-    formTagName: 'el-form-cascader',
   };
 }

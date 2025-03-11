@@ -51,4 +51,4 @@ export function handleTreeProps(props) {
       ...propsConfig,
     },
   };
-} 
+}
