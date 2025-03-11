@@ -4,7 +4,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-packageExtensionsChecksum: sha256-t8bNtOyoGGQ3/QJeGiKkit6Qh4642usReLs53cQJ9e8=
+packageExtensionsChecksum: aaf637e23750c8f5494b618e323c64e9
 
 importers:
 
@@ -257,10 +257,10 @@ importers:
     devDependencies:
       '@babel/plugin-proposal-nullish-coalescing-operator':
         specifier: ^7.18.6
-        version: 7.18.6(@babel/core@7.23.6)
+        version: 7.18.6(@babel/core@7.26.0)
       '@babel/plugin-proposal-optional-chaining':
         specifier: ^7.21.0
-        version: 7.21.0(@babel/core@7.23.6)
+        version: 7.21.0(@babel/core@7.26.0)
       '@lcap/builder':
         specifier: workspace:*
         version: link:../../packages/builder
@@ -296,7 +296,7 @@ importers:
         version: 7.6.17(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
       '@storybook/vue':
         specifier: ^7.6.17
-        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)
+        version: 7.6.17(@babel/core@7.26.0)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)
       '@testing-library/vue':
         specifier: '5'
         version: 5.9.0(vue-template-compiler@2.6.12(vue@2.6.12))(vue@2.6.12)
@@ -435,10 +435,10 @@ importers:
     devDependencies:
       '@babel/plugin-proposal-nullish-coalescing-operator':
         specifier: ^7.18.6
-        version: 7.18.6(@babel/core@7.26.0)
+        version: 7.18.6(@babel/core@7.23.6)
       '@babel/plugin-proposal-optional-chaining':
         specifier: ^7.21.0
-        version: 7.21.0(@babel/core@7.26.0)
+        version: 7.21.0(@babel/core@7.23.6)
       '@lcap/builder':
         specifier: workspace:*
         version: link:../../packages/builder
@@ -480,7 +480,7 @@ importers:
         version: 7.6.17(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))
       '@storybook/vue':
         specifier: ^7.6.17
-        version: 7.6.17(@babel/core@7.26.0)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)
+        version: 7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
@@ -11315,8 +11315,8 @@ packages:
   vue-component-type-helpers@2.1.10:
     resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
 
-  vue-component-type-helpers@2.2.0:
-    resolution: {integrity: sha512-cYrAnv2me7bPDcg9kIcGwjJiSB6Qyi08+jLDo9yuvoFQjzHiPTzML7RnkJB1+3P6KMsX/KbCD4QE3Tv/knEllw==}
+  vue-component-type-helpers@2.2.8:
+    resolution: {integrity: sha512-4bjIsC284coDO9om4HPA62M7wfsTvcmZyzdfR0aUlFXqq4tXxM1APyXpNVxPC8QazKw9OhmZNHBVDA6ODaZsrA==}
 
   vue-cropper@0.5.11:
     resolution: {integrity: sha512-UeA3qL2BLCTGkOEAxEsxSNFO+qLYAn6YRHv4oS32cP9lMhF1vFmnAf/z+ZamtR0/Fh3sbZeZUCLVR2Ol2/dpTQ==, tarball: https://registry.npmmirror.com/vue-cropper/-/vue-cropper-0.5.11.tgz}
@@ -15510,7 +15510,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.13(typescript@5.6.3)
-      vue-component-type-helpers: 2.2.0
+      vue-component-type-helpers: 2.2.8
 
   '@storybook/vue@7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)':
     dependencies:
@@ -23466,7 +23466,7 @@ snapshots:
 
   vue-component-type-helpers@2.1.10: {}
 
-  vue-component-type-helpers@2.2.0: {}
+  vue-component-type-helpers@2.2.8: {}
 
   vue-cropper@0.5.11: {}
 
