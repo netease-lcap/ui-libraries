@@ -142,7 +142,7 @@ async function startWatcher(options: LcapBuildOptions, pkgInfo: any, send: (msg:
       const task = taskQueue.shift();
       try {
         logger.start(`start ${task.name} task build`);
-        send('building');
+        send(`${task.name} building`);
         // eslint-disable-next-line no-await-in-loop
         await task.build();
         logger.success(`${task.name} task build successed!`);

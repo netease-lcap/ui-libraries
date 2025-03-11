@@ -136,7 +136,7 @@ export async function createForSchema(rootPath: string, metaInfo: ProjectMetaInf
     compName,
     title,
     sourceName: component.name,
-    description: component.description || title,
+    description: (component.description || title).replace(/'/g, '\\\''),
     type,
   }), 'utf-8');
 

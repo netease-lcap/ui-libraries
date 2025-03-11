@@ -107,12 +107,12 @@ export const getComponentMetaByApiTs = (tsPath) => {
       (p.node.decorators as any[]).forEach((decorator) => {
         if (
           decorator.expression.type === 'CallExpression'
-          && (decorator.expression.callee as babelTypes.Identifier).name === 'Component'
+          && ['Component', 'ExtensionComponent', 'IDEExtraInfo'].includes((decorator.expression.callee as babelTypes.Identifier).name)
         ) {
           decorator.expression.arguments.forEach((arg) => {
             if (arg.type === 'ObjectExpression') {
               const config = evalOptions(arg) || {};
-              ['title', 'show', 'group', 'icon'].forEach((key) => {
+              ['title', 'show', 'group', 'icon', 'sourceName'].forEach((key) => {
                 if (!isNil(config[key])) {
                   compMetaInfo[key] = config[key];
                 }

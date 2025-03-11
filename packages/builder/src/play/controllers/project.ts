@@ -33,7 +33,7 @@ export const publish = createAPIHandler('/api/project/release', 'POST', async (r
     platform,
     password,
   });
-  // await exec('npm run release');
+  await exec('npm run release');
 
   return true;
 });
