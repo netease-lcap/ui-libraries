@@ -1,15 +1,16 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
+import { useMemo, GetAccumulatedMapType } from '@/plugins/hooks';
+import { SelectAccumulateTypes } from './type';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useState, useMemo } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
-export function handleDataSource(props) {
+export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccumulateTypes>) {
   const dataConfig = props.get('dataSource');
-  const textField = props.get('textField', 'label');
-  const valueField = props.get('valueField', 'value');
+  const textField = props.get('textField') || 'label';
+  const valueField = props.get('valueField') || 'value';
   const slots = props.get('slots');
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName']);
   const ref = props.get('ref');
@@ -19,8 +20,8 @@ export function handleDataSource(props) {
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
     : {
-      default: () => _.map(dataSource, (item) => <el-option {...item} />),
-    };
+        default: () => _.map(dataSource, (item) => <el-option {...item} />),
+      };
 
   return {
     [$deletePropsList]: deletePropsList,
@@ -29,20 +30,5 @@ export function handleDataSource(props) {
     slots: _.assign(slots, dataSourceSlots),
 
     formTagName: 'el-form-select',
-  };
-}
-function handleValue(props) {
-  const [value, setValue] = useState('');
-  const propsValue = props.get('modelValue') || value;
-  const onChangeProps = props.get('onChange', () => {});
-  const emit = props.get('emit');
-  const changeValue = props.get('modelValue') ? _.bind(emit, 'update:modelValue') : setValue;
-
-  return {
-    onChange: _.wrap(onChangeProps, (fn, value) => {
-      _.attempt(fn, value);
-      changeValue(value);
-    }),
-    modelValue: propsValue,
   };
 }
