@@ -1,6 +1,7 @@
 import { createAPIHandler } from '../middleware';
 import {
   getSourceSchema, getExtensionProjectMeta, getLcapConfig, updateLcapConfg,
+  updatePackageInfo,
 } from '../../utils/project';
 import { exec } from '../../utils/exec';
 
@@ -33,6 +34,14 @@ export const publish = createAPIHandler('/api/project/release', 'POST', async (r
     platform,
     password,
   });
+
+  updatePackageInfo(req.context.rootPath, {
+    name,
+    version,
+    title,
+    description,
+  });
+
   await exec('npm run release');
 
   return true;

@@ -63,6 +63,8 @@ export interface ProjectMetaInfo {
   framework: 'vue2' | 'react' | 'vue3' | 'taro';
   name: string;
   version: string;
+  title: string;
+  description: string;
   libUIInfo: ProjectLibUIInfo | null;
 }
 
@@ -74,6 +76,8 @@ export function getExtensionProjectMeta(rootPath: string) {
     framework,
     name: pkgInfo.name,
     version: pkgInfo.version,
+    title: pkgInfo.title,
+    description: pkgInfo.description,
     libUIInfo: getLcapUIInfo(pkgInfo, rootPath),
   } as ProjectMetaInfo;
 }
@@ -141,4 +145,16 @@ export function updateLcapConfg(config) {
 
   const yaml = YAML.stringify(lcapConfig);
   fs.writeFileSync(path.resolve(os.homedir(), '.lcaprc'), yaml);
+}
+
+export function updatePackageInfo(rootPath: string, pkgInfo: any) {
+  const pkgPath = path.resolve(rootPath, 'package.json');
+  const pkg = fs.readJSONSync(pkgPath);
+  Object.keys(pkgInfo).forEach((key) => {
+    if (pkg[key]) {
+      pkg[key] = pkgInfo[key];
+    }
+  });
+
+  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
 }
