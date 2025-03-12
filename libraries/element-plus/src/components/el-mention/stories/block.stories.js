@@ -1,9 +1,9 @@
-import ElUpload from '../index';
+import ElMention from '../index';
 
 export default {
-  id: 'el-upload-blocks',
-  title: '组件列表/upload 上传/内置区块',
-  component: ElUpload,
+  id: 'el-mention-blocks',
+  title: '组件列表/Mention 提及/内置区块',
+  component: ElMention,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -15,7 +15,7 @@ export default {
           VUE_APP_DESIGNER: true,
         };
       },
-      template: '<div style="width: 300px;"><story/></div>',
+      template: '<div style="width: 500px;"><story/></div>',
     }),
   ],
 };
@@ -23,9 +23,9 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: `<el-upload>
-    <template #trigger>
-        <el-text text="点击上传"></el-text>
-      </template></el-upload>`,
+    template: `
+      <el-mention style="width: 320px" placeholder="Please input">
+      </el-mention>
+    `,
   }),
 };

@@ -20,3 +20,5 @@ export { ElMenu, ElMenuItem, ElMenuItemGroup, ElSubMenu } from './el-menu';
 export { ElUpload } from './el-upload';
 export { ElTimePicker } from './el-time-picker';
 export { ElTimeSelect } from './el-time-select';
+export { ElIcon } from './el-icon';
+export { ElMention } from './el-mention';

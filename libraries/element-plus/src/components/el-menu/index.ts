@@ -8,6 +8,7 @@ import 'element-plus/theme-chalk/el-menu-item-group.css';
 import 'element-plus/theme-chalk/el-sub-menu.css';
 
 const ElMenu = registerComponent(ElMenuPlus, { plugin: basicPlugin });
-export default ElMenu;
+// const ElMenuItemPlus = ElMenuItem;
 
 export { ElMenu, ElMenuItem, ElMenuItemGroup, ElSubMenu };
+export default ElMenu;

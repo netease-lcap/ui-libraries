@@ -16,34 +16,34 @@ export default {
 };
 
 /*  适用广泛的基础用法。 */
-export const Example1 = {
-  name: '顶栏',
-  render: () => ({
-    components: {
-      exampleDemo: ExampleDemo1,
-    },
-    template: '<example-demo></example-demo>',
-  }),
-};
+// export const Example1 = {
+//   name: '顶栏',
+//   render: () => ({
+//     components: {
+//       exampleDemo: ExampleDemo1,
+//     },
+//     template: '<example-demo></example-demo>',
+//   }),
+// };
 
-/*  垂直菜单，可内嵌子菜单。 */
-export const Example2 = {
-  name: '侧栏',
-  render: () => ({
-    components: {
-      exampleDemo: ExampleDemo2,
-    },
-    template: '<example-demo></example-demo>',
-  }),
-};
+// /*  垂直菜单，可内嵌子菜单。 */
+// export const Example2 = {
+//   name: '侧栏',
+//   render: () => ({
+//     components: {
+//       exampleDemo: ExampleDemo2,
+//     },
+//     template: '<example-demo></example-demo>',
+//   }),
+// };
 
-/*  */
-export const Example3 = {
-  name: '折叠',
-  render: () => ({
-    components: {
-      exampleDemo: ExampleDemo3,
-    },
-    template: '<example-demo></example-demo>',
-  }),
-};
+// /*  */
+// export const Example3 = {
+//   name: '折叠',
+//   render: () => ({
+//     components: {
+//       exampleDemo: ExampleDemo3,
+//     },
+//     template: '<example-demo></example-demo>',
+//   }),
+// };
