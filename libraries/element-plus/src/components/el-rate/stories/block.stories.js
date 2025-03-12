@@ -17,9 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-    <div>
-      <el-rate v-model="3" disabled />
-    </div>
+      <el-rate />
     `,
   }),
-}; 
+};

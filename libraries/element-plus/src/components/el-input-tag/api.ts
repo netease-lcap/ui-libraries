@@ -2,18 +2,13 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
     ideusage: {
       idetype: 'element',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-input-tag',
-      },
     },
   })
   @Component({
     title: '标签输入框',
-    icon: 'input-tag',
+    icon: 'input',
     description: '允许用户以标签形式添加内容的输入框',
     group: 'Form',
   })

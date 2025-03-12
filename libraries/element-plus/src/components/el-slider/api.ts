@@ -2,13 +2,8 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
     ideusage: {
       idetype: 'element',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-slider',
-      },
     },
   })
   @Component({

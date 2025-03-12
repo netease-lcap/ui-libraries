@@ -2,18 +2,14 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
+    order: 8,
     ideusage: {
       idetype: 'element',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-rate',
-      },
     },
   })
   @Component({
     title: '评分',
-    icon: 'star',
+    icon: 'rate',
     description: '评分组件',
     group: 'Form',
   })

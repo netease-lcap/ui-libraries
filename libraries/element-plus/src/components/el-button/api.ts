@@ -5,17 +5,16 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'element',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-button',
-      },
+      editable: 'text',
+      textholder: 'text',
+      forceUpdateWhenAttributeChange: true,
     },
   })
   @Component({
     title: '按钮',
     icon: 'button',
     description: '常用的操作按钮',
-    group: 'Basic',
+    group: 'Display',
   })
   export class ElButton extends ViewComponent {
     constructor(options?: Partial<ElButtonOptions>) {
@@ -30,11 +29,7 @@ namespace nasl.ui {
       description: '按钮尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '大' },
-          { title: '小' },
-        ],
+        options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
     size: '' | 'default' | 'large' | 'small';
@@ -45,14 +40,7 @@ namespace nasl.ui {
       description: '按钮类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '主要' },
-          { title: '成功' },
-          { title: '信息' },
-          { title: '警告' },
-          { title: '危险' },
-        ],
+        options: [{ title: '默认' }, { title: '主要' }, { title: '成功' }, { title: '信息' }, { title: '警告' }, { title: '危险' }],
       },
     })
     type: '' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
@@ -151,11 +139,7 @@ namespace nasl.ui {
       description: '原生 type 属性',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '按钮' },
-          { title: '提交' },
-          { title: '重置' },
-        ],
+        options: [{ title: '按钮' }, { title: '提交' }, { title: '重置' }],
       },
     })
     nativeType: 'button' | 'submit' | 'reset' = 'button';
@@ -198,4 +182,4 @@ namespace nasl.ui {
     })
     onClick: (event: any) => any;
   }
-} 
+}

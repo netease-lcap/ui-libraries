@@ -17,9 +17,11 @@ export const Block1 = {
       return {};
     },
     template: `
-    <div>
-      <el-card style="width: 300px">卡片内容</el-card>
-    </div>
+      <el-card >
+        <template #header>
+          <el-text text="卡片标题"></el-text>
+        </template>
+      </el-card>
     `,
   }),
-}; 
+};

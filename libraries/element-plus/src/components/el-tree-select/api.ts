@@ -2,20 +2,19 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
+    order: 6,
     ideusage: {
-      idetype: 'element',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-tree-select',
+      idetype: 'container',
+      events: {
+        click: true,
       },
     },
   })
   @Component({
     title: '树形选择',
-    icon: 'tree',
+    icon: 'tree-view',
     description: '树形选择器，可以对树形结构数据进行选择',
-    group: 'Form',
+    group: 'Selector',
   })
   export class ElTreeSelect extends ViewComponent {
     constructor(options?: Partial<ElTreeSelectOptions>) {

@@ -4,18 +4,14 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 1,
     ideusage: {
-      idetype: 'element',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-card',
-      },
+      idetype: 'container',
     },
   })
   @Component({
     title: '卡片',
     icon: 'card',
     description: '将信息聚合在卡片容器中展示',
-    group: 'Data',
+    group: 'Container',
   })
   export class ElCard extends ViewComponent {
     constructor(options?: Partial<ElCardOptions>) {
@@ -24,13 +20,6 @@ namespace nasl.ui {
   }
 
   export class ElCardOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '标题',
-      description: '卡片的标题，也可通过 slot#header 传入',
-      setter: { concept: 'InputSetter' },
-    })
-    header: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -62,11 +51,7 @@ namespace nasl.ui {
       description: '设置阴影显示时机',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '总是显示' },
-          { title: '悬浮显示' },
-          { title: '从不显示' },
-        ],
+        options: [{ title: '总是显示' }, { title: '悬浮显示' }, { title: '从不显示' }],
       },
     })
     shadow: 'always' | 'hover' | 'never' = 'always';
@@ -75,18 +60,18 @@ namespace nasl.ui {
       title: '默认',
       description: '自定义默认内容',
     })
-    slotDefault:  () => Array<ViewComponent>
+    slotDefault: () => Array<ViewComponent>;
 
     @Slot({
       title: '标题',
       description: '自定义标题内容',
     })
-    slotHeader:  () => Array<ViewComponent>;
+    slotHeader: () => Array<ViewComponent>;
 
     @Slot({
       title: '页脚',
       description: '自定义页脚内容',
     })
-    slotFooter:  () => Array<ViewComponent>;
+    slotFooter: () => Array<ViewComponent>;
   }
-} 
+}

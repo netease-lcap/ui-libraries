@@ -17,9 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-    <div>
       <el-switch />
-    </div>
     `,
   }),
-}; 
+};

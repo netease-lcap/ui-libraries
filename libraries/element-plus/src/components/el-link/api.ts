@@ -2,20 +2,17 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
     ideusage: {
       idetype: 'element',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-link',
-      },
+      editable: 'text',
+      textholder: 'text',
     },
   })
   @Component({
     title: '链接',
     icon: 'link',
     description: '文字超链接',
-    group: 'Basic',
+    group: 'Display',
   })
   export class ElLink extends ViewComponent {
     constructor(options?: Partial<ElLinkOptions>) {

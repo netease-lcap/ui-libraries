@@ -1,7 +1,8 @@
-import { ElSlider } from '../api';
+import { ElSlider } from '../index';
 
 export default {
-  title: 'Element Plus/Slider',
+  id: 'el-slider-examples',
+  title: '组件列表/Slider/示例',
   component: ElSlider,
   argTypes: {
     modelValue: {

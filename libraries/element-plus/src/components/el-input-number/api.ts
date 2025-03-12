@@ -2,18 +2,13 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
     ideusage: {
       idetype: 'element',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-input-number',
-      },
     },
   })
   @Component({
     title: '数字输入框',
-    icon: 'input-number',
+    icon: 'number',
     description: '仅允许输入标准的数字值，可定义范围',
     group: 'Form',
   })

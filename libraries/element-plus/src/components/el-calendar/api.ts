@@ -2,20 +2,16 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
+    order: 2,
     ideusage: {
       idetype: 'element',
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-calendar',
-      },
     },
   })
   @Component({
     title: '日历',
     icon: 'calendar',
     description: '显示日期',
-    group: 'Data',
+    group: 'Table',
   })
   export class ElCalendar extends ViewComponent {
     constructor(options?: Partial<ElCalendarOptions>) {

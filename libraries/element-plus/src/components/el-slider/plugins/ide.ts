@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { $deletePropsList, $ide } from '@/plugins/constants';
 import { useEffect, useMemo } from '@/plugins/hooks';
 
-export function handleNodePath(props) {
+ function handleNodePath(props) {
   const nodePath = props.get('data-nodepath');
   const myClass = props.get('class', '');
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');

@@ -1,21 +1,16 @@
-import { ElSlider } from '../api';
+import { ElSlider } from '../index';
 
 export default {
-  title: 'Element Plus/Slider/Block',
+  title: '组件列表/Slider/Block',
   component: ElSlider,
   parameters: {
-    viewMode: 'docs',
-    previewTabs: {
-      canvas: { hidden: true },
-    },
+    layout: 'padded',
   },
 };
 
 export const Block = () => ({
   template: `
-    <div style="width: 500px; margin: 20px;">
-      <el-slider v-model="value" />
-    </div>
+      <el-slider data-nodepath="123" />
   `,
   data() {
     return {

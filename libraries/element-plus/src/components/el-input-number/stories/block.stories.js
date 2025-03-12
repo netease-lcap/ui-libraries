@@ -14,14 +14,9 @@ export default {
 export const Block1 = {
   name: '数字输入框',
   render: () => ({
-    setup() {
-      const num = ref(1);
-      return { num };
-    },
+    setup() {},
     template: `
-    <div>
-      <el-input-number v-model="num" :min="1" :max="10" />
-    </div>
+    <el-input-number />
     `,
   }),
-}; 
+};

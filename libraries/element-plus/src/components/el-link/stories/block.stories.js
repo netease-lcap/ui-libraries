@@ -17,9 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-    <div>
-      <el-link>链接</el-link>
-    </div>
+    <el-link text="链接" />
     `,
   }),
-}; 
+};
