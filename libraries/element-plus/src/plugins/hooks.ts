@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { onMounted, onUnmounted, ref } from 'vue';
+import { PluginBase } from '@/types';
 
 interface Hook {
   next: Hook;
@@ -247,3 +248,80 @@ export function scheduler(pluginHooks, ImmutableProps, fiberMap, useStore) {
     return ImmutableProps.merge(result);
   }, ImmutableProps);
 }
+
+// 合并类型数组中的所有类型
+type MergeTypes<T extends any[]> = T extends [infer First, ...infer Rest] ? First & MergeTypes<Rest> : object;
+
+// 定义主类型，接受一个可选的泛型数组
+type AccumulateTypes<T extends any[] = []> = {
+  // 添加新类型的方法
+  add<U>(): AccumulateTypes<[...T, U]>;
+  // 获取当前累积的所有类型，返回准确的类型映射
+  getMapTypes(): {
+    get<K extends keyof MergeTypes<T>>(key: K): MergeTypes<T>[K];
+  } & Map<keyof MergeTypes<T>, MergeTypes<T>[keyof MergeTypes<T>]>;
+  getTypes(): MergeTypes<T>;
+};
+
+// 创建 AccumulateTypes 实例的辅助函数
+export function createAccumulateTypes<T extends any[] = []>(): AccumulateTypes<T> {
+  return {
+    add<U>(): AccumulateTypes<[...T, U]> {
+      return createAccumulateTypes<[...T, U]>();
+    },
+    getMapTypes(): {
+      get<K extends keyof MergeTypes<T>>(key: K): MergeTypes<T>[K];
+    } & Map<keyof MergeTypes<T>, MergeTypes<T>[keyof MergeTypes<T>]> {
+      return null as any;
+    },
+    getTypes(): MergeTypes<T> {
+      return null as any as MergeTypes<T>; // 类型转换，实际使用时不会返回 null
+    },
+  };
+}
+
+export function createPluginAccumulateTypes<T>(): AccumulateTypes<[T, PluginBase]> {
+  return createAccumulateTypes<[T, PluginBase]>();
+}
+
+// 定义主类型，接受一个可选的泛型数组
+
+// 创建 AccumulateTypes 实例的辅助函数
+type omit<T, K extends keyof T> = {
+  [P in Exclude<keyof T, K>]: T[P];
+};
+export type GetAccumulatedMapType<T> = T extends AccumulateTypes<infer U> ? ReturnType<T['getMapTypes']> : never;
+export type GetAccumulatedType<T> = T extends AccumulateTypes<infer U> ? ReturnType<T['getTypes']> : never;
+
+type add = {
+  a: string;
+};
+type add2 = {
+  b: number;
+};
+type add3 = {
+  c: boolean;
+  $deletePropsList: 'a' | 'b';
+};
+// 使用示例
+
+const typeAccumulator = createAccumulateTypes<[add]>();
+const withString = typeAccumulator.add<add2>();
+const withStringAndNumber = withString.add<add3>();
+
+// 获取累积的类型: string | number | boolean
+
+type AccumulatedTypea = GetAccumulatedMapType<typeof withStringAndNumber>;
+type AccumulatedTypea2 = GetAccumulatedType<typeof withStringAndNumber>;
+function getType(params: omit<AccumulatedTypea2, AccumulatedTypea2['$deletePropsList']>) {
+  // const f = params.b;
+  const f = params.c;
+  console.log(f);
+}
+function getMapType(params: AccumulatedTypea) {
+  const f = params.get('c');
+  console.log(f);
+}
+// const c: AccumulatedTypea = {};
+
+// var f=c.get('a')
