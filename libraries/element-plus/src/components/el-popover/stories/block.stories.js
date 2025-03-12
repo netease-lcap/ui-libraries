@@ -1,5 +1,4 @@
 import ElPopover from '../index';
-import { ElButton, ElText } from '@/index';
 
 export default {
   id: 'el-popover-blocks',

@@ -1,5 +1,4 @@
 import { defineComponent, watch, onBeforeUnmount, getCurrentInstance, ComponentInternalInstance } from 'vue';
-// TODO LD:这里要改成组件库里的icon组件
 import { ElMessage as ElMessagePlus, ElIcon, MessageHandler } from 'element-plus';
 import { setElStyle } from '../../utils/dom';
 
@@ -67,7 +66,6 @@ export default defineComponent({
       }
 
       const vnodes = slots.default?.() || [];
-      // TODO LD:确认Icon的使用方式
       const message = (
         <div class="el-message__content">
           {props.icon && (
