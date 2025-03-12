@@ -12,6 +12,25 @@ import type {
 } from '@lcap/material-parser';
 import { isNil, kebabCase, upperFirst } from 'lodash';
 
+const eventRegex = /^on[A-Z].*/;
+const slotRegex = /^slot[A-Z].*/;
+
+export function normalizeEventName(name: string) {
+  if (eventRegex.test(name)) {
+    return name;
+  }
+
+  return `on${upperFirst(name)}`;
+}
+
+export function normalizeSlotName(name: string) {
+  if (slotRegex.test(name) || name.startsWith('slot-')) {
+    return name;
+  }
+
+  return name.includes('-') ? `slot-${name}` : `slot${upperFirst(name)}`;
+}
+
 export function genTitle(name: string, title?: string) {
   if (title) {
     return title;
@@ -126,27 +145,32 @@ export function genAttrCode(attr: MaterialComponentAttr, group: string = '主要
 }
 
 export function genEventCode(event: MaterialComponentEvent) {
-  const { name, description } = event;
+  let { name } = event;
+
+  name = normalizeEventName(name);
+
   const title = genTitle(name);
   return `
   @Event({
     title: '${title}',
-    description: '${description || title}',
+    description: '${event.description || title}',
   })
   ${name}: (event: {}) => any;
 `;
 }
 
 export function genSlotCode(slot: MaterialComponentSlot) {
-  const { name, description } = slot;
+  let { name } = slot;
+
+  name = normalizeSlotName(name);
   const title = genTitle(name);
 
   return `
   @Slot({
     title: '${title}',
-    description: '${description || title}',
+    description: '${slot.description || title}',
   })
-  ${name}: (current: {}) => Array<nasl.ui.ViewComponent>;
+  ${name.includes('-') ? `'${name}'` : name}: (current: {}) => Array<nasl.ui.ViewComponent>;
 `;
 }
 

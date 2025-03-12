@@ -204,7 +204,11 @@ export function getAPIPropAST(code: string, name) {
   let propAST: any = null;
   traverse(ast, {
     ClassProperty(path) {
-      if (path.node.key.type === 'Identifier' && path.node.key.name === name) {
+      if ((
+        path.node.key.type === 'Identifier' && path.node.key.name === name
+      ) || (
+        path.node.key.type === 'StringLiteral' && path.node.key.value === name
+      )) {
         propAST = path.node;
       }
     },

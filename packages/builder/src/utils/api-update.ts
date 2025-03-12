@@ -11,6 +11,7 @@ import type {
   MaterialComponentAttr,
 } from '@lcap/material-parser';
 import {
+  camelCase,
   isNil,
   kebabCase,
   omit,
@@ -31,6 +32,8 @@ import {
   genEventCode,
   genSlotCode,
   genMethodCode,
+  normalizeEventName,
+  normalizeSlotName,
 } from './schema-utils';
 import { getProjectSourceSchema } from './lcap';
 
@@ -214,6 +217,12 @@ function insertProperty(ast: bt.File, property: bt.ClassProperty | bt.ClassMetho
 function removeProperty(ast: bt.File, componentName: string, propName: string, type: APIEditorBaseOptions['module']) {
   const { className, decoratorName } = getPropertyMeta(componentName, type);
 
+  if (type === 'event') {
+    propName = normalizeEventName(propName);
+  } else if (type === 'slot') {
+    propName = normalizeSlotName(propName);
+  }
+
   traverse(ast, {
     ClassDeclaration(path) {
       if (bt.isIdentifier(path.node.id) && path.node.id.name === className) {
@@ -235,6 +244,12 @@ function removeProperty(ast: bt.File, componentName: string, propName: string, t
       }
     },
   });
+
+  // 移除驼峰形式的插槽
+  if (type === 'slot' && propName.includes('-')) {
+    const n = camelCase(propName);
+    removeProperty(ast, componentName, n, type);
+  }
 }
 
 function findPropertyAST(ast: bt.File, componentName: string, propName: string, type: APIEditorBaseOptions['module']) {
@@ -364,8 +379,10 @@ export interface APIAddEventOptions extends APIEditorBaseOptions {
 
 export function addEvent(ast: bt.File, options: APIAddEventOptions) {
   const { name: componentName } = options;
-  const { name, schema } = options.data;
+  const { schema } = options.data;
   let code = '';
+
+  const name = normalizeEventName(options.data.name);
 
   if (schema) {
     code = genEventCode(schema);
@@ -393,8 +410,10 @@ export interface APIAddSlotOptions extends APIEditorBaseOptions {
 
 export function addSlot(ast: bt.File, options: APIAddSlotOptions) {
   const { name: componentName } = options;
-  const { name, schema } = options.data;
+  const { schema } = options.data;
   let code = '';
+
+  const name = normalizeSlotName(options.data.name);
 
   if (schema) {
     code = genSlotCode(schema);
@@ -403,12 +422,18 @@ export function addSlot(ast: bt.File, options: APIAddSlotOptions) {
       title: '${genTitle(name)}',
       description: '${genTitle(name)}',
     })
-    ${name}: (current: {}) => Array<nasl.ui.ViewComponent>;
+    ${name.includes('-') ? `'${name}'` : name}: (current: {}) => Array<nasl.ui.ViewComponent>;
     `;
   }
   const propAST = getAPIPropAST(code, name);
 
   insertProperty(ast, propAST, componentName, options.module);
+
+  if (name.includes('-')) {
+    const n = camelCase(name);
+    const camelCaseAst = getAPIPropAST(`${n}: (current: {}) => Array<nasl.ui.ViewComponent>;`, n);
+    insertProperty(ast, camelCaseAst, componentName, options.module);
+  }
 }
 
 export interface APIAddReadablePropOptions extends APIEditorBaseOptions {
@@ -427,7 +452,7 @@ export function addReadableProp(ast: bt.File, options: APIAddReadablePropOptions
     title: '${genTitle(name)}',
     description: '${genTitle(name)}',
   })
-  ${name}: () => any;
+  ${name}: any;
   `;
 
   const propAST = getAPIPropAST(code, name);
@@ -478,7 +503,7 @@ export interface APIUpdatePropOptions extends APIEditorBaseOptions {
 }
 
 export function updateProp(ast: bt.File, options: APIUpdatePropOptions) {
-  const { name: componentName, propName } = options;
+  const { name: componentName } = options;
   const {
     name,
     tsType,
@@ -486,10 +511,18 @@ export function updateProp(ast: bt.File, options: APIUpdatePropOptions) {
     ...rest
   } = options.data;
 
-  const { propAST, propOptionsAST } = findPropertyAST(ast, componentName, propName, 'prop');
+  let { propName } = options;
+
+  if (options.module === 'event') {
+    propName = normalizeEventName(propName);
+  } else if (options.module === 'slot') {
+    propName = normalizeSlotName(propName);
+  }
+
+  const { propAST, propOptionsAST } = findPropertyAST(ast, componentName, propName, options.module);
 
   if (!propAST || !propOptionsAST) {
-    throw new Error(`${name} 组件中未找到属性 ${propName} 的属性声明`);
+    throw new Error(`${componentName} 组件中未找到属性 ${propName} 的属性声明`);
   }
 
   if (name) {
