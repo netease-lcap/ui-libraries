@@ -314,13 +314,11 @@
                 "click": true
             },
             "eventsScope": "[class^=u-collapse_item_head]",
-            "slotWrapperInlineStyle": {
-                "title": "display:inline-block"
-            },
             "disableSlotAutoFill": [{
                 "slot": "extra",
                 "expression": "!this.getParent().getAttribute('showExtraEmptySlot')?.value"
-            }]
+            }],
+            "namedSlotOmitWrapper": ["title"]
         }
     },
     {
