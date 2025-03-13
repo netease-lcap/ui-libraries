@@ -72,7 +72,7 @@ namespace nasl.ui {
           useRef: 'argus?.[0]?.index === 0',
         },
       },
-      childAccept: "target.tag === 'el-table-column-pro'",
+      childAccept: "target.tag === 'el-table-column'",
     },
   })
   @Component({
@@ -90,12 +90,12 @@ namespace nasl.ui {
     @Prop({
       title: '分页大小',
     })
-    size: ElTableOptions<T, V, P, M>['pageSize'];
+    pageSize: ElTableOptions<T, V, P, M>['pageSize'];
 
     @Prop({
       title: '当前页数',
     })
-    page: ElTableOptions<T, V, P, M>['currentPage'];
+    currentPage: ElTableOptions<T, V, P, M>['currentPage'];
 
     @Prop({
       title: '排序属性',
@@ -225,7 +225,7 @@ namespace nasl.ui {
       description: '是否显示表格边框',
       setter: { concept: 'SwitchSetter' },
     })
-    bordered: nasl.core.Boolean = true;
+    border: nasl.core.Boolean = true;
 
     // @Prop({
     //   group: '主要属性',
@@ -437,7 +437,7 @@ namespace nasl.ui {
       description: '表格最大高度，超出后会出现滚动条。示例：100, "30%", "300"。值为数字类型，会自动加上单位 px',
       setter: { concept: 'InputSetter' },
     })
-    maxHeight:  nasl.core.Decimal;
+    maxHeight: nasl.core.Decimal;
 
     @Prop<ElTableOptions<T, V, P, M>, 'pagination'>({
       group: '主要属性',
@@ -935,11 +935,24 @@ namespace nasl.ui {
       parentAccept: "['el-table'].includes(target.tag)",
       // childAccept: false,
       useTemplateInDefaultSlot: true,
-      selector: {
-        expression: 'this',
-        cssSelector: 'td',
-      },
-
+      selector: [
+        {
+          expression: 'this',
+          cssSelector: 'td',
+        },
+        {
+          expression: 'this.getElement(el=>el.slotTarget==="header")',
+          cssSelector: 'th',
+        },
+      ],
+      forceUpdateWhenAttributeChange: 'parent',
+      forceRefresh:'parent',
+      disableSlotAutoFill: [
+        {
+          slot: 'default',
+          expression: "this.getAttribute('type')?.value === 'selection'",
+        },
+      ],
       slotInlineStyle: {
         title: 'min-width: 30px',
         cell: 'min-width: 30px',
@@ -978,11 +991,12 @@ namespace nasl.ui {
     //   title: '排序',
     //   description: '设置该列是否可以排序',
     //   docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
-    //   setter: {
-    //     concept: 'SwitchSetter',
+    //        setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '前端排序' }, { title: '后端排序' }],
     //   },
     // })
-    // sorter: nasl.core.Boolean = false;
+    // sortable: nasl.core.Boolean = false;
 
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
@@ -998,39 +1012,17 @@ namespace nasl.ui {
     // })
     // defaultOrder: 'asc' | 'desc' = 'asc';
 
-    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'type'>({
-    //   group: '数据属性',
-    //   title: '列类型',
-    //   description:
-    //     '支持序号列、单/多选、树形列和编辑列切换，序号列支持按照数字排序。选择编辑列需要先设置列字段。',
-    //   docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [
-    //       { title: '普通列' },
-    //       { title: '序号列' },
-    //       { title: '单选列' },
-    //       { title: '多选列' },
-    //       { title: '展开列' },
-    //       { title: '树形列' },
-    //       {
-    //         title: '编辑列',
-    //         tooltip: '与列字段关联，列字段不能为空',
-    //         disabledIf: (_) => _.field === null,
-    //       },
-    //       { title: '拖拽标识列' },
-    //     ],
-    //   },
-    // })
-    // type:
-    //   | 'normal'
-    //   | 'index'
-    //   | 'radio'
-    //   | 'checkbox'
-    //   | 'expander'
-    //   | 'tree'
-    //   | 'editable'
-    //   | 'dragHandler' = 'normal';
+    @Prop<ElTableColumnOptions<T, V, P, M>, 'type'>({
+      group: '数据属性',
+      title: '列类型',
+      description: '支持序号列、单/多选、树形列和编辑列切换，序号列支持按照数字排序。选择编辑列需要先设置列字段。',
+      docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '普通列' }, { title: '多选列' }],
+      },
+    })
+    type: 'normal' | 'selection' = 'normal';
 
     // @Prop<UTableViewColumnOptions<T, V, P, M>, 'autoIndex'>({
     //   group: '数据属性',
@@ -1080,11 +1072,37 @@ namespace nasl.ui {
       description:
         '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
       setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: ' 左侧固定' }, { title: '右侧固定' }, { title: '不固定' }],
+        concept: 'SwitchSetter',
       },
+      onChange: [
+        {
+          update: {
+            fixed: 'left',
+          },
+          if: (_) => _ === true,
+        },
+        {
+          update: {
+            fixed: false,
+          },
+          if: (_) => _ === false,
+        },
+      ],
     })
-    fixed: 'left' | 'right' | false = false;
+    isFixed: nasl.core.Boolean = false;
+
+    @Prop<ElTableColumnOptions<T, V, P, M>, 'fixed'>({
+      group: '主要属性',
+      title: '固定列',
+      description:
+        '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: ' 左侧固定' }, { title: '右侧固定' }],
+      },
+      if: (_) => _.isFixed === true,
+    })
+    fixed: 'left' | 'right' | false | '' = '';
 
     // @Prop({
     //   group: '主要属性',

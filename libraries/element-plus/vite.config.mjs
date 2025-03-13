@@ -28,7 +28,41 @@ export default defineConfig(({ command }) => {
         },
         reportCSSInfo: {
           enabled: true,
-          verbose: true,
+          verbose: false,
+          extraComponentMap: {
+            ElCheckbox: {
+              selectorPrefixMap: {
+                'el-checkbox-button': false,
+              },
+            },
+            ElTabPane: {
+              mainSelectorMap: {
+                '.el-tab-pane': true,
+              },
+            },
+            ElFormItemPro: {
+              selectorPrefixMap: {
+                'el-form-item': true,
+              },
+            },
+            ElCascader: {
+              selectorPrefixMap: {
+                'el-cascader-panel': false,
+                'el-cascader-menu': false,
+                'el-cascader-node': false,
+              },
+            },
+            ElSelect: {
+              selectorPrefixMap: {
+                'el-select-dropdown': true,
+              },
+            },
+            ElTable: {
+              selectorPrefixMap: {
+                'el-table-filter': false,
+              },
+            },
+          },
         },
       }),
     ],

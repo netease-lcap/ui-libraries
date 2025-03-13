@@ -1,13 +1,5 @@
 <template>
-<div v-if="$env.VUE_APP_DESIGNER" :class="$style.wrap">
-  <nav :class="$style.root" :readonly="readonly" :disabled="disabled">
-      <div :class="$style.body" ref="body">
-          <div :class="$style.arrow" :style="{ top }"></div>
-          <slot></slot>
-      </div>
-  </nav>
-</div>
-<nav v-else :class="$style.root" :readonly="readonly" :disabled="disabled">
+<nav :class="$style.root" :readonly="readonly" :disabled="disabled">
   <div :class="$style.body" ref="body">
       <div :class="$style.arrow" :style="{ top }"></div>
       <slot></slot>

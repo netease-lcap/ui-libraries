@@ -70,8 +70,8 @@ export default defineConfig(({ command }) => {
               mainSelectorMap: {
                 '[class*=u-table-view_filters-popper___]': true,
               },
-              depCompList: ['UPagination'],
-              hiddenSelectorPreFixList: ['u-table-view_filter'],
+              depComponents: ['UPagination'],
+              hideSelectorPrefixes: ['u-table-view_filter'],
             },
             UTreeViewNew: {
               mainSelectorMap: {
@@ -110,13 +110,13 @@ export default defineConfig(({ command }) => {
               },
             },
             UTreeSelectNew: {
-              depCompList: ['UTreeViewNew'],
+              depComponents: ['UTreeViewNew'],
             },
             URegionSelect: {
-              depCompList: [
+              depComponents: [
                 {
-                  compName: 'UCascader',
-                  isResetRoot: false,
+                  componentName: 'UCascader',
+                  stillRoot: true,
                 },
               ],
             },
@@ -136,13 +136,13 @@ export default defineConfig(({ command }) => {
               selectorPrefixMap: {
                 'u-date-time-picker_popper': true,
               },
-              depCompList: ['UDatePicker'],
+              depComponents: ['UDatePicker'],
             },
             UProcessRecord: {
-              depCompList: ['UTableView'],
+              depComponents: ['UTableView'],
             },
             UProcessMyprocess: {
-              depCompList: ['UTabs', 'UTableView', 'UForm', 'UButton'],
+              depComponents: ['UTabs', 'UTableView', 'UForm', 'UButton'],
             },
             URate: {
               mainSelectorMap: {

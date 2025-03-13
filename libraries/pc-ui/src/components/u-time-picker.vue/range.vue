@@ -179,8 +179,8 @@ export default {
             return formatterOptions[this.minUnit];
         },
         previewText() {
-          const start = this.genDisplayFormatText(this.startInputTime);
-          const end = this.genDisplayFormatText(this.endInputTime);
+          const start = this.genDisplayFormatText(this.startTime);
+          const end = this.genDisplayFormatText(this.endTime);
 
           if (!start && !end) {
             return '--';

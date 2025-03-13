@@ -1,12 +1,14 @@
 /* eslint-disable no-cond-assign */
 /* eslint-disable no-multi-assign */
 /* eslint-disable prefer-destructuring */
+/* eslint-disable no-restricted-syntax */
 
 import fs from 'fs-extra';
 import path from 'path';
 import * as postcss from 'postcss';
 import { parse } from 'postcss-values-parser';
 import { camelCase, kebabCase, capitalize } from 'lodash';
+import { getComponentMetaInfos } from '../utils/lcap';
 import type {
   LcapBuildOptions, CSSValue, CSSRule, SupportedCSSProperty,
 } from './types';
@@ -19,8 +21,8 @@ function getChildrenValue(val: Record<string, any>) {
   return val.nodes.map((node) => node.toString());
 }
 
-function isStartWithPrefix(hiddenSelectorPreFixList, selectorKey) {
-  return hiddenSelectorPreFixList.some((selectorPrefix) => selectorKey.startsWith(selectorPrefix) || selectorKey.startsWith(`[class*=${selectorPrefix}`));
+function startsWithPrefix(hideSelectorPrefixes: Array<string>, selectorKey: string) {
+  return hideSelectorPrefixes.some((selectorPrefix) => selectorKey.startsWith(selectorPrefix) || selectorKey.startsWith(`[class*=${selectorPrefix}`));
 }
 
 function parseCSSInfo(cssContent: string, componentNameMap: Record<string, string | undefined>, cssRulesDesc: Record<string, Record<string, string>>, options: LcapBuildOptions) {
@@ -402,22 +404,22 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
   if (options.reportCSSInfo?.extraComponentMap) {
     const compKeys = Object.keys(options.reportCSSInfo.extraComponentMap);
     compKeys.forEach((curCompName) => {
-      const hiddenSelectorPreFixList = options.reportCSSInfo?.extraComponentMap?.[curCompName]?.hiddenSelectorPreFixList;
-      if (hiddenSelectorPreFixList) {
+      const hideSelectorPrefixes = options.reportCSSInfo?.extraComponentMap?.[curCompName]?.hideSelectorPrefixes;
+      if (hideSelectorPrefixes) {
         const compCssDesc = cssRulesDesc[curCompName];
         const compCssInfo = componentCSSInfoMap[curCompName];
         Object.keys(compCssDesc).forEach((selectorKey) => {
-          if (isStartWithPrefix(hiddenSelectorPreFixList, selectorKey)) {
+          if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
             delete compCssDesc[selectorKey];
           }
         });
         Object.keys(compCssInfo.mainSelectorMap).forEach((selectorKey) => {
-          if (isStartWithPrefix(hiddenSelectorPreFixList, selectorKey)) {
+          if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
             delete compCssInfo.mainSelectorMap[selectorKey];
           }
         });
         compCssInfo.cssRules = compCssInfo.cssRules.filter((rule) => {
-          return !isStartWithPrefix(hiddenSelectorPreFixList, rule.selector);
+          return !startsWithPrefix(hideSelectorPrefixes, rule.selector);
         });
       }
     });
@@ -426,76 +428,45 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
   // 整合
   if (options.reportCSSInfo?.extraComponentMap) {
     const compKeys = Object.keys(options.reportCSSInfo.extraComponentMap);
-    for (let i = 0; i < compKeys.length; i++) {
-      const curCompName = compKeys[i];
-      const { depCompList } = options.reportCSSInfo.extraComponentMap[compKeys[i]];
-      if (depCompList && depCompList.length) {
-        for (let j = 0; j < depCompList.length; j++) {
-          const depCompItem = depCompList[j];
-          let depCompName = '';
-          let isResetRoot = true;
-          if (typeof depCompItem !== 'string') {
-            depCompName = depCompItem.compName;
-            isResetRoot = depCompItem.isResetRoot;
-          } else {
-            depCompName = depCompItem;
-          }
-          const depCompCssDesc = cssRulesDesc[depCompName];
-          cssRulesDesc[curCompName] = { ...cssRulesDesc[curCompName], ...depCompCssDesc };
-          const depCompCssInfo = componentCSSInfoMap[depCompName];
-          const resetCssRules = depCompCssInfo.cssRules.map((rule) => {
-            return {
-              ...rule,
-              isStartRoot: isResetRoot ? false : rule.isStartRoot,
-            };
-          });
-          const resetMainSelectorMap = isResetRoot ? Object.keys(depCompCssInfo.mainSelectorMap).reduce((acc, selector) => {
-            acc[selector] = false;
-            return acc;
-          }, {}) : { ...depCompCssInfo.mainSelectorMap };
-
-          if (!componentCSSInfoMap[curCompName]) {
-            componentCSSInfoMap[curCompName] = {
-              cssRules: [],
-              cssRuleMap: new Map(),
-              mainSelectorMap: new Map(),
-            };
-          }
-          componentCSSInfoMap[curCompName].cssRules = [...componentCSSInfoMap[curCompName].cssRules, ...resetCssRules];
-          componentCSSInfoMap[curCompName].mainSelectorMap = { ...componentCSSInfoMap[curCompName].mainSelectorMap, ...resetMainSelectorMap };
+    for (const curCompName of compKeys) {
+      const { depComponents } = options.reportCSSInfo.extraComponentMap[curCompName];
+      depComponents?.forEach((depCompItem) => {
+        let depComponentName = '';
+        let stillRoot = false;
+        if (typeof depCompItem !== 'string') {
+          depComponentName = depCompItem.componentName;
+          stillRoot = depCompItem.stillRoot;
+        } else {
+          depComponentName = depCompItem;
         }
-      }
+        const depCompCssDesc = cssRulesDesc[depComponentName];
+        cssRulesDesc[curCompName] = { ...cssRulesDesc[curCompName], ...depCompCssDesc };
+        const depCompCssInfo = componentCSSInfoMap[depComponentName];
+        const resetCssRules = depCompCssInfo.cssRules.map((rule) => {
+          return {
+            ...rule,
+            isStartRoot: stillRoot && rule.isStartRoot,
+          };
+        });
+        const resetMainSelectorMap = stillRoot ? { ...depCompCssInfo.mainSelectorMap } : Object.keys(depCompCssInfo.mainSelectorMap).reduce((acc, selector) => {
+          acc[selector] = false;
+          return acc;
+        }, {});
+
+        if (!componentCSSInfoMap[curCompName]) {
+          componentCSSInfoMap[curCompName] = {
+            cssRules: [],
+            cssRuleMap: new Map(),
+            mainSelectorMap: new Map(),
+          };
+        }
+        componentCSSInfoMap[curCompName].cssRules = [...componentCSSInfoMap[curCompName].cssRules, ...resetCssRules];
+        componentCSSInfoMap[curCompName].mainSelectorMap = { ...componentCSSInfoMap[curCompName].mainSelectorMap, ...resetMainSelectorMap };
+      });
     }
   }
 
-  return { componentCSSInfoMap, cssRulesDesc, cssContent: root.toResult().css };
-}
-
-// function collectComponentNames(componentList: any) {
-//   const componentNames: string[] = [];
-//   componentList.forEach((component) => {
-//     if (component.ignore) return;
-//     componentNames.push(component.name);
-//     if (component.children) {
-//       componentNames.push(...collectComponentNames(component.children));
-//     }
-//   });
-//   return componentNames;
-// }
-
-// { componentName: parentName }
-function collectComponentNameMap(
-  componentList: Array<{ name: string, ignore: boolean, children?: Array<{ name: string, ignore: boolean }> }>,
-  parentName?: string,
-) {
-  const componentNameMap: Record<string, string | undefined> = {};
-  componentList.forEach((component) => {
-    if (component.ignore) return;
-    // 这里用了个技巧，先匹配子组件
-    component.children && Object.assign(componentNameMap, collectComponentNameMap(component.children, component.name));
-    componentNameMap[component.name] = parentName;
-  });
-  return componentNameMap;
+  return { componentCSSInfoMap, cssRulesDesc: sortMap(cssRulesDesc), cssContent: root.toResult().css };
 }
 
 export default function buildCSSInfo(options: LcapBuildOptions) {
@@ -503,8 +474,15 @@ export default function buildCSSInfo(options: LcapBuildOptions) {
     return;
   }
 
-  const componentList = fs.readJSONSync(path.resolve(options.rootPath, options.destDir, 'nasl.ui.json'), 'utf-8');
-  const componentNameMap = collectComponentNameMap(componentList);
+  const components = getComponentMetaInfos(options.rootPath, true);
+  const componentNameMap: Record<string, string | undefined> = {}; // { componentName: parentName }
+  components.forEach((component) => {
+    // 这里用了个技巧，先匹配子组件
+    component.children?.forEach((child) => {
+      componentNameMap[child.name] = component.name;
+    });
+    componentNameMap[component.name] = undefined;
+  });
 
   const cssContent = fs.readFileSync(path.resolve(options.rootPath, options.destDir, 'index.css'), 'utf-8');
 

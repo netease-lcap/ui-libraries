@@ -1,0 +1,138 @@
+/// <reference types="@nasl/types" />
+
+namespace nasl.ui {
+  @IDEExtraInfo({
+    order: 1,
+    ideusage: {
+      idetype: 'container',
+      structured: true,
+      childAccept: "target.tag === 'el-breadcrumb-item'",
+    },
+  })
+  @Component({
+    title: '面包屑',
+    icon: 'crumb',
+    description: '显示当前页面的路径，快速返回之前的任意页面。',
+    group: 'Navigation',
+  })
+  export class ElBreadcrumb extends ViewComponent {
+    constructor(options?: Partial<ElBreadcrumbOptions>) {
+      super();
+    }
+  }
+
+  export class ElBreadcrumbOptions extends ViewComponentOptions {
+    @Prop({
+      group: '主要属性',
+      title: '分隔符',
+      description: '分隔符',
+      setter: { concept: 'InputSetter' },
+    })
+    separator: nasl.core.String = '/';
+
+    @Slot({
+      title: '内容',
+      description: '内容',
+      emptyBackground: 'add-sub',
+      snippets: [
+        {
+          title: '面包屑项',
+          code: '<el-breadcrumb-item><template #default><el-text text="面包屑"></el-text></template></el-breadcrumb-item>',
+        },
+      ],
+    })
+    slotDefault: () => Array<ViewComponent>;
+  }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+    },
+  })
+  @Component({
+    title: '面包屑项',
+    description: '面包屑项',
+  })
+  export class ElBreadcrumbItem extends ViewComponent {
+    constructor(options?: Partial<ElBreadcrumbItemOptions>) {
+      super();
+    }
+  }
+
+  export class ElBreadcrumbItemOptions extends ViewComponentOptions {
+    @Prop({
+      group: '交互属性',
+      title: '链接地址'
+    })
+    hrefAndTo: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '替换路由',
+      description:
+        '在使用 to 进行路由跳转时，启用 replace 将不会向 history 添加新记录',
+      setter: { concept: 'SwitchSetter' },
+    })
+    replace: nasl.core.Boolean = false;
+    
+    @Event({
+      title: '点击',
+      description: '在元素上按下并释放任意鼠标按钮时触发。',
+    })
+    onClick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '双击',
+      description: '在元素上双击鼠标按钮时触发。',
+    })
+    onDblclick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '右键点击',
+      description: '在右键菜单显示前触发。',
+    })
+    onContextmenu: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标按下',
+      description: '在元素上按下任意鼠标按钮时触发。',
+    })
+    onMousedown: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标释放',
+      description: '在元素上释放任意鼠标按钮时触发。',
+    })
+    onMouseup: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移入',
+      description: '鼠标移入元素时触发。',
+    })
+    onMouseenter: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移出',
+      description: '鼠标移出元素时触发。',
+    })
+    onMouseleave: (event: MouseEvent) => any;
+
+    @Event({
+      title: '聚焦时',
+      description: '聚焦时触发',
+    })
+    onFocus: (event: FocusEvent) => void;
+
+    @Event({
+      title: '失焦时',
+      description: '失焦时触发',
+    })
+    onBlur: (event: FocusEvent) => void;
+
+    @Slot({
+      title: '内容',
+      description: '内容',
+    })
+    slotDefault: () => Array<ViewComponent>;
+  }
+}

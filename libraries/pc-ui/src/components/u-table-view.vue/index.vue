@@ -246,7 +246,7 @@ export default {
           return this.currentDataSource && this.currentDataSource.sorting ? this.currentDataSource.sorting.order : '';
         },
         value() {
-          return this.selectedItem && this.$at(this.selectedItem, this.valueField);
+          return this.selectedItem && this.$at(this.selectedItem, this.getValueField());
         },
         values: 'currentValues',
       }),
@@ -519,7 +519,7 @@ export default {
             this.handleData();
         },
         currentData(currentData, oldCurrentData) {
-            if (currentData !== oldCurrentData) {
+            if (currentData !== oldCurrentData || this.currentDataSource.isSimpleItem) {
                 this.selectedItem = undefined;
             }
             this.watchValue(this.value);
@@ -559,14 +559,14 @@ export default {
             this.watchValue(value);
         },
         selectedItem(item, oldItem) {
-            const value = item ? this.$at(item, this.valueField) : undefined;
-            const oldValue = oldItem ? this.$at(oldItem, this.valueField) : undefined;
+            const value = item ? this.$at2(item, this.valueField) : undefined;
+            const oldValue = oldItem ? this.$at2(oldItem, this.valueField) : undefined;
             if (value === oldValue)
                 return;
 
             this.$emit('change', { value, oldValue, item, oldItem }, this);
             this.currentData.forEach((itemTemp) => {
-                const valueTemp = this.$at(itemTemp, this.valueField);
+                const valueTemp = this.$at(itemTemp, this.getValueField());
                 if (!itemTemp.hasOwnProperty('radioChecked')) {
                     this.$set(itemTemp, 'radioChecked', false);
                 }
@@ -1654,16 +1654,27 @@ export default {
         },
         /* Selection Methods */
         watchValue(value) {
-            if (this.selectedItem && this.$at(this.selectedItem, this.valueField) === value)
+            const valueField = this.getValueField();
+            if (this.selectedItem && this.$at(this.selectedItem, valueField) === value)
                 return;
-            if (value === undefined)
+            if (value === undefined) {
                 this.selectedItem = undefined;
-            else {
-                this.selectedItem = this.currentData && this.currentData.find((item) => this.$at(item, this.valueField) === value); // @TODO: Group
+            } else {
+                const selectedItem = this.currentData && this.currentData.find((item) => {
+                  if (this.$at(item, valueField) === value) {
+                    this.$set(item, 'radioChecked', true);
+                    return true;
+                  }
+
+                  return false;
+                }); // @TODO: Group
+
+                this.selectedItem = selectedItem && this.currentDataSource.isSimpleItem ? selectedItem.simple : selectedItem;
             }
         },
         watchValues(values) {
-            if (!this.valueField)
+            const valueField = this.getValueField();
+            if (!valueField)
                 return;
             if (values) {
                 this.currentValues = values;
@@ -1673,7 +1684,7 @@ export default {
                         if (!item.hasOwnProperty('checked')) {
                             this.$set(item, 'checked', false);
                         }
-                        if (values.includes(this.$at(item, this.valueField))) {
+                        if (values.includes(this.$at(item, valueField))) {
                             this.$set(item, 'checked', true);
                         } else {
                             // fix: 2954484513723136, values 为空时，没有清空选中状态
@@ -1683,14 +1694,14 @@ export default {
                 }
             } else {
                 const values = [];
-                this.currentData && this.currentData.forEach((item) => item.checked && values.push(this.$at(item, this.valueField)));
+                this.currentData && this.currentData.forEach((item) => item.checked && values.push(this.$at(item, valueField)));
                 this.currentValues = values;
             }
             // 暂存选中行
             if (this.currentData) {
                 this.currentData.forEach((item) => {
                     if (item.checked) {
-                        const label = this.$at(item, this.valueField);
+                        const label = this.$at(item, valueField);
                         this.checkedItems[label] = item;
                     }
                 });
@@ -1719,7 +1730,8 @@ export default {
                 this.selectedItem = undefined;
             else
                 this.selectedItem = item; // Assign and sync `value`
-            const value = this.selectedItem && this.$at(this.selectedItem, this.valueField);
+            const value = this.selectedItem && this.$at2(this.selectedItem, this.valueField);
+
             this.$emit('input', value, this);
             this.$emit('update:value', value, this); // Emit `after-` events
             this.$emit('select', {
@@ -1754,8 +1766,9 @@ export default {
                 this.getCheckedValues(item, checked);
             }
             const checkedItems = this.getCheckedItems();
+
             this.$emit('update:values', this.currentValues, this);
-            this.$emit('check', { values: this.currentValues, oldValues, item, checked, items: checkedItems }, this);
+            this.$emit('check', { values: this.currentValues, oldValues, item: this.getRealSimpleItem(item), checked, items: checkedItems }, this);
         },
         checkAll(checked) {
             // Check if enabled
@@ -1813,8 +1826,9 @@ export default {
             }
         },
         getCheckedValues(item, checked) {
-            if (this.valueField) {
-                const label = this.$at(item, this.valueField);
+            const valueField = this.getValueField();
+            if (valueField) {
+                const label = this.$at(item, valueField);
                 if (checked && !this.currentValues.includes(label))
                     this.currentValues.push(label);
                 else if (!checked && this.currentValues.includes(label))
@@ -1826,6 +1840,12 @@ export default {
                 }
             }
         },
+        getRealSimpleItem(item) {
+          return this.currentDataSource.isSimpleItem && item ? item.simple : item;
+        },
+        getValueField() {
+          return this.currentDataSource.isSimpleItem && !this.valueField ? 'simple' : this.valueField;
+        },
         /**
          * 获取所有选中行
          */
@@ -1834,7 +1854,7 @@ export default {
             Object.keys(this.checkedItems).forEach((itemKey) => {
                 const inValues = this.currentValues.find((value) => '' + value === itemKey);
                 if (inValues) {
-                    items.push(this.checkedItems[itemKey]);
+                    items.push(this.getRealSimpleItem(this.checkedItems[itemKey]));
                 }
             });
             return items;

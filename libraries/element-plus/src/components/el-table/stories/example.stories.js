@@ -1,5 +1,6 @@
 import { ref, watch } from 'vue';
 import { ElPagination } from 'element-plus';
+import _ from 'lodash';
 import Component from '../index';
 
 export default {
@@ -82,6 +83,9 @@ export const Example1 = {
         width.value = '1000px';
         console.log('object');
       }, 1000);
+      const logCellClick = (...el) => {
+        console.log(el, 'logCellClick');
+      };
       return {
         tableData,
         pageSize2,
@@ -89,6 +93,7 @@ export const Example1 = {
         mytable,
         selectedRowKeys,
         width,
+        logCellClick,
       };
     },
     template: `
@@ -98,32 +103,36 @@ row-key="name"
 :dataSource="tableData"
 :pagination="true"
 v-model:currentPage="currentPage"
-v-model:pageSize="pageSize2"
+@sync:state="logCellClick"
 :showTotal="true"
+height=""
 :style="{'width':width}"
+@selection-change="logCellClick"
 :sorting="{ field: 'six.name', order: 'desc' }"
 :showJumper="true"
-:pageSizes="[10,100, 200, 300, 400]"
+pageSizes="[5,10,20,50]"
+:pageSize="10"
 data-nodepath="1234"
 v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
 dragSort="row"
 :selection="true"
+:stripe="true"
 >
 
 <el-table-column label="申请人" >
-
+  <div>123</div>
 </el-table-column>
 
-    <el-table-column title="渠道" colKey="channel" :sorter="true" :autoMerge="true" >
-<template #cell="cell">
-  <div>{{ cell.item.channel }}</div>
-</template>
-</el-table-column>
+    <el-table-column label="渠道" prop="address" type="normal" >
+        <template #default="current">
+          <div>{{current.item.address}}</div>
+        </template>
+    </el-table-column>
 
     <el-table-column prop="six.name" label="Date" sortable="custom" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address" />
+    <el-table-column type="normal" prop="address" label="Address" />
 
 <template #expanded-row="{ item }">
   <div class="more-detail">
@@ -178,9 +187,9 @@ export const Example2 = {
       watch(selectedRowKeys, (el) => {
         console.log(el, 'log');
       });
-      // setTimeout(() => {
-      //   console.log(selectedRowKeys,'selectedRowKeys');
-      // }, 1000);
+      setTimeout(() => {
+        console.log(mytable, 'mytable====');
+      }, 1000);
       return {
         tableData,
         pageSize2,
@@ -195,8 +204,6 @@ ref="mytable"
 row-key="index"
 :dataSource="tableData"
 :pagination="true"
-v-model:currentPage="currentPage"
-v-model:pageSize="pageSize2"
 :showTotal="true"
 :sorting="{ field: 'createTime', order: 'desc' }"
 :showJumper="true"
@@ -229,12 +236,18 @@ export const Default = {
   render: () => ({
     setup() {
       const value = ref(2);
+      const object = { a: 1, b: '2', c: 3 };
+
+      _.pickBy(object, (value, key) => {
+        console.log(value, key, '`==============');
+        return _.isNumber(value);
+      });
       return {
         value,
       };
     },
     template: `
-  <el-table :pagination="true" :pageSize="20" data-nodepath="a55ba3783cb146a881ae5d54e594612b" key="component-a55ba3783cb146a881ae5d54e594612b" :dataSource="[{index:0},{index:1},{index:2}]"  rowKey="index" valueField="index"  >
+  <el-table style="--el-table-border-color: #e10910; color:red" :pagination="true" :pageSize="20" data-nodepath="a55ba3783cb146a881ae5d54e594612b" key="component-a55ba3783cb146a881ae5d54e594612b" :dataSource="[{index:0},{index:1},{index:2}]"  rowKey="index" valueField="index"  >
       <el-table-column data-nodepath="da0514a35d184c4aa1289d08aa8269f9" data-nodepath-multiple="true" dataNodepathMultiple="ture" key="component-da0514a35d184c4aa1289d08aa8269f9"  >
       <template #default={...argus}>
       </template>

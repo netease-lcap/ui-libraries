@@ -7,12 +7,23 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 import fp from 'lodash/fp';
 import omit from 'lodash/omit';
+import { useState, useEffect, useMemo, useRef } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
-function useControllableValue(props, options, { useState }) {
-  const [value, setValue] = useState('');
+export function handleHeight(props) {
+  const height = props.get('height');
+  const maxHeight = props.get('maxHeight');
+
+  return {
+    height: height === '' ? undefined : height,
+    maxHeight: maxHeight === '' ? undefined : maxHeight,
+  };
+}
+
+function useControllableValue(props, options) {
+  const [value, setValue] = useState(options.defaultValue);
   const { valuePropsName, tigger = `onUpdate:${valuePropsName}`, onChange } = options;
   const isControlled = props.get(valuePropsName);
   const myChange = (...arg) => {
@@ -22,15 +33,19 @@ function useControllableValue(props, options, { useState }) {
   const [myValue, mySetValue] = isControlled
     ? [props.get(valuePropsName), props.get(tigger, () => {})]
     : [value, myChange];
-  return [myValue, mySetValue, { [valuePropsName]: myValue, [tigger]: mySetValue }];
+  return [{ [valuePropsName]: myValue, [tigger]: mySetValue }, myValue, mySetValue];
 }
 
-export function handleDataSource(props, { useState, useEffect, useMemo }) {
+export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
   const pageProps = props.get('pageProps');
-  const { currentPage, pageSize, onChange = () => {} } = pageProps;
+  // const currentPage = pageProps.currentPage || 1;
+  // const pageSize = pageProps.pageSize || 10;
+  // const onChange = pageProps.onChange || (() => {});
+  const { defaultCurrentPage: currentPage, defaultPageSize: pageSize, onChange = () => {} } = pageProps;
   const sort = props.get('field');
   const order = props.get('order');
+  const emit = props.get('emit');
 
   const onBefore = props.get('onBefore', () => {});
   const onSuccess = props.get('onSuccess', () => {});
@@ -55,33 +70,31 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
   ]);
   const transformOption = useMemo(
     () => fp.cond([
-      [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
-      [_.isPlainObject, (data) => () => data],
-      [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
-      [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
-    ]),
+        [fp.isArray, fp.constant(async () => ({ list: dataSource, total: dataSource.length }))],
+        [_.isPlainObject, (data) => () => data],
+        [fp.isFunction, fp.constant((...arg) => Promise.resolve(dataSource(...arg)).then(warpList))],
+        [fp.stubTrue, fp.constant(async () => ({ list: [], total: 0 }))],
+      ]),
     [dataSource],
   );
+  emit('sync:state', 'currentPage', currentPage);
+  emit('sync:state', 'pageSize', pageSize);
   const {
     data: resultData = { list: [], total: 0 },
     run: reload,
     loading,
-  } = useRequestDataSource(
-    transformOption(dataSource),
-    {
-      onBefore: (params) => _.attempt(onBefore, params),
-      onSuccess: (data, params) => _.attempt(onSuccess, data, params),
-      defaultParams: [
-        {
-          currentPage,
-          pageSize,
-          sort,
-          order,
-        },
-      ],
-    },
-    { useState, useEffect, useMemo },
-  );
+  } = useRequestDataSource(transformOption(dataSource), {
+    onBefore: (params) => _.attempt(onBefore, params),
+    onSuccess: (data, params) => _.attempt(onSuccess, data, params),
+    defaultParams: [
+      {
+        currentPage,
+        pageSize,
+        sort,
+        order,
+      },
+    ],
+  });
   const { list: data, total } = resultData;
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
   const dataSourceResult = _.isEmpty(data) ? {} : { data };
@@ -95,15 +108,17 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
       order: getOrder(order),
     },
     onSortChange: ({ prop, order }) => reload({
-      currentPage,
-      pageSize,
-      sort: getOrder(order) ? prop : undefined,
-      order: getOrder(order),
-    }),
+        currentPage,
+        pageSize,
+        sort: getOrder(order) ? prop : undefined,
+        order: getOrder(order),
+      }),
     pageProps: {
       ...pageProps,
       total,
       onChange: _.wrap(onChange, (fn, currentPage, pageSize) => {
+        emit('sync:state', 'currentPage', currentPage);
+        emit('sync:state', 'pageSize', pageSize);
         _.attempt(fn, currentPage, pageSize);
         _.attempt(reload, { currentPage, pageSize });
       }),
@@ -112,44 +127,50 @@ export function handleDataSource(props, { useState, useEffect, useMemo }) {
   };
 }
 
-export function handlePage(props, { useState, childrenRef }) {
+export function handlePage(props) {
   const Component = props.get('render');
   const pagination = props.get('pagination');
-  const pageSizes = props.get('pageSizes');
+  const pageSizesProps = props.get('pageSizes');
+  const defaultPageSize = props.get('pageSize') || 10;
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
+  const onChange = props.get('onPageChange', () => {});
+  const defaultCurrentPage = props.get('currentPage') || 1;
+  const onSelectionChange = props.get('onSelectionChange', () => {});
   const ref = props.get('ref');
+
   const nodepath = props.get('data-nodepath');
+  const tableRef = useRef({});
   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-  const [currentPage, setpage, currentPageProps] = useControllableValue(
-    props,
-    {
-      valuePropsName: 'currentPage',
-    },
-    { useState },
-  );
-  const [pageSize, setPageSize, pageSizeProps] = useControllableValue(
-    props,
-    {
-      valuePropsName: 'pageSize',
-    },
-    { useState },
-  );
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
+  const pageSizes = useMemo(() => {
+    const jsonPageSizes = _.attempt(JSON.parse, pageSizesProps);
+    return _.isArray(jsonPageSizes) ? jsonPageSizes : [10, 20, 50];
+  }, [pageSizesProps]);
+
   return {
     pageProps: {
-      ...currentPageProps,
-      ...pageSizeProps,
+      defaultCurrentPage,
+      defaultPageSize,
       pageSizes,
       layout,
+      onChange,
     },
-    ref,
+    ref: Object.assign(ref, tableRef.value),
     [$deletePropsList]: deletePropsList,
     pagination,
+    onSelectionChange: _.wrap(onSelectionChange, (fn, value) => {
+      _.attempt(fn, { newSelection: value });
+    }),
     render: (props, { attrs, expose, slots }) => {
       return [
         <div data-nodepath={nodepath} style={props.style}>
-          <Component ref={childrenRef} {...omit({ ...props, ...attrs }, ['style'])} v-slots={slots} />
+          <Component
+            ref={tableRef}
+            {...omit({ ...props, ...attrs }, ['style'])}
+            style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
+            v-slots={slots}
+          />
           <ElConfigProvider locale={zhCn}>
             {props.pagination && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>

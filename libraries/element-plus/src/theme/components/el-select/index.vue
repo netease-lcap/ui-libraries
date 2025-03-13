@@ -1,18 +1,12 @@
 <template>
   <div>
-    <el-radio-group v-model="size">
-      <el-radio value="small">小尺寸</el-radio>
-      <el-radio value="medium">中尺寸</el-radio>
-      <el-radio value="large">大尺寸</el-radio>
-    </el-radio-group>
     <div class="actions-warp">
       <el-checkbox v-model="disabled">是否禁用</el-checkbox>
       <el-checkbox v-model="multiple">是否多选</el-checkbox>
-      <el-checkbox v-model="borderless">是否无边框</el-checkbox>
       <el-checkbox v-model="emptyData">是否置空数据</el-checkbox>
     </div>
 
-    <el-select clearable filterable v-model="value1" :size="size" :disabled="disabled" :multiple="multiple" :borderless="borderless"
+    <el-select clearable filterable v-model="value1" :size="size" :disabled="disabled" :multiple="multiple"
       :dataSource="emptyData ? [] : options2" />
 
     <!-- <el-select :size="size" :disabled="disabled" :multiple="multiple" :borderless="borderless"

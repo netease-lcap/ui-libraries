@@ -5,16 +5,19 @@
   /**
    * @desc 悬浮边框颜色
    * @type input
+   * @hidden
    */
   --el-select-border-color-hover: var(--el-border-color-hover);
   /**
    * @desc 禁用颜色
    * @type color
+   * @hidden
    */
   --el-select-disabled-color: var(--el-disabled-text-color);
   /**
    * @desc 禁用边框
    * @type input
+   * @hidden
    */
   --el-select-disabled-border: var(--el-disabled-border-color);
   /**
@@ -30,16 +33,19 @@
   /**
    * @desc 输入框颜色
    * @type color
+   * @hidden
    */
   --el-select-input-color: var(--el-text-color-placeholder);
   /**
    * @desc 多选输入框颜色
    * @type color
+   * @hidden
    */
   --el-select-multiple-input-color: var(--el-text-color-regular);
   /**
    * @desc 聚焦边框颜色
    * @type color
+   * @hidden
    */
   --el-select-input-focus-border-color: var(--el-color-primary);
   /**

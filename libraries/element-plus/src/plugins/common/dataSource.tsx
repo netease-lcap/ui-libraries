@@ -5,11 +5,10 @@ import fp from 'lodash/fp';
 // import { useRequest } from 'ahooks';
 import { watch, onMounted } from 'vue';
 import { useRequest } from 'vue-hooks-plus';
-import {
-  $deletePropsList, $dataSourceField, $labelKey, $valueKey,
-} from '@/plugins/constants';
+import { $deletePropsList, $dataSourceField, $labelKey, $valueKey } from '@/plugins/constants';
+import { useEffect, useMemo, useState, useRef } from '@/plugins/hooks';
+import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
 
-let stop = () => {};
 function formatData(data) {
   const conformsArray = _.cond([
     [Array.isArray, _.identity],
@@ -26,7 +25,7 @@ function wrapDataToRequest(dataSource) {
   ]);
   return wrapDataSource(dataSource);
 }
-export function useHandleTransformOption(props, { useMemo, useEffect }) {
+export function useHandleTransformOption(props) {
   const dataSourceField = props.get($dataSourceField, 'options');
   const deletePropsList = props.get($deletePropsList, []).concat([$dataSourceField]);
   const dataSource = props.get('dataSource');
@@ -40,18 +39,19 @@ export function useHandleTransformOption(props, { useMemo, useEffect }) {
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
   return _.isNil(dataSource)
     ? {
-      [$deletePropsList]: deletePropsList,
-    }
+        [$deletePropsList]: deletePropsList,
+      }
     : {
-      [$deletePropsList]: deletePropsList,
-      [dataSourceField]: resultData,
-      ref: selfRef,
-      loading,
-    };
+        [$deletePropsList]: deletePropsList,
+        [dataSourceField]: resultData,
+        ref: selfRef,
+        loading,
+      };
 }
 
 useHandleTransformOption.order = 5;
-export function useHandleTextAndValueField(props, { useMemo }) {
+
+export function useHandleTextAndValueField(props) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const labelKey = props.get($labelKey, 'label');
@@ -72,46 +72,52 @@ export function useHandleTextAndValueField(props, { useMemo }) {
 }
 useHandleTextAndValueField.order = 6;
 
-export function useHandleMapField(filedInfo, { useMemo }) {
-  const {
-    label = 'label', value = 'value', textField = 'label', valueField = 'value', dataSource,
-  } = filedInfo;
+export function useHandleMapField(filedInfo: {
+  label?: string;
+  value?: string;
+  textField?: string;
+  valueField?: string;
+  dataSource: DataSourceType;
+}) {
+  const { label = 'label', value = 'value', textField = 'label', valueField = 'value', dataSource } = filedInfo;
   return useMemo(() => {
-    return _.map(dataSource, (item) => ({
+    return _.map(dataSource, (item: any) => ({
       ...item,
       [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
       [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
     }));
-  }, [label, value, textField, valueField, dataSource]);
+  }, [label, value, textField, valueField, dataSource]) as DataSourceArrayType;
 }
-export function useRequestDataSource(dataSource, options = {}, { useMemo, useEffect, useState }) {
+export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
   const [resultData, setResult] = useState({});
+  const stop = useRef(() => {});
   const handleDataSouceToFn = _.cond([
     [_.isArray, _.constant(async () => dataSource)],
-    [_.isFunction, _.constant(async (...arg) => dataSource(...arg))],
-    [_.stubTrue, _.constant(async () => [])],
+    [_.isFunction, _.constant(async (...arg) => (dataSource as DataSourceFunctionType)(...arg))],
+    [_.stubTrue, _.constant(async () => [] as unknown as DataSourceArrayType)],
   ]);
   const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
   const result = useMemo(
     () => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSource] }),
     [dataSourceFn],
   ) as any;
-
-  stop();
-  stop = watch(
+  stop.value();
+  stop.value = watch(
     () => result,
     (value) => {
       setResult(value);
     },
     { immediate: true, deep: true },
   );
-  // });
-  const { data, run, loading } = resultData;
-  // useEffect(() => run?.(), [dataSource, run]);
+  const { data, run, loading } = resultData as {
+    data: DataSourceArrayType;
+    run: () => void;
+    loading: boolean;
+  };
   return { data, run, loading };
 }
 
-export function useFormatDataSource(dataSource, { useMemo }) {
+export function useFormatDataSource(dataSource: DataSourceArrayType): DataSourceArrayType {
   const conformsArray = _.cond([
     [Array.isArray, _.identity],
     [_.conforms({ list: _.isArray }), fp.get('list')],
@@ -120,7 +126,11 @@ export function useFormatDataSource(dataSource, { useMemo }) {
   return useMemo(() => conformsArray(dataSource), [dataSource]);
 }
 
-export function useDataSourceToTree(dataSource, parentField, valueField = 'value') {
+export function useDataSourceToTree(
+  dataSource: DataSourceArrayType,
+  parentField: string,
+  valueField: string = 'value',
+): DataSourceArrayType {
   if (_.isNil(parentField)) return dataSource;
   const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField), item]));
   const tree = [] as any[];
@@ -134,5 +144,5 @@ export function useDataSourceToTree(dataSource, parentField, valueField = 'value
       tree.push(map.get(_.get(item, valueField)));
     }
   });
-  return tree;
+  return tree as DataSourceArrayType;
 }

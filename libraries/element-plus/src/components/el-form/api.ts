@@ -31,7 +31,7 @@ namespace nasl.ui {
       title: '校验函数',
       description: '校验函数，包含错误文本提示等功能',
     })
-    validate	(): {
+    validated	(): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;
@@ -511,13 +511,13 @@ namespace nasl.ui {
     })
     rules: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '必填标记',
-      description: '是否为必填项,并显示必填标记',
-      setter: { concept: 'SwitchSetter' },
-    })
-    required: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '必填标记',
+    //   description: '是否为必填项,并显示必填标记',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // isRequired: nasl.core.Boolean = false;
 
 
     // @Prop({

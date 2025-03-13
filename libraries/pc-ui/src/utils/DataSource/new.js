@@ -199,7 +199,7 @@ const VueDataSource = Vue.extend({
             });
           },
         arrange(data = this.data) {
-           
+
             // 树形展示处理一下
             if (this.treeDisplay) {
                 data = this.listToTree(data, {
@@ -212,16 +212,17 @@ const VueDataSource = Vue.extend({
             }
 
             let arrangedData = Array.from(data);
+            if(this.isSimpleArray(arrangedData) && this.tag === "u-table-view") {
+              arrangedData = arrangedData.map(item => ({'simple': item}))
+              this.isSimpleItem = true;
+            } else {
+              this.isSimpleItem = false;
+            }
             // fix: 2864106089210368 树型分页无效，多次点击才生效
             if (this._process) {
                 arrangedData = this._process(arrangedData);
             }
-            if(this.isSimpleArray(arrangedData) && this.tag === "u-table-view") {
-                arrangedData = arrangedData.map(item => ({'simple': item}))
-                this.isSimpleItem = true;
-            } else {
-                this.isSimpleItem = false;
-            }
+
             const filtering = this.filtering;
             if (!this.remoteFiltering && filtering && Object.keys(filtering).length) {
                 arrangedData = arrangedData.filter((item) => solveCondition(filtering, item));
