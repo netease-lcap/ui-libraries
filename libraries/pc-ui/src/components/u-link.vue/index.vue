@@ -18,7 +18,7 @@
 
 <script>
 import { sync } from '@lcap/vue2-utils';
-import { debounce } from 'lodash';
+import { throttle } from 'lodash';
 import IIco from '../i-ico.vue';
 import encodeUrl from '../../utils/encodeUrl';
 
@@ -43,7 +43,7 @@ export default {
         disabled: { type: Boolean, default: false },
         decoration: { type: Boolean, default: true },
         download: { type: Boolean, default: false },
-        debounceTime: { type: Number, default: 0 },
+        throttleTime: { type: Number, default: 0 },
         destination: String,
         hoverType: { type: String, default: 'underline' },
         link: [String, Function],
@@ -51,8 +51,8 @@ export default {
     },
     data() {
         let clickEvent = this.$listeners.click || function () { /* noop */ };
-        if (this.debounceTime > 0) {
-          clickEvent = debounce(clickEvent, this.debounceTime);
+        if (this.throttleTime > 0) {
+          clickEvent = throttle(clickEvent, this.throttleTime);
         }
 
         return {
@@ -103,8 +103,8 @@ export default {
     watch: {
         $listeners(listeners) {
             let clickEvent = listeners.click || function () { /* noop */ };
-            if (this.debounceTime > 0) {
-                clickEvent = debounce(clickEvent, this.debounceTime);
+            if (this.throttleTime > 0) {
+                clickEvent = throttle(clickEvent, this.throttleTime);
             }
             this.clickEvent = clickEvent;
         },
