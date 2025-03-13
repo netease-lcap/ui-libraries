@@ -51,6 +51,19 @@ namespace nasl.ui {
         text: nasl.core.String;
 
         @Prop({
+          group: '主要属性',
+          title: '点击防抖',
+          description: '防止重复触发，控制操作频率，如不需要，清空或输0，单位毫秒',
+          docDescription: '防止重复触发，控制操作频率，如不需要，清空或输0，单位毫秒',
+          setter: {
+            concept: 'NumberInputSetter',
+            min: 0,
+          },
+          bindHide: true,
+        })
+        debounceTime: nasl.core.Integer = 0;
+
+        @Prop({
             group: '主要属性',
             title: '样式类型',
             description: '设置主题颜色和按钮样式类型',
