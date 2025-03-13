@@ -61,7 +61,7 @@ namespace nasl.ui {
           },
           bindHide: true,
         })
-        debounceTime: nasl.core.Integer = 0;
+        throttleTime: nasl.core.Integer = 0;
 
         @Prop({
             group: '主要属性',
