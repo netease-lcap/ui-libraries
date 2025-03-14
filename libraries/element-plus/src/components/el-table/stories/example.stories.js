@@ -103,24 +103,23 @@ row-key="name"
 :dataSource="tableData"
 :pagination="true"
 v-model:currentPage="currentPage"
-@sync:state="logCellClick"
 :showTotal="true"
 height=""
-:style="{'width':width}"
 @selection-change="logCellClick"
+field="six.name"
+order="desc"
 :sorting="{ field: 'six.name', order: 'desc' }"
 :showJumper="true"
 pageSizes="[5,10,20,50]"
 :pageSize="10"
 data-nodepath="1234"
 v-model:selectedRowKeys="selectedRowKeys"
-@sort-change="onSortChange"
 dragSort="row"
 :selection="true"
 :stripe="true"
 >
 
-<el-table-column label="申请人" >
+<el-table-column label="申请人"  sortable>
   <div>123</div>
 </el-table-column>
 
@@ -151,14 +150,10 @@ export const Example2 = {
     setup() {
       const activeName = ref('first');
       const total = 28;
-      const tableData = async (pageObj) => {
+      const tableData = async (pageObj = { currentPage: 1, pageSize: 20 }) => {
         console.log(pageObj, 'pagerequest====');
         const initialData = [];
-        for (
-          let i = (pageObj.currentPage - 1) * pageObj.pageSize;
-          i < pageObj.currentPage * pageObj.pageSize && i < total;
-          i++
-        ) {
+        for (let i = 0; i < total; i++) {
           initialData.push({
             index: i + 1,
             applicant: ['贾明', '张三', '王芳'][i % 3],

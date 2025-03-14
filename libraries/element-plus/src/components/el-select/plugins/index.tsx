@@ -4,6 +4,7 @@ import { useMemo, GetAccumulatedMapType } from '@/plugins/hooks';
 import { SelectAccumulateTypes } from './type';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
+// import { ElSelect } from '../index';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 

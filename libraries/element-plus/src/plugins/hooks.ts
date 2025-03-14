@@ -16,7 +16,7 @@ interface EffectHook {
 interface Fiber {
   workInProgressState: Hook;
   workInProgressEffect: EffectHook;
-  updateQueen: any[];
+  updateQueen: Set<any>;
   useStore: (selector: (store: any) => any) => any;
   setValue: (value: any) => void;
   storeKey: string | null;
@@ -46,7 +46,7 @@ function CreateFiberNode() {
     currentFiber: {
       workInProgressState,
       workInProgressEffect,
-      updateQueen: [],
+      updateQueen: new Set(),
       useStore: (selector: (store: any) => any) => selector,
       setValue: (value: any) => value,
       storeKey: null,
@@ -74,6 +74,7 @@ export function useState(initialstate) {
     hook = {
       next: null,
       storeKey: Symbol('storeKey'),
+      isSetValue: false,
     };
     hook.next = hook;
     if (currentFiber.workInProgressState) {
@@ -85,9 +86,10 @@ export function useState(initialstate) {
     hook = currentFiber.workInProgressState.next;
     currentFiber.workInProgressState = currentFiber.workInProgressState.next;
   }
-  const state = currentFiber.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
+  const state = hook?.isSetValue ? currentFiber.useStore((store) => store.state[hook?.storeKey]) : { value: initialstate };
   const localSetValue = (value) => {
-    const state = currentFiber.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
+    hook.isSetValue = true;
+    const state = currentFiber.useStore((store) => store.state[hook?.storeKey]);
     if (_.isEqual(value, state.value)) {
       return;
     }
@@ -95,16 +97,16 @@ export function useState(initialstate) {
     if (_.isFunction(value)) {
       value = value(state);
     }
-    currentFiber.updateQueen.push({ [hook.storeKey]: value });
+    currentFiber.updateQueen.add({ [hook.storeKey]: value });
     _.defer(() => {
-      if (!_.isEmpty(currentFiber.updateQueen)) {
-        const comit = currentFiber.updateQueen.reduce((pre, cur) => ({ ...pre, ...cur }), {});
+      if (currentFiber.updateQueen.size) {
+        const comit = Array.from(currentFiber.updateQueen).reduce((pre, cur) => ({ ...pre, ...cur }), {});
         currentFiber.setValue(comit);
-        currentFiber.updateQueen.splice(0, currentFiber.updateQueen.length);
+        currentFiber.updateQueen.clear();
       }
     }, currentFiber.updateQueen);
   };
-  return [state?.value ?? state, localSetValue];
+  return [state.value, localSetValue];
 }
 export function useRef(initialstate) {
   const currentFiber = fiberNode.getCurrentFiber();
@@ -226,8 +228,11 @@ export function useCallback(callBack, dep) {
   }
   return hook.callBack;
 }
+export function useControllableValue() {
+  
+}
 
-export function scheduler(pluginHooks, ImmutableProps, fiberMap, useStore) {
+export function scheduler(pluginHooks, ImmutableProps, fiberMap, useStore, updateQueen) {
   const setValue = useStore((state: any) => state.setvalue);
   return pluginHooks?.reduce((ImmutableProps, handleFn) => {
     const isMount = !fiberMap.has(handleFn);
@@ -236,7 +241,7 @@ export function scheduler(pluginHooks, ImmutableProps, fiberMap, useStore) {
       ? {
           workInProgressState: null,
           workInProgressEffect: null,
-          updateQueen: [],
+          updateQueen,
           useStore,
           setValue,
           storeKey,

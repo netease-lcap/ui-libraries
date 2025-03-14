@@ -89,7 +89,8 @@ export function registerComponent<T>(Component, options) {
 
       useStore.subscribe((props: any) => {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
-        const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap, useStore);
+        const updateQueen = new Set();
+        const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap, useStore, updateQueen);
         const commitJsState = commitState.delete('ref').toJS();
         const ref = commitState.get('ref');
         render.value = commitJsState.render;

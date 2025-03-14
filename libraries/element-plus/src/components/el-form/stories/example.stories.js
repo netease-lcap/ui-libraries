@@ -89,7 +89,7 @@ export const Example2 = {
       };
       const handleClick = async (tab) => {
         // console.log('====', formData, tab);
-        console.log(tab, 'tab', tab.validated());
+        console.log(tab, 'tab', tab.resetFields());
         // tab.validate().then(
         //   (res) => {
         //     console.log(res, 'res');
@@ -139,6 +139,7 @@ export const Example2 = {
     <el-form-input :rules="rules"  label="input21" v-model="inputName" data-nodepath="input21" />
 
     <a @click="handleClick(formRef)" >Submit</a>
+    <a @click="handleClick(formRef)" >Submit2</a>
     <el-form-checkbox-group label="ww" :isRequired="true" :dataSource="[{},{},{}]"></el-form-checkox-group>
     </el-form>
 
