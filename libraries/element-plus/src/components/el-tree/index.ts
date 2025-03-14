@@ -1,9 +1,8 @@
-import { ElTree } from 'element-plus';
-import 'element-plus/theme-chalk/el-tree.css';
+import { ElTree as ElTreePlus } from 'element-plus';
+
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
-import './index.css';
 
-const ElTreePlus = registerComponent(ElTree, { plugin: basicsPlugin });
-export { ElTreePlus };
-export default ElTreePlus; 
+export const ElTree = registerComponent(ElTreePlus, { plugin: basicsPlugin });
+
+export default ElTree;
