@@ -61,7 +61,7 @@ export const Example1 = {
     <div>
       {{activeName}}-
       {{name}}
-      <el-input  v-model="activeName" data-nodepath="1234"  ></el-input>
+      <el-input   data-nodepath="1234"  ></el-input>
     </div>
     `,
   }),
