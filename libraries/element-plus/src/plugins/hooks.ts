@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, getCurrentInstance } from 'vue';
 import { PluginBase } from '@/types';
 
 interface Hook {
@@ -13,6 +13,13 @@ interface EffectHook {
   result: any;
 }
 
+interface Options {
+  defaultValue?: string;
+  defaultValuePropName?: string;
+  valuePropName?: string;
+  trigger?: string;
+  onChange?: (value: any) => void;
+}
 interface Fiber {
   workInProgressState: Hook;
   workInProgressEffect: EffectHook;
@@ -65,7 +72,7 @@ function CreateFiberNode() {
 }
 export const fiberNode = CreateFiberNode();
 
-export function useState(initialstate) {
+export function useState(initialstate?) {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
 
@@ -228,11 +235,49 @@ export function useCallback(callBack, dep) {
   }
   return hook.callBack;
 }
-export function useControllableValue() {
-  
+
+export function useControllableValue(props: any, options: Options = {}) {
+  const instance = useMemo(() => getCurrentInstance(), []);
+  const { vnode } = instance;
+  const emit = props.get('emit');
+  const vProps = vnode.props || {};
+  const {
+    defaultValue = '',
+    defaultValuePropName = 'defaultValue',
+    valuePropName = 'modelValue',
+    trigger = `onUpdate:${valuePropName}`,
+    onChange: onChangeProps = () => {},
+  } = options || {};
+  const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
+  const propsValue = props.get(valuePropName);
+  const defaultValueValue = props.get(defaultValuePropName);
+  const [stateValue, setStateValue] = useState(propsValue ?? defaultValueValue ?? defaultValue);
+  const valueChange = props.get(trigger, () => {});
+
+  const onChange = (value: any) => {
+    _.attempt(onChangeProps, value);
+    if (isControlled) {
+      emit(trigger, value);
+    } else {
+      setStateValue(value);
+    }
+    _.attempt(valueChange, value);
+  };
+  const value = useMemo(() => (isControlled ? propsValue : stateValue), [stateValue, isControlled]);
+
+  return [
+    value,
+    onChange,
+    {
+      [valuePropName]: value,
+      [trigger]: onChange,
+    },
+  ];
 }
 
-export function scheduler(pluginHooks, ImmutableProps, fiberMap, useStore, updateQueen) {
+export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
+  const updateQueen = fiberMap.get('updateQueen');
+  const useStore = fiberMap.get('useStore');
   const setValue = useStore((state: any) => state.setvalue);
   return pluginHooks?.reduce((ImmutableProps, handleFn) => {
     const isMount = !fiberMap.has(handleFn);

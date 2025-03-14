@@ -47,7 +47,7 @@ export { ElNotification, ElNotificationDesigner } from './el-notification';
 export { ElLoading } from './el-loading';
 export { ElDatePicker, ElFormDatePicker } from './el-date-picker';
 export { ElTransfer, ElFormElTransfer } from './el-transfer';
-export { ElTree} from './el-tree';
+export { ElTree } from './el-tree';
 export { ElTooltip } from './el-tooltip';
 export { ElProgress } from './el-progress';
 export { ElResult } from './el-result';

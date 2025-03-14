@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import ElTabs from '../index';
 
 export default {
@@ -23,9 +24,14 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
+    setup() {
+      const value = ref('');
+      return {
+        value,
+      };
+    },
     template: `
-      <el-input>
-      </el-input>
+      <el-input> </el-input>
     `,
   }),
 };
