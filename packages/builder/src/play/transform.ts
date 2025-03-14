@@ -93,6 +93,10 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference): NType {
       return {
         type: 'boolean',
       };
+    case code.startsWith('nasl.core.DateTime'):
+      return {
+        type: 'datetime',
+      };
     case code.startsWith('nasl.core.Date'):
       return {
         type: 'date',
@@ -100,10 +104,6 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference): NType {
     case code.startsWith('nasl.core.Time'):
       return {
         type: 'time',
-      };
-    case code.startsWith('nasl.core.DateTime'):
-      return {
-        type: 'datetime',
       };
     case code.startsWith('nasl.collection.List'):
       return {

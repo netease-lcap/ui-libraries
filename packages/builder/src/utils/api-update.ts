@@ -572,7 +572,7 @@ export function updateProp(ast: bt.File, options: APIUpdatePropOptions) {
   }
 
   if (!isNil(defaultValue) && bt.isClassProperty(propAST)) {
-    propAST.value = getAST(defaultValue, false);
+    propAST.value = defaultValue ? getAST(defaultValue, false) : null;
   }
 
   updatePropertyOptions(propOptionsAST, rest);
