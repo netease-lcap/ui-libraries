@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import Components from '../index';
 
 export default {
@@ -13,6 +14,25 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-pagination-plus size="small" layout="prev, pager, next" :total="50" />',
+    setup() {
+      const value = ref(2);
+      const myref = ref(null);
+      const handleUpdatePageSize = (value) => {
+        // console.log(value, 'value');
+        myref.value.onChange(3);
+      };
+      return {
+        value,
+        handleUpdatePageSize,
+        myref,
+      };
+    },
+    template: `
+    <div>
+    {{value}}
+    <el-pagination-plus ref="myref" v-model:current-page="value" size="small" layout="prev, pager, next" :total="50" />
+    <button @click="handleUpdatePageSize">更新  </button>
+    </div>
+    `,
   }),
 };
