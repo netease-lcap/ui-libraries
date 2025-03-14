@@ -27,11 +27,12 @@ export interface NStructType extends NBasicType {
 }
 export interface NMapType extends NBasicType {
   type: 'map';
+  key: NType;
   value: NType;
 }
 export interface NUnionType extends NBasicType {
   type: 'union';
-  value: (NType | string)[];
+  value: NType[];
 }
 
 export interface NFunctionParam {
@@ -112,6 +113,7 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference): NType {
     case code.startsWith('nasl.collection.Map'):
       return {
         type: 'map',
+        key: node.typeParameters?.params[0] ? transformTsType2NType(node.typeParameters.params[0]) : { type: 'any' },
         value: node.typeParameters?.params[1] ? transformTsType2NType(node.typeParameters.params[1]) : { type: 'any' },
       } as NMapType;
     default:
