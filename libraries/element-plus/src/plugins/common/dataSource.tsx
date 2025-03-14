@@ -5,7 +5,7 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 import { watch } from 'vue';
 import { useRequest } from 'vue-hooks-plus';
-import { useMemo, useState, useRef } from '@/plugins/hooks';
+import { useMemo, useState, useRef, useEffect } from '@/plugins/hooks';
 import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
 
 export function useHandleMapField(filedInfo: {
@@ -24,24 +24,58 @@ export function useHandleMapField(filedInfo: {
     }));
   }, [label, value, textField, valueField, dataSource]) as DataSourceArrayType;
 }
-const handleDataSouceToFn = (dataSource: DataSourceType) => _.cond([
-    [_.isArray, _.constant(async () => dataSource)],
-    [_.isFunction, _.constant(async (...arg) => (dataSource as DataSourceFunctionType)(...arg))],
-    [_.stubTrue, _.constant(async () => [] as unknown as DataSourceArrayType)],
-  ]);
+const handleLocalPageData = _.cond([
+  [
+    _.conforms({ currentPage: _.isNumber, pageSize: _.isNumber, dataSource: _.isArray }),
+    (params) => {
+      const { currentPage = 1, pageSize = 10, dataSource } = params;
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      return { list: dataSource.slice(start, end), total: dataSource.length };
+    },
+  ],
+  [_.stubTrue, (params) => params.dataSource],
+]);
+const handleDataSouceToFn = _.cond([
+  [_.isArray, (dataSource) => async (params: any) => handleLocalPageData({ dataSource, ...params })],
+  [
+    _.isFunction,
+    (dataSource) => async (params: any) => {
+      const data = await dataSource(params);
+      return handleLocalPageData({ dataSource: data, ...params });
+    },
+  ],
+  [_.stubTrue, () => async (params) => handleLocalPageData({ dataSource: [], ...params })],
+]);
+
 export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
   const [resultData, setResult] = useState({});
   const stop = useRef(() => {});
+
   const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
-  const result = useMemo(() => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSource] }), [dataSourceFn]) as any;
+  const result = useMemo(() => useRequest(dataSourceFn, options), [dataSourceFn]) as any;
+  // _.attempt(
+  //   _.once(() => watch(
+  //       () => result,
+  //       (value) => {
+  //         console.count('value');
+  //         return setResult({ value });
+  //       },
+  //       { immediate: true, deep: true },
+  //     )),
+  // );
+
   stop.value();
   stop.value = watch(
     () => result,
     (value) => {
-      setResult(value);
+      console.count('value');
+      setResult({ value });
     },
     { immediate: true, deep: true },
   );
+  // console.log(refreshDeps, 'refreshDeps');
+
   const { data, run, loading } = resultData as {
     data: DataSourceArrayType;
     run: (...args: any[]) => void;
