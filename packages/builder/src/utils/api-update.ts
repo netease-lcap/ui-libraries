@@ -422,7 +422,7 @@ export function addSlot(ast: bt.File, options: APIAddSlotOptions) {
       title: '${genTitle(name)}',
       description: '${genTitle(name)}',
     })
-    ${name.includes('-') ? `'${name}'` : name}: (current: {}) => Array<nasl.ui.ViewComponent>;
+    ${name.includes('-') ? `'${name}'` : name}: () => Array<nasl.ui.ViewComponent>;
     `;
   }
   const propAST = getAPIPropAST(code, name);

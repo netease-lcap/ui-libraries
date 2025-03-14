@@ -170,7 +170,7 @@ export function genSlotCode(slot: MaterialComponentSlot) {
     title: '${title}',
     description: '${slot.description || title}',
   })
-  ${name.includes('-') ? `'${name}'` : name}: (current: {}) => Array<nasl.ui.ViewComponent>;
+  ${name.includes('-') ? `'${name}'` : name}: () => Array<nasl.ui.ViewComponent>;
 `;
 }
 
