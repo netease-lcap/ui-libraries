@@ -52,33 +52,28 @@ export interface NUnknowType extends NBasicType {
   raw: string;
 }
 
-export type TypeAST = {
-  type: NType,
-  raw: string;
-}
-
 export type TypeMap = {
   prop: {
-    [key: string]: TypeAST;
+    [key: string]: NType;
   },
   event: {
-    [key: string]: TypeAST;
+    [key: string]: NType;
   },
   slot: {
-    [key: string]: TypeAST;
+    [key: string]: NType | null;
   },
   method: {
     [key: string]: {
       params: NFunctionParam[],
-      returnType: TypeAST | 'void',
+      returnType: NType | 'void',
     };
   },
   readableProp: {
-    [key: string]: TypeAST;
+    [key: string]: NType;
   },
 };
 
-function transformTSTypeReference(node: babelTypes.TSTypeReference) {
+function transformTSTypeReference(node: babelTypes.TSTypeReference): NType {
   const code = getNodeCode(node);
   switch (true) {
     case code.startsWith('nasl.core.String'):
@@ -123,11 +118,11 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference) {
       return {
         type: 'unknow',
         raw: code,
-      };
+      } as NUnknowType;
   }
 }
 
-function transformTsType2NType(typeAST: babelTypes.TSType) {
+function transformTsType2NType(typeAST: babelTypes.TSType): NType {
   switch (typeAST.type) {
     case 'TSTypeReference':
       return transformTSTypeReference(typeAST);
@@ -179,7 +174,11 @@ function transformTsType2NType(typeAST: babelTypes.TSType) {
               };
           }
         }),
-        returnType: typeAST.typeAnnotation && typeAST.typeAnnotation.type === 'TSTypeAnnotation' ? transformTsType2NType(typeAST.typeAnnotation.typeAnnotation) : 'void',
+        returnType: (
+          typeAST.typeAnnotation
+          && typeAST.typeAnnotation.type === 'TSTypeAnnotation'
+          && typeAST.typeAnnotation.typeAnnotation.type !== 'TSVoidKeyword'
+        ) ? transformTsType2NType(typeAST.typeAnnotation.typeAnnotation) : 'void',
       } as NFunctionType;
     case 'TSTypeLiteral':
       return {
@@ -201,8 +200,6 @@ function transformTsType2NType(typeAST: babelTypes.TSType) {
           }
         }),
       };
-    case 'TSVoidKeyword':
-      return 'void';
     default:
       return {
         type: 'unknow',
@@ -211,7 +208,7 @@ function transformTsType2NType(typeAST: babelTypes.TSType) {
   }
 }
 
-function resolvePropTsType(prop: PropDeclaration) {
+function resolvePropTsType(prop: PropDeclaration): NType {
   if (!prop.tsType) {
     return {
       type: 'any',
@@ -267,7 +264,10 @@ function resolveSlotTsType(slot: SlotDeclaration) {
   return transformTsType2NType(typeAST.parameters[0].typeAnnotation.typeAnnotation);
 }
 
-function resolveMethodTsType(method: LogicDeclaration & { tsType: string }) {
+function resolveMethodTsType(method: LogicDeclaration & { tsType: string }): {
+  params: NFunctionParam[],
+  returnType: NType | 'void',
+} {
   if (!method.tsType) {
     return {
       params: [] as NFunctionParam[],
@@ -304,7 +304,10 @@ function resolveMethodTsType(method: LogicDeclaration & { tsType: string }) {
         defaultValue: param.defaultValue,
       } as NFunctionParam;
     }),
-    returnType: typeAST.typeAnnotation?.type === 'TSTypeAnnotation' ? transformTsType2NType(typeAST.typeAnnotation.typeAnnotation) : 'void',
+    returnType: (
+      typeAST.typeAnnotation?.type === 'TSTypeAnnotation'
+      && typeAST.typeAnnotation.typeAnnotation.type !== 'TSVoidKeyword'
+    ) ? transformTsType2NType(typeAST.typeAnnotation.typeAnnotation) : 'void',
   };
 }
 
