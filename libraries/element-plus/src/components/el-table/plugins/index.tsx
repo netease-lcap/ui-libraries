@@ -6,54 +6,127 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 import fp from 'lodash/fp';
 import omit from 'lodash/omit';
-import { useMemo, useRef, useCallback, useEffect, useState } from '@/plugins/hooks';
+import { useMemo, useRef, useCallback, useEffect, useState, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 
 import { useRequestDataSource } from '@/plugins/common/dataSource';
 
-export function handlePageProps(props) {
-  const pagination = props.get('pagination');
-  const pageSizesProps = props.get('pageSizes');
-  const defaultPageSize = props.get('pageSize') || 10;
-  const total = props.get('total');
-  const showTotal = props.get('showTotal');
-  const showJumper = props.get('showJumper');
-  const onChange = props.get('onPageChange', () => {});
-  const defaultCurrentPage = props.get('currentPage') || 1;
-  const onSelectionChange = props.get('onSelectionChange', () => {});
-  const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-  const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
-  const ref = props.get('ref');
+export function handleSortState(props) {
   const emit = props.get('emit');
+  const deletePropsList = props.get($deletePropsList).concat(['sort', 'order', 'setSort', 'setOrder']);
+  const [sort, setSort] = useControllableValue(props, {
+    defaultValuePropName: 'defaultField',
+    defaultValue: '',
+    valuePropName: 'field',
+    onChange: (sort) => {
+      emit('sync:state', 'sort', sort);
+    },
+  });
+  const [order, setOrder] = useControllableValue(props, {
+    defaultValuePropName: 'defaultOrder',
+    defaultValue: '',
+    valuePropName: 'order',
+    onChange: (order) => {
+      emit('sync:state', 'order', order);
+    },
+  });
   useEffect(() => {
-    emit('sync:state', 'currentPage', defaultCurrentPage);
-    emit('sync:state', 'pageSize', defaultPageSize);
+    emit('sync:state', 'sort', sort);
+    emit('sync:state', 'order', order);
   }, []);
-
-  const pageChange = useCallback(
-    _.wrap(onChange, (fn, currentPage, pageSize) => {
+  return {
+    [$deletePropsList]: deletePropsList,
+    sort,
+    setSort,
+    order,
+    setOrder,
+    defaultSort: {
+      prop: sort,
+      order,
+    },
+  };
+}
+handleSortState.order = 2;
+export function handlePageState(props) {
+  const emit = props.get('emit');
+  const deletePropsList = props
+    .get($deletePropsList)
+    .concat(['currentPage', 'pageSize', 'pageSizes', 'setCurrentPage', 'setPageSize', 'setPageSizes']);
+  const [currentPage, setCurrentPage, currentPageProps] = useControllableValue(props, {
+    defaultValuePropName: 'defaultCurrentPage',
+    valuePropName: 'currentPage',
+    onChange: (currentPage) => {
       emit('sync:state', 'currentPage', currentPage);
+    },
+  });
+  const [pageSize, setPageSize, pageSizeProps] = useControllableValue(props, {
+    defaultValuePropName: 'defaultPageSize',
+    valuePropName: 'pageSize',
+    onChange: (pageSize) => {
       emit('sync:state', 'pageSize', pageSize);
-      _.attempt(fn, currentPage, pageSize);
-      _.attempt(ref?.reload, { currentPage, pageSize });
-    }),
-    [ref, emit],
-  );
+    },
+  });
+  const pageSizesProps = props.get('pageSizes');
   const pageSizes = useMemo(() => {
     const jsonPageSizes = _.attempt(JSON.parse, pageSizesProps);
     return _.isArray(jsonPageSizes) ? jsonPageSizes : [10, 20, 50];
   }, [pageSizesProps]);
 
+  useEffect(() => {
+    emit('sync:state', 'currentPage', currentPage);
+    emit('sync:state', 'pageSize', pageSize);
+  }, []);
+
+  return {
+    [$deletePropsList]: deletePropsList,
+    pageProps: {
+      ...currentPageProps,
+      ...pageSizeProps,
+      pageSizes,
+    },
+    currentPage,
+    setCurrentPage,
+    pageSize,
+    setPageSize,
+    pageSizes,
+  };
+}
+handlePageState.order = 2;
+export function handlePageProps(props) {
+  const pagination = props.get('pagination');
+  const pageProps = props.get('pageProps');
+  const total = props.get('total');
+  const showTotal = props.get('showTotal');
+  const showJumper = props.get('showJumper');
+  const onChange = props.get('onPageChange', () => {});
+  const onSelectionChange = props.get('onSelectionChange', () => {});
+  const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
+  const ref = props.get('ref');
+  const emit = props.get('emit');
+  const setCurrentPage = props.get('setCurrentPage');
+  const setPageSize = props.get('setPageSize');
+  const pageChange = useCallback(
+    _.wrap(onChange, (fn, currentPage, pageSize) => {
+      setCurrentPage(currentPage);
+      setPageSize(pageSize);
+      _.attempt(fn, currentPage, pageSize);
+      _.attempt(ref?.reload, { currentPage, pageSize });
+    }),
+    [ref, emit],
+  );
+
   return {
     pageProps: {
-      defaultCurrentPage,
-      defaultPageSize,
-      pageSizes,
+      ...pageProps,
       layout,
       total,
       onChange: pageChange,
+      onSizeChange: (pageSize) => {
+        setPageSize(pageSize);
+        setCurrentPage(1);
+        _.attempt(ref?.reload, { currentPage: 1, pageSize });
+      },
     },
-    [$deletePropsList]: deletePropsList,
     pagination,
     onSelectionChange: _.wrap(onSelectionChange, (fn, value) => {
       _.attempt(fn, { newSelection: value });
@@ -72,47 +145,20 @@ const formatResult = _.cond([
   pageLocal?: boolean;
 };
 
-const getOrder = _.cond([
-  [_.matches('descending'), _.constant('desc')],
-  [_.matches('desc'), _.constant('descending')],
-  [_.matches('ascending'), _.constant('asc')],
-  [_.matches('asc'), _.constant('ascending')],
-  [_.stubTrue, _.constant(undefined)],
-]);
 export function handleSort(props) {
-  const sort = props.get('field');
-  const order = props.get('order');
   const emit = props.get('emit');
   const ref = props.get('ref');
-  const [sortValue, setSortValue] = useState(sort);
-  const [orderValue, setOrderValue] = useState(order);
-  const sortRef = useRef(sort);
-  const orderRef = useRef(order);
-  useEffect(() => {
-    emit('sync:state', 'sort', sort);
-    emit('sync:state', 'order', order);
-  }, [sort, order]);
+  const setSort = props.get('setSort');
+  const setOrder = props.get('setOrder');
   const onSortChange = useCallback(
     ({ prop, order }) => {
-      setSortValue(prop);
-      setOrderValue(getOrder(order));
-
-      sortRef.value = getOrder(order) ? prop : undefined;
-      orderRef.value = getOrder(order);
-      emit('sync:state', 'sort', prop);
-      emit('sync:state', 'order', order);
-      _.attempt(ref?.reload, { sort: prop, order: getOrder(order) });
+      setSort(prop);
+      setOrder(order);
+      _.attempt(ref?.reload, { sort: prop, order });
     },
     [ref, emit],
   );
-  console.log(orderValue, 'orderValue', sortValue, 'sortValue');
   return {
-    defaultSort: {
-      prop: sort,
-      order: getOrder(order),
-    },
-    sort: sortRef.value,
-    order: orderRef.value,
     onSortChange,
   };
 }
@@ -121,17 +167,18 @@ handleSort.order = 3;
 // 如果是 list total 就是后端分页
 export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
-  const currentPage = props.get('currentPage') || 1;
-  const pageSize = props.get('pageSize') || 10;
-  const emit = props.get('emit');
+  const currentPage = props.get('currentPage');
+  const pageSize = props.get('pageSize');
+  const order = props.get('order');
+  const sort = props.get('sort');
   const pageProps = props.get('pageProps');
   const onBefore = props.get('onBefore', () => {});
   const onSuccess = props.get('onSuccess', () => {});
   const ref = props.get('ref');
-  const defaultParams = [{ currentPage, pageSize }];
+  const defaultParams = [{ currentPage, pageSize, order, sort }];
   const {
     data: resultData = { list: [], total: 0 },
-    run: reload,
+    run,
     loading,
   } = useRequestDataSource(dataSource, {
     onBefore: (params) => _.attempt(onBefore, params),
@@ -139,27 +186,13 @@ export function handleDataSource(props) {
     defaultParams,
     formatResult,
   });
+  const reload = (params) => {
+    run({ currentPage, pageSize, order, sort, ...params });
+  };
   const { list: data, total } = resultData as { list: any; total: number };
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
   const dataSourceResult = _.isEmpty(data) ? {} : { data };
-  // const sortChange = useCallback(
-  //   ({ prop, order }) => reload({
-  //       currentPage,
-  //       pageSize,
-  //       sort: getOrder(order) ? prop : undefined,
-  //       order: getOrder(order),
-  //     }),
-  //   [currentPage, pageSize, reload, sort, order],
-  // );
-  // const pageChange = useCallback(
-  //   _.wrap(onChange, (fn, currentPage, pageSize) => {
-  //     emit('sync:state', 'currentPage', currentPage);
-  //     emit('sync:state', 'pageSize', pageSize);
-  //     _.attempt(fn, currentPage, pageSize);
-  //     _.attempt(reload, { currentPage, pageSize });
-  //   }),
-  //   [reload, emit],
-  // );
+
   return {
     ref: selfRef,
     pageProps: _.assign(pageProps, { total }),
@@ -176,6 +209,7 @@ export function handlePaginationRender(props) {
   return {
     ref: Object.assign(ref, tableRef.value),
     render: (props, { attrs, slots }) => {
+      console.log(props.pageProps, 'props');
       return [
         <div data-nodepath={nodepath} style={props.style}>
           <Component

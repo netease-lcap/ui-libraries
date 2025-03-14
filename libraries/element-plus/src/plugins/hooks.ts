@@ -254,14 +254,14 @@ export function useControllableValue(props: any, options: Options = {}) {
   const [stateValue, setStateValue] = useState(propsValue ?? defaultValueValue ?? defaultValue);
   const valueChange = props.get(trigger, () => {});
 
-  const onChange = (value: any) => {
-    _.attempt(onChangeProps, value);
+  const onChange = (...args) => {
     if (isControlled) {
-      emit(trigger, value);
+      emit(trigger, ...args);
     } else {
-      setStateValue(value);
+      setStateValue(...args);
     }
-    _.attempt(valueChange, value);
+    _.attempt(valueChange, ...args);
+    _.attempt(onChangeProps, ...args);
   };
   const value = useMemo(() => (isControlled ? propsValue : stateValue), [stateValue, isControlled]);
 

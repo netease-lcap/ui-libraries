@@ -5,7 +5,7 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 import { watch } from 'vue';
 import { useRequest } from 'vue-hooks-plus';
-import { useMemo, useState, useRef, useEffect } from '@/plugins/hooks';
+import { useMemo, useState, useRef, useEffect, useCallback } from '@/plugins/hooks';
 import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
 
 export function useHandleMapField(filedInfo: {
@@ -50,31 +50,17 @@ const handleDataSouceToFn = _.cond([
 
 export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
   const [resultData, setResult] = useState({});
-  const stop = useRef(() => {});
+  // const stop = useRef(() => {});
 
   const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
   const result = useMemo(() => useRequest(dataSourceFn, options), [dataSourceFn]) as any;
-  // _.attempt(
-  //   _.once(() => watch(
-  //       () => result,
-  //       (value) => {
-  //         console.count('value');
-  //         return setResult({ value });
-  //       },
-  //       { immediate: true, deep: true },
-  //     )),
-  // );
-
-  stop.value();
-  stop.value = watch(
-    () => result,
-    (value) => {
-      console.count('value');
-      setResult({ value });
-    },
-    { immediate: true, deep: true },
-  );
-  // console.log(refreshDeps, 'refreshDeps');
+  useEffect(() => {
+    watch(
+      () => result,
+      (value) => setResult({ value }),
+      { immediate: true, deep: true },
+    );
+  }, []);
 
   const { data, run, loading } = resultData as {
     data: DataSourceArrayType;
