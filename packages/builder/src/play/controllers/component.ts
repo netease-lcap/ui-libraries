@@ -6,6 +6,7 @@ import { getComponentMetaInfos, removeComponentFiles } from '../../utils/lcap';
 import { executeCreateForSchema } from '../../creates/schema';
 import { getExtensionProjectMeta } from '../../utils/project';
 import updateAPIFile from '../../utils/api-update';
+import { addTypeMap } from '../transform';
 
 export const getComponentList = createAPIHandler('/api/component/list', 'GET', async (req) => {
   const list = getComponentMetaInfos(req.context.rootPath, true);
@@ -33,7 +34,7 @@ export const getComponentDetail = createAPIHandler('/api/component/info', 'GET',
     },
   });
 
-  return componentConfig;
+  return addTypeMap(componentConfig);
 });
 
 export const getComponentFileContent = createAPIHandler('/api/component/api/file', 'GET', async (req) => {

@@ -491,6 +491,8 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                 // type: generate((member. as babelTypes.TSTypeAnnotation).typeAnnotation).code,
               };
 
+              (method as any).tsType = `(${member.params.map((param) => generate(param).code).join(', ')}) => ${member.returnType && member.returnType.type === 'TSTypeAnnotation' && member.returnType.typeAnnotation ? generate(member.returnType.typeAnnotation).code : 'void'}`;
+
               decorator.expression.arguments.forEach((arg) => {
                 if (arg.type === 'ObjectExpression') Object.assign(method, evalOptions(arg));
               });
