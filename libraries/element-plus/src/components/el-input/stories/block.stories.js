@@ -31,8 +31,7 @@ export const Default = {
       };
     },
     template: `
-      <el-input v-model="value">
-      </el-input>
+      <el-input> </el-input>
     `,
   }),
 };
