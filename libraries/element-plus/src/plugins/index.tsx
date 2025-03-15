@@ -2,6 +2,8 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import { ref, Ref, watch, provide, inject, markRaw, computed, defineComponent } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
@@ -61,11 +63,15 @@ export function registerComponent<T>(Component, options) {
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
       const provideRef = ref({});
+      // const router = useRouter?.();
+      // const route = useRoute?.();
       const useStore = create((set) => ({
         state: {
           inject: injectRef,
           provide: {},
           ref: {},
+          // router,
+          // route,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
         props: {

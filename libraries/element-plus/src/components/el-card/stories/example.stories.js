@@ -19,7 +19,7 @@ export const Example1 = {
     },
     template: `
     <div>
-      <el-card style="max-width: 480px">
+      <el-card style="max-width: 480px" data-nodepath="123">
         <template #header>
           <div class="card-header">
             <span>卡片名称</span>

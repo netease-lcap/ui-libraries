@@ -16,12 +16,12 @@ export const Example1 = {
   name: '基础用法',
   render: () => ({
     setup() {
-      const value = ref(new Date());
+      const value = ref(new Date('2025-03-14'));
       return { value };
     },
     template: `
     <div>
-      <el-calendar v-model="value" />
+      <el-calendar data-nodepath="123" v-model="value" />
     </div>
     `,
   }),
@@ -32,12 +32,15 @@ export const Example2 = {
   name: '自定义内容',
   render: () => ({
     setup() {
-      const value = ref(new Date());
-      return { value };
+      const value = ref('2025-03-14');
+      const handleUpdateValue = (v) => {
+        console.log(v);
+      };
+      return { value, handleUpdateValue };
     },
     template: `
     <div>
-      <el-calendar v-model="value">
+      <el-calendar v-model="value" @update:modelValue="handleUpdateValue">
         <template #date-cell="{ data }">
           <p :class="data.isSelected ? 'is-selected' : ''">
             {{ data.day.split('-').slice(1).join('-') }}
@@ -69,4 +72,4 @@ export const Example3 = {
     </div>
     `,
   }),
-}; 
+};

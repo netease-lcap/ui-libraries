@@ -75,37 +75,37 @@ namespace nasl.ui {
     })
     inlinePrompt: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '激活图标',
-      description: '打开时所显示图标组件，会覆盖 active-text',
-      setter: { concept: 'InputSetter' },
-    })
-    activeIcon: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '激活图标',
+    //   description: '打开时所显示图标组件，会覆盖 active-text',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // activeIcon: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '非激活图标',
-      description: '关闭时所显示图标组件，会覆盖 inactive-text',
-      setter: { concept: 'InputSetter' },
-    })
-    inactiveIcon: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '非激活图标',
+    //   description: '关闭时所显示图标组件，会覆盖 inactive-text',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // inactiveIcon: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '激活文字',
-      description: '打开时的文字描述',
-      setter: { concept: 'InputSetter' },
-    })
-    activeText: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '激活文字',
+    //   description: '打开时的文字描述',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // activeText: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '非激活文字',
-      description: '关闭时的文字描述',
-      setter: { concept: 'InputSetter' },
-    })
-    inactiveText: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '非激活文字',
+    //   description: '关闭时的文字描述',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // inactiveText: nasl.core.String;
 
     @Prop({
       group: '数据属性',
@@ -137,17 +137,17 @@ namespace nasl.ui {
     })
     onChange: (value: nasl.core.Boolean | nasl.core.String | nasl.core.Integer) => any;
 
-    @Slot({
-      title: '激活操作',
-      description: '自定义激活操作',
-    })
-    slotActiveAction: any;
+    // @Slot({
+    //   title: '激活操作',
+    //   description: '自定义激活操作',
+    // })
+    // slotActiveAction: any;
 
-    @Slot({
-      title: '非激活操作',
-      description: '自定义非激活操作',
-    })
-    slotInactiveAction: any;
+    // @Slot({
+    //   title: '非激活操作',
+    //   description: '自定义非激活操作',
+    // })
+    // slotInactiveAction: any;
 
     // @Method({
     //   title: '聚焦',

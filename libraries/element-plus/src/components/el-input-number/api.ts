@@ -73,11 +73,7 @@ namespace nasl.ui {
       description: '计数器尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '大' },
-          { title: '小' },
-        ],
+        options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
     size: '' | 'default' | 'large' | 'small';
@@ -112,10 +108,7 @@ namespace nasl.ui {
       description: '控制按钮位置',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '右侧' },
-        ],
+        options: [{ title: '默认' }, { title: '右侧' }],
       },
     })
     controlsPosition: '' | 'right';
@@ -136,13 +129,13 @@ namespace nasl.ui {
     })
     placeholder: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '清空值',
-      description: '输入框被清空时显示的值',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    valueOnClear: nasl.core.Decimal | null;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '清空值',
+    //   description: '输入框被清空时显示的值',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // valueOnClear: nasl.core.Decimal | null;
 
     @Prop({
       group: '主要属性',
@@ -170,4 +163,4 @@ namespace nasl.ui {
     })
     onFocus: (event: any) => any;
   }
-} 
+}

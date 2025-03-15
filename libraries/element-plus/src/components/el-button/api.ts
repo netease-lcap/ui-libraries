@@ -101,13 +101,13 @@ namespace nasl.ui {
     })
     loading: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '加载图标',
-      description: '自定义加载中图标组件',
-      setter: { concept: 'IconSetter' },
-    })
-    loadingIcon: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '加载图标',
+    //   description: '自定义加载中图标组件',
+    //   setter: { concept: 'IconSetter' },
+    // })
+    // loadingIcon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -117,13 +117,13 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '图标',
-      description: '图标组件',
-      setter: { concept: 'IconSetter' },
-    })
-    icon: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '图标',
+    //   description: '图标组件',
+    //   setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+    // })
+    // icon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -168,13 +168,13 @@ namespace nasl.ui {
     })
     dark: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '自定义标签',
-      description: '自定义元素标签',
-      setter: { concept: 'InputSetter' },
-    })
-    tag: nasl.core.String = 'button';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '自定义标签',
+    //   description: '自定义元素标签',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // tag: nasl.core.String = 'button';
 
     @Event({
       title: '点击时',

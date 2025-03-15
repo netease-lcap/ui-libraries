@@ -54,6 +54,7 @@ export function handlePageState(props) {
     .concat(['currentPage', 'pageSize', 'pageSizes', 'setCurrentPage', 'setPageSize', 'setPageSizes']);
   const [currentPage, setCurrentPage, currentPageProps] = useControllableValue(props, {
     defaultValuePropName: 'defaultCurrentPage',
+    defaultValue: 1,
     valuePropName: 'currentPage',
     onChange: (currentPage) => {
       emit('sync:state', 'currentPage', currentPage);
@@ -61,6 +62,7 @@ export function handlePageState(props) {
   });
   const [pageSize, setPageSize, pageSizeProps] = useControllableValue(props, {
     defaultValuePropName: 'defaultPageSize',
+    defaultValue: 10,
     valuePropName: 'pageSize',
     onChange: (pageSize) => {
       emit('sync:state', 'pageSize', pageSize);
@@ -176,6 +178,7 @@ export function handleDataSource(props) {
   const onSuccess = props.get('onSuccess', () => {});
   const ref = props.get('ref');
   const defaultParams = [{ currentPage, pageSize, order, sort }];
+  console.log(defaultParams, 'defaultParams');
   const {
     data: resultData = { list: [], total: 0 },
     run,
@@ -209,7 +212,6 @@ export function handlePaginationRender(props) {
   return {
     ref: Object.assign(ref, tableRef.value),
     render: (props, { attrs, slots }) => {
-      console.log(props.pageProps, 'props');
       return [
         <div data-nodepath={nodepath} style={props.style}>
           <Component

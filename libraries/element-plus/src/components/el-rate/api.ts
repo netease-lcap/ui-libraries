@@ -100,29 +100,29 @@ namespace nasl.ui {
     // })
     // icons: nasl.collection.List<nasl.core.String> = ['star-filled', 'star-filled', 'star-filled'];
 
-    @Prop({
-      group: '主要属性',
-      title: '未选中图标',
-      description: '未选中 icon 的类名',
-      setter: { concept: 'IconSetter' },
-    })
-    voidIcon: nasl.core.String = 'star';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '未选中图标',
+    //   description: '未选中 icon 的类名',
+    //   setter: { concept: 'IconSetter' },
+    // })
+    // voidIcon: nasl.core.String = 'star';
 
-    @Prop({
-      group: '主要属性',
-      title: '只读未选中图标',
-      description: '只读时未选中 icon 的类名',
-      setter: { concept: 'IconSetter' },
-    })
-    disabledVoidIcon: nasl.core.String = 'star';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '只读未选中图标',
+    //   description: '只读时未选中 icon 的类名',
+    //   setter: { concept: 'IconSetter' },
+    // })
+    // disabledVoidIcon: nasl.core.String = 'star';
 
-    @Prop({
-      group: '主要属性',
-      title: '显示辅助文字',
-      description: '是否显示辅助文字，若为真，则会从 texts 数组中选取当前分数对应的文字内容',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showText: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '显示辅助文字',
+    //   description: '是否显示辅助文字，若为真，则会从 texts 数组中选取当前分数对应的文字内容',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // showText: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -140,21 +140,21 @@ namespace nasl.ui {
     })
     showScore: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '辅助文字颜色',
-      description: '辅助文字的颜色',
-      setter: { concept: 'InputSetter' },
-    })
-    textColor: nasl.core.String = '#1F2D3D';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '辅助文字颜色',
+    //   description: '辅助文字的颜色',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // textColor: nasl.core.String = '#1F2D3D';
 
-    @Prop({
-      group: '主要属性',
-      title: '分数模板',
-      description: '分数显示模板',
-      setter: { concept: 'InputSetter' },
-    })
-    scoreTemplate: nasl.core.String = '{value}';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '分数模板',
+    //   description: '分数显示模板',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // scoreTemplate: nasl.core.String = '{value}';
 
     @Prop({
       group: '主要属性',

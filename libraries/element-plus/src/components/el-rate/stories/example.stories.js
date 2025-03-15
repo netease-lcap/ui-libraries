@@ -90,4 +90,4 @@ export const Example5 = {
     </div>
     `,
   }),
-}; 
+};

@@ -20,31 +20,6 @@ namespace nasl.ui {
   }
 
   export class ElCardOptions extends ViewComponentOptions {
-
-    @Prop({
-      group: '主要属性',
-      title: '页脚',
-      description: '卡片的页脚，也可通过 slot#footer 传入',
-      setter: { concept: 'InputSetter' },
-    })
-    footer: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '内容样式',
-      description: '卡片主体的 CSS 样式',
-      setter: { concept: 'InputSetter' },
-    })
-    bodyStyle: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '内容类名',
-      description: '卡片主体的自定义类名',
-      setter: { concept: 'InputSetter' },
-    })
-    bodyClass: nasl.core.String;
-
     @Prop({
       group: '主要属性',
       title: '阴影显示时机',

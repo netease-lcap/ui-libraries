@@ -89,7 +89,7 @@ export const Example2 = {
       };
       const handleClick = async (tab) => {
         // console.log('====', formData, tab);
-        console.log(tab, 'tab', tab.resetFields());
+        console.log(tab, 'tab', tab.resetForm());
         // tab.validate().then(
         //   (res) => {
         //     console.log(res, 'res');
@@ -119,11 +119,15 @@ export const Example2 = {
           required: true,
         },
       ];
+      const inputTag = ref([]);
+      const switchValue = ref(false);
       return {
         formData,
+        switchValue,
         select,
         activeName,
         inputName,
+        inputTag,
         list,
         handleClick,
         log,
@@ -135,9 +139,14 @@ export const Example2 = {
     <div>
     <el-form  ref="formRef">
 
-
-    <el-form-input :rules="rules"  label="input21" v-model="inputName" data-nodepath="input21" />
-
+    <el-form-input :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-input-number :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-cascader :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-input-tag :rules="rules"   label="input21"  data-nodepath="input21" />
+    <el-form-rate :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-slider :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-switch :rules="rules"  v-model="switchValue" label="input21" data-nodepath="switch" />
+    <el-form-tree-select :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <a @click="handleClick(formRef)" >Submit</a>
     <a @click="handleClick(formRef)" >Submit2</a>
     <el-form-checkbox-group label="ww" :isRequired="true" :dataSource="[{},{},{}]"></el-form-checkox-group>
@@ -169,7 +178,7 @@ export const Example3 = {
         // formRef.validate().then((res) => {
         //   console.log(res, 'res');
         // });
-        const result = await formRef.validate();
+        const result = await formRef.resetForm();
         console.log(result, 'result');
         // formRef.value.validate().then((res) => {
         //   console.log(res, 'res');

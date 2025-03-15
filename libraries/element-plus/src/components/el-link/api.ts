@@ -56,41 +56,88 @@ namespace nasl.ui {
     disabled: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '交互属性',
       title: '链接地址',
-      description: '原生 href 属性',
-      setter: { concept: 'InputSetter' },
     })
-    href: nasl.core.String;
+    hrefAndTo: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '打开方式',
-      description: '原生 target 属性',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '当前窗口' },
-          { title: '新窗口' },
-          { title: '父窗口' },
-          { title: '顶层窗口' },
-        ],
-      },
-    })
-    target: '_self' | '_blank' | '_parent' | '_top' = '_self';
 
-    @Prop({
-      group: '主要属性',
-      title: '图标',
-      description: '图标组件',
-      setter: { concept: 'IconSetter' },
-    })
-    icon: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '打开方式',
+    //   description: '原生 target 属性',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [
+    //       { title: '当前窗口' },
+    //       { title: '新窗口' },
+    //       { title: '父窗口' },
+    //       { title: '顶层窗口' },
+    //     ],
+    //   },
+    // })
+    // target: '_self' | '_blank' | '_parent' | '_top' = '_self';
 
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '图标',
+    //   description: '图标组件',
+    //   setter: { concept: 'IconSetter' },
+    // })
+    // icon: nasl.core.String;
     @Event({
-      title: '点击时',
-      description: '点击链接时触发',
+      title: '点击',
+      description: '在元素上按下并释放任意鼠标按钮时触发。',
     })
     onClick: (event: any) => any;
+
+    @Event({
+      title: '双击',
+      description: '在元素上双击鼠标按钮时触发。',
+    })
+    onDblclick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '右键点击',
+      description: '在右键菜单显示前触发。',
+    })
+    onContextmenu: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标按下',
+      description: '在元素上按下任意鼠标按钮时触发。',
+    })
+    onMousedown: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标释放',
+      description: '在元素上释放任意鼠标按钮时触发。',
+    })
+    onMouseup: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移入',
+      description: '鼠标移入元素时触发。',
+    })
+    onMouseenter: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移出',
+      description: '鼠标移出元素时触发。',
+    })
+    onMouseleave: (event: MouseEvent) => any;
+
+    @Event({
+      title: '聚焦时',
+      description: '聚焦时触发',
+    })
+    onFocus: (event: FocusEvent) => void;
+
+    @Event({
+      title: '失焦时',
+      description: '失焦时触发',
+    })
+    onBlur: (event: FocusEvent) => void;
+
   }
 } 

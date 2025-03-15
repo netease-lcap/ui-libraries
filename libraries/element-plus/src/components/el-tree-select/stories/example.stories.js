@@ -61,20 +61,91 @@ export const Example1 = {
           ],
         },
       ];
+      const dataSource = () => new Promise((res) => {
+          setTimeout(() => {
+            res([
+              {
+                entity1: {
+                  id: 0,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项5',
+                  fid: 1,
+                },
+              },
+              {
+                entity1: {
+                  id: 1,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项6',
+                  fid: 2,
+                },
+              },
+              {
+                entity1: {
+                  id: 3,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项3',
+                  fid: 0,
+                },
+              },
+              {
+                entity1: {
+                  id: 7,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项2',
+                  fid: 1,
+                },
+              },
+              {
+                entity1: {
+                  id: 8,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项1.1',
+                  fid: 2,
+                },
+              },
+              {
+                entity1: {
+                  id: 9,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项4',
+                  fid: 0,
+                },
+              },
+            ]);
+          }, 1000);
+        });
       const defaultProps = {
         children: 'children',
         label: 'label',
         value: 'value',
       };
-      return { value, data, defaultProps };
+      return { value, data, defaultProps, dataSource };
     },
     template: `
     <div>
       <el-tree-select
-        v-model="value"
-        :data="data"
-        :props="defaultProps"
-        :render-after-expand="false"
+      :multiple="true" :placeholder="12" valueField="entity1.id"
+        textField="entity1.property1"
+        parentField="entity1.fid" v-model:value="activeName" :dataSource="dataSource"
         node-key="value"
         placeholder="请选择"
         style="width: 240px"
@@ -231,4 +302,4 @@ export const Example3 = {
     </div>
     `,
   }),
-}; 
+};

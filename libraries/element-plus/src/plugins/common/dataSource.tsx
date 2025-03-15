@@ -62,11 +62,12 @@ export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
     );
   }, []);
 
-  const { data, run, loading } = resultData as {
-    data: DataSourceArrayType;
-    run: (...args: any[]) => void;
-    loading: boolean;
-  };
+  const { data, run, loading } = resultData
+    ?? ({} as {
+      data?: DataSourceArrayType;
+      run?: (...args: any[]) => void;
+      loading?: boolean;
+    });
   return { data, run, loading };
 }
 

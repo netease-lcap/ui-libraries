@@ -11,7 +11,7 @@ export default {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'padded',
   },
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  // More on argTypes: https://storybook.js.org/dos/api/argtypes
   argTypes: {},
 };
 
