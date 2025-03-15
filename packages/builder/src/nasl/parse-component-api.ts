@@ -324,7 +324,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
               // 枚举类型生成选项
               if (['EnumSelectSetter', 'CapsulesSetter'].includes(prop?.setter?.concept)) {
                 // 因为converter里有'join:|'，所有这里的分割前后需要空格
-                const types = prop?.tsType.split(' | ').map((type) => {
+                const types = prop?.tsType.replace(/\(|\)|\[\]|Array\<|\>/g, '').split(' | ').map((type) => {
                   try {
                     return eval(type.trim());
                   } catch (e) {
