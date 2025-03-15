@@ -141,7 +141,14 @@ const TEMP_IDEUSAGE_VAR_NAME = '_TEMP_VAR';
 
 export function getAST(obj: any, stringify = true) {
   const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${stringify ? JSON.stringify(obj) : obj};`;
-  const tempAST = babel.parseSync(code);
+  const tempAST = babel.parseSync(code, {
+    filename: 'result.ts',
+    presets: [require('@babel/preset-typescript')],
+    plugins: [[require('@babel/plugin-proposal-decorators'), { legacy: true }]],
+    rootMode: 'root',
+    root: __dirname,
+  });
+
   let ast;
   if (tempAST) {
     traverse(tempAST, {

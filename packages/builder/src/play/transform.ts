@@ -5,7 +5,9 @@ import type {
   EventDeclaration,
   SlotDeclaration,
   LogicDeclaration,
+  DefaultValue,
 } from '@nasl/types/nasl.ui.ast';
+import { isNil } from 'lodash';
 import * as babelTypes from '@babel/types';
 import { getTypeAST, getNodeCode } from '../utils/babel-utils';
 // eslint-disable-next-line no-use-before-define
@@ -266,6 +268,27 @@ function resolveSlotTsType(slot: SlotDeclaration) {
   return transformTsType2NType(typeAST.parameters[0].typeAnnotation.typeAnnotation);
 }
 
+export function transformDefaultValue(defaultValue?: DefaultValue): string {
+  if (!defaultValue?.expression) {
+    return '';
+  }
+
+  switch (defaultValue.expression?.concept) {
+    case 'NullLiteral':
+      return 'null';
+    case 'BooleanLiteral':
+      return defaultValue.expression.value;
+    case 'StringLiteral':
+      return `'${defaultValue.expression.value}'`;
+    case 'NumericLiteral':
+      return defaultValue.expression.value;
+    case 'NewList':
+      return `[${defaultValue.expression.items.map((item) => transformDefaultValue({ expression: item } as DefaultValue)).filter((v) => !isNil(v)).join(', ')}]`;
+    default:
+      return '';
+  }
+}
+
 function resolveMethodTsType(method: LogicDeclaration & { tsType: string }): {
   params: NFunctionParam[],
   returnType: NType | 'void',
@@ -303,7 +326,7 @@ function resolveMethodTsType(method: LogicDeclaration & { tsType: string }): {
         name: param.name,
         type: paramType ? transformTsType2NType(paramType) : { type: 'any' },
         description: param.description,
-        defaultValue: param.defaultValue,
+        defaultValue: transformDefaultValue(param.defaultValue),
       } as NFunctionParam;
     }),
     returnType: (

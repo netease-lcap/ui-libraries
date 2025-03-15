@@ -1,6 +1,7 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import { LcapBuildOptions } from 'src/build/types';
 import * as URL from 'url';
+import { LcapBuildOptions } from '../build/types';
+import logger from '../utils/logger';
 
 type Method = 'GET' | 'OPTIONS' | 'POST' | 'PUT' | 'DELETE';
 export interface Request {
@@ -84,6 +85,7 @@ export const createAPIMiddleware = (routes: APIRouterOptions[], context: LcapBui
         }),
       );
     } catch (e: any) {
+      logger.error(e);
       res.write(
         JSON.stringify({
           code: e.code || 500,

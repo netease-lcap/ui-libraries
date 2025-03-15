@@ -530,25 +530,27 @@ export function updateProp(ast: bt.File, options: APIUpdatePropOptions) {
   }
 
   if (tsType) {
-    const typeAST = getTypeAST(tsType);
-    if (options.module === 'method' && bt.isClassMethod(propAST) && typeAST.type === 'TSFunctionType') {
-      propAST.params = typeAST.parameters as any;
-      if (typeAST.typeAnnotation) {
-        propAST.returnType = typeAST.typeAnnotation;
-        propAST.body.body = [
-          {
-            type: 'ReturnStatement',
-            argument: {
-              type: 'TSAsExpression',
-              expression: {
-                type: 'NullLiteral',
-              },
-              typeAnnotation: {
-                type: 'TSAnyKeyword',
+    const typeAST = options.module === 'method' ? getAST(tsType, false) as bt.FunctionExpression : getTypeAST(tsType);
+    if (options.module === 'method' && bt.isClassMethod(propAST) && typeAST.type === 'FunctionExpression') {
+      propAST.params = typeAST.params;
+      if (typeAST.returnType) {
+        propAST.returnType = typeAST.returnType;
+        propAST.body.body = propAST.returnType.type === 'TSTypeAnnotation'
+          && propAST.returnType.typeAnnotation.type === 'TSVoidKeyword'
+          ? [] : [
+            {
+              type: 'ReturnStatement',
+              argument: {
+                type: 'TSAsExpression',
+                expression: {
+                  type: 'NullLiteral',
+                },
+                typeAnnotation: {
+                  type: 'TSAnyKeyword',
+                },
               },
             },
-          },
-        ];
+          ];
       } else {
         propAST.returnType = {
           type: 'TSTypeAnnotation',
