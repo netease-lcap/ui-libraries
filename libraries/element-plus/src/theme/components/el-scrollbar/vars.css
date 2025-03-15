@@ -1,0 +1,28 @@
+/**
+ * @component el-scrollbar
+ */
+.el-scrollbar {
+  /**
+   * @desc 滚动条透明度
+   * @type input
+   */
+  --el-scrollbar-opacity: 0.3;
+
+  /**
+   * @desc 滚动条背景颜色
+   * @type color
+   */
+  --el-scrollbar-bg-color: var(--el-text-color-secondary);
+
+  /**
+   * @desc 滚动条悬停时的透明度
+   * @type input
+   */
+  --el-scrollbar-hover-opacity: 0.5;
+
+  /**
+   * @desc 滚动条悬停时的背景颜色
+   * @type color
+   */
+  --el-scrollbar-hover-bg-color: var(--el-text-color-secondary);
+}

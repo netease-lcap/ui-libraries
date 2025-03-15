@@ -9,52 +9,62 @@
    * @type color
    */
   --el-cascader-menu-text-color: var(--el-text-color-regular);
+
   /**
    * @desc 菜单选中文字颜色
    * @type color
    */
   --el-cascader-menu-selected-text-color: var(--el-color-primary);
+
   /**
    * @desc 菜单背景颜色
    * @type color
    * @hidden
    */
   --el-cascader-menu-fill: var(--el-bg-color-overlay);
+
   /**
    * @desc 菜单字体大小
    * @type size
    */
   --el-cascader-menu-font-size: var(--el-font-size-base);
+
   /**
    * @desc 菜单圆角
    * @type size
    */
   --el-cascader-menu-radius: var(--el-border-radius-base);
+
   /**
-   * @title 菜单边框
+   * @desc 菜单边框
    * @type input
    */
   --el-cascader-menu-border: solid 1px var(--el-border-color-light);
+
   /**
    * @desc 菜单阴影
    * @type input
    */
   --el-cascader-menu-shadow: var(--el-box-shadow-light);
+
   /**
    * @desc 节点悬浮背景颜色
    * @type color
    */
   --el-cascader-node-background-hover: var(--el-fill-color-light);
+
   /**
    * @desc 节点禁用文字颜色
    * @type color
    */
   --el-cascader-node-color-disabled: var(--el-text-color-placeholder);
+
   /**
    * @desc 空节点文字颜色
    * @type color
    */
   --el-cascader-color-empty: var(--el-text-color-placeholder);
+
   /**
    * @desc 标签背景颜色
    * @type color
