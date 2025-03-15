@@ -1,8 +1,9 @@
 import _ from 'lodash';
+import { useControllableValue } from '@/plugins/hooks';
 // import React from 'react';
 // import { RouterContext } from '@/components/Router';
 
- function useHandleLink() {
+function useHandleLink() {
   // const { useNavigate } = React.useContext(RouterContext);
   // const navigate = useNavigate?.();
   return async (targetUrl, target) => {
@@ -22,3 +23,16 @@ import _ from 'lodash';
     }
   };
 }
+
+export function handleControllableValue(props: any) {
+  const ref = props.get('ref');
+  const [, setValue, valueProps] = useControllableValue(props);
+  return {
+    ...valueProps,
+    ref: Object.assign(ref, {
+      resetField: () => setValue(undefined),
+    }),
+  };
+}
+
+handleControllableValue.order = 2;

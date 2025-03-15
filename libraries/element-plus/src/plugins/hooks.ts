@@ -14,7 +14,7 @@ interface EffectHook {
 }
 
 interface Options {
-  defaultValue?: string;
+  defaultValue?: string | number | boolean;
   defaultValuePropName?: string;
   valuePropName?: string;
   trigger?: string;
@@ -93,16 +93,12 @@ export function useState(initialstate?) {
     hook = currentFiber.workInProgressState.next;
     currentFiber.workInProgressState = currentFiber.workInProgressState.next;
   }
-  const state = hook?.isSetValue ? currentFiber.useStore((store) => store.state[hook?.storeKey]) : { value: initialstate };
+  const state = hook?.isSetValue ? currentFiber.useStore((store) => store.state[hook?.storeKey]) : initialstate;
   const localSetValue = (value) => {
     hook.isSetValue = true;
     const state = currentFiber.useStore((store) => store.state[hook?.storeKey]);
     if (_.isEqual(value, state.value)) {
       return;
-    }
-    //  TODO:表单临时hack用了 后期优化一下
-    if (_.isFunction(value)) {
-      value = value(state);
     }
     currentFiber.updateQueen.add({ [hook.storeKey]: value });
     _.defer(() => {
@@ -113,7 +109,8 @@ export function useState(initialstate?) {
       }
     }, currentFiber.updateQueen);
   };
-  return [state.value, localSetValue];
+  const value = Object.prototype.hasOwnProperty.call(state, 'value') ? state.value : state;
+  return [value, localSetValue];
 }
 export function useRef(initialstate) {
   const currentFiber = fiberNode.getCurrentFiber();
@@ -154,15 +151,10 @@ export function useEffect(callBack, dep) {
       currentFiber.workInProgressEffect.next = hook;
     }
     currentFiber.workInProgressEffect = hook;
-    // if (dep.length === 0) {
     onMounted(() => {
       const result = callBack(...dep);
       hook.result = _.isFunction(result) ? result : () => {};
     });
-    // } else {
-    //   const result = callBack(...dep);
-    //   hook.result = _.isFunction(result) ? result : () => {};
-    // }
     onUnmounted(() => {
       _.attempt(hook.result);
     });
@@ -252,7 +244,8 @@ export function useControllableValue(props: any, options: Options = {}) {
   const propsValue = props.get(valuePropName);
   const defaultValueValue = props.get(defaultValuePropName);
   const [stateValue, setStateValue] = useState(propsValue ?? defaultValueValue ?? defaultValue);
-  const valueChange = props.get(trigger, () => {});
+  const triggerProps = props.get(trigger, () => {});
+  const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
 
   const onChange = (...args) => {
     if (isControlled) {
@@ -260,7 +253,7 @@ export function useControllableValue(props: any, options: Options = {}) {
     } else {
       setStateValue(...args);
     }
-    _.attempt(valueChange, ...args);
+    _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);
   };
   const value = useMemo(() => (isControlled ? propsValue : stateValue), [stateValue, isControlled]);

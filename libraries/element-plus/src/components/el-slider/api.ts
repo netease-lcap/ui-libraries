@@ -144,13 +144,13 @@ namespace nasl.ui {
     })
     debounce: number = 300;
 
-    @Prop({
-      group: '主要属性',
-      title: '提示框类名',
-      description: '提示框的自定义类名',
-      setter: { concept: 'InputSetter' },
-    })
-    tooltipClass: string = '';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '提示框类名',
+    //   description: '提示框的自定义类名',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // tooltipClass: string = '';
 
     @Prop({
       group: '主要属性',

@@ -26,7 +26,7 @@ namespace nasl.ui {
       description: '绑定值',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.Date;
+    value: nasl.core.Date | nasl.core.String;
 
     @Prop({
       group: '数据属性',
@@ -34,7 +34,7 @@ namespace nasl.ui {
       description: '时间范围，包括开始时间与结束时间。开始时间必须是周起始日，结束时间必须是周结束日，且时间跨度不能超过两个月',
       setter: { concept: 'InputSetter' },
     })
-    range: nasl.collection.List<nasl.core.Date>;
+    range: nasl.collection.List<nasl.core.Date | nasl.core.String>;
 
     @Slot({
       title: '日期单元格',
@@ -45,13 +45,13 @@ namespace nasl.ui {
       isSelected: nasl.core.Boolean;
       day: nasl.core.String;
       date: nasl.core.Date;
-    }) => any;
+    }) => Array<ViewComponent>;
 
     @Slot({
       title: '头部',
       description: '自定义日历头部内容',
     })
-    slotHeader: (scope: { date: nasl.core.Date }) => any;
+    slotHeader: (scope: { date: nasl.core.Date }) => Array<ViewComponent>;
 
     // @Method({
     //   title: '选择日期',

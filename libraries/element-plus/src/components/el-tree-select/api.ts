@@ -9,6 +9,14 @@ namespace nasl.ui {
         click: true,
       },
     },
+    extends: [
+      {
+        name: 'ElSelect',
+      },
+      {
+        name: 'ElTree',
+      },
+    ],
   })
   @Component({
     title: '树形选择',
@@ -16,13 +24,19 @@ namespace nasl.ui {
     description: '树形选择器，可以对树形结构数据进行选择',
     group: 'Selector',
   })
-  export class ElTreeSelect extends ViewComponent {
-    constructor(options?: Partial<ElTreeSelectOptions>) {
+  export class ElTreeSelect<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C extends nasl.core.Boolean,
+  > extends ViewComponent {
+    constructor(options?: Partial<ElSelectOptions<T, V, P, M, C> & ElTreeOptions<T, V, M>>) {
       super();
     }
   }
 
-  export class ElTreeSelectOptions extends ViewComponentOptions {
+  export class ElTreeSelectOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C extends nasl.core.Boolean> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '绑定值',
@@ -85,11 +99,7 @@ namespace nasl.ui {
       description: '输入框尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '大' },
-          { title: '默认' },
-          { title: '小' },
-        ],
+        options: [{ title: '大' }, { title: '默认' }, { title: '小' }],
       },
     })
     size: 'large' | 'default' | 'small';
@@ -210,4 +220,4 @@ namespace nasl.ui {
     })
     onNodeCollapse: (data: any, node: any, component: any) => any;
   }
-} 
+}

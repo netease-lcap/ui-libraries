@@ -14,3 +14,9 @@ export function handleTextToSlots(props) {
     [$deletePropsList]: deletePropsList,
   };
 }
+
+function handleHrefToRouter(props) {
+  const destination = props.get('destination');
+
+  return {};
+}

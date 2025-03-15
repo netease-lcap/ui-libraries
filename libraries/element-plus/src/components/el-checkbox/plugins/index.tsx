@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useState, useMemo } from '@/plugins/hooks';
+import { useMemo, useControllableValue } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
@@ -21,9 +21,7 @@ export function handleDataSource(props) {
     () => (_.isNil(dataConfig)
         ? {}
         : {
-            default: () => _.map(dataSource, (item) => (
-              <el-checkbox {...item}>{slots.item ? slots.item({ item }) : item.label}</el-checkbox>
-              )),
+            default: () => _.map(dataSource, (item) => <el-checkbox {...item}>{slots.item ? slots.item({ item }) : item.label}</el-checkbox>),
           }),
     [dataSource, slots, dataConfig],
   );
@@ -36,18 +34,17 @@ export function handleDataSource(props) {
     slots: _.assign(slots, dataSourceSlots),
   };
 }
-export function handleValue(props) {
-  const [value, setValue] = useState([]);
-  const propsValue = _.isEmpty(props.get('modelValue')) ? value : props.get('modelValue');
-  const onChangeProps = props.get('onChange', () => {});
-  const emit = props.get('emit');
+
+export function handleControllableValue(props: any) {
+  const ref = props.get('ref');
+  const [, setValue, valueProps] = useControllableValue(props);
   return {
-    onChange: _.wrap(onChangeProps, (fn, value) => {
-      _.attempt(fn, value);
-      emit('update:modelValue', value);
-      setValue(value);
-    }),
-    modelValue: propsValue,
+    ...valueProps,
     formTagName: 'el-form-checkbox-group',
+    ref: Object.assign(ref, {
+      resetField: () => {
+        setValue([]);
+      },
+    }),
   };
 }

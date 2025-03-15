@@ -42,7 +42,7 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '主要' },
+          { title: '默认' },
           { title: '成功' },
           { title: '信息' },
           { title: '警告' },
@@ -50,7 +50,7 @@ namespace nasl.ui {
         ],
       },
     })
-    tagType: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'info';
+    tagType: '' | 'success' | 'info' | 'warning' | 'danger' = 'info';
 
     @Prop({
       group: '主要属性',

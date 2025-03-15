@@ -63,7 +63,15 @@ export const Example2 = {
       const list = async () => {
         return new Promise((res) => {
           setTimeout(() => {
-            res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
+            const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+
+            const value = ref();
+            const options = Array.from({ length: 1000 }).map((_, idx) => ({
+              value: `Option ${idx + 1}`,
+              label: `${initials[idx % 10]}${idx}`,
+            }));
+            res(options);
+            // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
           }, 3000);
         });
       };
@@ -90,7 +98,7 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-select ref="select" v-model="activeName"  clearable :dataSource="list" multiple >
+    <el-select ref="select" :virtualize="true" v-model="activeName"  clearable :dataSource="list" multiple >
      <el-option label="item.value" :value="item.value" :name="name" / >
 
     </el-select>

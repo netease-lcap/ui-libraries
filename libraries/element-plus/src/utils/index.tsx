@@ -7,6 +7,9 @@ function filterUnderfinedValue(object: Record<string, string>) {
 const selfAttempt = _.attempt;
 const attempt = _.wrap(selfAttempt, (fn, ...arg: [any, any]) => {
   const result = fn(...arg);
+  if (_.isArray(arg[0])) {
+    return arg[0].map((item) => fn(item, ...arg.slice(1)));
+  }
   if (_.isError(result)) console.log(result);
   return result;
 });
