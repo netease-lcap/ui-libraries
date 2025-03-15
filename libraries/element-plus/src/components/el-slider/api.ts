@@ -20,14 +20,14 @@ namespace nasl.ui {
 
   export class ElSliderOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '绑定值',
       description: '滑块绑定值',
     })
     modelValue: number | number[] = 0;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '最小值',
       description: '滑块可设置的最小值',
       setter: { concept: 'NumberInputSetter' },
@@ -35,7 +35,7 @@ namespace nasl.ui {
     min: number = 0;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '最大值',
       description: '滑块可设置的最大值',
       setter: { concept: 'NumberInputSetter' },
@@ -51,7 +51,7 @@ namespace nasl.ui {
     disabled: boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '步长',
       description: '滑块步长',
       setter: { concept: 'NumberInputSetter' },
@@ -75,7 +75,7 @@ namespace nasl.ui {
     showInputControls: boolean = true;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '尺寸',
       description: '滑块的尺寸，垂直模式下无效',
       setter: {
@@ -86,7 +86,7 @@ namespace nasl.ui {
     size: '' | 'default' | 'large' | 'small' = 'default';
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '输入框尺寸',
       description: '输入框的尺寸，如未设置则继承 size 属性的值',
       setter: {
@@ -97,7 +97,7 @@ namespace nasl.ui {
     inputSize: '' | 'default' | 'large' | 'small' = 'default';
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '显示间断点',
       description: '是否显示间断点',
       setter: { concept: 'SwitchSetter' },
@@ -129,7 +129,7 @@ namespace nasl.ui {
     vertical: boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '高度',
       description: '滑块高度，垂直模式时必填',
       setter: { concept: 'InputSetter' },
@@ -183,4 +183,30 @@ namespace nasl.ui {
     })
     onInput: (value: number | number[]) => void;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'ElSlider',
+      },
+      {
+        name: 'ElFormItemPro',
+      },
+    ],
+  })
+  @Component({
+    title: '表单滑块',
+    description: '表单滑块',
+    group: 'Form',
+  })
+  export class ElFormSlider extends ViewComponent {
+    constructor(options?: Partial<ElFormSliderOptions & ElFormItemProOptions & Omit<ElSliderOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormSliderOptions extends ViewComponentOptions {}
 }
