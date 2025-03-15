@@ -63,7 +63,7 @@ namespace nasl.ui {
   > extends ViewComponent {
     constructor(
       options?: Partial<
-      ElFormTreeSelectOptions &
+      ElFormTreeSelectOptions<T, V, P, M, C> &
           ElFormItemProOptions &
           Omit<ElSelectOptions<T, V, P, M, C> & ElTreeOptions<T, V, M>, keyof ElFormItemProOptions>
       >,
@@ -72,5 +72,11 @@ namespace nasl.ui {
     }
   }
 
-  export class ElFormTreeSelectOptions extends ViewComponentOptions {}
+  export class ElFormTreeSelectOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C extends nasl.core.Boolean,
+  > extends ViewComponentOptions {}
 }

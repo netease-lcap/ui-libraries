@@ -178,7 +178,6 @@ export function handleDataSource(props) {
   const onSuccess = props.get('onSuccess', () => {});
   const ref = props.get('ref');
   const defaultParams = [{ currentPage, pageSize, order, sort }];
-  console.log(defaultParams, 'defaultParams');
   const {
     data: resultData = { list: [], total: 0 },
     run,
