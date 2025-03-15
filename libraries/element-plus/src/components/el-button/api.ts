@@ -24,7 +24,7 @@ namespace nasl.ui {
 
   export class ElButtonOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '尺寸',
       description: '按钮尺寸',
       setter: {
@@ -62,7 +62,7 @@ namespace nasl.ui {
     text: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '背景色',
       description: '文字按钮是否显示背景色',
       setter: { concept: 'SwitchSetter' },
@@ -78,7 +78,7 @@ namespace nasl.ui {
     link: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '圆角按钮',
       description: '是否为圆角按钮',
       setter: { concept: 'SwitchSetter' },
@@ -86,7 +86,7 @@ namespace nasl.ui {
     round: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '圆形按钮',
       description: '是否为圆形按钮',
       setter: { concept: 'SwitchSetter' },
@@ -153,7 +153,7 @@ namespace nasl.ui {
     autoInsertSpace: nasl.core.Boolean;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '自定义颜色',
       description: '自定义按钮颜色，会自动计算 hover 和 active 颜色',
       setter: { concept: 'InputSetter' },
@@ -161,7 +161,7 @@ namespace nasl.ui {
     color: nasl.core.String;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '暗黑模式',
       description: '暗黑模式，自动将颜色转换为暗黑模式颜色',
       setter: { concept: 'SwitchSetter' },

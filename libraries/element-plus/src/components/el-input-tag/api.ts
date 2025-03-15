@@ -20,7 +20,7 @@ namespace nasl.ui {
 
   export class ElInputTagOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '值',
       description: '绑定值',
       setter: { concept: 'InputSetter' },
@@ -28,7 +28,7 @@ namespace nasl.ui {
     value: nasl.core.String[];
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '最大标签数',
       description: '可以输入的最大标签数量',
       setter: { concept: 'NumberInputSetter' },
@@ -36,7 +36,7 @@ namespace nasl.ui {
     max: nasl.core.Integer;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '标签类型',
       description: '标签类型',
       setter: {
@@ -90,7 +90,7 @@ namespace nasl.ui {
     draggable: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '尺寸',
       description: '输入框尺寸',
       setter: {
@@ -234,4 +234,31 @@ namespace nasl.ui {
     })
     onClear: () => any;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'ElInputTag',
+      },
+      {
+        name: 'ElFormItemPro',
+      },
+    ],
+  })
+  @Component({
+    title: '表单标签输入框',
+    description: '表单标签输入框',
+    group: 'Form',
+  })
+  export class ElFormInputTag extends ViewComponent {
+    constructor(options?: Partial<ElFormInputTagOptions & ElFormItemProOptions & Omit<ElInputTagOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormInputTagOptions extends ViewComponentOptions {}
+
 } 

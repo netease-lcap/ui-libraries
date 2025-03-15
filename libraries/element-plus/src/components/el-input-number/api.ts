@@ -20,7 +20,7 @@ namespace nasl.ui {
 
   export class ElInputNumberOptions extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '值',
       description: '绑定值',
       setter: { concept: 'NumberInputSetter' },
@@ -28,7 +28,7 @@ namespace nasl.ui {
     value: nasl.core.Decimal;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '最小值',
       description: '允许的最小值',
       setter: { concept: 'NumberInputSetter' },
@@ -36,7 +36,7 @@ namespace nasl.ui {
     min: nasl.core.Decimal = -Infinity;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '最大值',
       description: '允许的最大值',
       setter: { concept: 'NumberInputSetter' },
@@ -44,7 +44,7 @@ namespace nasl.ui {
     max: nasl.core.Decimal = Infinity;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '步长',
       description: '计数器步长',
       setter: { concept: 'NumberInputSetter' },
@@ -52,7 +52,7 @@ namespace nasl.ui {
     step: nasl.core.Decimal = 1;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '严格步长',
       description: '是否只能输入步长的倍数',
       setter: { concept: 'SwitchSetter' },
@@ -60,7 +60,7 @@ namespace nasl.ui {
     stepStrictly: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '精度',
       description: '数值精度',
       setter: { concept: 'NumberInputSetter' },
@@ -68,7 +68,7 @@ namespace nasl.ui {
     precision: nasl.core.Integer;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '尺寸',
       description: '计数器尺寸',
       setter: {
@@ -163,4 +163,30 @@ namespace nasl.ui {
     })
     onFocus: (event: any) => any;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'ElFormItemPro',
+      },
+      {
+        name: 'ElInputNumber',
+      },
+    ],
+  })
+  @Component({
+    title: '表单数字输入框',
+    description: '表单数字输入框',
+    group: 'Form',
+  })
+  export class ElFormInputNumber extends ViewComponent {
+    constructor(options?: Partial<ElFormInputNumberOptions & ElFormItemProOptions & Omit<ElInputNumberOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormInputNumberOptions extends ViewComponentOptions {}
 }

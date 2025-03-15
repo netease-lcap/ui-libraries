@@ -40,7 +40,7 @@ namespace nasl.ui {
     type: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' = 'default';
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '下划线',
       description: '是否有下划线',
       setter: { concept: 'SwitchSetter' },

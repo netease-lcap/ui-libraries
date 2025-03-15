@@ -763,14 +763,6 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: [
-          'slotDefault',
-          'useRangeValue',
-          'startFieldName',
-          'endFieldName',
-          'startInitialValue',
-          'endInitialValue',
-        ],
       },
       {
         name: 'ElSelect',

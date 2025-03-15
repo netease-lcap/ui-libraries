@@ -45,7 +45,7 @@ namespace nasl.ui {
     loading: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '尺寸',
       description: '开关的尺寸',
       setter: {
@@ -60,7 +60,7 @@ namespace nasl.ui {
     size: 'large' | 'default' | 'small';
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '宽度',
       description: '开关的宽度',
       setter: { concept: 'NumberInputSetter' },
@@ -68,7 +68,7 @@ namespace nasl.ui {
     width: nasl.core.Integer;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '内嵌图标或文字',
       description: '图标或文本是否显示在点内，文本只显示第一个字符',
       setter: { concept: 'SwitchSetter' },
@@ -155,4 +155,30 @@ namespace nasl.ui {
     // })
     // focus(): void;
   }
-} 
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'ElSwitch',
+      },
+      {
+        name: 'ElFormItemPro',
+      },
+    ],
+  })
+  @Component({
+    title: '表单开关',
+    description: '表单开关',
+    group: 'Form',
+  })
+  export class ElFormSwitch extends ViewComponent {
+    constructor(options?: Partial<ElFormSwitchOptions & ElFormItemProOptions & Omit<ElSwitchOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormSwitchOptions extends ViewComponentOptions {}
+}
