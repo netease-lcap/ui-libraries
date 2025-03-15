@@ -1,0 +1,106 @@
+/**
+ * @component el-pagination
+ */
+.el-pagination {
+  /**
+   * @desc 分页字体大小
+   * @type input
+   */
+  --el-pagination-font-size: 14px;
+  
+  /**
+   * @desc 分页背景颜色
+   * @type color
+   */
+  --el-pagination-bg-color: var(--el-fill-color-blank);
+  
+  /**
+   * @desc 分页文字颜色
+   * @type color
+   */
+  --el-pagination-text-color: var(--el-text-color-primary);
+  
+  /**
+   * @desc 分页边框圆角
+   * @type input
+   */
+  --el-pagination-border-radius: 2px;
+  
+  /**
+   * @desc 分页按钮颜色
+   * @type color
+   */
+  --el-pagination-button-color: var(--el-text-color-primary);
+  
+  /**
+   * @desc 分页按钮宽度
+   * @type input
+   */
+  --el-pagination-button-width: 32px;
+  
+  /**
+   * @desc 分页按钮高度
+   * @type input
+   */
+  --el-pagination-button-height: 32px;
+  
+  /**
+   * @desc 禁用状态下分页按钮颜色
+   * @type color
+   */
+  --el-pagination-button-disabled-color: var(--el-text-color-placeholder);
+  
+  /**
+   * @desc 禁用状态下分页按钮背景颜色
+   * @type color
+   */
+  --el-pagination-button-disabled-bg-color: var(--el-fill-color-blank);
+  
+  /**
+   * @desc 分页按钮背景颜色
+   * @type color
+   */
+  --el-pagination-button-bg-color: var(--el-fill-color);
+  
+  /**
+   * @desc 分页按钮悬停颜色
+   * @type color
+   */
+  --el-pagination-hover-color: var(--el-color-primary);
+  
+  /**
+   * @desc 小号分页字体大小
+   * @type input
+   */
+  --el-pagination-font-size-small: 12px;
+  
+  /**
+   * @desc 小号分页按钮宽度
+   * @type input
+   */
+  --el-pagination-button-width-small: 24px;
+  
+  /**
+   * @desc 小号分页按钮高度
+   * @type input
+   */
+  --el-pagination-button-height-small: 24px;
+  
+  /**
+   * @desc 大号分页按钮宽度
+   * @type input
+   */
+  --el-pagination-button-width-large: 40px;
+  
+  /**
+   * @desc 大号分页按钮高度
+   * @type input
+   */
+  --el-pagination-button-height-large: 40px;
+  
+  /**
+   * @desc 分页项间距
+   * @type input
+   */
+  --el-pagination-item-gap: 16px;
+}

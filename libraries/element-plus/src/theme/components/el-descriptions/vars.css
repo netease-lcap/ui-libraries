@@ -1,0 +1,16 @@
+/**
+ * @component el-descriptions
+ */
+.el-descriptions {
+  /**
+   * @desc 表格边框样式
+   * @type input
+   */
+  --el-descriptions-table-border: 1px solid var(--el-border-color-lighter);
+
+  /**
+   * @desc 带边框的标签背景色
+   * @type color
+   */
+  --el-descriptions-item-bordered-label-background: var(--el-fill-color-light);
+}
