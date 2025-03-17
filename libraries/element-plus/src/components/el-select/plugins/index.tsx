@@ -39,10 +39,14 @@ export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccum
 export function handleVirtualize(props) {
   const virtualize = props.get('virtualize');
   const data = props.get('data');
-  if (!virtualize) return {};
   const render = useCallback((props) => <ElSelectV2 {...props} />, []);
-  return {
-    options: data,
-    render,
-  };
+  const result = useMemo(() => {
+    return virtualize
+      ? {
+          options: data,
+          render,
+        }
+      : {};
+  }, [virtualize, data, render]);
+  return result;
 }
