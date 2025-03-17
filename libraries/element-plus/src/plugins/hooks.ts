@@ -72,6 +72,10 @@ function CreateFiberNode() {
 }
 export const fiberNode = CreateFiberNode();
 
+const getStateValue = _.cond([
+  [_.isObject, (state) => ('value' in state ? state.value : state)],
+  [_.stubTrue, (state) => state],
+]);
 export function useState(initialstate?) {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
@@ -110,8 +114,7 @@ export function useState(initialstate?) {
       }
     }, currentFiber.updateQueen);
   };
-  const value = Object.prototype.hasOwnProperty.call(state, 'value') ? state.value : state;
-  return [value, localSetValue];
+  return [getStateValue(state), localSetValue];
 }
 export function useRef(initialstate) {
   const currentFiber = fiberNode.getCurrentFiber();
