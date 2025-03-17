@@ -92,6 +92,7 @@
     "loader-utils": "^3.2.1",
     "lodash": "^4.17.21",
     "magic-string": "^0.30.17",
+    "open": "8.4.2",
     "parse-imports": "^2.2.1",
     "picocolors": "^1.1.1",
     "postcss": "^8.4.35",

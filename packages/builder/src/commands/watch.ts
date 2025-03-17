@@ -234,9 +234,11 @@ export interface WatchCommandOptions {
   port?: number;
   https?: boolean;
   middlewares?: ((req: IncomingMessage, res: ServerResponse, next: () => void) => void)[];
+  onFirstBuilded?: () => void;
+  openURL?: string;
 }
 
-function startServer(options: LcapBuildOptions, { port = 8080, https, middlewares = [] }: WatchCommandOptions) {
+function startServer(options: LcapBuildOptions, { port = 8080, https, middlewares = [], openURL = '' }: WatchCommandOptions) {
   return LiveServer.start({
     port,
     https,
@@ -245,10 +247,11 @@ function startServer(options: LcapBuildOptions, { port = 8080, https, middleware
       createProxyLibrarySchema(options, { port, https }),
       ...middlewares,
     ],
+    openURL,
   });
 }
 
-export default async (rootPath: string, { port, https, middlewares }: WatchCommandOptions, buildConfigs?: { viteConfig: any, buildOptions: LcapBuildOptions }) => {
+export default async (rootPath: string, { port, https, middlewares, onFirstBuilded, openURL }: WatchCommandOptions, buildConfigs?: { viteConfig: any, buildOptions: LcapBuildOptions }) => {
   if (!buildConfigs) {
     buildConfigs = await getBuildConfig();
   }
@@ -297,7 +300,11 @@ export default async (rootPath: string, { port, https, middlewares }: WatchComma
               logger.success('build successed! starting file watching...');
               watcher.start();
 
-              server = await startServer(buildOptions, { port, https, middlewares });
+              if (typeof onFirstBuilded === 'function') {
+                onFirstBuilded();
+              }
+
+              server = await startServer(buildOptions, { port, https, middlewares, openURL });
             } catch (e) {
               logger.error(e);
               process.exit(1);

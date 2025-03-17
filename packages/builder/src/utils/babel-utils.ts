@@ -112,7 +112,7 @@ export const getComponentMetaByApiTs = (tsPath) => {
           decorator.expression.arguments.forEach((arg) => {
             if (arg.type === 'ObjectExpression') {
               const config = evalOptions(arg) || {};
-              ['title', 'show', 'group', 'icon', 'sourceName'].forEach((key) => {
+              ['title', 'show', 'group', 'icon', 'type', 'sourceName'].forEach((key) => {
                 if (!isNil(config[key])) {
                   compMetaInfo[key] = config[key];
                 }

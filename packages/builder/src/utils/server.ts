@@ -2,6 +2,7 @@
 /* eslint-disable global-require */
 import pc from 'picocolors';
 import { isFunction } from 'lodash';
+import open from 'open';
 import httpsConfig from './https';
 
 const fs = require('fs');
@@ -105,6 +106,7 @@ LiveServer.start = function (options) {
   const cors = options.cors || false;
   const https = options.https || null;
   const middlewares = options.middlewares || [];
+  const openPath = options.openURL || '';
 
   // Setup a web server
   const app = connect();
@@ -163,7 +165,7 @@ LiveServer.start = function (options) {
     const openHost = host === '0.0.0.0' ? '127.0.0.1' : host;
 
     const serveURL = `${protocol}://${serveHost}:${address.port}`;
-    const openURL = `${protocol}://${openHost}:${address.port}`;
+    const openURL = `${protocol}://${openHost}:${address.port}${openPath}`;
 
     let serveURLs = [serveURL];
     if (address.address === '0.0.0.0') {
@@ -197,6 +199,12 @@ LiveServer.start = function (options) {
       }
     } else {
       console.log(pc.green(`Serving ${root} at ${openURL} (${serveURL})`));
+    }
+
+    if (openPath) {
+      setTimeout(() => {
+        open(openURL);
+      }, 1000);
     }
   });
 

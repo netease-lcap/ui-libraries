@@ -1,8 +1,12 @@
 import { createAPIHandler } from '../middleware';
 import {
-  getSourceSchema, getExtensionProjectMeta, getLcapConfig, updateLcapConfg,
+  getSourceSchema,
+  getExtensionProjectMeta,
+  getLcapConfig,
+  updateLcapConfg,
   updatePackageInfo,
 } from '../../utils/project';
+import { getPreviewURL as getPreviewURLService } from '../preview';
 import { exec } from '../../utils/exec';
 
 export const getProjectMeta = createAPIHandler('/api/project/meta', 'GET', async (req) => {
@@ -45,4 +49,8 @@ export const publish = createAPIHandler('/api/project/release', 'POST', async (r
   await exec('npm run release');
 
   return true;
+});
+
+export const getPreviewURL = createAPIHandler('/api/project/previewURL', 'GET', async (req) => {
+  return getPreviewURLService();
 });
