@@ -103,9 +103,10 @@ export function useState(initialstate?) {
     currentFiber.updateQueen.add({ [hook.storeKey]: value });
     _.defer(() => {
       if (currentFiber.updateQueen.size) {
+        const deleteQueue = Array.from(currentFiber.updateQueen);
         const comit = Array.from(currentFiber.updateQueen).reduce((pre, cur) => ({ ...pre, ...cur }), {});
         currentFiber.setValue(comit);
-        currentFiber.updateQueen.clear();
+        deleteQueue.forEach((item) => currentFiber.updateQueen.delete(item));
       }
     }, currentFiber.updateQueen);
   };
