@@ -23,6 +23,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值',
       description: '绑定值',
+      sync: true,
       setter: { concept: 'NumberInputSetter' },
     })
     value: nasl.core.Decimal;
