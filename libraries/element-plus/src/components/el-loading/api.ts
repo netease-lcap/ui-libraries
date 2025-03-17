@@ -52,7 +52,7 @@ namespace nasl.ui {
         concept: 'InputSetter',
       },
     })
-    target: nasl.core.String;
+    private target: nasl.core.String;
 
     @Prop({
       title: '是否将Loading插入至body下',

@@ -2,11 +2,14 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
+    order: 2,
     ideusage: {
       idetype: 'container',
       structured: true,
       childAccept: "target.tag === 'el-breadcrumb-item'",
+      additionalAttribute: {
+        ":showInDesigner": true
+      }
     },
   })
   @Component({
@@ -29,6 +32,25 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     separator: nasl.core.String = '/';
+
+    @Prop({
+      group: '主要属性',
+      title: '自动生成',
+      description: '自动生成',
+      setter: { concept: 'SwitchSetter' },
+    })
+    auto: nasl.core.Boolean = false;
+
+    // @Prop({
+    //   title: '分隔符图标',
+    //   description: '分隔符图标',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTUI_ICONS',
+    //   },
+    // })
+    // separatorIcon: nasl.core.String;
 
     @Slot({
       title: '内容',
