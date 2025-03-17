@@ -72,6 +72,10 @@ function CreateFiberNode() {
 }
 export const fiberNode = CreateFiberNode();
 
+const getStateValue = _.cond([
+  [_.isObject, (state) => ('value' in state ? state.value : state)],
+  [_.stubTrue, (state) => state],
+]);
 export function useState(initialstate?) {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
@@ -103,14 +107,14 @@ export function useState(initialstate?) {
     currentFiber.updateQueen.add({ [hook.storeKey]: value });
     _.defer(() => {
       if (currentFiber.updateQueen.size) {
+        const deleteQueue = Array.from(currentFiber.updateQueen);
         const comit = Array.from(currentFiber.updateQueen).reduce((pre, cur) => ({ ...pre, ...cur }), {});
         currentFiber.setValue(comit);
-        currentFiber.updateQueen.clear();
+        deleteQueue.forEach((item) => currentFiber.updateQueen.delete(item));
       }
     }, currentFiber.updateQueen);
   };
-  const value = Object.prototype.hasOwnProperty.call(state, 'value') ? state.value : state;
-  return [value, localSetValue];
+  return [getStateValue(state), localSetValue];
 }
 export function useRef(initialstate) {
   const currentFiber = fiberNode.getCurrentFiber();
