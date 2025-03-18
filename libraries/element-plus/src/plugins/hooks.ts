@@ -246,8 +246,13 @@ export function useControllableValue(props: any, options: Options = {}) {
   } = options || {};
   const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
   const propsValue = props.get(valuePropName);
-  const defaultValueValue = props.get(defaultValuePropName);
-  const [stateValue, setStateValue] = useState(propsValue ?? defaultValueValue ?? defaultValue);
+  const defaultValueProps = props.get(defaultValuePropName);
+  const initialValue = useMemo(() => {
+    const controlledInitialValue = propsValue ?? defaultValueProps ?? defaultValue;
+    const uncontrolledInitialValue = defaultValueProps ?? defaultValue;
+    return isControlled ? controlledInitialValue : uncontrolledInitialValue;
+  }, [isControlled, propsValue, defaultValueProps, defaultValue]);
+  const [stateValue, setStateValue] = useState(initialValue);
   const triggerProps = props.get(trigger, () => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
 
