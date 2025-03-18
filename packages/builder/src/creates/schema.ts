@@ -154,6 +154,28 @@ export async function createForSchema(rootPath: string, metaInfo: ProjectMetaInf
   }
 }
 
+export function setImportStyle(rootPath: string, schema: MaterialSchema) {
+  if (!schema.style) {
+    return;
+  }
+
+  const entry = path.resolve(rootPath, 'src/index.ts');
+  if (!fs.existsSync(entry)) {
+    return;
+  }
+
+  const styleCode = `import '${path.join(schema.name, schema.style)}';`;
+
+  const content = fs.readFileSync(entry, 'utf-8').toString().split('\n');
+  if (content.some((line) => line.includes(styleCode))) {
+    return;
+  }
+
+  content.unshift(styleCode);
+
+  fs.writeFileSync(entry, content.join('\n'), 'utf-8');
+}
+
 export async function executeCreateForSchema(rootPath: string, metaInfo: ProjectMetaInfo, schema: string, name?: string) {
   if (!schema || !fs.existsSync(path.resolve(rootPath, schema))) {
     throw new Error(`schema 文件 ${schema} 不存在`);
@@ -235,4 +257,6 @@ export async function executeCreateForSchema(rootPath: string, metaInfo: Project
       component,
     });
   });
+
+  setImportStyle(rootPath, material);
 }
