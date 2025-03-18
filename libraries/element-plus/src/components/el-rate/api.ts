@@ -23,6 +23,7 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '绑定值',
+      sync: true,
       description: '评分的值',
       setter: { concept: 'NumberInputSetter' },
     })
