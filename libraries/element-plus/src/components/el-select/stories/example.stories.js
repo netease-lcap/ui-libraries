@@ -58,9 +58,9 @@ export const Example2 = {
     setup() {
       const activeName = ref('first');
       const name = ref('myName');
-      // const list = ref([{ value: 1 }, { value: 2 }, { value: 3 }]);
+      const list = ref([{ value: 1, label: '1' }, { value: 2, label: '2' }, { value: 3, label: '3' }]);
       // const list = ref([1, 2, 3]);
-      const list = async () => {
+list.value = async () => {
         return new Promise((res) => {
           setTimeout(() => {
             const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
@@ -72,7 +72,7 @@ export const Example2 = {
             }));
             res(options);
             // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
-          }, 3000);
+          }, 1000);
         });
       };
       const select = ref('');
@@ -84,6 +84,8 @@ export const Example2 = {
 
       setTimeout(() => {
         // name.value = 'myname';
+        // list.value = [{ value: 2, label: '2' }, { value: 3, label: '3' }];
+
         console.log(select, 'select');
         // list.value.push({ value: 4 });
       }, 3000);
@@ -98,7 +100,7 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-select ref="select" :virtualize="true" v-model="activeName"  clearable :dataSource="list" multiple >
+    <el-select ref="select" v-model="activeName"  clearable :dataSource="list" multiple >
      <el-option label="item.value" :value="item.value" :name="name" / >
 
     </el-select>
