@@ -40,6 +40,14 @@ namespace nasl.ui {
     type: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' = 'default';
 
     @Prop({
+      group: '主要属性',
+      title: '文本',
+      description: '显示文本内容',
+      docDescription: '显示的文本内容',
+    })
+    text: nasl.core.String;
+
+    @Prop({
       group: '样式属性',
       title: '下划线',
       description: '是否有下划线',

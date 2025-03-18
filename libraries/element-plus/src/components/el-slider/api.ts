@@ -22,9 +22,10 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '绑定值',
+      sync: true,
       description: '滑块绑定值',
     })
-    modelValue: number | number[] = 0;
+    value: nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
@@ -32,7 +33,7 @@ namespace nasl.ui {
       description: '滑块可设置的最小值',
       setter: { concept: 'NumberInputSetter' },
     })
-    min: number = 0;
+    min: nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
@@ -40,7 +41,7 @@ namespace nasl.ui {
       description: '滑块可设置的最大值',
       setter: { concept: 'NumberInputSetter' },
     })
-    max: number = 100;
+    max: nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
@@ -48,7 +49,7 @@ namespace nasl.ui {
       description: '是否禁用滑块',
       setter: { concept: 'SwitchSetter' },
     })
-    disabled: boolean = false;
+    disabled: nasl.core.Boolean;
 
     @Prop({
       group: '数据属性',
@@ -56,7 +57,7 @@ namespace nasl.ui {
       description: '滑块步长',
       setter: { concept: 'NumberInputSetter' },
     })
-    step: number = 1;
+    step: nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
@@ -64,7 +65,7 @@ namespace nasl.ui {
       description: '是否显示输入框，仅在非范围选择时有效',
       setter: { concept: 'SwitchSetter' },
     })
-    showInput: boolean = false;
+    showInput: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',
@@ -72,7 +73,7 @@ namespace nasl.ui {
       description: '在显示输入框的情况下，是否显示输入框的控制按钮',
       setter: { concept: 'SwitchSetter' },
     })
-    showInputControls: boolean = true;
+    showInputControls: nasl.core.Boolean;
 
     @Prop({
       group: '样式属性',
@@ -102,7 +103,7 @@ namespace nasl.ui {
       description: '是否显示间断点',
       setter: { concept: 'SwitchSetter' },
     })
-    showStops: boolean = false;
+    showStops: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',
@@ -110,7 +111,7 @@ namespace nasl.ui {
       description: '是否显示提示信息',
       setter: { concept: 'SwitchSetter' },
     })
-    showTooltip: boolean = true;
+    showTooltip: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
@@ -118,15 +119,15 @@ namespace nasl.ui {
       description: '是否为范围选择',
       setter: { concept: 'SwitchSetter' },
     })
-    range: boolean = false;
+    range: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',
       title: '垂直模式',
-      description: '是否为垂直模式',
+      description: '是否为垂直模式,垂直模式必须设置高度',
       setter: { concept: 'SwitchSetter' },
     })
-    vertical: boolean = false;
+    vertical: nasl.core.Boolean;
 
     @Prop({
       group: '样式属性',
@@ -134,7 +135,7 @@ namespace nasl.ui {
       description: '滑块高度，垂直模式时必填',
       setter: { concept: 'InputSetter' },
     })
-    height: string = '';
+    height: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -142,9 +143,9 @@ namespace nasl.ui {
       description: '输入时的去抖延迟，毫秒',
       setter: { concept: 'NumberInputSetter' },
     })
-    debounce: number = 300;
+    debounce: nasl.core.Integer = 300;
 
-    // @Prop({
+    // @Prop({  
     //   group: '主要属性',
     //   title: '提示框类名',
     //   description: '提示框的自定义类名',
@@ -169,19 +170,19 @@ namespace nasl.ui {
       description: '是否触发表单验证',
       setter: { concept: 'SwitchSetter' },
     })
-    validateEvent: boolean = true;
+    validateEvent: nasl.core.Boolean = true;
 
     @Event({
       title: '值改变时',
       description: '值改变时触发（如果拖拽中，则只在松开鼠标后触发）',
     })
-    onChange: (value: number | number[]) => void;
+    onChange: (value: nasl.core.Integer | nasl.core.Integer[]) => void;
 
     @Event({
       title: '输入时',
       description: '数据改变时触发（拖拽过程中实时触发）',
     })
-    onInput: (value: number | number[]) => void;
+    onInput: (value: nasl.core.Integer | nasl.core.Integer[]) => void;
   }
 
   @IDEExtraInfo({

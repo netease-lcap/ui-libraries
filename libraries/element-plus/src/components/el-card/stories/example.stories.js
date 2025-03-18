@@ -15,15 +15,15 @@ export const Example1 = {
   name: '基础用法',
   render: () => ({
     setup() {
-      return {};
+      return {
+        modelValue: '1234',
+      };
     },
     template: `
     <div>
       <el-card style="max-width: 480px" data-nodepath="123">
         <template #header>
-          <div class="card-header">
-            <span>卡片名称</span>
-          </div>
+          <el-input  />
         </template>
         <p v-for="o in 4" :key="o" class="text item">{{ '列表项目 ' + o }}</p>
         <template #footer>页脚内容</template>
