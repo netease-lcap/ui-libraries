@@ -127,7 +127,7 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
       sync: true,
     })
-    active: nasl.core.Integer | nasl.core.String;
+    active: nasl.core.Integer;
 
     @Prop({
       group: '主要属性',

@@ -11,7 +11,7 @@ namespace nasl.ui {
         dismiss:
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
-        loopRule: 'nth-child(n+3)',
+        loopRule: 'nth-last-child(-n+2)',
         loopElem: ".el-tabs__nav > .el-tabs__item",
         emptySlot: {
           display: 'large',
@@ -25,7 +25,10 @@ namespace nasl.ui {
       displaySlotConditions: {
         label: "!!this.getAttribute('dataSource')",
         content: "!!this.getAttribute('dataSource')",
-      }
+      },
+      additionalAttribute: {
+        ":showInDesigner": "\"true\""
+      },
     }
   })
   @Component({
