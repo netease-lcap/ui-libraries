@@ -286,6 +286,15 @@ namespace nasl.ui {
     })
     multiple: M = false as any;
 
+
+    @Prop({
+      group: '主要属性',
+      title: '是否虚拟滚动',
+      description: '是否开启虚拟滚动',
+      setter: { concept: 'SwitchSetter' },
+    })
+    virtualize: nasl.core.Boolean = false;
+
     // @Prop({
     //   group: '主要属性',
     //   title: 'Panel Bottom Content',
@@ -694,6 +703,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '选项值',
+      sync: true,
       description: '选项值',
       setter: { concept: 'InputSetter' },
     })

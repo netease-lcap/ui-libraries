@@ -10,15 +10,15 @@ namespace nasl.ui {
         dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
         loopRule: 'nth-child(n+2)',
-        loopElem: "> .el-p-tree__list .el-p-tree__item",
+        loopElem: '> .el-p-tree__list .el-p-tree__item',
         emptySlot: {
           display: 'inline',
           condition: "!this.getAttribute('dataSource')",
           accept: false,
-          content: '请绑定数据源'
-        }
-      }
-    }
+          content: '请绑定数据源',
+        },
+      },
+    },
   })
   @Component({
     title: '树形视图',
@@ -31,27 +31,80 @@ namespace nasl.ui {
       super();
     }
 
-    @Prop({
-      title: '选中值',
-    })
-    value: ElTreeOptions<T, V, M>['value'];
+    // @Prop({
+    //   title: '选中值',
+    // })
+    // value: ElTreeOptions<T, V, M>['value'];
 
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',
     })
     reload(): void {}
+    // @Method({
+    //   title: '获取节点',
+    //   description: '通过 key 或 data 获取节点',
+    // })
+    // getNode(data: T | V): any { return null; }
+
+    // @Method({
+    //   title: '获取当前选中节点',
+    //   description: '获取当前选中节点的数据',
+    // })
+    // getCurrentNode(): any { return null; }
+
+    // @Method({
+    //   title: '设置当前选中节点',
+    //   description: '通过 key 或 data 设置当前选中节点',
+    // })
+    // setCurrentNode(data: T | V): void {}
+
+    // @Method({
+    //   title: '设置节点是否选中',
+    //   description: '通过 key 或 data 设置节点是否选中',
+    // })
+    // setChecked(data: T | V, checked: nasl.core.Boolean, deep: nasl.core.Boolean): void {}
+
+    // @Method({
+    //   title: '获取选中节点',
+    //   description: '如果节点可以被选中，则返回目前选中的节点数据数组',
+    // })
+    // getCheckedNodes(): any { return null; }
+
+    // @Method({
+    //   title: '获取半选中节点',
+    //   description: '如果节点可以被选中，则返回目前半选中的节点数据数组',
+    // })
+    // getHalfCheckedNodes(): any { return null; }
+
+    // @Method({
+    //   title: '展开指定节点',
+    //   description: '展开指定节点的所有子节点',
+    // })
+    // expandNode(data: T | V): void {}
+
+    // @Method({
+    //   title: '折叠指定节点',
+    //   description: '折叠指定节点的所有子节点',
+    // })
+    // collapseNode(data: T | V): void {}
+
+    // @Method({
+    //   title: '过滤节点',
+    //   description: '对树节点进行筛选操作',
+    // })
+    // filter(query: nasl.core.String): void {}
   }
 
   export class ElTreeOptions<T, V, M extends nasl.core.Boolean> extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: '值',
-      description: '选中值',
-      setter: { concept: 'InputSetter' },
-    })
-    value: M extends true ? nasl.collection.List<V> : V;
+    // @Prop({
+    //   group: '数据属性',
+    //   sync: true,
+    //   title: '值',
+    //   description: '选中值',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // value: M extends true ? nasl.collection.List<V> : V;
 
     @Prop({
       group: '交互属性',
@@ -69,44 +122,9 @@ namespace nasl.ui {
     })
     private defaultValue: any[] = [];
 
-    // @Prop({
-    //   group: '主要属性',
-    //   sync: true,
-    //   title: '高亮节点值',
-    //   description: '高亮的节点值。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // actived: nasl.collection.List<V>;
-
-    // @Prop<ElTreeOptions<T, V, M>, 'activable'>({
-    //   group: '交互属性',
-    //   title: '可高亮',
-    //   description: '节点是否可高亮，仅单选时支持配置生效',
-    //   setter: { concept: 'SwitchSetter' },
-    //   if: _ => !_.checkable,
-    // })
-    // activable: nasl.core.Boolean = false;
-
-    // @Prop<ElTreeOptions<T, V, M>, 'activeMultiple'>({
-    //   group: '主要属性',
-    //   title: '多个节点同时高亮',
-    //   description: '是否允许多个节点同时高亮',
-    //   setter: { concept: 'SwitchSetter' },
-    //   if: _ => !!_.activable,
-    // })
-    // activeMultiple: nasl.core.Boolean = false;
-
     @Prop({
       group: '主要属性',
-      title: 'Allow Drop',
-      description: '判断节点是否可以执行 drop 操作，泛型 `T` 表示树节点 ',
-      setter: { concept: 'InputSetter' },
-    })
-    private allowDrop: any;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Check Props',
+      title: '复选框属性',
       description: '透传属性到 checkbox 组件。参考 checkbox 组件 API。',
       setter: { concept: 'InputSetter' },
     })
@@ -133,7 +151,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List\<T>后，会自动识别T的类型并进行展示',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
     })
     dataSchema: T;
 
@@ -149,20 +167,10 @@ namespace nasl.ui {
       group: '数据属性',
       title: '父级值字段',
       description: '如果数据源是平铺结构，需要指定父级字段',
-      docDescription:
-        '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
+      docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
       setter: { concept: 'PropertySelectSetter' },
     })
     parentField: (item: T) => V;
-
-    @Prop({
-      group: '数据属性',
-      title: '子级值字段',
-      description: '如果数据源是树形结构，需要指定子级字段，默认为children',
-      docDescription: '集合的元素类型中，用于标识子节点的属性',
-      setter: { concept: 'PropertySelectSetter' },
-    })
-    childrenField: (item: T) => any;
 
     @Prop({
       group: '数据属性',
@@ -173,249 +181,134 @@ namespace nasl.ui {
     textField: (item: T) => any;
 
     @Prop({
-      group: '交互属性',
-      title: '禁用复选框',
-      description: '禁用复选框，可支持禁用不同的行。',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disableCheck: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '交互属性',
-      title: '禁用',
-      description: '是否禁用树操作',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Draggable',
-      description: '节点是否可拖拽',
-      setter: { concept: 'SwitchSetter' },
-    })
-    private draggable: nasl.core.Boolean;
-
-    @Prop({
       group: '主要属性',
       title: '空态文本',
       description: '数据为空时展示的文本。',
       setter: { concept: 'InputSetter' },
     })
-    empty: nasl.core.String = '';
+    emptyText: nasl.core.String = '';
+
+    @Prop({
+      group: '主要属性',
+      title: '展开后渲染',
+      description: '是否在第一次展开某个树节点后才渲染其子节点',
+      setter: { concept: 'SwitchSetter' },
+    })
+    renderAfterExpand: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '高亮当前节点',
+      description: '是否高亮当前选中节点',
+      setter: { concept: 'SwitchSetter' },
+    })
+    highlightCurrent: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '点击节点支持展开收起',
+      description: '是否支持点击节点也能展开收起',
+      setter: { concept: 'SwitchSetter' },
+    })
+    expandOnClickNode: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '点击节点支持选中',
+      description: '是否支持点击节点也能选中',
+      setter: { concept: 'SwitchSetter' },
+    })
+    checkOnClickNode: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '自动展开父节点',
+      description: '展开子节点时是否自动展开父节点，当数据源为静态数据时首次打开生效',
+      setter: { concept: 'SwitchSetter' },
+    })
+    autoExpandParent: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示复选框',
+      description: '是否显示复选框',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showCheckbox: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '手风琴模式',
+      description: '是否开启手风琴模式',
+      setter: { concept: 'SwitchSetter' },
+    })
+    accordion: nasl.core.Boolean = false;
 
     @Prop({
       group: '交互属性',
       title: '展开全部节点',
-      description: '是否展开全部节点',
+      description: '是否默认展开所有节点, 仅首次生效',
       setter: { concept: 'SwitchSetter' },
     })
-    expandAll: nasl.core.Boolean = false;
+    defaultExpandAll: nasl.core.Boolean = false;
 
     @Prop({
-      group: '交互属性',
-      title: '默认展开的级别',
-      description: '默认展开的级别，第一层为 0',
+      group: '主要属性',
+      sync: true,
+      title: '默认展开的节点的 key 的数组',
+      description: '默认展开的节点的 key 的数组, 仅首次生效',
+      setter: { concept: 'InputSetter' },
+    })
+    defaultExpandedKeys: nasl.collection.List<V> = [];
+
+    @Prop({
+      group: '主要属性',
+      title: '是否虚拟滚动',
+      description: '是否开启虚拟滚动',
+      setter: { concept: 'SwitchSetter' },
+    })
+    virtualize: nasl.core.Boolean = false;
+
+    @Prop<ElTreeOptions<T, V, M>, 'height'>({
+      group: '主要属性',
+      title: '高度',
+      description: '高度虚拟滚动时需要设置高度',
+      setter: { concept: 'NumberInputSetter' },
+      if: (_) => _.virtualize !== false,
+    })
+    height: nasl.core.Decimal;
+
+    @Prop({
+      group: '主要属性',
+      title: '缩进',
+      description: '相邻级节点间的水平缩进，单位为像素',
       setter: {
         concept: 'NumberInputSetter',
         min: 0,
         precision: 0,
       },
     })
-    expandLevel: nasl.core.Decimal = 0;
-
-    @Prop({
-      group: '交互属性',
-      title: '手风琴效果',
-      description: '同级别展开互斥，手风琴效果',
-      setter: { concept: 'SwitchSetter' },
-    })
-    expandMutex: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '交互属性',
-      title: '点击节点支持展开收起',
-      description: '是否支持点击节点也能展开收起',
-      setter: { concept: 'SwitchSetter' },
-    })
-    expandOnClickNode: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '交互属性',
-      title: '自动展开父节点',
-      description: '展开子节点时是否自动展开父节点，当数据源为静态数据时首次打开生效',
-      setter: { concept: 'SwitchSetter' },
-    })
-    expandParent: nasl.core.Boolean = false;
+    indent: nasl.core.Decimal = 18;
 
     @Prop({
       group: '主要属性',
-      sync: true,
-      title: '展开的节点值',
-      description: '展开的节点值。',
+      title: '默认选中的节点',
+      description: '默认选中的节点的 key 的数组, 仅首次生效',
       setter: { concept: 'InputSetter' },
     })
-    expanded: nasl.collection.List<V> = [];
-
-    @Prop({
-      group: '主要属性',
-      title: '节点过滤',
-      description: '节点过滤方法，只呈现返回值为 true 的节点。',
-      setter: { concept: 'AnonymousFunctionSetter' },
-    })
-    filter: (node: {
-      actived: boolean;
-      checked: boolean;
-      data: T;
-      disabled: boolean;
-      expanded: boolean;
-      indeterminate: boolean;
-      loading: boolean;
-    }) => nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: '允许在过滤时折叠节点',
-      description: '是否允许在过滤时点击节点收齐折叠',
-      setter: { concept: 'SwitchSetter' },
-    })
-    allowFoldNodeOnFilter: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '交互属性',
-      title: '悬浮状态',
-      description: '节点是否有悬浮状态',
-      setter: { concept: 'SwitchSetter' },
-    })
-    hover: nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: '节点图标',
-      description: '节点图标，可自定义。',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
-      },
-    })
-    icon: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Keys',
-      description:
-        '用来定义 `value / label / disabled / children` 在 `data` 数据中对应的字段别名，示例：`{ value: "key", label "name", children: "list" }`。其中，disabled 待开发。。',
-      setter: { concept: 'InputSetter' },
-    })
-    private keys: object;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Label',
-      description:
-        '自定义节点内容，值为 `false` 不显示，值为 `true` 显示默认 label，值为字符串直接输出该字符串。泛型 `T` 表示树节点 ',
-      setter: { concept: 'InputSetter' },
-    })
-    private label: any = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '延迟加载',
-      description:
-        '延迟加载 children 为 true 的节点的子节点数据，即使 expandAll 被设置为 true，也同样延迟加载',
-      setter: { concept: 'SwitchSetter' },
-    })
-    private lazy: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '交互属性',
-      title: '连接线',
-      description:
-        '是否显示连接线。',
-      setter: { concept: 'SwitchSetter' },
-    })
-    line: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Load',
-      description:
-        '加载子数据的方法，在展开节点时调用（仅当节点 children 为 true 时生效），泛型 `T` 表示树节点 ',
-      setter: { concept: 'InputSetter' },
-    })
-    private load: any;
-
-
-    @Prop({
-      group: '样式属性',
-      title: '树高度',
-      description:
-        '树的高度，超出后会出现滚动条。示例：100,  "30%",  "300"。值为数字类型，会自动加上单位 px。如果不是绝对固定树的高度，建议使用 `maxHeight`',
-      setter: { concept: 'InputSetter' },
-    })
-    height: nasl.core.String | nasl.core.Decimal;
-
-    @Prop({
-      group: '样式属性',
-      title: '最大高度',
-      description:
-        '树的最大高度，超出后会出现滚动条。示例：100, "30%", "300"。值为数字类型，会自动加上单位 px',
-      setter: { concept: 'InputSetter' },
-    })
-    maxHeight: nasl.core.String | nasl.core.Decimal;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Scroll',
-      description:
-        '懒加载和虚拟滚动。为保证组件收益最大化，当数据量小于阈值 `scroll.threshold` 时，无论虚拟滚动的配置是否存在，组件内部都不会开启虚拟滚动，`scroll.threshold` 默认为 `100`。',
-      setter: { concept: 'InputSetter' },
-    })
-    private scroll: object;
-
-    @Prop({
-      group: '交互属性',
-      title: '过渡动画',
-      description: '节点展开折叠时是否使用过渡动画',
-      setter: { concept: 'SwitchSetter' },
-    })
-    transition: nasl.core.Boolean = true;
-
-    @Prop<ElTreeOptions<T, V, M>, 'valueMode'>({
-      group: '主要属性',
-      title: '选中值模式',
-      description:
-        '选中值模式。子节点 表示无论什么情况，选中值仅呈现叶子节点；父节点 表示当子节点全部选中时，仅父节点在选中值里面；全部 表示父节点和子节点全部会出现在选中值里面。可选项：onlyLeaf/parentFirst/all',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '子节点' },
-          { title: '父节点' },
-          { title: '全部' },
-        ],
-      },
-      if: _ => _.checkable,
-    })
-    valueMode: 'onlyLeaf' | 'parentFirst' | 'all' = 'onlyLeaf';
-
-    // @Event({
-    //   title: '节点激活时',
-    //   description: '节点激活时触发，泛型 `T` 表示树节点 ',
-    // })
-    // onActive: (value: V) => any;
+    defaultCheckedKeys: nasl.collection.List<V> = [];
 
     @Event({
       title: '改变时',
-      description:
-        '节点选中状态变化时触发',
+      description: '节点选中状态变化时触发',
     })
-    onChange: (value: M extends true ? nasl.collection.List<V> : V) => any;
+    checkChange: (value: M extends true ? nasl.collection.List<V> : V) => any;
 
     @Event({
       title: '节点点击时',
-      description: '节点点击时触发，泛型 `T` 表示树节点 ',
+      description: '节点点击时触发',
     })
-    onClick: (event: {
+    onNodeClick: (event: {
       node: {
         actived: nasl.core.Boolean;
         checked: nasl.core.Boolean;
@@ -426,87 +319,31 @@ namespace nasl.ui {
         loading: nasl.core.Boolean;
         value: V;
         label: nasl.core.String;
-      }
+      };
     }) => any;
 
-    // @Event({
-    //   title: 'On Drag End',
-    //   description: '节点结束拖拽时触发，泛型 `T` 表示树节点 ',
-    // })
-    // onDragEnd: (event: any) => any;
-
-    // @Event({
-    //   title: 'On Drag Leave',
-    //   description: '节点拖拽时离开目标元素时触发，泛型 `T` 表示树节点 ',
-    // })
-    // onDragLeave: (event: any) => any;
-
-    // @Event({
-    //   title: 'On Drag Over',
-    //   description: '节点拖拽到目标元素时触发，泛型 `T` 表示树节点 ',
-    // })
-    // onDragOver: (event: any) => any;
-
-    // @Event({
-    //   title: 'On Drag Start',
-    //   description: '节点开始拖拽时触发，泛型 `T` 表示树节点 ',
-    // })
-    // onDragStart: (event: any) => any;
-
-    // @Event({
-    //   title: 'On Drop',
-    //   description: '节点在目标元素上释放时触发，泛型 `T` 表示树节点 ',
-    // })
-    // onDrop: (event: any) => any;
+    @Event({
+      title: '节点选中状态改变时',
+      description: '节点选中状态改变时触发',
+    })
+    onCheck: (data: T, checked: nasl.core.Boolean) => any;
 
     @Event({
-      title: '节点展开或收起时',
-      description: '节点展开或收起时触发',
+      title: '当前选中节点改变时',
+      description: '当前选中节点改变时触发',
     })
-    onExpand: (event: any) => any;
+    onCurrentChange: (data: T) => any;
 
-    // @Event({
-    //   title: 'On Load',
-    //   description: '异步加载后触发，泛型 `T` 表示树节点 ',
-    // })
-    // onLoad: (event: any) => any;
-
-    // @Event({
-    //   title: 'On Scroll',
-    //   description: '滚动事件',
-    // })
-    // onScroll: (event: any) => any;
-
-    // @Slot({
-    //   title: 'Empty',
-    //   description: '数据为空时展示的文本。',
-    // })
-    // slotEmpty: () => Array<ViewComponent>;
-
-    // @Slot({
-    //   title: 'Icon',
-    //   description: '节点图标，可自定义。',
-    // })
-    // slotIcon: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '自定义节点内容',
-      description:
-        '自定义节点内容',
+    @Event({
+      title: '节点展开时',
+      description: '节点被展开时触发的事件	',
     })
-    slotLeaf: (current: Current<T>) => Array<ViewComponent>;
+    onNodeExpand: (data: T) => any;
 
-    // @Slot({
-    //   title: 'Line',
-    //   description:
-    //     '连接线。值为 false 不显示连接线；值为 true 显示默认连接线；值类型为 Function 表示自定义连接线。',
-    // })
-    // slotLine: () => Array<ViewComponent>;
-
-    // @Slot({
-    //   title: 'Operations',
-    //   description: '自定义节点操作项',
-    // })
-    // slotOperations: () => Array<ViewComponent>;
+    @Event({
+      title: '节点收起时',
+      description: '节点被收起时触发的事件',
+    })
+    onNodeCollapse: (data: T) => any;
   }
 }

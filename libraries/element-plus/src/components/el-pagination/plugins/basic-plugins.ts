@@ -1,3 +1,1 @@
-export function basicPlugin(props) {
-  console.log(props);
-}
+export function basicPlugin(props) {}

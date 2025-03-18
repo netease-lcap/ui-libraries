@@ -24,7 +24,7 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template: `
-      <el-mention style="width: 320px" placeholder="Please input">
+      <el-mention data-nodepath="el-mention">
       </el-mention>
     `,
   }),

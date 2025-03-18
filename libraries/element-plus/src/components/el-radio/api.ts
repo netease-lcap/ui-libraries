@@ -27,7 +27,7 @@ namespace nasl.ui {
   @Component({
     title: '单选组',
     icon: 'radios',
-    description: '',
+    description: '在一组备选项中进行单选',
     group: 'Form',
   })
   export class ElRadioGroup<T, V> extends ViewComponent {
@@ -53,10 +53,9 @@ namespace nasl.ui {
       title: '数据源',
       description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
-      designerValue: [{}, {}, {}],
       bindOpen: true,
     })
-    dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
+    dataSource: nasl.collection.List<T> | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
@@ -86,75 +85,27 @@ namespace nasl.ui {
     })
     value: V;
 
-    @Prop<ElRadioGroupOptions<T, V>, 'itemProps'>({
+    @Prop<ElRadioGroupOptions<T, V>, 'textField'>({
       group: '数据属性',
-      title: '单选项属性设置',
-      description: '单选项属性设置',
+      title: '文本字段',
+      description: '集合的元素类型中，用于显示文本的属性名称',
+      docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
       setter: {
-        concept: 'AnonymousFunctionSetter',
+        concept: 'PropertySelectSetter',
       },
-      bindOpen: true,
-      if: (_) => !!_.dataSource,
     })
-    itemProps: (current: Current<T>) => {
-      /**
-       * @title 禁用
-       */
-      disabled?: nasl.core.Boolean;
-      /**
-       * @title 是否允许取消选中
-       */
-      allowUncheck?: nasl.core.Boolean;
-    };
-
-    @Prop<ElRadioGroupOptions<T, V>, 'shape'>({
-      group: '样式属性',
-      title: '展示类型',
-      description: '单选框展示类型',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '默认' }, { title: '按钮' }],
-      },
-      onChange: [
-        {
-          clear: ['size', 'variant'],
-          if: (_) => _ === 'normal',
-        },
-      ],
-    })
-    shape: 'normal' | 'button' = 'normal';
+    textField: (item: T) => any = ((item: any) => item.text) as any;
 
     @Prop<ElRadioGroupOptions<T, V>, 'size'>({
       group: '样式属性',
-      title: '按钮尺寸',
-      description: '单选框按钮尺寸',
+      title: '尺寸',
+      description: '单选框尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '小' }, { title: '中' }, { title: '大' }],
+        options: [{ title: '小' }, { title: '默认' }, { title: '大' }],
       },
-      if: (_) => _.shape === 'button',
     })
-    size: 'small' | 'medium' | 'large' = 'medium';
-
-    @Prop<ElRadioGroupOptions<T, V>, 'variant'>({
-      group: '样式属性',
-      title: '按钮形式',
-      description: '单选组件按钮形式',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '外框线' }, { title: '主色填充' }, { title: '默认填充' }],
-      },
-      if: (_) => _.shape === 'button',
-    })
-    variant: 'outline' | 'primary-filled' | 'default-filled' = 'outline';
-
-    @Prop({
-      group: '状态属性',
-      title: '可取消选中',
-      description: '是否允许取消选中',
-      setter: { concept: 'SwitchSetter' },
-    })
-    allowUncheck: nasl.core.Boolean = false;
+    size: 'small' | 'default' | 'large' = 'default';
 
     @Prop({
       group: '状态属性',
@@ -166,11 +117,19 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'HTML 元素原生标签',
-      description: 'HTML 元素原生属性',
+      title: 'HTML元素原生name属性',
+      description: 'HTML元素原生属性',
       setter: { concept: 'InputSetter' },
     })
     private name: nasl.core.String;
+
+    @Prop({
+      group: '样式属性',
+      title: '显示边框',
+      description: '是否显示边框',
+      setter: { concept: 'SwitchSetter' },
+    })
+    border: nasl.core.Boolean = false;
 
     @Event({
       title: '改变后',
@@ -184,8 +143,12 @@ namespace nasl.ui {
       snippets: [
         {
           title: '单选项',
-          code: '<el-radio><el-text text="单选项"></el-text></el-radio>',
+          code: '<el-radio value="value"><el-text text="单选项"></el-text></el-radio>',
         },
+        // {
+        //   title: '单选按钮',
+        //   code: '<el-radio-button value="value"><el-text text="单选按钮"></el-text></el-radio-button>',
+        // },
       ],
     })
     slotDefault: () => Array<ViewComponent>;
@@ -210,7 +173,7 @@ namespace nasl.ui {
   @Component({
     title: '单选项',
     icon: 'radio',
-    description: '',
+    description: '单选项',
     group: 'Form',
   })
   export class ElRadio<T, V> extends ViewComponent {
@@ -223,26 +186,18 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '选项值',
-      description: '单选按钮的值。',
+      description: '单选按钮的值',
       setter: { concept: 'InputSetter' },
     })
     value: V;
 
     @Prop({
       group: '数据属性',
-      title: '是否选中',
-      description: '是否选中',
-      setter: { concept: 'SwitchSetter' },
+      title: '文本',
+      description: '单选按钮显示文本，如果未设置则作为值使用',
+      setter: { concept: 'InputSetter' },
     })
-    private checked: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '状态属性',
-      title: '可取消选中',
-      description: '是否允许取消选中',
-      setter: { concept: 'SwitchSetter' },
-    })
-    allowUncheck: nasl.core.Boolean = false;
+    label: string | number | boolean;
 
     @Prop({
       group: '状态属性',
@@ -253,9 +208,28 @@ namespace nasl.ui {
     disabled: nasl.core.Boolean;
 
     @Prop({
+      group: '样式属性',
+      title: '显示边框',
+      description: '是否显示边框',
+      setter: { concept: 'SwitchSetter' },
+    })
+    border: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '尺寸',
+      description: '单选框尺寸，仅在 border 为真时有效',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '小' }, { title: '默认' }, { title: '大' }],
+      },
+    })
+    size: 'small' | 'default' | 'large';
+
+    @Prop({
       group: '主要属性',
-      title: 'HTML 元素原生标签',
-      description: 'HTML 元素原生属性',
+      title: 'HTML元素原生name属性',
+      description: 'HTML元素原生属性',
       setter: { concept: 'InputSetter' },
     })
     private name: nasl.core.String;
@@ -266,15 +240,78 @@ namespace nasl.ui {
     })
     onChange: (event: V) => any;
 
-    @Event({
-      title: '点击',
-      description: '点击时触发，一般用于外层阻止冒泡场景',
+    @Slot({
+      title: 'Default',
+      description: '单选按钮内容，同 label',
     })
-    onClick: (event: MouseEvent) => any;
+    slotDefault: () => Array<ViewComponent>;
+  }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      parentAccept: "target.tag === 'el-radio-group'",
+    },
+  })
+  @Component({
+    title: '单选按钮',
+    icon: 'radio-button',
+    description: '单选按钮',
+    group: 'Form',
+  })
+  export class ElRadioButton<T, V> extends ViewComponent {
+    constructor(options?: Partial<ElRadioButtonOptions<T, V>>) {
+      super();
+    }
+  }
+
+  export class ElRadioButtonOptions<T, V> extends ViewComponentOptions {
+    @Prop({
+      group: '数据属性',
+      title: '选项值',
+      description: '单选按钮的值',
+      setter: { concept: 'InputSetter' },
+    })
+    value: V;
+
+    @Prop({
+      group: '数据属性',
+      title: '文本',
+      description: '单选按钮显示文本，如果未设置则作为值使用',
+      setter: { concept: 'InputSetter' },
+    })
+    label: string | number | boolean;
+
+    @Prop({
+      group: '状态属性',
+      title: '禁用',
+      description: '是否为禁用态',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      group: '样式属性',
+      title: '尺寸',
+      description: '单选框尺寸',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '小' }, { title: '默认' }, { title: '大' }],
+      },
+    })
+    size: 'small' | 'default' | 'large';
+
+    @Prop({
+      group: '主要属性',
+      title: 'HTML元素原生name属性',
+      description: 'HTML元素原生属性',
+      setter: { concept: 'InputSetter' },
+    })
+    private name: nasl.core.String;
 
     @Slot({
       title: 'Default',
-      description: '单选按钮内容，同 label。',
+      description: '单选按钮内容，同 label',
     })
     slotDefault: () => Array<ViewComponent>;
   }
@@ -311,14 +348,7 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItem',
-        excludes: [
-          'slotDefault',
-          'useRangeValue',
-          'startFieldName',
-          'endFieldName',
-          'startInitialValue',
-          'endInitialValue',
-        ],
+        excludes: ['slotDefault', 'useRangeValue', 'startFieldName', 'endFieldName', 'startInitialValue', 'endInitialValue'],
       },
       {
         name: 'ElRadioGroup',
@@ -331,7 +361,9 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormRadioGroup<T, V> extends ViewComponent {
-    constructor(options?: Partial<ElFormRadioGroupOptions<T, V> & ElFormItemProOptions & Omit<ElRadioGroupOptions<T, V>, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormRadioGroupOptions<T, V> & ElFormItemProOptions & Omit<ElRadioGroupOptions<T, V>, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }
