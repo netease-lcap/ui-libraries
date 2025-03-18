@@ -68,6 +68,7 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .description('创建依赖库组件、逻辑...')
     .option('--component', '创建组件')
     .option('--logic', '创建逻辑')
+    .option('--schema <schema>', '通过 schema 文件创建组件')
     .action(async (options) => {
       await create(cwd, {
         ...options,

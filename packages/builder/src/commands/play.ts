@@ -1,7 +1,8 @@
-import * as extensionUI from '@lcap/extension-ui';
 import startWatcher, { getBuildConfig } from './watch';
 import { routes, createAPIMiddleware } from '../play';
 import { startPreview } from '../play/preview';
+
+const extensionUI = require('@lcap/extension-ui');
 
 export interface PlayCommandOptions {
   port?: number;

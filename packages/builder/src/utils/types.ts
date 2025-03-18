@@ -6,5 +6,6 @@ export interface ComponentMetaInfo {
   icon?: string;
   tsPath: string;
   type?: string;
+  sourceName?: string;
   children?: ComponentMetaInfo[];
 }

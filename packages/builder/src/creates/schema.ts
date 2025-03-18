@@ -5,7 +5,7 @@ import prompts from 'prompts';
 import { kebabCase, upperFirst } from 'lodash';
 import { ProjectMetaInfo } from '../utils/project';
 import { createComponent, getTagName, COMPONENTS_FOLDER } from './component';
-import { Schema, WriteOptions } from '../utils/lcap';
+import { getComponentMetaInfos, Schema, WriteOptions } from '../utils/lcap';
 
 const EMPTY_API_TS = ({
   pkgName,
@@ -164,46 +164,65 @@ export async function executeCreateForSchema(rootPath: string, metaInfo: Project
     throw new Error(`schema 文件 ${schema} 中没有组件`);
   }
 
-  const components = material.components.filter((c) => !name || c.name === name);
+  const apiComponentList = getComponentMetaInfos(rootPath, true);
+
+  const components = material.components.filter((c) => (!name || c.name === name) && !apiComponentList.find((l) => l.sourceName === c.name));
   if (components.length === 0) {
-    throw new Error(`schema 文件 ${schema} 中没有找到组件 ${name}`);
+    throw new Error(`schema 文件 ${schema} 中没有可添加的组件`);
   }
 
-  if (!material.write) {
-    const answers = await prompts([
-      {
-        type: metaInfo.framework === 'react' ? null : 'select',
-        name: 'type',
-        message: '请选择端',
-        initial: 0,
-        choices: [
-          { value: 'pc', title: 'PC端' },
-          { value: 'h5', title: 'H5端' },
-          { value: 'both', title: '全部' },
-        ],
+  const answers = await prompts([
+    {
+      type: 'multiselect',
+      name: 'components',
+      message: '请选择要添加的组件：',
+      choices: components.map((c) => ({ value: c.name, title: c.name })),
+    },
+    {
+      type: metaInfo.framework === 'react' || material.write ? null : 'select',
+      name: 'type',
+      message: '请选择端',
+      initial: 0,
+      choices: [
+        { value: 'pc', title: 'PC端' },
+        { value: 'h5', title: 'H5端' },
+        { value: 'both', title: '全部' },
+      ],
+    },
+    {
+      type: !material.write ? 'text' : null,
+      name: 'prefix',
+      message: '请输入添加组件名称前缀（例如 cwx）：',
+      initial: 'cwx',
+      format: (val) => {
+        if (!val) {
+          return '';
+        }
+        return val.trim().toLowerCase();
       },
-      {
-        type: 'text',
-        name: 'prefix',
-        message: '请输入添加组件名称前缀（例如 cwx）：',
-        initial: 'cwx',
-        format: (val) => {
-          if (!val) {
-            return '';
-          }
-          return val.trim().toLowerCase();
-        },
-      },
-    ]);
+    },
+  ]);
 
-    material.write = answers;
+  if (!material.write) {
+    material.write = {
+      prefix: answers.prefix,
+      type: answers.type,
+    };
 
     fs.writeJSONSync(schema, material, { spaces: 2 });
   }
 
-  for (let i = 0; i < components.length; i++) {
-    const component = components[i];
-    // eslint-disable-next-line no-await-in-loop
+  if (answers.components.length === 0) {
+    throw new Error('请选择要添加的组件');
+  }
+
+  const writeOptions = material.write;
+  answers.components.forEach((name) => {
+    const component = components.find((c) => c.name === name);
+    if (!component) {
+      throw new Error(`schema 文件 ${schema} 中没有找到组件 ${name}`);
+    }
+
     createForSchema(rootPath, metaInfo, {
       meta: {
         name: material.name,
@@ -212,8 +231,8 @@ export async function executeCreateForSchema(rootPath: string, metaInfo: Project
         framework: material.framework,
         frameworkVersion: material.frameworkVersion,
       },
-      write: material.write,
+      write: writeOptions,
       component,
     });
-  }
+  });
 }
