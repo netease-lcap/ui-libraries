@@ -17,7 +17,7 @@ export async function startPreview(rootPath: string, https: boolean = false) {
 
   const commands: string[] = [
     'npx lcap-ide-server-proxy',
-    `--PLATFORM_URL=${platformURL}`,
+    `--PLATFORM_URL=${platformURL.startsWith('https') ? platformURL.replace('https:', 'http:') : platformURL}`,
     '--LIB_PATH=.',
   ];
 
@@ -30,7 +30,7 @@ export async function startPreview(rootPath: string, https: boolean = false) {
   ];
 
   try {
-    previewURL = `${platformURL.endsWith('/') ? platformURL : `${platformURL}/`}designer/uidev?appId=demo&branch=feauter-uidev314&${params.join('&')}`;
+    previewURL = `${platformURL.endsWith('/') ? platformURL : `${platformURL}/`}designer/uidev?appId=demo&branch=feature-uidev3142&${params.join('&')}`;
     logger.info(`ide 预览服务启动中...., 平台地址：${platformURL}`);
     await exec(commands.join(' '));
   } catch (e) {
