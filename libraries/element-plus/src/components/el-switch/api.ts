@@ -23,6 +23,7 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '绑定值',
+      sync: true,
       description: '绑定值，应等于 active-value 或 inactive-value，默认为布尔类型',
       setter: { concept: 'InputSetter' },
     })

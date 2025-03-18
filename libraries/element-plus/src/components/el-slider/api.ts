@@ -133,9 +133,9 @@ namespace nasl.ui {
       group: '样式属性',
       title: '高度',
       description: '滑块高度，垂直模式时必填',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'NumberInputSetter' },
     })
-    height: nasl.core.String;
+    height: nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
