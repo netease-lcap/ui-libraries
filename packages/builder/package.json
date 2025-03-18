@@ -8,7 +8,8 @@
     "bin",
     "lib",
     "templates",
-    "input"
+    "input",
+    "typings.d.ts"
   ],
   "exports": {
     ".": {
@@ -24,6 +25,7 @@
     "./input/vue3/stories-preview": "./input/vue3/stories-preview.js",
     "./input/react/stories-preview": "./input/react/stories-preview.jsx",
     "./input/theme.html": "./input/theme.html",
+    "./typings.d.ts": "./typings.d.ts",
     "./package.json": "./package.json"
   },
   "bin": {
