@@ -27,7 +27,7 @@ export async function startPreview(rootPath: string, https: boolean = false) {
   const port = 3000;
 
   try {
-    previewURL = `${https ? 'https' : 'http'}://127.0.0.1:${port}/designer/uidev?appId=demo&branch=feauter-uidev314`;
+    previewURL = `${https ? 'https' : 'http'}://localhost:${port}/designer/uidev?appId=demo&branch=feauter-uidev314`;
     logger.info(`ide 预览服务启动中...., 平台地址：${https ? 'https' : 'http'}${platformURL}`);
     await exec(commands.join(' '));
   } catch (e) {
