@@ -50,18 +50,13 @@ const handleDataSouceToFn = _.cond([
 
 export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
   const [resultData, setResult] = useState({});
-  // const stop = useRef(() => {});
-
+  const resultRef = useRef({});
   const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
-  const result = useMemo(() => useRequest(dataSourceFn, options), [dataSourceFn]) as any;
-  useEffect(() => {
-    watch(
-      () => result,
-      (value) => setResult({ value }),
-      { immediate: true, deep: true },
-    );
-  }, []);
+  resultRef.value = useMemo(() => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }), [dataSourceFn]);
 
+  useEffect(() => {
+    watch(resultRef, (value) => setResult({ value }), { immediate: true, deep: true });
+  }, []);
   const { data, run, loading } = resultData
     ?? ({} as {
       data?: DataSourceArrayType;
