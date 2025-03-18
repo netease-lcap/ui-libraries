@@ -1,3 +1,4 @@
+import * as extensionUI from '@lcap/extension-ui';
 import startWatcher, { getBuildConfig } from './watch';
 import { routes, createAPIMiddleware } from '../play';
 import { startPreview } from '../play/preview';
@@ -10,16 +11,20 @@ export interface PlayCommandOptions {
 export default async (rootPath: string, { port, https }: PlayCommandOptions) => {
   const buildConfigs = await getBuildConfig();
 
-  // 文件监听、静态服务器 websocket, 请求
+  const base = '/play';
+  // 文件监听、静态服务器 websocket, 请求转发
   await startWatcher(
     rootPath,
     {
       port,
       https,
-      openURL: '/play',
+      openURL: `${base}/index.html`,
       middlewares: [
         createAPIMiddleware(routes, {
           ...buildConfigs.buildOptions,
+        }),
+        extensionUI({
+          base,
         }),
       ],
       onFirstBuilded: () => {
@@ -28,5 +33,4 @@ export default async (rootPath: string, { port, https }: PlayCommandOptions) => 
     },
     buildConfigs,
   );
-  // TODO open 具体地址 /play/index.html
 };
