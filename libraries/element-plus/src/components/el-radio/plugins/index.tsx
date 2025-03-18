@@ -14,16 +14,13 @@ export function handleDataSource(props) {
   const deletePropsList = props.get($deletePropsList, []).concat($dataSourceDeleteField);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
-
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
   const dataSourceSlots = useMemo(
     () => (_.isNil(dataConfig)
         ? {}
         : {
-            default: () => _.map(dataSource, (item) => (
-              <el-radio {...item}>{slots.item ? slots.item({ item }) : item.label}</el-radio>
-              )),
+            default: () => _.map(dataSource, (item) => <el-radio {...item}>{slots.item ? slots.item({ item }) : item.label}</el-radio>),
           }),
     [dataSource, slots, dataConfig],
   );
@@ -34,20 +31,5 @@ export function handleDataSource(props) {
     loading,
     data,
     slots: _.assign(slots, dataSourceSlots),
-  };
-}
-export function handleValue(props) {
-  const [value, setValue] = useState([]);
-  const propsValue = _.isEmpty(props.get('modelValue')) ? value : props.get('modelValue');
-  const onChangeProps = props.get('onChange', () => {});
-  const emit = props.get('emit');
-  return {
-    onChange: _.wrap(onChangeProps, (fn, value) => {
-      _.attempt(fn, value);
-      emit('update:modelValue', value);
-      setValue(value);
-    }),
-    modelValue: propsValue,
-    formTagName: 'el-form-radio-group',
   };
 }
