@@ -114,6 +114,7 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .description('api.ts可视化编辑')
     .option('--port <port>', '端口')
     .option('--https', '启动https')
+    .option('--noPreview', '不启动预览')
     .action(async ({ ...args }) => {
       await play(cwd, args);
     });

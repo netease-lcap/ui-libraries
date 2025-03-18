@@ -7,9 +7,10 @@ const extensionUI = require('@lcap/extension-ui');
 export interface PlayCommandOptions {
   port?: number;
   https?: boolean;
+  noPreview?: boolean;
 }
 
-export default async (rootPath: string, { port, https }: PlayCommandOptions) => {
+export default async (rootPath: string, { port, https, noPreview }: PlayCommandOptions) => {
   const buildConfigs = await getBuildConfig();
 
   const base = '/play';
@@ -19,7 +20,7 @@ export default async (rootPath: string, { port, https }: PlayCommandOptions) => 
     {
       port,
       https,
-      openURL: `${base}/index.html`,
+      openURL: `${base}/index.html${noPreview ? '?editor=1' : ''}`,
       middlewares: [
         createAPIMiddleware(routes, {
           ...buildConfigs.buildOptions,
@@ -29,7 +30,7 @@ export default async (rootPath: string, { port, https }: PlayCommandOptions) => 
         }),
       ],
       onFirstBuilded: () => {
-        startPreview(rootPath, https);
+        !noPreview && startPreview(rootPath, https);
       },
     },
     buildConfigs,
