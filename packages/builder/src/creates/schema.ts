@@ -188,58 +188,69 @@ export async function executeCreateForSchema(rootPath: string, metaInfo: Project
 
   const apiComponentList = getComponentMetaInfos(rootPath, true);
 
-  const components = material.components.filter((c) => (!name || c.name === name) && !apiComponentList.find((l) => l.sourceName === c.name));
+  const components = material.components.filter((c) => (
+    name ? c.name === name
+      : (!apiComponentList.find((l) => l.sourceName === c.name))
+  ));
   if (components.length === 0) {
     throw new Error(`schema 文件 ${schema} 中没有可添加的组件`);
   }
 
-  const answers = await prompts([
-    {
-      type: 'multiselect',
-      name: 'components',
-      message: '请选择要添加的组件：',
-      choices: components.map((c) => ({ value: c.name, title: c.name })),
-    },
-    {
-      type: metaInfo.framework === 'react' || material.write ? null : 'select',
-      name: 'type',
-      message: '请选择端',
-      initial: 0,
-      choices: [
-        { value: 'pc', title: 'PC端' },
-        { value: 'h5', title: 'H5端' },
-        { value: 'both', title: '全部' },
-      ],
-    },
-    {
-      type: !material.write ? 'text' : null,
-      name: 'prefix',
-      message: '请输入添加组件名称前缀（例如 cwx）：',
-      initial: 'cwx',
-      format: (val) => {
-        if (!val) {
-          return '';
-        }
-        return val.trim().toLowerCase();
+  let createComponentNames: string[] = [];
+
+  if (name && material.write) {
+    createComponentNames = [name];
+  } else {
+    const answers = await prompts([
+      {
+        type: 'multiselect',
+        name: 'components',
+        message: '请选择要添加的组件：',
+        choices: components.map((c) => ({ value: c.name, title: c.name })),
       },
-    },
-  ]);
+      {
+        type: metaInfo.framework === 'react' || material.write ? null : 'select',
+        name: 'type',
+        message: '请选择端',
+        initial: 0,
+        choices: [
+          { value: 'pc', title: 'PC端' },
+          { value: 'h5', title: 'H5端' },
+          { value: 'both', title: '全部' },
+        ],
+      },
+      {
+        type: !material.write ? 'text' : null,
+        name: 'prefix',
+        message: '请输入添加组件名称前缀（例如 cwx）：',
+        initial: 'cwx',
+        format: (val) => {
+          if (!val) {
+            return '';
+          }
+          return val.trim().toLowerCase();
+        },
+      },
+    ]);
 
-  if (!material.write) {
-    material.write = {
-      prefix: answers.prefix,
-      type: answers.type,
-    };
+    if (!material.write) {
+      material.write = {
+        prefix: answers.prefix,
+        type: answers.type,
+      };
 
-    fs.writeJSONSync(schema, material, { spaces: 2 });
+      fs.writeJSONSync(schema, material, { spaces: 2 });
+    }
+
+    createComponentNames = answers.components;
   }
 
-  if (answers.components.length === 0) {
+  if (createComponentNames.length === 0) {
     throw new Error('请选择要添加的组件');
   }
 
   const writeOptions = material.write;
-  answers.components.forEach((name) => {
+  createComponentNames.forEach((name) => {
     const component = components.find((c) => c.name === name);
     if (!component) {
       throw new Error(`schema 文件 ${schema} 中没有找到组件 ${name}`);
