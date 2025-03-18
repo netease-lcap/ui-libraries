@@ -1,14 +1,10 @@
 import { ElPagination, ElConfigProvider } from 'element-plus';
-
 import _ from 'lodash';
-// import zhCn from "element-plus/lib/locale/lang/zh-cn"
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
-
 import fp from 'lodash/fp';
 import omit from 'lodash/omit';
-import { useMemo, useRef, useCallback, useEffect, useState, useControllableValue } from '@/plugins/hooks';
+import { useMemo, useRef, useCallback, useEffect, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
-
 import { useRequestDataSource } from '@/plugins/common/dataSource';
 
 export function handleSortState(props) {
@@ -219,12 +215,10 @@ export function handlePaginationRender(props) {
             style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
             v-slots={slots}
           />
-          <ElConfigProvider locale={zhCn}>
-            {props.pagination && (
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                <ElPagination {...props.pageProps} total={props.pageProps.total} />
-              </div>
-            )}
+          <ElConfigProvider v-if={props.pagination} locale={zhCn}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+              <ElPagination {...props.pageProps} total={props.pageProps.total} />
+            </div>
           </ElConfigProvider>
         </div>,
       ];

@@ -238,7 +238,7 @@ export function useControllableValue(props: any, options: Options = {}) {
   const emit = props.get('emit');
   const vProps = vnode.props || {};
   const {
-    defaultValue = '',
+    defaultValue,
     defaultValuePropName = 'defaultValue',
     valuePropName = 'modelValue',
     trigger = `onUpdate:${valuePropName}`,

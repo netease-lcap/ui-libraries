@@ -31,27 +31,80 @@ namespace nasl.ui {
       super();
     }
 
-    @Prop({
-      title: '选中值',
-    })
-    value: ElTreeOptions<T, V, M>['value'];
+    // @Prop({
+    //   title: '选中值',
+    // })
+    // value: ElTreeOptions<T, V, M>['value'];
 
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',
     })
     reload(): void {}
+    // @Method({
+    //   title: '获取节点',
+    //   description: '通过 key 或 data 获取节点',
+    // })
+    // getNode(data: T | V): any { return null; }
+
+    // @Method({
+    //   title: '获取当前选中节点',
+    //   description: '获取当前选中节点的数据',
+    // })
+    // getCurrentNode(): any { return null; }
+
+    // @Method({
+    //   title: '设置当前选中节点',
+    //   description: '通过 key 或 data 设置当前选中节点',
+    // })
+    // setCurrentNode(data: T | V): void {}
+
+    // @Method({
+    //   title: '设置节点是否选中',
+    //   description: '通过 key 或 data 设置节点是否选中',
+    // })
+    // setChecked(data: T | V, checked: nasl.core.Boolean, deep: nasl.core.Boolean): void {}
+
+    // @Method({
+    //   title: '获取选中节点',
+    //   description: '如果节点可以被选中，则返回目前选中的节点数据数组',
+    // })
+    // getCheckedNodes(): any { return null; }
+
+    // @Method({
+    //   title: '获取半选中节点',
+    //   description: '如果节点可以被选中，则返回目前半选中的节点数据数组',
+    // })
+    // getHalfCheckedNodes(): any { return null; }
+
+    // @Method({
+    //   title: '展开指定节点',
+    //   description: '展开指定节点的所有子节点',
+    // })
+    // expandNode(data: T | V): void {}
+
+    // @Method({
+    //   title: '折叠指定节点',
+    //   description: '折叠指定节点的所有子节点',
+    // })
+    // collapseNode(data: T | V): void {}
+
+    // @Method({
+    //   title: '过滤节点',
+    //   description: '对树节点进行筛选操作',
+    // })
+    // filter(query: nasl.core.String): void {}
   }
 
   export class ElTreeOptions<T, V, M extends nasl.core.Boolean> extends ViewComponentOptions {
-    @Prop({
-      group: '数据属性',
-      sync: true,
-      title: '值',
-      description: '选中值',
-      setter: { concept: 'InputSetter' },
-    })
-    value: M extends true ? nasl.collection.List<V> : V;
+    // @Prop({
+    //   group: '数据属性',
+    //   sync: true,
+    //   title: '值',
+    //   description: '选中值',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // value: M extends true ? nasl.collection.List<V> : V;
 
     @Prop({
       group: '交互属性',
@@ -118,15 +171,6 @@ namespace nasl.ui {
       setter: { concept: 'PropertySelectSetter' },
     })
     parentField: (item: T) => V;
-
-    @Prop({
-      group: '数据属性',
-      title: '子级值字段',
-      description: '如果数据源是树形结构，需要指定子级字段，默认为children',
-      docDescription: '集合的元素类型中，用于标识子节点的属性',
-      setter: { concept: 'PropertySelectSetter' },
-    })
-    childrenField: (item: T) => any;
 
     @Prop({
       group: '数据属性',
@@ -203,7 +247,7 @@ namespace nasl.ui {
     @Prop({
       group: '交互属性',
       title: '展开全部节点',
-      description: '是否默认展开所有节点',
+      description: '是否默认展开所有节点, 仅首次生效',
       setter: { concept: 'SwitchSetter' },
     })
     defaultExpandAll: nasl.core.Boolean = false;
@@ -212,10 +256,27 @@ namespace nasl.ui {
       group: '主要属性',
       sync: true,
       title: '默认展开的节点的 key 的数组',
-      description: '默认展开的节点的 key 的数组',
+      description: '默认展开的节点的 key 的数组, 仅首次生效',
       setter: { concept: 'InputSetter' },
     })
     defaultExpandedKeys: nasl.collection.List<V> = [];
+
+    @Prop({
+      group: '主要属性',
+      title: '是否虚拟滚动',
+      description: '是否开启虚拟滚动',
+      setter: { concept: 'SwitchSetter' },
+    })
+    virtualize: nasl.core.Boolean = false;
+
+    @Prop<ElTreeOptions<T, V, M>, 'height'>({
+      group: '主要属性',
+      title: '高度',
+      description: '高度虚拟滚动时需要设置高度',
+      setter: { concept: 'NumberInputSetter' },
+      if: (_) => _.virtualize !== false,
+    })
+    height: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -232,7 +293,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '默认选中的节点',
-      description: '默认选中的节点的 key 的数组',
+      description: '默认选中的节点的 key 的数组, 仅首次生效',
       setter: { concept: 'InputSetter' },
     })
     defaultCheckedKeys: nasl.collection.List<V> = [];
@@ -271,7 +332,7 @@ namespace nasl.ui {
       title: '当前选中节点改变时',
       description: '当前选中节点改变时触发',
     })
-    onCurrentChange: (data: T ) => any;
+    onCurrentChange: (data: T) => any;
 
     @Event({
       title: '节点展开时',

@@ -1,12 +1,10 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
 import { ElSelectV2 } from 'element-plus';
-import { useMemo, GetAccumulatedMapType } from '@/plugins/hooks';
+import { useMemo, useCallback, GetAccumulatedMapType } from '@/plugins/hooks';
 import { SelectAccumulateTypes } from './type';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-// import { ElSelect } from '../index';
-import { useCallback } from '../../../plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
