@@ -26,7 +26,7 @@ export async function startPreview(rootPath: string, https: boolean = false) {
     `IDE_VERSION=${version}`,
     `LIB_TYPE=${componentList[0].type === 'h5' ? 'h5' : 'pc'}`,
     `LIB_FRAMEWORK_KIND=${meta.framework}`,
-    `LIB_SERVICE=${https ? 'https' : 'http'}://localhost:${port}/`,
+    `LIB_SERVICE=http://localhost:${port}/`,
   ];
 
   try {
