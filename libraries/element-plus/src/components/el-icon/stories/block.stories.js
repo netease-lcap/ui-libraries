@@ -21,6 +21,6 @@ export default {
 export const Default = {
   name: '默认示例',
   render: () => ({
-    template: '<el-icon name="search"></el-icon>',
+    template: '<el-icon name="Search"></el-icon>',
   }),
 };

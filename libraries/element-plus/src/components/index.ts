@@ -24,7 +24,7 @@ export { ElCard, ElCardPlus } from './el-card';
 export { ElRow, ElCol } from './el-row';
 export { ElPagination } from './el-pagination';
 export { ElDescriptions, ElDescriptionsItem } from './el-descriptions';
-export { ElImage } from './el-image';
+export { ElImage, ElImageViewer } from './el-image';
 export { ElScrollbar } from './el-scrollbar';
 export { ElMenu, ElMenuItem, ElMenuItemGroup, ElSubMenu } from './el-menu';
 export { ElUpload } from './el-upload';
