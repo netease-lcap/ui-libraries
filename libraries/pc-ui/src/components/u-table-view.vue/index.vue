@@ -890,8 +890,9 @@ export default {
                 this.timer = undefined;
 
                 // 当最外层加了border后，会导致内部的宽度大于tablewrap的宽度，会出滚动条：Bug-2792431057259520
-                let rootWidth = this.$el.offsetWidth;
-                const tablewrapWidth = this.$refs.tableRender.getRefs().tablewrap && this.$refs.tableRender.getRefs().tablewrap.offsetWidth;
+                // 3088409490416384：用样式设置了tablewrap的border，使用offsetWith会使外部的宽度一直往上加2px, 用clientWidth，不包含border宽度
+                let rootWidth = this.$el.clientWidth;
+                const tablewrapWidth = this.$refs.tableRender.getRefs().tablewrap && this.$refs.tableRender.getRefs().tablewrap.clientWidth;
                 if (tablewrapWidth) {
                     rootWidth = tablewrapWidth;
                 }
