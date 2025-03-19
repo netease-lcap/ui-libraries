@@ -1250,68 +1250,77 @@ export default {
                 //处理分页衔接处数据合并
                 const pageSize = this.pageSize;
                 const count = parseInt(content.length / pageSize);
-                for (let i = 1; i <= count; i++) {
-                    const rowIndex = i * pageSize + headerRowCount - 1;
-                    // 当前页最后一行
-                    const itemData = content[rowIndex];
-                    if (!itemData) {
-                        break;
-                    }
-                    // 下一页第一行
-                    const itemData1 = content[rowIndex + 1];
-                    if (!itemData1) {
-                        break;
-                    }
-                    // 循环列
-                    for (let j = 0; j < itemData1.length; j++) {
-                        // 如果列有自动合并
-                        if (this.visibleColumnVMs[j].autoRowSpan) {
-                            // 3020499352090112，自动合并的值字段和列展示的数据不是同一个，数据相同，列字段的值不同，不需要合并
-                            let tempRowIndex = rowIndex;
-                            let itemDataData = itemData;
-                            while(itemDataData && itemDataData[j] && !itemDataData[j].assistData) {
-                                itemDataData = content[tempRowIndex];
-                                tempRowIndex--;
-                            }
-                            if(itemDataData[j].assistData && itemData1[j].assistData && itemDataData[j].assistData.currentValue !== itemData1[j].assistData.currentValue) {
-                                continue;
-                            }
-                            // 当前页最后
-                            const mergsMapItem = mergesMap.find((item) => item.row + item.rowspan - 1 === rowIndex && item.col === j);
-                            // 当前页有合并的数据
-                            if(mergsMapItem) {
-                                // 下一页第一行和下面的行有合并数据
-                                const mergsMapItem1Index = mergesMap.findIndex((item) => item.row === rowIndex + 1 && item.col === j);
-                                if (mergsMapItem1Index !== -1) {
-                                    // 下一页第一行和下面的行有合并数据
-                                    mergsMapItem.rowspan += mergesMap[mergsMapItem1Index].rowspan;
-                                    mergesMap.splice(mergsMapItem1Index, 1);
-                                } else {
-                                    // 下一页第一行和下面的行没有合并数据
-                                    mergsMapItem.rowspan += 1;
+                // 3084107844783616：有列不需要导出时，列对应需要修正
+                const hasAutoRowSpan = this.visibleColumnVMs.some((vm) => vm.autoRowSpan);
+                if (hasAutoRowSpan) { // 如果列有自动合并
+                    for (let i = 1; i <= count; i++) {
+                        const rowIndex = i * pageSize + headerRowCount - 1;
+                        // 当前页最后一行
+                        const itemData = content[rowIndex];
+                        if (!itemData) {
+                            break;
+                        }
+                        // 下一页第一行
+                        const itemData1 = content[rowIndex + 1];
+                        if (!itemData1) {
+                            break;
+                        }
+                        // 循环列
+                        for (let j = 0; j < itemData1.length; j++) {
+                            if (itemData1[j].assistData) {
+                                // 往上查找有assistData数据的那一行数据
+                                let tempRowIndex = rowIndex;
+                                let itemDataData = itemData;
+                                let assistDataItem = itemDataData[j];
+                                while (assistDataItem && !assistDataItem.assistData && tempRowIndex > 0) {
+                                    itemDataData = content[tempRowIndex];
+                                    assistDataItem = itemDataData[j];
+                                    tempRowIndex--;
                                 }
-                                // 下一页第一行的数据赋值给当前页最后一行
-                                itemData1[j] = Object.assign({}, itemData[j]);
-                            } else {
-                                // 只有最后一行和下一页第一行和下面的行有合并数据
-                                const mergsMapItem1Index = mergesMap.findIndex((item) => item.row === rowIndex + 1 && item.col === j);
-                                if (mergsMapItem1Index !== -1) {
-                                    mergesMap[mergsMapItem1Index].row -= 1;
-                                    mergesMap[mergsMapItem1Index].rowspan += 1;
-                                    const itemData2 = content[rowIndex + 2];
-                                    if(itemData2) {
-                                        itemData1[j] = Object.assign({}, itemData2[j]);
+                                if (!itemDataData || !itemDataData[j] || !itemDataData[j].assistData) { // 没有assistData的表格不是自动合并列，不需要处理
+                                    continue;
+                                }
+                                // 3020499352090112，自动合并的值字段和列展示的数据不是同一个，数据相同，列字段的值不同，不需要合并
+                                if (itemDataData && itemDataData[j] && itemDataData[j].assistData && itemData1[j].assistData && itemDataData[j].assistData.currentValue !== itemData1[j].assistData.currentValue) {
+                                    continue;
+                                }
+                                // 当前页最后
+                                const mergsMapItem = mergesMap.find((item) => item.row + item.rowspan - 1 === rowIndex && item.col === j);
+                                // 当前页有合并的数据
+                                if(mergsMapItem) {
+                                    // 下一页第一行和下面的行有合并数据
+                                    const mergsMapItem1Index = mergesMap.findIndex((item) => item.row === rowIndex + 1 && item.col === j);
+                                    if (mergsMapItem1Index !== -1) {
+                                        // 下一页第一行和下面的行有合并数据
+                                        mergsMapItem.rowspan += mergesMap[mergsMapItem1Index].rowspan;
+                                        mergesMap.splice(mergsMapItem1Index, 1);
+                                    } else {
+                                        // 下一页第一行和下面的行没有合并数据
+                                        mergsMapItem.rowspan += 1;
                                     }
+                                    // 下一页第一行的数据赋值给当前页最后一行
+                                    itemData1[j] = Object.assign({}, itemData[j]);
                                 } else {
-                                    // 只有最后一行和第一行需要合并
-                                    if (itemData[j] && itemData1[j] && itemData[j].v === itemData1[j].v) {
-                                        mergesMap.push({
-                                            col: j,
-                                            row: rowIndex,
-                                            rowspan: 2,
-                                            colspan: 1,
-                                        });
-                                        itemData1[j].v = '';
+                                    // 只有最后一行和下一页第一行和下面的行有合并数据
+                                    const mergsMapItem1Index = mergesMap.findIndex((item) => item.row === rowIndex + 1 && item.col === j);
+                                    if (mergsMapItem1Index !== -1) {
+                                        mergesMap[mergsMapItem1Index].row -= 1;
+                                        mergesMap[mergsMapItem1Index].rowspan += 1;
+                                        const itemData2 = content[rowIndex + 2];
+                                        if(itemData2) {
+                                            itemData1[j] = Object.assign({}, itemData2[j]);
+                                        }
+                                    } else {
+                                        // 只有最后一行和第一行需要合并
+                                        if (itemData[j] && itemData1[j] && itemData[j].v === itemData1[j].v) {
+                                            mergesMap.push({
+                                                col: j,
+                                                row: rowIndex,
+                                                rowspan: 2,
+                                                colspan: 1,
+                                            });
+                                            itemData1[j].v = '';
+                                        }
                                     }
                                 }
                             }
@@ -1456,11 +1465,11 @@ export default {
                                     v: title,
                                 };
                                 if (this.visibleColumnVMs[colIndex]?.autoRowSpan) {
-                                const field = this.visibleColumnVMs[colIndex].field;
-                                const currentData = this.exportData[rowIndex];
-                                data.assistData = {
+                                    const field = this.visibleColumnVMs[colIndex].field;
+                                    const currentData = this.exportData[rowIndex];
+                                    data.assistData = {
                                         currentValue: this.$at(currentData, field),
-                                }
+                                    }
                                 }
                                 if (includeStyles) {
                                     const style = getXslxStyle(node);
