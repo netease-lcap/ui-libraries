@@ -3,7 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 10,
-    sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/upload',
+    sourceDocURL: 'https://tdesign.tencent.com/vue/components/upload',
     ideusage: {
       idetype: 'container',
     },
