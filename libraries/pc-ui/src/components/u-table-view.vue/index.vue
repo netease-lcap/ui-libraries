@@ -1844,7 +1844,7 @@ export default {
           return this.currentDataSource.isSimpleItem && item ? item.simple : item;
         },
         getValueField() {
-          return this.currentDataSource.isSimpleItem && !this.valueField ? 'simple' : this.valueField;
+          return this.currentDataSource && this.currentDataSource.isSimpleItem && !this.valueField ? 'simple' : this.valueField;
         },
         /**
          * 获取所有选中行
