@@ -571,6 +571,7 @@ export default {
               this.$refs[`item_${i}`][0].style['vertical-align'] = 'middle';
               const itemWidth =
                 this.$refs[`item_${i}`][0].offsetWidth + marginWidth;
+
               if (inputWidth - itemWidth < 0) {
                 break;
               }
@@ -578,17 +579,21 @@ export default {
               this.collapseCounter += 1;
             }
           }
-          // 计算最后一个元素能否加入输入框
           this.$nextTick(() => {
-            const lastItem = this.$refs[`item_${this.selectedVMs.length - 1}`];
-            if (lastItem) {
-              lastItem[0].style.display = 'inline-block';
-              lastItem[0].style['vertical-align'] = 'middle';
-              lastAddElementWidth = lastItem[0].offsetWidth;
+            // 计算最后一个元素能否加入输入框 (仅在前面都可以显示时)
+            if (this.collapseCounter === this.selectedVMs.length - 1) {
+              const lastItem = this.$refs[`item_${this.selectedVMs.length - 1}`];
+              if (lastItem) {
+                lastItem[0].style.display = 'inline-block';
+                lastItem[0].style['vertical-align'] = 'middle';
+                lastAddElementWidth = lastItem[0].offsetWidth;
+              }
+              // 加上 “+N” 的宽度后判断最后一个是否显示
+              if (inputWidth > 0 && inputWidth + collapseTagWidth - lastAddElementWidth > 0) {
+                this.collapseCounter += 1;
+              }
             }
-            if (inputWidth > 0 && inputWidth - lastAddElementWidth > 0) {
-              this.collapseCounter += 1;
-            }
+
             // 隐藏掉超出输入框长度的元素
             if (
               this.collapseCounter === this.selectedVMs.length ||
