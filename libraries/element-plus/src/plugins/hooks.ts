@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, getCurrentInstance } from 'vue';
 import { PluginBase } from '@/types';
 
 interface Hook {
@@ -13,10 +13,17 @@ interface EffectHook {
   result: any;
 }
 
+interface Options {
+  defaultValue?: string | number | boolean;
+  defaultValuePropName?: string;
+  valuePropName?: string;
+  trigger?: string;
+  onChange?: (value: any) => void;
+}
 interface Fiber {
   workInProgressState: Hook;
   workInProgressEffect: EffectHook;
-  updateQueen: any[];
+  updateQueen: Set<any>;
   useStore: (selector: (store: any) => any) => any;
   setValue: (value: any) => void;
   storeKey: string | null;
@@ -46,7 +53,7 @@ function CreateFiberNode() {
     currentFiber: {
       workInProgressState,
       workInProgressEffect,
-      updateQueen: [],
+      updateQueen: new Set(),
       useStore: (selector: (store: any) => any) => selector,
       setValue: (value: any) => value,
       storeKey: null,
@@ -65,7 +72,11 @@ function CreateFiberNode() {
 }
 export const fiberNode = CreateFiberNode();
 
-export function useState(initialstate) {
+const getStateValue = _.cond([
+  [_.isObject, (state) => ('value' in state ? state.value : state)],
+  [_.stubTrue, (state) => state],
+]);
+export function useState(initialstate?) {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
 
@@ -74,6 +85,7 @@ export function useState(initialstate) {
     hook = {
       next: null,
       storeKey: Symbol('storeKey'),
+      isSetValue: false,
     };
     hook.next = hook;
     if (currentFiber.workInProgressState) {
@@ -85,26 +97,24 @@ export function useState(initialstate) {
     hook = currentFiber.workInProgressState.next;
     currentFiber.workInProgressState = currentFiber.workInProgressState.next;
   }
-  const state = currentFiber.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
+  const state = hook?.isSetValue ? currentFiber.useStore((store) => store.state[hook?.storeKey]) : initialstate;
   const localSetValue = (value) => {
-    const state = currentFiber.useStore((store) => store.state[hook?.storeKey] ?? initialstate);
+    hook.isSetValue = true;
+    const state = currentFiber.useStore((store) => store.state[hook?.storeKey]);
     if (_.isEqual(value, state.value)) {
       return;
     }
-    //  TODO:表单临时hack用了 后期优化一下
-    if (_.isFunction(value)) {
-      value = value(state);
-    }
-    currentFiber.updateQueen.push({ [hook.storeKey]: value });
+    currentFiber.updateQueen.add({ [hook.storeKey]: value });
     _.defer(() => {
-      if (!_.isEmpty(currentFiber.updateQueen)) {
-        const comit = currentFiber.updateQueen.reduce((pre, cur) => ({ ...pre, ...cur }), {});
+      if (currentFiber.updateQueen.size) {
+        const deleteQueue = Array.from(currentFiber.updateQueen);
+        const comit = Array.from(currentFiber.updateQueen).reduce((pre, cur) => ({ ...pre, ...cur }), {});
         currentFiber.setValue(comit);
-        currentFiber.updateQueen.splice(0, currentFiber.updateQueen.length);
+        deleteQueue.forEach((item) => currentFiber.updateQueen.delete(item));
       }
     }, currentFiber.updateQueen);
   };
-  return [state?.value ?? state, localSetValue];
+  return [getStateValue(state), localSetValue];
 }
 export function useRef(initialstate) {
   const currentFiber = fiberNode.getCurrentFiber();
@@ -145,15 +155,10 @@ export function useEffect(callBack, dep) {
       currentFiber.workInProgressEffect.next = hook;
     }
     currentFiber.workInProgressEffect = hook;
-    // if (dep.length === 0) {
     onMounted(() => {
       const result = callBack(...dep);
       hook.result = _.isFunction(result) ? result : () => {};
     });
-    // } else {
-    //   const result = callBack(...dep);
-    //   hook.result = _.isFunction(result) ? result : () => {};
-    // }
     onUnmounted(() => {
       _.attempt(hook.result);
     });
@@ -227,7 +232,54 @@ export function useCallback(callBack, dep) {
   return hook.callBack;
 }
 
-export function scheduler(pluginHooks, ImmutableProps, fiberMap, useStore) {
+export function useControllableValue(props: any, options: Options = {}) {
+  const instance = useMemo(() => getCurrentInstance(), []);
+  const { vnode } = instance;
+  const emit = props.get('emit');
+  const vProps = vnode.props || {};
+  const {
+    defaultValue,
+    defaultValuePropName = 'defaultValue',
+    valuePropName = 'modelValue',
+    trigger = `onUpdate:${valuePropName}`,
+    onChange: onChangeProps = () => {},
+  } = options || {};
+  const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
+  const propsValue = props.get(valuePropName);
+  const defaultValueProps = props.get(defaultValuePropName);
+  const initialValue = useMemo(() => {
+    const controlledInitialValue = propsValue ?? defaultValueProps ?? defaultValue;
+    const uncontrolledInitialValue = defaultValueProps ?? defaultValue;
+    return isControlled ? controlledInitialValue : uncontrolledInitialValue;
+  }, [isControlled, propsValue, defaultValueProps, defaultValue]);
+  const [stateValue, setStateValue] = useState(initialValue);
+  const triggerProps = props.get(trigger, () => {});
+  const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
+
+  const onChange = (...args) => {
+    if (isControlled) {
+      emit(trigger, ...args);
+    } else {
+      setStateValue(...args);
+    }
+    _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
+    _.attempt(onChangeProps, ...args);
+  };
+  const value = useMemo(() => (isControlled ? propsValue : stateValue), [stateValue, isControlled]);
+
+  return [
+    value,
+    onChange,
+    {
+      [valuePropName]: value,
+      [trigger]: onChange,
+    },
+  ];
+}
+
+export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
+  const updateQueen = fiberMap.get('updateQueen');
+  const useStore = fiberMap.get('useStore');
   const setValue = useStore((state: any) => state.setvalue);
   return pluginHooks?.reduce((ImmutableProps, handleFn) => {
     const isMount = !fiberMap.has(handleFn);
@@ -236,7 +288,7 @@ export function scheduler(pluginHooks, ImmutableProps, fiberMap, useStore) {
       ? {
           workInProgressState: null,
           workInProgressEffect: null,
-          updateQueen: [],
+          updateQueen,
           useStore,
           setValue,
           storeKey,

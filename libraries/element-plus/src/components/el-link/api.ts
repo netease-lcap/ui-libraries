@@ -1,0 +1,151 @@
+/// <reference types="@nasl/types" />
+
+namespace nasl.ui {
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'element',
+      editable: 'text',
+      textholder: 'text',
+    },
+  })
+  @Component({
+    title: '链接',
+    icon: 'link',
+    description: '文字超链接',
+    group: 'Display',
+  })
+  export class ElLink extends ViewComponent {
+    constructor(options?: Partial<ElLinkOptions>) {
+      super();
+    }
+  }
+
+  export class ElLinkOptions extends ViewComponentOptions {
+    @Prop({
+      group: '主要属性',
+      title: '类型',
+      description: '链接类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '默认' },
+          { title: '主要' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '危险' },
+          { title: '信息' },
+        ],
+      },
+    })
+    type: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' = 'default';
+
+    @Prop({
+      group: '主要属性',
+      title: '文本',
+      description: '显示文本内容',
+      docDescription: '显示的文本内容',
+    })
+    text: nasl.core.String;
+
+    @Prop({
+      group: '样式属性',
+      title: '下划线',
+      description: '是否有下划线',
+      setter: { concept: 'SwitchSetter' },
+    })
+    underline: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '禁用',
+      description: '是否禁用状态',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '交互属性',
+      title: '链接地址',
+    })
+    hrefAndTo: nasl.core.String;
+
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '打开方式',
+    //   description: '原生 target 属性',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [
+    //       { title: '当前窗口' },
+    //       { title: '新窗口' },
+    //       { title: '父窗口' },
+    //       { title: '顶层窗口' },
+    //     ],
+    //   },
+    // })
+    // target: '_self' | '_blank' | '_parent' | '_top' = '_self';
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '图标',
+    //   description: '图标组件',
+    //   setter: { concept: 'IconSetter' },
+    // })
+    // icon: nasl.core.String;
+    @Event({
+      title: '点击',
+      description: '在元素上按下并释放任意鼠标按钮时触发。',
+    })
+    onClick: (event: any) => any;
+
+    @Event({
+      title: '双击',
+      description: '在元素上双击鼠标按钮时触发。',
+    })
+    onDblclick: (event: MouseEvent) => any;
+
+    @Event({
+      title: '右键点击',
+      description: '在右键菜单显示前触发。',
+    })
+    onContextmenu: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标按下',
+      description: '在元素上按下任意鼠标按钮时触发。',
+    })
+    onMousedown: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标释放',
+      description: '在元素上释放任意鼠标按钮时触发。',
+    })
+    onMouseup: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移入',
+      description: '鼠标移入元素时触发。',
+    })
+    onMouseenter: (event: MouseEvent) => any;
+
+    @Event({
+      title: '鼠标移出',
+      description: '鼠标移出元素时触发。',
+    })
+    onMouseleave: (event: MouseEvent) => any;
+
+    @Event({
+      title: '聚焦时',
+      description: '聚焦时触发',
+    })
+    onFocus: (event: FocusEvent) => void;
+
+    @Event({
+      title: '失焦时',
+      description: '失焦时触发',
+    })
+    onBlur: (event: FocusEvent) => void;
+
+  }
+} 

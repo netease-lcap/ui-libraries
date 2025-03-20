@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-pagination-plus layout="prev, pager, next" :total="50" />',
+    template: '<el-pagination  layout="prev, pager, next" :total="50" />',
   }),
 };

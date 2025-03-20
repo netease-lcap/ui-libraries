@@ -28,7 +28,7 @@ export const Example1 = {
       const handleClick = (tab) => {
         console.log(tab, 'tabe====');
 
-        // activeName.value = 'second';
+        activeName.value = tab;
         // activeName.value = tab;
       };
       setTimeout(() => {
@@ -38,13 +38,15 @@ export const Example1 = {
         // console.log('yref', yref);
         // console.log(yref.value.focus(), 'myref.value.ref');
         attrs.value = {};
-        console.log('object');
+        // console.log('object');
+        activeName.value = '';
       }, 2000);
 
       setTimeout(() => {
         // console.log(myref.value.myChange(), 'myref.value.ref');
-        console.log('activeName', yref);
-      }, 9000);
+        // console.log('activeName', yref);
+        activeName.value = '123';
+      }, 5000);
 
       return {
         name,
@@ -57,8 +59,9 @@ export const Example1 = {
     },
     template: `
     <div>
-      {{activeName}}
-      <el-input v-model="activeName" data-nodepath="1234"  ></el-input>
+      {{activeName}}-
+      {{name}}
+      <el-input   data-nodepath="1234"  ></el-input>
     </div>
     `,
   }),

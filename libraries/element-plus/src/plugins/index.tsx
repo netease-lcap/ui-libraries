@@ -2,6 +2,8 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import { ref, Ref, watch, provide, inject, markRaw, computed, defineComponent } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
 import create from 'zustand-vue';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
@@ -58,15 +60,18 @@ export function registerComponent<T>(Component, options) {
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
       const render = markRaw(Component);
-      const fiberMap = new Map();
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
       const provideRef = ref({});
+      // const router = useRouter?.();
+      // const route = useRoute?.();
       const useStore = create((set) => ({
         state: {
           inject: injectRef,
           provide: {},
           ref: {},
+          // router,
+          // route,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
         props: {
@@ -85,13 +90,16 @@ export function registerComponent<T>(Component, options) {
           return set((state) => getNewStateFn(state), tr);
         },
       }));
+      const fiberMap = new Map<string, any>([
+        ['updateQueen', new Set()],
+        ['useStore', useStore],
+      ]);
       const setValue = useStore((state: any) => state.setvalue);
-
       useStore.subscribe((props: any) => {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
-        const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap, useStore);
-        const commitJsState = commitState.delete('ref').toJS();
+        const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
+        const commitJsState = commitState.delete('ref').toJS();
         render.value = commitJsState.render;
         componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
         Object.assign(exposeRef.value, ref);

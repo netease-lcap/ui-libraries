@@ -1,0 +1,28 @@
+/**
+ * @component el-tree
+ */
+.el-tree {
+  /**
+   * @desc 节点内容的高度
+   * @type input
+   */
+  --el-tree-node-content-height: 26px;
+
+  /**
+   * @desc 节点悬停时的背景色
+   * @type color
+   */
+  --el-tree-node-hover-bg-color: var(--el-fill-color-light);
+
+  /**
+   * @desc 节点文字颜色
+   * @type color
+   */
+  --el-tree-text-color: var(--el-text-color-regular);
+
+  /**
+   * @desc 展开图标颜色
+   * @type color
+   */
+  --el-tree-expand-icon-color: var(--el-text-color-placeholder);
+}

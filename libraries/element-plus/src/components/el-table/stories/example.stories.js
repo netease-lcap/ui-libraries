@@ -23,7 +23,45 @@ export const Example1 = {
       const activeName = ref('first');
       const tableData = async (page) => {
         console.log(page, 'pagerequest====');
-        return [
+        const arr = [
+          {
+            date: '2016-05-03',
+            name: 'Tom',
+            six: {
+              name: '132',
+            },
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-02',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-04',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-01',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-08',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-06',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-07',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
           {
             date: '2016-05-03',
             name: 'Tom',
@@ -63,6 +101,7 @@ export const Example1 = {
             address: 'No. 189, Grove St, Los Angeles',
           },
         ];
+        return { list: arr, total: arr.length };
       };
       const width = ref('501px');
       const mytable = ref();
@@ -103,34 +142,33 @@ row-key="name"
 :dataSource="tableData"
 :pagination="true"
 v-model:currentPage="currentPage"
-@sync:state="logCellClick"
 :showTotal="true"
 height=""
-:style="{'width':width}"
 @selection-change="logCellClick"
+field="six.name"
+order="descending"
 :sorting="{ field: 'six.name', order: 'desc' }"
 :showJumper="true"
 pageSizes="[5,10,20,50]"
-:pageSize="10"
+:defaultPageSize="10"
 data-nodepath="1234"
 v-model:selectedRowKeys="selectedRowKeys"
-@sort-change="onSortChange"
 dragSort="row"
 :selection="true"
 :stripe="true"
 >
 
-<el-table-column label="申请人" >
+<el-table-column label="申请人"   sortable>
   <div>123</div>
 </el-table-column>
 
-    <el-table-column label="渠道" prop="address" type="normal" >
+    <el-table-column label="渠道" prop="address" type="expand" >
         <template #default="current">
           <div>{{current.item.address}}</div>
         </template>
     </el-table-column>
 
-    <el-table-column prop="six.name" label="Date" sortable="custom" width="180" />
+    <el-table-column prop="six.name" label="Date" sortable="none" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
     <el-table-column type="normal" prop="address" label="Address" />
 
@@ -151,14 +189,10 @@ export const Example2 = {
     setup() {
       const activeName = ref('first');
       const total = 28;
-      const tableData = async (pageObj) => {
+      const tableData = async (pageObj = { currentPage: 1, pageSize: 20 }) => {
         console.log(pageObj, 'pagerequest====');
         const initialData = [];
-        for (
-          let i = (pageObj.currentPage - 1) * pageObj.pageSize;
-          i < pageObj.currentPage * pageObj.pageSize && i < total;
-          i++
-        ) {
+        for (let i = 0; i < total; i++) {
           initialData.push({
             index: i + 1,
             applicant: ['贾明', '张三', '王芳'][i % 3],

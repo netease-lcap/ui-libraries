@@ -6,8 +6,11 @@ function filterUnderfinedValue(object: Record<string, string>) {
 }
 const selfAttempt = _.attempt;
 const attempt = _.wrap(selfAttempt, (fn, ...arg: [any, any]) => {
+  if (_.isArray(arg[0])) {
+    return arg[0].map((item) => fn(item, ...arg.slice(1)));
+  }
   const result = fn(...arg);
-  // if (_.isError(result)) console.log(result);
+  if (_.isError(result)) console.log(result);
   return result;
 });
 
@@ -15,15 +18,6 @@ function isValidTime(time) {
   return !_.isNil(time) && dayjs(time).isValid();
 }
 
-
-function controllableValue(props) {
-  const resultObj = {};
-  const valueProps = props.has('value') ? { value: props.get('value') } : {};
-  const onChangeProps = props.has('onChange') ? { onChange: props.get('onChange') } : {};
-  _.assign(resultObj, valueProps);
-  _.assign(resultObj, onChangeProps);
-  return resultObj;
-}
 function isValidLink(link: string) {
   const pattern = /^(http(s)?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/;
   return pattern.test(link);
@@ -39,16 +33,19 @@ function stringToAscii(str) {
 
 // 示例用法
 _.mixin({
-  filterUnderfinedValue, attempt, isValidLink, stringToAscii, isValidTime, controllableValue,
+  filterUnderfinedValue,
+  attempt,
+  isValidLink,
+  stringToAscii,
+  isValidTime,
 });
 // _.mixin
 declare module 'lodash' {
   interface LoDashStatic {
     filterUnderfinedValue: (object: any) => any;
-    attempt: typeof _.attempt
-    isValidLink: typeof isValidLink
-    stringToAscii: typeof stringToAscii
-    isValidTime: typeof isValidTime
-    controllableValue: typeof controllableValue
+    attempt: typeof _.attempt;
+    isValidLink: typeof isValidLink;
+    stringToAscii: typeof stringToAscii;
+    isValidTime: typeof isValidTime;
   }
 }

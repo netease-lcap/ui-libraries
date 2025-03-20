@@ -367,14 +367,6 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: [
-          'slotDefault',
-          'useRangeValue',
-          'startFieldName',
-          'endFieldName',
-          'startInitialValue',
-          'endInitialValue',
-        ],
       },
       {
         name: 'ElInput',
@@ -387,9 +379,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormInput extends ViewComponent {
-    constructor(
-      options?: Partial<ElFormInputOptions & ElFormItemProOptions & Omit<ElInputOptions, keyof ElFormItemProOptions>>,
-    ) {
+    constructor(options?: Partial<ElFormInputOptions & ElFormItemProOptions & Omit<ElInputOptions, keyof ElFormItemProOptions>>) {
       super();
     }
   }

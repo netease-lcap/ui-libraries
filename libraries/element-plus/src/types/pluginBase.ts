@@ -30,3 +30,4 @@ export type PluginBase = {
   emit: emit;
   render: render;
 };
+export type GetOptionsType<T> = T extends { new (options?: infer O): any } ? O : never;

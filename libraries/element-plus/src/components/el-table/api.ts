@@ -49,7 +49,7 @@ namespace nasl.ui {
         },
       ],
       events: {
-        click: "this.getAttribute('hasExpandedRow')?.value",
+        click: true,
       },
       additionalAttribute: {
         rowKey: '"index"',
@@ -118,12 +118,7 @@ namespace nasl.ui {
     }
   }
 
-  export class ElTableOptions<
-    T,
-    V,
-    P extends nasl.core.Boolean,
-    M extends nasl.core.Boolean,
-  > extends ViewComponentOptions {
+  export class ElTableOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
     // @Prop({
     //   group: '主要属性',
     //   sync: true,
@@ -260,6 +255,27 @@ namespace nasl.ui {
       docDescription: '表格每一行的数据类型。该属性为展示属性，由数据源推导得到，无需填写',
     })
     dataSchema: T;
+
+    @Prop({
+      group: '数据属性',
+      title: '合并行或列的计算方法',
+      description: '合并行或列的计算方法',
+      docDescription: '合并行或列的计算方法',
+      bindOpen: true,
+      setter: {
+        concept: 'AnonymousFunctionSetter',
+      },
+    })
+    spanMethod: (item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => {
+      /**
+       * @title 合并行数
+       */
+      rowspan?: nasl.core.Integer;
+      /**
+       * @title 合并列数
+       */
+      colspan?: nasl.core.Integer;
+    };
 
     // @Prop({
     //   group: '主要属性',
@@ -462,7 +478,7 @@ namespace nasl.ui {
     })
     pageSizes: nasl.core.String = '[10, 20, 50]';
 
-    @Prop<ElTableOptions<T, V, P, M>, 'pageSize'>({
+    @Prop<ElTableOptions<T, V, P, M>, 'defaultPageSize'>({
       group: '数据属性',
       title: '默认每页条数',
       docDescription: '每页的数据条数。默认20条。在"分页"属性开启时有效',
@@ -471,9 +487,16 @@ namespace nasl.ui {
       },
       if: (_) => _.pagination !== false,
     })
-    pageSize: nasl.core.Integer = 10;
+    defaultPageSize: nasl.core.Integer = 10;
 
-    @Prop<ElTableOptions<T, V, P, M>, 'currentPage'>({
+    @Prop({
+      group: '数据属性',
+      title: '每页条数',
+      docDescription: '每页的数据条数。默认20条。在"分页"属性开启时有效',
+    })
+    private pageSize: nasl.core.Integer = 10;
+
+    @Prop<ElTableOptions<T, V, P, M>, 'defaultCurrentPage'>({
       group: '数据属性',
       title: '当前页数',
       description: '当前默认展示在第几页',
@@ -483,7 +506,14 @@ namespace nasl.ui {
       },
       if: (_) => _.pagination !== false,
     })
-    currentPage: nasl.core.Integer = 1;
+    defaultCurrentPage: nasl.core.Integer = 1;
+
+    @Prop({
+      group: '数据属性',
+      title: '当前页数',
+      description: '当前默认展示在第几页',
+    })
+    private currentPage: nasl.core.Integer = 1;
 
     @Prop<ElTableOptions<T, V, P, M>, 'showTotal'>({
       group: '数据属性',
@@ -524,7 +554,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    field: nasl.core.String;
+    defaultField: nasl.core.String;
 
     @Prop({
       group: '数据属性',
@@ -532,10 +562,10 @@ namespace nasl.ui {
       description: '设置数据初始化时的排序顺序',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '升序' }, { title: '降序' }],
+        options: [{ title: '升序' }, { title: '降序' }, { title: '无' }],
       },
     })
-    order: 'asc' | 'desc';
+    defaultOrder: 'ascending' | 'descending' | null;
 
     // @Prop({
     //   group: '主要属性',
@@ -639,8 +669,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '表格尺寸',
-      description:
-        '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `default`。可选项：small/default/large。',
+      description: '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `default`。可选项：small/default/large。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '中' }, { title: '大' }],
@@ -934,6 +963,9 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['el-table'].includes(target.tag)",
       // childAccept: false,
+      slotWrapperInlineStyle: {
+        header: 'display: inline-block;',
+      },
       useTemplateInDefaultSlot: true,
       selector: [
         {
@@ -946,7 +978,7 @@ namespace nasl.ui {
         },
       ],
       forceUpdateWhenAttributeChange: 'parent',
-      forceRefresh:'parent',
+      forceRefresh: 'parent',
       disableSlotAutoFill: [
         {
           slot: 'default',
@@ -969,12 +1001,7 @@ namespace nasl.ui {
     }
   }
 
-  export class ElTableColumnOptions<
-    T,
-    V,
-    P extends nasl.core.Boolean,
-    M extends nasl.core.Boolean,
-  > extends ViewComponentOptions {
+  export class ElTableColumnOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '列字段',
@@ -986,17 +1013,17 @@ namespace nasl.ui {
     })
     prop: (item: T) => any;
 
-    // @Prop({
-    //   group: '数据属性',
-    //   title: '排序',
-    //   description: '设置该列是否可以排序',
-    //   docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
-    //        setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [{ title: '前端排序' }, { title: '后端排序' }],
-    //   },
-    // })
-    // sortable: nasl.core.Boolean = false;
+    @Prop({
+      group: '数据属性',
+      title: '排序',
+      description: '设置该列是否可以排序',
+      docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '不排序' }, { title: '后端排序' }],
+      },
+    })
+    sortable: 'none' | 'custom' = 'none';
 
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
@@ -1019,10 +1046,10 @@ namespace nasl.ui {
       docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '普通列' }, { title: '多选列' }],
+        options: [{ title: '普通列' }, { title: '多选列' }, { title: '展开列' }],
       },
     })
-    type: 'normal' | 'selection' = 'normal';
+    type: 'normal' | 'selection' | 'expand' = 'normal';
 
     // @Prop<UTableViewColumnOptions<T, V, P, M>, 'autoIndex'>({
     //   group: '数据属性',

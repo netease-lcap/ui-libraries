@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
-import { useMemo, GetAccumulatedMapType } from '@/plugins/hooks';
+import { ElSelectV2 } from 'element-plus';
+import { useMemo, useCallback, GetAccumulatedMapType } from '@/plugins/hooks';
 import { SelectAccumulateTypes } from './type';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
@@ -28,7 +29,22 @@ export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccum
     ref: selfRef,
     loading,
     slots: _.assign(slots, dataSourceSlots),
-
+    data,
     formTagName: 'el-form-select',
   };
+}
+
+export function handleVirtualize(props) {
+  const virtualize = props.get('virtualize');
+  const data = props.get('data');
+  const render = useCallback((props) => <ElSelectV2 {...props} />, []);
+  const result = useMemo(() => {
+    return virtualize
+      ? {
+          options: data,
+          render,
+        }
+      : {};
+  }, [virtualize, data, render]);
+  return result;
 }

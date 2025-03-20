@@ -272,7 +272,7 @@ export default {
                     .then((results) => this.get$event(trigger));
             } else {
                 this.triggerValid = true;
-                this.realValid = true;
+                // this.realValid = true;
                 if (this.ignoreRules || this.ignoreValidation) {
                     this.firstErrorMessage = this.currentMessage = '';
                     this.color = '';

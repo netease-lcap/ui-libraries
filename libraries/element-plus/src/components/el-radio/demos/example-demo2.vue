@@ -13,9 +13,9 @@
       </div>
       <div class="block">
         <div>异步数据源</div>
-        <el-radio-group  :shape="button ? 'button' : 'normal'" :dataSource="load" :itemProps="setItemProps" valueField="id" :value.sync="checkedValue">
+        <el-radio-group   :dataSource="load" :itemProps="setItemProps" valueField="id" :value.sync="checkedValue">
           <template #item="current">
-            {{ current.item.label }}
+            {{ current.item.label+1 }}
           </template>
         </el-radio-group>
       </div>

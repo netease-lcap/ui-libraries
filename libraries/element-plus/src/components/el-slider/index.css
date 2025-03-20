@@ -1,0 +1,74 @@
+.el-slider {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.el-slider.is-vertical {
+  height: 100%;
+  width: 32px;
+}
+
+.el-slider__runway {
+  flex: 1;
+  height: 6px;
+  background-color: #e4e7ed;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+
+.el-slider__bar {
+  height: 6px;
+  background-color: #409eff;
+  border-radius: 3px;
+  position: absolute;
+}
+
+.el-slider__button-wrapper {
+  height: 36px;
+  width: 36px;
+  position: absolute;
+  z-index: 1;
+  top: -15px;
+  transform: translateX(-50%);
+  background-color: transparent;
+  text-align: center;
+  user-select: none;
+  line-height: normal;
+  outline: none;
+}
+
+.el-slider__button {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #409eff;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: 0.2s;
+  user-select: none;
+}
+
+.el-slider__marks {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.el-slider__mark {
+  position: absolute;
+  transform: translateX(-50%);
+  height: 100%;
+}
+
+.el-slider__mark-text {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #909399;
+  margin-top: 10px;
+  white-space: nowrap;
+}
