@@ -15,6 +15,10 @@ import { isNil, kebabCase, upperFirst } from 'lodash';
 const eventRegex = /^on[A-Z].*/;
 const slotRegex = /^slot[A-Z].*/;
 
+export function normalizeString(str: string) {
+  return str ? str.replace(/'/g, '\\\'') : '';
+}
+
 export function normalizeEventName(name: string) {
   if (eventRegex.test(name)) {
     return name;
@@ -128,7 +132,7 @@ export function genAttrCode(attr: MaterialComponentAttr, group: string = '主要
   const propOptions: string[] = [
     `group: '${group}',`,
     `title: '${title}',`,
-    `description: '${description || title}',`,
+    `description: '${normalizeString(description || title)}',`,
     genSetterCode(attr),
   ];
 
@@ -153,7 +157,7 @@ export function genEventCode(event: MaterialComponentEvent) {
   return `
   @Event({
     title: '${title}',
-    description: '${event.description || title}',
+    description: '${normalizeString(event.description || title)}',
   })
   ${name}: (event: {}) => any;
 `;
@@ -168,7 +172,7 @@ export function genSlotCode(slot: MaterialComponentSlot) {
   return `
   @Slot({
     title: '${title}',
-    description: '${slot.description || title}',
+    description: '${normalizeString(slot.description || title)}',
   })
   ${name.includes('-') ? `'${name}'` : name}: () => Array<nasl.ui.ViewComponent>;
 `;
@@ -185,7 +189,7 @@ export function genMethodCode(method: MaterialComponentMethod) {
   return `
   @Method({
     title: '${title}',
-    description: '${description || title}',
+    description: '${normalizeString(description || title)}',
   })
   ${name}(${params.map((param) => `${param.name}: ${genTypeCode(param.type)}`).join(', ')}): ${returnType ? genTypeCode(returnType) : 'void'} {
     ${returnType ? 'return null as any;' : ''}

@@ -200,6 +200,23 @@ function insertProperty(ast: bt.File, property: bt.ClassProperty | bt.ClassMetho
   traverse(ast, {
     ClassDeclaration(path) {
       if (bt.isIdentifier(path.node.id) && path.node.id.name === className) {
+        const hasProp = path.node.body.body.some((n) => (
+          (bt.isClassProperty(n) || bt.isClassMethod(n))
+            && ((
+              bt.isIdentifier(n.key)
+              && bt.isIdentifier(property.key)
+              && n.key.name === property.key.name
+            ) || (
+              bt.isStringLiteral(n.key)
+              && bt.isStringLiteral(property.key)
+              && n.key.value === property.key.value
+            ))
+        ));
+
+        if (hasProp) {
+          throw new Error(`${componentName} 组件中已存在属性 ${bt.isIdentifier(property.key) ? property.key.name : (property.key as bt.StringLiteral).value}`);
+        }
+
         const lastPropIndex = path.node.body.body.findLastIndex((n) => (
           bt.isClassProperty(n) && n.decorators
           && n.decorators.some((d) => (

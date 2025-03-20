@@ -6,6 +6,7 @@ import { kebabCase, upperFirst } from 'lodash';
 import { ProjectMetaInfo } from '../utils/project';
 import { createComponent, getTagName, COMPONENTS_FOLDER } from './component';
 import { getComponentMetaInfos, Schema, WriteOptions } from '../utils/lcap';
+import { normalizeString } from '../utils/schema-utils';
 
 const EMPTY_API_TS = ({
   pkgName,
@@ -136,7 +137,7 @@ export async function createForSchema(rootPath: string, metaInfo: ProjectMetaInf
     compName,
     title,
     sourceName: component.name,
-    description: (component.description || title).replace(/'/g, '\\\''),
+    description: normalizeString(component.description || title),
     type,
   }), 'utf-8');
 
