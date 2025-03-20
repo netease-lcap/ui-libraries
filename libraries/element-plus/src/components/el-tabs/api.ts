@@ -13,11 +13,8 @@ namespace nasl.ui {
         display: 3,
         loopRule: 'nth-last-child(-n+2)',
         loopElem: ".el-tabs__nav > .el-tabs__item",
-        emptySlot: {
-          display: 'large',
-          condition: "!this.getAttribute('dataSource')",
-          accept: false,
-        },
+        propertyName: ':dataSource',
+        displayData: "\"[{label: '0', value: '0'},{label:'1', value: '1'}, {label:'2', value: '2'}]\"",
       },
       displaySlotInline: {
         label: true,
@@ -27,7 +24,7 @@ namespace nasl.ui {
         content: "!!this.getAttribute('dataSource')",
       },
       additionalAttribute: {
-        ":showInDesigner": "\"true\""
+        "active": "0",
       },
     }
   })
@@ -120,7 +117,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    modelValue: nasl.core.String;
+    value: nasl.core.String;
 
 
     @Prop({
@@ -230,7 +227,7 @@ namespace nasl.ui {
       title: '点击新增按钮或关闭',
       description: '点击 tabs 的新增按钮或 tab 被关闭后触发',
     })
-    onTabEdit: (event: {
+    onEdit: (event: {
       value: nasl.core.String;
       action: 'add' | 'remove';
     }) => void;

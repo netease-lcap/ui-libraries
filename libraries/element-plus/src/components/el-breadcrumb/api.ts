@@ -8,7 +8,7 @@ namespace nasl.ui {
       structured: true,
       childAccept: "target.tag === 'el-breadcrumb-item'",
       additionalAttribute: {
-        ":showInDesigner": true
+        ":showInDesigner": "\"true\"",
       }
     },
   })

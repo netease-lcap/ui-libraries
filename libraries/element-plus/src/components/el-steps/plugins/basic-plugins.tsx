@@ -74,13 +74,13 @@ export function handleSwitchStep(props) {
     onChange(newValue);
   }, [activeProps, names, onChange]);
 
-  const prevStep = useCallback(() => {
+  const prevStep = () => {
     updateStep(activeSelf - 1);
-  }, [activeSelf, updateStep]);
+  };
 
-  const nextStep = useCallback(() => {
+  const nextStep = () => {
     updateStep(activeSelf + 1);
-  }, [activeSelf, updateStep]);
+  };
 
   const selfRef = useMemo(() => _.assign(ref, {
     prev: prevStep,

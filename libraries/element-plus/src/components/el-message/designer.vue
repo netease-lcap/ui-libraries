@@ -35,9 +35,10 @@
 </template>
 
 <script>
-import { ElIcon, ElBadge } from 'element-plus';
+import { ElBadge } from 'element-plus';
 import { Close, SuccessFilled, WarningFilled, CircleCloseFilled, InfoFilled } from '@element-plus/icons-vue';
 import Message from './message';
+import { ElIcon } from '../index' 
 const typeMap = {
   success: 'success',
   info: 'info',

@@ -1,6 +1,6 @@
 import { useControllableValue } from "@/plugins/hooks";
 
-export function handleDrawerRef(props) {
+export function handleDialogRef(props) {
   const [_, setValue, valueProps] = useControllableValue(props);
   const ref = props.get('ref');
 

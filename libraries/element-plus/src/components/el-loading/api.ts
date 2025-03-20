@@ -4,8 +4,8 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
     ideusage: {
-      idetype: "messager",
-      cacheOpenKey: "visible"
+      idetype: "container",
+      forceUpdateWhenAttributeChange: true,
     }
   })
   @Component({
@@ -15,18 +15,6 @@ namespace nasl.ui {
     group: 'Feedback',
   })
   export class ElLoading extends ViewComponent {
-    @Method({
-      title: '显示加载',
-      description: '显示加载',
-    })
-    open(): void {}
-
-    @Method({
-      title: '关闭加载',
-      description: '关闭加载',
-    })
-    close(): void {}
-
     constructor(options?: Partial<ElMessageOptions>) {
       super();
     }
@@ -122,22 +110,10 @@ namespace nasl.ui {
     })
     background: nasl.core.String;
 
-    @Event({
-      title: '关闭前的回调',
-      description: 'Loading 关闭之前执行的函数。 如果此函数返回 false ，关闭过程将被中止。 反之，loading 将被关闭。',
+    @Slot({
+      title: '覆盖节点',
+      description: '覆盖节点',
     })
-    onBeforeClose: (event: any) => any;
-
-    @Event({
-      title: 'Loading完全关闭后的回调',
-      description: 'Loading 完全关闭后触发的函数',
-    })
-    onClosed: (event: any) => any;
-
-    // @Slot({
-    //   title: 'Loading内容',
-    //   description: 'Loading内容',
-    // })
-    // slotDefault: () => Array<ViewComponent>;
+    slotDefault: () => Array<ViewComponent>;
   }
 }

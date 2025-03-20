@@ -7,7 +7,6 @@ namespace nasl.ui {
       idetype: 'drawer',
       cacheOpenKey: 'modelValue',
       structured: true,
-      bindStyleAttr: 'drawerStyle',
       selector: {
         expression: 'this',
         cssSelector: '.el-drawer',
@@ -59,7 +58,7 @@ namespace nasl.ui {
       description: '是否显示 Drawer',
       setter: { concept: 'SwitchSetter' },
     })
-    modelValue: nasl.core.Boolean = false;
+    value: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

@@ -7,7 +7,6 @@ namespace nasl.ui {
       idetype: 'modal',
       cacheOpenKey: 'modelValue',
       structured: true,
-      bindStyleAttr: 'dialogStyle',
       selector: {
         expression: 'this',
         cssSelector: '.el-dialog',
@@ -58,7 +57,7 @@ namespace nasl.ui {
       description: '是否显示对话框',
       setter: { concept: 'SwitchSetter' },
     })
-    modelValue: nasl.core.Boolean = false;
+    value: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -217,11 +216,11 @@ namespace nasl.ui {
     })
     onClose: (event: any) => any;
 
-    @Event({
-      title: '关闭前的回调',
-      description: '关闭前的回调',
-    })
-    onBeforeClose: (event: any) => any;
+    // @Event({
+    //   title: '关闭前的回调',
+    //   description: '关闭前的回调',
+    // })
+    // onBeforeClose: (event: any) => any;
 
     @Event({
       title: '关闭动画结束时的回调',

@@ -6,6 +6,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       namedSlotOmitWrapper: ['reference'],
+      bindStyleAttr: 'popperStyle',
       displaySlotInline: {
         reference: true,
       },
@@ -39,11 +40,11 @@ namespace nasl.ui {
       super();
     }
 
-    @Method({
-      title: '显示弹出框',
-      description: '显示弹出框',
-    })
-    show(): void {}
+    // @Method({
+    //   title: '显示弹出框',
+    //   description: '显示弹出框',
+    // })
+    // show(): void {}
 
     @Method({
       title: '关闭弹出框',
@@ -53,7 +54,6 @@ namespace nasl.ui {
   }
 
   export class ElPopoverOptions extends ViewComponentOptions {
-    // TODO LD：contextmenu是什么方式？
     @Prop({
       group: '主要属性',
       title: '触发方式',
@@ -64,21 +64,20 @@ namespace nasl.ui {
           { title: '点击' },
           { title: '聚焦' },
           { title: '悬浮' },
-          { title: 'contextmenu' },
+          { title: '右键点击' },
         ],
       },
     })
     trigger: 'click' | 'focus' | 'hover' | 'contextmenu' = 'hover';
 
-    // @Prop<ElPopoverOptions, 'value'>({
-    //   group: '主要属性',
-    //   sync: true,
-    //   title: '状态是否可见',
-    //   description: '状态是否可见',
-    //   setter: { concept: 'SwitchSetter' },
-    //   if: (_) => _.trigger === 'manual',
-    // })
-    // value: nasl.core.Boolean = false;
+    @Prop({
+      group: '主要属性',
+      sync: true,
+      title: 'Popover 是否显示',
+      description: 'Popover 是否显示',
+      setter: { concept: 'SwitchSetter' },
+    })
+    visible: nasl.core.Boolean | null = null;
 
     @Prop({
       group: '主要属性',

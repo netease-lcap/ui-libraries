@@ -2090,20 +2090,6 @@
     ".el-pagination>.is-last:focus,.el-pagination>.is-last._focus": "",
     ".el-pagination>.is-last:hover,.el-pagination>.is-last._hover": ""
   },
-  "ElPopconfirm": {
-    ".el-popconfirm__action": "",
-    ".el-popconfirm__action:active,.el-popconfirm__action._active": "",
-    ".el-popconfirm__action:focus,.el-popconfirm__action._focus": "",
-    ".el-popconfirm__action:hover,.el-popconfirm__action._hover": "",
-    ".el-popconfirm__icon": "",
-    ".el-popconfirm__icon:active,.el-popconfirm__icon._active": "",
-    ".el-popconfirm__icon:focus,.el-popconfirm__icon._focus": "",
-    ".el-popconfirm__icon:hover,.el-popconfirm__icon._hover": "",
-    ".el-popconfirm__main": "",
-    ".el-popconfirm__main:active,.el-popconfirm__main._active": "",
-    ".el-popconfirm__main:focus,.el-popconfirm__main._focus": "",
-    ".el-popconfirm__main:hover,.el-popconfirm__main._hover": ""
-  },
   "ElPopover": {
     ".el-popover": "",
     ".el-popover__reference": "",

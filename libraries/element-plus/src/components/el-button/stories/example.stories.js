@@ -133,3 +133,21 @@ export const Example4 = {
     `,
   }),
 };
+
+export const Example5 = {
+  name: '二次确认弹窗按钮',
+  render: () => ({
+    setup() {
+      return {
+        handleClick() {
+          console.log('点击了按钮');
+        },
+      };
+    },
+    template: `
+    <div>
+      <el-button :isOpenConfirm='true' text='二次确认框' popconfirmTitle="我是二次确认框" popconfirmConfirmButtonText="对" popconfirmCancelButtonText="🙅" @click="handleClick"></el-button>
+    </div>
+    `,
+  }),
+};
