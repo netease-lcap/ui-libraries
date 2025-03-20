@@ -275,7 +275,6 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      bindStyleAttr: 'inputStyle',
       bindStyleSelector: '.__cw-form-compose-input',
       childAccept: "target.tag === 'el-checkbox'",
       dataSource: {

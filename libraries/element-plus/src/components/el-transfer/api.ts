@@ -14,7 +14,7 @@ namespace nasl.ui {
         loopRule: 'nth-last-child(-n+2)',
         loopElem: '.el-p-transfer__list-item',
         displayData: "\"[{value: '', label: ''},{value:'1', label: ' '}, {value:'2', label: ' '}]\"",
-        propertyName: ":dataSource",
+        propertyName: ':dataSource',
       },
       additionalAttribute: {
         valueField: '"value"',
@@ -31,12 +31,13 @@ namespace nasl.ui {
   @Component({
     title: '穿梭框',
     icon: 'transfer',
-    description: '',
+    description: '用于在两个区域之间移动元素的控件，完成元素的选择和移动',
     group: 'Selector',
   })
   export class ElTransfer<T, V> extends ViewComponent {
     @Prop({
-      title: '目标数据',
+      title: '绑定值',
+      description: '当前选中的值，即目标列表的数据',
     })
     value: nasl.collection.List<V>;
 
@@ -60,7 +61,7 @@ namespace nasl.ui {
       designerValue: [{}, {}, {}],
       bindOpen: true,
     })
-    dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
+    dataSource: nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
@@ -80,18 +81,18 @@ namespace nasl.ui {
     })
     textField: (item: T) => any = ((item: any) => item.label) as any;
 
-    @Prop<ElTransferOptions<T, V>, 'optionIsSlot'>({
-      group: '数据属性',
-      title: '动态选项插槽',
-      description: '自定义选项内容',
-      docDescription: '自定义选项内容',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-      bindHide: true,
-      if: (_) => !!_.dataSource,
-    })
-    optionIsSlot: nasl.core.Boolean;
+    // @Prop<ElTransferOptions<T, V>, 'optionIsSlot'>({
+    //   group: '数据属性',
+    //   title: '动态选项插槽',
+    //   description: '自定义选项内容',
+    //   docDescription: '自定义选项内容',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    //   bindHide: true,
+    //   if: (_) => !!_.dataSource,
+    // })
+    // optionIsSlot: nasl.core.Boolean;
 
     @Prop<ElTransferOptions<T, V>, 'valueField'>({
       group: '数据属性',
@@ -108,7 +109,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: '禁用字段',
       description: '集合的元素类型中，用于标识节点的disabled属性',
-      docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
+      docDescription: '集合的元素类型中，用于标识节点是否被禁用的属性',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -117,91 +118,112 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '目标数据',
-      description: '目标数据',
+      title: '绑定值',
+      description: '当前选中的值，即目标列表的数据',
       setter: { concept: 'InputSetter' },
       sync: true,
     })
     value: nasl.collection.List<V>;
 
-    @Prop({
-      group: '数据属性',
-      sync: true,
-      title: '选中值',
-      description: '数据列表选中项。支持语法糖 `.sync`。',
-      setter: { concept: 'InputSetter' },
-    })
-    checked: nasl.collection.List<V>;
+    // @Prop({
+    //   group: '数据属性',
+    //   sync: true,
+    //   title: '选中值',
+    //   description: '数据列表选中项。支持语法糖 `.sync`。',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // checked: nasl.collection.List<V>;
 
     @Prop({
       group: '主要属性',
-      title: '可操作方向',
-      description: '穿梭框可操作方向。可选项：left/right/both',
+      title: '目标排序策略',
+      description: '右侧列表元素的排序策略',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '左' }, { title: '右' }, { title: '两端' }],
+        options: [{ title: '原始顺序' }, { title: '最后添加' }, { title: '最先添加' }],
       },
     })
-    direction: 'left' | 'right' | 'both' = 'both';
-
-    @Prop({
-      group: '状态属性',
-      title: '禁用',
-      description: '禁用全部操作：搜索、选中等',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      group: '状态属性',
-      title: '暂无数据文本',
-      description: '列表为空时呈现的内容。值类型为数组，则表示分别控制源列表和目标列表数据为空的呈现内容。',
-      setter: { concept: 'InputSetter' },
-    })
-    empty: nasl.core.String | nasl.collection.List<nasl.core.String>;
+    targetOrder: 'original' | 'push' | 'unshift' = 'original';
 
     @Prop({
       group: '主要属性',
-      title: '方向操作按钮文本',
-      description: '方向操作按钮。默认显示组件内置操作图标。自定义操作图标示例：["向左", "向右"]',
+      title: '左侧列表标题',
+      description: '左侧列表的标题',
       setter: { concept: 'InputSetter' },
     })
-    operation: nasl.collection.List<nasl.core.String>;
+    leftTitle: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '右侧列表标题',
+      description: '右侧列表的标题',
+    })
+    rightTitle: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '按钮文本',
+      description: '穿梭按钮的文本，数组形式，长度为2，分别代表左右两个按钮的文本',
+      setter: { concept: 'InputSetter' },
+    })
+    leftButtonText: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '右侧按钮文本',
+      description: '右侧按钮的文本',
+    })
+    rightButtonText: nasl.core.String;
 
     @Prop({
       group: '数据属性',
-      title: '筛选',
-      description: '搜索框配置，值为 false 表示不显示搜索框；值为 true 表示显示默认搜索框',
+      title: '可筛选',
+      description: '是否可搜索',
       setter: { concept: 'SwitchSetter' },
     })
-    search: nasl.core.Boolean = false;
+    filterable: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '显示全选',
-      description: '是否显示全选，值类型为数组则表示分别控制源列表和目标列表。',
-      setter: { concept: 'SwitchSetter' },
+      group: '数据属性',
+      title: '筛选提示文本',
+      description: '搜索框的占位符',
+      setter: { concept: 'InputSetter' },
     })
-    showCheckAll: nasl.core.Boolean | any[] = true;
+    filterPlaceholder: nasl.core.String;
+
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '筛选方法',
+    //   description: '自定义筛选方法',
+    //   docDescription: '自定义筛选方法，当 filterable 为 true 时生效，用于决定列表项是否显示',
+    // })
+    // filterMethod: (query: nasl.core.String, item: T) => nasl.core.Boolean;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '显示全选',
+    //   description: '是否显示全选复选框，值类型为数组则表示分别控制源列表和目标列表。',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // showCheckAll: nasl.core.Boolean | any[] = true;
 
     @Event({
       title: '改变后',
-      description:
-        '数据列表发生变化时触发，`type` 值为 `source`，表示源列表移动到目标列表，值为 `target` 表示目标列表移动到源列表，movedValue 则表示被移动的选项。',
+      description: '右侧列表元素变化时触发，当前值和发生移动的值以及移动方向',
     })
-    onChange: (event: nasl.collection.List<V>) => any;
+    onChange: (event: { value: nasl.collection.List<V>; movedValue: nasl.collection.List<V>; type: 'source' | 'target' }) => any;
 
     @Event({
-      title: '选中后',
-      description:
-        '源数据列表或目标数据列表的选中项发生变化时触发，`context.type` 可以区分触发来源是目标列表，还是源列表。',
+      title: '左侧选中变化',
+      description: '左侧列表选中项变化时触发',
     })
-    onCheckedChange: (event: {
-      checked: nasl.collection.List<V>;
-      sourceChecked: nasl.collection.List<V>;
-      targetChecked: nasl.collection.List<V>;
-      type: 'source' | 'target';
-    }) => any;
+    onLeftCheckChange: (event: nasl.collection.List<V>) => any;
+
+    @Event({
+      title: '右侧选中变化',
+      description: '右侧列表选中项变化时触发',
+    })
+    onRightCheckChange: (event: nasl.collection.List<V>) => any;
 
     @Event({
       title: '滚动时',
@@ -229,47 +251,22 @@ namespace nasl.ui {
       };
     }) => any;
 
-    @Event({
-      title: '筛选时',
-      description: '搜索时触发，options.query 表示用户输入的内容。',
-    })
-    onSearch: (event: { query: nasl.core.String; type: 'source' | 'target'; trigger: 'input' | 'enter' }) => any;
-
-    @Slot({
-      title: '来源标题',
-      description: '穿梭框标题',
-    })
-    slotTitlesource: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '目标标题',
-      description: '穿梭框标题',
-    })
-    slotTitletarget: () => Array<ViewComponent>;
-
     @Slot({
       title: '来源底部内容',
-      description: '穿梭框底部内容。',
+      description: '自定义左侧列表底部内容',
     })
-    slotFootersource: () => Array<ViewComponent>;
+    slotLeftFooter: () => Array<ViewComponent>;
 
     @Slot({
       title: '目标底部内容',
-      description: '穿梭框底部内容。',
+      description: '自定义右侧列表底部内容',
     })
-    slotFootertarget: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '穿梭项内容',
-      description: '自定义穿梭项内容',
-    })
-    slotOption: (current: Current<T>) => Array<ViewComponent>;
+    slotRightFooter: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      bindStyleAttr: 'inputStyle',
       bindStyleSelector: '.__cw-form-compose-input',
       displaySlotConditions: {
         option: "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
@@ -280,7 +277,7 @@ namespace nasl.ui {
         loopRule: 'nth-last-child(-n+2)',
         loopElem: '.el-p-transfer__list-item',
         displayData: "\"[{value: '', label: ''},{value:'1', label: ' '}, {value:'2', label: ' '}]\"",
-        propertyName: ":dataSource",
+        propertyName: ':dataSource',
       },
       additionalAttribute: {
         valueField: '"value"',
@@ -297,29 +294,28 @@ namespace nasl.ui {
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
     },
-    extends: [{
-      name: 'ElFormItemPro',
-      excludes: [
-        'slotDefault', 'useRangeValue',
-        'startFieldName', 'endFieldName',
-        'startInitialValue', 'endInitialValue',
-      ],
-    }, {
-      name: 'ElTransfer',
-    }],
+    extends: [
+      {
+        name: 'ElFormItemPro',
+        excludes: ['slotDefault', 'useRangeValue', 'startFieldName', 'endFieldName', 'startInitialValue', 'endInitialValue'],
+      },
+      {
+        name: 'ElTransfer',
+      },
+    ],
   })
   @Component({
     title: '表单穿梭框',
-    description: '表单穿梭框',
+    description: '表单穿梭框组件，用于在表单中使用穿梭框进行数据选择',
     group: 'Form',
   })
   export class ElFormTransfer<T, V> extends ViewComponent {
-    constructor(options?: Partial<ElFormTransferOptions<T, V> & ElFormItemProOptions & Omit<ElTransferOptions<T, V>, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormTransferOptions<T, V> & ElFormItemProOptions & Omit<ElTransferOptions<T, V>, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }
 
-  export class ElFormTransferOptions<T, V> extends ViewComponentOptions {
-
-  }
+  export class ElFormTransferOptions<T, V> extends ViewComponentOptions {}
 }

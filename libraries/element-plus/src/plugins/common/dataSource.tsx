@@ -11,16 +11,27 @@ import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/t
 export function useHandleMapField(filedInfo: {
   label?: string;
   value?: string;
+  disabled?: string;
   textField?: string;
   valueField?: string;
+  disabledField?: string;
   dataSource: DataSourceType;
 }) {
-  const { label = 'label', value = 'value', textField = 'label', valueField = 'value', dataSource } = filedInfo;
+  const {
+    label = 'label',
+    value = 'value',
+    textField = 'label',
+    valueField = 'value',
+    dataSource,
+    disabled = 'disabled',
+    disabledField,
+  } = filedInfo;
   return useMemo(() => {
     return _.map(dataSource, (item: any) => ({
       ...item,
       [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
       [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
+      [disabled]: !_.isObject(item) ? item : _.get(item, disabledField || 'disabled', false),
     }));
   }, [label, value, textField, valueField, dataSource]) as DataSourceArrayType;
 }

@@ -21,7 +21,7 @@ export const Example1 = {
     },
     template: `
     <div>
-      <el-calendar data-nodepath="123" v-model="value" />
+      <el-calendar data-nodepath="123"  v-model="value" />
     </div>
     `,
   }),

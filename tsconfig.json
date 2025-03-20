@@ -13,5 +13,5 @@
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["**/templates/*", "**/node_modules/*", "**/dist/*", "**/build/*", "**/storybook-static/*"]
+  "exclude": ["**/templates/*", "**/node_modules/*", "**/dist/*", "node_modules", "**/storybook-static/*"]
 }

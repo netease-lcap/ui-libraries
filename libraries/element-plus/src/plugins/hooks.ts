@@ -123,7 +123,6 @@ export function useRef(initialstate) {
   if (isMount) {
     hook = {
       next: null,
-      // value: { current: initialstate },
       value: ref(initialstate),
     };
     hook.next = hook;

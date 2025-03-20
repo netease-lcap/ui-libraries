@@ -9,7 +9,7 @@ namespace nasl.ui {
       events: {
         click: true,
       },
-      forceRefresh : {slot : 'default'}
+      forceRefresh: {slot: 'default'}
     },
   })
   @Component({
@@ -43,6 +43,14 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     content: nasl.core.String;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '原始HTML',
+    //   description: '内容是否为HTML字符串',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // rawContent: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -103,11 +111,11 @@ namespace nasl.ui {
       description: '出现位置的偏移量',
       setter: { concept: 'NumberInputSetter' },
     })
-    offset: nasl.core.Decimal = 0;
+    offset: nasl.core.Decimal = 12;
 
     // @Prop({
     //   group: '主要属性',
-    //   title: 'Transition',
+    //   title: '过渡动画',
     //   description: '定义渐变动画',
     //   setter: { concept: 'InputSetter' },
     // })
@@ -123,56 +131,28 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '延迟关闭',
+      description: '延迟关闭，单位毫秒',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    hideAfter: nasl.core.Decimal = 200;
+
+    @Prop({
+      group: '主要属性',
       title: '显示箭头',
       description: '是否显示箭头',
       setter: { concept: 'SwitchSetter' },
     })
     showArrow: nasl.core.Boolean = true;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Popper参数',
-    //   description: '[popper.js](https://popper.js.org/docs/v2/) 的参数',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // popperOptions: {
-    //   boundariesElement: nasl.core.String;
-    //   gpuAcceleration: nasl.core.Boolean;
-    // };
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '手动控制',
-    //   description:
-    //     '手动控制模式，设置为 true 后，mouseenter 和 mouseleave 事件将不会生效',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // manual: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '样式属性',
-    //   title: '额外类名',
-    //   description: '为 Tooltip 的 popper 添加类名',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // popperClass: nasl.core.String;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '鼠标进入',
-    //   description: '鼠标是否可进入到 tooltip 中',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // enterable: nasl.core.Boolean = true;
-    
     @Prop({
       group: '主要属性',
-      title: '延迟关闭',
-      description: '延迟关闭，单位毫秒',
-      setter: { concept: 'NumberInputSetter' },
+      title: '鼠标进入',
+      description: '鼠标是否可进入到 tooltip 中',
+      setter: { concept: 'SwitchSetter' },
     })
-    hideAfter: nasl.core.Decimal = 0;
-
+    enterable: nasl.core.Boolean = true;
+    
     @Prop({
       group: '主要属性',
       title: '自动隐藏',
@@ -181,14 +161,6 @@ namespace nasl.ui {
     })
     autoClose: nasl.core.Decimal = 0;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '聚焦导航',
-    //   description:
-    //     'Tooltip 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)',
-    //   setter: { concept: 'NumberInputSetter' },
-    // })
-    // tabindex: nasl.core.Decimal = 0;
     
     @Prop({
       group: '主要属性',
@@ -210,16 +182,61 @@ namespace nasl.ui {
       | 'focus'
       | 'contextmenu' = 'hover';
 
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '触发元素',
+    //   description: '触发 Tooltip 显示的元素',
+    //   docDescription: '触发 Tooltip 显示的元素，接受 HTML 元素或 Vue 组件',
+    // })
+    // triggerKeys: nasl.collection.List<nasl.core.String>;
+    
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '虚拟触发元素',
+    //   description: '虚拟触发元素',
+    //   docDescription: '如果需要触发的元素是虚拟的（例如不存在的 HTML 元素或 Vue 组件），则为 true',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // virtualTriggering: nasl.core.Boolean = false;
+    
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '虚拟触发参考',
+    //   description: '虚拟触发参考',
+    //   docDescription: '虚拟触发参考元素，配合 virtualTriggering 使用',
+    // })
+    // virtualRef: Record<string, any>;
+    
+    @Prop({
+      group: '主要属性',
+      title: '总是显示',
+      description: '是否总是显示 Tooltip',
+      setter: { concept: 'SwitchSetter' },
+    })
+    persistent: nasl.core.Boolean = false;
+    
+    @Prop({
+      group: '主要属性',
+      title: 'aria-label',
+      description: 'aria-label 属性',
+      docDescription: '为 Tooltip 的触发元素添加 aria-label 属性，以提高可访问性',
+      setter: { concept: 'InputSetter' },
+    })
+    ariaLabel: nasl.core.String;
+    
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '可用于表单元素',
+    //   description: '是否对表单元素触发 Tooltip',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // teleported: nasl.core.Boolean = true;
+
+
     @Slot({
-      title: 'Default',
-      description: '默认插槽',
+      title: '默认',
+      description: '默认插槽，触发 Tooltip 显示的元素',
     })
     slotDefault: () => Array<ViewComponent>;
-
-    // @Slot({
-    //   title: '内容',
-    //   description: '内容插槽',
-    // })
-    // slotContent: () => Array<ViewComponent>;
   }
 }
