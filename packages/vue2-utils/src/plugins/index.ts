@@ -1,6 +1,10 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
-import { isNil, kebabCase } from 'lodash';
+import * as VueCompositionAPI from '@vue/composition-api';
+import {
+  isNil,
+  kebabCase,
+} from 'lodash';
 import type {
   NaslComponentPluginOptions,
   PluginMap,
@@ -218,3 +222,8 @@ export const registerComponent = (
 };
 
 export { NaslComponentPluginOptions, PluginSetupFunction };
+
+// 注册 window.VueCompositionAPI
+if (typeof window !== 'undefined' && window.Vue && !(window as any).VueCompositionAPI) {
+  (window as any).VueCompositionAPI = VueCompositionAPI;
+}
