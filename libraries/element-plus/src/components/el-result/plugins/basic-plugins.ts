@@ -1,9 +1,10 @@
 /* 组件功能扩展插件 */
-export function useSlot(props) {
+import _ from 'lodash';
+
+export function handleSlots(props) {
   const slots = props.get('slots');
+
   return {
-    slots: Object.assign(slots, {
-      'sub-title': slots.subTitle,
-    }),
+    slots: _.mapKeys(slots, (value, key) => (key === 'subTitle' ? 'sub-title' : key)),
   };
 }

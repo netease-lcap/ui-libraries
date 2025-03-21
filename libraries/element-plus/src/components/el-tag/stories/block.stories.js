@@ -1,9 +1,9 @@
-import ElTag from '../index';
+import { ElTag , ElCheckTag } from '../index';
 
 export default {
   id: 'el-tag-blocks',
   title: '组件列表/Tag 标签/内置区块',
-  component: ElTag,
+  components: { ElTag, ElCheckTag },
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -26,6 +26,13 @@ export const Default = {
     template: '<el-tag text="默认标签"></el-tag>',
   }),
 };
+
+// export const Check = {
+//   name: '可选标签',
+//   render: () => ({
+//     template: '<el-check-tag :checked="true" text="默认标签"></el-check-tag>',
+//   }),
+// };
 
 // export const Large = {
 //   name: '大型标签',

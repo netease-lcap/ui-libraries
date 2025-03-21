@@ -1,24 +1,23 @@
-// import { $deletePropList, NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
-// import ElIcon from '../../el-icon';
+import { h } from 'vue';
+import _ from 'lodash';
+import { $deletePropsList } from '@/plugins/constants';
+import ElIcon from '../../el-icon/index';
 
-// export const useExtendsPlugin: NaslComponentPluginOptions = {
-//   setup(props, { h }) {
-//     return {
-//       slotDefault() {
-//         const icon = props.get('icon');
-//         const slotDefault = props.get('slotDefault');
+export function useExtendsPlugin(props) {
+  const slots = props.get('slots');
 
-//         const vnodes: any[] = typeof slotDefault === 'function' ? slotDefault() : [];
-
-//         if (icon) {
-//           vnodes.unshift(h(ElIcon, { attrs: { name: icon } }));
-//         }
-
-//         return vnodes;
-//       },
-//       [$deletePropList]: ['icon'],
-//     };
-//   },
-// };
-
-export {};
+  return {
+    slots: {
+      ...slots,
+      default: () => {
+        const icon = props.get('icon');
+        const vnodes: any[] = _.isFunction(slots.default) ? slots.default() : [];
+        if (icon) {
+          vnodes.unshift(h(ElIcon, { name: icon }));
+        }
+        return vnodes;
+      },
+    },
+    [$deletePropsList]: ['icon'],
+  };
+}

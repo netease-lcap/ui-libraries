@@ -72,7 +72,7 @@ namespace nasl.ui {
         ],
       },
     })
-    size: '' | 'large' | 'default' | 'small';
+    size: '' | 'large' | 'default' | 'small' = '';
 
     @Prop({
       group: '主要属性',
@@ -133,4 +133,74 @@ namespace nasl.ui {
     })
     onClose: (event: MouseEvent) => void;
   }
+  
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'element',
+      editable: "text",
+      textholder: "text",
+      useFxOrEg: { property: "text" }
+    }
+  })
+  @Component({
+    title: '可选中标签',
+    description: '可选中标签',
+  })
+  export class ElCheckTag extends ViewComponent {
+    constructor(options?: Partial<ElCheckTagOptions>) {
+      super();
+    }
+  }
+  
+  export class ElCheckTagOptions extends ElTagOptions {
+    @Prop({
+      group: '主要属性',
+      title: '文本',
+      description: '标签内容',
+      setter: { concept: 'InputSetter' },
+    })
+    text: nasl.core.String = '';
+    
+    @Prop({
+      group: '数据属性',
+      title: '是否选中',
+      description: '是否选中。支持语法糖 `v-model`',
+      setter: { concept: 'SwitchSetter' },
+    })
+    private checked: nasl.core.Boolean = false;
+    
+    @Prop({
+      group: '状态属性',
+      title: '禁用状态',
+      description: '是否禁用',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean = false;
+    
+    @Prop({
+      group: '主要属性',
+      title: '类型',
+      description: 'type属性，可选择标签的类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '主要' },
+          { title: '成功' },
+          { title: '信息' },
+          { title: '警告' },
+          { title: '危险' },
+        ],
+      },
+    })
+    type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
+    
+    @Event({
+      title: '点击',
+      description: '点击 Check Tag 时触发的事件',
+    })
+    onChange: (event: MouseEvent) => void;
+  }
+  
+  
+  
 }

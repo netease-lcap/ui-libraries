@@ -51,6 +51,6 @@ export { ElTree } from './el-tree';
 export { ElTooltip } from './el-tooltip';
 export { ElProgress } from './el-progress';
 export { ElResult } from './el-result';
-export { ElTag } from './el-tag';
+export { ElTag, ElCheckTag } from './el-tag';
 export { ElDropdown, ElDropdownItem, ElDropdownMenu } from './el-dropdown';
 export { ElRadio, ElRadioGroup, ElFormRadioGroup } from './el-radio';
