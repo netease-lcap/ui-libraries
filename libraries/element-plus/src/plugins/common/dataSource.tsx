@@ -5,8 +5,8 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 import { watch } from 'vue';
 import { useRequest } from 'vue-hooks-plus';
-import { useMemo, useState, useRef, useEffect, useCallback } from '@/plugins/hooks';
-import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
+import { useMemo, useState, useRef, useEffect } from '@/plugins/hooks';
+import { DataSourceType, DataSourceArrayType } from '@/types';
 
 export function useHandleMapField(filedInfo: {
   label?: string;
