@@ -1004,13 +1004,13 @@ importers:
         version: 7.23.3(@babel/core@7.23.6)
       '@babel/traverse':
         specifier: ^7.23.7
-        version: 7.23.7(supports-color@5.5.0)
+        version: 7.23.7
       '@babel/types':
         specifier: ^7.22.10
         version: 7.23.6
       '@lcap/extension-ui':
-        specifier: ^1.0.0-alpha.3
-        version: 1.0.0-alpha.3
+        specifier: ^1.0.0-alpha.4
+        version: 1.0.0-alpha.4
       '@lcap/material-parser':
         specifier: ^1.0.0-alpha.2
         version: 1.0.0-alpha.2(prop-types@15.8.1)(vue@3.5.13(typescript@5.3.3))
@@ -1253,7 +1253,7 @@ importers:
         version: 0.16.0(ejs@3.1.9)(handlebars@4.7.8)(lodash@4.17.21)(pug@3.0.2)
       debug:
         specifier: ^4.3.4
-        version: 4.3.4(supports-color@5.5.0)
+        version: 4.3.4(supports-color@9.4.0)
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
@@ -3303,8 +3303,8 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
 
-  '@lcap/extension-ui@1.0.0-alpha.3':
-    resolution: {integrity: sha512-oEBItUPanyIrUySV+zad9lfTAe8uWjlVdL+TRu1n9mneC4MX//yjWSFFvhmjJETq8USr9BylOh4xeRQHJfWEpQ==}
+  '@lcap/extension-ui@1.0.0-alpha.4':
+    resolution: {integrity: sha512-LkpT4BasAhJBLMcM7wC7shixfeOAdenu3EwNloGZQ3teJ60Q4qS3Ub1D567nCUuYIq8O6hBG40XkVCStG+gfIw==}
 
   '@lcap/material-parser@1.0.0-alpha.2':
     resolution: {integrity: sha512-nWPwyHt6O4Vc1E7RYRErGk6N2cAeeiIR3WbeZosEfhF692TmJVFJs8w7+bi8w9R9Sxpdhibd8CZNC11ewdx6ew==}
@@ -12301,10 +12301,10 @@ snapshots:
       '@babel/helpers': 7.23.6
       '@babel/parser': 7.23.6
       '@babel/template': 7.22.15
-      '@babel/traverse': 7.23.7(supports-color@5.5.0)
+      '@babel/traverse': 7.23.7
       '@babel/types': 7.23.6
       convert-source-map: 2.0.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -12589,7 +12589,7 @@ snapshots:
   '@babel/helpers@7.23.6':
     dependencies:
       '@babel/template': 7.22.15
-      '@babel/traverse': 7.23.7(supports-color@5.5.0)
+      '@babel/traverse': 7.23.7
       '@babel/types': 7.23.6
     transitivePeerDependencies:
       - supports-color
@@ -13313,6 +13313,21 @@ snapshots:
       '@babel/code-frame': 7.26.2
       '@babel/parser': 7.26.9
       '@babel/types': 7.26.9
+
+  '@babel/traverse@7.23.7':
+    dependencies:
+      '@babel/code-frame': 7.23.5
+      '@babel/generator': 7.23.6
+      '@babel/helper-environment-visitor': 7.22.20
+      '@babel/helper-function-name': 7.23.0
+      '@babel/helper-hoist-variables': 7.22.5
+      '@babel/helper-split-export-declaration': 7.22.6
+      '@babel/parser': 7.23.6
+      '@babel/types': 7.23.6
+      debug: 4.3.4(supports-color@9.4.0)
+      globals: 11.12.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@babel/traverse@7.23.7(supports-color@5.5.0)':
     dependencies:
@@ -14175,7 +14190,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@lcap/extension-ui@1.0.0-alpha.3':
+  '@lcap/extension-ui@1.0.0-alpha.4':
     dependencies:
       send: 1.1.0
     transitivePeerDependencies:
@@ -15531,7 +15546,7 @@ snapshots:
     dependencies:
       '@babel/generator': 7.23.6
       '@babel/parser': 7.23.6
-      '@babel/traverse': 7.23.7(supports-color@5.5.0)
+      '@babel/traverse': 7.23.7
       '@babel/types': 7.23.6
       '@storybook/csf': 0.1.2
       '@storybook/types': 7.6.17
@@ -16442,7 +16457,7 @@ snapshots:
       '@typescript-eslint/type-utils': 6.15.0(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/utils': 6.15.0(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/visitor-keys': 6.15.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       eslint: 8.56.0
       graphemer: 1.4.0
       ignore: 5.3.0
@@ -16472,7 +16487,7 @@ snapshots:
       '@typescript-eslint/types': 6.15.0
       '@typescript-eslint/typescript-estree': 6.15.0(typescript@5.3.3)
       '@typescript-eslint/visitor-keys': 6.15.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       eslint: 8.56.0
     optionalDependencies:
       typescript: 5.3.3
@@ -16505,7 +16520,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 6.15.0(typescript@5.3.3)
       '@typescript-eslint/utils': 6.15.0(eslint@8.56.0)(typescript@5.3.3)
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       eslint: 8.56.0
       ts-api-utils: 1.0.3(typescript@5.3.3)
     optionalDependencies:
@@ -16639,7 +16654,7 @@ snapshots:
     dependencies:
       '@ampproject/remapping': 2.2.1
       '@bcoe/v8-coverage': 0.2.3
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       istanbul-lib-coverage: 3.2.2
       istanbul-lib-report: 3.0.1
       istanbul-lib-source-maps: 4.0.1
@@ -19272,7 +19287,7 @@ snapshots:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.3
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.2.2
@@ -20653,7 +20668,7 @@ snapshots:
     dependencies:
       chalk: 5.3.0
       commander: 11.1.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       execa: 8.0.1
       lilconfig: 3.0.0
       listr2: 8.0.0
@@ -22281,7 +22296,7 @@ snapshots:
   react-docgen@7.0.1:
     dependencies:
       '@babel/core': 7.23.6
-      '@babel/traverse': 7.23.7(supports-color@5.5.0)
+      '@babel/traverse': 7.23.7
       '@babel/types': 7.23.6
       '@types/babel__core': 7.20.5
       '@types/babel__traverse': 7.20.5
@@ -23445,7 +23460,7 @@ snapshots:
       bundle-require: 4.2.1(esbuild@0.21.5)
       cac: 6.7.14
       chokidar: 3.5.3
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       esbuild: 0.21.5
       execa: 5.1.1
       globby: 11.1.0
@@ -23806,7 +23821,7 @@ snapshots:
       acorn-walk: 8.3.1
       cac: 6.7.14
       chai: 4.3.10
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       execa: 8.0.1
       local-pkg: 0.5.0
       magic-string: 0.30.5
