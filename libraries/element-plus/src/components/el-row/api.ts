@@ -69,6 +69,14 @@ namespace nasl.ui {
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 0;
 
+    @Prop({
+      group: '主要属性',
+      title: '标签',
+      description: '标签',
+      setter: { concept: 'InputSetter' },
+    })
+    tag: nasl.core.String = 'div';
+
     @Slot({
       title: '自定义默认内容',
       description: '自定义默认内容',
@@ -113,6 +121,14 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     offset: nasl.core.Decimal | nasl.core.Integer = 0;
+
+    @Prop({
+      group: '主要属性',
+      title: '标签',
+      description: '标签',
+      setter: { concept: 'InputSetter' },
+    })
+    tag: nasl.core.String = 'div';
 
     @Prop({
       group: '主要属性',

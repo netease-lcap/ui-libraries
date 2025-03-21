@@ -145,6 +145,15 @@ namespace nasl.ui {
     collapse: nasl.core.Boolean = false;
 
     @Prop({
+      group: '主要属性',
+      title: '是否使用 vue-router 的模式',
+      description:
+        '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
+      setter: { concept: 'SwitchSetter' },
+    })
+    router: nasl.core.Boolean = false;
+
+    @Prop({
       group: '样式属性',
       title: '背景色',
       description: '菜单的背景色（仅支持 hex 格式）',
@@ -192,7 +201,7 @@ namespace nasl.ui {
     })
     uniqueOpened: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElMenuOptions<T, V>, 'menuTrigger'>({
       group: '主要属性',
       title: '子菜单打开的触发方式',
       description: '子菜单打开的触发方式(只在 mode 为 horizontal 时有效)',
@@ -200,17 +209,9 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '鼠标悬停时' }, { title: '鼠标点击时' }],
       },
+      if: (_) => _.mode === 'horizontal',
     })
     menuTrigger: 'hover' | 'click' = 'hover';
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '是否使用 vue-router 的模式',
-    //   description:
-    //     '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // router: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -361,14 +362,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     index: nasl.core.String | null = null;
-
-    @Prop({
-      group: '样式属性',
-      title: '弹出菜单类名',
-      description: '弹出菜单的自定义类名',
-      setter: { concept: 'InputSetter' },
-    })
-    popperClass: nasl.core.String;
 
     @Prop({
       group: '主要属性',
