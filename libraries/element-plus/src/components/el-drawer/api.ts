@@ -193,6 +193,22 @@ namespace nasl.ui {
     })
     withHeader: nasl.core.Boolean = true;
 
+    @Prop({
+      group: '主要属性',
+      title: 'z-index',
+      description: '和原生的 CSS 的 z-index 相同，改变 z 轴的顺序',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    zIndex: nasl.core.Integer;
+
+    @Prop({
+      group: '主要属性',
+      title: 'aria-level 属性',
+      description: 'header 的 aria-level 属性',
+      setter: { concept: 'InputSetter' },
+    })
+    headerAriaLevel : nasl.core.String = '2';
+
     @Event({
       title: 'Drawer 打开的回调',
       description: 'Drawer 打开的回调',
@@ -210,6 +226,12 @@ namespace nasl.ui {
       description: 'Drawer 关闭的回调',
     })
     onClose: (event: any) => any;
+
+    @Event({
+      title: '关闭前的回调',
+      description: '关闭前的回调，会暂停 Drawer 的关闭',
+    })
+    onBeforeClose: (event: any) => any;
 
     @Event({
       title: 'Drawer 关闭动画结束时的回调',

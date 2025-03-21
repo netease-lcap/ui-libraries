@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { useControllableValue, useMemo } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
+import { ElIcon } from '../../index';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -45,5 +46,24 @@ export function handleDataSource(props) {
     onTabClick: _.wrap(onTabClick, (fn, ...args) => {
       _.attempt(fn, ...args);
     }),
+  };
+}
+
+export function handleAddIcon(props) {
+  const addIcon = props.get('addIcon');
+  const slots = props.get('slots');
+  if (!addIcon) return {};
+
+  const addIconSlot = {
+    'add-icon': () => {
+      return <ElIcon name={addIcon} />;
+    },
+  };
+
+  return {
+    slots: {
+      ...slots,
+      ...addIconSlot,
+    },
   };
 }

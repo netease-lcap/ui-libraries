@@ -1,6 +1,7 @@
 import { useRoute, useRouter } from 'vue-router';
 import { useEffect, useState } from '@/plugins/hooks';
 import { ElBreadcrumbItem } from '../index';
+import { ElIcon } from '../../index';
 
 export function handleAutoCrumbs(props) {
   const auto = props.get('auto');
@@ -47,5 +48,16 @@ export function handleAutoCrumbs(props) {
       ...slots,
       default: () => items.map(renderBreadcrumbItem),
     },
+  };
+}
+
+export function handleSeparatorIcon(props) {
+  const separatorIcon = props.get('separatorIcon');
+  if (!separatorIcon) return {};
+
+  const separatorIconComp = <ElIcon name={separatorIcon} />;
+
+  return {
+    separatorIcon: separatorIconComp,
   };
 }

@@ -169,13 +169,13 @@ namespace nasl.ui {
     })
     offset: nasl.core.Decimal = 0;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '定义渐变动画',
-    //   description: '定义渐变动画',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // transition: nasl.core.String = 'fade-in-linear';
+    @Prop({
+      group: '主要属性',
+      title: '定义渐变动画',
+      description: '定义渐变动画',
+      setter: { concept: 'InputSetter' },
+    })
+    transition: nasl.core.String = 'fade-in-linear';
 
     @Prop({
       group: '主要属性',

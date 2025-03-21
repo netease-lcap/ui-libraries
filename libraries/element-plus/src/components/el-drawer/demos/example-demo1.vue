@@ -18,7 +18,7 @@
       v-model="drawer"
       title="I am the title"
       :direction="direction"
-      :before-close="handleClose"
+      @before-close="handleClose"
     >
       <span>Hi, there!</span>
     </el-drawer>

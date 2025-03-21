@@ -128,8 +128,8 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [
           { title: '默认样式' },
-          { title: '选项卡样式的标签页' },
-          { title: '卡片化的标签页' },
+          { title: '卡片风格标签页' },
+          { title: '带边框的卡片风格标签页' },
         ],
       },
     })
@@ -150,6 +150,26 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     addable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '可增加且可关闭',
+      description: '标签是否同时可增加和关闭',
+      setter: { concept: 'SwitchSetter' },
+    })
+    editable: nasl.core.Boolean = false;
+
+    @Prop<ElTabsOptions<T, V>, 'addIcon'>({
+      group: '主要属性',
+      title: '添加按钮图标',
+      description: '自定义添加按钮图标',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
+      if: (_) => !!_.addable || !!_.editable,
+    })
+    addIcon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -298,7 +318,7 @@ namespace nasl.ui {
       description: '与选项卡绑定值对应的标识符',
       setter: { concept: 'InputSetter' },
     })
-    name: nasl.core.String;
+    name: nasl.core.String | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',

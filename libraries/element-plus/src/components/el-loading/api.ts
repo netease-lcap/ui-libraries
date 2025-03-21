@@ -110,6 +110,18 @@ namespace nasl.ui {
     })
     background: nasl.core.String;
 
+    @Event({
+      title: '关闭前的回调',
+      description: 'Loading 关闭之前执行的函数。 如果此函数返回 false ，关闭过程将被中止。 反之，loading 将被关闭。',
+    })
+    onBeforeClose: (event: any) => any;
+
+    @Event({
+      title: '完全关闭后触发的函数',
+      description: 'Loading 完全关闭后触发的函数',
+    })
+    onClosed: (event: any) => any;
+
     @Slot({
       title: '覆盖节点',
       description: '覆盖节点',

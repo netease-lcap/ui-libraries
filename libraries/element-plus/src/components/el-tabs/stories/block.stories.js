@@ -34,7 +34,7 @@ export const Default = {
 };
 
 export const CardStyle = {
-  name: '选项卡风格',
+  name: '卡片风格',
   render: () => ({
     template: `
       <el-tabs type="card">
@@ -47,7 +47,7 @@ export const CardStyle = {
 };
 
 export const BorderCardStyle = {
-  name: '卡片化风格',
+  name: '带有边框的卡片风格',
   render: () => ({
     template: `
       <el-tabs type="border-card">
