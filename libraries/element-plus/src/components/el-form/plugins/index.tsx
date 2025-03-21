@@ -1,8 +1,7 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
-import { watch } from 'vue';
 import { $formProvide } from '@/components/el-form/constants';
-import { useRef, useEffect } from '@/plugins/hooks';
+import { useRef } from '@/plugins/hooks';
 
 export function handleModelValue(props) {
   const modelValue = props.get('model') ?? {};
@@ -10,7 +9,6 @@ export function handleModelValue(props) {
   const provide = props.get('provide');
   const ref = props.get('ref');
   const formItemList = useRef({});
-  // console.log(model., 'model');
   return {
     model,
     provide: Object.assign(provide, {
