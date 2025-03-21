@@ -44,7 +44,7 @@ namespace nasl.ui {
       },
       onChange: [{ clear: ['placeholderRight'] }],
     })
-    range: nasl.core.Boolean = false;
+    private range: nasl.core.Boolean = false;
 
     @Prop<ElDatePickerOptions, 'value'>({
       group: '数据属性',
@@ -77,74 +77,6 @@ namespace nasl.ui {
     endValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
     @Prop({
-      group: '数据属性',
-      title: '转换器',
-      description: '转换器，用于转换时间结果',
-      docDescription: '用于转换选中的日期格式，支持JSON、Unix 时间戳、Date对象、YYYY-MM-DD共4种模式。默认YYYY-MM-DD',
-      setter: {
-          concept: 'EnumSelectSetter',
-          options: [{ title: 'JSON' }, { title: 'Unix 时间戳' }, { title: 'Date 对象' }, { title: 'YYYY-MM-DD' }],
-      },
-    })
-    converter: 'json' | 'timestamp' | 'date' | 'format' = 'format';
-
-    @Prop({
-      group: '主要属性',
-      title: '允许输入',
-      description: '是否允许输入日期',
-      setter: { concept: 'SwitchSetter' },
-    })
-    allowInput: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '样式属性',
-      title: '无边框',
-      description: '无边框模式',
-      setter: { concept: 'SwitchSetter' },
-    })
-    borderless: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '可清除',
-      description: '是否显示清除按钮',
-      setter: { concept: 'SwitchSetter' },
-    })
-    clearable: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '数据属性',
-      title: '最小日期值',
-      description: '最小可选的日期值，默认为10年前，日期填写格式为“yyyy-mm-dd”',
-      docDescription: '设置日期范围，支持输入的最小日期',
-    })
-    minDate:
-      | nasl.core.String
-      | nasl.core.Integer
-      | nasl.core.Date
-      | nasl.core.DateTime;
-
-    @Prop({
-      group: '数据属性',
-      title: '最大日期值',
-      description: '最大可选的日期值，默认为9年后，日期填写格式为“yyyy-mm-dd”',
-      docDescription: '设置日期范围，支持输入的最大日期',
-    })
-    maxDate:
-      | nasl.core.String
-      | nasl.core.Integer
-      | nasl.core.Date
-      | nasl.core.DateTime;
-
-    @Prop({
-      group: '状态属性',
-      title: '禁用',
-      description: '是否禁用组件',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
       group: '状态属性',
       title: '只读',
       description: '只读状态',
@@ -152,376 +84,314 @@ namespace nasl.ui {
     })
     readonly: nasl.core.Boolean;
 
-    @Prop<ElDatePickerOptions, 'mode'>({
-      group: '主要属性',
-      title: '日期类型',
-      description: '选择器模式。可选项：year/quarter/month/week/date',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '年份' },
-          { title: '季度' },
-          { title: '月份' },
-          { title: '周' },
-          { title: '日期' },
-        ],
-      },
-      onChange: [{
-        update: {
-          format: 'YYYY-MM-DD',
-        },
-        if: (val) => val === 'date',
-      }, {
-        update: {
-          format: 'YYYY',
-        },
-        if: (val) => val === 'year',
-      }, {
-        update: {
-          format: 'YYYY-MM',
-        },
-        if: (val) => val === 'month',
-      }, {
-        update: {
-          format: 'GGGG-[W]WW',
-        },
-        if: (val) => val === 'week',
-      }, {
-        update: {
-          format: 'YYYY-[Q]Q',
-        },
-        if: (val) => val === 'quarter',
-      }]
-    })
-    mode: 'year' | 'quarter' | 'month' | 'week' | 'date' = 'date';
-
     @Prop({
-      group: '主要属性',
-      title: '第一天从星期几开始',
-      description: '第一天从星期几开始',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 1,
-        max: 7,
-      },
+      group: '状态属性',
+      title: '禁用',
+      description: '是否禁用按钮',
+      setter: { concept: 'SwitchSetter' },
     })
-    firstDayOfWeek: nasl.core.Decimal = 1;
-
-    @Prop<ElDatePickerOptions, 'format'>({
-      group: '主要属性',
-      title: '日期展示格式',
-      description:
-        '仅用于格式化日期显示的格式，不影响日期值。注意和 `valueType` 的区别，`valueType`会直接决定日期值 `value` 的格式。全局配置默认为："YYYY-MM-DD"，',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '中国（2023年7月26日）', if: _ => _.mode === 'date' },
-          { title: 'ISO（2023-07-26）', if: _ => _.mode === 'date' },
-          { title: 'US（7/26/2023）', if: _ => _.mode === 'date' },
-          { title: 'EU（26/7/2023）', if: _ => _.mode === 'date' },
-          { title: '2023-28周', if: _ => _.mode === 'week' },
-          { title: '2023年第28周', if: _ => _.mode === 'week' },
-          { title: '2023-W28', if: _ => _.mode === 'week' },
-          { title: '中国（2023年7月）', if: _ => _.mode === 'month' },
-          { title: 'ISO（2023-07）', if: _ => _.mode === 'month' },
-          { title: 'US/EU（7/2023）', if: _ => _.mode === 'month' },
-          { title: '2023年第3季度', if: _ => _.mode === 'quarter' },
-          { title: '2023年Q3', if: _ => _.mode === 'quarter' },
-          { title: '2023-Q3', if: _ => _.mode === 'quarter' },
-          { title: '中国（2023年）', if: _ => _.mode === 'year' },
-          { title: 'ISO（2023）', if: _ => _.mode === 'year' }
-      ],
-      },
-    })
-    format: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' | 'GGGG-W周' | 'GGGG年第W周' | 'GGGG-[W]WW' | 'YYYY年M月' | 'YYYY-MM' | 'M/YYYY' | 'YYYY年第Q季度' | 'YYYY年[Q]Q' | 'YYYY-[Q]Q' | 'YYYY年' | 'YYYY' = 'YYYY-MM-DD';
-
-    @Prop({
-      group: '主要属性',
-      title: '占位符',
-      description: '占位符。',
-      setter: { concept: 'InputSetter' },
-    })
-    placeholder: nasl.core.String = '请选择日期';
-
-    @Prop<ElDatePickerOptions, 'placeholderRight'>({
-      group: '主要属性',
-      title: '右侧占位符',
-      description:
-        '时间选择框无内容时的提示信息，支持自定义编辑, 在没有设置的时候使用placeholder作为右侧占位符内容',
-      if: (_) => _.range === true,
-      implicitToString: true,
-      setter: {
-        concept: 'InputSetter',
-        placeholder: '同占位符一致'
-      }
-    })
-    placeholderRight: nasl.core.String = '';
-
-    @Prop<ElDatePickerOptions, 'separator'>({
-      group: '主要属性',
-      title: '分隔符',
-      description: '日期分隔符，支持全局配置，默认为 -',
-      if: (_) => _.range === true,
-      setter: {
-        concept: 'InputSetter',
-      },
-    })
-    separator: nasl.core.String = '-';
-
-    @Prop<ElDatePickerOptions, 'enablePresets'>({
-      group: '主要属性',
-      title: '启用快捷设置',
-      description: '启用预设快捷日期选择',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    enablePresets: nasl.core.Boolean = false;
-
-    @Prop<ElDatePickerOptions, 'presetsPlacement'>({
-      group: '主要属性',
-      title: '快捷设置位置',
-      description:
-        '预设面板展示区域（包含确定按钮）。可选项：left/top/right/bottom',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '左侧' },
-          { title: '顶部' },
-          { title: '右侧' },
-          { title: '底部' },
-        ],
-      },
-      if: (_) => _.enablePresets === true,
-    })
-    presetsPlacement: 'left' | 'top' | 'right' | 'bottom' = 'bottom';
-
-    @Prop({
-      title: '前缀图标',
-      description: '前缀图标',
-      group: '主要属性',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
-      },
-    })
-    prefixIcon: nasl.core.String;
-
-    @Prop({
-      title: '后缀图标',
-      description: '后缀图标',
-      group: '主要属性',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
-      },
-    })
-    suffixIcon: nasl.core.String;
+    disabled: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',
       title: '尺寸',
-      description: '输入框尺寸。可选项：small/medium/large。',
+      description: '输入框尺寸。可选项：large/default/small。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '无' }, { title: '大' }, { title: '默认' }, { title: '小' }],
+      },
+    })
+    size: '' | 'large' | 'default' | 'small' = '';
+
+    @Prop({
+      group: '交互属性',
+      title: '文本框可输入',
+      description: '文本框可输入',
+      setter: { concept: 'SwitchSetter' },
+    })
+    editable: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '交互属性',
+      title: '可清空',
+      description: '是否显示清除按钮',
+      setter: { concept: 'SwitchSetter' },
+    })
+    clearable: nasl.core.Boolean = true;
+
+    @Prop<ElDatePickerOptions, 'placeholder'>({
+      group: '主要属性',
+      title: '占位符',
+      description: '非范围选择时的占位内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.range === false,
+    })
+    placeholder: nasl.core.String;
+
+    @Prop<ElDatePickerOptions, 'startPlaceholder'>({
+      group: '主要属性',
+      title: '范围选择时开始日期的占位内容',
+      description: '范围选择时开始日期的占位内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.range,
+    })
+    startPlaceholder: nasl.core.String;
+
+    @Prop<ElDatePickerOptions, 'endPlaceholder'>({
+      group: '主要属性',
+      title: '范围选择时结束日期的占位内容',
+      description: '范围选择时结束日期的占位内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.range,
+    })
+    endPlaceholder: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示类型',
+      description: '显示类型',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '小' },
-          { title: '中' },
-          { title: '大' },
+          { title: '年份' },
+          { title: '多个年份' },
+          { title: '月份' },
+          { title: '多个月份' },
+          { title: '日期' },
+          { title: '多个日期' },
+          { title: '日期时间' },
+          { title: '周' },
+          { title: '日期时间范围' },
+          { title: '日期范围' },
+          { title: '月份范围' },
+          { title: '年份范围' },
         ],
       },
     })
-    size:
-      | 'small'
-      | 'medium'
-      | 'large' = 'medium';
+    type:
+      | 'year'
+      | 'years'
+      | 'month'
+      | 'months'
+      | 'date'
+      | 'dates'
+      | 'datetime'
+      | 'week'
+      | 'datetimerange'
+      | 'daterange'
+      | 'monthrange'
+      | 'yearrange' = 'date';
+
+    @Prop({
+      group: '主要属性',
+      title: '显示在输入框中的格式',
+      description: '显示在输入框中的格式',
+      setter: { concept: 'InputSetter' },
+    })
+    format: nasl.core.String = 'YYYY-MM-DD';
+
+    @Prop({
+      group: '主要属性',
+      title: '选择范围时的分隔符',
+      description: '选择范围时的分隔符',
+      setter: { concept: 'InputSetter' },
+    })
+    rangeSeparator: nasl.core.String = '-';
+
+    @Prop({
+      group: '主要属性',
+      title: '选择器打开时默认显示的时间',
+      description: '可选，选择器打开时默认显示的时间',
+      setter: { concept: 'InputSetter' },
+    })
+    defaultValue: Date | [Date, Date];
+
+    @Prop({
+      group: '主要属性',
+      title: '范围选择时选中日期所使用的当日内具体时刻',
+      description: '范围选择时选中日期所使用的当日内具体时刻',
+      setter: { concept: 'InputSetter' },
+    })
+    defaultTime: Date | [Date, Date];
+
+    @Prop({
+      group: '主要属性',
+      title: '绑定值的格式',
+      description: '可选，绑定值的格式，例如：YYYY-MM-DD。 不指定则绑定值为 Date 对象',
+      setter: { concept: 'InputSetter' },
+    })
+    valueFormat: nasl.core.String;
 
     // @Prop({
     //   group: '主要属性',
-    //   title: 'Status',
-    //   description: '输入框状态。可选项：default/success/warning/error',
+    //   title: '可选，时间选择器下拉列表中显示的日期格式',
+    //   description: '可选，时间选择器下拉列表中显示的日期格式',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // dateFormat: nasl.core.String;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '时间选择器下拉列表中显示的时间格式',
+    //   description: '可选，时间选择器下拉列表中显示的时间格式',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // timeFormat: nasl.core.String;
+
+    @Prop<ElDatePickerOptions, 'unlinkPanels'>({
+      group: '主要属性',
+      title: '取消两个日期面板之间的联动',
+      description: '在范围选择器里取消两个日期面板之间的联动',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.range,
+    })
+    unlinkPanels: nasl.core.Boolean = true;
+
+    // @Prop({
+    //   title: '前缀图标',
+    //   description: '前缀图标',
+    //   group: '主要属性',
     //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [
-    //       { title: 'default' },
-    //       { title: 'success' },
-    //       { title: 'warning' },
-    //       { title: 'error' },
-    //     ],
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
     //   },
     // })
-    // status: 'default' | 'success' | 'warning' | 'error' = 'default';
+    // prefixIcon: nasl.core.String;
 
     // @Prop({
+    //   title: '清除图标',
+    //   description: '自定义清除图标',
     //   group: '主要属性',
-    //   title: 'Tips',
-    //   description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
-    //   setter: { concept: 'InputSetter' },
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+    //   },
     // })
-    // tips: any;
+    // clearIcon: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Value Type',
-    //   description:
-    //     '用于格式化日期的值，仅支持部分格式，时间戳、日期等。⚠️ `YYYYMMDD` 这种格式不支持，请勿使用，如果希望支持可以给 `dayjs` 提个 PR。注意和 `format` 的区别，`format` 仅用于处理日期在页面中呈现的格式。`ValueTypeEnum` 即将废弃，请更为使用 `DatePickerValueType`。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // valueType: nasl.core.String;
     @Prop({
-      group: '样式属性',
-      title: '宽度随内容自适应',
-      description: '宽度随内容自适应',
+      group: '主要属性',
+      title: '表单验证',
+      description: '是否触发表单验证',
+      setter: { concept: 'SwitchSetter' },
+    })
+    validateEvent: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '将下拉列表插入至 body 元素',
+      description: '是否将 date-picker 的下拉列表插入至 body 元素',
+      setter: { concept: 'SwitchSetter' },
+    })
+    teleported: nasl.core.Boolean = true;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '清空选项的值',
+    //   description: '清空选项的值',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // valueOnClear: nasl.core.Decimal | null;
+
+    @Prop({
+      group: '主要属性',
+      title: 'Tooltip 可用的 positions',
+      description: 'Tooltip 可用的 positions',
       setter: {
-        concept: 'SwitchSetter',
+        concept: 'InputSetter',
       },
     })
-    autoWidth: nasl.core.Boolean = false;
+    fallbackPlacements: Array<
+      | 'top'
+      | 'top-start'
+      | 'top-end'
+      | 'bottom'
+      | 'bottom-start'
+      | 'bottom-end'
+      | 'left'
+      | 'left-start'
+      | 'left-end'
+      | 'right'
+      | 'right-start'
+      | 'right-end'
+    >;
 
     @Prop({
-      group: '样式属性',
-      title: '文本内容位置',
-      description: '文本内容位置，居左/居中/居右',
+      group: '主要属性',
+      title: '位置',
+      description: '下拉框出现的位置',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '左对齐' },
-          { title: '居中对齐' },
-          { title: '右对齐' },
+          { title: '上边' },
+          { title: '上左' },
+          { title: '上右' },
+          { title: '下边' },
+          { title: '下左' },
+          { title: '下右' },
+          { title: '左边' },
+          { title: '左上' },
+          { title: '左下' },
+          { title: '右边' },
+          { title: '右上' },
+          { title: '右下' },
         ],
       },
     })
-    align: 'left' | 'center' | 'right' = 'left';
-
-    @Event({
-      title: '失焦时',
-      description: '当输入框失去焦点时触发',
-    })
-    onBlur: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startValue: nasl.core.String | nasl.core.Date,
-      endValue: nasl.core.String | nasl.core.Date,
-      position: 'start' | 'end',
-     }) => any;
+    placement:
+      | 'top'
+      | 'top-start'
+      | 'top-end'
+      | 'bottom'
+      | 'bottom-start'
+      | 'bottom-end'
+      | 'left'
+      | 'left-start'
+      | 'left-end'
+      | 'right'
+      | 'right-start'
+      | 'right-end' = 'bottom';
 
     @Event({
       title: '值改变时',
-      description: '选中值发生变化时触发。',
+      description: '用户确认选定的值时触发',
     })
-    onChange: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startValue: nasl.core.String | nasl.core.Date,
-      endValue: nasl.core.String | nasl.core.Date,
-      trigger: 'confirm' | 'pick' | 'enter' | 'preset' | 'clear',
-     }) => any;
+    onChange: (value: any) => void;
 
     @Event({
-      title: '聚焦时',
-      description: '输入框获得焦点时触发',
+      title: '失去焦点时',
+      description: '在组件 Input 失去焦点时触发',
     })
-    onFocus: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startValue: nasl.core.String | nasl.core.Date,
-      endValue: nasl.core.String | nasl.core.Date,
-      position: 'start' | 'end',
-     }) => any;
+    onBlur: (event: any) => void;
 
     @Event({
-      title: '面板选中后',
-      description: '面板选中值后触发',
+      title: '获得焦点时',
+      description: '在组件 Input 获得焦点时触发',
     })
-    onPick: (event: {
-      value: nasl.core.String | nasl.core.Date,
-      startValue: nasl.core.String | nasl.core.Date,
-      endValue: nasl.core.String | nasl.core.Date,
-      position: 'start' | 'end',
-     }) => any;
+    onFocus: (event: any) => void;
 
-    // @Event({
-    //   title: '点击预设按钮后',
-    //   description: '点击预设按钮后触发',
-    // })
-    // onPresetClick: (event: {
-    //   value: nasl.core.String | nasl.core.Date,
-    //   startValue: nasl.core.String | nasl.core.Date,
-    //   endValue: nasl.core.String | nasl.core.Date,
-    //   position: 'start' | 'end',
-    //  }) => any;
-  }
-
-  @IDEExtraInfo({
-    ideusage: {
-      idetype: 'container',
-      ignoreProperty: ['rules'],
-      bindStyleSelector: '.__cw-form-compose-input',
-      slotWrapperInlineStyle: {
-        label: 'display: inline-block;',
-      },
-      forceRefresh: 'parent',
-      namedSlotOmitWrapper: ['label'],
-    },
-    extends: [{
-      name: 'ElFormItemPro',
-      excludes: [
-        'slotDefault',
-      ],
-    }, {
-      name: 'ElDatePicker',
-    }],
-  })
-  @Component({
-    title: '表单日期选择器',
-    description: '表单日期选择器',
-    group: 'Form',
-  })
-  export class ElFormDatePicker extends ViewComponent {
-    constructor(options?: Partial<ElFormDatePickerOptions & ElFormItemProOptions & Omit<ElDatePickerOptions, keyof ElFormItemProOptions>>) {
-      super();
-    }
-  }
-
-  export class ElFormDatePickerOptions extends ViewComponentOptions {
-    @Prop<ElFormDatePickerOptions, 'useRangeValue'>({
-      group: '数据属性',
-      title: '使用区间字段',
-      description: '使用区间字段, 用于日期、时间、日期时间选择器开启区间选择时，托管起始值与结束值',
-      setter: { concept: 'SwitchSetter' },
-      if: (_) => false,
-      bindHide: true,
+    @Event({
+      title: '清空时',
+      description: '可清空的模式下用户点击清空按钮时触发',
     })
-    useRangeValue: nasl.core.Boolean = false;
+    onClear: () => void;
 
-    @Prop<ElFormDatePickerOptions, 'range'>({
-      group: '数据属性',
-      title: '区间选择',
-      description: '是否支持进行时间区间选择，关闭则为时间点选择',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-      onChange: [
-        {
-          clear: ['placeholderRight'],
-        },
-        {
-          clear: [],
-          if: (_) => !_,
-        },
-        {
-          update: {
-            useRangeValue: true,
-          },
-          if: (_) => !!_,
-        },
-        {
-          update: {
-            useRangeValue: false,
-          },
-          clear: ['placeholderRight', 'name', 'startFieldName', 'endFieldName'],
-          if: (_) => !_,
-        },
-      ],
-      bindHide: true,
+    @Event({
+      title: '日历所选日期更改时',
+      description: '在日历所选日期更改时触发',
     })
-    range: nasl.core.Boolean = false;
+    onCalendarChange: (value: any) => void;
+
+    @Event({
+      title: '日期面板改变时',
+      description: '当日期面板改变时触发',
+    })
+    onPanelChange: (date: any, view?: nasl.core.String) => void;
+
+    @Event({
+      title: '下拉列表出现/消失时',
+      description: '当 DatePicker 的下拉列表出现/消失时触发',
+    })
+    onVisibleChange: (visibility: nasl.core.Boolean) => void;
   }
 }

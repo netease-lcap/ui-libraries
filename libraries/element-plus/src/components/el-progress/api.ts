@@ -63,6 +63,15 @@ namespace nasl.ui {
       },
     })
     strokeWidth: nasl.core.Decimal = 6;
+    
+    @Prop<ElProgressOptions, 'textInside'>({
+      group: '样式属性',
+      title: '文字内置在进度条内',
+      description: '进度条显示文字内置在进度条内（只在 type=line 时可用），文字展示不全时需调整进度条宽度属性',
+      setter: { concept: 'SwitchSetter' },
+      if: _ => _.type === 'line',
+    })
+    textInside: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
@@ -127,15 +136,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     showText: nasl.core.Boolean = true;
-
-    @Prop<ElProgressOptions, 'textInside'>({
-      group: '主要属性',
-      title: '文字内置在进度条内',
-      description: '进度条显示文字内置在进度条内（只在 type=line 时可用），文字展示不全时需调整进度条宽度属性',
-      setter: { concept: 'SwitchSetter' },
-      if: _ => _.type === 'line',
-    })
-    textInside: nasl.core.Boolean = false;
 
     @Prop<ElProgressOptions, 'strokeLinecap'>({
       group: '样式属性',

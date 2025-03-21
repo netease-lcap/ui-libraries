@@ -18,7 +18,7 @@ export function handleRange(props) {
   const type = props.get('type') ?? 'date';
   const isRange = type.includes('range');
   return {
-    isRange,
+    range: isRange,
   };
 }
 handleRange.order = 3;

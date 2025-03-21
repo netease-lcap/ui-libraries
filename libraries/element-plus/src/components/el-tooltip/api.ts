@@ -160,7 +160,6 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     autoClose: nasl.core.Decimal = 0;
-
     
     @Prop({
       group: '主要属性',
@@ -169,18 +168,14 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '悬停' },
+          { title: '鼠标悬停' },
           { title: '点击' },
-          { title: '聚焦' },
-          { title: '上下文菜单' },
         ],
       },
     })
     trigger: 
       | 'hover'
-      | 'click'
-      | 'focus'
-      | 'contextmenu' = 'hover';
+      | 'click' = 'hover';
 
     // @Prop({
     //   group: '主要属性',
