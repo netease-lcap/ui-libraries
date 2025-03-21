@@ -5,6 +5,8 @@ export function handleSlots(props) {
   const slots = props.get('slots');
 
   return {
-    slots: _.mapKeys(slots, (value, key) => (key === 'subTitle' ? 'sub-title' : key)),
+    slots: _.assign(slots, {
+      'sub-title': slots.subTitle,
+    }),
   };
 }
