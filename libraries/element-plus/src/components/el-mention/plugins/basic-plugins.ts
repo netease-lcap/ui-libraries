@@ -5,7 +5,7 @@ import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/
 import { useMemo } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
-
+export { handleControllableValue } from '@/plugins/common/index';
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
   const textField = props.get('textField') || 'label';
