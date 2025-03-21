@@ -273,6 +273,7 @@ export function useControllableValue(props: any, options: Options = {}) {
       [valuePropName]: value,
       [trigger]: onChange,
     },
+    isControlled,
   ];
 }
 

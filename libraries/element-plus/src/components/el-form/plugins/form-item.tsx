@@ -1,103 +1,82 @@
-import VusionValidator, { localizeRules } from '@lcap/validator';
 import _ from 'lodash';
 import { ElFormItem } from 'element-plus';
-import { computed, inject, Ref, ref, watch, onMounted, onUnmounted } from 'vue';
-import { $formProvide, $formItemPrpos } from '@/components/el-form/constants';
-import { $provide, $rootStyle } from '@/plugins/constants';
-import { useEffect } from '@/plugins/hooks';
 
-function categoryStyles(style: Record<string, string> = {}) {
-  return Object.entries(style).reduce(
-    (acc, [key, value]) => {
-      const styleKey = $rootStyle.includes(key) ? 'style' : 'innerStyle';
-      acc[styleKey][key] = value;
-      return acc;
-    },
-    { style: {}, innerStyle: {} },
-  );
-}
+import { ref, watch, inject, Ref, getCurrentInstance, VNode, computed, onMounted, onUnmounted } from 'vue';
+import { ElFormItemWrap } from '@/components/el-form';
+import { $formProvide, $formItemProps } from '@/components/el-form/constants';
+import { useEffect } from '@/plugins/hooks';
+import { $provide } from '@/plugins/constants';
+
+type FormItemProvide = {
+  [$formProvide]: {
+    value: any;
+    setValue: (key: string, value: any) => void;
+    isInForm: boolean;
+    setFormitem: (key: string, value: any) => void;
+    deleteFormitem: (key: string) => void;
+  };
+};
+
 export function withFormItem(Component, name) {
   return {
     name,
     Component,
     inheritAttrs: false,
-    props: { ...ElFormItem.props },
+    props: {
+      ...ElFormItem.props,
+      modelValue: { type: [String, Number, Boolean, Object, Array], default: undefined },
+      'onUpdate:modelValue': { type: Function, default: undefined },
+      prop: { type: String, default: undefined },
+    },
     setup(props, { attrs, slots, emit, expose }) {
-      const propName = _.uniqueId('formItemPropName');
       const componentRef = ref({});
       const myRef = ref({});
-      const prop = computed(() => props.prop ?? propName);
-      const isRequired = computed(() => attrs.isRequired ?? false);
-      const styleProps = computed(() => categoryStyles(props.style));
-      const rules = computed(() => {
-        const rules = props.rules ?? [];
-        const required = isRequired.value ? { required: true, message: '表单项不得为空', trigger: 'blur' } : [];
-        return rules
-          .map((item) => {
-            return {
-              message: item.message,
-              required: item.required,
-              trigger: 'blur',
-              validator: (rule, value, callback) => {
-                const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
-                return new Promise((resolve) => {
-                  validator
-                    .validate(value)
-                    .then(() => {
-                      resolve(true);
-                    })
-                    .catch((errorMessage) => {
-                      callback(new Error(errorMessage));
-                      resolve({
-                        result: false,
-                        message: errorMessage,
-                      });
-                    });
-                });
-              },
-            };
-          })
-          .concat(required);
-      });
-      const myInject = inject($provide) as Ref<{
-        [$formProvide]: {
-          value: any;
-          setValue: (key: any, value: any) => void;
-          setFormitem: (key: any, value: any) => void;
-          deleteFormitem: (key: any) => void;
-        };
-      }>;
-      const formProvide = computed(() => myInject?.value?.[$formProvide]);
-      const formItemProps = Object.keys(ElFormItem.props);
+      const valueRef = ref({});
+      const uniqueid = _.uniqueId('formItemPropName');
+      const prop = computed(() => props.prop ?? uniqueid);
+      const provide = inject($provide) as Ref<FormItemProvide>;
+      const { setValue, value = valueRef, setFormitem, deleteFormitem } = provide?.value?.[$formProvide] ?? {};
+      const { vnode } = getCurrentInstance() as { vnode: VNode };
+      const { props: vnodeProps } = vnode;
+      const isControlled = Object.prototype.hasOwnProperty.call(vnodeProps, 'modelValue');
+      const modelValue = computed(() => (isControlled ? props?.modelValue : value?.[prop.value]));
+      const onUpdateModelValue = (value) => {
+        const propsOnUpdateModelValue = props?.['onUpdate:modelValue'] ?? (() => {});
+        _.attempt(propsOnUpdateModelValue, value);
+        _.attempt(setValue, prop.value, value);
+      };
+
       watch(componentRef, (value) => Object.assign(myRef.value, value));
       expose(myRef.value);
+
       onMounted(() => {
-        _.attempt(formProvide.value.setFormitem, prop.value, myRef.value);
+        setFormitem(prop.value, {
+          resetField: () => {
+            onUpdateModelValue(undefined);
+          },
+        });
       });
       onUnmounted(() => {
-        _.attempt(formProvide.value.deleteFormitem, prop.value);
+        deleteFormitem(prop.value);
       });
+
       return () => {
         return (
-          <ElFormItem
-            {..._.pick(props, $formItemPrpos)}
-            prop={prop.value}
-            style={styleProps.value.style}
+          <ElFormItemWrap
+            {..._.pick(_.assign({}, props, attrs, { prop: prop.value }), $formItemProps)}
             v-slots={{
               label: slots.label,
             }}
-            rules={rules.value}
           >
             <Component
-              {..._.omit(props, formItemProps)}
-              {...attrs}
-              style={styleProps.value.innerStyle}
-              onUpdate:modelValue={(value) => _.attempt(formProvide.value.setValue, prop.value, value)}
+              {..._.omit(_.assign({}, props, attrs), $formItemProps)}
               v-slots={slots}
               v-on={emit}
               ref={componentRef}
+              modelValue={modelValue.value}
+              onUpdate:modelValue={onUpdateModelValue}
             />
-          </ElFormItem>
+          </ElFormItemWrap>
         );
       };
     },

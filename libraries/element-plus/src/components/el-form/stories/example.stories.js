@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Component from '../index';
 // import { ElSelect, ElOption } from '../index';
 
@@ -87,24 +87,7 @@ export const Example2 = {
         inputName.value = el;
         console.log(formData.value, 'formData');
       };
-      const handleClick = async (tab) => {
-        // console.log('====', formData, tab);
-        console.log(tab, 'tab', tab.resetForm());
-        // tab.validate().then(
-        //   (res) => {
-        //     console.log(res, 'res');
-        //   },
-        //   (err) => {
-        //     console.log(err, 'err');
-        //   },
-        // );
 
-        // tab.resetForm();
-        // const result= await tab.validate();
-        // tab.fields()
-        // console.log(tab.fields, 'fields');
-        // console.log(tab);
-      };
       // setTimeout(() => {
       // name.value = 'newName';
       // list.value[0].value = 2;
@@ -115,13 +98,33 @@ export const Example2 = {
         {
           validate: 'filled',
           message: '表单项不得为空',
-          trigger: 'input+blur',
+          trigger: 'blur',
           required: true,
         },
       ];
       const inputTag = ref([]);
       const switchValue = ref(false);
+      const model = ref({
+        input21: '123',
+      });
+      const handleClick = async (tab) => {
+        // console.log('====', formData, tab);
+        tab.resetForm();
+        // console.log(tab, 'tab', tab.validated());
+        // console.log(model, 'model');
+      };
+      watch(
+        model,
+        (value) => {
+          console.log(value, 'model');
+        },
+        {
+          immediate: true,
+          deep: true,
+        },
+      );
       return {
+        model,
         formData,
         switchValue,
         select,
@@ -137,19 +140,20 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-form  ref="formRef">
-
-    <el-form-input :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-input-number :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form :model="model" ref="formRef">
+    {{inputName}}
+    <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
+     <el-form-input-number :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <el-form-cascader :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <el-form-input-tag :rules="rules"   label="input21"  data-nodepath="input21" />
     <el-form-rate :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <el-form-slider :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <el-form-switch :rules="rules"  v-model="switchValue" label="input21" data-nodepath="switch" />
     <el-form-tree-select :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-checkbox-group label="ww" :rules="rules" :isRequired="true" :dataSource="[{},{},{}]"></el-form-checkbox-group>
+
     <a @click="handleClick(formRef)" >Submit</a>
     <a @click="handleClick(formRef)" >Submit2</a>
-    <el-form-checkbox-group label="ww" :isRequired="true" :dataSource="[{},{},{}]"></el-form-checkox-group>
     </el-form>
 
 
