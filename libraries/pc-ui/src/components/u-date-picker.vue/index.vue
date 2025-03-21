@@ -261,6 +261,10 @@ export default {
                 return;
             this.showDate = this.handleEmptyValue(this.format(date, this.getFormatString()));
             const showDate = this.returnTime(this.showDate);
+            const newDate = showDate ? new Date(this.transformDate(showDate)) : undefined;
+            this.$emit('update:value', this.handleEmptyValue(this.toValue(newDate)));
+            this.$emit('update:date', this.handleEmptyValue(this.toValue(newDate)));
+
             /**
              * @event select 选择某一项时触发
              * @property {object} sender 事件发送对象

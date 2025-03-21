@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
 import { ElSelectV2 } from 'element-plus';
-import { useMemo, useCallback, GetAccumulatedMapType } from '@/plugins/hooks';
+import { useMemo, useCallback, GetAccumulatedMapType, useState } from '@/plugins/hooks';
 import { SelectAccumulateTypes } from './type';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
@@ -13,16 +13,12 @@ export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccum
   const textField = props.get('textField') || 'label';
   const valueField = props.get('valueField') || 'value';
   const slots = props.get('slots');
-  const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName']);
+  const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
-  const dataSourceSlots = _.isNil(dataConfig)
-    ? {}
-    : {
-        default: () => _.map(dataSource, (item) => <el-option {...item} />),
-      };
+  const dataSourceSlots = _.isNil(dataConfig) ? {} : { default: () => _.map(dataSource, (item) => <el-option {...item} />) };
 
   return {
     [$deletePropsList]: deletePropsList,

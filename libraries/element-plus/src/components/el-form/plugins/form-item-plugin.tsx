@@ -40,14 +40,12 @@ export function handleRules(props) {
   const isRequired = props.get('isRequired');
   const required = useMemo(() => (isRequired ? { required: true, message: '表单项不得为空', trigger: 'blur' } : []), [isRequired]);
   const rules = useMemo(
-    () =>
-      rulesProps
+    () => rulesProps
         .map((item) => ({
           message: item.message,
           required: item.required,
           trigger: 'blur',
-          validator: (rule, value, callback) =>
-            new Promise((resolve) => {
+          validator: (rule, value, callback) => new Promise((resolve) => {
               const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
               validator
                 .validate(value)
