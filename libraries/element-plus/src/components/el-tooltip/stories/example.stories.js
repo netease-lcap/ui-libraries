@@ -29,7 +29,7 @@ export const Example1 = {
 export const Example2 = {
   name: '主题',
   render: () => ({
-    template: `<div><el-tooltip content="Top center" placement="top">
+    template: `<div><el-tooltip  content="Top center" placement="top">
   <el-button>Dark</el-button>
 </el-tooltip>
 <el-tooltip content="Bottom center" placement="bottom" effect="light">

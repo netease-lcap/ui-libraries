@@ -63,15 +63,15 @@ export function registerComponent<T>(Component, options) {
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
       const provideRef = ref({});
-      // const router = useRouter?.();
-      // const route = useRoute?.();
+      const router = useRouter?.();
+      const route = useRoute?.();
       const useStore = create((set) => ({
         state: {
           inject: injectRef,
           provide: {},
           ref: {},
-          // router,
-          // route,
+          router,
+          route,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
         props: {

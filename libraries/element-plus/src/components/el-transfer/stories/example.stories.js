@@ -15,10 +15,17 @@ export default {
 export const Example1 = {
   name: '基础示例',
   render: () => ({
-    components: {
-      exampleDemo: ExampleDemo1,
+    setup() {
+      const dataSource = async () => [
+        { value: 1, label: '选项1' },
+        { value: 2, label: '选项2' },
+        { value: 3, label: '选项3' },
+      ];
+      return {
+        dataSource,
+      };
     },
-    template: '<example-demo></example-demo>',
+    template: '<el-transfer :dataSource="dataSource"></el-transfer>',
   }),
 };
 

@@ -26,7 +26,8 @@ export const Default = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-picker align="center" style="--el-datepicker-cell-active-background: red;" :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker>',
+    template:
+      '<el-date-picker align="center" style="--el-datepicker-cell-active-background: red;" :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker>',
   }),
 };
 
@@ -47,6 +48,7 @@ export const Range = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-picker :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker>',
+    template:
+      '<el-date-picker :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker>',
   }),
 };

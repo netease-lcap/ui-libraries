@@ -10,6 +10,35 @@ import { OverloadComponentContext } from './context';
 import { LCAP_UI_PACKAGE_PATH } from './constants';
 import { transformAPITs } from './transform-api';
 
+function changeNodeSource(node: babelTypes.ImportDeclaration | babelTypes.ExportNamedDeclaration | babelTypes.ExportAllDeclaration, filePath: string, modules: string[]) {
+  if (!node.source) {
+    return;
+  }
+
+  let sourcePath = node.source.value;
+  if (sourcePath.startsWith('./') && sourcePath.lastIndexOf('/') === 1) {
+    const resolvePath = path.resolve(filePath.substring(0, filePath.lastIndexOf('/')), sourcePath);
+    if (fs.existsSync(resolvePath) && !fs.lstatSync(resolvePath).isDirectory()) {
+      return;
+    }
+  }
+
+  if (sourcePath.startsWith('@components')) {
+    sourcePath = sourcePath.replace('@components', '@lcap-ui/src/components');
+  } else if (sourcePath.startsWith('cloud-ui.vusion/src')) {
+    sourcePath = sourcePath.replace('cloud-ui.vusion/src', '@lcap-ui/cloudui');
+  } else if (sourcePath.startsWith('@/')) {
+    const srcVusion = fs.existsSync('.lcap/lcap-ui/src-vusion');
+    sourcePath = sourcePath.replace('@', srcVusion ? '@lcap-ui/src-vusion' : '@lcap-ui/src');
+  } else if (sourcePath.startsWith('../') || sourcePath.startsWith('./')) {
+    const lastFolderPath = filePath.substring(0, filePath.lastIndexOf('/'));
+    sourcePath = normalizePath(path.resolve(lastFolderPath, sourcePath).replace(path.resolve(process.cwd(), LCAP_UI_PACKAGE_PATH), '@lcap-ui'));
+  } else if (modules.indexOf(sourcePath) === -1) {
+    modules.push(sourcePath);
+  }
+  node.source.value = sourcePath;
+}
+
 function transformScriptAst(ast: babelTypes.File, filePath, modules: string[]) {
   let isJSX = false;
   traverse(ast, {
@@ -17,29 +46,14 @@ function transformScriptAst(ast: babelTypes.File, filePath, modules: string[]) {
       isJSX = true;
       p.skip();
     },
+    ExportNamedDeclaration(p) {
+      changeNodeSource(p.node, filePath, modules);
+    },
+    ExportAllDeclaration(p) {
+      changeNodeSource(p.node, filePath, modules);
+    },
     ImportDeclaration(p) {
-      let sourcePath = p.node.source.value;
-      if (sourcePath.startsWith('./') && sourcePath.lastIndexOf('/') === 1) {
-        const resolvePath = path.resolve(filePath.substring(0, filePath.lastIndexOf('/')), sourcePath);
-        if (fs.existsSync(resolvePath) && !fs.lstatSync(resolvePath).isDirectory()) {
-          return;
-        }
-      }
-
-      if (sourcePath.startsWith('@components')) {
-        sourcePath = sourcePath.replace('@components', '@lcap-ui/src/components');
-      } else if (sourcePath.startsWith('cloud-ui.vusion/src')) {
-        sourcePath = sourcePath.replace('cloud-ui.vusion/src', '@lcap-ui/cloudui');
-      } else if (sourcePath.startsWith('@/')) {
-        const srcVusion = fs.existsSync('.lcap/lcap-ui/src-vusion');
-        sourcePath = sourcePath.replace('@', srcVusion ? '@lcap-ui/src-vusion' : '@lcap-ui/src');
-      } else if (sourcePath.startsWith('../') || sourcePath.startsWith('./')) {
-        const lastFolderPath = filePath.substring(0, filePath.lastIndexOf('/'));
-        sourcePath = normalizePath(path.resolve(lastFolderPath, sourcePath).replace(path.resolve(process.cwd(), LCAP_UI_PACKAGE_PATH), '@lcap-ui'));
-      } else if (modules.indexOf(sourcePath) === -1) {
-        modules.push(sourcePath);
-      }
-      p.node.source.value = sourcePath;
+      changeNodeSource(p.node, filePath, modules);
     },
   });
 

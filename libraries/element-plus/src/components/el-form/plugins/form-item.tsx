@@ -2,45 +2,19 @@ import VusionValidator, { localizeRules } from '@lcap/validator';
 import _ from 'lodash';
 import { ElFormItem } from 'element-plus';
 import { computed, inject, Ref, ref, watch, onMounted, onUnmounted } from 'vue';
-import { $formProvide } from '@/components/el-form/constants';
-import { $provide } from '@/plugins/constants';
+import { $formProvide, $formItemPrpos } from '@/components/el-form/constants';
+import { $provide, $rootStyle } from '@/plugins/constants';
 import { useEffect } from '@/plugins/hooks';
 
-function getStyles(style: Record<string, string> = {}) {
-  const rootStyle = {};
-  const inputStyle = {};
-  Object.keys(style).forEach((key) => {
-    const attrName = _.camelCase(key);
-    if (
-      [
-        'margin',
-        'marginLeft',
-        'marginRight',
-        'marginBottom',
-        'marginTop',
-        'position',
-        'left',
-        'right',
-        'bottom',
-        'top',
-        'display',
-        'flex',
-        'order',
-        'visibility',
-        'zIndex',
-        'boxSizing',
-        'flexGrow',
-        'flexShrink',
-        'flexBasis',
-        'alignSelf',
-      ].includes(attrName)
-    ) {
-      rootStyle[key] = style[key];
-    } else {
-      inputStyle[key] = style[key];
-    }
-  });
-  return { rootStyle, inputStyle };
+function categoryStyles(style: Record<string, string> = {}) {
+  return Object.entries(style).reduce(
+    (acc, [key, value]) => {
+      const styleKey = $rootStyle.includes(key) ? 'style' : 'innerStyle';
+      acc[styleKey][key] = value;
+      return acc;
+    },
+    { style: {}, innerStyle: {} },
+  );
 }
 export function withFormItem(Component, name) {
   return {
@@ -54,7 +28,7 @@ export function withFormItem(Component, name) {
       const myRef = ref({});
       const prop = computed(() => props.prop ?? propName);
       const isRequired = computed(() => attrs.isRequired ?? false);
-      const styleProps = computed(() => getStyles(props.inputStyle));
+      const styleProps = computed(() => categoryStyles(props.style));
       const rules = computed(() => {
         const rules = props.rules ?? [];
         const required = isRequired.value ? { required: true, message: '表单项不得为空', trigger: 'blur' } : [];
@@ -106,20 +80,9 @@ export function withFormItem(Component, name) {
       return () => {
         return (
           <ElFormItem
-            {..._.pick(props, [
-              'error',
-              'for',
-              'inlineMessage',
-              'label',
-              'labelPosition',
-              'labelWidth',
-              'prop',
-              'showMessage',
-              'size',
-              'validateStatus',
-            ])}
+            {..._.pick(props, $formItemPrpos)}
             prop={prop.value}
-            style={styleProps.value.rootStyle}
+            style={styleProps.value.style}
             v-slots={{
               label: slots.label,
             }}
@@ -128,7 +91,7 @@ export function withFormItem(Component, name) {
             <Component
               {..._.omit(props, formItemProps)}
               {...attrs}
-              style={styleProps.value.inputStyle}
+              style={styleProps.value.innerStyle}
               onUpdate:modelValue={(value) => _.attempt(formProvide.value.setValue, prop.value, value)}
               v-slots={slots}
               v-on={emit}
