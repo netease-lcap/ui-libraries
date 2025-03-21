@@ -67,6 +67,10 @@ export default defineComponent({
       type: String,
       default: '',
     },
+    closeOnHashChange: {
+      type: Boolean,
+      default: true,
+    },
     inputPlaceholder: {
       type: String,
     },
@@ -107,6 +111,32 @@ export default defineComponent({
       type: String as PropType<ComponentSize>,
       default: 'default',
     },
+    customClass: {
+      type: String,
+    },
+    modalClass: {
+      type: String,
+    },
+    cancelButtonClass: {
+      type: String,
+    },
+    confirmButtonClass: {
+      type: String,
+    },
+    closeOnPressEscape: {
+      type: Boolean,
+      default: true,
+    },
+    closeOnClickModal: {
+      type: Boolean,
+      default: true,
+    },
+    appendTo: {
+      type: [String, Object] as PropType<string | HTMLElement>,
+    },
+    customStyle: {
+      type: Object,
+    },
   },
 
   setup(props, { slots, emit, expose }) {
@@ -145,8 +175,10 @@ export default defineComponent({
           showConfirmButton: props.showConfirmButton,
           showClose: props.showClose,
           roundButton: props.roundButton,
-          closeOnPressEscape: props.type !== 'alert',
-          closeOnClickModal: props.type !== 'alert',
+          closeOnPressEscape: props.closeOnPressEscape,
+          closeOnClickModal: props.closeOnClickModal,
+          // closeOnPressEscape: props.type !== 'alert',
+          // closeOnClickModal: props.type !== 'alert',
           showInput: props.type === 'prompt',
           inputPlaceholder: props.inputPlaceholder,
           inputType: props.inputType,
@@ -155,6 +187,13 @@ export default defineComponent({
           inputValidator: props.inputValidator,
           inputErrorMessage: props.inputErrorMessage,
           buttonSize: props.buttonSize,
+          customClass: props.customClass,
+          modalClass: props.modalClass,
+          cancelButtonClass: props.cancelButtonClass,
+          confirmButtonClass: props.confirmButtonClass,
+          closeOnHashChange: props.closeOnHashChange,
+          appendTo: props.appendTo,
+          customStyle: props.customStyle,
           // customClass: getCurrentInstance()?.vnode?.data?.staticClass,
         });
 

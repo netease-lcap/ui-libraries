@@ -27,31 +27,31 @@ namespace nasl.ui {
     description: '引导用户按照流程完成任务的分步导航条，可根据实际应用场景设定步骤，步骤不得少于 2 步。',
     group: 'Navigation',
   })
-  export class ElSteps<T> extends ViewComponent {
-    // @Method({
-    //   title: '上一步',
-    //   description: '上一步',
-    // })
-    // prev(): void {}
+  export class ElSteps<T, V> extends ViewComponent {
+    @Method({
+      title: '上一步',
+      description: '上一步',
+    })
+    prev(): void {}
 
-    // @Method({
-    //   title: '下一步',
-    //   description: '下一步',
-    // })
-    // next(): void {}
+    @Method({
+      title: '下一步',
+      description: '下一步',
+    })
+    next(): void {}
 
-    // @Method({
-    //   title: '重新加载',
-    //   description: '清除缓存，重新加载',
-    // })
-    // reload(): void {}
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
 
-    constructor(options?: Partial<ElStepsOptions<T>>) {
+    constructor(options?: Partial<ElStepsOptions<T, V>>) {
       super();
     }
   }
 
-  export class ElStepsOptions<T> extends ViewComponentOptions {
+  export class ElStepsOptions<T, V> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -85,7 +85,29 @@ namespace nasl.ui {
     })
     nameField: (item: T) => nasl.core.String = ((item: any) => item.name) as any;
 
-    @Prop<ElStepsOptions<T>, 'direction'>({
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '文本字段',
+    //   description: '集合的元素类型中，用于显示文本的属性名称',
+    //   docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    // })
+    // textField: (item: T) => any = ((item: any) => item.text) as any;
+
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '值字段',
+    //   description: '集合的元素类型中，用于标识选中值的属性',
+    //   docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    // })
+    // valueField: (item: T) => V = ((item: any) => item.value) as any;
+
+    @Prop<ElStepsOptions<T, V>, 'direction'>({
       group: '主要属性',
       title: '显示方向',
       description: '显示方向',
@@ -105,7 +127,7 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
       sync: true,
     })
-    active: nasl.core.Integer | nasl.core.String;
+    active: nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
@@ -178,6 +200,18 @@ namespace nasl.ui {
       ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '步骤标题',
+      description: '步骤标题',
+    })
+    slotTitle: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '步骤描述',
+      description: '步骤描述',
+    })
+    slotDescription: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({

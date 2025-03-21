@@ -136,11 +136,11 @@ namespace nasl.ui {
     })
     zIndex: nasl.core.Integer = 0;
 
-    @Event({
-      title: '弹出后事件',
-      description: '弹出提示时触发',
-    })
-    onOpen: (event: {}) => any;
+    // @Event({
+    //   title: '弹出后事件',
+    //   description: '弹出提示时触发',
+    // })
+    // onOpen: (event: {}) => any;
 
     @Event({
         title: '关闭后',

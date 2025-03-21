@@ -7,10 +7,26 @@ namespace nasl.ui {
       idetype: 'container',
       structured: true,
       childAccept: "target.tag === 'el-tab-pane'",
+      dataSource: {
+        dismiss:
+          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 3,
+        loopRule: 'nth-last-child(-n+2)',
+        loopElem: ".el-tabs__nav > .el-tabs__item",
+        propertyName: ':dataSource',
+        displayData: "\"[{label: '0', value: '0'},{label:'1', value: '1'}, {label:'2', value: '2'}]\"",
+      },
       displaySlotInline: {
         label: true,
       },
-    },
+      displaySlotConditions: {
+        label: "!!this.getAttribute('dataSource')",
+        content: "!!this.getAttribute('dataSource')",
+      },
+      additionalAttribute: {
+        "active": "0",
+      },
+    }
   })
   @Component({
     title: '选项卡',
@@ -19,6 +35,12 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElTabs<T, V> extends ViewComponent {
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void { }
+
     constructor(options?: Partial<ElTabsOptions<T, V>>) {
       super();
     }
@@ -27,12 +49,75 @@ namespace nasl.ui {
   export class ElTabsOptions<T, V> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
+      title: '数据源',
+      description:
+        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription:
+        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      designerValue: [{}, {}, {}],
+      bindOpen: true,
+    })
+    dataSource:
+      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
+      | nasl.collection.List<T>;
+
+    @Prop({
+      group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      docDescription:
+        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+    })
+    dataSchema: T;
+
+    @Prop<ElTabsOptions<T, V>, 'titleField'>({
+      group: '数据属性',
+      title: '文本字段',
+      description: '集合的元素类型中，用于显示文本的属性名称',
+      docDescription:
+        '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    titleField: (item: T) => nasl.core.String = ((item: any) =>
+      item.title) as any;
+
+    @Prop<ElTabsOptions<T, V>, 'valueField'>({
+      group: '数据属性',
+      title: '值字段',
+      description: '集合的元素类型中，用于标识选中值的属性',
+      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    valueField: (item: T) => V = ((item: any) => item.value) as any;
+
+    @Prop<ElTabsOptions<T, V>, 'tabPaneProps'>({
+      group: '数据属性',
+      title: '标签页属性设置',
+      description: '开启数据源后，设置每个标签页属性',
+      setter: {
+        concept: 'AnonymousFunctionSetter',
+      },
+      if: (_) => !!_.dataSource,
+      bindOpen: true,
+    })
+    tabPaneProps: (current: Current<T>) => {
+      disabled: nasl.core.Boolean;
+      closable: nasl.core.Boolean;
+      lazy: nasl.core.Boolean;
+    };
+
+    @Prop({
+      group: '数据属性',
       title: '选中值',
       description: '绑定值，选中选项卡的 name',
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    modelValue: nasl.core.String;
+    value: nasl.core.String;
 
 
     @Prop({
@@ -43,8 +128,8 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [
           { title: '默认样式' },
-          { title: '选项卡样式的标签页' },
-          { title: '卡片化的标签页' },
+          { title: '卡片风格标签页' },
+          { title: '带边框的卡片风格标签页' },
         ],
       },
     })
@@ -65,6 +150,26 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     addable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '可增加且可关闭',
+      description: '标签是否同时可增加和关闭',
+      setter: { concept: 'SwitchSetter' },
+    })
+    editable: nasl.core.Boolean = false;
+
+    @Prop<ElTabsOptions<T, V>, 'addIcon'>({
+      group: '主要属性',
+      title: '添加按钮图标',
+      description: '自定义添加按钮图标',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
+      if: (_) => !!_.addable || !!_.editable,
+    })
+    addIcon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -103,11 +208,17 @@ namespace nasl.ui {
       oldActiveName: nasl.core.String,
     ) => nasl.core.Boolean;
 
+    // @Event({
+    //   title: '改变时',
+    //   description: '激活标签页改变时触发',
+    // })
+    // onInput: (event: nasl.core.String) => void;
+
     @Event({
       title: '改变时',
-      description: '激活标签页改变时触发',
+      description: 'activeName 改变时触发',
     })
-    onInput: (event: nasl.core.String) => void;
+    onTabChange: (name: nasl.core.String) => void;
 
     @Event({
       title: '点击标签页',
@@ -136,7 +247,7 @@ namespace nasl.ui {
       title: '点击新增按钮或关闭',
       description: '点击 tabs 的新增按钮或 tab 被关闭后触发',
     })
-    onTabEdit: (event: {
+    onEdit: (event: {
       value: nasl.core.String;
       action: 'add' | 'remove';
     }) => void;
@@ -153,6 +264,18 @@ namespace nasl.ui {
       ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '标签页标题',
+      description: '标签页标题',
+    })
+    slotLabel: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '标签页内容',
+      description: '标签页内容',
+    })
+    slotContent: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
@@ -195,7 +318,7 @@ namespace nasl.ui {
       description: '与选项卡绑定值对应的标识符',
       setter: { concept: 'InputSetter' },
     })
-    name: nasl.core.String;
+    name: nasl.core.String | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',

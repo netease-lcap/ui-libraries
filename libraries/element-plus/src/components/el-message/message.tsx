@@ -1,6 +1,7 @@
 import { defineComponent, watch, onBeforeUnmount, getCurrentInstance, ComponentInternalInstance } from 'vue';
-import { ElMessage as ElMessagePlus, ElIcon, MessageHandler } from 'element-plus';
+import { ElMessage as ElMessagePlus, MessageHandler } from 'element-plus';
 import { setElStyle } from '../../utils/dom';
+import { ElIcon } from '../index';
 
 export default defineComponent({
   name: 'ElMessage',
