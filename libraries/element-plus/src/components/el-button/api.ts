@@ -35,7 +35,7 @@ namespace nasl.ui {
         options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
-    size: '' | 'default' | 'large' | 'small';
+    size: '' | 'default' | 'large' | 'small' = 'default';
 
     @Prop({
       group: '主要属性',
@@ -59,10 +59,10 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '文字按钮',
-      description: '是否为文字按钮',
-      setter: { concept: 'SwitchSetter' },
+      description: '文字按钮',
+      setter: { concept: 'InputSetter' },
     })
-    text: nasl.core.Boolean = false;
+    text: nasl.core.String = '按钮';
 
     @Prop({
       group: '样式属性',
