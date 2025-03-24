@@ -13,16 +13,8 @@ export default {
   },
 };
 const iconData = [
-  'bar-chart',
-  'bar-chart-horizontal',
-  'bar-chart-2',
-  'bar-chart-box',
-  'bar-chart-grouped',
-  'bubble-chart',
-  'pie-chart',
-  'pie-chart-2',
-  'pie-chart-box',
-  'donut-chart',
+  'School',
+  'ChatSquare',
 ];
 
 export const Default = {
@@ -36,7 +28,7 @@ export const Default = {
     },
     template: `
       <div style="font-size:24px; color: red;display:flex; gap: 16px;">
-        <el-icon v-for="icon in iconData" :name="\`ri-\${icon}-fill\`" />
+        <el-icon v-for="icon in iconData" :name="\`\${icon}\`" />
       </div>
     `,
   }),

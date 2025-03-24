@@ -1,0 +1,5 @@
+.el-descriptions {
+  span.el-descriptions__label {
+    display: inline-block;
+  }
+}

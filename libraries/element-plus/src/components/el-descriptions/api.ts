@@ -59,66 +59,10 @@ namespace nasl.ui {
       description: '列表的尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{title: '默认' }, { title: '中等' }, { title: '小型' }, { title: '迷你' }],
+        options: [{title: '默认' }, { title: '大型' }, { title: '小型' }],
       },
     })
-    size: '' | 'medium' | 'small' | 'mini' = '';
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '标题',
-    //   description: '标题文本，显示在左上方',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // title: nasl.core.String;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '操作区文本',
-    //   description: '操作区文本，显示在右上方',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // extra: nasl.core.String;
-
-    @Prop({
-      group: '状态属性',
-      title: '是否显示冒号',
-      description: '是否显示冒号',
-      setter: { concept: 'SwitchSetter' },
-    })
-    private colon: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '样式属性',
-      title: '标签类名',
-      description: '自定义标签类名',
-      setter: { concept: 'InputSetter' },
-    })
-    private labelClassName: nasl.core.String;
-
-    @Prop({
-      group: '样式属性',
-      title: '内容类名',
-      description: '自定义内容类名',
-      setter: { concept: 'InputSetter' },
-    })
-    private contentClassName: nasl.core.String;
-
-    @Prop({
-      group: '样式属性',
-      title: '标签样式',
-      description: '自定义标签样式',
-      setter: { concept: 'InputSetter' },
-    })
-    private labelStyle: nasl.core.String = '{}';
-
-    @Prop({
-      group: '样式属性',
-      title: '内容样式',
-      description: '自定义内容样式',
-      setter: { concept: 'InputSetter' },
-    })
-    private contentStyle: nasl.core.String = '{}';;
+    size: '' | 'large' | 'small' = '';
 
     @Slot({
       title: '标题',
@@ -156,11 +100,16 @@ namespace nasl.ui {
       "parentAccept": "target.tag === 'el-descriptions'",
       "selector": [
         {
-          "expression": "this.getElement(el => el.slotTarget === 'label')",
-          "cssSelector": ".el-descriptions-item__label"
-        }, {
           "expression": "this",
-          "cssSelector": ".el-descriptions-item__content"
+          "cssSelector": ".el-descriptions__cell"
+        },
+        {
+          "expression": "this.getElement(el => el.slotTarget === 'label')",
+          "cssSelector": ".el-descriptions__cell"
+        },
+        {
+          "expression": "this.getElement(el => el.slotTarget === 'content')",
+          "cssSelector": ".el-descriptions__cell"
         }
       ],
     }
@@ -176,18 +125,9 @@ namespace nasl.ui {
       super();
     }
   }
-
   export class ElDescriptionsItemOptions extends ViewComponentOptions {
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '标签文本',
-    //   description: '标签文本',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // label: nasl.core.String;
-
     @Prop({
-      group: '数据属性',
+      group: '样式属性',
       title: '列的数量',
       description: '往右侧占据列的数量',
       setter: {
@@ -197,6 +137,18 @@ namespace nasl.ui {
       },
     })
     span: nasl.core.Decimal = 1;
+
+    @Prop({
+      group: '样式属性',
+      title: '标签宽度',
+      description: '单元格应该跨越的行数',
+      setter: { 
+        concept: 'NumberInputSetter',
+        precision: 0,
+        min: 1, 
+      },
+    })
+    rowspan: nasl.core.Integer = 1;
 
     @Prop({
       group: '样式属性',

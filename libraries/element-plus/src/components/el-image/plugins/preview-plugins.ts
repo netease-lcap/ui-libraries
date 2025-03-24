@@ -1,7 +1,7 @@
 export const handleDateRange = (props) => {
-  const previewSrcList = props.get('previewSrcList');
+  const previewSrcList = props.get('urlList');
   const listRange = typeof previewSrcList === 'string' ? previewSrcList?.split(',') : [];
   return {
-    previewSrcList: Array.isArray(listRange) ? listRange : undefined
+    urlList: Array.isArray(listRange) ? listRange : undefined,
   };
 };

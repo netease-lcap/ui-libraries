@@ -1,13 +1,13 @@
-export const handleTimeSelectProps = (props) => {
-  const start = props.get('start');
-  const end = props.get('end');
-  const step = props.get('step');
-  const format = props.get('format');
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+
+export function handleIcon(props) {
+  const clearIcon = props.get('clearIcon');
+  const prefixIcon = props.get('prefixIcon');
 
   return {
-    start: start || '09:00',
-    end: end || '18:00',
-    step: step || '00:30',
-    format: format || 'HH:mm',
+    clearIcon: clearIcon ? ElementPlusIconsVue[clearIcon] : null,
+    prefixIcon: prefixIcon ? ElementPlusIconsVue[prefixIcon] : null,
   };
-};
+}
+
+export { handleControllableValue } from '@/plugins/common/index';

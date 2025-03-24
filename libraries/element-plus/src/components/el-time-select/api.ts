@@ -9,9 +9,9 @@ namespace nasl.ui {
   })
   @Component({
     title: '时间选择',
-    icon: 'time',
-    description: '用于选择固定时间',
-    group: 'Form',
+    // icon: 'select',
+    description: '',
+    group: 'Selector',
   })
   export class ElTimeSelect extends ViewComponent {
     @Prop({
@@ -41,7 +41,7 @@ namespace nasl.ui {
       title: '值',
       description: '选择的值'
     })
-    value: nasl.core.String;
+    value: nasl.core.String | nasl.core.Time;
 
     @Prop({
       group: '主要属性',
@@ -49,7 +49,7 @@ namespace nasl.ui {
       description: '开始时间',
       setter: { concept: 'InputSetter' },
     })
-    start: nasl.core.String = '09:00';
+    start: nasl.core.String | nasl.core.Time = '09:00';
 
     @Prop({
       group: '主要属性',
@@ -57,7 +57,7 @@ namespace nasl.ui {
       description: '结束时间',
       setter: { concept: 'InputSetter' },
     })
-    end: nasl.core.String = '18:00';
+    end: nasl.core.String | nasl.core.Time = '18:00';
 
     @Prop({
       group: '主要属性',
@@ -73,7 +73,7 @@ namespace nasl.ui {
       description: '最小时间，小于该时间的时间段将被禁用',
       setter: { concept: 'InputSetter' },
     })
-    minTime: nasl.core.String;
+    minTime: nasl.core.String | nasl.core.Time;
 
     @Prop({
       group: '主要属性',
@@ -81,7 +81,7 @@ namespace nasl.ui {
       description: '最大时间，大于该时间的时间段将被禁用',
       setter: { concept: 'InputSetter' },
     })
-    maxTime: nasl.core.String;
+    maxTime: nasl.core.String | nasl.core.Time;
 
     @Prop({
       group: '主要属性',
@@ -93,11 +93,19 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '时间格式',
-      description: '时间格式化',
-      setter: { concept: 'InputSetter' },
+      title: '格式化',
+      description: '用于格式化时间，',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '12:09:09' },
+          { title: '12时09分09秒' },
+          { title: '12:09' },
+          { title: '12时09分' },
+        ],
+      },
     })
-    format: nasl.core.String = 'HH:mm';
+    format: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' = 'HH:mm:ss';
 
     @Prop({
       group: '状态属性',
