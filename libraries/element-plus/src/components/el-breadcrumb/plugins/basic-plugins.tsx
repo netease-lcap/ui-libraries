@@ -1,5 +1,5 @@
-import { useRoute, useRouter } from 'vue-router';
-import { useEffect, useState } from '@/plugins/hooks';
+import { useRoute } from 'vue-router';
+import { useMemo } from '@/plugins/hooks';
 import { ElBreadcrumbItem } from '../index';
 import { ElIcon } from '../../index';
 
@@ -10,15 +10,13 @@ export function handleAutoCrumbs(props) {
 
   if (!auto || showInDesigner) return {};
 
-  const router = useRouter?.();
   const route = useRoute?.();
-  const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    if (!route?.path) return;
+  const items = useMemo(() => {
+    if (!route?.path) return [];
 
     const matched = route.matched || [];
-    const items = matched.reduce((pre: Array<{title: string, to: string}>, curMatch) => {
+    return matched.reduce((pre: Array<{title: string, to: string}>, curMatch) => {
       const meta = {
         ...curMatch.meta,
         ...((curMatch?.components?.default?.__vccOpts || curMatch.components?.default)?.meta || {}),
@@ -29,8 +27,7 @@ export function handleAutoCrumbs(props) {
       });
       return pre;
     }, []);
-    setItems(items);
-  }, [route, router]);
+  }, [route]);
 
   const renderBreadcrumbItem = (item) => (
     <ElBreadcrumbItem
