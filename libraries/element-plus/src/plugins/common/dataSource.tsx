@@ -5,16 +5,18 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 import { watch } from 'vue';
 import { useRequest } from 'vue-hooks-plus';
-import { useMemo, useState, useRef, useEffect, useCallback } from '@/plugins/hooks';
-import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
+import { useMemo, useState, useRef, useEffect } from '@/plugins/hooks';
+import { DataSourceType, DataSourceArrayType } from '@/types';
 
 export function useHandleMapField(filedInfo: {
   label?: string;
   value?: string;
   disabled?: string;
+  divided?: string;
   textField?: string;
   valueField?: string;
   disabledField?: string;
+  dividedField?: string;
   dataSource: DataSourceType;
 }) {
   const {
@@ -25,15 +27,19 @@ export function useHandleMapField(filedInfo: {
     dataSource,
     disabled = 'disabled',
     disabledField,
+    dividedField,
+    divided = 'divided',
   } = filedInfo;
-  return useMemo(() => {
-    return _.map(dataSource, (item: any) => ({
-      ...item,
-      [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
-      [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
-      [disabled]: !_.isObject(item) ? item : _.get(item, disabledField || 'disabled', false),
-    }));
-  }, [label, value, textField, valueField, dataSource]) as DataSourceArrayType;
+  return useMemo(
+    () => _.map(dataSource, (item: any) => ({
+        ...item,
+        [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
+        [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
+        [disabled]: !_.isObject(item) ? item : _.get(item, disabledField || 'disabled', false),
+        [divided]: !_.isObject(item) ? item : _.get(item, dividedField || 'divided', false),
+      })),
+    [label, value, textField, valueField, dataSource],
+  ) as DataSourceArrayType;
 }
 const handleLocalPageData = _.cond([
   [

@@ -1,4 +1,4 @@
-import { defineComponent, watch, onBeforeUnmount, getCurrentInstance } from 'vue';
+import { defineComponent, watch, onBeforeUnmount, getCurrentInstance, PropType } from 'vue';
 import { ElNotification as ElNotificationPlus, NotificationHandle } from 'element-plus';
 import { setElStyle } from '../../utils/dom';
 
@@ -41,6 +41,12 @@ export default defineComponent({
       type: Number,
       default: 0,
     },
+    customClass: {
+      type: String,
+    },
+    appendTo: {
+      type: [String, Object] as PropType<string | HTMLElement>,
+    },
   },
 
   setup(props, { slots, emit, expose }) {
@@ -71,6 +77,8 @@ export default defineComponent({
         position: props.position,
         zIndex: props.zIndex,
         icon: props.icon,
+        customClass: props.customClass,
+        appendTo: props.appendTo,
         message,
         onClick: () => {
           emit('click');

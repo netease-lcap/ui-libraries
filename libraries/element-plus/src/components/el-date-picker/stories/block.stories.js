@@ -20,9 +20,16 @@ export default {
   ],
 };
 
-export const Default = {
-  name: '基础示例',
+export const Date = {
+  name: '日期选择器',
   render: () => ({
-    template: '<el-date-picker></el-date-picker>',
+    template: '<el-date-picker type="date"></el-date-picker>',
   }),
 };
+
+// export const DateTime = {
+//   name: '日期时间选择器',
+//   render: () => ({
+//     template: '<el-date-picker type="datetime"></el-date-picker>',
+//   }),
+// };

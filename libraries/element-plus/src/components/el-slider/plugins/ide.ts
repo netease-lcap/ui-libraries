@@ -15,6 +15,7 @@ import { useEffect, useMemo } from '@/plugins/hooks';
   return {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
+    formTagName: 'el-form-slider',
   };
 }
 

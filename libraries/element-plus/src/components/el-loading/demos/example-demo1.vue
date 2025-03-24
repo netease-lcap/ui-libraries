@@ -1,11 +1,12 @@
 <template>
   <div>
-    <el-loading :visible="loading" :target="target"></el-loading>
-    <el-table :data="tableData" style="width: 100%" ref="elTableRef">
-      <el-table-column prop="date" label="Date" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="address" label="Address" />
-    </el-table>
+    <el-loading :visible="loading">
+      <el-table :data="tableData" style="width: 100%" ref="elTableRef">
+        <el-table-column prop="date" label="Date" width="180" />
+        <el-table-column prop="name" label="Name" width="180" />
+        <el-table-column prop="address" label="Address" />
+      </el-table>
+    </el-loading>
     <button @click="loading = !loading" style="position: relative; top: 100px">切换Loading态</button>
   </div>
 </template>

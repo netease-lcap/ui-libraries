@@ -14,7 +14,7 @@ export function handleModelValue(props) {
     provide: Object.assign(provide, {
       [$formProvide]: {
         isInForm: true,
-        value: model.value,
+        value: model,
         setValue: (key, value) => {
           model.value[key] = value;
         },

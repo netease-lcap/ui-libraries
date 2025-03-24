@@ -7,7 +7,6 @@ namespace nasl.ui {
       idetype: 'modal',
       cacheOpenKey: 'modelValue',
       structured: true,
-      bindStyleAttr: 'dialogStyle',
       selector: {
         expression: 'this',
         cssSelector: '.el-dialog',
@@ -58,7 +57,7 @@ namespace nasl.ui {
       description: '是否显示对话框',
       setter: { concept: 'SwitchSetter' },
     })
-    modelValue: nasl.core.Boolean = false;
+    value: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -128,6 +127,22 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '打开延时',
+      description: 'dialog 打开的延时时间，单位毫秒',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    openSelay: nasl.core.Integer = 0;
+
+    @Prop({
+      group: '主要属性',
+      title: '关闭延时',
+      description: 'dialog 关闭的延时时间，单位毫秒',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    closeSelay: nasl.core.Integer = 0;
+
+    @Prop({
+      group: '主要属性',
       title: '是否点击遮罩层关闭',
       description: '是否可以通过点击遮罩层关闭对话框',
       setter: { concept: 'SwitchSetter' },
@@ -191,13 +206,32 @@ namespace nasl.ui {
     })
     destroyOnClose: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'aria-level 属性',
-    //   description: 'header 的 aria-level 属性',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // headerAriaLevel : nasl.core.String = '2';
+    @Prop({
+      group: '主要属性',
+      title: '关闭图标',
+      description: '自定义关闭图标',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
+    })
+    closeIcon: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: 'z-index',
+      description: '和原生的 CSS 的 z-index 相同，改变 z 轴的顺序',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    zIndex: nasl.core.Integer;
+
+    @Prop({
+      group: '主要属性',
+      title: 'aria-level 属性',
+      description: 'header 的 aria-level 属性',
+      setter: { concept: 'InputSetter' },
+    })
+    headerAriaLevel : nasl.core.String = '2';
 
     @Event({
       title: '打开的回调',

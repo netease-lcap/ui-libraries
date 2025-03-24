@@ -2,9 +2,16 @@
 import _ from 'lodash';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useState, useMemo } from '@/plugins/hooks';
+import { useMemo } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+export { handleControllableValue } from '@/plugins/common/index';
+
+export function handleTagName(props) {
+  return {
+    formTagName: 'el-form-radio-group',
+  };
+}
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');

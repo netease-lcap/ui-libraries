@@ -15,6 +15,7 @@ export function handleNodePath(props) {
   return {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
+    formTagName: 'el-form-rate',
   };
 }
 

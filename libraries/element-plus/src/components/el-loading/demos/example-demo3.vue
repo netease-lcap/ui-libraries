@@ -1,11 +1,12 @@
 <template>
   <div>
-    <el-loading :visible="loading" :fullscreen="true" :lock="true"></el-loading>
-    <el-table :data="tableData" style="width: 100%" ref="elTableRef">
-      <el-table-column prop="date" label="Date" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="address" label="Address" />
-    </el-table>
+    <el-loading :visible="loading" :fullscreen="true" :lock="true">
+      <el-table :data="tableData" style="width: 100%" ref="elTableRef">
+        <el-table-column prop="date" label="Date" width="180" />
+        <el-table-column prop="name" label="Name" width="180" />
+        <el-table-column prop="address" label="Address" />
+      </el-table>
+    </el-loading>
     <button @click="openFullScreen" style="position: relative; top: 100px">开启满屏Loading</button>
   </div>
 </template>

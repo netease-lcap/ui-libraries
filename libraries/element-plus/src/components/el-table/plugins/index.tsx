@@ -2,7 +2,6 @@ import { ElPagination, ElConfigProvider } from 'element-plus';
 import _ from 'lodash';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import fp from 'lodash/fp';
-import omit from 'lodash/omit';
 import { useMemo, useRef, useCallback, useEffect, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource } from '@/plugins/common/dataSource';
@@ -211,7 +210,7 @@ export function handlePaginationRender(props) {
         <div data-nodepath={nodepath} style={props.style}>
           <Component
             ref={tableRef}
-            {...omit({ ...props, ...attrs }, ['style'])}
+            {..._.omit({ ...props, ...attrs }, ['style'])}
             style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
             v-slots={slots}
           />

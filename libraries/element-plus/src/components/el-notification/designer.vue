@@ -6,9 +6,10 @@
       :style="positionStyle"
       role="alert"
     >
-      <el-icon v-if="iconComponent" :class="['el-notification__icon', typeClass]">
+      <el-icon-plus v-if="iconComponent && props.type && !props.icon" :class="['el-notification__icon', typeClass]">
         <component :is="iconComponent" />
-      </el-icon>
+      </el-icon-plus>
+      <el-icon v-if="!props.type && props.icon" :name="props.icon" :class="['el-notification__icon', typeClass]" />
       <div class="el-notification__group">
         <h2 class="el-notification__title" v-text="props.title" />
         <div
@@ -17,9 +18,9 @@
         >
           <slot></slot>
         </div>
-        <el-icon v-if="props.showClose" class="el-notification__closeBtn">
+        <el-icon-plus v-if="props.showClose" class="el-notification__closeBtn">
           <Close />
-        </el-icon>
+        </el-icon-plus>
       </div>
     </div>
   </transition>
@@ -28,7 +29,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { Close, SuccessFilled, WarningFilled, CircleCloseFilled, InfoFilled } from '@element-plus/icons-vue';
-import { ElIcon } from 'element-plus';
+import { ElIcon as ElIconPlus } from 'element-plus';
+import { ElIcon } from '../index'
 import Notification from './notification';
 
 const typeMap = {

@@ -1,7 +1,6 @@
 /* 组件功能扩展插件 */
 import _ from 'lodash';
 import dayjs from 'dayjs';
-import isNil from 'lodash';
 import { useControllableValue } from '@/plugins/hooks';
 import { useMemo } from '../../../plugins/hooks';
 
@@ -18,7 +17,7 @@ export function handleRange(props) {
   const type = props.get('type') ?? 'date';
   const isRange = type.includes('range');
   return {
-    isRange,
+    range: isRange,
   };
 }
 handleRange.order = 3;
@@ -33,8 +32,8 @@ export function handleRangeDateValue(props) {
   const isRange = props.get('range');
   const startValue = props.get('startValue');
   const endValue = props.get('endValue');
-  const setStartValue = props.get('onUpdate:startValue');
-  const setEndValue = props.get('onUpdate:endValue');
+  const setStartValue = props.get('onUpdate:startValue') ?? (() => {});
+  const setEndValue = props.get('onUpdate:endValue') ?? (() => {});
   const isControlledTime = props.has('startValue') && props.has('endValue');
   const isEffectiveTime = isControlledTime ? dayjs(startValue).isValid() && dayjs(endValue).isValid() : false;
   const isNilTime = _.isNil(startValue) || _.isNil(endValue);

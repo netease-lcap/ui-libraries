@@ -1,12 +1,13 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
 import { ElSelectV2 } from 'element-plus';
-import { useMemo, useCallback, GetAccumulatedMapType, useState } from '@/plugins/hooks';
+import { useMemo, useCallback, GetAccumulatedMapType } from '@/plugins/hooks';
 import { SelectAccumulateTypes } from './type';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+export { handleControllableValue } from '@/plugins/common/index';
 
 export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccumulateTypes>) {
   const dataConfig = props.get('dataSource');

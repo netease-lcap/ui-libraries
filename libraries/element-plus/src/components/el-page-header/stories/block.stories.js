@@ -23,6 +23,16 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-page-header></el-page-header>',
+    template: `<el-page-header>
+      <template #icon>
+        <el-icon name="back"></el-icon>
+      </template>
+      <template #title>
+        <el-text text='Back'></el-text>
+      </template>
+      <template #content>
+        <el-text text='Title'></el-text>
+      </template>
+    </el-page-header>`,
   }),
 };
