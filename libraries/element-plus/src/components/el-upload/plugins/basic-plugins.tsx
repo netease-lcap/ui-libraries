@@ -1,9 +1,8 @@
-import { UploadFile, UploadProgressEvent, UploadRawFile } from 'element-plus';
+import { UploadFile, UploadRawFile } from 'element-plus';
 // import { UploadFilled } from '@element-plus/icons-vue';
 import _ from 'lodash';
-import { useControllableValue, useEffect, useMemo } from '@/plugins/hooks';
+import { useControllableValue } from '@/plugins/hooks';
 import { ElFlex, ElIcon, ElText } from '@/components/index';
-import { $deletePropsList, $ide } from '@/plugins/constants';
 
 type Converter = 'json' | 'simple';
 
@@ -73,7 +72,6 @@ const formatResponse = (urlField, res, uploadFile) => {
 };
 
 const updateFileList = (fileList, newResponse) => {
-  console.log('updateFileList', fileList);
   if (newResponse.status === 'success') {
     // 如果上传成功，替换文件列表中的文件
     return fileList.map((file) => (file.name === newResponse.name
@@ -91,9 +89,8 @@ export function handleResponse(props) {
   const onSuccess = props.get('onSuccess');
   const urlField = props.get('url-field') || 'filePath';
   const [fileList, setFileList, fileListProps] = useControllableValue(props, {
-    valuePropName: 'modelValue',
-    // @ts-ignore
-    defaultValuePropName: 'fileList',
+    valuePropName: 'fileList',
+    defaultValuePropName: 'value',
   });
 
   return {
@@ -101,7 +98,6 @@ export function handleResponse(props) {
       if (response && (response.code === 200 || response.Code === 200)) {
         const newResponse = formatResponse(urlField, response, file);
         const newFileList = updateFileList(fileList, newResponse);
-        // console.log('newFileList', newFileList, fileList);
         setFileList(newFileList);
         if (_.isFunction(onSuccess)) {
           onSuccess(newResponse, file);
@@ -218,20 +214,3 @@ export function handleSlots(props) {
     ),
   };
 }
-
-// export function handleNodePath(props) {
-//   const nodePath = props.get('data-nodepath');
-//   const myClass = props.get('class', '');
-//   const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-//   const nodeId = useMemo(() => _.uniqueId('Upload_'), []);
-//   useEffect(() => {
-//     const node = document.querySelector(`.${nodeId}`);
-//     node?.setAttribute('data-nodepath', nodePath);
-//   }, []);
-//   return {
-//     class: `${myClass} ${nodeId}`,
-//     [$deletePropsList]: deletePropsList,
-//   };
-// }
-
-// handleNodePath.type = $ide;
