@@ -25,7 +25,7 @@ export function handleSortState(props) {
       emit('sync:state', 'order', order);
     },
   });
-  useEffect(() => {
+  useMemo(() => {
     emit('sync:state', 'sort', sort);
     emit('sync:state', 'order', order);
   }, []);
@@ -69,7 +69,7 @@ export function handlePageState(props) {
     return _.isArray(jsonPageSizes) ? jsonPageSizes : [10, 20, 50];
   }, [pageSizesProps]);
 
-  useEffect(() => {
+  useMemo(() => {
     emit('sync:state', 'currentPage', currentPage);
     emit('sync:state', 'pageSize', pageSize);
   }, []);
