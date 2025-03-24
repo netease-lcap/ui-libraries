@@ -53,7 +53,6 @@ namespace nasl.ui {
       title: '数据源',
       description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
-      bindOpen: true,
     })
     dataSource: nasl.collection.List<T> | nasl.collection.List<T>;
 
@@ -123,13 +122,6 @@ namespace nasl.ui {
     })
     private name: nasl.core.String;
 
-    @Prop({
-      group: '样式属性',
-      title: '显示边框',
-      description: '是否显示边框',
-      setter: { concept: 'SwitchSetter' },
-    })
-    border: nasl.core.Boolean = false;
 
     @Event({
       title: '改变后',
@@ -166,7 +158,7 @@ namespace nasl.ui {
       parentAccept: "target.tag === 'el-radio-group'",
       selector: {
         expression: 'this',
-        cssSelector: 'label.el-p-radio',
+        cssSelector: 'label.el-radio',
       },
     },
   })
