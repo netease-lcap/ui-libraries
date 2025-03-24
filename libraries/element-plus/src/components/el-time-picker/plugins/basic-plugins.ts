@@ -1,59 +1,81 @@
 import _ from 'lodash';
-import { $deletePropsList, $ide } from '@/plugins/constants';
-import { useEffect, useMemo, useControllableValue } from '@/plugins/hooks';
-import { getNaslTimeValue, getFormatTimeValue } from './utils';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import dayjs from 'dayjs';
+import { useMemo, useControllableValue } from '@/plugins/hooks';
+import { getNaslTimeValue, getFormatTimeValue, isValidStringTime } from './utils';
 
-export function handleControllableValue(props: any) {
-  const ref = props.get('ref');
-  const value = props.get('value');
-  const startValue = props.get('start-value');
-  const endValue = props.get('end-value');
+type GetTimeValueParams = {
+  isEffectiveTime: boolean;
+  isNilTime: boolean;
+  isControlledTime: boolean;
+  startValue: string;
+  endValue: string;
+  value: string[];
+};
+
+const getTimeValue = _.cond([
+  [_.matches({ isNilTime: true, isControlledTime: true }), _.constant([])],
+  [_.matches({ isEffectiveTime: false }), _.constant([])],
+  [_.matches({ isControlledTime: false }), (value: GetTimeValueParams) => [getFormatTimeValue(value.value[0]), getFormatTimeValue(value.value[1])]],
+  [_.stubTrue, ({ startValue, endValue }) => [getFormatTimeValue(startValue), getFormatTimeValue(endValue)]],
+]);
+
+export function handleRangeDateValue(props) {
   const isRange = props.get('isRange');
-  const emit = props.get('emit');
+  const startValue = props.get('startValue');
+  const endValue = props.get('endValue');
   const format = props.get('format');
-  // 根据startValue和endValue拼接成默认值数组
-  const defaultTimeValue = isRange ? [getFormatTimeValue(startValue), getFormatTimeValue(endValue)] : getFormatTimeValue(value);
+  const setStartValue = props.get('onUpdate:startValue') ?? (() => {});
+  const setEndValue = props.get('onUpdate:endValue') ?? (() => {});
+  const isControlledTime = props.has('startValue') && props.has('endValue');
+  const isEffectiveTime = isControlledTime ? isValidStringTime(startValue) && isValidStringTime(endValue) : false;
+  const isNilTime = _.isNil(startValue) || _.isNil(endValue);
 
-  const [, setValue, valueProps] = useControllableValue(props, {
-    // @ts-ignore
-    defaultValue: defaultTimeValue,
-    onChange: (val) => {
-      const valArr = typeof val === 'string' ? getNaslTimeValue(val, format) : val.map((item) => getNaslTimeValue(item, format));
-      emit('change', valArr);
-    },
-  });
+  const onChange = (value) => {
+    const isValidDayjs = dayjs(value?.[0]).isValid() && dayjs(value?.[1]).isValid();
+    const isUneffectiveValue = _.isNil(value) || _.isEmpty(value) || !isValidDayjs;
+    const isEffectiveTime = isUneffectiveValue ? [] : _.map(value, (item) => getNaslTimeValue(item, format));
 
-  return {
-    ...valueProps,
-    formTagName: 'el-form-time-picker',
-    ref: Object.assign(ref, {
-      resetField: () => setValue(undefined),
+    _.attempt(setStartValue, isEffectiveTime[0]);
+    _.attempt(setEndValue, isEffectiveTime[1]);
+  };
+
+  const [value, setValue] = useControllableValue(props);
+  const timeValue = useMemo(
+    () => getTimeValue({
+        isEffectiveTime,
+        isNilTime,
+        isControlledTime,
+        startValue,
+        endValue,
+        value,
+      }),
+    [isEffectiveTime, isNilTime, isControlledTime, startValue, endValue, value],
+  );
+  const rangeResult = {
+    modelValue: timeValue,
+    'onUpdate:modelValue': _.wrap(setValue, (fn, ...args) => {
+      _.attempt(fn, ...args);
+      _.attempt(onChange, ...args);
     }),
   };
+  return isRange ? rangeResult : {};
 }
 
-export function handleNodePath(props) {
-  const nodePath = props.get('data-nodepath');
-  const myClass = props.get('class', '');
-  const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-  const nodeId = useMemo(() => _.uniqueId('TimePicker_'), []);
+export function handleDateValue(props) {
   const isRange = props.get('isRange');
-  useEffect(() => {
-    const node = document.querySelector(`.${nodeId}`);
-    const inputNumberElement = node?.closest('.el-date-editor');
-    inputNumberElement?.setAttribute('data-nodepath', nodePath);
-  }, []);
-  return {
-    class: `${myClass} ${nodeId}`,
-    [$deletePropsList]: deletePropsList,
-    'is-range': isRange,
-    formTagName: 'el-form-time-picker',
+  const [value, setValue] = useControllableValue(props);
+  const result = {
+    modelValue: value,
+    'onUpdate:modelValue': _.wrap(setValue, (fn, value: any) => {
+      const modelValue = _.isNil(value) || _.isEmpty(value) ? undefined : new Date(value.format()).toJSON();
+      _.attempt(fn, modelValue);
+    }),
   };
+  return isRange ? {} : result;
 }
 
-handleNodePath.type = $ide;
-
+export * from './ide';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 export function handleIcon(props) {

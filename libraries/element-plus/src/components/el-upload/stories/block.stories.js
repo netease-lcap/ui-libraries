@@ -23,9 +23,11 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: `<el-upload>
-    <template #trigger>
-        <el-text text="点击上传"></el-text>
-      </template></el-upload>`,
+    template: `
+    <el-upload converter="simple" urlField="filePath" url="/upload">
+      <template #trigger>
+        <el-button text="点击上传"></el-button>
+      </template>
+    </el-upload>`,
   }),
 };

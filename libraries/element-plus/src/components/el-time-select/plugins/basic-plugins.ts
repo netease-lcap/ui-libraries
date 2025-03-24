@@ -9,3 +9,5 @@ export function handleIcon(props) {
     prefixIcon: prefixIcon ? ElementPlusIconsVue[prefixIcon] : null,
   };
 }
+
+export { handleControllableValue } from '@/plugins/common/index';

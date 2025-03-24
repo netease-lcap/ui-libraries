@@ -35,10 +35,6 @@ export const DisabledSeconds = {
 
 export const Range = {
   name: '区间选择',
-  render: () => ({
-    components: {
-      exampleDemo: ExampleDemo3,
-    },
-    template: '<example-demo></example-demo>',
-  }),
+  component: { ExampleDemo: ExampleDemo3 },
+  template: '<example-demo />',
 };

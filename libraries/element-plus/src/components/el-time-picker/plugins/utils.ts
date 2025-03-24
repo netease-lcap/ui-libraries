@@ -9,6 +9,10 @@ export function getFormatTimeValue(v: string) {
   return dayjs(`${dayjs().format('YYYY-MM-DD')} ${v}`).toDate();
 }
 
+export function isValidStringTime(v: string) {
+  return dayjs(`${dayjs().format('YYYY-MM-DD')} ${v}`).isValid();
+}
+
 export function getFormatStr(format: string = DEFAULT_FORMAT) {
   if (format.indexOf('s') !== -1) {
     return 'HH:mm:ss';

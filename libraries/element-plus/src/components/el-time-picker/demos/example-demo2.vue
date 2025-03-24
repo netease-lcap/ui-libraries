@@ -1,8 +1,8 @@
 <template>
   <div class="example-basic">
     <el-time-picker
-      :start-value="value1[0]"
-      :end-value="value1[1]"
+      v-model:startValue="value1[0]"
+      v-model:endValue="value1[1]"
       @change="change"
       is-range
       :disabled-hours="disabledHours"

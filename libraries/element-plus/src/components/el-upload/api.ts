@@ -6,22 +6,36 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       childAccept: true,
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-upload',
-      },
+      disableSlotAutoFill: [
+        {
+          slot: 'tip',
+          expression: "!this.getAttribute('hasTip')?.value",
+        }
+      ],
     },
   })
   @Component({
     title: '上传',
-    icon: 'upload',
-    description: '通过点击或者拖拽上传文件',
+    icon: 'uploader',
+    description: '上传组件允许用户传输文件或提交自己的内容。',
     group: 'Form',
   })
   export class ElUpload extends ViewComponent {
     constructor(options?: Partial<ElUploadOptions>) {
       super();
     }
+
+    @Method({
+      title: '触发选择文件',
+      description: '组件实例方法，打开文件选择器',
+    })
+    handleStart(): void {}
+
+    @Method({
+      title: '移除文件',
+      description: '移除文件',
+    })
+    handleRemove(): void {}
 
     @Method({
       title: '清空已上传文件列表',
@@ -40,9 +54,31 @@ namespace nasl.ui {
       description: '手动上传文件列表',
     })
     submit(): void {}
+
+    @Prop({
+      title: '文件列表',
+    })
+    fileList: nasl.collection.List<{
+      name: nasl.core.String;
+      percentage?: nasl.core.Decimal;
+      status: 'ready' | 'uploading' | 'success' | 'fail';
+      size?: nasl.core.Integer;
+      response?: any;
+      uid: nasl.core.Integer;
+      url?: nasl.core.String;
+      raw?: any;
+    }>;
   }
 
   export class ElUploadOptions extends ViewComponentOptions {
+    @Prop({
+      group: '主要属性',
+      title: '接受上传的文件类型',
+      description: '接受上传的文件类型',
+      setter: { concept: 'InputSetter' },
+    })
+    accept: nasl.core.String;
+
     @Prop({
       group: '主要属性',
       title: '上传地址',
@@ -51,13 +87,116 @@ namespace nasl.ui {
     })
     action: nasl.core.String;
 
+
+    @Prop({
+      group: '数据属性',
+      title: '值',
+      description: '当前文件列表',
+      sync: true,
+      docDescription: '当前的文件列表',
+    })
+    value: nasl.core.String;
+
+    @Prop({
+      group: '数据属性',
+      title: '转换器',
+      description:
+        '将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          {
+            title: 'JSON',
+          },
+          {
+            title: 'URL字符串',
+          },
+        ],
+      },
+    })
+    converter: 'json' | 'simple' = 'simple';
+
+    @Prop({
+      group: '数据属性',
+      title: 'URL 字段',
+      description: '请求返回的 URL 字段名',
+      docDescription: '请求返回的URL字段名',
+    })
+    urlField: nasl.core.String = 'url';
+
+
+    @Prop({
+      group: '数据属性',
+      title: '上传的文件字段',
+      description: '上传的文件字段名，后端需要这个字段获取',
+      setter: { concept: 'InputSetter' },
+    })
+    name: nasl.core.String = 'file';
+
     @Prop({
       group: '主要属性',
       title: '请求头',
       description: '设置上传的请求头部',
       setter: { concept: 'InputSetter' },
     })
-    headers: nasl.core.String;
+    headers: object;
+
+    @Prop({
+      group: '数据属性',
+      title: 'HTTP 请求类型',
+      description:
+        'HTTP 请求类型。可选项：POST/GET/PUT/OPTIONS/PATCH/post/get/put/options/patch',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: 'POST' },
+          { title: 'GET' },
+          { title: 'PUT' },
+          { title: 'OPTIONS' },
+          { title: 'PATCH' },
+          { title: 'post' },
+          { title: 'get' },
+          { title: 'put' },
+          { title: 'options' },
+          { title: 'patch' },
+        ],
+      },
+    })
+    method:
+      | 'POST'
+      | 'GET'
+      | 'PUT'
+      | 'OPTIONS'
+      | 'PATCH'
+      | 'post'
+      | 'get'
+      | 'put'
+      | 'options'
+      | 'patch' = 'POST';
+
+    @Prop({
+      group: '主要属性',
+      title: '启用压缩',
+      description:
+        '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
+      docDescription:
+        '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    lcapIsCompress: nasl.core.Boolean;
+
+    @Prop({
+      group: '主要属性',
+      title: '源地址访问',
+      description: '开启后支持通过文件存储源地址访问文件',
+      docDescription: '开启后支持通过文件存储源地址访问文件',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    viaOriginURL: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',
@@ -76,12 +215,47 @@ namespace nasl.ui {
     multiple: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '接受上传的文件类型',
-      description: '接受上传的文件类型',
-      setter: { concept: 'InputSetter' },
+      group: '数据属性',
+      title: '是否携带Cookie',
+      description: '上传请求时是否携带 cookie',
+      setter: { concept: 'SwitchSetter' },
     })
-    accept: nasl.core.String;
+    withCredentials: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '文件访问策略',
+      docDescription: '支持任何人可访问和用户登录后可访问两种方式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '任何人可访问' }, { title: '用户登录后可访问' }],
+      },
+    })
+    access: 'public' | 'private';
+
+    @Prop({
+      group: '主要属性',
+      title: '文件有效期',
+      description: '是否开启文件有效期控制',
+      docDescription: '支持配置文件自动清理，开启后可自定义上传后有效天数',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    ttl: nasl.core.Boolean;
+
+
+    @Prop<ElUploadOptions, 'ttlValue'>({
+      group: '主要属性',
+      title: '上传后有效天数',
+      description: '文件上传后的有效期天数',
+      docDescription: '开启文件有效期开关后显示，可配置文件自动清理的时间',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+      if: (_) => _.ttl === true,
+    })
+    ttlValue: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -93,11 +267,34 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '是否显示上传提示',
+      description: '是否显示上传提示',
+      setter: { concept: 'SwitchSetter' },
+    })
+    hasTip: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '是否显示已上传文件列表',
       description: '是否显示已上传文件列表',
       setter: { concept: 'SwitchSetter' },
     })
     showFileList: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '文件列表类型',
+      description: '文件列表类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: 'text' },
+          { title: 'picture' },
+          { title: 'picture-card' },
+        ],
+      },
+    })
+    listType: 'text' | 'picture' | 'picture-card' = 'text';
 
     @Prop({
       group: '主要属性',
@@ -111,48 +308,54 @@ namespace nasl.ui {
       title: '文件上传成功时',
       description: '文件上传成功时的钩子',
     })
-    onSuccess: (response: any, file: File, fileList: File[]) => any;
+    onSuccess: (event: any) => any;
 
     @Event({
       title: '文件上传失败时',
       description: '文件上传失败时的钩子',
     })
-    onError: (err: Error, file: File, fileList: File[]) => any;
+    onError: (event: any) => any;
 
     @Event({
       title: '文件状态改变时',
       description: '文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用',
     })
-    onChange: (file: File, fileList: File[]) => any;
+    onChange: (event: any) => any;
 
     @Event({
       title: '文件列表移除文件时',
       description: '文件列表移除文件时的钩子',
     })
-    onRemove: (file: File, fileList: File[]) => any;
+    onRemove: (event: any) => any;
 
     @Event({
       title: '点击文件时',
       description: '点击文件时的钩子',
     })
-    onPreview: (file: File) => any;
+    onPreview: (event: any) => any;
+
+    @Event({
+      title: '上传前',
+      description: '上传前的钩子',
+    })
+    onBeforeUpload: (event: any) => any;
+
+    @Event({
+      title: '移除文件前',
+      description: '移除文件前的钩子',
+    })
+    onBeforeRemove: (event: any) => any;
 
     @Slot({
-      title: '默认内容',
-      description: '自定义默认内容',
+      title: '上传提示',
+      description: '上传提示',
     })
-    slotDefault: () => Array<ViewComponent>;
+    slotTip: () => Array<ViewComponent>;
 
     @Slot({
       title: '触发内容',
       description: '触发文件选择框的内容',
     })
     slotTrigger: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '提示内容',
-      description: '提示说明文字',
-    })
-    slotTip: () => Array<ViewComponent>;
   }
 }
