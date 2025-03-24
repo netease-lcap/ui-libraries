@@ -669,7 +669,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '表格尺寸',
-      description: '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `default`。可选项：small/default/large。',
+      description: '表格尺寸',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '中' }, { title: '大' }],
