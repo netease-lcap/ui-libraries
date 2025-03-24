@@ -136,6 +136,16 @@
     ".el-breadcrumb:focus,.el-breadcrumb._focus": "面包屑:获得焦点",
     ".el-breadcrumb:hover,.el-breadcrumb._hover": "面包屑:鼠标移入"
   },
+  "ElBreadcrumbItem": {
+    ".el-breadcrumb__inner": "面包屑内部",
+    ".el-breadcrumb__inner:active,.el-breadcrumb__inner._active": "面包屑内部:鼠标按下",
+    ".el-breadcrumb__inner:focus,.el-breadcrumb__inner._focus": "面包屑内部:获得焦点",
+    ".el-breadcrumb__inner:hover,.el-breadcrumb__inner._hover": "面包屑内部:鼠标移入",
+    ".el-breadcrumb__item": "面包屑项",
+    ".el-breadcrumb__item:active,.el-breadcrumb__item._active": "面包屑项:鼠标按下",
+    ".el-breadcrumb__item:focus,.el-breadcrumb__item._focus": "面包屑项:获得焦点",
+    ".el-breadcrumb__item:hover,.el-breadcrumb__item._hover": "面包屑项:鼠标移入"
+  },
   "ElButton": {
     ".el-button": "按钮",
     ".el-button [class*=el-icon] svg": "按钮>图标>svg",
@@ -4287,4 +4297,3 @@
     ".el-upload.is-drag": "上传:拖动中"
   }
 }
-

@@ -40,6 +40,17 @@ export default defineConfig(({ command }) => {
                 '.el-button,.el-button.is-round': true,
               },
             },
+            ElBreadcrumb: {
+              mainSelectorMap: {
+                '.el-breadcrumb__separator': false,
+              },
+            },
+            ElBreadcrumbItem: {
+              mainSelectorMap: {
+                '.el-breadcrumb__item': true,
+                '.el-breadcrumb__inner': false,
+              },
+            },
             ElCheckbox: {
               selectorPrefixMap: {
                 'el-checkbox-button': false,
@@ -80,7 +91,7 @@ export default defineConfig(({ command }) => {
             },
             ElSelect: {
               selectorPrefixMap: {
-                'el-select-dropdown': true,
+                'el-select__popper': true,
               },
             },
             ElTable: {
