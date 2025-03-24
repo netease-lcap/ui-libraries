@@ -8,7 +8,7 @@ export function getFormatTimeValue(v: string, format: string = DEFAULT_FORMAT) {
     return null;
   }
 
-  return dayjs(`${dayjs().format('YYYY-MM-DD')} ${v}`);
+  return dayjs(`${dayjs().format('YYYY-MM-DD')} ${v}`).format(format);
 }
 
 export function getNumberArr(str: string, position: 'start' | 'end') {
