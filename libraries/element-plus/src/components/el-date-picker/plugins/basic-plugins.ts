@@ -32,8 +32,8 @@ export function handleRangeDateValue(props) {
   const isRange = props.get('range');
   const startValue = props.get('startValue');
   const endValue = props.get('endValue');
-  const setStartValue = props.get('onUpdate:startValue');
-  const setEndValue = props.get('onUpdate:endValue');
+  const setStartValue = props.get('onUpdate:startValue') ?? (() => {});
+  const setEndValue = props.get('onUpdate:endValue') ?? (() => {});
   const isControlledTime = props.has('startValue') && props.has('endValue');
   const isEffectiveTime = isControlledTime ? dayjs(startValue).isValid() && dayjs(endValue).isValid() : false;
   const isNilTime = _.isNil(startValue) || _.isNil(endValue);

@@ -104,7 +104,8 @@ export function useState(initialstate?) {
     if (_.isEqual(value, state.value)) {
       return;
     }
-    currentFiber.updateQueen.add({ [hook.storeKey]: value });
+    const getValue = _.isFunction(value) ? value(state) : value;
+    currentFiber.updateQueen.add({ [hook.storeKey]: getValue });
     _.defer(() => {
       if (currentFiber.updateQueen.size) {
         const deleteQueue = Array.from(currentFiber.updateQueen);
