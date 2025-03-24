@@ -1,6 +1,7 @@
 import { h, defineComponent, ref, onMounted, VNode, RendererNode, RendererElement } from 'vue';
 import { ElIcon as ElIconPlus } from 'element-plus';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import _ from 'lodash';
 
 export interface ElIconProps {
   name: string;
@@ -58,22 +59,30 @@ export default defineComponent({
   },
   setup(props: ElIconProps) {
     function renderChildren(): VNode<RendererNode, RendererElement> {
+      if (!props.name) {
+        return <ElIconPlus />;
+      }
+
+      // 处理SVG URL
       if (isSvgUrl(props.name)) {
         return <OnlineSvgIcon name={props.name} />;
       }
 
-      if (props.name && ElementPlusIconsVue[props.name]) {
-        return <ElIconPlus>{h(ElementPlusIconsVue[props.name])}</ElIconPlus>;
+      let iconComponent = null;
+
+      if (ElementPlusIconsVue[props.name]) {
+        iconComponent = ElementPlusIconsVue[props.name];
+      } else {
+        const pascalName = _.upperFirst(_.camelCase(props.name));
+        if (ElementPlusIconsVue[pascalName]) {
+          iconComponent = ElementPlusIconsVue[pascalName];
+        }
       }
 
-      return <ElIconPlus>{props.name}</ElIconPlus>;
+      return <ElIconPlus>{iconComponent ? h(iconComponent) : props.name}</ElIconPlus>;
     }
     return () => {
-      return (
-        <ElIconPlus>
-          {renderChildren()}
-        </ElIconPlus>
-      );
+      return <ElIconPlus>{renderChildren()}</ElIconPlus>;
     };
   },
 });
