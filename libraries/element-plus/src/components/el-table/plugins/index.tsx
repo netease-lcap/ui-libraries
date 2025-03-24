@@ -6,6 +6,10 @@ import { useMemo, useRef, useCallback, useEffect, useControllableValue } from '@
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource } from '@/plugins/common/dataSource';
 
+const orderMap = {
+  descending: 'desc',
+  ascending: 'asc',
+};
 export function handleSortState(props) {
   const emit = props.get('emit');
   const deletePropsList = props.get($deletePropsList).concat(['sort', 'order', 'setSort', 'setOrder']);
@@ -22,12 +26,12 @@ export function handleSortState(props) {
     defaultValue: '',
     valuePropName: 'order',
     onChange: (order) => {
-      emit('sync:state', 'order', order);
+      emit('sync:state', 'order', orderMap[order]);
     },
   });
   useMemo(() => {
     emit('sync:state', 'sort', sort);
-    emit('sync:state', 'order', order);
+    emit('sync:state', 'order', orderMap[order]);
   }, []);
   return {
     [$deletePropsList]: deletePropsList,
