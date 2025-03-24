@@ -8,6 +8,9 @@ namespace nasl.ui {
       editable: 'text',
       textholder: 'text',
       forceUpdateWhenAttributeChange: true,
+      events: {
+        click: true,
+      },
     },
   })
   @Component({
@@ -151,6 +154,41 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     autoInsertSpace: nasl.core.Boolean;
+
+    @Prop({
+      group: '主要属性',
+      title: '是否开启二次确认',
+      description: '是否开启二次确认',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isOpenConfirm: nasl.core.Boolean;
+
+    @Prop<ElButtonOptions, 'popconfirmTitle'>({
+      group: '主要属性',
+      title: '二次确认标题',
+      description: '二次确认标题',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !!_.isOpenConfirm,
+    })
+    popconfirmTitle: nasl.core.String = '确认操作？';
+
+    @Prop<ElButtonOptions, 'popconfirmConfirmButtonText'>({
+      group: '主要属性',
+      title: '弹框确认按钮文字',
+      description: '二次确认弹框确认按钮文字',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !!_.isOpenConfirm,
+    })
+    popconfirmConfirmButtonText: nasl.core.String = '确认';
+
+    @Prop<ElButtonOptions, 'popconfirmCancelButtonText'>({
+      group: '主要属性',
+      title: '弹框取消按钮文字',
+      description: '二次确认弹框取消按钮文字',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !!_.isOpenConfirm,
+    })
+    popconfirmCancelButtonText: nasl.core.String = '取消';
 
     @Prop({
       group: '样式属性',

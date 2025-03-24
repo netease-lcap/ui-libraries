@@ -7,31 +7,33 @@
       text="Loading..."
       svgViewBox="-10, -10, 50, 50"
       :svg="svg"
-    ></el-loading>
-    <el-table
-      :data="tableData"
-      style="width: 100%"
-      ref="table1Ref"
     >
-      <el-table-column prop="date" label="Date" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="address" label="Address" />
-    </el-table>
+      <el-table
+        :data="tableData"
+        style="width: 100%"
+        ref="table1Ref"
+      >
+        <el-table-column prop="date" label="Date" width="180" />
+        <el-table-column prop="name" label="Name" width="180" />
+        <el-table-column prop="address" label="Address" />
+      </el-table>
+    </el-loading>
     <el-loading 
       :visible="loading2" 
       :target="target2" 
       :svg="svg"
       svgViewBox="-10, -10, 50, 50"
-      ></el-loading>
-    <el-table
-      :data="tableData"
-      style="width: 100%; margin-top: 50px"
-      ref="table2Ref"
     >
-      <el-table-column prop="date" label="Date" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="address" label="Address" />
-    </el-table>
+      <el-table
+        :data="tableData"
+        style="width: 100%; margin-top: 50px"
+        ref="table2Ref"
+      >
+        <el-table-column prop="date" label="Date" width="180" />
+        <el-table-column prop="name" label="Name" width="180" />
+        <el-table-column prop="address" label="Address" />
+      </el-table>
+    </el-loading>
     <button @click="handleClick" style="position: relative; top: 100px">切换Loading态</button>
   </div>
 </template>

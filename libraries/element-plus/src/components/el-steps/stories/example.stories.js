@@ -1,6 +1,7 @@
 import Component from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
+import ExampleDemo3 from '../demos/example-demo3.vue';
 
 export default {
   id: 'el-steps-examples',
@@ -112,16 +113,30 @@ export const Example8 = {
       return {
         dataSource: () => [{
           label: '步骤一',
-          value: '1',
+          value: '1.1',
         }, {
           label: '步骤二',
-          value: '2',
+          value: '2.1',
         }, {
           label: '步骤三',
-          value: '3',
+          value: '3.1',
         }],
       };
     },
-    template: '<el-steps active="2" simple :dataSource="dataSource" nameField="value"><template #title="{ item }"><el-text :text="item.label" /></template></el-steps>',
+    template: `
+      <el-steps active="1" :dataSource="dataSource" nameField="value">
+        <template #title="{ item }"><el-text :text="item.label" /></template>
+        <template #description="{ item }"><el-text :text="item.value" /></template>
+      </el-steps>`,
+  }),
+};
+
+export const Example9 = {
+  name: '数据源-使用v-model绑定',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo3,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };

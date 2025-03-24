@@ -30,7 +30,7 @@ export const Primary = {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template: `<div>
-      <div style="height: 2000px;"></div>
+      <div style="height: 2000px;">Scroll down to see the bottom-right button.</div>
       <el-backtop v-bind="$props"></el-backtop>
     </div>`,
   }),

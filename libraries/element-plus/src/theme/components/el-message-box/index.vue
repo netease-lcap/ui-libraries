@@ -1,6 +1,18 @@
 <template>
   <div>
-    <h1> TODO el-message-box</h1>
+  <div style="position: relative; width: 100%; height: 300px" ref="appendToEl"></div>
+    <el-message-box 
+      type="confirm" 
+      iconType="info" 
+      title="提示" 
+      modalClass="box-mask-class" 
+      :appendTo="appendToEl"
+      :closeOnClickModal="false"
+      :closeOnPressEscape="false"
+      :closeOnHashChange="false"
+      :lockScroll="false">
+      <template #default><el-text text="确认内容lalalla"></el-text></template>
+    </el-message-box>
   </div>
 </template>
 <script>
@@ -16,3 +28,12 @@ export default {
   },
 };
 </script>
+<style>
+.box-mask-class {
+  position: unset !important;
+}
+
+.box-mask-class .el-overlay-message-box {
+  position: unset !important;
+}
+</style>

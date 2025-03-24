@@ -39,7 +39,6 @@ export { ElSteps, ElStep } from './el-steps';
 export { ElAlert } from './el-alert';
 export { ElDialog } from './el-dialog';
 export { ElDrawer } from './el-drawer';
-export { ElPopconfirm } from './el-popconfirm';
 export { ElPopover } from './el-popover';
 export { ElMessage, ElMessageDesigner } from './el-message';
 export { ElMessageBox, ElMessageBoxDesigner } from './el-message-box';
