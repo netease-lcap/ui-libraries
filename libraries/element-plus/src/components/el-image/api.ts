@@ -43,11 +43,11 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'fill' },
-          { title: 'contain' },
-          { title: 'cover' },
-          { title: 'none' },
-          { title: 'scale-down' },
+          { title: '拉伸' },
+          { title: '适应' },
+          { title: '填充' },
+          { title: '原尺寸' },
+          { title: '适应（图片小于父元素时以原尺寸展示）' },
           { title: '默认' },
         ],
       },
