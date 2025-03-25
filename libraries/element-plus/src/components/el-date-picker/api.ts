@@ -98,7 +98,7 @@ namespace nasl.ui {
       description: '输入框尺寸。可选项：large/default/small。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '无' }, { title: '大' }, { title: '默认' }, { title: '小' }],
+        options: [{ title: '默认' }, { title: '大' }, { title: '中' }, { title: '小' }],
       },
     })
     size: '' | 'large' | 'default' | 'small' = '';

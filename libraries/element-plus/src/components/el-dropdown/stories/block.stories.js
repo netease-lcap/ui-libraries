@@ -41,7 +41,7 @@ export const Default = {
   render: () => ({
     template: `<el-dropdown>
     <template #default>
-      <el-text text="下拉菜单"></el-text>
+      <el-button type="danger" text="下拉菜单" style="width: 100px;"></el-button>
     </template>
     <template #items>
       <el-dropdown-item><el-text text="选项一"></el-text></el-dropdown-item>
@@ -55,7 +55,10 @@ export const Default = {
 export const ButtonStyle = {
   name: '分隔按钮样式',
   render: () => ({
-    template: `<el-dropdown type="primary" :splitButton="true" text="下拉菜单">
+    template: `<el-dropdown type="primary" :splitButton="true">
+    <template #default>
+      <el-text text="下拉菜单"></el-text>
+    </template>
     <template #items>
       <el-dropdown-item><el-text text="选项一"></el-text></el-dropdown-item>
       <el-dropdown-item><el-text text="选项二"></el-text></el-dropdown-item>

@@ -48,15 +48,15 @@ namespace nasl.ui {
     })
     type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
 
-    @Prop({
-      group: '主要属性',
-      title: '背景色',
-      description: 'color属性，可以设置标签背景色',
-      setter: {
-        concept: 'InputSetter'
-      },
-    })
-    color: nasl.core.String = '';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '背景色',
+    //   description: 'color属性，可以设置标签背景色',
+    //   setter: {
+    //     concept: 'InputSetter'
+    //   },
+    // })
+    // color: nasl.core.String = '';
 
     @Prop({
       group: '主要属性',

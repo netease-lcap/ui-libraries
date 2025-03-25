@@ -99,40 +99,62 @@ namespace nasl.ui {
       },
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
-
+    
     @Prop({
       group: '数据属性',
-      title: '图标属性字段',
-      description: '集合的元素类型中，用于图标的属性名称',
+      title: '禁用字段',
+      description: '集合的元素类型中，用于标识禁用项的属性',
+      docDescription: '集合的元素类型中，用于标识禁用项的属性，支持自定义变更',
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
-    iconField: (item: T) => any = ((item: any) => item.icon) as any;
-
+    disabledField: (item: T) => nasl.core.Boolean = ((item: any) => item.disabled);
+    
     @Prop({
       group: '数据属性',
-      title: '菜单项属性设置',
-      description: '菜单项属性设置',
+      title: '分隔字段',
+      description: '集合的元素类型中，用于显示分隔线的属性',
+      docDescription: '集合的元素类型中，用于显示分隔线的属性，支持自定义变更',
       setter: {
-        concept: 'AnonymousFunctionSetter',
+        concept: 'PropertySelectSetter',
       },
     })
-    itemProps: (current: { item: T; index: nasl.core.Integer }) => {
-      disabled: nasl.core.Boolean;
-      divided: nasl.core.Boolean;
-      icon: nasl.core.String;
-      command: nasl.core.String | nasl.core.Integer | V;
-    };
+    dividedField: (item: T) => nasl.core.Boolean = ((item: any) => item.divided);
 
-    @Prop<ElDropdownOptions<T, V>, 'text'>({
-      group: '主要属性',
-      title: '文本',
-      description: '按钮内容',
-      setter: { concept: 'InputSetter' },
-      if: (_) => _.splitButton === true,
-    })
-    text: nasl.core.String = '下拉菜单';
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '图标属性字段',
+    //   description: '集合的元素类型中，用于图标的属性名称',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    // })
+    // iconField: (item: T) => any = ((item: any) => item.icon) as any;
+
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '菜单项属性设置',
+    //   description: '菜单项属性设置',
+    //   setter: {
+    //     concept: 'AnonymousFunctionSetter',
+    //   },
+    // })
+    // itemProps: (current: { item: T; index: nasl.core.Integer }) => {
+    //   disabled: nasl.core.Boolean;
+    //   divided: nasl.core.Boolean;
+    //   icon: nasl.core.String;
+    //   command: nasl.core.String | nasl.core.Integer | V;
+    // };
+
+    // @Prop<ElDropdownOptions<T, V>, 'text'>({
+    //   group: '主要属性',
+    //   title: '文本',
+    //   description: '按钮内容',
+    //   setter: { concept: 'InputSetter' },
+    //   if: (_) => _.splitButton === true,
+    // })
+    // text: nasl.core.String = '下拉菜单';
 
     @Prop<ElDropdownOptions<T, V>, 'type'>({
       group: '样式属性',
@@ -276,10 +298,10 @@ namespace nasl.ui {
     onClick: (event: {}) => any;
 
     @Event({
-      title: '点击菜单项时',
-      description: '点击菜单项触发的事件回调',
+      title: '点击下拉项时',
+      description: '当下拉项被点击时触发，参数是从下拉菜单中发送的指令值',
     })
-    onCommand: (event: nasl.core.String | nasl.core.Integer | V) => any;
+    onCommand: (event: nasl.core.String | nasl.core.Decimal | nasl.core.Integer | V) => any;
 
     @Event({
       title: '下拉框出现/隐藏时',
@@ -331,11 +353,11 @@ namespace nasl.ui {
   export class ElDropdownItemOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
-      title: '指令',
+      title: '指令值',
       description: '派发到command回调函数的指令参数',
       setter: { concept: 'InputSetter' },
     })
-    command: nasl.core.String | nasl.core.Decimal | object;
+    command: nasl.core.String | nasl.core.Decimal | nasl.core.Integer | object;
 
     @Prop({
       group: '状态属性',
@@ -353,22 +375,22 @@ namespace nasl.ui {
     })
     divided: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '图标',
-      description: '图标',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
-      },
-    })
-    icon: nasl.core.String;
-
-    // @Slot({
-    //   title: '菜单项内容',
-    //   description: '菜单项内容',
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '图标',
+    //   description: '图标',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+    //   },
     // })
-    // slotDefault: () => Array<ViewComponent>;
+    // icon: nasl.core.String;
+
+    @Slot({
+      title: '菜单项内容',
+      description: '菜单项内容',
+    })
+    slotDefault: () => Array<ViewComponent>;
 
     @Event({
       title: '点击',
