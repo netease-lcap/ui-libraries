@@ -1,0 +1,13 @@
+/**
+ * @component el-text
+ */
+.el-text {
+  /**
+   * @type input
+   */
+  --el-text-font-size: var(--el-font-size-base);
+  /**
+   * @type color
+   */
+  --el-text-color: var(--el-text-color-regular);
+}

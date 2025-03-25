@@ -1110,9 +1110,7 @@ namespace nasl.ui {
           if: (_) => _ === true,
         },
         {
-          update: {
-            fixed: false,
-          },
+          clear: ['fixed'], 
           if: (_) => _ === false,
         },
       ],
@@ -1130,7 +1128,7 @@ namespace nasl.ui {
       },
       if: (_) => _.isFixed === true,
     })
-    fixed: 'left' | 'right' | false | '' = '';
+    fixed: 'left' | 'right' ;
 
     // @Prop({
     //   group: '主要属性',

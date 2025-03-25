@@ -1,0 +1,21 @@
+/**
+ * @component el-card
+ */
+.el-card {
+  /**
+   * @type color
+   */
+  --el-card-border-color: var(--el-border-color-light);
+  /**
+   * @type input
+   */
+  --el-card-border-radius: 4px;
+  /**
+   * @type input
+   */
+  --el-card-padding: 20px;
+  /**
+   * @type color
+   */
+  --el-card-bg-color: var(--el-fill-color-blank);
+}

@@ -1,0 +1,25 @@
+/**
+ * @component el-link
+ */
+.el-link {
+  /**
+   * @type input
+   */
+  --el-link-font-size: var(--el-font-size-base);
+  /**
+   * @type input
+   */
+  --el-link-font-weight: var(--el-font-weight-primary);
+  /**
+   * @type color
+   */
+  --el-link-text-color: var(--el-text-color-regular);
+  /**
+   * @type color
+   */
+  --el-link-hover-text-color: var(--el-color-primary);
+  /**
+   * @type color
+   */
+  --el-link-disabled-text-color: var(--el-text-color-placeholder);
+}

@@ -86,7 +86,7 @@ namespace nasl.ui {
       },
       onChange: [
         {
-          clear: ['collapse'],
+         clear: ['collapse'], 
           if: (_) => _ === 'horizontal',
         },
       ],

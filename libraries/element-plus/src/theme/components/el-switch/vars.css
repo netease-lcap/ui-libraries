@@ -1,0 +1,13 @@
+/**
+ * @component el-switch
+ */
+.el-switch {
+  /**
+   * @type color
+   */
+  --el-switch-on-color: var(--el-color-primary);
+  /**
+   * @type color
+   */
+  --el-switch-off-color: var(--el-border-color);
+}
