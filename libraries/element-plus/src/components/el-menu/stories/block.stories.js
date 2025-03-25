@@ -24,21 +24,25 @@ export const Default = {
   name: '菜单栏',
   render: () => ({
     template: `<el-menu :ellipsis="false" background-color="#545c64" text-color="#fff" style="color: #fff; padding: 0 20px;" active-text-color="#ffd04b" mode="horizontal" defaultActive="menu1">
-        <el-flex mode="flex" :gutter="12" alignment="center" style="min-width: 160px; margin-right: 12px;">
+      <template #left>
+        <el-flex mode="flex" :gutter="12" alignment="center" style="min-width: 160px; margin-right: 12px;height: 100%;">
           <el-image fit="cover" src="/assets/lcap-logo-light.svg" style="width: 28px; height: 28px;"></el-image>
           <el-text text="应用名称" size="large" style="--custom-start: auto;"></el-text>
         </el-flex>
-      <el-menu-item index="menu1"><template #default><el-text text="顶部导航一"></el-text></template></el-menu-item>
-      <el-menu-item index="menu2"><template #default><el-text text="顶部导航二"></el-text></template></el-menu-item>
-      <el-sub-menu index="menu3">
+      </template>
+      <el-menu-item><template #default><el-text text="顶部导航一"></el-text></template></el-menu-item>
+      <el-menu-item><template #default><el-text text="顶部导航二"></el-text></template></el-menu-item>
+      <el-sub-menu>
         <template #title><el-text text="顶部导航三"></el-text></template>
-        <el-menu-item index="men"><template #default><el-text text="菜单项"></el-text></template></el-menu-item>
+        <el-menu-item><template #default><el-text text="菜单项"></el-text></template></el-menu-item>
       </el-sub-menu>
-      <el-flex mode="flex" alignment="center" :gutter="12" style="color: #fff;cursor: pointer;flex: 1; justify-content: flex-end;">
-        <el-image fit="cover" src="/assets/avatar-default.svg" style="width: 36px; height: 36px;"></el-image>
-        <el-text text="DEVACC-examtemplate"></el-text>
-      </el-flex>
-      </el-menu>`,
+      <template #right>
+        <el-flex mode="flex" alignment="center" :gutter="12" style="color: #fff;cursor: pointer;flex: 1; justify-content: flex-end;height: 100%;">
+          <el-image fit="cover" src="/assets/avatar-default.svg" style="width: 36px; height: 36px;"></el-image>
+          <el-text text="DEVACC-examtemplate"></el-text>
+        </el-flex>
+      </template>
+    </el-menu>`,
   }),
 };
 

@@ -10,4 +10,11 @@ export function handleIcon(props) {
   };
 }
 
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
+
+export function handleTagName() {
+  return {
+    formTagName: 'el-form-time-select',
+  };
+}
