@@ -17,7 +17,7 @@ namespace nasl.ui {
     @Prop({
       title: '值',
     })
-    value: nasl.core.Time;
+    modelValue: nasl.core.Time;
 
     @Prop({
       title: '起始值',
@@ -258,7 +258,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIcon: nasl.core.String;
+    prefixIcon: nasl.core.String = 'Clock';
 
     @Prop({
       title: '自定义清除图标',
@@ -269,7 +269,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    clearIcon: nasl.core.String;
+    clearIcon: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',
