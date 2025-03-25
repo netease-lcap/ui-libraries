@@ -27,7 +27,7 @@ namespace nasl.ui {
       description: '绑定值，应等于 active-value 或 inactive-value，默认为布尔类型',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.Boolean | nasl.core.String | nasl.core.Integer;
+    modelValue: nasl.core.Boolean | nasl.core.String | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',

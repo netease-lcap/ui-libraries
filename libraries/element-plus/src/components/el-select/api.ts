@@ -214,7 +214,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
+    modelValue: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
 
     // @Prop<ElSelectProOptions<T, V, P, M, C>, 'valueIsSlot'>({
     //   group: '数据属性',
