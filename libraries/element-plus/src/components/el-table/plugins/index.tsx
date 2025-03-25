@@ -169,6 +169,7 @@ handleSort.order = 3;
 export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
   const currentPage = props.get('currentPage');
+  const pagination = props.get('pagination');
   const pageSize = props.get('pageSize');
   const order = props.get('order');
   const sort = props.get('sort');
@@ -176,7 +177,7 @@ export function handleDataSource(props) {
   const onBefore = props.get('onBefore', () => {});
   const onSuccess = props.get('onSuccess', () => {});
   const ref = props.get('ref');
-  const defaultParams = [{ currentPage, pageSize, order, sort }];
+  const defaultParams = [{ currentPage, pageSize, order, sort, pagination }];
   const {
     data: resultData = { list: [], total: 0 },
     run,
@@ -188,7 +189,7 @@ export function handleDataSource(props) {
     formatResult,
   });
   const reload = (params) => {
-    run({ currentPage, pageSize, order, sort, ...params });
+    run({ currentPage, pageSize, order, sort, pagination, ...params });
   };
   const { list: data, total } = resultData as { list: any; total: number };
   const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
@@ -218,11 +219,13 @@ export function handlePaginationRender(props) {
             style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
             v-slots={slots}
           />
-          <ElConfigProvider v-if={props.pagination} locale={zhCn}>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-              <ElPagination {...props.pageProps} total={props.pageProps.total} />
-            </div>
-          </ElConfigProvider>
+          {props.pagination && (
+            <ElConfigProvider locale={zhCn}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                <ElPagination {...props.pageProps} total={props.pageProps.total} />
+              </div>
+            </ElConfigProvider>
+          )}
         </div>,
       ];
     },

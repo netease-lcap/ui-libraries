@@ -101,6 +101,7 @@ export const Example1 = {
             address: 'No. 189, Grove St, Los Angeles',
           },
         ];
+        // return arr
         return { list: arr, total: arr.length };
       };
       const width = ref('501px');
@@ -140,7 +141,6 @@ export const Example1 = {
 ref="mytable"
 row-key="name"
 :dataSource="tableData"
-:pagination="true"
 v-model:currentPage="currentPage"
 :showTotal="true"
 height=""
@@ -154,6 +154,7 @@ pageSizes="[5,10,20,50]"
 data-nodepath="1234"
 v-model:selectedRowKeys="selectedRowKeys"
 dragSort="row"
+:pagination="false"
 :selection="true"
 :stripe="true"
 >

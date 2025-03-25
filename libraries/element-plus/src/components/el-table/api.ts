@@ -40,6 +40,7 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'container',
+      ignoreProperty: ['defaultCurrentPage'],
       structured: true,
       containerDirection: 'row',
       disableSlotAutoFill: [
