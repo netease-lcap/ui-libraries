@@ -25,7 +25,7 @@ namespace nasl.ui {
       sync: true,
       description: '滑块绑定值',
     })
-    value: nasl.core.Integer;
+    modelValue: nasl.core.Integer;
 
     @Prop({
       group: '数据属性',

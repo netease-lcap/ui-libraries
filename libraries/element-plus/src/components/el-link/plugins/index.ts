@@ -21,10 +21,13 @@ export function handleHrefToRouter(props) {
   const href = props.get('href');
   const target = props.get('target');
   const onClick = props.get('onClick');
-  const router = props.get('$router');
+  const router = props.get('router');
   const destinationToRouterClick = _.cond([
     [_.matches({ target: '_blank' }), _.constant(() => {})],
-    [_.isString, (params) => () => router.push(params.destination)],
+    [
+      _.conforms({ destination: _.isString }),
+      ({ destination, target }) => () => router.push(destination, { target }),
+    ],
     [_.stubTrue, _.constant(() => {})],
   ]);
   const routerClick = destinationToRouterClick({ destination, target });

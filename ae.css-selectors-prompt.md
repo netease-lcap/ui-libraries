@@ -40,6 +40,12 @@
     "[class*=u-list-view__][border=false] [class*=u-list-view_foot__]": "数据列表:无边框>底部",
 ```
 
+## Context
+
+选择器名称请结合以下组件名命名：
+
+<%= context %>
+
 ## Attention claims
 
 - 请严格使用 JSON 的 key/value 格式

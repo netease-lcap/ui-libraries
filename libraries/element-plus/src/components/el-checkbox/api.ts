@@ -206,7 +206,7 @@ namespace nasl.ui {
       description: '多选框的值。',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
+    modelValue: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
 
     @Prop({
       group: '数据属性',

@@ -26,7 +26,7 @@ namespace nasl.ui {
       description: '绑定值',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String[];
+    modelValue: nasl.core.String[];
 
     @Prop({
       group: '数据属性',

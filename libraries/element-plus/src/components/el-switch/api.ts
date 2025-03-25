@@ -27,7 +27,7 @@ namespace nasl.ui {
       description: '绑定值，应等于 active-value 或 inactive-value，默认为布尔类型',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.Boolean | nasl.core.String | nasl.core.Integer;
+    modelValue: nasl.core.Boolean | nasl.core.String | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
@@ -92,21 +92,21 @@ namespace nasl.ui {
     // })
     // inactiveIcon: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '激活文字',
-    //   description: '打开时的文字描述',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // activeText: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '激活文字',
+      description: '打开时的文字描述',
+      setter: { concept: 'InputSetter' },
+    })
+    activeText: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '非激活文字',
-    //   description: '关闭时的文字描述',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // inactiveText: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '非激活文字',
+      description: '关闭时的文字描述',
+      setter: { concept: 'InputSetter' },
+    })
+    inactiveText: nasl.core.String;
 
     @Prop({
       group: '数据属性',

@@ -43,7 +43,7 @@ export function useHandleMapField(filedInfo: {
 }
 const handleLocalPageData = _.cond([
   [
-    _.conforms({ currentPage: _.isNumber, pageSize: _.isNumber, dataSource: _.isArray }),
+    _.conforms({ currentPage: _.isNumber, pageSize: _.isNumber, dataSource: _.isArray, pagination: (el) => el }),
     (params) => {
       const { currentPage = 1, pageSize = 10, dataSource } = params;
       const start = (currentPage - 1) * pageSize;

@@ -247,15 +247,15 @@ namespace nasl.ui {
     })
     closeOnHashChange: nasl.core.Boolean = true;
 
-    @Prop({
-      title: '是否显示输入框',
-      description: '是否显示输入框',
-      group: '主要属性',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    showInput: nasl.core.Boolean = false;
+    // @Prop({
+    //   title: '是否显示输入框',
+    //   description: '是否显示输入框',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // showInput: nasl.core.Boolean = false;
     
     @Prop<ElMessageBoxOptions, 'inputPlaceholder'>({
       title: '输入框的占位符',

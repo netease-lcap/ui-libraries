@@ -181,7 +181,7 @@ namespace nasl.ui {
       description: '单选按钮的值',
       setter: { concept: 'InputSetter' },
     })
-    value: V;
+    modelValue: V;
 
     @Prop({
       group: '数据属性',
