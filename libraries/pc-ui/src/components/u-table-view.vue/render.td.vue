@@ -2,7 +2,8 @@
     <td :class="$style.cell"
         :ellipsis="getTdEllipsis()"
         v-ellipsis-title
-        :disabled="disabled">
+        :disabled="disabled"
+        :tree-display="treeDisplay">
         <!-- type === 'index' -->
         <span v-if="vm.type === 'index'">
             <template v-if="vm.autoIndex && usePagination && currentDataSource">
