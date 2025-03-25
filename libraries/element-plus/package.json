@@ -83,7 +83,6 @@
     "immutable": "5.0.0-beta.4",
     "lodash": "^4.17.21",
     "vue-hooks-plus": "^2.2.1",
-    "zustand-vue": "1.0.0-beta.24",
-    "uid": "^2.0.2"
+    "zustand-vue": "1.0.0-beta.24"
   }
 }
