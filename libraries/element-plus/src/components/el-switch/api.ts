@@ -92,21 +92,21 @@ namespace nasl.ui {
     // })
     // inactiveIcon: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '激活文字',
-    //   description: '打开时的文字描述',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // activeText: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '激活文字',
+      description: '打开时的文字描述',
+      setter: { concept: 'InputSetter' },
+    })
+    activeText: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '非激活文字',
-    //   description: '关闭时的文字描述',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // inactiveText: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '非激活文字',
+      description: '关闭时的文字描述',
+      setter: { concept: 'InputSetter' },
+    })
+    inactiveText: nasl.core.String;
 
     @Prop({
       group: '数据属性',
