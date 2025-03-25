@@ -58,7 +58,7 @@ namespace nasl.ui {
       description: '是否显示对话框',
       setter: { concept: 'SwitchSetter' },
     })
-    value: nasl.core.Boolean = false;
+    modelValue: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',

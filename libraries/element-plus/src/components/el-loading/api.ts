@@ -15,7 +15,19 @@ namespace nasl.ui {
     group: 'Feedback',
   })
   export class ElLoading extends ViewComponent {
-    constructor(options?: Partial<ElMessageOptions>) {
+    @Method({
+      title: '显示Loading',
+      description: '显示Loading',
+    })
+    show(): void {}
+
+    @Method({
+      title: '关闭Loading',
+      description: '关闭Loading',
+    })
+    hide(): void {}
+    
+    constructor(options?: Partial<ElLoadingOptions>) {
       super();
     }
   }

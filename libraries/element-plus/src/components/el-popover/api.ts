@@ -247,7 +247,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '是否自动删除 popover 组件',
+      title: '是否保持弹出框不被销毁',
       description: '当 popover 组件长时间不触发且 persistent 属性设置为 false 时, popover 将会被销毁',
       setter: { concept: 'SwitchSetter' },
     })

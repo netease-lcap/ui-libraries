@@ -117,7 +117,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    value: nasl.core.String;
+    modelValue: nasl.core.String;
 
 
     @Prop({
