@@ -1,0 +1,26 @@
+.el-menu.el-menu--horizontal {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.el-menu.el-menu--horizontal > .el-menu-item,
+.el-menu.el-menu--horizontal > .el-submenu {
+  float: none;
+  flex-shrink: 0;
+}
+
+.el-menu.el-menu--horizontal::before,
+.el-menu.el-menu--horizontal::after {
+  content: none;
+}
+
+.el-menu.el-menu--horizontal > .el-menu__extra {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 2px;
+  gap: 12px;
+  margin-left: 12px;
+}
