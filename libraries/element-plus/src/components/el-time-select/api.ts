@@ -17,7 +17,7 @@ namespace nasl.ui {
     @Prop({
       title: '值',
     })
-    value: nasl.core.Time;
+    modelValue: nasl.core.Time | nasl.core.String;
 
     @Method({
       title: '获取焦点',
@@ -41,7 +41,7 @@ namespace nasl.ui {
       title: '值',
       description: '选择的值'
     })
-    value: nasl.core.String | nasl.core.Time;
+    modelValue: nasl.core.String | nasl.core.Time;
 
     @Prop({
       group: '主要属性',
@@ -137,7 +137,7 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     prefixIcon: nasl.core.String;
@@ -148,7 +148,7 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     suffixIcon: nasl.core.String;

@@ -29,7 +29,7 @@ export { ElScrollbar } from './el-scrollbar';
 export { ElMenu, ElMenuItem, ElMenuItemGroup, ElSubMenu } from './el-menu';
 export { ElUpload, ElFormUpload } from './el-upload';
 export { ElTimePicker, ElFormTimePicker } from './el-time-picker';
-export { ElTimeSelect } from './el-time-select';
+export { ElTimeSelect, ElFormTimeSelect } from './el-time-select';
 export { ElIcon } from './el-icon';
 export { ElMention } from './el-mention';
 export { ElBreadcrumb, ElBreadcrumbItem } from './el-breadcrumb';
