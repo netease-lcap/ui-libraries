@@ -224,18 +224,18 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '自动隐藏延时',
-      description: 'tooltip 出现后自动隐藏延时，单位毫秒',
+      description: '弹出框出现后多久进行自动隐藏，单位毫秒',
       setter: { concept: 'NumberInputSetter' },
     })
     autoClose: nasl.core.Integer = 0;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Popover 组件的 tabindex',
-      description: 'Popover 组件的 tabindex',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    tabindex: nasl.core.Integer | nasl.core.String = 0;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Popover 组件的 tabindex',
+    //   description: 'Popover 组件的 tabindex',
+    //   setter: { concept: 'NumberInputSetter' },
+    // })
+    // tabindex: nasl.core.Integer | nasl.core.String = 0;
 
     @Prop({
       group: '主要属性',
@@ -248,18 +248,18 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '是否自动删除 popover 组件',
-      description: '当 popover 组件长时间不触发且 persistent 属性设置为 false 时, popover 将会被删除',
+      description: '当 popover 组件长时间不触发且 persistent 属性设置为 false 时, popover 将会被销毁',
       setter: { concept: 'SwitchSetter' },
     })
     persistent: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否启用虚拟触发器',
-      description: '是否启用虚拟触发器',
-      setter: { concept: 'SwitchSetter' },
-    })
-    virtualTriggering: nasl.core.Boolean;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否启用虚拟触发器',
+    //   description: '是否启用虚拟触发器',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // virtualTriggering: nasl.core.Boolean;
 
     @Event({
       title: '显示时触发',

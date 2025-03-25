@@ -37,7 +37,7 @@ export default defineComponent({
     },
     showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     lockScroll: {
       type: Boolean,
