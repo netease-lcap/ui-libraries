@@ -360,7 +360,7 @@ content: "\e665";
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.cell[ellipsis][tree-display="true"] > div:last-child {
+.cell[ellipsis][tree-column="true"] > div:last-child {
     display: inline;  /* 3042948982240000 */
 }
 .cell[ellipsis] > * {
