@@ -233,7 +233,7 @@ namespace nasl.ui {
       title: '清空时',
       description: '点击清空按钮时触发',
     })
-    onClear: () => any;
+    onClear: (event: any) => any;
   }
 
   @IDEExtraInfo({
