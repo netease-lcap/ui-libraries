@@ -102,7 +102,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '自定义加载器',
       description: '自定义 SVG 元素覆盖默认加载器',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
     })
     svg: nasl.core.String;
 
