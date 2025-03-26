@@ -140,7 +140,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
-      title: '标签宽度',
+      title: '跨越行数',
       description: '单元格应该跨越的行数',
       setter: { 
         concept: 'NumberInputSetter',

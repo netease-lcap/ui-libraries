@@ -140,18 +140,18 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIcon: nasl.core.String;
+    prefixIcon: nasl.core.String = 'Clock';
 
     @Prop({
-      title: '后缀图标',
-      description: '后缀图标',
+      title: '清除图标',
+      description: '清除图标',
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    suffixIcon: nasl.core.String;
+    clearIcon: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',

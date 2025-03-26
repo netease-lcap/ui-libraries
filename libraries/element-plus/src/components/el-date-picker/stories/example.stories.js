@@ -1,4 +1,5 @@
 import ElDatePicker from '../index';
+import ExampleDemo1 from '../demos/example-demo1.vue';
 
 export default {
   id: 'el-date-picker-examples',
@@ -50,5 +51,15 @@ export const Range = {
     },
     template:
       '<el-date-picker :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker>',
+  }),
+};
+
+export const Example1 = {
+  name: '基础用法',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo1,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };

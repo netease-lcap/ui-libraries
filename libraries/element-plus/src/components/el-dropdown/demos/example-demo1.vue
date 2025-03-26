@@ -5,11 +5,15 @@
     <el-dropdown
       type="primary"
       :splitButton="true"
-      text="下拉菜单"
       :dataSource="sourceFunc"
       textField="text"
       valueField="value"
-      iconField="icon">
+      disabledField="disabled"
+      dividedField="divided"
+      @command="handleCommand">
+      <template #default>
+        <el-text text="下拉菜单"></el-text>
+      </template>
       <template #items>
         <el-dropdown-item>黄金糕</el-dropdown-item>
         <el-dropdown-item>狮子头</el-dropdown-item>
@@ -24,12 +28,15 @@
 <script>
 export default {
   methods: {
+    handleCommand(value){
+      console.log('click',value);
+    },
     sourceFunc() {
       return [
         {
           text: '选项1',
           value: 1,
-          icon: 'search',
+          disabled: true,
         },
         {
           text: '选项2',
@@ -39,7 +46,7 @@ export default {
         {
           text: '选项3',
           value: 3,
-          icon: '',
+          divided: true,
         },
       ];
     },

@@ -125,9 +125,9 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '禁止选择部分小时选项',
-      description: '禁止选择部分小时选项',
-      docDescription: '禁止选择部分小时选项',
+      title: '禁止选择部分分钟选项',
+      description: '禁止选择部分分钟选项',
+      docDescription: '禁止选择部分分钟选项',
       bindOpen: true,
       setter: {
           concept: 'AnonymousFunctionSetter',
@@ -142,9 +142,9 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '禁止选择部分小时选项',
-      description: '禁止选择部分小时选项',
-      docDescription: '禁止选择部分小时选项',
+      title: '禁止选择部分秒选项',
+      description: '禁止选择部分秒选项',
+      docDescription: '禁止选择部分秒选项',
       bindOpen: true,
       setter: {
           concept: 'AnonymousFunctionSetter',

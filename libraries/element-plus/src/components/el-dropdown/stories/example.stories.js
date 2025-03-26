@@ -78,46 +78,54 @@ export const Example6 = {
   render: () => ({
     template: `<div><el-dropdown split-button type="primary">
   默认尺寸
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>黄金糕</el-dropdown-item>
-    <el-dropdown-item>狮子头</el-dropdown-item>
-    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-    <el-dropdown-item>双皮奶</el-dropdown-item>
-    <el-dropdown-item>蚵仔煎</el-dropdown-item>
-  </el-dropdown-menu>
+  <template #dropdown>
+    <el-dropdown-menu>
+      <el-dropdown-item>黄金糕</el-dropdown-item>
+      <el-dropdown-item>狮子头</el-dropdown-item>
+      <el-dropdown-item>螺蛳粉</el-dropdown-item>
+      <el-dropdown-item>双皮奶</el-dropdown-item>
+      <el-dropdown-item>蚵仔煎</el-dropdown-item>
+    </el-dropdown-menu>
+  </template>
 </el-dropdown>
 
-<el-dropdown size="medium" split-button type="primary">
-  中等尺寸
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>黄金糕</el-dropdown-item>
-    <el-dropdown-item>狮子头</el-dropdown-item>
-    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-    <el-dropdown-item>双皮奶</el-dropdown-item>
-    <el-dropdown-item>蚵仔煎</el-dropdown-item>
-  </el-dropdown-menu>
+<el-dropdown size="large" split-button type="primary">
+  大型尺寸
+  <template #dropdown>
+    <el-dropdown-menu>
+      <el-dropdown-item>黄金糕</el-dropdown-item>
+      <el-dropdown-item>狮子头</el-dropdown-item>
+      <el-dropdown-item>螺蛳粉</el-dropdown-item>
+      <el-dropdown-item>双皮奶</el-dropdown-item>
+      <el-dropdown-item>蚵仔煎</el-dropdown-item>
+    </el-dropdown-menu>
+  </template>
+</el-dropdown>
+
+<el-dropdown size="default" split-button type="primary">
+  中型尺寸
+  <template #dropdown>
+    <el-dropdown-menu>
+      <el-dropdown-item>黄金糕</el-dropdown-item>
+      <el-dropdown-item>狮子头</el-dropdown-item>
+      <el-dropdown-item>螺蛳粉</el-dropdown-item>
+      <el-dropdown-item>双皮奶</el-dropdown-item>
+      <el-dropdown-item>蚵仔煎</el-dropdown-item>
+    </el-dropdown-menu>
+  </template>
 </el-dropdown>
 
 <el-dropdown size="small" split-button type="primary">
   小型尺寸
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>黄金糕</el-dropdown-item>
-    <el-dropdown-item>狮子头</el-dropdown-item>
-    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-    <el-dropdown-item>双皮奶</el-dropdown-item>
-    <el-dropdown-item>蚵仔煎</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
-
-<el-dropdown size="mini" split-button type="primary">
-  超小尺寸
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>黄金糕</el-dropdown-item>
-    <el-dropdown-item>狮子头</el-dropdown-item>
-    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-    <el-dropdown-item>双皮奶</el-dropdown-item>
-    <el-dropdown-item>蚵仔煎</el-dropdown-item>
-  </el-dropdown-menu>
+  <template #dropdown>
+    <el-dropdown-menu>
+      <el-dropdown-item>黄金糕</el-dropdown-item>
+      <el-dropdown-item>狮子头</el-dropdown-item>
+      <el-dropdown-item>螺蛳粉</el-dropdown-item>
+      <el-dropdown-item>双皮奶</el-dropdown-item>
+      <el-dropdown-item>蚵仔煎</el-dropdown-item>
+    </el-dropdown-menu>
+  </template>
 </el-dropdown></div>`,
   }),
 };
@@ -163,6 +171,7 @@ export const Example7 = {
         console.log('item command', command);
       },
     },
-    template: '<el-dropdown @command="handleCommand" :data-source="dataSource" text-field="label" size="small" split-button type="primary"><el-text>下拉菜单</el-text></el-dropdown>',
+    template:
+      '<el-dropdown @command="handleCommand" :dataSource="dataSource" textField="label" size="small" split-button type="primary"><el-text>下拉菜单</el-text></el-dropdown>',
   }),
 };

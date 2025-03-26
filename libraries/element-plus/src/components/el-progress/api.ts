@@ -173,11 +173,12 @@ namespace nasl.ui {
     // })
     // textColor: nasl.core.String;
     
-    @Prop({
+    @Prop<ElProgressOptions, 'striped'>({
       group: '样式属性',
       title: '增加条纹',
       description: '在进度条上增加条纹',
       setter: { concept: 'SwitchSetter' },
+      if: _ => _.type === 'line'
     })
     striped: nasl.core.Boolean = false;
     
