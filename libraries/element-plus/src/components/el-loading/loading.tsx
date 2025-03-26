@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 
 export default defineComponent({
   name: 'ElLoading',
@@ -42,6 +42,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const isVisible = ref(false);
     const loadingConfig = ref({
       body: props.body,
       fullscreen: props.fullscreen,
@@ -53,14 +54,31 @@ export default defineComponent({
       svgViewBox: props.svgViewBox,
       customClass: props.customClass,
     });
+
+    const show = () => {
+      isVisible.value = true;
+    };
+
+    const hide = () => {
+      isVisible.value = false;
+    };
+
+    // 监听 visible prop 的变化
+    watch(() => props.visible, (newVal) => {
+      isVisible.value = newVal;
+    }, { immediate: true });
+
     return {
       loadingConfig,
+      isVisible,
+      show,
+      hide,
     };
   },
   render() {
     return (
       <div
-        v-loading={this.visible ? this.loadingConfig : false}
+        v-loading={this.isVisible ? this.loadingConfig : false}
       >
         {this.$slots.default?.()}
       </div>

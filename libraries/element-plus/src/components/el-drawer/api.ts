@@ -58,7 +58,7 @@ namespace nasl.ui {
       description: '是否显示 Drawer',
       setter: { concept: 'SwitchSetter' },
     })
-    value: nasl.core.Boolean = false;
+    modelValue: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -195,19 +195,19 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'z-index',
+      title: '展示层级',
       description: '和原生的 CSS 的 z-index 相同，改变 z 轴的顺序',
       setter: { concept: 'NumberInputSetter' },
     })
     zIndex: nasl.core.Integer;
 
-    @Prop({
-      group: '主要属性',
-      title: 'aria-level 属性',
-      description: 'header 的 aria-level 属性',
-      setter: { concept: 'InputSetter' },
-    })
-    headerAriaLevel : nasl.core.String = '2';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'aria-level 属性',
+    //   description: 'header 的 aria-level 属性',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // headerAriaLevel : nasl.core.String = '2';
 
     @Event({
       title: 'Drawer 打开的回调',
