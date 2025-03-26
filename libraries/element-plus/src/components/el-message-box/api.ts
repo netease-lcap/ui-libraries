@@ -122,16 +122,17 @@ namespace nasl.ui {
     })
     icon: nasl.core.String;
 
-    @Prop({
-      title: '自定义关闭图标',
-      description: '自定义关闭图标组件',
-      group: '主要属性',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
-      },
-    })
-    closeIcon: nasl.core.String;
+    // TODO: element-plus2.9.5版本支持这个属性，项目里是2.9.0
+    // @Prop({
+    //   title: '自定义关闭图标',
+    //   description: '自定义关闭图标组件',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTUI_ICONS',
+    //   },
+    // })
+    // closeIcon: nasl.core.String;
 
     @Prop({
       title: '关闭按钮',

@@ -1,5 +1,6 @@
 import { defineComponent, watch, onBeforeUnmount, ref, PropType } from 'vue';
-import { ElMessageBox as ElMessageBoxPlus, MessageBoxInputValidator, ComponentSize } from 'element-plus';
+import { ElMessageBox as ElMessageBoxPlus, MessageBoxInputValidator, ComponentSize, Callback } from 'element-plus';
+import { ElIcon } from '../index';
 
 type MessageType = '' | 'alert' | 'confirm' | 'prompt';
 type IconType = '' | 'success' | 'info' | 'warning' | 'error';
@@ -137,6 +138,12 @@ export default defineComponent({
     customStyle: {
       type: Object,
     },
+    callback: {
+      type: Function as PropType<Callback>,
+    },
+    beforeClose: {
+      type: Function as PropType<(action: 'confirm' | 'cancel' | 'close', instance: any) => void>,
+    },
   },
 
   setup(props, { slots, emit, expose }) {
@@ -154,6 +161,9 @@ export default defineComponent({
       const vnodes = slots.default?.() || [];
       const message = vnodes.length > 0 ? <div>{vnodes}</div> : null;
 
+      const IconComp = <ElIcon name={props.icon} />;
+      const CloseIconComp = <ElIcon name={props.closeIcon} />;
+
       try {
         const { value } = await ElMessageBoxPlus({
           boxType: props.type,
@@ -168,7 +178,8 @@ export default defineComponent({
           center: props.center,
           draggable: props.draggable,
           overflow: props.overflow,
-          icon: props.icon,
+          icon: IconComp,
+          closeIcon: CloseIconComp,
           distinguishCancelAndClose: true,
           lockScroll: props.lockScroll,
           showCancelButton: props.showCancelButton,
@@ -194,6 +205,8 @@ export default defineComponent({
           closeOnHashChange: props.closeOnHashChange,
           appendTo: props.appendTo,
           customStyle: props.customStyle,
+          callback: props.callback,
+          beforeClose: props.beforeClose,
           // customClass: getCurrentInstance()?.vnode?.data?.staticClass,
         });
 

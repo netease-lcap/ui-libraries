@@ -1,6 +1,7 @@
 import { defineComponent, watch, onBeforeUnmount, getCurrentInstance, PropType } from 'vue';
 import { ElNotification as ElNotificationPlus, NotificationHandle } from 'element-plus';
 import { setElStyle } from '../../utils/dom';
+import { ElIcon } from '../index';
 
 export default defineComponent({
   name: 'ElNotification',
@@ -68,6 +69,8 @@ export default defineComponent({
       const vnodes = slots.default?.() || [];
       const message = vnodes.length > 0 ? <div>{vnodes}</div> : null;
 
+      const IconComp = <ElIcon name={props.icon} />;
+
       messageHandler = ElNotificationPlus({
         type: props.type,
         title: props.title,
@@ -76,7 +79,7 @@ export default defineComponent({
         offset: props.offset,
         position: props.position,
         zIndex: props.zIndex,
-        icon: props.icon,
+        icon: IconComp,
         customClass: props.customClass,
         appendTo: props.appendTo,
         message,
