@@ -1,6 +1,14 @@
 <template>
   <div class="example-basic">
     <el-time-picker
+      @change="change"
+      is-range
+      :disabled-hours="disabledHours"
+      :disabled-minutes="disabledMinutes"
+      :disabled-seconds="disabledSeconds"
+      placeholder="Arbitrary time"
+    />
+    <el-time-picker
       v-model:startValue="value1[0]"
       v-model:endValue="value1[1]"
       @change="change"
