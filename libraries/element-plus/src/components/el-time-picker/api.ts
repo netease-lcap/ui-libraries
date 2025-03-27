@@ -17,7 +17,7 @@ namespace nasl.ui {
     @Prop({
       title: '值',
     })
-    value: nasl.core.Time;
+    modelValue: nasl.core.Time;
 
     @Prop({
       title: '起始值',
@@ -116,7 +116,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledHours: (role: nasl.core.String, comparingDate?: nasl.core.Time) => {
+    disabledHours: (role: nasl.core.String, comparingDate: any) => {
       /**
        * @title 禁止选择的小时
        */
@@ -133,7 +133,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate?: nasl.core.Time) => {
+    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
       /**
        * @title 禁止选择的分钟
        */
@@ -150,7 +150,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate?: nasl.core.Time) => {
+    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
       /**
        * @title 禁止选择的秒
        */
@@ -258,7 +258,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIcon: nasl.core.String;
+    prefixIcon: nasl.core.String = 'Clock';
 
     @Prop({
       title: '自定义清除图标',
@@ -269,7 +269,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    clearIcon: nasl.core.String;
+    clearIcon: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',

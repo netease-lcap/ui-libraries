@@ -1,5 +1,9 @@
 .el-descriptions {
   span.el-descriptions__label {
     display: inline-block;
+    color: inherit;
+  }
+  span.el-descriptions__content {
+    color: inherit;
   }
 }
