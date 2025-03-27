@@ -25,7 +25,6 @@ export const Default = {
     template: `
       <div style="width: 300px;">
         <el-mention
-          v-model="text"
           :suggestions="suggestions"
         />
       </div>
