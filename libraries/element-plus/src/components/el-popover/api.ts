@@ -5,7 +5,6 @@ namespace nasl.ui {
     order: 7,
     ideusage: {
       idetype: 'container',
-      namedSlotOmitWrapper: ['reference'],
       bindStyleAttr: 'popperStyle',
       displaySlotInline: {
         reference: true,
@@ -13,7 +12,7 @@ namespace nasl.ui {
       selector: [
         {
           expression: "this.getElement(el => el.slotTarget === 'reference')",
-          cssSelector: '.el-popover',
+          cssSelector: '.el-tooltip__trigger',
           placement: 'tail',
         },
         {

@@ -41,7 +41,7 @@ export default defineComponent({
       type: String,
     },
   },
-  setup(props) {
+  setup(props, { slots, expose }) {
     const isVisible = ref(false);
     const loadingConfig = ref({
       body: props.body,
@@ -68,19 +68,16 @@ export default defineComponent({
       isVisible.value = newVal;
     }, { immediate: true });
 
-    return {
-      loadingConfig,
-      isVisible,
+    expose({
       show,
       hide,
-    };
-  },
-  render() {
-    return (
+    });
+
+    return () => (
       <div
-        v-loading={this.isVisible ? this.loadingConfig : false}
+        v-loading={isVisible.value ? loadingConfig.value : false}
       >
-        {this.$slots.default?.()}
+        {slots.default?.()}
       </div>
     );
   },
