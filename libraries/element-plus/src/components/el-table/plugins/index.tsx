@@ -2,7 +2,7 @@ import { ElPagination, ElConfigProvider } from 'element-plus';
 import _ from 'lodash';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import fp from 'lodash/fp';
-import { useMemo, useRef, useCallback, useEffect, useControllableValue } from '@/plugins/hooks';
+import { useMemo, useRef, useCallback, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource } from '@/plugins/common/dataSource';
 
@@ -48,6 +48,7 @@ export function handleSortState(props) {
 handleSortState.order = 2;
 export function handlePageState(props) {
   const emit = props.get('emit');
+  const ref = props.get('ref');
   const deletePropsList = props
     .get($deletePropsList)
     .concat(['currentPage', 'pageSize', 'pageSizes', 'setCurrentPage', 'setPageSize', 'setPageSizes']);
@@ -55,8 +56,9 @@ export function handlePageState(props) {
     defaultValuePropName: 'defaultCurrentPage',
     defaultValue: 1,
     valuePropName: 'currentPage',
-    onChange: (currentPage) => {
+    onChange: (currentPage, pageSize = {}) => {
       emit('sync:state', 'currentPage', currentPage);
+      _.attempt(ref?.reload, { currentPage, ...pageSize });
     },
   });
   const [pageSize, setPageSize, pageSizeProps] = useControllableValue(props, {
@@ -65,17 +67,19 @@ export function handlePageState(props) {
     valuePropName: 'pageSize',
     onChange: (pageSize) => {
       emit('sync:state', 'pageSize', pageSize);
+      setCurrentPage(1, { pageSize });
     },
   });
   const pageSizesProps = props.get('pageSizes');
   const pageSizes = useMemo(() => {
-    const jsonPageSizes = _.attempt(JSON.parse, pageSizesProps);
+    const jsonPageSizes = _.isString(pageSizesProps) ? _.attempt(JSON.parse, pageSizesProps) : pageSizesProps;
     return _.isArray(jsonPageSizes) ? jsonPageSizes : [10, 20, 50];
   }, [pageSizesProps]);
 
   useMemo(() => {
     emit('sync:state', 'currentPage', currentPage);
     emit('sync:state', 'pageSize', pageSize);
+    return null;
   }, []);
 
   return {
@@ -99,34 +103,14 @@ export function handlePageProps(props) {
   const total = props.get('total');
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
-  const onChange = props.get('onPageChange', () => {});
   const onSelectionChange = props.get('onSelectionChange', () => {});
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
-  const ref = props.get('ref');
-  const emit = props.get('emit');
-  const setCurrentPage = props.get('setCurrentPage');
-  const setPageSize = props.get('setPageSize');
-  const pageChange = useCallback(
-    _.wrap(onChange, (fn, currentPage, pageSize) => {
-      setCurrentPage(currentPage);
-      setPageSize(pageSize);
-      _.attempt(fn, currentPage, pageSize);
-      _.attempt(ref?.reload, { currentPage, pageSize, pagination });
-    }),
-    [ref, emit],
-  );
 
   return {
     pageProps: {
       ...pageProps,
       layout,
       total,
-      onChange: pageChange,
-      onSizeChange: (pageSize) => {
-        setPageSize(pageSize);
-        setCurrentPage(1);
-        _.attempt(ref?.reload, { currentPage: 1, pageSize, pagination });
-      },
     },
     pagination,
     onSelectionChange: _.wrap(onSelectionChange, (fn, value) => {
@@ -158,7 +142,7 @@ export function handleSort(props) {
       setOrder(order);
       _.attempt(ref?.reload, { sort: prop, order, pagination });
     },
-    [ref, emit],
+    [ref, emit, pagination],
   );
   return {
     onSortChange,

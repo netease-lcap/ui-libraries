@@ -253,7 +253,7 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column prop="applicant" label="申请人" width="100" fixedPosition="left"></el-table-column>
+  <el-table-column prop="applicant" sortable="custom" label="申请人" width="100" fixedPosition="left"></el-table-column>
   <el-table-column prop="status" label="申请状态" width="150" sorter></el-table-column>
   <el-table-column prop="channel" label="签署方式" width="200"></el-table-column>
   <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
