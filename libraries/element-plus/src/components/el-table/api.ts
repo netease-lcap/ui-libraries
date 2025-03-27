@@ -276,7 +276,7 @@ namespace nasl.ui {
        * @title 合并列数
        */
       colspan?: nasl.core.Integer;
-    };
+    } | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
 
     // @Prop({
     //   group: '主要属性',
