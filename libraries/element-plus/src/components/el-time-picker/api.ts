@@ -116,7 +116,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledHours: (role: nasl.core.String, comparingDate?: nasl.core.Time) => {
+    disabledHours: (role: nasl.core.String, comparingDate: any) => {
       /**
        * @title 禁止选择的小时
        */
@@ -133,7 +133,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate?: nasl.core.Time) => {
+    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
       /**
        * @title 禁止选择的分钟
        */
@@ -150,7 +150,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate?: nasl.core.Time) => {
+    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
       /**
        * @title 禁止选择的秒
        */
