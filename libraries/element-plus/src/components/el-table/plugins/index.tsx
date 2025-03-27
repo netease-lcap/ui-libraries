@@ -111,7 +111,7 @@ export function handlePageProps(props) {
       setCurrentPage(currentPage);
       setPageSize(pageSize);
       _.attempt(fn, currentPage, pageSize);
-      _.attempt(ref?.reload, { currentPage, pageSize });
+      _.attempt(ref?.reload, { currentPage, pageSize, pagination });
     }),
     [ref, emit],
   );
@@ -125,7 +125,7 @@ export function handlePageProps(props) {
       onSizeChange: (pageSize) => {
         setPageSize(pageSize);
         setCurrentPage(1);
-        _.attempt(ref?.reload, { currentPage: 1, pageSize });
+        _.attempt(ref?.reload, { currentPage: 1, pageSize, pagination });
       },
     },
     pagination,
@@ -149,13 +149,14 @@ const formatResult = _.cond([
 export function handleSort(props) {
   const emit = props.get('emit');
   const ref = props.get('ref');
+  const pagination = props.get('pagination');
   const setSort = props.get('setSort');
   const setOrder = props.get('setOrder');
   const onSortChange = useCallback(
     ({ prop, order }) => {
       setSort(prop);
       setOrder(order);
-      _.attempt(ref?.reload, { sort: prop, order });
+      _.attempt(ref?.reload, { sort: prop, order, pagination });
     },
     [ref, emit],
   );
