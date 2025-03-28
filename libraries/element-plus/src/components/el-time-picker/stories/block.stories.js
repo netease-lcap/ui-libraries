@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '时间选择器',
   render: () => ({
-    template: `<el-time-picker placeholder="请选择时间" />`,
+    template: '<el-time-picker  placeholder="请选择时间" />',
   }),
 };

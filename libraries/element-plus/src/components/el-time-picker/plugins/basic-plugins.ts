@@ -16,7 +16,10 @@ type GetTimeValueParams = {
 const getTimeValue = _.cond([
   [_.matches({ isNilTime: true, isControlledTime: true }), _.constant([])],
   [_.matches({ isEffectiveTime: false }), _.constant([])],
-  [_.matches({ isControlledTime: false }), (value: GetTimeValueParams) => [getFormatTimeValue(value.value[0]), getFormatTimeValue(value.value[1])]],
+  [
+    _.matches({ isControlledTime: false }),
+    (value: GetTimeValueParams) => [getFormatTimeValue(value.value[0]), getFormatTimeValue(value.value[1])],
+  ],
   [_.stubTrue, ({ startValue, endValue }) => [getFormatTimeValue(startValue), getFormatTimeValue(endValue)]],
 ]);
 
@@ -81,8 +84,10 @@ export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export function handleIcon(props) {
   const clearIcon = props.get('clearIcon');
   const prefixIcon = props.get('prefixIcon');
+  const className = props.get('class') ?? '';
 
   return {
+    class: `${className} el-time-picker`,
     clearIcon: clearIcon ? ElementPlusIconsVue[clearIcon] : null,
     prefixIcon: prefixIcon ? ElementPlusIconsVue[prefixIcon] : null,
   };

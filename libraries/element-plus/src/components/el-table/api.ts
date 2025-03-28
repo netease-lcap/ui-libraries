@@ -978,8 +978,8 @@ namespace nasl.ui {
           cssSelector: 'th',
         },
       ],
-      forceUpdateWhenAttributeChange: 'parent',
-      forceRefresh: 'parent',
+      // forceUpdateWhenAttributeChange: 'parent',
+      // forceRefresh: 'parent',
       disableSlotAutoFill: [
         {
           slot: 'default',

@@ -62,6 +62,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '占位符',
+      description: '占位符',
+      setter: { concept: 'InputSetter' },
+    })
+    placeholder: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
       title: '为空的内容',
       description: '当下拉列表为空时显示的内容。',
       setter: { concept: 'InputSetter' },
@@ -82,7 +90,7 @@ namespace nasl.ui {
       description: '是否显示可选框',
       setter: { concept: 'SwitchSetter' },
     })
-    checkable: M = false as M;
+    multiple: M = false as M;
 
     @Prop({
       group: '主要属性',
@@ -222,15 +230,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     defaultExpandAll: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: '默认展开的节点的 key 的数组',
-      description: '默认展开的节点的 key 的数组, 仅首次生效',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultExpandedKeys: nasl.collection.List<V> = [];
 
     @Prop({
       group: '主要属性',
