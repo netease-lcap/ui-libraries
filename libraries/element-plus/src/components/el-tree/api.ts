@@ -97,14 +97,7 @@ namespace nasl.ui {
   }
 
   export class ElTreeOptions<T, V, M extends nasl.core.Boolean> extends ViewComponentOptions {
-    // @Prop({
-    //   group: '数据属性',
-    //   sync: true,
-    //   title: '值',
-    //   description: '选中值',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // value: M extends true ? nasl.collection.List<V> : V;
+
 
     @Prop({
       group: '交互属性',

@@ -4,7 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'container',
+      idetype: 'element',
       events: {
         click: true,
       },
