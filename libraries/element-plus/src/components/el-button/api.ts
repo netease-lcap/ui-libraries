@@ -35,7 +35,7 @@ namespace nasl.ui {
         options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
-    size: '' | 'default' | 'large' | 'small';
+    size: 'default' | 'large' | 'small' = 'default';
 
     @Prop({
       group: '主要属性',
@@ -58,19 +58,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '文字按钮',
-      description: '是否为文字按钮',
-      setter: { concept: 'SwitchSetter' },
+      title: '按钮文字',
+      description: '按钮文字',
+      setter: { concept: 'InputSetter' },
     })
-    text: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '样式属性',
-      title: '背景色',
-      description: '文字按钮是否显示背景色',
-      setter: { concept: 'SwitchSetter' },
-    })
-    bg: nasl.core.Boolean = false;
+    text: nasl.core.String = '按钮';
 
     @Prop({
       group: '主要属性',
@@ -96,13 +88,13 @@ namespace nasl.ui {
     })
     circle: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '加载中',
-      description: '是否为加载中状态',
-      setter: { concept: 'SwitchSetter' },
-    })
-    loading: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '加载中',
+    //   description: '是否为加载中状态',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // loading: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -197,14 +189,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     color: nasl.core.String;
-
-    @Prop({
-      group: '样式属性',
-      title: '暗黑模式',
-      description: '暗黑模式，自动将颜色转换为暗黑模式颜色',
-      setter: { concept: 'SwitchSetter' },
-    })
-    dark: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',

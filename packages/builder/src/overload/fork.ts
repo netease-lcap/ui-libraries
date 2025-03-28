@@ -199,7 +199,7 @@ function saveVueFile(filePath: string, context: OverloadComponentContext, module
     resultCodes.push(
       result.styleTag,
       transformCssCode(result.styleCodes.join('\n'), filePath),
-      '</style>',
+      result.styleTag.trim().endsWith('</style>') ? '' : '</style>',
     );
   }
   const basename = path.basename(filePath);

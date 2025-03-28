@@ -10,18 +10,17 @@ export { handleControllableValue } from '@/plugins/common/index';
 export function handleTitle(props) {
   const leftTitle = props.get('leftTitle');
   const rightTitle = props.get('rightTitle');
-  const title = _.map([leftTitle, rightTitle], _.isNil);
+  const titles = [leftTitle, rightTitle];
   return {
-    title,
+    titles,
   };
 }
 
 export function handleButtonText(props) {
   const leftButtonText = props.get('leftButtonText');
   const rightButtonText = props.get('rightButtonText');
-  const buttonText = _.map([leftButtonText, rightButtonText], _.isNil);
   return {
-    buttonText,
+    buttonTexts: [leftButtonText, rightButtonText],
   };
 }
 

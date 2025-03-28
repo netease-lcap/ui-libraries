@@ -1,0 +1,73 @@
+/**
+ * @component el-button
+ */
+.el-button {
+  /**
+   * @type input
+   */
+  --el-button-font-weight: var(--el-font-weight-primary);
+  /**
+   * @type color
+   */
+  --el-button-border-color: var(--el-border-color);
+  /**
+   * @type color
+   */
+  --el-button-bg-color: var(--el-fill-color-blank);
+  /**
+   * @type color
+   */
+  --el-button-text-color: var(--el-text-color-regular);
+  /**
+   * @type color
+   */
+  --el-button-disabled-text-color: var(--el-disabled-text-color);
+  /**
+   * @type color
+   */
+  --el-button-disabled-bg-color: var(--el-fill-color-blank);
+  /**
+   * @type color
+   */
+  --el-button-disabled-border-color: var(--el-border-color-light);
+  /**
+   * @type color
+   */
+  --el-button-divide-border-color: rgba(255,255,255,0.5);
+  /**
+   * @type color
+   */
+  --el-button-hover-text-color: var(--el-color-primary);
+  /**
+   * @type color
+   */
+  --el-button-hover-bg-color: var(--el-color-primary-light-9);
+  /**
+   * @type color
+   */
+  --el-button-hover-border-color: var(--el-color-primary-light-7);
+  /**
+   * @type color
+   */
+  --el-button-active-text-color: var(--el-button-hover-text-color);
+  /**
+   * @type color
+   */
+  --el-button-active-border-color: var(--el-color-primary);
+  /**
+   * @type color
+   */
+  --el-button-active-bg-color: var(--el-button-hover-bg-color);
+  /**
+   * @type color
+   */
+  --el-button-outline-color: var(--el-color-primary-light-5);
+  /**
+   * @type color
+   */
+  --el-button-hover-link-text-color: var(--el-text-color-secondary);
+  /**
+   * @type color
+   */
+  --el-button-active-color: var(--el-text-color-primary);
+}

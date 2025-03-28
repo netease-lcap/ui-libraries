@@ -32,6 +32,7 @@ export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccum
 }
 
 export function handleVirtualize(props) {
+  const slots = props.get('slots');
   const virtualize = props.get('virtualize');
   const data = props.get('data');
   const render = useCallback((props) => <ElSelectV2 {...props} />, []);
@@ -40,6 +41,7 @@ export function handleVirtualize(props) {
       ? {
           options: data,
           render,
+          slots: _.omit(slots, 'default'),
         }
       : {};
   }, [virtualize, data, render]);

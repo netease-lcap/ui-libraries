@@ -1,0 +1,21 @@
+/**
+ * @component el-tree-select
+ */
+.el-tree-select {
+  /**
+   * @type input
+   */
+  --el-tree-node-content-height: 26px;
+  /**
+   * @type color
+   */
+  --el-tree-node-hover-bg-color: var(--el-fill-color-light);
+  /**
+   * @type color
+   */
+  --el-tree-text-color: var(--el-text-color-regular);
+  /**
+   * @type color
+   */
+  --el-tree-expand-icon-color: var(--el-text-color-placeholder);
+}

@@ -1,9 +1,11 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
+
 import { useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
 
+export * from './ide';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
 

@@ -26,7 +26,7 @@ namespace nasl.ui {
       sync: true,
       setter: { concept: 'NumberInputSetter' },
     })
-    value: nasl.core.Decimal;
+    modelValue: nasl.core.Decimal;
 
     @Prop({
       group: '数据属性',

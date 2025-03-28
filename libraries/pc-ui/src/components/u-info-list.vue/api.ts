@@ -53,7 +53,7 @@ namespace nasl.ui {
             snippets: [
                 {
                     title: '详情列表组',
-                    code: '<u-info-list-group><template #title><u-text text="基本信息"></u-text></template><u-info-list-item label="名称"><u-text text="张三"></u-text></u-info-list-item></u-info-list-group>',
+                    code: '<u-info-list-group><template #title><u-text text="基本信息"></u-text></template><u-info-list-item><template #label><u-text text="名称"></u-text></template><u-text text="张三"></u-text></u-info-list-item></u-info-list-group>',
                 },
                 {
                     title: '详情列表项',

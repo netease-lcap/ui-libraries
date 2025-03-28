@@ -146,7 +146,7 @@ export const Example5 = {
     },
     template: `
     <div>
-      <el-button :isOpenConfirm='true' text='二次确认框' popconfirmTitle="我是二次确认框" popconfirmConfirmButtonText="对" popconfirmCancelButtonText="🙅" @click="handleClick"></el-button>
+      <el-button :isPopConfirm='true' text='二次确认框' popconfirmTitle="我是二次确认框" popconfirmConfirmButtonText="对" popconfirmCancelButtonText="🙅" @click="handleClick"></el-button>
     </div>
     `,
   }),

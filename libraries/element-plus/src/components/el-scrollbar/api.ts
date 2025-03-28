@@ -17,7 +17,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '滚动条',
-    icon: 'scrollbar',
+    icon: 'Scrollbar',
     description: '用于替换浏览器原生滚动条',
     group: 'Navigation',
   })

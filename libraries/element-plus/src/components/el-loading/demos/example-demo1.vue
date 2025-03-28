@@ -1,13 +1,16 @@
 <template>
   <div>
-    <el-loading :visible="loading">
+    <el-loading :visible='loading' ref="loadingRef" :fullscreen="false">
       <el-table :data="tableData" style="width: 100%" ref="elTableRef">
         <el-table-column prop="date" label="Date" width="180" />
         <el-table-column prop="name" label="Name" width="180" />
         <el-table-column prop="address" label="Address" />
       </el-table>
     </el-loading>
-    <button @click="loading = !loading" style="position: relative; top: 100px">切换Loading态</button>
+    <div style="position: relative; top: 100px">
+      <button @click="handleVisible">切换visible控制</button>
+      <button @click="handleClick">使用show方法控制</button>
+    </div>
   </div>
 </template>
   
@@ -16,6 +19,7 @@
   
   const loading = ref(false)
   const elTableRef = ref();
+  const loadingRef = ref();
 
   const target = computed(() => {
     return elTableRef.value?.$el?.parentElement;
@@ -38,6 +42,14 @@
       address: 'No.1518,  Jinshajiang Road, Putuo District',
     },
   ]
+
+  function handleClick() {
+    loadingRef.value?.show?.();
+  }
+
+  function handleVisible() {
+    loading.value = !loading.value;
+  }
 </script>
   
 <style>

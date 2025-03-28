@@ -1,0 +1,37 @@
+/**
+ * @component el-rate
+ */
+.el-rate {
+  /**
+   * @type input
+   */
+  --el-rate-height: 20px;
+  /**
+   * @type input
+   */
+  --el-rate-font-size: var(--el-font-size-base);
+  /**
+   * @type input
+   */
+  --el-rate-icon-size: 18px;
+  /**
+   * @type input
+   */
+  --el-rate-icon-margin: 6px;
+  /**
+   * @type color
+   */
+  --el-rate-void-color: var(--el-border-color-darker);
+  /**
+   * @type color
+   */
+  --el-rate-fill-color: #f7ba2a;
+  /**
+   * @type color
+   */
+  --el-rate-disabled-void-color: var(--el-fill-color);
+  /**
+   * @type color
+   */
+  --el-rate-text-color: var(--el-text-color-primary);
+}

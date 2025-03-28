@@ -1,0 +1,41 @@
+/**
+ * @component el-slider
+ */
+.el-slider {
+  /**
+   * @type color
+   */
+  --el-slider-main-bg-color: var(--el-color-primary);
+  /**
+   * @type color
+   */
+  --el-slider-runway-bg-color: var(--el-border-color-light);
+  /**
+   * @type color
+   */
+  --el-slider-stop-bg-color: var(--el-color-white);
+  /**
+   * @type color
+   */
+  --el-slider-disabled-color: var(--el-text-color-placeholder);
+  /**
+   * @type input
+   */
+  --el-slider-border-radius: 3px;
+  /**
+   * @type input
+   */
+  --el-slider-height: 6px;
+  /**
+   * @type input
+   */
+  --el-slider-button-size: 20px;
+  /**
+   * @type input
+   */
+  --el-slider-button-wrapper-size: 36px;
+  /**
+   * @type input
+   */
+  --el-slider-button-wrapper-offset: -15px;
+}

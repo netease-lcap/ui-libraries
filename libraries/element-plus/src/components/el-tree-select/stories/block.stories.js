@@ -17,7 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-      <el-tree-select placeholder="请选择" data-nodepath="123" />
+      <el-tree-select placeholder="请选择"  />
     `,
   }),
 };

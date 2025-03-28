@@ -28,8 +28,29 @@ export default defineConfig(({ command }) => {
         },
         reportCSSInfo: {
           enabled: true,
-          verbose: false,
+          verbose: true,
           extraComponentMap: {
+            ElIcon: {
+              selectorPrefixMap: {
+                'el-icon-loading': true,
+              },
+            },
+            ElButton: {
+              mainSelectorMap: {
+                '.el-button,.el-button.is-round': true,
+              },
+            },
+            ElBreadcrumb: {
+              mainSelectorMap: {
+                '.el-breadcrumb__separator': false,
+              },
+            },
+            ElBreadcrumbItem: {
+              mainSelectorMap: {
+                '.el-breadcrumb__item': true,
+                '.el-breadcrumb__inner': false,
+              },
+            },
             ElCheckbox: {
               selectorPrefixMap: {
                 'el-checkbox-button': false,
@@ -45,6 +66,11 @@ export default defineConfig(({ command }) => {
                 'el-form-item': true,
               },
             },
+            ElCalendar: {
+              selectorPrefixMap: {
+                'el-calendar-table': false,
+              },
+            },
             ElCascader: {
               selectorPrefixMap: {
                 'el-cascader-panel': false,
@@ -52,14 +78,52 @@ export default defineConfig(({ command }) => {
                 'el-cascader-node': false,
               },
             },
+            ElCollapse: {
+              selectorPrefixMap: {
+                'el-collapse': true,
+                'el-collapse-item': false,
+              },
+            },
+            ElDropdown: {
+              selectorPrefixMap: {
+                'el-dropdown-menu': false,
+              },
+            },
             ElSelect: {
               selectorPrefixMap: {
-                'el-select-dropdown': true,
+                'el-select__popper': true,
               },
             },
             ElTable: {
               selectorPrefixMap: {
                 'el-table-filter': false,
+              },
+            },
+            ElProgressBar: {
+              selectorPrefixMap: {
+                'el-progress-bar': false,
+              },
+            },
+            ElTag: {
+              mainSelectorMap: {
+                '.el-tag,.el-tag.el-tag--primary': true,
+              },
+            },
+            ElTransfer: {
+              selectorPrefixMap: {
+                'el-transfer-panel': false,
+              },
+            },
+            ElTree: {
+              selectorPrefixMap: {
+                'el-tree-node': false,
+              },
+            },
+            ElUploader: {
+              selectorPrefixMap: {
+                'el-upload-dragger': false,
+                'el-upload-list': false,
+                'el-upload-cover': false,
               },
             },
           },

@@ -1,3 +1,5 @@
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+
 export { ElFlex } from './el-flex';
 export { ElText } from './el-text';
 export { ElTabs, ElTabPane } from './el-tabs';
@@ -53,3 +55,5 @@ export { ElResult } from './el-result';
 export { ElTag, ElCheckTag } from './el-tag';
 export { ElDropdown, ElDropdownItem, ElDropdownMenu } from './el-dropdown';
 export { ElRadio, ElRadioGroup, ElFormRadioGroup } from './el-radio';
+export { ElConfigProvider as ConfigProvider } from 'element-plus';
+export const locale = { zhCn };

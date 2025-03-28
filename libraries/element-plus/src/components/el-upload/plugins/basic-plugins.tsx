@@ -1,6 +1,7 @@
 import { UploadFile, UploadRawFile } from 'element-plus';
 // import { UploadFilled } from '@element-plus/icons-vue';
 import _ from 'lodash';
+import isNil from 'lodash/isNil';
 import { useControllableValue } from '@/plugins/hooks';
 import { ElFlex, ElIcon, ElText } from '@/components/index';
 
@@ -108,34 +109,26 @@ export function handleResponse(props) {
   };
 }
 
+const getLcapTtl = _.cond([
+  [_.conforms({ ttl: isNil, ttlValue: isNil }), () => ({})],
+  [_.conforms({ ttl: isNil, ttlValue: !isNil }), ({ ttlValue }) => ({ 'lcap-ttl': ttlValue })],
+  [_.stubTrue, ({ ttl, ttlValue }) => ({ 'lcap-ttl': ttl ? ttlValue : -1 })],
+]);
 export function handleRequestHeaders(props) {
   const propHeaders = props.get('headers');
   const access = props.get('access');
   const ttl = props.get('ttl');
   const ttlValue = props.get('ttlValue');
 
-  const lcapUploadHeaders: any = {
-    Authorization: getCookie('Authorization'),
-  };
-
   const { appInfo } = window as any;
+  const lcapAccessObject = access ? { 'lcap-access': access } : {};
+  const DomainName = appInfo?.domainName ? { DomainName: appInfo.domainName } : {};
+  const lcapTtl = getLcapTtl({ ttl, ttlValue });
+  const Authorization = { Authorization: getCookie('Authorization') };
 
-  if (access) {
-    lcapUploadHeaders['lcap-access'] = access;
-  }
-
-  if (appInfo && appInfo.domainName) {
-    lcapUploadHeaders.DomainName = appInfo.domainName;
-  }
-  if (ttlValue !== null && ttlValue !== undefined) {
-    if (ttl !== null && ttl !== undefined) {
-      lcapUploadHeaders['lcap-ttl'] = ttl ? ttlValue : -1;
-    } else {
-      lcapUploadHeaders['lcap-ttl'] = ttlValue;
-    }
-  }
-
-  return { headers: { ...(_.isPlainObject(propHeaders) ? propHeaders : {}), ...lcapUploadHeaders } };
+  return {
+    headers: _.assign(propHeaders, lcapAccessObject, DomainName, lcapTtl, Authorization),
+  };
 }
 
 export function handleRequestData(props) {

@@ -119,17 +119,6 @@ namespace nasl.ui {
     })
     onMouseleave: (event: MouseEvent) => any;
 
-    @Event({
-      title: '聚焦时',
-      description: '聚焦时触发',
-    })
-    onFocus: (event: FocusEvent) => void;
-
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: FocusEvent) => void;
 
     // @Prop({
     //   group: '主要属性',
