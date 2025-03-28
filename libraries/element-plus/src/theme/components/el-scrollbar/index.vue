@@ -1,5 +1,7 @@
 <template>
-  <demo-preview></demo-preview>
+  <el-scrollbar height="400px">
+    <el-flex style="height: 1000px; width: 100%; background-color: #dddddd;"><el-text text="内容区域"/></el-flex>
+  </el-scrollbar>
 </template>
 <script>
 // 默认可使用组件区块实例作为主题配置预览
