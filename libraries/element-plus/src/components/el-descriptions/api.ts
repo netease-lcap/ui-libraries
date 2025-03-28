@@ -97,6 +97,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       "idetype": "container",
+      "forceRefresh": "parent",
       "parentAccept": "target.tag === 'el-descriptions'",
       "selector": [
         {
