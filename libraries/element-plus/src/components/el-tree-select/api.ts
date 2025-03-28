@@ -9,14 +9,6 @@ namespace nasl.ui {
         click: true,
       },
     },
-    extends: [
-      {
-        name: 'ElSelect',
-      },
-      {
-        name: 'ElTree',
-      },
-    ],
   })
   @Component({
     title: '树形选择',
@@ -349,3 +341,12 @@ namespace nasl.ui {
     C extends nasl.core.Boolean,
   > extends ViewComponentOptions {}
 }
+
+
+new nasl.ui.ElTreeSelect<typeof __elementsRef.el_tree_select_3.__item, typeof __elementsRef.el_tree_select_3.__V, typeof __elementsRef.el_tree_select_3.__pageable, typeof __elementsRef.el_tree_select_3.__multiple, typeof __elementsRef.el_tree_select_3.__converter>({_name: __elements.el_tree_select_3,
+  placeholder: nasl.ui._bindAttrWrap(() => {
+return new nasl.core.StringLiteral<"请选择">();
+}, false),
+  modelValue: nasl.ui._bindAttrWrap(() => {
+return }, true),
+  });

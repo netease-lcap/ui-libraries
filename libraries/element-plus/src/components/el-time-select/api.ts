@@ -9,7 +9,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '时间选择',
-    // icon: 'select',
+    icon: 'TimeSelect',
     description: '',
     group: 'Selector',
   })
