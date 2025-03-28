@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-cond-assign */
 /* eslint-disable no-multi-assign */
 /* eslint-disable prefer-destructuring */
@@ -36,6 +37,7 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
   const isNonStandardRE = /-(moz|webkit|ms|o)-/;
   const hasPesudoElementRE = /::|:(before|after|selection)/;
   const hashClassRE = /\.([a-zA-Z0-9][a-zA-Z0-9_-]*?)___[a-zA-Z0-9-]{6,}/;
+  const warningIgnoreRE = new RegExp((options.reportCSSInfo?.warningIgnore || [/%/]).map((re) => re.source).join('|'));
 
   function getPrefixMap(componentName: string, parentName: string | undefined) {
     const firstPrefix = kebabCase(componentName);
@@ -109,6 +111,12 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
     mainSelectorMap: Map<string, boolean>,
   }> = {};
 
+  /** 目前只是用来减少 WARN 日志 */
+  const allMainSelectorMap = !options.reportCSSInfo?.extraComponentMap ? {} : Object.keys(options.reportCSSInfo?.extraComponentMap).reduce((obj, componentName) => {
+    const mainSelectorMap = options.reportCSSInfo?.extraComponentMap?.[componentName]?.mainSelectorMap;
+    return { ...obj, ...mainSelectorMap };
+  }, {} as Record<string, boolean>);
+
   root.nodes.forEach((node) => {
     if (node.type === 'rule') {
       if (/\([^(),]+?(,[^(),]+?)+\)/.test(node.selector)) return; // 过滤掉含有逗号()的选择器
@@ -136,12 +144,13 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
             name = kebabCase(name);
             return new RegExp(`^\\.${name}(_|-)|^\\[class\\*=${name}(_|-)`).test(selector) && !/:(before|after)$/.test(selector);
           });
-          if (tempComponentName) console.log(`[WARN] 未找到可能的组件选择器: ${selector}，按照_|-分割推测可能的组件：${tempComponentName}`);
+          if (tempComponentName && allMainSelectorMap[selector] === undefined && !warningIgnoreRE.test(selector)) console.log(`[WARN] 未找到可能的组件选择器: ${selector}，按照_|-分割推测可能的组件：${tempComponentName}`);
           const tempComponentName2 = componentNames.find((name) => {
             name = kebabCase(name);
             return new RegExp(`^\\.${name}|^\\[class\\*=${name}`).test(selector) && !/:(before|after)$/.test(selector);
           });
-          if (!tempComponentName && tempComponentName2) console.log(`[WARN] 未找到可能的组件选择器: ${selector}，根据前缀连续推测可能的组件：${tempComponentName2}`);
+          if (!tempComponentName && tempComponentName2 && allMainSelectorMap[selector] === undefined
+            && !warningIgnoreRE.test(selector)) console.log(`[WARN] 未找到可能的组件选择器: ${selector}，根据前缀连续推测可能的组件：${tempComponentName2}`);
         }
         return;
       }
@@ -396,7 +405,7 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
 
   if (options.reportCSSInfo?.verbose) {
     componentNames.forEach((componentName) => {
-      if (!componentCSSInfoMap[componentName]) console.log(`[WARN] 组件 ${componentName} 上未匹配到任何选择器`);
+      if (!componentCSSInfoMap[componentName] && !options.reportCSSInfo?.extraComponentMap?.[componentName]) console.log(`[WARN] 组件 ${componentName} 上未匹配到任何选择器`);
     });
   }
 
@@ -429,7 +438,9 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
   if (options.reportCSSInfo?.extraComponentMap) {
     const compKeys = Object.keys(options.reportCSSInfo.extraComponentMap);
     for (const curCompName of compKeys) {
-      const { depComponents } = options.reportCSSInfo.extraComponentMap[curCompName];
+      // eslint-disable-next-line prefer-const
+      const { depComponents, depComponentMap } = options.reportCSSInfo.extraComponentMap[curCompName];
+      const _depComponentMap = depComponentMap || {};
       depComponents?.forEach((depCompItem) => {
         let depComponentName = '';
         let stillRoot = false;
@@ -439,9 +450,16 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
         } else {
           depComponentName = depCompItem;
         }
+        _depComponentMap[depComponentName] = stillRoot;
+      });
+
+      Object.keys(_depComponentMap).forEach((depComponentName) => {
+        const stillRoot = _depComponentMap[depComponentName];
         const depCompCssDesc = cssRulesDesc[depComponentName];
+        // eslint-disable-next-line no-param-reassign
         cssRulesDesc[curCompName] = { ...cssRulesDesc[curCompName], ...depCompCssDesc };
         const depCompCssInfo = componentCSSInfoMap[depComponentName];
+        if (!depCompCssInfo) throw new Error(`组件 ${curCompName} 找不到依赖组件 ${depComponentName} 的配置`);
         const resetCssRules = depCompCssInfo.cssRules.map((rule) => {
           return {
             ...rule,
@@ -493,4 +511,20 @@ export default function buildCSSInfo(options: LcapBuildOptions) {
   fs.writeJSONSync(path.resolve(options.rootPath, options.destDir, 'index.css-info-map.json'), result.componentCSSInfoMap, { spaces: 2 });
   fs.writeJSONSync(path.resolve(options.rootPath, 'index.css-info-desc.json'), result.cssRulesDesc, { spaces: 2 });
   fs.writeFileSync(path.resolve(options.rootPath, options.destDir, 'index.css'), result.cssContent);
+}
+
+export function fastConfigFormComponentMap(originComponentNames: string[]) {
+  const result: Record<string, {
+    depComponentMap: Record<string, boolean>;
+  }> = {};
+
+  originComponentNames.forEach((componentName) => {
+    result[componentName.replace(/^El/, 'ElForm')] = {
+      depComponentMap: {
+        [componentName]: true,
+      },
+    };
+  });
+
+  return result;
 }

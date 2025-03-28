@@ -3,7 +3,8 @@ import path from 'node:path';
 import fs from 'fs-extra';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import { createGenScopedName, lcapPlugin } from '@lcap/builder';
+import { createGenScopedName, fastConfigFormComponentMap, lcapPlugin } from '@lcap/builder';
+import { ElTimePicker, ElTimeSelect } from 'element-plus';
 
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
@@ -29,6 +30,18 @@ export default defineConfig(({ command }) => {
         reportCSSInfo: {
           enabled: true,
           verbose: true,
+          warningIgnore: [
+            /-(fade|transition)-(enter|leave)-/,
+            /^\.el-button-group/,
+            /^\.el-input-group/,
+            /^\.el-select-group/,
+            /^\.el-textarea/,
+            /^\.el-table-v2/,
+            /^\.el-tooltip-v2/,
+            /^\.el-col-|=el-col-/,
+            /^\.el-color-/,
+            /^\.el-loading-/,
+          ],
           extraComponentMap: {
             ElIcon: {
               selectorPrefixMap: {
@@ -51,6 +64,23 @@ export default defineConfig(({ command }) => {
                 '.el-breadcrumb__inner': false,
               },
             },
+            ElDescriptionsItem: {
+              selectorPrefixMap: {
+                'el-descriptions__cell': true,
+                'el-descriptions__label': false,
+                'el-descriptions__content': false,
+              },
+            },
+            ElDropdownItem: {
+              selectorPrefixMap: {
+                '.el-dropdown-menu__item': true,
+              },
+            },
+            ElOption: {
+              selectorPrefixMap: {
+                '.el-select-dropdown__item': true,
+              },
+            },
             ElCheckbox: {
               selectorPrefixMap: {
                 'el-checkbox-button': false,
@@ -59,6 +89,11 @@ export default defineConfig(({ command }) => {
             ElTabPane: {
               mainSelectorMap: {
                 '.el-tab-pane': true,
+              },
+            },
+            ElForm: {
+              selectorPrefixMap: {
+                'el-form-item': true,
               },
             },
             ElFormItemPro: {
@@ -92,6 +127,7 @@ export default defineConfig(({ command }) => {
             ElSelect: {
               selectorPrefixMap: {
                 'el-select__popper': true,
+                'el-select-dropdown': false,
               },
             },
             ElTable: {
@@ -99,7 +135,7 @@ export default defineConfig(({ command }) => {
                 'el-table-filter': false,
               },
             },
-            ElProgressBar: {
+            ElProgress: {
               selectorPrefixMap: {
                 'el-progress-bar': false,
               },
@@ -119,13 +155,45 @@ export default defineConfig(({ command }) => {
                 'el-tree-node': false,
               },
             },
-            ElUploader: {
+            ElUpload: {
               selectorPrefixMap: {
                 'el-upload-dragger': false,
                 'el-upload-list': false,
                 'el-upload-cover': false,
               },
             },
+            ElMention: {
+              selectorPrefixMap: {
+                'el-mention-dropdown': false,
+              },
+            },
+            ElTimePicker: {
+              mainSelectorMap: {
+                '.el-time-picker': true,
+              },
+            },
+            ElTimeSelect: {
+              mainSelectorMap: {
+                '.el-time-select': true,
+              },
+            },
+            ...fastConfigFormComponentMap([
+              'ElCascader',
+              'ElCheckboxGroup',
+              'ElDatePicker',
+              'ElInput',
+              'ElInputNumber',
+              'ElInputTag',
+              'ElRadioGroup',
+              'ElRate',
+              'ElSelect',
+              'ElSlider',
+              'ElSwitch',
+              'ElTimePicker',
+              'ElTimeSelect',
+              'ElTransfer',
+              'ElTreeSelect',
+            ]),
           },
         },
       }),
