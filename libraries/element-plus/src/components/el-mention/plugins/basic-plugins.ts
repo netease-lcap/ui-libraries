@@ -15,7 +15,6 @@ export function handleDataSource(props) {
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const selfRef = useMemo(() => _.assign(ref, { reload, options: dataSource }), [dataSource, reload, ref]);
-
   return {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,

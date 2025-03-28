@@ -10,12 +10,24 @@ namespace nasl.ui {
   })
   @Component({
     title: 'Loading加载',
-    icon: 'loading',
+    icon: 'circular-progress',
     description: '加载数据时显示动效。',
     group: 'Feedback',
   })
   export class ElLoading extends ViewComponent {
-    constructor(options?: Partial<ElMessageOptions>) {
+    @Method({
+      title: '显示Loading',
+      description: '显示Loading',
+    })
+    show(): void {}
+
+    @Method({
+      title: '关闭Loading',
+      description: '关闭Loading',
+    })
+    hide(): void {}
+    
+    constructor(options?: Partial<ElLoadingOptions>) {
       super();
     }
   }

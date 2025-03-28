@@ -26,7 +26,7 @@ namespace nasl.ui {
       description: '绑定值',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String[];
+    modelValue: nasl.collection.List<nasl.core.String>;
 
     @Prop({
       group: '数据属性',
@@ -233,7 +233,7 @@ namespace nasl.ui {
       title: '清空时',
       description: '点击清空按钮时触发',
     })
-    onClear: () => any;
+    onClear: (event: any) => any;
   }
 
   @IDEExtraInfo({

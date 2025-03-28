@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { $deletePropsList, $ide } from '@/plugins/constants';
 import { useEffect, useMemo } from '@/plugins/hooks';
-
+import { ElDescriptionsCell } from '../cell';
 export function handleNodePath(props) {
   const nodePath = props.get('data-nodepath') || '3333';
 
@@ -21,3 +21,23 @@ export function handleNodePath(props) {
 }
 
 handleNodePath.type = $ide;
+
+
+export function handleDescriptionsCell(props) {
+  const slots = props.get('slots');
+  const defaultSlotVNode = slots?.default?.();
+  console.log(defaultSlotVNode, 'defaultSlotVNode')
+  const node = _.map(defaultSlotVNode, (vNode) => ({
+    ...vNode,
+    children: {
+      ...vNode.children,
+      default: () => <span>{vNode.children.default()}<ElDescriptionsCell style={vNode.props.style} /></span>
+    }
+  }))
+
+  return {
+    slots: {
+      default: () => node
+    }
+  }
+}

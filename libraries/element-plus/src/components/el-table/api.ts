@@ -40,6 +40,7 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'container',
+      ignoreProperty: ['defaultCurrentPage'],
       structured: true,
       containerDirection: 'row',
       disableSlotAutoFill: [
@@ -275,7 +276,7 @@ namespace nasl.ui {
        * @title 合并列数
        */
       colspan?: nasl.core.Integer;
-    };
+    } | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
 
     // @Prop({
     //   group: '主要属性',
@@ -669,7 +670,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '表格尺寸',
-      description: '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `default`。可选项：small/default/large。',
+      description: '表格尺寸',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '中' }, { title: '大' }],
@@ -977,8 +978,8 @@ namespace nasl.ui {
           cssSelector: 'th',
         },
       ],
-      forceUpdateWhenAttributeChange: 'parent',
-      forceRefresh: 'parent',
+      // forceUpdateWhenAttributeChange: 'parent',
+      // forceRefresh: 'parent',
       disableSlotAutoFill: [
         {
           slot: 'default',
@@ -1109,9 +1110,7 @@ namespace nasl.ui {
           if: (_) => _ === true,
         },
         {
-          update: {
-            fixed: false,
-          },
+          clear: ['fixed'], 
           if: (_) => _ === false,
         },
       ],
@@ -1129,7 +1128,7 @@ namespace nasl.ui {
       },
       if: (_) => _.isFixed === true,
     })
-    fixed: 'left' | 'right' | false | '' = '';
+    fixed: 'left' | 'right' ;
 
     // @Prop({
     //   group: '主要属性',

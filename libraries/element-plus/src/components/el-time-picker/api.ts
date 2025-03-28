@@ -116,7 +116,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledHours: (role: nasl.core.String, comparingDate?: nasl.core.Time) => {
+    disabledHours: (role: nasl.core.String, comparingDate: any) => {
       /**
        * @title 禁止选择的小时
        */
@@ -125,15 +125,15 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '禁止选择部分小时选项',
-      description: '禁止选择部分小时选项',
-      docDescription: '禁止选择部分小时选项',
+      title: '禁止选择部分分钟选项',
+      description: '禁止选择部分分钟选项',
+      docDescription: '禁止选择部分分钟选项',
       bindOpen: true,
       setter: {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate?: nasl.core.Time) => {
+    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
       /**
        * @title 禁止选择的分钟
        */
@@ -142,15 +142,15 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '禁止选择部分小时选项',
-      description: '禁止选择部分小时选项',
-      docDescription: '禁止选择部分小时选项',
+      title: '禁止选择部分秒选项',
+      description: '禁止选择部分秒选项',
+      docDescription: '禁止选择部分秒选项',
       bindOpen: true,
       setter: {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate?: nasl.core.Time) => {
+    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
       /**
        * @title 禁止选择的秒
        */
@@ -258,7 +258,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIcon: nasl.core.String;
+    prefixIcon: nasl.core.String = 'Clock';
 
     @Prop({
       title: '自定义清除图标',
@@ -269,7 +269,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    clearIcon: nasl.core.String;
+    clearIcon: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',

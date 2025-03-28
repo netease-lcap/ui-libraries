@@ -1,3 +1,5 @@
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+
 export { ElFlex } from './el-flex';
 export { ElText } from './el-text';
 export { ElTabs, ElTabPane } from './el-tabs';
@@ -23,13 +25,13 @@ export { ElCalendar, ElCalendarPlus } from './el-calendar';
 export { ElCard, ElCardPlus } from './el-card';
 export { ElRow, ElCol } from './el-row';
 export { ElPagination } from './el-pagination';
-export { ElDescriptions, ElDescriptionsItem } from './el-descriptions';
+export { ElDescriptions, ElDescriptionsItem, ElDescriptionsCell } from './el-descriptions';
 export { ElImage, ElImageViewer } from './el-image';
 export { ElScrollbar } from './el-scrollbar';
 export { ElMenu, ElMenuItem, ElMenuItemGroup, ElSubMenu } from './el-menu';
 export { ElUpload, ElFormUpload } from './el-upload';
 export { ElTimePicker, ElFormTimePicker } from './el-time-picker';
-export { ElTimeSelect } from './el-time-select';
+export { ElTimeSelect, ElFormTimeSelect } from './el-time-select';
 export { ElIcon } from './el-icon';
 export { ElMention } from './el-mention';
 export { ElBreadcrumb, ElBreadcrumbItem } from './el-breadcrumb';
@@ -53,3 +55,5 @@ export { ElResult } from './el-result';
 export { ElTag, ElCheckTag } from './el-tag';
 export { ElDropdown, ElDropdownItem, ElDropdownMenu } from './el-dropdown';
 export { ElRadio, ElRadioGroup, ElFormRadioGroup } from './el-radio';
+export { ElConfigProvider as ConfigProvider } from 'element-plus';
+export const locale = { zhCn };

@@ -18,7 +18,7 @@ interface Options {
   defaultValuePropName?: string;
   valuePropName?: string;
   trigger?: string;
-  onChange?: (value: any) => void;
+  onChange?: (...args: any[]) => void;
 }
 interface Fiber {
   workInProgressState: Hook;

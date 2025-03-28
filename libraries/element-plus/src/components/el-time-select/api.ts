@@ -9,7 +9,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '时间选择',
-    // icon: 'select',
+    icon: 'TimeSelect',
     description: '',
     group: 'Selector',
   })
@@ -17,7 +17,7 @@ namespace nasl.ui {
     @Prop({
       title: '值',
     })
-    value: nasl.core.Time;
+    modelValue: nasl.core.Time | nasl.core.String;
 
     @Method({
       title: '获取焦点',
@@ -41,7 +41,7 @@ namespace nasl.ui {
       title: '值',
       description: '选择的值'
     })
-    value: nasl.core.String | nasl.core.Time;
+    modelValue: nasl.core.String | nasl.core.Time;
 
     @Prop({
       group: '主要属性',
@@ -137,21 +137,21 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIcon: nasl.core.String;
+    prefixIcon: nasl.core.String = 'Clock';
 
     @Prop({
-      title: '后缀图标',
-      description: '后缀图标',
+      title: '清除图标',
+      description: '清除图标',
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    suffixIcon: nasl.core.String;
+    clearIcon: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',

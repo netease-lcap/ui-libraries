@@ -11,16 +11,13 @@ namespace nasl.ui {
         click: true,
       },
       dataSource: {
-        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss:
+          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
-        loopRule: 'nth-child(n+2)',
-        loopElem: '> .el-p-tree__list .el-p-tree__item',
-        emptySlot: {
-          display: 'inline',
-          condition: "!this.getAttribute('dataSource')",
-          accept: false,
-          content: '请绑定数据源',
-        },
+        loopRule: 'nth-last-child(-n+2)',
+        loopElem: ".el-tabs__nav > .el-tabs__item",
+        propertyName: ':dataSource',
+        displayData: "\"[{label: '菜单一', value: '0'},{label:'菜单二', value: '1'}, {label:'菜单三', value: '2'}]\"",
       },
       additionalAttribute: {
         ':collapseTransition': '"false"',
@@ -86,7 +83,7 @@ namespace nasl.ui {
       },
       onChange: [
         {
-          clear: ['collapse'],
+         clear: ['collapse'], 
           if: (_) => _ === 'horizontal',
         },
       ],

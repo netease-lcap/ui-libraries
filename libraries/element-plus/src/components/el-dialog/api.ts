@@ -11,6 +11,7 @@ namespace nasl.ui {
         expression: 'this',
         cssSelector: '.el-dialog',
       },
+      forceUpdateWhenAttributeChange: true,
     },
   })
   @Component({
@@ -57,7 +58,7 @@ namespace nasl.ui {
       description: '是否显示对话框',
       setter: { concept: 'SwitchSetter' },
     })
-    value: nasl.core.Boolean = false;
+    modelValue: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -219,7 +220,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'z-index',
+      title: '展示层级',
       description: '和原生的 CSS 的 z-index 相同，改变 z 轴的顺序',
       setter: { concept: 'NumberInputSetter' },
     })
@@ -231,7 +232,7 @@ namespace nasl.ui {
       description: 'header 的 aria-level 属性',
       setter: { concept: 'InputSetter' },
     })
-    headerAriaLevel : nasl.core.String = '2';
+    private headerAriaLevel : nasl.core.String = '2';
 
     @Event({
       title: '打开的回调',

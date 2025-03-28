@@ -16,7 +16,7 @@ type GetTimeValueParams = {
 const getTimeValue = _.cond([
   [_.matches({ isNilTime: true, isControlledTime: true }), _.constant([])],
   [_.matches({ isEffectiveTime: false }), _.constant([])],
-  [_.matches({ isControlledTime: false }), (value: GetTimeValueParams) => [getFormatTimeValue(value.value[0]), getFormatTimeValue(value.value[1])]],
+  [_.matches({ isControlledTime: false }), (value: GetTimeValueParams) => value?.value],
   [_.stubTrue, ({ startValue, endValue }) => [getFormatTimeValue(startValue), getFormatTimeValue(endValue)]],
 ]);
 
@@ -28,7 +28,7 @@ export function handleRangeDateValue(props) {
   const setStartValue = props.get('onUpdate:startValue') ?? (() => {});
   const setEndValue = props.get('onUpdate:endValue') ?? (() => {});
   const isControlledTime = props.has('startValue') && props.has('endValue');
-  const isEffectiveTime = isControlledTime ? isValidStringTime(startValue) && isValidStringTime(endValue) : false;
+  const isEffectiveTime = isControlledTime ? isValidStringTime(startValue) && isValidStringTime(endValue) : true;
   const isNilTime = _.isNil(startValue) || _.isNil(endValue);
 
   const onChange = (value) => {
@@ -64,12 +64,20 @@ export function handleRangeDateValue(props) {
 
 export function handleDateValue(props) {
   const isRange = props.get('isRange');
-  const [value, setValue] = useControllableValue(props);
+  const _value = props.get('value');
+  const _setStateValue = props.get('onUpdate:value') ?? (() => {});
+  const defaultValue = _value ? getFormatTimeValue(_value) : '';
+  const [value, setValue] = useControllableValue(props, {
+    // @ts-ignore
+    defaultValue,
+  });
   const result = {
     modelValue: value,
-    'onUpdate:modelValue': _.wrap(setValue, (fn, value: any) => {
-      const modelValue = _.isNil(value) || _.isEmpty(value) ? undefined : new Date(value.format()).toJSON();
+    'onUpdate:modelValue': _.wrap(setValue, (fn, val: any) => {
+      const modelValue = _.isNil(val) ? undefined : new Date(dayjs(val).format()).toJSON();
+      const naslValue = getNaslTimeValue(modelValue);
       _.attempt(fn, modelValue);
+      _.attempt(_setStateValue, naslValue);
     }),
   };
   return isRange ? {} : result;
@@ -81,8 +89,10 @@ export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export function handleIcon(props) {
   const clearIcon = props.get('clearIcon');
   const prefixIcon = props.get('prefixIcon');
+  const className = props.get('class') ?? '';
 
   return {
+    class: `${className} el-time-picker`,
     clearIcon: clearIcon ? ElementPlusIconsVue[clearIcon] : null,
     prefixIcon: prefixIcon ? ElementPlusIconsVue[prefixIcon] : null,
   };

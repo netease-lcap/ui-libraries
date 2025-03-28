@@ -1,0 +1,21 @@
+/**
+ * @component el-calendar
+ */
+.el-calendar {
+  /**
+   * @type input
+   */
+  --el-calendar-border: var(--el-table-border,1px solid var(--el-border-color-lighter));
+  /**
+   * @type input
+   */
+  --el-calendar-header-border-bottom: var(--el-calendar-border);
+  /**
+   * @type color
+   */
+  --el-calendar-selected-bg-color: var(--el-color-primary-light-9);
+  /**
+   * @type input
+   */
+  --el-calendar-cell-width: 85px;
+}

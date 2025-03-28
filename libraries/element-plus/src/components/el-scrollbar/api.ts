@@ -17,7 +17,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '滚动条',
-    icon: 'scrollbar',
+    icon: 'Scrollbar',
     description: '用于替换浏览器原生滚动条',
     group: 'Navigation',
   })
@@ -33,6 +33,38 @@ namespace nasl.ui {
       description: '滚动到顶部',
     })
     scrollTo(): void {}
+
+    @Method({
+      title: '设置滚动条到顶部的距离',
+      description: '设置滚动条到顶部的距离',
+    })
+    setScrollTop(
+      @Param({
+        title: '高度',
+        description: '滚动条到顶部的距离',
+      })
+      scrollTop: nasl.core.Integer,
+    ): void {}
+
+  
+    @Method({
+      title: '设置滚动条到左边的距离',
+      description: '设置滚动条到左边的距离',
+    })
+    setScrollLeft(
+      @Param({
+        title: '宽度',
+        description: '滚动条到左边的距离',
+      })
+      scrollLeft: nasl.core.Integer,
+    ): void {}
+
+
+    @Method({
+      title: '更新滚动条状态',
+      description: '更新滚动条状态',
+    })
+    update(): void {}
     
 
     constructor(options?: Partial<ElScrollbarOptions>) {
@@ -75,27 +107,43 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '换行',
-      description: '是否自动换行',
-      setter: { concept: 'SwitchSetter' },
-    })
-    wrapStyle: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '无限滚动距离',
-      description: '触发加载的距离阈值',
+      title: '滚动条最小尺寸',
+      description: '滚动条最小尺寸',
       setter: { concept: 'NumberInputSetter' },
     })
     minSize: nasl.core.Decimal = 20;
 
     @Prop({
       group: '主要属性',
-      title: '无限滚动',
-      description: '是否开启无限滚动',
+      title: '滚动条容器样式',
+      description: '滚动条容器样式',
+      setter: { concept: 'InputSetter' },
+    })
+    wrapStyle: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '视图的自定义样式',
+      description: '视图的自定义样式',
+      setter: { concept: 'InputSetter' },
+    })
+    viewStyle: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '不响应容器尺寸变化',
+      description: '不响应容器尺寸变化，如果容器尺寸不会发生变化，最好设置它可以优化性能',
       setter: { concept: 'SwitchSetter' },
     })
     noresize: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '视图标签',
+      description: '视图的元素标签',
+      setter: { concept: 'InputSetter' },
+    })
+    tag: nasl.core.String = 'div';
 
     @Event({
       title: '滚动时',

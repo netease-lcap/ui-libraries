@@ -57,5 +57,5 @@
    * @desc 输入框宽度
    * @type size
    */
-  --el-select-width: 100%;
+  --el-select-width: 240px;
 }

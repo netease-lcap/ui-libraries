@@ -43,11 +43,11 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'fill' },
-          { title: 'contain' },
-          { title: 'cover' },
-          { title: 'none' },
-          { title: 'scale-down' },
+          { title: '拉伸' },
+          { title: '适应' },
+          { title: '填充' },
+          { title: '原尺寸' },
+          { title: '适应（图片小于父元素时以原尺寸展示）' },
           { title: '默认' },
         ],
       },
@@ -63,12 +63,12 @@ namespace nasl.ui {
     alt: nasl.core.String = '';
 
     @Prop({
-      group: '状态属性',
-      title: '是否开启懒加载',
-      description: '是否开启懒加载',
-      setter: { concept: 'SwitchSetter' },
+      group: '主要属性',
+      title: '图片预览的初始图片Index值',
+      description: '图片预览初始图片index',
+      setter: { concept: 'NumberInputSetter', min: 0 },
     })
-    lazy: nasl.core.Boolean = false;
+    initialIndex: nasl.core.String | nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -83,7 +83,7 @@ namespace nasl.ui {
       description: '是否开启无限滚动',
       setter: { concept: 'SwitchSetter' },
     })
-    infinite: nasl.core.Boolean = false;
+    infinite: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
@@ -94,7 +94,7 @@ namespace nasl.ui {
     hideOnClickModal: nasl.core.Boolean = false;
 
     @Prop({
-      group: '数据属性',
+      group: '主要属性',
       title: '图片预览的z-index值',
       description: '设置图片预览的 z-index',
       setter: { concept: 'NumberInputSetter' },
@@ -102,12 +102,13 @@ namespace nasl.ui {
     zIndex: nasl.core.Decimal = 2000;
 
     @Prop({
-      group: '数据属性',
-      title: '图片预览的初始图片Index值',
-      description: '图片预览初始图片index',
-      setter: { concept: 'NumberInputSetter' },
+      group: '状态属性',
+      title: '是否开启懒加载',
+      description: '是否开启懒加载',
+      setter: { concept: 'SwitchSetter' },
     })
-    initialIndex: nasl.core.Decimal;
+    lazy: nasl.core.Boolean = false;
+
 
     @Event({
       title: '图片预览',
@@ -128,8 +129,8 @@ namespace nasl.ui {
     onError: (event: {}) => any;
 
     @Event({
-      title: '图片预览关闭时',
-      description: '图片预览关闭时',
+      title: '图片预览切换时',
+      description: '图片预览切换时',
     })
     onSwitch: (index: nasl.core.Integer) => any;
 

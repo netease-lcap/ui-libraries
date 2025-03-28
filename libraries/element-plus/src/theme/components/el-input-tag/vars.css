@@ -1,0 +1,57 @@
+/**
+ * @component el-input-tag
+ */
+.el-input-tag {
+  /**
+   * @type color
+   */
+  --el-input-tag-border-color-hover: var(--el-border-color-hover);
+  /**
+   * @type color
+   */
+  --el-input-tag-disabled-color: var(--el-disabled-text-color);
+  /**
+   * @type input
+   */
+  --el-input-tag-disabled-border: var(--el-disabled-border-color);
+  /**
+   * @type input
+   */
+  --el-input-tag-font-size: var(--el-font-size-base);
+  /**
+   * @type color
+   */
+  --el-input-tag-close-hover-color: var(--el-text-color-secondary);
+  /**
+   * @type color
+   */
+  --el-input-tag-text-color: var(--el-text-color-regular);
+  /**
+   * @type color
+   */
+  --el-input-tag-input-focus-border-color: var(--el-color-primary);
+  /**
+   * @type input
+   */
+  --el-input-tag-width: 240px;
+  /**
+   * @type input
+   */
+  --el-input-tag-mini-height: var(--el-component-size);
+  /**
+   * @type input
+   */
+  --el-input-tag-gap: 6px;
+  /**
+   * @type input
+   */
+  --el-input-tag-padding: 4px;
+  /**
+   * @type input
+   */
+  --el-input-tag-inner-padding: 8px;
+  /**
+   * @type input
+   */
+  --el-input-tag-line-height: 24px;
+}

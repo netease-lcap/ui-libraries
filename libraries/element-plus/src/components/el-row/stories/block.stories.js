@@ -23,10 +23,10 @@ export default {
 export const Demo1 = {
   name: '3列样式（8:8:8）',
   render: () => ({
-    template: `<el-row :gutter="20">
-    <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
-    <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
-    <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+    template: `<el-row>
+    <el-col :span="8"><div class="grid-content ep-bg-purple" /></el-col>
+    <el-col :span="8"><div class="grid-content ep-bg-purple" /></el-col>
+    <el-col :span="8"><div class="grid-content ep-bg-purple" /></el-col>
   </el-row>`,
   }),
 };
@@ -34,7 +34,7 @@ export const Demo1 = {
 export const Demo2 = {
   name: '4列样式（2:4:8:10）',
   render: () => ({
-    template: `<el-row :gutter="16">
+    template: `<el-row>
       <el-col :span="2"></el-col>
       <el-col :span="4"></el-col>
       <el-col :span="8"></el-col>
@@ -46,7 +46,7 @@ export const Demo2 = {
 export const Demo3 = {
   name: '2列样式（8:16）',
   render: () => ({
-    template: `<el-row :gutter="16">
+    template: `<el-row>
       <el-col :span="8"></el-col>
       <el-col :span="16"></el-col>
     </el-row>`,
