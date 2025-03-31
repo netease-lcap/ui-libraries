@@ -217,21 +217,21 @@ namespace nasl.ui {
     })
     rangeSeparator: nasl.core.String = '-';
 
-    @Prop({
-      group: '主要属性',
-      title: '选择器打开时默认显示的时间',
-      description: '可选，选择器打开时默认显示的时间',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultValue: Date | [Date, Date];
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '选择器打开时默认显示的时间',
+    //   description: '可选，选择器打开时默认显示的时间',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // defaultValue: Date | [Date, Date];
 
-    @Prop({
-      group: '主要属性',
-      title: '选中日期时的当日内具体时刻',
-      description: '范围选择时选中日期所使用的当日内具体时刻',
-      setter: { concept: 'InputSetter' },
-    })
-    defaultTime: Date | [Date, Date];
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '选中日期时的当日内具体时刻',
+    //   description: '范围选择时选中日期所使用的当日内具体时刻',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // defaultTime: Date | [Date, Date];
 
     @Prop({
       group: '主要属性',
@@ -241,21 +241,23 @@ namespace nasl.ui {
     })
     valueFormat: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '可选，时间选择器下拉列表中显示的日期格式',
-    //   description: '可选，时间选择器下拉列表中显示的日期格式',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // dateFormat: nasl.core.String;
+    @Prop<ElDatePickerOptions, 'dateFormat'>({
+      group: '主要属性',
+      title: '下拉列表中显示的日期格式',
+      description: '可选，时间选择器下拉列表中显示的日期格式',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.type.includes('datetime'),
+    })
+    dateFormat: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '时间选择器下拉列表中显示的时间格式',
-    //   description: '可选，时间选择器下拉列表中显示的时间格式',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // timeFormat: nasl.core.String;
+    @Prop<ElDatePickerOptions, 'timeFormat'>({
+      group: '主要属性',
+      title: '下拉列表中显示的时间格式',
+      description: '可选，时间选择器下拉列表中显示的时间格式',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.type.includes('datetime'),
+    })
+    timeFormat: nasl.core.String;
 
     @Prop<ElDatePickerOptions, 'unlinkPanels'>({
       group: '主要属性',

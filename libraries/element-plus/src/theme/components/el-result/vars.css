@@ -38,3 +38,11 @@
    */
   --el-result-extra-margin-top: 30px;
 }
+
+.el-result .el-result__title .el-text {
+  --el-text-font-size: var(--el-result-title-font-size);
+}
+
+.el-result .el-result__subtitle .el-text {
+  --el-text-font-size: var(--el-result-title-font-size);
+}
