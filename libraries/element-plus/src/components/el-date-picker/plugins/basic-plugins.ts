@@ -1,8 +1,9 @@
-/* 组件功能扩展插件 */
+// /* 组件功能扩展插件 */
 import _ from 'lodash';
 import dayjs from 'dayjs';
 import { useControllableValue } from '@/plugins/hooks';
 import { useMemo } from '../../../plugins/hooks';
+import { FORM_TAG_NAME } from '../constants';
 
 type GetTimeValueParams = {
   isEffectiveTime: boolean;
@@ -23,7 +24,7 @@ export function handleRange(props) {
 handleRange.order = 3;
 
 const getTimeValue = _.cond([
-  [_.matches({ isNilTime: true, isControlledTime: true }), _.constant([])],
+  [_.matches({ isNilTime: true }), _.constant([])],
   [_.matches({ isEffectiveTime: false }), _.constant([])],
   [_.matches({ isControlledTime: false }), (value: GetTimeValueParams) => [dayjs(value.value[0]), dayjs(value.value[1])]],
   [_.stubTrue, ({ startValue, endValue }) => [dayjs(startValue), dayjs(endValue)]],
@@ -35,19 +36,22 @@ export function handleRangeDateValue(props) {
   const setStartValue = props.get('onUpdate:startValue') ?? (() => {});
   const setEndValue = props.get('onUpdate:endValue') ?? (() => {});
   const isControlledTime = props.has('startValue') && props.has('endValue');
-  const isEffectiveTime = isControlledTime ? dayjs(startValue).isValid() && dayjs(endValue).isValid() : false;
-  const isNilTime = _.isNil(startValue) || _.isNil(endValue);
+  const [value, setValue] = useControllableValue(props);
+  const isEffectiveTime = isControlledTime
+    ? dayjs(startValue).isValid() && dayjs(endValue).isValid()
+    : _.every(value, (item) => dayjs(item).isValid());
+  const isNilTime = isControlledTime ? _.isNil(startValue) || _.isNil(endValue) : _.isEmpty(value);
   const onChange = (value) => {
     const isValidDayjs = dayjs(value?.[0]).isValid() && dayjs(value?.[1]).isValid();
-    const isUneffectiveValue = _.isNil(value) || _.isEmpty(value) || !isValidDayjs;
-    const isEffectiveTime = isUneffectiveValue ? [] : _.map(value, (item) => new Date(item.format()).toJSON());
-    _.attempt(setStartValue, isEffectiveTime[0]);
-    _.attempt(setEndValue, isEffectiveTime[1]);
+    const isUnEffectiveValue = _.isNil(value) || _.isEmpty(value) || !isValidDayjs;
+    const effectiveTime = isUnEffectiveValue ? [] : _.map(value, (item) => dayjs(item).toJSON());
+    _.attempt(setStartValue, effectiveTime[0]);
+    _.attempt(setEndValue, effectiveTime[1]);
   };
 
-  const [value, setValue] = useControllableValue(props);
   const timeValue = useMemo(
-    () => getTimeValue({
+    () =>
+      getTimeValue({
         isEffectiveTime,
         isNilTime,
         isControlledTime,
@@ -59,9 +63,9 @@ export function handleRangeDateValue(props) {
   );
   const rangeResult = {
     modelValue: timeValue,
-    'onUpdate:modelValue': _.wrap(setValue, (fn, ...args) => {
-      _.attempt(fn, ...args);
-      _.attempt(onChange, ...args);
+    'onUpdate:modelValue': _.wrap(setValue, (fn, time: any) => {
+      _.attempt(fn, time);
+      _.attempt(onChange, time);
     }),
   };
   return isRange ? rangeResult : {};
@@ -72,10 +76,19 @@ export function handleDateValue(props) {
   const [value, setValue] = useControllableValue(props);
   const result = {
     modelValue: value,
-    'onUpdate:modelValue': _.wrap(setValue, (fn, value: any) => {
-      const modelValue = _.isNil(value) || _.isEmpty(value) ? undefined : new Date(value.format()).toJSON();
-      _.attempt(fn, modelValue);
+    'onUpdate:modelValue': _.wrap(setValue, (fn, time: Date | Array<Date> | null) => {
+      // const modelValue = _.isNil(time) ? undefined : new Date(time).toJSON();
+      // _.attempt(fn, modelValue);
+      _.attempt(fn, time);
     }),
   };
   return isRange ? {} : result;
+}
+
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+
+export function handleTagName(props) {
+  return {
+    formTagName: FORM_TAG_NAME,
+  };
 }

@@ -237,7 +237,7 @@ namespace nasl.ui {
       description: '触发下拉的行为',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '鼠标悬停' }, { title: '点击' }, { title: 'contextmenu' }],
+        options: [{ title: '鼠标悬停' }, { title: '点击' }, { title: '上下文菜单' }],
       },
     })
     trigger: 'hover' | 'click' | 'contextmenu' = 'hover';
