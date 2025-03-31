@@ -5,7 +5,7 @@ export function handleHrefToRouter(props) {
   const href = props.get('href');
   const target = props.get('target');
   const onClick = props.get('onClick') ?? _.noop;
-  const router = props.get('$router');
+  const router = props.get('router');
   const toRouterClick = _.cond([
     [_.matches({ target: '_blank', isExternalLink: true }), (params) => () => window.open(params.externalUrl, '_blank')],
     [_.matches({ isExternalLink: true }), (params) => () => window.location.href = params.externalUrl],
