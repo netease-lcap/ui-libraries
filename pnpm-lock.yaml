@@ -790,8 +790,8 @@ importers:
         specifier: 3.9.0-beta
         version: 3.9.0-beta
       '@nasl/types':
-        specifier: 0.1.11-beta
-        version: 0.1.11-beta
+        specifier: 0.1.11
+        version: 0.1.11
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -3258,8 +3258,8 @@ packages:
   '@nasl/types@0.1.10':
     resolution: {integrity: sha512-CFPQvx5Xh1gEgN6oUqO3ZLA2FyY7fiQGOMJu9mGtkk4CN8xecj/o3BDNB6MdAWJRPav4i0a+dHnufZ+DULpPKw==}
 
-  '@nasl/types@0.1.11-beta':
-    resolution: {integrity: sha512-Zd7CGyrzMznUQDOlrA0k63mukZ3JKzfCW+0dyVGJuvC93svPEX5P0u/TPp+nbAObSvufIybjzZiEhV14EL+NJw==}
+  '@nasl/types@0.1.11':
+    resolution: {integrity: sha512-0aaEG4gBy1jOpLOY4MoqFwDca2LVMl+ygGR4Ct4VUpPbsff8zkMge0dPpt1M9aGWEDC9QHUMYLIEzb20IcUAJA==}
 
   '@nasl/types@0.1.6':
     resolution: {integrity: sha512-h6Yh57U1jEbvgWh8A1XxsWAW61JLjshq35sT1G57qZ3D6539v2hxEUe8TjOL0c501lz7gCm4WLlowf/wgypBRA==}
@@ -14004,7 +14004,7 @@ snapshots:
 
   '@nasl/types@0.1.10': {}
 
-  '@nasl/types@0.1.11-beta': {}
+  '@nasl/types@0.1.11': {}
 
   '@nasl/types@0.1.6': {}
 
