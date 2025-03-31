@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-date-picker :modeValue="value" type="date" placeholder="Pick a day" @change="onChange" />
+    <!-- <el-date-picker :modelValue="value" type="date" placeholder="Pick a day2" @change="onChange" /> -->
+    <el-date-picker v-model="value" type="date" placeholder="Pick a day2" @change="onChange" @calendar-change="calendarChange" />
   </div>
 </template>
 
@@ -8,14 +9,24 @@
 export default {
   data() {
     return {
-      value: '',
+      value: '2024-08-02',
     };
   },
   methods: {
     onChange(value) {
       console.log('change', value);
     },
+    calendarChange(value) {
+      debugger;
+      console.log('calendarChange', value);
+    },
   },
+  mounted() {
+    console.log('mounted');
+    setTimeout(() => {
+      this.value = undefined;
+    },2000)
+  }
 };
 </script>
 
