@@ -1,6 +1,8 @@
 .el-text {
   white-space: pre-wrap;
   max-width: 100%;
+}
+body{
   color: var(--el-text-color);
 }
 
@@ -33,7 +35,7 @@
 }
 
 .el-text.el-text--color-default {
-  color: var(--el-text-color);
+  color: inherit;
 }
 
 .el-text.el-text--color-primary {

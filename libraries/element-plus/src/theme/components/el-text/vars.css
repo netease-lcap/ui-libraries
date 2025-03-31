@@ -6,11 +6,11 @@
    * @desc 文字的字体大小
    * @type input
    */
-  --el-text-font-size: var(--el-font-size-base);
+  /* --el-text-font-size: var(--el-font-size-base); */
   
   /**
    * @desc 文字的颜色
    * @type color
    */
-  --el-text-color: var(--el-text-color-regular);
+  /* --el-text-color: var(--el-text-color-regular); */
 }
