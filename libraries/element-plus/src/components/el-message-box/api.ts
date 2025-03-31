@@ -117,7 +117,7 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     icon: nasl.core.String;
@@ -202,7 +202,7 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     cancelButtonLoadingIcon: nasl.core.String;
@@ -213,7 +213,7 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     confirmButtonLoadingIcon: nasl.core.String;

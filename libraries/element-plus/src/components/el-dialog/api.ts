@@ -213,7 +213,7 @@ namespace nasl.ui {
       description: '自定义关闭图标',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     closeIcon: nasl.core.String;
