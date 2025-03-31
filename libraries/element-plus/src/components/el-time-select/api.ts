@@ -39,7 +39,8 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '值',
-      description: '选择的值'
+      description: '选择的值',
+      sync: true
     })
     modelValue: nasl.core.String | nasl.core.Time;
 
