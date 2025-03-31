@@ -16,25 +16,13 @@ namespace nasl.ui {
     description: '树形选择器，可以对树形结构数据进行选择',
     group: 'Selector',
   })
-  export class ElTreeSelect<
-    T,
-    V,
-    P extends nasl.core.Boolean,
-    M extends nasl.core.Boolean,
-    C extends nasl.core.Boolean,
-  > extends ViewComponent {
+  export class ElTreeSelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(options?: Partial<ElTreeSelectOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class ElTreeSelectOptions<
-    T,
-    V,
-    P extends nasl.core.Boolean,
-    M extends nasl.core.Boolean,
-    C extends nasl.core.Boolean,
-  > extends ViewComponentOptions {
+  export class ElTreeSelectOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
       title: '禁用组件',
@@ -341,12 +329,3 @@ namespace nasl.ui {
     C extends nasl.core.Boolean,
   > extends ViewComponentOptions {}
 }
-
-
-new nasl.ui.ElTreeSelect<typeof __elementsRef.el_tree_select_3.__item, typeof __elementsRef.el_tree_select_3.__V, typeof __elementsRef.el_tree_select_3.__pageable, typeof __elementsRef.el_tree_select_3.__multiple, typeof __elementsRef.el_tree_select_3.__converter>({_name: __elements.el_tree_select_3,
-  placeholder: nasl.ui._bindAttrWrap(() => {
-return new nasl.core.StringLiteral<"请选择">();
-}, false),
-  modelValue: nasl.ui._bindAttrWrap(() => {
-return }, true),
-  });
