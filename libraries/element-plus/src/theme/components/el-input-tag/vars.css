@@ -3,54 +3,79 @@
  */
 .el-input-tag {
   /**
+   * @desc 悬停时边框颜色
    * @type color
    */
   --el-input-tag-border-color-hover: var(--el-border-color-hover);
+
   /**
+   * @desc 禁用状态下的文字颜色
    * @type color
    */
   --el-input-tag-disabled-color: var(--el-disabled-text-color);
+
   /**
+   * @desc 禁用状态下的边框颜色
    * @type input
    */
   --el-input-tag-disabled-border: var(--el-disabled-border-color);
+
   /**
+   * @desc 字体大小
    * @type input
    */
   --el-input-tag-font-size: var(--el-font-size-base);
+
   /**
+   * @desc 关闭按钮悬停时的颜色
    * @type color
    */
   --el-input-tag-close-hover-color: var(--el-text-color-secondary);
+
   /**
+   * @desc 文字颜色
    * @type color
    */
   --el-input-tag-text-color: var(--el-text-color-regular);
+
   /**
+   * @desc 输入框聚焦时的边框颜色
    * @type color
    */
   --el-input-tag-input-focus-border-color: var(--el-color-primary);
+
   /**
+   * @desc 宽度
    * @type input
    */
   --el-input-tag-width: 240px;
+
   /**
+   * @desc 迷你高度
    * @type input
    */
   --el-input-tag-mini-height: var(--el-component-size);
+
   /**
+   * @desc 间距
    * @type input
    */
   --el-input-tag-gap: 6px;
+
   /**
+   * @desc 内边距
    * @type input
    */
   --el-input-tag-padding: 4px;
+
   /**
+   * @desc 内部填充
    * @type input
    */
   --el-input-tag-inner-padding: 8px;
+
   /**
+   * @desc 行高
    * @type input
    */
   --el-input-tag-line-height: 24px;
