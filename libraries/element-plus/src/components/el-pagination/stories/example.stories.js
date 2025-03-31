@@ -30,7 +30,7 @@ export const Default = {
     template: `
     <div>
     {{value}}
-    <el-pagination-plus ref="myref" pageSizes="[10,20,50]" v-model:current-page="value" size="small" layout="prev, pager, next" :total="50" />
+    <el-pagination      :pageSizes="[1, 2, 3, 4]"  layout="prev, pager,sizes, next" :total="50" />
     <button @click="handleUpdatePageSize">更新  </button>
     </div>
     `,
