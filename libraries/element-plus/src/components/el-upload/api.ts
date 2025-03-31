@@ -85,7 +85,7 @@ namespace nasl.ui {
       description: '请求URL',
       setter: { concept: 'InputSetter' },
     })
-    action: nasl.core.String;
+    action: nasl.core.String = '/upload';
 
 
     @Prop({
