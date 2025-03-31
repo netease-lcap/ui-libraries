@@ -98,7 +98,10 @@ export function useDataSourceToTree(
   valueField: string = 'value',
 ): DataSourceArrayType {
   if (_.isNil(parentField)) return dataSource;
-  const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField), item]));
+  const map = new Map<string, Record<string, any>>(dataSource
+    .filter(item => !_.isNil(_.get(item, valueField)))
+    .map((item) => [_.get(item, valueField), item]));
+  if (map.size === 0) return dataSource;
   return dataSource.reduce((acc, item) => {
     const parent = map.get(_.get(item, parentField));
     const value = map.get(_.get(item, valueField));
