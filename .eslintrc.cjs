@@ -26,6 +26,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-unused-vars": 1,
     'no-unused-vars': 1,
+    'no-console': [1, { allow: ['info', 'warn', 'error'] }],
     'react/no-children-prop': 0,
     'react-refresh/only-export-components': 0,
     '@typescript-eslint/ban-ts-comment': 0,
