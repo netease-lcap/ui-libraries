@@ -52,6 +52,8 @@ export const handleDataSource = (props) => {
   };
 };
 
+handleDataSource.order = 1;
+
 export const handleSlotDefault = (props) => {
   const dataConfig = props.get('dataSource');
   if (dataConfig) {
@@ -82,3 +84,5 @@ export const handleSlotDefault = (props) => {
     },
   };
 };
+
+export * from './ide'
