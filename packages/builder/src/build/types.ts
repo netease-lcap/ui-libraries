@@ -44,10 +44,14 @@ export interface BuildModulesOptions extends LcapMetaOptions {
   addDepExternal?: boolean;
 }
 
-export interface DepComponent {
-  componentName: string; // 依赖的组件名称
-  stillRoot: boolean; // 依赖的组件样式重置过来时，是否仍为根节点。默认为 false
-}
+export type DepComponent = {
+  /** 依赖的组件样式重置过来时，是否仍为根节点。默认为 false */
+  stillRoot: boolean;
+  /** 依赖的组件名称 */
+  componentName: string;
+  // eslint-disable-next-line no-use-before-define
+  cssInfo?: FinalComponentCSSInfo;
+};
 
 export interface LcapBuildOptions extends LcapMetaOptions {
   assetsPublicPath?: string;
@@ -86,6 +90,7 @@ export interface LcapBuildOptions extends LcapMetaOptions {
        */
       mainSelectorMap?: Record<string, boolean>;
       /**
+       * @deprecated
        * ### 额外补充依赖组件
        * 比如 UTreeSelectNew依赖了UTreeViewNew，需要补充UTreeViewNew
        */
@@ -97,7 +102,13 @@ export interface LcapBuildOptions extends LcapMetaOptions {
        *
        * key 为组件名，value 表示该依赖组件的顶层是否同为根节点
        */
-      depComponentMap?: Record<string, boolean>;
+      // eslint-disable-next-line no-use-before-define
+      depComponentMap?: Record<string, boolean | FinalComponentCSSInfo | DepComponent>;
+      /**
+       * ### 继承其他组件的 CSS 信息
+       */
+      // eslint-disable-next-line no-use-before-define
+      extends: FinalComponentCSSInfo;
       /**
        * 需要隐藏的选择器前缀列表
        */
@@ -158,4 +169,9 @@ export interface CSSRule<V = CSSValue> {
   description: string;
   // code?: string;
   parsedStyle?: Partial<Record<SupportedCSSProperty, V>>;
+}
+
+export interface FinalComponentCSSInfo {
+  cssRules: CSSRule[],
+  mainSelectorMap: Record<string, boolean>,
 }

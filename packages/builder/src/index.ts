@@ -1,7 +1,7 @@
 import lcapPlugin from './plugins';
 import genNaslLogicsConfig from './build/gens/gen-nasl-logics-config';
 import { createGenScopedName } from './utils/create-gen-scoped-name';
-import { fastConfigFormComponentMap } from './build/build-css-info';
+import { batchDepCSSInfo, batchDepBasicCSSInfo, extendsCSSInfo } from './build/build-css-info';
 
 export type {
   ThemeInfo,
@@ -27,5 +27,7 @@ export {
   lcapPlugin,
   genNaslLogicsConfig,
   createGenScopedName,
-  fastConfigFormComponentMap,
+  batchDepCSSInfo,
+  batchDepBasicCSSInfo,
+  extendsCSSInfo,
 };

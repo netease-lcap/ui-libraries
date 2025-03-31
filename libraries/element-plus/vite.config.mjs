@@ -3,8 +3,7 @@ import path from 'node:path';
 import fs from 'fs-extra';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import { createGenScopedName, fastConfigFormComponentMap, lcapPlugin } from '@lcap/builder';
-import { ElTimePicker, ElTimeSelect } from 'element-plus';
+import { createGenScopedName, batchDepCSSInfo, lcapPlugin } from '@lcap/builder';
 
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
@@ -73,12 +72,12 @@ export default defineConfig(({ command }) => {
             },
             ElDropdownItem: {
               selectorPrefixMap: {
-                '.el-dropdown-menu__item': true,
+                'el-dropdown-menu__item': true,
               },
             },
             ElOption: {
               selectorPrefixMap: {
-                '.el-select-dropdown__item': true,
+                'el-select-dropdown__item': true,
               },
             },
             ElCheckbox: {
@@ -133,7 +132,14 @@ export default defineConfig(({ command }) => {
             ElTable: {
               selectorPrefixMap: {
                 'el-table-filter': false,
+                'el-table-column': false,
               },
+              depComponentMap: {
+                ElPagination: false,
+              },
+            },
+            ElTableColumn: {
+              hideSelectorPrefixes: ['el-table-column'],
             },
             ElProgress: {
               selectorPrefixMap: {
@@ -155,8 +161,36 @@ export default defineConfig(({ command }) => {
                 'el-tree-node': false,
               },
             },
+            ElTreeSelect: {
+              depComponentMap: {
+                ElSelect: true,
+                ElTree: false,
+              },
+            },
+            ElDatePicker: {
+              depComponentMap: {
+                ElInput: true,
+              },
+            },
+            ElTimePicker: {
+              mainSelectorMap: {
+                '.el-time-picker': true,
+              },
+              depComponentMap: {
+                ElInput: true,
+              },
+            },
+            ElTimeSelect: {
+              mainSelectorMap: {
+                '.el-time-select': true,
+              },
+              depComponentMap: {
+                ElSelect: true,
+              },
+            },
             ElUpload: {
               selectorPrefixMap: {
+                'el-upload': false,
                 'el-upload-dragger': false,
                 'el-upload-list': false,
                 'el-upload-cover': false,
@@ -167,17 +201,7 @@ export default defineConfig(({ command }) => {
                 'el-mention-dropdown': false,
               },
             },
-            ElTimePicker: {
-              mainSelectorMap: {
-                '.el-time-picker': true,
-              },
-            },
-            ElTimeSelect: {
-              mainSelectorMap: {
-                '.el-time-select': true,
-              },
-            },
-            ...fastConfigFormComponentMap([
+            ...batchDepCSSInfo([
               'ElCascader',
               'ElCheckboxGroup',
               'ElDatePicker',
@@ -193,7 +217,7 @@ export default defineConfig(({ command }) => {
               'ElTimeSelect',
               'ElTransfer',
               'ElTreeSelect',
-            ]),
+            ], (oldName) => oldName.replace(/^El/, 'ElForm')),
           },
         },
       }),
