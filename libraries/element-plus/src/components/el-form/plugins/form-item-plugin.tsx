@@ -26,13 +26,6 @@ export function handleInputStyle(props) {
   return { style, innerStyle };
 }
 
-export function handleIsRequired(props) {
-  const isRequiredProps = props.get('isRequired');
-  const isRequired = useMemo(() => isRequiredProps ?? false, [isRequiredProps]);
-  return { isRequired };
-}
-handleIsRequired.order = 3;
-
 export function handleRules(props) {
   const rulesProps = props.get('rules') ?? [];
   const isRequired = props.get('isRequired');
