@@ -107,6 +107,8 @@ function getIgnores(root) {
     ignores.push('.lcap');
   }
 
+  ignores.push('.git');
+
   return ignores;
 }
 
