@@ -28,7 +28,7 @@ export default defineConfig(({ command }) => {
         },
         reportCSSInfo: {
           enabled: true,
-          verbose: true,
+          verbose: false,
           warningIgnore: [
             /-(fade|transition)-(enter|leave)-/,
             /^\.el-button-group/,
