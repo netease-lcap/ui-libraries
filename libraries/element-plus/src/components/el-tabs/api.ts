@@ -165,7 +165,7 @@ namespace nasl.ui {
       description: '自定义添加按钮图标',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
       if: (_) => !!_.addable || !!_.editable,
     })

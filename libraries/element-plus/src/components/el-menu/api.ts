@@ -22,6 +22,7 @@ namespace nasl.ui {
       additionalAttribute: {
         ':collapseTransition': '"false"',
         menuTrigger: 'click',
+        ":showInDesigner": "\"true\"",
       },
       snippetsDisplayConditions: {
         default: "this.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",

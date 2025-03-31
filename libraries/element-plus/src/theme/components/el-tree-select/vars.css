@@ -3,18 +3,25 @@
  */
 .el-tree-select {
   /**
+   * @desc 树节点内容的高度
    * @type input
    */
   --el-tree-node-content-height: 26px;
+
   /**
+   * @desc 树节点悬停时的背景颜色
    * @type color
    */
   --el-tree-node-hover-bg-color: var(--el-fill-color-light);
+
   /**
+   * @desc 树节点文本颜色
    * @type color
    */
   --el-tree-text-color: var(--el-text-color-regular);
+
   /**
+   * @desc 树节点展开图标的颜色
    * @type color
    */
   --el-tree-expand-icon-color: var(--el-text-color-placeholder);

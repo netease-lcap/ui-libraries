@@ -2,6 +2,9 @@
   white-space: pre-wrap;
   max-width: 100%;
 }
+body{
+  color: var(--el-text-color);
+}
 
 .el-text.el-text--reset {
   align-self: unset;

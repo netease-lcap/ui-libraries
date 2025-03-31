@@ -24,26 +24,23 @@ export function handleDataSource(props) {
     dataSource: useFormatDataSource(data),
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
-  const dropdownSlotRender = useCallback(
-    () => {
-      if (dataConfig) {
-        return (
-          <el-dropdown-menu>
-            {dataSource.map((item) => (
-              <el-dropdown-item key={item.value} {...item}>
-                <el-text text={item.label} />
-              </el-dropdown-item>
-            ))}
-          </el-dropdown-menu>
-        );
-      }
-      if (slots.items) {
-        return <el-dropdown-menu>{slots.items()}</el-dropdown-menu>;
-      }
-      return slots.dropdown?.();
-    },
-    [dataConfig, dataSource, slots.items, slots.dropdown]
-  );
+  const dropdownSlotRender = useCallback(() => {
+    if (dataConfig) {
+      return (
+        <el-dropdown-menu>
+          {dataSource.map((item) => (
+            <el-dropdown-item key={item.value} {...item}>
+              <el-text text={item.label} />
+            </el-dropdown-item>
+          ))}
+        </el-dropdown-menu>
+      );
+    }
+    if (slots.items) {
+      return <el-dropdown-menu>{slots.items()}</el-dropdown-menu>;
+    }
+    return slots.dropdown?.();
+  }, [dataConfig, dataSource, slots.items, slots.dropdown]);
 
   return {
     [$deletePropsList]: deletePropsList,
@@ -56,3 +53,14 @@ export function handleDataSource(props) {
     },
   };
 }
+
+export function handleDefaultSlot(props) {
+  const slots = props.get('slots');
+  return {
+    slots: {
+      ...slots,
+      default: slots.default ? () => <div style="width: auto;">{slots.default()}</div> : undefined,
+    },
+  };
+}
+handleDefaultSlot.order = 2;

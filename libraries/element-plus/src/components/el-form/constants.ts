@@ -10,5 +10,6 @@ export const $formItemProps = [
   'prop',
   'showMessage',
   'size',
+  'isRequired',
   'validateStatus',
 ];

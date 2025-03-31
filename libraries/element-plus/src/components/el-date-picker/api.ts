@@ -17,7 +17,7 @@ namespace nasl.ui {
     @Prop({
       title: '值',
     })
-    value: ElDatePickerOptions['value'];
+    modelValue: ElDatePickerOptions['modelValue'];
 
     @Prop({
       title: '起始值',
@@ -35,33 +35,42 @@ namespace nasl.ui {
   }
 
   export class ElDatePickerOptions extends ViewComponentOptions {
-    @Prop({
-      group: '数据属性',
-      title: '区间选择',
-      description: '是否支持进行时间区间选择，关闭则为时间点选择',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-      onChange: [{ clear: ['placeholderRight'] }],
-    })
-    private range: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '区间选择',
+    //   description: '是否支持进行时间区间选择，关闭则为时间点选择',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    //   onChange: [
+    //     {
+    //       clear: ['modelValue'],
+    //       if: (_) => _ === false,
+    //     },
+    //     {
+    //       clear: ['startValue', 'endValue'],
+    //       if: (_) => _ === true,
+    //     },
+    //   ],
+    // })
+    // range: nasl.core.Boolean = false;
 
-    @Prop<ElDatePickerOptions, 'value'>({
+    @Prop<ElDatePickerOptions, 'modelValue'>({
       group: '数据属性',
       title: '值',
       description: '选中值',
       setter: { concept: 'InputSetter' },
-      if: (_) => _.range === false,
+      if: (_) => !_.type.includes('range'),
       sync: true,
     })
-    value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    modelValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
     @Prop<ElDatePickerOptions, 'startValue'>({
       group: '数据属性',
       title: '起始值',
       description: '开始日期',
       setter: { concept: 'InputSetter' },
-      if: (_) => !!_.range,
+      if: (_) => _.type.includes('range'),
       sync: true,
     })
     startValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
@@ -71,7 +80,7 @@ namespace nasl.ui {
       title: '结束值',
       description: '结束日期',
       setter: { concept: 'InputSetter' },
-      if: (_) => !!_.range,
+      if: (_) => _.type.includes('range'),
       sync: true,
     })
     endValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
@@ -124,29 +133,29 @@ namespace nasl.ui {
       title: '占位符',
       description: '非范围选择时的占位内容',
       setter: { concept: 'InputSetter' },
-      if: (_) => _.range === false,
+      if: (_) => !_.type.includes('range'),
     })
-    placeholder: nasl.core.String;
+    placeholder: nasl.core.String = '';
 
     @Prop<ElDatePickerOptions, 'startPlaceholder'>({
       group: '主要属性',
-      title: '范围选择时开始日期的占位内容',
+      title: '开始日期的占位内容',
       description: '范围选择时开始日期的占位内容',
       setter: { concept: 'InputSetter' },
-      if: (_) => _.range,
+      if: (_) => _.type.includes('range'),
     })
     startPlaceholder: nasl.core.String;
 
     @Prop<ElDatePickerOptions, 'endPlaceholder'>({
       group: '主要属性',
-      title: '范围选择时结束日期的占位内容',
+      title: '结束日期的占位内容',
       description: '范围选择时结束日期的占位内容',
       setter: { concept: 'InputSetter' },
-      if: (_) => _.range,
+      if: (_) => _.type.includes('range'),
     })
     endPlaceholder: nasl.core.String;
 
-    @Prop({
+    @Prop<ElDatePickerOptions, 'type'>({
       group: '主要属性',
       title: '显示类型',
       description: '显示类型',
@@ -167,6 +176,16 @@ namespace nasl.ui {
           { title: '年份范围' },
         ],
       },
+      onChange: [
+        {
+          clear: ['modelValue'],
+          if: (_) => _.includes('range'),
+        },
+        {
+          clear: ['startValue', 'endValue'],
+          if: (_) => !_.includes('range'),
+        },
+      ],
     })
     type:
       | 'year'
@@ -208,7 +227,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '范围选择时选中日期所使用的当日内具体时刻',
+      title: '选中日期时的当日内具体时刻',
       description: '范围选择时选中日期所使用的当日内具体时刻',
       setter: { concept: 'InputSetter' },
     })
@@ -243,7 +262,7 @@ namespace nasl.ui {
       title: '取消两个日期面板之间的联动',
       description: '在范围选择器里取消两个日期面板之间的联动',
       setter: { concept: 'SwitchSetter' },
-      if: (_) => _.range,
+      if: (_) => _.type.includes('range'),
     })
     unlinkPanels: nasl.core.Boolean = true;
 
@@ -356,7 +375,7 @@ namespace nasl.ui {
       title: '值改变时',
       description: '用户确认选定的值时触发',
     })
-    onChange: (value: any) => void;
+    onChange: (modelValue: any) => void;
 
     @Event({
       title: '失去焦点时',
@@ -374,13 +393,13 @@ namespace nasl.ui {
       title: '清空时',
       description: '可清空的模式下用户点击清空按钮时触发',
     })
-    onClear: () => void;
+    onClear: (event: any) => void;
 
     @Event({
       title: '日历所选日期更改时',
       description: '在日历所选日期更改时触发',
     })
-    onCalendarChange: (value: any) => void;
+    onCalendarChange: (modelValue: any) => void;
 
     @Event({
       title: '日期面板改变时',

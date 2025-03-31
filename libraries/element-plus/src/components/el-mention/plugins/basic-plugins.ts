@@ -19,7 +19,7 @@ export function handleDataSource(props) {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
     loading,
-    data,
+    options: dataSource,
     formTagName: 'el-form-mention',
   };
 }

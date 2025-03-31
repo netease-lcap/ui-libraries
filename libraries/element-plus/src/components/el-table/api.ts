@@ -1026,6 +1026,17 @@ namespace nasl.ui {
     })
     sortable: 'none' | 'custom' = 'none';
 
+    @Prop({
+      group: '样式属性',
+      title: '对齐方式',
+      description: '设置列内容的对齐方式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }],
+      },
+    })
+    align: 'left' | 'center' | 'right' = 'left';
+
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
     //   title: '排序初始顺序',
