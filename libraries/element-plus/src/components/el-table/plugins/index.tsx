@@ -201,7 +201,10 @@ export function handlePaginationRender(props) {
           <Component
             ref={tableRef}
             {..._.omit({ ...props, ...attrs }, ['style'])}
-            style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
+            style={{
+              ..._.pickBy(props.style, (value, key) => key?.startsWith('--')),
+              ..._.pick(props.style, ['color', 'fontSize', 'fontWeight']),
+            }}
             v-slots={slots}
           />
           {props.pagination && (
