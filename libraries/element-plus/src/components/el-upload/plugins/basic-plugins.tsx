@@ -1,8 +1,6 @@
 import { UploadFile, UploadRawFile } from 'element-plus';
-// import { UploadFilled } from '@element-plus/icons-vue';
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
-import { useControllableValue } from '@/plugins/hooks';
 import { ElFlex, ElIcon, ElText } from '@/components/index';
 
 type Converter = 'json' | 'simple';
@@ -22,7 +20,7 @@ const getCookie = (cname) => {
   return '';
 };
 
-const getFileListByValue = (value, converter: Converter = 'json', fileList) => {
+const getFileListByValue = (value, converter: Converter = 'simple', fileList) => {
   if (Array.isArray(fileList)) {
     return fileList as UploadFile[];
   }
@@ -72,40 +70,45 @@ const formatResponse = (urlField, res, uploadFile) => {
   };
 };
 
-const updateFileList = (fileList, newResponse) => {
-  if (newResponse.status === 'success') {
-    // 如果上传成功，替换文件列表中的文件
-    return fileList.map((file) => (file.name === newResponse.name
-        ? {
-            name: file.name,
-            url: newResponse.url,
-          }
-        : file));
-  }
-  // 如果上传失败，删除文件列表中的文件
-  return fileList.filter((file) => file.name !== newResponse.name);
+const getValueByList = (fileList: UploadFile[], converter: Converter, urlField: string) => {
+  const successFiles = fileList.filter(item => item.status === 'success').map(item => {
+    if (item.response) {
+      return formatResponse(urlField, item.response, item)
+    } else {
+      return item
+    }
+  })
+
+  return converter === 'simple' ? successFiles.map((x) => x.url || '').join(',') : JSON.stringify(successFiles);
 };
 
-export function handleResponse(props) {
-  const onSuccess = props.get('onSuccess');
-  const urlField = props.get('url-field') || 'filePath';
-  const [fileList, setFileList, fileListProps] = useControllableValue(props, {
-    valuePropName: 'fileList',
-    defaultValuePropName: 'value',
-  });
+export function removeValueByList(list: UploadFile[]) {
+  return Array.isArray(list) ? list.map(item => item.url).join(',') : ''
+}
 
+export function handleResponse(props) {
+  const onRemove = props.get('onRemove');
+  const onChange = props.get('onChange');
+  const urlField = props.get('url-field') || 'filePath';
+  const converter = props.get('converter') || 'simple';
+  const value = props.get('value');
+  const setValue = props.get('onUpdate:value') ?? (() => {});
+  
+  const defaultFileList = getFileListByValue(value, converter, undefined);
   return {
-    onSuccess: (response, file) => {
-      if (response && (response.code === 200 || response.Code === 200)) {
-        const newResponse = formatResponse(urlField, response, file);
-        const newFileList = updateFileList(fileList, newResponse);
-        setFileList(newFileList);
-        if (_.isFunction(onSuccess)) {
-          onSuccess(newResponse, file);
-        }
+    fileList: defaultFileList,
+    onChange: (uploadFile: UploadFile, fileList: UploadFile[]) => {
+      if (uploadFile.status === 'success') {
+        const newValue = getValueByList(fileList, converter, urlField);
+        _.attempt(setValue, newValue);
       }
+      _.attempt(onChange, uploadFile, fileList);
     },
-    ...fileListProps,
+    onRemove: (uploadFile, fileList) => {
+      const newValue = removeValueByList(fileList);
+      _.attempt(setValue, newValue);
+      _.attempt(onRemove, uploadFile, fileList);
+    }
   };
 }
 
