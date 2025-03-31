@@ -17,7 +17,7 @@ namespace nasl.ui {
     @Prop({
       title: '值',
     })
-    modelValue: nasl.core.Time | nasl.core.String;
+    modelValue:  nasl.core.String;
 
     @Method({
       title: '获取焦点',
@@ -39,9 +39,10 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '值',
-      description: '选择的值'
+      description: '选择的值',
+      sync: true
     })
-    modelValue: nasl.core.String | nasl.core.Time;
+    modelValue: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -49,7 +50,7 @@ namespace nasl.ui {
       description: '开始时间',
       setter: { concept: 'InputSetter' },
     })
-    start: nasl.core.String | nasl.core.Time = '09:00';
+    start: nasl.core.String = '09:00';
 
     @Prop({
       group: '主要属性',
@@ -57,7 +58,7 @@ namespace nasl.ui {
       description: '结束时间',
       setter: { concept: 'InputSetter' },
     })
-    end: nasl.core.String | nasl.core.Time = '18:00';
+    end: nasl.core.String = '18:00';
 
     @Prop({
       group: '主要属性',
@@ -73,7 +74,7 @@ namespace nasl.ui {
       description: '最小时间，小于该时间的时间段将被禁用',
       setter: { concept: 'InputSetter' },
     })
-    minTime: nasl.core.String | nasl.core.Time;
+    minTime: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -81,7 +82,7 @@ namespace nasl.ui {
       description: '最大时间，大于该时间的时间段将被禁用',
       setter: { concept: 'InputSetter' },
     })
-    maxTime: nasl.core.String | nasl.core.Time;
+    maxTime: nasl.core.String;
 
     @Prop({
       group: '主要属性',
