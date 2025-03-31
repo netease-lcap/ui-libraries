@@ -10,7 +10,7 @@ namespace nasl.ui {
   })
   @Component({
     title: 'Loading加载',
-    icon: 'circular-progress',
+    icon: 'loading',
     description: '加载数据时显示动效。',
     group: 'Feedback',
   })

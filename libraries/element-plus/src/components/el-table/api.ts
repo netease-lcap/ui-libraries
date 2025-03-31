@@ -55,8 +55,10 @@ namespace nasl.ui {
       additionalAttribute: {
         rowKey: '"index"',
         valueField: '"index"',
+        ":expandRowKeys" : "\"[0]\""
       },
       forceUpdateWhenAttributeChange: true,
+   
       dataSource: {
         display: 3,
         loopElem: 'table > tbody > tr',
