@@ -1,6 +1,7 @@
 .el-text {
   white-space: pre-wrap;
   max-width: 100%;
+  color: var(--el-text-color);
 }
 
 .el-text.el-text--reset {
@@ -32,7 +33,7 @@
 }
 
 .el-text.el-text--color-default {
-  color: inherit;
+  color: var(--el-text-color);
 }
 
 .el-text.el-text--color-primary {
