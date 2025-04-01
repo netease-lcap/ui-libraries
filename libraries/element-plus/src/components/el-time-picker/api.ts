@@ -259,7 +259,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIcon: nasl.core.String = 'Clock';
+    prefixIconName: nasl.core.String = 'Clock';
 
     @Prop({
       title: '自定义清除图标',
@@ -270,7 +270,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    clearIcon: nasl.core.String = 'CircleClose';
+    clearIconName: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',

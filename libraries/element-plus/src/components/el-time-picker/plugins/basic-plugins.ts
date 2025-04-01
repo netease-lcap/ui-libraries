@@ -86,14 +86,12 @@ export function handleDateValue(props) {
 export * from './ide';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
-export function handleIcon(props) {
-  const clearIcon = props.get('clearIcon');
-  const prefixIcon = props.get('prefixIcon');
+export function handleTagName(props) {
   const className = props.get('class') ?? '';
-
   return {
+    formTagName: 'el-form-time-picker',
     class: `${className} el-time-picker`,
-    clearIcon: clearIcon ? ElementPlusIconsVue[clearIcon] : null,
-    prefixIcon: prefixIcon ? ElementPlusIconsVue[prefixIcon] : null,
   };
 }
+
+export { handleIcon } from '@/plugins/common/icon'
