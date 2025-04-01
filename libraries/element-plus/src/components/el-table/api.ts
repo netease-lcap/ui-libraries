@@ -223,7 +223,7 @@ namespace nasl.ui {
       description: '是否显示表格边框',
       setter: { concept: 'SwitchSetter' },
     })
-    border: nasl.core.Boolean = true;
+    border: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
