@@ -9,6 +9,7 @@ export function handleDataSource(props) {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const parentField = props.get('parentField');
+  const slotsProps = props.get('slots');
   const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'parentField', 'childrenField']);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
@@ -16,6 +17,8 @@ export function handleDataSource(props) {
   const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
   const dataSourceResult = _.isEmpty(TreeData) ? {} : { data: TreeData };
+  const slotsDefault = useCallback(({ node }) => slotsProps.default({ item: node }), [slotsProps]);
+  const slots = useMemo(() => _.assign(slotsProps, slotsDefault), [slotsProps, slotsDefault]);
 
   return {
     [$deletePropsList]: deletePropsList,
@@ -23,6 +26,7 @@ export function handleDataSource(props) {
     nodeKey: 'value',
     loading,
     ...dataSourceResult,
+    slots,
   };
 }
 

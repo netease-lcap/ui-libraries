@@ -26,7 +26,7 @@ export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccum
     ref: selfRef,
     loading,
     slots: _.assign(slots, dataSourceSlots),
-    data:dataSource,
+    data: dataSource,
     formTagName: 'el-form-select',
   };
 }
@@ -35,7 +35,6 @@ export function handleVirtualize(props) {
   const slots = props.get('slots');
   const virtualize = props.get('virtualize');
   const data = props.get('data') ?? [];
-  console.log(data, 'data');
   const render = useCallback((props) => <ElSelectV2 {...props} />, []);
   const result = useMemo(() => {
     return virtualize

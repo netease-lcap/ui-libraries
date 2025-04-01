@@ -105,7 +105,11 @@ export const Default = {
         list,
       };
     },
-    template: '<el-tree :height="208" :virtualize="true" :default-checked-keys="[1]" show-checkbox  :dataSource="list"></el-tree>',
+    template: `<el-tree :height="208" :virtualize="true" :default-checked-keys="[1]" show-checkbox  :dataSource="list">
+    <template #default="current"> 
+    <div>{{ current.item.label }}</div>
+    </template>
+    </el-tree>`,
   }),
 };
 
