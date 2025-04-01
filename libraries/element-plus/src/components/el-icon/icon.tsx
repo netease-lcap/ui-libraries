@@ -58,9 +58,9 @@ export default defineComponent({
     ...ElementPlusIconsVue,
   },
   setup(props: ElIconProps) {
-    function renderChildren(): VNode<RendererNode, RendererElement> {
-      if (!props.name) {
-        return <ElIconPlus />;
+    function renderChildren(): VNode<RendererNode, RendererElement> | null {
+      if (_.isNil(props.name)) {
+        return null
       }
 
       // 处理SVG URL
