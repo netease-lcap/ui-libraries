@@ -113,4 +113,35 @@ namespace nasl.ui {
     })
     onSelect: (item: nasl.core.String) => any;
   }
+
+  @IDEExtraInfo({
+    order: 4,
+    ideusage: {
+      idetype: 'container',
+      structured: true,
+      ignoreProperty: ['rules'],
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [
+      {
+        name: 'ElFormItemPro',
+      },
+      {
+        name: 'ElMention',
+      },
+    ],
+  })
+  @Component({
+    title: '表单提及',
+    description: '表单提及',
+    group: 'Form',
+  })
+  export class ElFormMention<T, V> extends ViewComponent {
+    constructor(options?: Partial<ElFormMentionOptions<T, V> & ElFormItemProOptions>) {
+      super();
+    }
+  }
+
+  export class ElFormMentionOptions<T, V> extends ViewComponentOptions {}
 }

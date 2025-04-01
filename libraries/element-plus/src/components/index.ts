@@ -33,7 +33,7 @@ export { ElUpload, ElFormUpload } from './el-upload';
 export { ElTimePicker, ElFormTimePicker } from './el-time-picker';
 export { ElTimeSelect, ElFormTimeSelect } from './el-time-select';
 export { ElIcon } from './el-icon';
-export { ElMention } from './el-mention';
+export { ElMention, ElFormMention } from './el-mention';
 export { ElBreadcrumb, ElBreadcrumbItem } from './el-breadcrumb';
 export { ElBacktop, ElBacktopDesigner } from './el-backtop';
 export { ElPageHeader } from './el-page-header';

@@ -151,6 +151,7 @@ export const Example2 = {
     <el-form-switch :rules="rules"  v-model="switchValue" label="input21" data-nodepath="switch" />
     <el-form-tree-select :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <el-form-checkbox-group label="ww" :rules="rules" :isRequired="true" :dataSource="[{},{},{}]"></el-form-checkbox-group>
+    <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
 
     <a @click="handleClick(formRef)" >Submit</a>
     <a @click="handleClick(formRef)" >Submit2</a>
