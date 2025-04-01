@@ -17,8 +17,12 @@ export function handleDataSource(props) {
   const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
   const dataSourceResult = _.isEmpty(TreeData) ? {} : { data: TreeData };
-  const slotsDefault = useCallback(({ node }) => slotsProps.default({ item: node }), [slotsProps]);
-  const slots = useMemo(() => _.assign(slotsProps, slotsDefault), [slotsProps, slotsDefault]);
+  // const slotsDefault = useCallback(({ node }) => slotsProps?.item?.({ item: node }), [slotsProps]);
+  const slotItemToDefault = useMemo(() => {
+    const hasItemSlot = _.isFunction(slotsProps?.item);
+    return hasItemSlot ? { default: ({ node }) => slotsProps.item({ item: node }) } : {};
+  }, [slotsProps]);
+  const slots = useMemo(() => _.assign(slotsProps, { ...slotItemToDefault }), [slotsProps, slotItemToDefault]);
 
   return {
     [$deletePropsList]: deletePropsList,
@@ -32,8 +36,9 @@ export function handleDataSource(props) {
 
 export function handleVirtualize(props) {
   const virtualize = props.get('virtualize');
+  const slots = props.get('slots');
 
-  const render = useCallback((props) => <ElTreeV2 {...props} />, []);
+  const render = useCallback((props) => <ElTreeV2 {...props} v-slots={slots} />, [slots]);
   const result = useMemo(() => {
     return virtualize
       ? {

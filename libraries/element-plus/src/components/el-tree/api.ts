@@ -338,10 +338,16 @@ namespace nasl.ui {
     })
     onNodeCollapse: (data: T) => any;
 
+    // @Slot({
+    //   title: '默认插槽',
+    //   description: '默认插槽',
+    // })
+    // slotDefault: (current: Current<T>) => Array<ViewComponent>;
+
     @Slot({
-      title: '默认插槽',
-      description: '默认插槽',
+      title: '节点内容',
+      description: '节点内容',
     })
-    slotDefault: (current: Current<T>) => Array<ViewComponent>;
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
 }

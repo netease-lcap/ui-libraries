@@ -105,10 +105,13 @@ export const Default = {
         list,
       };
     },
-    template: `<el-tree :height="208" :virtualize="true" :default-checked-keys="[1]" show-checkbox  :dataSource="list">
-    <template #default="current"> 
-    <div>{{ current.item.label }}</div>
+    template: `<el-tree :height="208"  :default-checked-keys="[1]" show-checkbox  :dataSource="[{},{},{}]">
+    <template #item={...argus}>
+        <div data-nodepath="4d225b3f1e154e828a0932788c69e36a"  >
+        <el-text>1</el-text>
+        </div>
     </template>
+
     </el-tree>`,
   }),
 };
