@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 3,
     ideusage: {
       idetype: 'element',
+      forceUpdateWhenAttributeChange: 'type',
     },
   })
   @Component({

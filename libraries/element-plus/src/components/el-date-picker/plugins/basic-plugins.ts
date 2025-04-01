@@ -50,8 +50,7 @@ export function handleRangeDateValue(props) {
   };
 
   const timeValue = useMemo(
-    () =>
-      getTimeValue({
+    () => getTimeValue({
         isEffectiveTime,
         isNilTime,
         isControlledTime,
@@ -87,7 +86,7 @@ export function handleDateValue(props) {
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
-export function handleTagName(props) {
+export function handleTagName() {
   return {
     formTagName: FORM_TAG_NAME,
   };
