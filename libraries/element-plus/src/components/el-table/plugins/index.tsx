@@ -199,7 +199,7 @@ export function handlePaginationRender(props) {
         <div data-nodepath={nodepath} style={props.style}>
           <Component
             ref={tableRef}
-            {..._.omit({ ...props, ...attrs }, ['style'])}
+            {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])}
             style={{
               ..._.pickBy(props.style, (value, key) => key?.startsWith('--')),
               ..._.pick(props.style, ['color', 'fontSize', 'fontWeight']),
