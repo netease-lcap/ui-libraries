@@ -84,7 +84,7 @@ namespace nasl.ui {
         options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
-    size: '' | 'default' | 'large' | 'small' = 'default';
+    size: 'default' | 'large' | 'small' = 'default';
 
     @Prop({
       group: '样式属性',
@@ -95,7 +95,7 @@ namespace nasl.ui {
         options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
-    inputSize: '' | 'default' | 'large' | 'small' = 'default';
+    inputSize: 'default' | 'large' | 'small' = 'default';
 
     @Prop({
       group: '样式属性',
@@ -145,7 +145,7 @@ namespace nasl.ui {
     })
     debounce: nasl.core.Integer = 300;
 
-    // @Prop({  
+    // @Prop({
     //   group: '主要属性',
     //   title: '提示框类名',
     //   description: '提示框的自定义类名',

@@ -42,13 +42,7 @@ namespace nasl.ui {
       description: '标签类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '成功' },
-          { title: '信息' },
-          { title: '警告' },
-          { title: '危险' },
-        ],
+        options: [{ title: '默认' }, { title: '成功' }, { title: '信息' }, { title: '警告' }, { title: '危险' }],
       },
     })
     tagType: '' | 'success' | 'info' | 'warning' | 'danger' = 'info';
@@ -59,11 +53,7 @@ namespace nasl.ui {
       description: '标签效果',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '浅色' },
-          { title: '深色' },
-          { title: '朴素' },
-        ],
+        options: [{ title: '浅色' }, { title: '深色' }, { title: '朴素' }],
       },
     })
     tagEffect: 'light' | 'dark' | 'plain' = 'light';
@@ -74,10 +64,7 @@ namespace nasl.ui {
       description: '触发输入标签的键',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '回车键' },
-          { title: '空格键' },
-        ],
+        options: [{ title: '回车键' }, { title: '空格键' }],
       },
     })
     trigger: 'Enter' | 'Space' = 'Enter';
@@ -96,14 +83,10 @@ namespace nasl.ui {
       description: '输入框尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '大' },
-          { title: '小' },
-        ],
+        options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
-    size: '' | 'default' | 'large' | 'small';
+    size: 'default' | 'large' | 'small';
 
     @Prop({
       group: '主要属性',
@@ -261,5 +244,4 @@ namespace nasl.ui {
   }
 
   export class ElFormInputTagOptions extends ViewComponentOptions {}
-
-} 
+}
