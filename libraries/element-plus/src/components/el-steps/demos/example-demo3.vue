@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-steps :dataSource="dataSource" nameField="value" v-model="active" ref="stepsRef">
+    <el-steps :dataSource="dataSource" nameField="value" :active="active2" ref="stepsRef">
       <template #title="{ item }"><el-text :text="item.label" /></template>
       <template #description="{ item }"><el-text :text="item.value" /></template>
     </el-steps>
@@ -25,6 +25,7 @@ const dataSource = ref([{
 }]);
 
 const active = ref('1.1')
+const active2 = ref(1)
 
 const next = () => {
   stepsRef.value?.next();
