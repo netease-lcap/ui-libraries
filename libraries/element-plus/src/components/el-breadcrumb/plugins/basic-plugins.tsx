@@ -10,7 +10,7 @@ export function handleAutoCrumbs(props) {
   const slots = props.get('slots');
   const route = props.get('route');
 
-  const isAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
+  const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
 
   const routerMeta = useMemo(() => {
     if (!route?.path) return [];
@@ -43,7 +43,7 @@ export function handleAutoCrumbs(props) {
   }, [routerMeta]);
 
   const result = useMemo(
-    () => (isAutoCrumbs
+    () => (!isNotAutoCrumbs
         ? {
             slots: {
               ...slots,
@@ -51,7 +51,7 @@ export function handleAutoCrumbs(props) {
             },
           }
         : {}),
-    [isAutoCrumbs, defaultSlots, slots],
+    [isNotAutoCrumbs, defaultSlots, slots],
   );
   return result;
 }
