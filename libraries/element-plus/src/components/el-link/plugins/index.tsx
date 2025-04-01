@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
-import { ElIcon } from '@/components';
+import { getPropsIcon } from '@/plugins/common/icon';
 
 export * from './ide.ts';
 
@@ -14,7 +14,7 @@ export function handleTextToSlots(props) {
       default: () => text,
     }),
     [$deletePropsList]: deletePropsList,
-    icon: <ElIcon name={icon} />,
+    icon: getPropsIcon({ name: icon }),
   };
 }
 
