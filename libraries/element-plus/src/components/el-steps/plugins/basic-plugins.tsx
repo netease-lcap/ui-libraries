@@ -16,7 +16,7 @@ export function handleDataSource(props) {
   const dataSource = useHandleMapField({ dataSource: useFormatDataSource(data) });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
   const slotsDefaultNames = useMemo(() => {
-    const isStepItem = (node) => _.get(node, 'type.name', '').match(/[sS]tep$/);
+    const isStepItem = (node) => _.get(node, 'type.components.Component.name', '').match('ElStep');
     const defaultNodes = _.attempt(slotsProps.default) ?? [];
     return _.flatMap(defaultNodes, (node, index) => (isStepItem(node) ? [_.get(node, 'props.name', `${STEP_NAME_PREFIX}${index}`)] : []));
   }, [slotsProps]);
@@ -70,7 +70,7 @@ export function handleSwitchStep(props) {
     const index = _.indexOf(stepNameList, name);
     const activeValue = index === -1 ? 0 : index + 1;
     setActive(activeValue);
-  }, [name]);
+  }, [name, stepNameList]);
 
   const prevStep = () => {
     const nextNameIndex = Math.max(0, _.indexOf(stepNameList, name));
