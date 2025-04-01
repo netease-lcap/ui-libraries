@@ -58,11 +58,7 @@ export default defineComponent({
     ...ElementPlusIconsVue,
   },
   setup(props: ElIconProps) {
-    function renderChildren(): VNode<RendererNode, RendererElement> | null {
-      if (_.isNil(props.name)) {
-        return null
-      }
-
+    function renderChildren(): VNode<RendererNode, RendererElement> {
       // 处理SVG URL
       if (isSvgUrl(props.name)) {
         return <OnlineSvgIcon name={props.name} />;
@@ -82,7 +78,7 @@ export default defineComponent({
       return <ElIconPlus>{iconComponent ? h(iconComponent) : props.name}</ElIconPlus>;
     }
     return () => {
-      return <ElIconPlus>{renderChildren()}</ElIconPlus>;
+      return !props.name ? null : renderChildren();
     };
   },
 });
