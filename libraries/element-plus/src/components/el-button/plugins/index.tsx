@@ -22,14 +22,13 @@ export function handlePopupconfirmButton(props) {
   const slots = props.get('slots');
 
   const getReferenceButton = useCallback(
-    (selfProps, { attrs }) => {
+    (selfProps) => {
       return (
         <ButtonComponent
           {..._.omit(selfProps, [...$PopconfirmProps, 'onClick', 'isPopConfirm'])}
           v-slots={{
             default: () => slots.default?.(),
           }}
-          {...attrs}
         />
       );
     },
