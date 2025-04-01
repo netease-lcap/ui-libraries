@@ -145,7 +145,7 @@ namespace nasl.ui {
       group: '数据属性',
       title: 'HTTP 请求类型',
       description:
-        'HTTP 请求类型。可选项：POST/GET/PUT/OPTIONS/PATCH/post/get/put/options/patch',
+        'HTTP 请求类型。可选项：POST/GET/PUT/OPTIONS/PATCH',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -153,12 +153,7 @@ namespace nasl.ui {
           { title: 'GET' },
           { title: 'PUT' },
           { title: 'OPTIONS' },
-          { title: 'PATCH' },
-          { title: 'post' },
-          { title: 'get' },
-          { title: 'put' },
-          { title: 'options' },
-          { title: 'patch' },
+          { title: 'PATCH' }
         ],
       },
     })
@@ -288,9 +283,9 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: 'text' },
-          { title: 'picture' },
-          { title: 'picture-card' },
+          { title: '文本' },
+          { title: '图片' },
+          { title: '图片卡片' },
         ],
       },
     })

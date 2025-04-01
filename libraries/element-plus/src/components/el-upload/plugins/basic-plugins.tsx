@@ -223,12 +223,14 @@ export function handlePreviewRender(props) {
   const onPreview = props.get('onPreview');
   const updateRef = useRef({});
   const dialogRef = useRef({});
+  const urlField = props.get('url-field') || 'filePath';
 
   const [dialogImageUrl, setDialogImageUrl] = useControllableValue(props, {
     valuePropName: 'dialogImageUrl',
     defaultValue: ''
   });
   return {
+    dialogImageUrl,
     ref: Object.assign(ref, updateRef.value),
     render: (props, { attrs, slots }) => {
       return [
@@ -240,13 +242,14 @@ export function handlePreviewRender(props) {
             v-slots={slots}
           />
           <ElDialog ref={dialogRef}>
-            <img w-full src={dialogImageUrl} alt="Preview Image" style={{ width: '100%', height: '100%' }}/>
+            <img w-full src={props.dialogImageUrl} alt="Preview Image" style={{ width: '100%', height: '100%' }}/>
           </ElDialog>
         </div>,
       ];
     },
     onPreview: (uploadFile: UploadFile) => {
-      setDialogImageUrl(uploadFile.url)
+      const url = _.get(uploadFile, `response.${urlField}`, uploadFile.url)
+      setDialogImageUrl(url)
       dialogRef.value.open()
       _.attempt(onPreview, uploadFile)
     }
