@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { ElPopconfirm } from 'element-plus';
 import { $deletePropsList } from '@/plugins/constants';
 import { $PopconfirmProps } from '../constants';
-import { ElIcon } from '@/components';
+import { getPropsIcon } from '@/plugins/common/icon';
 import { useCallback } from '@/plugins/hooks';
 // export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export function handleTextToslot(props) {
@@ -15,7 +15,7 @@ export function handleTextToslot(props) {
   return {
     slots: _.assign(slots, defaultSlot),
     [$deletePropsList]: deletePropsList,
-    icon: <ElIcon name={icon} />,
+    icon: getPropsIcon({ name: icon }),
   };
 }
 

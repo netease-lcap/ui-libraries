@@ -9,3 +9,7 @@ export function handleIcon(props) {
     prefixIcon: <ElIcon name={prefixIconName} />,
   };
 }
+
+export const getPropsIcon = function (props: any) {
+  return props.name ? <ElIcon {...props} /> : null;
+};
