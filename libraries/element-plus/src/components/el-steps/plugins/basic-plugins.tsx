@@ -73,7 +73,7 @@ export function handleSwitchStep(props) {
   }, [name, stepNameList]);
 
   const prevStep = () => {
-    const nextNameIndex = Math.max(0, _.indexOf(stepNameList, name));
+    const nextNameIndex = Math.max(0, _.indexOf(stepNameList, name) - 1);
     setName(stepNameList[nextNameIndex]);
   };
 
