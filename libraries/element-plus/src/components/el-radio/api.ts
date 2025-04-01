@@ -189,7 +189,7 @@ namespace nasl.ui {
       description: '单选按钮显示文本，如果未设置则作为值使用',
       setter: { concept: 'InputSetter' },
     })
-    label: string | number | boolean;
+    label: nasl.core.String | nasl.core.Integer | nasl.core.Boolean;
 
     @Prop({
       group: '状态属性',
@@ -272,7 +272,7 @@ namespace nasl.ui {
       description: '单选按钮显示文本，如果未设置则作为值使用',
       setter: { concept: 'InputSetter' },
     })
-    label: string | number | boolean;
+    label: nasl.core.String | nasl.core.Integer | nasl.core.Boolean;
 
     @Prop({
       group: '状态属性',
