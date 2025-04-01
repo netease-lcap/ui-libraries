@@ -1,7 +1,8 @@
 import { UploadFile, UploadRawFile } from 'element-plus';
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
-import { ElFlex, ElIcon, ElText } from '@/components/index';
+import { ElDialog, ElFlex, ElIcon, ElText } from '@/components/index';
+import { useControllableValue, useRef } from '@/plugins/hooks';
 
 type Converter = 'json' | 'simple';
 
@@ -138,13 +139,17 @@ export function handleRequestData(props) {
   const propData = props.get('data');
   const lcapIsCompress = props.get('lcapIsCompress');
   const viaOriginURL = props.get('viaOriginURL');
+  const action = props.get('action') || '/upload';
 
   const formData = {
     lcapIsCompress,
     viaOriginURL,
   };
 
-  return { data: { ...(_.isObject(propData) ? propData : {}), ...formData } };
+  return { 
+    data: { ...(_.isObject(propData) ? propData : {}), ...formData },
+    action, 
+  };
 }
 
 export function handleEvent(props) {
@@ -190,6 +195,7 @@ export function handleSlots(props) {
         <ElIcon class="el-icon--upload" name="Plus" />
       </ElFlex>
     ),
+    trigger: null,
   };
 
   const pictureSlot = {
@@ -205,8 +211,44 @@ export function handleSlots(props) {
     slots: Object.assign(
       slots,
       drag ? dragSlot : {},
-      listType === 'picture-card' ? pictureCardSlot : {},
-      listType === 'picture' ? pictureSlot : {},
+      listType === 'picture-card' ? pictureCardSlot : {}
     ),
+  };
+}
+
+export function handlePreviewRender(props) {
+  const Component = props.get('render');
+  const ref = props.get('ref');
+  const nodepath = props.get('data-nodepath');
+  const onPreview = props.get('onPreview');
+  const updateRef = useRef({});
+  const dialogRef = useRef({});
+
+  const [dialogImageUrl, setDialogImageUrl] = useControllableValue(props, {
+    valuePropName: 'dialogImageUrl',
+    defaultValue: ''
+  });
+  return {
+    ref: Object.assign(ref, updateRef.value),
+    render: (props, { attrs, slots }) => {
+      return [
+        <div data-nodepath={nodepath} style={props.style}>
+          <Component
+            ref={updateRef}
+            {..._.omit({ ...props, ...attrs }, ['style'])}
+            style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
+            v-slots={slots}
+          />
+          <ElDialog ref={dialogRef}>
+            <img w-full src={dialogImageUrl} alt="Preview Image" style={{ width: '100%', height: '100%' }}/>
+          </ElDialog>
+        </div>,
+      ];
+    },
+    onPreview: (uploadFile: UploadFile) => {
+      setDialogImageUrl(uploadFile.url)
+      dialogRef.value.open()
+      _.attempt(onPreview, uploadFile)
+    }
   };
 }
