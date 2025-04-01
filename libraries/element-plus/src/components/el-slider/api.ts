@@ -166,7 +166,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '验证事件',
+      title: '表单验证',
       description: '是否触发表单验证',
       setter: { concept: 'SwitchSetter' },
     })
