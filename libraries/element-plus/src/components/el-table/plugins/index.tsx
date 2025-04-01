@@ -202,7 +202,7 @@ export function handlePaginationRender(props) {
             {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])}
             style={{
               ..._.pickBy(props.style, (value, key) => key?.startsWith('--')),
-              ..._.pick(props.style, ['color', 'fontSize', 'fontWeight']),
+              ..._.pick(props.style, ['color', 'fontSize', 'fontWeight', 'height']),
             }}
             v-slots={slots}
           />
