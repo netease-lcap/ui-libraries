@@ -106,7 +106,7 @@ namespace nasl.ui {
         ],
       },
     })
-    format: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' = 'HH:mm:ss';
+    format: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' = 'HH:mm';
 
     @Prop({
       group: '状态属性',
@@ -141,7 +141,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIcon: nasl.core.String = 'Clock';
+    prefixIconName: nasl.core.String = 'Clock';
 
     @Prop({
       title: '清除图标',
@@ -152,7 +152,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    clearIcon: nasl.core.String = 'CircleClose';
+    clearIconName: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',
