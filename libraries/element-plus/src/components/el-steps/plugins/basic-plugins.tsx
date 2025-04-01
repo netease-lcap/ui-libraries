@@ -60,23 +60,26 @@ export function handleSwitchStep(props) {
   const stepNameList = props.get('stepNameList');
   const [active, setActive] = useControllableValue(props, {
     valuePropName: 'active',
+    defaultValue: 0,
   });
-  const [names, setNames] = useControllableValue(props);
+  const [name, setName] = useControllableValue(props, {
+    defaultValue: stepNameList[0],
+  });
 
   useEffect(() => {
-    const index = _.indexOf(stepNameList, names);
-    const activeValue = index === -1 ? 0 : index;
+    const index = _.indexOf(stepNameList, name);
+    const activeValue = index === -1 ? 0 : index + 1;
     setActive(activeValue);
-  }, [names]);
+  }, [name]);
 
   const prevStep = () => {
-    const nextNameIndex = Math.max(0, _.indexOf(stepNameList, names) - 1);
-    setNames(stepNameList[nextNameIndex]);
+    const nextNameIndex = Math.max(0, _.indexOf(stepNameList, name));
+    setName(stepNameList[nextNameIndex]);
   };
 
   const nextStep = () => {
-    const nextNameIndex = Math.min(stepNameList.length - 1, _.indexOf(stepNameList, names) + 1);
-    setNames(stepNameList[nextNameIndex]);
+    const nextNameIndex = Math.min(stepNameList.length - 1, _.indexOf(stepNameList, name) + 1);
+    setName(stepNameList[nextNameIndex]);
   };
 
   const selfRef = useMemo(
