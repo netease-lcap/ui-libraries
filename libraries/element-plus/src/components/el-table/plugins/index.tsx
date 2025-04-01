@@ -1,6 +1,5 @@
-import { ElPagination, ElConfigProvider } from 'element-plus';
+import { ElPagination } from 'element-plus';
 import _ from 'lodash';
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import fp from 'lodash/fp';
 import { useMemo, useRef, useCallback, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
@@ -208,11 +207,9 @@ export function handlePaginationRender(props) {
             v-slots={slots}
           />
           {props.pagination && (
-            <ElConfigProvider locale={zhCn}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                <ElPagination {...props.pageProps} total={props.pageProps.total} />
-              </div>
-            </ElConfigProvider>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+              <ElPagination {...props.pageProps} total={props.pageProps.total} />
+            </div>
           )}
         </div>,
       ];
