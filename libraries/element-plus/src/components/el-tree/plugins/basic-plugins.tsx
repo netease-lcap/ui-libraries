@@ -15,7 +15,6 @@ export function handleDataSource(props) {
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
-  console.log(TreeData, 'TreeData');
   const dataSourceResult = _.isEmpty(TreeData) ? {} : { data: TreeData };
 
   return {
