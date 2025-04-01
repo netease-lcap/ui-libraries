@@ -247,16 +247,16 @@ namespace nasl.ui {
     onOpened: (event: any) => any;
 
     @Event({
-      title: '关闭的回调',
-      description: '对话框关闭的回调',
-    })
-    onClose: (event: any) => any;
-
-    @Event({
       title: '关闭前的回调',
       description: '关闭前的回调',
     })
     onBeforeClose: (event: any) => any;
+
+    @Event({
+      title: '关闭的回调',
+      description: '对话框关闭的回调',
+    })
+    onClose: (event: any) => any;
 
     @Event({
       title: '关闭动画结束时的回调',
