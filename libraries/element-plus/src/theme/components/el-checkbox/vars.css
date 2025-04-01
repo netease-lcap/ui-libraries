@@ -97,7 +97,6 @@
    * @type color
    */
   --el-checkbox-checked-input-border-color: var(--el-color-primary);
-
   /**
    * @desc 多选框选中背景颜色
    * @type color

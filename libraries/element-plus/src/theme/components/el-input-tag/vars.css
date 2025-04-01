@@ -16,13 +16,13 @@
 
   /**
    * @desc 禁用状态下的边框颜色
-   * @type input
+   * @type color
    */
   --el-input-tag-disabled-border: var(--el-disabled-border-color);
 
   /**
    * @desc 字体大小
-   * @type input
+   * @type size
    */
   --el-input-tag-font-size: var(--el-font-size-base);
 
@@ -46,37 +46,37 @@
 
   /**
    * @desc 宽度
-   * @type input
+   * @type size
    */
   --el-input-tag-width: 240px;
 
   /**
    * @desc 迷你高度
-   * @type input
+   * @type size
    */
   --el-input-tag-mini-height: var(--el-component-size);
 
   /**
    * @desc 间距
-   * @type input
+   * @type size
    */
   --el-input-tag-gap: 6px;
 
   /**
    * @desc 内边距
-   * @type input
+   * @type size
    */
   --el-input-tag-padding: 4px;
 
   /**
    * @desc 内部填充
-   * @type input
+   * @type size
    */
   --el-input-tag-inner-padding: 8px;
 
   /**
    * @desc 行高
-   * @type input
+   * @type size
    */
   --el-input-tag-line-height: 24px;
 }
