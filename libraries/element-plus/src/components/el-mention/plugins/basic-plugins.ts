@@ -20,6 +20,5 @@ export function handleDataSource(props) {
     ref: selfRef,
     loading,
     options: dataSource,
-    formTagName: 'el-form-mention',
   };
 }
