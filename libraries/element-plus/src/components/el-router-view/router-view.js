@@ -5,6 +5,7 @@ export default {
   setup(props) {
     return () => h(resolveComponent('router-view'), {
       class: 'el-router-view',
+      ...props,
     });
   },
 };
