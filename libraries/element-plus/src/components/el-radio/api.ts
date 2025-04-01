@@ -82,7 +82,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    value: V;
+    modelValue: V;
 
     @Prop<ElRadioGroupOptions<T, V>, 'textField'>({
       group: '数据属性',
