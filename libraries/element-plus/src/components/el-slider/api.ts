@@ -73,7 +73,7 @@ namespace nasl.ui {
       description: '在显示输入框的情况下，是否显示输入框的控制按钮',
       setter: { concept: 'SwitchSetter' },
     })
-    showInputControls: nasl.core.Boolean;
+    showInputControls: nasl.core.Boolean = true;
 
     @Prop({
       group: '样式属性',
