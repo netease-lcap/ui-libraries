@@ -11,7 +11,7 @@ namespace nasl.ui {
     title: '时间选择',
     icon: 'TimeSelect',
     description: '',
-    group: 'Selector',
+    group: 'Form',
   })
   export class ElTimeSelect extends ViewComponent {
     @Prop({
@@ -189,4 +189,34 @@ namespace nasl.ui {
     })
     onClear: (event: MouseEvent) => any;
   }
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      forceUpdateWhenAttributeChange: true,
+      additionalAttribute: {
+        "prefixIconName": "\"Clock\"",
+        "clearIconName": "\"CircleClose\"",
+      },
+    },
+    extends: [
+      {
+        name: 'ElTimeSelect',
+      },
+      {
+        name: 'ElFormItemPro',
+      },
+    ],
+  })
+  @Component({
+    title: '表单时间选择',
+    description: '表单时间选择',
+    group: 'Form',
+  })
+  export class ElFormTimeSelect extends ViewComponent {
+    constructor(options?: Partial<ElFormTimeSelectOptions & ElFormItemProOptions & Omit<ElFormTimeSelectOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormTimeSelectOptions extends ViewComponentOptions {}
 }
