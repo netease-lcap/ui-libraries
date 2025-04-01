@@ -135,7 +135,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '单选项',
-          code: '<el-radio value="value"><el-text text="单选项"></el-text></el-radio>',
+          code: '<el-radio value="value" ><el-text text="单选项"></el-text></el-radio>',
         },
         // {
         //   title: '单选按钮',
@@ -181,7 +181,7 @@ namespace nasl.ui {
       description: '单选按钮的值',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: V;
+    value: V;
 
     @Prop({
       group: '数据属性',
