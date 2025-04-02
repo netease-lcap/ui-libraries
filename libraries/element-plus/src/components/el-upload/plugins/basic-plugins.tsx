@@ -220,10 +220,14 @@ export function handlePreviewRender(props) {
   const Component = props.get('render');
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
+  const listType = props.get('listType');
   const onPreview = props.get('onPreview');
   const updateRef = useRef({});
   const dialogRef = useRef({});
   const urlField = props.get('url-field') || 'filePath';
+  if (listType !== 'picture-card') { 
+    return {}
+  }
 
   const [dialogImageUrl, setDialogImageUrl] = useControllableValue(props, {
     valuePropName: 'dialogImageUrl',
