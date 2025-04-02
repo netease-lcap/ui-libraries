@@ -2,6 +2,7 @@ import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import { useMemo } from '@/plugins/hooks';
 import { $rootStyle } from '@/plugins/constants';
+import { categoryStyles } from '@/utils';
 
 export function handlePropName(props) {
   const propProps = props.get('prop');
@@ -10,16 +11,16 @@ export function handlePropName(props) {
   return { prop };
 }
 
-function categoryStyles(style: Record<string, string> = {}) {
-  return Object.entries(style).reduce(
-    (acc, [key, value]) => {
-      const styleKey = $rootStyle.includes(key) ? 'style' : 'innerStyle';
-      acc[styleKey][key] = value;
-      return acc;
-    },
-    { style: {}, innerStyle: {} },
-  );
-}
+// function categoryStyles(style: Record<string, string> = {}) {
+//   return Object.entries(style).reduce(
+//     (acc, [key, value]) => {
+//       const styleKey = $rootStyle.includes(key) ? 'style' : 'innerStyle';
+//       acc[styleKey][key] = value;
+//       return acc;
+//     },
+//     { style: {}, innerStyle: {} },
+//   );
+// }
 export function handleInputStyle(props) {
   const styleProps = props.get('style');
   const { style, innerStyle } = categoryStyles(styleProps);

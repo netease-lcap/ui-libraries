@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import dayjs from 'dayjs';
 
+export * from './dom';
+
 function filterUnderfinedValue(object: Record<string, string>) {
   return Object.fromEntries(Object.entries(object).filter(([, value]) => !_.isUndefined(value)));
 }

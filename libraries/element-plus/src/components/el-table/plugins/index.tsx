@@ -4,6 +4,7 @@ import fp from 'lodash/fp';
 import { useMemo, useRef, useCallback, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource } from '@/plugins/common/dataSource';
+import { categoryStyles } from '@/utils';
 
 const orderMap = {
   descending: 'desc',
@@ -192,20 +193,13 @@ export function handlePaginationRender(props) {
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const tableRef = useRef({});
+  const { style, innerStyle } = categoryStyles(props.style);
   return {
     ref: Object.assign(ref, tableRef.value),
     render: (props, { attrs, slots }) => {
       return [
-        <div data-nodepath={nodepath} style={props.style}>
-          <Component
-            ref={tableRef}
-            {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])}
-            style={{
-              ..._.pickBy(props.style, (value, key) => key?.startsWith('--')),
-              ..._.pick(props.style, ['color', 'fontSize', 'fontWeight', 'height']),
-            }}
-            v-slots={slots}
-          />
+        <div data-nodepath={nodepath} style={style}>
+          <Component ref={tableRef} {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])} style={innerStyle} v-slots={slots} />
           {props.pagination && (
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
               <ElPagination {...props.pageProps} total={props.pageProps.total} />
