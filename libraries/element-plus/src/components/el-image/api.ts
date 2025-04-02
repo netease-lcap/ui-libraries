@@ -56,14 +56,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '图片替代文本',
-      description: '用自然语言描述图片中的内容，在图片加载失败或未加载时展示，可以提升用户体验或优化 SEO',
-      setter: { concept: 'InputSetter' },
-    })
-    alt: nasl.core.String = '';
-
-    @Prop({
-      group: '主要属性',
       title: '图片预览的初始图片Index值',
       description: '图片预览初始图片index',
       setter: { concept: 'NumberInputSetter', min: 0 },
@@ -85,7 +77,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     hideOnClickModal: nasl.core.Boolean = false;
-    
+
     @Prop({
       group: '主要属性',
       title: '是否开启无限滚动',
