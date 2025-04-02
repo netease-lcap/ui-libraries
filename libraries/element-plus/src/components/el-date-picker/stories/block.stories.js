@@ -23,13 +23,13 @@ export default {
 export const Date = {
   name: '日期选择器',
   render: () => ({
-    template: '<el-date-picker type="date"></el-date-picker>',
+    template: '<el-date-picker type="date" placeholder="请选择日期"></el-date-picker>',
   }),
 };
 
-// export const DateTime = {
-//   name: '日期时间选择器',
-//   render: () => ({
-//     template: '<el-date-picker type="datetime"></el-date-picker>',
-//   }),
-// };
+export const DateTime = {
+  name: '日期时间选择器',
+  render: () => ({
+    template: '<el-date-picker type="datetime" placeholder="请选择时间"></el-date-picker>',
+  }),
+};
