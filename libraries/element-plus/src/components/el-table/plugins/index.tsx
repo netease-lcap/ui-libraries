@@ -188,6 +188,7 @@ export function handleDataSource(props) {
   };
 }
 
+
 export function handlePaginationRender(props) {
   const Component = props.get('render');
   const ref = props.get('ref');
