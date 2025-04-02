@@ -1208,14 +1208,14 @@ namespace nasl.ui {
     // })
     // expanderPosition: 'left' | 'right' = 'left';
 
-    @Prop({
-      group: '样式属性',
-      title: '列宽度',
-      description: '设置列宽度，可设置为数字或百分比',
-      docDescription:
-        '列宽，可以作为最小宽度使用。当列宽总和小于 table 元素时，浏览器根据宽度设置情况自动分配宽度；当列宽总和大于 table 元素，表现为定宽。可以同时调整 table 元素的宽度来达到自己想要的效果	',
-    })
-    width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '列宽度',
+    //   description: '设置列宽度，可设置为数字或百分比',
+    //   docDescription:
+    //     '列宽，可以作为最小宽度使用。当列宽总和小于 table 元素时，浏览器根据宽度设置情况自动分配宽度；当列宽总和大于 table 元素，表现为定宽。可以同时调整 table 元素的宽度来达到自己想要的效果	',
+    // })
+    // width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
 
     // @Prop({
     //   group: '样式属性',
