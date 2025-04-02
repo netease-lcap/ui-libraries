@@ -643,7 +643,6 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: ['slotDefault', 'useRangeValue', 'startFieldName', 'endFieldName', 'startInitialValue', 'endInitialValue'],
       },
       {
         name: 'ElCascader',
@@ -651,8 +650,8 @@ namespace nasl.ui {
     ],
   })
   @Component({
-    title: '表单选择器',
-    description: '表单选择器',
+    title: '表单级联选择器',
+    description: '表单级联选择器',
     group: 'Form',
   })
   export class ElFormCascader<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
