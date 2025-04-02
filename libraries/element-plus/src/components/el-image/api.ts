@@ -56,8 +56,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '图片无法显示时的Alt值',
-      description: '原生 alt',
+      title: '图片替代文本',
+      description: '用自然语言描述图片中的内容，在图片加载失败或未加载时展示，可以提升用户体验或优化 SEO',
       setter: { concept: 'InputSetter' },
     })
     alt: nasl.core.String = '';
@@ -77,6 +77,15 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     previewSrcList: nasl.core.String = '';
+
+    @Prop({
+      group: '主要属性',
+      title: '点击遮罩关闭预览 ',
+      description: '控制点击遮罩层是否关闭预览弹窗',
+      setter: { concept: 'SwitchSetter' },
+    })
+    hideOnClickModal: nasl.core.Boolean = false;
+    
     @Prop({
       group: '主要属性',
       title: '是否开启无限滚动',
@@ -85,13 +94,6 @@ namespace nasl.ui {
     })
     infinite: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '点击图片时是否隐藏预览',
-      description: '点击图片时是否隐藏预览',
-      setter: { concept: 'SwitchSetter' },
-    })
-    hideOnClickModal: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
