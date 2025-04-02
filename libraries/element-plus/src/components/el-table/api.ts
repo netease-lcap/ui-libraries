@@ -1143,6 +1143,14 @@ namespace nasl.ui {
     })
     fixed: 'left' | 'right' ;
 
+    @Prop({
+      group: '样式属性',
+      title: '列宽度',
+      description: '设置列宽度，可设置为数字或百分比',
+      docDescription: '指定列宽，可以是数字或百分比，如100，或10%。',
+    })
+    width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
+
     // @Prop({
     //   group: '主要属性',
     //   title: '表头文本过长省略',
