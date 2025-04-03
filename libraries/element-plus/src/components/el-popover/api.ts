@@ -13,7 +13,7 @@ namespace nasl.ui {
         {
           expression: "this.getElement(el => el.slotTarget === 'reference')",
           cssSelector: '.el-tooltip__trigger',
-          placement: 'tail',
+          placement: 'anonymous',
         },
         {
           expression: 'this',
