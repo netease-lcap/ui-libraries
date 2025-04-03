@@ -8,6 +8,7 @@ import {
 } from '../../utils/project';
 import { getPreviewURL as getPreviewURLService } from '../preview';
 import { exec } from '../../utils/exec';
+import logger from '../../utils/logger';
 
 export const getProjectMeta = createAPIHandler('/api/project/meta', 'GET', async (req) => {
   const meta = getExtensionProjectMeta(req.context.rootPath);
@@ -46,7 +47,11 @@ export const publish = createAPIHandler('/api/project/release', 'POST', async (r
     description,
   });
 
-  await exec('npm run release');
+  try {
+    await exec('npm run release');
+  } catch (e: any) {
+    throw new Error('发布失败, 请根据终端中的异常信息进行排查');
+  }
 
   return true;
 });

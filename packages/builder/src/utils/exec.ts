@@ -29,10 +29,26 @@ export function execSync(...args: Array<string>) {
  */
 export function exec(...args: Array<string>) {
   const command = args.join(' ');
-
+  let ended = false;
   return new Promise(((resolve, reject) => {
     const result = spawn(command, { shell: true, stdio: 'inherit' });
-    result.on('error', reject);
-    result.on('close', (code) => (code === 0 ? resolve(true) : reject()));
+    result.on('error', (e) => {
+      if (!ended) {
+        ended = true;
+        reject(e);
+      }
+    });
+    result.on('exit', (code) => {
+      if (!ended) {
+        ended = true;
+        (code === 0 ? resolve(true) : reject());
+      }
+    });
+    result.on('close', (code) => {
+      if (!ended) {
+        ended = true;
+        (code === 0 ? resolve(true) : reject());
+      }
+    });
   }));
 }
