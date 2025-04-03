@@ -7,10 +7,16 @@ import { executeCreateForSchema } from '../../creates/schema';
 import { getExtensionProjectMeta } from '../../utils/project';
 import updateAPIFile from '../../utils/api-update';
 import { addTypeMap } from '../transform';
+import logger from '../../utils/logger';
 
 export const getComponentList = createAPIHandler('/api/component/list', 'GET', async (req) => {
-  const list = getComponentMetaInfos(req.context.rootPath, true);
-  return list;
+  try {
+    const list = getComponentMetaInfos(req.context.rootPath, true);
+    return list;
+  } catch (e: any) {
+    logger.error(e.message);
+    throw new Error('获取组件列表失败, 请根据终端中的异常信息进行排查');
+  }
 });
 
 export const getComponentDetail = createAPIHandler('/api/component/info', 'GET', async (req) => {

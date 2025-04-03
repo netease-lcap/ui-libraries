@@ -99,6 +99,7 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
   program.command('parse')
     .description('解析 npm 包')
     .argument('<pkg>', 'npm 包名，例如: antd、 element-ui@beta')
+    .option('-l, --local <local>', '本地包路径')
     .option('-o, --output <file>', '输出的文件名， 默认 schema.json')
     .option('-t, --tempDir <dir>', '临时目录')
     .option('-n, --npmClient <client>', 'npm 客户端，npm、yarn、pnpm, 默认npm')

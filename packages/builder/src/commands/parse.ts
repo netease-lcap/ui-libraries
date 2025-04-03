@@ -12,6 +12,7 @@ export interface ParseCommandOptions {
   tempDir?: string;
   npmClient?: 'npm' | 'yarn' | 'pnpm';
   generate?: boolean;
+  local?: string;
 }
 
 async function setPkgLcapScheme(output) {
@@ -76,6 +77,7 @@ export default async function executeParse(rootPath: string, options: ParseComma
     pkg,
     generate = false,
     npmClient = 'npm',
+    local,
     ...rest
   } = options;
   const i = pkg.indexOf('@');
@@ -91,13 +93,15 @@ export default async function executeParse(rootPath: string, options: ParseComma
 
   const output = options.output || 'schema.json';
   try {
-    console.log(picocolors.bgBlue(`开始解析包 ${pkg}`), options);
+    console.log(picocolors.bgBlue(`开始解析包 ${pkg} ${local ? `(本地包: ${local})` : ''}`), options);
     await parseNPM({
       ...rest,
       name,
       version,
       output,
       npmClient: 'npm',
+      isLocal: !!local,
+      file: local,
     });
 
     console.log(picocolors.green(`解析包 ${pkg} 成功，生成文件 ${options.output || 'schema.json'}`));
