@@ -28,8 +28,8 @@ export function handleModelValue(props) {
     }),
     ref: Object.assign(ref, {
       validated: async () => ref.validate().then(
-          () => true,
-          () => false,
+          () => ({ valid: true }),
+          () => ({ valid: false }),
         ),
       resetForm: () => {
         ref.resetFields();
