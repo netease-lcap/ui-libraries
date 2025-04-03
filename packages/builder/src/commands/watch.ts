@@ -1,4 +1,4 @@
-import { loadConfigFromFile, build } from 'vite';
+import { loadConfigFromFile, build, normalizePath } from 'vite';
 import chokidar from 'chokidar';
 import fs from 'fs-extra';
 import path from 'path';
@@ -161,7 +161,7 @@ async function startWatcher(options: LcapBuildOptions, pkgInfo: any, send: (msg:
       return;
     }
 
-    const tasks = watcherTasks.filter((task) => task.check(filePath));
+    const tasks = watcherTasks.filter((task) => task.check(normalizePath(filePath)));
     if (tasks.length > 0) {
       console.clear();
       logger.info(`${action} file, filePath: ${filePath} `);

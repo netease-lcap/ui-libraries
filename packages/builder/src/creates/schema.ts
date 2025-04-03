@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { normalizePath } from 'vite';
 import { type MaterialSchema, type MaterialComponent } from '@lcap/material-parser';
 import prompts from 'prompts';
 import { kebabCase, upperFirst } from 'lodash';
@@ -165,7 +166,7 @@ export function setImportStyle(rootPath: string, schema: MaterialSchema) {
     return;
   }
 
-  const styleCode = `import '${path.join(schema.name, schema.style)}';`;
+  const styleCode = `import '${normalizePath(path.join(schema.name, schema.style))}'`;
 
   const content = fs.readFileSync(entry, 'utf-8').toString().split('\n');
   if (content.some((line) => line.includes(styleCode))) {
