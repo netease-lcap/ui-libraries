@@ -1,5 +1,4 @@
 import { ElRadio, ElRadioGroup as ElRadioGroupPlus } from 'element-plus';
-import 'element-plus/theme-chalk/el-radio.css';
 import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 import { withFormItem } from '@/components/el-form';

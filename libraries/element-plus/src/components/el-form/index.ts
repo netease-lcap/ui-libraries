@@ -1,5 +1,4 @@
 import { ElForm as ElFormPlus, ElFormItem as ElFormItemPlus } from 'element-plus';
-import 'element-plus/theme-chalk/el-select.css';
 import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 import * as formItemPlugin from './plugins/form-item-plugin';

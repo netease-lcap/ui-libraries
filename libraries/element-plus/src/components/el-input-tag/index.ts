@@ -1,5 +1,4 @@
 import { ElInputTag as ElInputTagPlus } from 'element-plus';
-import 'element-plus/theme-chalk/el-input-tag.css';
 import './index.css';
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index.ts';
