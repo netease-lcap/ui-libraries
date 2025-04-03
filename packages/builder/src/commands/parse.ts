@@ -42,6 +42,7 @@ export async function parseNPM(options: any) {
     output = 'schema.json',
     tempDir,
     npmClient = 'npm',
+    ...rest
   } = options;
 
   const result = await parse({
@@ -49,6 +50,7 @@ export async function parseNPM(options: any) {
     version,
     tempDir,
     npmClient,
+    ...rest,
   });
 
   await fs.ensureFile(output);
