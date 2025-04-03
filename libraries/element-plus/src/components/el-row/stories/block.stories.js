@@ -24,9 +24,9 @@ export const Demo1 = {
   name: '3列样式（8:8:8）',
   render: () => ({
     template: `<el-row>
-    <el-col :span="8"><div class="grid-content ep-bg-purple" /></el-col>
-    <el-col :span="8"><div class="grid-content ep-bg-purple" /></el-col>
-    <el-col :span="8"><div class="grid-content ep-bg-purple" /></el-col>
+    <el-col :span="8"></el-col>
+    <el-col :span="8"></el-col>
+    <el-col :span="8"></el-col>
   </el-row>`,
   }),
 };

@@ -62,7 +62,7 @@ export function registerComponent<T>(Component, options) {
       let Render = Component;
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
-      const provideRef = ref({});
+      const provideRef = ref(injectRef);
       const router = useRouter?.();
       const route = useRoute?.();
       const useStore = create((set) => ({
