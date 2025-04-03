@@ -1060,10 +1060,10 @@ namespace nasl.ui {
       docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '普通列' }, { title: '多选列' }, { title: '展开列' }],
+        options: [{ title: '普通列' }, { title: '多选列' }, { title: '展开列' },{ title: '序号列' }],
       },
     })
-    type: 'normal' | 'selection' | 'expand' = 'normal';
+    type: 'normal' | 'selection' | 'expand' | 'index' = 'normal';
 
     // @Prop<UTableViewColumnOptions<T, V, P, M>, 'autoIndex'>({
     //   group: '数据属性',
