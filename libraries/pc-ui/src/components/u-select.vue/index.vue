@@ -3,7 +3,6 @@
     :class="[
       $style.root,
       isPreview ? $style.preview : '',
-      isPreview && !$env.VUE_APP_DESIGNER ? $style.disEvent : '',
     ]"
     :color="color || (formItemVM && formItemVM.color)"
     :readonly="readonly"
@@ -18,7 +17,7 @@
     :suffix="suffix ? suffix : undefined"
     :start="!!prefix"
     :end="!!suffix"
-    :tabindex="readonly || currentDisabled ? '' : 0"
+    :tabindex="readonly || currentDisabled || isPreview ? '' : 0"
     @click="focus"
     @keydown.up.prevent="$refs.popper.currentOpened ? shift(-1) : open()"
     @keydown.down.prevent="$refs.popper.currentOpened ? shift(+1) : open()"
@@ -179,7 +178,7 @@
       :color="color"
       :placement="placement"
       :append-to="appendTo"
-      :disabled="readonly || currentDisabled"
+      :disabled="readonly || currentDisabled || isPreview"
       :style="{ width: currentPopperWidth }"
       :footer="showRenderFooter"
       @update:opened="$emit('update:opened', $event, this)"
