@@ -21,7 +21,7 @@ namespace nasl.ui {
 
   export class ElMentionOptions<T, V> extends ViewComponentOptions {
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '数据源',
       description: '数据源',
       setter: {

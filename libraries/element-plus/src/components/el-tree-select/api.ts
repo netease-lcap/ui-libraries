@@ -300,7 +300,18 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      ignoreProperty: ['rules'],
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
     },
+    extends: [
+      {
+        name: 'ElFormItemPro',
+      },
+      {
+        name: 'ElTreeSelect',
+      },
+    ],
   })
   @Component({
     title: '表单树形选择',
