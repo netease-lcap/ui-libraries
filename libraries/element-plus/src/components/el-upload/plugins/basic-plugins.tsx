@@ -1,7 +1,7 @@
 import { UploadFile, UploadRawFile } from 'element-plus';
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
-import { ElDialog, ElFlex, ElIcon, ElText } from '@/components/index';
+import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
 import { useControllableValue, useRef } from '@/plugins/hooks';
 
 type Converter = 'json' | 'simple';
@@ -72,29 +72,30 @@ const formatResponse = (urlField, res, uploadFile) => {
 };
 
 const getValueByList = (fileList: UploadFile[], converter: Converter, urlField: string) => {
-  const successFiles = fileList.filter(item => item.status === 'success').map(item => {
-    if (item.response) {
-      return formatResponse(urlField, item.response, item)
-    } else {
-      return item
-    }
-  })
+  const successFiles = fileList
+    .filter((item) => item.status === 'success')
+    .map((item) => {
+      if (item.response) {
+        return formatResponse(urlField, item.response, item);
+      } else {
+        return item;
+      }
+    });
 
   return converter === 'simple' ? successFiles.map((x) => x.url || '').join(',') : JSON.stringify(successFiles);
 };
 
 export function removeValueByList(list: UploadFile[]) {
-  return Array.isArray(list) ? list.map(item => item.url).join(',') : ''
+  return Array.isArray(list) ? list.map((item) => item.url).join(',') : '';
 }
 
 export function handleResponse(props) {
   const onRemove = props.get('onRemove');
   const onChange = props.get('onChange');
-  const urlField = props.get('url-field') || 'filePath';
+  const urlField = props.get('urlField') || 'filePath';
   const converter = props.get('converter') || 'simple';
   const value = props.get('value');
   const setValue = props.get('onUpdate:value') ?? (() => {});
-  
   const defaultFileList = getFileListByValue(value, converter, undefined);
   return {
     fileList: defaultFileList,
@@ -109,7 +110,7 @@ export function handleResponse(props) {
       const newValue = removeValueByList(fileList);
       _.attempt(setValue, newValue);
       _.attempt(onRemove, uploadFile, fileList);
-    }
+    },
   };
 }
 
@@ -146,9 +147,9 @@ export function handleRequestData(props) {
     viaOriginURL,
   };
 
-  return { 
+  return {
     data: { ...(_.isObject(propData) ? propData : {}), ...formData },
-    action, 
+    action,
   };
 }
 
@@ -161,8 +162,8 @@ export function handleEvent(props) {
       _.isFunction(beforeUpload) && _.attempt(beforeUpload, rawFile);
     },
     beforeRemove: (uploadFile: UploadFile, uploadFiles: UploadFile[]) => {
-      _.isFunction(beforeRemove)
-        && _.attempt(beforeRemove, {
+      _.isFunction(beforeRemove) &&
+        _.attempt(beforeRemove, {
           uploadFile,
           uploadFiles,
         });
@@ -171,48 +172,50 @@ export function handleEvent(props) {
 }
 
 export function handleSlots(props) {
-  const triggerUploadText = props.get('triggerUploadText') || '点击上传';
+  const triggerUploadText = props.get('triggerUploadText') || '上传到服务器';
   const slots = props.get('slots');
   const listType = props.get('listType');
+  const ref = props.get('ref');
   const drag = props.get('drag');
+  const autoUpload = props.get('autoUpload');
+  const showUploadButton = props.get('showUploadButton');
 
   const dragSlot = {
-    default: (
+    trigger: (
       <ElFlex direction="column" alignment="center">
         <ElIcon class="el-icon--upload" name="UploadFilled" />
         <ElFlex class="el-upload__text" justify="center">
           <ElText text="拖拽到此区域 或者 " />
-          <ElText text={triggerUploadText} color="primary" />
+          <ElText text="点击上传文件" color="primary" />
         </ElFlex>
       </ElFlex>
     ),
-    trigger: null,
   };
 
   const pictureCardSlot = {
-    default: (
+    trigger: (
       <ElFlex direction="column" alignment="center">
         <ElIcon class="el-icon--upload" name="Plus" />
       </ElFlex>
     ),
-    trigger: null,
   };
 
-  const pictureSlot = {
+  const uploadSlot = {
     default: (
-      <ElFlex direction="column" alignment="center">
-        <ElIcon class="el-icon--upload" name="Plus" />
-      </ElFlex>
+      <ElButton
+        text={triggerUploadText}
+        onClick={() => {
+          ref!.submit();
+        }}></ElButton>
     ),
   };
 
   return {
     triggerUploadText,
-    slots: Object.assign(
-      slots,
-      drag ? dragSlot : {},
-      listType === 'picture-card' ? pictureCardSlot : {}
-    ),
+    slots: Object.assign(slots, 
+      drag ? dragSlot : {}, 
+      listType === 'picture-card' ? pictureCardSlot : {}, 
+      !autoUpload && showUploadButton ? uploadSlot : {}),
   };
 }
 
@@ -221,21 +224,14 @@ export function handlePreviewRender(props) {
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const listType = props.get('listType');
-  const onPreview = props.get('onPreview');
   const updateRef = useRef({});
+  const imageRef = useRef({});
   const dialogRef = useRef({});
   const urlField = props.get('url-field') || 'filePath';
-  if (listType !== 'picture-card') { 
-    return {}
+  if (listType !== 'picture-card') {
+    return {};
   }
-
-  const [dialogImageUrl, setDialogImageUrl] = useControllableValue(props, {
-    valuePropName: 'dialogImageUrl',
-    defaultValue: ''
-  });
   return {
-    dialogImageUrl,
-    ref: Object.assign(ref, updateRef.value),
     render: (props, { attrs, slots }) => {
       return [
         <div data-nodepath={nodepath} style={props.style}>
@@ -246,16 +242,37 @@ export function handlePreviewRender(props) {
             v-slots={slots}
           />
           <ElDialog ref={dialogRef}>
-            <img w-full src={props.dialogImageUrl} alt="Preview Image" style={{ width: '100%', height: '100%' }}/>
+            <img w-full src={imageRef.value.dialogImageUrl} alt="Preview Image" style={{ width: '100%', height: '100%' }} />
           </ElDialog>
         </div>,
       ];
     },
     onPreview: (uploadFile: UploadFile) => {
-      const url = _.get(uploadFile, `response.${urlField}`, uploadFile.url)
-      setDialogImageUrl(url)
-      dialogRef.value.open()
-      _.attempt(onPreview, uploadFile)
-    }
+      const url = _.get(uploadFile, `response.${urlField}`, uploadFile.url);
+      imageRef.value.dialogImageUrl = url;
+      dialogRef.value.open();
+    },
+    ref: {
+      ...ref,
+      submit: () => {
+        updateRef.value.submit();
+      },
+      clearFiles: () => {
+        updateRef.value.clearFiles();
+      },
+      abort: () => {
+        updateRef.value.abort();
+      },
+      handleRemove: () => {
+        updateRef.value.handleRemove();
+      },
+      handleStart: () => {
+        updateRef.value.handleStart();
+      },
+    },
   };
 }
+
+handlePreviewRender.order = 1;
+
+export * from './ide';
