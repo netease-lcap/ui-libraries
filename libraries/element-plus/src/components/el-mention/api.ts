@@ -138,7 +138,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormMention<T, V> extends ViewComponent {
-    constructor(options?: Partial<ElFormMentionOptions<T, V> & ElFormItemProOptions>) {
+    constructor(options?: Partial<ElFormMentionOptions<T, V> & ElFormItemProOptions & Omit<ElMentionOptions<T, V>, keyof ElFormItemProOptions>>) {
       super();
     }
   }
