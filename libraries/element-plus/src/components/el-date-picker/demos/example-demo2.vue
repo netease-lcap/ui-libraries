@@ -3,7 +3,7 @@
     <el-date-picker
       v-model:start="startValue"
       v-model:end="endValue"
-      type="daterange"
+      type="datetimerange"
       placeholder="Pick a day2"
       @change="onChange"
       @calendar-change="calendarChange" />
