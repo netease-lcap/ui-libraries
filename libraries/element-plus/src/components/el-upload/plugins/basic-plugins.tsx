@@ -2,7 +2,7 @@ import { UploadFile, UploadRawFile } from 'element-plus';
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
 import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
-import { useControllableValue, useRef } from '@/plugins/hooks';
+import { useRef } from '@/plugins/hooks';
 
 type Converter = 'json' | 'simple';
 
@@ -225,6 +225,7 @@ export function handlePreviewRender(props) {
   const nodepath = props.get('data-nodepath');
   const listType = props.get('listType');
   const updateRef = useRef({});
+  const onPreview = props.get('onPreview');
   const imageRef = useRef({});
   const dialogRef = useRef({});
   const urlField = props.get('url-field') || 'filePath';
@@ -251,6 +252,7 @@ export function handlePreviewRender(props) {
       const url = _.get(uploadFile, `response.${urlField}`, uploadFile.url);
       imageRef.value.dialogImageUrl = url;
       dialogRef.value.open();
+      _.attempt(onPreview, uploadFile)
     },
     ref: {
       ...ref,
