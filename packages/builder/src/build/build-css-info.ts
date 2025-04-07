@@ -12,6 +12,7 @@ import path from 'path';
 import * as postcss from 'postcss';
 import { parse } from 'postcss-values-parser';
 import { camelCase, kebabCase, capitalize } from 'lodash';
+import { normalizePath } from 'vite';
 import { getComponentMetaInfos } from '../utils/lcap';
 import type {
   LcapBuildOptions, CSSValue, CSSRule, SupportedCSSProperty, FinalComponentCSSInfo,
@@ -615,17 +616,17 @@ export default function buildCSSInfo(options: LcapBuildOptions) {
     componentNameMap[component.name] = undefined;
   });
 
-  const cssContent = fs.readFileSync(path.resolve(options.rootPath, options.destDir, 'index.css'), 'utf-8');
+  const cssContent = fs.readFileSync(normalizePath(path.resolve(options.rootPath, options.destDir, 'index.css')), 'utf-8');
 
-  const cssRulesDescPath = path.resolve(options.rootPath, 'index.css-info-desc.json');
+  const cssRulesDescPath = normalizePath(path.resolve(options.rootPath, 'index.css-info-desc.json'));
   const cssRulesDesc = fs.existsSync(cssRulesDescPath) ? fs.readJSONSync(cssRulesDescPath) : {};
 
   const result = parseCSSInfo(cssContent, cssRulesDesc, componentNameMap, options);
   postprocessCSSInfo(result.componentCSSInfoMap, result.cssRulesDesc, componentNameMap, options);
 
-  fs.writeJSONSync(path.resolve(options.rootPath, options.destDir, 'index.css-info-map.json'), convertCSSInfoMapToFinal(result.componentCSSInfoMap), { spaces: 2 });
-  fs.writeJSONSync(path.resolve(options.rootPath, 'index.css-info-desc.json'), sortMap(result.cssRulesDesc), { spaces: 2 });
-  fs.writeFileSync(path.resolve(options.rootPath, options.destDir, 'index.css'), result.cssContent);
+  fs.writeJSONSync(normalizePath(path.resolve(options.rootPath, options.destDir, 'index.css-info-map.json')), convertCSSInfoMapToFinal(result.componentCSSInfoMap), { spaces: 2 });
+  fs.writeJSONSync(normalizePath(path.resolve(options.rootPath, 'index.css-info-desc.json')), sortMap(result.cssRulesDesc), { spaces: 2 });
+  fs.writeFileSync(normalizePath(path.resolve(options.rootPath, options.destDir, 'index.css')), result.cssContent);
 }
 
 export function batchDepCSSInfo(
