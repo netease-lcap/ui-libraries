@@ -570,6 +570,8 @@ content: "\e67f";
 .preview {
     border: none;
     background: transparent;
+    pointer-events: default;
+    outline: none;
 }
 
 .disEvent{
