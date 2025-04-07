@@ -4,7 +4,9 @@
 import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import create from 'zustand-vue';
+// import create from 'zustand-vue';
+import { createStore } from 'zustand/vanilla';
+
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
@@ -65,7 +67,7 @@ export function registerComponent<T>(Component, options) {
       const provideRef = ref(injectRef);
       const router = useRouter?.();
       const route = useRoute?.();
-      const useStore = create((set) => ({
+      const useStore = createStore((set) => ({
         state: {
           inject: injectRef,
           provide: {},
@@ -90,12 +92,13 @@ export function registerComponent<T>(Component, options) {
           return set((state) => getNewStateFn(state), tr);
         },
       }));
+      const { getState, setState, subscribe, getInitialState } = useStore;
       const fiberMap = new Map<string, any>([
         ['updateQueen', new Set()],
-        ['useStore', useStore],
+        ['getState', getState],
       ]);
-      const setValue = useStore((state: any) => state.setvalue);
-      useStore.subscribe((props: any) => {
+      const { setvalue: setValue } = getState() as any;
+      subscribe((props: any) => {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
         const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');

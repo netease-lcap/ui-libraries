@@ -267,7 +267,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
       if: (_) => _.type.includes('range'),
     })
-    unlinkPanels: nasl.core.Boolean = true;
+    unlinkPanels: nasl.core.Boolean = false;
 
     // @Prop({
     //   title: '前缀图标',

@@ -72,7 +72,7 @@ export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
   resultRef.value = useMemo(() => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }), [dataSourceFn]);
 
   useEffect(() => {
-    watch(resultRef, (value) => setResult({ value }), { immediate: true, deep: true });
+    watch(resultRef, (value) => setResult(value), { immediate: true, deep: true });
   }, []);
   const { data, run, loading } = resultData
     ?? ({} as {
