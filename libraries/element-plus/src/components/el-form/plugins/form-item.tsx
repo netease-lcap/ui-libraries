@@ -87,9 +87,7 @@ export function handleComponentInForm(props) {
   useEffect(() => {
     const inject = props.get('inject');
     const { isInForm } = inject?.value?.[$formProvide] ?? {};
-    console.log(inject, 'inject');
     const isInIDE = isInForm && nodePath;
-    console.log(isInForm, nodePath, 'input');
     if (!isInIDE) return;
     const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
     elem?.setAttribute('data-element-tag', formTagName);
