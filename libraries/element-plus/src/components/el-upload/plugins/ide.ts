@@ -18,5 +18,3 @@ export function handleNodePath(props) {
     formTagName: 'el-form-upload',
   };
 }
-
-export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
