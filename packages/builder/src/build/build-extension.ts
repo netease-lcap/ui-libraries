@@ -37,7 +37,6 @@ function getPath(filePath, pkg) {
 }
 
 async function zipExtension(root, destDir) {
-  const dirList: string[] = ['nasl.extension.json'];
   const fileList = glob.sync(`${destDir}/**/*`)
     .filter((item) => item.indexOf('.') !== -1)
     .concat(['manifest', 'source.zip']);
@@ -46,7 +45,9 @@ async function zipExtension(root, destDir) {
     fileList.push('nasl.extension.d.ts');
   }
 
-  const zipList = dirList.concat(fileList);
+  fileList.push('nasl.extension.json');
+
+  const zipList = fileList;
   const pkg = fs.readJSONSync(path.resolve(root, 'package.json'));
   const manifestData = {
     'Plugin-Version': '1.0.0',
