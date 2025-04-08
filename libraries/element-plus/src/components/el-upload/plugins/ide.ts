@@ -12,7 +12,6 @@ export function handleNodePath(props) {
     const node = document.querySelector(`.${nodeId}`);
     node?.setAttribute('data-nodepath', nodePath);
   }, []);
-  console.log(`${myClass} ${nodeId}`);
   return {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
