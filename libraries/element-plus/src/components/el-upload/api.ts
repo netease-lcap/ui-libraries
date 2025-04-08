@@ -391,7 +391,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormUpload extends ViewComponent {
-    constructor(options?: Partial<ElFormUploadOptions & ElFormItemProOptions & Omit<ElInputNumberOptions, keyof ElFormItemProOptions>>) {
+    constructor(options?: Partial<ElFormUploadOptions & ElFormItemProOptions & Omit<ElFormUploadOptions, keyof ElFormItemProOptions>>) {
       super();
     }
   }
