@@ -122,7 +122,7 @@ namespace nasl.ui {
       description: '请求返回的 URL 字段名',
       docDescription: '请求返回的URL字段名',
     })
-    urlField: nasl.core.String = 'url';
+    urlField: nasl.core.String = 'filePath';
 
 
     @Prop({
@@ -299,6 +299,24 @@ namespace nasl.ui {
     })
     autoUpload: nasl.core.Boolean = true;
 
+    @Prop<ElUploadOptions, 'triggerUploadText'>({
+      group: '主要属性',
+      title: '上传按钮文本',
+      description: '上传按钮文本',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.autoUpload !== true
+    })
+    triggerUploadText: nasl.core.String = '上传到服务器';
+
+    @Prop<ElUploadOptions, 'showUploadButton'>({
+      group: '主要属性',
+      title: '是否显示上传按钮',
+      description: '是否显示上传按钮',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.autoUpload !== true
+    })
+    showUploadButton: nasl.core.Boolean = true;
+
     @Event({
       title: '文件上传成功时',
       description: '文件上传成功时的钩子',
@@ -353,4 +371,30 @@ namespace nasl.ui {
     })
     slotTrigger: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'ElFormItemPro',
+      },
+      {
+        name: 'ElUpload',
+      },
+    ],
+  })
+  @Component({
+    title: '表单上传组件',
+    description: '表单上传组件',
+    group: 'Form',
+  })
+  export class ElFormUpload extends ViewComponent {
+    constructor(options?: Partial<ElFormUploadOptions & ElFormItemProOptions & Omit<ElInputNumberOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormUploadOptions extends ViewComponentOptions {}
 }

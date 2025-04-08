@@ -26,7 +26,7 @@ export const Default = {
     template: `
     <el-upload converter="simple" urlField="filePath" action="/upload">
       <template #trigger>
-        <el-button text="点击上传"></el-button>
+        <el-button text="点击上传" style="margin-right: 10px;"></el-button>
       </template>
     </el-upload>`,
   }),
