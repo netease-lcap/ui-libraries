@@ -1,7 +1,7 @@
 import { ElInputNumber as ElInputNumberPlus } from 'element-plus';
 import './index.css';
 import { registerComponent } from '../../plugins';
-import * as basicsPlugin from './plugins/index.ts';
+import * as basicsPlugin from './plugins/index';
 import { withFormItem } from '../../components/el-form/plugins/form-item';
 
 const ElInputNumber = registerComponent(ElInputNumberPlus, { plugin: basicsPlugin });

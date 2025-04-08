@@ -1,6 +1,6 @@
 import { ElButton as ElButtonPlus } from 'element-plus';
 import { registerComponent } from '../../plugins';
-import * as basicsPlugin from './plugins/index.tsx';
+import * as basicsPlugin from './plugins/index';
 
 const ElButton = registerComponent(ElButtonPlus, { plugin: basicsPlugin });
 export { ElButtonPlus, ElButton };

@@ -1,7 +1,7 @@
 import { ElInputTag as ElInputTagPlus } from 'element-plus';
 import './index.css';
 import { registerComponent } from '../../plugins';
-import * as basicsPlugin from './plugins/index.ts';
+import * as basicsPlugin from './plugins/index';
 import { withFormItem } from '../../components/el-form/plugins/form-item';
 
 const ElInputTag = registerComponent(ElInputTagPlus, { plugin: basicsPlugin });
