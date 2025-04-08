@@ -94,4 +94,4 @@ export function handleTagName(props) {
   };
 }
 
-export { handleIcon } from '@/plugins/common/icon'
+export { handleIcon } from '@/plugins/common/icon';
