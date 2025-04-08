@@ -26,7 +26,7 @@ handleRange.order = 3;
 const getTimeValue = _.cond([
   [_.matches({ isNilTime: true }), _.constant([])],
   [_.matches({ isEffectiveTime: false }), _.constant([])],
-  [_.matches({ isControlledTime: false }), (value: GetTimeValueParams) => [dayjs(value.value[0]), dayjs(value.value[1])]],
+  [_.matches({ isControlledTime: false }), (value: GetTimeValueParams) => _.map(value.value, (item) => dayjs(item))],
   [_.stubTrue, ({ startValue, endValue }) => [dayjs(startValue), dayjs(endValue)]],
 ]);
 export function handleRangeDateValue(props) {
@@ -38,11 +38,13 @@ export function handleRangeDateValue(props) {
   const isControlledTime = props.has('startValue') && props.has('endValue');
   const [value, setValue] = useControllableValue(props);
   const isEffectiveTime = isControlledTime
-    ? dayjs(startValue).isValid() && dayjs(endValue).isValid()
+    ? _.every([startValue, endValue], (item) => dayjs(item).isValid())
     : _.every(value, (item) => dayjs(item).isValid());
-  const isNilTime = isControlledTime ? _.isNil(startValue) || _.isNil(endValue) : _.isEmpty(value);
+  const isNilTime = isControlledTime
+    ? _.some([startValue, endValue], (item) => _.isNil(item))
+    : _.some(value, (item) => _.isNil(item));
   const onChange = (value) => {
-    const isValidDayjs = dayjs(value?.[0]).isValid() && dayjs(value?.[1]).isValid();
+    const isValidDayjs = _.every(value, (item) => dayjs(item).isValid());
     const isUnEffectiveValue = _.isNil(value) || _.isEmpty(value) || !isValidDayjs;
     const effectiveTime = isUnEffectiveValue ? [] : _.map(value, (item) => dayjs(item).toJSON());
     _.attempt(setStartValue, effectiveTime[0]);

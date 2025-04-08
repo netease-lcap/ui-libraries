@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import { useMemo } from '@/plugins/hooks';
-import { $rootStyle } from '@/plugins/constants';
 import { categoryStyles } from '@/utils';
 
 export function handlePropName(props) {
@@ -11,26 +10,19 @@ export function handlePropName(props) {
   return { prop };
 }
 
-// function categoryStyles(style: Record<string, string> = {}) {
-//   return Object.entries(style).reduce(
-//     (acc, [key, value]) => {
-//       const styleKey = $rootStyle.includes(key) ? 'style' : 'innerStyle';
-//       acc[styleKey][key] = value;
-//       return acc;
-//     },
-//     { style: {}, innerStyle: {} },
-//   );
+// export function handleInputStyle(props) {
+//   const styleProps = props.get('style');
+//   const { style, innerStyle } = categoryStyles(styleProps);
+//   return { style, innerStyle };
 // }
-export function handleInputStyle(props) {
-  const styleProps = props.get('style');
-  const { style, innerStyle } = categoryStyles(styleProps);
-  return { style, innerStyle };
-}
 
 export function handleRules(props) {
   const rulesProps = props.get('rules') ?? [];
   const isRequired = props.get('isRequired');
-  const required = useMemo(() => (isRequired ? { required: true, message: '表单项不得为空', trigger: 'blur' } : []), [isRequired]);
+  const required = useMemo(
+    () => (isRequired ? { required: true, message: '表单项不得为空', trigger: 'blur' } : []),
+    [isRequired],
+  );
   const rules = useMemo(() => {
     const ideRules = _.map(rulesProps, (item) => ({
         message: item.message,
