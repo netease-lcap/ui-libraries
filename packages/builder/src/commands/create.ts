@@ -46,6 +46,8 @@ export default async (rootPath: string, options: any) => {
     }
   }
 
+  const prompt = options.prompt ? JSON.parse(options.prompt) : null;
+
   const projectMetaInfo = getExtensionProjectMeta(rootPath);
 
   switch (type) {
@@ -53,10 +55,10 @@ export default async (rootPath: string, options: any) => {
       await executeCreateForSchema(rootPath, projectMetaInfo, options.schema, options.name);
       break;
     case 'component':
-      await executeCreateComponent(rootPath, projectMetaInfo);
+      await executeCreateComponent(rootPath, projectMetaInfo, prompt);
       break;
     case 'logic':
-      await executeCreateLogic(rootPath, projectMetaInfo);
+      await executeCreateLogic(rootPath, projectMetaInfo, prompt);
       break;
     default: break;
   }

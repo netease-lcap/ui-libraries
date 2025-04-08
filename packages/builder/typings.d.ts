@@ -18,6 +18,20 @@ declare namespace nasl.ui {
 
     firstError: string;
   }
+
+  export interface ExtensionComponentOptions {
+    type: 'pc' | 'h5' | 'both';
+    show?: boolean;
+    replaceNaslUIComponent?: string;
+    extends?: any;
+    sourceName?: string;
+    ideusage?: {
+      idetype?: 'element' | 'modal' | 'popover' | 'container' | string;
+      [key: string]: any;
+    };
+  }
+
+  export function ExtensionComponent(options?: ExtensionComponentOptions & Record<string, any>): (target: any) => void;
 }
 
 declare namespace nasl.core {

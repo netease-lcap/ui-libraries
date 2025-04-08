@@ -239,8 +239,8 @@ export function createComponent(rootPath: string, metaInfo: ProjectMetaInfo, opt
   );
 }
 
-export async function executeCreateComponent(rootPath: string, metaInfo: ProjectMetaInfo) {
-  const options = await getCreateComponentOptions(rootPath, metaInfo);
+export async function executeCreateComponent(rootPath: string, metaInfo: ProjectMetaInfo, prompt: any) {
+  const options = prompt ?? await getCreateComponentOptions(rootPath, metaInfo);
 
   if (!options) {
     return;
