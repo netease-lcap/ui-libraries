@@ -440,7 +440,7 @@ namespace nasl.ui {
     ],
   })
   @Component({
-    title: '日期选择器',
+    title: '表单日期选择器',
     description: '表单日期选择器',
     group: 'Form',
   })

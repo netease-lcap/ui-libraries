@@ -71,15 +71,15 @@ namespace nasl.ui {
     })
     isRange: nasl.core.Boolean = false;
 
-    @Prop<ElTimePickerOptions, 'value'>({
+    @Prop<ElTimePickerOptions, 'modelValue'>({
       group: '数据属性',
+      sync: true,
       title: '值',
       description: '选中值。',
       setter: { concept: 'InputSetter' },
       if: (_) => !_.isRange,
-      sync: true,
     })
-    value: nasl.core.String | nasl.core.Time;
+    modelValue: nasl.core.String | nasl.core.Time;
 
     @Prop<ElTimePickerOptions, 'startValue'>({
       group: '数据属性',
@@ -332,6 +332,7 @@ namespace nasl.ui {
         label: 'display: inline-block;',
       },
       forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: true,
       namedSlotOmitWrapper: ['label'],
     },
     extends: [{
@@ -340,11 +341,11 @@ namespace nasl.ui {
         'slotDefault',
       ],
     }, {
-      name: 'ElDatePicker',
+      name: 'ElTimePicker',
     }],
   })
   @Component({
-    title: '时间选择器',
+    title: '表单时间选择器',
     description: '表单时间选择器',
     group: 'Form',
   })

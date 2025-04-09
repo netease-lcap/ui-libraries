@@ -1,0 +1,6 @@
+.el-date-editor{
+  --el-date-editor-width:240px;
+}
+.el-date-editor--daterange, .el-date-editor--timerange{
+  --el-date-editor-width:280px;
+}
