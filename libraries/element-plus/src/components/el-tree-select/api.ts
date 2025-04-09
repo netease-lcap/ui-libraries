@@ -22,7 +22,13 @@ namespace nasl.ui {
     }
   }
 
-  export class ElTreeSelectOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
+  export class ElTreeSelectOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
       title: '禁用组件',
@@ -323,10 +329,12 @@ namespace nasl.ui {
     V,
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
-    C extends nasl.core.Boolean,
+    C,
   > extends ViewComponent {
     constructor(
-      options?: Partial<ElTreeSelectOptions<T, V, P, M, C> & Omit<ElTreeSelectOptions<T, V, P, M, C>, keyof ElFormItemProOptions>>,
+      options?: Partial<
+        ElTreeSelectOptions<T, V, P, M, C> & Omit<ElTreeSelectOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+      >,
     ) {
       super();
     }
@@ -337,6 +345,6 @@ namespace nasl.ui {
     V,
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
-    C extends nasl.core.Boolean,
+    C,
   > extends ViewComponentOptions {}
 }
