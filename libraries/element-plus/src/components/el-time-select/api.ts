@@ -10,7 +10,7 @@ namespace nasl.ui {
   @Component({
     title: '时间选择',
     icon: 'TimeSelect',
-    description: '',
+    description: '时间选择',
     group: 'Form',
   })
   export class ElTimeSelect extends ViewComponent {
