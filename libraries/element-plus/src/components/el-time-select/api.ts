@@ -208,11 +208,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormTimeSelect extends ViewComponent {
-    constructor(
-      options?: Partial<
-        ElFormTimeSelectOptions & ElFormItemProOptions & Omit<ElFormTimeSelectOptions, keyof ElFormItemProOptions>
-      >,
-    ) {
+    constructor(options?: Partial<ElFormTimeSelectOptions & ElFormItemProOptions & Omit<ElTimeSelectOptions, keyof ElFormItemProOptions>>) {
       super();
     }
   }

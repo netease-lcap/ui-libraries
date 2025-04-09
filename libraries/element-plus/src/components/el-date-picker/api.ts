@@ -315,28 +315,28 @@ namespace nasl.ui {
     // })
     // valueOnClear: nasl.core.Decimal | null;
 
-    @Prop({
-      group: '主要属性',
-      title: 'Tooltip 可用的 positions',
-      description: 'Tooltip 可用的 positions',
-      setter: {
-        concept: 'InputSetter',
-      },
-    })
-    fallbackPlacements: Array<
-      | 'top'
-      | 'top-start'
-      | 'top-end'
-      | 'bottom'
-      | 'bottom-start'
-      | 'bottom-end'
-      | 'left'
-      | 'left-start'
-      | 'left-end'
-      | 'right'
-      | 'right-start'
-      | 'right-end'
-    >;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: 'Tooltip 可用的 positions',
+    //   description: 'Tooltip 可用的 positions',
+    //   setter: {
+    //     concept: 'InputSetter',
+    //   },
+    // })
+    // fallbackPlacements: Array<
+    //   | 'top'
+    //   | 'top-start'
+    //   | 'top-end'
+    //   | 'bottom'
+    //   | 'bottom-start'
+    //   | 'bottom-end'
+    //   | 'left'
+    //   | 'left-start'
+    //   | 'left-end'
+    //   | 'right'
+    //   | 'right-start'
+    //   | 'right-end'
+    // >;
 
     @Prop({
       group: '主要属性',
@@ -416,4 +416,43 @@ namespace nasl.ui {
     })
     onVisibleChange: (visibility: nasl.core.Boolean) => void;
   }
+
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      ignoreProperty: ['rules'],
+      bindStyleAttr: 'inputStyle',
+      bindStyleSelector: '.__cw-form-compose-input',
+      slotWrapperInlineStyle: {
+        label: 'display: inline-block;',
+      },
+      forceRefresh: 'parent',
+      namedSlotOmitWrapper: ['label'],
+    },
+    extends: [
+      {
+        name: 'ElFormItemPro',
+        excludes: ['slotDefault'],
+      },
+      {
+        name: 'ElDatePicker',
+      },
+    ],
+  })
+  @Component({
+    title: '日期选择器',
+    description: '表单日期选择器',
+    group: 'Form',
+  })
+  export class ElFormDatePicker extends ViewComponent {
+    constructor(
+      options?: Partial<
+        ElFormDatePickerOptions & ElFormItemProOptions & Omit<ElDatePickerOptions, keyof ElFormItemProOptions>
+      >,
+    ) {
+      super();
+    }
+  }
+
+  export class ElFormDatePickerOptions extends ViewComponentOptions {}
 }

@@ -17,7 +17,7 @@
     :suffix="suffix ? suffix : undefined"
     :start="!!prefix"
     :end="!!suffix"
-    :tabindex="readonly || currentDisabled || isPreview ? '' : 0"
+    :tabindex="readonly || currentDisabled || isPreview ? -1 : 0"
     @click="focus"
     @keydown.up.prevent="$refs.popper.currentOpened ? shift(-1) : open()"
     @keydown.down.prevent="$refs.popper.currentOpened ? shift(+1) : open()"

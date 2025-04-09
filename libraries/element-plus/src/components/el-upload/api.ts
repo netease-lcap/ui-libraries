@@ -375,13 +375,19 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      disableSlotAutoFill: [
+        {
+          slot: 'tip',
+          expression: "!this.getAttribute('hasTip')?.value",
+        }
+      ],
     },
     extends: [
       {
-        name: 'ElFormItemPro',
+        name: 'ElUpload',
       },
       {
-        name: 'ElUpload',
+        name: 'ElFormItemPro',
       },
     ],
   })
@@ -391,7 +397,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormUpload extends ViewComponent {
-    constructor(options?: Partial<ElFormUploadOptions & ElFormItemProOptions & Omit<ElFormUploadOptions, keyof ElFormItemProOptions>>) {
+    constructor(options?: Partial<ElFormUploadOptions & ElFormItemProOptions & Omit<ElUploadOptions, keyof ElFormItemProOptions>>) {
       super();
     }
   }
