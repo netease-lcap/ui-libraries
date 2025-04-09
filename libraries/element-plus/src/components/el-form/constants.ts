@@ -13,4 +13,5 @@ export const $formItemProps = [
   'isRequired',
   'validateStatus',
   'data-nodepath',
+  'style',
 ];
