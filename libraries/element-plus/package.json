@@ -18,14 +18,6 @@
     "manifest.json",
     "README.md"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist-theme/index.mjs",
-      "require": "./dist-theme/index.cjs",
-      "default": "./dist-theme/index.js"
-    },
-    "./*": "./*"
-  },
   "scripts": {
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 8008",
