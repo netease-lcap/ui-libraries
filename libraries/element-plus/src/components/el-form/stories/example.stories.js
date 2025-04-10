@@ -147,12 +147,20 @@ export const Example2 = {
     <div>
     <el-form :model="model" ref="formRef">
     {{inputName}}
-
+    <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
+     <el-form-input-number :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-cascader :rules="rules"    label="input212"  data-nodepath="input21" :dataSource="list" />
+    <el-form-input-tag :rules="rules"   label="input21"  data-nodepath="input21" />
+    <el-form-rate :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-slider :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-switch :rules="rules"  v-model="switchValue" label="input21" data-nodepath="switch" />
+    <el-form-tree-select :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-checkbox-group label="ww" :rules="rules" :isRequired="true" :dataSource="list"></el-form-checkbox-group>
+    <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
 
     <a @click="handleClick(formRef)" >Submit</a>
     <a @click="handleClick(formRef)" >Submit2</a>
     </el-form>
-    <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21222333" />
 
 
     </div>
