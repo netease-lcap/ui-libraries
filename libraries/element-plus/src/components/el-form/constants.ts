@@ -13,5 +13,6 @@ export const $formItemProps = [
   'isRequired',
   'validateStatus',
   'data-nodepath',
+  'data-enable-events',
   'style',
 ];
