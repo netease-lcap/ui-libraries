@@ -294,9 +294,11 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       ignoreProperty: ['rules'],
+      structured: false,
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
+
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
     },

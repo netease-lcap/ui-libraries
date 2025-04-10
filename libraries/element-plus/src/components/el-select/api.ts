@@ -658,6 +658,7 @@ namespace nasl.ui {
       additionalAttribute: {
         valueField: '"value"',
         textField: '"text"',
+        '@blur': '"($event)=>{throw\'stop blur!\'}"',
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",
