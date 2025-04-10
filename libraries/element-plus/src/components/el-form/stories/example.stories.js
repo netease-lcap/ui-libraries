@@ -76,8 +76,13 @@ export const Example2 = {
       const list = async () => {
         return new Promise((res) => {
           setTimeout(() => {
-            res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
-          }, 3000);
+            // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
+            res([
+              { value: 1, label: 1 },
+              { value: 2, label: 2 },
+              { value: 3, label: 3, 'data-nodepath': 'aabb' },
+            ]);
+          }, 1000);
         });
       };
       const select = ref();
@@ -144,7 +149,7 @@ export const Example2 = {
     {{inputName}}
     <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
      <el-form-input-number :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-cascader :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-cascader :rules="rules"    label="input212"  data-nodepath="input21" :dataSource="list" />
     <el-form-input-tag :rules="rules"   label="input21"  data-nodepath="input21" />
     <el-form-rate :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <el-form-slider :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />

@@ -99,11 +99,14 @@ export function useState(initialstate?) {
   }
   const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
   const localSetValue = (value) => {
+    // console.log(value, 'value-data');
     hook.isSetValue = true;
     const state = currentFiber.getState().state[hook?.storeKey];
-    if (_.isEqual(value, state)) {
-      return;
-    }
+    // console.log(state, 'state-data');
+    // TODO 判断是否相等
+    // if (_.isEqual(value, state)) {
+    //   return;
+    // }
     const getValue = _.isFunction(value) ? value(getStateValue(state)) : value;
     currentFiber.updateQueen.add({ [hook.storeKey]: getValue });
     _.defer(() => {

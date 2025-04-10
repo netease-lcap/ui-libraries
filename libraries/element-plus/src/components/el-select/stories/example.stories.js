@@ -39,14 +39,14 @@ export const Example1 = {
       };
     },
     template: `
-    <el-select v-model="activeName" multiple>
+    <el-form-select v-model="activeName" multiple>
       <el-option
         v-for="item in list"
         key="item.value"
         label="item.label"
         value="item.value"
       />
-    </el-select>
+    </el-form-select>
 
     `,
   }),

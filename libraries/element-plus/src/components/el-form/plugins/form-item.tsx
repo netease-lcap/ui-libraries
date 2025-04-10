@@ -42,7 +42,6 @@ export function withFormItem(Component, name) {
       const isControlled = Object.prototype.hasOwnProperty.call(vnodeProps, 'modelValue');
       const modelValue = computed(() => (isControlled ? props?.modelValue : value?.[prop.value]));
       const style = computed(() => categoryStyles(_.assign({}, props?.style, attrs.style)));
-      console.log(style.value, 'style', { ..._.omit(_.assign({}, props, attrs), $formItemProps) });
       const onUpdateModelValue = (value) => {
         const propsOnUpdateModelValue = props?.['onUpdate:modelValue'] ?? (() => {});
         _.attempt(propsOnUpdateModelValue, value);

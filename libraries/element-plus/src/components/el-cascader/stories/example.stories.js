@@ -185,9 +185,9 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-cascader ref="select" data-nodepath="123" size="small" filterable :multiple="true" :placeholder="12" valueField="entity1.id"
+    <el-cascader ref="select" data-nodepath="123"  filterable :multiple="true" :placeholder="12" valueField="entity1.id"
         textField="entity1.property1"
-        parentField="entity1.fid" v-model:value="activeName" :dataSource="dataSource"  >
+        parentField="entity1.fid" :dataSource="dataSource"  >
 
     </el-cascader>
     

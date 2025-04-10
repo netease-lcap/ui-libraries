@@ -674,6 +674,9 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
+        excludes: [
+          'slotDefault',
+        ],
       },
       {
         name: 'ElSelect',
