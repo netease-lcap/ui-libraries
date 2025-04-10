@@ -173,49 +173,57 @@ export function handleEvent(props) {
 
 export function handleSlots(props) {
   const triggerUploadText = props.get('triggerUploadText') || '上传到服务器';
-  const slots = props.get('slots');
+  const slots = props.get('slots') || {};
   const listType = props.get('listType');
   const ref = props.get('ref');
   const drag = props.get('drag');
   const autoUpload = props.get('autoUpload');
+  const hasTip = props.get('hasTip');
   const showUploadButton = props.get('showUploadButton');
 
-  const dragSlot = {
-    trigger: (
-      <ElFlex direction="column" alignment="center">
-        <ElIcon class="el-icon--upload" name="UploadFilled" />
-        <ElFlex class="el-upload__text" justify="center">
-          <ElText text="拖拽到此区域 或者 " />
-          <ElText text="点击上传文件" color="primary" />
-        </ElFlex>
-      </ElFlex>
-    ),
-  };
+  const dragSlot = drag
+    ? {
+        trigger: (
+          <ElFlex direction="column" alignment="center">
+            <ElIcon class="el-icon--upload" name="UploadFilled" />
+            <ElFlex class="el-upload__text" justify="center">
+              <ElText text="拖拽到此区域 或者 " />
+              <ElText text="点击上传文件" color="primary" />
+            </ElFlex>
+          </ElFlex>
+        ),
+      }
+    : {};
 
-  const pictureCardSlot = {
-    trigger: (
-      <ElFlex direction="column" alignment="center">
-        <ElIcon class="el-icon--upload" name="Plus" />
-      </ElFlex>
-    ),
-  };
+  const pictureCardSlot =
+    listType === 'picture-card'
+      ? {
+          trigger: (
+            <ElFlex direction="column" alignment="center">
+              <ElIcon class="el-icon--upload" name="Plus" />
+            </ElFlex>
+          ),
+        }
+      : {};
 
-  const uploadSlot = {
-    default: (
-      <ElButton
-        text={triggerUploadText}
-        onClick={() => {
-          ref!.submit();
-        }}></ElButton>
-    ),
-  };
+  const uploadSlot =
+    !autoUpload && showUploadButton
+      ? {
+          default: (
+            <ElButton
+              text={triggerUploadText}
+              onClick={() => {
+                ref?.submit();
+              }}></ElButton>
+          ),
+        }
+      : {};
+
+  const tipSlot = hasTip ? { tip: slots.tip } : { tip: null };
 
   return {
     triggerUploadText,
-    slots: Object.assign(slots, 
-      drag ? dragSlot : {}, 
-      listType === 'picture-card' ? pictureCardSlot : {}, 
-      !autoUpload && showUploadButton ? uploadSlot : {}),
+    slots: { ...slots, ...dragSlot, ...pictureCardSlot, ...uploadSlot, ...tipSlot },
   };
 }
 
@@ -243,7 +251,12 @@ export function handlePreviewRender(props) {
             v-slots={slots}
           />
           <ElDialog ref={dialogRef}>
-            <img w-full src={imageRef.value.dialogImageUrl} alt="Preview Image" style={{ width: '100%', height: '100%' }} />
+            <img
+              w-full
+              src={imageRef.value.dialogImageUrl}
+              alt="Preview Image"
+              style={{ width: '100%', height: '100%' }}
+            />
           </ElDialog>
         </div>,
       ];
@@ -252,7 +265,7 @@ export function handlePreviewRender(props) {
       const url = _.get(uploadFile, `response.${urlField}`, uploadFile.url);
       imageRef.value.dialogImageUrl = url;
       dialogRef.value.open();
-      _.attempt(onPreview, uploadFile)
+      _.attempt(onPreview, uploadFile);
     },
     ref: {
       ...ref,

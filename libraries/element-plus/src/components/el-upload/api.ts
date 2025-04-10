@@ -315,7 +315,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
       if: (_) => _.autoUpload !== true
     })
-    showUploadButton: nasl.core.Boolean = true;
+    showUploadButton: nasl.core.Boolean = false;
 
     @Event({
       title: '文件上传成功时',
