@@ -3,16 +3,19 @@ import _ from 'lodash';
 import { ElPopconfirm } from 'element-plus';
 import { $deletePropsList } from '@/plugins/constants';
 import { $PopconfirmProps } from '../constants';
+import { getPropsIcon } from '@/plugins/common/icon';
 import { useCallback } from '@/plugins/hooks';
 // export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export function handleTextToslot(props) {
   const text = props.get('text');
   const slots = props.get('slots');
+  const icon = props.get('icon');
   const deletePropsList = props.get($deletePropsList).concat(['text']);
   const defaultSlot = text ? { default: () => text } : {};
   return {
     slots: _.assign(slots, defaultSlot),
     [$deletePropsList]: deletePropsList,
+    icon: getPropsIcon({ name: icon }),
   };
 }
 

@@ -112,13 +112,13 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '图标',
-    //   description: '图标组件',
-    //   setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
-    // })
-    // icon: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '图标',
+      description: '图标组件',
+      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+    })
+    icon: nasl.core.String;
 
     @Prop({
       group: '主要属性',

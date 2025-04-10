@@ -8,4 +8,4 @@ export function handleTagName(props) {
     class: `${className} el-time-select`,
   };
 }
-export { handleIcon } from '@/plugins/common/icon'
+export { handleIcon } from '@/plugins/common/icon';

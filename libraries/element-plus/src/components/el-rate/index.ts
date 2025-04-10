@@ -1,5 +1,4 @@
 import { ElRate as ElRatePlus } from 'element-plus';
-import 'element-plus/theme-chalk/el-rate.css';
 import './index.css';
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';

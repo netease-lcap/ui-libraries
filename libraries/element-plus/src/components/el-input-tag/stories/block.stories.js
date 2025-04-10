@@ -16,7 +16,7 @@ export const Block1 = {
   render: () => ({
     setup() {},
     template: `
-      <el-input-tag />
+      <el-input-tag placeholder="请输入内容" />
     `,
   }),
 };

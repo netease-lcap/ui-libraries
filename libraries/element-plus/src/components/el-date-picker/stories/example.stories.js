@@ -1,5 +1,7 @@
 import ElDatePicker from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
+import ExampleDemo2 from '../demos/example-demo2.vue';
+import ExampleDemo3 from '../demos/example-demo3.vue';
 
 export default {
   id: 'el-date-picker-examples',
@@ -11,54 +13,31 @@ export default {
   },
 };
 
-export const Default = {
-  name: '基础示例',
-  render: () => ({
-    data() {
-      return {
-        value: '2024-08-02',
-      };
-    },
-    methods: {
-      handleChange(name, e) {
-        console.log(name, e);
-      },
-      handleSyncState(name, value) {
-        console.log('sync', name, value);
-      },
-    },
-    template:
-      '<el-date-picker align="center" style="--el-datepicker-cell-active-background: red;" :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker>',
-  }),
-};
-
-export const Range = {
-  name: '区间选择示例',
-  render: () => ({
-    data() {
-      return {
-        startValue: '2024-08-02',
-        endValue: '2024-10-02',
-      };
-    },
-    methods: {
-      handleChange(name, e) {
-        console.log(name, e);
-      },
-      handleSyncState(name, value) {
-        console.log('sync', name, value);
-      },
-    },
-    template:
-      '<el-date-picker :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker>',
-  }),
-};
-
 export const Example1 = {
   name: '基础用法',
   render: () => ({
     components: {
       exampleDemo: ExampleDemo1,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+export const Example2 = {
+  name: '区间选择',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo2,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+export const Example3 = {
+  name: '多个日期选择',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo3,
     },
     template: '<example-demo></example-demo>',
   }),

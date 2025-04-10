@@ -159,7 +159,7 @@ dragSort="row"
 :stripe="true"
 >
 
-<el-table-column label="申请人"   sortable>
+<el-table-column label="申请人"  style="color:red"  sortable>
   <div>123</div>
 </el-table-column>
 

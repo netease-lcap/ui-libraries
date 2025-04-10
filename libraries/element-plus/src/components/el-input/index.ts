@@ -1,5 +1,4 @@
 import { ElInput as ElInputPlus } from 'element-plus';
-import 'element-plus/theme-chalk/el-input.css';
 import './index.css';
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';

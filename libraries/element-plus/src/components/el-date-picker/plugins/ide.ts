@@ -1,6 +1,6 @@
 /* 仅在 ide 环境生效的插件 */
 import _ from 'lodash';
-import { $deletePropsList } from '@/plugins/constants';
+import { $deletePropsList, $ide } from '@/plugins/constants';
 import { useEffect, useMemo } from '@/plugins/hooks';
 
 export function handleNodePath(props) {
@@ -18,3 +18,4 @@ export function handleNodePath(props) {
     formTagName: 'el-form-date-picker',
   };
 }
+handleNodePath.type = $ide;

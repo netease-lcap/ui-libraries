@@ -89,7 +89,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    value: nasl.collection.List<V>;
+    modelValue: nasl.collection.List<V>;
 
     // @Prop<ElCheckboxGroupOptions<T, V>, 'itemProps'>({
     //   group: '数据属性',
@@ -206,7 +206,7 @@ namespace nasl.ui {
       description: '多选框的值。',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
+    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
 
     @Prop({
       group: '数据属性',

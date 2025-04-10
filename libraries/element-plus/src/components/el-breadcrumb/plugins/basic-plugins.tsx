@@ -1,51 +1,59 @@
-import { useRoute } from 'vue-router';
+import _ from 'lodash';
 import { useMemo } from '@/plugins/hooks';
 import { ElBreadcrumbItem } from '../index';
 import { ElIcon } from '../../index';
+import { useCallback } from '../../../plugins/hooks';
 
 export function handleAutoCrumbs(props) {
   const auto = props.get('auto');
   const showInDesigner = props.get('showInDesigner');
   const slots = props.get('slots');
+  const route = props.get('route');
 
-  if (!auto || showInDesigner) return {};
+  const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
 
-  const route = useRoute?.();
-
-  const items = useMemo(() => {
+  const routerMeta = useMemo(() => {
     if (!route?.path) return [];
-
-    const matched = route.matched || [];
-    return matched.reduce((pre: Array<{title: string, to: string}>, curMatch) => {
-      const meta = {
-        ...curMatch.meta,
-        ...((curMatch?.components?.default?.__vccOpts || curMatch.components?.default)?.meta || {}),
-      };
-      pre.push({
-        title: meta?.crumb || curMatch.name || curMatch.path,
-        to: curMatch.path,
-      });
-      return pre;
-    }, []);
+    return _.reduce(
+      route.matched,
+      (pre: Array<{ title: string; to: string }>, curMatch) => {
+        const meta = _.assign(
+          {},
+          curMatch.meta,
+          _.get(curMatch, 'components.default.__vccOpts.meta', {}),
+          _.get(curMatch, 'components.default.meta', {}),
+        );
+        return pre.concat({
+          title: meta?.crumb || curMatch.name || curMatch.path,
+          to: curMatch.path,
+        });
+      },
+      [],
+    );
   }, [route]);
 
-  const renderBreadcrumbItem = (item) => (
-    <ElBreadcrumbItem
-      key={item.to}
-      to={{ path: item.to }}
-    >
-      {{
-        default: () => item.title,
-      }}
-    </ElBreadcrumbItem>
-  );
+  const defaultSlots = useCallback(() => {
+    return routerMeta.map((item) => (
+      <ElBreadcrumbItem key={item.to} to={{ path: item.to }}>
+        {{
+          default: () => item.title,
+        }}
+      </ElBreadcrumbItem>
+    ));
+  }, [routerMeta]);
 
-  return {
-    slots: {
-      ...slots,
-      default: () => items.map(renderBreadcrumbItem),
-    },
-  };
+  const result = useMemo(
+    () => (!isNotAutoCrumbs
+        ? {
+            slots: {
+              ...slots,
+              default: defaultSlots,
+            },
+          }
+        : {}),
+    [isNotAutoCrumbs, defaultSlots, slots],
+  );
+  return result;
 }
 
 export function handleSeparatorIcon(props) {

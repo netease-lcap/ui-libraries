@@ -222,16 +222,16 @@ namespace nasl.ui {
     onOpened: (event: any) => any;
 
     @Event({
-      title: 'Drawer 关闭的回调',
-      description: 'Drawer 关闭的回调',
-    })
-    onClose: (event: any) => any;
-
-    @Event({
       title: '关闭前的回调',
       description: '关闭前的回调，会暂停 Drawer 的关闭',
     })
     onBeforeClose: (event: any) => any;
+
+    @Event({
+      title: 'Drawer 关闭的回调',
+      description: 'Drawer 关闭的回调',
+    })
+    onClose: (event: any) => any;
 
     @Event({
       title: 'Drawer 关闭动画结束时的回调',

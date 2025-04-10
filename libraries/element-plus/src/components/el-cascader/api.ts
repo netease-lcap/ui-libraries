@@ -597,7 +597,6 @@ namespace nasl.ui {
     // })
     // slotValueDisplay: () => Array<ViewComponent>;
 
-
     // @Slot({
     //   title: '选项内容',
     //   description: '自定义选项内容',
@@ -653,29 +652,23 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: [
-          'slotDefault',
-          'useRangeValue',
-          'startFieldName',
-          'endFieldName',
-          'startInitialValue',
-          'endInitialValue',
-        ],
       },
       {
-        name: 'ElSelectPro',
+        name: 'ElCascader',
       },
     ],
   })
   @Component({
-    title: '表单选择器',
-    description: '表单选择器',
+    title: '表单级联选择器',
+    description: '表单级联选择器',
     group: 'Form',
   })
   export class ElFormCascader<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(
       options?: Partial<
-        ElFormCascaderOptions<T, V, P, M, C> & Omit<ElCascaderOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+        ElFormCascaderOptions<T, V, P, M, C> &
+          ElFormItemProOptions &
+          Omit<ElCascaderOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
       >,
     ) {
       super();

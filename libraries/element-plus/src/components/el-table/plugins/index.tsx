@@ -1,10 +1,10 @@
-import { ElPagination, ElConfigProvider } from 'element-plus';
+import { ElPagination } from 'element-plus';
 import _ from 'lodash';
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import fp from 'lodash/fp';
 import { useMemo, useRef, useCallback, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource } from '@/plugins/common/dataSource';
+import { categoryStyles } from '@/utils';
 
 const orderMap = {
   descending: 'desc',
@@ -188,28 +188,23 @@ export function handleDataSource(props) {
   };
 }
 
+
 export function handlePaginationRender(props) {
   const Component = props.get('render');
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const tableRef = useRef({});
+  const { style, innerStyle } = categoryStyles(props.style);
   return {
     ref: Object.assign(ref, tableRef.value),
     render: (props, { attrs, slots }) => {
       return [
-        <div data-nodepath={nodepath} style={props.style}>
-          <Component
-            ref={tableRef}
-            {..._.omit({ ...props, ...attrs }, ['style'])}
-            style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
-            v-slots={slots}
-          />
+        <div data-nodepath={nodepath} style={style}>
+          <Component ref={tableRef} {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])} style={innerStyle} v-slots={slots} />
           {props.pagination && (
-            <ElConfigProvider locale={zhCn}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                <ElPagination {...props.pageProps} total={props.pageProps.total} />
-              </div>
-            </ElConfigProvider>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+              <ElPagination {...props.pageProps} total={props.pageProps.total} />
+            </div>
           )}
         </div>,
       ];

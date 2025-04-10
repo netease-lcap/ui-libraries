@@ -9,7 +9,7 @@
   </div>
 </template>
   
-<script lang="ts" setup>
+<script setup>
 import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance();
 const value = ref('tab2');

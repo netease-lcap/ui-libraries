@@ -1,8 +1,10 @@
 import _ from 'lodash';
-import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import dayjs from 'dayjs';
 import { useMemo, useControllableValue } from '@/plugins/hooks';
 import { getNaslTimeValue, getFormatTimeValue, isValidStringTime } from './utils';
+
+export * from './ide';
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 type GetTimeValueParams = {
   isEffectiveTime: boolean;
@@ -64,27 +66,22 @@ export function handleRangeDateValue(props) {
 
 export function handleDateValue(props) {
   const isRange = props.get('isRange');
-  const _value = props.get('value');
-  const _setStateValue = props.get('onUpdate:value') ?? (() => {});
-  const defaultValue = _value ? getFormatTimeValue(_value) : '';
-  const [value, setValue] = useControllableValue(props, {
-    // @ts-ignore
-    defaultValue,
-  });
+
+  // const _value = props.get('value');
+  // const _setStateValue = props.get('onUpdate:value') ?? (() => {});
+  // const defaultValue = _value ? getFormatTimeValue(_value) : '';
+  const [value, setValue] = useControllableValue(props);
   const result = {
     modelValue: value,
     'onUpdate:modelValue': _.wrap(setValue, (fn, val: any) => {
       const modelValue = _.isNil(val) ? undefined : new Date(dayjs(val).format()).toJSON();
       const naslValue = getNaslTimeValue(modelValue);
       _.attempt(fn, modelValue);
-      _.attempt(_setStateValue, naslValue);
+      _.attempt(setValue, naslValue);
     }),
   };
   return isRange ? {} : result;
 }
-
-export * from './ide';
-export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 export function handleTagName(props) {
   const className = props.get('class') ?? '';
@@ -94,4 +91,4 @@ export function handleTagName(props) {
   };
 }
 
-export { handleIcon } from '@/plugins/common/icon'
+export { handleIcon } from '@/plugins/common/icon';

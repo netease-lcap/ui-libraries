@@ -5,7 +5,6 @@ namespace nasl.ui {
     order: 8,
     ideusage: {
       idetype: 'container',
-      forceUpdateWhenAttributeChange: true,
       dataSource: {
         dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
@@ -15,7 +14,7 @@ namespace nasl.ui {
           display: 'inline',
           condition: "!this.getAttribute('dataSource')",
           accept: false,
-          content: '请绑定数据源',
+          content: '"请绑定数据源"',
         },
       },
     },
@@ -338,5 +337,17 @@ namespace nasl.ui {
       description: '节点被收起时触发的事件',
     })
     onNodeCollapse: (data: T) => any;
+
+    // @Slot({
+    //   title: '默认插槽',
+    //   description: '默认插槽',
+    // })
+    // slotDefault: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '节点内容',
+      description: '节点内容',
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
 }

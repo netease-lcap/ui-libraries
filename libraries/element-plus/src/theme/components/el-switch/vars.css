@@ -3,10 +3,13 @@
  */
 .el-switch {
   /**
+   * @desc 开启状态的颜色
    * @type color
    */
   --el-switch-on-color: var(--el-color-primary);
+
   /**
+   * @desc 关闭状态的颜色
    * @type color
    */
   --el-switch-off-color: var(--el-border-color);

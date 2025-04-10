@@ -82,7 +82,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    value: V;
+    modelValue: V;
 
     @Prop<ElRadioGroupOptions<T, V>, 'textField'>({
       group: '数据属性',
@@ -135,7 +135,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '单选项',
-          code: '<el-radio value="value"><el-text text="单选项"></el-text></el-radio>',
+          code: '<el-radio value="value" ><el-text text="单选项"></el-text></el-radio>',
         },
         // {
         //   title: '单选按钮',
@@ -181,7 +181,7 @@ namespace nasl.ui {
       description: '单选按钮的值',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: V;
+    value: V;
 
     @Prop({
       group: '数据属性',
@@ -189,7 +189,7 @@ namespace nasl.ui {
       description: '单选按钮显示文本，如果未设置则作为值使用',
       setter: { concept: 'InputSetter' },
     })
-    label: string | number | boolean;
+    label: nasl.core.String | nasl.core.Integer | nasl.core.Boolean;
 
     @Prop({
       group: '状态属性',
@@ -272,7 +272,7 @@ namespace nasl.ui {
       description: '单选按钮显示文本，如果未设置则作为值使用',
       setter: { concept: 'InputSetter' },
     })
-    label: string | number | boolean;
+    label: nasl.core.String | nasl.core.Integer | nasl.core.Boolean;
 
     @Prop({
       group: '状态属性',
@@ -338,7 +338,7 @@ namespace nasl.ui {
     },
     extends: [
       {
-        name: 'ElFormItem',
+        name: 'ElFormItemPro',
         excludes: ['slotDefault', 'useRangeValue', 'startFieldName', 'endFieldName', 'startInitialValue', 'endInitialValue'],
       },
       {

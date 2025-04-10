@@ -10,5 +10,8 @@ export const $formItemProps = [
   'prop',
   'showMessage',
   'size',
+  'isRequired',
   'validateStatus',
+  'data-nodepath',
+  'style',
 ];

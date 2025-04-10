@@ -3,38 +3,55 @@
  */
 .el-slider {
   /**
+   * @desc 滑块的主要背景颜色
    * @type color
    */
   --el-slider-main-bg-color: var(--el-color-primary);
+
   /**
+   * @desc 滑轨的背景颜色
    * @type color
    */
   --el-slider-runway-bg-color: var(--el-border-color-light);
+
   /**
+   * @desc 滑块停止时的背景颜色
    * @type color
    */
   --el-slider-stop-bg-color: var(--el-color-white);
+
   /**
+   * @desc 滑块禁用时的颜色
    * @type color
    */
   --el-slider-disabled-color: var(--el-text-color-placeholder);
+
   /**
+   * @desc 滑块的边框圆角
    * @type input
    */
   --el-slider-border-radius: 3px;
+
   /**
+   * @desc 滑块的高度
    * @type input
    */
   --el-slider-height: 6px;
+
   /**
+   * @desc 滑块按钮的大小
    * @type input
    */
   --el-slider-button-size: 20px;
+
   /**
+   * @desc 滑块按钮包装器的大小
    * @type input
    */
   --el-slider-button-wrapper-size: 36px;
+
   /**
+   * @desc 滑块按钮包装器的偏移量
    * @type input
    */
   --el-slider-button-wrapper-offset: -15px;

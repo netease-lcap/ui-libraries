@@ -3,71 +3,859 @@
  */
 .el-button {
   /**
-   * @type input
+   * @desc 默认按钮字体粗细
+   * @type font-weight
    */
-  --el-button-font-weight: var(--el-font-weight-primary);
+  --el-button-default-font-weight: var(--el-font-weight-primary);
+
   /**
+   * @desc 默认按钮边框颜色
    * @type color
    */
-  --el-button-border-color: var(--el-border-color);
+  --el-button-default-border-color: var(--el-border-color);
+
   /**
+   * @desc 默认按钮背景颜色
    * @type color
    */
-  --el-button-bg-color: var(--el-fill-color-blank);
+  --el-button-default-bg-color: var(--el-fill-color-blank);
+
   /**
+   * @desc 默认按钮文字颜色
    * @type color
    */
-  --el-button-text-color: var(--el-text-color-regular);
+  --el-button-default-text-color: var(--el-text-color-regular);
+
   /**
+   * @desc 默认按钮禁用状态文字颜色
    * @type color
    */
-  --el-button-disabled-text-color: var(--el-disabled-text-color);
+  --el-button-default-disabled-text-color: var(--el-disabled-text-color);
+
   /**
+   * @desc 默认按钮禁用状态背景颜色
    * @type color
    */
-  --el-button-disabled-bg-color: var(--el-fill-color-blank);
+  --el-button-default-disabled-bg-color: var(--el-fill-color-blank);
+
   /**
+   * @desc 默认按钮禁用状态边框颜色
    * @type color
    */
-  --el-button-disabled-border-color: var(--el-border-color-light);
+  --el-button-default-disabled-border-color: var(--el-border-color-light);
+
   /**
+   * @desc 默认按钮分隔线颜色
    * @type color
    */
-  --el-button-divide-border-color: rgba(255,255,255,0.5);
+  --el-button-default-divide-border-color: rgba(255, 255, 255, 0.5);
+
   /**
+   * @desc 默认按钮悬停状态文字颜色
    * @type color
    */
-  --el-button-hover-text-color: var(--el-color-primary);
+  --el-button-default-hover-text-color: var(--el-color-primary);
+
   /**
+   * @desc 默认按钮悬停状态背景颜色
    * @type color
    */
-  --el-button-hover-bg-color: var(--el-color-primary-light-9);
+  --el-button-default-hover-bg-color: var(--el-color-primary-light-9);
+
   /**
+   * @desc 默认按钮悬停状态边框颜色
    * @type color
    */
-  --el-button-hover-border-color: var(--el-color-primary-light-7);
+  --el-button-default-hover-border-color: var(--el-color-primary-light-7);
+
   /**
+   * @desc 默认按钮激活状态文字颜色
    * @type color
    */
-  --el-button-active-text-color: var(--el-button-hover-text-color);
+  --el-button-default-active-text-color: var(--el-button-hover-text-color);
+
   /**
+   * @desc 默认按钮激活状态边框颜色
    * @type color
    */
-  --el-button-active-border-color: var(--el-color-primary);
+  --el-button-default-active-border-color: var(--el-color-primary);
+
   /**
+   * @desc 默认按钮激活状态背景颜色
    * @type color
    */
-  --el-button-active-bg-color: var(--el-button-hover-bg-color);
+  --el-button-default-active-bg-color: var(--el-button-hover-bg-color);
+
   /**
+   * @desc 默认按钮轮廓颜色
    * @type color
    */
-  --el-button-outline-color: var(--el-color-primary-light-5);
+  --el-button-default-outline-color: var(--el-color-primary-light-5);
+
   /**
+   * @desc 默认按钮悬停链接文字颜色
    * @type color
    */
-  --el-button-hover-link-text-color: var(--el-text-color-secondary);
+  --el-button-default-hover-link-text-color: var(--el-text-color-secondary);
+
   /**
+   * @desc 默认按钮激活状态颜色
    * @type color
    */
-  --el-button-active-color: var(--el-text-color-primary);
+  --el-button-default-active-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 默认按钮朴素悬停状态文字颜色
+   * @type color
+   */
+  --el-button-default-plain-hover-text-color: var(--el-color-primary);
+
+  /**
+   * @desc 默认按钮朴素悬停状态背景颜色
+   * @type color
+   */
+  --el-button-default-plain-hover-bg-color: var(--el-fill-color-blank);
+
+  /**
+   * @desc 默认按钮朴素悬停状态边框颜色
+   * @type color
+   */
+  --el-button-default-plain-hover-border-color: var(--el-color-primary);
+
+  /**
+   * @desc 主按钮文字颜色
+   * @type color
+   */
+  --el-button-primary-text-color: var(--el-color-white);
+
+  /**
+   * @desc 主按钮背景颜色
+   * @type color
+   */
+  --el-button-primary-bg-color: var(--el-color-primary);
+
+  /**
+   * @desc 主按钮边框颜色
+   * @type color
+   */
+  --el-button-primary-border-color: var(--el-color-primary);
+
+  /**
+   * @desc 主按钮轮廓颜色
+   * @type color
+   */
+  --el-button-primary-outline-color: var(--el-color-primary-light-5);
+
+  /**
+   * @desc 主按钮激活状态颜色
+   * @type color
+   */
+  --el-button-primary-active-color: var(--el-color-primary-dark-2);
+
+  /**
+   * @desc 主按钮悬停状态文字颜色
+   * @type color
+   */
+  --el-button-primary-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 主按钮悬停链接文字颜色
+   * @type color
+   */
+  --el-button-primary-hover-link-text-color: var(--el-color-primary-light-5);
+
+  /**
+   * @desc 主按钮悬停状态背景颜色
+   * @type color
+   */
+  --el-button-primary-hover-bg-color: var(--el-color-primary-light-3);
+
+  /**
+   * @desc 主按钮悬停状态边框颜色
+   * @type color
+   */
+  --el-button-primary-hover-border-color: var(--el-color-primary-light-3);
+
+  /**
+   * @desc 主按钮激活状态背景颜色
+   * @type color
+   */
+  --el-button-primary-active-bg-color: var(--el-color-primary-dark-2);
+
+  /**
+   * @desc 主按钮激活状态边框颜色
+   * @type color
+   */
+  --el-button-primary-active-border-color: var(--el-color-primary-dark-2);
+
+  /**
+   * @desc 主按钮禁用状态文字颜色
+   * @type color
+   */
+  --el-button-primary-disabled-text-color: var(--el-color-white);
+
+  /**
+   * @desc 主按钮禁用状态背景颜色
+   * @type color
+   */
+  --el-button-primary-disabled-bg-color: var(--el-color-primary-light-5);
+
+  /**
+   * @desc 主按钮禁用状态边框颜色
+   * @type color
+   */
+  --el-button-primary-disabled-border-color: var(--el-color-primary-light-5);
+
+  /**
+   * @desc 主按钮朴素文字颜色
+   * @type color
+   */
+  --el-button-primary-plain-text-color: var(--el-color-primary);
+
+  /**
+   * @desc 主按钮朴素背景颜色
+   * @type color
+   */
+  --el-button-primary-plain-bg-color: var(--el-color-primary-light-9);
+
+  /**
+   * @desc 主按钮朴素边框颜色
+   * @type color
+   */
+  --el-button-primary-plain-border-color: var(--el-color-primary-light-5);
+
+  /**
+   * @desc 主按钮朴素悬停状态文字颜色
+   * @type color
+   */
+  --el-button-primary-plain-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 主按钮朴素悬停状态背景颜色
+   * @type color
+   */
+  --el-button-primary-plain-hover-bg-color: var(--el-color-primary);
+
+  /**
+   * @desc 主按钮朴素悬停状态边框颜色
+   * @type color
+   */
+  --el-button-primary-plain-hover-border-color: var(--el-color-primary);
+
+  /**
+   * @desc 主按钮朴素激活状态文字颜色
+   * @type color
+   */
+  --el-button-primary-plain-active-text-color: var(--el-color-white);
+
+  /**
+   * @desc 主按钮朴素禁用状态背景颜色
+   * @type color
+   */
+  --el-button-primary-plain-disabled-background-color: var(--el-color-primary-light-9);
+
+  /**
+   * @desc 主按钮朴素禁用状态边框颜色
+   * @type color
+   */
+  --el-button-primary-plain-disabled-border-color: var(--el-color-primary-light-8);
+
+  /**
+   * @desc 主按钮朴素禁用状态颜色
+   * @type color
+   */
+  --el-button-primary-plain-disabled-color: var(--el-color-primary-light-5);
+
+  /**
+   * @desc 成功按钮文字颜色
+   * @type color
+   */
+  --el-button-success-text-color: var(--el-color-white);
+
+  /**
+   * @desc 成功按钮背景颜色
+   * @type color
+   */
+  --el-button-success-bg-color: var(--el-color-success);
+
+  /**
+   * @desc 成功按钮边框颜色
+   * @type color
+   */
+  --el-button-success-border-color: var(--el-color-success);
+
+  /**
+   * @desc 成功按钮轮廓颜色
+   * @type color
+   */
+  --el-button-success-outline-color: var(--el-color-success-light-5);
+
+  /**
+   * @desc 成功按钮激活状态颜色
+   * @type color
+   */
+  --el-button-success-active-color: var(--el-color-success-dark-2);
+
+  /**
+   * @desc 成功按钮悬停状态文字颜色
+   * @type color
+   */
+  --el-button-success-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 成功按钮悬停链接文字颜色
+   * @type color
+   */
+  --el-button-success-hover-link-text-color: var(--el-color-success-light-5);
+
+  /**
+   * @desc 成功按钮悬停状态背景颜色
+   * @type color
+   */
+  --el-button-success-hover-bg-color: var(--el-color-success-light-3);
+
+  /**
+   * @desc 成功按钮悬停状态边框颜色
+   * @type color
+   */
+  --el-button-success-hover-border-color: var(--el-color-success-light-3);
+
+  /**
+   * @desc 成功按钮激活状态背景颜色
+   * @type color
+   */
+  --el-button-success-active-bg-color: var(--el-color-success-dark-2);
+
+  /**
+   * @desc 成功按钮激活状态边框颜色
+   * @type color
+   */
+  --el-button-success-active-border-color: var(--el-color-success-dark-2);
+
+  /**
+   * @desc 成功按钮禁用状态文字颜色
+   * @type color
+   */
+  --el-button-success-disabled-text-color: var(--el-color-white);
+
+  /**
+   * @desc 成功按钮禁用状态背景颜色
+   * @type color
+   */
+  --el-button-success-disabled-bg-color: var(--el-color-success-light-5);
+
+  /**
+   * @desc 成功按钮禁用状态边框颜色
+   * @type color
+   */
+  --el-button-success-disabled-border-color: var(--el-color-success-light-5);
+
+  /**
+   * @desc 成功按钮朴素文字颜色
+   * @type color
+   */
+  --el-button-success-plain-text-color: var(--el-color-success);
+
+  /**
+   * @desc 成功按钮朴素背景颜色
+   * @type color
+   */
+  --el-button-success-plain-bg-color: var(--el-color-success-light-9);
+
+  /**
+   * @desc 成功按钮朴素边框颜色
+   * @type color
+   */
+  --el-button-success-plain-border-color: var(--el-color-success-light-5);
+
+  /**
+   * @desc 成功按钮朴素悬停状态文字颜色
+   * @type color
+   */
+  --el-button-success-plain-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 成功按钮朴素悬停状态背景颜色
+   * @type color
+   */
+  --el-button-success-plain-hover-bg-color: var(--el-color-success);
+
+  /**
+   * @desc 成功按钮朴素悬停状态边框颜色
+   * @type color
+   */
+  --el-button-success-plain-hover-border-color: var(--el-color-success);
+
+  /**
+   * @desc 成功按钮朴素激活状态文字颜色
+   * @type color
+   */
+  --el-button-success-plain-active-text-color: var(--el-color-white);
+
+  /**
+   * @desc 成功按钮朴素禁用状态背景颜色
+   * @type color
+   */
+  --el-button-success-plain-disabled-background-color: var(--el-color-success-light-9);
+
+  /**
+   * @desc 成功按钮朴素禁用状态边框颜色
+   * @type color
+   */
+  --el-button-success-plain-disabled-border-color: var(--el-color-success-light-8);
+
+  /**
+   * @desc 成功按钮朴素禁用状态颜色
+   * @type color
+   */
+  --el-button-success-plain-disabled-color: var(--el-color-success-light-5);
+
+  /**
+   * @desc 警告按钮文字颜色
+   * @type color
+   */
+  --el-button-warning-text-color: var(--el-color-white);
+
+  /**
+   * @desc 警告按钮背景颜色
+   * @type color
+   */
+  --el-button-warning-bg-color: var(--el-color-warning);
+
+  /**
+   * @desc 警告按钮边框颜色
+   * @type color
+   */
+  --el-button-warning-border-color: var(--el-color-warning);
+
+  /**
+   * @desc 警告按钮轮廓颜色
+   * @type color
+   */
+  --el-button-warning-outline-color: var(--el-color-warning-light-5);
+
+  /**
+   * @desc 警告按钮激活状态颜色
+   * @type color
+   */
+  --el-button-warning-active-color: var(--el-color-warning-dark-2);
+
+  /**
+   * @desc 警告按钮悬停状态文字颜色
+   * @type color
+   */
+  --el-button-warning-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 警告按钮悬停链接文字颜色
+   * @type color
+   */
+  --el-button-warning-hover-link-text-color: var(--el-color-warning-light-5);
+
+  /**
+   * @desc 警告按钮悬停状态背景颜色
+   * @type color
+   */
+  --el-button-warning-hover-bg-color: var(--el-color-warning-light-3);
+
+  /**
+   * @desc 警告按钮悬停状态边框颜色
+   * @type color
+   */
+  --el-button-warning-hover-border-color: var(--el-color-warning-light-3);
+
+  /**
+   * @desc 警告按钮激活状态背景颜色
+   * @type color
+   */
+  --el-button-warning-active-bg-color: var(--el-color-warning-dark-2);
+
+  /**
+   * @desc 警告按钮激活状态边框颜色
+   * @type color
+   */
+  --el-button-warning-active-border-color: var(--el-color-warning-dark-2);
+
+  /**
+   * @desc 警告按钮禁用状态文字颜色
+   * @type color
+   */
+  --el-button-warning-disabled-text-color: var(--el-color-white);
+
+  /**
+   * @desc 警告按钮禁用状态背景颜色
+   * @type color
+   */
+  --el-button-warning-disabled-bg-color: var(--el-color-warning-light-5);
+
+  /**
+   * @desc 警告按钮禁用状态边框颜色
+   * @type color
+   */
+  --el-button-warning-disabled-border-color: var(--el-color-warning-light-5);
+
+  /**
+   * @desc 警告按钮朴素文字颜色
+   * @type color
+   */
+  --el-button-warning-plain-text-color: var(--el-color-warning);
+
+  /**
+   * @desc 警告按钮朴素背景颜色
+   * @type color
+   */
+  --el-button-warning-plain-bg-color: var(--el-color-warning-light-9);
+
+  /**
+   * @desc 警告按钮朴素边框颜色
+   * @type color
+   */
+  --el-button-warning-plain-border-color: var(--el-color-warning-light-5);
+
+  /**
+   * @desc 警告按钮朴素悬停状态文字颜色
+   * @type color
+   */
+  --el-button-warning-plain-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 警告按钮朴素悬停状态背景颜色
+   * @type color
+   */
+  --el-button-warning-plain-hover-bg-color: var(--el-color-warning);
+
+  /**
+   * @desc 警告按钮朴素悬停状态边框颜色
+   * @type color
+   */
+  --el-button-warning-plain-hover-border-color: var(--el-color-warning);
+
+  /**
+   * @desc 警告按钮朴素激活状态文字颜色
+   * @type color
+   */
+  --el-button-warning-plain-active-text-color: var(--el-color-white);
+
+  /**
+   * @desc 警告按钮朴素禁用状态背景颜色
+   * @type color
+   */
+  --el-button-warning-plain-disabled-background-color: var(--el-color-warning-light-9);
+
+  /**
+   * @desc 警告按钮朴素禁用状态边框颜色
+   * @type color
+   */
+  --el-button-warning-plain-disabled-border-color: var(--el-color-warning-light-8);
+  /**
+   * @desc 警告按钮禁用状态下的文本颜色
+   * @type color
+   */
+  --el-button-warning-plain-disabled-color: var(--el-color-warning-light-5);
+
+  /**
+   * @desc 危险按钮的文本颜色
+   * @type color
+   */
+  --el-button-danger-text-color: var(--el-color-white);
+
+  /**
+   * @desc 危险按钮的背景颜色
+   * @type color
+   */
+  --el-button-danger-bg-color: var(--el-color-danger);
+
+  /**
+   * @desc 危险按钮的边框颜色
+   * @type color
+   */
+  --el-button-danger-border-color: var(--el-color-danger);
+
+  /**
+   * @desc 危险按钮的轮廓颜色
+   * @type color
+   */
+  --el-button-danger-outline-color: var(--el-color-danger-light-5);
+
+  /**
+   * @desc 危险按钮的激活颜色
+   * @type color
+   */
+  --el-button-danger-active-color: var(--el-color-danger-dark-2);
+
+  /**
+   * @desc 危险按钮悬停时的文本颜色
+   * @type color
+   */
+  --el-button-danger-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 危险按钮悬停时的链接文本颜色
+   * @type color
+   */
+  --el-button-danger-hover-link-text-color: var(--el-color-danger-light-5);
+
+  /**
+   * @desc 危险按钮悬停时的背景颜色
+   * @type color
+   */
+  --el-button-danger-hover-bg-color: var(--el-color-danger-light-3);
+
+  /**
+   * @desc 危险按钮悬停时的边框颜色
+   * @type color
+   */
+  --el-button-danger-hover-border-color: var(--el-color-danger-light-3);
+
+  /**
+   * @desc 危险按钮激活时的背景颜色
+   * @type color
+   */
+  --el-button-danger-active-bg-color: var(--el-color-danger-dark-2);
+
+  /**
+   * @desc 危险按钮激活时的边框颜色
+   * @type color
+   */
+  --el-button-danger-active-border-color: var(--el-color-danger-dark-2);
+
+  /**
+   * @desc 危险按钮禁用状态下的文本颜色
+   * @type color
+   */
+  --el-button-danger-disabled-text-color: var(--el-color-white);
+
+  /**
+   * @desc 危险按钮禁用状态下的背景颜色
+   * @type color
+   */
+  --el-button-danger-disabled-bg-color: var(--el-color-danger-light-5);
+
+  /**
+   * @desc 危险按钮禁用状态下的边框颜色
+   * @type color
+   */
+  --el-button-danger-disabled-border-color: var(--el-color-danger-light-5);
+
+  /**
+   * @desc 危险按钮的纯文本颜色
+   * @type color
+   */
+  --el-button-danger-plain-text-color: var(--el-color-danger);
+
+  /**
+   * @desc 危险按钮的纯背景颜色
+   * @type color
+   */
+  --el-button-danger-plain-bg-color: var(--el-color-danger-light-9);
+
+  /**
+   * @desc 危险按钮的纯边框颜色
+   * @type color
+   */
+  --el-button-danger-plain-border-color: var(--el-color-danger-light-5);
+
+  /**
+   * @desc 危险按钮悬停时的纯文本颜色
+   * @type color
+   */
+  --el-button-danger-plain-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 危险按钮悬停时的纯背景颜色
+   * @type color
+   */
+  --el-button-danger-plain-hover-bg-color: var(--el-color-danger);
+
+  /**
+   * @desc 危险按钮悬停时的纯边框颜色
+   * @type color
+   */
+  --el-button-danger-plain-hover-border-color: var(--el-color-danger);
+
+  /**
+   * @desc 危险按钮激活时的纯文本颜色
+   * @type color
+   */
+  --el-button-danger-plain-active-text-color: var(--el-color-white);
+
+  /**
+   * @desc 危险按钮禁用状态下的纯背景颜色
+   * @type color
+   */
+  --el-button-danger-plain-disabled-background-color: var(--el-color-danger-light-9);
+
+  /**
+   * @desc 危险按钮禁用状态下的纯边框颜色
+   * @type color
+   */
+  --el-button-danger-plain-disabled-border-color: var(--el-color-danger-light-8);
+
+  /**
+   * @desc 危险按钮禁用状态下的纯文本颜色
+   * @type color
+   */
+  --el-button-danger-plain-disabled-color: var(--el-color-danger-light-5);
+
+  /**
+   * @desc 信息按钮的文本颜色
+   * @type color
+   */
+  --el-button-info-text-color: var(--el-color-white);
+
+  /**
+   * @desc 信息按钮的背景颜色
+   * @type color
+   */
+  --el-button-info-bg-color: var(--el-color-info);
+
+  /**
+   * @desc 信息按钮的边框颜色
+   * @type color
+   */
+  --el-button-info-border-color: var(--el-color-info);
+
+  /**
+   * @desc 信息按钮的轮廓颜色
+   * @type color
+   */
+  --el-button-info-outline-color: var(--el-color-info-light-5);
+
+  /**
+   * @desc 信息按钮的激活颜色
+   * @type color
+   */
+  --el-button-info-active-color: var(--el-color-info-dark-2);
+
+  /**
+   * @desc 信息按钮悬停时的文本颜色
+   * @type color
+   */
+  --el-button-info-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 信息按钮悬停时的链接文本颜色
+   * @type color
+   */
+  --el-button-info-hover-link-text-color: var(--el-color-info-light-5);
+
+  /**
+   * @desc 信息按钮悬停时的背景颜色
+   * @type color
+   */
+  --el-button-info-hover-bg-color: var(--el-color-info-light-3);
+
+  /**
+   * @desc 信息按钮悬停时的边框颜色
+   * @type color
+   */
+  --el-button-info-hover-border-color: var(--el-color-info-light-3);
+
+  /**
+   * @desc 信息按钮激活时的背景颜色
+   * @type color
+   */
+  --el-button-info-active-bg-color: var(--el-color-info-dark-2);
+
+  /**
+   * @desc 信息按钮激活时的边框颜色
+   * @type color
+   */
+  --el-button-info-active-border-color: var(--el-color-info-dark-2);
+
+  /**
+   * @desc 信息按钮禁用状态下的文本颜色
+   * @type color
+   */
+  --el-button-info-disabled-text-color: var(--el-color-white);
+
+  /**
+   * @desc 信息按钮禁用状态下的背景颜色
+   * @type color
+   */
+  --el-button-info-disabled-bg-color: var(--el-color-info-light-5);
+
+  /**
+   * @desc 信息按钮禁用状态下的边框颜色
+   * @type color
+   */
+  --el-button-info-disabled-border-color: var(--el-color-info-light-5);
+
+  /**
+   * @desc 信息按钮的纯文本颜色
+   * @type color
+   */
+  --el-button-info-plain-text-color: var(--el-color-info);
+
+  /**
+   * @desc 信息按钮的纯背景颜色
+   * @type color
+   */
+  --el-button-info-plain-bg-color: var(--el-color-info-light-9);
+
+  /**
+   * @desc 信息按钮的纯边框颜色
+   * @type color
+   */
+  --el-button-info-plain-border-color: var(--el-color-info-light-5);
+
+  /**
+   * @desc 信息按钮悬停时的纯文本颜色
+   * @type color
+   */
+  --el-button-info-plain-hover-text-color: var(--el-color-white);
+
+  /**
+   * @desc 信息按钮悬停时的纯背景颜色
+   * @type color
+   */
+  --el-button-info-plain-hover-bg-color: var(--el-color-info);
+
+  /**
+   * @desc 信息按钮悬停时的纯边框颜色
+   * @type color
+   */
+  --el-button-info-plain-hover-border-color: var(--el-color-info);
+
+  /**
+   * @desc 信息按钮激活时的纯文本颜色
+   * @type color
+   */
+  --el-button-info-plain-active-text-color: var(--el-color-white);
+
+  /**
+   * @desc 信息按钮禁用状态下的纯背景颜色
+   * @type color
+   */
+  --el-button-info-plain-disabled-background-color: var(--el-color-info-light-9);
+
+  /**
+   * @desc 信息按钮禁用状态下的纯边框颜色
+   * @type color
+   */
+  --el-button-info-plain-disabled-border-color: var(--el-color-info-light-8);
+
+  /**
+   * @desc 信息按钮禁用状态下的纯文本颜色
+   * @type color
+   */
+  --el-button-info-plain-disabled-color: var(--el-color-info-light-5);
+
+  /**
+   * @desc 默认按钮的尺寸
+   * @type size
+   */
+  --el-button-default-size: 32px;
+
+  /**
+   * @desc 小型按钮的尺寸
+   * @type size
+   */
+  --el-button-small-size: 24px;
+
+  /**
+   * @desc 大型按钮的尺寸
+   * @type size
+   */
+  --el-button-large-size: 40px;
 }

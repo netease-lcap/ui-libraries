@@ -8,9 +8,7 @@ import './index.css';
 function Iframe(props, { slots }) {
   return (
     <div class="el-iframe" {...props}>
-      {props!.src ? (
-        <iframe frameborder="0" allowfullscreen="allowfullscreen" src={props!.src} onLoad={props!.onLoad} />
-      ) : null}
+      {props!.src ? <iframe frameborder="0" src={props!.src} onLoad={props!.onLoad} /> : null}
     </div>
   );
 }

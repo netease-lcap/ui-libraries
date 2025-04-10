@@ -41,7 +41,7 @@ export const Default = {
   render: () => ({
     template: `<el-dropdown>
     <template #default>
-      <el-button type="danger" text="下拉菜单" style="width: 100px;"></el-button>
+      <el-button type="primary" text="下拉菜单"></el-button>
     </template>
     <template #items>
       <el-dropdown-item><el-text text="选项一"></el-text></el-dropdown-item>
