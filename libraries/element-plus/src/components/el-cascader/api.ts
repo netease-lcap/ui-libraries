@@ -615,9 +615,6 @@ namespace nasl.ui {
       idetype: 'container',
       bindStyleSelector: '.__cw-form-compose-input',
       childAccept: "target.tag === 'el-option-pro'",
-      events: {
-        click: true,
-      },
       displaySlotConditions: {
         value:
           "!!this.getAttribute('dataSource') && this.getAttribute('valueIsSlot') && this.getAttribute('valueIsSlot').value",
