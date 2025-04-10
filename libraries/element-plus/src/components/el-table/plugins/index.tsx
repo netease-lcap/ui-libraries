@@ -194,13 +194,16 @@ export function handlePaginationRender(props) {
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const tableRef = useRef({});
-  const { style, innerStyle } = categoryStyles(props.style);
+  const styleProps=props.get('style');
+  const { style, innerStyle } = categoryStyles(styleProps);
   return {
     ref: Object.assign(ref, tableRef.value),
+    tableStyle:innerStyle,
+    style,
     render: (props, { attrs, slots }) => {
       return [
-        <div data-nodepath={nodepath} style={style}>
-          <Component ref={tableRef} {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])} style={innerStyle} v-slots={slots} />
+        <div data-nodepath={nodepath} style={props.style}>
+          <Component ref={tableRef} {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])} style={attrs.tableStyle} v-slots={slots} />
           {props.pagination && (
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
               <ElPagination {...props.pageProps} total={props.pageProps.total} />
