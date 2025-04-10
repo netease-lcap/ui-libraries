@@ -375,6 +375,8 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      translateBindingProperty: ["hasTip"],
+      forceRefresh: 'parent',
       disableSlotAutoFill: [
         {
           slot: 'tip',
@@ -384,10 +386,13 @@ namespace nasl.ui {
     },
     extends: [
       {
-        name: 'ElUpload',
+        name: 'ElUpload'
       },
       {
         name: 'ElFormItemPro',
+        excludes: [
+          'slotDefault',
+        ],
       },
     ],
   })

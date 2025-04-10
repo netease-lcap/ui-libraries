@@ -18,7 +18,7 @@ namespace nasl.ui {
     @Prop({
       title: '值',
     })
-    value: nasl.core.Time;
+    modelValue: nasl.core.Time;
 
     @Prop({
       title: '起始值',
