@@ -67,12 +67,9 @@ export function handleRangeDateValue(props) {
 export function handleDateValue(props) {
   const isRange = props.get('isRange');
 
-  // const _value = props.get('value');
-  // const _setStateValue = props.get('onUpdate:value') ?? (() => {});
-  // const defaultValue = _value ? getFormatTimeValue(_value) : '';
   const [value, setValue] = useControllableValue(props);
   const result = {
-    modelValue: value,
+    modelValue: value ? getFormatTimeValue(value) : '',
     'onUpdate:modelValue': _.wrap(setValue, (fn, val: any) => {
       const modelValue = _.isNil(val) ? undefined : new Date(dayjs(val).format()).toJSON();
       const naslValue = getNaslTimeValue(modelValue);
