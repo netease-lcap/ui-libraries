@@ -36,7 +36,13 @@ export function withFormItem(Component, name) {
       const uniqueid = _.uniqueId('formItemPropName');
       const prop = computed(() => props.prop ?? uniqueid);
       const provide = inject($provide) as Ref<FormItemProvide>;
-      const { setValue, value = valueRef, setFormitem, deleteFormitem } = provide?.value?.[$formProvide] ?? {};
+      const {
+        isInForm,
+        setValue,
+        value = valueRef,
+        setFormitem,
+        deleteFormitem,
+      } = provide?.value?.[$formProvide] ?? {};
       const { vnode } = getCurrentInstance() as { vnode: VNode };
       const { props: vnodeProps } = vnode;
       const isControlled = Object.prototype.hasOwnProperty.call(vnodeProps, 'modelValue');
@@ -47,19 +53,46 @@ export function withFormItem(Component, name) {
         _.attempt(propsOnUpdateModelValue, value);
         _.attempt(setValue, prop.value, value);
       };
+      onMounted(() => {
+        const { isInForm } = provide?.value?.[$formProvide] ?? {};
+        if (!isInForm) {
+          const nodePath = attrs['data-nodepath'];
+          const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
+          elem?.setAttribute('data-has-mutation', 'true');
+          elem?.setAttribute('data-element-tag', name.replace('el-form-', 'el-'));
+        }
+      });
+      // watch(
+      //   provide,
+      //   (value) => {
+      //     const { isInForm } = value?.[$formProvide] ?? {};
+      //     if (!isInForm) {
+      //       const nodePath = attrs['data-nodepath'];
+      //       onMounted(() => {
+      //         const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
+      //         elem?.setAttribute('data-has-mutation', 'true');
+      //         elem?.setAttribute('data-element-tag', name.replace('el-form-', 'el-'));
+      //       });
+      //     }
+      //   },
+      //   {
+      //     immediate: true,
+      //     deep: true,
+      //   },
+      // );
 
       watch(componentRef, (value) => Object.assign(myRef.value, value));
       expose(myRef.value);
 
       onMounted(() => {
-        setFormitem(prop.value, {
+        setFormitem?.(prop.value, {
           resetField: () => {
             onUpdateModelValue(undefined);
           },
         });
       });
       onUnmounted(() => {
-        deleteFormitem(prop.value);
+        deleteFormitem?.(prop.value);
       });
 
       return () => {
@@ -95,8 +128,8 @@ export function handleComponentInForm(props) {
     const isInIDE = isInForm && nodePath;
     if (!isInIDE) return;
     const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
-    elem?.setAttribute('data-element-tag', formTagName);
     elem?.setAttribute('data-has-mutation', 'true');
+    elem?.setAttribute('data-element-tag', formTagName);
   }, []);
 }
 
