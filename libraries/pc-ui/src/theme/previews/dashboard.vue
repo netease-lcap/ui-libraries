@@ -129,7 +129,7 @@
                 <div class="team-work-body">
                   <div class="team-work-row" v-for="item in teamData" :key="item.name">
                     <div class="team-work-row-name">
-                      <img :src="UserAvatar" alt="用户头像" class="team-work-row-name-avatar">
+                      <AvatarDefault class="team-work-row-name-avatar" />
                       <u-text :text="item.name" class="team-work-row-item-title"></u-text>
                     </div>
                     <div class="team-work-row-item">
@@ -181,7 +181,7 @@
       <div class="aside">
         <div class="card">
           <div class="user-info">
-            <img :src="UserAvatar" alt="用户头像" class="user-avatar">
+            <AvatarDefault class="user-avatar" />
             <div class="user-info-text">
               <u-text text="用户名称" class="user-info-text-name"></u-text>
               <u-text text="部门名称" class="user-info-text-dept"></u-text>
@@ -297,17 +297,17 @@
 </template>
 <script>
 import PageLayout from './layout.vue';
-import UserAvatar from '../assets/avatar-default.svg';
+import AvatarDefault from './avatar-default.vue';
 import IconMore from './icon-more.vue';
 
 export default {
   components: {
     PageLayout,
     IconMore,
+    AvatarDefault,
   },
   data() {
     return {
-      UserAvatar,
       teamData: [
         {
           name: '成员A',
@@ -755,7 +755,7 @@ export default {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: var(--brand-primary-light);
+  background-color: var(--brand-primary-lighter);
   color: #fff;
   display: flex;
   justify-content: center;
@@ -809,7 +809,7 @@ export default {
   align-items: center;
   width: 40px;
   height: 40px;
-  background-color: #fff;
+  background-color: var(--background-color-default);
   border-radius: var(--border-radius-base);
 }
 

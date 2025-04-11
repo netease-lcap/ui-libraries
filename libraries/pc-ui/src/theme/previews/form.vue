@@ -1,7 +1,10 @@
 <template>
   <PageLayout>
-    <u-linear-layout type="flex" direction="vertical" gap="normal" class="form_page_layout">
-      <u-panel title="项目信息">
+    <div class="form_page_layout">
+      <div class="card x-panel-card">
+        <div class="x-panel-card-header">
+          <u-text text="资源监控" class="x-panel-card-header-title"></u-text>
+        </div>
         <u-form repeat="3">
           <u-form-item required label="项目名称">
             <u-input placeholder="请输入"></u-input>
@@ -24,9 +27,8 @@
               <u-input placeholder="请输入"></u-input>
           </u-form-item>
         </u-form>
-      </u-panel>
-
-      <u-panel>
+      </div>
+      <div class="card">
         <u-tabs appear="line">
           <u-tab title="基本信息">
             <div class="sub-title">
@@ -107,8 +109,8 @@
             </u-table-view>
           </u-tab>
         </u-tabs>
-      </u-panel>
-    </u-linear-layout>
+      </div>
+    </div>
   </PageLayout>
 </template>
 <script>
@@ -128,11 +130,41 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .form_page_layout {
-  padding: var(--space-medium);
-  background-color: var(--background-color-disabled-light);
-  min-height: 100%;
+  padding: var(--space-base);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-base);
+}
+
+.card {
+  padding: var(--space-base);
+  border-radius: var(--border-radius-medium);
+  background-color: var(--background-color-default);
+}
+
+.x-panel-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: var(--space-base);
+}
+
+.x-panel-card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.x-panel-card-header-title {
+  font-size: var(--font-size-large);
+  color: var(--color-base);
+  line-height: calc(var(--font-size-large) + 8px);
+  font-weight: 500;
 }
 
 .sub-title {

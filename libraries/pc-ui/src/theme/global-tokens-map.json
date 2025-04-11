@@ -151,6 +151,10 @@
     "title": "默认背景色",
     "type": "color"
   },
+  "--background-color-body": {
+    "title": "页面背景色",
+    "type": "color"
+  },
   "--border-color-base": {
     "title": "边框色",
     "type": "color"

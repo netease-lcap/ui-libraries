@@ -212,5 +212,14 @@ export default (cssContent: string, themeComponentFolder) => {
     themeInfo.components.push(themeComponent);
   });
 
+  if (globTokenMap['--background-color-default']) {
+    themeInfo.global.variables.push({
+      type: 'color',
+      name: '--background-color-body',
+      title: '页面背景色',
+      value: 'none',
+    });
+  }
+
   return themeInfo;
 };

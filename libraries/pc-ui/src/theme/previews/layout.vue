@@ -17,10 +17,7 @@
                 </u-dropdown-item>
               </template>
               <template #title>
-                <img
-                  :src="AvatarDefault"
-                  fit="cover"
-                  class="user-avatar"></img>
+                <AvatarDefault class="user-avatar" />
                 <span class="user-name">
                   <u-text text="USERNAME"></u-text>
                 </span>
@@ -101,7 +98,7 @@
             </u-sidebar-item>
           </u-sidebar>
         </u-multi-layout-item>
-        <u-multi-layout-item style="background-color: #F0F3FA;">
+        <u-multi-layout-item style="background-color: var(--background-color-body, #F0F3FA);">
           <slot></slot>
         </u-multi-layout-item>
       </u-multi-layout>
@@ -110,15 +107,11 @@
 </template>
 
 <script>
-import AvatarDefault from '../assets/avatar-default.svg';
-import Logo from '../assets/lcap-logo-light.svg';
+import AvatarDefault from './avatar-default.vue';
 
 export default {
-  data() {
-    return {
-      AvatarDefault,
-      Logo,
-    };
+  components: {
+    AvatarDefault,
   },
 };
 </script>

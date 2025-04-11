@@ -137,6 +137,14 @@ const ColorGroups = [
     mapToken: [],
   },
   {
+    key: 'colorBackground3',
+    type: 'Color',
+    name: '页面背景色',
+    desc: '',
+    seedToken: ['--background-color-body'],
+    mapToken: [],
+  },
+  {
     key: 'colorBorder',
     type: 'Color',
     name: '边框色',
