@@ -1,0 +1,16 @@
+/**
+ * @component el-upload
+ */
+.el-upload {
+  /**
+   * @desc 拖拽区域水平内边距
+   * @type input
+   */
+  --el-upload-dragger-padding-horizontal: 40px;
+  
+  /**
+   * @desc 拖拽区域垂直内边距
+   * @type input
+   */
+  --el-upload-dragger-padding-vertical: 10px;
+}

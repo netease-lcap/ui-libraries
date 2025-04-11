@@ -1,0 +1,22 @@
+/**
+ * @component el-backtop
+ */
+.el-backtop {
+  /**
+   * @desc 返回顶部按钮的背景色
+   * @type color
+   */
+  --el-backtop-bg-color: var(--el-bg-color-overlay);
+
+  /**
+   * @desc 返回顶部按钮的文字颜色
+   * @type color
+   */
+  --el-backtop-text-color: var(--el-color-primary);
+
+  /**
+   * @desc 返回顶部按钮悬停时的背景色
+   * @type color
+   */
+  --el-backtop-hover-bg-color: var(--el-border-color-extra-light);
+}

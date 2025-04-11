@@ -1,0 +1,52 @@
+/**
+ * @component el-rate
+ */
+.el-rate {
+  /**
+   * @desc 评分组件的高度
+   * @type input
+   */
+  --el-rate-height: 20px;
+
+  /**
+   * @desc 评分组件的字体大小
+   * @type input
+   */
+  --el-rate-font-size: var(--el-font-size-base);
+
+  /**
+   * @desc 评分图标的大小
+   * @type input
+   */
+  --el-rate-icon-size: 18px;
+
+  /**
+   * @desc 评分图标的外间距
+   * @type input
+   */
+  --el-rate-icon-margin: 6px;
+
+  /**
+   * @desc 未选中评分图标的颜色
+   * @type color
+   */
+  --el-rate-void-color: var(--el-border-color-darker);
+
+  /**
+   * @desc 选中评分图标的颜色
+   * @type color
+   */
+  --el-rate-fill-color: #f7ba2a;
+
+  /**
+   * @desc 禁用状态下未选中评分图标的颜色
+   * @type color
+   */
+  --el-rate-disabled-void-color: var(--el-fill-color);
+
+  /**
+   * @desc 评分组件的文字颜色
+   * @type color
+   */
+  --el-rate-text-color: var(--el-text-color-primary);
+}

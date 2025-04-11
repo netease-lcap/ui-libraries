@@ -1,0 +1,52 @@
+/**
+ * @component el-popover
+ */
+.el-popover {
+  /**
+   * @desc 弹出框背景色
+   * @type color
+   */
+  --el-popover-bg-color: var(--el-bg-color-overlay);
+
+  /**
+   * @desc 弹出框字体大小
+   * @type input
+   */
+  --el-popover-font-size: var(--el-font-size-base);
+
+  /**
+   * @desc 弹出框边框颜色
+   * @type color
+   */
+  --el-popover-border-color: var(--el-border-color-lighter);
+
+  /**
+   * @desc 弹出框内边距
+   * @type input
+   */
+  --el-popover-padding: 12px;
+
+  /**
+   * @desc 大号弹出框内边距
+   * @type input
+   */
+  --el-popover-padding-large: 18px 20px;
+
+  /**
+   * @desc 弹出框标题字体大小
+   * @type input
+   */
+  --el-popover-title-font-size: 16px;
+
+  /**
+   * @desc 弹出框标题文字颜色
+   * @type color
+   */
+  --el-popover-title-text-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 弹出框边框圆角
+   * @type input
+   */
+  --el-popover-border-radius: 4px;
+}

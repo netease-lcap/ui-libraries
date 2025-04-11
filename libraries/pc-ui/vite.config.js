@@ -44,22 +44,22 @@ export default defineConfig(({ command }) => {
             },
             UCrumb: {
               mainSelectorMap: {
-                "[class*=u-crumb___]": true,
+                '[class*=u-crumb___]': true,
               },
             },
             UDescList: {
               mainSelectorMap: {
-                "[class*=u-desc-list___]": true,
+                '[class*=u-desc-list___]': true,
               },
             },
             UForm: {
               mainSelectorMap: {
-                "[class*=u-form___]": true,
+                '[class*=u-form___]': true,
               },
             },
             URadios: {
               mainSelectorMap: {
-                "[class*=u-radios___]": true,
+                '[class*=u-radios___]': true,
               },
             },
             UTableView: {
@@ -75,14 +75,14 @@ export default defineConfig(({ command }) => {
             },
             UTreeViewNew: {
               mainSelectorMap: {
-                "[class*=u-tree-view-new___]": true,
+                '[class*=u-tree-view-new___]': true,
               },
             },
             UListComponents: {
               mainSelectorMap: {
-                ".u-for-com": true,
-                ".u-for-com-frag": false,
-                ".u-for-com-item": false,
+                '.u-for-com': true,
+                '.u-for-com-frag': false,
+                '.u-for-com-item': false,
               },
             },
             UToc: {

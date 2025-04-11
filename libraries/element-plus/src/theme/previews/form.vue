@@ -1,5 +1,5 @@
 <template>
-  <el-container style="height: 100vh">
+  <el-container style="height: 100vh;color: var(--el-text-color);">
     <el-header style="padding: 0">
       <el-menu :ellipsis="false" background-color="#545c64" text-color="#fff" style="color: #fff; padding: 0 20px;" active-text-color="#ffd04b" mode="horizontal" defaultActive="menu1">
         <el-flex mode="flex" :gutter="12" alignment="center" style="min-width: 160px; margin-right: 12px;">

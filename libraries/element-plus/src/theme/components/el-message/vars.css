@@ -1,0 +1,40 @@
+/**
+ * @component el-message
+ */
+.el-message {
+  /**
+   * @desc 消息背景色
+   * @type color
+   */
+  --el-message-bg-color: var(--el-color-info-light-9);
+
+  /**
+   * @desc 消息边框颜色
+   * @type color
+   */
+  --el-message-border-color: var(--el-border-color-lighter);
+
+  /**
+   * @desc 消息内边距
+   * @type input
+   */
+  --el-message-padding: 11px 15px;
+
+  /**
+   * @desc 关闭按钮大小
+   * @type input
+   */
+  --el-message-close-size: 16px;
+
+  /**
+   * @desc 关闭按钮颜色
+   * @type color
+   */
+  --el-message-close-icon-color: var(--el-text-color-placeholder);
+
+  /**
+   * @desc 关闭按钮悬停颜色
+   * @type color
+   */
+  --el-message-close-hover-color: var(--el-text-color-secondary);
+}

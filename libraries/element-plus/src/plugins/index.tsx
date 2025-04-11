@@ -1,8 +1,12 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, markRaw, computed } from 'vue';
-import create from 'zustand-vue';
+import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+// import create from 'zustand-vue';
+import { createStore } from 'zustand/vanilla';
+
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
@@ -45,8 +49,8 @@ export class PluginOptions {
   };
 }
 
-export function registerComponent(Component, options) {
-  return {
+export function registerComponent<T>(Component, options) {
+  return defineComponent<T>({
     name: 'HocBaseComponents',
     components: { Component },
     inheritAttrs: false,
@@ -57,16 +61,19 @@ export function registerComponent(Component, options) {
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
-      const render = markRaw(Component);
-      const fiberMap = new Map();
+      let Render = Component;
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
-      const provideRef = ref({});
-      const useStore = create((set) => ({
+      const provideRef = ref(injectRef);
+      const router = useRouter?.();
+      const route = useRoute?.();
+      const useStore = createStore((set) => ({
         state: {
           inject: injectRef,
           provide: {},
           ref: {},
+          router,
+          route,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
         props: {
@@ -85,18 +92,24 @@ export function registerComponent(Component, options) {
           return set((state) => getNewStateFn(state), tr);
         },
       }));
-      const setValue = useStore((state: any) => state.setvalue);
-
-      useStore.subscribe((props: any) => {
+      const { getState, setState, subscribe, getInitialState } = useStore;
+      const fiberMap = new Map<string, any>([
+        ['updateQueen', new Set()],
+        ['getState', getState],
+      ]);
+      const { setvalue: setValue } = getState() as any;
+      subscribe((props: any) => {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
-        const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap, useStore);
-        const commitJsState = commitState.delete('ref').toJS();
+        const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
-        render.value = commitJsState.render;
+        const commitJsState = commitState.delete('ref').toJS();
+        const isRenderChange = Component !== commitState.get('render');
+        Render = isRenderChange ? commitJsState.render : Render;
         componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
         Object.assign(exposeRef.value, ref);
         Object.assign(provideRef.value, commitJsState.provide);
       });
+
       watch(
         () => [props, attrs, slots, emit],
         ([props, attrs, slots, emit]) => {
@@ -117,11 +130,10 @@ export function registerComponent(Component, options) {
       expose(exposeRef.value);
 
       provide($provide, provideRef);
-      const RenderComponent = computed(() => render.value) as any;
 
       return () => {
         return (
-          <RenderComponent.value
+          <Render
             {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(componentState, 'value.state.slots', {}) }}
             ref={componentRef}
@@ -129,5 +141,5 @@ export function registerComponent(Component, options) {
         );
       };
     },
-  };
+  });
 }

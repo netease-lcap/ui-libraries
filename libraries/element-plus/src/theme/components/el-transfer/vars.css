@@ -1,0 +1,58 @@
+/**
+ * @component el-transfer
+ */
+.el-transfer {
+  /**
+   * @desc 边框颜色
+   * @type color
+   */
+  --el-transfer-border-color: var(--el-border-color-lighter);
+
+  /**
+   * @desc 边框圆角
+   * @type input
+   */
+  --el-transfer-border-radius: var(--el-border-radius-base);
+
+  /**
+   * @desc 面板宽度
+   * @type input
+   */
+  --el-transfer-panel-width: 200px;
+
+  /**
+   * @desc 面板头部高度
+   * @type input
+   */
+  --el-transfer-panel-header-height: 40px;
+
+  /**
+   * @desc 面板头部背景色
+   * @type color
+   */
+  --el-transfer-panel-header-bg-color: var(--el-fill-color-light);
+
+  /**
+   * @desc 面板底部高度
+   * @type input
+   */
+  --el-transfer-panel-footer-height: 40px;
+
+  /**
+   * @desc 面板主体高度
+   * @type input
+   */
+  --el-transfer-panel-body-height: 278px;
+
+  /**
+   * @desc 项目高度
+   * @type input
+   */
+  --el-transfer-item-height: 30px;
+
+  /**
+   * @desc 过滤器高度
+   * @type input
+   */
+  --el-transfer-filter-height: 32px;
+}

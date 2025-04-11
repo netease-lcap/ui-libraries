@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Component from '../index';
 // import { ElSelect, ElOption } from '../index';
 
@@ -76,8 +76,13 @@ export const Example2 = {
       const list = async () => {
         return new Promise((res) => {
           setTimeout(() => {
-            res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
-          }, 3000);
+            // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
+            res([
+              { value: 1, label: 1 },
+              { value: 2, label: 2 },
+              { value: 3, label: 3, 'data-nodepath': 'aabb' },
+            ]);
+          }, 1000);
         });
       };
       const select = ref();
@@ -87,24 +92,7 @@ export const Example2 = {
         inputName.value = el;
         console.log(formData.value, 'formData');
       };
-      const handleClick = async (tab) => {
-        // console.log('====', formData, tab);
-        console.log(tab, 'tab', tab.validated());
-        // tab.validate().then(
-        //   (res) => {
-        //     console.log(res, 'res');
-        //   },
-        //   (err) => {
-        //     console.log(err, 'err');
-        //   },
-        // );
 
-        // tab.resetForm();
-        // const result= await tab.validate();
-        // tab.fields()
-        // console.log(tab.fields, 'fields');
-        // console.log(tab);
-      };
       // setTimeout(() => {
       // name.value = 'newName';
       // list.value[0].value = 2;
@@ -115,15 +103,39 @@ export const Example2 = {
         {
           validate: 'filled',
           message: '表单项不得为空',
-          trigger: 'input+blur',
+          trigger: 'blur',
           required: true,
         },
       ];
+      const inputTag = ref([]);
+      const switchValue = ref(false);
+      const model = ref({
+        input21: '123',
+      });
+      const handleClick = async (tab) => {
+        // console.log('====', formData, tab);
+        tab.resetForm();
+        // console.log(tab, 'tab', tab.validated());
+        // console.log(model, 'model');
+      };
+      watch(
+        model,
+        (value) => {
+          console.log(value, 'model');
+        },
+        {
+          immediate: true,
+          deep: true,
+        },
+      );
       return {
+        model,
         formData,
+        switchValue,
         select,
         activeName,
         inputName,
+        inputTag,
         list,
         handleClick,
         log,
@@ -133,13 +145,21 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-form  ref="formRef">
-
-
-    <el-form-input :rules="rules"  label="input21" v-model="inputName" data-nodepath="input21" />
+    <el-form :model="model" ref="formRef">
+    {{inputName}}
+    <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
+     <el-form-input-number :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-cascader :rules="rules"    label="input212"  data-nodepath="input21" :dataSource="list" />
+    <el-form-input-tag :rules="rules"   label="input21"  data-nodepath="input21" />
+    <el-form-rate :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-slider :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-switch :rules="rules"  v-model="switchValue" label="input21" data-nodepath="switch" />
+    <el-form-tree-select :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-checkbox-group label="ww" :rules="rules" :isRequired="true" :dataSource="list"></el-form-checkbox-group>
+    <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
 
     <a @click="handleClick(formRef)" >Submit</a>
-    <el-form-checkbox-group label="ww" :isRequired="true" :dataSource="[{},{},{}]"></el-form-checkox-group>
+    <a @click="handleClick(formRef)" >Submit2</a>
     </el-form>
 
 
@@ -168,7 +188,7 @@ export const Example3 = {
         // formRef.validate().then((res) => {
         //   console.log(res, 'res');
         // });
-        const result = await formRef.validate();
+        const result = await formRef.resetForm();
         console.log(result, 'result');
         // formRef.value.validate().then((res) => {
         //   console.log(res, 'res');

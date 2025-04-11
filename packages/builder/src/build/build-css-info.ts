@@ -1,7 +1,11 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-cond-assign */
 /* eslint-disable no-multi-assign */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-restricted-syntax */
+/* eslint-disable no-param-reassign */
 
 import fs from 'fs-extra';
 import path from 'path';
@@ -10,7 +14,8 @@ import { parse } from 'postcss-values-parser';
 import { camelCase, kebabCase, capitalize } from 'lodash';
 import { getComponentMetaInfos } from '../utils/lcap';
 import type {
-  LcapBuildOptions, CSSValue, CSSRule, SupportedCSSProperty,
+  LcapBuildOptions, CSSValue, CSSRule, SupportedCSSProperty, FinalComponentCSSInfo,
+  DepComponent,
 } from './types';
 
 function sortMap(map: Record<string, any>) {
@@ -25,7 +30,18 @@ function startsWithPrefix(hideSelectorPrefixes: Array<string>, selectorKey: stri
   return hideSelectorPrefixes.some((selectorPrefix) => selectorKey.startsWith(selectorPrefix) || selectorKey.startsWith(`[class*=${selectorPrefix}`));
 }
 
-function parseCSSInfo(cssContent: string, componentNameMap: Record<string, string | undefined>, cssRulesDesc: Record<string, Record<string, string>>, options: LcapBuildOptions) {
+interface ComponentCSSInfo {
+  cssRules: CSSRule[],
+  cssRuleMap: Map<string, CSSRule>,
+  mainSelectorMap: Map<string, boolean>,
+}
+
+function parseCSSInfo(
+  cssContent: string,
+  cssRulesDesc: Record<string, Record<string, string>>,
+  componentNameMap: Record<string, string | undefined>,
+  options: LcapBuildOptions,
+) {
   const componentNames = Object.keys(componentNameMap);
   const allCSSDescMap = Object.values(cssRulesDesc).reduce((acc, item) => Object.assign(acc, item), {});
 
@@ -36,6 +52,7 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
   const isNonStandardRE = /-(moz|webkit|ms|o)-/;
   const hasPesudoElementRE = /::|:(before|after|selection)/;
   const hashClassRE = /\.([a-zA-Z0-9][a-zA-Z0-9_-]*?)___[a-zA-Z0-9-]{6,}/;
+  const warningIgnoreRE = new RegExp((options.reportCSSInfo?.warningIgnore || [/%/]).map((re) => re.source).join('|'));
 
   function getPrefixMap(componentName: string, parentName: string | undefined) {
     const firstPrefix = kebabCase(componentName);
@@ -103,11 +120,13 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
     return !!rootPrefixes.length && re.test(selector);
   });
 
-  const componentCSSInfoMap: Record<string, {
-    cssRules: CSSRule[],
-    cssRuleMap: Map<string, CSSRule>,
-    mainSelectorMap: Map<string, boolean>,
-  }> = {};
+  const componentCSSInfoMap: Record<string, ComponentCSSInfo> = {};
+
+  /** 目前只是用来减少 WARN 日志 */
+  const allMainSelectorMap = !options.reportCSSInfo?.extraComponentMap ? {} : Object.keys(options.reportCSSInfo?.extraComponentMap).reduce((obj, componentName) => {
+    const mainSelectorMap = options.reportCSSInfo?.extraComponentMap?.[componentName]?.mainSelectorMap;
+    return { ...obj, ...mainSelectorMap };
+  }, {} as Record<string, boolean>);
 
   root.nodes.forEach((node) => {
     if (node.type === 'rule') {
@@ -136,12 +155,13 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
             name = kebabCase(name);
             return new RegExp(`^\\.${name}(_|-)|^\\[class\\*=${name}(_|-)`).test(selector) && !/:(before|after)$/.test(selector);
           });
-          if (tempComponentName) console.log(`[WARN] 未找到可能的组件选择器: ${selector}，根据_|-分割推测可能的组件：${tempComponentName}`);
+          if (tempComponentName && allMainSelectorMap[selector] === undefined && !warningIgnoreRE.test(selector)) console.warn(`[WARN] 未找到可能的组件选择器: ${selector}，按照_|-分割推测可能的组件：${tempComponentName}`);
           const tempComponentName2 = componentNames.find((name) => {
             name = kebabCase(name);
             return new RegExp(`^\\.${name}|^\\[class\\*=${name}`).test(selector) && !/:(before|after)$/.test(selector);
           });
-          if (!tempComponentName && tempComponentName2) console.log(`[WARN] 未找到可能的组件选择器: ${selector}，根据前缀连续推测可能的组件：${tempComponentName2}`);
+          if (!tempComponentName && tempComponentName2 && allMainSelectorMap[selector] === undefined
+            && !warningIgnoreRE.test(selector)) console.warn(`[WARN] 未找到可能的组件选择器: ${selector}，根据前缀连续推测可能的组件：${tempComponentName2}`);
         }
         return;
       }
@@ -376,7 +396,7 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
 
     componentCSSInfo.cssRules.forEach((rule) => {
       const matchedMainSelector = Array.from(componentCSSInfo.mainSelectorMap.keys()).find((mainSelector) => rule.selector.startsWith(mainSelector.split(/[ +>~]/g)[0]));
-      !matchedMainSelector && console.log(`selector: ${rule.selector} 匹配 mainSelector: ${matchedMainSelector}`);
+      !matchedMainSelector && console.warn(`selector: ${rule.selector} 匹配 mainSelector: ${matchedMainSelector}`);
       rule.description = cssDescMap[rule.selector] = allCSSDescMap[rule.selector] || '';
     });
     // eslint-disable-next-line no-nested-ternary
@@ -384,89 +404,200 @@ function parseCSSInfo(cssContent: string, componentNameMap: Record<string, strin
     Object.keys(cssDescMap).forEach((selector) => {
       if (!componentCSSInfo.cssRuleMap.has(selector)) delete cssDescMap[selector];
     });
-    cssRulesDesc[componentName] = sortMap(cssDescMap);
-
-    const finalComponentCSSInfo = componentCSSInfo as any;
-    finalComponentCSSInfo.mainSelectorMap = Object.fromEntries(componentCSSInfo.mainSelectorMap);
-    delete finalComponentCSSInfo.cssRuleMap;
+    cssRulesDesc[componentName] = cssDescMap;
   });
+
+  return { componentCSSInfoMap, cssRulesDesc, cssContent: root.toResult().css };
+}
+
+function postprocessCSSInfo(
+  componentCSSInfoMap: Record<string, ComponentCSSInfo>,
+  cssRulesDesc: Record<string, Record<string, string>>,
+  componentNameMap: Record<string, string | undefined>,
+  options: LcapBuildOptions,
+) {
+  const componentNames = Object.keys(componentNameMap);
+
+  if (options.reportCSSInfo?.extraComponentMap) {
+    /**
+     * 根据依赖组件补充信息
+     * 从上到下的顺序
+     */
+    Object.entries(options.reportCSSInfo.extraComponentMap).forEach(([componentName, extraComponentInfo]) => {
+      const _depComponentMap: Record<string, DepComponent> = {};
+      Object.entries(extraComponentInfo.depComponentMap || {}).forEach(([depName, depItem]) => {
+        if (typeof depItem === 'boolean') {
+          _depComponentMap[depName] = {
+            componentName: depName,
+            stillRoot: depItem,
+          };
+        } else if ('stillRoot' in depItem) {
+          if ('cssInfo' in depItem && !depItem.cssInfo) throw new Error(`组件 ${componentName} 的依赖组件 ${depName} 配置错误`);
+          _depComponentMap[depName] = depItem;
+        } else {
+          if (!depItem) throw new Error(`组件 ${componentName} 的依赖组件 ${depName} 配置错误`);
+          _depComponentMap[depName] = {
+            componentName: depName,
+            cssInfo: depItem,
+            stillRoot: false,
+          };
+        }
+      });
+      extraComponentInfo.depComponents?.forEach((depItem) => {
+        let depName = '';
+        if (typeof depItem === 'string') {
+          depName = depItem;
+          if (_depComponentMap[depName]) return;
+
+          _depComponentMap[depName] = {
+            componentName: depName,
+            stillRoot: false,
+          };
+        } else {
+          depName = depItem.componentName;
+          if (_depComponentMap[depName]) return;
+          if ('cssInfo' in depItem && !depItem.cssInfo) throw new Error(`组件 ${componentName} 的依赖组件 ${depName} 配置错误`);
+
+          _depComponentMap[depName] = depItem;
+        }
+      });
+      if ('extends' in extraComponentInfo && !extraComponentInfo.extends) throw new Error(`组件 ${componentName} 的 extends 配置错误`);
+      if (extraComponentInfo.extends) {
+        const baseName = `_Base${componentName}`;
+        _depComponentMap[baseName] = {
+          componentName: baseName,
+          cssInfo: extraComponentInfo.extends,
+          stillRoot: true,
+        };
+      }
+
+      Object.keys(_depComponentMap).forEach((depName) => {
+        const depItem = _depComponentMap[depName];
+        const stillRoot = depItem.stillRoot;
+        options.reportCSSInfo?.verbose && console.info(`[INFO] 组件 ${componentName} 依赖 ${depName}，且${stillRoot ? '仍为根节点' : '不为根节点'}`);
+
+        const _depCSSInfo = componentCSSInfoMap[depName];
+        if (!_depCSSInfo && !depItem.cssInfo) throw new Error(`组件 ${componentName} 找不到依赖组件 ${depName} 的配置`);
+        [_depCSSInfo, depItem.cssInfo && convertFinalCSSInfoToInner(depItem.cssInfo)].forEach((depCSSInfo) => {
+          if (!depCSSInfo) return;
+
+          let currCSSInfo = componentCSSInfoMap[componentName];
+          if (!currCSSInfo) {
+            currCSSInfo = componentCSSInfoMap[componentName] = {
+              cssRules: [],
+              cssRuleMap: new Map(),
+              mainSelectorMap: new Map(),
+            };
+          }
+
+          // 补充 cssRules 和 cssRuleMap
+          depCSSInfo.cssRules.forEach((rule) => {
+            const newRule = {
+              ...rule,
+              isStartRoot: stillRoot && rule.isStartRoot,
+            };
+
+            // 采取不覆盖策略，保证自定义配置的优先级
+            if (!currCSSInfo.cssRuleMap.has(rule.selector)) {
+              currCSSInfo.cssRules.push(newRule);
+              currCSSInfo.cssRuleMap.set(rule.selector, newRule);
+            }
+            // else { // 去重
+            //   const index = currCSSInfo.cssRules.findIndex((item) => item.selector === rule.selector);
+            //   currCSSInfo.cssRules[index] = newRule;
+            //   currCSSInfo.cssRuleMap.set(rule.selector, newRule);
+            // }
+          });
+
+          // 补充 mainSelectorMap
+          depCSSInfo.mainSelectorMap.forEach((value, key) => {
+            // 采取不覆盖策略，保证自定义配置的优先级
+            if (!currCSSInfo.mainSelectorMap.has(key)) {
+              currCSSInfo.mainSelectorMap.set(key, stillRoot ? value : false);
+            }
+          });
+        });
+
+        // 补充 cssRules 的中文描述
+        [cssRulesDesc[depName], depItem.cssInfo && convertFinalCSSInfoToDesc(depItem.cssInfo)].forEach((depCSSRulesDesc) => {
+          if (!depCSSRulesDesc) return;
+          Object.entries(depCSSRulesDesc).forEach(([selectorKey, desc]) => {
+            let descObj = cssRulesDesc[componentName];
+            if (!descObj) descObj = cssRulesDesc[componentName] = {};
+            if (!descObj[selectorKey]) {
+              descObj[selectorKey] = desc; // 采取不覆盖策略，保证自定义配置的优先级
+              const cssRule = componentCSSInfoMap[componentName]?.cssRuleMap.get(selectorKey);
+              if (cssRule) cssRule.description = desc;
+            }
+          });
+        });
+      });
+    });
+
+    /**
+     * 过滤掉需要隐藏的选择器
+     */
+    Object.entries(options.reportCSSInfo.extraComponentMap).forEach(([componentName, extraComponentInfo]) => {
+      if (!extraComponentInfo.hideSelectorPrefixes) return;
+      const hideSelectorPrefixes = extraComponentInfo.hideSelectorPrefixes;
+
+      const compCssDesc = cssRulesDesc[componentName];
+      const compCssInfo = componentCSSInfoMap[componentName];
+      Object.keys(compCssDesc).forEach((selectorKey) => {
+        if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
+          delete compCssDesc[selectorKey];
+        }
+      });
+      Object.keys(compCssInfo.mainSelectorMap).forEach((selectorKey) => {
+        if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
+          delete compCssInfo.mainSelectorMap[selectorKey];
+        }
+      });
+      compCssInfo.cssRules = compCssInfo.cssRules.filter((rule) => {
+        return !startsWithPrefix(hideSelectorPrefixes, rule.selector);
+      });
+    });
+  }
+
+  /**
+   * 如果组件已经不存在了，就在描述中也删除掉
+   */
   Object.keys(cssRulesDesc).forEach((componentName) => {
     if (!componentCSSInfoMap[componentName]) delete cssRulesDesc[componentName];
+    else cssRulesDesc[componentName] = sortMap(cssRulesDesc[componentName]);
   });
 
   if (options.reportCSSInfo?.verbose) {
     componentNames.forEach((componentName) => {
-      if (!componentCSSInfoMap[componentName]) console.log(`[WARN] 组件 ${componentName} 上未匹配到任何选择器`);
+      if (!componentCSSInfoMap[componentName]) console.warn(`[WARN] 组件 ${componentName} 上未匹配到任何选择器`);
     });
   }
+}
 
-  //  过滤掉需要隐藏的选择器
-  if (options.reportCSSInfo?.extraComponentMap) {
-    const compKeys = Object.keys(options.reportCSSInfo.extraComponentMap);
-    compKeys.forEach((curCompName) => {
-      const hideSelectorPrefixes = options.reportCSSInfo?.extraComponentMap?.[curCompName]?.hideSelectorPrefixes;
-      if (hideSelectorPrefixes) {
-        const compCssDesc = cssRulesDesc[curCompName];
-        const compCssInfo = componentCSSInfoMap[curCompName];
-        Object.keys(compCssDesc).forEach((selectorKey) => {
-          if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
-            delete compCssDesc[selectorKey];
-          }
-        });
-        Object.keys(compCssInfo.mainSelectorMap).forEach((selectorKey) => {
-          if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
-            delete compCssInfo.mainSelectorMap[selectorKey];
-          }
-        });
-        compCssInfo.cssRules = compCssInfo.cssRules.filter((rule) => {
-          return !startsWithPrefix(hideSelectorPrefixes, rule.selector);
-        });
-      }
-    });
-  }
+function convertCSSInfoMapToFinal(cssInfoMap: Record<string, ComponentCSSInfo>) {
+  const final: Record<string, FinalComponentCSSInfo> = {};
+  Object.entries(cssInfoMap).forEach(([componentName, cssInfo]) => {
+    final[componentName] = {
+        cssRules: Array.from(cssInfo.cssRules),
+        mainSelectorMap: Object.fromEntries(cssInfo.mainSelectorMap),
+    };
+  });
+  return final;
+}
 
-  // 整合
-  if (options.reportCSSInfo?.extraComponentMap) {
-    const compKeys = Object.keys(options.reportCSSInfo.extraComponentMap);
-    for (const curCompName of compKeys) {
-      const { depComponents } = options.reportCSSInfo.extraComponentMap[curCompName];
-      depComponents?.forEach((depCompItem) => {
-        let depComponentName = '';
-        let stillRoot = false;
-        if (typeof depCompItem !== 'string') {
-          depComponentName = depCompItem.componentName;
-          stillRoot = depCompItem.stillRoot;
-        } else {
-          depComponentName = depCompItem;
-        }
-        const depCompCssDesc = cssRulesDesc[depComponentName];
-        cssRulesDesc[curCompName] = { ...cssRulesDesc[curCompName], ...depCompCssDesc };
-        const depCompCssInfo = componentCSSInfoMap[depComponentName];
-        const resetCssRules = depCompCssInfo.cssRules.map((rule) => {
-          return {
-            ...rule,
-            isStartRoot: stillRoot && rule.isStartRoot,
-          };
-        });
-        const resetMainSelectorMap = stillRoot ? { ...depCompCssInfo.mainSelectorMap } : Object.keys(depCompCssInfo.mainSelectorMap).reduce((acc, selector) => {
-          acc[selector] = false;
-          return acc;
-        }, {});
+function convertFinalCSSInfoToInner(cssInfo: FinalComponentCSSInfo) {
+  return {
+    cssRules: cssInfo.cssRules,
+    mainSelectorMap: new Map(Object.entries(cssInfo.mainSelectorMap)),
+  };
+}
 
-        if (!componentCSSInfoMap[curCompName]) {
-          componentCSSInfoMap[curCompName] = {
-            cssRules: [],
-            cssRuleMap: new Map(),
-            mainSelectorMap: new Map(),
-          };
-        }
-        componentCSSInfoMap[curCompName].cssRules = [...componentCSSInfoMap[curCompName].cssRules, ...resetCssRules];
-        componentCSSInfoMap[curCompName].mainSelectorMap = { ...componentCSSInfoMap[curCompName].mainSelectorMap, ...resetMainSelectorMap };
-      });
-    }
-  }
-
-  return { componentCSSInfoMap, cssRulesDesc: sortMap(cssRulesDesc), cssContent: root.toResult().css };
+function convertFinalCSSInfoToDesc(cssInfo: FinalComponentCSSInfo) {
+  const result: Record<string, string> = {};
+  cssInfo.cssRules.forEach((rule) => {
+    result[rule.selector] = rule.description;
+  });
+  return result;
 }
 
 export default function buildCSSInfo(options: LcapBuildOptions) {
@@ -488,9 +619,72 @@ export default function buildCSSInfo(options: LcapBuildOptions) {
 
   const cssRulesDescPath = path.resolve(options.rootPath, 'index.css-info-desc.json');
   const cssRulesDesc = fs.existsSync(cssRulesDescPath) ? fs.readJSONSync(cssRulesDescPath) : {};
-  const result = parseCSSInfo(cssContent, componentNameMap, cssRulesDesc, options);
 
-  fs.writeJSONSync(path.resolve(options.rootPath, options.destDir, 'index.css-info-map.json'), result.componentCSSInfoMap, { spaces: 2 });
-  fs.writeJSONSync(path.resolve(options.rootPath, 'index.css-info-desc.json'), result.cssRulesDesc, { spaces: 2 });
+  const result = parseCSSInfo(cssContent, cssRulesDesc, componentNameMap, options);
+  postprocessCSSInfo(result.componentCSSInfoMap, result.cssRulesDesc, componentNameMap, options);
+
+  fs.writeJSONSync(path.resolve(options.rootPath, options.destDir, 'index.css-info-map.json'), convertCSSInfoMapToFinal(result.componentCSSInfoMap), { spaces: 2 });
+  fs.writeJSONSync(path.resolve(options.rootPath, 'index.css-info-desc.json'), sortMap(result.cssRulesDesc), { spaces: 2 });
   fs.writeFileSync(path.resolve(options.rootPath, options.destDir, 'index.css'), result.cssContent);
+}
+
+export function batchDepCSSInfo(
+  originComponentNames: string[],
+  renameComponent: (oldName: string) => string,
+  stillRoot = true,
+) {
+  const result: Record<string, {
+    depComponentMap: Record<string, boolean>;
+  }> = {};
+
+  originComponentNames.forEach((componentName) => {
+    result[renameComponent(componentName)] = {
+      depComponentMap: {
+        [componentName]: stillRoot,
+      },
+    };
+  });
+
+  return result;
+}
+export function batchDepBasicCSSInfo(
+  basicCSSInfo: Record<string, FinalComponentCSSInfo>,
+  originComponentNames: string[],
+  renameComponent: (oldName: string) => string,
+  stillRoot = true,
+) {
+  const result: Record<string, {
+    depComponentMap: Record<string, DepComponent>;
+  }> = {};
+
+  originComponentNames.forEach((componentName) => {
+    result[renameComponent(componentName)] = {
+      depComponentMap: {
+        [componentName]: {
+          componentName,
+          stillRoot,
+          cssInfo: basicCSSInfo[componentName],
+        },
+      },
+    };
+  });
+
+  return result;
+}
+
+export function extendsCSSInfo(
+  cssInfo: FinalComponentCSSInfo,
+  renameSelector?: (oldSelector: string) => string,
+) {
+  const result = {
+    cssRules: cssInfo.cssRules.map((cssRule) => ({
+      ...cssRule,
+      selector: renameSelector ? renameSelector(cssRule.selector) : cssRule.selector,
+    })),
+    mainSelectorMap: Object.entries(cssInfo.mainSelectorMap).reduce(
+      (prev, [selector, isStartRoot]) => ({ ...prev, [renameSelector ? renameSelector(selector) : selector]: isStartRoot }),
+      {} as Record<string, boolean>,
+    ),
+  };
+  return result;
 }

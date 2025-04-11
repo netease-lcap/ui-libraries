@@ -1,0 +1,34 @@
+/**
+ * @component el-link
+ */
+.el-link {
+  /**
+   * @desc 链接字体大小
+   * @type input
+   */
+  --el-link-font-size: var(--el-font-size-base);
+  
+  /**
+   * @desc 链接字体粗细
+   * @type input
+   */
+  --el-link-font-weight: var(--el-font-weight-primary);
+  
+  /**
+   * @desc 链接文字颜色
+   * @type color
+   */
+  --el-link-text-color: var(--el-text-color-regular);
+  
+  /**
+   * @desc 链接悬停时文字颜色
+   * @type color
+   */
+  --el-link-hover-text-color: var(--el-color-primary);
+  
+  /**
+   * @desc 链接禁用时文字颜色
+   * @type color
+   */
+  --el-link-disabled-text-color: var(--el-text-color-placeholder);
+}

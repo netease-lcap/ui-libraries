@@ -1,9 +1,21 @@
 const fs = require('fs-extra');
+const json = require('./libraries/element-plus/dist-theme/nasl.ui.json');
+
+const componentNameMap = {};
+json.forEach((component) => {
+  componentNameMap[component.name] = component.title;
+  componentNameMap[component.kebabName] = component.title;
+  component.children.forEach((subComponent) => {
+    componentNameMap[subComponent.name] = subComponent.title;
+    componentNameMap[subComponent.kebabName] = subComponent.title;
+  });
+});
+const componentNameMapStr = Object.keys(componentNameMap).map((name) => `- ${name}: ${componentNameMap[name]}\n`).join('');
 
 module.exports = {
   mode: 'file-rpa',
-  prompt: fs.readFileSync('./ae.css-selectors-prompt.md', 'utf-8'),
-  includes: ['libraries/pc-ui/index.css-info-desc.json'],
+  prompt: fs.readFileSync('./ae.css-selectors-prompt.md', 'utf-8').replace(/<%= context %>/, componentNameMapStr),
+  includes: ['libraries/element-plus/index.css-info-desc.json'],
   excludes: [],
   linePattern: /^(\s*")(.+?)(":\s*")(.*?)(",?\s*)$/,
   linePreFilter(line) {

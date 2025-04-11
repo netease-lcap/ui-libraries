@@ -1,5 +1,4 @@
 import { ElTabs as ElTabsPlus, ElTabPane } from 'element-plus';
-import 'element-plus/theme-chalk/el-tabs.css';
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
 
