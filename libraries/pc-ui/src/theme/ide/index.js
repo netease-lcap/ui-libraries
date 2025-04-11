@@ -121,9 +121,17 @@ const ColorGroups = [
     },
   },
   {
-    key: 'colorBackground',
+    key: 'colorBackground1',
     type: 'Color',
-    name: '背景色',
+    name: '默认背景色',
+    desc: '',
+    seedToken: ['--background-color-default'],
+    mapToken: [],
+  },
+  {
+    key: 'colorBackground2',
+    type: 'Color',
+    name: '填充背景色',
     desc: '',
     seedToken: ['--background-color-base'],
     mapToken: [],
@@ -139,10 +147,53 @@ const ColorGroups = [
   {
     key: 'colorText',
     type: 'Color',
-    name: '文本色',
+    name: '一级文本色',
     desc: '',
     seedToken: ['--color-base'],
     mapToken: [],
+    getMapTokenValue: (seedTokenValues) => {
+      return {
+        '--font-first-color': seedTokenValues[0],
+        '--font-fourth-color': seedTokenValues[0],
+      };
+    },
+  },
+  {
+    key: 'colorText2',
+    type: 'Color',
+    name: '二级文本色',
+    desc: '',
+    seedToken: ['--font-second-color'],
+    mapToken: [],
+  },
+  {
+    key: 'colorText3',
+    type: 'Color',
+    name: '三级文本色',
+    desc: '',
+    seedToken: ['--font-third-color'],
+    mapToken: [],
+    getMapTokenValue: (seedTokenValues) => {
+      return {
+        '--color-light': seedTokenValues[0],
+        '--font-third-color-opacity-15': colorOpacity(seedTokenValues[0], 0.15),
+        '--font-third-color-opacity-60': colorOpacity(seedTokenValues[0], 0.6),
+      };
+    },
+  },
+  {
+    key: 'colorText4',
+    type: 'Color',
+    name: '四级级文本色',
+    desc: '',
+    seedToken: ['--font-disabled-color'],
+    mapToken: [],
+    getMapTokenValue: (seedTokenValues) => {
+      return {
+        '--color-lighter': seedTokenValues[0],
+        '--font-disabled-color-opacity-50': colorOpacity(seedTokenValues[0], 0.5),
+      };
+    },
   },
   {
     key: 'colorLink',
@@ -247,7 +298,7 @@ const PrimaryColorGroup = [
     key: 'background',
     name: '背景色',
     desc: '',
-    seedToken: ['--background-color-base'],
+    seedToken: ['--background-color-default'],
     mapToken: [],
   },
 ];
