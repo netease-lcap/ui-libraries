@@ -117,12 +117,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledHours: (role: nasl.core.String, comparingDate: any) => {
-      /**
-       * @title 禁止选择的小时
-       */
-      hours: nasl.collection.List<nasl.core.Integer>
-    };
+    disabledHours: (role: nasl.core.String, comparingDate: any) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -134,12 +129,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
-      /**
-       * @title 禁止选择的分钟
-       */
-      minutes: nasl.collection.List<nasl.core.Integer>
-    };
+    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -151,12 +141,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
-      /**
-       * @title 禁止选择的秒
-       */
-      seconds: nasl.collection.List<nasl.core.Integer>
-    };
+    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
