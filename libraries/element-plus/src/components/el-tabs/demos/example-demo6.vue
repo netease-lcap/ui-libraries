@@ -5,15 +5,10 @@
     editable
     class="demo-tabs"
     @edit="handleTabsEdit"
+    :dataSource="editableTabs"
+    titleField="title"
+    valueField="name"
   >
-    <el-tab-pane
-      v-for="item in editableTabs"
-      :key="item.name"
-      :label="item.title"
-      :name="item.name"
-    >
-      {{ item.content }}
-    </el-tab-pane>
   </el-tabs>
 </template>
 
