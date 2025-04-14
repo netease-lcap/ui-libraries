@@ -60,26 +60,27 @@ export const Example2 = {
       const name = ref('myName');
       const list = ref([{ value: 1, label: '1' }, { value: 2, label: '2' }, { value: 3, label: '3' }]);
       // const list = ref([1, 2, 3]);
-list.value = async () => {
-        return new Promise((res) => {
-          setTimeout(() => {
-            const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+// list.value = async () => {
+//         return new Promise((res) => {
+//           setTimeout(() => {
+//             const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
 
-            const value = ref();
-            const options = Array.from({ length: 1000 }).map((_, idx) => ({
-              value: `Option ${idx + 1}`,
-              label: `${initials[idx % 10]}${idx}`,
-            }));
-            res(options);
-            // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
-          }, 1000);
-        });
-      };
+//             const value = ref();
+//             const options = Array.from({ length: 1000 }).map((_, idx) => ({
+//               value: `Option ${idx + 1}`,
+//               label: `${initials[idx % 10]}${idx}`,
+//             }));
+//             res(options);
+//             // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
+//           }, 1000);
+//         });
+//       };
       const select = ref('');
 
       const handleClick = (tab) => {
-        console.log(tab, '====');
-        select.value.reload();
+        list.value.push({ value: 4, label: '4' });
+        // console.log(tab, '====');
+        // select.value.reload();
       };
 
       setTimeout(() => {
@@ -101,7 +102,6 @@ list.value = async () => {
     template: `
     <div>
     <el-select ref="select" v-model="activeName"  clearable :dataSource="list" multiple >
-     <el-option label="item.value" :value="item.value" :name="name" / >
 
     </el-select>
     {{ activeName }}
