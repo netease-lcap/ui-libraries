@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-backtop></el-backtop>',
+    template: '<el-backtop :visibilityHeight="200" :right="40" :bottom="40"></el-backtop>',
   }),
 };
