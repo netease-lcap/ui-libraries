@@ -95,6 +95,13 @@ export default {
         ]));
       }
 
+      const listeners = {
+        ...this.$listeners,
+      };
+
+      // 修复 scroll 事件被监听两次的问题
+      delete listeners.scroll;
+
       return h('div', {
          staticClass: this.$style.root,
          attrs: {
@@ -105,7 +112,7 @@ export default {
            nowrap: !this.wrap,
          },
          ref: 'root',
-         on: this.$listeners,
+         on: listeners,
       }, children);
     }
 };
