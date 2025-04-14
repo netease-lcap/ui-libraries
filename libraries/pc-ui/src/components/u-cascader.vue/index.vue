@@ -122,7 +122,7 @@ export default {
     },
     data() {
         return {
-            currentValue: this.useArrayLikeValue && Array.isArray(this.value) ? '正在加载' : this.value,
+            currentValue: this.useArrayLikeValue && Array.isArray(this.value) ? '' : this.value,
             currentData: [], // 动态加载时的数据
             lastValueString: '',
             lastValueArray: [], // 当前属性存储文本字段的内容, UCascader有被其它组件mixin，故这里不修改变量名
@@ -229,7 +229,7 @@ export default {
             this.currentDataSource = this.normalizeDataSource(this.data);
         }
         // this.currentValue = this.value; // 这里会引起currentValue change，emit事件导致validator执行
-        this.lastValueString = this.useArrayLikeValue && Array.isArray(this.value) ? '正在加载' : this.value;
+        this.lastValueString = this.useArrayLikeValue && Array.isArray(this.value) ? '' : this.value;
         if (this.lazy)
             this.triggerLazyLoad();
         // validator
