@@ -394,8 +394,8 @@ namespace nasl.ui {
       }) => any;
 
       @Event({
-          title: '选择时',
-          description: '选择日期时触发',
+          title: '选择后',
+          description: '选择日期后触发',
       })
       onSelect: (event: {
           date: nasl.core.String;

@@ -197,25 +197,25 @@ export default defineConfig(({ command }) => {
               selectorPrefixMap: {
                 'narrow-scrollbar': true,
               },
-              depCompList: ['ElTreePro', 'ElSelectPro', 'ElInputPro'],
+              depComponents: ['ElTreePro', 'ElSelectPro', 'ElInputPro'],
             },
             ElDatePickerPro: {
               mainSelectorMap: {
                 '.el-p-date-picker': true,
               },
-              depCompList: ['ElSelectInputPro', 'ElInputPro'],
+              depComponents: ['ElSelectInputPro', 'ElInputPro'],
             },
             ElDateTimePickerPro: {
               mainSelectorMap: {
                 '.el-p-date-picker': true,
               },
-              depCompList: ['ElSelectInputPro', 'ElInputPro'],
+              depComponents: ['ElSelectInputPro', 'ElInputPro'],
             },
             ElTimePickerPro: {
               selectorPrefixMap: {
                 'el-p-time-range-picker': true,
               },
-              depCompList: ['ElRangeInputPro', 'ElInputPro'],
+              depComponents: ['ElRangeInputPro', 'ElInputPro'],
             },
             ElInputPro: {
               selectorPrefixMap: {
@@ -224,7 +224,7 @@ export default defineConfig(({ command }) => {
               },
             },
             ElTablePro: {
-              depCompList: ['ElPaginationPro'],
+              depComponents: ['ElPaginationPro'],
             },
             ElTooltip: {
               selectorPrefixMap: {

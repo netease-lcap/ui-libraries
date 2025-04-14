@@ -1,0 +1,28 @@
+/**
+ * @component el-card
+ */
+.el-card {
+  /**
+   * @desc 卡片边框颜色
+   * @type color
+   */
+  --el-card-border-color: var(--el-border-color-light);
+  
+  /**
+   * @desc 卡片边框圆角
+   * @type input
+   */
+  --el-card-border-radius: 4px;
+  
+  /**
+   * @desc 卡片内边距
+   * @type input
+   */
+  --el-card-padding: 20px;
+  
+  /**
+   * @desc 卡片背景颜色
+   * @type color
+   */
+  --el-card-bg-color: var(--el-fill-color-blank);
+}

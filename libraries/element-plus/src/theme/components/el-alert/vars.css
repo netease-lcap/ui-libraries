@@ -1,0 +1,58 @@
+/**
+ * @component el-alert
+ */
+.el-alert {
+  /**
+   * @desc 警告框的内边距
+   * @type input
+   */
+  --el-alert-padding: 8px 16px;
+
+  /**
+   * @desc 警告框的基础边框半径
+   * @type input
+   */
+  --el-alert-border-radius-base: var(--el-border-radius-base);
+
+  /**
+   * @desc 警告框标题的字体大小
+   * @type input
+   */
+  --el-alert-title-font-size: 14px;
+
+  /**
+   * @desc 带描述的警告框标题的字体大小
+   * @type input
+   */
+  --el-alert-title-with-description-font-size: 16px;
+
+  /**
+   * @desc 警告框描述的字体大小
+   * @type input
+   */
+  --el-alert-description-font-size: 14px;
+
+  /**
+   * @desc 警告框关闭按钮的字体大小
+   * @type input
+   */
+  --el-alert-close-font-size: 16px;
+
+  /**
+   * @desc 自定义警告框关闭按钮的字体大小
+   * @type input
+   */
+  --el-alert-close-customed-font-size: 14px;
+
+  /**
+   * @desc 警告框图标的大小
+   * @type input
+   */
+  --el-alert-icon-size: 16px;
+
+  /**
+   * @desc 大型警告框图标的大小
+   * @type input
+   */
+  --el-alert-icon-large-size: 28px;
+}

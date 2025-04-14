@@ -43,3 +43,10 @@ export const SpaceBetween = {
     template: '<el-flex justify="space-between"><el-flex :wrap="true"></el-flex><el-flex :wrap="true"></el-flex></el-flex>',
   }),
 };
+
+export const qiankun = {
+  name: '前端框架',
+  render: () => ({
+    template: '<el-flex id="qiankun" direction="horizontal" mode="block"></el-flex>',
+  }),
+};

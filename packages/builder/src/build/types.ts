@@ -29,11 +29,6 @@ export interface LcapThemeOptions extends Partial<ThemeOptions> {
   themePreviewEntry?: string;
 }
 
-export interface DepCompListInfo {
-  compName: string;
-  isResetRoot: boolean;
-}
-
 export interface LcapMetaOptions {
   rootPath: string;
   type: 'extension' | 'nasl.ui';
@@ -48,6 +43,15 @@ export interface BuildModulesOptions extends LcapMetaOptions {
   tsconfigPath?: string;
   addDepExternal?: boolean;
 }
+
+export type DepComponent = {
+  /** 依赖的组件样式重置过来时，是否仍为根节点。默认为 false */
+  stillRoot: boolean;
+  /** 依赖的组件名称 */
+  componentName: string;
+  // eslint-disable-next-line no-use-before-define
+  cssInfo?: FinalComponentCSSInfo;
+};
 
 export interface LcapBuildOptions extends LcapMetaOptions {
   assetsPublicPath?: string;
@@ -65,8 +69,9 @@ export interface LcapBuildOptions extends LcapMetaOptions {
     verbose?: true; // 开启后会打印"有选择器没对应组件、有组件没有选择器"的情况，防止遗漏信息，对新组件库调试很有用
     extraComponentMap?: Record<string, { // 额外的组件配置，key 为组件大驼峰名称
       /**
-       * 补充组件相关的选择器前缀
+       * ### 补充组件相关的选择器前缀
        * key 为前缀名，value 表示是否为根节点
+       *
        * 一般有以下情况：
        * - build 后的 CSS 中有组件信息，但前缀不匹配组件名，需要手动补充前缀
        *   @example: 表格需要补充 u-table 前缀的选择器：UTableView: { selectorPrefixMap: { 'u-table': false } }
@@ -77,22 +82,42 @@ export interface LcapBuildOptions extends LcapMetaOptions {
        */
       selectorPrefixMap?: Record<string, boolean>;
       /**
-       * 补充主选择器
+       * ### 补充主选择器
        * key 为选择器，value 表示是否为根节点
+       *
        * 一般是因为 rule 是空的，build 后的 CSS 被压缩没了。需要手动补充选择器信息
        * @example: 表单本身没有样式，UForm: { mainSelectorMap: { "[class*=u-form___]": true } }
        */
       mainSelectorMap?: Record<string, boolean>;
       /**
-       * 额外补充依赖组件
+       * @deprecated
+       * ### 额外补充依赖组件
        * 比如 UTreeSelectNew依赖了UTreeViewNew，需要补充UTreeViewNew
        */
-      depCompList?: Array<string | DepCompListInfo>;
+      depComponents?: Array<string | DepComponent>;
+
+      /**
+       * ### 额外补充依赖组件
+       * depComponents 的另一种写法
+       *
+       * key 为组件名，value 表示该依赖组件的顶层是否同为根节点
+       */
+      // eslint-disable-next-line no-use-before-define
+      depComponentMap?: Record<string, boolean | FinalComponentCSSInfo | DepComponent>;
+      /**
+       * ### 继承其他组件的 CSS 信息
+       */
+      // eslint-disable-next-line no-use-before-define
+      extends: FinalComponentCSSInfo;
       /**
        * 需要隐藏的选择器前缀列表
        */
-      hiddenSelectorPreFixList?: Array<string>;
+      hideSelectorPrefixes?: Array<string>;
     }>;
+    /**
+     * 忽略警告列表规则
+     */
+    warningIgnore?: RegExp[];
     inferSelectorComponentName?: (selector: string, componentNameMap: Record<string, string | undefined>) => string | undefined; // 重写推断选择器是哪个组件的方法。很复杂！建议优先走上面的配置
     isSelectorStartRoot?: (selector: string, componentName: string, parentName: string | undefined) => boolean; // 重写判断选择器是否是根节点。很复杂！建议优先走上面的配置
   };
@@ -144,4 +169,9 @@ export interface CSSRule<V = CSSValue> {
   description: string;
   // code?: string;
   parsedStyle?: Partial<Record<SupportedCSSProperty, V>>;
+}
+
+export interface FinalComponentCSSInfo {
+  cssRules: CSSRule[],
+  mainSelectorMap: Record<string, boolean>,
 }

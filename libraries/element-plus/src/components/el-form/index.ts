@@ -1,18 +1,13 @@
 import { ElForm as ElFormPlus, ElFormItem as ElFormItemPlus } from 'element-plus';
-// import { ElForm as ElFormPlus, ElFormItem } from 'element-plus';
-import 'element-plus/theme-chalk/el-select.css';
-import { registerComponet } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
-import * as formItemPlugin from './plugins/form-item';
+import * as formItemPlugin from './plugins/form-item-plugin';
 import { withFormItem } from './plugins/form-item';
+import './index.css';
 
-// const formProvide=Stor
+const ElForm = registerComponent(ElFormPlus, { plugin: basicsPlugin });
+const ElFormItemWrap = registerComponent(ElFormItemPlus, { plugin: formItemPlugin });
+const ElFormItem = ElFormItemPlus;
 
-const ElForm = registerComponet(ElFormPlus, { plugin: basicsPlugin });
-const ElFormItem = registerComponet(ElFormItemPlus, { plugin: formItemPlugin });
-const ElFormItemPro = ElFormItem;
-
-export {
-  ElForm, ElFormItem, withFormItem, ElFormItemPro,
-};
+export { ElForm, ElFormItemWrap, withFormItem, ElFormItem };
 export default ElForm;

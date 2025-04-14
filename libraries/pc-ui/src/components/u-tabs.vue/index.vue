@@ -249,7 +249,7 @@ export default {
                 //     itemVM.navigate(itemVM.destination);
                 // }
             } else {
-                if (this.tabDataSource && this.tabDataSource.length) {
+                if (!this.disabled && this.tabDataSource && this.tabDataSource.length) {
                     this.$emit('click', e, itemVM);
                     const value = itemVM.value || this.$at(itemVM, this.valueField);
                     this.$emit('update:value', value, this);

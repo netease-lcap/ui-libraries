@@ -207,28 +207,16 @@ const usePropMap = (props: any, ctx: SetupContext, extendComponent?: any) => {
   };
 
   const useComputed = (map: Record<string, any>, dependPropKeys: string | string[], compute: (...args: any[]) => any = (v) => v) => {
-    let oldValues: any[] = [];
-    let oldResult: any = null;
     return computed(() => {
       const values = normalizeArray(dependPropKeys).map((k) => mapGet(map, k));
-      if (isShallowEqualArray(oldValues, values)) {
-        return oldResult;
-      }
-
       const result = compute(...values);
-      oldResult = result;
-      oldValues = values;
       return result;
     });
   };
 
   const useMapGetRef = (map: Record<string, any>, dependPropKeys: string | string[], compute: (...args: any[]) => any = (v) => v) => {
     const propRef = ref(null);
-    const dependencies = computed(() => {
-      return normalizeArray(dependPropKeys).map((k) => mapGet(map, k));
-    });
-
-    watch(dependencies, (values, oldValues) => {
+    watch(() => normalizeArray(dependPropKeys).map((k) => mapGet(map, k)), (values, oldValues) => {
       // 加一层浅比较防止重复执行，vue composition api 并不是真正的响应式，
       // 数据没变化也执行computed
       if (isShallowEqualArray(values, oldValues)) {

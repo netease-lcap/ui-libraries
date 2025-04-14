@@ -53,7 +53,7 @@ async function getWatcherTasks(options: LcapBuildOptions, pkgInfo: any) {
   const NaslUIWatcher = {
     name: 'nasl.ui',
     check(filePath: string) {
-      return filePath.endsWith('api.ts');
+      return filePath.endsWith('api.ts') || filePath.includes('block.stories');
     },
     build: async () => {
       await buildNaslUI(options);
@@ -92,7 +92,7 @@ async function getWatcherTasks(options: LcapBuildOptions, pkgInfo: any) {
   const NaslExtensionWatcher = {
     name: 'nasl.extension',
     check(filePath: string) {
-      return filePath.includes('src/') && (filePath.endsWith('api.ts') || filePath.includes('src/logics'));
+      return filePath.includes('src/') && (filePath.endsWith('api.ts') || filePath.includes('src/logics') || filePath.includes('block.stories'));
     },
     build: async () => {
       await buildNaslExtensionConfig(options);

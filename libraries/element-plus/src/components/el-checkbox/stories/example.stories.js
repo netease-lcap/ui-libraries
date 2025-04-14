@@ -1,4 +1,5 @@
 import { ref } from 'vue';
+import _ from 'lodash';
 import Component from '../index';
 // import { ElSelect, ElOption } from '../index';
 
@@ -10,7 +11,7 @@ export default {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'padded',
   },
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  // More on argTypes: https://storybook.js.org/dos/api/argtypes
   argTypes: {},
 };
 
@@ -71,6 +72,7 @@ export const Example2 = {
           }, 3000);
         });
       };
+      const dataSourceProps = ref({ dataSource: [] });
       const dataSource = () => new Promise((res) => {
         setTimeout(() => {
           res([
@@ -141,7 +143,7 @@ export const Example2 = {
               },
             },
           ]);
-        }, 3000);
+        }, 1000);
       });
       const select = ref('');
       const options = ref([
@@ -159,9 +161,12 @@ export const Example2 = {
         },
       ]);
       const arr = [3, 4, 5];
+      const num = ref(0);
 
+      const logNum = _.throttle((value) => console.log(value, 'throttle'), 2000, { leading: false });
       const handleClick = (tab) => {
-        console.log(tab);
+        num.value++;
+        logNum(num.value);
       };
       // setTimeout(() => {
       // name.value = 'newName';
@@ -171,6 +176,9 @@ export const Example2 = {
       // }, 3000);
       setTimeout(() => {
         name.value = 'myname';
+        // dataSourceProps.value = { dataSource: [{}, {}, {}, {}] };
+        dataSourceProps.value.dataSource = [{}, {}, {}, {}];
+        console.log('=====');
         // list.value.push({ value: 4 });
       }, 3000);
 
@@ -181,16 +189,30 @@ export const Example2 = {
         options,
         list,
         dataSource,
+        dataSourceProps,
         arr,
         handleClick,
+        num,
       };
     },
     template: `
     <div>
-      <el-checkbox-group  valueField="entity1.property1" textField="entity1.property1" :dataSource="dataSource" >
+     <el-checkbox-group :dataSource="dataSource" id="my1">
         <el-checkbox label="Option1" value="Value1" />
         <el-checkbox label="Option2" value="Value2" />
+        <template #item="{item}">
+          <el-text text="item.entity1.property11"  @click="handleClick(item)"/>
+        </template>
       </el-checkbox-group>
+
+     <el-checkbox-group  valueField="entity1.id" textField="entity1.property1"  :dataSource="dataSource" id="my2">
+     <el-checkbox label="Option1" value="Value1" />
+     <el-checkbox label="Option2" value="Value2" />
+
+   </el-checkbox-group>
+
+
+      <button @click="handleClick">click</button>
     </div>
 
     `,

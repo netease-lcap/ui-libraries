@@ -1,5 +1,6 @@
 import { ref, watch } from 'vue';
 import { ElPagination } from 'element-plus';
+import _ from 'lodash';
 import Component from '../index';
 
 export default {
@@ -22,7 +23,45 @@ export const Example1 = {
       const activeName = ref('first');
       const tableData = async (page) => {
         console.log(page, 'pagerequest====');
-        return [
+        const arr = [
+          {
+            date: '2016-05-03',
+            name: 'Tom',
+            six: {
+              name: '132',
+            },
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-02',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-04',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-01',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-08',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-06',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
+          {
+            date: '2016-05-07',
+            name: 'Tom',
+            address: 'No. 189, Grove St, Los Angeles',
+          },
           {
             date: '2016-05-03',
             name: 'Tom',
@@ -62,10 +101,13 @@ export const Example1 = {
             address: 'No. 189, Grove St, Los Angeles',
           },
         ];
+        // return arr
+        return { list: arr, total: arr.length };
       };
+      const width = ref('501px');
       const mytable = ref();
       const currentPage = ref(1);
-      const pageSize2 = ref(10);
+      const pageSize2 = ref(5);
       const selectedRowKeys = ref([
         {
           date: '2016-05-07',
@@ -77,15 +119,21 @@ export const Example1 = {
       watch(selectedRowKeys, (el) => {
         console.log(el, 'log');
       });
-      // setTimeout(() => {
-      //   console.log(selectedRowKeys,'selectedRowKeys');
-      // }, 1000);
+      setTimeout(() => {
+        width.value = '1000px';
+        console.log('object');
+      }, 1000);
+      const logCellClick = (...el) => {
+        console.log(el, 'logCellClick');
+      };
       return {
         tableData,
         pageSize2,
         currentPage,
         mytable,
         selectedRowKeys,
+        width,
+        logCellClick,
       };
     },
     template: `
@@ -93,32 +141,37 @@ export const Example1 = {
 ref="mytable"
 row-key="name"
 :dataSource="tableData"
-:pagination="true"
 v-model:currentPage="currentPage"
-v-model:pageSize="pageSize2"
 :showTotal="true"
+height=""
+@selection-change="logCellClick"
+field="six.name"
+order="descending"
 :sorting="{ field: 'six.name', order: 'desc' }"
 :showJumper="true"
-:pageSizes="[10,100, 200, 300, 400]"
+pageSizes="[5,10,20,50]"
+:defaultPageSize="10"
+data-nodepath="1234"
 v-model:selectedRowKeys="selectedRowKeys"
-@sort-change="onSortChange"
 dragSort="row"
+:pagination="false"
 :selection="true"
+:stripe="true"
 >
 
-<el-table-column label="申请人" >
-
+<el-table-column label="申请人"  style="color:red"  sortable>
+  <div>123</div>
 </el-table-column>
 
-    <el-table-column title="渠道" colKey="channel" :sorter="true" :autoMerge="true" >
-<template #cell="cell">
-  <div>{{ cell.item.channel }}</div>
-</template>
-</el-table-column>
+    <el-table-column label="渠道" prop="address" type="expand" >
+        <template #default="current">
+          <div>{{current.item.address}}</div>
+        </template>
+    </el-table-column>
 
-    <el-table-column prop="six.name" label="Date" sortable="custom" width="180" />
+    <el-table-column prop="six.name" label="Date" sortable="none" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address" />
+    <el-table-column type="normal" prop="address" label="Address" />
 
 <template #expanded-row="{ item }">
   <div class="more-detail">
@@ -137,14 +190,10 @@ export const Example2 = {
     setup() {
       const activeName = ref('first');
       const total = 28;
-      const tableData = async (pageObj) => {
+      const tableData = async (pageObj = { currentPage: 1, pageSize: 20 }) => {
         console.log(pageObj, 'pagerequest====');
         const initialData = [];
-        for (
-          let i = (pageObj.currentPage - 1) * pageObj.pageSize;
-          i < pageObj.currentPage * pageObj.pageSize && i < total;
-          i++
-        ) {
+        for (let i = 0; i < total; i++) {
           initialData.push({
             index: i + 1,
             applicant: ['贾明', '张三', '王芳'][i % 3],
@@ -173,9 +222,9 @@ export const Example2 = {
       watch(selectedRowKeys, (el) => {
         console.log(el, 'log');
       });
-      // setTimeout(() => {
-      //   console.log(selectedRowKeys,'selectedRowKeys');
-      // }, 1000);
+      setTimeout(() => {
+        console.log(mytable, 'mytable====');
+      }, 1000);
       return {
         tableData,
         pageSize2,
@@ -190,8 +239,6 @@ ref="mytable"
 row-key="index"
 :dataSource="tableData"
 :pagination="true"
-v-model:currentPage="currentPage"
-v-model:pageSize="pageSize2"
 :showTotal="true"
 :sorting="{ field: 'createTime', order: 'desc' }"
 :showJumper="true"
@@ -206,7 +253,7 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column prop="applicant" label="申请人" width="100" fixedPosition="left"></el-table-column>
+  <el-table-column prop="applicant" sortable="custom" label="申请人" width="100" fixedPosition="left"></el-table-column>
   <el-table-column prop="status" label="申请状态" width="150" sorter></el-table-column>
   <el-table-column prop="channel" label="签署方式" width="200"></el-table-column>
   <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
@@ -224,12 +271,18 @@ export const Default = {
   render: () => ({
     setup() {
       const value = ref(2);
+      const object = { a: 1, b: '2', c: 3 };
+
+      _.pickBy(object, (value, key) => {
+        console.log(value, key, '`==============');
+        return _.isNumber(value);
+      });
       return {
         value,
       };
     },
     template: `
-  <el-table :pagination="true" :pageSize="20" data-nodepath="a55ba3783cb146a881ae5d54e594612b" key="component-a55ba3783cb146a881ae5d54e594612b" :dataSource="[{index:0},{index:1},{index:2}]"  rowKey="index" valueField="index"  >
+  <el-table style="--el-table-border-color: #e10910; color:red" :pagination="true" :pageSize="20" data-nodepath="a55ba3783cb146a881ae5d54e594612b" key="component-a55ba3783cb146a881ae5d54e594612b" :dataSource="[{index:0},{index:1},{index:2}]"  rowKey="index" valueField="index"  >
       <el-table-column data-nodepath="da0514a35d184c4aa1289d08aa8269f9" data-nodepath-multiple="true" dataNodepathMultiple="ture" key="component-da0514a35d184c4aa1289d08aa8269f9"  >
       <template #default={...argus}>
       </template>

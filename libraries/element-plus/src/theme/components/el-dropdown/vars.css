@@ -1,0 +1,28 @@
+/**
+ * @component el-dropdown
+ */
+.el-dropdown {
+  /**
+   * @desc 下拉菜单的盒子阴影
+   * @type input
+   */
+  --el-dropdown-menu-box-shadow: var(--el-box-shadow-light);
+
+  /**
+   * @desc 下拉菜单项悬停时的填充颜色
+   * @type input
+   */
+  --el-dropdown-menuItem-hover-fill: var(--el-color-primary-light-9);
+
+  /**
+   * @desc 下拉菜单项悬停时的文字颜色
+   * @type color
+   */
+  --el-dropdown-menuItem-hover-color: var(--el-color-primary);
+
+  /**
+   * @desc 下拉菜单的层级
+   * @type input
+   */
+  --el-dropdown-menu-index: 10;
+}

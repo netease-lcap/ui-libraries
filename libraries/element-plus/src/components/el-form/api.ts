@@ -5,7 +5,7 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'container',
-      structured: true,
+      // structured: true,
     },
   })
   @Component({
@@ -31,7 +31,7 @@ namespace nasl.ui {
       title: '校验函数',
       description: '校验函数，包含错误文本提示等功能',
     })
-    validate	(): {
+    validated	(): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;
@@ -138,8 +138,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '必填标记',
-      description: '是否显示必填符号（*），默认显示',
+      title: '隐藏必填标记',
+      description: '是否隐藏必填标记（*），默认显示',
       setter: { concept: 'SwitchSetter' },
     })
     hideRequiredAsterisk: nasl.core.Boolean = false;
@@ -294,9 +294,11 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       ignoreProperty: ['rules'],
+      structured: false,
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
+
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
     },
@@ -510,6 +512,15 @@ namespace nasl.ui {
       bindHide: true,
     })
     rules: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '必填标记',
+      description: '是否为必填项,并显示必填标记',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isRequired: nasl.core.Boolean = false;
+
 
     // @Prop({
     //   group: '主要属性',

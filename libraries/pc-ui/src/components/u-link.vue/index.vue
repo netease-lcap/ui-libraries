@@ -18,6 +18,7 @@
 
 <script>
 import { sync } from '@lcap/vue2-utils';
+import { throttle } from 'lodash';
 import IIco from '../i-ico.vue';
 import encodeUrl from '../../utils/encodeUrl';
 
@@ -42,14 +43,20 @@ export default {
         disabled: { type: Boolean, default: false },
         decoration: { type: Boolean, default: true },
         download: { type: Boolean, default: false },
+        throttleTime: { type: Number, default: 0 },
         destination: String,
         hoverType: { type: String, default: 'underline' },
         link: [String, Function],
         iconPosition: { type: String, default: 'left', validator: (value) => ['left', 'right'].includes(value) },
     },
     data() {
+        let clickEvent = this.$listeners.click || function () { /* noop */ };
+        if (this.throttleTime > 0) {
+          clickEvent = throttle(clickEvent, this.throttleTime);
+        }
+
         return {
-            clickEvent: this.$listeners.click || function () { /* noop */ },
+            clickEvent,
             loading: false,
         };
     },
@@ -95,7 +102,11 @@ export default {
     },
     watch: {
         $listeners(listeners) {
-            this.clickEvent = listeners.click || function () { /* noop */ };
+            let clickEvent = listeners.click || function () { /* noop */ };
+            if (this.throttleTime > 0) {
+                clickEvent = throttle(clickEvent, this.throttleTime);
+            }
+            this.clickEvent = clickEvent;
         },
     },
     methods: {

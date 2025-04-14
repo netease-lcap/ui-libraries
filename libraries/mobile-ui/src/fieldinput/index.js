@@ -199,6 +199,11 @@ export default createComponent({
     },
 
     onBlur(event) {
+      // 中文输入时丢失焦点不会触发onCompositionEnd，此时需要手动重置composing
+      if (event.target.composing) {
+        event.target.composing = false;
+      }
+
       // 自定义键盘由closeNumber改变
       if (!this.shownumbertype) {
         this.focused = false;

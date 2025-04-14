@@ -40,7 +40,7 @@ namespace nasl.ui {
             docDescription: '当前选择的值',
             settable: true,
         })
-        value: M extends true ? nasl.collection.List<nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean> : (nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean);
+        value: M extends true ? nasl.collection.List<any> : (nasl.core.String | nasl.core.Integer | nasl.core.Decimal | nasl.core.Boolean);
 
         @Prop({
             group: '主要属性',

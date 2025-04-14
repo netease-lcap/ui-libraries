@@ -90,7 +90,7 @@ export default {
         value: {
             type: [Date, String, Number, Array],
             default() {
-                return dayjs().format(DefaultFormatType); // 避免控制台报Error
+                return null;
             },
         },
         minDate: [Date, String, Number],

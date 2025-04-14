@@ -1,0 +1,64 @@
+/**
+ * @component el-radio
+ */
+.el-radio {
+  /**
+   * @desc 单选框字体大小
+   * @type input
+   */
+  --el-radio-font-size: var(--el-font-size-base);
+
+  /**
+   * @desc 单选框文字颜色
+   * @type color
+   */
+  --el-radio-text-color: var(--el-text-color-regular);
+
+  /**
+   * @desc 单选框字体粗细
+   * @type input
+   */
+  --el-radio-font-weight: var(--el-font-weight-primary);
+
+  /**
+   * @desc 单选框输入框高度
+   * @type input
+   */
+  --el-radio-input-height: 14px;
+
+  /**
+   * @desc 单选框输入框宽度
+   * @type input
+   */
+  --el-radio-input-width: 14px;
+
+  /**
+   * @desc 单选框输入框边框圆角
+   * @type input
+   */
+  --el-radio-input-border-radius: var(--el-border-radius-circle);
+
+  /**
+   * @desc 单选框输入框背景颜色
+   * @type color
+   */
+  --el-radio-input-bg-color: var(--el-fill-color-blank);
+
+  /**
+   * @desc 单选框输入框边框
+   * @type input
+   */
+  --el-radio-input-border: var(--el-border);
+
+  /**
+   * @desc 单选框输入框边框颜色
+   * @type color
+   */
+  --el-radio-input-border-color: var(--el-border-color);
+
+  /**
+   * @desc 单选框输入框悬停时边框颜色
+   * @type color
+   */
+  --el-radio-input-border-color-hover: var(--el-color-primary);
+}

@@ -7,6 +7,7 @@ namespace nasl.ui {
       idetype: "container",
       structured: true,
       childAccept: "target.tag === 'el-checkbox-pro'",
+      forceUpdateWhenAttributeChange: true,
       dataSource: {
         dismiss:
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
@@ -88,7 +89,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    value: nasl.collection.List<V>;
+    modelValue: nasl.collection.List<V>;
 
     // @Prop<ElCheckboxGroupOptions<T, V>, 'itemProps'>({
     //   group: '数据属性',
@@ -172,11 +173,11 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '多选项内容',
-    //   description: '多选项内容',
-    // })
-    // slotItem: (current: Current<T>) => Array<ViewComponent>;
+    @Slot({
+      title: '多选项内容',
+      description: '多选项内容',
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
@@ -274,7 +275,6 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      bindStyleAttr: 'inputStyle',
       bindStyleSelector: '.__cw-form-compose-input',
       childAccept: "target.tag === 'el-checkbox'",
       dataSource: {

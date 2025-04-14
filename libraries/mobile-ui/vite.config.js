@@ -83,7 +83,7 @@ export default defineConfig(({ command }) => {
                 '.van-pickerson__popup': true,
                 '.van-pickerson__wrap': true,
               },
-              depCompList: ['VanCell'],
+              depComponents: ['VanCell'],
             },
             VanProgress: {
               selectorPrefixMap: {
@@ -143,7 +143,7 @@ export default defineConfig(({ command }) => {
                 '.van-datetime-picker': false,
                 '.van-ellipsis': false,
               },
-              depCompList: ['VanCell'],
+              depComponents: ['VanCell'],
             },
             VanArea: {
               selectorPrefixMap: {
@@ -155,7 +155,7 @@ export default defineConfig(({ command }) => {
                 '.van-area__popup': true,
                 '.van-area__wrappparea': true,
               },
-              depCompList: ['VanCell', 'VanDatetimePicker'], // 用VanDatetimePicker里关于van-picker和van-picker-column的选择器
+              depComponents: ['VanCell', 'VanDatetimePicker'], // 用VanDatetimePicker里关于van-picker和van-picker-column的选择器
             },
             VanCascader: {
               selectorPrefixMap: {
@@ -167,7 +167,7 @@ export default defineConfig(({ command }) => {
                 '.van-cascader__popup': true,
                 '.van-cascader__wrapppcascader': true,
               },
-              depCompList: ['VanCell', 'VanSearch', 'VanTabs', 'VanTab'],
+              depComponents: ['VanCell', 'VanSearch', 'VanTabs', 'VanTab'],
             },
             VanCalendar: {
               selectorPrefixMap: {
@@ -179,7 +179,7 @@ export default defineConfig(({ command }) => {
                 '.van-calendar__popup': true,
                 '.van-calendar__wrapppcalendar': true,
               },
-              depCompList: ['VanCell'],
+              depComponents: ['VanCell'],
             },
             VanDropdownItem: {
               selectorPrefixMap: {
@@ -193,7 +193,7 @@ export default defineConfig(({ command }) => {
               //   '.van-dropdown-menu__item--disabled .van-dropdown-menu__title': false,
               //   '.van-ellipsis': false,
               // },
-              depCompList: ['VanCell'],
+              depComponents: ['VanCell'],
             },
             VanCardu: {
               selectorPrefixMap: {
@@ -217,7 +217,7 @@ export default defineConfig(({ command }) => {
               },
             },
             VanSearch: {
-              depCompList: ['VanField'],
+              depComponents: ['VanField'],
             },
             VanFieldtextarea: {
               selectorPrefixMap: {
