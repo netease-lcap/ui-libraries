@@ -19,7 +19,9 @@ export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccum
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
-  const dataSourceSlots = _.isNil(dataConfig) ? {} : { default: () => _.map(dataSource, (item) => <el-option {...item} />) };
+  const dataSourceSlots = _.isNil(dataConfig)
+    ? {}
+    : { default: () => _.map(dataSource, (item) => <el-option {...item} />) };
 
   return {
     [$deletePropsList]: deletePropsList,

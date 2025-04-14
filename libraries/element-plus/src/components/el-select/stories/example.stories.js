@@ -82,6 +82,9 @@ export const Example2 = {
         // console.log(tab, '====');
         // select.value.reload();
       };
+      const handleChange = (val) => {
+        list.value = list.value.filter((item) => item.value !== 1);
+      };
 
       setTimeout(() => {
         // name.value = 'myname';
@@ -97,6 +100,7 @@ export const Example2 = {
         activeName,
         list,
         handleClick,
+        handleChange,
       };
     },
     template: `
@@ -106,7 +110,7 @@ export const Example2 = {
     </el-select>
     {{ activeName }}
     <button @click="handleClick">click</button>
-    
+    <button @click="handleChange">change</button>
     </div>
 
     `,

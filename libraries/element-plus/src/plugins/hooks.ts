@@ -148,7 +148,7 @@ export function useEffect(callBack, dep) {
   if (isMount) {
     hook = {
       next: null,
-      dep: _.cloneDeep(dep),
+      dep,
       result: () => {},
       callBack,
     };
@@ -172,7 +172,7 @@ export function useEffect(callBack, dep) {
     if (!_.isEmpty(dep) && !isSameDep) {
       const result = callBack(...dep);
       hook.result = _.isFunction(result) ? result : () => {};
-      hook.dep = _.cloneDeep(dep);
+      hook.dep = dep;
     }
   }
   return null;
@@ -185,7 +185,7 @@ export function useMemo(callBack, dep) {
   if (isMount) {
     hook = {
       next: null,
-      dep: _.cloneDeep(dep),
+      dep,
       result: null,
     };
     hook.next = hook;
@@ -198,10 +198,10 @@ export function useMemo(callBack, dep) {
   } else {
     hook = currentFiber.workInProgressEffect.next;
     currentFiber.workInProgressEffect = currentFiber.workInProgressEffect.next;
-    const isSameDep = _.every(dep, (item, index) => Object.is(item, _.get(hook, `dep.${index}`)));
+    const isSameDep = _.every(dep, (item, index) => _.isEqual(item, _.get(hook, `dep.${index}`)));
     if (!_.isEmpty(dep) && !isSameDep) {
       hook.result = callBack();
-      hook.dep = _.cloneDeep(dep);
+      hook.dep = dep;
     }
   }
   return hook.result;
@@ -213,7 +213,7 @@ export function useCallback(callBack, dep) {
   if (isMount) {
     hook = {
       next: null,
-      dep: _.cloneDeep(dep),
+      dep,
       callBack,
     };
     hook.next = hook;
@@ -228,7 +228,7 @@ export function useCallback(callBack, dep) {
     currentFiber.workInProgressEffect = currentFiber.workInProgressEffect.next;
     const isSameDep = _.every(dep, (item, index) => Object.is(item, _.get(hook, `dep.${index}`)));
     if (!_.isEmpty(dep) && !isSameDep) {
-      hook.dep = _.cloneDeep(dep);
+      hook.dep = dep;
       hook.callBack = callBack;
     }
   }

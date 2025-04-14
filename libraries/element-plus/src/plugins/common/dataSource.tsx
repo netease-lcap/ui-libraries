@@ -64,15 +64,24 @@ const handleDataSouceToFn = _.cond([
   ],
   [_.stubTrue, () => async (params) => handleLocalPageData({ dataSource: [], ...params })],
 ]);
-
 export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
   const [resultData, setResult] = useState({});
   const resultRef = useRef({});
-  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
-  resultRef.value = useMemo(() => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }), [dataSourceFn]);
+  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [_.cloneDeep(dataSource)]);
+
+  resultRef.value = useMemo(
+    () => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }),
+    [dataSourceFn],
+  );
 
   useEffect(() => {
-    watch(resultRef, (value) => setResult(value), { immediate: true, deep: true });
+    watch(
+      resultRef,
+      (value) => {
+        return setResult({ ...value, data: _.cloneDeep(value.data) });
+      },
+      { immediate: true, deep: true },
+    );
   }, []);
   const { data, run, loading } = resultData
     ?? ({} as {
