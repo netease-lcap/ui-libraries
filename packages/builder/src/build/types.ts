@@ -4,6 +4,10 @@ export interface BuildIdeOptions {
   configFile?: string;
   entry?: string;
   outDir?: string;
+  setters?: {
+    rootPath: string;
+    entries: Record<string, string>;
+  };
 }
 
 export interface Dependency {
