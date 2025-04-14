@@ -27,14 +27,7 @@ namespace nasl.ui {
       description: '链接类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '主要' },
-          { title: '成功' },
-          { title: '警告' },
-          { title: '危险' },
-          { title: '信息' },
-        ],
+        options: [{ title: '默认' }, { title: '主要' }, { title: '成功' }, { title: '警告' }, { title: '危险' }, { title: '信息' }],
       },
     })
     type: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' = 'default';
@@ -69,7 +62,6 @@ namespace nasl.ui {
     })
     hrefAndTo: nasl.core.String;
 
-
     // @Prop({
     //   group: '主要属性',
     //   title: '打开方式',
@@ -86,13 +78,14 @@ namespace nasl.ui {
     // })
     // target: '_self' | '_blank' | '_parent' | '_top' = '_self';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '图标',
-    //   description: '图标组件',
-    //   setter: { concept: 'IconSetter' },
-    // })
-    // icon: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '图标',
+      description: '图标组件',
+      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+    })
+    icon: nasl.core.String;
+
     @Event({
       title: '点击',
       description: '在元素上按下并释放任意鼠标按钮时触发。',
@@ -134,18 +127,5 @@ namespace nasl.ui {
       description: '鼠标移出元素时触发。',
     })
     onMouseleave: (event: MouseEvent) => any;
-
-    @Event({
-      title: '聚焦时',
-      description: '聚焦时触发',
-    })
-    onFocus: (event: FocusEvent) => void;
-
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: FocusEvent) => void;
-
   }
-} 
+}

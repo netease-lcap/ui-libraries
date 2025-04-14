@@ -36,5 +36,9 @@
     "ide/**/*.ts"
   ],
   "references": [
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

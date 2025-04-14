@@ -1,5 +1,4 @@
 import { ElTable as ElTablePlus, ElTableColumn as ElTableColumnPlus } from 'element-plus';
-import 'element-plus/theme-chalk/el-input.css';
 import { registerComponent } from '../../plugins';
 
 import * as basicsPlugin from './plugins/index';

@@ -31,25 +31,8 @@ export const Default = {
         <el-text text="请根据提示进行操作"></el-text>
       </template>
       <template #extra>
-        <el-text text="返回"></el-text>
+        <el-button type="primary" size="medium" text="返回"></el-button>
       </template>
     </el-result>`,
   }),
 };
-
-// export const Default = {
-//   name: '基础示例',
-//   render: () => ({
-//     template: `<el-result icon="success">
-//       <template #title>
-//         <el-text text="成功提示"></el-text>
-//       </template>
-//       <template #subTitle>
-//         <el-text text="请根据提示进行操作"></el-text>
-//       </template>
-//       <template #extra>
-//         <el-button type="primary" size="medium" text="返回"></el-button>
-//       </template>
-//     </el-result>`,
-//   }),
-// };

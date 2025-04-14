@@ -89,7 +89,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    value: nasl.collection.List<V>;
+    modelValue: nasl.collection.List<V>;
 
     // @Prop<ElCheckboxGroupOptions<T, V>, 'itemProps'>({
     //   group: '数据属性',

@@ -1,24 +1,29 @@
-// import { $deletePropList, NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
-// import ElIcon from '../../el-icon';
+import { h } from 'vue';
+import _ from 'lodash';
+import { $deletePropsList } from '@/plugins/constants';
+import ElIcon from '../../el-icon/index';
 
-// export const useExtendsPlugin: NaslComponentPluginOptions = {
-//   setup(props, { h }) {
-//     return {
-//       slotDefault() {
+// export function useExtendsPlugin(props) {
+//   const slots = props.get('slots');
+
+//   return {
+//     slots: {
+//       ...slots,
+//       default: () => {
 //         const icon = props.get('icon');
-//         const slotDefault = props.get('slotDefault');
-
-//         const vnodes: any[] = typeof slotDefault === 'function' ? slotDefault() : [];
-
+//         const vnodes: any[] = _.isFunction(slots.default) ? slots.default() : [];
 //         if (icon) {
-//           vnodes.unshift(h(ElIcon, { attrs: { name: icon } }));
+//           vnodes.unshift(h(ElIcon, { name: icon }));
 //         }
-
 //         return vnodes;
 //       },
-//       [$deletePropList]: ['icon'],
-//     };
-//   },
-// };
+//     },
+//     [$deletePropsList]: ['icon'],
+//   };
+// }
 
-export {};
+export function handleItemPlugin(props) {
+  return {
+    [$deletePropsList]: ['icon'],
+  };
+}

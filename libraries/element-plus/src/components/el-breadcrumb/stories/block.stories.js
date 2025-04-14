@@ -30,3 +30,10 @@ export const Default = {
     </el-breadcrumb>`,
   }),
 };
+
+export const Auto = {
+  name: '自动生成面包屑',
+  render: () => ({
+    template: '<el-breadcrumb :auto="true" separator="/"></el-breadcrumb>',
+  }),
+};

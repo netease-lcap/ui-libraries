@@ -7,11 +7,11 @@ namespace nasl.ui {
       idetype: 'modal',
       cacheOpenKey: 'modelValue',
       structured: true,
-      bindStyleAttr: 'dialogStyle',
       selector: {
         expression: 'this',
         cssSelector: '.el-dialog',
       },
+      forceUpdateWhenAttributeChange: true,
     },
   })
   @Component({
@@ -128,6 +128,22 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '打开延时',
+      description: 'dialog 打开的延时时间，单位毫秒',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    openSelay: nasl.core.Integer = 0;
+
+    @Prop({
+      group: '主要属性',
+      title: '关闭延时',
+      description: 'dialog 关闭的延时时间，单位毫秒',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    closeSelay: nasl.core.Integer = 0;
+
+    @Prop({
+      group: '主要属性',
       title: '是否点击遮罩层关闭',
       description: '是否可以通过点击遮罩层关闭对话框',
       setter: { concept: 'SwitchSetter' },
@@ -191,13 +207,32 @@ namespace nasl.ui {
     })
     destroyOnClose: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'aria-level 属性',
-    //   description: 'header 的 aria-level 属性',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // headerAriaLevel : nasl.core.String = '2';
+    @Prop({
+      group: '主要属性',
+      title: '关闭图标',
+      description: '自定义关闭图标',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+      },
+    })
+    closeIcon: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '展示层级',
+      description: '和原生的 CSS 的 z-index 相同，改变 z 轴的顺序',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    zIndex: nasl.core.Integer;
+
+    @Prop({
+      group: '主要属性',
+      title: 'aria-level 属性',
+      description: 'header 的 aria-level 属性',
+      setter: { concept: 'InputSetter' },
+    })
+    private headerAriaLevel : nasl.core.String = '2';
 
     @Event({
       title: '打开的回调',
@@ -212,16 +247,16 @@ namespace nasl.ui {
     onOpened: (event: any) => any;
 
     @Event({
-      title: '关闭的回调',
-      description: '对话框关闭的回调',
-    })
-    onClose: (event: any) => any;
-
-    @Event({
       title: '关闭前的回调',
       description: '关闭前的回调',
     })
     onBeforeClose: (event: any) => any;
+
+    @Event({
+      title: '关闭的回调',
+      description: '对话框关闭的回调',
+    })
+    onClose: (event: any) => any;
 
     @Event({
       title: '关闭动画结束时的回调',

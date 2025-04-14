@@ -18,13 +18,13 @@ interface Options {
   defaultValuePropName?: string;
   valuePropName?: string;
   trigger?: string;
-  onChange?: (value: any) => void;
+  onChange?: (...args: any[]) => void;
 }
 interface Fiber {
   workInProgressState: Hook;
   workInProgressEffect: EffectHook;
   updateQueen: Set<any>;
-  useStore: (selector: (store: any) => any) => any;
+  getState: () => any;
   setValue: (value: any) => void;
   storeKey: string | null;
   queen: any[];
@@ -54,7 +54,7 @@ function CreateFiberNode() {
       workInProgressState,
       workInProgressEffect,
       updateQueen: new Set(),
-      useStore: (selector: (store: any) => any) => selector,
+      getState: () => ({}),
       setValue: (value: any) => value,
       storeKey: null,
       queen: [],
@@ -73,7 +73,7 @@ function CreateFiberNode() {
 export const fiberNode = CreateFiberNode();
 
 const getStateValue = _.cond([
-  [_.isObject, (state) => ('value' in state ? state.value : state)],
+  [_.isObject, (state) => state],
   [_.stubTrue, (state) => state],
 ]);
 export function useState(initialstate?) {
@@ -97,14 +97,18 @@ export function useState(initialstate?) {
     hook = currentFiber.workInProgressState.next;
     currentFiber.workInProgressState = currentFiber.workInProgressState.next;
   }
-  const state = hook?.isSetValue ? currentFiber.useStore((store) => store.state[hook?.storeKey]) : initialstate;
+  const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
   const localSetValue = (value) => {
+    // console.log(value, 'value-data');
     hook.isSetValue = true;
-    const state = currentFiber.useStore((store) => store.state[hook?.storeKey]);
-    if (_.isEqual(value, state.value)) {
-      return;
-    }
-    currentFiber.updateQueen.add({ [hook.storeKey]: value });
+    const state = currentFiber.getState().state[hook?.storeKey];
+    // console.log(state, 'state-data');
+    // TODO 判断是否相等
+    // if (_.isEqual(value, state)) {
+    //   return;
+    // }
+    const getValue = _.isFunction(value) ? value(getStateValue(state)) : value;
+    currentFiber.updateQueen.add({ [hook.storeKey]: getValue });
     _.defer(() => {
       if (currentFiber.updateQueen.size) {
         const deleteQueue = Array.from(currentFiber.updateQueen);
@@ -273,13 +277,14 @@ export function useControllableValue(props: any, options: Options = {}) {
       [valuePropName]: value,
       [trigger]: onChange,
     },
+    isControlled,
   ];
 }
 
 export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
   const updateQueen = fiberMap.get('updateQueen');
-  const useStore = fiberMap.get('useStore');
-  const setValue = useStore((state: any) => state.setvalue);
+  const getState = fiberMap.get('getState');
+  const setValue = getState().setvalue;
   return pluginHooks?.reduce((ImmutableProps, handleFn) => {
     const isMount = !fiberMap.has(handleFn);
     const storeKey = _.uniqueId('storeKey');
@@ -288,7 +293,7 @@ export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
           workInProgressState: null,
           workInProgressEffect: null,
           updateQueen,
-          useStore,
+          getState,
           setValue,
           storeKey,
         }

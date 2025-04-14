@@ -27,11 +27,12 @@
           >
             <div class="el-message-box__title">
               <el-icon-plus
-                v-if="iconComponent && props.center"
+                v-if="iconComponent && props.center && !props.icon"
                 :class="['el-message-box__status', typeClass]"
               >
                 <component :is="iconComponent" />
               </el-icon-plus>
+              <el-icon v-if="iconComponent && props.icon && props.center" :name="props.icon" :class="['el-message-box__status', typeClass]" />
               <span>{{ props.title }}</span>
             </div>
             <button
@@ -39,19 +40,21 @@
               type="button"
               class="el-message-box__headerbtn"
             >
-              <el-icon-plus class="el-message-box__close">
+              <el-icon-plus class="el-message-box__close" v-if="!props.closeIcon">
                 <component :is="closeIconComp" />
               </el-icon-plus>
+              <el-icon v-if="props.closeIcon" :name="props.closeIcon" :class="['el-message-box__status', typeClass]" />
             </button>
           </div>
           <div class="el-message-box__content">
             <div class="el-message-box__container">
               <el-icon-plus
-                v-if="iconComponent && !props.center"
+                v-if="iconComponent && !props.center && !props.icon"
                 :class="['el-message-box__status', typeClass]"
               >
                 <component :is="iconComponent" />
               </el-icon-plus>
+              <el-icon v-if="iconComponent && !props.center && props.icon" :name="props.icon" :class="['el-message-box__status', typeClass]" />
               <div class="el-message-box__message">
                 <slot></slot>
               </div>
@@ -109,6 +112,7 @@ import {
   ElOverlay as ElOverlayPlus, 
   ElIcon as ElIconPlus 
 } from 'element-plus';
+import { ElIcon } from '../index';
 import MessageBox from './message-box';
 
 const typeMap = {

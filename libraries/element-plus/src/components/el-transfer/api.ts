@@ -123,7 +123,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    value: nasl.collection.List<V>;
+    modelValue: nasl.collection.List<V>;
 
     // @Prop({
     //   group: '数据属性',

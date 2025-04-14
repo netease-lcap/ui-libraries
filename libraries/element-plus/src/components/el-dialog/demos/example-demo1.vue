@@ -8,7 +8,8 @@
       v-model="dialogVisible"
       title="Tips"
       width="500"
-      :before-close="handleClose"
+      @before-close="handleClose"
+      closeIcon="setting"
     >
       <span>This is a message</span>
       <template #footer>

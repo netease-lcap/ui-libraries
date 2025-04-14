@@ -144,7 +144,15 @@
     "type": "color"
   },
   "--background-color-base": {
-    "title": "背景色",
+    "title": "填充背景色",
+    "type": "color"
+  },
+  "--background-color-default": {
+    "title": "默认背景色",
+    "type": "color"
+  },
+  "--background-color-body": {
+    "title": "页面背景色",
     "type": "color"
   },
   "--border-color-base": {
@@ -152,7 +160,19 @@
     "type": "color"
   },
   "--color-base": {
-    "title": "文本色",
+    "title": "一级文本色",
+    "type": "color"
+  },
+  "--font-second-color": {
+    "title": "二级文本色",
+    "type": "color"
+  },
+  "--font-third-color": {
+    "title": "三级文本色",
+    "type": "color"
+  },
+  "--font-disabled-color": {
+    "title": "四级文本色",
     "type": "color"
   },
   "--link-color": {

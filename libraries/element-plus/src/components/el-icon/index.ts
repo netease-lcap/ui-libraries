@@ -1,4 +1,4 @@
-import Icon from './icon.tsx';
+import Icon from './icon';
 
 export const ElIcon = Icon;
 export default ElIcon;

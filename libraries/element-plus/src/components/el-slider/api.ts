@@ -25,7 +25,7 @@ namespace nasl.ui {
       sync: true,
       description: '滑块绑定值',
     })
-    value: nasl.core.Integer;
+    modelValue: nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
@@ -73,7 +73,7 @@ namespace nasl.ui {
       description: '在显示输入框的情况下，是否显示输入框的控制按钮',
       setter: { concept: 'SwitchSetter' },
     })
-    showInputControls: nasl.core.Boolean;
+    showInputControls: nasl.core.Boolean = true;
 
     @Prop({
       group: '样式属性',
@@ -84,7 +84,7 @@ namespace nasl.ui {
         options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
-    size: '' | 'default' | 'large' | 'small' = 'default';
+    size: 'default' | 'large' | 'small' = 'default';
 
     @Prop({
       group: '样式属性',
@@ -95,7 +95,7 @@ namespace nasl.ui {
         options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
-    inputSize: '' | 'default' | 'large' | 'small' = 'default';
+    inputSize: 'default' | 'large' | 'small' = 'default';
 
     @Prop({
       group: '样式属性',
@@ -145,7 +145,7 @@ namespace nasl.ui {
     })
     debounce: nasl.core.Integer = 300;
 
-    // @Prop({  
+    // @Prop({
     //   group: '主要属性',
     //   title: '提示框类名',
     //   description: '提示框的自定义类名',
@@ -166,7 +166,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '验证事件',
+      title: '表单验证',
       description: '是否触发表单验证',
       setter: { concept: 'SwitchSetter' },
     })

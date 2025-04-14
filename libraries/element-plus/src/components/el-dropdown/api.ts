@@ -64,23 +64,18 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description:
-        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription:
-        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
       bindOpen: true,
     })
-    dataSource:
-      | nasl.collection.List<T>
-      | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription:
-        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
     })
     dataSchema: T;
 
@@ -104,29 +99,103 @@ namespace nasl.ui {
       },
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
-
+    
     @Prop({
       group: '数据属性',
-      title: '图标属性字段',
-      description: '集合的元素类型中，用于图标的属性名称',
+      title: '禁用字段',
+      description: '集合的元素类型中，用于标识禁用项的属性',
+      docDescription: '集合的元素类型中，用于标识禁用项的属性，支持自定义变更',
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
-    iconField: (item: T) => any = ((item: any) => item.icon) as any;
-
+    disabledField: (item: T) => nasl.core.Boolean = ((item: any) => item.disabled);
+    
     @Prop({
       group: '数据属性',
-      title: '菜单项属性设置',
-      description: '菜单项属性设置',
+      title: '分隔字段',
+      description: '集合的元素类型中，用于显示分隔线的属性',
+      docDescription: '集合的元素类型中，用于显示分隔线的属性，支持自定义变更',
       setter: {
-        concept: 'AnonymousFunctionSetter',
+        concept: 'PropertySelectSetter',
       },
     })
-    itemProps: (current: { item: T; index: nasl.core.Integer }) => {
-      disabled: nasl.core.Boolean;
-      divided: nasl.core.Boolean;
-    };
+    dividedField: (item: T) => nasl.core.Boolean = ((item: any) => item.divided);
+
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '图标属性字段',
+    //   description: '集合的元素类型中，用于图标的属性名称',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    // })
+    // iconField: (item: T) => any = ((item: any) => item.icon) as any;
+
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '菜单项属性设置',
+    //   description: '菜单项属性设置',
+    //   setter: {
+    //     concept: 'AnonymousFunctionSetter',
+    //   },
+    // })
+    // itemProps: (current: { item: T; index: nasl.core.Integer }) => {
+    //   disabled: nasl.core.Boolean;
+    //   divided: nasl.core.Boolean;
+    //   icon: nasl.core.String;
+    //   command: nasl.core.String | nasl.core.Integer | V;
+    // };
+
+    // @Prop<ElDropdownOptions<T, V>, 'text'>({
+    //   group: '主要属性',
+    //   title: '文本',
+    //   description: '按钮内容',
+    //   setter: { concept: 'InputSetter' },
+    //   if: (_) => _.splitButton === true,
+    // })
+    // text: nasl.core.String = '下拉菜单';
+
+    @Prop<ElDropdownOptions<T, V>, 'type'>({
+      group: '样式属性',
+      title: '按钮类型',
+      description: '设置按钮样式类型',
+      docDescription: '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮按钮。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '默认按钮' },
+          { title: '主要按钮' },
+          { title: '成功按钮' },
+          { title: '警告按钮' },
+          { title: '信息按钮' },
+          { title: '危险按钮' },
+          { title: '文字按钮' },
+        ],
+      },
+      if: (_) => _.splitButton,
+    })
+    type: '' | 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'text' = '';
+
+    @Prop<ElDropdownOptions<T, V>, 'size'>({
+      group: '样式属性',
+      title: '按钮尺寸',
+      description: '按钮尺寸',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '默认' }, { title: '大型' }, { title: '中型' }, { title: '小型' }],
+      },
+      if: (_) => _.splitButton,
+    })
+    size: '' | 'large' | 'default' | 'small' = '';
+
+    @Prop({
+      group: '主要属性',
+      title: '菜单最大高度',
+      description: '菜单最大高度，超出后会出现滚动条',
+      setter: { concept: 'InputSetter' },
+    })
+    maxHeight: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -136,54 +205,13 @@ namespace nasl.ui {
     })
     splitButton: nasl.core.Boolean = false;
 
-    @Prop<ElDropdownOptions<T, V>, 'text'>({
-      group: '主要属性',
-      title: '文本',
-      description: '按钮内容',
-      setter: { concept: 'InputSetter' },
-      if: (_) => _.splitButton === true,
+    @Prop({
+      group: '状态属性',
+      title: '是否禁用',
+      description: '是否禁用',
+      setter: { concept: 'SwitchSetter' },
     })
-    text: nasl.core.String = '下拉菜单';
-
-    @Prop<ElDropdownOptions<T, V>, 'type'>({
-      group: '样式属性',
-      title: '按钮类型',
-      description: '设置按钮样式类型',
-      docDescription:
-        '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮按钮。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '主要按钮' },
-          { title: '成功按钮' },
-          { title: '警告按钮' },
-          { title: '危险按钮' },
-          { title: '信息按钮' },
-          { title: '文字按钮' },
-          { title: '默认按钮' },
-        ],
-      },
-      if: (_) => _.splitButton,
-    })
-    type: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' | '' =
-      '';
-
-    @Prop<ElDropdownOptions<T, V>, 'size'>({
-      group: '样式属性',
-      title: '按钮尺寸',
-      description: '按钮尺寸',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '中等' },
-          { title: '小型' },
-          { title: '迷你' },
-          { title: '默认' },
-        ],
-      },
-      if: (_) => _.splitButton,
-    })
-    size: 'medium' | 'small' | 'mini' | '' = 'small';
+    disabled: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -201,13 +229,7 @@ namespace nasl.ui {
         ],
       },
     })
-    placement:
-      | 'top'
-      | 'top-start'
-      | 'top-end'
-      | 'bottom'
-      | 'bottom-start'
-      | 'bottom-end' = 'bottom-end';
+    placement: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' = 'bottom-end';
 
     @Prop({
       group: '交互属性',
@@ -215,10 +237,10 @@ namespace nasl.ui {
       description: '触发下拉的行为',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '鼠标悬停' }, { title: '点击' }],
+        options: [{ title: '鼠标悬停' }, { title: '点击' }, { title: '上下文菜单' }],
       },
     })
-    trigger: 'hover' | 'click' = 'hover';
+    trigger: 'hover' | 'click' | 'contextmenu' = 'hover';
 
     @Prop({
       group: '状态属性',
@@ -234,7 +256,7 @@ namespace nasl.ui {
       description: '展开下拉菜单的延时（仅在 trigger 为 hover 时有效）',
       setter: { concept: 'NumberInputSetter' },
     })
-    showTimeout: nasl.core.Decimal = 250;
+    showTimeout: nasl.core.Decimal = 150;
 
     @Prop({
       group: '主要属性',
@@ -254,24 +276,32 @@ namespace nasl.ui {
     // tabindex: nasl.core.Decimal = 0;
 
     @Prop({
-      group: '状态属性',
-      title: '是否禁用',
-      description: '是否禁用',
+      group: '主要属性',
+      title: '将下拉列表插入至 body 元素',
+      description: '是否将下拉列表插入至 body 元素',
       setter: { concept: 'SwitchSetter' },
     })
-    disabled: nasl.core.Boolean = false;
+    teleported: nasl.core.Boolean = true;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '非活动状态是否持续',
+    //   description: '当下拉菜单处于非活动状态且 persistent 为 false 时，下拉菜单将被销毁',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // persistent: nasl.core.Boolean = true;
 
     @Event({
       title: '点击左侧按钮时',
-      description: '点击左侧按钮时',
+      description: '下拉触发元素呈现为按钮组时，点击左侧按钮的回调',
     })
     onClick: (event: {}) => any;
 
     @Event({
-      title: '点击菜单项时',
-      description: '点击菜单项触发的事件回调',
+      title: '点击下拉项时',
+      description: '当下拉项被点击时触发，参数是从下拉菜单中发送的指令值',
     })
-    onCommand: (event: nasl.core.String | nasl.core.Integer | V) => any;
+    onCommand: (event: nasl.core.String | nasl.core.Decimal | nasl.core.Integer | V) => any;
 
     @Event({
       title: '下拉框出现/隐藏时',
@@ -323,11 +353,11 @@ namespace nasl.ui {
   export class ElDropdownItemOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
-      title: '指令',
-      description: '指令',
+      title: '指令值',
+      description: '派发到command回调函数的指令参数',
       setter: { concept: 'InputSetter' },
     })
-    command: nasl.core.String | nasl.core.Decimal | object;
+    command: nasl.core.String | nasl.core.Decimal | nasl.core.Integer | object;
 
     @Prop({
       group: '状态属性',
@@ -345,16 +375,16 @@ namespace nasl.ui {
     })
     divided: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '图标',
-      description: '图标',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
-      },
-    })
-    icon: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '图标',
+    //   description: '图标',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+    //   },
+    // })
+    // icon: nasl.core.String;
 
     @Slot({
       title: '菜单项内容',

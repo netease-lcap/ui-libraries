@@ -5,16 +5,18 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 import { watch } from 'vue';
 import { useRequest } from 'vue-hooks-plus';
-import { useMemo, useState, useRef, useEffect, useCallback } from '@/plugins/hooks';
-import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
+import { useMemo, useState, useRef, useEffect } from '@/plugins/hooks';
+import { DataSourceType, DataSourceArrayType } from '@/types';
 
 export function useHandleMapField(filedInfo: {
   label?: string;
   value?: string;
   disabled?: string;
+  divided?: string;
   textField?: string;
   valueField?: string;
   disabledField?: string;
+  dividedField?: string;
   dataSource: DataSourceType;
 }) {
   const {
@@ -25,19 +27,23 @@ export function useHandleMapField(filedInfo: {
     dataSource,
     disabled = 'disabled',
     disabledField,
+    dividedField,
+    divided = 'divided',
   } = filedInfo;
-  return useMemo(() => {
-    return _.map(dataSource, (item: any) => ({
-      ...item,
-      [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
-      [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
-      [disabled]: !_.isObject(item) ? item : _.get(item, disabledField || 'disabled', false),
-    }));
-  }, [label, value, textField, valueField, dataSource]) as DataSourceArrayType;
+  return useMemo(
+    () => _.map(dataSource, (item: any) => ({
+        ...item,
+        [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
+        [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
+        [disabled]: !_.isObject(item) ? item : _.get(item, disabledField || 'disabled', false),
+        [divided]: !_.isObject(item) ? item : _.get(item, dividedField || 'divided', false),
+      })),
+    [label, value, textField, valueField, dataSource],
+  ) as DataSourceArrayType;
 }
 const handleLocalPageData = _.cond([
   [
-    _.conforms({ currentPage: _.isNumber, pageSize: _.isNumber, dataSource: _.isArray }),
+    _.conforms({ currentPage: _.isNumber, pageSize: _.isNumber, dataSource: _.isArray, pagination: (el) => el }),
     (params) => {
       const { currentPage = 1, pageSize = 10, dataSource } = params;
       const start = (currentPage - 1) * pageSize;
@@ -66,7 +72,7 @@ export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
   resultRef.value = useMemo(() => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }), [dataSourceFn]);
 
   useEffect(() => {
-    watch(resultRef, (value) => setResult({ value }), { immediate: true, deep: true });
+    watch(resultRef, (value) => setResult(value), { immediate: true, deep: true });
   }, []);
   const { data, run, loading } = resultData
     ?? ({} as {
@@ -92,10 +98,10 @@ export function useDataSourceToTree(
   valueField: string = 'value',
 ): DataSourceArrayType {
   if (_.isNil(parentField)) return dataSource;
-  const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField), item]));
+  const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField, item), item]));
   return dataSource.reduce((acc, item) => {
     const parent = map.get(_.get(item, parentField));
-    const value = map.get(_.get(item, valueField));
+    const value = map.get(_.get(item, valueField, item));
     if (parent) {
       parent.children = _.isArray(parent.children) ? parent.children.concat(value) : [value];
     } else {

@@ -4,7 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'container',
+      idetype: 'element',
       events: {
         click: true,
       },
@@ -192,7 +192,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
+    modelValue: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
 
     // @Prop<ElCascaderOptions<T, V, P, M, C>, 'childrenField'>({
     //   group: '数据属性',
@@ -597,7 +597,6 @@ namespace nasl.ui {
     // })
     // slotValueDisplay: () => Array<ViewComponent>;
 
-
     // @Slot({
     //   title: '选项内容',
     //   description: '自定义选项内容',
@@ -615,11 +614,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       bindStyleSelector: '.__cw-form-compose-input',
-      structured: true,
       childAccept: "target.tag === 'el-option-pro'",
-      events: {
-        click: true,
-      },
       displaySlotConditions: {
         value:
           "!!this.getAttribute('dataSource') && this.getAttribute('valueIsSlot') && this.getAttribute('valueIsSlot').value",
@@ -653,29 +648,23 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: [
-          'slotDefault',
-          'useRangeValue',
-          'startFieldName',
-          'endFieldName',
-          'startInitialValue',
-          'endInitialValue',
-        ],
       },
       {
-        name: 'ElSelectPro',
+        name: 'ElCascader',
       },
     ],
   })
   @Component({
-    title: '表单选择器',
-    description: '表单选择器',
+    title: '表单级联选择器',
+    description: '表单级联选择器',
     group: 'Form',
   })
   export class ElFormCascader<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(
       options?: Partial<
-        ElFormCascaderOptions<T, V, P, M, C> & Omit<ElCascaderOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+        ElFormCascaderOptions<T, V, P, M, C> &
+          ElFormItemProOptions &
+          Omit<ElCascaderOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
       >,
     ) {
       super();

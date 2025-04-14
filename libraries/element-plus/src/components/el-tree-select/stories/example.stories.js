@@ -61,7 +61,8 @@ export const Example1 = {
           ],
         },
       ];
-      const dataSource = () => new Promise((res) => {
+      const dataSource = () =>
+        new Promise((res) => {
           setTimeout(() => {
             res([
               {
@@ -214,9 +215,10 @@ export const Example2 = {
     },
     template: `
     <div>
-      <el-tree-select
+      <el-form-tree-select
         v-model="value"
         :data="data"
+        show-checkbox	
         :props="defaultProps"
         :render-after-expand="false"
         node-key="value"

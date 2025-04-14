@@ -4,6 +4,9 @@
   display: flex;
   align-items: center;
 }
+.el-form-item .el-slider{
+  width: 240px;
+}
 
 .el-slider.is-vertical {
   height: 100%;

@@ -34,7 +34,7 @@ namespace nasl.ui {
       description: '输入框的值',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String;
+    modelValue: nasl.core.String;
 
     @Prop({
       group: '主要属性',

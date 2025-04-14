@@ -30,7 +30,6 @@ namespace nasl.ui {
       },
     })
     name: nasl.core.String = 'search';
-    
 
     @Event({
       title: '点击',

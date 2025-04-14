@@ -40,6 +40,7 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'container',
+      ignoreProperty: ['defaultCurrentPage'],
       structured: true,
       containerDirection: 'row',
       disableSlotAutoFill: [
@@ -54,8 +55,10 @@ namespace nasl.ui {
       additionalAttribute: {
         rowKey: '"index"',
         valueField: '"index"',
+        ":expandRowKeys" : "\"[0]\""
       },
       forceUpdateWhenAttributeChange: true,
+   
       dataSource: {
         display: 3,
         loopElem: 'table > tbody > tr',
@@ -220,7 +223,7 @@ namespace nasl.ui {
       description: '是否显示表格边框',
       setter: { concept: 'SwitchSetter' },
     })
-    border: nasl.core.Boolean = true;
+    border: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -275,7 +278,7 @@ namespace nasl.ui {
        * @title 合并列数
        */
       colspan?: nasl.core.Integer;
-    };
+    } | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
 
     // @Prop({
     //   group: '主要属性',
@@ -669,7 +672,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '表格尺寸',
-      description: '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `default`。可选项：small/default/large。',
+      description: '表格尺寸',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '中' }, { title: '大' }],
@@ -977,8 +980,8 @@ namespace nasl.ui {
           cssSelector: 'th',
         },
       ],
-      forceUpdateWhenAttributeChange: 'parent',
-      forceRefresh: 'parent',
+      // forceUpdateWhenAttributeChange: 'parent',
+      // forceRefresh: 'parent',
       disableSlotAutoFill: [
         {
           slot: 'default',
@@ -1025,6 +1028,17 @@ namespace nasl.ui {
     })
     sortable: 'none' | 'custom' = 'none';
 
+    @Prop({
+      group: '样式属性',
+      title: '对齐方式',
+      description: '设置列内容的对齐方式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }],
+      },
+    })
+    align: 'left' | 'center' | 'right' = 'left';
+
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
     //   title: '排序初始顺序',
@@ -1046,10 +1060,10 @@ namespace nasl.ui {
       docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '普通列' }, { title: '多选列' }, { title: '展开列' }],
+        options: [{ title: '普通列' }, { title: '多选列' }, { title: '展开列' },{ title: '序号列' }],
       },
     })
-    type: 'normal' | 'selection' | 'expand' = 'normal';
+    type: 'normal' | 'selection' | 'expand' | 'index' = 'normal';
 
     // @Prop<UTableViewColumnOptions<T, V, P, M>, 'autoIndex'>({
     //   group: '数据属性',
@@ -1109,27 +1123,33 @@ namespace nasl.ui {
           if: (_) => _ === true,
         },
         {
-          update: {
-            fixed: false,
-          },
+          clear: ['fixed'], 
           if: (_) => _ === false,
         },
       ],
     })
     isFixed: nasl.core.Boolean = false;
 
-    @Prop<ElTableColumnOptions<T, V, P, M>, 'fixed'>({
-      group: '主要属性',
-      title: '固定列',
-      description:
-        '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: ' 左侧固定' }, { title: '右侧固定' }],
-      },
-      if: (_) => _.isFixed === true,
+        @Prop<ElTableColumnOptions<T, V, P, M>, 'fixed'>({
+          group: '主要属性',
+          title: '固定列',
+          description:
+            '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
+          setter: {
+            concept: 'EnumSelectSetter',
+            options: [{ title: ' 左侧固定' }, { title: '右侧固定' }],
+          },
+          if: (_) => _.isFixed === true,
+        })
+        fixed: 'left' | 'right' ;
+
+    @Prop({
+      group: '样式属性',
+      title: '列宽度',
+      description: '设置列宽度，可设置为数字或百分比',
+      docDescription: '指定列宽，可以是数字或百分比，如100，或10%。',
     })
-    fixed: 'left' | 'right' | false | '' = '';
+    width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
 
     // @Prop({
     //   group: '主要属性',
@@ -1188,14 +1208,14 @@ namespace nasl.ui {
     // })
     // expanderPosition: 'left' | 'right' = 'left';
 
-    @Prop({
-      group: '样式属性',
-      title: '列宽度',
-      description: '设置列宽度，可设置为数字或百分比',
-      docDescription:
-        '列宽，可以作为最小宽度使用。当列宽总和小于 table 元素时，浏览器根据宽度设置情况自动分配宽度；当列宽总和大于 table 元素，表现为定宽。可以同时调整 table 元素的宽度来达到自己想要的效果	',
-    })
-    width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '列宽度',
+    //   description: '设置列宽度，可设置为数字或百分比',
+    //   docDescription:
+    //     '列宽，可以作为最小宽度使用。当列宽总和小于 table 元素时，浏览器根据宽度设置情况自动分配宽度；当列宽总和大于 table 元素，表现为定宽。可以同时调整 table 元素的宽度来达到自己想要的效果	',
+    // })
+    // width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
 
     // @Prop({
     //   group: '样式属性',

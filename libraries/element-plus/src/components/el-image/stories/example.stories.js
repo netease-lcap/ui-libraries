@@ -3,6 +3,7 @@ import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
 import ExampleDemo4 from '../demos/example-demo4.vue';
 import ExampleDemo5 from '../demos/example-demo5.vue';
+import ExampleDemo6 from '../demos/example-demo6.vue';
 
 export default {
   id: 'el-image-examples',
@@ -78,6 +79,17 @@ export const Example5 = {
   render: () => ({
     components: {
       exampleDemo: ExampleDemo5,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+/*  */
+export const Example6 = {
+  name: '预览',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo6,
     },
     template: '<example-demo></example-demo>',
   }),

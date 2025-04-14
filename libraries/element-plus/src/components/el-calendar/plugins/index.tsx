@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import { ElConfigProvider } from 'element-plus';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
-import { $deletePropsList } from '@/plugins/constants';
 import { useMemo } from '@/plugins/hooks';
 import { useCallback } from '../../../plugins/hooks';
 

@@ -1,4 +1,5 @@
 import Component from '../index';
+import ExampleDemo from '../demos/exampleDemo.vue';
 
 export default {
   id: 'el-upload-examples',
@@ -15,23 +16,10 @@ export default {
 export const Example1 = {
   name: '点击上传',
   render: () => ({
-    template: `<el-upload
-      class="upload-demo"
-      action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :before-remove="beforeRemove"
-      multiple
-      :limit="3"
-      :on-exceed="handleExceed"
-    >
-      <el-button type="primary">Click to upload</el-button>
-      <template #tip>
-        <div class="el-upload__tip">
-          jpg/png files with a size less than 500kb
-        </div>
-      </template>
-    </el-upload>`,
+    components: {
+      exampleDemo: ExampleDemo,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };
 
@@ -41,7 +29,7 @@ export const Example2 = {
     template: `<el-upload
       class="upload-demo"
       drag
-      action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+      action="/upload"
       multiple
     >
       <el-icon class="el-icon--upload"><upload-filled /></el-icon>

@@ -25,7 +25,7 @@ export const Example1 = {
         dataSource,
       };
     },
-    template: '<el-transfer :dataSource="dataSource"></el-transfer>',
+    template: '<el-transfer leftTitle="来源" rightTitle="目标" style="margin-top: 20px" :dataSource="dataSource"></el-transfer>',
   }),
 };
 

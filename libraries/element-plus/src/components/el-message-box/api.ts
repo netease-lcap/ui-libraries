@@ -14,7 +14,8 @@ namespace nasl.ui {
         },
         "useSlot": true,
       },
-      "cacheOpenKey": "visible"
+      "cacheOpenKey": "visible",
+      "bindStyleAttr": "customStyle",
     }
   })
   @Component({
@@ -116,21 +117,22 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     icon: nasl.core.String;
 
-    @Prop({
-      title: '自定义关闭图标',
-      description: '自定义关闭图标组件',
-      group: '主要属性',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
-      },
-    })
-    closeIcon: nasl.core.String;
+    // TODO: element-plus2.9.5版本支持这个属性，项目里是2.9.0
+    // @Prop({
+    //   title: '自定义关闭图标',
+    //   description: '自定义关闭图标组件',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTUI_ICONS',
+    //   },
+    // })
+    // closeIcon: nasl.core.String;
 
     @Prop({
       title: '关闭按钮',
@@ -200,7 +202,7 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     cancelButtonLoadingIcon: nasl.core.String;
@@ -211,7 +213,7 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     confirmButtonLoadingIcon: nasl.core.String;
@@ -236,6 +238,26 @@ namespace nasl.ui {
     })
     closeOnPressEscape: nasl.core.Boolean = true;
 
+    @Prop({
+      title: 'hash 改变时关闭弹框',
+      description: '是否在 hash 改变时关闭 MessageBox',
+      group: '主要属性',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    closeOnHashChange: nasl.core.Boolean = true;
+
+    // @Prop({
+    //   title: '是否显示输入框',
+    //   description: '是否显示输入框',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // showInput: nasl.core.Boolean = false;
+    
     @Prop<ElMessageBoxOptions, 'inputPlaceholder'>({
       title: '输入框的占位符',
       description: '输入框的占位符',

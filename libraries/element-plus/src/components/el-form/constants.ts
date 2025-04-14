@@ -1,13 +1,18 @@
 export const $formProvide = Symbol('formProvide');
-export const $formItemPrpos = [
+export const $formItemProps = [
   'error',
   'for',
   'inlineMessage',
   'label',
   'labelPosition',
   'labelWidth',
+  'rules',
   'prop',
   'showMessage',
   'size',
+  'isRequired',
   'validateStatus',
+  'data-nodepath',
+  'data-enable-events',
+  'style',
 ];

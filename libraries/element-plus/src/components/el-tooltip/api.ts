@@ -160,7 +160,6 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     autoClose: nasl.core.Decimal = 0;
-
     
     @Prop({
       group: '主要属性',
@@ -169,18 +168,14 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '悬停' },
+          { title: '鼠标悬停' },
           { title: '点击' },
-          { title: '聚焦' },
-          { title: '上下文菜单' },
         ],
       },
     })
     trigger: 
       | 'hover'
-      | 'click'
-      | 'focus'
-      | 'contextmenu' = 'hover';
+      | 'click' = 'hover';
 
     // @Prop({
     //   group: '主要属性',
@@ -207,18 +202,18 @@ namespace nasl.ui {
     // })
     // virtualRef: Record<string, any>;
     
-    @Prop({
-      group: '主要属性',
-      title: '总是显示',
-      description: '是否总是显示 Tooltip',
-      setter: { concept: 'SwitchSetter' },
-    })
-    persistent: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '总是显示',
+    //   description: '是否总是显示 Tooltip',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // persistent: nasl.core.Boolean = false;
     
     @Prop({
       group: '主要属性',
       title: 'aria-label',
-      description: 'aria-label 属性',
+      description: '为 Tooltip 的触发元素添加 aria-label 属性，以提高可访问性',
       docDescription: '为 Tooltip 的触发元素添加 aria-label 属性，以提高可访问性',
       setter: { concept: 'InputSetter' },
     })

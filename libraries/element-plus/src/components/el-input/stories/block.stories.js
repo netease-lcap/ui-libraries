@@ -31,7 +31,7 @@ export const Default = {
       };
     },
     template: `
-      <el-input> </el-input>
+      <el-input placeholder="请输入内容" />
     `,
   }),
 };

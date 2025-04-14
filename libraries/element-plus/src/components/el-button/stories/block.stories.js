@@ -17,7 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-      <el-button  text="主要按钮" ></el-button>
+      <el-button  text="按钮" ></el-button>
     `,
   }),
 };

@@ -3,8 +3,7 @@ import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 import { withFormItem } from '@/components/el-form';
 
-
 const ElTransfer = registerComponent(ElTransferPlus, { plugin: basicsPlugin });
-const ElFormElTransfer = withFormItem(ElTransfer, 'el-form-date-picker');
-export { ElTransfer, ElFormElTransfer };
+const ElFormTransfer = withFormItem(ElTransfer, 'el-form-transfer');
+export { ElTransfer, ElFormTransfer };
 export default ElTransfer;

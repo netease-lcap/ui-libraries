@@ -63,6 +63,15 @@ namespace nasl.ui {
       },
     })
     strokeWidth: nasl.core.Decimal = 6;
+    
+    @Prop<ElProgressOptions, 'textInside'>({
+      group: '样式属性',
+      title: '文字内置在进度条内',
+      description: '进度条显示文字内置在进度条内（只在 type=line 时可用），文字展示不全时需调整进度条宽度属性',
+      setter: { concept: 'SwitchSetter' },
+      if: _ => _.type === 'line',
+    })
+    textInside: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
@@ -128,15 +137,6 @@ namespace nasl.ui {
     })
     showText: nasl.core.Boolean = true;
 
-    @Prop<ElProgressOptions, 'textInside'>({
-      group: '主要属性',
-      title: '文字内置在进度条内',
-      description: '进度条显示文字内置在进度条内（只在 type=line 时可用），文字展示不全时需调整进度条宽度属性',
-      setter: { concept: 'SwitchSetter' },
-      if: _ => _.type === 'line',
-    })
-    textInside: nasl.core.Boolean = false;
-
     @Prop<ElProgressOptions, 'strokeLinecap'>({
       group: '样式属性',
       title: '路径两端的形状',
@@ -173,11 +173,12 @@ namespace nasl.ui {
     // })
     // textColor: nasl.core.String;
     
-    @Prop({
+    @Prop<ElProgressOptions, 'striped'>({
       group: '样式属性',
       title: '增加条纹',
       description: '在进度条上增加条纹',
       setter: { concept: 'SwitchSetter' },
+      if: _ => _.type === 'line'
     })
     striped: nasl.core.Boolean = false;
     

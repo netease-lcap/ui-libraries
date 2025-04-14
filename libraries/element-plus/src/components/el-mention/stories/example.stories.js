@@ -19,14 +19,17 @@ export const Default = {
     data() {
       return {
         text: '',
-        suggestions: ['user1', 'user2', 'user3'],
+        suggestions: [
+          { value: 'user1', label: 'user1' },
+          { value: 'user2', label: 'user2' },
+          { value: 'user3', label: 'user3' },
+        ],
       };
     },
     template: `
       <div style="width: 300px;">
         <el-mention
-          v-model="text"
-          :suggestions="suggestions"
+          :dataSource="suggestions"
         />
       </div>
     `,

@@ -2,9 +2,16 @@
 import _ from 'lodash';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useMemo, useControllableValue } from '@/plugins/hooks';
+import { useMemo } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+export { handleControllableValue } from '@/plugins/common/index';
+
+export function handleTagName(props) {
+  return {
+    formTagName: 'el-form-checkbox-group',
+  };
+}
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -35,16 +42,16 @@ export function handleDataSource(props) {
   };
 }
 
-export function handleControllableValue(props: any) {
-  const ref = props.get('ref');
-  const [, setValue, valueProps] = useControllableValue(props);
-  return {
-    ...valueProps,
-    formTagName: 'el-form-checkbox-group',
-    ref: Object.assign(ref, {
-      resetField: () => {
-        setValue([]);
-      },
-    }),
-  };
-}
+// export function handleControllableValue(props: any) {
+//   const ref = props.get('ref');
+//   const [, setValue, valueProps] = useControllableValue(props);
+//   return {
+//     ...valueProps,
+//     formTagName: 'el-form-checkbox-group',
+//     ref: Object.assign(ref, {
+//       resetField: () => {
+//         setValue([]);
+//       },
+//     }),
+//   };
+// }

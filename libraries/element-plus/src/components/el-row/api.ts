@@ -69,6 +69,14 @@ namespace nasl.ui {
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 0;
 
+    @Prop({
+      group: '主要属性',
+      title: '标签',
+      description: '标签',
+      setter: { concept: 'InputSetter' },
+    })
+    tag: nasl.core.String = 'div';
+
     @Slot({
       title: '自定义默认内容',
       description: '自定义默认内容',
@@ -102,7 +110,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '栅格占据的列数',
       description: '栅格占据的列数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: { concept: 'NumberInputSetter', min: 0, max: 24 },
     })
     span: nasl.core.Decimal | nasl.core.Integer = 24;
 
@@ -110,15 +118,23 @@ namespace nasl.ui {
       group: '主要属性',
       title: '栅格左侧的间隔格数',
       description: '栅格左侧的间隔格数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: { concept: 'NumberInputSetter', min: 0, max: 24 },
     })
     offset: nasl.core.Decimal | nasl.core.Integer = 0;
 
     @Prop({
       group: '主要属性',
+      title: '标签',
+      description: '标签',
+      setter: { concept: 'InputSetter' },
+    })
+    tag: nasl.core.String = 'div';
+
+    @Prop({
+      group: '主要属性',
       title: '栅格向右移动格数',
       description: '栅格向右移动格数',
-      setter: { concept: 'NumberInputSetter' },
+      setter: { concept: 'NumberInputSetter', min: 0, max: 24 },
     })
     push: nasl.core.Decimal | nasl.core.Integer = 0;
 
@@ -136,6 +152,7 @@ namespace nasl.ui {
       description: '`<768px` 响应式栅格占据的列数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })
@@ -147,6 +164,7 @@ namespace nasl.ui {
       description: '`<768px` 响应式栅格左侧的间隔格数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })
@@ -158,6 +176,7 @@ namespace nasl.ui {
       description: '`≥768px` 响应式栅格占据的列数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })
@@ -169,6 +188,7 @@ namespace nasl.ui {
       description: '`≥768px` 响应式栅格左侧的间隔格数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })
@@ -180,6 +200,7 @@ namespace nasl.ui {
       description: '`≥992px` 响应式栅格占据的列数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })
@@ -191,6 +212,7 @@ namespace nasl.ui {
       description: '`≥992px` 响应式栅格左侧的间隔格数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })
@@ -202,6 +224,7 @@ namespace nasl.ui {
       description: '`≥1200px` 响应式栅格占据的列数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })
@@ -213,6 +236,7 @@ namespace nasl.ui {
       description: '`≥1200px` 响应式栅格左侧的间隔格数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })
@@ -224,6 +248,7 @@ namespace nasl.ui {
       description: '`≥1920px` 响应式栅格占据的列数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })
@@ -235,6 +260,7 @@ namespace nasl.ui {
       description: '`≥1920px` 响应式栅格左侧的间隔格数',
       setter: {
         concept: 'NumberInputSetter',
+        min: 0,
         max: 24,
       },
     })

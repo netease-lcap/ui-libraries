@@ -44,7 +44,7 @@ export const Example1 = {
       <el-button :plain="true" @click="open2">成功</el-button>
       <el-button :plain="true" @click="open3">警告</el-button>
       <el-button :plain="true" @click="open4">错误</el-button>
-      <el-message ref="message1" :visible.sync="visible1" icon="delete-solid">这是一条消息提示</el-message>
+      <el-message ref="message1" :visible.sync="visible1" icon="delete">这是一条消息提示</el-message>
       <el-message :visible.sync="visible2" type="success">恭喜你，这是一条成功消息</el-message>
       <el-message :visible.sync="visible3" type="warning">警告哦，这是一条警告消息</el-message>
       <el-message :visible.sync="visible4" type="error">这是一条消息提示</el-message>

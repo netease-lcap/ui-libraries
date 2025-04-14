@@ -1,13 +1,11 @@
-export const handleTimeSelectProps = (props) => {
-  const start = props.get('start');
-  const end = props.get('end');
-  const step = props.get('step');
-  const format = props.get('format');
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+export { handleControllableValue } from '@/plugins/common/index';
 
+export function handleTagName(props) {
+  const className = props.get('class') ?? '';
   return {
-    start: start || '09:00',
-    end: end || '18:00',
-    step: step || '00:30',
-    format: format || 'HH:mm',
+    formTagName: 'el-form-time-select',
+    class: `${className} el-time-select`,
   };
-};
+}
+export { handleIcon } from '@/plugins/common/icon';

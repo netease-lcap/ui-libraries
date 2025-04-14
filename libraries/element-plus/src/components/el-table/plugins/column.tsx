@@ -5,7 +5,13 @@ export function columnPlugin(props) {
   return {
     slots: {
       ...slots,
-      default: (item) => slots?.default?.({ ...item, index: item.$index, item: item.row }),
+      default: (item) => slots?.default?.({
+          ...item,
+          index: item.$index,
+          item: item.row,
+          rowIndex: item.$index,
+          columnIndex: item.cellIndex,
+        }),
     },
   };
 }

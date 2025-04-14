@@ -1,1 +1,4 @@
 /* Input Tag component custom styles */ 
+.el-input-tag{
+  --el-input-tag-width:240px;
+}

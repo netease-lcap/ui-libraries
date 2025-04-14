@@ -14,7 +14,7 @@ export function handleModelValue(props) {
     provide: Object.assign(provide, {
       [$formProvide]: {
         isInForm: true,
-        value: model.value,
+        value: model,
         setValue: (key, value) => {
           model.value[key] = value;
         },
@@ -28,8 +28,8 @@ export function handleModelValue(props) {
     }),
     ref: Object.assign(ref, {
       validated: async () => ref.validate().then(
-          () => true,
-          () => false,
+          () => ({ valid: true }),
+          () => ({ valid: false }),
         ),
       resetForm: () => {
         ref.resetFields();

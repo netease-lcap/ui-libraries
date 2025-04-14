@@ -9,15 +9,15 @@ namespace nasl.ui {
   })
   @Component({
     title: '时间选择',
-    icon: 'time',
-    description: '用于选择固定时间',
+    icon: 'TimeSelect',
+    description: '时间选择',
     group: 'Form',
   })
   export class ElTimeSelect extends ViewComponent {
     @Prop({
       title: '值',
     })
-    value: nasl.core.Time;
+    modelValue: nasl.core.String;
 
     @Method({
       title: '获取焦点',
@@ -29,7 +29,7 @@ namespace nasl.ui {
       title: '失去焦点',
       description: '使输入框失去焦点',
     })
-    blur(): void {} 
+    blur(): void {}
     constructor(options?: Partial<ElTimeSelectOptions>) {
       super();
     }
@@ -39,9 +39,10 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '值',
-      description: '选择的值'
+      description: '选择的值',
+      sync: true,
     })
-    value: nasl.core.String;
+    modelValue: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -93,11 +94,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '时间格式',
-      description: '时间格式化',
-      setter: { concept: 'InputSetter' },
+      title: '格式化',
+      description: '用于格式化时间，',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '12:09:09' }, { title: '12时09分09秒' }, { title: '12:09' }, { title: '12时09分' }],
+      },
     })
-    format: nasl.core.String = 'HH:mm';
+    format: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' = 'HH:mm';
 
     @Prop({
       group: '状态属性',
@@ -129,21 +133,21 @@ namespace nasl.ui {
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIcon: nasl.core.String;
+    prefixIconName: nasl.core.String = 'Clock';
 
     @Prop({
-      title: '后缀图标',
-      description: '后缀图标',
+      title: '清除图标',
+      description: '清除图标',
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    suffixIcon: nasl.core.String;
+    clearIconName: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',
@@ -180,4 +184,34 @@ namespace nasl.ui {
     })
     onClear: (event: MouseEvent) => any;
   }
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      forceUpdateWhenAttributeChange: true,
+      additionalAttribute: {
+        prefixIconName: '"Clock"',
+        clearIconName: '"CircleClose"',
+      },
+    },
+    extends: [
+      {
+        name: 'ElTimeSelect',
+      },
+      {
+        name: 'ElFormItemPro',
+      },
+    ],
+  })
+  @Component({
+    title: '表单时间选择',
+    description: '表单时间选择',
+    group: 'Form',
+  })
+  export class ElFormTimeSelect extends ViewComponent {
+    constructor(options?: Partial<ElFormTimeSelectOptions & ElFormItemProOptions & Omit<ElTimeSelectOptions, keyof ElFormItemProOptions>>) {
+      super();
+    }
+  }
+
+  export class ElFormTimeSelectOptions extends ViewComponentOptions {}
 }

@@ -3,6 +3,23 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 1,
+    ideusage: {
+      "idetype": "container",
+      "disableSlotAutoFill": [
+        {
+          "slot": "breadcrumb",
+          "expression": "!this.getAttribute('showBreadcrumb')?.value",
+        },
+        {
+          "slot": "extra",
+          "expression": "!this.getAttribute('showExtra')?.value",
+        },
+        {
+          "slot": "default",
+          "expression": "!this.getAttribute('showMainContent')?.value",
+        }
+      ]
+    }
   })
   @Component({
     title: '页头',
@@ -18,31 +35,28 @@ namespace nasl.ui {
 
   export class ElPageHeaderOptions extends ViewComponentOptions {
     @Prop({
-      title: '图标',
-      description: 'Page Header 的图标 Icon 组件',
       group: '主要属性',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
-      },
+      title: '展示面包屑页头区域',
+      description: '您可以通过添加插槽 breadcrumb 来设置面包屑路由导航',
+      setter: { concept: 'SwitchSetter' },
     })
-    icon: nasl.core.String;
+    showBreadcrumb: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
-      title: '主标题',
-      description: 'Page Header 的主标题',
-      setter: { concept: 'InputSetter' },
+      title: '展示额外操作区域',
+      description: '头部可能会变得很复杂，您可以在头部添加更多的区块，以允许丰富的交互。',
+      setter: { concept: 'SwitchSetter' },
     })
-    title: nasl.core.String = '';
+    showExtra: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
-      title: '内容',
-      description: 'Page Header 的内容',
-      setter: { concept: 'InputSetter' },
+      title: '展示主要内容区域',
+      description: '让页头显示一些协同响应内容',
+      setter: { concept: 'SwitchSetter' },
     })
-    content: nasl.core.String = '';
+    showMainContent: nasl.core.Boolean = false;
 
     @Event({
       title: '点击左侧区域触发',

@@ -21,23 +21,25 @@
         :type="badgeType"
         class="el-message__badge"
       />
-      <el-icon v-if="iconComponent" :class="typeClass">
+      <el-icon-plus v-if="iconComponent && !icon" :class="typeClass">
         <component :is="iconComponent" />
-      </el-icon>
+      </el-icon-plus>
+      <el-icon v-if="iconComponent && icon" :name="icon" :class="typeClass" />
       <div class="el-message__content">
         <slot></slot>
       </div>
-      <el-icon v-if="showClose" :class="el-message__closeBtn">
+      <el-icon-plus v-if="showClose" :class="el-message__closeBtn">
         <Close />
-      </el-icon>
+      </el-icon-plus>
     </div>
   </transition>
 </template>
 
 <script>
-import { ElIcon, ElBadge } from 'element-plus';
+import { ElBadge, ElIcon as ElIconPlus } from 'element-plus';
 import { Close, SuccessFilled, WarningFilled, CircleCloseFilled, InfoFilled } from '@element-plus/icons-vue';
 import Message from './message';
+import { ElIcon } from '../index';
 const typeMap = {
   success: 'success',
   info: 'info',
@@ -53,6 +55,7 @@ export const TypeComponentsMap = {
 export default {
   name: 'ElMessageDesigner',
   components: {
+    ElIconPlus,
     ElIcon,
     ElBadge,
     Close,

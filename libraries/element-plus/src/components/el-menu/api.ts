@@ -10,9 +10,19 @@ namespace nasl.ui {
       events: {
         click: true,
       },
+      dataSource: {
+        dismiss:
+          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 3,
+        loopRule: 'nth-last-child(-n+2)',
+        loopElem: ".el-tabs__nav > .el-tabs__item",
+        propertyName: ':dataSource',
+        displayData: "\"[{label: '菜单一', value: '0'},{label:'菜单二', value: '1'}, {label:'菜单三', value: '2'}]\"",
+      },
       additionalAttribute: {
         ':collapseTransition': '"false"',
         menuTrigger: 'click',
+        ":showInDesigner": "\"true\"",
       },
       snippetsDisplayConditions: {
         default: "this.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",
@@ -29,8 +39,14 @@ namespace nasl.ui {
     description: '为网站提供导航功能的菜单。',
     group: 'Navigation',
   })
-  export class ElMenu extends ViewComponent {
-    constructor(options?: Partial<ElMenuOptions>) {
+  export class ElMenu<T, V> extends ViewComponent {
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
+
+    constructor(options?: Partial<ElMenuOptions<T, V>>) {
       super();
     }
 
@@ -57,8 +73,8 @@ namespace nasl.ui {
     ): void {}
   }
 
-  export class ElMenuOptions extends ViewComponentOptions {
-    @Prop<ElMenuOptions, 'mode'>({
+  export class ElMenuOptions<T, V> extends ViewComponentOptions {
+    @Prop<ElMenuOptions<T, V>, 'mode'>({
       group: '主要属性',
       title: '模式',
       description: '模式',
@@ -68,14 +84,56 @@ namespace nasl.ui {
       },
       onChange: [
         {
-          clear: ['collapse'],
+         clear: ['collapse'], 
           if: (_) => _ === 'horizontal',
         },
       ],
     })
     mode: 'horizontal' | 'vertical' = 'vertical';
 
-    @Prop<ElMenuOptions, 'collapse'>({
+    @Prop({
+      group: '数据属性',
+      title: '数据源',
+      description: '树数据',
+      designerValue: [{}, {}, {}],
+      bindOpen: true,
+    })
+    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+
+    @Prop({
+      group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
+    })
+    dataSchema: T;
+
+    @Prop({
+      group: '数据属性',
+      title: '值字段',
+      description: '值字段',
+      setter: { concept: 'PropertySelectSetter' },
+    })
+    valueField: (item: T) => V;
+
+    @Prop({
+      group: '数据属性',
+      title: '父级值字段',
+      description: '如果数据源是平铺结构，需要指定父级字段',
+      docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
+      setter: { concept: 'PropertySelectSetter' },
+    })
+    parentField: (item: T) => V;
+
+    @Prop({
+      group: '数据属性',
+      title: '文本字段',
+      description: '集合的元素类型中，用于显示文本的属性名称',
+      setter: { concept: 'PropertySelectSetter' },
+    })
+    textField: (item: T) => any;
+
+    @Prop<ElMenuOptions<T, V>, 'collapse'>({
       group: '主要属性',
       title: '折叠状态',
       description: '是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）',
@@ -83,6 +141,15 @@ namespace nasl.ui {
       if: (_) => _.mode === 'vertical',
     })
     collapse: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '是否使用 vue-router 的模式',
+      description:
+        '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
+      setter: { concept: 'SwitchSetter' },
+    })
+    router: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',
@@ -132,7 +199,7 @@ namespace nasl.ui {
     })
     uniqueOpened: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElMenuOptions<T, V>, 'menuTrigger'>({
       group: '主要属性',
       title: '子菜单打开的触发方式',
       description: '子菜单打开的触发方式(只在 mode 为 horizontal 时有效)',
@@ -140,17 +207,9 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '鼠标悬停时' }, { title: '鼠标点击时' }],
       },
+      if: (_) => _.mode === 'horizontal',
     })
     menuTrigger: 'hover' | 'click' = 'hover';
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '是否使用 vue-router 的模式',
-    //   description:
-    //     '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // router: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -303,14 +362,6 @@ namespace nasl.ui {
     index: nasl.core.String | null = null;
 
     @Prop({
-      group: '样式属性',
-      title: '弹出菜单类名',
-      description: '弹出菜单的自定义类名',
-      setter: { concept: 'InputSetter' },
-    })
-    popperClass: nasl.core.String;
-
-    @Prop({
       group: '主要属性',
       title: '展开子菜单的延时',
       description: '展开子菜单的延时',
@@ -392,14 +443,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     index: nasl.core.String;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Vue Router 路径对象',
-    //   description: 'Vue Router 路径对象',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // route: object;
 
     @Prop({
       group: '交互属性',
@@ -497,13 +540,6 @@ namespace nasl.ui {
     }
   }
   export class ElMenuItemGroupOptions extends ViewComponentOptions {
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '分组标题',
-    //   description: '分组标题',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // title: nasl.core.String;
 
     @Slot({
       title: '默认',

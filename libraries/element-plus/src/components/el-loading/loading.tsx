@@ -1,5 +1,4 @@
-import { defineComponent, watch, onBeforeUnmount } from 'vue';
-import { ElLoadingService } from 'element-plus';
+import { defineComponent, ref, watch } from 'vue';
 
 export default defineComponent({
   name: 'ElLoading',
@@ -38,75 +37,48 @@ export default defineComponent({
     svgViewBox: {
       type: String,
     },
+    customClass: {
+      type: String,
+    },
   },
-
-  setup(props, { expose }) {
-    let instance: any = null;
-
-    const closeMessage = () => {
-      if (instance) {
-        const ins = instance;
-        instance = null;
-        ins?.close();
-      }
-    };
-
-    const openMessage = () => {
-      if (instance) {
-        return;
-      }
-
-      instance = ElLoadingService({
-        visible: props.visible,
-        text: props.text,
-        body: props.body,
-        fullscreen: props.fullscreen,
-        lock: props.lock,
-        target: props.target,
-        background: props.background,
-        svg: props.svg,
-        svgViewBox: props.svgViewBox,
-        spinner: props.spinner,
-      });
-
-      // if (this.$vnode.data.staticStyle && instance.$el) {
-      //   setElStyle(this.$vnode.data.staticStyle, instance.$el);
-      // }
-
-      // if (this.$vnode.data.style && instance.$el) {
-      //   setElStyle(this.$vnode.data.style, instance.$el);
-      // }
-    };
-
-    watch(
-      () => props.visible,
-      (val, oldVal) => {
-        if (val === oldVal) return;
-        if (val) {
-          openMessage();
-        } else {
-          closeMessage();
-        }
-      },
-      { immediate: true },
-    );
-
-    onBeforeUnmount(() => {
-      closeMessage();
+  setup(props, { slots, expose }) {
+    const isVisible = ref(false);
+    const loadingConfig = ref({
+      body: props.body,
+      fullscreen: props.fullscreen,
+      lock: props.lock,
+      text: props.text,
+      background: props.background,
+      spinner: props.spinner,
+      svg: props.svg,
+      svgViewBox: props.svgViewBox,
+      customClass: props.customClass,
     });
 
-    const open = () => {
-      openMessage();
+    const show = () => {
+      isVisible.value = true;
     };
 
-    const close = () => {
-      closeMessage();
+    const hide = () => {
+      isVisible.value = false;
     };
+
+    // 监听 visible prop 的变化
+    watch(() => props.visible, (newVal) => {
+      isVisible.value = newVal;
+    }, { immediate: true });
 
     expose({
-      open,
-      close,
+      show,
+      hide,
     });
-    return () => null;
+
+    return () => (
+      <div
+        v-loading={isVisible.value ? loadingConfig.value : false}
+      >
+        {slots.default?.()}
+      </div>
+    );
   },
 });

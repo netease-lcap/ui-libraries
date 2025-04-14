@@ -4,8 +4,8 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
     ideusage: {
-      idetype: "messager",
-      cacheOpenKey: "visible"
+      idetype: "container",
+      forceUpdateWhenAttributeChange: true,
     }
   })
   @Component({
@@ -16,18 +16,18 @@ namespace nasl.ui {
   })
   export class ElLoading extends ViewComponent {
     @Method({
-      title: '显示加载',
-      description: '显示加载',
+      title: '显示Loading',
+      description: '显示Loading',
     })
-    open(): void {}
+    show(): void {}
 
     @Method({
-      title: '关闭加载',
-      description: '关闭加载',
+      title: '关闭Loading',
+      description: '关闭Loading',
     })
-    close(): void {}
-
-    constructor(options?: Partial<ElMessageOptions>) {
+    hide(): void {}
+    
+    constructor(options?: Partial<ElLoadingOptions>) {
       super();
     }
   }
@@ -52,7 +52,7 @@ namespace nasl.ui {
         concept: 'InputSetter',
       },
     })
-    target: nasl.core.String;
+    private target: nasl.core.String;
 
     @Prop({
       title: '是否将Loading插入至body下',
@@ -129,15 +129,15 @@ namespace nasl.ui {
     onBeforeClose: (event: any) => any;
 
     @Event({
-      title: 'Loading完全关闭后的回调',
+      title: '完全关闭后触发的函数',
       description: 'Loading 完全关闭后触发的函数',
     })
     onClosed: (event: any) => any;
 
-    // @Slot({
-    //   title: 'Loading内容',
-    //   description: 'Loading内容',
-    // })
-    // slotDefault: () => Array<ViewComponent>;
+    @Slot({
+      title: '覆盖节点',
+      description: '覆盖节点',
+    })
+    slotDefault: () => Array<ViewComponent>;
   }
 }

@@ -8,6 +8,9 @@ namespace nasl.ui {
       editable: 'text',
       textholder: 'text',
       forceUpdateWhenAttributeChange: true,
+      events: {
+        click: true,
+      },
     },
   })
   @Component({
@@ -32,7 +35,7 @@ namespace nasl.ui {
         options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
-    size: '' | 'default' | 'large' | 'small';
+    size: 'default' | 'large' | 'small' = 'default';
 
     @Prop({
       group: '主要属性',
@@ -55,19 +58,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '文字按钮',
-      description: '是否为文字按钮',
-      setter: { concept: 'SwitchSetter' },
+      title: '按钮文字',
+      description: '按钮文字',
+      setter: { concept: 'InputSetter' },
     })
-    text: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '样式属性',
-      title: '背景色',
-      description: '文字按钮是否显示背景色',
-      setter: { concept: 'SwitchSetter' },
-    })
-    bg: nasl.core.Boolean = false;
+    text: nasl.core.String = '按钮';
 
     @Prop({
       group: '主要属性',
@@ -93,13 +88,13 @@ namespace nasl.ui {
     })
     circle: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '加载中',
-      description: '是否为加载中状态',
-      setter: { concept: 'SwitchSetter' },
-    })
-    loading: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '加载中',
+    //   description: '是否为加载中状态',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // loading: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -117,13 +112,13 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '图标',
-    //   description: '图标组件',
-    //   setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
-    // })
-    // icon: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '图标',
+      description: '图标组件',
+      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+    })
+    icon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -153,20 +148,47 @@ namespace nasl.ui {
     autoInsertSpace: nasl.core.Boolean;
 
     @Prop({
+      group: '主要属性',
+      title: '是否开启二次确认',
+      description: '是否开启二次确认',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isPopConfirm: nasl.core.Boolean;
+
+    @Prop<ElButtonOptions, 'title'>({
+      group: '主要属性',
+      title: '二次确认标题',
+      description: '二次确认标题',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !!_.isPopConfirm,
+    })
+    title: nasl.core.String = '确认操作？';
+
+    @Prop<ElButtonOptions, 'confirmButtonText'>({
+      group: '主要属性',
+      title: '弹框确认按钮文字',
+      description: '二次确认弹框确认按钮文字',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !!_.isPopConfirm,
+    })
+    confirmButtonText: nasl.core.String = '确认';
+
+    @Prop<ElButtonOptions, 'cancelButtonText'>({
+      group: '主要属性',
+      title: '弹框取消按钮文字',
+      description: '二次确认弹框取消按钮文字',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !!_.isPopConfirm,
+    })
+    cancelButtonText: nasl.core.String = '取消';
+
+    @Prop({
       group: '样式属性',
       title: '自定义颜色',
       description: '自定义按钮颜色，会自动计算 hover 和 active 颜色',
       setter: { concept: 'InputSetter' },
     })
     color: nasl.core.String;
-
-    @Prop({
-      group: '样式属性',
-      title: '暗黑模式',
-      description: '暗黑模式，自动将颜色转换为暗黑模式颜色',
-      setter: { concept: 'SwitchSetter' },
-    })
-    dark: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
