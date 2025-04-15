@@ -152,30 +152,6 @@ namespace nasl.ui {
     router: nasl.core.Boolean = false;
 
     @Prop({
-      group: '样式属性',
-      title: '背景色',
-      description: '菜单的背景色（仅支持 hex 格式）',
-      setter: { concept: 'InputSetter' },
-    })
-    backgroundColor: nasl.core.String = '#ffffff';
-
-    @Prop({
-      group: '样式属性',
-      title: '文字颜色',
-      description: '菜单的文字颜色（仅支持 hex 格式）',
-      setter: { concept: 'InputSetter' },
-    })
-    textColor: nasl.core.String = '#303133';
-
-    @Prop({
-      group: '样式属性',
-      title: '当前激活菜单的文字颜色',
-      description: '当前激活菜单的文字颜色（仅支持 hex 格式）',
-      setter: { concept: 'InputSetter' },
-    })
-    activeTextColor: nasl.core.String = '#409EFF';
-
-    @Prop({
       group: '主要属性',
       title: '当前激活菜单的标识',
       description: '当前激活菜单的 标识',
