@@ -19,6 +19,7 @@ es
 lib
 dist
 dist-theme
+out
 assets-package
 /site
 changelog.generated.md
