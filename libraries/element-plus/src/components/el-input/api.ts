@@ -172,16 +172,16 @@ namespace nasl.ui {
     })
     private spellCheck: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '前缀图标',
-    //   description: '组件前置图标。',
-    //   setter: {
-    //     concept: 'IconSetter',
-    //     customIconFont: 'LCAP_ELEMENTUI_ICONS',
-    //   },
-    // })
-    // prefixIcon: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '前缀图标',
+      description: '组件前置图标。',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
+    })
+    prefixIcon: nasl.core.String;
 
     // @Prop({
     //   group: '主要属性',
@@ -191,16 +191,16 @@ namespace nasl.ui {
     // })
     // suffix: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '后缀图标',
-    //   description: '组件后置图标。',
-    //   setter: {
-    //     concept: 'IconSetter',
-    //     customIconFont: 'LCAP_ELEMENTUI_ICONS',
-    //   },
-    // })
-    // suffixIcon: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '后缀图标',
+      description: '组件后置图标。',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
+    })
+    suffixIcon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
