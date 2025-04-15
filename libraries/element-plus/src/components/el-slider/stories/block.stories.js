@@ -22,7 +22,7 @@ export const Block = {
   name: '基础示例',
   render: () => ({
     template: `
-      <el-slider vertical  height="200px"/>
+      <el-slider style="height: 200px;" />
     `,
   }),
 };

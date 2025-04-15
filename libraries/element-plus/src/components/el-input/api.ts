@@ -178,7 +178,7 @@ namespace nasl.ui {
       description: '组件前置图标。',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     prefixIcon: nasl.core.String;
@@ -197,7 +197,7 @@ namespace nasl.ui {
       description: '组件后置图标。',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
     suffixIcon: nasl.core.String;
