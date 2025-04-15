@@ -395,7 +395,7 @@ namespace nasl.ui {
       title: '清空时',
       description: '清空时触发',
     })
-    onClear: () => any;
+    onClear: (event: any) => any;
 
 
 
@@ -403,20 +403,20 @@ namespace nasl.ui {
       title: '下拉框显示或隐藏时',
       description: '下拉框显示或隐藏时触发',
     })
-    onVisibleChange: () => any;
+    onVisibleChange: (event: any) => any;
 
     @Event({
       title: '失去焦点时',
       description: '失去焦点时触发',
     })
-    onBlur: () => any;
+    onBlur: (event: any) => any;
     
     
     @Event({
       title: '获得焦点时',
       description: '获得焦点时触发',
     })
-    onFocus: () => any;
+    onFocus: (event: any) => any;
     
     
 
