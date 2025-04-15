@@ -13,7 +13,7 @@ export default {
           VUE_APP_DESIGNER: true,
         };
       },
-      template: '<div style="width: 500px;"><story/></div>',
+      template: '<div style="width: 500px;height: 200px;"><story/></div>',
     }),
   ],
 };
@@ -22,7 +22,7 @@ export const Block = {
   name: '基础示例',
   render: () => ({
     template: `
-      <el-slider  />
+      <el-slider vertical  height="200px"/>
     `,
   }),
 };
