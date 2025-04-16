@@ -118,17 +118,17 @@ export default {
 
 <style>
 .app-nav-bar {
-  --navbar-background: var(--background-color-default);
+  /* --navbar-background: var(--background-color-default);
   --navbar-color: var(--color-base);
   --navbar-item-color: var(--color-base);
   --navbar-item-color-hover: var(--brand-primary);
   --navbar-item-color-selected: var(--brand-primary);
-  border-bottom: 1px solid var(--border-color-base);
+  border-bottom: 1px solid var(--border-color-base); */
 }
 
 .app-nav-bar-item {
-  font-weight: 500;
-  margin-right: var(--space-medium) !important;
+  /* font-weight: 500;
+  margin-right: var(--space-medium) !important; */
 }
 
 .app-logo {
@@ -140,7 +140,7 @@ export default {
 
 .app-title {
   font-weight: 500;
-  color: var(--color-base);
+  /* color: var(--color-base); */
 }
 
 .user-avatar {
@@ -157,32 +157,32 @@ export default {
 }
 
 .app-side-bar {
-  --sidebar-item-background-selected: var(--brand-primary-lightest);
+  /* --sidebar-item-background-selected: var(--brand-primary-lightest);
   --sidebar-item-icon-color-selected: var(--brand-primary);
   --sidebar-item-height: 40px;
   --sidebar-item-padding-left: calc(var(--space-small) + 4px);
   --sidebar-item-background: transparent;
   --sidebar-background: var(--background-color-default);
-  padding: var(--space-base) var(--space-small);
+  padding: var(--space-base) var(--space-small); */
 }
 
 .app-side-bar-item {
-  --sidebar-item-color: var(--font-second-color);
+  /* --sidebar-item-color: var(--font-second-color);
   border-right: none !important;
   border-radius: var(--border-radius-medium) !important;
   margin-bottom: var(--space-mini) !important;
-  position: relative;
+  position: relative; */
 }
 
 .app-side-bar-item[selected]::before {
-  content: '';
+  /* content: '';
   position: absolute;
   top: 12px;
   left: 0;
   width: 4px;
   height: 16px;
   background-color: var(--brand-primary);
-  border-radius: 4px;
+  border-radius: 4px; */
 }
 
 .app-side-bar-item-icon {
@@ -203,8 +203,8 @@ export default {
 }
 
 .app-side-bar-item[selected] .app-side-bar-item-text {
-  color: var(--color-base);
-  font-weight: 500;
+  /* color: var(--color-base); */
+  /* font-weight: 500; */
 }
 </style>
 

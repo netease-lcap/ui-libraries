@@ -2,37 +2,40 @@
   <PageLayout>
     <div class="container">
       <div class="main">
-        <div class="card">
+        <XPanel>
           <div class="welcome-card">
             <u-text text="Hi，Welcome!" class="welcome-card-title"></u-text>
             <u-text text="欢迎来到工单管理系统，您可以在此处查看项目整体情况"  class="welcome-card-desc"></u-text>
           </div>
-        </div>
+        </XPanel>
         <div class="row-cards">
           <div class="row-card">
-            <div class="card todo-statistic-card">
-              <div class="todo-statistic-card-main">
-                <u-text text="已完成工单数" class="todo-statistic-card-title"></u-text>
-                <div class="todo-statistic-card-main-value">
-                  <u-text text="1200" class="todo-statistic-card-main-value-title"></u-text>
-                  <u-text text="+1.30%" class="todo-statistic-card-main-value-percent color-success"></u-text>
+            <XPanel>
+              <div class="todo-statistic-card">
+                <div class="todo-statistic-card-main">
+                  <u-text text="已完成工单数" class="todo-statistic-card-title"></u-text>
+                  <div class="todo-statistic-card-main-value">
+                    <u-text text="1200" class="todo-statistic-card-main-value-title"></u-text>
+                    <u-text text="+1.30%" class="todo-statistic-card-main-value-percent color-success"></u-text>
+                  </div>
+                  <u-text text="已解决、关闭、取消" class="todo-statistic-card-main-desc"></u-text>
                 </div>
-                <u-text text="已解决、关闭、取消" class="todo-statistic-card-main-desc"></u-text>
+                <div class="todo-statistic-card-status">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="var(--brand-primary)" fill-opacity="0.1"/>
+                    <path d="M20 11C17.4821 11 15.2073 12.0326 13.5727 13.7C12.811 14.477 12.1895 15.3908 11.7484 16.4004C11.4989 16.9714 11.307 17.5734 11.18 18.1989C11.0621 18.78 11 19.3823 11 20C11 24.9706 15.0294 29 20 29C24.9706 29 29 24.9706 29 20C29 15.0294 24.9706 11 20 11ZM12.1445 12.3C14.1397 10.2646 16.9231 9 20 9C26.0751 9 31 13.9249 31 20C31 26.0751 26.0751 31 20 31C13.9249 31 9 26.0751 9 20C9 19.2479 9.07563 18.5124 9.22002 17.8011C9.37544 17.0354 9.61036 16.2986 9.91573 15.5996C10.4555 14.3643 11.215 13.248 12.1445 12.3Z" fill="var(--brand-primary)"/>
+                    <path d="M14.7853 19.2148C15.1526 18.8023 15.7847 18.7658 16.1971 19.1331L18.7525 21.4091L23.5984 16.4796C23.9843 16.0845 24.6174 16.077 25.0125 16.4629C25.4076 16.8488 25.4151 17.4819 25.0292 17.877L19.5161 23.4898C19.1427 23.8721 18.5346 23.8933 18.1356 23.5378L14.8669 20.6266C14.4545 20.2593 14.418 19.6272 14.7853 19.2148Z" fill="var(--brand-primary)" fill-opacity="0.5"/>
+                  </svg>
+                </div>
               </div>
-              <div class="todo-statistic-card-status">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="40" height="40" rx="8" fill="var(--brand-primary)" fill-opacity="0.1"/>
-                  <path d="M20 11C17.4821 11 15.2073 12.0326 13.5727 13.7C12.811 14.477 12.1895 15.3908 11.7484 16.4004C11.4989 16.9714 11.307 17.5734 11.18 18.1989C11.0621 18.78 11 19.3823 11 20C11 24.9706 15.0294 29 20 29C24.9706 29 29 24.9706 29 20C29 15.0294 24.9706 11 20 11ZM12.1445 12.3C14.1397 10.2646 16.9231 9 20 9C26.0751 9 31 13.9249 31 20C31 26.0751 26.0751 31 20 31C13.9249 31 9 26.0751 9 20C9 19.2479 9.07563 18.5124 9.22002 17.8011C9.37544 17.0354 9.61036 16.2986 9.91573 15.5996C10.4555 14.3643 11.215 13.248 12.1445 12.3Z" fill="var(--brand-primary)"/>
-                  <path d="M14.7853 19.2148C15.1526 18.8023 15.7847 18.7658 16.1971 19.1331L18.7525 21.4091L23.5984 16.4796C23.9843 16.0845 24.6174 16.077 25.0125 16.4629C25.4076 16.8488 25.4151 17.4819 25.0292 17.877L19.5161 23.4898C19.1427 23.8721 18.5346 23.8933 18.1356 23.5378L14.8669 20.6266C14.4545 20.2593 14.418 19.6272 14.7853 19.2148Z" fill="var(--brand-primary)" fill-opacity="0.5"/>
-                </svg>
-              </div>
-            </div>
+            </XPanel>
           </div>
           <div class="row-card">
-            <div class="card todo-statistic-card">
-              <div class="todo-statistic-card-main">
-                <u-text text="未响应工单数" class="todo-statistic-card-title"></u-text>
-                <div class="todo-statistic-card-main-value">
+            <XPanel>
+              <div class="todo-statistic-card">
+                <div class="todo-statistic-card-main">
+                  <u-text text="未响应工单数" class="todo-statistic-card-title"></u-text>
+                  <div class="todo-statistic-card-main-value">
                   <u-text text="1200" class="todo-statistic-card-main-value-title"></u-text>
                   <u-text text="+1.30%" class="todo-statistic-card-main-value-percent color-error"></u-text>
                 </div>
@@ -45,34 +48,34 @@
                   <path d="M20.0518 13.6095C20.604 13.6095 21.0518 14.0572 21.0518 14.6095V19.5093L23.6361 21.1537C24.102 21.4502 24.2394 22.0683 23.9429 22.5342C23.6464 23.0002 23.0283 23.1375 22.5624 22.8411L19.5149 20.9019C19.2264 20.7184 19.0518 20.4001 19.0518 20.0582V14.6095C19.0518 14.0572 19.4995 13.6095 20.0518 13.6095Z" fill="var(--brand-warning)" fill-opacity="0.5"/>
                 </svg>
               </div>
-            </div>
+              </div>
+            </XPanel>
           </div>
           <div class="row-card">
-            <div class="card todo-statistic-card">
-              <div class="todo-statistic-card-main">
-                <u-text text="未完成工单数" class="todo-statistic-card-title"></u-text>
-                <div class="todo-statistic-card-main-value">
-                  <u-text text="1200" class="todo-statistic-card-main-value-title"></u-text>
-                  <u-text text="+1.30%" class="todo-statistic-card-main-value-percent color-error"></u-text>
+            <XPanel>
+              <div class="todo-statistic-card">
+                <div class="todo-statistic-card-main">
+                  <u-text text="未完成工单数" class="todo-statistic-card-title"></u-text>
+                  <div class="todo-statistic-card-main-value">
+                    <u-text text="1200" class="todo-statistic-card-main-value-title"></u-text>
+                    <u-text text="+1.30%" class="todo-statistic-card-main-value-percent color-error"></u-text>
+                  </div>
+                  <u-text text="评估中、解决中" class="todo-statistic-card-main-desc"></u-text>
                 </div>
-                <u-text text="评估中、解决中" class="todo-statistic-card-main-desc"></u-text>
+                <div class="todo-statistic-card-status">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="var(--brand-error)" fill-opacity="0.1"/>
+                    <path d="M20 11C17.4821 11 15.2073 12.0326 13.5727 13.7C12.811 14.477 12.1895 15.3908 11.7484 16.4004C11.4989 16.9714 11.307 17.5734 11.18 18.1989C11.0621 18.78 11 19.3823 11 20C11 24.9706 15.0294 29 20 29C24.9706 29 29 24.9706 29 20C29 15.0294 24.9706 11 20 11ZM12.1445 12.3C14.1397 10.2646 16.9231 9 20 9C26.0751 9 31 13.9249 31 20C31 26.0751 26.0751 31 20 31C13.9249 31 9 26.0751 9 20C9 19.2479 9.07563 18.5124 9.22002 17.8011C9.37544 17.0354 9.61036 16.2986 9.91573 15.5996C10.4555 14.3643 11.215 13.248 12.1445 12.3Z" fill="var(--brand-error)"/>
+                    <path d="M21 15.2275C21 14.6753 20.5523 14.2275 20 14.2275C19.4477 14.2275 19 14.6753 19 15.2275V20.6763C19 21.2286 19.4477 21.6763 20 21.6763C20.5523 21.6763 21 21.2286 21 20.6763V15.2275Z" fill="var(--brand-error)" fill-opacity="0.5"/>
+                    <path d="M21 24.3447C21 23.7924 20.5523 23.3447 20 23.3447C19.4477 23.3447 19 23.7924 19 24.3447V24.7726C19 25.3249 19.4477 25.7726 20 25.7726C20.5523 25.7726 21 25.3249 21 24.7726V24.3447Z" fill="var(--brand-error)" fill-opacity="0.5"/>
+                  </svg>
+                  </div>
               </div>
-              <div class="todo-statistic-card-status">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="40" height="40" rx="8" fill="var(--brand-error)" fill-opacity="0.1"/>
-                  <path d="M20 11C17.4821 11 15.2073 12.0326 13.5727 13.7C12.811 14.477 12.1895 15.3908 11.7484 16.4004C11.4989 16.9714 11.307 17.5734 11.18 18.1989C11.0621 18.78 11 19.3823 11 20C11 24.9706 15.0294 29 20 29C24.9706 29 29 24.9706 29 20C29 15.0294 24.9706 11 20 11ZM12.1445 12.3C14.1397 10.2646 16.9231 9 20 9C26.0751 9 31 13.9249 31 20C31 26.0751 26.0751 31 20 31C13.9249 31 9 26.0751 9 20C9 19.2479 9.07563 18.5124 9.22002 17.8011C9.37544 17.0354 9.61036 16.2986 9.91573 15.5996C10.4555 14.3643 11.215 13.248 12.1445 12.3Z" fill="var(--brand-error)"/>
-                  <path d="M21 15.2275C21 14.6753 20.5523 14.2275 20 14.2275C19.4477 14.2275 19 14.6753 19 15.2275V20.6763C19 21.2286 19.4477 21.6763 20 21.6763C20.5523 21.6763 21 21.2286 21 20.6763V15.2275Z" fill="var(--brand-error)" fill-opacity="0.5"/>
-                  <path d="M21 24.3447C21 23.7924 20.5523 23.3447 20 23.3447C19.4477 23.3447 19 23.7924 19 24.3447V24.7726C19 25.3249 19.4477 25.7726 20 25.7726C20.5523 25.7726 21 25.3249 21 24.7726V24.3447Z" fill="var(--brand-error)" fill-opacity="0.5"/>
-                </svg>
-              </div>
-            </div>
+            </XPanel>
           </div>
         </div>
-        <div class="card x-panel-card">
-          <div class="x-panel-card-header">
-            <u-text text="资源监控" class="x-panel-card-header-title"></u-text>
-            <IconMore class="x-panel-card-header-more" />
-          </div>
+
+        <XPanel title="资源监控" more>
           <div class="progress-list-container">
             <div class="progress-list-item">
               <u-circular-progress :percent="25">
@@ -106,14 +109,10 @@
               </u-circular-progress>
             </div>
           </div>
-        </div>
+        </XPanel>
         <div class="row-cards">
           <div class="row-card">
-            <div class="card x-panel-card" style="min-height: 348px;">
-              <div class="x-panel-card-header">
-                <u-text text="团队工作量" class="x-panel-card-header-title"></u-text>
-                <IconMore class="x-panel-card-header-more" />
-              </div>
+            <XPanel title="团队工作量" more style="min-height: 348px;">
               <div class="team-work">
                 <div class="team-work-header">
                   <div class="team-work-header-name">
@@ -142,14 +141,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </XPanel>
           </div>
           <div class="row-card">
-            <div class="card x-panel-card" style="min-height: 348px;">
-              <div class="x-panel-card-header">
-                <u-text text="工单处理排名" class="x-panel-card-header-title"></u-text>
-                <IconMore class="x-panel-card-header-more" />
-              </div>
+            <XPanel title="工单处理排名" more style="min-height: 348px;">
               <u-table-view style="width: 100%;border-radius: var(--border-radius-base);" :dataSource="taskData">
                 <u-table-view-column title="排名" field="no" width="10%" align="center">
                   <template #cell="{ item }">
@@ -174,12 +169,12 @@
                 </u-table-view-column>
                 <u-table-view-column title="工单数量" field="count" width="20%" />
               </u-table-view>
-            </div>
+            </XPanel>
           </div>
         </div>
       </div>
       <div class="aside">
-        <div class="card">
+        <XPanel>
           <div class="user-info">
             <AvatarDefault class="user-avatar" />
             <div class="user-info-text">
@@ -201,32 +196,29 @@
               <u-text text="标题C" class="static-item-value"></u-text>
             </div>
           </div>
-        </div>
-        <div class="card todo-statistic-card">
-          <div class="todo-statistic-card-main">
-            <u-text text="其他工单数" class="todo-statistic-card-title"></u-text>
-            <div class="todo-statistic-card-main-value">
-              <u-text text="1200" class="todo-statistic-card-main-value-title"></u-text>
-              <u-text text="+1.30%" class="todo-statistic-card-main-value-percent color-error"></u-text>
+        </XPanel>
+        <XPanel>
+          <div class="todo-statistic-card">
+            <div class="todo-statistic-card-main">
+              <u-text text="其他工单数" class="todo-statistic-card-title"></u-text>
+              <div class="todo-statistic-card-main-value">
+                <u-text text="1200" class="todo-statistic-card-main-value-title"></u-text>
+                <u-text text="+1.30%" class="todo-statistic-card-main-value-percent color-error"></u-text>
+              </div>
+              <u-text text="后续解决等" class="todo-statistic-card-main-desc"></u-text>
             </div>
-            <u-text text="后续解决等" class="todo-statistic-card-main-desc"></u-text>
+            <div class="todo-statistic-card-status">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="40" height="40" rx="8" fill="var(--brand-success)" fill-opacity="0.1"/>
+                <path d="M20 11C17.4821 11 15.2073 12.0326 13.5727 13.7C12.811 14.477 12.1895 15.3908 11.7484 16.4004C11.4989 16.9714 11.307 17.5734 11.18 18.1989C11.0621 18.78 11 19.3823 11 20C11 24.9706 15.0294 29 20 29C24.9706 29 29 24.9706 29 20C29 15.0294 24.9706 11 20 11ZM12.1445 12.3C14.1397 10.2646 16.9231 9 20 9C26.0751 9 31 13.9249 31 20C31 26.0751 26.0751 31 20 31C13.9249 31 9 26.0751 9 20C9 19.2479 9.07563 18.5124 9.22002 17.8011C9.37544 17.0354 9.61036 16.2986 9.91573 15.5996C10.4555 14.3643 11.215 13.248 12.1445 12.3Z" fill="var(--brand-success)"/>
+                <path d="M16.7617 20C16.7617 20.6839 16.2073 21.2383 15.5234 21.2383C14.8396 21.2383 14.2852 20.6839 14.2852 20C14.2852 19.3161 14.8396 18.7617 15.5234 18.7617C16.2073 18.7617 16.7617 19.3161 16.7617 20Z" fill="var(--brand-success)" fill-opacity="0.5"/>
+                <path d="M21.2383 20C21.2383 20.6839 20.6839 21.2383 20 21.2383C19.3161 21.2383 18.7617 20.6839 18.7617 20C18.7617 19.3161 19.3161 18.7617 20 18.7617C20.6839 18.7617 21.2383 19.3161 21.2383 20Z" fill="var(--brand-success)" fill-opacity="0.5"/>
+                <path d="M24.4766 21.2383C25.1604 21.2383 25.7148 20.6839 25.7148 20C25.7148 19.3161 25.1604 18.7617 24.4766 18.7617C23.7927 18.7617 23.2383 19.3161 23.2383 20C23.2383 20.6839 23.7927 21.2383 24.4766 21.2383Z" fill="var(--brand-success)" fill-opacity="0.5"/>
+              </svg>
+            </div>
           </div>
-          <div class="todo-statistic-card-status">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="40" height="40" rx="8" fill="var(--brand-success)" fill-opacity="0.1"/>
-              <path d="M20 11C17.4821 11 15.2073 12.0326 13.5727 13.7C12.811 14.477 12.1895 15.3908 11.7484 16.4004C11.4989 16.9714 11.307 17.5734 11.18 18.1989C11.0621 18.78 11 19.3823 11 20C11 24.9706 15.0294 29 20 29C24.9706 29 29 24.9706 29 20C29 15.0294 24.9706 11 20 11ZM12.1445 12.3C14.1397 10.2646 16.9231 9 20 9C26.0751 9 31 13.9249 31 20C31 26.0751 26.0751 31 20 31C13.9249 31 9 26.0751 9 20C9 19.2479 9.07563 18.5124 9.22002 17.8011C9.37544 17.0354 9.61036 16.2986 9.91573 15.5996C10.4555 14.3643 11.215 13.248 12.1445 12.3Z" fill="var(--brand-success)"/>
-              <path d="M16.7617 20C16.7617 20.6839 16.2073 21.2383 15.5234 21.2383C14.8396 21.2383 14.2852 20.6839 14.2852 20C14.2852 19.3161 14.8396 18.7617 15.5234 18.7617C16.2073 18.7617 16.7617 19.3161 16.7617 20Z" fill="var(--brand-success)" fill-opacity="0.5"/>
-              <path d="M21.2383 20C21.2383 20.6839 20.6839 21.2383 20 21.2383C19.3161 21.2383 18.7617 20.6839 18.7617 20C18.7617 19.3161 19.3161 18.7617 20 18.7617C20.6839 18.7617 21.2383 19.3161 21.2383 20Z" fill="var(--brand-success)" fill-opacity="0.5"/>
-              <path d="M24.4766 21.2383C25.1604 21.2383 25.7148 20.6839 25.7148 20C25.7148 19.3161 25.1604 18.7617 24.4766 18.7617C23.7927 18.7617 23.2383 19.3161 23.2383 20C23.2383 20.6839 23.7927 21.2383 24.4766 21.2383Z" fill="var(--brand-success)" fill-opacity="0.5"/>
-            </svg>
-
-          </div>
-        </div>
-        <div class="card x-panel-card">
-          <div class="x-panel-card-header">
-            <u-text text="服务产品" class="x-panel-card-header-title"></u-text>
-            <IconMore class="x-panel-card-header-more" />
-          </div>
+        </XPanel>
+        <XPanel title="服务产品" more>
           <div class="service-product-list">
             <div class="service-product-item">
               <u-text text="Aa" class="service-product-item-text"></u-text>
@@ -241,11 +233,9 @@
               <u-text text="Dd" class="service-product-item-text"></u-text>
             </div>
           </div>
-        </div>
-        <div class="card x-panel-card">
-          <div class="x-panel-card-header">
-            <u-text text="待办事项" class="x-panel-card-header-title"></u-text>
-            <IconMore class="x-panel-card-header-more" />
+        </XPanel>
+        <XPanel title="待办事项" more>
+          <div class="todo-card-list">
           </div>
           <div class="todo-card-list">
             <div class="todo-card-item item-primary">
@@ -290,13 +280,14 @@
               <u-text text="32" class="todo-card-item-count"></u-text>
             </div>
           </div>
-        </div>
+        </XPanel>
       </div>
     </div>
   </PageLayout>
 </template>
 <script>
 import PageLayout from './layout.vue';
+import XPanel from './x-panel.vue';
 import AvatarDefault from './avatar-default.vue';
 import IconMore from './icon-more.vue';
 
@@ -304,6 +295,7 @@ export default {
   components: {
     PageLayout,
     IconMore,
+    XPanel,
     AvatarDefault,
   },
   data() {
@@ -398,12 +390,6 @@ export default {
   flex: 1;
 }
 
-.card {
-  padding: var(--space-base);
-  border-radius: var(--border-radius-medium);
-  background-color: var(--background-color-default);
-}
-
 .welcome-card {
   display: flex;
   flex-direction: column;
@@ -412,7 +398,7 @@ export default {
   gap: var(--space-mini);
   height: 110px;
   padding: var(--space-medium);
-  background-color: var(--brand-primary-lightest);
+  background: var(--alert-background-color-info);
   border-radius: var(--border-radius-medium);
 }
 
@@ -553,32 +539,6 @@ export default {
 
 .color-error {
   color: var(--brand-error);
-}
-
-.x-panel-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: var(--space-base);
-}
-
-.x-panel-card-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.x-panel-card-header-title {
-  font-size: var(--font-size-large);
-  color: var(--color-base);
-  line-height: calc(var(--font-size-large) + 8px);
-  font-weight: 500;
-}
-
-.x-panel-card-header-more {
-  color: var(--font-second-color);
 }
 
 .progress-list-container {
