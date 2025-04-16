@@ -42,7 +42,7 @@ export function handlePopupconfirmButton(props) {
     return (
       <ElPopconfirm
         {..._.pick(selfProps, $PopconfirmProps)}
-        title={selfProps.popconfirmTitle ?? '确认操作？'}
+        title={selfProps.title ?? '确认操作？'}
         icon={selfProps.popconfirmIcon}
         confirmButtonText={selfProps.confirmButtonText ?? '确认'}
         cancelButtonText={selfProps.cancelButtonText ?? '取消'}
