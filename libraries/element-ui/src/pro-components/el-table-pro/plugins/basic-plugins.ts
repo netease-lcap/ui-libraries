@@ -17,7 +17,7 @@ export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', event: 'update:selectedRowKeys' }]);
 
 export const useTable: NaslComponentPluginOptions = {
-  props: ['onPageChange', 'page', 'pageSize', 'pageSizeOptions', 'showTotal', 'showJumper', 'treeDisplay', 'virtual'],
+  props: ['onPageChange', 'page', 'pageSize', 'valueField', 'multiple', 'parentField', 'selection', 'pageSizeOptions', 'showTotal', 'showJumper', 'treeDisplay', 'virtual'],
   setup(props, ctx) {
     console.log('============table render===========');
     const current = props.useRef('page', (v) => v ?? 1);

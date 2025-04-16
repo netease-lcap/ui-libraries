@@ -48,13 +48,6 @@ export default function useTreeData(props: ElEnhancedTableProps, context: SetupC
     onExpandFoldIconClick,
   } = useTreeDataExpand(props, context, { store, dataSource, rowDataKeys });
 
-  const checkedColumn = computed(() => columns.value.find((col) => col.colKey === 'row-select'));
-
-  watch(checkedColumn, (column) => {
-    if (!store.value || !checkedColumn.value) return;
-    store.value.updateDisabledState(dataSource.value, column, rowDataKeys.value);
-  });
-
   function getFoldIcon(h: CreateElement, context: PrimaryTableCellParams<TableRowData>) {
     const params = { ...context, type: 'fold' };
     const defaultFoldIcon = t(global.value.treeExpandAndFoldIcon, h, params) || <MinusRectangleIcon />;
@@ -84,6 +77,13 @@ export default function useTreeData(props: ElEnhancedTableProps, context: SetupC
     },
     { immediate: true },
   );
+
+  const checkedColumn = computed(() => columns.value.find((col) => col.colKey === 'row-select'));
+
+  watch(checkedColumn, (column) => {
+    if (!store.value || !checkedColumn.value) return;
+    store.value.updateDisabledState(dataSource.value, column, rowDataKeys.value);
+  });
 
   onUnmounted(() => {
     if (!props.tree) return;
