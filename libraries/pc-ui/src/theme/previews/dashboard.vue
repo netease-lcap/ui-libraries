@@ -769,7 +769,7 @@ export default {
   align-items: center;
   width: 40px;
   height: 40px;
-  background-color: var(--background-color-default);
+  background-color: var(--panel-background);
   border-radius: var(--border-radius-base);
 }
 
