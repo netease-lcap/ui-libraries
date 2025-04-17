@@ -57,7 +57,7 @@ function transformTypeAnnotation(node: Annotation): astTypes.TypeAnnotation | un
         inferred: false,
         ruleMap: new Map(),
         typeArguments: transformTypeParameters(typeParameters),
-      };
+      } as any;
     }
 
     if (typeParameters && typeName.type === 'Identifier') {
@@ -71,7 +71,7 @@ function transformTypeAnnotation(node: Annotation): astTypes.TypeAnnotation | un
         inferred: false,
         ruleMap: new Map(),
         typeArguments: transformTypeParameters(typeParameters),
-      };
+      } as any;
     }
   }
 }
@@ -304,7 +304,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                 name: (member.key as babelTypes.Identifier).name,
                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.PropDeclaration['title'],
                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
-              };
+              } as any;
               // 默认值
               if (member.value) {
                 const typeAnnotation = member.typeAnnotation as babelTypes.TSTypeAnnotation;
@@ -429,7 +429,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                 name: (member.key as babelTypes.Identifier).name,
                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.PropDeclaration['title'],
                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
-              };
+              } as any;
 
               // @TODO: default
               // @TODO: private
