@@ -491,12 +491,16 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                 // type: generate((member. as babelTypes.TSTypeAnnotation).typeAnnotation).code,
               };
 
-              (method as any).tsType = `(${member.params.map((param) => {
-                if (param.type === 'AssignmentPattern') {
-                  return generate(param.left).code;
+              (method as any).tsType = `(${member.params.map((param, index) => {
+                if (param.type === 'AssignmentPattern' && param.left.type === 'Identifier') {
+                  return `${param.left.name}: ${param.left.typeAnnotation && param.left.typeAnnotation.type === 'TSTypeAnnotation' && param.left.typeAnnotation.typeAnnotation ? generate(param.left.typeAnnotation.typeAnnotation).code : 'any'}`;
                 }
 
-                return generate(param).code;
+                if (param.type === 'Identifier') {
+                  return `${param.name}: ${param.typeAnnotation && param.typeAnnotation.type === 'TSTypeAnnotation' && param.typeAnnotation.typeAnnotation ? generate(param.typeAnnotation.typeAnnotation).code : 'any'}`;
+                }
+
+                return `param${index + 1}`;
               }).join(', ')}) => ${member.returnType && member.returnType.type === 'TSTypeAnnotation' && member.returnType.typeAnnotation ? generate(member.returnType.typeAnnotation).code : 'void'}`;
 
               decorator.expression.arguments.forEach((arg) => {

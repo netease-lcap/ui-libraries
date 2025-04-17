@@ -257,6 +257,11 @@ function removeProperty(ast: bt.File, componentName: string, propName: string, t
               p.remove();
             }
           },
+          ClassMethod(p) {
+            if (bt.isIdentifier(p.node.key) && p.node.key.name === propName && type === 'method') {
+              p.remove();
+            }
+          },
         });
       }
     },
