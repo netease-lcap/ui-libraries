@@ -476,6 +476,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                   return {
                     concept: 'Param',
                     name: (param as babelTypes.Identifier).name,
+                    optional: param.optional,
                     description: decorator ? getValueFromObjectExpressionByKey(
                       (decorator.expression as babelTypes.CallExpression).arguments[0] as babelTypes.ObjectExpression,
                       'description',
