@@ -1106,8 +1106,8 @@ importers:
         version: 2.7.0
     devDependencies:
       '@nasl/types':
-        specifier: ^0.1.6
-        version: 0.1.6
+        specifier: ^0.1.11
+        version: 0.1.11
       '@types/babel__core':
         specifier: ^7.1.20
         version: 7.20.5
@@ -1364,7 +1364,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^5.2.1
-        version: 5.2.1(vite@6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0))(vue@3.5.13(typescript@5.7.3))
+        version: 5.2.1(vite@6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))
       '@vue/tsconfig':
         specifier: ^0.7.0
         version: 0.7.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
@@ -1373,7 +1373,7 @@ importers:
         version: 5.7.3
       vite:
         specifier: ^6.2.0
-        version: 6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0)
+        version: 6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0)(yaml@2.7.0)
       vue-tsc:
         specifier: ^2.2.4
         version: 2.2.8(typescript@5.7.3)
@@ -3510,9 +3510,6 @@ packages:
 
   '@nasl/types@0.1.11':
     resolution: {integrity: sha512-0aaEG4gBy1jOpLOY4MoqFwDca2LVMl+ygGR4Ct4VUpPbsff8zkMge0dPpt1M9aGWEDC9QHUMYLIEzb20IcUAJA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.11.tgz}
-
-  '@nasl/types@0.1.6':
-    resolution: {integrity: sha512-h6Yh57U1jEbvgWh8A1XxsWAW61JLjshq35sT1G57qZ3D6539v2hxEUe8TjOL0c501lz7gCm4WLlowf/wgypBRA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.6.tgz}
 
   '@nasl/types@0.1.7-beta.1':
     resolution: {integrity: sha512-iMgr0tRx8hlhXCAFUyI1WjYJkHTtq+X5dTZ8qlyAN4jOs7Ivj9b3fZB4djoT99VsCtorOD2azbIqR8vdYaZInw==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.7-beta.1.tgz}
@@ -14725,8 +14722,6 @@ snapshots:
 
   '@nasl/types@0.1.11': {}
 
-  '@nasl/types@0.1.6': {}
-
   '@nasl/types@0.1.7-beta.1': {}
 
   '@nasl/types@0.1.8-beta.3': {}
@@ -17162,9 +17157,9 @@ snapshots:
       vite: 6.0.3(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0)(yaml@2.7.0)
       vue: 3.5.13(typescript@5.6.3)
 
-  '@vitejs/plugin-vue@5.2.1(vite@6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0))(vue@3.5.13(typescript@5.7.3))':
+  '@vitejs/plugin-vue@5.2.1(vite@6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))':
     dependencies:
-      vite: 6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0)
+      vite: 6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0)(yaml@2.7.0)
       vue: 3.5.13(typescript@5.7.3)
 
   '@vitest/coverage-v8@1.1.0(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0))':
@@ -24409,7 +24404,7 @@ snapshots:
       terser: 5.26.0
       yaml: 2.7.0
 
-  vite@6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0):
+  vite@6.2.5(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0)(yaml@2.7.0):
     dependencies:
       esbuild: 0.25.2
       postcss: 8.5.3
@@ -24420,6 +24415,7 @@ snapshots:
       jiti: 1.21.0
       less: 4.2.0
       terser: 5.26.0
+      yaml: 2.7.0
 
   vitest-canvas-mock@0.3.3(vitest@1.1.0(@types/node@20.11.26)(jsdom@23.0.1)(less@4.2.0)(terser@5.26.0)):
     dependencies:
@@ -24728,7 +24724,7 @@ snapshots:
   webpack@5.89.0:
     dependencies:
       '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       '@webassemblyjs/ast': 1.11.6
       '@webassemblyjs/wasm-edit': 1.11.6
       '@webassemblyjs/wasm-parser': 1.11.6
@@ -24759,7 +24755,7 @@ snapshots:
   webpack@5.89.0(esbuild@0.18.20):
     dependencies:
       '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       '@webassemblyjs/ast': 1.11.6
       '@webassemblyjs/wasm-edit': 1.11.6
       '@webassemblyjs/wasm-parser': 1.11.6
