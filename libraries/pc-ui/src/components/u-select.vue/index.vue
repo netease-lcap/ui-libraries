@@ -800,6 +800,13 @@ export default {
       }
       this.popperOpened = true; // 刚打开时，除非是没有加载，否则保留上次的 filter 过的数据
 
+      // 多选时，打开时更新过滤条件
+      if (this.hasFilter && this.closedClearFilter) {
+        this.resetFilterList();
+        this.hasFilter = false;
+        this.closedClearFilter = false;
+      }
+
       if (
         this.filterable &&
         this.currentDataSource &&
@@ -822,6 +829,11 @@ export default {
       if (this.loadMoreNoopTimer) {
         clearTimeout(this.loadMoreNoopTimer);
       }
+      // 多选时，关闭时更新过滤条件，打开后更新防止重复请求和闪动
+      if (this.hasFilter) {
+        this.closedClearFilter = true;
+      }
+
       this.popperOpened = false;
       this.focusedVM = undefined;
       this.preventRootBlur = false;
@@ -829,11 +841,6 @@ export default {
       clearTimeout(this.inputBlurTimer);
       clearTimeout(this.rootBlurTimer);
 
-      // 多选时，打开时更新过滤条件
-      if (this.hasFilter) {
-        this.resetFilterList();
-        this.hasFilter = false;
-      }
       this.$emit('close', $event, this);
       this.$emit('update:opened', false);
     },
