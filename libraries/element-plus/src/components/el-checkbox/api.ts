@@ -89,7 +89,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       sync: true,
     })
-    value: nasl.collection.List<V>;
+    modelValue: nasl.collection.List<V>;
 
     // @Prop<ElCheckboxGroupOptions<T, V>, 'itemProps'>({
     //   group: '数据属性',
@@ -275,7 +275,6 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      bindStyleAttr: 'inputStyle',
       bindStyleSelector: '.__cw-form-compose-input',
       childAccept: "target.tag === 'el-checkbox'",
       dataSource: {

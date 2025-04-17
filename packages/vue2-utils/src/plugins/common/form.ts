@@ -44,6 +44,7 @@ export const useUpdateSync = (props: Readonly<MapGet>, options: PropSyncOption[]
 export const createUseUpdateSync = (options: PropSyncOption[] = [{ name: 'value', event: 'change' }]) => {
   return {
     name: 'useUpdateSync',
+    props: options.map(({ name }) => name),
     setup(props) {
       return useUpdateSync(props, options);
     },

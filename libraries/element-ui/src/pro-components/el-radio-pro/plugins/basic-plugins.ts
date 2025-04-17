@@ -9,7 +9,7 @@ export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'chang
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useDataSourceRender: NaslComponentPluginOptions = {
-  props: ['data', 'valueField', 'shape'],
+  props: ['data', 'valueField', 'shape', 'itemProps'],
   setup({ get: propGet, useComputed }) {
     const shapeRef = useComputed('shape', (v) => (v || 'normal'));
     const options = useComputed(['data', 'shape'], (data, shape) => {

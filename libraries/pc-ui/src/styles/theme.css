@@ -361,6 +361,7 @@
 
     /* @component u-sidebar */
     --sidebar-background: #ffffff; /* @desc 侧边栏背景色,如：#223325 */ /* @type color */ /* @excludeTags u-sidebar-item,u-sidebar-group,u-sidebar-divider */ /* @depStaticStyles { "u-sidebar": ["background-color"] } */
+    --sidebar-border-right-color: #E9E9EB; /* @desc 侧边栏右边框颜色,如：#223325 */ /* @type color */ /* @excludeTags u-sidebar-item,u-sidebar-group,u-sidebar-divider */
     --sidebar-item-height: 54px; /* @group 项 */ /* @desc 侧边栏项高度,如：1px */ /* @prefix sidebar-item */ /* @excludeTags u-sidebar-divider */ /* @depStaticStyles { "u-sidebar-item": ["height"] } */
     --sidebar-item-padding-left: 30px; /* @group 项 */ /* @desc 侧边栏项左边距,如：1px */ /* @prefix sidebar-item */ /* @excludeTags u-sidebar-divider */ /* @depStaticStyles { "u-sidebar-item": ["padding-left"] } */
     --sidebar-item-background: #ffffff; /* @group 项 */ /* @desc 侧边栏项背景色,如：#223325 */ /* @prefix sidebar-item */ /* @type color */ /* @excludeTags u-sidebar-divider */ /* @depStaticStyles { "u-sidebar-item": ["background-color"] } */

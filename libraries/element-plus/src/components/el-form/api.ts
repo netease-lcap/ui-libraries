@@ -5,7 +5,7 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'container',
-      structured: true,
+      // structured: true,
     },
   })
   @Component({
@@ -31,7 +31,7 @@ namespace nasl.ui {
       title: '校验函数',
       description: '校验函数，包含错误文本提示等功能',
     })
-    validate	(): {
+    validated	(): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;
@@ -294,9 +294,11 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       ignoreProperty: ['rules'],
+      structured: false,
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
+
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
     },

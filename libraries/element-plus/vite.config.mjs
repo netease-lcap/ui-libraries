@@ -3,7 +3,7 @@ import path from 'node:path';
 import fs from 'fs-extra';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import { createGenScopedName, lcapPlugin } from '@lcap/builder';
+import { createGenScopedName, batchDepCSSInfo, lcapPlugin } from '@lcap/builder';
 
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
@@ -29,7 +29,57 @@ export default defineConfig(({ command }) => {
         reportCSSInfo: {
           enabled: true,
           verbose: false,
+          warningIgnore: [
+            /-(fade|transition)-(enter|leave)-/,
+            /^\.el-button-group/,
+            /^\.el-input-group/,
+            /^\.el-select-group/,
+            /^\.el-textarea/,
+            /^\.el-table-v2/,
+            /^\.el-tooltip-v2/,
+            /^\.el-col-|=el-col-/,
+            /^\.el-color-/,
+            /^\.el-loading-/,
+          ],
           extraComponentMap: {
+            ElIcon: {
+              selectorPrefixMap: {
+                'el-icon-loading': true,
+              },
+            },
+            ElButton: {
+              mainSelectorMap: {
+                '.el-button,.el-button.is-round': true,
+              },
+            },
+            ElBreadcrumb: {
+              mainSelectorMap: {
+                '.el-breadcrumb__separator': false,
+              },
+            },
+            ElBreadcrumbItem: {
+              mainSelectorMap: {
+                '.el-breadcrumb__item': true,
+                '.el-breadcrumb__inner': false,
+              },
+            },
+            ElDescriptionsItem: {
+              selectorPrefixMap: {
+                'el-descriptions__cell': true,
+                'el-descriptions__label': false,
+                'el-descriptions__content': false,
+              },
+            },
+            ElDropdownItem: {
+              selectorPrefixMap: {
+                'el-dropdown-menu__item': true,
+              },
+            },
+            ElOption: {
+              selectorPrefixMap: {
+                'el-select-dropdown__item': true,
+              },
+            },
             ElCheckbox: {
               selectorPrefixMap: {
                 'el-checkbox-button': false,
@@ -40,9 +90,19 @@ export default defineConfig(({ command }) => {
                 '.el-tab-pane': true,
               },
             },
+            ElForm: {
+              selectorPrefixMap: {
+                'el-form-item': true,
+              },
+            },
             ElFormItemPro: {
               selectorPrefixMap: {
                 'el-form-item': true,
+              },
+            },
+            ElCalendar: {
+              selectorPrefixMap: {
+                'el-calendar-table': false,
               },
             },
             ElCascader: {
@@ -52,16 +112,112 @@ export default defineConfig(({ command }) => {
                 'el-cascader-node': false,
               },
             },
+            ElCollapse: {
+              selectorPrefixMap: {
+                'el-collapse': true,
+                'el-collapse-item': false,
+              },
+            },
+            ElDropdown: {
+              selectorPrefixMap: {
+                'el-dropdown-menu': false,
+              },
+            },
             ElSelect: {
               selectorPrefixMap: {
-                'el-select-dropdown': true,
+                'el-select__popper': true,
+                'el-select-dropdown': false,
               },
             },
             ElTable: {
               selectorPrefixMap: {
                 'el-table-filter': false,
+                'el-table-column': false,
+              },
+              depComponentMap: {
+                ElPagination: false,
               },
             },
+            ElTableColumn: {
+              hideSelectorPrefixes: ['el-table-column'],
+            },
+            ElProgress: {
+              selectorPrefixMap: {
+                'el-progress-bar': false,
+              },
+            },
+            ElTag: {
+              mainSelectorMap: {
+                '.el-tag,.el-tag.el-tag--primary': true,
+              },
+            },
+            ElTransfer: {
+              selectorPrefixMap: {
+                'el-transfer-panel': false,
+              },
+            },
+            ElTree: {
+              selectorPrefixMap: {
+                'el-tree-node': false,
+              },
+            },
+            ElTreeSelect: {
+              depComponentMap: {
+                ElSelect: true,
+                ElTree: false,
+              },
+            },
+            ElDatePicker: {
+              depComponentMap: {
+                ElInput: true,
+              },
+            },
+            ElTimePicker: {
+              mainSelectorMap: {
+                '.el-time-picker': true,
+              },
+              depComponentMap: {
+                ElInput: true,
+              },
+            },
+            ElTimeSelect: {
+              mainSelectorMap: {
+                '.el-time-select': true,
+              },
+              depComponentMap: {
+                ElSelect: true,
+              },
+            },
+            ElUpload: {
+              selectorPrefixMap: {
+                'el-upload': false,
+                'el-upload-dragger': false,
+                'el-upload-list': false,
+                'el-upload-cover': false,
+              },
+            },
+            ElMention: {
+              selectorPrefixMap: {
+                'el-mention-dropdown': false,
+              },
+            },
+            ...batchDepCSSInfo([
+              'ElCascader',
+              'ElCheckboxGroup',
+              'ElDatePicker',
+              'ElInput',
+              'ElInputNumber',
+              'ElInputTag',
+              'ElRadioGroup',
+              'ElRate',
+              'ElSelect',
+              'ElSlider',
+              'ElSwitch',
+              'ElTimePicker',
+              'ElTimeSelect',
+              'ElTransfer',
+              'ElTreeSelect',
+            ], (oldName) => oldName.replace(/^El/, 'ElForm')),
           },
         },
       }),

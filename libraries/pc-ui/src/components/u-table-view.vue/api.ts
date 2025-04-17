@@ -1151,6 +1151,25 @@ namespace nasl.ui {
           };
       }) => any;
 
+        @Event({
+            title: '树型展开前',
+            description: '点击树型展开按钮前触发',
+        })
+        onBeforeTreeToggleExpanded: (event: {
+            item: T;
+            expanded: nasl.core.Boolean;
+            oldExpanded: nasl.core.Boolean;
+        }) => any;
+
+        @Event({
+            title: '树型展开后',
+            description: '点击树型展开按钮后触发',
+        })
+        onTreeToggleExpanded: (event: {
+            item: T;
+            expanded: nasl.core.Boolean;
+        }) => any;
+
       @Slot({
           title: '默认',
           description: '在表格中插入`<u-table-view-column>`子组件',

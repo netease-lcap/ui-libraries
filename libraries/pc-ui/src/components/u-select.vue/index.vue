@@ -3,7 +3,6 @@
     :class="[
       $style.root,
       isPreview ? $style.preview : '',
-      isPreview && !$env.VUE_APP_DESIGNER ? $style.disEvent : '',
     ]"
     :color="color || (formItemVM && formItemVM.color)"
     :readonly="readonly"
@@ -18,7 +17,7 @@
     :suffix="suffix ? suffix : undefined"
     :start="!!prefix"
     :end="!!suffix"
-    :tabindex="readonly || currentDisabled ? '' : 0"
+    :tabindex="readonly || currentDisabled || isPreview ? -1 : 0"
     @click="focus"
     @keydown.up.prevent="$refs.popper.currentOpened ? shift(-1) : open()"
     @keydown.down.prevent="$refs.popper.currentOpened ? shift(+1) : open()"
@@ -179,7 +178,7 @@
       :color="color"
       :placement="placement"
       :append-to="appendTo"
-      :disabled="readonly || currentDisabled"
+      :disabled="readonly || currentDisabled || isPreview"
       :style="{ width: currentPopperWidth }"
       :footer="showRenderFooter"
       @update:opened="$emit('update:opened', $event, this)"
@@ -415,6 +414,7 @@ export default {
   },
   computed: {
     currentDisabled() {
+      if (this.isPreview) return false;
       if (this.disabled) return true;
       else if (this.emptyDisabled)
         return this.currentData
@@ -571,6 +571,7 @@ export default {
               this.$refs[`item_${i}`][0].style['vertical-align'] = 'middle';
               const itemWidth =
                 this.$refs[`item_${i}`][0].offsetWidth + marginWidth;
+
               if (inputWidth - itemWidth < 0) {
                 break;
               }
@@ -578,17 +579,21 @@ export default {
               this.collapseCounter += 1;
             }
           }
-          // 计算最后一个元素能否加入输入框
           this.$nextTick(() => {
-            const lastItem = this.$refs[`item_${this.selectedVMs.length - 1}`];
-            if (lastItem) {
-              lastItem[0].style.display = 'inline-block';
-              lastItem[0].style['vertical-align'] = 'middle';
-              lastAddElementWidth = lastItem[0].offsetWidth;
+            // 计算最后一个元素能否加入输入框 (仅在前面都可以显示时)
+            if (this.collapseCounter === this.selectedVMs.length - 1) {
+              const lastItem = this.$refs[`item_${this.selectedVMs.length - 1}`];
+              if (lastItem) {
+                lastItem[0].style.display = 'inline-block';
+                lastItem[0].style['vertical-align'] = 'middle';
+                lastAddElementWidth = lastItem[0].offsetWidth;
+              }
+              // 加上 “+N” 的宽度后判断最后一个是否显示
+              if (inputWidth > 0 && inputWidth + collapseTagWidth - lastAddElementWidth > 0) {
+                this.collapseCounter += 1;
+              }
             }
-            if (inputWidth > 0 && inputWidth - lastAddElementWidth > 0) {
-              this.collapseCounter += 1;
-            }
+
             // 隐藏掉超出输入框长度的元素
             if (
               this.collapseCounter === this.selectedVMs.length ||
@@ -794,6 +799,12 @@ export default {
         this.setPopperWidth();
       }
       this.popperOpened = true; // 刚打开时，除非是没有加载，否则保留上次的 filter 过的数据
+
+      // 多选时，打开时更新过滤条件
+      if (this.filterable && this.currentDataSource && this.multiple) {
+        this.currentDataSource.filter(this.filtering);
+      }
+
       if (
         this.filterable &&
         this.currentDataSource &&
@@ -909,7 +920,7 @@ export default {
           return;
         }
         if (this.preventRootBlur) return (this.preventRootBlur = false);
-        this.close();
+        // this.close();
         this.$emit('blur', e);
       }, 400);
 

@@ -34,7 +34,7 @@ namespace nasl.ui {
       description: '输入框的值',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String;
+    modelValue: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -172,16 +172,16 @@ namespace nasl.ui {
     })
     private spellCheck: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '前缀图标',
-    //   description: '组件前置图标。',
-    //   setter: {
-    //     concept: 'IconSetter',
-    //     customIconFont: 'LCAP_ELEMENTUI_ICONS',
-    //   },
-    // })
-    // prefixIcon: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '前缀图标',
+      description: '组件前置图标。',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+      },
+    })
+    prefixIcon: nasl.core.String;
 
     // @Prop({
     //   group: '主要属性',
@@ -191,16 +191,16 @@ namespace nasl.ui {
     // })
     // suffix: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '后缀图标',
-    //   description: '组件后置图标。',
-    //   setter: {
-    //     concept: 'IconSetter',
-    //     customIconFont: 'LCAP_ELEMENTUI_ICONS',
-    //   },
-    // })
-    // suffixIcon: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '后缀图标',
+      description: '组件后置图标。',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+      },
+    })
+    suffixIcon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -355,7 +355,6 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      bindStyleAttr: 'inputStyle',
       bindStyleSelector: '.__cw-form-compose-input',
       ignoreProperty: ['rules'],
       slotWrapperInlineStyle: {
@@ -367,14 +366,6 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: [
-          'slotDefault',
-          'useRangeValue',
-          'startFieldName',
-          'endFieldName',
-          'startInitialValue',
-          'endInitialValue',
-        ],
       },
       {
         name: 'ElInput',
@@ -387,9 +378,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormInput extends ViewComponent {
-    constructor(
-      options?: Partial<ElFormInputOptions & ElFormItemProOptions & Omit<ElInputOptions, keyof ElFormItemProOptions>>,
-    ) {
+    constructor(options?: Partial<ElFormInputOptions & ElFormItemProOptions & Omit<ElInputOptions, keyof ElFormItemProOptions>>) {
       super();
     }
   }

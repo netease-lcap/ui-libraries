@@ -7,6 +7,7 @@
    * @type size
    */
   --el-form-label-font-size: var(--el-font-size-base);
+  
   /**
    * @desc 行内内容宽度
    * @type size

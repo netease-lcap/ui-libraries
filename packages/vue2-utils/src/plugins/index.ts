@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import Vue, { type VNode, type ComponentOptions } from 'vue';
+import * as VueCompositionAPI from '@vue/composition-api';
 import {
   isNil,
   kebabCase,
@@ -253,3 +254,8 @@ export {
   RenderBaseComponent,
   RENDER_COMPONENT_KEY,
 };
+
+// 注册 window.VueCompositionAPI
+if (typeof window !== 'undefined' && window.Vue && !(window as any).VueCompositionAPI) {
+  (window as any).VueCompositionAPI = VueCompositionAPI;
+}

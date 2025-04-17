@@ -1,0 +1,94 @@
+/**
+ * @component el-notification
+ */
+.el-notification {
+  /**
+   * @desc 通知的宽度
+   * @type input
+   */
+  --el-notification-width: 330px;
+
+  /**
+   * @desc 通知的内边距
+   * @type input
+   */
+  --el-notification-padding: 14px 26px 14px 13px;
+
+  /**
+   * @desc 通知的圆角半径
+   * @type input
+   */
+  --el-notification-radius: 8px;
+
+  /**
+   * @desc 通知的阴影效果
+   * @type input
+   */
+  --el-notification-shadow: var(--el-box-shadow-light);
+
+  /**
+   * @desc 通知的边框颜色
+   * @type color
+   */
+  --el-notification-border-color: var(--el-border-color-lighter);
+
+  /**
+   * @desc 通知图标的大小
+   * @type input
+   */
+  --el-notification-icon-size: 24px;
+
+  /**
+   * @desc 关闭按钮的字体大小
+   * @type input
+   */
+  --el-notification-close-font-size: var(--el-message-close-size,16px);
+
+  /**
+   * @desc 通知组的左外边距
+   * @type input
+   */
+  --el-notification-group-margin-left: 13px;
+
+  /**
+   * @desc 通知组的右外边距
+   * @type input
+   */
+  --el-notification-group-margin-right: 8px;
+
+  /**
+   * @desc 通知内容的字体大小
+   * @type input
+   */
+  --el-notification-content-font-size: var(--el-font-size-base);
+
+  /**
+   * @desc 通知内容的颜色
+   * @type color
+   */
+  --el-notification-content-color: var(--el-text-color-regular);
+
+  /**
+   * @desc 通知标题的字体大小
+   * @type input
+   */
+  --el-notification-title-font-size: 16px;
+
+  /**
+   * @desc 通知标题的颜色
+   * @type color
+   */
+  --el-notification-title-color: var(--el-text-color-primary);
+
+  /**
+   * @desc 关闭按钮的颜色
+   * @type color
+   */
+  --el-notification-close-color: var(--el-text-color-secondary);
+
+  /**
+   * @desc 关闭按钮悬停时的颜色
+   * @type color
+   */
+  --el-notification-close-hover-color: var(--el-text-color-regular);
+}

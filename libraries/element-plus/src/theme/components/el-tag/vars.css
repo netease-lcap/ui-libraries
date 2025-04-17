@@ -1,0 +1,28 @@
+/**
+ * @component el-tag
+ */
+.el-tag {
+  /**
+   * @desc 标签字体大小
+   * @type input
+   */
+  --el-tag-font-size: 12px;
+
+  /**
+   * @desc 标签边框圆角
+   * @type input
+   */
+  --el-tag-border-radius: 4px;
+
+  /**
+   * @desc 圆角标签边框圆角
+   * @type input
+   */
+  --el-tag-border-radius-rounded: 9999px;
+
+  /**
+   * @desc 图标大小
+   * @type input
+   */
+  --el-icon-size: 14px;
+}

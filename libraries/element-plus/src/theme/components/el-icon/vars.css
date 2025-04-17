@@ -1,0 +1,10 @@
+/**
+ * @component el-icon
+ */
+.el-icon {
+  /**
+   * @desc 图标颜色
+   * @type color
+   */
+  --color: inherit;
+}

@@ -1,5 +1,10 @@
-import { ref } from 'vue';
 import Component from '../index';
+import ExampleDemo1 from '../demos/example-demo1.vue';
+import ExampleDemo2 from '../demos/example-demo2.vue';
+import ExampleDemo4 from '../demos/example-demo4.vue';
+import ExampleDemo6 from '../demos/example-demo6.vue';
+import ExampleDemo7 from '../demos/example-demo7.vue';
+import ExampleDemo8 from '../demos/example-demo8.vue';
 
 export default {
   id: 'el-tabs-examples',
@@ -17,30 +22,91 @@ export default {
 export const Example1 = {
   name: '基础用法',
   render: () => ({
-    setup() {
-      const activeName = ref('first');
-      const name = ref('myName');
-
-      const handleClick = (tab) => {
-        console.log(tab);
-      };
-      setTimeout(() => {
-        name.value = 'newName';
-      }, 3000);
-
-      return {
-        name,
-        activeName,
-        handleClick,
-      };
+    components: {
+      exampleDemo: ExampleDemo1,
     },
-    template: `
-    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" type="card">
-      <el-tab-pane :label="name" name="first">User</el-tab-pane>
-      <el-tab-pane label="Config" name="second">Config</el-tab-pane>
-      <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-      <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
-    </el-tabs>
-    `,
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+export const Example2 = {
+  name: '卡片风格',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo2,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+/*  卡片化的标签页。 */
+export const Example3 = {
+  name: '带有边框的卡片风格',
+  render: () => ({
+    template: `<div><el-tabs type="border-card">
+  <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+  <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+  <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+  <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+</el-tabs></div>`,
+  }),
+};
+
+/*  可以通过 `tab-position` 设置标签的位置 */
+export const Example4 = {
+  name: '位置',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo4,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+/*  可以通过具名 `slot` 来实现自定义标签页的内容 */
+export const Example5 = {
+  name: '自定义标签页',
+  render: () => ({
+    template: `<div><el-tabs type="border-card">
+  <el-tab-pane>
+    <span slot="label"><i class="el-icon-date"></i> 我的行程</span>
+    我的行程
+  </el-tab-pane>
+  <el-tab-pane label="消息中心">消息中心</el-tab-pane>
+  <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+  <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+</el-tabs></div>`,
+  }),
+};
+
+/*  增减标签页按钮只能在选项卡样式的标签页下使用 */
+export const Example6 = {
+  name: '动态增减标签页',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo6,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+/*  */
+export const Example7 = {
+  name: '自定义增加标签页触发器',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo7,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+export const Example8 = {
+  name: '数据源',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo8,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };

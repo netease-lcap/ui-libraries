@@ -57,29 +57,6 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     C,
   > extends ViewComponentOptions {
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '宽度自适应',
-    //   description: '宽度随内容自适应',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // autoWidth: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '自动聚焦',
-    //   description: '自动聚焦',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // autofocus: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '无边框模式',
-    //   description: '无边框模式',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // borderless: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -183,19 +160,6 @@ namespace nasl.ui {
     })
     textField: (item: T) => any = ((item: any) => item.text) as any;
 
-    // @Prop<ElSelectProOptions<T, V, P, M, C>, 'optionIsSlot'>({
-    //   group: '数据属性',
-    //   title: '动态选项插槽',
-    //   description: '自定义选项内容',
-    //   docDescription: '自定义选项内容',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    //   bindHide: true,
-    //   if: (_) => !!_.dataSource,
-    // })
-    // optionIsSlot: nasl.core.Boolean;
-
     @Prop<ElSelectOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
@@ -214,69 +178,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
-
-    // @Prop<ElSelectProOptions<T, V, P, M, C>, 'valueIsSlot'>({
-    //   group: '数据属性',
-    //   title: '动态选中项插槽',
-    //   description: '自定义选中项内容',
-    //   docDescription: '自定义选中项内容',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    //   bindHide: true,
-    //   if: (_) => !!_.dataSource,
-    // })
-    // valueIsSlot: nasl.core.Boolean;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Keys',
-    //   description:
-    //     '用来定义 value / label / disabled 在 `options` 中对应的字段别名。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // keys: object;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Label',
-    //   description: '左侧文本。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // label: any;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Loading',
-    //   description: '是否为加载状态',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // loading: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Loading Text',
-    //   description: '远程加载时显示的文字，支持自定义。如加上超链接。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // loadingText: any;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Max',
-    //   description: '用于控制多选数量，值为 0 则不限制',
-    //   setter: { concept: 'NumberInputSetter' },
-    // })
-    // max: nasl.core.Decimal = 0;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '最小折叠数量',
-    //   description: '最小折叠数量，用于多选情况下折叠选中项，超出该数值的选中项折叠。值为 0 则表示不折叠',
-    //   setter: { concept: 'NumberInputSetter' },
-    // })
-    // minCollapsedNum: nasl.core.Decimal = 0;
+    modelValue: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
 
     @Prop({
       group: '主要属性',
@@ -285,6 +187,15 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     multiple: M = false as any;
+
+
+    @Prop({
+      group: '主要属性',
+      title: '是否虚拟滚动',
+      description: '是否开启虚拟滚动,虚拟滚动仅支持数据源',
+      setter: { concept: 'SwitchSetter' },
+    })
+    virtualize: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -479,6 +390,35 @@ namespace nasl.ui {
       selectedOptions: T[];
       trigger: 'clear' | 'tag-remove' | 'backspace' | 'check' | 'uncheck' | 'default';
     }) => any;
+
+    @Event({
+      title: '清空时',
+      description: '清空时触发',
+    })
+    onClear: (event: any) => any;
+
+
+
+    @Event({
+      title: '下拉框显示或隐藏时',
+      description: '下拉框显示或隐藏时触发',
+    })
+    onVisibleChange: (event: any) => any;
+
+    @Event({
+      title: '失去焦点时',
+      description: '失去焦点时触发',
+    })
+    onBlur: (event: any) => any;
+    
+    
+    @Event({
+      title: '获得焦点时',
+      description: '获得焦点时触发',
+    })
+    onFocus: (event: any) => any;
+    
+    
 
 
     // @Event({
@@ -694,6 +634,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '选项值',
+      sync: true,
       description: '选项值',
       setter: { concept: 'InputSetter' },
     })
@@ -723,7 +664,6 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      bindStyleAttr: 'inputStyle',
       bindStyleSelector: '.__cw-form-compose-input',
       structured: true,
       childAccept: "target.tag === 'el-option'",
@@ -747,6 +687,7 @@ namespace nasl.ui {
       additionalAttribute: {
         valueField: '"value"',
         textField: '"text"',
+        '@blur': '"($event)=>{throw\'stop blur!\'}"',
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",
@@ -765,11 +706,6 @@ namespace nasl.ui {
         name: 'ElFormItemPro',
         excludes: [
           'slotDefault',
-          'useRangeValue',
-          'startFieldName',
-          'endFieldName',
-          'startInitialValue',
-          'endInitialValue',
         ],
       },
       {

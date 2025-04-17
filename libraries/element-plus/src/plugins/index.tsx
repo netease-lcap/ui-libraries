@@ -1,12 +1,17 @@
+/* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, markRaw } from 'vue';
-import create from 'zustand-vue';
+import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+// import create from 'zustand-vue';
+import { createStore } from 'zustand/vanilla';
+
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { $deletePropsList, $provide } from '@/plugins/constants';
-import { fiberNode } from '@/plugins/hooks';
+import { scheduler } from '@/plugins/hooks';
 import '@/utils/index';
 
 export class PluginOptions {
@@ -44,8 +49,8 @@ export class PluginOptions {
   };
 }
 
-export function registerComponet(Component, options) {
-  return {
+export function registerComponent<T>(Component, options) {
+  return defineComponent<T>({
     name: 'HocBaseComponents',
     components: { Component },
     inheritAttrs: false,
@@ -55,20 +60,21 @@ export function registerComponet(Component, options) {
       const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
-      const mystate = ref({ state: {} });
-      const render = markRaw(Component);
-      const fiberMap = new Map();
-      const myRef = ref({});
-      const childrenRef = ref({});
+      const componentState = ref({ state: {} });
+      let Render = Component;
+      const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
-      const provideRef = ref({});
-      const useStore = create((set) => ({
+      const provideRef = ref(injectRef);
+      const router = useRouter?.();
+      const route = useRoute?.();
+      const useStore = createStore((set) => ({
         state: {
           inject: injectRef,
           provide: {},
           ref: {},
-          childrenRef: {},
-          [$deletePropsList]: ['provide', 'childrenRef', 'inject', 'render', 'slots', 'emit', $deletePropsList],
+          router,
+          route,
+          [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
         props: {
           ...props,
@@ -86,80 +92,54 @@ export function registerComponet(Component, options) {
           return set((state) => getNewStateFn(state), tr);
         },
       }));
-      const setValue = useStore((state: any) => state.setvalue);
-
-      function scheduler(pluginHooks, ImmutableProps, componentRef) {
-        return pluginHooks?.reduce((ImmutableProps, handleFn) => {
-          const isMount = !fiberMap.has(handleFn);
-          const storeKey = _.uniqueId('storeKey');
-          const fiber = isMount
-            ? {
-                workInProgressState: null,
-                workInProgressEffect: null,
-                updateQueen: [],
-                useStore,
-                setValue,
-                storeKey,
-              }
-            : fiberMap.get(handleFn);
-          fiberNode.setCurrentFiber(fiber, isMount);
-          const result = _.attempt(_.bind(handleFn, fiber), ImmutableProps, {
-            componentRef,
-            childrenRef,
-            ref: myRef.value,
-          });
-          fiberMap.set(handleFn, fiber);
-          return ImmutableProps.merge(result);
-        }, ImmutableProps);
-      }
-      useStore.subscribe((props: any) => {
-        const ImmutableProps = imMap({ ...props.props, ...props.state });
-        const ImmutableCommit = ImmutableProps.merge({ render: Component });
-        const commitState = scheduler(pluginHooks, ImmutableCommit, componentRef);
-        const commitJsState = commitState.toJS();
-        render.value = commitJsState.render;
-        mystate.value.state = _.omit(commitJsState, ['render']);
-        Object.assign(myRef.value, commitJsState.ref);
+      const { getState, setState, subscribe, getInitialState } = useStore;
+      const fiberMap = new Map<string, any>([
+        ['updateQueen', new Set()],
+        ['getState', getState],
+      ]);
+      const { setvalue: setValue } = getState() as any;
+      subscribe((props: any) => {
+        const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
+        const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
+        const ref = commitState.get('ref');
+        const commitJsState = commitState.delete('ref').toJS();
+        const isRenderChange = Component !== commitState.get('render');
+        Render = isRenderChange ? commitJsState.render : Render;
+        componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
+        Object.assign(exposeRef.value, ref);
         Object.assign(provideRef.value, commitJsState.provide);
       });
+
       watch(
         () => [props, attrs, slots, emit],
-        (value, oldValue) => {
-          if (!_.isEqual(value, oldValue)) {
-            const [props, attrs, slots, emit] = value;
-            setValue((state) => ({
-              props: {
-                ...props,
-                ...attrs,
-                slots,
-                emit,
-              },
-            }));
-            const expandProps = useStore() as any;
-            Object.assign(myRef.value, expandProps.state.ref);
-          }
+        ([props, attrs, slots, emit]) => {
+          setValue(() => ({
+            props: {
+              ...props,
+              ...attrs,
+              slots,
+              emit,
+            },
+          }));
         },
         { deep: true, immediate: true },
       );
 
-      watch(componentRef, (value) => _.defaults(myRef.value, value));
-      watch(childrenRef, (value) => Object.assign(myRef.value, value));
+      watch(componentRef, (value) => _.defaults(exposeRef.value, value));
       watch(injectRef, (value) => _.defaults(provideRef.value, value), { deep: true, immediate: true });
-      expose(myRef.value);
+      expose(exposeRef.value);
 
       provide($provide, provideRef);
 
-      const RenderComponent = render.value ?? Component;
-
       return () => {
         return (
-          <RenderComponent
-            {..._.omit(mystate.value.state, mystate.value.state[$deletePropsList])}
-            v-slots={{ ...slots, ..._.get(mystate, 'value.state.slots', {}) }}
+          <Render
+            {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}
+            v-slots={{ ...slots, ..._.get(componentState, 'value.state.slots', {}) }}
             ref={componentRef}
           />
         );
       };
     },
-  };
+  });
 }

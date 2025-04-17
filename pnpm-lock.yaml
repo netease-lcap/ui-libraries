@@ -82,9 +82,15 @@ importers:
 
   libraries/element-plus:
     dependencies:
+      '@element-plus/icons-vue':
+        specifier: ^2.3.1
+        version: 2.3.1(vue@3.5.13(typescript@5.6.3))
       '@lcap/validator':
         specifier: workspace:*
         version: link:../../packages/validator
+      '@vue/shared':
+        specifier: ^3.5.13
+        version: 3.5.13
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
@@ -100,9 +106,9 @@ importers:
       vue-hooks-plus:
         specifier: ^2.2.1
         version: 2.2.1(vue@3.5.13(typescript@5.6.3))
-      zustand-vue:
-        specifier: 1.0.0-beta.24
-        version: 1.0.0-beta.24(vue@3.5.13(typescript@5.6.3))(zustand@4.5.2(@types/react@18.2.45)(react@18.2.0))
+      zustand:
+        specifier: ^5.0.3
+        version: 5.0.3(@types/react@18.2.45)(react@18.2.0)(use-sync-external-store@1.2.0(react@18.2.0))
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^3.2.2
@@ -145,13 +151,16 @@ importers:
         version: 4.1.1(vite@6.0.3(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0))(vue@3.5.13(typescript@5.6.3))
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.16(postcss@8.4.49)
+        version: 10.4.16(postcss@8.5.3)
       color:
         specifier: ^4.2.3
         version: 4.2.3
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
+      postcss:
+        specifier: ^8.5.3
+        version: 8.5.3
       storybook:
         specifier: ^8.4.6
         version: 8.4.7(prettier@2.8.8)
@@ -168,8 +177,8 @@ importers:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.6.3)
       vue-router:
-        specifier: ^3.3.4
-        version: 3.3.4(vue@3.5.13(typescript@5.6.3))
+        specifier: ^4.5.0
+        version: 4.5.0(vue@3.5.13(typescript@5.6.3))
       vue-tsc:
         specifier: ^2.1.10
         version: 2.1.10(typescript@5.6.3)
@@ -314,7 +323,7 @@ importers:
         version: 1.3.6(vue-template-compiler@2.6.12(vue@2.6.12))(vue@2.6.12)
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.16(postcss@8.4.49)
+        version: 10.4.16(postcss@8.5.3)
       color:
         specifier: ^4.2.3
         version: 4.2.3
@@ -414,9 +423,6 @@ importers:
       online-svg-icon-vue2:
         specifier: ^1.2.3
         version: 1.2.3
-      postcss:
-        specifier: 7.0.0
-        version: 7.0.0
       resize-observer-polyfill:
         specifier: ^1.5.1
         version: 1.5.1
@@ -514,6 +520,9 @@ importers:
       less:
         specifier: ^4.2.0
         version: 4.2.0
+      postcss:
+        specifier: 7.0.0
+        version: 7.0.0
       remark-parse:
         specifier: ^11.0.0
         version: 11.0.0
@@ -667,7 +676,7 @@ importers:
         version: 2.0.8(@babel/core@7.23.6)(@types/react@18.2.45)(antd@5.22.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.16(postcss@8.4.49)
+        version: 10.4.16(postcss@8.5.3)
       jsdom:
         specifier: ^23.0.1
         version: 23.0.1
@@ -790,8 +799,8 @@ importers:
         specifier: 3.9.0-beta
         version: 3.9.0-beta
       '@nasl/types':
-        specifier: 0.1.9-alpha
-        version: 0.1.9-alpha
+        specifier: 0.1.11
+        version: 0.1.11
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -836,7 +845,7 @@ importers:
         version: 1.3.6(vue-template-compiler@2.6.12(vue@2.6.12))(vue@2.6.12)
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.16(postcss@8.4.49)
+        version: 10.4.16(postcss@8.5.3)
       color:
         specifier: ^4.2.3
         version: 4.2.3
@@ -941,7 +950,7 @@ importers:
         version: 4.1.1(vite@6.0.3(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0))(vue@3.5.13(typescript@5.6.3))
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.16(postcss@8.4.49)
+        version: 10.4.16(postcss@8.5.3)
       color:
         specifier: ^4.2.3
         version: 4.2.3
@@ -1160,7 +1169,7 @@ importers:
         version: 4.13.0
       tsup:
         specifier: ^8.0.2
-        version: 8.1.0(@swc/core@1.6.1)(postcss@8.4.49)(typescript@5.3.3)
+        version: 8.1.0(@swc/core@1.6.1)(postcss@8.5.3)(typescript@5.3.3)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
@@ -1504,22 +1513,26 @@ packages:
 
   '@antfu/eslint-config-basic@0.20.7':
     resolution: {integrity: sha512-Lhty32km7/dtCtoGBWB9OQnC9aG1mYdFiF4JrbhPPr4nj7fd/KY+p91zIyOtEnlSNp4uKRGXD4DnYjp0cJdGBA==, tarball: https://registry.npmmirror.com/@antfu/eslint-config-basic/-/eslint-config-basic-0.20.7.tgz}
+    deprecated: Deprecated, please migrate to @antfu/eslint-config with the flat config
     peerDependencies:
       eslint: '>=7.4.0'
 
   '@antfu/eslint-config-react@0.20.7':
     resolution: {integrity: sha512-CfqtjfrhnDffDImfwWbGWCHjaY/7Un7kkEOVqIh46oU9B6XW6wCFWh3VWJn7SsIYKVJbYlOypneqziYRUB0H3Q==, tarball: https://registry.npmmirror.com/@antfu/eslint-config-react/-/eslint-config-react-0.20.7.tgz}
+    deprecated: Deprecated, please migrate to @antfu/eslint-config with the flat config
     peerDependencies:
       eslint: '>=7.4.0'
 
   '@antfu/eslint-config-ts@0.20.7':
     resolution: {integrity: sha512-wPLhwQ8Jt7rrJj4MQUY2F7pbiV4ITx8RbuOTpkVmuUQeGe3mHCGvJostTcz5JYgWyd3JOx2dqFBY10t3YXEMYw==, tarball: https://registry.npmmirror.com/@antfu/eslint-config-ts/-/eslint-config-ts-0.20.7.tgz}
+    deprecated: Deprecated, please migrate to @antfu/eslint-config with the flat config
     peerDependencies:
       eslint: '>=7.4.0'
       typescript: '>=3.9'
 
   '@antfu/eslint-config-vue@0.20.7':
     resolution: {integrity: sha512-jpWi0FaeDLbAoTawJYExHnZ8EC6+1wiL8OD2Iu1A400b0PGyP85vpfcFAAKGij2KgJVc0ZoHeFJQX1TTMeiI/g==, tarball: https://registry.npmmirror.com/@antfu/eslint-config-vue/-/eslint-config-vue-0.20.7.tgz}
+    deprecated: Deprecated, please migrate to @antfu/eslint-config with the flat config
     peerDependencies:
       eslint: '>=7.4.0'
 
@@ -3258,6 +3271,9 @@ packages:
   '@nasl/types@0.1.10':
     resolution: {integrity: sha512-CFPQvx5Xh1gEgN6oUqO3ZLA2FyY7fiQGOMJu9mGtkk4CN8xecj/o3BDNB6MdAWJRPav4i0a+dHnufZ+DULpPKw==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.10.tgz}
 
+  '@nasl/types@0.1.11':
+    resolution: {integrity: sha512-0aaEG4gBy1jOpLOY4MoqFwDca2LVMl+ygGR4Ct4VUpPbsff8zkMge0dPpt1M9aGWEDC9QHUMYLIEzb20IcUAJA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.11.tgz}
+
   '@nasl/types@0.1.6':
     resolution: {integrity: sha512-h6Yh57U1jEbvgWh8A1XxsWAW61JLjshq35sT1G57qZ3D6539v2hxEUe8TjOL0c501lz7gCm4WLlowf/wgypBRA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.6.tgz}
 
@@ -4137,7 +4153,7 @@ packages:
     resolution: {integrity: sha512-sA0QCcf4QAMixWvn8uvRYPfkKCSl6JajJaAspoPqXSxHEpK7uwOlpg3kqFU5XJJPXD0X957M+ONgNvBzYqSpEw==, tarball: https://registry.npmmirror.com/@storybook/addon-viewport/-/addon-viewport-7.6.17.tgz}
 
   '@storybook/addon-viewport@8.4.7':
-    resolution: {integrity: sha512-hvczh/jjuXXcOogih09a663sRDDSATXwbE866al1DXgbDFraYD/LxX/QDb38W9hdjU9+Qhx8VFIcNWoMQns5HQ==}
+    resolution: {integrity: sha512-hvczh/jjuXXcOogih09a663sRDDSATXwbE866al1DXgbDFraYD/LxX/QDb38W9hdjU9+Qhx8VFIcNWoMQns5HQ==, tarball: https://registry.npmmirror.com/@storybook/addon-viewport/-/addon-viewport-8.4.7.tgz}
     peerDependencies:
       storybook: ^8.4.7
 
@@ -6978,7 +6994,7 @@ packages:
     resolution: {integrity: sha512-QpLs9D9v9kArv4lfDEgg1X/gN5XLnf/A6l9cs8SPZLRZR3ZkY9+kwIQTxm+fsSej5UMYGE8fdoaZVIBlqG0XTw==, tarball: https://registry.npmmirror.com/emoji-regex/-/emoji-regex-10.3.0.tgz}
 
   emoji-regex@8.0.0:
-    resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
+    resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==, tarball: https://registry.npmmirror.com/emoji-regex/-/emoji-regex-8.0.0.tgz}
 
   emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==, tarball: https://registry.npmmirror.com/emoji-regex/-/emoji-regex-9.2.2.tgz}
@@ -7573,7 +7589,7 @@ packages:
     engines: {node: '>=12'}
 
   fs-extra@11.1.1:
-    resolution: {integrity: sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==}
+    resolution: {integrity: sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==, tarball: https://registry.npmmirror.com/fs-extra/-/fs-extra-11.1.1.tgz}
     engines: {node: '>=14.14'}
 
   fs-extra@11.2.0:
@@ -7585,7 +7601,7 @@ packages:
     engines: {node: '>=6 <7 || >=8'}
 
   fs-extra@8.1.0:
-    resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==}
+    resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==, tarball: https://registry.npmmirror.com/fs-extra/-/fs-extra-8.1.0.tgz}
     engines: {node: '>=6 <7 || >=8'}
 
   fs-extra@9.1.0:
@@ -8061,7 +8077,7 @@ packages:
     resolution: {integrity: sha512-0by5vtUJs8iFQb5TYUHHPudOR+qXYIMKtiUzvLIZITZUjknFmziyBJuLhVRc+Ds0dREFlskDNJKYIdIzu/9pfw==, tarball: https://registry.npmmirror.com/is-finalizationregistry/-/is-finalizationregistry-1.0.2.tgz}
 
   is-fullwidth-code-point@3.0.0:
-    resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
+    resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==, tarball: https://registry.npmmirror.com/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz}
     engines: {node: '>=8'}
 
   is-fullwidth-code-point@4.0.0:
@@ -8963,6 +8979,11 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==, tarball: https://registry.npmmirror.com/mz/-/mz-2.7.0.tgz}
 
+  nanoid@3.3.11:
+    resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==, tarball: https://registry.npmmirror.com/nanoid/-/nanoid-3.3.11.tgz}
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
   nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==, tarball: https://registry.npmmirror.com/nanoid/-/nanoid-3.3.7.tgz}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -9418,8 +9439,8 @@ packages:
     resolution: {integrity: sha512-u5U8qYpBCpN13BsiEB0CbR1Hhh4Gc0zLFuedrHJKMctHCHAGrMdG0PRM/KErzAL3CU6/eckEtmHNB3x6e3c0vA==, tarball: https://registry.npmmirror.com/postcss/-/postcss-8.4.35.tgz}
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.4.49:
-    resolution: {integrity: sha512-OCVPnIObs4N29kxTjzLfUryOkvZEq+pf8jTF0lg8E7uETuWHA+v7j3c/xJmiqpX450191LlmZfUKkXxkTry7nA==, tarball: https://registry.npmmirror.com/postcss/-/postcss-8.4.49.tgz}
+  postcss@8.5.3:
+    resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==, tarball: https://registry.npmmirror.com/postcss/-/postcss-8.5.3.tgz}
     engines: {node: ^10 || ^12 || >=14}
 
   preferred-pm@3.1.2:
@@ -10549,7 +10570,7 @@ packages:
     resolution: {integrity: sha512-u/1tdPl4yQnPBjnVrmdLo9gtuLvELKsAoRapekWggdiQNvvvum+jYF329d84NAa660KQw7pB2n36KrIKVoXa3A==, tarball: https://registry.npmmirror.com/string-convert/-/string-convert-0.2.1.tgz}
 
   string-width@4.2.3:
-    resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
+    resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==, tarball: https://registry.npmmirror.com/string-width/-/string-width-4.2.3.tgz}
     engines: {node: '>=8'}
 
   string-width@5.1.2:
@@ -11313,10 +11334,10 @@ packages:
         optional: true
 
   vue-component-type-helpers@2.1.10:
-    resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
+    resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==, tarball: https://registry.npmmirror.com/vue-component-type-helpers/-/vue-component-type-helpers-2.1.10.tgz}
 
-  vue-component-type-helpers@2.2.0:
-    resolution: {integrity: sha512-cYrAnv2me7bPDcg9kIcGwjJiSB6Qyi08+jLDo9yuvoFQjzHiPTzML7RnkJB1+3P6KMsX/KbCD4QE3Tv/knEllw==}
+  vue-component-type-helpers@2.2.8:
+    resolution: {integrity: sha512-4bjIsC284coDO9om4HPA62M7wfsTvcmZyzdfR0aUlFXqq4tXxM1APyXpNVxPC8QazKw9OhmZNHBVDA6ODaZsrA==}
 
   vue-cropper@0.5.11:
     resolution: {integrity: sha512-UeA3qL2BLCTGkOEAxEsxSNFO+qLYAn6YRHv4oS32cP9lMhF1vFmnAf/z+ZamtR0/Fh3sbZeZUCLVR2Ol2/dpTQ==, tarball: https://registry.npmmirror.com/vue-cropper/-/vue-cropper-0.5.11.tgz}
@@ -11350,6 +11371,7 @@ packages:
 
   vue-i18n@8.28.2:
     resolution: {integrity: sha512-C5GZjs1tYlAqjwymaaCPDjCyGo10ajUphiwA922jKt9n7KPpqR7oM1PCwYzhB/E7+nT3wfdG3oRre5raIT1rKA==, tarball: https://registry.npmmirror.com/vue-i18n/-/vue-i18n-8.28.2.tgz}
+    deprecated: Vue I18n v8.x has reached EOL and is no longer actively maintained. About maintenance status, see https://vue-i18n.intlify.dev/guide/maintenance.html
     peerDependencies:
       vue: ^2
 
@@ -11368,6 +11390,11 @@ packages:
     resolution: {integrity: sha512-SdKRBeoXUjaZ9R/8AyxsdTqkOfMcI5tWxPZOUX5Ie1BTL5rPSZ0O++pbiZCeYeythiZIdLEfkDiQPKIaWk5hDg==, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-3.3.4.tgz}
     peerDependencies:
       vue: ^2
+
+  vue-router@4.5.0:
+    resolution: {integrity: sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.5.0.tgz}
+    peerDependencies:
+      vue: ^3.2.0
 
   vue-template-babel-compiler@1.2.0:
     resolution: {integrity: sha512-CScBSX1/wCdmmZ/Lvj/63p2CCVTS0FMj0F69VRBo73CuJrjvPAPGmeNJ7D/cwt/VS2PduowRWbO8N4Zh4Z3b0g==, tarball: https://registry.npmmirror.com/vue-template-babel-compiler/-/vue-template-babel-compiler-1.2.0.tgz}
@@ -11670,12 +11697,6 @@ packages:
     resolution: {integrity: sha512-zK7YHHz4ZXpW89AHXUPbQVGKI7uvkd3hzusTdotCg1UxyaVtg0zFJSTfW/Dq5f7OBBVnq6cZIaC8Ti4hb6dtCA==, tarball: https://registry.npmmirror.com/zip-stream/-/zip-stream-6.0.1.tgz}
     engines: {node: '>= 14'}
 
-  zustand-vue@1.0.0-beta.24:
-    resolution: {integrity: sha512-/dDX6ojKNG0OpXkmh05GowzXl/MoysphvyuGfi1mz2H2AG5SQvmTm+GEJV6AYBhK23ntpE8HWNwPKBY0qK6bZw==, tarball: https://registry.npmmirror.com/zustand-vue/-/zustand-vue-1.0.0-beta.24.tgz}
-    peerDependencies:
-      vue: '>=2.6.0'
-      zustand: '>=4.1.4'
-
   zustand@4.5.2:
     resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==, tarball: https://registry.npmmirror.com/zustand/-/zustand-4.5.2.tgz}
     engines: {node: '>=12.7.0'}
@@ -11689,6 +11710,24 @@ packages:
       immer:
         optional: true
       react:
+        optional: true
+
+  zustand@5.0.3:
+    resolution: {integrity: sha512-14fwWQtU3pH4dE0dOpdMiWjddcH+QzKIgk1cl8epwSE7yag43k/AD/m4L6+K7DytAOr9gGBe3/EXj9g7cdostg==, tarball: https://registry.npmmirror.com/zustand/-/zustand-5.0.3.tgz}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
         optional: true
 
 snapshots:
@@ -13968,6 +14007,8 @@ snapshots:
 
   '@nasl/types@0.1.10': {}
 
+  '@nasl/types@0.1.11': {}
+
   '@nasl/types@0.1.6': {}
 
   '@nasl/types@0.1.7-beta.1': {}
@@ -15510,7 +15551,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.13(typescript@5.6.3)
-      vue-component-type-helpers: 2.2.0
+      vue-component-type-helpers: 2.2.8
 
   '@storybook/vue@7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)':
     dependencies:
@@ -16576,8 +16617,8 @@ snapshots:
       '@vue/shared': 3.4.8
       estree-walker: 2.0.2
       magic-string: 0.30.17
-      postcss: 8.4.35
-      source-map-js: 1.0.2
+      postcss: 8.5.3
+      source-map-js: 1.2.1
 
   '@vue/compiler-sfc@3.5.13':
     dependencies:
@@ -16588,7 +16629,7 @@ snapshots:
       '@vue/shared': 3.5.13
       estree-walker: 2.0.2
       magic-string: 0.30.14
-      postcss: 8.4.49
+      postcss: 8.5.3
       source-map-js: 1.2.1
 
   '@vue/compiler-ssr@3.4.8':
@@ -17214,14 +17255,14 @@ snapshots:
       postcss: 7.0.0
       postcss-value-parser: 4.2.0
 
-  autoprefixer@10.4.16(postcss@8.4.49):
+  autoprefixer@10.4.16(postcss@8.5.3):
     dependencies:
       browserslist: 4.22.2
       caniuse-lite: 1.0.30001570
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
-      postcss: 8.4.49
+      postcss: 8.5.3
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.5: {}
@@ -17952,24 +17993,24 @@ snapshots:
 
   css-loader@6.9.0(webpack@5.89.0(esbuild@0.18.20)):
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.49)
-      postcss: 8.4.49
-      postcss-modules-extract-imports: 3.0.0(postcss@8.4.49)
-      postcss-modules-local-by-default: 4.0.3(postcss@8.4.49)
-      postcss-modules-scope: 3.1.0(postcss@8.4.49)
-      postcss-modules-values: 4.0.0(postcss@8.4.49)
+      icss-utils: 5.1.0(postcss@8.5.3)
+      postcss: 8.5.3
+      postcss-modules-extract-imports: 3.0.0(postcss@8.5.3)
+      postcss-modules-local-by-default: 4.0.3(postcss@8.5.3)
+      postcss-modules-scope: 3.1.0(postcss@8.5.3)
+      postcss-modules-values: 4.0.0(postcss@8.5.3)
       postcss-value-parser: 4.2.0
       semver: 7.6.3
       webpack: 5.89.0(esbuild@0.18.20)
 
   css-loader@6.9.0(webpack@5.89.0):
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.49)
-      postcss: 8.4.49
-      postcss-modules-extract-imports: 3.0.0(postcss@8.4.49)
-      postcss-modules-local-by-default: 4.0.3(postcss@8.4.49)
-      postcss-modules-scope: 3.1.0(postcss@8.4.49)
-      postcss-modules-values: 4.0.0(postcss@8.4.49)
+      icss-utils: 5.1.0(postcss@8.5.3)
+      postcss: 8.5.3
+      postcss-modules-extract-imports: 3.0.0(postcss@8.5.3)
+      postcss-modules-local-by-default: 4.0.3(postcss@8.5.3)
+      postcss-modules-scope: 3.1.0(postcss@8.5.3)
+      postcss-modules-values: 4.0.0(postcss@8.5.3)
       postcss-value-parser: 4.2.0
       semver: 7.6.3
       webpack: 5.89.0
@@ -19684,9 +19725,9 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
-  icss-utils@5.1.0(postcss@8.4.49):
+  icss-utils@5.1.0(postcss@8.5.3):
     dependencies:
-      postcss: 8.4.49
+      postcss: 8.5.3
 
   ieee754@1.2.1: {}
 
@@ -20486,7 +20527,7 @@ snapshots:
     dependencies:
       '@babel/parser': 7.23.6
       '@babel/types': 7.23.6
-      source-map-js: 1.0.2
+      source-map-js: 1.2.1
 
   make-dir@2.1.0:
     dependencies:
@@ -20861,6 +20902,8 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
+  nanoid@3.3.11: {}
+
   nanoid@3.3.7: {}
 
   natural-compare-lite@1.4.0: {}
@@ -21223,33 +21266,33 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.24.0
 
-  postcss-load-config@4.0.2(postcss@8.4.49):
+  postcss-load-config@4.0.2(postcss@8.5.3):
     dependencies:
       lilconfig: 3.0.0
       yaml: 2.3.4
     optionalDependencies:
-      postcss: 8.4.49
+      postcss: 8.5.3
 
-  postcss-modules-extract-imports@3.0.0(postcss@8.4.49):
+  postcss-modules-extract-imports@3.0.0(postcss@8.5.3):
     dependencies:
-      postcss: 8.4.49
+      postcss: 8.5.3
 
-  postcss-modules-local-by-default@4.0.3(postcss@8.4.49):
+  postcss-modules-local-by-default@4.0.3(postcss@8.5.3):
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.49)
-      postcss: 8.4.49
+      icss-utils: 5.1.0(postcss@8.5.3)
+      postcss: 8.5.3
       postcss-selector-parser: 6.0.15
       postcss-value-parser: 4.2.0
 
-  postcss-modules-scope@3.1.0(postcss@8.4.49):
+  postcss-modules-scope@3.1.0(postcss@8.5.3):
     dependencies:
-      postcss: 8.4.49
+      postcss: 8.5.3
       postcss-selector-parser: 6.0.15
 
-  postcss-modules-values@4.0.0(postcss@8.4.49):
+  postcss-modules-values@4.0.0(postcss@8.5.3):
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.49)
-      postcss: 8.4.49
+      icss-utils: 5.1.0(postcss@8.5.3)
+      postcss: 8.5.3
 
   postcss-selector-parser@6.0.15:
     dependencies:
@@ -21288,9 +21331,9 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.0.2
 
-  postcss@8.4.49:
+  postcss@8.5.3:
     dependencies:
-      nanoid: 3.3.7
+      nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -23067,7 +23110,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsup@8.1.0(@swc/core@1.6.1)(postcss@8.4.49)(typescript@5.3.3):
+  tsup@8.1.0(@swc/core@1.6.1)(postcss@8.5.3)(typescript@5.3.3):
     dependencies:
       bundle-require: 4.2.1(esbuild@0.21.5)
       cac: 6.7.14
@@ -23077,7 +23120,7 @@ snapshots:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.2(postcss@8.4.49)
+      postcss-load-config: 4.0.2(postcss@8.5.3)
       resolve-from: 5.0.0
       rollup: 4.28.1
       source-map: 0.8.0-beta.0
@@ -23085,7 +23128,7 @@ snapshots:
       tree-kill: 1.2.2
     optionalDependencies:
       '@swc/core': 1.6.1
-      postcss: 8.4.49
+      postcss: 8.5.3
       typescript: 5.3.3
     transitivePeerDependencies:
       - supports-color
@@ -23380,7 +23423,7 @@ snapshots:
   vite@5.0.10(@types/node@17.0.45)(less@4.2.0)(terser@5.26.0):
     dependencies:
       esbuild: 0.19.10
-      postcss: 8.4.35
+      postcss: 8.5.3
       rollup: 4.9.1
     optionalDependencies:
       '@types/node': 17.0.45
@@ -23391,7 +23434,7 @@ snapshots:
   vite@5.0.10(@types/node@20.11.26)(less@4.2.0)(terser@5.26.0):
     dependencies:
       esbuild: 0.19.10
-      postcss: 8.4.35
+      postcss: 8.5.3
       rollup: 4.9.1
     optionalDependencies:
       '@types/node': 20.11.26
@@ -23402,7 +23445,7 @@ snapshots:
   vite@6.0.3(@types/node@20.11.26)(jiti@1.21.0)(less@4.2.0)(terser@5.26.0):
     dependencies:
       esbuild: 0.24.0
-      postcss: 8.4.49
+      postcss: 8.5.3
       rollup: 4.28.0
     optionalDependencies:
       '@types/node': 20.11.26
@@ -23466,7 +23509,7 @@ snapshots:
 
   vue-component-type-helpers@2.1.10: {}
 
-  vue-component-type-helpers@2.2.0: {}
+  vue-component-type-helpers@2.2.8: {}
 
   vue-cropper@0.5.11: {}
 
@@ -23552,6 +23595,11 @@ snapshots:
 
   vue-router@3.3.4(vue@3.5.13(typescript@5.6.3)):
     dependencies:
+      vue: 3.5.13(typescript@5.6.3)
+
+  vue-router@4.5.0(vue@3.5.13(typescript@5.6.3)):
+    dependencies:
+      '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.6.3)
 
   vue-template-babel-compiler@1.2.0(vue-template-compiler@2.6.12(vue@2.6.12)):
@@ -23993,14 +24041,15 @@ snapshots:
       compress-commons: 6.0.2
       readable-stream: 4.5.2
 
-  zustand-vue@1.0.0-beta.24(vue@3.5.13(typescript@5.6.3))(zustand@4.5.2(@types/react@18.2.45)(react@18.2.0)):
-    dependencies:
-      vue: 3.5.13(typescript@5.6.3)
-      zustand: 4.5.2(@types/react@18.2.45)(react@18.2.0)
-
   zustand@4.5.2(@types/react@18.2.45)(react@18.2.0):
     dependencies:
       use-sync-external-store: 1.2.0(react@18.2.0)
     optionalDependencies:
       '@types/react': 18.2.45
       react: 18.2.0
+
+  zustand@5.0.3(@types/react@18.2.45)(react@18.2.0)(use-sync-external-store@1.2.0(react@18.2.0)):
+    optionalDependencies:
+      '@types/react': 18.2.45
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)

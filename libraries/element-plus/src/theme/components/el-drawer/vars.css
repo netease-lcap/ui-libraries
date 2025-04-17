@@ -1,0 +1,16 @@
+/**
+ * @component el-drawer
+ */
+.el-drawer {
+  /**
+   * @desc 抽屉背景色
+   * @type color
+   */
+  --el-drawer-bg-color: var(--el-dialog-bg-color,var(--el-bg-color));
+  
+  /**
+   * @desc 抽屉主要内边距
+   * @type input
+   */
+  --el-drawer-padding-primary: var(--el-dialog-padding-primary,20px);
+}

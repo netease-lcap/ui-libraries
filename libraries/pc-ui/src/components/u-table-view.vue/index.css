@@ -354,8 +354,14 @@ content: "\e665";
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.cell[ellipsis] > div:last-child {
-   display: inline; /* 3042948982240000 */
+.cell[ellipsis] > div:last-child { /*3091817581019904 还原回来*/
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cell[ellipsis][tree-column="true"] > div:last-child {
+    display: inline;  /* 3042948982240000 */
 }
 .cell[ellipsis] > * {
     white-space: nowrap;

@@ -324,8 +324,33 @@ const StyleGroups = [
   },
 ];
 
+const PrimaryColorGroup = [
+  {
+    key: 'primary',
+    name: '主题色',
+    desc: '',
+    seedToken: ['--el-color-primary'],
+    mapToken: [],
+  },
+  {
+    key: 'hover',
+    name: '主题色hover',
+    desc: '',
+    seedToken: ['--el-color-primary-light-3'],
+    mapToken: [],
+  },
+  {
+    key: 'background',
+    name: '背景色',
+    desc: '',
+    seedToken: ['--el-color-primary-light-9'],
+    mapToken: [],
+  },
+];
+
 export default {
   color: ColorGroups,
   size: SizeGroups,
   style: StyleGroups,
+  primaryColor: PrimaryColorGroup,
 };

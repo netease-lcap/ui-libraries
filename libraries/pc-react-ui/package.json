@@ -3,6 +3,7 @@
   "version": "1.4.0",
   "description": "Codewave Low Code AI Platform React Ant Design HOC UI Components",
   "main": "dist-theme/index.js",
+  "module": "dist-theme/index.mjs",
   "style": "dist-theme/index.css",
   "files": [
     "dist-theme",

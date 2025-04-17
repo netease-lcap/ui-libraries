@@ -1,0 +1,58 @@
+/**
+ * @component el-dialog
+ */
+.el-dialog {
+  /**
+   * @desc 对话框宽度
+   * @type input
+   */
+  --el-dialog-width: 50%;
+  
+  /**
+   * @desc 对话框顶部外边距
+   * @type input
+   */
+  --el-dialog-margin-top: 15vh;
+  
+  /**
+   * @desc 对话框背景颜色
+   * @type color
+   */
+  --el-dialog-bg-color: var(--el-bg-color);
+  
+  /**
+   * @desc 对话框阴影
+   * @type input
+   */
+  --el-dialog-box-shadow: var(--el-box-shadow);
+  
+  /**
+   * @desc 对话框标题字体大小
+   * @type input
+   */
+  --el-dialog-title-font-size: var(--el-font-size-large);
+  
+  /**
+   * @desc 对话框内容字体大小
+   * @type input
+   */
+  --el-dialog-content-font-size: 14px;
+  
+  /**
+   * @desc 对话框字体行高
+   * @type input
+   */
+  --el-dialog-font-line-height: var(--el-font-line-height-primary);
+  
+  /**
+   * @desc 对话框内边距
+   * @type input
+   */
+  --el-dialog-padding-primary: 16px;
+  
+  /**
+   * @desc 对话框边框圆角
+   * @type input
+   */
+  --el-dialog-border-radius: var(--el-border-radius-base);
+}

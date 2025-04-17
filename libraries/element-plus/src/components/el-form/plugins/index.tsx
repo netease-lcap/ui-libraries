@@ -1,35 +1,39 @@
 /* eslint-disable no-shadow */
+import _ from 'lodash';
 import { $formProvide } from '@/components/el-form/constants';
-import { useState } from '@/plugins/hooks';
+import { useRef } from '@/plugins/hooks';
 
-export function handleModelValue(props, { componentRef }) {
+export function handleModelValue(props) {
   const modelValue = props.get('model') ?? {};
-  const [value, setFormValue] = useState(modelValue);
+  const model = useRef(modelValue);
   const provide = props.get('provide');
   const ref = props.get('ref');
+  const formItemList = useRef({});
   return {
-    model: value,
+    model,
     provide: Object.assign(provide, {
       [$formProvide]: {
         isInForm: true,
-        value,
-        setValue: (value) => setFormValue((state) => ({
-          ...state,
-          ...value,
-        })),
+        value: model,
+        setValue: (key, value) => {
+          model.value[key] = value;
+        },
+        setFormitem: (key, value) => {
+          formItemList.value[key] = value;
+        },
+        deleteFormitem: (key) => {
+          delete formItemList.value[key];
+        },
       },
     }),
     ref: Object.assign(ref, {
-      validate: async () => {
-        const result = await componentRef.value
-          .validate()
-          .then((result) => {
-            return true;
-          })
-          .catch((err) => {
-            return false;
-          });
-        return result;
+      validated: async () => ref.validate().then(
+          () => ({ valid: true }),
+          () => ({ valid: false }),
+        ),
+      resetForm: () => {
+        ref.resetFields();
+        _.values(formItemList.value).forEach((item) => _.attempt(item.resetField));
       },
     }),
   };
