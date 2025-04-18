@@ -200,7 +200,17 @@ export async function executeCreateForSchema(rootPath: string, metaInfo: Project
 
   let createComponentNames: string[] = [];
 
-  if (name && material.write) {
+  if (name) {
+    // 如果 schema 中没有 write 配置，则默认添加组件名称前缀为 cwx，端类型为 pc
+    if (!material.write) {
+      material.write = {
+        prefix: 'cwx',
+        type: 'pc',
+      };
+
+      fs.writeJSONSync(schema, material, { spaces: 2 });
+    }
+
     createComponentNames = [name];
   } else {
     const answers = await prompts([
