@@ -8,7 +8,10 @@ import {
 } from '../../utils/project';
 import { getPreviewURL as getPreviewURLService } from '../preview';
 import { exec } from '../../utils/exec';
-import logger from '../../utils/logger';
+
+export const healthCheck = createAPIHandler('/api/health', 'GET', async (req) => {
+  return 'ok';
+});
 
 export const getProjectMeta = createAPIHandler('/api/project/meta', 'GET', async (req) => {
   const meta = getExtensionProjectMeta(req.context.rootPath);

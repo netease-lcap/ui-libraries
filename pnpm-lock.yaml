@@ -1009,8 +1009,8 @@ importers:
         specifier: ^7.22.10
         version: 7.23.6
       '@lcap/extension-ui':
-        specifier: ^1.0.0-beta.2
-        version: 1.0.0-beta.2
+        specifier: ^1.0.0-beta.4
+        version: 1.0.0-beta.4
       '@lcap/material-parser':
         specifier: ^1.0.0-alpha.3
         version: 1.0.0-alpha.3(prop-types@15.8.1)(vue@3.5.13(typescript@5.3.3))
@@ -3475,8 +3475,8 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==, tarball: https://registry.npmmirror.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz}
 
-  '@lcap/extension-ui@1.0.0-beta.2':
-    resolution: {integrity: sha512-1/OMtyUXdUBnrOOxg6fPam9GZcc13iEbqVgHxzZ/mjSOUWBODzb9QiSmYirYkdKj8RguFHlCQYzAfgwIBw0sMg==}
+  '@lcap/extension-ui@1.0.0-beta.4':
+    resolution: {integrity: sha512-uo7Y/GIm30DyVR3s801mBFhexiC59IlomCbWDG1n4Oe2IGTNuBYAVkg6ttKj/e5u8aRjpvjnvqnoGU0PzXJe0A==}
 
   '@lcap/material-parser@1.0.0-alpha.3':
     resolution: {integrity: sha512-DPC2KxaY+RKbfEgz79YABxl6vf/qbn4nxrXstmxlRIs+M8ZkZL2kaMpLt5lFhMRxOTnBJzJ9EL/JyDUL35OrzA==}
@@ -10764,7 +10764,7 @@ packages:
     hasBin: true
 
   send@0.18.0:
-    resolution: {integrity: sha512-qqWzuOjSFOuqPjFe4NOsMLafToQQwBSOEpS+FwEt3A2V3vKubTquT3vmLTQpFgMXp8AlFWFuP1qKaJZOtPpVXg==, tarball: https://registry.npmmirror.com/send/-/send-0.18.0.tgz}
+    resolution: {integrity: sha512-qqWzuOjSFOuqPjFe4NOsMLafToQQwBSOEpS+FwEt3A2V3vKubTquT3vmLTQpFgMXp8AlFWFuP1qKaJZOtPpVXg==}
     engines: {node: '>= 0.8.0'}
 
   send@1.1.0:
@@ -14635,7 +14635,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@lcap/extension-ui@1.0.0-beta.2':
+  '@lcap/extension-ui@1.0.0-beta.4':
     dependencies:
       send: 1.1.0
     transitivePeerDependencies:
