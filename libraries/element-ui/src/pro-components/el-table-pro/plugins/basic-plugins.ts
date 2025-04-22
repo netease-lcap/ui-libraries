@@ -241,10 +241,10 @@ export const useTable: NaslComponentPluginOptions = {
     onMounted(() => {
       if (_.isFunction(onLoadData)) {
         onLoadData?.({
-          page: current.value,
-          size: pageSize.value,
-          sort: sorting.value?.field,
-          order: sorting.value?.order,
+          page: _.get(pagination.value, 'current', undefined), //current.value,
+          size: _.get(pagination.value, 'pageSize', undefined),
+          sort: _.get(sorting.value, 'field'),
+          order: _.get(sorting.value, 'order'),
         });
       }
     });
@@ -283,8 +283,8 @@ export const useTable: NaslComponentPluginOptions = {
           current.value = 1;
           if (_.isFunction(onLoadData)) {
             onLoadData?.({
-              page: current.value,
-              size: pageSize.value,
+              page: _.get(pagination.value, 'current', undefined), //current.value,
+              size: _.get(pagination.value, 'pageSize', undefined),
               sort: sort.value,
               order: order.value,
             });
