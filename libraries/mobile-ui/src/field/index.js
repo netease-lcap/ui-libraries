@@ -634,6 +634,8 @@ export default createComponent({
         return;
       }
 
+      if (!input) return;
+
       const scrollTop = getRootScrollTop();
       input.style.height = 'auto';
 
