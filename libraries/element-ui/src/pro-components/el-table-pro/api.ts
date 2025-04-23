@@ -184,6 +184,14 @@ namespace nasl.ui {
       if: (_) => _.treeDisplay === false,
     })
     hasExpandedRow: nasl.core.Boolean = false;
+
+    @Prop<ElTableProOptions<T, V, P, M>, 'hasIndexColumn'>({
+      group: '主要属性',
+      title: '是否显示序号列',
+      description: '是否显示序号列',
+      setter: { concept: 'SwitchSetter' },
+    })
+    hasIndexColumn: nasl.core.Boolean = false;
     // hasExpandedRow
     // @Prop({
     //   group: '主要属性',
