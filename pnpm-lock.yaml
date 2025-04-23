@@ -1009,8 +1009,8 @@ importers:
         specifier: ^7.22.10
         version: 7.23.6
       '@lcap/extension-ui':
-        specifier: ^1.0.0-beta.4
-        version: 1.0.0-beta.4
+        specifier: ^1.0.0-beta.6
+        version: 1.0.0-beta.6
       '@lcap/material-parser':
         specifier: ^1.0.0-alpha.3
         version: 1.0.0-alpha.3(prop-types@15.8.1)(vue@3.5.13(typescript@5.3.3))
@@ -3475,8 +3475,8 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==, tarball: https://registry.npmmirror.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz}
 
-  '@lcap/extension-ui@1.0.0-beta.4':
-    resolution: {integrity: sha512-uo7Y/GIm30DyVR3s801mBFhexiC59IlomCbWDG1n4Oe2IGTNuBYAVkg6ttKj/e5u8aRjpvjnvqnoGU0PzXJe0A==}
+  '@lcap/extension-ui@1.0.0-beta.6':
+    resolution: {integrity: sha512-18xoJDhr7kL5HjDZiFLdv0BczfT3wZEkLbKL6ady1telGGyQKlvPWM849hvOKWLJltVuzZ/beOSJY6caTcRDKg==}
 
   '@lcap/material-parser@1.0.0-alpha.3':
     resolution: {integrity: sha512-DPC2KxaY+RKbfEgz79YABxl6vf/qbn4nxrXstmxlRIs+M8ZkZL2kaMpLt5lFhMRxOTnBJzJ9EL/JyDUL35OrzA==}
@@ -11829,8 +11829,8 @@ packages:
   vue-component-type-helpers@2.1.10:
     resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
 
-  vue-component-type-helpers@2.2.8:
-    resolution: {integrity: sha512-4bjIsC284coDO9om4HPA62M7wfsTvcmZyzdfR0aUlFXqq4tXxM1APyXpNVxPC8QazKw9OhmZNHBVDA6ODaZsrA==}
+  vue-component-type-helpers@2.2.10:
+    resolution: {integrity: sha512-iDUO7uQK+Sab2tYuiP9D1oLujCWlhHELHMgV/cB13cuGbG4qwkLHvtfWb6FzvxrIOPDnU0oHsz2MlQjhYDeaHA==}
 
   vue-cropper@0.5.11:
     resolution: {integrity: sha512-UeA3qL2BLCTGkOEAxEsxSNFO+qLYAn6YRHv4oS32cP9lMhF1vFmnAf/z+ZamtR0/Fh3sbZeZUCLVR2Ol2/dpTQ==, tarball: https://registry.npmmirror.com/vue-cropper/-/vue-cropper-0.5.11.tgz}
@@ -14635,7 +14635,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@lcap/extension-ui@1.0.0-beta.4':
+  '@lcap/extension-ui@1.0.0-beta.6':
     dependencies:
       send: 1.1.0
     transitivePeerDependencies:
@@ -16322,7 +16322,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.13(typescript@5.6.3)
-      vue-component-type-helpers: 2.2.8
+      vue-component-type-helpers: 2.2.10
 
   '@storybook/vue@7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)':
     dependencies:
@@ -24477,7 +24477,7 @@ snapshots:
 
   vue-component-type-helpers@2.1.10: {}
 
-  vue-component-type-helpers@2.2.8: {}
+  vue-component-type-helpers@2.2.10: {}
 
   vue-cropper@0.5.11: {}
 
