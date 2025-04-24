@@ -343,7 +343,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                     option.tsDisabledIf = option.disabledIf;
                   }
 
-                  let value: any = types[idx];
+                  let value: any = option.value ?? types[idx];
 
                   return {
                     ...option,
