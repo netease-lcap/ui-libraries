@@ -765,12 +765,7 @@ namespace nasl.ui {
       title: '切换分页后',
       description: '切换分页或改变分页大小时触发',
     })
-    onPageonChange: (event: {
-      size: nasl.core.Integer;
-      oldSize: nasl.core.Integer;
-      number: nasl.core.Integer;
-      oldNumber: nasl.core.Integer;
-    }) => any;
+    onPageonChange: (event: any) => any;
 
     // @Event({
     //   title: '排序前',
@@ -800,13 +795,13 @@ namespace nasl.ui {
       title: '点击行',
       description: '点击某一行时触发',
     })
-    onRowClick: (event: { item: T; index: nasl.core.Integer; rowIndex: nasl.core.Integer }) => any;
+    onRowClick: (event: { item: T; index: nasl.core.Integer;  }) => any;
 
     @Event({
       title: '双击行',
       description: '双击某一行时触发',
     })
-    onDoubleClick: (event: { item: T; index: nasl.core.Integer; rowIndex: nasl.core.Integer }) => any;
+    onDoubleClick: (event: { item: T; index: nasl.core.Integer;  }) => any;
 
     // @Event({
     //   title: '选择前',
