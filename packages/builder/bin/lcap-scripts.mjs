@@ -49,8 +49,9 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
 
   program.command('build')
     .description('构建流程，vite build 生成 theme.config.json usage.json, nasl.ui.json, i18n.json 等文件')
-    .action(async () => {
-      await build();
+    .option('--staging', '预览构建, 不构建耗时的任务，例如 pack, 模块构建')
+    .action(async (options) => {
+      await build(cwd, options);
     });
 
   program.command('deploy')

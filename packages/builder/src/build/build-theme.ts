@@ -100,6 +100,7 @@ export async function viteBuildTheme(themeConfig: ThemeConfig, options: LcapBuil
     configFile: false,
     envFile: false,
     ...config,
+    mode: watch ? 'staging' : 'production',
   });
 }
 

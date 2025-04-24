@@ -6,11 +6,12 @@ import { getPackName } from '../utils';
 import logger from '../utils/logger';
 import genNaslExtensionConfig from './gens/gen-nasl-extension-config';
 import genManifestConfig from './gens/gen-manifest-config';
-import type { BuildMode, LcapBuildOptions } from './types';
+import type { BuildMode, LcapBuildOptions, BuildModulesOptions } from './types';
 import { execSync } from '../utils/exec';
 import { buildTheme } from './build-theme';
 import buildCSSInfo from './build-css-info';
 import buildDeclaration from './build-declaration';
+import { buildModules } from './build-modules';
 
 const zipDir = (basePath, fileName = 'client.zip', files: string[] = []) => new Promise((res) => {
   const zipPath = path.resolve(basePath, fileName);
@@ -36,8 +37,16 @@ function getPath(filePath, pkg) {
   return resultPath;
 }
 
-async function zipExtension(root, destDir) {
-  const fileList = glob.sync(`${destDir}/**/*`)
+async function zipExtension(root: string, destDir: string, modulesOutDir: string | undefined) {
+  const filePaths = [
+    `${destDir}/**/*`,
+  ];
+
+  if (modulesOutDir) {
+    filePaths.push(`${modulesOutDir}/**/*`);
+  }
+
+  const fileList = glob.sync(filePaths)
     .filter((item) => item.indexOf('.') !== -1)
     .concat(['manifest', 'source.zip']);
 
@@ -183,11 +192,13 @@ export async function buildNaslExtension(options: LcapBuildOptions, mode: BuildM
     return;
   }
 
+  await buildModules(options);
+
   if (options.pnpm) {
     execSync('pnpm pack');
   } else {
     execSync('npm pack');
   }
 
-  zipExtension(options.rootPath, options.destDir);
+  zipExtension(options.rootPath, options.destDir, options.modules && (options.modules as BuildModulesOptions).outDir ? (options.modules as BuildModulesOptions).outDir : 'es');
 }

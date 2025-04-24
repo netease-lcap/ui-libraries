@@ -16,12 +16,12 @@ import buildCSSInfo from '../build/build-css-info';
 import { buildNaslExtensionConfig, buildNaslExtensionManifest } from '../build/build-extension';
 import { buildTheme } from '../build/build-theme';
 import buildDecalaration from '../build/build-declaration';
-import { LcapBuildOptions } from '../build/types';
+import { LcapBuildOptions, BuildMode } from '../build/types';
 import { exec } from '../utils/exec';
 import LiveServer from '../utils/server';
 
-export async function getBuildConfig() {
-  const loadResult = await loadConfigFromFile({ command: 'build', mode: 'production' });
+export async function getBuildConfig(mode: BuildMode = 'production') {
+  const loadResult = await loadConfigFromFile({ command: 'build', mode });
   if (!loadResult || !loadResult.config) {
     throw new Error('未找到 vite 配置文件');
   }
@@ -281,6 +281,7 @@ export default async (rootPath: string, { port, https, middlewares, onFirstBuild
       configFile: false,
       envFile: false,
       ...viteConfig,
+      mode: 'staging',
       plugins: [
         ...viteConfig.plugins as any[],
         {

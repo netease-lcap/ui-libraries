@@ -87,6 +87,7 @@ export async function viteBuildIde(options: BuildIdeOptions, rootPath: string, w
     configFile: false,
     envFile: false,
     ...buildConfig,
+    mode: watch ? 'staging' : 'production',
   });
 }
 

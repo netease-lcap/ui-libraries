@@ -1,4 +1,4 @@
-export type BuildMode = 'production' | 'watch';
+export type BuildMode = 'production' | 'watch' | 'staging';
 
 export interface BuildIdeOptions {
   configFile?: string;

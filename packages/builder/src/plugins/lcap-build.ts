@@ -1,6 +1,6 @@
-import type { Plugin } from 'vite';
+import type { Plugin, ResolvedConfig } from 'vite';
 import { lcapBuild } from '../build';
-import type { LcapBuildOptions, LcapThemeOptions } from '../build/types';
+import type { LcapBuildOptions, LcapThemeOptions, BuildMode } from '../build/types';
 import logger from '../utils/logger';
 
 export {
@@ -12,12 +12,17 @@ export interface ViteLcapPluginOptions extends Partial<LcapBuildOptions> {
 
 export default (options: any) => {
   let disabled = false;
+  let startMode: BuildMode = 'production';
   return {
     name: 'vite:lcap-build',
     _options: options,
-    configResolved(config) {
+    configResolved(config: ResolvedConfig) {
       if (config.build.watch || config.mode === 'test' || config.mode === 'serve') {
         disabled = true;
+      }
+
+      if (config.mode === 'staging') {
+        startMode = 'staging';
       }
     },
     async closeBundle() {
@@ -26,7 +31,7 @@ export default (options: any) => {
       }
 
       try {
-        await lcapBuild(options);
+        await lcapBuild(options, startMode);
       } catch (e) {
         logger.error(e);
         process.exit(1);
