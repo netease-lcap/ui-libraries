@@ -148,13 +148,6 @@ export default createComponent({
     fileList() {
       return this.toValue(this.currentValue);
     },
-    canUp() {
-      if (this.currentValue.length === 0) return true;
-      const can = this.currentValue.every(
-        (item) => item.status !== 'uploading',
-      );
-      return can;
-    },
   },
   watch: {
     value(val) {
@@ -641,7 +634,7 @@ export default createComponent({
     },
 
     genUpload() {
-      if (!this.canUp) return;
+      if (!this.canUp(this.currentValue)) return;
       if (this.readonly && !this.inDesigner()) return;
       if (this.currentValue.length >= this.maxCount || !this.showUpload) {
         return;
@@ -787,25 +780,24 @@ export default createComponent({
             ? this.handleFileName(file?.url)
             : file?.file?.name;
           file.response = res;
-          setTimeout(() => {
-            if (this.canUp) {
-              const value = this.currentValue;
-              this.$emit('input', this.toValue(value));
-              this.$emit('update:value', this.toValue(value));
-              this.$emit('update:fileListProp', this.toValue(value));
 
-              this.$emit(
-                'success',
-                {
-                  res,
-                  file: file.file,
-                  item: file,
-                  xhr,
-                },
-                this,
-              );
-            }
-          }, 100);
+          const value = this.currentValue;
+          if (this.canUp(value)) {
+            this.$emit('input', this.toValue(value));
+            this.$emit('update:value', this.toValue(value));
+            this.$emit('update:fileListProp', this.toValue(value));
+
+            this.$emit(
+              'success',
+              {
+                res,
+                file: file.file,
+                item: file,
+                xhr,
+              },
+              this,
+            );
+          }
         },
         onError: (e, res) => {
           file.status = 'failed';
@@ -834,6 +826,20 @@ export default createComponent({
         if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
       }
       return '';
+    },
+    canUp(value) {
+      let list = value;
+      if (!Array.isArray(list)) {
+        list = [list];
+      }
+
+      if (list.length === 0) return true;
+
+      const can = list.every(
+        (item) => item.status !== 'uploading',
+      );
+
+      return can;
     },
   },
 
