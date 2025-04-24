@@ -13,7 +13,6 @@ export function execSync(...args: Array<string>) {
   logger.info('execute command: ', command);
   const result = spawnSync(command, { shell: true, stdio: 'inherit' });
   if (result.status !== null && result.status > 0) {
-    logger.error('execute command error: ', command);
     // 异常退出
     throw new Error(`execute command error: ${command}`);
   }

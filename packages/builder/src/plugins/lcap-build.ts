@@ -25,6 +25,11 @@ export default (options: any) => {
         startMode = 'staging';
       }
     },
+    buildEnd(error) {
+      if (error) {
+        disabled = true;
+      }
+    },
     async closeBundle() {
       if (disabled) {
         return;
