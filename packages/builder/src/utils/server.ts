@@ -142,6 +142,26 @@ LiveServer.start = function (options) {
     protocol = 'http';
   }
 
+  let resolve; let
+reject;
+  const resultPromise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+
+  let clients: any[] = [];
+
+  const result = {
+    server,
+    send: (msg) => {
+      clients.forEach((ws) => {
+        if (!ws) {
+          return;
+        }
+        ws.send(msg);
+      });
+    },
+  };
   // Handle server startup errors
   server.addListener('error', (e) => {
     if (e.code === 'EADDRINUSE') {
@@ -153,6 +173,7 @@ LiveServer.start = function (options) {
     } else {
       console.log(pc.red(e.toString()));
       LiveServer.shutdown();
+      reject(e);
     }
   });
 
@@ -201,6 +222,8 @@ LiveServer.start = function (options) {
       console.log(pc.green(`Serving ${root} at ${openURL} (${serveURL})`));
     }
 
+    resolve(result);
+
     if (openPath) {
       setTimeout(() => {
         open(openURL);
@@ -212,7 +235,6 @@ LiveServer.start = function (options) {
   server.listen(port, host);
 
   // WebSocket
-  let clients: any[] = [];
   server.addListener('upgrade', (request, socket, head) => {
     const ws = new WebSocket(request, socket, head);
     ws.onopen = function () {
@@ -241,17 +263,7 @@ LiveServer.start = function (options) {
     clients.push(ws);
   });
 
-  return {
-    server,
-    send: (msg) => {
-      clients.forEach((ws) => {
-        if (!ws) {
-          return;
-        }
-        ws.send(msg);
-      });
-    },
-  };
+  return resultPromise;
 };
 
 LiveServer.shutdown = () => {
