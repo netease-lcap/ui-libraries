@@ -107,4 +107,37 @@
   white-space: inherit;
 }
 
+:root {
+  --el-switch-label-gutter: 8px;
+  --el-switch-label-font-size: @font-size-base;
+  --el-switch-label-font-weight: 500;
+  --el-switch-label-color: var(--el-text-color-primary);
+  --el-switch-label-color-active: var(--el-brand-color);
+}
+
+.@{prefix}-switch__wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--el-switch-label-gutter);
+}
+
+.@{prefix}-switch__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--el-switch-label-font-size);
+  font-weight: var(--el-switch-label-font-weight);
+  color: var(--el-switch-label-color);
+}
+
+.@{prefix}-switch__label--active {
+  color: var(--el-switch-label-color-active);
+}
+
+.@{prefix}-switch__label--disabled {
+  opacity: 0.6;
+}
+
+
 @import "./style-panel.less";
