@@ -42,7 +42,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      containerDirection: "row",
+      containerDirection: 'row',
       disableSlotAutoFill: [
         {
           slot: 'expandedRow',
@@ -684,6 +684,7 @@ namespace nasl.ui {
       setter: {
         concept: 'PropertySelectSetter',
       },
+      onChange: [{ update: { dragSort: 'disabled' } }],
       if: (_) => _.treeDisplay === true,
     })
     parentField: (item: T) => any;
@@ -700,7 +701,7 @@ namespace nasl.ui {
     })
     checkStrictly: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'dragSort'>({
       group: '主要属性',
       title: '行拖拽',
       description: '拖拽排序方式，行拖拽排序，这种方式无法进行文本复制，',
@@ -708,6 +709,8 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '行拖拽' }, { title: '关闭拖拽' }],
       },
+
+      if: (_) => _.treeDisplay === false,
     })
     dragSort: 'row' | 'disabled' = 'disabled';
 

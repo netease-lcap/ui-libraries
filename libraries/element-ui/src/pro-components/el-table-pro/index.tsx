@@ -21,7 +21,7 @@ export const ElTablePro = registerComponent(Table, plugins, {
   nativeEvents: [],
   slotNames: [],
   methodNames: [],
-  eventNames: ['page-change'],
+  eventNames: ['page-change', 'select-change'],
 });
 export const ElBaseTablePro = BaseTable;
 export const ElPrimaryTablePro = PrimaryTable;
