@@ -382,6 +382,11 @@ export default {
         getStyle(type, columnVM, currentData) {
             const style = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.style);
             const staticStyle = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.staticStyle);
+            // 3103262065048320：固定列动态样式没生效
+            let rowStyle = {};
+            if(type === 'td' && currentData && this.rowStyle && typeof this.rowStyle === 'function') {
+                rowStyle = this.rowStyle(currentData);
+            }
             if (this.useStickyFixed) {
                 // --z-index-layout: 100, 可能用于导航栏fixed，不能大于它
                 // 3024744461883136: 不需要大于99的控制。elZindex判断是为了兼容已经设置了值的
@@ -405,7 +410,7 @@ export default {
                                 left = this.getFixedWidth(columnVM, 'left');
                             }
                             if (left !== undefined) {
-                                return Object.assign(staticStyle, style, {
+                                return Object.assign(staticStyle, style, rowStyle, {
                                     position: 'sticky',
                                     left: left + 'px',
                                     zIndex,
@@ -425,7 +430,7 @@ export default {
                                 right = this.getFixedWidth(columnVM, 'right');
                             }
                             if (right !== undefined) {
-                                return Object.assign(staticStyle, style, {
+                                return Object.assign(staticStyle, style, rowStyle, {
                                     position: 'sticky',
                                     right: right + 'px',
                                     zIndex,
@@ -436,19 +441,7 @@ export default {
                     }
                 }
             }
-            if(type === 'td' && currentData && this.rowStyle && typeof this.rowStyle === 'function') {
-                // const backgroundColor = this.rowStyle(currentData);
-                // if(backgroundColor) {
-                //     return Object.assign(staticStyle, style, {
-                //         backgroundColor
-                //     });
-                // }
-                const rowStyle = this.rowStyle(currentData);
-                if(rowStyle) {
-                    return Object.assign(staticStyle, style, rowStyle);
-                }
-            }
-            return Object.assign(staticStyle, style);
+            return Object.assign(staticStyle, style, rowStyle);
         },
         /**
          * 固定列
