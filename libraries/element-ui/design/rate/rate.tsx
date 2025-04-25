@@ -1,6 +1,4 @@
-import {
-  defineComponent, computed, toRefs, ref,
-} from '@vue/composition-api';
+import { defineComponent, computed, toRefs, ref } from '@vue/composition-api';
 import { StarFilledIcon } from '@element-ui-icons';
 import useVModel from '../hooks/useVModel';
 import props from './props';
@@ -16,7 +14,11 @@ export default defineComponent({
 
   setup(props: ElRateProps) {
     const activeColor = Array.isArray(props.color) ? props.color[0] : props.color;
-    const defaultColor = Array.isArray(props.color) ? props.color[1] : 'var(--el-bg-color-component)';
+    let defaultColor = Array.isArray(props.color) ? props.color[1] : 'var(--el-bg-color-component)';
+
+    if (props.distinguishColor) {
+      defaultColor = props.voidColor || 'var(--el-bg-color-component)';
+    }
 
     const { value: inputValue } = toRefs(props);
     const [starValue, setStarValue] = useVModel(inputValue, props.defaultValue, props.onChange, 'change');
@@ -26,8 +28,26 @@ export default defineComponent({
     const { classPrefix } = useConfig('classPrefix');
 
     const displayValue = computed(() => Number(hoverValue.value || starValue.value));
-    const displayText = computed(() => props.texts.length === 0 ? ['极差', '失望', '一般', '满意', '惊喜'] : props.texts);
+    const displayText = computed(() =>
+      props.texts.length === 0 ? ['极差', '失望', '一般', '满意', '惊喜'] : props.texts,
+    );
+    const displayScore = computed(() => {
+      if (!props.showScore) return '';
+      const template = props.scoreTemplate;
+      const valueToDisplay = Number.isNaN(displayValue.value) ? 0 : displayValue.value || 0;
+      return template.replace('{value}', String(valueToDisplay));
+    });
 
+    const getActiveColor = (value: number) => {
+      const { colors } = props;
+
+      if (!props.distinguishColor) {
+        return activeColor;
+      }
+      if (value <= (props.lowThreshold ?? 2)) return colors?.[0];
+      if (value <= (props.highThreshold ?? 4)) return colors?.[1];
+      return colors?.[2];
+    };
     const getStarValue = (event: MouseEvent, index: number) => {
       if (props.allowHalf) {
         const { left } = rootRef.value?.getBoundingClientRect?.();
@@ -72,7 +92,7 @@ export default defineComponent({
 
     const activeIconStyle = computed(() => ({
       fontSize: props.size,
-      color: activeColor,
+      color: getActiveColor(displayValue.value),
     }));
 
     const inactiveIconStyle = computed(() => ({
@@ -92,6 +112,7 @@ export default defineComponent({
       rootRef,
       activeIconStyle,
       inactiveIconStyle,
+      displayScore,
     };
   },
   methods: {
@@ -101,7 +122,14 @@ export default defineComponent({
   },
   render() {
     const {
-      classPrefix, mouseLeaveHandler, getStarCls, clickHandler, mouseEnterHandler, displayText, displayValue,
+      classPrefix,
+      mouseLeaveHandler,
+      getStarCls,
+      clickHandler,
+      mouseEnterHandler,
+      displayText,
+      displayValue,
+      displayScore,
     } = this;
 
     return (
@@ -112,10 +140,9 @@ export default defineComponent({
               key={index}
               class={[`${classPrefix}-rate__item`, getStarCls(index)]}
               onClick={(event: MouseEvent) => clickHandler(event, index + 1)}
-              onMousemove={(event: MouseEvent) => mouseEnterHandler(event, index + 1)}
-            >
-              {this.showText ? (
-                <Tooltip key={index} content={displayText[displayValue - 1]}>
+              onMousemove={(event: MouseEvent) => mouseEnterHandler(event, index + 1)}>
+              {(this.showText || this.showScore) ? (
+                <Tooltip key={index} content={this.showScore ? displayScore : displayText[displayValue - 1]}>
                   <div class={`${classPrefix}-rate__star-top`} style={{ ...this.activeIconStyle }}>
                     {this.renderRateIcon()}
                   </div>
@@ -123,8 +150,7 @@ export default defineComponent({
                     class={`${classPrefix}-rate__star-bottom`}
                     style={{
                       ...this.inactiveIconStyle,
-                    }}
-                  >
+                    }}>
                     {this.renderRateIcon()}
                   </div>
                 </Tooltip>
@@ -134,16 +160,14 @@ export default defineComponent({
                     class={`${classPrefix}-rate__star-top`}
                     style={{
                       ...this.activeIconStyle,
-                    }}
-                  >
+                    }}>
                     {this.renderRateIcon()}
                   </div>
                   <div
                     class={`${classPrefix}-rate__star-bottom`}
                     style={{
                       ...this.inactiveIconStyle,
-                    }}
-                  >
+                    }}>
                     {this.renderRateIcon()}
                   </div>
                 </div>
@@ -151,7 +175,9 @@ export default defineComponent({
             </li>
           ))}
         </ul>
-        {this.showText && <div class={`${classPrefix}-rate__text`}>{displayText[displayValue - 1]}</div>}
+        {(this.showText || this.showScore) && (
+          <div class={`${classPrefix}-rate__text`}>{this.showScore ? displayScore : displayText[displayValue - 1]}</div>
+        )}
       </div>
     );
   },
