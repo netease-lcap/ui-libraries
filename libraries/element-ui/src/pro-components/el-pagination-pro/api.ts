@@ -219,6 +219,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     totalContent: nasl.core.Boolean = true;
+    
+    @Prop({
+      group: '交互属性',
+      title: '隐藏单页',
+      description: '只有一页时是否隐藏',
+      setter: { concept: 'SwitchSetter' },
+    })
+    hideOnSinglePage: nasl.core.Boolean = false;
 
     @Event({
       title: '改变时',

@@ -1,0 +1,7 @@
+.el-dropdown .el-icon-arrow-down {
+  transition: transform 0.3s;
+}
+
+.el-dropdown.is-opened .el-icon-arrow-down {
+  transform: rotate(180deg);
+}
