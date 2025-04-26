@@ -258,7 +258,7 @@ export default defineComponent({
     }
 
     const onTagRemoveClick = (ctx: TagInputRemoveContext) => {
-      const removeDate = dayjs(ctx.item).toDate();
+      const removeDate = dayjs(ctx.item, formatRef.value.format).toDate();
       const newDate = processDate(removeDate);
       onChange?.(newDate, {
         dayjsValue: parseToDayjs(removeDate, formatRef.value.format),
@@ -337,7 +337,7 @@ export default defineComponent({
           status={this.status}
           tips={this.tips}
           popupProps={datePickerPopupProps}
-          inputProps={{ ...datePickerInputProps }}
+          inputProps={{ ...datePickerInputProps}}
           popupVisible={popupVisible}
           clearable={this.clearable}
           allowInput={!this.readonly && this.allowInput}
@@ -347,7 +347,6 @@ export default defineComponent({
           placeholder={
             this.placeholder ?? (this.global.placeholder as { [key in typeof this.mode]: string })[this.mode]
           }
-          suffixIcon={renderSuffixIcon()}
           tagInputProps={{
             onRemove: onTagRemoveClick,
           }}
