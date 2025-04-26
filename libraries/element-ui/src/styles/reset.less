@@ -169,4 +169,24 @@
   }
 }
 
+.@{prefix}-slider__stop {
+  top: 0;
+  width: var(--el-slider-rail-track-step-size);
+  height: var(--el-slider-rail-track-step-size);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background-color: var(--el-slider-stop-background);
+}
+
+.@{prefix}-slider--vertical {
+  .@{prefix}-slider__stop {
+    width: var(--el-slider-rail-track-step-size);
+    height: var(--el-slider-rail-track-step-size);
+    background-color: var(--el-slider-stop-background);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    left: 0;
+  }
+}
+
 @import "./style-panel.less";

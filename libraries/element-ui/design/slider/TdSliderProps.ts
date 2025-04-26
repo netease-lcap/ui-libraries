@@ -44,6 +44,11 @@ export interface ElSliderProps {
    */
   range?: boolean;
   /**
+   * 是否显示步长
+   * @default false
+   */
+  showStep?: boolean;
+  /**
    * 步长
    * @default 1
    */
