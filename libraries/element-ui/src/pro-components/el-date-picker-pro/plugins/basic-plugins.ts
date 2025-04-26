@@ -1,6 +1,6 @@
 import { CreateElement } from 'vue';
 import { NaslComponentPluginOptions, $render } from '@lcap/vue2-utils';
-import { DateRangeValue, DateRangePicker, DateValue } from '@element-pro';
+import { DateRangeValue, DateRangePicker, DateValue, DateMultipleValue } from '@element-pro';
 import {
   usePlaceholder,
   useDatePickerValue,
@@ -20,7 +20,8 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: [
     'range', 'autoWidth', 'align',
     'placeholderRight', 'startValue', 'endValue',
-    'maxTime', 'minTime', 'enablePresets', 'prefixIcon', 'suffixIcon',
+    'maxTime', 'minTime', 'enablePresets',
+    'multiple', 'prefixIcon', 'suffixIcon',
   ],
   setup(props) {
     const valueFormat = props.useComputed('converter', (v) => {
@@ -30,6 +31,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
 
       return v;
     });
+
     const placeholder = usePlaceholder(props, '请选择日期');
     const { value, changeValue } = useDatePickerValue(props, valueFormat);
     const events = useContextEvents(props, valueFormat);
@@ -53,11 +55,11 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       };
 
       if (prefixIcon) {
-        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon } });
+        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon }, class: 'el-p-icon' });
       }
 
       if (suffixIcon) {
-        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon } });
+        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon }, class: 'el-p-icon' });
       }
 
       return inputStyleProps;
@@ -70,10 +72,10 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       disableDate,
       presets,
       ...events,
-      onChange: (v: DateValue | DateRangeValue, context) => {
+      onChange: (v: DateValue | DateRangeValue | DateMultipleValue, context) => {
         const [range] = props.get<[boolean]>(['range']);
         const onChange = props.get<any>('onChange') || (() => {});
-        const changeEvent = getChangeEventByValue(v, range, valueFormat);
+        const changeEvent = getChangeEventByValue(v, range, valueFormat, props.get<boolean>('multiple'));
         changeValue(context.dayjsValue, v);
         onChange({
           ...changeEvent,

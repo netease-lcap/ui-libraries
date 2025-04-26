@@ -44,7 +44,8 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: [
     'range', 'autoWidth', 'align',
     'placeholderRight', 'startValue', 'endValue',
-    'maxTime', 'minTime', 'enablePresets', 'prefixIcon', 'suffixIcon',
+    'maxTime', 'minTime', 'enablePresets',
+    'multiple', 'prefixIcon', 'suffixIcon',
   ],
   setup(props) {
     const { useComputed } = props;
@@ -82,11 +83,11 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       };
 
       if (prefixIcon) {
-        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon } });
+        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon }, class: 'el-p-icon' });
       }
 
       if (suffixIcon) {
-        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon } });
+        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon }, class: 'el-p-icon' });
       }
 
       return inputStyleProps;
@@ -140,8 +141,24 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         hideDisabledTime: false,
       },
       onChange: (v: DateValue | DateRangeValue, context) => {
-        const [range] = props.get<[boolean]>(['range']);
+        const [range, timeFormat] = props.get<[boolean, string]>(['range', 'timeFormat']);
         const onChange = props.get<any>('onChange') || (() => {});
+
+        const unit = timeFormat && timeFormat.includes('ss') ? 'second' : 'minute';
+
+        if (!range && context.dayjsValue) {
+          if (disableDate.value(context.dayjsValue.toDate()) || disableTime(context.dayjsValue.toDate(), context)) {
+            return;
+          }
+        }
+
+        if (range && context.dayjsValue) {
+          const values = Array.isArray(context.dayjsValue) ? context.dayjsValue : [context.dayjsValue];
+          if (values.some((v) => disableDate.value(v.toDate(), unit))) {
+            return;
+          }
+        }
+
         const changeEvent = getChangeEventByValue(v, range, valueFormat);
         changeValue(context.dayjsValue, v);
         onChange({

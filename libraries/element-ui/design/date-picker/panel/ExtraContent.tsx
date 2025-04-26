@@ -1,6 +1,6 @@
 import { defineComponent, PropType, computed } from '@vue/composition-api';
 import ElDateFooter from '../base/Footer';
-import type { ElDatePickerProps, ElDateRangePickerProps, DateValue } from '../type';
+import type { ElDatePickerProps, ElDateRangePickerProps, DateValue, DateMultipleValue } from '../type';
 
 export default defineComponent({
   name: 'ElExtraContent',
@@ -11,7 +11,7 @@ export default defineComponent({
     onPresetClick: Function,
     onConfirmClick: Function,
     // 支持时间戳模式：时间戳为Number类型
-    selectedValue: [String, Number, Date] as PropType<DateValue>,
+    selectedValue: [String, Number, Array] as PropType<DateValue | DateMultipleValue>,
   },
   setup(props) {
     const showPanelFooter = computed(() => props.enableTimePicker || props.presets);

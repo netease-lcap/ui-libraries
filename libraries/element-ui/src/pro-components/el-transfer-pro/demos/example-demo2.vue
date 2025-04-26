@@ -6,6 +6,10 @@
           showCheckAll
           :value.sync="targetValues"
           :checked.sync="checked"
+          :search="true"
+          searchPlaceholder="请输入哈哈哈哈"
+          buttonDirection="horizontal"
+          targetSort="push"
           @change="onChange">
           <template #titlesource>
             <div>{{ '来源' }}</div>
@@ -22,6 +26,7 @@
         </el-transfer-pro>
       </div>
       <div class="block">
+        {{ checked }}
       </div>
     </div>
   </template>
@@ -29,8 +34,8 @@
   export default {
     data() {
       return {
-        targetValues: [],
-        checked:[1],
+        targetValues: [3],
+        checked:[1, 3],
         list: [{
           value: 1,
           label: '内容1',
@@ -53,4 +58,3 @@
     },
   };
   </script>
-  
