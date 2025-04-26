@@ -1,10 +1,8 @@
 import { defineComponent, watch, computed } from '@vue/composition-api';
 import dayjs from 'dayjs';
-import { CalendarIcon as ElCalendarIcon } from '@element-ui-icons';
 import isDate from 'lodash/isDate';
 
 import { usePrefixClass } from '../hooks/useConfig';
-import { useGlobalIcon } from '../hooks/useGlobalIcon';
 import useSingle from './hooks/useSingle';
 import {
   parseToDayjs, getDefaultFormat, formatTime, formatDate,
@@ -24,7 +22,6 @@ export default defineComponent({
   props,
   setup(props, { emit }) {
     const COMPONENT_NAME = usePrefixClass('date-picker');
-    const { CalendarIcon } = useGlobalIcon({ CalendarIcon: ElCalendarIcon });
 
     const {
       inputValue,
@@ -263,7 +260,6 @@ export default defineComponent({
       popupVisible,
       panelProps,
       isDisabled,
-      CalendarIcon,
     };
   },
   render() {
@@ -275,16 +271,7 @@ export default defineComponent({
       popupVisible,
       panelProps,
       isDisabled,
-      CalendarIcon,
     } = this;
-
-    const renderSuffixIcon = () => {
-      if (this.suffixIcon) return this.suffixIcon;
-      if (this.$scopedSlots.suffixIcon) return this.$scopedSlots.suffixIcon;
-      if (this.$scopedSlots['suffix-icon']) return this.$scopedSlots['suffix-icon'];
-
-      return () => <CalendarIcon />;
-    };
 
     return (
       <div class={COMPONENT_NAME}>
@@ -297,7 +284,7 @@ export default defineComponent({
           tips={this.tips}
           readonly={this.readonly}
           popupProps={datePickerPopupProps}
-          inputProps={{ suffixIcon: renderSuffixIcon(), ...datePickerInputProps }}
+          inputProps={{ ...datePickerInputProps }}
           popupVisible={popupVisible}
           clearable={this.clearable}
           allowInput={!this.readonly && this.allowInput}
