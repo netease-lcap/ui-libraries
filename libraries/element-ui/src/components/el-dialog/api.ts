@@ -114,13 +114,13 @@ namespace nasl.ui {
     })
     lockScroll: nasl.core.Boolean = true;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '自定义类名',
-    //   description: '对话框的自定义类名',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // customClass: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '自定义类名',
+      description: '对话框的自定义类名',
+      setter: { concept: 'InputSetter' },
+    })
+    customClass: nasl.core.String;
 
     @Prop({
       group: '主要属性',

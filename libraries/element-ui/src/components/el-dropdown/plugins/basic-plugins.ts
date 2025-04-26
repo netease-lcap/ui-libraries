@@ -1,5 +1,6 @@
 /* 组件功能扩展插件 */
 import { at, isFunction, isNil } from 'lodash';
+import { ref, computed } from '@vue/composition-api';
 import { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import { ElDropdownMenu, ElDropdownItem } from '../index';
 import ElText from '../../el-text';
@@ -13,8 +14,23 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       return size || 'small';
     });
 
+    const isOpened = ref(false);
+    function onVisibleChange(value: boolean) {
+      const visibleHandler = props.get('onVisibleChange');
+      if (typeof visibleHandler === 'function') {
+        visibleHandler(value);
+      }
+      isOpened.value = value;
+    }
+
+    const openClass = computed(() => {
+      return isOpened.value ? 'is-opened' : '';
+    });
+
     return {
       size: currentSize,
+      class: openClass,
+      onVisibleChange,
       slotDropdown: () => {
         const data = props.get<any[]>('data') || [];
         const [

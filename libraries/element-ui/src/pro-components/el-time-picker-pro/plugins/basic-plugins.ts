@@ -103,7 +103,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     ], (
       autoWidth = false,
       align = 'left',
-      prefixIcon,
+      prefixIcon = 'el-icon-time',
       suffixIcon,
     ) => {
       const inputStyleProps: any = {

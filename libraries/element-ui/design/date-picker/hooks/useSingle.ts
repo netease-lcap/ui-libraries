@@ -41,7 +41,7 @@ export default function useSingle(props: ElDatePickerProps, { emit }: any) {
       ref: inputRef,
       borderless: props.borderless,
       size: props.size,
-      prefixIcon: props.prefixIcon,
+      // prefixIcon: props.prefixIcon,
       class: [
         {
           [`${COMPONENT_NAME.value}__input--placeholder`]: isHoverCell.value,

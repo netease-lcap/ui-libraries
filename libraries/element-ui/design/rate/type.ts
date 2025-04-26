@@ -8,6 +8,49 @@ import { ElNode } from '../common';
 
 export interface ElRateProps {
   /**
+   * 是否区分颜色
+   * @default false
+   */
+  distinguishColor?: boolean;
+
+  /**
+   * 低分和中等分数的界限值，值越大代表分数越低
+   * @default 2
+   */
+  lowThreshold?: number;
+
+  /**
+   * 高分和中等分数的界限值，值越大代表分数越高
+   * @default 4
+   */
+  highThreshold?: number;
+
+  /**
+   * 未选中时的颜色
+   * @default '#C6D1DE'
+   */
+  voidColor?: string;
+
+  /** 
+   * 图标颜色
+   * @default ['#99A9BF','#F7BA2A', '#FF9900']
+   */
+  colors?: Array<string>;
+
+
+  /**
+   * 是否显示分数
+   * @default false
+   */
+  showScore?: boolean;
+
+  /**
+   * 分数模板
+   * @default '{value}分'
+   */
+  scoreTemplate?: string;
+
+  /**
    * 是否允许半选
    * @default false
    */

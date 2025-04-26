@@ -1,3 +1,4 @@
+import { CreateElement } from 'vue';
 import { NaslComponentPluginOptions, $render } from '@lcap/vue2-utils';
 import {
   DateRangeValue,
@@ -17,8 +18,6 @@ import {
   useDisableDate,
   getChangeEventByValue,
   usePresets,
-  useInputProps,
-  useIcons,
 } from '../../el-date-picker-pro/hooks';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
@@ -46,7 +45,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     'range', 'autoWidth', 'align',
     'placeholderRight', 'startValue', 'endValue',
     'maxTime', 'minTime', 'enablePresets',
-    'multiple',
+    'multiple', 'prefixIcon', 'suffixIcon',
   ],
   setup(props) {
     const { useComputed } = props;
@@ -66,8 +65,34 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const events = useContextEvents(props, valueFormat);
     const disableDate = useDisableDate(props, DEFAULT_FORMAT);
     const presets = usePresets(props);
-    const inputProps = useInputProps(props);
-    const icons = useIcons(props);
+
+    const inputProps = props.useComputed<any>([
+      'autoWidth',
+      'align',
+      'prefixIcon',
+      'suffixIcon',
+    ], (
+      autoWidth = false,
+      align = 'left',
+      prefixIcon = 'el-icon-date',
+      suffixIcon,
+    ) => {
+      const inputStyleProps: any = {
+        autoWidth,
+        align,
+      };
+
+      if (prefixIcon) {
+        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon } });
+      }
+
+      if (suffixIcon) {
+        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon } });
+      }
+
+      return inputStyleProps;
+    });
+
     const format = useComputed(['format', 'dateFormat', 'timeFormat'], (
       formatStr,
       dateFormat = 'YYYY-MM-DD',
@@ -108,7 +133,6 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       disableDate,
       presets,
       format,
-      ...icons,
       ...events,
       valueType: DEFAULT_FORMAT,
       enableTimePicker: true,
@@ -164,7 +188,10 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         if (!context.propsData.props.rangeInputProps) {
           context.propsData.props.rangeInputProps = {};
         }
-        context.propsData.props.rangeInputProps.inputProps = inputProps.value;
+        const { prefixIcon, suffixIcon, ...reset } = inputProps.value;
+        context.propsData.props.rangeInputProps.inputProps = reset;
+        context.propsData.props.rangeInputProps.prefixIcon = prefixIcon;
+        context.propsData.props.rangeInputProps.suffixIcon = suffixIcon;
 
         return h(DateRangePicker, context.propsData, context.childrenNodes);
       },

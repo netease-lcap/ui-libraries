@@ -1,10 +1,8 @@
 import { defineComponent, watch, computed } from '@vue/composition-api';
 import dayjs from 'dayjs';
-import { CalendarIcon as ElCalendarIcon } from '@element-ui-icons';
 import isDate from 'lodash/isDate';
 
 import { usePrefixClass, useConfig } from '../hooks/useConfig';
-import { useGlobalIcon } from '../hooks/useGlobalIcon';
 import useSingle from './hooks/useSingle';
 import {
   parseToDayjs, getDefaultFormat, formatTime, formatDate,
@@ -25,7 +23,6 @@ export default defineComponent({
   props,
   setup(props, { emit }) {
     const COMPONENT_NAME = usePrefixClass('date-picker');
-    const { CalendarIcon } = useGlobalIcon({ CalendarIcon: ElCalendarIcon });
     const { global } = useConfig('datePicker');
 
     const {
@@ -314,7 +311,6 @@ export default defineComponent({
       onTagRemoveClick,
       onTagClearClick,
       global,
-      CalendarIcon,
     };
   },
   render() {
@@ -328,16 +324,7 @@ export default defineComponent({
       isDisabled,
       onTagRemoveClick,
       onTagClearClick,
-      CalendarIcon,
     } = this;
-
-    const renderSuffixIcon = () => {
-      if (this.suffixIcon) return this.suffixIcon;
-      if (this.$scopedSlots.suffixIcon) return this.$scopedSlots.suffixIcon;
-      if (this.$scopedSlots['suffix-icon']) return this.$scopedSlots['suffix-icon'];
-
-      return () => <CalendarIcon />;
-    };
 
     return (
       <div class={COMPONENT_NAME}>

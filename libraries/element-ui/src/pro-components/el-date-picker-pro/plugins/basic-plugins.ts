@@ -1,3 +1,4 @@
+import { CreateElement } from 'vue';
 import { NaslComponentPluginOptions, $render } from '@lcap/vue2-utils';
 import { DateRangeValue, DateRangePicker, DateValue, DateMultipleValue } from '@element-pro';
 import {
@@ -7,8 +8,6 @@ import {
   useDisableDate,
   getChangeEventByValue,
   usePresets,
-  useInputProps,
-  useIcons,
 } from '../hooks';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
@@ -22,7 +21,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     'range', 'autoWidth', 'align',
     'placeholderRight', 'startValue', 'endValue',
     'maxTime', 'minTime', 'enablePresets',
-    'multiple',
+    'multiple', 'prefixIcon', 'suffixIcon',
   ],
   setup(props) {
     const valueFormat = props.useComputed('converter', (v) => {
@@ -38,8 +37,33 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const events = useContextEvents(props, valueFormat);
     const disableDate = useDisableDate(props, DEFAULT_FORMAT);
     const presets = usePresets(props);
-    const inputProps = useInputProps(props);
-    const icons = useIcons(props);
+
+    const inputProps = props.useComputed<any>([
+      'autoWidth',
+      'align',
+      'prefixIcon',
+      'suffixIcon',
+    ], (
+      autoWidth = false,
+      align = 'left',
+      prefixIcon = 'el-icon-date',
+      suffixIcon,
+    ) => {
+      const inputStyleProps: any = {
+        autoWidth,
+        align,
+      };
+
+      if (prefixIcon) {
+        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon } });
+      }
+
+      if (suffixIcon) {
+        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon } });
+      }
+
+      return inputStyleProps;
+    });
 
     return {
       value,
@@ -47,7 +71,6 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       inputProps,
       disableDate,
       presets,
-      ...icons,
       ...events,
       onChange: (v: DateValue | DateRangeValue | DateMultipleValue, context) => {
         const [range] = props.get<[boolean]>(['range']);
@@ -70,7 +93,10 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         if (!context.propsData.props.rangeInputProps) {
           context.propsData.props.rangeInputProps = {};
         }
-        context.propsData.props.rangeInputProps.inputProps = inputProps.value;
+        const { prefixIcon, suffixIcon, ...reset } = inputProps.value;
+        context.propsData.props.rangeInputProps.inputProps = reset;
+        context.propsData.props.rangeInputProps.prefixIcon = prefixIcon;
+        context.propsData.props.rangeInputProps.suffixIcon = suffixIcon;
 
         return h(DateRangePicker, context.propsData, context.childrenNodes);
       },
