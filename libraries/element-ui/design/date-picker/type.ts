@@ -199,7 +199,7 @@ export interface ElDateRangePickerProps {
   disableTime?: (
     times: Array<Date | null>,
     context: { partial: DateRangePickerPartial },
-  ) => Partial<{ hour: Array<number>; minute: Array<number>; second: Array<number> }>;
+  ) => Partial<boolean>;
   /**
    * 是否禁用组件
    */

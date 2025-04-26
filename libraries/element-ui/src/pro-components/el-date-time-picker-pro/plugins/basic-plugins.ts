@@ -119,6 +119,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       onChange: (v: DateValue | DateRangeValue, context) => {
         const [range] = props.get<[boolean]>(['range']);
         const onChange = props.get<any>('onChange') || (() => {});
+
         const changeEvent = getChangeEventByValue(v, range, valueFormat);
         changeValue(context.dayjsValue, v);
         onChange({
