@@ -4,6 +4,11 @@
   --el-table-head-background-color: var(--el-bg-color-secondarycontainer);
   --el-table-head-font-weight: 700;
   --el-input-number-button-bg-color: var(--el-bg-color-secondarycontainer);
+  --el-switch-label-gutter: 8px;
+  --el-switch-label-font-size: @font-size-base;
+  --el-switch-label-font-weight: 500;
+  --el-switch-label-color: var(--el-text-color-primary);
+  --el-switch-label-color-active: var(--el-brand-color);
 }
 
 .@{prefix}-table__header {
@@ -107,14 +112,6 @@
   white-space: inherit;
 }
 
-:root {
-  --el-switch-label-gutter: 8px;
-  --el-switch-label-font-size: @font-size-base;
-  --el-switch-label-font-weight: 500;
-  --el-switch-label-color: var(--el-text-color-primary);
-  --el-switch-label-color-active: var(--el-brand-color);
-}
-
 .@{prefix}-switch__wrapper {
   display: inline-flex;
   align-items: center;
@@ -139,5 +136,37 @@
   opacity: 0.6;
 }
 
+.@{prefix}-transfer {
+  height: var(--el-transfer-common-height);
+}
+
+.@{prefix}-transfer.@{prefix}-transfer__search {
+  height: var(--el-transfer-with-search-height);
+}
+
+.@{prefix}-transfer.@{prefix}-transfer__footer {
+  height: var(--el-transfer-with-footer-height);
+}
+
+.@{prefix}-transfer.@{prefix}-transfer__search .@{prefix}-transfer__list,
+.@{prefix}-transfer.@{prefix}-transfer__footer .@{prefix}-transfer__list,
+.@{prefix}-transfer .@{prefix}-transfer__list {
+  height: 100%;
+}
+
+.@{prefix}-transfer__operations {
+  .el-button + .el-button {
+    margin-left: 0;
+  }
+  .el-p-transfer__operations__button {
+    cursor: pointer;
+  }
+}
+
+.@{prefix}-transfer--operations-horizontal {
+  .@{prefix}-transfer__operations {
+    flex-direction: row-reverse;
+  }
+}
 
 @import "./style-panel.less";
