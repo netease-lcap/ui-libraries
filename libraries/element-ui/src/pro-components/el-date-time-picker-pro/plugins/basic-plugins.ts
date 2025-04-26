@@ -117,8 +117,23 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         hideDisabledTime: false,
       },
       onChange: (v: DateValue | DateRangeValue, context) => {
-        const [range] = props.get<[boolean]>(['range']);
+        const [range, timeFormat] = props.get<[boolean, string]>(['range', 'timeFormat']);
         const onChange = props.get<any>('onChange') || (() => {});
+
+        const unit = timeFormat && timeFormat.includes('ss') ? 'second' : 'minute';
+
+        if (!range && context.dayjsValue) {
+          if (disableDate.value(context.dayjsValue.toDate()) || disableTime(context.dayjsValue.toDate(), context)) {
+            return;
+          }
+        }
+
+        if (range && context.dayjsValue) {
+          const values = Array.isArray(context.dayjsValue) ? context.dayjsValue : [context.dayjsValue];
+          if (values.some((v) => disableDate.value(v.toDate(), unit))) {
+            return;
+          }
+        }
 
         const changeEvent = getChangeEventByValue(v, range, valueFormat);
         changeValue(context.dayjsValue, v);

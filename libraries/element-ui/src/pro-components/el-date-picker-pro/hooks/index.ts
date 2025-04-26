@@ -323,14 +323,14 @@ export function useContextEvents(props: MapGet, valueFormat: ComputedRef<string>
 
 export function useDisableDate(props: MapGet, format: string) {
   const disableDate = props.useComputed<any>(['minDate', 'maxDate'], (minDate, maxDate) => {
-    return (date: DateValue) => {
+    return (date: DateValue, unit: any = 'date') => {
       let disabled = false;
       if (minDate) {
-        disabled = dayjs(date).isBefore(dayjs(minDate, format), 'date');
+        disabled = dayjs(date).isBefore(dayjs(minDate, format), unit);
       }
 
       if (!disabled && maxDate) {
-        disabled = dayjs(date).isAfter(dayjs(maxDate, format), 'date');
+        disabled = dayjs(date).isAfter(dayjs(maxDate, format), unit);
       }
 
       return disabled;
