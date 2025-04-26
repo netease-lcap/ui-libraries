@@ -1,5 +1,5 @@
 import { NaslComponentPluginOptions, $render } from '@lcap/vue2-utils';
-import { DateRangeValue, DateRangePicker, DateValue } from '@element-pro';
+import { DateRangeValue, DateRangePicker, DateValue, DateMultipleValue } from '@element-pro';
 import {
   usePlaceholder,
   useDatePickerValue,
@@ -22,6 +22,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     'range', 'autoWidth', 'align',
     'placeholderRight', 'startValue', 'endValue',
     'maxTime', 'minTime', 'enablePresets',
+    'multiple',
   ],
   setup(props) {
     const valueFormat = props.useComputed('converter', (v) => {
@@ -31,6 +32,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
 
       return v;
     });
+
     const placeholder = usePlaceholder(props, '请选择日期');
     const { value, changeValue } = useDatePickerValue(props, valueFormat);
     const events = useContextEvents(props, valueFormat);
@@ -47,10 +49,10 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       presets,
       ...icons,
       ...events,
-      onChange: (v: DateValue | DateRangeValue, context) => {
+      onChange: (v: DateValue | DateRangeValue | DateMultipleValue, context) => {
         const [range] = props.get<[boolean]>(['range']);
         const onChange = props.get<any>('onChange') || (() => {});
-        const changeEvent = getChangeEventByValue(v, range, valueFormat);
+        const changeEvent = getChangeEventByValue(v, range, valueFormat, props.get<boolean>('multiple'));
         changeValue(context.dayjsValue, v);
         onChange({
           ...changeEvent,

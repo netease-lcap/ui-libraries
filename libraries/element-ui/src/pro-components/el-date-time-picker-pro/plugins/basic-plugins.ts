@@ -46,6 +46,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     'range', 'autoWidth', 'align',
     'placeholderRight', 'startValue', 'endValue',
     'maxTime', 'minTime', 'enablePresets',
+    'multiple',
   ],
   setup(props) {
     const { useComputed } = props;

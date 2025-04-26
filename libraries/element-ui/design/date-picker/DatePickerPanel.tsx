@@ -64,7 +64,7 @@ export default defineComponent({
     }
 
     // 头部快速切换
-    function onJumperClick({ trigger }: { trigger: string }) {
+    function onJumperClick({ trigger }: { trigger: 'prev' | 'next' | 'current' }) {
       const triggerMap = {
         prev: 'arrow-previous',
         next: 'arrow-next',
@@ -80,7 +80,7 @@ export default defineComponent({
 
       const current = new Date(year.value, month.value);
 
-      let next = null;
+      let next: Date | null = null;
       if (trigger === 'prev') {
         next = subtractMonth(current, monthCount);
       } else if (trigger === 'current') {
@@ -95,24 +95,24 @@ export default defineComponent({
       if (year.value !== nextYear) {
         props.onYearChange?.({
           year: nextYear,
-          date: dayjs(value.value).toDate(),
+          date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
           trigger: trigger === 'current' ? 'today' : (`year-${triggerMap[trigger]}` as DatePickerYearChangeTrigger),
         });
         emit('year-change', {
           year: nextYear,
-          date: dayjs(value.value).toDate(),
+          date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
           trigger: trigger === 'current' ? 'today' : (`year-${triggerMap[trigger]}` as DatePickerYearChangeTrigger),
         });
       }
       if (month.value !== nextMonth) {
         props.onMonthChange?.({
           month: nextMonth,
-          date: dayjs(value.value).toDate(),
+          date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
           trigger: trigger === 'current' ? 'today' : (`month-${triggerMap[trigger]}` as DatePickerMonthChangeTrigger),
         });
         emit('month-change', {
           month: nextMonth,
-          date: dayjs(value.value).toDate(),
+          date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
           trigger: trigger === 'current' ? 'today' : (`month-${triggerMap[trigger]}` as DatePickerMonthChangeTrigger),
         });
       }
@@ -138,16 +138,16 @@ export default defineComponent({
         : dayjs(cacheValue.value as string, formatRef.value.format);
       const nextDate = currentDate.hour(nextHours).minute(minutes).second(seconds).millisecond(milliseconds)
         .toDate();
-      cacheValue.value = formatDate(nextDate, { format: formatRef.value.format });
+      cacheValue.value = formatDate(nextDate, { format: formatRef.value.format as string });
 
       props.onTimeChange?.({
         time: val,
-        date: parseToDayjs(value.value, formatRef.value.format).toDate(),
+        date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
         trigger: 'time-hour',
       });
       emit('time-change', {
         time: val,
-        date: parseToDayjs(value.value, formatRef.value.format).toDate(),
+        date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
         trigger: 'time-hour',
       });
     }
@@ -156,10 +156,10 @@ export default defineComponent({
     function onConfirmClick({ e }: { e: MouseEvent }) {
       onChange?.(
         formatDate(cacheValue.value, {
-          format: formatRef.value.format,
+          format: formatRef.value.format as string,
         }) as DateValue,
         {
-          dayjsValue: parseToDayjs(cacheValue.value as string, formatRef.value.format),
+          dayjsValue: parseToDayjs(cacheValue.value as string, formatRef.value.format as string),
           trigger: 'confirm',
         },
       );
@@ -170,8 +170,8 @@ export default defineComponent({
     // 预设
     function onPresetClick(presetValue: any, context: any) {
       const presetVal = typeof presetValue === 'function' ? presetValue() : presetValue;
-      onChange?.(formatDate(presetVal, { format: formatRef.value.format }) as DateValue, {
-        dayjsValue: parseToDayjs(presetVal, formatRef.value.format),
+      onChange?.(formatDate(presetVal, { format: formatRef.value.format as string }) as DateValue, {
+        dayjsValue: parseToDayjs(presetVal, formatRef.value.format as string),
         trigger: 'preset',
       });
       props.onPresetClick?.(context);
@@ -183,12 +183,12 @@ export default defineComponent({
 
       props.onYearChange?.({
         year: year.value,
-        date: parseToDayjs(value.value, formatRef.value.format).toDate(),
+        date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
         trigger: 'year-select',
       });
       emit('year-change', {
         year: year.value,
-        date: parseToDayjs(value.value, formatRef.value.format).toDate(),
+        date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
         trigger: 'year-select',
       });
     }
@@ -198,12 +198,12 @@ export default defineComponent({
 
       props.onMonthChange?.({
         month: month.value,
-        date: parseToDayjs(value.value, formatRef.value.format).toDate(),
+        date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
         trigger: 'month-select',
       });
       emit('month-change', {
         month: month.value,
-        date: parseToDayjs(value.value, formatRef.value.format).toDate(),
+        date: parseToDayjs(value.value as DateValue, formatRef.value.format as string).toDate(),
         trigger: 'month-select',
       });
     }

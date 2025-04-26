@@ -30,6 +30,25 @@ export const Default = {
   }),
 };
 
+export const Multiple = {
+  name: '多选示例',
+  render: () => ({
+    data() {
+      return {
+        value: null,
+      };
+    },
+    methods: {
+      handleChange(name, e) {
+        // console.log(name, e);
+      },
+      handleSyncState(name, value) {
+        // console.log('sync', name, value);
+      },
+    },
+    template: '<el-date-picker-pro :minCollapsedNum="1" format="YYYY年MM月DD日" mode="date" :multiple="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
+  }),
+};
 export const Range = {
   name: '区间选择示例',
   render: () => ({
