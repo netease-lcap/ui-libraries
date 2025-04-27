@@ -402,11 +402,12 @@ export default createComponent({
         if (this.afterRead) {
           this.afterRead(validFiles, this.getDetail());
         }
-        this.$nextTick(function() {
+        this.$nextTick(() => {
           this.currentValue.forEach((file, index) => {
             if (!file.url && !file.status) {
               file.status = 'uploading';
               file.message = t('uploading');
+
               this.post(file, index);
             }
           });
@@ -713,7 +714,7 @@ export default createComponent({
       return match ? match[1] : null;
     },
 
-    post(file) {
+    post(file, idx) {
       const headers = {
         ...this.headers,
         Authorization: this.getCookie('authorization') || null,
@@ -751,6 +752,8 @@ export default createComponent({
       const xhr = ajax({
         ...requestData,
         onStart: (e) => {
+          // 修改入参file存在失败的情况，所以使用下标获取当前文件
+          const file = this.currentValue[idx];
           this.$emit('start', {
             e,
             file: file.file,
@@ -758,6 +761,8 @@ export default createComponent({
           });
         },
         onProgress: (e) => {
+          // 修改入参file存在失败的情况，所以使用下标获取当前文件
+          const file = this.currentValue[idx];
           // file.status = 'uploading';
           // file.message = e.percent + '%' || '上传中...';
           file.percent = e.percent;
@@ -773,6 +778,8 @@ export default createComponent({
           );
         },
         onSuccess: (res) => {
+          // 修改入参file存在失败的情况，所以使用下标获取当前文件
+          const file = this.currentValue[idx];
           if (res.Code === 200 && Array.isArray(res.Data)) {
             res = {
               [this.urlField]: res.Data.map((f) => f[this.urlField])[0],
@@ -789,27 +796,26 @@ export default createComponent({
             ? this.handleFileName(file?.url)
             : file?.file?.name;
           file.response = res;
-          setTimeout(() => {
-            if (this.canUp) {
-              const value = this.currentValue;
-              this.$emit('input', this.toValue(value));
-              this.$emit('update:value', this.toValue(value));
-              this.$emit('update:fileListProp', this.toValue(value));
 
-              this.$emit(
-                'success',
-                {
-                  res,
-                  file: file.file,
-                  item: file,
-                  xhr,
-                },
-                this,
-              );
-            }
-          }, 100);
+          const value = this.currentValue;
+          this.$emit('input', this.toValue(value));
+          this.$emit('update:value', this.toValue(value));
+          this.$emit('update:fileListProp', this.toValue(value));
+
+          this.$emit(
+            'success',
+            {
+              res,
+              file: file.file,
+              item: file,
+              xhr,
+            },
+            this,
+          );
         },
         onError: (e, res) => {
+          // 修改入参file存在失败的情况，所以使用下标获取当前文件
+          const file = this.currentValue[idx];
           file.status = 'failed';
           file.message = t('fail');
           file.errorMsg = e.errorMsg;
