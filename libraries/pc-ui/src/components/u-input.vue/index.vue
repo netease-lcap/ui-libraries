@@ -1,6 +1,6 @@
 <template>
 <div v-if="!isPreview" :class="$style.root" :readonly="readonly" :disabled="disabled" :color="currentColor || formItemVM && formItemVM.color"
-    :focus="focused" :clearable="clearable && currentValue" :prefix="prefix" :suffix="suffix"
+    :focus="focused" :clearable="clearable && currentValue" :prefix="prefix || false" :suffix="suffix || false"
     :show-password="showPassword" :password="password"
     @click.self="!focused && focus()">
     <span :class="$style.baseline">b</span><!-- 用于基线对齐 -->
@@ -221,7 +221,7 @@ export default {
             // 因此需要特殊处理，此时 compositionInputing 值为 true
             this.compositionInputing = false;
             const $event = {
-                oldValue: this.currentValue,
+                oldValue: this.value ?? this.currentValue,
                 value: this.handleEmptyValue(e.target.value),
             };
             if (this.$emitPrevent('before-input', $event, this))
