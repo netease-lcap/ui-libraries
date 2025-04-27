@@ -221,7 +221,7 @@ export default {
             // 因此需要特殊处理，此时 compositionInputing 值为 true
             this.compositionInputing = false;
             const $event = {
-                oldValue: this.currentValue,
+                oldValue: this.value ?? this.currentValue,
                 value: this.handleEmptyValue(e.target.value),
             };
             if (this.$emitPrevent('before-input', $event, this))
