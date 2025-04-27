@@ -752,6 +752,7 @@ export default createComponent({
       const xhr = ajax({
         ...requestData,
         onStart: (e) => {
+          // 修改入参file存在失败的情况，所以使用下标获取当前文件
           const file = this.currentValue[idx];
           this.$emit('start', {
             e,
@@ -760,6 +761,7 @@ export default createComponent({
           });
         },
         onProgress: (e) => {
+          // 修改入参file存在失败的情况，所以使用下标获取当前文件
           const file = this.currentValue[idx];
           // file.status = 'uploading';
           // file.message = e.percent + '%' || '上传中...';
@@ -776,6 +778,7 @@ export default createComponent({
           );
         },
         onSuccess: (res) => {
+          // 修改入参file存在失败的情况，所以使用下标获取当前文件
           const file = this.currentValue[idx];
           if (res.Code === 200 && Array.isArray(res.Data)) {
             res = {
@@ -811,6 +814,7 @@ export default createComponent({
           );
         },
         onError: (e, res) => {
+          // 修改入参file存在失败的情况，所以使用下标获取当前文件
           const file = this.currentValue[idx];
           file.status = 'failed';
           file.message = t('fail');
