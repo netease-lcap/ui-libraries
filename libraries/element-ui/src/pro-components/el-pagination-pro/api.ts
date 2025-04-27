@@ -6,6 +6,9 @@ namespace nasl.ui {
     sourceDocURL: 'https://tdesign.tencent.com/vue/components/pagination',
     ideusage: {
       idetype: 'element',
+      additionalAttribute: {
+        ":hideOnSinglePage": "\"false\"",
+      },
     }
   })
   @Component({
