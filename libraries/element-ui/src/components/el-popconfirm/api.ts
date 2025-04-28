@@ -70,18 +70,44 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '确认按钮类型',
-      description: '确认按钮类型',
-      setter: { concept: 'InputSetter' },
+      description: '设置确认按钮类型',
+      docDescription:
+      '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮按钮。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '主要按钮' },
+          { title: '成功按钮' },
+          { title: '警告按钮' },
+          { title: '危险按钮' },
+          { title: '信息按钮' },
+          { title: '文字按钮' },
+          { title: '默认按钮' },
+        ],
+      },
     })
-    confirmButtonType: nasl.core.String = 'Primary';
+    confirmButtonType: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' | '' = 'primary';
 
     @Prop({
       group: '主要属性',
       title: '取消按钮类型',
-      description: '取消按钮类型',
-      setter: { concept: 'InputSetter' },
+      description: '设置取消按钮类型',
+      docDescription:
+      '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮按钮。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '主要按钮' },
+          { title: '成功按钮' },
+          { title: '警告按钮' },
+          { title: '危险按钮' },
+          { title: '信息按钮' },
+          { title: '文字按钮' },
+          { title: '默认按钮' },
+        ],
+      },
     })
-    cancelButtonType: nasl.core.String = 'Text';
+    cancelButtonType: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' | '' = 'text';
     
     @Prop({
       title: '自定义图标',
