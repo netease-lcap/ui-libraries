@@ -105,6 +105,11 @@ export default {
     type: [Boolean, Function] as PropType<ElPaginationProps['totalContent']>,
     default: true,
   },
+  /** 只有一页是是否隐藏 */
+  hideOnSinglePage: {
+    type: [Boolean, Function] as PropType<ElPaginationProps['hideOnSinglePage']>,
+    default: false,
+  },
   /** 当前页或分页大小发生变化时触发 */
   onChange: Function as PropType<ElPaginationProps['onChange']>,
   /** 当前页发生变化时触发 */

@@ -188,6 +188,12 @@ export default defineConfig(({ command }) => {
                 '.el-p-select-option': false,
               },
             },
+            ElSwitchPro: {
+              selectorPrefixMap: {
+                'el-p-switch__wrapper': true,
+                'el-p-switch': false,
+              },
+            },
             ElCascaderPro: {
               mainSelectorMap: {
                 '.el-p-cascader': true,

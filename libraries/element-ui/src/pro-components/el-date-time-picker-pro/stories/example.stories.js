@@ -15,7 +15,7 @@ export const Default = {
   render: () => ({
     data() {
       return {
-        value: '2024-08-02',
+        value: '2025-04-31',
         height: '44px',
       };
     },
@@ -30,7 +30,7 @@ export const Default = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-time-picker-pro style="width: 260px" :style="{ height: height }" :class="`el-text`" class="el-temp" @confirm="confirm" max-date="2024-08-15 12:12:12" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
+    template: '<el-date-time-picker-pro style="width: 260px"  :style="{ height: height }" :class="`el-text`" class="el-temp" @confirm="confirm" min-date="2025-04-22 10:38:39" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
   }),
 };
 
@@ -39,8 +39,8 @@ export const Range = {
   render: () => ({
     data() {
       return {
-        startValue: '2024-08-02',
-        endValue: '2024-10-02',
+        startValue: null,
+        endValue: null,
       };
     },
     methods: {
@@ -54,6 +54,6 @@ export const Range = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-time-picker-pro max-date="2024-08-15 12:12:12" time-format="HH:mm"  @confirm="confirm" :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
+    template: '<el-date-time-picker-pro min-date="2025-04-22 10:38:39" time-format="HH:mm"  @confirm="confirm" :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
   }),
 };

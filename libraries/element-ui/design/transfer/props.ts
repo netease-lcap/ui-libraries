@@ -61,6 +61,10 @@ export default {
   pagination: {
     type: [Object, Array] as PropType<ElTransferProps['pagination']>,
   },
+  /** 自定义操作按钮 */
+  operationButton: {
+    type: Function as PropType<ElTransferProps['operationButton']>,
+  },
   /** 搜索框配置，值为 false 表示不显示搜索框；值为 true 表示显示默认搜索框；值类型为对象，用于透传 Props 到 Input 组件；值类型为数组，则分别表示控制两侧搜索框 */
   search: {
     type: [Boolean, Object, Array] as PropType<ElTransferProps['search']>,

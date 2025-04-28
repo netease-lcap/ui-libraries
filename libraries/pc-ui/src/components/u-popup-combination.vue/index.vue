@@ -13,6 +13,7 @@
           :style="staticStyleVar"
           :vusion-scope-id="$vnode.context.$options._scopeId"
           :class="[cssRuleClassName]"
+          @click.native="handleClick"
         >
             <slot></slot>
         </u-popup>
@@ -58,6 +59,13 @@ export default {
         },
         scheduleUpdate() {
             this.$refs.popup.scheduleUpdate();
+        },
+        handleClick(e) {
+          // 如果appendTo为reference，则阻止冒泡
+          const appendTo = this.$attrs.appendTo || this.$attrs['append-to'];
+          if (appendTo === 'reference') {
+            e.stopPropagation();
+          }
         },
     },
 };

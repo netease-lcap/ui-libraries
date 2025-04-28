@@ -178,6 +178,19 @@ namespace nasl.ui {
         })
         disabled: nasl.core.Boolean = false;
 
+
+        @Prop({
+          group: '主要属性',
+          title: '弹出层位置依据',
+          description: `设置弹出层依据哪个元素定位位置，可选值：'body'表示添加到 document.body，'reference'表示添加到参考元素中。`,
+          docDescription: '设置弹出层在html里的位置，支持引用元素下、全局body设置。当把当前组件放入某个组件，而组件overflow是hidden的时候，需要设置为全局body',
+          setter: {
+              concept: 'EnumSelectSetter',
+              options: [{ title: '引用元素下' }, { title: '全局body' }],
+          },
+        })
+        appendTo: 'reference' | 'body' = 'body';
+
         @Event({
             title: '弹出前',
             description: '弹出前触发。',
