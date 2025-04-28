@@ -405,6 +405,29 @@ namespace nasl.ui {
     })
     status: 'default' | 'success' | 'warning' | 'error' = 'default';
 
+    @Prop({
+      group: '状态属性',
+      title: '为空自动禁用',
+      description: '为空时置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
+      docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
+      setter: {
+          concept: 'SwitchSetter',
+      },
+    })
+    emptyDisabled: nasl.core.Boolean = false;
+    
+    @Prop({
+      group: '主要属性',
+      title: '弹出层位置依据',
+      description: '设置弹出层依据哪个元素定位位置，可选值：`body`表示添加到 document.body，`reference`表示添加到参考元素中。',
+      docDescription: '设置添加到哪个元素',
+      setter: {
+          concept: 'EnumSelectSetter',
+          options: [{ title: '全局body' }, { title: '引用元素下' }],
+      },
+    })
+    appendTo: 'body' | 'reference' = 'body';
+
     // @Prop({
     //   group: '主要属性',
     //   title: 'Suffix',
@@ -686,29 +709,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     disabled: nasl.core.Boolean = false;
-    
-    @Prop({
-      group: '状态属性',
-      title: '为空自动禁用',
-      description: '为空时置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
-      docDescription: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
-      setter: {
-          concept: 'SwitchSetter',
-      },
-    })
-    emptyDisabled: nasl.core.Boolean = false;
-    
-    @Prop({
-      group: '主要属性',
-      title: '弹出层位置依据',
-      description: '设置弹出层依据哪个元素定位位置，可选值：`body`表示添加到 document.body，`reference`表示添加到参考元素中。',
-      docDescription: '设置添加到哪个元素',
-      setter: {
-          concept: 'EnumSelectSetter',
-          options: [{ title: '全局body' }, { title: '引用元素下' }],
-      },
-    })
-    appendTo: 'body' | 'reference' = 'body';
 
     // @Prop({
     //   group: '主要属性',
