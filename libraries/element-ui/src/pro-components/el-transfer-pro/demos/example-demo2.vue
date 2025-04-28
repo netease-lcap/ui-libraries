@@ -7,6 +7,8 @@
           :value.sync="targetValues"
           :checked.sync="checked"
           :search="true"
+          textField="tree.label"
+          valueField="tree.value"
           searchPlaceholder="请输入哈哈哈哈"
           buttonDirection="horizontal"
           targetSort="push"
@@ -37,17 +39,23 @@
         targetValues: [3],
         checked:[1, 3],
         list: [{
+          tree: {
           value: 1,
           label: '内容1',
           disabled: false
+        }
         },{
-          value: 2,
-          label: '内容2',
-          disabled: true
+          tree: {
+            value: 2,
+            label: '内容2',
+            disabled: false
+          }
         },{
-          value: 3,
-          label: '内容3',
-          disabled: false
+          tree: {
+            value: 3,
+            label: '内容3',
+            disabled: false
+          }
         }]
       };
     },
