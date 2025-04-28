@@ -210,16 +210,24 @@ export default createComponent({
           </div>
         ))}
         {!this.slots() && this.options?.length === 0 && this.inDesigner() && <div style="text-align: center;width:100%">请绑定数据源或插入子节点</div>}
-        {(this.slots() || []).map(item => (
-          <div
-            style={{
-              position: 'relative',
-              width: itemWidth,
-            }}
-          >
-            {item}
-          </div>
-        ))}
+        {/* 静态子节点 */}
+        {(this.slots() || []).map((item) => {
+          // 空格、换行等节点不渲染
+          if (!item.tag) {
+            return item;
+          }
+
+          return (
+            <div
+              style={{
+                position: 'relative',
+                width: itemWidth,
+              }}
+            >
+              {item}
+            </div>
+          );
+        })}
       </div>
     );
   },
