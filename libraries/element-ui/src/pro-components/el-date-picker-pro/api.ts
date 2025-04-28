@@ -55,7 +55,7 @@ namespace nasl.ui {
       if: (_) => _.range === false,
       sync: true,
     })
-    value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    value: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime | nasl.collection.List<any>;
 
     @Prop<ElDatePickerProOptions, 'startValue'>({
       group: '数据属性',
