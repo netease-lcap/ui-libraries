@@ -8,7 +8,8 @@ namespace nasl.ui {
       idetype: 'element',
       additionalAttribute: {
         ':showText': '"false"',
-      }
+      },
+      forceUpdateWhenAttributeChange: true,
     }
   })
   @Component({
