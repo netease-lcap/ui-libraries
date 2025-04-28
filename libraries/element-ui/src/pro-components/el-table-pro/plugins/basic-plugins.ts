@@ -268,6 +268,29 @@ export const useTable: NaslComponentPluginOptions = {
         return ({ row }) => slotExpandedRow({ item: row });
       }),
       bordered,
+      expandIcon: (h, params) => {
+        return h('el-icon', {
+          attrs: {
+            name: 'el-icon-arrow-right',
+          },
+          staticClass: 'el-p-icon',
+        });
+      },
+      treeExpandAndFoldIcon: props.useComputed('treeDisplay', (value) => {
+        if (!value) return undefined;
+
+        return (h, { type }) => {
+          return h('el-icon', {
+            attrs: {
+              name: 'el-icon-arrow-right',
+            },
+            staticClass: 'el-p-icon el-p-tree-icon',
+            class: {
+              'el-p-tree-icon--opened': type === 'fold',
+            },
+          });
+        }
+      }),
       onSelectChange: (selectedRowKeys: Array<string | number>, context: SelectOptions<any>) => {
         const onSelectChange = props.get('onSelectChange');
 
@@ -292,7 +315,6 @@ export const useTable: NaslComponentPluginOptions = {
         },
       },
       [$render](resultVNode, h, context) {
-        console.log('=========== table========');
         const vnodes = ctx.setupContext.slots?.default?.();
         const columns = renderSlot(vnodes);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];
