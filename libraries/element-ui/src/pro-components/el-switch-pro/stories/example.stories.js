@@ -13,6 +13,18 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-switch-pro></el-switch-pro>',
+    data: () => ({
+      value: 'open',
+    }),
+    template: `
+    <div>
+      <el-switch-pro v-model="value" activeColor="red" activeValue="open" activeIconClass="el-icon-success" inactiveValue="close" inactiveIconClass="el-icon-error" activeText="开启" inactiveText="关闭"></el-switch-pro>
+      {{ value }}
+    </div>
+    `,
   }),
+  args: {
+    activeValue: 'open',
+    inactiveValue: 'close',
+  },
 };

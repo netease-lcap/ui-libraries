@@ -253,6 +253,21 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     requiredMark: nasl.core.Boolean = false;
+    
+    @Prop({
+      group: '主要属性',
+      title: '必填标记显示位置',
+      description:
+        '表单必填符号（*）显示位置。可选项：left/right',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '左' },
+          { title: '右' },
+        ],
+      },
+    })
+    requiredMarkPosition: 'left' | 'right' = 'left';
 
     @Prop({
       group: '主要属性',

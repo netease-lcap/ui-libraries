@@ -209,7 +209,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTUI_ICONS',
       },
     })
-    prefixIcon: nasl.core.String;
+    prefixIcon: nasl.core.String = 'el-icon-time';
 
     @Prop({
       title: '后缀图标',

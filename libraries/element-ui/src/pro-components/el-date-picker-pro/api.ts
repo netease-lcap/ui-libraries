@@ -43,7 +43,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
-      onChange: [{ clear: ['placeholderRight'] }],
+      onChange: [{ clear: ['placeholderRight', 'multiple'] }],
     })
     range: nasl.core.Boolean = false;
 
@@ -89,11 +89,12 @@ namespace nasl.ui {
     })
     converter: 'json' | 'timestamp' | 'date' | 'format' = 'format';
 
-    @Prop({
+    @Prop<ElDatePickerProOptions, 'allowInput'>({
       group: '主要属性',
       title: '允许输入',
       description: '是否允许输入日期',
       setter: { concept: 'SwitchSetter' },
+      if: (_) => !_.multiple,
     })
     allowInput: nasl.core.Boolean = false;
 
@@ -185,6 +186,7 @@ namespace nasl.ui {
       }, {
         update: {
           format: 'GGGG-[W]WW',
+          multiple: false,
         },
         if: (val) => val === 'week',
       }, {
@@ -192,9 +194,38 @@ namespace nasl.ui {
           format: 'YYYY-[Q]Q',
         },
         if: (val) => val === 'quarter',
-      }]
+      }],
     })
     mode: 'year' | 'quarter' | 'month' | 'week' | 'date' = 'date';
+
+    @Prop<ElDatePickerProOptions, 'multiple'>({
+      group: '主要属性',
+      title: '多选',
+      description: '是否支持多选',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.mode !== 'week' && !_.range,
+      onChange: [{
+        update: {
+          allowInput: false,
+          range: false,
+          enablePresets: false,
+        },
+        if: (_) => _ === true,
+      }],
+    })
+    multiple: nasl.core.Boolean = false;
+
+    @Prop<ElDatePickerProOptions, 'minCollapsedNum'>({
+      group: '主要属性',
+      title: '最小折叠数量',
+      description: '最小折叠数量,用于标签数量过多的情况下折叠选中项，超出该数值的选中项折叠。值为 0 则表示不折叠',
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 0,
+      },
+      if: (_) => _.multiple === true,
+    })
+    minCollapsedNum: nasl.core.Integer = 0;
 
     @Prop({
       group: '主要属性',
@@ -276,6 +307,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => !_.multiple,
     })
     enablePresets: nasl.core.Boolean = false;
 
@@ -306,7 +338,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTUI_ICONS',
       },
     })
-    prefixIcon: nasl.core.String;
+    prefixIcon: nasl.core.String = 'el-icon-date';
 
     @Prop({
       title: '后缀图标',

@@ -51,6 +51,11 @@ namespace nasl.ui {
           { title: '仪表盘形' },
         ],
       },
+      onChange: [
+        {
+          clear: ['textInside'],
+        }
+      ]
     })
     type: 'line' | 'circle' | 'dashboard' = 'line';
 
