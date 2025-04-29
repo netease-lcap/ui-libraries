@@ -132,7 +132,7 @@ export default {
 }
 
 .app-logo {
-  color: var(--brand-primary);
+  color: var(--brand-logo-color);
   vertical-align: middle;
   margin-left: var(--space-base);
   margin-right: var(--space-small) !important;
