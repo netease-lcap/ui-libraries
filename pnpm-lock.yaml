@@ -1009,8 +1009,8 @@ importers:
         specifier: ^7.22.10
         version: 7.23.6
       '@lcap/extension-ui':
-        specifier: ^1.0.0-beta.7
-        version: 1.0.0-beta.7
+        specifier: ^1.0.0-beta.8
+        version: 1.0.0-beta.8
       '@lcap/material-parser':
         specifier: ^1.0.0-alpha.3
         version: 1.0.0-alpha.3(prop-types@15.8.1)(vue@3.5.13(typescript@5.3.3))
@@ -3475,8 +3475,8 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==, tarball: https://registry.npmmirror.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz}
 
-  '@lcap/extension-ui@1.0.0-beta.7':
-    resolution: {integrity: sha512-J5tYXASKYoiBbUOeHxQJrQjvHDL0qW1GJQ4SicxQv3OVtAKyTVYpzY4/f6YdQ/P3FewuwCeO+U4apoCCtIgtkw==}
+  '@lcap/extension-ui@1.0.0-beta.8':
+    resolution: {integrity: sha512-NRhS45MQi5ZZ1t8t37+/JWQ1drXFYrdkybtYHgkgjSZ3cRYKWkJzT17KcIlu9/Mcc7EgiPN/aUbeiTW+O57XGw==}
 
   '@lcap/material-parser@1.0.0-alpha.3':
     resolution: {integrity: sha512-DPC2KxaY+RKbfEgz79YABxl6vf/qbn4nxrXstmxlRIs+M8ZkZL2kaMpLt5lFhMRxOTnBJzJ9EL/JyDUL35OrzA==}
@@ -14638,7 +14638,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@lcap/extension-ui@1.0.0-beta.7':
+  '@lcap/extension-ui@1.0.0-beta.8':
     dependencies:
       send: 1.1.0
     transitivePeerDependencies:

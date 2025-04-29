@@ -19,7 +19,7 @@ export async function startPreview(rootPath: string, https: boolean = false) {
 
   platformURL = `${protocol}${platformURL.substring(platformURL.indexOf('://'))}`;
 
-  const version = '3.13.2';
+  const version = '4.0.0';
 
   const commands: string[] = [
     'npx lcap-ide-server-proxy localserver',
@@ -33,7 +33,7 @@ export async function startPreview(rootPath: string, https: boolean = false) {
   ];
 
   try {
-    previewURL = `${protocol}://localhost:${port}/designer/uidev?appId=demo&branch=feature-uidev3142&MODE=localserver&LIB_SERVICE=${protocol}://localhost:${port}`;
+    previewURL = `${protocol}://localhost:${port}/designer/uidev?appId=demo&MODE=localserver&LIB_SERVICE=${protocol}://localhost:${port}`;
     logger.info(`ide 预览服务启动中...., 平台地址：${platformURL}`);
     await exec(commands.join(' '));
   } catch (e) {
