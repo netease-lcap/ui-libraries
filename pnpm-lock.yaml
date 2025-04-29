@@ -1009,8 +1009,8 @@ importers:
         specifier: ^7.22.10
         version: 7.23.6
       '@lcap/extension-ui':
-        specifier: ^1.0.0-beta.6
-        version: 1.0.0-beta.6
+        specifier: ^1.0.0-beta.7
+        version: 1.0.0-beta.7
       '@lcap/material-parser':
         specifier: ^1.0.0-alpha.3
         version: 1.0.0-alpha.3(prop-types@15.8.1)(vue@3.5.13(typescript@5.3.3))
@@ -1106,8 +1106,8 @@ importers:
         version: 2.7.0
     devDependencies:
       '@nasl/types':
-        specifier: ^0.1.11
-        version: 0.1.11
+        specifier: ^0.1.12
+        version: 0.1.12
       '@types/babel__core':
         specifier: ^7.1.20
         version: 7.20.5
@@ -3475,8 +3475,8 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==, tarball: https://registry.npmmirror.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz}
 
-  '@lcap/extension-ui@1.0.0-beta.6':
-    resolution: {integrity: sha512-18xoJDhr7kL5HjDZiFLdv0BczfT3wZEkLbKL6ady1telGGyQKlvPWM849hvOKWLJltVuzZ/beOSJY6caTcRDKg==}
+  '@lcap/extension-ui@1.0.0-beta.7':
+    resolution: {integrity: sha512-J5tYXASKYoiBbUOeHxQJrQjvHDL0qW1GJQ4SicxQv3OVtAKyTVYpzY4/f6YdQ/P3FewuwCeO+U4apoCCtIgtkw==}
 
   '@lcap/material-parser@1.0.0-alpha.3':
     resolution: {integrity: sha512-DPC2KxaY+RKbfEgz79YABxl6vf/qbn4nxrXstmxlRIs+M8ZkZL2kaMpLt5lFhMRxOTnBJzJ9EL/JyDUL35OrzA==}
@@ -3510,6 +3510,9 @@ packages:
 
   '@nasl/types@0.1.11':
     resolution: {integrity: sha512-0aaEG4gBy1jOpLOY4MoqFwDca2LVMl+ygGR4Ct4VUpPbsff8zkMge0dPpt1M9aGWEDC9QHUMYLIEzb20IcUAJA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.11.tgz}
+
+  '@nasl/types@0.1.12':
+    resolution: {integrity: sha512-enfLqU62yqgH1+D55PHp6Semgv+Io0VbIaG+WggeCV7AgfMl3J4mISigXicKhEPdfcS3/6qEmWtFxwKBVUKLlg==}
 
   '@nasl/types@0.1.7-beta.1':
     resolution: {integrity: sha512-iMgr0tRx8hlhXCAFUyI1WjYJkHTtq+X5dTZ8qlyAN4jOs7Ivj9b3fZB4djoT99VsCtorOD2azbIqR8vdYaZInw==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.7-beta.1.tgz}
@@ -14635,7 +14638,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@lcap/extension-ui@1.0.0-beta.6':
+  '@lcap/extension-ui@1.0.0-beta.7':
     dependencies:
       send: 1.1.0
     transitivePeerDependencies:
@@ -14721,6 +14724,8 @@ snapshots:
   '@nasl/types@0.1.10': {}
 
   '@nasl/types@0.1.11': {}
+
+  '@nasl/types@0.1.12': {}
 
   '@nasl/types@0.1.7-beta.1': {}
 
