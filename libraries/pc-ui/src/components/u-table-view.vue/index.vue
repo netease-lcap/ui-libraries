@@ -1716,6 +1716,12 @@ export default {
                     }
                 });
             }
+            // 3123124215948800: values变化后充值了item.checked状态，需要递归处理父级的半勾选状态
+            if (this.treeDisplay) {
+                Object.keys(this.checkedItems).forEach((itemKey) => {
+                    this.checkRecursively(this.checkedItems[itemKey], true, this.treeCheckType);
+                });
+            }
         },
         onClickRow(e, item, rowIndex) {
             this.$emit('click-row', { item, index: rowIndex });
