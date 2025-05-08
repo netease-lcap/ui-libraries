@@ -605,7 +605,7 @@ namespace nasl.ui {
     @Prop({
       group: '交互属性',
       title: '可调整列宽',
-      description: '设置是否可以调整列宽',
+      description: '设置制品是否可以调整列宽',
       setter: { concept: 'SwitchSetter' },
     })
     resizable: nasl.core.Boolean = false;

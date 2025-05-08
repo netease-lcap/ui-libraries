@@ -345,8 +345,9 @@ export const useTable: NaslComponentPluginOptions = {
         const vnodes = ctx.setupContext.slots?.default?.();
         const columns = renderSlot(vnodes);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];
+        console.log(context.propsData.props, 'context');
         if (!context.propsData?.props?.displayColumns) {
-          context.propsData.props.displayColumns = columns.map((item) => item.colKey);
+          resultVNode.componentOptions.propsData.displayColumns = columns.map((item) => item.colKey);
         }
         if (tree.value) {
           context.propsData.props.columns = columns;
