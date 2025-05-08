@@ -74,11 +74,13 @@ export const Default = {
           { colKey: 'time', title: '时长', width: 100 },
           { colKey: 'createTime', title: '创建时间', width: 100 },
         ],
+        displayColumns: undefined,
       };
     },
     methods: {
       log(value) {
         console.log(value, 'log');
+        this.displayColumns = value;
       },
       onSortChange(...arg) {
         console.log(arg, 'arg===');
@@ -111,6 +113,12 @@ export const Default = {
    @sort-change="onSortChange"
    :onRowClick="log"
    dragSort="row"
+   :columnController="true"
+   :headerAffixedTop="true"
+
+   :displayColumns="displayColumns"
+   @display-columns-change="log"
+   :resizable="true"
    :treeDisplay="true"
    :selection="true"
    :hasIndexColumn="true"

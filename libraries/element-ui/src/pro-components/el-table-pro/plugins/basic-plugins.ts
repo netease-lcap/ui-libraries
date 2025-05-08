@@ -25,6 +25,8 @@ export const useTable: NaslComponentPluginOptions = {
     'showTotal',
     'showJumper',
     'treeDisplay',
+    'displayColumns',
+    'onDisplayColumnsChange',
     'virtual',
   ],
   setup(props, ctx) {
@@ -241,14 +243,36 @@ export const useTable: NaslComponentPluginOptions = {
     onMounted(() => {
       if (_.isFunction(onLoadData)) {
         onLoadData?.({
-          page: _.get(pagination.value, 'current', undefined), //current.value,
+          page: _.get(pagination.value, 'current', undefined), // current.value,
           size: _.get(pagination.value, 'pageSize', undefined),
           sort: _.get(sorting.value, 'field'),
           order: _.get(sorting.value, 'order'),
         });
       }
     });
+    const columnController = props.useRef('columnController', (v) => (v
+        ? {
+            placement: 'top-right',
+          }
+        : {}));
 
+    // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
+    const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
+    watch(
+      () => props.get('displayColumns'),
+      (value) => {
+        displayColumns.value = value;
+      },
+    );
+    const onDisplayColumnsChange = props.useComputed('onDisplayColumnsChange', (fn) => {
+      return (value) => {
+        if (!_.isFunction(fn)) {
+          displayColumns.value = value;
+        } else {
+          fn(value);
+        }
+      };
+    });
     return {
       data,
       onPageChange,
@@ -256,6 +280,9 @@ export const useTable: NaslComponentPluginOptions = {
       ...scroll.value,
       pagination,
       tree,
+      columnController,
+      displayColumns,
+      onDisplayColumnsChange,
       rowKey: valueField,
       // tree: {
       //   childrenKey: 'chiildren',
@@ -289,7 +316,7 @@ export const useTable: NaslComponentPluginOptions = {
               'el-p-tree-icon--opened': type === 'fold',
             },
           });
-        }
+        };
       }),
       onSelectChange: (selectedRowKeys: Array<string | number>, context: SelectOptions<any>) => {
         const onSelectChange = props.get('onSelectChange');
@@ -306,7 +333,7 @@ export const useTable: NaslComponentPluginOptions = {
           current.value = 1;
           if (_.isFunction(onLoadData)) {
             onLoadData?.({
-              page: _.get(pagination.value, 'current', undefined), //current.value,
+              page: _.get(pagination.value, 'current', undefined), // current.value,
               size: _.get(pagination.value, 'pageSize', undefined),
               sort: sort.value,
               order: order.value,
@@ -318,6 +345,9 @@ export const useTable: NaslComponentPluginOptions = {
         const vnodes = ctx.setupContext.slots?.default?.();
         const columns = renderSlot(vnodes);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];
+        if (!context.propsData?.props?.displayColumns) {
+          context.propsData.props.displayColumns = columns.map((item) => item.colKey);
+        }
         if (tree.value) {
           context.propsData.props.columns = columns;
           return h(EnhancedTable, context.propsData, context.childrenNodes);
