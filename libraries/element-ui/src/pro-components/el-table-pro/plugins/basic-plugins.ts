@@ -348,6 +348,7 @@ export const useTable: NaslComponentPluginOptions = {
         console.log(context.propsData.props, 'context');
         if (!context.propsData?.props?.displayColumns) {
           resultVNode.componentOptions.propsData.displayColumns = columns.map((item) => item.colKey);
+          context.propsData.props.displayColumns = columns.map((item) => item.colKey);
         }
         if (tree.value) {
           context.propsData.props.columns = columns;
