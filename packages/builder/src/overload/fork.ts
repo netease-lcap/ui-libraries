@@ -7,8 +7,9 @@ import traverse from '@babel/traverse';
 import generator from '@babel/generator';
 import * as babelTypes from '@babel/types';
 import { OverloadComponentContext } from './context';
-import { LCAP_UI_PACKAGE_PATH } from './constants';
-import { transformAPITs } from './transform-api';
+import { LCAP_UI_PACKAGE_PATH, LCAP_UI_PACKAGE_NAME } from './constants';
+import { getPath } from '../utils/fs';
+import logger from '../utils/logger';
 
 const suffixes = ['.js', '.jsx', '.ts', '.tsx'];
 
@@ -248,6 +249,54 @@ function addDependices() {
   }
 }
 
+function addSubExports(context: OverloadComponentContext) {
+  const indexPath = getPath(path.resolve(context.componentFolderPath, './index'));
+  const needExportNames = context.replaceNames.filter((name) => context.replaceNameMap[name] && context.replaceNameMap[name] !== context.name);
+  if (!indexPath || needExportNames.length === 0) {
+    return;
+  }
+
+  try {
+    const code = fs.readFileSync(indexPath, 'utf-8').toString();
+    const ast = parser.parse(code, {
+      sourceType: 'module',
+      plugins: ['typescript', 'jsx'],
+    });
+
+    traverse(ast, {
+      ExportSpecifier(p) {
+        if (p.node.exported.type === 'Identifier' && needExportNames.includes(p.node.exported.name)) {
+          // p.node.exported.name = context.replaceNameMap[p.node.exported.name];
+          const exportPath = p.findParent((n) => n.isExportNamedDeclaration());
+
+          // 如果存在 exportPath 且 exportPath 是 ExportNamedDeclaration 类型，则添加新的 ExportSpecifier
+          if (exportPath && exportPath.node.type === 'ExportNamedDeclaration') {
+            exportPath.node.specifiers.push({
+              type: 'ExportSpecifier',
+              local: p.node.local,
+              exported: {
+                ...p.node.exported,
+                name: context.replaceNameMap[p.node.exported.name],
+              },
+            });
+            needExportNames.splice(needExportNames.indexOf(p.node.exported.name), 1);
+          }
+        }
+      },
+    });
+
+    let resultCode = generator(ast).code;
+
+    if (needExportNames.length > 0) {
+      resultCode = `${resultCode}\nexport { ${needExportNames.map((name) => `${name} as ${context.replaceNameMap[name]}`).join(', ')} } from '${LCAP_UI_PACKAGE_NAME}';\n`;
+    }
+
+    fs.writeFileSync(indexPath, resultCode, 'utf-8');
+  } catch (e) {
+    logger.warn(e);
+  }
+}
+
 export async function forkComponent(context: OverloadComponentContext) {
   if (!context.fork) {
     return;
@@ -280,15 +329,6 @@ export async function forkComponent(context: OverloadComponentContext) {
       default: break;
     }
   });
-}
 
-export async function setAllAPI(context: OverloadComponentContext) {
-  const filePath = path.resolve(context.pkgComponentFolderPath, 'api.ts');
-  if (!fs.existsSync(filePath) || !context.naslUIConfig.children || context.naslUIConfig.children.length === 0) {
-    return;
-  }
-
-  let code = fs.readFileSync(filePath, 'utf-8').toString();
-  code = transformAPITs(code, context, true);
-  fs.writeFileSync(path.resolve(context.componentFolderPath, 'temp-all-api.bak'), code, 'utf-8');
+  addSubExports(context);
 }

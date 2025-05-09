@@ -48,3 +48,15 @@ export function isWithForm(config: any) {
 export function addPrefix(name, prefix) {
   return upperFirst(prefix.toLowerCase()) + name;
 }
+
+export function replaceAllTagName(code: string, replaceMap: Record<string, string>) {
+  return Object.keys(replaceMap).reduce((result, key) => {
+    return replaceXmlTagsPrecisely(result, key, replaceMap[key]);
+  }, code);
+}
+
+export function replaceAllTagNameInCode(code: string, replaceMap: Record<string, string>) {
+  return Object.keys(replaceMap).reduce((result, key) => {
+    return result.replaceAll(`'${key}'`, `'${replaceMap[key]}'`).replaceAll(`"${key}"`, `"${replaceMap[key]}"`);
+  }, code);
+}

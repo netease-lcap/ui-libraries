@@ -43,6 +43,7 @@ export interface OverloadComponentContext {
   themeConfig: ThemeComponentConfig;
   isWithForm: boolean;
   withFormName: string;
+  exportNames: string[];
   findNaslUIConfig: (name: string | ((c: NaslUIComponentConfig) => boolean)) => NaslUIComponentConfig | null;
 }
 
@@ -123,6 +124,7 @@ function getReleaceMap(comp, framework, prefix) {
   return {
     replaceNames: Object.keys(replaceNameMap),
     replaceTags: Object.keys(replaceTagMap),
+    exportNames: Object.values(replaceNameMap),
     replaceNameMap,
     replaceTagMap,
   };

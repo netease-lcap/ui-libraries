@@ -4,33 +4,7 @@ import { kebabCase } from 'lodash';
 import type { OverloadComponentContext } from './context';
 import { LCAP_UI_PACKAGE_NAME } from './constants';
 import { addPrefix, getWithFormName } from './utils';
-
-function resetExports(componentFolderPath: string, name: string, exportNames: string[]) {
-  const indexPath = path.resolve(componentFolderPath, '../index.ts');
-
-  if (!fs.existsSync(indexPath)) {
-    return;
-  }
-
-  let codes = fs.readFileSync(indexPath, 'utf-8').split('\n');
-  codes = codes.map((code) => {
-    if (code.startsWith('export') && (code.includes(` ${name} `) || code.includes(` ${name}}`))) {
-      return `export { ${exportNames.join(', ')} } from './${kebabCase(name)}';`;
-    }
-
-    if (code.startsWith('import') && code.includes(` ${name} `)) {
-      return `import { ${exportNames.join(', ')} } from './${kebabCase(name)}';`;
-    }
-
-    if (code.trim() === name || code.trim() === `${name},`) {
-      return exportNames.map((n) => `  ${n},`).join('\n');
-    }
-
-    return code;
-  });
-
-  fs.writeFileSync(indexPath, codes.join('\n'), 'utf-8');
-}
+import { getPath } from '../utils/fs';
 
 function generateElementUIComponent(context: OverloadComponentContext) {
   const withFormName = addPrefix(getWithFormName(context.naslUIConfig.name), context.prefix);
@@ -76,10 +50,6 @@ function generateElementUIComponent(context: OverloadComponentContext) {
 
   fs.writeFileSync(path.resolve(context.componentFolderPath, 'index.vue'), vueCode, 'utf-8');
   fs.writeFileSync(path.resolve(context.componentFolderPath, 'index.ts'), indexCode, 'utf-8');
-
-  if (context.isWithForm) {
-    resetExports(context.componentFolderPath, context.name, [context.name, withFormName]);
-  }
 }
 
 async function generateVueComponent(context: OverloadComponentContext) {
@@ -157,6 +127,46 @@ async function generateReactComponent(context: OverloadComponentContext) {
   fs.writeFileSync(path.resolve(context.componentFolderPath, 'index.tsx'), code, 'utf-8');
 }
 
+// 添加 index.ts 中的子组件 exports
+function addIndexExports(context: OverloadComponentContext) {
+  const indexPath = getPath(path.resolve(context.componentFolderPath, './index'));
+
+  if (!indexPath || !fs.existsSync(indexPath)) {
+    return;
+  }
+
+  const needExportNames = context.replaceNames.filter((name) => {
+    const exportName = context.replaceNameMap[name];
+
+    return exportName && exportName !== context.name && (!context.isWithForm || name !== context.withFormName);
+  });
+
+  if (needExportNames.length === 0) {
+    return;
+  }
+
+  const codes = fs.readFileSync(indexPath, 'utf-8').split('\n');
+  codes.push(`import { ${needExportNames.map((n) => `${n} as ${context.replaceNameMap[n]}`).join(', ')} } from '${LCAP_UI_PACKAGE_NAME}';`);
+  codes.push(`export { ${needExportNames.map((n) => context.replaceNameMap[n]).join(', ')} };\n`);
+  fs.writeFileSync(indexPath, codes.join('\n'), 'utf-8');
+}
+
+function addComponentsExports(context: OverloadComponentContext) {
+  const indexPath = path.resolve(context.componentFolderPath, '../index.ts');
+  const needExportNames = context.exportNames.filter((name) => name !== context.name);
+
+  if (!fs.existsSync(indexPath) || needExportNames.length === 0) {
+    return;
+  }
+
+  const folderName = path.basename(context.componentFolderPath);
+
+  const codes = fs.readFileSync(indexPath, 'utf-8').split('\n');
+  codes.push(`export { ${needExportNames.join(', ')} } from './${folderName}';\n`);
+
+  fs.writeFileSync(indexPath, codes.join('\n'), 'utf-8');
+}
+
 export async function generateComponentFile(context: OverloadComponentContext) {
   switch (context.framework) {
     case 'vue2':
@@ -167,4 +177,7 @@ export async function generateComponentFile(context: OverloadComponentContext) {
       break;
     default: break;
   }
+
+  addIndexExports(context);
+  addComponentsExports(context);
 }

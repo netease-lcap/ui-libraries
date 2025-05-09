@@ -5,7 +5,7 @@ import generate from '@babel/generator';
 import traverse from '@babel/traverse';
 import { OverloadComponentContext } from './context';
 import { LCAP_UI_PATH } from './constants';
-import { addPrefix } from './utils';
+import { addPrefix, replaceAllTagNameInCode } from './utils';
 import { getAST } from '../utils/babel-utils';
 
 export function transformAPITs(tsCode, context: OverloadComponentContext, all: boolean = false) {
@@ -180,7 +180,14 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
                   return ext;
                 });
               }
-              const ast = getAST(obj);
+              let ast;
+
+              if (key === 'ideusage') {
+                ast = getAST(replaceAllTagNameInCode(JSON.stringify(obj), context.replaceTagMap), false);
+              } else {
+                ast = getAST(obj);
+              }
+
               if (!ast) {
                 return;
               }

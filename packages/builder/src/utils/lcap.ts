@@ -4,6 +4,9 @@ import glob from 'fast-glob';
 import { normalizePath } from 'vite';
 import { camelCase, upperFirst } from 'lodash';
 import { MaterialSchema } from '@lcap/material-parser';
+import * as parser from '@babel/parser';
+import traverse from '@babel/traverse';
+import generator from '@babel/generator';
 import { type NaslUIComponentConfig } from '../overload';
 import { getComponentPathInfo } from './component-path';
 import logger from './logger';
@@ -101,31 +104,49 @@ export function removeComponentFiles(rootPath: string, name: string) {
   const componentFolderName = path.basename(componentFolder);
   const exportsFilePath = ['index.ts', 'index.js'].map((fileName) => path.resolve(componentFolder, '../', fileName)).filter((p) => fs.existsSync(p))[0];
 
-  // 重写文件导入
-  if (exportsFilePath) {
-    const codes: string[] = [];
-    fs.readFileSync(exportsFilePath, 'utf-8').toString().split('\n').forEach((code) => {
-      const s = code.trim();
-      const fromKey = ' from ';
-      const fromIndex = s.indexOf(fromKey);
-      if (fromIndex > -1 && (s.startsWith('import') || s.startsWith('export'))) {
-        const formSource = s.substring(fromIndex + fromKey.length);
-        if (formSource.includes(`/${componentFolderName}'`) || formSource.includes(`/${componentFolderName}"`) || formSource.includes(`/${componentFolderName}/`)) {
-          return;
-        }
+  const code = fs.readFileSync(exportsFilePath, 'utf-8').toString();
+  const source = `./${componentFolderName}`;
+
+  const ast = parser.parse(code, {
+    sourceType: 'module',
+    plugins: ['typescript', 'jsx'],
+  });
+
+  const removeNames = [name];
+
+  traverse(ast, {
+    ExportNamedDeclaration(path) {
+      if (path.node.source && path.node.source.value === source) {
+        path.remove();
       }
+    },
+    ImportDeclaration(path) {
+      if (path.node.source && path.node.source.value === source) {
+        path.traverse({
+          ImportSpecifier(p) {
+            if (p.node.local.name === name) {
+              removeNames.push(p.node.local.name);
+            }
+          },
+        });
 
-      if (s === name || s === `${name},`) {
-        return;
+        path.remove();
       }
-
-      codes.push(code);
-    });
-
-    fs.writeFileSync(exportsFilePath, codes.join('\n'), 'utf-8');
-  }
+    },
+    ExportAllDeclaration(path) {
+      if (path.node.source && path.node.source.value === source) {
+        path.remove();
+      }
+    },
+    ExportSpecifier(path) {
+      if (removeNames.includes(path.node.local.name)) {
+        path.remove();
+      }
+    },
+  });
 
   fs.rmSync(componentFolder, { recursive: true });
+  fs.writeFileSync(exportsFilePath, generator(ast).code, 'utf-8');
 }
 
 export interface WriteOptions {
