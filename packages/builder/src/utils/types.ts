@@ -7,5 +7,6 @@ export interface ComponentMetaInfo {
   tsPath: string;
   type?: string;
   sourceName?: string;
+  kebabName?: string;
   children?: ComponentMetaInfo[];
 }

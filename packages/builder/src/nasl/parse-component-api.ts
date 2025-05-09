@@ -11,6 +11,7 @@ import generate from '@babel/generator';
 import * as astTypes from '@nasl/types/nasl.ui.ast';
 import { evalOptions, getSlotName } from '../utils/babel-utils';
 import snippetCode2NASL from '../nasl/snippet-code2nasl';
+import { getKebabCaseName } from '../utils/string';
 
 function getValueFromObjectExpressionByKey(object: babelTypes.ObjectExpression, key: string): unknown {
   const property = object.properties.find((prop) => prop.type === 'ObjectProperty' && (prop.key as babelTypes.Identifier).name === key) as babelTypes.ObjectProperty;
@@ -237,7 +238,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
       // VanRouterView
       name: className,
       // van-router-view
-      kebabName: className.replace(/([A-Z])/g, (m, $1) => `-${$1.toLowerCase()}`).replace(/^-/, ''),
+      kebabName: getKebabCaseName(className),
       title: '',
       description: '',
       icon: '',

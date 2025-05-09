@@ -9,6 +9,7 @@ import * as prettier from 'prettier';
 import { isNil, lowerFirst } from 'lodash';
 import logger from './logger';
 import { ComponentMetaInfo } from './types';
+import { getKebabCaseName } from './string';
 
 export const evalOptions = (object) => {
   const { code } = generate(object);
@@ -101,6 +102,7 @@ export const getComponentMetaByApiTs = (tsPath) => {
 
       const compMetaInfo: ComponentMetaInfo = {
         name: p.node.id.name,
+        kebabName: getKebabCaseName(p.node.id.name),
         tsPath,
       };
 

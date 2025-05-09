@@ -72,9 +72,12 @@ export function getComponentMetaInfos(rootPath: string, parseAPI: boolean = fals
   }
 
   if (parseAPI) {
-    return metaInfos.map(({ tsPath }) => {
+    return metaInfos.map(({ tsPath, show }) => {
       try {
-        return getComponentMetaByApiTs(tsPath);
+        return {
+          show,
+          ...getComponentMetaByApiTs(tsPath),
+        };
       } catch (e) {
         logger.error(`解析组件 ${tsPath} 失败`);
         return null;
