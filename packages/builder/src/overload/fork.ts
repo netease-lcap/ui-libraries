@@ -10,6 +10,15 @@ import { OverloadComponentContext } from './context';
 import { LCAP_UI_PACKAGE_PATH } from './constants';
 import { transformAPITs } from './transform-api';
 
+const suffixes = ['.js', '.jsx', '.ts', '.tsx'];
+
+function isExist(filePath: string) {
+  return ['', ...suffixes].some((suffix) => {
+    const fullPath = filePath + suffix;
+    return fs.existsSync(fullPath) && !fs.lstatSync(fullPath).isDirectory();
+  });
+}
+
 function changeNodeSource(node: babelTypes.ImportDeclaration | babelTypes.ExportNamedDeclaration | babelTypes.ExportAllDeclaration, filePath: string, modules: string[]) {
   if (!node.source) {
     return;
@@ -18,7 +27,7 @@ function changeNodeSource(node: babelTypes.ImportDeclaration | babelTypes.Export
   let sourcePath = node.source.value;
   if (sourcePath.startsWith('./') && sourcePath.lastIndexOf('/') === 1) {
     const resolvePath = path.resolve(filePath.substring(0, filePath.lastIndexOf('/')), sourcePath);
-    if (fs.existsSync(resolvePath) && !fs.lstatSync(resolvePath).isDirectory()) {
+    if (isExist(resolvePath)) {
       return;
     }
   }
