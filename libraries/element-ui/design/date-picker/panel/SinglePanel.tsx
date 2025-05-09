@@ -2,7 +2,7 @@ import { defineComponent, PropType, computed } from '@vue/composition-api';
 import { useConfig, usePrefixClass } from '../../hooks/useConfig';
 import ElPanelContent from './PanelContent';
 import ElExtraContent from './ExtraContent';
-import { ElDatePickerProps } from '../type';
+import { DateMultipleValue, DateValue, ElDatePickerProps } from '../type';
 import { getDefaultFormat, parseToDayjs } from '../../_common/js/date-picker/format';
 import useTableData from '../hooks/useTableData';
 import useDisableDate, { disableDateProps } from '../hooks/useDisableDate';
@@ -31,6 +31,7 @@ export default defineComponent({
     month: Number,
     time: String,
     popupVisible: Boolean,
+    multiple: Boolean,
     onPanelClick: Function,
     onCellClick: Function,
     onCellMouseEnter: Function,
@@ -64,7 +65,8 @@ export default defineComponent({
       }
 
       const disableTimeObj = { hour: [h], minute: [m], second: [s] };
-      const checkTime = parseToDayjs(props.value, format).hour(h).minute(m).second(s).toDate();
+      const value = props.multiple ? Date.now() : (props.value as string | Date | number);
+      const checkTime = parseToDayjs(value, format as string).hour(h).minute(m).second(s).toDate();
       if (props.disableTime(checkTime)) {
         return disableTimeObj;
       }
@@ -73,11 +75,18 @@ export default defineComponent({
     };
 
     const tableData = computed(() => useTableData({
+      value: props.multiple && props.value && Array.isArray(props.value) ? props.value.map((val) => parseToDayjs(val, format as string).toDate()) : props.value,
       year: props.year,
       month: props.month,
       mode: props.mode,
-      start: props.value ? parseToDayjs(props.value, format).toDate() : undefined,
+      start: props.value
+        ? parseToDayjs(
+          props.multiple ? (props.value as DateMultipleValue)[0] : (props.value as DateValue),
+          format as string,
+        ).toDate()
+        : undefined,
       firstDayOfWeek: props.firstDayOfWeek || global.value.firstDayOfWeek,
+      multiple: props.multiple,
       ...disableDateOptions.value,
     }));
 
@@ -90,6 +99,7 @@ export default defineComponent({
       firstDayOfWeek: props.firstDayOfWeek || global.value.firstDayOfWeek,
       tableData: tableData.value,
       popupVisible: props.popupVisible,
+      multiple: props.multiple,
       enableTimePicker: props.enableTimePicker,
       timePickerProps: {
         ...(props.timePickerProps as any),

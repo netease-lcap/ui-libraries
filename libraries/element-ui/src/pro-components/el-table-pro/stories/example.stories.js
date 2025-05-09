@@ -39,6 +39,11 @@ export const Default = {
               children: [
                 {
                   channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                  children: [
+                    {
+                      channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                    },
+                  ],
                 },
               ],
               detail: {
@@ -73,7 +78,7 @@ export const Default = {
     },
     methods: {
       log(value) {
-        console.log(value);
+        console.log(value, 'log');
       },
       onSortChange(...arg) {
         console.log(arg, 'arg===');
@@ -81,9 +86,7 @@ export const Default = {
       onDragSortChange(...arg) {
         console.log(arg, 'arg===');
       },
-      rowspanAndColspan({
-        row, col, rowIndex, colIndex,
-      }) {
+      rowspanAndColspan({ row, col, rowIndex, colIndex }) {
         // console.log(rowIndex,'rowIndex`');
         // if (colIndex == 1 && rowIndex % this.rowspan == 0) {
         //   return {
@@ -110,14 +113,14 @@ export const Default = {
    dragSort="row"
    :treeDisplay="true"
    :selection="true"
+   :hasIndexColumn="true"
    :multiple="false"
+   @cell-click="log"
    :onDragSort="onDragSortChange"
     >
 
-    <el-table-column-pro title="申请人" >
-    <template #cell="cell">
-      <div>{{'12'}}</div>
-    </template>
+    <el-table-column-pro title="申请人" colKey="createTime">
+
     </el-table-column-pro>
 
         <el-table-column-pro title="渠道" colKey="channel" :sorter="true" :autoMerge="true" >
@@ -134,6 +137,78 @@ export const Default = {
       </div>
     </template>
     </el-table-pro>`,
+  }),
+};
+
+export const 树形 = {
+  name: '树形示例',
+  render: () => ({
+    data() {
+      return {
+        data: async (params) => {
+          const initialData = [];
+          const total = 3;
+          for (let i = 0; i < total; i++) {
+            initialData.push({
+              index: i,
+              add: {
+                index: i,
+                name: '贾明',
+                age: 18,
+              },
+              applicant: ['贾明', '张三', '王芳'][i % 3],
+              status: i % 3,
+              channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+              // children: [
+              //   {
+              //     channel: ['电子签署2', '电子签署2', '纸质签署2'][i % 2],
+              //     index: `${i}2`,
+              //     children: [
+              //       {
+              //         channel: ['电子签署3', '电子签署3', '纸质签署3'][i % 3],
+              //         index: `${i}3`,
+              //       },
+              //     ],
+              //   },
+              // ],
+              // detail: {
+              //   email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
+              // },
+              // matters: ['宣传物料制作费用', 'algolia 服务报销', '相关周边制作费', '激励奖品快递费'][i % 4],
+              // time: [2, 10, 1][i % 3],
+              // createTime: ['2022-01-01', '2022-02-01', '2022-02-01', '2022-03-01', '2022-04-01'][i % 4],
+            });
+          }
+
+          return {
+            list: initialData,
+            total,
+            onDragSortChange: (value) => {
+              console.log(value, 'onDragSortChange');
+            },
+          };
+        },
+      };
+    },
+    methods: {
+      async onDragSortChange(value) {
+          console.log(JSON.stringify(value.data[0].add.index), JSON.stringify(value.newData[0].add.index), 'onDragSortChange');
+      },
+    },
+    template: `
+    <el-table-pro
+        row-key="add.index"
+    :dataSource="data"
+    :treeDisplay="true"
+    :hasIndexColumn="true"
+   dragSort="row"
+
+   @drag-sort="onDragSortChange"
+    >
+      <el-table-column-pro title="申请人" colKey="channel"></el-table-column-pro>
+    
+    </el-table-pro>
+    `,
   }),
 };
 // <el-table-column-pro data-nodepath="123"  >

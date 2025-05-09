@@ -167,7 +167,7 @@ namespace nasl.ui {
       description: '方向操作按钮。默认显示组件内置操作图标。自定义操作图标示例：["向左", "向右"]',
       setter: { concept: 'InputSetter' },
     })
-    operation: nasl.collection.List<nasl.core.String>;
+    private operation: nasl.collection.List<nasl.core.String>;
 
     @Prop({
       group: '数据属性',
@@ -177,6 +177,15 @@ namespace nasl.ui {
     })
     search: nasl.core.Boolean = false;
 
+    @Prop<ElTransferProOptions<T, V>, 'searchPlaceholder'>({
+      group: '主要属性',
+      title: '搜索框占位符',
+      description: '搜索框占位符',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !!_.search,
+    })
+    searchPlaceholder: nasl.core.String = '请输入关键词搜索';
+
     @Prop({
       group: '主要属性',
       title: '显示全选',
@@ -184,6 +193,111 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     showCheckAll: nasl.core.Boolean | any[] = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '目标列表排序',
+      description:
+        '目标列表元素的排序策略：若为 `original`，则保持与数据源相同的顺序；若为 `push`，则新加入的元素排在最后；若为 `unshift`，则新加入的元素排在最前',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '原顺序' },
+          { title: '新加入的元素排在最后' },
+          { title: '新加入的元素排在最前' },
+        ],
+      },
+    })
+    targetSort: 'original' | 'push' | 'unshift' = 'original';
+
+    @Prop({
+      group: '样式属性',
+      title: '按钮排列方向',
+      description: '按钮排列方向',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '水平' }, { title: '垂直' }],
+      },
+    })
+    buttonDirection: 'horizontal' | 'vertical' = 'vertical';
+
+    @Prop({
+      group: '样式属性',
+      title: '按钮尺寸',
+      description: '设置按钮大小',
+      docDescription: '按钮尺寸，支持设置 中型、小、迷你。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '大' },
+          { title: '中型' },
+          { title: '正常' },
+          { title: '小' },
+        ],
+      },
+    })
+    buttonSize: 'large' | 'medium' | 'small' | 'mini' = 'mini';
+
+    @Prop({
+      group: '样式属性',
+      title: '按钮类型',
+      description: '设置按钮样式类型',
+      docDescription:
+        '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮按钮。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '主要按钮' },
+          { title: '成功按钮' },
+          { title: '警告按钮' },
+          { title: '危险按钮' },
+          { title: '信息按钮' },
+          { title: '文字按钮' },
+          { title: '默认按钮' },
+        ],
+      },
+    })
+    buttonType: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' | '' = 'primary';
+
+    @Prop({
+      group: '样式属性',
+      title: '朴素按钮',
+      description: '是否朴素按钮',
+      setter: { concept: 'SwitchSetter' },
+    })
+    buttonPlain: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '圆角按钮',
+      description: '是否圆角按钮',
+      setter: { concept: 'SwitchSetter' },
+    })
+    buttonRound: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '圆形按钮',
+      description: '是否圆形按钮',
+      setter: { concept: 'SwitchSetter' },
+    })
+    buttonCircle: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '向左按钮文本',
+      description: '向左按钮文本',
+      setter: { concept: 'InputSetter' },
+    })
+    leftButtonText: nasl.core.String;
+
+    @Prop({
+      group: '样式属性',
+      title: '向右按钮文本',
+      description: '向右按钮文本',
+      setter: { concept: 'InputSetter' },
+    })
+    rightButtonText: nasl.core.String;
 
     @Event({
       title: '改变后',

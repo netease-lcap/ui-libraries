@@ -39,7 +39,7 @@ export default function useRange(props: ElDateRangePickerProps, { emit }: any) {
     borderless: props.borderless,
     size: props.size,
     clearable: props.clearable,
-    prefixIcon: props.prefixIcon,
+    // prefixIcon: props.prefixIcon,
     readonly: !props.allowInput || props.readonly,
     separator: props.separator || global.value.rangeSeparator,
     placeholder: props.placeholder || global.value.placeholder[props.mode],

@@ -844,7 +844,6 @@ export default {
             }
 
             const match = url.match(/\/([^/]+)$/);
-            console.log('match', match);
             return match ? match[1] : null;
         },
         emitInputEvent() {

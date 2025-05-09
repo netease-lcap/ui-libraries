@@ -145,7 +145,7 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-form :model="model" ref="formRef">
+    <el-form :model="model" ref="formRef" inline>
     {{inputName}}
     <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
      <el-form-input-number :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />

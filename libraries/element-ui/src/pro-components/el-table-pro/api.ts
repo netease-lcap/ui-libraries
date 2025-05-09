@@ -42,7 +42,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
-      containerDirection: "row",
+      containerDirection: 'row',
       disableSlotAutoFill: [
         {
           slot: 'expandedRow',
@@ -168,6 +168,18 @@ namespace nasl.ui {
     })
     multiple: M = false as any;
 
+    @Prop<ElTableProOptions<T, V, P, M>, 'treeDisplay'>({
+      group: '数据属性',
+      title: '树形模式',
+      description: '以树形数据展示表格',
+      docDescription: '表格是否以树型方式展示。默认关闭',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => _.hasExpandedRow === false,
+    })
+    treeDisplay: nasl.core.Boolean = false;
+
     @Prop({
       group: '主要属性',
       sync: true,
@@ -184,41 +196,14 @@ namespace nasl.ui {
       if: (_) => _.treeDisplay === false,
     })
     hasExpandedRow: nasl.core.Boolean = false;
-    // hasExpandedRow
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Default Active Row Keys',
-    //   description:
-    //     '高亮行，支持鼠标键盘操作(Shift)连续高亮行，可用于处理行选中等批量操作，模拟操作系统区域选择行为。非受控属性。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // defaultActiveRowKeys: any[] = [];
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Active Row Type',
-    //   description:
-    //     '默认不会高亮点击行，`activeRowType=single` 表示鼠标点击仅允许同时高亮一行，Shift 键盘操作加鼠标操作依然可以高亮多行，因为这属于明显的区域选择行为。`activeRowType= multiple ` 表示允许鼠标点击同时高亮多行。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // activeRowType: nasl.core.String;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Allow Resize Column Width',
-    //   description: '已废弃。是否允许调整列宽。请更为使用 `resizable`',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // allowResizeColumnWidth: nasl.core.Boolean;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Attach',
-    //   description:
-    //     '超出省略等所有浮层元素统一绑定到 `attach`，可根据实际情况调整挂载元素。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // attach: nasl.core.String | any;
+    @Prop<ElTableProOptions<T, V, P, M>, 'hasIndexColumn'>({
+      group: '主要属性',
+      title: '是否显示序号列',
+      description: '是否显示序号列',
+      setter: { concept: 'SwitchSetter' },
+    })
+    hasIndexColumn: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -227,22 +212,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     bordered: nasl.core.Boolean = true;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Bottom Content',
-    //   description: '表格底部内容，可以用于自定义列设置等。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // bottomContent: any;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '单元格数据为空时呈现的内容',
-    //   description: '单元格数据为空时呈现的内容',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // cellEmptyContent: any;
 
     @Prop({
       group: '数据属性',
@@ -655,17 +624,7 @@ namespace nasl.ui {
     })
     tableLayout: 'auto' | 'fixed' = 'fixed';
 
-    @Prop<ElTableProOptions<T, V, P, M>, 'treeDisplay'>({
-      group: '数据属性',
-      title: '树形模式',
-      description: '以树形数据展示表格',
-      docDescription: '表格是否以树型方式展示。默认关闭',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-      if: (_) => _.hasExpandedRow === false,
-    })
-    treeDisplay: nasl.core.Boolean = false;
+
 
     @Prop<ElTableProOptions<T, V, P, M>, 'parentField'>({
       group: '数据属性',
@@ -676,6 +635,7 @@ namespace nasl.ui {
       setter: {
         concept: 'PropertySelectSetter',
       },
+      onChange: [{ update: { dragSort: 'disabled' } }],
       if: (_) => _.treeDisplay === true,
     })
     parentField: (item: T) => any;
@@ -692,7 +652,7 @@ namespace nasl.ui {
     })
     checkStrictly: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElTableProOptions<T, V, P, M>, 'dragSort'>({
       group: '主要属性',
       title: '行拖拽',
       description: '拖拽排序方式，行拖拽排序，这种方式无法进行文本复制，',
@@ -700,6 +660,8 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '行拖拽' }, { title: '关闭拖拽' }],
       },
+
+      if: (_) => _.treeDisplay === false,
     })
     dragSort: 'row' | 'disabled' = 'disabled';
 
