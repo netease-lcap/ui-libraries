@@ -1364,7 +1364,8 @@ export default {
 
             const titleColIndexRelations = [];
             let headRows = [];
-            const headEl = this.$el.querySelector('[position=static] thead');
+            const headRef = this.$refs.tableRender.getRefs().head;
+            const headEl = headRef && headRef.querySelector('thead');
             if (headEl) {
                 headRows = Array.from(headEl.childNodes).filter((tr) => tr.nodeName === 'TR');
             }
@@ -1432,7 +1433,9 @@ export default {
                 await new Promise((res) => {
                     this.$once('hook:updated', res);
                 });
-                const bodyEl = this.$el.querySelector('[position=static] tbody');
+                const bodyTableRef = this.$refs.tableRender.getRefs().bodyTable;
+                const tableEl = bodyTableRef && bodyTableRef.$el;
+                const bodyEl = tableEl && tableEl.querySelector('tbody');
                 if (bodyEl) {
                     const trs = Array.from(bodyEl.childNodes).filter((tr) => tr.nodeName === 'TR');
                     const res1 = trs.map((tr, rowIndex) => Array.from(tr.childNodes).map(
