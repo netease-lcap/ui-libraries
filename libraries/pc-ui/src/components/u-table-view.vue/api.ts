@@ -1711,7 +1711,7 @@ namespace nasl.ui {
               },
           ],
       })
-      slotDefault: SlotType<() => Array<UTableViewColumn<T, V, P, M> | ViewComponent>>;
+      slotDefault: () => Array<UTableViewColumn<T, V, P, M> | ViewComponent>;
 
       @Slot({
           title: '标题',
