@@ -123,6 +123,7 @@ function getIgnores(root) {
 }
 
 async function buildSourceZip(root) {
+  const pkg = fs.readJSONSync(path.resolve(root, 'package.json'));
   const ignores = getIgnores(root);
   const files = await glob(['**/*'], {
     cwd: root,
@@ -130,6 +131,24 @@ async function buildSourceZip(root) {
     ignore: ignores,
     dot: true,
   });
+
+  const packageFiles = await glob('*.tgz', {
+    cwd: root,
+    absolute: false,
+    dot: true,
+  });
+
+  const pkgName = pkg.name.replace('@', '').replace('/', '-');
+
+  packageFiles.forEach((file) => {
+    const name = path.basename(file, '.tgz');
+    if (name.startsWith(pkgName)) {
+      return;
+    }
+
+    files.push(file);
+  });
+
   await zipDir(root, 'source.zip', files);
 }
 
