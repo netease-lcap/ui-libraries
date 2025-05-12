@@ -32,7 +32,7 @@ export function genTableTemplate(entity: naslTypes.Entity, nameGroup: NameGroup,
   const entityName = entity.name;
   const currentName = nameGroup.currentName || 'current';
   const properties = entity.properties.filter(filterProperty('inTable'));
-  const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.currentPage, elements.$ce.pageSize${options.hasFilter ? `,${nameGroup.viewVariableFilter}` : ''})`;
+  const dataSourceValue = `app.logics.${nameGroup.logic}(elements.$ce.currentPage, elements.$ce.pageSize, elements.$ce.sort, elements.$ce.order${options.hasFilter ? `,${nameGroup.viewVariableFilter}` : ''})`;
   const idProperties = getAllEntityPromaryKeyProperty(entity);
   return `<ElTable
         ref="${nameGroup.viewElementMainView}"
@@ -107,13 +107,13 @@ export function genTableBlock(entity: naslTypes.Entity, refElement: naslTypes.Vi
       return ${genTableTemplate(entity, nameGroup)}
     }
     export namespace app.logics {
-        ${genQueryLogic(allEntities, nameGroup, true, false, false)}
+        ${genQueryLogic(allEntities, nameGroup, true, true, false)}
     }`);
 
   return `export function view() {
       return ${genTableTemplate(entity, nameGroup)}
     }
     export namespace app.logics {
-        ${genQueryLogic(allEntities, nameGroup, true, false, false)}
+        ${genQueryLogic(allEntities, nameGroup, true, true, false)}
     }`;
 }
