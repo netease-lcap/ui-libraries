@@ -51,11 +51,11 @@ export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: N
     return `.LEFT_JOIN(${namespace}.${relationEntity.name}Entity, ${relationEntity.name} => ON(${onExpressions}))`;
   }).join('\n')}
   ${supportFilter && properties.length ? `.WHERE(${genWhereExpression(entity)})` : ''}
-        ${supportSort ? '.ORDER_BY([sort, order])' : ''}
-        .SELECT({
+    .SELECT({
             ${entityLowerName}: ${entity.name},
             ${allEntities.map((relationEntity) => `${firstLowerCase(relationEntity.name)}: ${relationEntity.name}`).join(',')}
-        }))${supportPage ? ', page, size)' : ''}
+        })
+        ${supportSort ? '.ORDER_BY([sort, order])' : ''})${supportPage ? ', page, size)' : ''}
         return result;
     }`;
 }

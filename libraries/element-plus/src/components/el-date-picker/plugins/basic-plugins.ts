@@ -93,3 +93,5 @@ export function handleTagName() {
     formTagName: FORM_TAG_NAME,
   };
 }
+
+export { handleIcon } from '@/plugins/common/icon';

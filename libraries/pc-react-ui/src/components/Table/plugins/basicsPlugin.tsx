@@ -174,8 +174,8 @@ export function useHandleOnRow(props) {
   const onRowDbClick = props.get('onDoubleClick', () => { });
   return {
     onRow: (record, index) => ({
-      onClick: () => _.attempt(onRowClick, record, index),
-      onDoubleClick: () => _.attempt(onRowDbClick, record, index),
+      onClick: () => _.attempt(onRowClick, { item: record, index }),
+      onDoubleClick: () => _.attempt(onRowDbClick, { item: record, index }),
     }),
   };
 }

@@ -55,6 +55,32 @@ export default {
     type: Number,
     default: 0,
   },
+  /** 是否区分颜色 */
+  distinguishColor: Boolean,
+  /** 低分和中等分数的界限值，值越大代表分数越低 */
+  lowThreshold: {
+    type: Number,
+    default: 2,
+  },
+  /** 高分和中等分数的界限值，值越大代表分数越高 */
+  highThreshold: {
+    type: Number,
+    default: 4,
+  },
+  /** 未选中时的颜色 */
+  voidColor: String,
+  /** 图标颜色 */
+  colors: {
+    type: Array as PropType<ElRateProps['colors']>,
+    default: (): ElRateProps['colors'] => ['#99A9BF', '#F7BA2A', '#FF9900'],
+  },
+  /** 是否显示分数 */
+  showScore: Boolean,
+  /** 分数模板 */
+  scoreTemplate: {
+    type: String,
+    default: '{value}',
+  },
   /** 评分数改变时触发 */
   onChange: Function as PropType<ElRateProps['onChange']>,
 };

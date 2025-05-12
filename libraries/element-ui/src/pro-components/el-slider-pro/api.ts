@@ -58,6 +58,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
+      title: '是否显示间断点',
+      description: '是否显示间断点',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showStep: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '数据属性',
       title: '双游标滑块',
       description: '双游标滑块',
       setter: { concept: 'SwitchSetter' },

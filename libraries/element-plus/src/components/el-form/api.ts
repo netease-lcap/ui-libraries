@@ -198,7 +198,13 @@ namespace nasl.ui {
     })
     size: 'small' | 'medium' | 'large' | '' = '';
 
-
+    @Prop({
+      group: '主要属性',
+      title: '行内布局',
+      description: '是否行内布局',
+      setter: { concept: 'SwitchSetter' },
+    })
+    inline: nasl.core.Boolean = false;
     // @Prop({
     //   group: '主要属性',
     //   title: '冒号',
@@ -299,7 +305,8 @@ namespace nasl.ui {
         label: 'display: inline-block;',
       },
 
-      forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: true,
+      forceRefresh: true,
       namedSlotOmitWrapper: ['label'],
     },
   })

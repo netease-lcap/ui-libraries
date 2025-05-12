@@ -2,12 +2,8 @@
 /* 组件功能扩展插件 */
 // export {};
 import _, { isFunction, isNil } from 'lodash';
-import {
-  computed, ref, watch, onMounted,
-} from '@vue/composition-api';
-import {
-  SelectOptions, Table, BaseTable, PrimaryTable, EnhancedTable,
-} from '@element-pro';
+import { computed, ref, watch, onMounted } from '@vue/composition-api';
+import { SelectOptions, Table, BaseTable, PrimaryTable, EnhancedTable } from '@element-pro';
 import { listToTree } from '@lcap/vue2-utils/utils';
 import { $ref, $render, createUseUpdateSync } from '@lcap/vue2-utils';
 
@@ -17,7 +13,22 @@ export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', event: 'update:selectedRowKeys' }]);
 
 export const useTable: NaslComponentPluginOptions = {
-  props: ['onPageChange', 'page', 'pageSize', 'pageSizeOptions', 'showTotal', 'showJumper', 'treeDisplay', 'virtual'],
+  props: [
+    'onPageChange',
+    'page',
+    'pageSize',
+    'valueField',
+    'multiple',
+    'parentField',
+    'selection',
+    'pageSizeOptions',
+    'showTotal',
+    'showJumper',
+    'treeDisplay',
+    'displayColumns',
+    'onDisplayColumnsChange',
+    'virtual',
+  ],
   setup(props, ctx) {
     console.log('============table render===========');
     const current = props.useRef('page', (v) => v ?? 1);
@@ -26,6 +37,7 @@ export const useTable: NaslComponentPluginOptions = {
     const valueField = props.useComputed('valueField', (value) => value ?? rowKey);
     const sorting = props.useComputed('sorting', (value) => value);
     const selection = props.useRef('selection', (v) => v);
+    const hasIndexColumn = props.useRef('hasIndexColumn', (v) => v);
     const multiple = props.useRef('multiple', (v) => v);
     const typeColumns = _.cond([
       [
@@ -49,15 +61,30 @@ export const useTable: NaslComponentPluginOptions = {
       ],
       [_.stubTrue, _.constant([])],
     ])({ selection: selection.value, multiple: multiple.value });
+    const indexColumn = _.cond([
+      [
+        _.matches({ type: true }),
+        _.constant([
+          {
+            colKey: 'serial-number',
+            title: '序号',
+            type: 'index',
+            width: 70,
+            align: 'center',
+          },
+        ]),
+      ],
+      [_.stubTrue, _.constant([])],
+    ])({ type: hasIndexColumn.value });
     const sort = ref<string | null>(sorting.value?.field);
     const order = ref<string | null>(sorting.value?.order);
     const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
     const tree = props.useComputed('treeDisplay', (value) => (value
-      ? {
-        childrenKey: 'children',
-        checkStrictly: checkStrictly.value,
-      }
-      : undefined));
+        ? {
+            childrenKey: 'children',
+            checkStrictly: checkStrictly.value,
+          }
+        : undefined));
 
     const data = props.useComputed('data', (v) => {
       const treeDisplay = props.get('treeDisplay');
@@ -74,8 +101,8 @@ export const useTable: NaslComponentPluginOptions = {
     const rowspanAndColspan = ({ row, col }) => {
       return row?.rowspan?.[col.colKey] > 1
         ? {
-          rowspan: row?.rowspan?.[col.colKey],
-        }
+            rowspan: row?.rowspan?.[col.colKey],
+          }
         : {};
     };
     watch(
@@ -139,7 +166,10 @@ export const useTable: NaslComponentPluginOptions = {
           },
         ];
       });
-      return typeColumns.concat(columns).filter((item) => !_.isEmpty(item));
+      return typeColumns
+        .concat(indexColumn)
+        .concat(columns)
+        .filter((item) => !_.isEmpty(item));
     };
     const scroll = props.useComputed('virtual', (value) => (value ? { scroll: { type: 'virtual' } } : {}));
 
@@ -213,14 +243,36 @@ export const useTable: NaslComponentPluginOptions = {
     onMounted(() => {
       if (_.isFunction(onLoadData)) {
         onLoadData?.({
-          page: current.value,
-          size: pageSize.value,
-          sort: sorting.value?.field,
-          order: sorting.value?.order,
+          page: _.get(pagination.value, 'current', undefined), // current.value,
+          size: _.get(pagination.value, 'pageSize', undefined),
+          sort: _.get(sorting.value, 'field'),
+          order: _.get(sorting.value, 'order'),
         });
       }
     });
+    const columnController = props.useRef('columnController', (v) => (v
+        ? {
+            placement: 'top-right',
+          }
+        : {}));
 
+    // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
+    const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
+    watch(
+      () => props.get('displayColumns'),
+      (value) => {
+        displayColumns.value = value;
+      },
+    );
+    const onDisplayColumnsChange = props.useComputed('onDisplayColumnsChange', (fn) => {
+      return (value) => {
+        if (!_.isFunction(fn)) {
+          displayColumns.value = value;
+        } else {
+          fn(value);
+        }
+      };
+    });
     return {
       data,
       onPageChange,
@@ -228,6 +280,9 @@ export const useTable: NaslComponentPluginOptions = {
       ...scroll.value,
       pagination,
       tree,
+      columnController,
+      displayColumns,
+      onDisplayColumnsChange,
       rowKey: valueField,
       // tree: {
       //   childrenKey: 'chiildren',
@@ -240,6 +295,29 @@ export const useTable: NaslComponentPluginOptions = {
         return ({ row }) => slotExpandedRow({ item: row });
       }),
       bordered,
+      expandIcon: (h, params) => {
+        return h('el-icon', {
+          attrs: {
+            name: 'el-icon-arrow-right',
+          },
+          staticClass: 'el-p-icon',
+        });
+      },
+      treeExpandAndFoldIcon: props.useComputed('treeDisplay', (value) => {
+        if (!value) return undefined;
+
+        return (h, { type }) => {
+          return h('el-icon', {
+            attrs: {
+              name: 'el-icon-arrow-right',
+            },
+            staticClass: 'el-p-icon el-p-tree-icon',
+            class: {
+              'el-p-tree-icon--opened': type === 'fold',
+            },
+          });
+        };
+      }),
       onSelectChange: (selectedRowKeys: Array<string | number>, context: SelectOptions<any>) => {
         const onSelectChange = props.get('onSelectChange');
 
@@ -255,8 +333,8 @@ export const useTable: NaslComponentPluginOptions = {
           current.value = 1;
           if (_.isFunction(onLoadData)) {
             onLoadData?.({
-              page: current.value,
-              size: pageSize.value,
+              page: _.get(pagination.value, 'current', undefined), // current.value,
+              size: _.get(pagination.value, 'pageSize', undefined),
               sort: sort.value,
               order: order.value,
             });
@@ -264,10 +342,14 @@ export const useTable: NaslComponentPluginOptions = {
         },
       },
       [$render](resultVNode, h, context) {
-        console.log('=========== table========');
         const vnodes = ctx.setupContext.slots?.default?.();
         const columns = renderSlot(vnodes);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];
+        console.log(context.propsData.props, 'context');
+        if (!context.propsData?.props?.displayColumns) {
+          resultVNode.componentOptions.propsData.displayColumns = columns.map((item) => item.colKey);
+          context.propsData.props.displayColumns = columns.map((item) => item.colKey);
+        }
         if (tree.value) {
           context.propsData.props.columns = columns;
           return h(EnhancedTable, context.propsData, context.childrenNodes);
