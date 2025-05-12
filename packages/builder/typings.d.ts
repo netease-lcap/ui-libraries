@@ -41,6 +41,8 @@ declare namespace nasl.core {
 }
 
 declare namespace extensions {
+  export type SlotType<T extends (...args: Array<any>) => Array<any>> = (ret: ReturnType<T>, ...args: Parameters<T>) => ReturnType<T>;
+
   export interface ExtensionComponentOptions {
     type: 'pc' | 'h5' | 'both';
     show?: boolean;
