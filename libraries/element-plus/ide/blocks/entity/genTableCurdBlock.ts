@@ -65,7 +65,7 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
     }
   });
   const allEntities = [...entitySet];
-  const entityLogic = genQueryLogic(allEntities, nameGroup, true, false, true);
+  const entityLogic = genQueryLogic(allEntities, nameGroup, true, true, true);
   newLogics.push(entityLogic);
 
   return `export function view() {
