@@ -5,7 +5,7 @@ namespace nasl.ui {
     order: 2,
     sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/message-box',
     ideusage: {
-      "idetype": "messager",
+      "idetype": "modal",
       "elementSutando": {
         "condition": true,
         "component": "ElMessageBoxDesigner",
