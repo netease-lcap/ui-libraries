@@ -68,6 +68,7 @@ export async function getCreateComponentOptions(rootPath: string, metaInfo: Proj
     }
 
     if (createMode === 'overload') {
+      const supportFork = isSupportFork(metaInfo);
       const overloadAnswers = await prompts([
         {
           type: 'select',
@@ -89,10 +90,10 @@ export async function getCreateComponentOptions(rootPath: string, metaInfo: Proj
           },
         },
         {
-          type: () => (isSupportFork(metaInfo) ? 'confirm' : null),
+          type: () => (supportFork ? 'confirm' : null),
           name: 'fork',
           message: '是否复制基础组件源代码？\n复制组件源码后，该组件将完全独立，无法继续跟随基础组件能力升级变化，请慎重处理；',
-          initial: false,
+          initial: true,
         },
       ]);
 
@@ -101,6 +102,7 @@ export async function getCreateComponentOptions(rootPath: string, metaInfo: Proj
       result = {
         ...result,
         ...overloadAnswers,
+        fork: supportFork && overloadAnswers.fork,
         name: upperFirst(overloadAnswers.prefix) + overloadAnswers.baseComponentName,
         title: comp ? comp.title : '',
         type: metaInfo.libUIInfo && metaInfo.libUIInfo.type ? metaInfo.libUIInfo.type : 'pc',
