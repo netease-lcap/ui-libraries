@@ -15,7 +15,7 @@ export default {
     },
     icotype: {
       type: String,
-      default: () => 'top',
+      default: () => 'only',
     }
   },
   render(h) {
