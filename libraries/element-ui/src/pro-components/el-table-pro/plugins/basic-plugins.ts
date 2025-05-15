@@ -17,19 +17,67 @@ import { $ref, $render, createUseUpdateSync } from '@lcap/vue2-utils';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
 
-import { ElInputPro, ElInputNumberPro, ElSelectPro } from '@/pro-components/index';
+import {
+  ElInputPro,
+  ElInputNumberPro,
+  ElSelectPro,
+  ElCascaderPro,
+  ElCheckboxPro,
+  ElCheckboxGroupPro,
+  ElRadioPro,
+  ElRadioGroupPro,
+  ElSwitchPro,
+  ElColorPickerPro,
+  ElDatePickerPro,
+  ElDateRangePickerPro,
+  ElDatePickerPanelPro,
+  ElDateRangePickerPanelPro,
+  ElDateTimePickerPro,
+  ElInputAdornmentPro,
+  ElRatePro,
+  ElTextareaPro,
+  ElSelectInputPro,
+  ElSliderPro,
+  ElTagInputPro,
+  ElTimePickerPro,
+  ElTreePro,
+  ElTreeSelectPro,
+  ElUploadPro,
+} from '@/pro-components/index';
 
 const formComponentMap = {
   'el-input-pro': ElInputPro,
   'el-select-pro': ElSelectPro,
-  ElInputNumber: ElInputNumberPro,
+  'el-cascader-pro': ElCascaderPro,
+  'el-checkbox-pro': ElCheckboxPro,
+  'el-checkbox-group-pro': ElCheckboxGroupPro,
+  'el-radio-pro': ElRadioPro,
+  'el-radio-group-pro': ElRadioGroupPro,
+  'el-switch-pro': ElSwitchPro,
+  'el-input-number-pro': ElInputNumberPro,
+  'el-color-picker-pro': ElColorPickerPro,
+  'el-date-picker-pro': ElDatePickerPro,
+  'el-date-range-picker-pro': ElDateRangePickerPro,
+  'el-date-picker-panel-pro': ElDatePickerPanelPro,
+  'el-date-range-picker-panel-pro': ElDateRangePickerPanelPro,
+  'el-date-time-picker-pro': ElDateTimePickerPro,
+  'el-input-adornment-pro': ElInputAdornmentPro,
+  'el-rate-pro': ElRatePro,
+  'el-textarea-pro': ElTextareaPro,
+  'el-select-input-pro': ElSelectInputPro,
+  'el-slider-pro': ElSliderPro,
+  'el-tag-input-pro': ElTagInputPro,
+  'el-time-picker-pro': ElTimePickerPro,
+  'el-tree-pro': ElTreePro,
+  'el-tree-select-pro': ElTreeSelectPro,
+  'el-upload-pro': ElUploadPro,
 };
 
 export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', event: 'update:selectedRowKeys' }]);
 
 const isEditColumn = ({ type, cell }) => {
-  const isEditColumn = type === 'edit';
+  const isEditColumn = type === 'editable';
   const cellNode = _.attempt(cell, { item: {} });
   const cellNodeTag = _.get(cellNode, '0.children.0.componentOptions.tag');
   const isFormComponent = !_.isEmpty(formComponentMap[cellNodeTag]);
@@ -39,7 +87,7 @@ const editColumnProps = ({ type, cell, attrs }) => {
   const cellNode = _.attempt(cell, { item: {} });
   const cellNodeTag = _.get(cellNode, '0.children.0.componentOptions.tag');
   const { listeners, propsData, children } = _.get(cellNode, '0.children.0.componentOptions');
-  const onEdit = _.get(attrs, 'onEdit', () => {});
+  const onRowEdit = _.get(attrs, 'onRowEdit', () => {});
   const rules = _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
@@ -59,8 +107,6 @@ const editColumnProps = ({ type, cell, attrs }) => {
         });
       },
     })) ?? [];
-  console.log(listeners, propsData, 'listeners, propsData');
-  console.log(cellNodeTag, 'cellNode');
   return {
     edit: {
       component: formComponentMap[cellNodeTag],
@@ -68,13 +114,8 @@ const editColumnProps = ({ type, cell, attrs }) => {
       props: { ...propsData, slots: { default: () => children } },
       rules,
       onEdited: (context) => {
-        _.attempt(onEdit, context);
-        // this.data.splice(context.rowIndex, 1, context.newRowData);
-        // console.log('Edit Framework:', context);
-        // MessagePlugin.success('Success');
+        _.attempt(onRowEdit, context);
       },
-      // rules: [{ required: true, message: '不能为空' }],
-      // rules: [{ required: true, message: '不能为空' }],
     },
   };
 };

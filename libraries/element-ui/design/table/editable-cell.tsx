@@ -1,6 +1,4 @@
-import {
-  computed, defineComponent, onMounted, PropType, ref, SetupContext, toRefs, watch,
-} from '@vue/composition-api';
+import { computed, defineComponent, onMounted, PropType, ref, SetupContext, toRefs, watch } from '@vue/composition-api';
 import get from 'lodash/get';
 import set from 'lodash/set';
 import isFunction from 'lodash/isFunction';
@@ -164,10 +162,10 @@ export default defineComponent({
       if (!edit) return {};
       const editProps = isFunction(edit.props)
         ? edit.props({
-          ...cellParams.value,
-          editedRow: currentRow.value,
-          updateEditedCellValue,
-        })
+            ...cellParams.value,
+            editedRow: currentRow.value,
+            updateEditedCellValue,
+          })
         : { ...edit.props };
       // to remove warn: runtime-core.esm-bundler.js:38 [Vue warn]: Invalid prop: type check failed for prop "onChange". Expected Function, got Array
       delete editProps.onChange;
@@ -185,35 +183,35 @@ export default defineComponent({
     });
 
     const validateEdit = (trigger: 'self' | 'parent'): Promise<true | AllValidateResult[]> => new Promise((resolve) => {
-      const params: PrimaryTableRowValidateContext<TableRowData> = {
-        result: [
-          {
-            ...cellParams.value,
-            errorList: [],
-            value: editValue.value,
-          },
-        ],
-        trigger,
-      };
-      const rules = isFunction(col.value.edit.rules) ? col.value.edit.rules(cellParams.value) : col.value.edit.rules;
-      if (!col.value.edit || !rules || !rules.length) {
-        props.onValidate?.(params);
-        resolve(true);
-        return;
-      }
-      validate(editValue.value, rules).then((result) => {
-        const list = result?.filter((t) => !t.result);
-        params.result[0].errorList = list;
-        props.onValidate?.(params);
-        if (!list || !list.length) {
-          errorList.value = [];
+        const params: PrimaryTableRowValidateContext<TableRowData> = {
+          result: [
+            {
+              ...cellParams.value,
+              errorList: [],
+              value: editValue.value,
+            },
+          ],
+          trigger,
+        };
+        const rules = isFunction(col.value.edit.rules) ? col.value.edit.rules(cellParams.value) : col.value.edit.rules;
+        if (!col.value.edit || !rules || !rules.length) {
+          props.onValidate?.(params);
           resolve(true);
-        } else {
-          errorList.value = list;
-          resolve(list);
+          return;
         }
+        validate(editValue.value, rules).then((result) => {
+          const list = result?.filter((t) => !t.result);
+          params.result[0].errorList = list;
+          props.onValidate?.(params);
+          if (!list || !list.length) {
+            errorList.value = [];
+            resolve(true);
+          } else {
+            errorList.value = list;
+            resolve(list);
+          }
+        });
       });
-    });
 
     const isSame = (a: any, b: any) => {
       if (typeof a === 'object' && typeof b === 'object') {
@@ -458,8 +456,9 @@ export default defineComponent({
           props={this.componentProps}
           on={{ ...this.listeners, ...tmpEditOnListeners }}
           value={this.editValue}
-          onUpdate:value={this.onEditChange}
-        >
+          onChange={(e) => {
+            this.onEditChange(e?.value??e);
+          }}>
           {this.componentProps?.slots?.default?.()}
         </Component>
       </div>

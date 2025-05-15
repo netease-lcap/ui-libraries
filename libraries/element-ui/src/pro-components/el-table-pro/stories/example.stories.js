@@ -201,7 +201,11 @@ export const 树形 = {
     },
     methods: {
       async onDragSortChange(value) {
-          console.log(JSON.stringify(value.data[0].add.index), JSON.stringify(value.newData[0].add.index), 'onDragSortChange');
+        console.log(
+          JSON.stringify(value.data[0].add.index),
+          JSON.stringify(value.newData[0].add.index),
+          'onDragSortChange',
+        );
       },
     },
     template: `
@@ -238,7 +242,7 @@ export const 可编辑表格 = {
     },
     data() {
       return {
-        data: async (params) => {
+        data:  (params) => {
           const initialData = [];
           const total = 200;
           for (let i = 0; i < total; i++) {
@@ -288,9 +292,19 @@ export const 可编辑表格 = {
         displayColumns: undefined,
       };
     },
+    beforeMount() {
+      console.log(12341234);
+      this.list = this.data().list;
+      setTimeout(() => {
+        this.list[0] = { applicant: '张三22' };
+        console.log(1234);
+      }, 1000);
+    },
     methods: {
       log(value) {
-        console.log(value, 'log');
+        console.log(value, 'log', this.list);
+        this.$set(this.list, value.rowIndex, value.newRowData);
+
         // this.displayColumns = value;
       },
       onSortChange(...arg) {
@@ -299,30 +313,35 @@ export const 可编辑表格 = {
       onDragSortChange(...arg) {
         console.log(arg, 'arg===');
       },
-
     },
     template: `<el-table-pro
       row-key="index"
-      :dataSource="data"
+      :dataSource="list"
       :selectedRowKeys.sync="selectedRowKeys"
       width="800px"
-      @cell-click="log"
     >
-
-
+<el-table-column-pro title="渠道"  colKey="applicant" type="editable" :rules="[
+          { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
+    ]" :onRowEdit="log">
+      <template #cell="cell">
+        <div>
+          <el-input-pro />
+        </div>
+      </template>
+    </el-table-column-pro>
     <el-table-column-pro title="渠道" colKey="status" type="edit" :rules="[
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
     ]" onEdit="log">
       <template #cell="cell">
         <div>
-          <el-select-pro  >
+          <el-select-pro @change="log" >
             <el-option-pro value="1" label="1"></el-option-pro>
             <el-option-pro value="2" label="2"></el-option-pro>
             <el-option-pro value="3" label="3"></el-option-pro>
           </el-select-pro>
         </div>
       </template>
-
+    </el-table-column-pro>
     </el-table-pro>`,
   }),
 };

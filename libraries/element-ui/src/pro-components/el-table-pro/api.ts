@@ -961,6 +961,29 @@ namespace nasl.ui {
     })
     sorter: nasl.core.Boolean = false;
 
+
+    @Prop({
+      group: '数据属性',
+      title: '列类型',
+      description: '列类型',
+      docDescription: '列类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '普通列' }, { title: '编辑列' } ],
+      },
+    })
+    type: 'normal' | 'editable'  = 'normal';
+
+
+    @Prop<ElTableColumnProOptions<T, V, P, M>, 'rules'>({
+      group: '主要属性',
+      title: '验证规则',
+      description: '表单字段校验规则。',
+      setter: { concept: 'InputSetter' },
+      bindHide: true,
+      if: (_) => _.type === 'editable',
+    })
+    rules: nasl.core.String;
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
     //   title: '排序初始顺序',
@@ -1128,6 +1151,17 @@ namespace nasl.ui {
         '列宽，可以作为最小宽度使用。当列宽总和小于 table 元素时，浏览器根据宽度设置情况自动分配宽度；当列宽总和大于 table 元素，表现为定宽。可以同时调整 table 元素的宽度来达到自己想要的效果	',
     })
     width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
+
+    @Event({
+      title: '行编辑编辑完成',
+      description: '退出编辑态后触发',
+    })
+    onRowEdit: (event: {
+      colIndex: number;
+      rowIndex: number;
+      newRowData: T;
+      row: T;
+    }) => any
 
     // @Prop({
     //   group: '样式属性',
@@ -1529,11 +1563,13 @@ namespace nasl.ui {
   //     })
   //     onFilterChange: (event: any) => any;
 
-  //     @Event({
-  //       title: 'On Row Edit',
-  //       description: '行编辑时触发。',
-  //     })
-  //     onRowEdit: (event: any) => any;
+      // @Event({
+      //   title: 'On Row Edit',
+      //   description: '行编辑时触发。',
+      // })
+      // onRowEdit: (event: {
+
+      // }) => ;
 
   //     @Event({
   //       title: 'On Row Validate',
