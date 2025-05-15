@@ -1,4 +1,9 @@
 {
+
+  "--brand-logo-color": {
+    "title": "Logo颜色",
+    "type": "color"
+  },
   "--brand-primary": {
     "title": "主色",
     "type": "color"

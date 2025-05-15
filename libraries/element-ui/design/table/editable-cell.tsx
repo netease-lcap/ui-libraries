@@ -458,8 +458,10 @@ export default defineComponent({
           props={this.componentProps}
           on={{ ...this.listeners, ...tmpEditOnListeners }}
           value={this.editValue}
-          onChange={this.onEditChange}
-        />
+          onUpdate:value={this.onEditChange}
+        >
+          {this.componentProps?.slots?.default?.()}
+        </Component>
       </div>
     );
   },

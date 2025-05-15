@@ -586,6 +586,32 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '表头吸顶',
+      description: '是否表头吸顶',
+      setter: { concept: 'SwitchSetter' },
+    })
+    headerAffixedTop: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      sync: true,
+      title: '显示列',
+      bindOpen: true,
+      description: '列配置功能中，当前显示的列。支持语法糖 `.sync`。',
+      setter: { concept: 'InputSetter' },
+    })
+    displayColumns: nasl.collection.List<string> 
+
+    @Prop({
+      group: '交互属性',
+      title: '可调整列宽',
+      description: '设置制品是否可以调整列宽',
+      setter: { concept: 'SwitchSetter' },
+    })
+    resizable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '表格尺寸',
       description:
         '表格尺寸，支持全局配置 `GlobalConfigProvider`，默认全局配置值为 `medium`。可选项：small/medium/large。',
@@ -623,8 +649,6 @@ namespace nasl.ui {
       },
     })
     tableLayout: 'auto' | 'fixed' = 'fixed';
-
-
 
     @Prop<ElTableProOptions<T, V, P, M>, 'parentField'>({
       group: '数据属性',
@@ -665,6 +689,13 @@ namespace nasl.ui {
     })
     dragSort: 'row' | 'disabled' = 'disabled';
 
+    @Prop({
+      group: '主要属性',
+      title: '列配置控制器',
+      description: '显示列控制器',
+      setter: { concept: 'SwitchSetter' },
+    })
+    columnController: nasl.core.Boolean = false;
     // @Prop({
     //   group: '主要属性',
     //   title: 'Top Content',
@@ -754,6 +785,12 @@ namespace nasl.ui {
       data: nasl.collection.List<T>;
       newData: nasl.collection.List<T>;
     }) => any;
+
+    @Event({
+      title: '列配置确认后',
+      description: '列配置确认后触发',
+    })
+    onDisplayColumnsChange: (event: nasl.collection.List<string>) => any;
     // @row-dbclick='xxx'
     // onRowClick="log"
     // @Event({
@@ -1167,15 +1204,6 @@ namespace nasl.ui {
 
   //     @Prop({
   //       group: '主要属性',
-  //       title: 'Column Controller',
-  //       description:
-  //         '自定义显示列控制器，值为空不会显示。具体属性请看下方 `TableColumnController` 文档。',
-  //       setter: { concept: 'InputSetter' },
-  //     })
-  //     columnController: object;
-
-  //     @Prop({
-  //       group: '主要属性',
   //       sync: true,
   //       title: 'Column Controller Visible',
   //       description:
@@ -1191,15 +1219,6 @@ namespace nasl.ui {
   //       setter: { concept: 'InputSetter' },
   //     })
   //     columns: any[] = [];
-
-  //     @Prop({
-  //       group: '主要属性',
-  //       sync: true,
-  //       title: 'Display Columns',
-  //       description: '列配置功能中，当前显示的列。支持语法糖 `.sync`。',
-  //       setter: { concept: 'InputSetter' },
-  //     })
-  //     displayColumns: any[];
 
   //     @Prop({
   //       group: '主要属性',

@@ -168,6 +168,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      forceUpdateWhenAttributeChange: true,
     },
     extends: [
       {

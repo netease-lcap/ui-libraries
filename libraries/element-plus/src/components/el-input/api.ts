@@ -360,7 +360,8 @@ namespace nasl.ui {
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
-      forceRefresh: 'parent',
+      forceRefresh: true,
+      forceUpdateWhenAttributeChange: true,
       namedSlotOmitWrapper: ['label'],
     },
     extends: [

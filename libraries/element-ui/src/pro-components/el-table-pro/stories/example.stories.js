@@ -74,11 +74,13 @@ export const Default = {
           { colKey: 'time', title: '时长', width: 100 },
           { colKey: 'createTime', title: '创建时间', width: 100 },
         ],
+        displayColumns: undefined,
       };
     },
     methods: {
       log(value) {
         console.log(value, 'log');
+        this.displayColumns = value;
       },
       onSortChange(...arg) {
         console.log(arg, 'arg===');
@@ -108,9 +110,16 @@ export const Default = {
    :dataSource="data"
    :rowspanAndColspan="rowspanAndColspan"
    :selectedRowKeys.sync="selectedRowKeys"
+   width="800px"
+   :columnController="false"
    @sort-change="onSortChange"
    :onRowClick="log"
    dragSort="row"
+   :columnController="false"
+   :headerAffixedTop="true"
+
+   @display-columns-change="log"
+   :resizable="true"
    :treeDisplay="true"
    :selection="true"
    :hasIndexColumn="true"
@@ -211,15 +220,109 @@ export const 树形 = {
     `,
   }),
 };
-// <el-table-column-pro data-nodepath="123"  >
-//   <template #title="title">
-//      <div>
-//      <div>1234</div>
-//      </div>
-//  </template>
-//   <template #cell="cell">
-//       <div>
-//           <div>{{ cell.row.applicant }}</div>
-//      </div>
-//    </template>
-// </el-table-column-pro>
+
+export const 可编辑表格 = {
+  name: '可编辑表格',
+  render: () => ({
+    // moud
+    async mounted() {
+      setTimeout(() => {
+        this.hasExpandedRow = false;
+        console.log(123);
+      }, 3000);
+    },
+    watch: {
+      selectedRowKeys(value) {
+        console.log(value, '===watch');
+      },
+    },
+    data() {
+      return {
+        data: async (params) => {
+          const initialData = [];
+          const total = 200;
+          for (let i = 0; i < total; i++) {
+            initialData.push({
+              index: i,
+              applicant: ['贾明', '张三', '王芳'][i % 3],
+              status: i % 3,
+              channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+              children: [
+                {
+                  channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                  children: [
+                    {
+                      channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                    },
+                  ],
+                },
+              ],
+              detail: {
+                email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
+              },
+              matters: ['宣传物料制作费用', 'algolia 服务报销', '相关周边制作费', '激励奖品快递费'][i % 4],
+              time: [2, 10, 1][i % 3],
+              createTime: ['2022-01-01', '2022-02-01', '2022-02-01', '2022-03-01', '2022-04-01'][i % 4],
+            });
+          }
+
+          return {
+            list: initialData,
+            total,
+          };
+        },
+        hasExpandedRow: true,
+        list: [],
+        rowspan: 2,
+        type: undefined,
+        selectedRowKeys: [],
+        columns: [
+          { colKey: 'applicant', title: '申请人', width: 100 },
+          { colKey: 'status', title: '状态', width: 100 },
+          { colKey: 'channel', title: '渠道', width: 100 },
+          { colKey: 'detail.email', title: '邮箱', width: 100 },
+          { colKey: 'matters', title: '事项', width: 100 },
+          { colKey: 'time', title: '时长', width: 100 },
+          { colKey: 'createTime', title: '创建时间', width: 100 },
+        ],
+        displayColumns: undefined,
+      };
+    },
+    methods: {
+      log(value) {
+        console.log(value, 'log');
+        // this.displayColumns = value;
+      },
+      onSortChange(...arg) {
+        console.log(arg, 'arg===');
+      },
+      onDragSortChange(...arg) {
+        console.log(arg, 'arg===');
+      },
+
+    },
+    template: `<el-table-pro
+      row-key="index"
+      :dataSource="data"
+      :selectedRowKeys.sync="selectedRowKeys"
+      width="800px"
+      @cell-click="log"
+    >
+
+
+    <el-table-column-pro title="渠道" colKey="status" type="edit" :rules="[
+          { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
+    ]" onEdit="log">
+      <template #cell="cell">
+        <div>
+          <el-select-pro  >
+            <el-option-pro value="1" label="1"></el-option-pro>
+            <el-option-pro value="2" label="2"></el-option-pro>
+            <el-option-pro value="3" label="3"></el-option-pro>
+          </el-select-pro>
+        </div>
+      </template>
+
+    </el-table-pro>`,
+  }),
+};

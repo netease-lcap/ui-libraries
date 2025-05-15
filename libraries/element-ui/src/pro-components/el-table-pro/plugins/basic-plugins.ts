@@ -3,14 +3,81 @@
 // export {};
 import _, { isFunction, isNil } from 'lodash';
 import { computed, ref, watch, onMounted } from '@vue/composition-api';
-import { SelectOptions, Table, BaseTable, PrimaryTable, EnhancedTable } from '@element-pro';
+import {
+  SelectOptions,
+  Table,
+  BaseTable,
+  PrimaryTable,
+  EnhancedTable,
+  CustomValidateResolveType,
+  FormRule,
+} from '@element-pro';
 import { listToTree } from '@lcap/vue2-utils/utils';
 import { $ref, $render, createUseUpdateSync } from '@lcap/vue2-utils';
-
+import VusionValidator, { localizeRules } from '@lcap/validator';
 import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
+
+import { ElInputPro, ElInputNumberPro, ElSelectPro } from '@/pro-components/index';
+
+const formComponentMap = {
+  'el-input-pro': ElInputPro,
+  'el-select-pro': ElSelectPro,
+  ElInputNumber: ElInputNumberPro,
+};
 
 export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', event: 'update:selectedRowKeys' }]);
+
+const isEditColumn = ({ type, cell }) => {
+  const isEditColumn = type === 'edit';
+  const cellNode = _.attempt(cell, { item: {} });
+  const cellNodeTag = _.get(cellNode, '0.children.0.componentOptions.tag');
+  const isFormComponent = !_.isEmpty(formComponentMap[cellNodeTag]);
+  return isEditColumn && isFormComponent;
+};
+const editColumnProps = ({ type, cell, attrs }) => {
+  const cellNode = _.attempt(cell, { item: {} });
+  const cellNodeTag = _.get(cellNode, '0.children.0.componentOptions.tag');
+  const { listeners, propsData, children } = _.get(cellNode, '0.children.0.componentOptions');
+  const onEdit = _.get(attrs, 'onEdit', () => {});
+  const rules = _.map(attrs?.rules, (item) => ({
+      trigger: 'all',
+      validator: (val) => {
+        const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
+        return new Promise((resolve) => {
+          validator
+            .validate(val)
+            .then(() => {
+              resolve(true as CustomValidateResolveType);
+            })
+            .catch((errorMessage) => {
+              resolve({
+                result: false,
+                message: errorMessage,
+              } as CustomValidateResolveType);
+            });
+        });
+      },
+    })) ?? [];
+  console.log(listeners, propsData, 'listeners, propsData');
+  console.log(cellNodeTag, 'cellNode');
+  return {
+    edit: {
+      component: formComponentMap[cellNodeTag],
+      on: () => listeners,
+      props: { ...propsData, slots: { default: () => children } },
+      rules,
+      onEdited: (context) => {
+        _.attempt(onEdit, context);
+        // this.data.splice(context.rowIndex, 1, context.newRowData);
+        // console.log('Edit Framework:', context);
+        // MessagePlugin.success('Success');
+      },
+      // rules: [{ required: true, message: '不能为空' }],
+      // rules: [{ required: true, message: '不能为空' }],
+    },
+  };
+};
 
 export const useTable: NaslComponentPluginOptions = {
   props: [
@@ -25,6 +92,8 @@ export const useTable: NaslComponentPluginOptions = {
     'showTotal',
     'showJumper',
     'treeDisplay',
+    'displayColumns',
+    'onDisplayColumnsChange',
     'virtual',
   ],
   setup(props, ctx) {
@@ -109,7 +178,6 @@ export const useTable: NaslComponentPluginOptions = {
         if (_.isEqual(value, oldValue)) return;
         const [autoMergeFields, data] = value;
         if (_.isEmpty(autoMergeFields) || _.isEmpty(data)) return;
-        console.log(data, '===data');
 
         data.forEach((item, index) => {
           _.forEach(autoMergeFields, (field) => {
@@ -136,12 +204,14 @@ export const useTable: NaslComponentPluginOptions = {
 
         const nodePath = _.get(attrs, 'data-nodepath');
         const { cell, title } = _.get(vnode, 'data.scopedSlots', {});
-
+        const cellNode = cell?.({ item: {} });
+        console.log(cellNode, cell, 'cell');
         const titleProps = _.isFunction(title)
           ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
           : {};
 
         const cellRender = _.cond([
+          [isEditColumn, editColumnProps],
           [
             _.conforms({ cell: _.isFunction, type: _.isNil }),
             _.constant({ cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col }) }),
@@ -152,7 +222,8 @@ export const useTable: NaslComponentPluginOptions = {
           ],
           [_.conforms({ type: _.isString }), _.constant({})],
         ]);
-        const cellProps = cellRender({ type: attrs.type, cell });
+        const cellProps = cellRender({ type: attrs.type, cell, attrs });
+        console.log(cellProps, 'cellProps');
         return [
           {
             ...attrs,
@@ -241,14 +312,36 @@ export const useTable: NaslComponentPluginOptions = {
     onMounted(() => {
       if (_.isFunction(onLoadData)) {
         onLoadData?.({
-          page: _.get(pagination.value, 'current', undefined), //current.value,
+          page: _.get(pagination.value, 'current', undefined), // current.value,
           size: _.get(pagination.value, 'pageSize', undefined),
           sort: _.get(sorting.value, 'field'),
           order: _.get(sorting.value, 'order'),
         });
       }
     });
+    const columnController = props.useRef('columnController', (v) => (v
+        ? {
+            placement: 'top-right',
+          }
+        : {}));
 
+    // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
+    const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
+    watch(
+      () => props.get('displayColumns'),
+      (value) => {
+        displayColumns.value = value;
+      },
+    );
+    const onDisplayColumnsChange = props.useComputed('onDisplayColumnsChange', (fn) => {
+      return (value) => {
+        if (!_.isFunction(fn)) {
+          displayColumns.value = value;
+        } else {
+          fn(value);
+        }
+      };
+    });
     return {
       data,
       onPageChange,
@@ -256,6 +349,9 @@ export const useTable: NaslComponentPluginOptions = {
       ...scroll.value,
       pagination,
       tree,
+      columnController,
+      displayColumns,
+      onDisplayColumnsChange,
       rowKey: valueField,
       // tree: {
       //   childrenKey: 'chiildren',
@@ -289,7 +385,7 @@ export const useTable: NaslComponentPluginOptions = {
               'el-p-tree-icon--opened': type === 'fold',
             },
           });
-        }
+        };
       }),
       onSelectChange: (selectedRowKeys: Array<string | number>, context: SelectOptions<any>) => {
         const onSelectChange = props.get('onSelectChange');
@@ -306,7 +402,7 @@ export const useTable: NaslComponentPluginOptions = {
           current.value = 1;
           if (_.isFunction(onLoadData)) {
             onLoadData?.({
-              page: _.get(pagination.value, 'current', undefined), //current.value,
+              page: _.get(pagination.value, 'current', undefined), // current.value,
               size: _.get(pagination.value, 'pageSize', undefined),
               sort: sort.value,
               order: order.value,
@@ -318,6 +414,10 @@ export const useTable: NaslComponentPluginOptions = {
         const vnodes = ctx.setupContext.slots?.default?.();
         const columns = renderSlot(vnodes);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];
+        if (!context.propsData?.props?.displayColumns) {
+          resultVNode.componentOptions.propsData.displayColumns = columns.map((item) => item.colKey);
+          context.propsData.props.displayColumns = columns.map((item) => item.colKey);
+        }
         if (tree.value) {
           context.propsData.props.columns = columns;
           return h(EnhancedTable, context.propsData, context.childrenNodes);

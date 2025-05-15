@@ -305,7 +305,8 @@ namespace nasl.ui {
         label: 'display: inline-block;',
       },
 
-      forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: true,
+      forceRefresh: true,
       namedSlotOmitWrapper: ['label'],
     },
   })
