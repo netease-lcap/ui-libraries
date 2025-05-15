@@ -21,7 +21,7 @@ export default {
 export const Default = {
   name: '组合图标-上下',
   render: () => ({
-    template: '<el-icon name="picture-outline"><el-text text="图标"></el-text></el-icon>',
+    template: '<el-icon name="picture-outline" icotype="top"><el-text text="图标"></el-text></el-icon>',
   }),
 };
 
