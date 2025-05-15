@@ -30,7 +30,7 @@ namespace nasl.ui {
         options: [{ title: '仅图标' }, { title: '组合图标-上下' }, { title: '组合图标-左右' }],
       },
     })
-    icotype: 'only' | 'top' | 'left' = 'top';
+    icotype: 'only' | 'top' | 'left' = 'only';
     @Prop({
       group: '主要属性',
       title: '图标',
