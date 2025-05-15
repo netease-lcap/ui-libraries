@@ -19,8 +19,23 @@ export default {
 };
 
 export const Default = {
-  name: '默认示例',
+  name: '组合图标-上下',
   render: () => ({
-    template: '<el-icon name="picture-outline"></el-icon>',
+    template: '<el-icon name="picture-outline"><el-text text="图标"></el-text></el-icon>',
+  }),
+};
+
+export const Default2 = {
+  name: '组合图标-左右',
+  render: () => ({
+    template: '<el-icon name="picture-outline" icotype="left"><el-text text="图标"></el-text></el-icon>',
+  }),
+};
+
+
+export const Default3 = {
+  name: '仅图标',
+  render: () => ({
+    template: '<el-icon name="picture-outline" icotype="only"><el-text text="图标"></el-text></el-icon>',
   }),
 };
