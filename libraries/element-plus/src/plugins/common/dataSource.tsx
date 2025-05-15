@@ -18,7 +18,7 @@ export function useHandleMapField(filedInfo: {
   disabledField?: string;
   dividedField?: string;
   dataSource: DataSourceType;
-  filedsMap?: Record<string, string>;
+  fieldsMap?: Record<string, string>;
 }) {
   const {
     label = 'label',
@@ -30,12 +30,12 @@ export function useHandleMapField(filedInfo: {
     disabledField,
     dividedField,
     divided = 'divided',
-    filedsMap,
+    fieldsMap,
   } = filedInfo;
   return useMemo(
     () => _.map(dataSource, (item: any) => ({
         ...item,
-        ...Object.fromEntries(Object.entries(filedsMap || {}).map(([key, value]) => [key, _.get(item, value, '')])),
+        ...Object.fromEntries(Object.entries(fieldsMap || {}).map(([key, path]) => [key, _.get(item, path, undefined)])),
         [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
         [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
         [disabled]: !_.isObject(item) ? item : _.get(item, disabledField || 'disabled', false),
