@@ -189,7 +189,6 @@ namespace nasl.ui {
       description: '非范围选择时的占位内容',
       setter: { concept: 'InputSetter' },
       if: (_) => !_.isRange,
-      sync: true,
     })
     placeholder: nasl.core.String = '请选择时间';
 

@@ -634,7 +634,6 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '选项值',
-      sync: true,
       description: '选项值',
       setter: { concept: 'InputSetter' },
     })
