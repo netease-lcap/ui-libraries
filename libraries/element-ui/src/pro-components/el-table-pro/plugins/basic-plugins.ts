@@ -81,6 +81,7 @@ const isEditColumn = ({ type, cell }) => {
   const isEditColumn = type === 'editable';
   const cellNode = _.attempt(cell, { item: {} });
   const cellNodeTag = _.get(cellNode, '0.componentOptions.tag');
+  console.log(cellNode, 'cellNode');
   const isFormComponent = !_.isEmpty(formComponentMap[cellNodeTag]);
   return isEditColumn && isFormComponent;
 };
