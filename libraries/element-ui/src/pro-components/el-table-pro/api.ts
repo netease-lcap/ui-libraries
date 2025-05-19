@@ -916,7 +916,7 @@ namespace nasl.ui {
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
       selector: 'multiple',
-
+      namedSlotOmitWrapper:['cell'],
       slotInlineStyle: {
         title: 'min-width: 30px',
         cell: 'min-width: 30px',

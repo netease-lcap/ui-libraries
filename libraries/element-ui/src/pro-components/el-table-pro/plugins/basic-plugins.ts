@@ -80,15 +80,15 @@ export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', eve
 const isEditColumn = ({ type, cell }) => {
   const isEditColumn = type === 'editable';
   const cellNode = _.attempt(cell, { item: {} });
-  const cellNodeTag = _.get(cellNode, '0.children.0.componentOptions.tag');
+  const cellNodeTag = _.get(cellNode, '0.componentOptions.tag');
   const isFormComponent = !_.isEmpty(formComponentMap[cellNodeTag]);
   return isEditColumn && isFormComponent;
 };
 const editColumnProps = ({ type, cell, attrs }) => {
   const cellNode = _.attempt(cell, { item: {} });
-  const cellNodeTag = _.get(cellNode, '0.children.0.componentOptions.tag');
-  const { listeners = [], propsData = {}, children } = _.get(cellNode, '0.children.0.componentOptions');
-  const nodeAttrs = _.get(cellNode, '0.children.0.data.attrs', {});
+  const cellNodeTag = _.get(cellNode, '0.componentOptions.tag');
+  const { listeners = [], propsData = {}, children } = _.get(cellNode, '0.componentOptions');
+  const nodeAttrs = _.get(cellNode, '0.data.attrs', {});
   const onRowEdit = _.get(attrs, 'onRowEdit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
   const rules = _.map(attrs?.rules, (item) => ({
