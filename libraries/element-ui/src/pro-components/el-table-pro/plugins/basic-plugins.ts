@@ -86,8 +86,10 @@ const isEditColumn = ({ type, cell }) => {
 const editColumnProps = ({ type, cell, attrs }) => {
   const cellNode = _.attempt(cell, { item: {} });
   const cellNodeTag = _.get(cellNode, '0.children.0.componentOptions.tag');
-  const { listeners, propsData, children } = _.get(cellNode, '0.children.0.componentOptions');
+  const { listeners = [], propsData = {}, children } = _.get(cellNode, '0.children.0.componentOptions');
+  const nodeAttrs = _.get(cellNode, '0.children.0.data.attrs', {});
   const onRowEdit = _.get(attrs, 'onRowEdit', () => {});
+  const nodepath = _.get(attrs, 'data-nodepath', false);
   const rules = _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
@@ -108,10 +110,12 @@ const editColumnProps = ({ type, cell, attrs }) => {
       },
     })) ?? [];
   return {
+    colKey: attrs.colKey ?? 'index',
     edit: {
       component: formComponentMap[cellNodeTag],
-      on: () => listeners,
-      props: { ...propsData, slots: { default: () => children } },
+      on: () => listeners || [],
+      props: { ...nodeAttrs, ...propsData, slots: { default: () => children } },
+      keepEditMode: !!nodepath,
       rules,
       onEdited: (context) => {
         _.attempt(onRowEdit, context);
@@ -254,7 +258,7 @@ export const useTable: NaslComponentPluginOptions = {
         const cellRender = _.cond([
           [isEditColumn, editColumnProps],
           [
-            _.conforms({ cell: _.isFunction, type: _.isNil }),
+            _.conforms({ cell: _.isFunction }),
             _.constant({ cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col }) }),
           ],
           [

@@ -454,6 +454,7 @@ export default defineComponent({
           status={errorMessage ? this.errorList?.[0]?.type || 'error' : undefined}
           tips={errorMessage}
           props={this.componentProps}
+          data-nodepath={this.componentProps['data-nodepath']}
           on={{ ...this.listeners, ...tmpEditOnListeners }}
           value={this.editValue}
           onChange={(e) => {
