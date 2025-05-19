@@ -485,7 +485,7 @@ export default {
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
                     const isGroupInLast = this.isLastLeftFixed(columnVM.$parent, groupVMIndex, groupList);
-                    const isLastInGroup = list[columnIndex + 1] === undefined || list[columnIndex + 1].$parent !== columnVM.$parent; // 原来组里的最后一个没有阴影，增加判断
+                    const isLastInGroup = list[columnIndex + 1] === undefined || (list[columnIndex + 1] && list[columnIndex + 1].$parent !== columnVM.$parent); // 原来组里的最后一个没有阴影，增加判断
                     isLastInList = isLastInGroup && isGroupInLast;
                 }
             }
@@ -509,7 +509,7 @@ export default {
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
                     const isGroupInLast = this.isFirstRightFixed(columnVM.$parent, groupVMIndex, groupList);
-                    const isLastInGroup = list[columnIndex - 1] === undefined || list[columnIndex - 1].$parent !== columnVM.$parent;
+                    const isLastInGroup = list[columnIndex - 1] === undefined || (list[columnIndex - 1] && list[columnIndex - 1].$parent !== columnVM.$parent);
                     isLastInList = isLastInGroup && isGroupInLast;
                 }
             }
