@@ -2,7 +2,7 @@
 /* 组件功能扩展插件 */
 // export {};
 import _, { isFunction, isNil } from 'lodash';
-import { computed, ref, watch, onMounted } from '@vue/composition-api';
+import { computed, ref, watch, onMounted, provide, getCurrentInstance } from '@vue/composition-api';
 import {
   SelectOptions,
   Table,
@@ -16,6 +16,7 @@ import { listToTree } from '@lcap/vue2-utils/utils';
 import { $ref, $render, createUseUpdateSync } from '@lcap/vue2-utils';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
+import { IN_ELEMENT_FORM } from '../../el-form-pro/constants';
 
 import {
   ElInputPro,
@@ -387,6 +388,7 @@ export const useTable: NaslComponentPluginOptions = {
         }
       };
     });
+    provide(IN_ELEMENT_FORM, false);
     return {
       data,
       onPageChange,
