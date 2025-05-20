@@ -194,7 +194,7 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     },
     pkgComponentFolderPath: getComponentFloderPath(rootPath, component, env.framework, modulesInfo?.api),
     componentFolderPath: path.resolve(rootPath, `src/components/${tagName}`),
-    fork: fork && env.framework === 'vue' && pkg.name !== '@lcap/element-ui',
+    fork: fork && env.framework === 'vue2' && pkg.name !== '@lcap/element-ui',
     prefix,
     isWithForm: isWithForm(comp),
     withFormName: getWithFormName(comp.name),
