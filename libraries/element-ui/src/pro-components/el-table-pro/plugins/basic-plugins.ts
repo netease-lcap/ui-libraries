@@ -89,6 +89,7 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps }) => {
   const cellNodeTag = _.get(cellNode, '0.componentOptions.tag');
   const { listeners = [], propsData = {}, children } = _.get(cellNode, '0.componentOptions');
   const nodeAttrs = _.get(cellNode, '0.data.attrs', {});
+  const scopedSlots = _.get(cellNode, '0.data.scopedSlots', {});
   const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
   const rules =
@@ -116,7 +117,7 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps }) => {
     edit: {
       component: formComponentMap[cellNodeTag],
       on: () => listeners || [],
-      props: { ...nodeAttrs, ...propsData, slots: { default: () => children } },
+      props: { ...nodeAttrs, ...propsData, slots: { default: () => children, ...scopedSlots } },
       keepEditMode: !!nodepath,
       rules,
       onEdited: (context) => {
@@ -254,6 +255,7 @@ export const useTable: NaslComponentPluginOptions = {
         const nodePath = _.get(attrs, 'data-nodepath');
         const { cell, title } = _.get(vnode, 'data.scopedSlots', {});
         const listeners = _.get(vnode, 'componentOptions.listeners', {});
+        console.log(vnode);
         const titleProps = _.isFunction(title)
           ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
           : {};

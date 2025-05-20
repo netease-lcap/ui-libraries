@@ -457,10 +457,10 @@ export default defineComponent({
           attrs={this.componentProps}
           on={{ ...this.listeners, ...tmpEditOnListeners }}
           value={this.editValue}
+          scopedSlots={this.componentProps?.slots}
           onChange={(e) => {
             this.onEditChange(e?.value??e);
           }}>
-          {this.componentProps?.slots?.default?.()}
         </Component>
       </div>
     );

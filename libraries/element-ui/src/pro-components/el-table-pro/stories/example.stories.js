@@ -324,7 +324,11 @@ export const 可编辑表格 = {
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
     ]" @row-edit="log">
       <template #cell="cell">
-          <el-input-pro size="small" />
+        <el-radio-group-pro :dataSource="[1,2,3]" >
+          <template #item="current">
+            {{11}}
+          </template>
+        </el-radio-group-pro>
       </template>
     </el-table-column-pro>
     <el-table-column-pro title="渠道" colKey="status" type="editable" :rules="[
