@@ -84,12 +84,12 @@ const isEditColumn = ({ type, cell }) => {
   const isFormComponent = !_.isEmpty(formComponentMap[cellNodeTag]);
   return isEditColumn && isFormComponent;
 };
-const editColumnProps = ({ type, cell, attrs }) => {
+const editColumnProps = ({ type, cell, attrs, listeners: listenersProps}) => {
   const cellNode = _.attempt(cell, { item: {} });
   const cellNodeTag = _.get(cellNode, '0.componentOptions.tag');
   const { listeners = [], propsData = {}, children } = _.get(cellNode, '0.componentOptions');
   const nodeAttrs = _.get(cellNode, '0.data.attrs', {});
-  const onRowEdit = _.get(attrs, 'onRowEdit', () => {});
+  const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
   const rules = _.map(attrs?.rules, (item) => ({
       trigger: 'all',
@@ -251,7 +251,7 @@ export const useTable: NaslComponentPluginOptions = {
         const nodePath = _.get(attrs, 'data-nodepath');
         const { cell, title } = _.get(vnode, 'data.scopedSlots', {});
         const cellNode = cell?.({ item: {} });
-        console.log(cellNode, cell, 'cell');
+        const listeners = _.get(vnode, 'componentOptions.listeners', {});
         const titleProps = _.isFunction(title)
           ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
           : {};
@@ -268,7 +268,7 @@ export const useTable: NaslComponentPluginOptions = {
           ],
           [_.conforms({ type: _.isString }), _.constant({})],
         ]);
-        const cellProps = cellRender({ type: attrs.type, cell, attrs });
+        const cellProps = cellRender({ type: attrs.type, cell, attrs, listeners });
         console.log(cellProps, 'cellProps');
         return [
           {

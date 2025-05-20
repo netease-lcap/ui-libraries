@@ -322,16 +322,14 @@ export const 可编辑表格 = {
     >
 <el-table-column-pro title="渠道"  colKey="detail.email" type="editable" :rules="[
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
-    ]" :onRowEdit="log">
+    ]" @row-edit="log">
       <template #cell="cell">
-        <div>
           <el-input-pro />
-        </div>
       </template>
     </el-table-column-pro>
-    <el-table-column-pro title="渠道" colKey="status" type="edit" :rules="[
+    <el-table-column-pro title="渠道" colKey="status" type="editable" :rules="[
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
-    ]" onEdit="log">
+    ]" @row-edit="log">
       <template #cell="cell">
         <div>
           <el-select-pro @change="log" >
