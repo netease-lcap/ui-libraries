@@ -442,6 +442,7 @@ export default defineComponent({
         }
       });
     }
+    console.log(this.componentProps, 'componentProps');
     return (
       <div
         class={this.tableBaseClass?.cellEditWrap}
@@ -453,8 +454,7 @@ export default defineComponent({
         <Component
           status={errorMessage ? this.errorList?.[0]?.type || 'error' : undefined}
           tips={errorMessage}
-          props={this.componentProps}
-          data-nodepath={this.componentProps['data-nodepath']}
+          attrs={this.componentProps}
           on={{ ...this.listeners, ...tmpEditOnListeners }}
           value={this.editValue}
           onChange={(e) => {

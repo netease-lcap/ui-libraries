@@ -84,14 +84,15 @@ const isEditColumn = ({ type, cell }) => {
   const isFormComponent = !_.isEmpty(formComponentMap[cellNodeTag]);
   return isEditColumn && isFormComponent;
 };
-const editColumnProps = ({ type, cell, attrs, listeners: listenersProps}) => {
+const editColumnProps = ({ type, cell, attrs, listeners: listenersProps }) => {
   const cellNode = _.attempt(cell, { item: {} });
   const cellNodeTag = _.get(cellNode, '0.componentOptions.tag');
   const { listeners = [], propsData = {}, children } = _.get(cellNode, '0.componentOptions');
   const nodeAttrs = _.get(cellNode, '0.data.attrs', {});
   const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
-  const rules = _.map(attrs?.rules, (item) => ({
+  const rules =
+    _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
         const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
@@ -192,12 +193,14 @@ export const useTable: NaslComponentPluginOptions = {
     const sort = ref<string | null>(sorting.value?.field);
     const order = ref<string | null>(sorting.value?.order);
     const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
-    const tree = props.useComputed('treeDisplay', (value) => (value
+    const tree = props.useComputed('treeDisplay', (value) =>
+      value
         ? {
             childrenKey: 'children',
             checkStrictly: checkStrictly.value,
           }
-        : undefined));
+        : undefined,
+    );
 
     const data = props.useComputed('data', (v) => {
       const treeDisplay = props.get('treeDisplay');
@@ -364,11 +367,13 @@ export const useTable: NaslComponentPluginOptions = {
         });
       }
     });
-    const columnController = props.useRef('columnController', (v) => (v
+    const columnController = props.useRef('columnController', (v) =>
+      v
         ? {
             placement: 'top-right',
           }
-        : {}));
+        : {},
+    );
 
     // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
     const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
