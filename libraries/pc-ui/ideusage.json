@@ -1067,7 +1067,7 @@
                 "loopRule": "nth-last-child(-n+2)",
                 "loopElem": "div[class^='u-select_item']"
             },
-            "translateBindingProperty": ["value", "placeholder"],
+            "translateBindingProperty": ["placeholder"],
             "additionalAttribute": {
                 "autofocus": "\"false\"",
                 "appendTo": "\"body\""
