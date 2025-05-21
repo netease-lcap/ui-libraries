@@ -26,7 +26,8 @@ type DefaultValue =
   | babelTypes.NumericLiteral
   | babelTypes.ArrayExpression
   | babelTypes.ObjectExpression
-  | babelTypes.TSAsExpression;
+  | babelTypes.TSAsExpression
+  | babelTypes.UnaryExpression;
 type Annotation = babelTypes.TSTypeReference | babelTypes.TSUnionType;
 const isPrimitive = (name: string) => ['String', 'Integer', 'Decimal', 'Boolean'].includes(name);
 
@@ -121,6 +122,23 @@ function transformValue(node: DefaultValue, typeAnnotation?: Annotation): any {
       concept: 'BooleanLiteral',
       value: String(node.value),
     };
+  }
+
+  if (node.type === 'UnaryExpression' && node.operator === '-' && node.prefix && node.argument.type === 'NumericLiteral') {
+    const value = `-${String(node.argument.value)}`;
+
+    return {
+      concept: 'NumericLiteral',
+      value,
+      typeAnnotation: {
+        concept: 'TypeAnnotation',
+        typeKind: 'primitive',
+        typeName: value.includes('.') ? 'Decimal' : 'Integer',
+        typeNamespace: 'nasl.core',
+        inferred: false,
+        ruleMap: new Map(),
+      },
+    }
   }
 
   if (node.type === 'NumericLiteral') {
