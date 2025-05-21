@@ -442,7 +442,6 @@ export default defineComponent({
         }
       });
     }
-    console.log(this.componentProps, 'componentProps');
     return (
       <div
         class={this.tableBaseClass?.cellEditWrap}

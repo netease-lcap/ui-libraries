@@ -145,7 +145,6 @@ export const useTable: NaslComponentPluginOptions = {
     'virtual',
   ],
   setup(props, ctx) {
-    console.log('============table render===========');
     const current = props.useRef('page', (v) => v ?? 1);
     const pageSize = props.useRef('pageSize', (v) => v ?? 10);
     const rowKey = (props.get('rowKey') || 'id') as string;
@@ -255,7 +254,6 @@ export const useTable: NaslComponentPluginOptions = {
         const nodePath = _.get(attrs, 'data-nodepath');
         const { cell, title } = _.get(vnode, 'data.scopedSlots', {});
         const listeners = _.get(vnode, 'componentOptions.listeners', {});
-        console.log(vnode);
         const titleProps = _.isFunction(title)
           ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
           : {};
@@ -273,7 +271,6 @@ export const useTable: NaslComponentPluginOptions = {
           [_.conforms({ type: _.isString }), _.constant({})],
         ]);
         const cellProps = cellRender({ type: attrs.type, cell, attrs, listeners });
-        console.log(cellProps, 'cellProps');
         return [
           {
             ...attrs,
