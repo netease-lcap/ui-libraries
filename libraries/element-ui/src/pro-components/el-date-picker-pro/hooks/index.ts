@@ -245,7 +245,7 @@ export const useDatePickerValue = (props: MapGet, valueFormat: ComputedRef<strin
       const endValue = getNaslDateValue(d[1], valueFormat);
       onUpdateStartValue(startValue);
       onUpdateEndValue(endValue);
-      updateValue = [startValue, endValue];
+      updateValue = normalizeDateRange(startValue, endValue);
     }
 
     onUpdateValue(updateValue);
@@ -298,7 +298,7 @@ export function getChangeEventByValue(d: DateValue | DateRangeValue | DateMultip
   } else if (Array.isArray(d)) {
     changeEvent.startValue = getNaslDateValue(d[0], valueFormat);
     changeEvent.endValue = getNaslDateValue(d[1], valueFormat);
-    changeEvent.value = [changeEvent.startValue, changeEvent.endValue];
+    changeEvent.value = normalizeDateRange(changeEvent.startValue, changeEvent.endValue);
   }
 
   return changeEvent;

@@ -442,6 +442,9 @@ export default defineComponent({
         }
       });
     }
+
+    const { slots, ...restProps } = this.componentProps || {};
+
     return (
       <div
         class={this.tableBaseClass?.cellEditWrap}
@@ -453,12 +456,16 @@ export default defineComponent({
         <Component
           status={errorMessage ? this.errorList?.[0]?.type || 'error' : undefined}
           tips={errorMessage}
-          attrs={this.componentProps}
+          attrs={restProps}
           on={{ ...this.listeners, ...tmpEditOnListeners }}
           value={this.editValue}
-          scopedSlots={this.componentProps?.slots}
+          scopedSlots={slots}
           onChange={(e) => {
-            this.onEditChange(e?.value??e);
+            let val = e;
+            if (typeof e === 'object' && Object.prototype.hasOwnProperty.call(e, 'value')) {
+              val = e?.value;
+            }
+            this.onEditChange(val);
           }}>
         </Component>
       </div>
