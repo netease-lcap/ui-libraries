@@ -23,9 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: `<el-watermark>
-      <el-flex direction="horizontal" mode="block" style="width: 100%; height: 200px;">
-      </el-flex>
-    </el-watermark>`,
+    template: `<el-watermark></el-watermark>`,
   }),
 };

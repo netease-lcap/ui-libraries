@@ -10,7 +10,7 @@
     sizeField="size1"
     style="max-width: 600px">
     <template #content="current">
-      {{ current.text }}
+      {{ current.item.text }}
     </template>
   </el-timeline>
 </template>

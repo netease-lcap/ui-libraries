@@ -24,14 +24,11 @@ namespace nasl.ui {
         modelValue: 'opened',
         valueField: 'value',
       },
-      slotWrapperInlineStyle: {
-        icon: 'margin: 0 8px 0 auto;'
-      },
       displaySlotConditions: {
         title: "!!this.getAttribute('dataSource')",
         icon: "!!this.getAttribute('dataSource')",
-        content: "!!this.getAttribute('dataSource')"
-      }
+        content: "!!this.getAttribute('dataSource')",
+      },
     },
   })
   @Component({
@@ -64,7 +61,7 @@ namespace nasl.ui {
       description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
-      // bindOpen: true,
+      bindOpen: true,
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
@@ -76,27 +73,16 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    // @Prop<ElCollapseOptions<T, V>, 'textField'>({
-    //   group: '数据属性',
-    //   title: '标题字段',
-    //   description: '集合的元素类型中，用于显示标题的属性名称',
-    //   docDescription: '集合的元素类型中，用于显示标题的属性名称，支持自定义变更。',
-    //   setter: {
-    //     concept: 'PropertySelectSetter',
-    //   },
-    // })
-    // textField: (item: T) => any = ((item: any) => item.title) as any;
-
-    @Prop<ElCollapseOptions<T, V>, 'valueField'>({
+    @Prop<ElCollapseOptions<T, V>, 'nameField'>({
       group: '数据属性',
-      title: '值字段',
+      title: '唯一标识字段',
       description: '集合的元素类型中，用于标识选中值的属性',
       docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => V = ((item: any) => item.value) as any;
+    nameField: (item: T) => V = ((item: any) => item.name) as any;
 
     @Prop({
       group: '数据属性',
@@ -106,7 +92,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     modelValue: V | nasl.collection.List<V>;
-    
+
     @Prop<ElCollapseOptions<T, V>, 'disabledField'>({
       group: '数据属性',
       title: '禁用字段',
@@ -202,9 +188,6 @@ namespace nasl.ui {
       events: {
         click: true,
       },
-      slotWrapperInlineStyle: {
-        icon: 'margin: 0 8px 0 auto;'
-      }
     },
   })
   @Component({
@@ -227,22 +210,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     name: nasl.core.String | nasl.core.Decimal;
-
-    @Prop({
-      group: '主要属性',
-      title: '面板标题',
-      description: '面板标题',
-      setter: { concept: 'InputSetter' },
-    })
-    title: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '图标',
-      description: '图标组件',
-      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
-    })
-    icon: nasl.core.String = 'ArrowRight';
 
     @Prop({
       group: '主要属性',

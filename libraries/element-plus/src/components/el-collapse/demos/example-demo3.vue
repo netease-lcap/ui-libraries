@@ -2,9 +2,12 @@
 <!--  数据源 -->
 <template>
   <div>
-    <el-collapse :value.sync="activeNames" @change="handleChange" :dataSource="load" valueField="title">
+    <el-collapse :modelValue.sync="activeNames" @change="handleChange" :dataSource="load" valueField="title">
+      <template #title="current">
+        {{ current.item.title }}
+      </template>
       <template #content="current">
-        {{ current.content }}
+        {{ current.item.content }}
       </template>
     </el-collapse>
     {{ activeNames }}
@@ -14,9 +17,9 @@
 // 模拟后端请求
 const mockRequest = (data, timeout = 300) => new Promise((res, rej) => setTimeout(() => res(data), timeout));
 let data = [
-  { title: 'text1', content: 'content1' },
-  { title: 'text2', content: 'content2' },
-  { title: 'text3', content: 'content3' },
+  { name: '1', title: 'text1', content: 'content1' },
+  { name: '2', title: 'text2', content: 'content2' },
+  { name: '3', title: 'text3', content: 'content3' },
 ];
 // 模拟数据服务
 const mockService = {
@@ -27,13 +30,14 @@ const mockService = {
 export default {
   data() {
     return {
-      activeNames: ['text1'],
+      activeNames: ['1'],
       activeNames1: [],
     };
   },
   methods: {
     handleChange(val) {
       console.log(val);
+      this.activeNames = val;
     },
     load() {
       return mockService.load();

@@ -25,7 +25,7 @@ export function handleDataSource(props) {
                 <el-anchor-link
                   {...item}
                   v-slots={{
-                    default: () => slots.content?.(item),
+                    default: () => slots.content?.({ item }),
                   }}
                 />
               )),

@@ -38,22 +38,22 @@ export const Default = {
   }),
 };
 
-// export const DataSource = {
-//   name: '使用数据源',
-//   render: () => ({
-//     template: `
-//       <el-carousel :dataSource="[{}]"></el-carousel>
-//     `,
-//   }),
-// };
-
-/*  数据源截图 */
-export const demo1 = {
-  name: '数据源',
+export const DataSource = {
+  name: '使用数据源',
   render: () => ({
-    components: {
-      exampleDemo: BlockDemo1,
-    },
-    template: '<example-demo></example-demo>',
+    template: `
+      <el-carousel :dataSource="[{}]"></el-carousel>
+    `,
   }),
 };
+
+/*  数据源截图 */
+// export const demo1 = {
+//   name: '数据源',
+//   render: () => ({
+//     components: {
+//       exampleDemo: BlockDemo1,
+//     },
+//     template: '<example-demo></example-demo>',
+//   }),
+// };

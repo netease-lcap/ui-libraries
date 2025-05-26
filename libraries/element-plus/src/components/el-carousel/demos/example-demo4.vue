@@ -1,7 +1,7 @@
 <template>
   <el-carousel :dataSource="data" height="200px">
     <template #content="current">
-      {{ current.text }}
+      {{ current.item.content }}
     </template>
   </el-carousel>
 </template>
