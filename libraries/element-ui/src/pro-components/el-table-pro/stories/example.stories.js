@@ -303,7 +303,8 @@ export const 可编辑表格 = {
     methods: {
       log(value) {
         console.log(value, 'log', this.list);
-        this.$set(this.list, value.rowIndex, value.newRowData);
+        // console.log(log);
+        // this.$set(this.list, value.rowIndex, value.newRowData);
 
         // this.displayColumns = value;
       },
@@ -336,16 +337,16 @@ export const 可编辑表格 = {
       </div>
       </template>
     </el-table-column-pro>
-    <el-table-column-pro title="渠道" colKey="status" type="editable" :rules="[
+    <el-table-column-pro title="渠道"  colKey="status" type="editable" :rules="[
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
     ]" @row-edit="log">
       <template #edit="cell">
-          <el-input-pro @change="log" ></el-input-pro>
+      <el-time-picker-pro  ></el-time-picker-pro>
       </template>
       <template #cell="cell">
-      <div>
+      <el-text>
       123
-      </div>
+      </el-text>
       </template>
     </el-table-column-pro>
     </el-table-pro>`,

@@ -123,6 +123,7 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit })
       rules,
       abortEditOnEvent: ['onChange'],
       onEdited: (context) => {
+        console.log(context,'context');
         _.attempt(onRowEdit, context);
       },
     },
