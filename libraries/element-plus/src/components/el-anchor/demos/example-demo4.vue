@@ -1,5 +1,9 @@
 <template>
-  <el-anchor :dataSource="data" :offset="100" @click="handleClick"></el-anchor>
+  <el-anchor :dataSource="data" :offset="100" @click="handleClick">
+    <template #content="current">
+      {{ current.item.title }}
+    </template>
+  </el-anchor>
 
   <!-- 目标位置 -->
   <div id="section1">部分一的内容</div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="root" :id="label || refName" :name="label || refName" anchor vusion-slot-name="default">
+  <div class="root" :id="label || refName" :name="label || refName">
     <slot></slot>
   </div>
 </template>
