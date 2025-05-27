@@ -17,12 +17,12 @@ namespace nasl.ui {
           condition: "!this.getAttribute('dataSource')",
           accept: false,
         },
-        displayData: "\"[{value:'opened'},{value:'1'}, {value:'2'}]\"",
+        displayData: "\"[{name:'opened'},{name:'1'}, {name:'2'}]\"",
         propertyName: ':dataSource',
       },
       additionalAttribute: {
         modelValue: 'opened',
-        valueField: 'value',
+        nameField: 'name',
       },
       displaySlotConditions: {
         title: "!!this.getAttribute('dataSource')",
