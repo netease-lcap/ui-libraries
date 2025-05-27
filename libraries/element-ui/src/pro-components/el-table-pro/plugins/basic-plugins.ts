@@ -77,23 +77,20 @@ const formComponentMap = {
 export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', event: 'update:selectedRowKeys' }]);
 
-const isEditColumn = ({ type, cell }) => {
+const isEditColumn = ({ type, edit }) => {
   const isEditColumn = type === 'editable';
-  const cellNode = _.attempt(cell, { item: {} });
-  const cellNodeTag = _.get(cellNode, '0.componentOptions.tag');
-  const isFormComponent = !_.isEmpty(formComponentMap[cellNodeTag]);
-  return isEditColumn && isFormComponent;
+
+  return isEditColumn;
 };
-const editColumnProps = ({ type, cell, attrs, listeners: listenersProps }) => {
-  const cellNode = _.attempt(cell, { item: {} });
-  const cellNodeTag = _.get(cellNode, '0.componentOptions.tag');
-  const { listeners = [], propsData = {}, children } = _.get(cellNode, '0.componentOptions');
-  const nodeAttrs = _.get(cellNode, '0.data.attrs', {});
-  const scopedSlots = _.get(cellNode, '0.data.scopedSlots', {});
+const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit }) => {
+  const editNode = _.attempt(edit, { item: {} });
+  const editNodeTag = _.get(editNode, '0.componentOptions.tag');
+  const { listeners = [], propsData = {}, children } = _.get(editNode, '0.componentOptions', {});
+  const nodeAttrs = _.get(editNode, '0.data.attrs', {});
+  const scopedSlots = _.get(editNode, '0.data.scopedSlots', {});
   const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
-  const rules =
-    _.map(attrs?.rules, (item) => ({
+  const rules = _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
         const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
@@ -114,13 +111,17 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps }) => {
     })) ?? [];
   return {
     colKey: attrs.colKey ?? 'index',
+    cell: (h, { row, rowIndex, col }) => {
+      return nodepath
+        ? [cell({ item: row, index: rowIndex, col }), edit()]
+        : [cell({ item: row, index: rowIndex, col })];
+    },
     edit: {
-      component: formComponentMap[cellNodeTag],
+      component: formComponentMap[editNodeTag],
       on: () => listeners || [],
       props: { ...nodeAttrs, ...propsData, slots: { default: () => children, ...scopedSlots } },
-      keepEditMode: !!nodepath,
       rules,
-      abortEditOnEvent: ['onBlur', 'onChange'],
+      abortEditOnEvent: ['onChange'],
       onEdited: (context) => {
         _.attempt(onRowEdit, context);
       },
@@ -194,14 +195,12 @@ export const useTable: NaslComponentPluginOptions = {
     const sort = ref<string | null>(sorting.value?.field);
     const order = ref<string | null>(sorting.value?.order);
     const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
-    const tree = props.useComputed('treeDisplay', (value) =>
-      value
+    const tree = props.useComputed('treeDisplay', (value) => (value
         ? {
             childrenKey: 'children',
             checkStrictly: checkStrictly.value,
           }
-        : undefined,
-    );
+        : undefined));
 
     const data = props.useComputed('data', (v) => {
       const treeDisplay = props.get('treeDisplay');
@@ -253,7 +252,7 @@ export const useTable: NaslComponentPluginOptions = {
         const attrs = _.get(vnode, 'data.attrs', {});
 
         const nodePath = _.get(attrs, 'data-nodepath');
-        const { cell, title } = _.get(vnode, 'data.scopedSlots', {});
+        const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
         const listeners = _.get(vnode, 'componentOptions.listeners', {});
         const titleProps = _.isFunction(title)
           ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
@@ -271,7 +270,7 @@ export const useTable: NaslComponentPluginOptions = {
           ],
           [_.conforms({ type: _.isString }), _.constant({})],
         ]);
-        const cellProps = cellRender({ type: attrs.type, cell, attrs, listeners });
+        const cellProps = cellRender({ type: attrs.type, cell, attrs, listeners, edit });
         return [
           {
             ...attrs,
@@ -367,13 +366,11 @@ export const useTable: NaslComponentPluginOptions = {
         });
       }
     });
-    const columnController = props.useRef('columnController', (v) =>
-      v
+    const columnController = props.useRef('columnController', (v) => (v
         ? {
             placement: 'top-right',
           }
-        : {},
-    );
+        : {}));
 
     // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
     const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));

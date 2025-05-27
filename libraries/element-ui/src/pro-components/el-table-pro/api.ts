@@ -916,7 +916,7 @@ namespace nasl.ui {
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
       selector: 'multiple',
-      namedSlotOmitWrapper:['cell'],
+      namedSlotOmitWrapper:['cell','edit'],
       slotInlineStyle: {
         title: 'min-width: 30px',
         cell: 'min-width: 30px',
@@ -1189,11 +1189,11 @@ namespace nasl.ui {
     })
     slotCell: (current: Current<T>) => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '编辑单元格',
-    //   description: '对单元格的编辑数据展示进行自定义',
-    // })
-    // slotEditcell: (current: Current<T>) => Array<ViewComponent>;
+    @Slot({
+      title: '编辑单元格',
+      description: '对单元格的编辑数据展示进行自定义',
+    })
+    slotEdit: () => Array<ViewComponent>;
 
     @Slot({
       title: '标题',
