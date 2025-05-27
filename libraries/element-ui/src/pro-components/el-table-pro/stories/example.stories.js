@@ -324,11 +324,11 @@ export const 可编辑表格 = {
 <el-table-column-pro title="渠道"  colKey="detail.email" type="editable" :rules="[
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
     ]" @row-edit="log">
-      <template #edit="cell">
+      <template #edit>
         <el-radio-group-pro :dataSource="[1,2,3]" data-nodepath="123">
-          <template #item="current">
-            {{11}}
-          </template>
+            <template #item="current" >
+              <el-text>123</el-text>
+            </template>
         </el-radio-group-pro>
       </template>
       <template #cell="cell">
@@ -341,7 +341,7 @@ export const 可编辑表格 = {
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
     ]" @row-edit="log">
       <template #edit="cell">
-      <el-time-picker-pro  ></el-time-picker-pro>
+      <el-input-pro ></el-input-pro>
       </template>
       <template #cell="cell">
       <el-text>

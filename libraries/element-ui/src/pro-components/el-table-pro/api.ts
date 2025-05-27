@@ -984,6 +984,20 @@ namespace nasl.ui {
       if: (_) => _.type === 'editable',
     })
     rules: nasl.core.String;
+
+
+    @Prop<ElTableColumnProOptions<T, V, P, M>, 'abortEditOnEvent'>({
+      group: '主要属性',
+      title: '退出编辑事件',
+      description: '退出编辑事件',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '改变后' }, { title: '失去焦点后' }],
+      },
+      if: (_) => _.type === 'editable',
+    })
+    abortEditOnEvent: 'onChange' | 'onBlur' = 'onChange';
+
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
     //   title: '排序初始顺序',

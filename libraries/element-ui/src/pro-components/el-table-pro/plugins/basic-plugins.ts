@@ -90,6 +90,7 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit })
   const scopedSlots = _.get(editNode, '0.data.scopedSlots', {});
   const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
+  const abortEditOnEvent = attrs?.abortEditOnEvent ?? 'onChange';
   const rules = _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
@@ -121,9 +122,8 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit })
       on: () => listeners || [],
       props: { ...nodeAttrs, ...propsData, slots: { default: () => children, ...scopedSlots } },
       rules,
-      abortEditOnEvent: ['onChange'],
+      abortEditOnEvent: [abortEditOnEvent],
       onEdited: (context) => {
-        console.log(context,'context');
         _.attempt(onRowEdit, context);
       },
     },
