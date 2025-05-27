@@ -320,7 +320,7 @@ export const 可编辑表格 = {
       :selectedRowKeys.sync="selectedRowKeys"
       width="800px"
     >
-<el-table-column-pro data-nodepath="detail.email" title="渠道"  colKey="detail.email" type="editable" :rules="[
+<el-table-column-pro title="渠道"  colKey="detail.email" type="editable" :rules="[
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
     ]" @row-edit="log">
       <template #cell="cell">
@@ -335,13 +335,7 @@ export const 可编辑表格 = {
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
     ]" @row-edit="log">
       <template #cell="cell">
-        <div>
-          <el-select-pro @change="log" >
-            <el-option-pro value="1" label="1"></el-option-pro>
-            <el-option-pro value="2" label="2"></el-option-pro>
-            <el-option-pro value="3" label="3"></el-option-pro>
-          </el-select-pro>
-        </div>
+          <el-input-pro @change="log" ></el-input-pro>
       </template>
     </el-table-column-pro>
     </el-table-pro>`,

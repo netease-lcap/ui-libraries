@@ -120,6 +120,7 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps }) => {
       props: { ...nodeAttrs, ...propsData, slots: { default: () => children, ...scopedSlots } },
       keepEditMode: !!nodepath,
       rules,
+      abortEditOnEvent: ['onBlur', 'onChange'],
       onEdited: (context) => {
         _.attempt(onRowEdit, context);
       },
