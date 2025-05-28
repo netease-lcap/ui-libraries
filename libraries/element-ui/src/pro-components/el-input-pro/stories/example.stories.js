@@ -99,10 +99,15 @@ export const Default = {
 export const Align = {
   name: '对齐方式',
   render: () => ({
+    methods: {
+      onEnter(event) {
+        console.log(event, 'onEnter');
+      },
+    },
     template: `
       <div>
         <div>右</div>
-        <el-input-pro align="right"></el-input-pro>
+        <el-input-pro :onEnter="onEnter" align="right"></el-input-pro>
         <div>居中</div>
         <el-input-pro align="center"></el-input-pro>
         <div>左</div>
@@ -110,6 +115,7 @@ export const Align = {
       </div>
     `,
   }),
+
 };
 
 export const Disabled = {
