@@ -133,6 +133,9 @@ function updateHMRConfig(config: UserConfig) {
     config.server = {};
   }
 
+  // 允许所有 host 访问
+  (config.server as any).allowedHosts = true;
+
   if (typeof config.server.hmr === 'boolean' && !config.server.hmr) {
     return config;
   }
