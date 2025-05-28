@@ -123,6 +123,29 @@ function setLibBuildConfig(options: LcapViteConfigPluginOptions, config: UserCon
   };
 }
 
+/**
+ * 更新 HMR 配置
+ * @param config vite 配置
+ * @returns 更新后的配置
+ */
+function updateHMRConfig(config: UserConfig) {
+  if (!config.server) {
+    config.server = {};
+  }
+
+  if (typeof config.server.hmr === 'boolean' && !config.server.hmr) {
+    return config;
+  }
+
+  const hmr = typeof config.server.hmr === 'object' ? config.server.hmr : {};
+  config.server.hmr = {
+    ...hmr,
+    path: hmr.path || '/_vite_hmr',
+  };
+
+  return config;
+}
+
 export default function lcapViteConfigPlugin(options: LcapViteConfigPluginOptions) {
   return {
     name: 'vite:lcap-default-config',
@@ -132,6 +155,10 @@ export default function lcapViteConfigPlugin(options: LcapViteConfigPluginOption
       resetLogger(config);
       addDefine(config, isBuild);
       setLibBuildConfig(options, config);
+
+      if (!isBuild) {
+        updateHMRConfig(config);
+      }
     },
   } as Plugin;
 }
