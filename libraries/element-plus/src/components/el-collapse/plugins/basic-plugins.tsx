@@ -7,16 +7,17 @@ import { useMemo } from '@/plugins/hooks';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
-  const valueField = props.get('valueField') || 'value';
+  const nameField = props.get('nameField') || 'name';
   const slots = props.get('slots');
   const disabledField = props.get('disabledField') || 'disabled';
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
   const dataSource = useHandleMapField({
-    value: 'name',
-    valueField,
-    disabledField,
+    fieldsMap: {
+      name: nameField,
+      disabled: disabledField,
+    },
     dataSource: useFormatDataSource(data),
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
@@ -31,9 +32,9 @@ export function handleDataSource(props) {
                 <el-collapse-item
                   {...item}
                   v-slots={{
-                    title: () => slots.title?.(item),
-                    icon: () => slots.icon?.(item),
-                    default: () => slots.content?.(item),
+                    title: () => slots.title?.({ item }),
+                    icon: () => slots.icon?.({ item }),
+                    default: () => slots.content?.({ item }),
                   }}
                 />
               )),

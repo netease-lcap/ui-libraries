@@ -6,12 +6,16 @@ import { useMemo } from '@/plugins/hooks';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
+  const hrefField = props.get('hrefField') || 'href';
   const slots = props.get('slots');
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
   const dataSource = useHandleMapField({
     dataSource: useFormatDataSource(data),
+    fieldsMap: {
+      href: hrefField,
+    },
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 
@@ -24,8 +28,9 @@ export function handleDataSource(props) {
               _.map(dataSource, (item) => (
                 <el-anchor-link
                   {...item}
+                  href={`${_.get(item, hrefField, '').startsWith('#') ? '' : '#'}${_.get(item, hrefField, '')}`}
                   v-slots={{
-                    default: () => slots.content?.(item),
+                    default: () => slots.content?.({ item }),
                   }}
                 />
               )),

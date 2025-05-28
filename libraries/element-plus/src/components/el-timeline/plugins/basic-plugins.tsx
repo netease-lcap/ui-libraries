@@ -67,7 +67,7 @@ export function handleDataSource(props) {
                 <el-timeline-item
                   {...item}
                   v-slots={{
-                    default: () => slots.content?.(item),
+                    default: () => slots.content?.({ item }),
                   }}
                 />
               )),

@@ -7,6 +7,17 @@ namespace nasl.ui {
       idetype: 'container',
       structured: true,
       childAccept: "target.tag === 'el-anchor-link'",
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 3,
+        loopRule: 'nth-child(n+2)',
+        loopElem: ' > .el-anchor__item',
+        emptySlot: {
+          display: 'large',
+          condition: "!this.getAttribute('dataSource')",
+          accept: false,
+        },
+      },
       displaySlotConditions: {
         content: "!!this.getAttribute('dataSource')"
       }
@@ -18,24 +29,24 @@ namespace nasl.ui {
     description: '快速找到当前页面上信息内容的位置',
     group: 'Display',
   })
-  export class ElAnchor<T> extends ViewComponent {
+  export class ElAnchor<T, V> extends ViewComponent {
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',
     })
     reload(): void {}
 
-    constructor(options?: Partial<ElAnchorOptions<T>>) {
+    constructor(options?: Partial<ElAnchorOptions<T, V>>) {
       super();
     }
   }
 
-  export class ElAnchorOptions<T> extends ViewComponentOptions {
+  export class ElAnchorOptions<T, V> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description: '展示数据的输入源，可设置为集合类型变量（List<T, V>）或输出参数为集合类型的逻辑。',
+      docDescription: '支持动态绑定集合类型变量（List<T, V>）或输出参数为集合类型的逻辑',
       designerValue: [{}],
       bindOpen: true,
     })
@@ -45,9 +56,20 @@ namespace nasl.ui {
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T, V>后，会自动识别T的类型并进行展示。',
     })
     dataSchema: T;
+    
+    @Prop<ElAnchorOptions<T, V>, 'hrefField'>({
+      group: '数据属性',
+      title: '链接地址字段',
+      description: '集合的元素类型中，用于标识链接地址的属性',
+      docDescription: '集合的元素类型中，用于标识链接地址的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    hrefField: (item: T) => V = ((item: any) => item.href) as any;
 
     // @Prop({
     //   group: '主要属性',
@@ -224,7 +246,7 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class ElAnchorItem extends ViewComponent {
-    constructor(options?: Partial<ElAnchorLinkOptions>) {
+    constructor(options?: Partial<ElAnchorItemOptions>) {
       super();
     }
   }
