@@ -341,7 +341,7 @@ export const 可编辑表格 = {
           { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
     ]" @row-edit="log">
       <template #edit="cell">
-      <el-input-pro ></el-input-pro>
+      <el-time-picker-pro :class="'class12'"  class="class" staticClass="staticClass" style="width: 100px;" :style="{height: '100px'}" statcStyle="statcStyle" ></el-time-picker-pro>
       </template>
       <template #cell="cell">
       <el-text>
