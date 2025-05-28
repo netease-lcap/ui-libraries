@@ -1009,11 +1009,11 @@ importers:
         specifier: ^7.22.10
         version: 7.23.6
       '@lcap/extension-ui':
-        specifier: ^1.0.0-beta.8
-        version: 1.0.0-beta.8
+        specifier: ^1.0.0
+        version: 1.0.0
       '@lcap/material-parser':
-        specifier: ^1.0.0-alpha.3
-        version: 1.0.0-alpha.3(prop-types@15.8.1)(vue@3.5.13(typescript@5.3.3))
+        specifier: ^1.0.0
+        version: 1.0.0(prop-types@15.8.1)(vue@3.5.13(typescript@5.3.3))
       archiver:
         specifier: ^7.0.1
         version: 7.0.1
@@ -1106,8 +1106,8 @@ importers:
         version: 2.7.0
     devDependencies:
       '@nasl/types':
-        specifier: ^0.1.12
-        version: 0.1.12
+        specifier: ^0.1.13
+        version: 0.1.13
       '@types/babel__core':
         specifier: ^7.1.20
         version: 7.20.5
@@ -3475,11 +3475,11 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==, tarball: https://registry.npmmirror.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz}
 
-  '@lcap/extension-ui@1.0.0-beta.8':
-    resolution: {integrity: sha512-NRhS45MQi5ZZ1t8t37+/JWQ1drXFYrdkybtYHgkgjSZ3cRYKWkJzT17KcIlu9/Mcc7EgiPN/aUbeiTW+O57XGw==}
+  '@lcap/extension-ui@1.0.0':
+    resolution: {integrity: sha512-gP4G5yRMT7y3aYDU71W4dy9ZWenZd2VaD1IAokDt3nSNqnrZnLGaA/K0XP840QHUT8E+p7D6bAL0bI+YnKrXUw==}
 
-  '@lcap/material-parser@1.0.0-alpha.3':
-    resolution: {integrity: sha512-DPC2KxaY+RKbfEgz79YABxl6vf/qbn4nxrXstmxlRIs+M8ZkZL2kaMpLt5lFhMRxOTnBJzJ9EL/JyDUL35OrzA==}
+  '@lcap/material-parser@1.0.0':
+    resolution: {integrity: sha512-Q22p1xo5EW3qosvZcAy+6k9ccUD/TozVchIpnD6AQuuvJX7UObpHkKWd50tqsT0JlHbum7IkZlrl8dRjqWefQw==}
 
   '@lukeed/csprng@1.1.0':
     resolution: {integrity: sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA==, tarball: https://registry.npmmirror.com/@lukeed/csprng/-/csprng-1.1.0.tgz}
@@ -3511,8 +3511,8 @@ packages:
   '@nasl/types@0.1.11':
     resolution: {integrity: sha512-0aaEG4gBy1jOpLOY4MoqFwDca2LVMl+ygGR4Ct4VUpPbsff8zkMge0dPpt1M9aGWEDC9QHUMYLIEzb20IcUAJA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.11.tgz}
 
-  '@nasl/types@0.1.12':
-    resolution: {integrity: sha512-enfLqU62yqgH1+D55PHp6Semgv+Io0VbIaG+WggeCV7AgfMl3J4mISigXicKhEPdfcS3/6qEmWtFxwKBVUKLlg==}
+  '@nasl/types@0.1.13':
+    resolution: {integrity: sha512-ioXS4BEtX6kRnc5MQcnErZvxl0q/QskJw0RUvWGacBH+EX1BDRA3SLGLxYBLvTmArKfnhrQI2Z9DlnxvUB5yvA==}
 
   '@nasl/types@0.1.7-beta.1':
     resolution: {integrity: sha512-iMgr0tRx8hlhXCAFUyI1WjYJkHTtq+X5dTZ8qlyAN4jOs7Ivj9b3fZB4djoT99VsCtorOD2azbIqR8vdYaZInw==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.7-beta.1.tgz}
@@ -5984,7 +5984,7 @@ packages:
     resolution: {integrity: sha512-OH/2E5Fg20h2aPrbe+QL8JZQFko0YZaF+j4mnQ7BGhfavO7OpSLa8a0y9sBwomHdSbkhTS8TQNayBfnW5DwbvQ==, tarball: https://registry.npmmirror.com/ast-types-flow/-/ast-types-flow-0.0.8.tgz}
 
   ast-types@0.16.1:
-    resolution: {integrity: sha512-6t10qk83GOG8p0vKmaCr8eiilZwO171AvbROMtvvNiwrTly62t+7XkA8RdIIVbpMhCASAsxgAzdRSwh6nw/5Dg==, tarball: https://registry.npmmirror.com/ast-types/-/ast-types-0.16.1.tgz}
+    resolution: {integrity: sha512-6t10qk83GOG8p0vKmaCr8eiilZwO171AvbROMtvvNiwrTly62t+7XkA8RdIIVbpMhCASAsxgAzdRSwh6nw/5Dg==}
     engines: {node: '>=4'}
 
   astral-regex@2.0.0:
@@ -6387,7 +6387,7 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
   cli-spinners@2.9.2:
-    resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==, tarball: https://registry.npmmirror.com/cli-spinners/-/cli-spinners-2.9.2.tgz}
+    resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==}
     engines: {node: '>=6'}
 
   cli-table3@0.6.3:
@@ -8523,7 +8523,7 @@ packages:
     resolution: {integrity: sha512-gyPJuv83bHMpocVYoqof5VDiZveEoGoFL8m3BXNb2VW8Xs+rz9kqO8LOQ5DH6EsuvilT1ApazU0pyl+ytbPtlw==, tarball: https://registry.npmmirror.com/is-hexadecimal/-/is-hexadecimal-1.0.4.tgz}
 
   is-interactive@1.0.0:
-    resolution: {integrity: sha512-2HvIEKRoqS62guEC+qBjpvRubdX910WCMuJTZ+I9yvqKU2/12eSL549HMwtabb4oupdj2sMP50k+XJfB/8JE6w==, tarball: https://registry.npmmirror.com/is-interactive/-/is-interactive-1.0.0.tgz}
+    resolution: {integrity: sha512-2HvIEKRoqS62guEC+qBjpvRubdX910WCMuJTZ+I9yvqKU2/12eSL549HMwtabb4oupdj2sMP50k+XJfB/8JE6w==}
     engines: {node: '>=8'}
 
   is-map@2.0.2:
@@ -8622,7 +8622,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   is-unicode-supported@0.1.0:
-    resolution: {integrity: sha512-knxG2q4UC3u8stRGyAVJCOdxFmv5DZiRcdlIaAQXAbSfJya+OhopNotLQrstBhququ4ZpuKbDc/8S6mgXgPFPw==, tarball: https://registry.npmmirror.com/is-unicode-supported/-/is-unicode-supported-0.1.0.tgz}
+    resolution: {integrity: sha512-knxG2q4UC3u8stRGyAVJCOdxFmv5DZiRcdlIaAQXAbSfJya+OhopNotLQrstBhququ4ZpuKbDc/8S6mgXgPFPw==}
     engines: {node: '>=10'}
 
   is-url-superb@4.0.0:
@@ -8795,7 +8795,7 @@ packages:
         optional: true
 
   jsesc@0.5.0:
-    resolution: {integrity: sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==, tarball: https://registry.npmmirror.com/jsesc/-/jsesc-0.5.0.tgz}
+    resolution: {integrity: sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==}
     hasBin: true
 
   jsesc@2.5.2:
@@ -9037,7 +9037,7 @@ packages:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==, tarball: https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz}
 
   log-symbols@4.1.0:
-    resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==, tarball: https://registry.npmmirror.com/log-symbols/-/log-symbols-4.1.0.tgz}
+    resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
     engines: {node: '>=10'}
 
   log-update@4.0.0:
@@ -9077,7 +9077,7 @@ packages:
     engines: {node: '>=10'}
 
   lru-cache@8.0.5:
-    resolution: {integrity: sha512-MhWWlVnuab1RG5/zMRRcVGXZLCXrZTgfwMikgzCegsPnG62yDQo5JnqKkrK4jO5iKqDAZGItAqN5CtKBCBWRUA==, tarball: https://registry.npmmirror.com/lru-cache/-/lru-cache-8.0.5.tgz}
+    resolution: {integrity: sha512-MhWWlVnuab1RG5/zMRRcVGXZLCXrZTgfwMikgzCegsPnG62yDQo5JnqKkrK4jO5iKqDAZGItAqN5CtKBCBWRUA==}
     engines: {node: '>=16.14'}
 
   lz-string@1.5.0:
@@ -9424,10 +9424,10 @@ packages:
     engines: {node: '>= 0.6'}
 
   neo-async@2.6.2:
-    resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==, tarball: https://registry.npmmirror.com/neo-async/-/neo-async-2.6.2.tgz}
+    resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
   node-dir@0.1.17:
-    resolution: {integrity: sha512-tmPX422rYgofd4epzrNoOXiE8XFZYOcCq1vD7MAXCDO+O+zndlA2ztdKKMa+EeuBG5tHETpr4ml4RGgpqDCCAg==, tarball: https://registry.npmmirror.com/node-dir/-/node-dir-0.1.17.tgz}
+    resolution: {integrity: sha512-tmPX422rYgofd4epzrNoOXiE8XFZYOcCq1vD7MAXCDO+O+zndlA2ztdKKMa+EeuBG5tHETpr4ml4RGgpqDCCAg==}
     engines: {node: '>= 0.10.5'}
 
   node-fetch-native@1.4.1:
@@ -9583,7 +9583,7 @@ packages:
     engines: {node: '>= 0.8.0'}
 
   ora@5.4.1:
-    resolution: {integrity: sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ==, tarball: https://registry.npmmirror.com/ora/-/ora-5.4.1.tgz}
+    resolution: {integrity: sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ==}
     engines: {node: '>=10'}
 
   os-homedir@1.0.2:
@@ -10339,7 +10339,7 @@ packages:
       react: ^16.3.0 || ^17.0.1 || ^18.0.0
 
   react-docgen-typescript@2.2.2:
-    resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==, tarball: https://registry.npmmirror.com/react-docgen-typescript/-/react-docgen-typescript-2.2.2.tgz}
+    resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==}
     peerDependencies:
       typescript: '>= 4.3.x'
 
@@ -10495,7 +10495,7 @@ packages:
     engines: {node: '>= 4'}
 
   recast@0.23.9:
-    resolution: {integrity: sha512-Hx/BGIbwj+Des3+xy5uAtAbdCyqK9y9wbBcDFDYanLS9JnMqf7OeF87HQwUimE87OEc72mr6tkKUKMBBL+hF9Q==, tarball: https://registry.npmmirror.com/recast/-/recast-0.23.9.tgz}
+    resolution: {integrity: sha512-Hx/BGIbwj+Des3+xy5uAtAbdCyqK9y9wbBcDFDYanLS9JnMqf7OeF87HQwUimE87OEc72mr6tkKUKMBBL+hF9Q==}
     engines: {node: '>= 4'}
 
   rechoir@0.6.2:
@@ -10762,7 +10762,7 @@ packages:
     hasBin: true
 
   semver@7.6.3:
-    resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==, tarball: https://registry.npmmirror.com/semver/-/semver-7.6.3.tgz}
+    resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -11074,7 +11074,7 @@ packages:
     engines: {node: '>=4'}
 
   strip-indent@3.0.0:
-    resolution: {integrity: sha512-laJTa3Jb+VQpaC6DseHhF7dXVqHTfJPCRDaEbid/drOhgitgYku/letMUqOXFoWV0zIIUbjpdH2t+tYj4bQMRQ==, tarball: https://registry.npmmirror.com/strip-indent/-/strip-indent-3.0.0.tgz}
+    resolution: {integrity: sha512-laJTa3Jb+VQpaC6DseHhF7dXVqHTfJPCRDaEbid/drOhgitgYku/letMUqOXFoWV0zIIUbjpdH2t+tYj4bQMRQ==}
     engines: {node: '>=8'}
 
   strip-indent@4.0.0:
@@ -11253,7 +11253,7 @@ packages:
     resolution: {integrity: sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==, tarball: https://registry.npmmirror.com/tiny-invariant/-/tiny-invariant-1.3.1.tgz}
 
   tiny-invariant@1.3.3:
-    resolution: {integrity: sha512-+FbBPE1o9QAYvviau/qC5SE3caw21q3xkvWKBtja5vgqOWIHHJ3ioaq1VPfn/Szqctz2bU/oYeKd9/z5BL+PVg==, tarball: https://registry.npmmirror.com/tiny-invariant/-/tiny-invariant-1.3.3.tgz}
+    resolution: {integrity: sha512-+FbBPE1o9QAYvviau/qC5SE3caw21q3xkvWKBtja5vgqOWIHHJ3ioaq1VPfn/Szqctz2bU/oYeKd9/z5BL+PVg==}
 
   tinybench@2.5.1:
     resolution: {integrity: sha512-65NKvSuAVDP/n4CqH+a9w2kTlLReS9vhsAP06MWx+/89nMinJyB2icyl58RIcqCmIggpojIGeuJGhjU1aGMBSg==, tarball: https://registry.npmmirror.com/tinybench/-/tinybench-2.5.1.tgz}
@@ -11347,7 +11347,7 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==, tarball: https://registry.npmmirror.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz}
 
   ts-map@1.0.3:
-    resolution: {integrity: sha512-vDWbsl26LIcPGmDpoVzjEP6+hvHZkBkLW7JpvwbCv/5IYPJlsbzCVXY3wsCeAxAUeTclNOUZxnLdGh3VBD/J6w==, tarball: https://registry.npmmirror.com/ts-map/-/ts-map-1.0.3.tgz}
+    resolution: {integrity: sha512-vDWbsl26LIcPGmDpoVzjEP6+hvHZkBkLW7JpvwbCv/5IYPJlsbzCVXY3wsCeAxAUeTclNOUZxnLdGh3VBD/J6w==}
 
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==, tarball: https://registry.npmmirror.com/tsconfig-paths/-/tsconfig-paths-3.15.0.tgz}
@@ -11872,7 +11872,7 @@ packages:
       vue: ^2
 
   vue-inbrowser-compiler-independent-utils@4.71.1:
-    resolution: {integrity: sha512-K3wt3iVmNGaFEOUR4JIThQRWfqokxLfnPslD41FDZB2ajXp789+wCqJyGYlIFsvEQ2P61PInw6/ph5iiqg51gg==, tarball: https://registry.npmmirror.com/vue-inbrowser-compiler-independent-utils/-/vue-inbrowser-compiler-independent-utils-4.71.1.tgz}
+    resolution: {integrity: sha512-K3wt3iVmNGaFEOUR4JIThQRWfqokxLfnPslD41FDZB2ajXp789+wCqJyGYlIFsvEQ2P61PInw6/ph5iiqg51gg==}
     peerDependencies:
       vue: '>=2'
 
@@ -12757,7 +12757,7 @@ snapshots:
 
   '@babel/helper-builder-binary-assignment-operator-visitor@7.22.15':
     dependencies:
-      '@babel/types': 7.23.6
+      '@babel/types': 7.26.9
 
   '@babel/helper-compilation-targets@7.23.6':
     dependencies:
@@ -12957,7 +12957,7 @@ snapshots:
     dependencies:
       '@babel/helper-function-name': 7.23.0
       '@babel/template': 7.22.15
-      '@babel/types': 7.23.6
+      '@babel/types': 7.26.9
 
   '@babel/helpers@7.23.6':
     dependencies:
@@ -14638,13 +14638,13 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@lcap/extension-ui@1.0.0-beta.8':
+  '@lcap/extension-ui@1.0.0':
     dependencies:
       send: 1.1.0
     transitivePeerDependencies:
       - supports-color
 
-  '@lcap/material-parser@1.0.0-alpha.3(prop-types@15.8.1)(vue@3.5.13(typescript@5.3.3))':
+  '@lcap/material-parser@1.0.0(prop-types@15.8.1)(vue@3.5.13(typescript@5.3.3))':
     dependencies:
       '@babel/core': 7.26.9
       '@babel/generator': 7.26.9
@@ -14725,7 +14725,7 @@ snapshots:
 
   '@nasl/types@0.1.11': {}
 
-  '@nasl/types@0.1.12': {}
+  '@nasl/types@0.1.13': {}
 
   '@nasl/types@0.1.7-beta.1': {}
 
@@ -14768,7 +14768,7 @@ snapshots:
 
   '@radix-ui/react-arrow@1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -14974,7 +14974,7 @@ snapshots:
 
   '@radix-ui/react-toggle@1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.45)(react@18.2.0)
@@ -15017,7 +15017,7 @@ snapshots:
 
   '@radix-ui/react-use-escape-keydown@1.0.3(@types/react@18.2.45)(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.45)(react@18.2.0)
       react: 18.2.0
     optionalDependencies:
@@ -15039,7 +15039,7 @@ snapshots:
 
   '@radix-ui/react-use-rect@1.0.1(@types/react@18.2.45)(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       '@radix-ui/rect': 1.0.1
       react: 18.2.0
     optionalDependencies:
@@ -15047,7 +15047,7 @@ snapshots:
 
   '@radix-ui/react-use-size@1.0.1(@types/react@18.2.45)(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.45)(react@18.2.0)
       react: 18.2.0
     optionalDependencies:
@@ -15065,7 +15065,7 @@ snapshots:
 
   '@radix-ui/rect@1.0.1':
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
 
   '@rc-component/async-validator@5.0.4':
     dependencies:
@@ -18186,7 +18186,7 @@ snapshots:
 
   babel-walk@3.0.0-canary-5:
     dependencies:
-      '@babel/types': 7.23.6
+      '@babel/types': 7.26.9
 
   bail@2.0.2: {}
 
@@ -18741,8 +18741,8 @@ snapshots:
 
   constantinople@4.0.1:
     dependencies:
-      '@babel/parser': 7.23.6
-      '@babel/types': 7.23.6
+      '@babel/parser': 7.26.9
+      '@babel/types': 7.26.9
 
   content-disposition@0.5.4:
     dependencies:
@@ -20910,8 +20910,8 @@ snapshots:
 
   istanbul-lib-instrument@5.2.1:
     dependencies:
-      '@babel/core': 7.23.6
-      '@babel/parser': 7.23.6
+      '@babel/core': 7.26.9
+      '@babel/parser': 7.26.9
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
       semver: 6.3.1
@@ -21854,7 +21854,7 @@ snapshots:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.13.1
-      semver: 7.6.0
+      semver: 7.6.3
       validate-npm-package-license: 3.0.4
 
   normalize-path@1.0.0: {}
@@ -23100,7 +23100,7 @@ snapshots:
 
   regenerator-transform@0.15.2:
     dependencies:
-      '@babel/runtime': 7.26.0
+      '@babel/runtime': 7.26.9
 
   regexp-tree@0.1.27: {}
 
@@ -24880,8 +24880,8 @@ snapshots:
 
   with@7.0.2:
     dependencies:
-      '@babel/parser': 7.23.6
-      '@babel/types': 7.23.6
+      '@babel/parser': 7.26.9
+      '@babel/types': 7.26.9
       assert-never: 1.2.1
       babel-walk: 3.0.0-canary-5
 
