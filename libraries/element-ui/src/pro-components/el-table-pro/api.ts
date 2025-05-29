@@ -986,6 +986,8 @@ namespace nasl.ui {
     rules: nasl.core.String;
 
 
+
+
     @Prop<ElTableColumnProOptions<T, V, P, M>, 'abortEditOnEvent'>({
       group: '主要属性',
       title: '退出编辑事件',
