@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import InputSetter from './setters/InputSetter.vue';
+import NormalSetter from './setters/NormalSetter.vue';
 
 const value = ref('33');
 
@@ -14,7 +15,7 @@ const change = (e) => {
 <template>
   <div class="root">
     <span>value: {{ value }}</span>
-    <InputSetter :value="value" @change="change" />
+    <NormalSetter :value="value" @change="change" />
   </div>
 </template>
 
