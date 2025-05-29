@@ -86,7 +86,7 @@ function setLibBuildConfig(options: LcapViteConfigPluginOptions, config: UserCon
     ...config.build,
     lib: {
       entry: 'src/index.ts',
-      formats: ['es', 'cjs', 'umd'],
+      formats: ['es', 'umd'],
       fileName: (format, entryName) => {
         switch (format) {
           case 'es':

@@ -73,7 +73,7 @@ async function getWatcherTasks(options: LcapBuildOptions, pkgInfo: any) {
       return filePath.includes('src/') && filePath.includes('/theme/');
     },
     build: async () => {
-      await buildTheme(options, true);
+      await buildTheme(options, 'watch');
     },
   };
 

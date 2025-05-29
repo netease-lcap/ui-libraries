@@ -5,7 +5,7 @@ import genThemeConfig, { ThemeConfig } from './gens/gen-theme-config';
 import { themePath } from '../constants/input-paths';
 import { getComponentMetaInfos } from '../utils/lcap';
 import logger from '../utils/logger';
-import type { LcapBuildOptions } from './types';
+import type { LcapBuildOptions, BuildMode } from './types';
 
 const LIVE_RELOAD = {
   html: `<script type="text/javascript">
@@ -155,7 +155,7 @@ function getComponentList(options: LcapBuildOptions) {
   return list.sort((a, b) => (getGroupIndex(a.group) - getGroupIndex(b.group)));
 }
 
-export async function buildTheme(options: LcapBuildOptions, watch?: boolean) {
+export async function buildTheme(options: LcapBuildOptions, mode: BuildMode = 'production') {
   const components = await getComponentList(options);
 
   // 如果组件列表为空，则不构建 theme
@@ -182,6 +182,10 @@ export async function buildTheme(options: LcapBuildOptions, watch?: boolean) {
   await fs.writeJSON(path.join(options.destDir, 'theme.config.json'), themeConfig, { spaces: 2 });
   logger.success('生成 theme.config.json 成功！');
 
-  await viteBuildTheme(themeConfig, options, watch);
+  // 非 staging 模式下，才进行 vite theme 构建
+  if (mode !== 'staging') {
+    await viteBuildTheme(themeConfig, options, mode === 'watch');
+  }
+
   logger.success('构建theme 成功');
 }
