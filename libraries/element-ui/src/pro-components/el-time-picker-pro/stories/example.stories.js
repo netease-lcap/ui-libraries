@@ -39,17 +39,24 @@ export const Range = {
       return {
         startValue: null,
         endValue: null,
+        values: '12:00:00',
       };
     },
     methods: {
       handleSyncState(name, value) {
         console.log(name, value);
       },
+      handleChange() {
+        this.values = ['12:00:00', '19:00:00'];
+      },
     },
     template:
       `<div>
-      {{startValue}} - {{endValue}}
-      <div><el-time-picker-pro :allowInput="true" :startValue.sync="startValue" :endValue.sync="endValue" format="HH时mm分ss秒" :clearable="true" :range="true" @sync:state="handleSyncState"></el-time-picker-pro></div>
+      <div><el-time-picker-pro :allowInput="true" :value.sync="values" :startValue.sync="startValue" :endValue.sync="endValue" format="HH时mm分ss秒" :clearable="true" :range="true" @sync:state="handleSyncState"></el-time-picker-pro></div>
+      <p>startValue: {{ startValue }}</p>
+      <p>endValue: {{ endValue }}</p>
+      <p>values: {{ values }}</p>
+      <el-button @click="handleChange">change</el-button>
       </div>
       `,
   }),

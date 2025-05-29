@@ -562,6 +562,7 @@ namespace nasl.ui {
     ideusage: {
       parentAccept: "target.tag.endsWith('el-select')",
       idetype: 'container',
+      forceUpdateWhenAttributeChange: true,
       //   structured: true,
       //   selector: {
       //     expression: 'this',

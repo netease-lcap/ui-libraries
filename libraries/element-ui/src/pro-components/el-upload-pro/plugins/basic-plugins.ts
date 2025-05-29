@@ -338,9 +338,13 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       },
       onChange: (list, context: UploadChangeContext) => {
         errorMessage.value = '';
-        const onChange = props.get<UploadProps['onChange']>('onChange') || (() => {});
+        const onChange = props.get<any>('onChange') || (() => {});
         changeFileList(list);
-        onChange(list, context);
+        onChange({
+          ...context,
+          fileList: list,
+          value: getValueByList(list, props.get('converter')),
+        });
       },
       onSuccess: (context: SuccessContext) => {
         const [autoUpload, onSuccess] = props.get<[boolean, any]>(['autoUpload', 'onSuccess']);

@@ -141,7 +141,7 @@ export default defineComponent({
               class={[`${classPrefix}-rate__item`, getStarCls(index)]}
               onClick={(event: MouseEvent) => clickHandler(event, index + 1)}
               onMousemove={(event: MouseEvent) => mouseEnterHandler(event, index + 1)}>
-              {(this.showText || this.showScore) ? (
+              {(this.showText || this.showScore) && !this.disabled ? (
                 <Tooltip key={index} content={this.showScore ? displayScore : displayText[displayValue - 1]}>
                   <div class={`${classPrefix}-rate__star-top`} style={{ ...this.activeIconStyle }}>
                     {this.renderRateIcon()}

@@ -242,7 +242,7 @@ export default defineComponent({
             {...{ props: calcInputProps[1] }}
           />
           {suffixContent ? <div class={`${COMPONENT_NAME}__suffix`}>{suffixContent}</div> : null}
-          {suffixIconContent && (
+          {(suffixIconContent || isShowClearIcon) && (
             <span class={`${COMPONENT_NAME}__suffix ${COMPONENT_NAME}__suffix-icon`}>
               {isShowClearIcon ? (
                 <CloseCircleFilledIcon class={`${COMPONENT_NAME}__suffix-clear`} onClick={handleClear} />

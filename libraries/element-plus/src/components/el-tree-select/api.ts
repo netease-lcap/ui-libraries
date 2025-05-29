@@ -309,6 +309,7 @@ namespace nasl.ui {
       ignoreProperty: ['rules'],
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
+      forceUpdateWhenAttributeChange: true,
     },
     extends: [
       {

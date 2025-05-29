@@ -643,6 +643,7 @@ namespace nasl.ui {
       },
       ignoreProperty: ['rules'],
       forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: true,
       namedSlotOmitWrapper: ['label'],
     },
     extends: [

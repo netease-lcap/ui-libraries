@@ -104,6 +104,23 @@ export const Example1 = {
         // return arr
         return { list: arr, total: arr.length };
       };
+      const tableData2 = ref([
+        {
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+        {
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+        {
+          date: '2016-05-04',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+      ]);
       const width = ref('501px');
       const mytable = ref();
       const currentPage = ref(1);
@@ -124,10 +141,11 @@ export const Example1 = {
         console.log('object');
       }, 1000);
       const logCellClick = (...el) => {
-        console.log(el, 'logCellClick');
+        console.log(tableData2.value, 'logCellClick');
       };
       return {
         tableData,
+        tableData2,
         pageSize2,
         currentPage,
         mytable,
@@ -137,10 +155,11 @@ export const Example1 = {
       };
     },
     template: `
+    <div>
 <el-table
 ref="mytable"
 row-key="name"
-:dataSource="tableData"
+:dataSource="tableData2"
 v-model:currentPage="currentPage"
 :showTotal="true"
 height=""
@@ -163,9 +182,10 @@ dragSort="row"
   <div>123</div>
 </el-table-column>
 
-    <el-table-column label="渠道" prop="address" type="expand" >
+    <el-table-column label="渠道" prop="address"  >
         <template #default="current">
           <div>{{current.item.address}}</div>
+          <el-input v-model="current.item.address" />
         </template>
     </el-table-column>
 
@@ -173,12 +193,10 @@ dragSort="row"
     <el-table-column prop="name" label="Name" width="180" />
     <el-table-column type="normal" prop="address" label="Address" />
 
-<template #expanded-row="{ item }">
-  <div class="more-detail">
-    <p class="title"><b>集群名称:</b></p><p class="content">{{item.channel}}</p><br/>
-  </div>
-</template>
+
 </el-table>
+<el-button @click="logCellClick">添加行</el-button>
+    </div>
     `,
   }),
 };

@@ -715,7 +715,7 @@ export default {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: var(--brand-primary-lighter);
+  background-color: var(--brand-primary-light);
   color: #fff;
   display: flex;
   justify-content: center;
