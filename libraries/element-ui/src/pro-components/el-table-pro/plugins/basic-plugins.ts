@@ -2,15 +2,147 @@
 /* 组件功能扩展插件 */
 // export {};
 import _, { isFunction, isNil } from 'lodash';
-import { computed, ref, watch, onMounted } from '@vue/composition-api';
-import { SelectOptions, Table, BaseTable, PrimaryTable, EnhancedTable } from '@element-pro';
+import { computed, ref, watch, onMounted, provide, getCurrentInstance } from '@vue/composition-api';
+import {
+  SelectOptions,
+  Table,
+  BaseTable,
+  PrimaryTable,
+  EnhancedTable,
+  CustomValidateResolveType,
+  FormRule,
+} from '@element-pro';
 import { listToTree } from '@lcap/vue2-utils/utils';
 import { $ref, $render, createUseUpdateSync } from '@lcap/vue2-utils';
-
+import VusionValidator, { localizeRules } from '@lcap/validator';
 import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
+import { IN_ELEMENT_FORM } from '../../el-form-pro/constants';
+
+import {
+  ElInputPro,
+  ElInputNumberPro,
+  ElSelectPro,
+  ElCascaderPro,
+  ElCheckboxPro,
+  ElCheckboxGroupPro,
+  ElRadioPro,
+  ElRadioGroupPro,
+  ElSwitchPro,
+  ElColorPickerPro,
+  ElDatePickerPro,
+  ElDateRangePickerPro,
+  ElDatePickerPanelPro,
+  ElDateRangePickerPanelPro,
+  ElDateTimePickerPro,
+  ElInputAdornmentPro,
+  ElRatePro,
+  ElTextareaPro,
+  ElSelectInputPro,
+  ElSliderPro,
+  ElTagInputPro,
+  ElTimePickerPro,
+  ElTreePro,
+  ElTreeSelectPro,
+  ElUploadPro,
+} from '@/pro-components/index';
+
+const formComponentMap = {
+  'el-input-pro': ElInputPro,
+  'el-select-pro': ElSelectPro,
+  'el-cascader-pro': ElCascaderPro,
+  'el-checkbox-pro': ElCheckboxPro,
+  'el-checkbox-group-pro': ElCheckboxGroupPro,
+  'el-radio-pro': ElRadioPro,
+  'el-radio-group-pro': ElRadioGroupPro,
+  'el-switch-pro': ElSwitchPro,
+  'el-input-number-pro': ElInputNumberPro,
+  'el-color-picker-pro': ElColorPickerPro,
+  'el-date-picker-pro': ElDatePickerPro,
+  'el-date-range-picker-pro': ElDateRangePickerPro,
+  'el-date-picker-panel-pro': ElDatePickerPanelPro,
+  'el-date-range-picker-panel-pro': ElDateRangePickerPanelPro,
+  'el-date-time-picker-pro': ElDateTimePickerPro,
+  'el-input-adornment-pro': ElInputAdornmentPro,
+  'el-rate-pro': ElRatePro,
+  'el-textarea-pro': ElTextareaPro,
+  'el-select-input-pro': ElSelectInputPro,
+  'el-slider-pro': ElSliderPro,
+  'el-tag-input-pro': ElTagInputPro,
+  'el-time-picker-pro': ElTimePickerPro,
+  'el-tree-pro': ElTreePro,
+  'el-tree-select-pro': ElTreeSelectPro,
+  'el-upload-pro': ElUploadPro,
+};
 
 export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', event: 'update:selectedRowKeys' }]);
+
+const isEditColumn = ({ type, edit }) => {
+  const isEditColumn = type === 'editable';
+
+  return isEditColumn;
+};
+const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit }) => {
+  const editNode = _.attempt(edit, { item: {} });
+  const editNodeTag = _.get(editNode, '0.componentOptions.tag');
+  const { listeners = [], propsData = {}, children } = _.get(editNode, '0.componentOptions', {});
+  const nodeAttrs = _.get(editNode, '0.data.attrs', {});
+  const {
+    class: classAttr,
+    staticClass: staticClassAttr,
+    style: styleAttr,
+    statcStyle: statcStyleAttr,
+  } = _.get(editNode, '0.data', {});
+  const scopedSlots = _.get(editNode, '0.data.scopedSlots', {});
+  const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
+  const nodepath = _.get(attrs, 'data-nodepath', false);
+  const abortEditOnEvent = attrs?.abortEditOnEvent ? [attrs?.abortEditOnEvent] : [];
+  const rules = _.map(attrs?.rules, (item) => ({
+      trigger: 'all',
+      validator: (val) => {
+        const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
+        return new Promise((resolve) => {
+          validator
+            .validate(val)
+            .then(() => {
+              resolve(true as CustomValidateResolveType);
+            })
+            .catch((errorMessage) => {
+              resolve({
+                result: false,
+                message: errorMessage,
+              } as CustomValidateResolveType);
+            });
+        });
+      },
+    })) ?? [];
+  return {
+    colKey: attrs.colKey ?? 'index',
+    cell: (h, { row, rowIndex, col }) => {
+      return nodepath
+        ? [cell({ item: row, index: rowIndex, col }), edit()]
+        : [cell({ item: row, index: rowIndex, col })];
+    },
+    edit: {
+      component: formComponentMap[editNodeTag],
+      on: () => listeners || [],
+      props: {
+        ...nodeAttrs,
+        ...propsData,
+        slots: { default: () => children, ...scopedSlots },
+        class: classAttr,
+        staticClass: staticClassAttr,
+        style: styleAttr,
+        statcStyle: statcStyleAttr,
+      },
+      rules,
+      abortEditOnEvent,
+      onEdited: (context) => {
+        _.attempt(onRowEdit, context);
+      },
+    },
+  };
+};
 
 export const useTable: NaslComponentPluginOptions = {
   props: [
@@ -25,10 +157,11 @@ export const useTable: NaslComponentPluginOptions = {
     'showTotal',
     'showJumper',
     'treeDisplay',
+    'displayColumns',
+    'onDisplayColumnsChange',
     'virtual',
   ],
   setup(props, ctx) {
-    console.log('============table render===========');
     const current = props.useRef('page', (v) => v ?? 1);
     const pageSize = props.useRef('pageSize', (v) => v ?? 10);
     const rowKey = (props.get('rowKey') || 'id') as string;
@@ -109,7 +242,6 @@ export const useTable: NaslComponentPluginOptions = {
         if (_.isEqual(value, oldValue)) return;
         const [autoMergeFields, data] = value;
         if (_.isEmpty(autoMergeFields) || _.isEmpty(data)) return;
-        console.log(data, '===data');
 
         data.forEach((item, index) => {
           _.forEach(autoMergeFields, (field) => {
@@ -135,15 +267,16 @@ export const useTable: NaslComponentPluginOptions = {
         const attrs = _.get(vnode, 'data.attrs', {});
 
         const nodePath = _.get(attrs, 'data-nodepath');
-        const { cell, title } = _.get(vnode, 'data.scopedSlots', {});
-
+        const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
+        const listeners = _.get(vnode, 'componentOptions.listeners', {});
         const titleProps = _.isFunction(title)
           ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
           : {};
 
         const cellRender = _.cond([
+          [isEditColumn, editColumnProps],
           [
-            _.conforms({ cell: _.isFunction, type: _.isNil }),
+            _.conforms({ cell: _.isFunction }),
             _.constant({ cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col }) }),
           ],
           [
@@ -152,7 +285,7 @@ export const useTable: NaslComponentPluginOptions = {
           ],
           [_.conforms({ type: _.isString }), _.constant({})],
         ]);
-        const cellProps = cellRender({ type: attrs.type, cell });
+        const cellProps = cellRender({ type: attrs.type, cell, attrs, listeners, edit });
         return [
           {
             ...attrs,
@@ -241,14 +374,37 @@ export const useTable: NaslComponentPluginOptions = {
     onMounted(() => {
       if (_.isFunction(onLoadData)) {
         onLoadData?.({
-          page: _.get(pagination.value, 'current', undefined), //current.value,
+          page: _.get(pagination.value, 'current', undefined), // current.value,
           size: _.get(pagination.value, 'pageSize', undefined),
           sort: _.get(sorting.value, 'field'),
           order: _.get(sorting.value, 'order'),
         });
       }
     });
+    const columnController = props.useRef('columnController', (v) => (v
+        ? {
+            placement: 'top-right',
+          }
+        : {}));
 
+    // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
+    const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
+    watch(
+      () => props.get('displayColumns'),
+      (value) => {
+        displayColumns.value = value;
+      },
+    );
+    const onDisplayColumnsChange = props.useComputed('onDisplayColumnsChange', (fn) => {
+      return (value) => {
+        if (!_.isFunction(fn)) {
+          displayColumns.value = value;
+        } else {
+          fn(value);
+        }
+      };
+    });
+    provide(IN_ELEMENT_FORM, false);
     return {
       data,
       onPageChange,
@@ -256,6 +412,9 @@ export const useTable: NaslComponentPluginOptions = {
       ...scroll.value,
       pagination,
       tree,
+      columnController,
+      displayColumns,
+      onDisplayColumnsChange,
       rowKey: valueField,
       // tree: {
       //   childrenKey: 'chiildren',
@@ -289,7 +448,7 @@ export const useTable: NaslComponentPluginOptions = {
               'el-p-tree-icon--opened': type === 'fold',
             },
           });
-        }
+        };
       }),
       onSelectChange: (selectedRowKeys: Array<string | number>, context: SelectOptions<any>) => {
         const onSelectChange = props.get('onSelectChange');
@@ -306,7 +465,7 @@ export const useTable: NaslComponentPluginOptions = {
           current.value = 1;
           if (_.isFunction(onLoadData)) {
             onLoadData?.({
-              page: _.get(pagination.value, 'current', undefined), //current.value,
+              page: _.get(pagination.value, 'current', undefined), // current.value,
               size: _.get(pagination.value, 'pageSize', undefined),
               sort: sort.value,
               order: order.value,
@@ -318,6 +477,10 @@ export const useTable: NaslComponentPluginOptions = {
         const vnodes = ctx.setupContext.slots?.default?.();
         const columns = renderSlot(vnodes);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];
+        if (!context.propsData?.props?.displayColumns) {
+          resultVNode.componentOptions.propsData.displayColumns = columns.map((item) => item.colKey);
+          context.propsData.props.displayColumns = columns.map((item) => item.colKey);
+        }
         if (tree.value) {
           context.propsData.props.columns = columns;
           return h(EnhancedTable, context.propsData, context.childrenNodes);

@@ -15,7 +15,7 @@ namespace nasl.ui {
     },
   })
   @Component({
-    title: '单行输入',
+    title: '输入框',
     icon: 'input',
     description: '',
     group: 'Form',
@@ -42,10 +42,10 @@ namespace nasl.ui {
       description: '输入框类型。可选项：text/url/tel/password/search/submit/hidden',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '文本' }, { title: '链接' }, { title: '电话' }, { title: '密码' }, { title: '搜索' }],
+        options: [{ title: '文本' }, { title: '链接' }, { title: '电话' }, { title: '密码' }, { title: '搜索' }, { title: '多行文本' }],
       },
     })
-    type: 'text' | 'url' | 'tel' | 'password' | 'search' = 'text';
+      type: 'text' | 'url' | 'tel' | 'password' | 'search' | 'textarea' = 'text';
 
     @Prop({
       group: '交互属性',
@@ -360,7 +360,8 @@ namespace nasl.ui {
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
-      forceRefresh: 'parent',
+      forceRefresh: true,
+      forceUpdateWhenAttributeChange: true,
       namedSlotOmitWrapper: ['label'],
     },
     extends: [

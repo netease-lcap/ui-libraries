@@ -225,6 +225,15 @@ namespace nasl.ui {
     })
     border: nasl.core.Boolean = false;
 
+    @Prop<ElTableOptions<T, V, P, M>, 'resizable'>({
+      group: '主要属性',
+      title: '是否允许调整列宽',
+      description: '是否允许调整列宽',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.border === true,
+    })
+    resizable: nasl.core.Boolean = true;
+
     // @Prop({
     //   group: '主要属性',
     //   title: 'Bottom Content',

@@ -11,7 +11,7 @@ export default defineComponent({
     onPresetClick: Function,
     onConfirmClick: Function,
     // 支持时间戳模式：时间戳为Number类型
-    selectedValue: [String, Number, Array] as PropType<DateValue | DateMultipleValue>,
+    selectedValue: [String, Number, Array, Date] as PropType<DateValue | DateMultipleValue>,
   },
   setup(props) {
     const showPanelFooter = computed(() => props.enableTimePicker || props.presets);

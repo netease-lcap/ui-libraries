@@ -208,6 +208,11 @@ export const useDatePickerValue = (props: MapGet, valueFormat: ComputedRef<strin
         return transformDate(v);
       }
 
+      if (v && !startValue && !endValue) {
+        const values = (Array.isArray(v) ? v : [v]);
+        return normalizeDateRange(transformDate(values[0]), transformDate(values[1]));
+      }
+
       return normalizeDateRange(transformDate(startValue), transformDate(endValue));
     },
   );
@@ -226,18 +231,25 @@ export const useDatePickerValue = (props: MapGet, valueFormat: ComputedRef<strin
     ]);
 
     const format = getFormat(props.get<string>('mode'), props.get<string>('format'), props.get<boolean>('enableTimePicker'));
+    let updateValue: any = null;
     if (multiple) {
       const vals = (Array.isArray(v) ? v : [v]).map((val) => dateValue2Dayjs(val, format)).filter(Boolean).map((d: any) => d.toDate());
       valueRef.value = vals;
-      onUpdateValue(getNaslMultipleDateValue(vals, valueFormat));
+      updateValue = getNaslMultipleDateValue(vals, valueFormat);;
     } else if (!range) {
       valueRef.value = v && d ? dayjs2Date(Array.isArray(d) ? d[0] : d) : null;
-      onUpdateValue(getNaslDateValue(Array.isArray(v) ? v[0] : v, valueFormat));
+      updateValue = getNaslDateValue(Array.isArray(v) ? v[0] : v, valueFormat);
     } else {
       valueRef.value = Array.isArray(d) ? normalizeDateRange(dayjs2Date(d[0]), dayjs2Date(d[1])) : [];
-      onUpdateStartValue(getNaslDateValue(d[0], valueFormat));
-      onUpdateEndValue(getNaslDateValue(d[1], valueFormat));
+      const startValue = getNaslDateValue(d[0], valueFormat);
+      const endValue = getNaslDateValue(d[1], valueFormat);
+      onUpdateStartValue(startValue);
+      onUpdateEndValue(endValue);
+      updateValue = normalizeDateRange(startValue, endValue);
     }
+
+    onUpdateValue(updateValue);
+    return updateValue;
   }
 
   useSyncState({
@@ -286,6 +298,7 @@ export function getChangeEventByValue(d: DateValue | DateRangeValue | DateMultip
   } else if (Array.isArray(d)) {
     changeEvent.startValue = getNaslDateValue(d[0], valueFormat);
     changeEvent.endValue = getNaslDateValue(d[1], valueFormat);
+    changeEvent.value = normalizeDateRange(changeEvent.startValue, changeEvent.endValue);
   }
 
   return changeEvent;

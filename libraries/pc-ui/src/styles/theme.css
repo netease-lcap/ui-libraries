@@ -10,6 +10,7 @@
     --brand-primary-lighter: #bbd4ff;
     --brand-primary-light: #5c98ff;
     --brand-primary: #337eff;
+    --brand-logo-color: var(--brand-primary);
     --brand-primary-dark: #1168ff;
     --brand-primary-darker: #004bcc;
     --brand-primary-darkest: #003eaa;

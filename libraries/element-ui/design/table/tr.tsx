@@ -126,7 +126,7 @@ export function renderCell(
   }
   const r = get(row, col.colKey);
   // 0 和 false 属于正常可用之，不能使用兜底逻辑 cellEmptyContent
-  if (![undefined, '', null].includes(r)) return r;
+  if (![undefined, '', null].includes(r)) return typeof r.toString === 'function' ? r.toString() : r;
   // cellEmptyContent 作为空数据兜底显示，用户可自定义
   if (extra?.cellEmptyContent) {
     return isFunction(extra.cellEmptyContent) ? extra.cellEmptyContent(h, params) : extra.cellEmptyContent;

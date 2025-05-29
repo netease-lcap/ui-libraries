@@ -34,7 +34,8 @@ namespace nasl.ui {
       sync: true,
       title: '值',
       description: '输入框的值',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'InputSetter' ,
+      },
     })
     value: nasl.core.String;
 

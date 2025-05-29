@@ -280,8 +280,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/vite-plugin-vue2
       '@nasl/types':
-        specifier: 0.1.9-alpha
-        version: 0.1.9-alpha
+        specifier: 0.1.12-alpha
+        version: 0.1.12-alpha
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -3270,6 +3270,9 @@ packages:
   '@nasl/types@0.1.11':
     resolution: {integrity: sha512-0aaEG4gBy1jOpLOY4MoqFwDca2LVMl+ygGR4Ct4VUpPbsff8zkMge0dPpt1M9aGWEDC9QHUMYLIEzb20IcUAJA==}
 
+  '@nasl/types@0.1.12-alpha':
+    resolution: {integrity: sha512-5anxxI7t2whRuYuGj6U618iX9VMHRVMbP8suttBDLPIm2CsoVdYE2t2E7GYWcdZ8yF+Tu+WMRdauCX86Zc0RFg==}
+
   '@nasl/types@0.1.6':
     resolution: {integrity: sha512-h6Yh57U1jEbvgWh8A1XxsWAW61JLjshq35sT1G57qZ3D6539v2hxEUe8TjOL0c501lz7gCm4WLlowf/wgypBRA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.6.tgz}
 
@@ -3278,9 +3281,6 @@ packages:
 
   '@nasl/types@0.1.8-beta.3':
     resolution: {integrity: sha512-d/Cfv7Wc4rkUKOSoyPy6BSXfF3tWE7FxvFe9YcWsg2v/P4esu1vTmCRZTZwpWOvEQ6Yb1f+LgQXa8AF6rq0SIA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.8-beta.3.tgz}
-
-  '@nasl/types@0.1.9-alpha':
-    resolution: {integrity: sha512-dSqqh4X5fBaZpBGrtZtM/CubKm3M/Ajk6Uo4uL4uosRRYlHDaQJoyKwLfaT1Uaevm985XO2/9PoZohur7+eVBQ==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.9-alpha.tgz}
 
   '@ndelangen/get-tarball@3.0.9':
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==, tarball: https://registry.npmmirror.com/@ndelangen/get-tarball/-/get-tarball-3.0.9.tgz}
@@ -11332,8 +11332,8 @@ packages:
   vue-component-type-helpers@2.1.10:
     resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
 
-  vue-component-type-helpers@2.2.8:
-    resolution: {integrity: sha512-4bjIsC284coDO9om4HPA62M7wfsTvcmZyzdfR0aUlFXqq4tXxM1APyXpNVxPC8QazKw9OhmZNHBVDA6ODaZsrA==}
+  vue-component-type-helpers@2.2.10:
+    resolution: {integrity: sha512-iDUO7uQK+Sab2tYuiP9D1oLujCWlhHELHMgV/cB13cuGbG4qwkLHvtfWb6FzvxrIOPDnU0oHsz2MlQjhYDeaHA==}
 
   vue-cropper@0.5.11:
     resolution: {integrity: sha512-UeA3qL2BLCTGkOEAxEsxSNFO+qLYAn6YRHv4oS32cP9lMhF1vFmnAf/z+ZamtR0/Fh3sbZeZUCLVR2Ol2/dpTQ==, tarball: https://registry.npmmirror.com/vue-cropper/-/vue-cropper-0.5.11.tgz}
@@ -14004,13 +14004,13 @@ snapshots:
 
   '@nasl/types@0.1.11': {}
 
+  '@nasl/types@0.1.12-alpha': {}
+
   '@nasl/types@0.1.6': {}
 
   '@nasl/types@0.1.7-beta.1': {}
 
   '@nasl/types@0.1.8-beta.3': {}
-
-  '@nasl/types@0.1.9-alpha': {}
 
   '@ndelangen/get-tarball@3.0.9':
     dependencies:
@@ -15546,7 +15546,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.13(typescript@5.6.3)
-      vue-component-type-helpers: 2.2.8
+      vue-component-type-helpers: 2.2.10
 
   '@storybook/vue@7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)':
     dependencies:
@@ -23504,7 +23504,7 @@ snapshots:
 
   vue-component-type-helpers@2.1.10: {}
 
-  vue-component-type-helpers@2.2.8: {}
+  vue-component-type-helpers@2.2.10: {}
 
   vue-cropper@0.5.11: {}
 

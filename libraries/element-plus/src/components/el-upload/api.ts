@@ -377,6 +377,7 @@ namespace nasl.ui {
       idetype: 'container',
       translateBindingProperty: ["hasTip"],
       forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: true,
       disableSlotAutoFill: [
         {
           slot: 'tip',
