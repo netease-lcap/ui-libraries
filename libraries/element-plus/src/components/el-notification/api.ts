@@ -129,7 +129,7 @@ namespace nasl.ui {
     offset: nasl.core.Integer = 20;
 
     @Prop({
-      title: '初始 zIndex',
+      title: '展示层级',
       group: "主要属性",
       description: "初始 zIndex",
       setter: { concept: "NumberInputSetter"},

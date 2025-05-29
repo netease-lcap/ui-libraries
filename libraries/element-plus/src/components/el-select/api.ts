@@ -391,6 +391,35 @@ namespace nasl.ui {
       trigger: 'clear' | 'tag-remove' | 'backspace' | 'check' | 'uncheck' | 'default';
     }) => any;
 
+    @Event({
+      title: '清空时',
+      description: '清空时触发',
+    })
+    onClear: (event: any) => any;
+
+
+
+    @Event({
+      title: '下拉框显示或隐藏时',
+      description: '下拉框显示或隐藏时触发',
+    })
+    onVisibleChange: (event: any) => any;
+
+    @Event({
+      title: '失去焦点时',
+      description: '失去焦点时触发',
+    })
+    onBlur: (event: any) => any;
+    
+    
+    @Event({
+      title: '获得焦点时',
+      description: '获得焦点时触发',
+    })
+    onFocus: (event: any) => any;
+    
+    
+
 
     // @Event({
     //   title: 'On Create',
@@ -533,6 +562,7 @@ namespace nasl.ui {
     ideusage: {
       parentAccept: "target.tag.endsWith('el-select')",
       idetype: 'container',
+      forceUpdateWhenAttributeChange: true,
       //   structured: true,
       //   selector: {
       //     expression: 'this',
@@ -605,7 +635,6 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '选项值',
-      sync: true,
       description: '选项值',
       setter: { concept: 'InputSetter' },
     })

@@ -1,4 +1,4 @@
-import { DateRangeValue, DateValue, PickContext } from '@element-pro';
+import { DateRangeValue, DateValue, DateMultipleValue, PickContext } from '@element-pro';
 import { useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types';
 import { ComputedRef, Ref, unref } from '@vue/composition-api';
@@ -9,6 +9,7 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import { isFunction, isNil } from 'lodash';
 import { CreateElement } from 'vue';
 import customParseFormat from '../../../utils/date-parse';
+import { parseToDayjs } from '../../../../design/_common/js/date-picker/format';
 
 (ZH_CN as any).meridiem = (hour: number) => {
   if (hour < 6) {
@@ -95,6 +96,18 @@ function transformDate(date) {
   return undefined;
 }
 
+function transformMultipleDate(date: DateValue | DateMultipleValue) {
+  if (!date) {
+    return [];
+  }
+
+  if (!Array.isArray(date)) {
+    return [transformDate(date)];
+  }
+
+  return date.map(transformDate).filter(Boolean);
+}
+
 function getNaslDateValue(d: DateValue | null, format: any) {
   if (!d) {
     return null;
@@ -119,6 +132,54 @@ function getNaslDateValue(d: DateValue | null, format: any) {
   }
 }
 
+function getNaslMultipleDateValue(d: DateValue | DateMultipleValue | null, format: any) {
+  if (!d) {
+    return [];
+  }
+
+  if (!Array.isArray(d)) {
+    return [getNaslDateValue(d, format)].filter(Boolean);
+  }
+
+  return d.map((val) => getNaslDateValue(val, format)).filter(Boolean);
+}
+
+function getFormat(mode: string = 'date', format: string, enableTimePicker: boolean = false) {
+  if (format) {
+    return format;
+  }
+
+  if (mode === 'year') {
+    return 'YYYY';
+  }
+
+  if (mode === 'month') {
+    return 'YYYY-MM';
+  }
+
+  if (mode === 'quarter') {
+    return 'YYYY-[Q]Q';
+  }
+
+  if (mode === 'week') {
+    return 'YYYY-wo';
+  }
+
+  if (mode === 'date') {
+    return `YYYY-MM-DD${enableTimePicker ? ' HH:mm:ss' : ''}`;
+  }
+
+  return '';
+}
+
+function dateValue2Dayjs(d: DateValue | null, format: string) {
+  if (!d) {
+    return null;
+  }
+
+  return parseToDayjs(d, format);
+}
+
 function dayjs2Date(d: Dayjs | null) {
   if (!d || !d.isValid()) {
     return null;
@@ -135,20 +196,30 @@ function normalizeDateRange(s: any, e: any) {
   return [s, e];
 }
 
-export const useDatePickerValue = (props: MapGet, format: ComputedRef<string> | Ref<string>) => {
-  const valueRef = props.useRef<DateValue | DateRangeValue>(
-    ['value', 'startValue', 'endValue', 'range'],
-    (v, startValue, endValue, range) => {
+export const useDatePickerValue = (props: MapGet, valueFormat: ComputedRef<string> | Ref<string>) => {
+  const valueRef = props.useRef<DateValue | DateRangeValue | DateMultipleValue | null>(
+    ['value', 'startValue', 'endValue', 'range', 'multiple'],
+    (v, startValue, endValue, range, multiple) => {
       if (!range) {
+        if (multiple) {
+          return transformMultipleDate(v);
+        }
+
         return transformDate(v);
+      }
+
+      if (v && !startValue && !endValue) {
+        const values = (Array.isArray(v) ? v : [v]);
+        return normalizeDateRange(transformDate(values[0]), transformDate(values[1]));
       }
 
       return normalizeDateRange(transformDate(startValue), transformDate(endValue));
     },
   );
 
-  function changeValue(d: Dayjs | Dayjs[], v: DateValue | DateRangeValue) {
+  function changeValue(d: Dayjs | Dayjs[], v: DateValue | DateRangeValue | DateMultipleValue) {
     const range = props.get<boolean>('range');
+    const multiple = props.get<boolean>('multiple');
     const [
       onUpdateValue = () => {},
       onUpdateStartValue = () => {},
@@ -159,34 +230,51 @@ export const useDatePickerValue = (props: MapGet, format: ComputedRef<string> | 
       'update:endValue',
     ]);
 
-    if (!range) {
+    const format = getFormat(props.get<string>('mode'), props.get<string>('format'), props.get<boolean>('enableTimePicker'));
+    let updateValue: any = null;
+    if (multiple) {
+      const vals = (Array.isArray(v) ? v : [v]).map((val) => dateValue2Dayjs(val, format)).filter(Boolean).map((d: any) => d.toDate());
+      valueRef.value = vals;
+      updateValue = getNaslMultipleDateValue(vals, valueFormat);;
+    } else if (!range) {
       valueRef.value = v && d ? dayjs2Date(Array.isArray(d) ? d[0] : d) : null;
-      onUpdateValue(getNaslDateValue(Array.isArray(v) ? v[0] : v, format));
+      updateValue = getNaslDateValue(Array.isArray(v) ? v[0] : v, valueFormat);
     } else {
       valueRef.value = Array.isArray(d) ? normalizeDateRange(dayjs2Date(d[0]), dayjs2Date(d[1])) : [];
-      onUpdateStartValue(getNaslDateValue(d[0], format));
-      onUpdateEndValue(getNaslDateValue(d[1], format));
+      const startValue = getNaslDateValue(d[0], valueFormat);
+      const endValue = getNaslDateValue(d[1], valueFormat);
+      onUpdateStartValue(startValue);
+      onUpdateEndValue(endValue);
+      updateValue = normalizeDateRange(startValue, endValue);
     }
+
+    onUpdateValue(updateValue);
+    return updateValue;
   }
 
   useSyncState({
     value: () => {
+      const multiple = props.get<boolean>('multiple');
+      if (multiple) {
+        return getNaslMultipleDateValue(valueRef.value, valueFormat);
+      }
+
       if (Array.isArray(valueRef.value)) {
         return null;
       }
-      return getNaslDateValue(valueRef.value, format);
+      return getNaslDateValue(valueRef.value, valueFormat);
     },
     startValue: () => {
       if (!Array.isArray(valueRef.value)) {
         return null;
       }
-      return getNaslDateValue(valueRef.value[0], format);
+      return getNaslDateValue(valueRef.value[0], valueFormat);
     },
     endValue: () => {
       if (!Array.isArray(valueRef.value)) {
         return null;
       }
-      return getNaslDateValue(valueRef.value[1], format);
+      return getNaslDateValue(valueRef.value[1], valueFormat);
     },
   });
 
@@ -196,30 +284,34 @@ export const useDatePickerValue = (props: MapGet, format: ComputedRef<string> | 
   };
 };
 
-export function getChangeEventByValue(d: DateValue | DateRangeValue, range: boolean, format: ComputedRef<string> | Ref<string>) {
-  const changeEvent = {
+export function getChangeEventByValue(d: DateValue | DateRangeValue | DateMultipleValue, range: boolean, valueFormat: ComputedRef<string> | Ref<string>, multiple: boolean = false) {
+  const changeEvent: any = {
     value: null,
     startValue: null,
     endValue: null,
   };
-  if (!range) {
-    changeEvent.value = d ? getNaslDateValue(!Array.isArray(d) ? d : d[0], format) : null;
+
+  if (multiple) {
+    changeEvent.value = getNaslMultipleDateValue(d, valueFormat);
+  } else if (!range) {
+    changeEvent.value = d ? getNaslDateValue(!Array.isArray(d) ? d : d[0], valueFormat) : null;
   } else if (Array.isArray(d)) {
-    changeEvent.startValue = getNaslDateValue(d[0], format);
-    changeEvent.endValue = getNaslDateValue(d[1], format);
+    changeEvent.startValue = getNaslDateValue(d[0], valueFormat);
+    changeEvent.endValue = getNaslDateValue(d[1], valueFormat);
+    changeEvent.value = normalizeDateRange(changeEvent.startValue, changeEvent.endValue);
   }
 
   return changeEvent;
 }
 
-export function useContextEvents(props: MapGet, format: ComputedRef<string> | Ref<string>) {
+export function useContextEvents(props: MapGet, valueFormat: ComputedRef<string> | Ref<string>) {
   const events: Record<string, any> = {};
 
   ['onFocus', 'onBlur', 'onInput'].forEach((eventName) => {
     events[eventName] = (context) => {
       const handler = props.get(eventName);
       if (isFunction(handler)) {
-        const changeEvent = getChangeEventByValue(context.value, props.get<boolean>('range'), format);
+        const changeEvent = getChangeEventByValue(context.value, props.get<boolean>('range'), valueFormat, props.get<boolean>('multiple'));
         handler({
           ...changeEvent,
           position: context && context.partial,
@@ -228,10 +320,10 @@ export function useContextEvents(props: MapGet, format: ComputedRef<string> | Re
     };
   });
 
-  events.onPick = (value: DateValue, context: PickContext) => {
+  events.onPick = (value: DateValue | DateMultipleValue, context: PickContext) => {
     const handler = props.get('onPick');
     if (isFunction(handler)) {
-      const changeEvent = getChangeEventByValue(value, false, format);
+      const changeEvent = getChangeEventByValue(value, false, valueFormat, props.get<boolean>('multiple'));
       handler({
         ...changeEvent,
         position: context && context.partial,
@@ -244,14 +336,14 @@ export function useContextEvents(props: MapGet, format: ComputedRef<string> | Re
 
 export function useDisableDate(props: MapGet, format: string) {
   const disableDate = props.useComputed<any>(['minDate', 'maxDate'], (minDate, maxDate) => {
-    return (date: DateValue) => {
+    return (date: DateValue, unit: any = 'date') => {
       let disabled = false;
       if (minDate) {
-        disabled = dayjs(date).isBefore(dayjs(minDate, format), 'date');
+        disabled = dayjs(date).isBefore(dayjs(minDate, format), unit);
       }
 
       if (!disabled && maxDate) {
-        disabled = dayjs(date).isAfter(dayjs(maxDate, format), 'date');
+        disabled = dayjs(date).isAfter(dayjs(maxDate, format), unit);
       }
 
       return disabled;

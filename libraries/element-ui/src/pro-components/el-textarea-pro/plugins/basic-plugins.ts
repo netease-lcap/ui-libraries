@@ -21,8 +21,26 @@ export const useAutoSize: NaslComponentPluginOptions = {
 
       return v;
     });
+    const onKeydown = props.get('onKeydown');
+    const onKeypress = props.get('onKeypress');
+    const onKeyup = props.get('onKeyup');
 
     return {
+      onKeydown: (value, event) => {
+        if (isFunction(onKeydown)) {
+          onKeydown({ value, event });
+        }
+      },
+      onKeypress: (value, event) => {
+        if (isFunction(onKeypress)) {
+          onKeypress({ value, event });
+        }
+      },
+      onKeyup: (value, event) => {
+        if (isFunction(onKeyup)) {
+          onKeyup({ value, event });
+        }
+      },
       autosize: size,
       [$deletePropList]: ['minRows', 'maxRows'],
     };

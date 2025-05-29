@@ -39,6 +39,11 @@ export const Default = {
               children: [
                 {
                   channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                  children: [
+                    {
+                      channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                    },
+                  ],
                 },
               ],
               detail: {
@@ -69,11 +74,13 @@ export const Default = {
           { colKey: 'time', title: '时长', width: 100 },
           { colKey: 'createTime', title: '创建时间', width: 100 },
         ],
+        displayColumns: undefined,
       };
     },
     methods: {
       log(value) {
-        console.log(value);
+        console.log(value, 'log');
+        this.displayColumns = value;
       },
       onSortChange(...arg) {
         console.log(arg, 'arg===');
@@ -81,9 +88,7 @@ export const Default = {
       onDragSortChange(...arg) {
         console.log(arg, 'arg===');
       },
-      rowspanAndColspan({
-        row, col, rowIndex, colIndex,
-      }) {
+      rowspanAndColspan({ row, col, rowIndex, colIndex }) {
         // console.log(rowIndex,'rowIndex`');
         // if (colIndex == 1 && rowIndex % this.rowspan == 0) {
         //   return {
@@ -105,19 +110,26 @@ export const Default = {
    :dataSource="data"
    :rowspanAndColspan="rowspanAndColspan"
    :selectedRowKeys.sync="selectedRowKeys"
+   width="800px"
+   :columnController="false"
    @sort-change="onSortChange"
    :onRowClick="log"
    dragSort="row"
+   :columnController="false"
+   :headerAffixedTop="true"
+
+   @display-columns-change="log"
+   :resizable="true"
    :treeDisplay="true"
    :selection="true"
+   :hasIndexColumn="true"
    :multiple="false"
+   @cell-click="log"
    :onDragSort="onDragSortChange"
     >
 
-    <el-table-column-pro title="申请人" >
-    <template #cell="cell">
-      <div>{{'12'}}</div>
-    </template>
+    <el-table-column-pro title="申请人" colKey="createTime">
+
     </el-table-column-pro>
 
         <el-table-column-pro title="渠道" colKey="channel" :sorter="true" :autoMerge="true" >
@@ -136,15 +148,207 @@ export const Default = {
     </el-table-pro>`,
   }),
 };
-// <el-table-column-pro data-nodepath="123"  >
-//   <template #title="title">
-//      <div>
-//      <div>1234</div>
-//      </div>
-//  </template>
-//   <template #cell="cell">
-//       <div>
-//           <div>{{ cell.row.applicant }}</div>
-//      </div>
-//    </template>
-// </el-table-column-pro>
+
+export const 树形 = {
+  name: '树形示例',
+  render: () => ({
+    data() {
+      return {
+        data: async (params) => {
+          const initialData = [];
+          const total = 3;
+          for (let i = 0; i < total; i++) {
+            initialData.push({
+              index: i,
+              add: {
+                index: i,
+                name: '贾明',
+                age: 18,
+              },
+              applicant: ['贾明', '张三', '王芳'][i % 3],
+              status: i % 3,
+              channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+              // children: [
+              //   {
+              //     channel: ['电子签署2', '电子签署2', '纸质签署2'][i % 2],
+              //     index: `${i}2`,
+              //     children: [
+              //       {
+              //         channel: ['电子签署3', '电子签署3', '纸质签署3'][i % 3],
+              //         index: `${i}3`,
+              //       },
+              //     ],
+              //   },
+              // ],
+              // detail: {
+              //   email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
+              // },
+              // matters: ['宣传物料制作费用', 'algolia 服务报销', '相关周边制作费', '激励奖品快递费'][i % 4],
+              // time: [2, 10, 1][i % 3],
+              // createTime: ['2022-01-01', '2022-02-01', '2022-02-01', '2022-03-01', '2022-04-01'][i % 4],
+            });
+          }
+
+          return {
+            list: initialData,
+            total,
+            onDragSortChange: (value) => {
+              console.log(value, 'onDragSortChange');
+            },
+          };
+        },
+      };
+    },
+    methods: {
+      async onDragSortChange(value) {
+        console.log(
+          JSON.stringify(value.data[0].add.index),
+          JSON.stringify(value.newData[0].add.index),
+          'onDragSortChange',
+        );
+      },
+    },
+    template: `
+    <el-table-pro
+        row-key="add.index"
+    :dataSource="data"
+    :treeDisplay="true"
+    :hasIndexColumn="true"
+   dragSort="row"
+
+   @drag-sort="onDragSortChange"
+    >
+      <el-table-column-pro title="申请人" colKey="channel"></el-table-column-pro>
+    
+    </el-table-pro>
+    `,
+  }),
+};
+
+export const 可编辑表格 = {
+  name: '可编辑表格',
+  render: () => ({
+    // moud
+    async mounted() {
+      setTimeout(() => {
+        this.hasExpandedRow = false;
+        console.log(123);
+      }, 3000);
+    },
+    watch: {
+      selectedRowKeys(value) {
+        console.log(value, '===watch');
+      },
+    },
+    data() {
+      return {
+        data:  (params) => {
+          const initialData = [];
+          const total = 200;
+          for (let i = 0; i < total; i++) {
+            initialData.push({
+              index: i,
+              applicant: ['贾明', '张三', '王芳'][i % 3],
+              status: i % 3,
+              channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+              children: [
+                {
+                  channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                  children: [
+                    {
+                      channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                    },
+                  ],
+                },
+              ],
+              detail: {
+                email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
+              },
+              matters: ['宣传物料制作费用', 'algolia 服务报销', '相关周边制作费', '激励奖品快递费'][i % 4],
+              time: [2, 10, 1][i % 3],
+              createTime: ['2022-01-01', '2022-02-01', '2022-02-01', '2022-03-01', '2022-04-01'][i % 4],
+            });
+          }
+
+          return {
+            list: initialData,
+            total,
+          };
+        },
+        hasExpandedRow: true,
+        list: [],
+        rowspan: 2,
+        type: undefined,
+        selectedRowKeys: [],
+        columns: [
+          { colKey: 'applicant', title: '申请人', width: 100 },
+          { colKey: 'status', title: '状态', width: 100 },
+          { colKey: 'channel', title: '渠道', width: 100 },
+          { colKey: 'detail.email', title: '邮箱', width: 100 },
+          { colKey: 'matters', title: '事项', width: 100 },
+          { colKey: 'time', title: '时长', width: 100 },
+          { colKey: 'createTime', title: '创建时间', width: 100 },
+        ],
+        displayColumns: undefined,
+      };
+    },
+    beforeMount() {
+      console.log(12341234);
+      this.list = this.data().list;
+      setTimeout(() => {
+        this.list[0] = { applicant: '张三22' };
+        console.log(1234);
+      }, 1000);
+    },
+    methods: {
+      log(value) {
+        console.log(value, 'log', this.list);
+        // console.log(log);
+        // this.$set(this.list, value.rowIndex, value.newRowData);
+
+        // this.displayColumns = value;
+      },
+      onSortChange(...arg) {
+        console.log(arg, 'arg===');
+      },
+      onDragSortChange(...arg) {
+        console.log(arg, 'arg===');
+      },
+    },
+    template: `<el-table-pro
+      row-key="index"
+      :dataSource="list"
+      :selectedRowKeys.sync="selectedRowKeys"
+      width="800px"
+    >
+<el-table-column-pro title="渠道"  colKey="detail.email" type="editable" :rules="[
+          { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
+    ]" @row-edit="log">
+      <template #edit>
+        <el-radio-group-pro :dataSource="[1,2,3]" data-nodepath="123">
+            <template #item="current" >
+              <el-text>123</el-text>
+            </template>
+        </el-radio-group-pro>
+      </template>
+      <template #cell="cell">
+      <div>
+      123
+      </div>
+      </template>
+    </el-table-column-pro>
+    <el-table-column-pro title="渠道"  colKey="status" type="editable" :rules="[
+          { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
+    ]" @row-edit="log">
+      <template #edit="cell">
+      <el-time-picker-pro :class="'class12'"  class="class" staticClass="staticClass" style="width: 100px;" :style="{height: '100px'}" statcStyle="statcStyle" ></el-time-picker-pro>
+      </template>
+      <template #cell="cell">
+      <el-text>
+      123
+      </el-text>
+      </template>
+    </el-table-column-pro>
+    </el-table-pro>`,
+  }),
+};

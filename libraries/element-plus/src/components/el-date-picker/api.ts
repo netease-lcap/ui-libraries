@@ -269,27 +269,27 @@ namespace nasl.ui {
     })
     unlinkPanels: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   title: '前缀图标',
-    //   description: '前缀图标',
-    //   group: '主要属性',
-    //   setter: {
-    //     concept: 'IconSetter',
-    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
-    //   },
-    // })
-    // prefixIcon: nasl.core.String;
+    @Prop({
+      title: '前缀图标',
+      description: '前缀图标',
+      group: '主要属性',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+      },
+    })
+    prefixIconName: nasl.core.String;
 
-    // @Prop({
-    //   title: '清除图标',
-    //   description: '自定义清除图标',
-    //   group: '主要属性',
-    //   setter: {
-    //     concept: 'IconSetter',
-    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
-    //   },
-    // })
-    // clearIcon: nasl.core.String;
+    @Prop({
+      title: '清除图标',
+      description: '自定义清除图标',
+      group: '主要属性',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+      },
+    })
+    clearIconName: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -427,6 +427,7 @@ namespace nasl.ui {
         label: 'display: inline-block;',
       },
       forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: true,
       namedSlotOmitWrapper: ['label'],
     },
     extends: [

@@ -1,6 +1,6 @@
 {
   "name": "@lcap/element-plus",
-  "version": "1.0.1-beta.1",
+  "version": "1.0.0",
   "author": "NetEase CodeWave FE Team",
   "main": "dist-theme/index.js",
   "module": "dist-theme/index.mjs",

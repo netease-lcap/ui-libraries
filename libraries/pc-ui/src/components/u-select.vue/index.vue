@@ -127,7 +127,7 @@
               selectedVMs.length - collapseCounter >= 1 &&
               selectedVMs.length !== 1
             "
-            :style="{ 'vertical-align': 'middle', 'padding-right': '6px' }">
+            :style="{ 'padding-right': '6px' }">
             <span :class="$style['tag-text']"
               >+{{ selectedVMs.length - collapseCounter }}...</span
             >
@@ -568,7 +568,7 @@ export default {
           for (let i = 0; i < this.selectedVMs.length - 1; i++) {
             if (this.$refs[`item_${i}`]) {
               this.$refs[`item_${i}`][0].style.display = 'inline-block';
-              this.$refs[`item_${i}`][0].style['vertical-align'] = 'middle';
+              // this.$refs[`item_${i}`][0].style['vertical-align'] = 'middle';
               const itemWidth =
                 this.$refs[`item_${i}`][0].offsetWidth + marginWidth;
 
@@ -585,7 +585,7 @@ export default {
               const lastItem = this.$refs[`item_${this.selectedVMs.length - 1}`];
               if (lastItem) {
                 lastItem[0].style.display = 'inline-block';
-                lastItem[0].style['vertical-align'] = 'middle';
+                // lastItem[0].style['vertical-align'] = 'middle';
                 lastAddElementWidth = lastItem[0].offsetWidth;
               }
               // 加上 “+N” 的宽度后判断最后一个是否显示
@@ -799,6 +799,14 @@ export default {
         this.setPopperWidth();
       }
       this.popperOpened = true; // 刚打开时，除非是没有加载，否则保留上次的 filter 过的数据
+
+      // 多选时，打开时更新过滤条件
+      if (this.hasFilter && this.closedClearFilter) {
+        this.resetFilterList();
+        this.hasFilter = false;
+        this.closedClearFilter = false;
+      }
+
       if (
         this.filterable &&
         this.currentDataSource &&
@@ -821,12 +829,18 @@ export default {
       if (this.loadMoreNoopTimer) {
         clearTimeout(this.loadMoreNoopTimer);
       }
+      // 多选时，关闭时更新过滤条件，打开后更新防止重复请求和闪动
+      if (this.hasFilter) {
+        this.closedClearFilter = true;
+      }
+
       this.popperOpened = false;
       this.focusedVM = undefined;
       this.preventRootBlur = false;
       this.preventBlur = false;
       clearTimeout(this.inputBlurTimer);
       clearTimeout(this.rootBlurTimer);
+
       this.$emit('close', $event, this);
       this.$emit('update:opened', false);
     },

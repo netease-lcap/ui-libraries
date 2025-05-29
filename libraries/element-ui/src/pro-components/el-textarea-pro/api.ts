@@ -168,11 +168,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Tips',
+      title: '输入框下方提示文本',
       description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
       setter: { concept: 'InputSetter' },
     })
-    private tips: nasl.core.String;
+    tips: nasl.core.String;
 
     @Prop({
       group: '主要属性',

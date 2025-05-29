@@ -18,6 +18,7 @@ export function useHandleMapField(filedInfo: {
   disabledField?: string;
   dividedField?: string;
   dataSource: DataSourceType;
+  fieldsMap?: Record<string, string>;
 }) {
   const {
     label = 'label',
@@ -29,10 +30,12 @@ export function useHandleMapField(filedInfo: {
     disabledField,
     dividedField,
     divided = 'divided',
+    fieldsMap,
   } = filedInfo;
   return useMemo(
     () => _.map(dataSource, (item: any) => ({
         ...item,
+        ...Object.fromEntries(Object.entries(fieldsMap || {}).map(([key, path]) => [key, _.get(item, path, undefined)])),
         [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
         [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
         [disabled]: !_.isObject(item) ? item : _.get(item, disabledField || 'disabled', false),
@@ -64,15 +67,24 @@ const handleDataSouceToFn = _.cond([
   ],
   [_.stubTrue, () => async (params) => handleLocalPageData({ dataSource: [], ...params })],
 ]);
-
 export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
   const [resultData, setResult] = useState({});
   const resultRef = useRef({});
-  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [dataSource]);
-  resultRef.value = useMemo(() => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }), [dataSourceFn]);
+  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [_.cloneDeep(dataSource)]);
+
+  resultRef.value = useMemo(
+    () => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }),
+    [dataSourceFn],
+  );
 
   useEffect(() => {
-    watch(resultRef, (value) => setResult(value), { immediate: true, deep: true });
+    watch(
+      resultRef,
+      (value) => {
+        return setResult({ ...value, data: _.cloneDeep(value.data) });
+      },
+      { immediate: true, deep: true },
+    );
   }, []);
   const { data, run, loading } = resultData
     ?? ({} as {

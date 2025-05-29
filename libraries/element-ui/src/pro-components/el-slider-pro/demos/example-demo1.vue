@@ -6,7 +6,7 @@
         {{ value }}
       </div>
       <div class="block" style="margin-top:50px">
-        <el-slider-pro :tooltipProps="{ placement: 'left', showArrow:false }" layout="vertical" style="height:300px" :label="false"/>
+        <el-slider-pro :tooltipProps="{ placement: 'left', showArrow:false }" layout="vertical"  :marks="marks1" style="height:300px" :label="false"/>
       </div>
       <div class="block" style="margin-top:50px">
         {{ values }}
@@ -14,9 +14,9 @@
       </div>
 
       <div class="block" style="margin-top:50px">
-        <el-button @click="showLabelTooltip=!showLabelTooltip">展示tooltip</el-button>
-        <el-slider-pro :showLabelTooltip="showLabelTooltip" unit="%"/>
-        {{ showLabelToolTip }}
+        <el-button @click="toggleShowLabelTooltip">展示tooltip</el-button>
+        <el-slider-pro :showLabelTooltip="showLabelTooltip" unit="%" />
+        {{ showLabelTooltip }}
       </div>
       <div class="block" style="margin-top:50px">
         <el-slider-pro :marks="marks1"/>
@@ -28,7 +28,7 @@
     data() {
       return {
         value: 12,
-        showLabelTooltip: null,
+        showLabelTooltip: false,
         // marks1: {
         //     0: '0°C',
         //     20: '20°C',
@@ -42,6 +42,9 @@
       };
     },
     methods: {
+        toggleShowLabelTooltip() {
+            this.showLabelTooltip = !this.showLabelTooltip;
+        },
         handleChange(value) {
             console.log('the change value is:', value);
         },
@@ -55,4 +58,3 @@
     },
   };
   </script>
-  

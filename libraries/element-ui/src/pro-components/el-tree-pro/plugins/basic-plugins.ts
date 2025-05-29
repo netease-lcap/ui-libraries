@@ -12,8 +12,12 @@ export const useListToTree: NaslComponentPluginOptions = {
   setup: (props) => {
     const data = props.useComputed('data', (value) => {
       const valueField = props.get<string>('valueField') || 'value';
-      const parentField = props.get<string>('parentField') || 'parent';
+      const parentField = props.get<string>('parentField');
       const childrenField = props.get<string>('childrenField') || 'children';
+
+      if (!parentField) {
+        return value;
+      }
 
       return listToTree(value, {
         valueField,

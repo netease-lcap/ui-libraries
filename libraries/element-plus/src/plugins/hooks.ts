@@ -198,7 +198,7 @@ export function useMemo(callBack, dep) {
   } else {
     hook = currentFiber.workInProgressEffect.next;
     currentFiber.workInProgressEffect = currentFiber.workInProgressEffect.next;
-    const isSameDep = _.every(dep, (item, index) => Object.is(item, _.get(hook, `dep.${index}`)));
+    const isSameDep = _.every(dep, (item, index) => _.isEqual(item, _.get(hook, `dep.${index}`)));
     if (!_.isEmpty(dep) && !isSameDep) {
       hook.result = callBack();
       hook.dep = dep;

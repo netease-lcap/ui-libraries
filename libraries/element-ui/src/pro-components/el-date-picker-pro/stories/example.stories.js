@@ -26,10 +26,29 @@ export const Default = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-picker-pro align="center" style="--el-datepicker-cell-active-background: red;" :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
+    template: '<el-date-picker-pro style="--el-datepicker-cell-active-background: red;" :enablePresets="true" presetsPlacement="left" :allowInput="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
   }),
 };
 
+export const Multiple = {
+  name: '多选示例',
+  render: () => ({
+    data() {
+      return {
+        value: null,
+      };
+    },
+    methods: {
+      handleChange(name, e) {
+        // console.log(name, e);
+      },
+      handleSyncState(name, value) {
+        // console.log('sync', name, value);
+      },
+    },
+    template: '<el-date-picker-pro :minCollapsedNum="10" format="YYYY年MM月DD日" mode="date" :multiple="true" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
+  }),
+};
 export const Range = {
   name: '区间选择示例',
   render: () => ({
@@ -37,6 +56,7 @@ export const Range = {
       return {
         startValue: '2024-08-02',
         endValue: '2024-10-02',
+        values: ['2024-08-02', '2024-10-02'],
       };
     },
     methods: {
@@ -47,6 +67,13 @@ export const Range = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-picker-pro :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-picker-pro>',
+    template: `
+      <div>
+        <el-date-picker-pro :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :value.sync="values" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange('change', $event)" @focus="handleChange('focus', $event)" @pick="handleChange('pick', $event)"></el-date-picker-pro>
+        <p>startValue: {{ startValue }}</p>
+        <p>endValue: {{ endValue }}</p>
+        <p>values: {{ values }}</p>
+      </div>
+    `
   }),
 };

@@ -1,10 +1,7 @@
 <template>
   <PageLayout>
     <div class="form_page_layout">
-      <div class="card x-panel-card">
-        <div class="x-panel-card-header">
-          <u-text text="资源监控" class="x-panel-card-header-title"></u-text>
-        </div>
+      <XPanel title="资源监控">
         <u-form repeat="3">
           <u-form-item required label="项目名称">
             <u-input placeholder="请输入"></u-input>
@@ -27,8 +24,9 @@
               <u-input placeholder="请输入"></u-input>
           </u-form-item>
         </u-form>
-      </div>
-      <div class="card">
+      </XPanel>
+
+      <XPanel>
         <u-tabs appear="line">
           <u-tab title="基本信息">
             <div class="sub-title">
@@ -109,18 +107,20 @@
             </u-table-view>
           </u-tab>
         </u-tabs>
-      </div>
+      </XPanel>
     </div>
   </PageLayout>
 </template>
 <script>
 import PageLayout from './layout.vue';
+import XPanel from './x-panel.vue';
 import AvatarDefault from '../assets/avatar-default.svg';
 import Logo from '../assets/lcap-logo-light.svg'
 
 export default {
   components: {
     PageLayout,
+    XPanel,
   },
   data() {
     return {
@@ -143,28 +143,6 @@ export default {
   padding: var(--space-base);
   border-radius: var(--border-radius-medium);
   background-color: var(--background-color-default);
-}
-
-.x-panel-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: var(--space-base);
-}
-
-.x-panel-card-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.x-panel-card-header-title {
-  font-size: var(--font-size-large);
-  color: var(--color-base);
-  line-height: calc(var(--font-size-large) + 8px);
-  font-weight: 500;
 }
 
 .sub-title {

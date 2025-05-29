@@ -91,6 +91,10 @@ export default {
   suffix: {
     type: [String, Function] as PropType<ElSelectInputProps['suffix']>,
   },
+  /** 组件前置图标 */
+  prefixIcon: {
+    type: Function as PropType<ElSelectInputProps['prefixIcon']>,
+  },
   /** 组件后置图标 */
   suffixIcon: {
     type: Function as PropType<ElSelectInputProps['suffixIcon']>,

@@ -280,8 +280,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/vite-plugin-vue2
       '@nasl/types':
-        specifier: 0.1.9-alpha
-        version: 0.1.9-alpha
+        specifier: 0.1.12-alpha
+        version: 0.1.12-alpha
       '@storybook/addon-essentials':
         specifier: ^7.6.17
         version: 7.6.17(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -423,9 +423,6 @@ importers:
       online-svg-icon-vue2:
         specifier: ^1.2.3
         version: 1.2.3
-      postcss:
-        specifier: 7.0.0
-        version: 7.0.0
       resize-observer-polyfill:
         specifier: ^1.5.1
         version: 1.5.1
@@ -523,6 +520,9 @@ importers:
       less:
         specifier: ^4.2.0
         version: 4.2.0
+      postcss:
+        specifier: 7.0.0
+        version: 7.0.0
       remark-parse:
         specifier: ^11.0.0
         version: 11.0.0
@@ -1556,26 +1556,22 @@ packages:
 
   '@antfu/eslint-config-basic@0.20.7':
     resolution: {integrity: sha512-Lhty32km7/dtCtoGBWB9OQnC9aG1mYdFiF4JrbhPPr4nj7fd/KY+p91zIyOtEnlSNp4uKRGXD4DnYjp0cJdGBA==, tarball: https://registry.npmmirror.com/@antfu/eslint-config-basic/-/eslint-config-basic-0.20.7.tgz}
-    deprecated: Deprecated, please migrate to @antfu/eslint-config with the flat config
     peerDependencies:
       eslint: '>=7.4.0'
 
   '@antfu/eslint-config-react@0.20.7':
     resolution: {integrity: sha512-CfqtjfrhnDffDImfwWbGWCHjaY/7Un7kkEOVqIh46oU9B6XW6wCFWh3VWJn7SsIYKVJbYlOypneqziYRUB0H3Q==, tarball: https://registry.npmmirror.com/@antfu/eslint-config-react/-/eslint-config-react-0.20.7.tgz}
-    deprecated: Deprecated, please migrate to @antfu/eslint-config with the flat config
     peerDependencies:
       eslint: '>=7.4.0'
 
   '@antfu/eslint-config-ts@0.20.7':
     resolution: {integrity: sha512-wPLhwQ8Jt7rrJj4MQUY2F7pbiV4ITx8RbuOTpkVmuUQeGe3mHCGvJostTcz5JYgWyd3JOx2dqFBY10t3YXEMYw==, tarball: https://registry.npmmirror.com/@antfu/eslint-config-ts/-/eslint-config-ts-0.20.7.tgz}
-    deprecated: Deprecated, please migrate to @antfu/eslint-config with the flat config
     peerDependencies:
       eslint: '>=7.4.0'
       typescript: '>=3.9'
 
   '@antfu/eslint-config-vue@0.20.7':
     resolution: {integrity: sha512-jpWi0FaeDLbAoTawJYExHnZ8EC6+1wiL8OD2Iu1A400b0PGyP85vpfcFAAKGij2KgJVc0ZoHeFJQX1TTMeiI/g==, tarball: https://registry.npmmirror.com/@antfu/eslint-config-vue/-/eslint-config-vue-0.20.7.tgz}
-    deprecated: Deprecated, please migrate to @antfu/eslint-config with the flat config
     peerDependencies:
       eslint: '>=7.4.0'
 
@@ -3512,7 +3508,10 @@ packages:
     resolution: {integrity: sha512-CFPQvx5Xh1gEgN6oUqO3ZLA2FyY7fiQGOMJu9mGtkk4CN8xecj/o3BDNB6MdAWJRPav4i0a+dHnufZ+DULpPKw==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.10.tgz}
 
   '@nasl/types@0.1.11':
-    resolution: {integrity: sha512-0aaEG4gBy1jOpLOY4MoqFwDca2LVMl+ygGR4Ct4VUpPbsff8zkMge0dPpt1M9aGWEDC9QHUMYLIEzb20IcUAJA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.11.tgz}
+    resolution: {integrity: sha512-0aaEG4gBy1jOpLOY4MoqFwDca2LVMl+ygGR4Ct4VUpPbsff8zkMge0dPpt1M9aGWEDC9QHUMYLIEzb20IcUAJA==}
+
+  '@nasl/types@0.1.12-alpha':
+    resolution: {integrity: sha512-5anxxI7t2whRuYuGj6U618iX9VMHRVMbP8suttBDLPIm2CsoVdYE2t2E7GYWcdZ8yF+Tu+WMRdauCX86Zc0RFg==}
 
   '@nasl/types@0.1.13':
     resolution: {integrity: sha512-ioXS4BEtX6kRnc5MQcnErZvxl0q/QskJw0RUvWGacBH+EX1BDRA3SLGLxYBLvTmArKfnhrQI2Z9DlnxvUB5yvA==}
@@ -3522,9 +3521,6 @@ packages:
 
   '@nasl/types@0.1.8-beta.3':
     resolution: {integrity: sha512-d/Cfv7Wc4rkUKOSoyPy6BSXfF3tWE7FxvFe9YcWsg2v/P4esu1vTmCRZTZwpWOvEQ6Yb1f+LgQXa8AF6rq0SIA==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.8-beta.3.tgz}
-
-  '@nasl/types@0.1.9-alpha':
-    resolution: {integrity: sha512-dSqqh4X5fBaZpBGrtZtM/CubKm3M/Ajk6Uo4uL4uosRRYlHDaQJoyKwLfaT1Uaevm985XO2/9PoZohur7+eVBQ==, tarball: https://registry.npmmirror.com/@nasl/types/-/types-0.1.9-alpha.tgz}
 
   '@ndelangen/get-tarball@3.0.9':
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==, tarball: https://registry.npmmirror.com/@ndelangen/get-tarball/-/get-tarball-3.0.9.tgz}
@@ -9402,7 +9398,7 @@ packages:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==, tarball: https://registry.npmmirror.com/mz/-/mz-2.7.0.tgz}
 
   nanoid@3.3.11:
-    resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==, tarball: https://registry.npmmirror.com/nanoid/-/nanoid-3.3.11.tgz}
+    resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -9753,7 +9749,7 @@ packages:
     resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==, tarball: https://registry.npmmirror.com/performance-now/-/performance-now-2.1.0.tgz}
 
   picocolors@0.2.1:
-    resolution: {integrity: sha512-cMlDqaLEqfSaW8Z7N5Jw+lyIW869EzT73/F5lhtY9cLGoVxSXznfgfXMO0Z5K0o0Q2TkTXq+0KFsdnSe3jDViA==, tarball: https://registry.npmmirror.com/picocolors/-/picocolors-0.2.1.tgz}
+    resolution: {integrity: sha512-cMlDqaLEqfSaW8Z7N5Jw+lyIW869EzT73/F5lhtY9cLGoVxSXznfgfXMO0Z5K0o0Q2TkTXq+0KFsdnSe3jDViA==}
 
   picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==, tarball: https://registry.npmmirror.com/picocolors/-/picocolors-1.0.0.tgz}
@@ -9860,7 +9856,7 @@ packages:
       postcss: ^8.2.9
 
   postcss@6.0.23:
-    resolution: {integrity: sha512-soOk1h6J3VMTZtVeVpv15/Hpdl2cBLX3CAw4TAbkpTJiNPk9YP/zWcD1ND+xEtvyuuvKzbxliTOIyvkSeSJ6ag==, tarball: https://registry.npmmirror.com/postcss/-/postcss-6.0.23.tgz}
+    resolution: {integrity: sha512-soOk1h6J3VMTZtVeVpv15/Hpdl2cBLX3CAw4TAbkpTJiNPk9YP/zWcD1ND+xEtvyuuvKzbxliTOIyvkSeSJ6ag==}
     engines: {node: '>=4.0.0'}
 
   postcss@7.0.0:
@@ -9868,7 +9864,7 @@ packages:
     engines: {node: '>=6.0.0'}
 
   postcss@7.0.39:
-    resolution: {integrity: sha512-yioayjNbHn6z1/Bywyb2Y4s3yvDAeXGOyxqD+LnVOinq6Mdmd++SW2wUNVzavyyHxd6+DxzWGIuosg6P1Rj8uA==, tarball: https://registry.npmmirror.com/postcss/-/postcss-7.0.39.tgz}
+    resolution: {integrity: sha512-yioayjNbHn6z1/Bywyb2Y4s3yvDAeXGOyxqD+LnVOinq6Mdmd++SW2wUNVzavyyHxd6+DxzWGIuosg6P1Rj8uA==}
     engines: {node: '>=6.0.0'}
 
   postcss@8.4.35:
@@ -9876,7 +9872,7 @@ packages:
     engines: {node: ^10 || ^12 || >=14}
 
   postcss@8.5.3:
-    resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==, tarball: https://registry.npmmirror.com/postcss/-/postcss-8.5.3.tgz}
+    resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
     engines: {node: ^10 || ^12 || >=14}
 
   preferred-pm@3.1.2:
@@ -10888,7 +10884,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   source-map-js@1.2.1:
-    resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==, tarball: https://registry.npmmirror.com/source-map-js/-/source-map-js-1.2.1.tgz}
+    resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
 
   source-map-support@0.5.21:
@@ -11870,7 +11866,6 @@ packages:
 
   vue-i18n@8.28.2:
     resolution: {integrity: sha512-C5GZjs1tYlAqjwymaaCPDjCyGo10ajUphiwA922jKt9n7KPpqR7oM1PCwYzhB/E7+nT3wfdG3oRre5raIT1rKA==, tarball: https://registry.npmmirror.com/vue-i18n/-/vue-i18n-8.28.2.tgz}
-    deprecated: Vue I18n v8.x has reached EOL and is no longer actively maintained. About maintenance status, see https://vue-i18n.intlify.dev/guide/maintenance.html
     peerDependencies:
       vue: ^2
 
@@ -12208,7 +12203,7 @@ packages:
     engines: {node: '>= 14'}
 
   zustand@4.5.2:
-    resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==, tarball: https://registry.npmmirror.com/zustand/-/zustand-4.5.2.tgz}
+    resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'
@@ -12223,7 +12218,7 @@ packages:
         optional: true
 
   zustand@5.0.3:
-    resolution: {integrity: sha512-14fwWQtU3pH4dE0dOpdMiWjddcH+QzKIgk1cl8epwSE7yag43k/AD/m4L6+K7DytAOr9gGBe3/EXj9g7cdostg==, tarball: https://registry.npmmirror.com/zustand/-/zustand-5.0.3.tgz}
+    resolution: {integrity: sha512-14fwWQtU3pH4dE0dOpdMiWjddcH+QzKIgk1cl8epwSE7yag43k/AD/m4L6+K7DytAOr9gGBe3/EXj9g7cdostg==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=18.0.0'
@@ -14732,13 +14727,13 @@ snapshots:
 
   '@nasl/types@0.1.11': {}
 
+  '@nasl/types@0.1.12-alpha': {}
+
   '@nasl/types@0.1.13': {}
 
   '@nasl/types@0.1.7-beta.1': {}
 
   '@nasl/types@0.1.8-beta.3': {}
-
-  '@nasl/types@0.1.9-alpha': {}
 
   '@ndelangen/get-tarball@3.0.9':
     dependencies:
@@ -17392,7 +17387,7 @@ snapshots:
       '@vue/shared': 3.4.8
       entities: 4.5.0
       estree-walker: 2.0.2
-      source-map-js: 1.0.2
+      source-map-js: 1.2.1
 
   '@vue/compiler-core@3.5.13':
     dependencies:

@@ -1,5 +1,6 @@
+import { CreateElement } from 'vue';
 import { NaslComponentPluginOptions, $render } from '@lcap/vue2-utils';
-import { DateRangeValue, DateRangePicker, DateValue } from '@element-pro';
+import { DateRangeValue, DateRangePicker, DateValue, DateMultipleValue } from '@element-pro';
 import {
   usePlaceholder,
   useDatePickerValue,
@@ -7,8 +8,6 @@ import {
   useDisableDate,
   getChangeEventByValue,
   usePresets,
-  useInputProps,
-  useIcons,
 } from '../hooks';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
@@ -22,6 +21,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     'range', 'autoWidth', 'align',
     'placeholderRight', 'startValue', 'endValue',
     'maxTime', 'minTime', 'enablePresets',
+    'multiple', 'prefixIcon', 'suffixIcon',
   ],
   setup(props) {
     const valueFormat = props.useComputed('converter', (v) => {
@@ -31,13 +31,39 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
 
       return v;
     });
+
     const placeholder = usePlaceholder(props, '请选择日期');
     const { value, changeValue } = useDatePickerValue(props, valueFormat);
     const events = useContextEvents(props, valueFormat);
     const disableDate = useDisableDate(props, DEFAULT_FORMAT);
     const presets = usePresets(props);
-    const inputProps = useInputProps(props);
-    const icons = useIcons(props);
+
+    const inputProps = props.useComputed<any>([
+      'autoWidth',
+      'align',
+      'prefixIcon',
+      'suffixIcon',
+    ], (
+      autoWidth = false,
+      align = 'left',
+      prefixIcon = 'el-icon-date',
+      suffixIcon,
+    ) => {
+      const inputStyleProps: any = {
+        autoWidth,
+        align,
+      };
+
+      if (prefixIcon) {
+        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon }, class: 'el-p-icon' });
+      }
+
+      if (suffixIcon) {
+        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon }, class: 'el-p-icon' });
+      }
+
+      return inputStyleProps;
+    });
 
     return {
       value,
@@ -45,15 +71,15 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       inputProps,
       disableDate,
       presets,
-      ...icons,
       ...events,
-      onChange: (v: DateValue | DateRangeValue, context) => {
+      onChange: (v: DateValue | DateRangeValue | DateMultipleValue, context) => {
         const [range] = props.get<[boolean]>(['range']);
         const onChange = props.get<any>('onChange') || (() => {});
-        const changeEvent = getChangeEventByValue(v, range, valueFormat);
-        changeValue(context.dayjsValue, v);
+        const changeEvent = getChangeEventByValue(v, range, valueFormat, props.get<boolean>('multiple'));
+        const updateValue = changeValue(context.dayjsValue, v);
         onChange({
           ...changeEvent,
+          value: updateValue,
           trigger: context.trigger,
         });
       },
@@ -68,7 +94,10 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         if (!context.propsData.props.rangeInputProps) {
           context.propsData.props.rangeInputProps = {};
         }
-        context.propsData.props.rangeInputProps.inputProps = inputProps.value;
+        const { prefixIcon, suffixIcon, ...reset } = inputProps.value;
+        context.propsData.props.rangeInputProps.inputProps = reset;
+        context.propsData.props.rangeInputProps.prefixIcon = prefixIcon;
+        context.propsData.props.rangeInputProps.suffixIcon = suffixIcon;
 
         return h(DateRangePicker, context.propsData, context.childrenNodes);
       },

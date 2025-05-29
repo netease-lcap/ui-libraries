@@ -71,8 +71,8 @@
     </u-table-designer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
-        :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
-        :page-size="currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
+        :total-items="currentDataSource.total" :page="currentDataSource.paging && currentDataSource.paging.number"
+        :page-size="currentDataSource.paging && currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
         :size="paginationSize"
         @change="page($event.page)" @change-page-size="onChangePageSize">
     </u-pagination>
@@ -447,6 +447,8 @@ export default {
             getItemColSpan: this.getItemColSpan,
             getItemRowSpan: this.getItemRowSpan,
             getTableContentElem: this.getTableContentElem,
+            filterMultiple: this.filterMultiple,
+            filterMax: this.filterMax,
         };
     },
     computed: {
@@ -648,7 +650,10 @@ export default {
         },
         paging: {
             handler(value) {
-                if (this.currentDataSource) {
+                if (value && this.currentDataSource && !this.currentDataSource.paging) {
+                    this.currentDataSource.paging = value;
+                }
+                if (this.currentDataSource && this.currentDataSource.paging && value) {
                     if (this.currentDataSource.paging.number !== value.number || this.currentDataSource.paging.size !== value.size)
                         this.page(value.number, value.size);
                 }
@@ -892,7 +897,7 @@ export default {
                 // 当最外层加了border后，会导致内部的宽度大于tablewrap的宽度，会出滚动条：Bug-2792431057259520
                 // 3088409490416384：用样式设置了tablewrap的border，使用offsetWith会使外部的宽度一直往上加2px, 用clientWidth，不包含border宽度
                 let rootWidth = this.$el.clientWidth;
-                const tablewrapWidth = this.$refs.tableRender.getRefs().tablewrap && this.$refs.tableRender.getRefs().tablewrap.clientWidth;
+                const tablewrapWidth = this.$refs.tableRender && this.$refs.tableRender.getRefs().tablewrap && this.$refs.tableRender.getRefs().tablewrap.clientWidth;
                 if (tablewrapWidth) {
                     rootWidth = tablewrapWidth;
                 }
@@ -1053,7 +1058,7 @@ export default {
                     if (rootHeight) {
                         // 如果使用 v-show 隐藏了，无法计算
                         const titleHeight = this.$refs.title ? this.$refs.title.offsetHeight : 0;
-                        const headEl = this.$refs.tableRender.getRefs().head;
+                        const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
                         const headHeight = headEl ? headEl.offsetHeight : 0;
                         const paginationHeight = this.getPaginationHeight();
                         this.bodyHeight = rootHeight - titleHeight - headHeight - paginationHeight;
@@ -1072,13 +1077,13 @@ export default {
 
                 this.$emit('resize', undefined, this);
                 this.$nextTick(() => {
-                    this.$refs.tableRender.getRefs().scrollView && this.$refs.tableRender.getRefs().scrollView.handleResize();
+                    this.$refs.tableRender && this.$refs.tableRender.getRefs().scrollView && this.$refs.tableRender.getRefs().scrollView.handleResize();
                 });
             });
         },
         syncHeadScroll() {
             // this.$refs.head[0].scrollLeft = this.$refs.head[0].parentElement.scrollLeft;
-            const headEl = this.$refs.tableRender.getRefs().head;
+            const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
             if (this.xScrollParentEl && this.stickingHead && headEl && headEl.childNodes[0]) {
                 const xScrollParentEl = this.xScrollParentEl;
                 headEl.childNodes[0].style.marginLeft = '-' + xScrollParentEl.scrollLeft + 'px';
@@ -1092,7 +1097,7 @@ export default {
                 return;
             const bodyRect = getRect(bodyEl);
             const parentRect = this.scrollParentEl === window ? { top: 0, bottom: window.innerHeight } : getRect(this.scrollParentEl);
-            const headEl = this.$refs.tableRender.getRefs().head;
+            const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
             const headHeight = headEl && headEl.offsetHeight || 0;
 
             parentRect.top += this.stickHeadOffset;
@@ -1106,7 +1111,7 @@ export default {
             const stickingHeadTop = parentRect.top;
             const stickingHeadHeight = headHeight;
             const stickheadEl = headEl;
-            const headPlaceholderEl = this.$refs.tableRender.getRefs().headPlaceholder;
+            const headPlaceholderEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().headPlaceholder;
             if (stickheadEl) {
                 if (stickingHead) {
                     stickheadEl.setAttribute('stickingHead', true);
@@ -1122,7 +1127,7 @@ export default {
                 }
                 stickheadEl.style.top = stickingHeadTop + 'px';
                 // fix：滚动条在最右边时，置顶时表头会有偏移
-                const scorllViewEl = this.$refs.tableRender.getRefs().scrollView;
+                const scorllViewEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().scrollView;
                 stickheadEl.scrollLeft = scorllViewEl && scorllViewEl.$refs.wrap.scrollLeft;
                 if (this.syncStickHeadXScroll) {
                     this.syncHeadScroll();
@@ -1364,7 +1369,8 @@ export default {
 
             const titleColIndexRelations = [];
             let headRows = [];
-            const headEl = this.$el.querySelector('[position=static] thead');
+            const headRef = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
+            const headEl = headRef && headRef.querySelector('thead');
             if (headEl) {
                 headRows = Array.from(headEl.childNodes).filter((tr) => tr.nodeName === 'TR');
             }
@@ -1432,7 +1438,9 @@ export default {
                 await new Promise((res) => {
                     this.$once('hook:updated', res);
                 });
-                const bodyEl = this.$el.querySelector('[position=static] tbody');
+                const bodyTableRef = this.$refs.tableRender && this.$refs.tableRender.getRefs().bodyTable;
+                const tableEl = bodyTableRef && bodyTableRef.$el;
+                const bodyEl = tableEl && tableEl.querySelector('tbody');
                 if (bodyEl) {
                     const trs = Array.from(bodyEl.childNodes).filter((tr) => tr.nodeName === 'TR');
                     const res1 = trs.map((tr, rowIndex) => Array.from(tr.childNodes).map(
@@ -1714,6 +1722,12 @@ export default {
                         const label = this.$at(item, valueField);
                         this.checkedItems[label] = item;
                     }
+                });
+            }
+            // 3123124215948800: values变化后充值了item.checked状态，需要递归处理父级的半勾选状态
+            if (this.treeDisplay) {
+                Object.keys(this.checkedItems).forEach((itemKey) => {
+                    this.checkRecursively(this.checkedItems[itemKey], true, this.treeCheckType);
                 });
             }
         },
@@ -2102,7 +2116,7 @@ export default {
                 // this.dragState.sourcePath === undefined，表示是拖拽节点所在表格外的其他表格，因为其他表格没有响应dragstart事件，所以sourcePath为undefined
                 if (!this.dropData && this.dragState.sourcePath === undefined) {
                     this.dropData = {
-                        dragoverElRect: this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
+                        dragoverElRect: this.$refs.tableRender && this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
                         parentElRect: this.$refs.root.getBoundingClientRect(),
                         position: 'append',
                         left: 0,
@@ -2383,7 +2397,7 @@ export default {
                     return;
                 if (this.draggable || this.acrossTableDrag) {
                     this.dropData = {
-                        dragoverElRect: this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
+                        dragoverElRect: this.$refs.tableRender && this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
                         parentElRect: this.$refs.root.getBoundingClientRect(),
                         position: 'append',
                         left: 0,
@@ -2520,7 +2534,7 @@ export default {
                 Array.from(crt.children).forEach((td) => {
                     td.style.position = 'static'; // 去除sticky的情况
                 });
-                const tableEl = this.$refs.tableRender.getRefs().bodyTable.$el;
+                const tableEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().bodyTable.$el;
                 const tableElCrt = tableEl.cloneNode(true);
                 const tbody = tableElCrt.getElementsByTagName('tbody')[0];
                 tbody.innerHTML = '';

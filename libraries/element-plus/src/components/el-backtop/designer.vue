@@ -22,22 +22,19 @@
   const props = defineProps({
     visibilityHeight: {
       type: Number,
-      default: 200
     },
     target: {
       type: String
     },
     right: {
       type: Number,
-      default: 40
     },
     bottom: {
       type: Number,
-      default: 40
     }
   });
   
-  const styleBottom = computed(() => `${props.bottom}px`);
-  const styleRight = computed(() => `${props.right}px`);
+  const styleBottom = computed(() => typeof props.bottom === 'number' ? `${props.bottom}px` : 'unset');
+  const styleRight = computed(() => typeof props.right === 'number' ? `${props.right}px` : 'unset');
 </script>
   

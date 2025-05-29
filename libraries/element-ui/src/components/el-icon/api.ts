@@ -4,7 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 4,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
     },
   })
   @Component({
@@ -20,6 +20,17 @@ namespace nasl.ui {
   }
 
   export class ElIconOptions extends ViewComponentOptions {
+    @Prop({
+      group: '主要属性',
+      title: '图标布局',
+      description: '图标和文本的布局方式',
+      docDescription: '支持选择图标的展示方式，包括仅图标、组合图标-上下、组合图标-左右三种方式。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '仅图标' }, { title: '组合图标-上下' }, { title: '组合图标-左右' }],
+      },
+    })
+    icotype: 'only' | 'top' | 'left' = 'only';
     @Prop({
       group: '主要属性',
       title: '图标',
@@ -72,5 +83,11 @@ namespace nasl.ui {
       description: '鼠标移出元素时触发。',
     })
     onMouseleave: (event: MouseEvent) => any;
+
+    @Slot({
+      title: '默认',
+      description: '插入文本或 HTML。',
+    })
+    slotDefault: () => Array<ViewComponent>;
   }
 }

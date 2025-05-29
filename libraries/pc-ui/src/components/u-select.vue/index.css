@@ -163,7 +163,7 @@ content: "\e65d";
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    vertical-align: middle;
+    vertical-align: top;
     max-width: 50%;
 
     padding: var(--select-tag-padding);
@@ -173,6 +173,7 @@ content: "\e65d";
     /* vertical-align: 1px; */
     background: var(--select-tag-background);
     border-radius: var(--select-tag-border-radius);
+    margin-top: calc(calc(var(--select-height) - var(--select-border-width) * 2 - var(--select-tag-line-height)) / 2);
 }
 
 .tag:not(:last-of-type) {

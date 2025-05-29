@@ -73,6 +73,15 @@ export interface ElDatePickerProps {
    */
   mode?: 'year' | 'quarter' | 'month' | 'week' | 'date';
   /**
+   * 支持多选日期，但不支持在range-picker中，或与enableTimePicker、allowInput 一起使用
+   * @default false
+   */
+  multiple?: boolean;
+  /**
+   * 最小折叠数量
+   */
+  minCollapsedNum?: number;
+  /**
    * 占位符
    */
   placeholder?: string;
@@ -119,12 +128,12 @@ export interface ElDatePickerProps {
    * 选中值
    * @default ''
    */
-  value?: DateValue;
+  value?: DateValue | DateMultipleValue;
   /**
    * 选中值，非受控属性
    * @default ''
    */
-  defaultValue?: DateValue;
+  defaultValue?: DateValue | DateMultipleValue;
   /**
    * 用于格式化日期的值，仅支持部分格式，时间戳、日期等。⚠️ `YYYYMMDD` 这种格式不支持，请勿使用，如果希望支持可以给 `dayjs` 提个 PR。注意和 `format` 的区别，`format` 仅用于处理日期在页面中呈现的格式。`ValueTypeEnum` 即将废弃，请更为使用 `DatePickerValueType`
    * @default ''
@@ -133,11 +142,14 @@ export interface ElDatePickerProps {
   /**
    * 当输入框失去焦点时触发
    */
-  onBlur?: (context: { value: DateValue; e: FocusEvent }) => void;
+  onBlur?: (context: { value: DateValue | DateMultipleValue; e: FocusEvent }) => void;
   /**
    * 选中值发生变化时触发
    */
-  onChange?: (value: DateValue, context: { dayjsValue?: Dayjs; trigger?: DatePickerTriggerSource }) => void;
+  onChange?: (
+    value: DateValue | DateMultipleValue,
+    context: { dayjsValue?: Dayjs; trigger?: DatePickerTriggerSource },
+  ) => void;
   /**
    * 如果存在“确定”按钮，则点击“确定”按钮时触发
    */
@@ -145,7 +157,7 @@ export interface ElDatePickerProps {
   /**
    * 输入框获得焦点时触发
    */
-  onFocus?: (context: { value: DateValue; e: FocusEvent }) => void;
+  onFocus?: (context: { value: DateValue | DateMultipleValue; e: FocusEvent }) => void;
   /**
    * 面板选中值后触发
    */
@@ -181,20 +193,21 @@ export interface ElDateRangePickerProps {
    * 禁用日期，示例：['A', 'B'] 表示日期 A 和日期 B 会被禁用。{ from: 'A', to: 'B' } 表示在 A 到 B 之间的日期会被禁用。{ before: 'A', after: 'B' } 表示在 A 之前和在 B 之后的日期都会被禁用。其中 A = '2021-01-01'，B = '2021-02-01'。值类型为 Function 则表示返回值为 true 的日期会被禁用
    */
   disableDate?: DisableRangeDate;
-
   /**
-   * 禁用时间
+   * 禁用时间项的配置函数，仅在日期区间选择器中开启时间展示时可用
    */
-  disableTime?: (times: [Date | null, Date | null], context: { partial: DateRangePickerPartial }) => boolean;
-
+  disableTime?: (
+    times: Array<Date | null>,
+    context: { partial: DateRangePickerPartial },
+  ) => Partial<boolean>;
   /**
    * 是否禁用组件
    */
   disabled?: boolean;
   /**
-   * 只读属性
+   * 是否只读
    */
-  readonly?: boolean;
+  readonly?: Boolean;
   /**
    * 是否显示时间选择
    * @default false
@@ -334,6 +347,7 @@ export interface ElDatePickerPanelProps
     | 'value'
     | 'defaultValue'
     | 'disableDate'
+    | 'disableTime'
     | 'enableTimePicker'
     | 'firstDayOfWeek'
     | 'format'
@@ -395,7 +409,6 @@ export interface ElDateRangePickerPanelProps
     | 'value'
     | 'defaultValue'
     | 'disableDate'
-    | 'disableTime'
     | 'enableTimePicker'
     | 'firstDayOfWeek'
     | 'format'
@@ -485,6 +498,8 @@ export interface PresetDate {
 
 export type DateValue = string | number | Date;
 
+export type DateMultipleValue = Array<DateValue>;
+
 export type DatePickerValueType =
   | 'time-stamp'
   | 'Date'
@@ -498,7 +513,7 @@ export type DatePickerValueType =
 
 export type ValueTypeEnum = DatePickerValueType;
 
-export type DatePickerTriggerSource = 'confirm' | 'pick' | 'enter' | 'preset' | 'clear';
+export type DatePickerTriggerSource = 'confirm' | 'pick' | 'enter' | 'preset' | 'clear' | 'tag-remove';
 
 export type DisableRangeDate =
   | Array<DateValue>
