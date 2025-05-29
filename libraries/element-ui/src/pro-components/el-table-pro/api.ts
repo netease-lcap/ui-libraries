@@ -600,7 +600,7 @@ namespace nasl.ui {
       description: '列配置功能中，当前显示的列。支持语法糖 `.sync`。',
       setter: { concept: 'InputSetter' },
     })
-    displayColumns: nasl.collection.List<string> 
+    displayColumns: nasl.collection.List<nasl.core.String> 
 
     @Prop({
       group: '交互属性',
