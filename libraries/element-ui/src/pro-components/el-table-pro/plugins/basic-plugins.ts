@@ -87,11 +87,16 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit })
   const editNodeTag = _.get(editNode, '0.componentOptions.tag');
   const { listeners = [], propsData = {}, children } = _.get(editNode, '0.componentOptions', {});
   const nodeAttrs = _.get(editNode, '0.data.attrs', {});
-  const { class: classAttr, staticClass: staticClassAttr, style: styleAttr, statcStyle: statcStyleAttr } = _.get(editNode, '0.data', {});
+  const {
+    class: classAttr,
+    staticClass: staticClassAttr,
+    style: styleAttr,
+    statcStyle: statcStyleAttr,
+  } = _.get(editNode, '0.data', {});
   const scopedSlots = _.get(editNode, '0.data.scopedSlots', {});
   const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
-  const abortEditOnEvent = attrs?.abortEditOnEvent ?? 'onBlur';
+  const abortEditOnEvent = attrs?.abortEditOnEvent ? [attrs?.abortEditOnEvent] : [];
   const rules = _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
@@ -121,9 +126,17 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit })
     edit: {
       component: formComponentMap[editNodeTag],
       on: () => listeners || [],
-      props: { ...nodeAttrs, ...propsData, slots: { default: () => children, ...scopedSlots }, class: classAttr, staticClass: staticClassAttr, style: styleAttr, statcStyle: statcStyleAttr },
+      props: {
+        ...nodeAttrs,
+        ...propsData,
+        slots: { default: () => children, ...scopedSlots },
+        class: classAttr,
+        staticClass: staticClassAttr,
+        style: styleAttr,
+        statcStyle: statcStyleAttr,
+      },
       rules,
-      abortEditOnEvent: [abortEditOnEvent],
+      abortEditOnEvent,
       onEdited: (context) => {
         _.attempt(onRowEdit, context);
       },

@@ -992,11 +992,11 @@ namespace nasl.ui {
       description: '退出编辑事件',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '改变后' }, { title: '失去焦点后' }],
+        options: [{ title: '改变后' }, { title: '失去焦点后' },{ title: '点击其他单元格' }],
       },
       if: (_) => _.type === 'editable',
     })
-    abortEditOnEvent: 'onChange' | 'onBlur' = 'onChange';
+    abortEditOnEvent: 'onChange' | 'onBlur' | '' =''
 
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
