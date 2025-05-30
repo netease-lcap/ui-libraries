@@ -557,6 +557,30 @@ function postprocessCSSInfo(
         return !startsWithPrefix(hideSelectorPrefixes, rule.selector);
       });
     });
+    /**
+     * 过滤掉需要隐藏的选择器
+     */
+    Object.entries(options.reportCSSInfo.extraComponentMap).forEach(([componentName, extraComponentInfo]) => {
+      if (!extraComponentInfo.hideSelectorRegexps) return;
+      const hideSelectorRegexps = extraComponentInfo.hideSelectorRegexps;
+
+      const compCssDesc = cssRulesDesc[componentName];
+      const compCssInfo = componentCSSInfoMap[componentName];
+      if (!compCssDesc || !compCssInfo) return;
+      Object.keys(compCssDesc).forEach((selectorKey) => {
+        if (hideSelectorRegexps.some((reg) => reg.test(selectorKey))) {
+          delete compCssDesc[selectorKey];
+        }
+      });
+      Object.keys(compCssInfo.mainSelectorMap).forEach((selectorKey) => {
+        if (hideSelectorRegexps.some((reg) => reg.test(selectorKey))) {
+          delete compCssInfo.mainSelectorMap[selectorKey];
+        }
+      });
+      compCssInfo.cssRules = compCssInfo.cssRules.filter((rule) => {
+        return !hideSelectorRegexps.some((reg) => reg.test(rule.selector));
+      });
+    });
   }
 
   /**
