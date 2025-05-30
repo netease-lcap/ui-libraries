@@ -140,7 +140,9 @@ function updateHMRConfig(config: UserConfig) {
     return config;
   }
 
+  // 远程沙箱调试需要
   const hmr = typeof config.server.hmr === 'object' ? config.server.hmr : {};
+  delete hmr.port;
   config.server.hmr = {
     ...hmr,
     path: hmr.path || '/_vite_hmr',
@@ -162,6 +164,9 @@ export default function lcapViteConfigPlugin(options: LcapViteConfigPluginOption
       if (!isBuild) {
         updateHMRConfig(config);
       }
+    },
+    configResolved(config) {
+      console.log('configResolved', config.server.hmr);
     },
   } as Plugin;
 }
