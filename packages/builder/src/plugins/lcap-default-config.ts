@@ -165,8 +165,5 @@ export default function lcapViteConfigPlugin(options: LcapViteConfigPluginOption
         updateHMRConfig(config);
       }
     },
-    configResolved(config) {
-      console.log('configResolved', config.server.hmr);
-    },
   } as Plugin;
 }
