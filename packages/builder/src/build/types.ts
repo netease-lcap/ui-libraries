@@ -113,6 +113,10 @@ export interface LcapBuildOptions extends LcapMetaOptions {
        * 需要隐藏的选择器前缀列表
        */
       hideSelectorPrefixes?: Array<string>;
+      /**
+       * 需要隐藏的选择器正则列表
+       */
+      hideSelectorRegexps?: Array<RegExp>;
     }>;
     /**
      * 忽略警告列表规则

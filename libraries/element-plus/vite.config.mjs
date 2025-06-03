@@ -201,6 +201,18 @@ export default defineConfig(({ command }) => {
                 'el-mention-dropdown': false,
               },
             },
+            ElFlex: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElAbsoluteLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElRow: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElCol: {
+              hideSelectorRegexps: [/>\*/],
+            },
             ...batchDepCSSInfo([
               'ElCascader',
               'ElCheckboxGroup',
