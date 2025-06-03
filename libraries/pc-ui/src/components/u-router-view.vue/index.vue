@@ -18,7 +18,7 @@
         </div>
     </div>
     <router-view v-else-if="disableKeepAlive"></router-view>
-    <keep-alive v-else>
+    <keep-alive v-else :include="keepAliveInclude" :exclude="keepAliveExclude" :max="keepAliveMax">
         <router-view></router-view>
     </keep-alive>
 </template>
@@ -35,6 +35,9 @@ export default {
     props: {
         designer: { type: Boolean, default: true },
         disableKeepAlive: { type: Boolean, default: true },
+        keepAliveInclude: { type: [Array, String, RegExp] },
+        keepAliveExclude: { type: [Array, String, RegExp] },
+        keepAliveMax: { type: Number },
     },
 };
 </script>
