@@ -64,4 +64,5 @@ export { ElCollapse, ElCollapseItem } from './el-collapse';
 export { ElDivider } from './el-divider';
 export { ElTimeline, ElTimelineItem } from './el-timeline';
 export { ElWatermark } from './el-watermark';
+export { ElMultiLayout, ElMultiLayoutItem } from './el-multi-layout';
 export const locale = { zhCn };
