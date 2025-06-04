@@ -159,6 +159,27 @@ export default defineConfig(({ command }) => {
                 'u-toast': true,
               },
             },
+            ULinearLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            UAbsoluteLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            UGridLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            UGridLayoutColumn: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            UGridLayoutRow: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            UMultiLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            UMultiLayoutItem: {
+              hideSelectorRegexps: [/>\*/],
+            },
           },
         },
       }),

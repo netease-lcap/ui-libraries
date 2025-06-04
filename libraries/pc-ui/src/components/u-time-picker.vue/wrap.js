@@ -18,7 +18,7 @@ export default {
         const component = this.range ? Range : Single;
         const dataAttrs = {};
         for(const k in this.$attrs) {
-            if(k.startsWith('data-')) {
+            if(k.startsWith('data-') || ['vusion-d2c-id'].includes(k)) {
                 dataAttrs[k] = this.$attrs[k];
             }
         }
