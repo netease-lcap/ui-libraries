@@ -26,6 +26,11 @@ export default defineConfig(({ command }) => {
           },
           tsconfigPath: 'tsconfig.build.json',
         },
+        i18n: {
+          'zh-CN': './src/locale/langs/zh-cn.json',
+          'en-US': './src/locale/langs/en.json',
+          ja: './src/locale/langs/ja.json',
+        },
         reportCSSInfo: {
           enabled: true,
           verbose: false,
