@@ -243,12 +243,17 @@ export const Example2 = {
       setTimeout(() => {
         console.log(mytable, 'mytable====');
       }, 1000);
+      const logCellClick = (el) => {
+        console.log(el, 'el');
+        console.log(mytable.value.reload(), 'logCellClick');
+      };
       return {
         tableData,
         pageSize2,
         currentPage,
         mytable,
         selectedRowKeys,
+        logCellClick,
       };
     },
     template: `
@@ -263,6 +268,7 @@ row-key="index"
 :pageSizes="[10, 100, 200, 300, 400]"
 v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
+:editTable="true"
 dragSort="row"
 :selection="true"
   bordered
@@ -271,8 +277,24 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column prop="applicant" sortable="custom" label="申请人" width="100" fixedPosition="left"></el-table-column>
-  <el-table-column prop="status" label="申请状态" width="150" sorter></el-table-column>
+  <el-table-column  prop="applicant" label="申请人" :editable="true" width="300" fixedPosition="left" @edit-change="logCellClick">
+  <template #default="current">
+    <el-text v-if="!current.editable">{{current.item.applicant}}</el-text>
+    <el-form-input v-else  @change="(e)=>console.log(e, 'e.target.value')" v-model="current.item.applicant"  :rules="[{ validate: 'filled',
+          message: '表单项不得为空',
+          trigger: 'blur',
+          required: true,}]"  />
+
+  </template>
+  </el-table-column>
+  <el-table-column prop="status" label="申请状态" width="350" :editable="true">
+  <template #default="current">
+      <el-form-select :rules="[{ validate: 'filled',
+          message: '表单项不得为空',
+          trigger: 'change',
+          required: true,}]" v-model="current.item.status" :clearable="true" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+  </template>
+  </el-table-column>
   <el-table-column prop="channel" label="签署方式" width="200"></el-table-column>
   <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
   <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>

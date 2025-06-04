@@ -680,6 +680,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '可编辑表格',
+      description: '可编辑表格',
+      setter: { concept: 'SwitchSetter' },
+    })
+    editTable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '表格尺寸',
       description: '表格尺寸',
       setter: {
@@ -1048,6 +1056,16 @@ namespace nasl.ui {
     })
     align: 'left' | 'center' | 'right' = 'left';
 
+    @Prop({
+      group: '数据属性',
+      title: '可编辑列',
+      description: '设置该列是否可编辑',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    editable: nasl.core.Boolean = false;
+
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
     //   title: '排序初始顺序',
@@ -1246,11 +1264,17 @@ namespace nasl.ui {
     // })
     // autoRowSpan: nasl.core.Boolean = false;
 
+    @Event({
+      title: '编辑列变化时',
+      description: '编辑列变化时触发',
+    })
+    onEditChange: (event: { row: T,$index:nasl.core.Integer,cellIndex:nasl.core.Integer,}) => any;
+
     @Slot({
       title: '单元格',
       description: '对单元格的数据展示进行自定义',
     })
-    slotDefault: (current: Current<T>) => Array<ViewComponent>;
+    slotDefault: (current: {item:T,index:nasl.core.Integer,rowIndex:nasl.core.Integer,columnIndex:nasl.core.Integer,editable:nasl.core.Boolean}) => Array<ViewComponent>;
 
     // @Slot({
     //   title: '编辑单元格',

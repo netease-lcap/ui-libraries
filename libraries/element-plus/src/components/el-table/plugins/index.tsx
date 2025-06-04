@@ -177,7 +177,8 @@ export function handleDataSource(props) {
     run({ currentPage, pageSize, order, sort, pagination, ...params });
   };
   const { list: data, total } = resultData as { list: any; total: number };
-  const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
+  const selfRef = _.assign(ref, { reload, data });
+
   const dataSourceResult = _.isEmpty(data) ? {} : { data };
 
   return {
@@ -188,22 +189,26 @@ export function handleDataSource(props) {
   };
 }
 
-
 export function handlePaginationRender(props) {
   const Component = props.get('render');
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const tableRef = useRef({});
-  const styleProps=props.get('style');
+  const styleProps = props.get('style');
   const { style, innerStyle } = categoryStyles(styleProps);
   return {
-    ref: Object.assign(ref, tableRef.value),
-    tableStyle:innerStyle,
+    ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
+    tableStyle: innerStyle,
     style,
     render: (props, { attrs, slots }) => {
       return [
         <div data-nodepath={nodepath} style={props.style}>
-          <Component ref={tableRef} {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])} style={attrs.tableStyle} v-slots={slots} />
+          <Component
+            ref={tableRef}
+            {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])}
+            style={attrs.tableStyle}
+            v-slots={slots}
+          />
           {props.pagination && (
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
               <ElPagination {...props.pageProps} total={props.pageProps.total} />
@@ -214,6 +219,27 @@ export function handlePaginationRender(props) {
     },
   };
 }
+
+export function handleEditTable(props) {
+  const editTable = props.get('editTable');
+  if (!editTable) return {};
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const tableRef = useRef({});
+  const render = useCallback((props, { attrs, slots }) => {
+    return (
+      <el-form>
+        <Component ref={tableRef} {...props} {...attrs} v-slots={slots} />
+      </el-form>
+    );
+  }, []);
+  render.inheritAttrs = false;
+  return {
+    ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
+    render,
+  };
+}
+
 export function handleHeight(props) {
   const height = props.get('height');
   const maxHeight = props.get('maxHeight');
