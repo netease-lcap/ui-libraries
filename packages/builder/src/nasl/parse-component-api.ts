@@ -11,6 +11,7 @@ import generate from '@babel/generator';
 import * as astTypes from '@nasl/types/nasl.ui.ast';
 import { evalOptions, getSlotName } from '../utils/babel-utils';
 import snippetCode2NASL from '../nasl/snippet-code2nasl';
+import { getKebabCaseName } from '../utils/string';
 
 function getValueFromObjectExpressionByKey(object: babelTypes.ObjectExpression, key: string): unknown {
   const property = object.properties.find((prop) => prop.type === 'ObjectProperty' && (prop.key as babelTypes.Identifier).name === key) as babelTypes.ObjectProperty;
@@ -58,7 +59,7 @@ function transformTypeAnnotation(node: Annotation): astTypes.TypeAnnotation | un
         inferred: false,
         ruleMap: new Map(),
         typeArguments: transformTypeParameters(typeParameters),
-      };
+      } as any;
     }
 
     if (typeParameters && typeName.type === 'Identifier') {
@@ -72,7 +73,7 @@ function transformTypeAnnotation(node: Annotation): astTypes.TypeAnnotation | un
         inferred: false,
         ruleMap: new Map(),
         typeArguments: transformTypeParameters(typeParameters),
-      };
+      } as any;
     }
   }
 }
@@ -255,7 +256,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
       // VanRouterView
       name: className,
       // van-router-view
-      kebabName: className.replace(/([A-Z])/g, (m, $1) => `-${$1.toLowerCase()}`).replace(/^-/, ''),
+      kebabName: getKebabCaseName(className),
       title: '',
       description: '',
       icon: '',
@@ -322,7 +323,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                 name: (member.key as babelTypes.Identifier).name,
                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.PropDeclaration['title'],
                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
-              };
+              } as any;
               // 默认值
               if (member.value) {
                 const typeAnnotation = member.typeAnnotation as babelTypes.TSTypeAnnotation;
@@ -342,7 +343,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
               // 枚举类型生成选项
               if (['EnumSelectSetter', 'CapsulesSetter'].includes(prop?.setter?.concept)) {
                 // 因为converter里有'join:|'，所有这里的分割前后需要空格
-                const types = prop?.tsType.split(' | ').map((type) => {
+                const types = prop?.tsType.replace(/\(|\)|\[\]|Array\<|\>/g, '').split(' | ').map((type) => {
                   try {
                     return eval(type.trim());
                   } catch (e) {
@@ -361,7 +362,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                     option.tsDisabledIf = option.disabledIf;
                   }
 
-                  let value: any = types[idx];
+                  let value: any = option.value ?? types[idx];
 
                   return {
                     ...option,
@@ -447,7 +448,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                 name: (member.key as babelTypes.Identifier).name,
                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.PropDeclaration['title'],
                 tsType: generate((member.typeAnnotation as babelTypes.TSTypeAnnotation).typeAnnotation).code,
-              };
+              } as any;
 
               // @TODO: default
               // @TODO: private
@@ -494,6 +495,7 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                   return {
                     concept: 'Param',
                     name: (param as babelTypes.Identifier).name,
+                    optional: param.optional,
                     description: decorator ? getValueFromObjectExpressionByKey(
                       (decorator.expression as babelTypes.CallExpression).arguments[0] as babelTypes.ObjectExpression,
                       'description',
@@ -508,6 +510,18 @@ export default function transform(tsCode: string, framework: string): astTypes.V
                 title: getValueFromObjectExpressionByKey(decorator.expression.arguments[0] as babelTypes.ObjectExpression, 'title') as astTypes.LogicDeclaration['title'],
                 // type: generate((member. as babelTypes.TSTypeAnnotation).typeAnnotation).code,
               };
+
+              (method as any).tsType = `(${member.params.map((param, index) => {
+                if (param.type === 'AssignmentPattern' && param.left.type === 'Identifier') {
+                  return `${param.left.name}: ${param.left.typeAnnotation && param.left.typeAnnotation.type === 'TSTypeAnnotation' && param.left.typeAnnotation.typeAnnotation ? generate(param.left.typeAnnotation.typeAnnotation).code : 'any'}`;
+                }
+
+                if (param.type === 'Identifier') {
+                  return `${param.name}: ${param.typeAnnotation && param.typeAnnotation.type === 'TSTypeAnnotation' && param.typeAnnotation.typeAnnotation ? generate(param.typeAnnotation.typeAnnotation).code : 'any'}`;
+                }
+
+                return `param${index + 1}`;
+              }).join(', ')}) => ${member.returnType && member.returnType.type === 'TSTypeAnnotation' && member.returnType.typeAnnotation ? generate(member.returnType.typeAnnotation).code : 'void'}`;
 
               decorator.expression.arguments.forEach((arg) => {
                 if (arg.type === 'ObjectExpression') Object.assign(method, evalOptions(arg));

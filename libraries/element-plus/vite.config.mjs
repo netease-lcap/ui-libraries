@@ -20,6 +20,15 @@ export default defineConfig(({ command }) => {
         type: 'nasl.ui',
         framework: 'vue3',
         pnpm: true,
+        // ide: {
+        //   setters: {
+        //     rootPath: path.resolve(rootPath, '../../setters'),
+        //     entries: {
+        //       ExInputSetter: 'src/setters/InputSetter.vue',
+        //       ExNormalSetter: 'src/setters/NormalSetter.vue',
+        //     },
+        //   },
+        // },
         modules: {
           entries: {
             install: 'src/install',

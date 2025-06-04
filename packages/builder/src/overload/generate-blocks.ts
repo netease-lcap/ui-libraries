@@ -7,7 +7,7 @@ import glob from 'fast-glob';
 import fs from 'fs-extra';
 import path from 'path';
 import { OverloadComponentContext } from './context';
-import { replaceTagName } from './utils';
+import { replaceTagName, replaceAllTagName } from './utils';
 import { LCAP_UI_PACKAGE_NAME } from './constants';
 
 function getBlockCodeFromData(context: OverloadComponentContext) {
@@ -204,7 +204,7 @@ function getBlockCodeFromFile(filePath, context: OverloadComponentContext) {
 export function generateBlockFile(context: OverloadComponentContext) {
   if (context.framework.startsWith('vue2')) {
     const content = getBlockCodeFromData(context);
-    fs.writeFileSync(path.resolve(context.componentFolderPath, 'stories/block.stories.js'), content, 'utf-8');
+    fs.writeFileSync(path.resolve(context.componentFolderPath, 'stories/block.stories.js'), replaceAllTagName(content, context.replaceTagMap), 'utf-8');
     return;
   }
   const storyFilePath = glob.sync('stories/block.stories.{tsx,jsx}', { cwd: context.pkgComponentFolderPath, absolute: true })[0];

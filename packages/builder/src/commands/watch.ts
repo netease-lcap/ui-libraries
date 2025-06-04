@@ -1,4 +1,4 @@
-import { loadConfigFromFile, build } from 'vite';
+import { loadConfigFromFile, build, normalizePath } from 'vite';
 import chokidar from 'chokidar';
 import fs from 'fs-extra';
 import path from 'path';
@@ -16,12 +16,12 @@ import buildCSSInfo from '../build/build-css-info';
 import { buildNaslExtensionConfig, buildNaslExtensionManifest } from '../build/build-extension';
 import { buildTheme } from '../build/build-theme';
 import buildDecalaration from '../build/build-declaration';
-import { LcapBuildOptions } from '../build/types';
+import { LcapBuildOptions, BuildMode } from '../build/types';
 import { exec } from '../utils/exec';
 import LiveServer from '../utils/server';
 
-async function getBuildConfig() {
-  const loadResult = await loadConfigFromFile({ command: 'build', mode: 'production' });
+export async function getBuildConfig(mode: BuildMode = 'production') {
+  const loadResult = await loadConfigFromFile({ command: 'build', mode });
   if (!loadResult || !loadResult.config) {
     throw new Error('未找到 vite 配置文件');
   }
@@ -73,7 +73,7 @@ async function getWatcherTasks(options: LcapBuildOptions, pkgInfo: any) {
       return filePath.includes('src/') && filePath.includes('/theme/');
     },
     build: async () => {
-      await buildTheme(options, true);
+      await buildTheme(options, 'watch');
     },
   };
 
@@ -142,7 +142,7 @@ async function startWatcher(options: LcapBuildOptions, pkgInfo: any, send: (msg:
       const task = taskQueue.shift();
       try {
         logger.start(`start ${task.name} task build`);
-        send('building');
+        send(`${task.name} building`);
         // eslint-disable-next-line no-await-in-loop
         await task.build();
         logger.success(`${task.name} task build successed!`);
@@ -161,7 +161,7 @@ async function startWatcher(options: LcapBuildOptions, pkgInfo: any, send: (msg:
       return;
     }
 
-    const tasks = watcherTasks.filter((task) => task.check(filePath));
+    const tasks = watcherTasks.filter((task) => task.check(normalizePath(filePath)));
     if (tasks.length > 0) {
       console.clear();
       logger.info(`${action} file, filePath: ${filePath} `);
@@ -230,19 +230,33 @@ function createProxyLibrarySchema(options: LcapBuildOptions, { port, https }) {
   };
 }
 
-function startServer(options: LcapBuildOptions, { port = 8080, https }) {
+export interface WatchCommandOptions {
+  port?: number;
+  https?: boolean;
+  middlewares?: ((req: IncomingMessage, res: ServerResponse, next: () => void) => void)[];
+  onFirstBuilded?: () => void;
+  openURL?: string;
+}
+
+function startServer(options: LcapBuildOptions, { port = 8080, https, middlewares = [], openURL = '' }: WatchCommandOptions) {
   return LiveServer.start({
     port,
     https,
     cors: true,
     middlewares: [
       createProxyLibrarySchema(options, { port, https }),
+      ...middlewares,
     ],
+    openURL,
   });
 }
 
-export default async (rootPath: string, { port, https }: any) => {
-  const { viteConfig, buildOptions } = await getBuildConfig();
+export default async (rootPath: string, { port, https, middlewares, onFirstBuilded, openURL }: WatchCommandOptions, buildConfigs?: { viteConfig: any, buildOptions: LcapBuildOptions }) => {
+  if (!buildConfigs) {
+    buildConfigs = await getBuildConfig();
+  }
+
+  const { viteConfig, buildOptions } = buildConfigs;
   const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
   let onceBuilded = false;
   let server;
@@ -267,6 +281,7 @@ export default async (rootPath: string, { port, https }: any) => {
       configFile: false,
       envFile: false,
       ...viteConfig,
+      mode: 'staging',
       plugins: [
         ...viteConfig.plugins as any[],
         {
@@ -286,7 +301,11 @@ export default async (rootPath: string, { port, https }: any) => {
               logger.success('build successed! starting file watching...');
               watcher.start();
 
-              server = await startServer(buildOptions, { port, https });
+              if (typeof onFirstBuilded === 'function') {
+                onFirstBuilded();
+              }
+
+              server = await startServer(buildOptions, { port, https, middlewares, openURL });
             } catch (e) {
               logger.error(e);
               process.exit(1);

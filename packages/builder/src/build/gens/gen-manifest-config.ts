@@ -31,6 +31,7 @@ const getManifest = (type, outDir, modulesOutDir = 'es') => {
     ide: [
       `${outDir}/ide/index.js`,
       `${outDir}/ide/index.css`,
+      `${outDir}/setters.json`,
     ],
   } as {
     [key: string]: string[],

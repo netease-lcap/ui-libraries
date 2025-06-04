@@ -5,5 +5,8 @@ export interface ComponentMetaInfo {
   group?: string;
   icon?: string;
   tsPath: string;
+  type?: string;
+  sourceName?: string;
+  kebabName?: string;
   children?: ComponentMetaInfo[];
 }
