@@ -41,7 +41,7 @@ import { sync } from '@lcap/vue2-utils';
 import { isEqual, isNil } from 'lodash';
 import { MRoot } from '../m-root.vue';
 import MField from '../m-field.vue';
-import { getCheckInfo, addChildrenValues, removeChildrenValues, filterParentValues } from './utils';
+import { getCheckInfo, addChildrenValues, removeChildrenValues, filterParentValues, getSelectNodeValues } from './utils';
 import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
 
 export default {
@@ -257,6 +257,13 @@ export default {
 
             return final;
         },
+        getSelectNodeValues() {
+          if (!this.currentDataSource || this.currentDataSource.data.length === 0) {
+            return [];
+          }
+
+          return getSelectNodeValues(this.currentDataSource.data, this.selectedVM ? this.selectedVM.value : this.value, { valueField: this.valueField, childrenField: this.childrenField, disabledField: this.disabledField });
+        },
         watchValue(value) {
             if (this.checkable) {
                 return this.watchValues(value);
@@ -264,9 +271,9 @@ export default {
 
             if (this.selectedVM && this.selectedVM.value === value)
                 return;
-            if (value === undefined)
+            if (value === undefined) {
                 this.selectedVM = undefined;
-            else {
+            } else {
                 this.selectedVM = this.find((nodeVM) => nodeVM.value === value);
                 if (this.selectedVM) {
                     let nodeVM = this.selectedVM.parentVM;
