@@ -19,7 +19,7 @@ export default {
 
     computed: {
         linkConfigs() {
-            return {
+            const config = {
                 content: this.value,
                 backgroundColor: this.configs.completed ? '#26BD71' : '#999999',
                 approximate: 400,
@@ -30,6 +30,14 @@ export default {
                 showContent: true,
                 showAdd: false
             };
+            if (this.node.type === 'sequenceFlow' && this.node.title) {
+                Object.assign(config, {
+                    branchInfo: {
+                        branchName: this.node.title,
+                    },
+                })
+            }
+            return config;
         },
         value() {
             return this.node.flowValue;
