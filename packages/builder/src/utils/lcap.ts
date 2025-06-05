@@ -3,6 +3,10 @@ import fs from 'fs-extra';
 import glob from 'fast-glob';
 import { normalizePath } from 'vite';
 import { camelCase, upperFirst } from 'lodash';
+import { MaterialSchema } from '@lcap/material-parser';
+import * as parser from '@babel/parser';
+import traverse from '@babel/traverse';
+import generator from '@babel/generator';
 import { type NaslUIComponentConfig } from '../overload';
 import { getComponentPathInfo } from './component-path';
 import logger from './logger';
@@ -71,10 +75,106 @@ export function getComponentMetaInfos(rootPath: string, parseAPI: boolean = fals
   }
 
   if (parseAPI) {
-    return metaInfos.map(({ tsPath }) => {
-      return getComponentMetaByApiTs(tsPath);
+    return metaInfos.map(({ tsPath, show }) => {
+      try {
+        return {
+          show,
+          ...getComponentMetaByApiTs(tsPath),
+        };
+      } catch (e) {
+        logger.error(`解析组件 ${tsPath} 失败`);
+        return null;
+      }
     }).filter((v) => !!v) as ComponentMetaInfo[];
   }
 
   return metaInfos as ComponentMetaInfo[];
+}
+
+export function removeComponentFiles(rootPath: string, name: string) {
+  const components = getComponentMetaInfos(rootPath, true);
+
+  const compMeta = components.find((c) => c.name === name);
+
+  if (!compMeta) {
+    throw new Error(`未找到组件 ${name}`);
+  }
+
+  const componentFolder = path.dirname(compMeta.tsPath);
+  const componentFolderName = path.basename(componentFolder);
+  const exportsFilePath = ['index.ts', 'index.js'].map((fileName) => path.resolve(componentFolder, '../', fileName)).filter((p) => fs.existsSync(p))[0];
+
+  const code = fs.readFileSync(exportsFilePath, 'utf-8').toString();
+  const source = `./${componentFolderName}`;
+
+  const ast = parser.parse(code, {
+    sourceType: 'module',
+    plugins: ['typescript', 'jsx'],
+  });
+
+  const removeNames = [name];
+
+  traverse(ast, {
+    ExportNamedDeclaration(path) {
+      if (path.node.source && path.node.source.value === source) {
+        path.remove();
+      }
+    },
+    ImportDeclaration(path) {
+      if (path.node.source && path.node.source.value === source) {
+        path.traverse({
+          ImportSpecifier(p) {
+            if (p.node.local.name === name) {
+              removeNames.push(p.node.local.name);
+            }
+          },
+        });
+
+        path.remove();
+      }
+    },
+    ExportAllDeclaration(path) {
+      if (path.node.source && path.node.source.value === source) {
+        path.remove();
+      }
+    },
+    ExportSpecifier(path) {
+      if (removeNames.includes(path.node.local.name)) {
+        path.remove();
+      }
+    },
+  });
+
+  fs.rmSync(componentFolder, { recursive: true });
+  fs.writeFileSync(exportsFilePath, generator(ast).code, 'utf-8');
+}
+
+export interface WriteOptions {
+  type: 'pc' | 'h5' | 'both';
+  prefix: string;
+}
+
+export interface Schema extends MaterialSchema {
+  write?: WriteOptions;
+}
+
+export function getProjectSourceSchema(rootPath: string = process.cwd()) {
+  const pkgInfo = fs.readJSONSync(path.resolve(rootPath, 'package.json'));
+
+  if (!pkgInfo.lcap?.schema) {
+    throw new Error('未找到本地NPM扫描结果文件');
+  }
+
+  const schema = pkgInfo.lcap?.schema;
+
+  if (!schema || !fs.existsSync(path.resolve(rootPath, schema))) {
+    throw new Error(`schema 文件 ${schema} 不存在`);
+  }
+
+  const material: Schema = fs.readJSONSync(path.resolve(rootPath, schema), 'utf-8');
+  if (!material.components || material.components.length === 0) {
+    throw new Error(`schema 文件 ${schema} 中没有组件`);
+  }
+
+  return material;
 }

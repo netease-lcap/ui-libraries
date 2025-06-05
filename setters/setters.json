@@ -1,0 +1,4 @@
+{
+  "ExInputSetter": "src/setters/InputSetter.vue",
+  "ExNormalSetter": "src/setters/NormalSetter.vue"
+}

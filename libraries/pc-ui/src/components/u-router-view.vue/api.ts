@@ -21,5 +21,37 @@ namespace nasl.ui {
             },
         })
         disableKeepAlive: nasl.core.Boolean = true;
+
+        @Prop<URouterViewOptions, 'keepAliveInclude'>({
+            title: '缓存页面',
+            description: '缓存页面，设置后只有匹配路径的页面会被缓存',
+            setter: {
+                concept: 'InputSetter',
+            },
+            if: (_) => !_.disableKeepAlive,
+            bindOpen: true,
+        })
+        keepAliveInclude: nasl.collection.List<nasl.core.String>;
+
+        @Prop<URouterViewOptions, 'keepAliveExclude'>({
+            title: '不缓存页面',
+            description: '不缓存页面，设置后只有匹配路径的页面不会被缓存',
+            setter: {
+                concept: 'InputSetter',
+            },
+            if: (_) => !_.disableKeepAlive,
+            bindOpen: true,
+        })
+        keepAliveExclude: nasl.collection.List<nasl.core.String>;
+
+        @Prop<URouterViewOptions, 'keepAliveMax'>({
+            title: '缓存页面最大数量',
+            description: '最多可以缓存多少组件实例(默认 不设上限)',
+            setter: {
+                concept: 'NumberInputSetter',
+            },
+            if: (_) => !_.disableKeepAlive,
+        })
+        keepAliveMax: nasl.core.Integer;
     }
 }

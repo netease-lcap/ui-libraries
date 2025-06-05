@@ -538,23 +538,31 @@ function postprocessCSSInfo(
      * 过滤掉需要隐藏的选择器
      */
     Object.entries(options.reportCSSInfo.extraComponentMap).forEach(([componentName, extraComponentInfo]) => {
-      if (!extraComponentInfo.hideSelectorPrefixes) return;
-      const hideSelectorPrefixes = extraComponentInfo.hideSelectorPrefixes;
-
       const compCssDesc = cssRulesDesc[componentName];
       const compCssInfo = componentCSSInfoMap[componentName];
+      if (!compCssDesc || !compCssInfo) return;
+
+      const hideSelectorPrefixes = extraComponentInfo.hideSelectorPrefixes;
+      const hideSelectorRegexps = extraComponentInfo.hideSelectorRegexps;
+
+      const shouldHideSelector = (selectorKey: string) => {
+        if (hideSelectorPrefixes && startsWithPrefix(hideSelectorPrefixes, selectorKey)) return true;
+        if (hideSelectorRegexps && hideSelectorRegexps.some((reg) => reg.test(selectorKey))) return true;
+        return false;
+      };
+
       Object.keys(compCssDesc).forEach((selectorKey) => {
-        if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
+        if (shouldHideSelector(selectorKey)) {
           delete compCssDesc[selectorKey];
         }
       });
       Object.keys(compCssInfo.mainSelectorMap).forEach((selectorKey) => {
-        if (startsWithPrefix(hideSelectorPrefixes, selectorKey)) {
+        if (shouldHideSelector(selectorKey)) {
           delete compCssInfo.mainSelectorMap[selectorKey];
         }
       });
       compCssInfo.cssRules = compCssInfo.cssRules.filter((rule) => {
-        return !startsWithPrefix(hideSelectorPrefixes, rule.selector);
+        return !shouldHideSelector(rule.selector);
       });
     });
   }

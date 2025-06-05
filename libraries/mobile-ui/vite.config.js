@@ -229,6 +229,18 @@ export default defineConfig(({ command }) => {
                 'van-fieldinput__newwrap': true,
               },
             },
+            VanRow: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            VanCol: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            VanAbsoluteLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            VanLinearLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
           },
         },
       }),
