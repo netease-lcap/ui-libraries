@@ -4,6 +4,7 @@ import { useMemo, useState, useCallback } from '@/plugins/hooks';
 
 export function columnPlugin(props) {
   const slots = props.get('slots');
+
   return {
     slots: {
       ...slots,
@@ -64,7 +65,7 @@ const EditDefault = {
               columnIndex: item.cellIndex,
               editable,
             })
-            .map((node) => cloneVNode(node, {
+            ?.map((node) => cloneVNode(node, {
                 onValidateSuccess: () => {
                   // editable.value = false;
                 },

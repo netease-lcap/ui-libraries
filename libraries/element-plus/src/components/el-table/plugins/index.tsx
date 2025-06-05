@@ -1,10 +1,11 @@
 import { ElPagination } from 'element-plus';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { useMemo, useRef, useCallback, useControllableValue } from '@/plugins/hooks';
+import { useMemo, useRef, useCallback, useControllableValue, useState } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
+import { ElTableToolBar } from '@/components/el-table';
 
 const orderMap = {
   descending: 'desc',
@@ -240,6 +241,34 @@ export function handleEditTable(props) {
   };
 }
 
+export function handleTableConfig(props) {
+  // if (!tableConfig) return {};
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const tableRef = useRef({});
+  const tableSlots = props.get('slots');
+  const render = useCallback((props, { attrs, slots }) => {
+    const [value, setValue] = useState([]);
+    return (
+      <div>
+        <ElTableToolBar tableSlots={tableSlots} setValue={setValue} />
+        <Component
+          ref={tableRef}
+          {...props}
+          {...attrs}
+          v-slots={{ ...slots, default: () => slots.default().filter((item) => value.includes(item.props.prop)) }}
+        />
+      </div>
+    );
+  }, []);
+  render.inheritAttrs = false;
+  return {
+    // ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
+
+    render,
+  };
+}
+
 export function handleHeight(props) {
   const height = props.get('height');
   const maxHeight = props.get('maxHeight');
@@ -247,5 +276,14 @@ export function handleHeight(props) {
   return {
     height: height === '' ? undefined : height,
     maxHeight: maxHeight === '' ? undefined : maxHeight,
+  };
+}
+
+export function handleSticky(props) {
+  const stickyName = props.get('sticky') ? 'sticky-table' : '';
+  const className = props.get('class', '');
+  const classNames = `${stickyName} ${className}`;
+  return {
+    class: classNames,
   };
 }

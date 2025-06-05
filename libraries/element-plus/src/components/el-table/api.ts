@@ -225,15 +225,6 @@ namespace nasl.ui {
     })
     border: nasl.core.Boolean = false;
 
-    @Prop<ElTableOptions<T, V, P, M>, 'resizable'>({
-      group: '主要属性',
-      title: '是否允许调整列宽',
-      description: '是否允许调整列宽',
-      setter: { concept: 'SwitchSetter' },
-      if: (_) => _.border === true,
-    })
-    resizable: nasl.core.Boolean = true;
-
     // @Prop({
     //   group: '主要属性',
     //   title: 'Bottom Content',
@@ -705,6 +696,14 @@ namespace nasl.ui {
     })
     stripe: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '主要属性',
+      title: '是否表头吸顶',
+      description: '是否表头吸顶',
+      setter: { concept: 'SwitchSetter' },
+    })
+    sticky: nasl.core.Boolean = false;
+
     // @Prop({
     //   group: '主要属性',
     //   title: '表格内容的总宽度',
@@ -981,6 +980,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      structured: { slot: 'default', empty: true },
       parentAccept: "['el-table'].includes(target.tag)",
       // childAccept: false,
       slotWrapperInlineStyle: {
@@ -1045,6 +1045,15 @@ namespace nasl.ui {
     })
     sortable: 'none' | 'custom' = 'none';
 
+
+    @Prop<ElTableColumnOptions<T, V, P, M>, 'resizable'>({
+      group: '样式属性',
+      title: '是否允许调整列宽',
+      description: '是否允许调整列宽,需要打开表格的边框属性',
+      setter: { concept: 'SwitchSetter' },
+    })
+    resizable: nasl.core.Boolean = true;
+
     @Prop({
       group: '样式属性',
       title: '对齐方式',
@@ -1055,6 +1064,7 @@ namespace nasl.ui {
       },
     })
     align: 'left' | 'center' | 'right' = 'left';
+
 
     @Prop({
       group: '数据属性',
@@ -1273,6 +1283,15 @@ namespace nasl.ui {
     @Slot({
       title: '单元格',
       description: '对单元格的数据展示进行自定义',
+      snippets: [
+        {
+          title: '表格列',
+          code: `<el-table-column data-nodepath-multiple="ture">
+                    <template #header><el-text text="表格列"></el-text></template>
+                    <template #default="current"></template>
+                </el-table-column>`,
+        },
+      ],
     })
     slotDefault: (current: {item:T,index:nasl.core.Integer,rowIndex:nasl.core.Integer,columnIndex:nasl.core.Integer,editable:nasl.core.Boolean}) => Array<ViewComponent>;
 

@@ -260,6 +260,7 @@ export const Example2 = {
 <el-table
 ref="mytable"
 row-key="index"
+class="my-table"
 :dataSource="tableData"
 :pagination="true"
 :showTotal="true"
@@ -271,32 +272,22 @@ v-model:selectedRowKeys="selectedRowKeys"
 :editTable="true"
 dragSort="row"
 :selection="true"
-  bordered
+  :border="true"
   hover
   stripe
   showHeader
   size=small"
 >
-  <el-table-column  prop="applicant" label="申请人" :editable="true" width="300" fixedPosition="left" @edit-change="logCellClick">
-  <template #default="current">
-    <el-text v-if="!current.editable">{{current.item.applicant}}</el-text>
-    <el-form-input v-else  @change="(e)=>console.log(e, 'e.target.value')" v-model="current.item.applicant"  :rules="[{ validate: 'filled',
-          message: '表单项不得为空',
-          trigger: 'blur',
-          required: true,}]"  />
+  <el-table-column  :resizable="false" prop="applicant" label="申请人" :editable="true" width="300" fixedPosition="left" @edit-change="logCellClick">
 
-  </template>
   </el-table-column>
   <el-table-column prop="status" label="申请状态" width="350" :editable="true">
-  <template #default="current">
-      <el-form-select :rules="[{ validate: 'filled',
-          message: '表单项不得为空',
-          trigger: 'change',
-          required: true,}]" v-model="current.item.status" :clearable="true" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
-  </template>
+
   </el-table-column>
-  <el-table-column prop="channel" label="签署方式" width="200"></el-table-column>
-  <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
+  <el-table-column  label="签署方式">
+  
+  </el-table-column>
+    <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
   <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
   <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
   <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
