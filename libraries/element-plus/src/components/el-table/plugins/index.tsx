@@ -241,7 +241,7 @@ export function handleEditTable(props) {
   };
 }
 
-export function handleTableConfig(props) {
+ function handleTableConfig(props) {
   // if (!tableConfig) return {};
   const ref = props.get('ref');
   const Component = props.get('render');

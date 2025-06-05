@@ -39,8 +39,3 @@ export function tableToolBarPlugin(props) {
     },
   };
 }
-    
-
-
-
-
