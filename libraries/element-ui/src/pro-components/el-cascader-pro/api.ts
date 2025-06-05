@@ -17,6 +17,7 @@ namespace nasl.ui {
         displayData: "\"[{value: '', label: ''}, {value:'1', label: ' '}, {value:'2', label: ' '}]\"",
         propertyName: ':dataSource',
       },
+      ignoreProperty: ['filterable'],
       additionalAttribute: {
         valueField: '"value"',
         textField: '"label"',
