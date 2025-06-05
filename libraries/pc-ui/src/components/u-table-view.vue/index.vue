@@ -32,6 +32,7 @@
 
         :defaultOrder="defaultOrder"
         :sorting="sorting"
+        :sortTrigger="sortTrigger"
 
         :useStickyFixed="useStickyFixed"
         :fixedRightList="fixedRightList"
@@ -130,6 +131,7 @@
 
         :defaultOrder="defaultOrder"
         :sorting="sorting"
+        :sortTrigger="sortTrigger"
 
         :useStickyFixed="useStickyFixed"
         :fixedRightList="fixedRightList"
