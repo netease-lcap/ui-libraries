@@ -166,7 +166,7 @@ export default defineConfig(({ command }) => {
               hideSelectorRegexps: [/>\*/],
             },
             UGridLayout: {
-              hideSelectorRegexps: [/>\*/],
+              hideSelectorRegexps: [/>\*/, />/],
             },
             UGridLayoutColumn: {
               hideSelectorRegexps: [/>\*/],
@@ -175,7 +175,7 @@ export default defineConfig(({ command }) => {
               hideSelectorRegexps: [/>\*/],
             },
             UMultiLayout: {
-              hideSelectorRegexps: [/>\*/],
+              hideSelectorRegexps: [/>\*/, />/],
             },
             UMultiLayoutItem: {
               hideSelectorRegexps: [/>\*/],

@@ -556,9 +556,9 @@ function postprocessCSSInfo(
           delete compCssDesc[selectorKey];
         }
       });
-      Object.keys(compCssInfo.mainSelectorMap).forEach((selectorKey) => {
+      Array.from(compCssInfo.mainSelectorMap.keys()).forEach((selectorKey) => {
         if (shouldHideSelector(selectorKey)) {
-          delete compCssInfo.mainSelectorMap[selectorKey];
+          compCssInfo.mainSelectorMap.delete(selectorKey);
         }
       });
       compCssInfo.cssRules = compCssInfo.cssRules.filter((rule) => {
