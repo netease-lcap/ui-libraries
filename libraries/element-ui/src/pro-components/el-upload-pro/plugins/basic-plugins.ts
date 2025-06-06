@@ -318,6 +318,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     useSyncState({
       fileList: () => fileList.value,
     });
+    const instance = getCurrentInstance();
 
     return {
       sizeLimit,

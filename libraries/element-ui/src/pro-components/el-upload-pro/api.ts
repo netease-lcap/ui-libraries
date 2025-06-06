@@ -483,7 +483,7 @@ namespace nasl.ui {
     }) => any;
 
     @Event({
-      title: '文件上传前设置',
+      title: '文件上传前',
       description:
         '如果是自动上传模式 `autoUpload=true`，表示单个文件上传之前的钩子函数，若函数返回值为 `false` 则表示不上传当前文件。如果是非自动上传模式 `autoUpload=false`，函数返回值为 `false` 时表示从上传文件中剔除当前文件。<br/>`context.file` 表示当前上传的文件，`context.fileList` 表示当前文件列表，`context.response` 表示上传请求的返回数据',
     })
