@@ -7,6 +7,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
+      forceRefresh: { slot: 'dateCell' },
     },
   })
   @Component({
