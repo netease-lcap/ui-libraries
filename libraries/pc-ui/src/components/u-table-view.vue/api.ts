@@ -708,6 +708,17 @@ namespace nasl.ui {
       nativeScroll: nasl.core.Boolean = false;
 
       @Prop({
+        group: '交互属性',
+        title: '排序触发方式',
+        docDescription: '表格排序的触发方式。默认"点击表头"。',
+        setter: {
+            concept: 'EnumSelectSetter',
+            options: [{ title: '点击表头' }, { title: '点击图标' }],
+        },
+      })
+      sortTrigger: 'head' | 'icon' = 'head';
+
+      @Prop({
           group: '状态属性',
           title: '初始即加载',
           description: '设置初始时是否立即加载',
