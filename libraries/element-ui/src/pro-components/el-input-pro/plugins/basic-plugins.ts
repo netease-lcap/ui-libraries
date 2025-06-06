@@ -1,6 +1,7 @@
-import { createUseUpdateSync, $deletePropList } from '@lcap/vue2-utils';
+import { createUseUpdateSync, $deletePropList, $ref } from '@lcap/vue2-utils';
 import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
 import { isFunction, isNil } from 'lodash';
+import { getCurrentInstance } from '@vue/composition-api';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
 
@@ -14,7 +15,22 @@ export const useIcon: NaslComponentPluginOptions = {
     const onKeydown = props.get('onKeydown');
     const onKeypress = props.get('onKeypress');
     const onKeyup = props.get('onKeyup');
+    const instance = getCurrentInstance();
     return {
+      [$ref]: {
+        focus: () => {
+          instance?.refs?.$base?.focus();
+        },
+        blur: () => {
+          instance?.refs?.$base?.blur();
+        },
+        select: () => {
+          instance?.refs?.$base?.select();
+        },
+        clear: () => {
+          instance?.refs?.$base?.clear();
+        },
+      },
       onEnter: (value, event) => {
         if (isFunction(onEnter)) {
           onEnter({ value, event });

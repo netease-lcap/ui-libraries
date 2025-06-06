@@ -42,6 +42,18 @@ namespace nasl.ui {
     })
     uploadFiles(): void {}
 
+    @Method({
+      title: '清空文件列表',
+      description: '清空文件列表',
+    })
+    clearFiles(): void {}
+
+    @Method({
+      title: '取消上传',
+      description: '取消上传',
+    })
+    abort(): void {}
+
     constructor(options?: Partial<ElUploadProOptions>) {
       super();
     }
@@ -355,24 +367,7 @@ namespace nasl.ui {
       }>,
     ) => nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: '文件上传前设置',
-      description:
-        '如果是自动上传模式 `autoUpload=true`，表示单个文件上传之前的钩子函数，若函数返回值为 `false` 则表示不上传当前文件。如果是非自动上传模式 `autoUpload=false`，函数返回值为 `false` 时表示从上传文件中剔除当前文件。',
-      setter: { concept: 'AnonymousFunctionSetter' },
-    })
-    beforeUpload: (file: {
-      lastModified?: nasl.core.Integer;
-      name?: nasl.core.String;
-      percent?: nasl.core.Decimal;
-      raw?: File;
-      size?: nasl.core.Integer;
-      status?: 'success' | 'fail' | 'progress' | 'waiting';
-      type?: nasl.core.String;
-      uploadTime?: nasl.core.String;
-      url?: nasl.core.String;
-    }) => nasl.core.Boolean;
+
 
     @Prop({
       group: '状态属性',
@@ -485,6 +480,23 @@ namespace nasl.ui {
         uploadTime?: nasl.core.String;
         url?: nasl.core.String;
       };
+    }) => any;
+
+    @Event({
+      title: '文件上传前设置',
+      description:
+        '如果是自动上传模式 `autoUpload=true`，表示单个文件上传之前的钩子函数，若函数返回值为 `false` 则表示不上传当前文件。如果是非自动上传模式 `autoUpload=false`，函数返回值为 `false` 时表示从上传文件中剔除当前文件。<br/>`context.file` 表示当前上传的文件，`context.fileList` 表示当前文件列表，`context.response` 表示上传请求的返回数据',
+    })
+    beforeUpload: (event: {
+      lastModified?: nasl.core.Integer;
+      name?: nasl.core.String;
+      percent?: nasl.core.Decimal;
+      raw?: File;
+      size?: nasl.core.Integer;
+      status?: 'success' | 'fail' | 'progress' | 'waiting';
+      type?: nasl.core.String;
+      uploadTime?: nasl.core.String;
+      url?: nasl.core.String;
     }) => any;
 
     @Event({

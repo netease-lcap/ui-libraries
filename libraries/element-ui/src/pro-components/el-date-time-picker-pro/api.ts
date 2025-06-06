@@ -30,6 +30,13 @@ namespace nasl.ui {
     })
     endValue: ElDateTimePickerProOptions['endValue'];
 
+    @Method({
+      title: '聚焦',
+      description: '聚焦',
+    })
+    focus: () => void;
+
+
     constructor(options?: Partial<ElDateTimePickerProOptions>) {
       super();
     }
@@ -104,6 +111,15 @@ namespace nasl.ui {
       },
     })
     converter: 'json' | 'timestamp' | 'date' | 'format' = 'json';
+
+
+    @Prop({
+      group: '主要属性',
+      title: '格式',
+      description: '格式',
+      setter: { concept: 'InputSetter' },
+    })
+    format: nasl.core.String;
 
     @Prop({
       group: '主要属性',

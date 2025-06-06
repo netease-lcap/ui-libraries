@@ -30,6 +30,12 @@ namespace nasl.ui {
     })
     endValue: ElDatePickerProOptions['endValue'];
 
+    @Method({
+      title: '聚焦',
+      description: '聚焦',
+    })
+    focus: () => void;
+
     constructor(options?: Partial<ElDatePickerProOptions>) {
       super();
     }
@@ -97,6 +103,8 @@ namespace nasl.ui {
       if: (_) => !_.multiple,
     })
     allowInput: nasl.core.Boolean = false;
+
+
 
     @Prop({
       group: '样式属性',

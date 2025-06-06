@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 2,
     sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/calendar',
     ideusage: {
+      idetype: 'container',
       forceUpdateWhenAttributeChange: true,
     },
   })

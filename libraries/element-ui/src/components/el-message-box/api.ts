@@ -246,6 +246,32 @@ namespace nasl.ui {
     })
     inputErrorMessage: nasl.core.String = '输入的数据不合法';
 
+
+    @Prop({
+      title: '是否点击遮罩层关闭',
+      description: '是否可以通过点击遮罩层关闭对话框',
+      group: '主要属性',
+      setter: { concept: 'SwitchSetter' },
+    })
+    closeOnClickModal: nasl.core.Boolean = true;
+
+
+    @Prop({
+      title: '是否按下 ESC 键关闭',
+      description: '是否可以通过按下 ESC 键关闭对话框',
+      group: '主要属性',
+      setter: { concept: 'SwitchSetter' },
+    })
+    closeOnPressEscape: nasl.core.Boolean = true;
+
+    @Prop({
+      title: '是否在 URL 改变时关闭',
+      description: '是否在 URL 改变时关闭对话框',
+      group: '主要属性',
+      setter: { concept: 'SwitchSetter' },
+    })
+    closeOnHashChange: nasl.core.Boolean = true;
+
     @Event({
       title: '确认按钮点击后',
       description: '确认按钮点击后触发',
@@ -257,6 +283,13 @@ namespace nasl.ui {
       description: '取消按钮点击后触发',
     })
     onCancel: (event: {}) => any;
+
+
+    @Event({
+      title: '关闭前',
+      description: '关闭前触发',
+    })
+    beforeClose: (event: {}) => any;
 
     @Event({
       title: '关闭后',

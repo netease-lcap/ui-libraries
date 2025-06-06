@@ -13,6 +13,21 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-upload-pro theme="image" :autoUpload="false"></el-upload-pro>',
+    methods: {
+      onUpload(event) {
+        console.log(event, 'onUpload');
+        this.$refs.upload.resetFieldRender();
+      },
+    },
+    mounted() {
+      console.log(this.$refs.upload, 'this.$refs.upload');
+      // this.$refs.upload.triggerUpload();
+    },
+    template: `
+    <div>
+      <el-upload-pro ref="upload" theme="image" :autoUpload="false"></el-upload-pro>
+      <el-button @click="onUpload">上传</el-button>
+    </div>
+    `,
   }),
 };
