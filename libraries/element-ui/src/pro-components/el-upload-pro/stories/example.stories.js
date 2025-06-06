@@ -16,7 +16,6 @@ export const Default = {
     methods: {
       onUpload(event) {
         console.log(event, 'onUpload');
-        this.$refs.upload.resetFieldRender();
       },
     },
     mounted() {
@@ -25,7 +24,7 @@ export const Default = {
     },
     template: `
     <div>
-      <el-upload-pro ref="upload" theme="image" :autoUpload="false"></el-upload-pro>
+      <el-upload-pro :BeforeUpload="onUpload" ref="upload" theme="image" :autoUpload="false"></el-upload-pro>
       <el-button @click="onUpload">上传</el-button>
     </div>
     `,

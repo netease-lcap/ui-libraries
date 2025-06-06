@@ -265,7 +265,7 @@ function checkAccept(file: UploadFile, accept: string) {
 
 /* 组件功能扩展插件 */
 export const useExtendsPlugin: NaslComponentPluginOptions = {
-  props: ['converter', 'urlField'],
+  props: ['converter', 'urlField', 'beforeUpload'],
   setup: (props, { setupContext: ctx }) => {
     const { useComputed } = props;
 

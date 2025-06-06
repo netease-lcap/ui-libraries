@@ -8,7 +8,7 @@ export const ElUploadPro = registerComponent(Upload, plugins, {
   name: TAG_NAME,
   nativeEvents: [],
   slotNames: [],
-  methodNames: ['triggerUpload', 'uploadFiles'],
+  methodNames: ['triggerUpload', 'uploadFiles', 'onBeforeUpload', 'onUpload'],
   model: {
     prop: 'value',
     event: 'update:value',
