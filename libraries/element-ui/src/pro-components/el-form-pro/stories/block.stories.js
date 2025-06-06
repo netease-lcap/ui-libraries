@@ -32,9 +32,7 @@ export const Default = {
         <el-radio-pro value="A"><el-text text="类型 A"></el-text></el-radio-pro>
         <el-radio-pro value="B"><el-text text="类型 B"></el-text></el-radio-pro>
       </el-form-radio-group-pro>
-      <el-form-item-pro label=" ">
-          <el-button type="primary" text="立即创建"></el-button>
-      </el-form-item-pro>
+      <el-button style="margin-left: 100px;" type="primary" text="立即创建"></el-button>
     </el-form-pro>`,
   }),
 };
@@ -51,9 +49,7 @@ export const Inline = {
         <el-radio-pro value="A"><el-text text="类型 A"></el-text></el-radio-pro>
         <el-radio-pro value="B"><el-text text="类型 B"></el-text></el-radio-pro>
       </el-form-radio-group-pro>
-      <el-form-item-pro label=" ">
-          <el-button type="primary" text="立即创建"></el-button>
-      </el-form-item-pro>
+      <el-button type="primary" text="立即创建"></el-button>
     </el-form-pro>`,
   }),
 };
