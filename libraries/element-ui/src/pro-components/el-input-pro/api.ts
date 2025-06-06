@@ -18,10 +18,6 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElInputPro extends ViewComponent {
-    constructor(options?: Partial<ElInputProOptions>) {
-      super();
-    }
-
     @Prop({
       title: '值',
     })
@@ -31,25 +27,31 @@ namespace nasl.ui {
       title: '聚焦',
       description: '聚焦',
     })
-    focus: () => void;
+    focus(): void {}
 
     @Method({
       title: '失去焦点',
       description: '失去焦点',
     })
-    blur: () => void;
+    blur(): void {}
 
     @Method({
       title: '选择',
       description: '选择',
     })
-    select: () => void;
+    select(): void {}
 
     @Method({
       title: '清空',
       description: '清空',
     })
-    clear: () => void;
+    clear(): void {}
+
+    constructor(options?: Partial<ElInputProOptions>) {
+      super();
+    }
+
+
   }
 
   export class ElInputProOptions extends ViewComponentOptions {

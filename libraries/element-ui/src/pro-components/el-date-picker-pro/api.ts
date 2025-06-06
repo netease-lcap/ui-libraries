@@ -34,7 +34,7 @@ namespace nasl.ui {
       title: '聚焦',
       description: '聚焦',
     })
-    focus: () => void;
+    focus(): void {}
 
     constructor(options?: Partial<ElDatePickerProOptions>) {
       super();
