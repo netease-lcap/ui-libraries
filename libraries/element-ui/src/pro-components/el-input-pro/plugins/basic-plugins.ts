@@ -25,10 +25,10 @@ export const useIcon: NaslComponentPluginOptions = {
           instance?.refs?.$base?.blur();
         },
         select: () => {
-          instance?.refs?.$base?.select();
+          instance?.refs?.$base?.$el.querySelector('input')?.select();
         },
         clear: () => {
-          instance?.refs?.$base?.clear();
+          instance?.refs?.$base?.emitClear();
         },
       },
       onEnter: (value, event) => {

@@ -57,7 +57,7 @@ export const useAutoSize: NaslComponentPluginOptions = {
           instance?.refs?.$base?.blur();
         },
         select: () => {
-          instance?.refs?.$base?.select();
+          instance?.refs?.$base?.$el.querySelector('textarea')?.select();
         },
       },
     };
