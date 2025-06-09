@@ -85,7 +85,7 @@
             </template>
             <template v-if="dataSource !== undefined">
                 <template v-for="(itemVM, index) in tabDataSource">
-                    <div vusion-slot-name="content" :key="index" v-show="itemVM.active" v-if="!loadOnActive || itemVM.active">
+                    <div vusion-slot-name="content" :key="$at(itemVM, valueField) ?? index" v-show="itemVM.active" v-if="!loadOnActive || itemVM.active">
                         <slot name="content" :item="itemVM" :index="index"></slot>
                         <s-empty
                             v-if="$env.VUE_APP_DESIGNER && !$slots.content && !($scopedSlots.content && $scopedSlots.content(itemVM)) && !!$attrs['vusion-node-path']">
