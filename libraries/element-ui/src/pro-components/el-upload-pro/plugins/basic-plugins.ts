@@ -265,7 +265,7 @@ function checkAccept(file: UploadFile, accept: string) {
 
 /* 组件功能扩展插件 */
 export const useExtendsPlugin: NaslComponentPluginOptions = {
-  props: ['converter', 'urlField', 'beforeUpload'],
+  props: ['converter', 'urlField'],
   setup: (props, { setupContext: ctx }) => {
     const { useComputed } = props;
 
@@ -303,7 +303,8 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
 
     const beforeUpload: ElUploadProps['beforeUpload'] = (file: UploadFile) => {
       const accept = props.get<string>('accept');
-      const beforeUploadFn = props.get('beforeUpload');
+
+      const beforeUploadFn = props.get('onBeforeUpload') || props.get('beforeUpload');
       const enable = checkAccept(file, accept);
       if (!enable) {
         errorMessage.value = `文件类型不匹配，请上传${accept}的文件类型`;
