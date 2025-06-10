@@ -11,6 +11,7 @@ namespace nasl.ui {
       events: {
         click: true,
       },
+      ignoreProperty: ['filterable'],
       displaySlotConditions: {
         value:
           "!!this.getAttribute('dataSource') && this.getAttribute('valueIsSlot') && this.getAttribute('valueIsSlot').value",
@@ -415,7 +416,7 @@ namespace nasl.ui {
       },
     })
     emptyDisabled: nasl.core.Boolean = false;
-    
+
     @Prop({
       group: '主要属性',
       title: '弹出层位置依据',

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { ElFormItem } from 'element-plus';
 
-import { ref, watch, inject, Ref, getCurrentInstance, VNode, computed, onMounted, onUnmounted } from 'vue';
+import { ref, watch, inject, Ref, getCurrentInstance, VNode, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import { ElFormItemWrap } from '@/components/el-form';
 import { $formProvide, $formItemProps } from '@/components/el-form/constants';
 import { useEffect } from '@/plugins/hooks';
@@ -33,6 +33,7 @@ export function withFormItem(Component, name) {
       const componentRef = ref({});
       const myRef = ref({});
       const valueRef = ref({});
+      const formItemRef = ref({});
       const uniqueid = _.uniqueId('formItemPropName');
       const prop = computed(() => props.prop ?? uniqueid);
       const provide = inject($provide) as Ref<FormItemProvide>;
@@ -80,8 +81,10 @@ export function withFormItem(Component, name) {
       //     deep: true,
       //   },
       // );
+      nextTick(() => {
+        Object.assign(myRef.value, formItemRef.value, componentRef.value);
+      });
 
-      watch(componentRef, (value) => Object.assign(myRef.value, value));
       expose(myRef.value);
 
       onMounted(() => {
@@ -90,6 +93,7 @@ export function withFormItem(Component, name) {
             onUpdateModelValue(undefined);
           },
         });
+        _.attempt(setValue, prop.value, modelValue.value);
       });
       onUnmounted(() => {
         deleteFormitem?.(prop.value);
@@ -100,6 +104,7 @@ export function withFormItem(Component, name) {
           <ElFormItemWrap
             {..._.pick(_.assign({}, props, attrs, { prop: prop.value }), $formItemProps)}
             style={style.value.style}
+            ref={formItemRef}
             v-slots={{
               label: slots.label,
             }}

@@ -6,7 +6,7 @@ namespace nasl.ui {
     sourceDocURL: 'https://tdesign.tencent.com/vue/components/form',
     ideusage: {
       idetype: 'container',
-      structured: true,
+      // structured: true,
     },
   })
   @Component({
@@ -91,6 +91,21 @@ namespace nasl.ui {
       description: '校验函数，包含错误文本提示等功能',
     })
     validate(): {
+      valid: nasl.core.Boolean;
+    } {
+      return {} as any;
+    }
+
+    @Method({
+      title: '字段校验函数',
+      description: '校验指定表单字段，绑定字段列表'
+    })
+    validateField(
+      @Param({
+        title: '字段列表'
+      })
+      fields: nasl.collection.List<nasl.core.String> = [],
+    ): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;
@@ -361,12 +376,12 @@ namespace nasl.ui {
       title: '表单内容',
       description: '插入表单项',
       emptyBackground: 'add-sub-large',
-      snippets: [
-        {
-          title: '表单项',
-          code: '<el-form-item-pro><template #label><el-text text="表单项"></el-text></template></el-form-item-pro>',
-        },
-      ],
+      // snippets: [
+      //   {
+      //     title: '表单项',
+      //     code: '<el-form-item-pro><template #label><el-text text="表单项"></el-text></template></el-form-item-pro>',
+      //   },
+      // ],
     })
     slotDefault: () => Array<ViewComponent>;
   }

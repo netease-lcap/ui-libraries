@@ -1,3 +1,13 @@
 .el-table-column--selection .empty-slot.empty-slot.empty-slot{
   min-width: 25px;
 }
+
+.el-table.sticky-table {
+  overflow: visible; 
+}
+.el-table.sticky-table .el-table__header-wrapper {
+  position: sticky; 
+  top: 8px; 
+  z-index: 5;
+}
+

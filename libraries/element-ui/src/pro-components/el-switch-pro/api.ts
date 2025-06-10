@@ -21,6 +21,18 @@ namespace nasl.ui {
     })
     value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
 
+    @Method({
+      title: '获取值',
+      description: '获取值',
+    })
+    getValue(): void {}
+
+    @Method({
+      title: '聚焦',
+      description: '聚焦',
+    })
+    focus(): void {}
+
     constructor(options?: Partial<ElSwitchProOptions>) {
       super();
     }

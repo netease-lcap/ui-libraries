@@ -9,9 +9,9 @@ import {
   UploadFile,
   UploadProps,
 } from '@element-pro';
-import { $deletePropList, NaslComponentPluginOptions, useSyncState } from '@lcap/vue2-utils';
+import { $ref, $deletePropList, NaslComponentPluginOptions, useSyncState } from '@lcap/vue2-utils';
 import { MapGet } from '@lcap/vue2-utils/plugins/types.js';
-import { computed, ref, SetupContext, shallowRef, watch } from '@vue/composition-api';
+import { computed, ref, SetupContext, shallowRef, watch, getCurrentInstance } from '@vue/composition-api';
 import { at, isFunction, isObject, isPlainObject } from 'lodash';
 
 type Converter = 'json' | 'simple';
@@ -62,39 +62,45 @@ function useUploadRequestInfo(props: MapGet, ctx: SetupContext) {
     return '';
   };
 
-  const headers = props.useComputed(['headers', 'access', 'ttl', 'ttlValue'], (propHeaders = {}, access, ttl, ttlValue) => {
-    const lcapUploadHeaders: any = {
-      Authorization: getCookie('Authorization'),
-    };
-    const { appInfo } = window as any;
+  const headers = props.useComputed(
+    ['headers', 'access', 'ttl', 'ttlValue'],
+    (propHeaders = {}, access, ttl, ttlValue) => {
+      const lcapUploadHeaders: any = {
+        Authorization: getCookie('Authorization'),
+      };
+      const { appInfo } = window as any;
 
-    if (access) {
-      lcapUploadHeaders['lcap-access'] = access;
-    }
-
-    if (appInfo && appInfo.domainName) {
-      lcapUploadHeaders.DomainName = appInfo.domainName;
-    }
-
-    if (ttlValue !== null && ttlValue !== undefined) {
-      if (ttl !== null && ttl !== undefined) {
-        lcapUploadHeaders['lcap-ttl'] = ttl ? ttlValue : -1;
-      } else {
-        lcapUploadHeaders['lcap-ttl'] = ttlValue;
+      if (access) {
+        lcapUploadHeaders['lcap-access'] = access;
       }
-    }
 
-    return { ...(isPlainObject(propHeaders) ? propHeaders : {}), ...lcapUploadHeaders };
-  });
+      if (appInfo && appInfo.domainName) {
+        lcapUploadHeaders.DomainName = appInfo.domainName;
+      }
 
-  const data = props.useComputed(['data', 'lcapIsCompress', 'viaOriginURL'], (propData, lcapIsCompress, viaOriginURL) => {
-    const formData = {
-      lcapIsCompress,
-      viaOriginURL,
-    };
+      if (ttlValue !== null && ttlValue !== undefined) {
+        if (ttl !== null && ttl !== undefined) {
+          lcapUploadHeaders['lcap-ttl'] = ttl ? ttlValue : -1;
+        } else {
+          lcapUploadHeaders['lcap-ttl'] = ttlValue;
+        }
+      }
 
-    return { ...(isObject(propData) ? propData : {}), ...formData };
-  });
+      return { ...(isPlainObject(propHeaders) ? propHeaders : {}), ...lcapUploadHeaders };
+    },
+  );
+
+  const data = props.useComputed(
+    ['data', 'lcapIsCompress', 'viaOriginURL'],
+    (propData, lcapIsCompress, viaOriginURL) => {
+      const formData = {
+        lcapIsCompress,
+        viaOriginURL,
+      };
+
+      return { ...(isObject(propData) ? propData : {}), ...formData };
+    },
+  );
 
   function formatResponse(res, context: FormatResponseContext) {
     const urlField = props.get<string>('urlField') || 'url';
@@ -144,7 +150,7 @@ const getValueByList = (fileList: UploadFile[], converter: Converter) => {
   }
 
   if (converter === 'simple') {
-    return list.map((x) => (x.url || '')).join(',');
+    return list.map((x) => x.url || '').join(',');
   }
 
   return JSON.stringify(list);
@@ -179,36 +185,37 @@ const getFileListByValue = (value, converter: Converter = 'json', fileList) => {
 };
 
 function useValue2FileList(props: MapGet) {
-  const fileList = shallowRef<UploadFile[]>(getFileListByValue(
-    props.get('value'),
-    props.get('converter'),
-    props.get('fileList'),
-  ));
+  const fileList = shallowRef<UploadFile[]>(
+    getFileListByValue(props.get('value'), props.get('converter'), props.get('fileList')),
+  );
 
-  watch(() => props.get('value'), (v, oldV) => {
-    const converter = props.getEnd<Converter>('converter');
-    if (v === oldV || v === getValueByList(fileList.value, converter)) {
-      return;
-    }
+  watch(
+    () => props.get('value'),
+    (v, oldV) => {
+      const converter = props.getEnd<Converter>('converter');
+      if (v === oldV || v === getValueByList(fileList.value, converter)) {
+        return;
+      }
 
-    const list = getFileListByValue(v, converter, props.get('fileList'));
-    const arr = [...fileList.value].filter((it) => {
-      if (it.status !== 'success') {
+      const list = getFileListByValue(v, converter, props.get('fileList'));
+      const arr = [...fileList.value].filter((it) => {
+        if (it.status !== 'success') {
+          return true;
+        }
+
+        const index = list.findIndex((valueItem) => valueItem.url === it.url);
+
+        if (index === -1) {
+          return false;
+        }
+
+        list.splice(index, 1);
         return true;
-      }
+      });
 
-      const index = list.findIndex((valueItem) => valueItem.url === it.url);
-
-      if (index === -1) {
-        return false;
-      }
-
-      list.splice(index, 1);
-      return true;
-    });
-
-    fileList.value = arr.concat(list);
-  });
+      fileList.value = arr.concat(list);
+    },
+  );
 
   const changeFileList = (list) => {
     const converter = props.get<Converter>('converter');
@@ -235,7 +242,8 @@ function checkAccept(file: UploadFile, accept: string) {
   const extension = (file.name.indexOf('.') > -1 ? `.${file.name.split('.').pop()}` : '').toLowerCase();
   const type = file.type.toLowerCase();
   const baseType = type.replace(/\/.*$/, '').toLowerCase();
-  const enable = accept.split(',')
+  const enable = accept
+    .split(',')
     .map((t) => t.trim())
     .filter((t) => !!t)
     .some((acceptedType) => {
@@ -260,37 +268,43 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
   props: ['converter', 'urlField'],
   setup: (props, { setupContext: ctx }) => {
     const { useComputed } = props;
+
     const sizeLimit = useComputed<SizeLimitObj | undefined>('sizeLimitStr', getSizeLimit);
     const uploadRequestInfo = useUploadRequestInfo(props, ctx);
     const { fileList, changeFileList } = useValue2FileList(props);
     const errorMessage = ref('');
 
-    const locale = props.useComputed(['theme', 'cancelUploadText', 'triggerUploadText', 'draggable'], (theme, cancelUploadText: string, triggerUploadText: string, draggable: boolean) => {
-      const uploadText = triggerUploadText || '选择文件';
+    const locale = props.useComputed(
+      ['theme', 'cancelUploadText', 'triggerUploadText', 'draggable'],
+      (theme, cancelUploadText: string, triggerUploadText: string, draggable: boolean) => {
+        const uploadText = triggerUploadText || '选择文件';
 
-      return {
-        cancelUploadText: cancelUploadText || '取消上传',
-        dragger: {
-          clickAndDragText: draggable === true ? `点击上方“${uploadText}”或将文件拖到此区域` : `点击上方“${uploadText}”`,
-          dragDropText: '释放鼠标',
-          draggingText: '拖拽到此区域',
-        },
-        triggerUploadText: {
-          fileInput: uploadText,
-          image: theme && theme.includes('image') ? triggerUploadText || '点击上传图片' : uploadText,
-          normal: '点击上传',
-          // 选择文件和上传文件是 2 个步骤，文本需明确步骤
-          reupload: '重新上传',
-          continueUpload: '继续上传',
-          delete: '删除',
-          uploading: '上传中',
-        },
-      };
-    });
+        return {
+          cancelUploadText: cancelUploadText || '取消上传',
+          dragger: {
+            clickAndDragText:
+              draggable === true ? `点击上方“${uploadText}”或将文件拖到此区域` : `点击上方“${uploadText}”`,
+            dragDropText: '释放鼠标',
+            draggingText: '拖拽到此区域',
+          },
+          triggerUploadText: {
+            fileInput: uploadText,
+            image: theme && theme.includes('image') ? triggerUploadText || '点击上传图片' : uploadText,
+            normal: '点击上传',
+            // 选择文件和上传文件是 2 个步骤，文本需明确步骤
+            reupload: '重新上传',
+            continueUpload: '继续上传',
+            delete: '删除',
+            uploading: '上传中',
+          },
+        };
+      },
+    );
 
     const beforeUpload: ElUploadProps['beforeUpload'] = (file: UploadFile) => {
       const accept = props.get<string>('accept');
-      const beforeUploadFn = props.get('beforeUpload');
+
+      const beforeUploadFn = props.get('onBeforeUpload') || props.get('beforeUpload');
       const enable = checkAccept(file, accept);
       if (!enable) {
         errorMessage.value = `文件类型不匹配，请上传${accept}的文件类型`;
@@ -305,6 +319,7 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     useSyncState({
       fileList: () => fileList.value,
     });
+    const instance = getCurrentInstance();
 
     return {
       sizeLimit,
@@ -314,27 +329,41 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       beforeUpload,
       tips: errorMessage,
       status: computed(() => (errorMessage.value ? 'error' : 'default')),
-      uploadButton: (h, context: { disabled: boolean; uploading: boolean; uploadFiles: () => void; uploadText: string }) => {
-        return h('el-button', {
-          attrs: {
-            loading: context.uploading,
-            disabled: context.disabled || context.uploading,
-            type: 'primary',
+      uploadButton: (
+        h,
+        context: { disabled: boolean; uploading: boolean; uploadFiles: () => void; uploadText: string },
+      ) => {
+        return h(
+          'el-button',
+          {
+            attrs: {
+              loading: context.uploading,
+              disabled: context.disabled || context.uploading,
+              type: 'primary',
+            },
+            on: {
+              click: () => context.uploadFiles?.(),
+            },
           },
-          on: {
-            click: () => context.uploadFiles?.(),
-          },
-        }, context.uploadText);
+          context.uploadText,
+        );
       },
-      cancelUploadButton: (h, context: { disabled: boolean; cancelUploadText: string; cancelUpload: (event: any) => void }) => {
-        return h('el-button', {
-          attrs: {
-            disabled: context.disabled,
+      cancelUploadButton: (
+        h,
+        context: { disabled: boolean; cancelUploadText: string; cancelUpload: (event: any) => void },
+      ) => {
+        return h(
+          'el-button',
+          {
+            attrs: {
+              disabled: context.disabled,
+            },
+            on: {
+              click: (e) => context.cancelUpload?.({ e }),
+            },
           },
-          on: {
-            click: (e) => context.cancelUpload?.({ e }),
-          },
-        }, context.cancelUploadText);
+          context.cancelUploadText,
+        );
       },
       onChange: (list, context: UploadChangeContext) => {
         errorMessage.value = '';
@@ -371,6 +400,14 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         }
       },
       [$deletePropList]: ['value'],
+      [$ref]: {
+        clearFiles() {
+          changeFileList([]);
+        },
+        abort() {
+          instance?.refs?.$base?.clearFiles();
+        },
+      },
     };
   },
 };

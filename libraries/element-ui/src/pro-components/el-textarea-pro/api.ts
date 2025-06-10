@@ -25,6 +25,24 @@ namespace nasl.ui {
       title: '值',
     })
     value: nasl.core.String;
+
+    @Method({
+      title: '聚焦',
+      description: '聚焦',
+    })
+    focus(): void {}
+
+    @Method({
+      title: '失去焦点',
+      description: '失去焦点',
+    })
+    blur(): void {}
+
+    @Method({
+      title: '选择',
+      description: '选择',
+    })
+    select(): void {}
   }
 
   export class ElTextareaProOptions extends ViewComponentOptions {
@@ -87,6 +105,26 @@ namespace nasl.ui {
       if: _ => !!_.autosize,
     })
     maxRows: nasl.core.Decimal;
+
+
+    @Prop({
+      group: '主要属性',
+      title: '最小长度',
+      description: '最小长度',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    minlength: nasl.core.Decimal;
+
+
+    @Prop({
+      group: '主要属性',
+      title: '是否不允许拖动调整大小',
+      description: '是否不允许拖动调整大小',
+      setter: { concept: 'SwitchSetter' },
+    })
+    resize: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

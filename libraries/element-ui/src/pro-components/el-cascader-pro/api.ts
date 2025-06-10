@@ -17,6 +17,7 @@ namespace nasl.ui {
         displayData: "\"[{value: '', label: ''}, {value:'1', label: ' '}, {value:'2', label: ' '}]\"",
         propertyName: ':dataSource',
       },
+      ignoreProperty: ['filterable'],
       additionalAttribute: {
         valueField: '"value"',
         textField: '"label"',
@@ -468,11 +469,11 @@ namespace nasl.ui {
     })
     valueType: 'single' | 'full' = 'single';
 
-    // @Event({
-    //   title: 'On Blur',
-    //   description: '当输入框失去焦点时触发',
-    // })
-    // onBlur: (event: any) => any;
+    @Event({
+      title: '失去焦点',
+      description: '当输入框失去焦点时触发',
+    })
+    onBlur: (event: any) => any;
 
     @Event({
       title: '值变化',
@@ -487,23 +488,25 @@ namespace nasl.ui {
     })
     slotOption: (current: Current<T>) => Array<ViewComponent>;
 
-    // @Event({
-    //   title: 'On Focus',
-    //   description: '获得焦点时触发',
-    // })
-    // onFocus: (event: any) => any;
+    @Event({
+      title: 'On Focus',
+      description: '获得焦点时触发',
+    })
+    onFocus: (event: any) => any;
 
-    // @Event({
-    //   title: 'On Popup Visible Change',
-    //   description: '下拉框显示或隐藏时触发。',
-    // })
-    // onPopupVisibleChange: (event: any) => any;
 
-    // @Event({
-    //   title: 'On Remove',
-    //   description: '多选模式下，选中数据被移除时触发。',
-    // })
-    // onRemove: (event: any) => any;
+
+    @Event({
+      title: '下拉框显示或隐藏时触发。',
+      description: '下拉框显示或隐藏时触发。',
+    })
+    onPopupVisibleChange: (event: any) => any;
+
+    @Event({
+      title: '多选模式下，选中数据被移除时触发。',
+      description: '多选模式下，选中数据被移除时触发。',
+    })
+    onRemove: (event: any) => any;
 
     // @Slot({
     //   title: 'Collapsed Items',

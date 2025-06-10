@@ -51,7 +51,7 @@ export class PluginOptions {
 
 export function registerComponent<T>(Component, options) {
   return defineComponent<T>({
-    name: 'HocBaseComponents',
+    name: options.name || 'HocBaseComponents',
     components: { Component },
     inheritAttrs: false,
     props: Component.props,

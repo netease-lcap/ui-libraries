@@ -243,18 +243,24 @@ export const Example2 = {
       setTimeout(() => {
         console.log(mytable, 'mytable====');
       }, 1000);
+      const logCellClick = (el) => {
+        console.log(el, 'el');
+        console.log(mytable.value.reload(), 'logCellClick');
+      };
       return {
         tableData,
         pageSize2,
         currentPage,
         mytable,
         selectedRowKeys,
+        logCellClick,
       };
     },
     template: `
 <el-table
 ref="mytable"
 row-key="index"
+class="my-table"
 :dataSource="tableData"
 :pagination="true"
 :showTotal="true"
@@ -265,18 +271,23 @@ v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
 dragSort="row"
 :selection="true"
-  bordered
+  :border="true"
   hover
   stripe
   showHeader
   size=small"
 >
-  <el-table-column prop="applicant" sortable="custom" label="申请人" width="100" fixedPosition="left"></el-table-column>
-  <el-table-column prop="status" label="申请状态" width="150" sorter></el-table-column>
-  <el-table-column prop="channel" label="签署方式" width="200"></el-table-column>
+  <el-table-column  :resizable="false" prop="applicant" label="申请人" width="300" fixedPosition="left" @edit-change="logCellClick">
+
+  </el-table-column>
+  <el-table-column prop="status" label="申请状态" width="350">
+
+  </el-table-column>
+  <el-table-column  label="签署方式">
+  </el-table-column>
+    <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
+    <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
   <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
-  <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
-  <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
   <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
   <el-table-column prop="confirmTime" label="确认时间" width="160"></el-table-column>
 </el-table>

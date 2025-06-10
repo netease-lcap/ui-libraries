@@ -1002,7 +1002,7 @@ export default {
           }
         }, 0);
       } else {
-        if (this.filterable && this.filterText === '') {
+        if (this.filterable && this.filterText === '' && !this.compositionInputing) {
           if (!this.selectedVMs.length) return;
           const lastItemVM = this.selectedVMs[this.selectedVMs.length - 1];
           this.select(lastItemVM, false);

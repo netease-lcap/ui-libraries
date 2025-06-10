@@ -242,11 +242,16 @@ export default {
             return this.rootVM && this.rootVM.paddingLeft || 0;
         },
         childrenNodeRenderedIf() {
-            const childrenExist = this.rootVM.ifExpanded && !this.childrenRendered && this.node && !this.node.childrenRendered ? this.currentExpanded : true
+            const childrenExist = this.rootVM.ifExpanded && !this.childrenRendered && this.node && !this.node.childrenRendered ? this.currentExpanded : true;
+
+            if (this.renderOptimize && childrenExist && this.rootVM.getSelectNodeValues().includes(this.value)) {
+              return true;
+            }
+
             return this.renderOptimize ? childrenExist && this.currentExpanded : childrenExist
         },
         childrenNodeRenderedShow() {
-            return this.renderOptimize ? true : this.currentExpanded
+            return this.currentExpanded
         },
         filterOptions() {
             const { filterText, field, textField, matchMethod, caseSensitive } = this.rootVM;
