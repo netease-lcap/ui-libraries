@@ -245,14 +245,12 @@ export function handleEditTable(props) {
 }
 
 export function handleTableConfig(props) {
-  const tableConfig = props.get('tableConfig');
-  if (!tableConfig) return {};
+  const columnConfig = props.get('columnConfig');
+  if (!columnConfig) return {};
   const Component = props.get('render');
   const tableRef = useRef({});
   const render = useCallback((props, { attrs, slots }) => {
-    const columns = _.flatMap(slots.default(), (node) =>
-      node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : [],
-    );
+    const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : []));
     const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
     return (
       <div>

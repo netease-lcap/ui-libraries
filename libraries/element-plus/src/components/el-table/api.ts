@@ -458,6 +458,14 @@ namespace nasl.ui {
     })
     maxHeight: nasl.core.Decimal;
 
+    @Prop({
+      group: '主要属性',
+      title: '列配置',
+      description: '列配置',
+      setter: { concept: 'SwitchSetter' },
+    })
+    columnConfig: nasl.core.Boolean = false;
+
     @Prop<ElTableOptions<T, V, P, M>, 'pagination'>({
       group: '主要属性',
       title: '分页',
