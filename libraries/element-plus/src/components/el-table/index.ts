@@ -10,7 +10,7 @@ import './index.css';
 // const ElTable = ElTablePlus;
 const ElTable = registerComponent(ElTablePlus, { plugin: basicsPlugin, name: 'ElTable' });
 const ElTableColumn = registerComponent(ElTableColumnPlus, { plugin: columnPlugin, name: 'ElTableColumn' });
-const ElTableToolBar = registerComponent<{ tableSlots: any }>(ElFlex, {
+const ElTableToolBar = registerComponent<{ columns: any; selectedColumns: any; setSelectedColumns: any }>(ElFlex, {
   plugin: tableToolBarPlugin,
   name: 'ElTableToolBar',
 });

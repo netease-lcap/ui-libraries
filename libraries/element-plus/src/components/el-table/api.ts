@@ -614,6 +614,16 @@ namespace nasl.ui {
       },
     })
     valueField: (item: T) => V;
+    
+    @Prop<ElTableOptions<T, V, P, M>, 'parentField'>({
+      group: '数据属性',
+      title: '父级值字段',
+      description: '在树形数据中，指定数据父级值的字段',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    parentField: (item: T) => V;
 
     // @Prop({
     //   group: '主要属性',

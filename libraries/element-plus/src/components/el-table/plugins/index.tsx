@@ -3,7 +3,7 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 import { useMemo, useRef, useCallback, useControllableValue, useState } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
-import { useRequestDataSource } from '@/plugins/common/dataSource';
+import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
 import { ElTableToolBar } from '@/components/el-table';
 
@@ -164,6 +164,8 @@ export function handleDataSource(props) {
   const onSuccess = props.get('onSuccess', () => {});
   const ref = props.get('ref');
   const defaultParams = [{ currentPage, pageSize, order, sort, pagination }];
+  const valueField = props.get('valueField');
+  const parentField = props.get('parentField');
   const {
     data: resultData = { list: [], total: 0 },
     run,
@@ -178,9 +180,10 @@ export function handleDataSource(props) {
     run({ currentPage, pageSize, order, sort, pagination, ...params });
   };
   const { list: data, total } = resultData as { list: any; total: number };
-  const selfRef = _.assign(ref, { reload, data });
+  const treeData = useDataSourceToTree(data, parentField, valueField);
+  const selfRef = _.assign(ref, { reload, data: treeData });
 
-  const dataSourceResult = _.isEmpty(data) ? {} : { data };
+  const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
 
   return {
     ref: selfRef,
@@ -241,30 +244,33 @@ export function handleEditTable(props) {
   };
 }
 
- function handleTableConfig(props) {
-  // if (!tableConfig) return {};
-  const ref = props.get('ref');
+export function handleTableConfig(props) {
+  const tableConfig = props.get('tableConfig');
+  if (!tableConfig) return {};
   const Component = props.get('render');
   const tableRef = useRef({});
-  const tableSlots = props.get('slots');
   const render = useCallback((props, { attrs, slots }) => {
-    const [value, setValue] = useState([]);
+    const columns = _.flatMap(slots.default(), (node) =>
+      node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : [],
+    );
+    const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
     return (
       <div>
-        <ElTableToolBar tableSlots={tableSlots} setValue={setValue} />
+        <ElTableToolBar columns={columns} selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} />
         <Component
           ref={tableRef}
           {...props}
           {...attrs}
-          v-slots={{ ...slots, default: () => slots.default().filter((item) => value.includes(item.props.prop)) }}
+          v-slots={{
+            ...slots,
+            default: () => slots.default().filter((item) => selectedColumns.includes(item.props.prop)),
+          }}
         />
       </div>
     );
   }, []);
   render.inheritAttrs = false;
   return {
-    // ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
-
     render,
   };
 }
@@ -287,3 +293,5 @@ export function handleSticky(props) {
     class: classNames,
   };
 }
+
+export function handleVirtualize(props) {}

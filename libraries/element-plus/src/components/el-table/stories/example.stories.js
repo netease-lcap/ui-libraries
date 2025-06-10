@@ -269,7 +269,6 @@ class="my-table"
 :pageSizes="[10, 100, 200, 300, 400]"
 v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
-:editTable="true"
 dragSort="row"
 :selection="true"
   :border="true"
@@ -278,18 +277,17 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column  :resizable="false" prop="applicant" label="申请人" :editable="true" width="300" fixedPosition="left" @edit-change="logCellClick">
+  <el-table-column  :resizable="false" prop="applicant" label="申请人" width="300" fixedPosition="left" @edit-change="logCellClick">
 
   </el-table-column>
-  <el-table-column prop="status" label="申请状态" width="350" :editable="true">
+  <el-table-column prop="status" label="申请状态" width="350">
 
   </el-table-column>
   <el-table-column  label="签署方式">
-  
   </el-table-column>
-    <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
-  <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
-  <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
+    <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
+    <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
+  <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
   <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
   <el-table-column prop="confirmTime" label="确认时间" width="160"></el-table-column>
 </el-table>
