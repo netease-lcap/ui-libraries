@@ -1,7 +1,7 @@
 import _, { isFunction } from 'lodash';
 import { listToTree } from '@lcap/vue2-utils/utils';
-import { createUseUpdateSync } from '@lcap/vue2-utils';
-import { computed } from '@vue/composition-api';
+import { createUseUpdateSync, $ref } from '@lcap/vue2-utils';
+import { computed, getCurrentInstance } from '@vue/composition-api';
 import { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types.js';
 
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils';
@@ -16,10 +16,7 @@ export const useCascaderSelect: NaslComponentPluginOptions = {
     const textField = props.useComputed('textField', (v) => v || 'label');
     const parentField = props.useComputed('parentField', (v) => v);
 
-    const childrenField = props.useComputed(
-      'childrenField',
-      (v) => v || 'children',
-    );
+    const childrenField = props.useComputed('childrenField', (v) => v || 'children');
 
     const options = props.useComputed('data', (data) => {
       if (_.isEmpty(data)) return undefined;
@@ -32,6 +29,8 @@ export const useCascaderSelect: NaslComponentPluginOptions = {
     });
 
     const keys = props.useComputed('keys', (v) => (_.isObject(v) ? v : {}));
+
+    const instance = getCurrentInstance();
 
     return {
       options,
@@ -55,6 +54,12 @@ export const useCascaderSelect: NaslComponentPluginOptions = {
         return null;
       },
       slotOption: () => null,
+      [$ref]: {
+        getValue: () => {
+          // 假装这里有一个聚焦方法
+          return instance?.refs?.$base?.displayValue;
+        },
+      },
     };
   },
 };

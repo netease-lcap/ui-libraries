@@ -143,7 +143,7 @@ namespace nasl.ui {
       description: '单选组件按钮形式',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '外框线' }, { title: '主色填充' }, { title: '默认填充' }],
+        options: [{ title: '有边框' }, { title: '主色填充' }, { title: '默认填充' }],
       },
       if: (_) => _.shape === 'button',
     })

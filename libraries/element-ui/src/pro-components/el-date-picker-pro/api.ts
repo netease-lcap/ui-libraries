@@ -30,6 +30,12 @@ namespace nasl.ui {
     })
     endValue: ElDatePickerProOptions['endValue'];
 
+    @Method({
+      title: '聚焦',
+      description: '聚焦',
+    })
+    focus(): void {}
+
     constructor(options?: Partial<ElDatePickerProOptions>) {
       super();
     }
@@ -97,6 +103,8 @@ namespace nasl.ui {
       if: (_) => !_.multiple,
     })
     allowInput: nasl.core.Boolean = false;
+
+
 
     @Prop({
       group: '样式属性',
@@ -241,7 +249,7 @@ namespace nasl.ui {
 
     @Prop<ElDatePickerProOptions, 'format'>({
       group: '主要属性',
-      title: '日期展示格式',
+      title: '展示格式',
       description:
         '仅用于格式化日期显示的格式，不影响日期值。注意和 `valueType` 的区别，`valueType`会直接决定日期值 `value` 的格式。全局配置默认为："YYYY-MM-DD"，',
       setter: {

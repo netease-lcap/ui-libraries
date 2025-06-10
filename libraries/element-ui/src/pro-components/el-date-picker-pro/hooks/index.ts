@@ -237,8 +237,9 @@ export const useDatePickerValue = (props: MapGet, valueFormat: ComputedRef<strin
       valueRef.value = vals;
       updateValue = getNaslMultipleDateValue(vals, valueFormat);;
     } else if (!range) {
-      valueRef.value = v && d ? dayjs2Date(Array.isArray(d) ? d[0] : d) : null;
-      updateValue = getNaslDateValue(Array.isArray(v) ? v[0] : v, valueFormat);
+      const val = v && d ? dayjs2Date(Array.isArray(d) ? d[0] : d) : null;
+      valueRef.value = val;
+      updateValue = getNaslDateValue(val, valueFormat);
     } else {
       valueRef.value = Array.isArray(d) ? normalizeDateRange(dayjs2Date(d[0]), dayjs2Date(d[1])) : [];
       const startValue = getNaslDateValue(d[0], valueFormat);
