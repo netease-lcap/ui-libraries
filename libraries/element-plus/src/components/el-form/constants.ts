@@ -11,6 +11,7 @@ export const $formItemProps = [
   'showMessage',
   'size',
   'isRequired',
+  'onValidateSuccess',
   'validateStatus',
   'data-nodepath',
   'data-enable-events',

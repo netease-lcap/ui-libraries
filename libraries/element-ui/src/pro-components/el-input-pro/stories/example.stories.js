@@ -107,7 +107,7 @@ export const Align = {
     template: `
       <div>
         <div>右</div>
-        <el-input-pro :onEnter="onEnter" align="right"></el-input-pro>
+        <el-input-pro :minLength="10" :onEnter="onEnter" align="right"></el-input-pro>
         <div>居中</div>
         <el-input-pro align="center"></el-input-pro>
         <div>左</div>

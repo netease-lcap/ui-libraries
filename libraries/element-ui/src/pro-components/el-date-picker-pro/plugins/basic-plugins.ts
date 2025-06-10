@@ -1,5 +1,5 @@
 import { CreateElement } from 'vue';
-import { NaslComponentPluginOptions, $render } from '@lcap/vue2-utils';
+import { NaslComponentPluginOptions, $render, $ref } from '@lcap/vue2-utils';
 import { DateRangeValue, DateRangePicker, DateValue, DateMultipleValue } from '@element-pro';
 import {
   usePlaceholder,
@@ -100,6 +100,11 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         context.propsData.props.rangeInputProps.suffixIcon = suffixIcon;
 
         return h(DateRangePicker, context.propsData, context.childrenNodes);
+      },
+      [$ref]: {
+        focus: () => {
+          // 假装这里有一个聚焦方法
+        },
       },
     };
   },
