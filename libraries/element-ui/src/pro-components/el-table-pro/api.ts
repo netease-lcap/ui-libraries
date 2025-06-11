@@ -915,7 +915,17 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
-      selector: 'multiple',
+      // selector: 'multiple',
+      selector: [
+        {
+          expression: "this.getElement(el => el.slotTarget === 'title')",
+          cssSelector: "th"
+        },
+        {
+          expression: "this.getElement(el => el.slotTarget === 'cell')",
+          cssSelector: "td"
+        },
+      ],
       namedSlotOmitWrapper:['cell','edit'],
       slotInlineStyle: {
         title: 'min-width: 30px',
@@ -985,6 +995,16 @@ namespace nasl.ui {
     })
     rules: nasl.core.String;
 
+    @Prop({
+      group: '主要属性',
+      title: '对齐方式',
+      description: '对齐方式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '右对齐' }, { title: '居中对齐' }],
+      },
+    })
+    align: 'left' | 'right' | 'center' = 'left';
 
 
 

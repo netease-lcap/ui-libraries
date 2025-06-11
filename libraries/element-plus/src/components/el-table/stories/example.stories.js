@@ -281,6 +281,12 @@ dragSort="row"
 
   </el-table-column>
   <el-table-column prop="status" label="申请状态" width="350">
+  <template #header>
+    <div>申请状态</div>
+  </template>
+  <template #default="current">
+    <div>{{current.item.status}}</div>
+  </template>
 
   </el-table-column>
   <el-table-column  label="签署方式">
