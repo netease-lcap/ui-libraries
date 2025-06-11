@@ -179,10 +179,11 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         modelValue={$sync(${vModel})}>
     </ElFormInputNumber>`;
   } if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
-    return `<ElFormTextarea ${formItemAttrs.join(' ')}
+    return `<ElFormInput ${formItemAttrs.join(' ')}
         placeholder="请输入${label}"
-        modelValue={$sync(${vModel})}>
-    </ElFormTextarea>`;
+        modelValue={$sync(${vModel})}
+        type="textarea">
+    </ElFormInput>`;
   } if (propertyTypeName === 'Date') {
     return `<ElFormDatePicker ${formItemAttrs.join(' ')}
         type="date"
