@@ -16,6 +16,7 @@ export function handleNodePath(props) {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
     formTagName: 'el-form-switch',
+    tagName: 'el-switch',
   };
 }
 

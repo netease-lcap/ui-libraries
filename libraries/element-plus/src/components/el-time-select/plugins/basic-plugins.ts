@@ -5,6 +5,7 @@ export function handleTagName(props) {
   const className = props.get('class') ?? '';
   return {
     formTagName: 'el-form-time-select',
+    tagName: 'el-time-select',
     class: `${className} el-time-select`,
   };
 }
