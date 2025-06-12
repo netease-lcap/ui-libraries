@@ -2,6 +2,7 @@ import { ElTimeline as ElTimelinePlus, ElTimelineItem as ElTimelineItemPlus } fr
 import _ from 'lodash';
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
+import * as itemPlugins from './plugins/item-plugins';
 
 function ElTimelineRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
@@ -9,7 +10,7 @@ function ElTimelineRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 function ElTimelineItemRegister(BaseComponent, plugin = {}, extend = true) {
-  const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
+  const componentPlugin = extend ? _.assign(itemPlugins, plugin) : plugin;
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
