@@ -1002,7 +1002,7 @@ namespace nasl.ui {
       parentAccept: "['el-table'].includes(target.tag)",
       // childAccept: false,
       slotWrapperInlineStyle: {
-        header: 'display: inline-block;',
+        // header: 'display: inline-block;',
       },
       useTemplateInDefaultSlot: true,
       selector: [

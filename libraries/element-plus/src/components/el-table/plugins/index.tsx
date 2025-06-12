@@ -250,9 +250,7 @@ export function handleTableConfig(props) {
   const Component = props.get('render');
   const tableRef = useRef({});
   const render = useCallback((props, { attrs, slots }) => {
-    const columns = _.flatMap(slots.default(), (node) =>
-      node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : [],
-    );
+    const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : []));
     const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
     return (
       <div>
@@ -294,7 +292,7 @@ export function handleSticky(props) {
   };
 }
 
- function handleVirtualize(props) {
+function handleVirtualize(props) {
   const virtualize = props.get('virtualize');
   if (!virtualize) return {};
   const tableRef = useRef({});
@@ -307,7 +305,6 @@ export function handleSticky(props) {
     }
     return [];
   });
-  console.log(columns, columnsSlots, 'columns');
 
   const render = useCallback((props, { attrs, slots }) => {
     return <ElTableV2 ref={tableRef} {...props} {...attrs} v-slots={slots} />;

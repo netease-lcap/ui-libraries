@@ -58,13 +58,14 @@ export function registerComponent<T>(Component, options) {
 
     setup(props, { attrs, slots, emit, expose }) {
       const componentRef = ref(null);
+      const { usePlugin } = (props as any);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
       let Render = Component;
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
-      const provideRef = ref(injectRef);
+      const provideRef = ref(_.cloneDeep(injectRef));
       const router = useRouter?.();
       const route = useRoute?.();
       const useStore = createStore((set) => ({
