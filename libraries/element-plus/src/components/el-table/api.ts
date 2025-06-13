@@ -58,6 +58,7 @@ namespace nasl.ui {
         ":expandRowKeys" : "\"[0]\""
       },
       forceUpdateWhenAttributeChange: true,
+      refreshMutationNodesWhenAttributeChange: ['editTable'],
    
       dataSource: {
         display: 3,
