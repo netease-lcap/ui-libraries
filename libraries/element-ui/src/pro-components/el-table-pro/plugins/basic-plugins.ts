@@ -266,7 +266,7 @@ export const useTable: NaslComponentPluginOptions = {
         if (!vnode.tag?.includes('ElTableColumnPro')) return [];
         const attrs = _.get(vnode, 'data.attrs', {});
 
-        const nodePath = _.get(attrs, 'data-nodepath');
+        // const nodePath = _.get(attrs, 'data-nodepath');
         const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
         const listeners = _.get(vnode, 'componentOptions.listeners', {});
         const titleProps = _.isFunction(title)
@@ -292,7 +292,7 @@ export const useTable: NaslComponentPluginOptions = {
             ...cellProps,
             ...titleProps,
             attrs: {
-              'data-nodepath': nodePath,
+              // 'data-nodepath': nodePath,
             },
           },
         ];

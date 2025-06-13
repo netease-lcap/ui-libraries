@@ -41,5 +41,6 @@ export function handleDataSource(props) {
     loading,
     data: dataSource,
     formTagName: 'el-form-transfer',
+    tagName: 'el-transfer',
   };
 }

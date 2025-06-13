@@ -30,6 +30,7 @@ export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccum
     slots: _.assign(slots, dataSourceSlots),
     data: dataSource,
     formTagName: 'el-form-select',
+    tagName: 'el-select',
   };
 }
 

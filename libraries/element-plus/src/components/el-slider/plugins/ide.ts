@@ -5,6 +5,7 @@ import { useEffect, useMemo } from '@/plugins/hooks';
 export function handleNodePath(props) {
   return {
     formTagName: 'el-form-slider',
+    tagName: 'el-slider',
   };
 }
 

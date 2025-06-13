@@ -19,6 +19,7 @@ export function handleNodePath(props) {
     [$deletePropsList]: deletePropsList,
     'is-range': isRange,
     formTagName: 'el-form-time-picker',
+    tagName: 'el-time-picker',
   };
 }
 

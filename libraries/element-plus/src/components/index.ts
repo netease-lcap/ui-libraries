@@ -67,3 +67,5 @@ export { ElWatermark } from './el-watermark';
 export { ElMultiLayout, ElMultiLayoutItem } from './el-multi-layout';
 export { ElListComponents } from './el-list-components';
 export const locale = { zhCn };
+
+

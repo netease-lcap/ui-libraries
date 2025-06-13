@@ -1,4 +1,4 @@
-import { ElPagination } from 'element-plus';
+import { ElPagination, ElTableV2 } from 'element-plus';
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { useMemo, useRef, useCallback, useControllableValue, useState } from '@/plugins/hooks';
@@ -292,4 +292,25 @@ export function handleSticky(props) {
   };
 }
 
-export function handleVirtualize(props) {}
+function handleVirtualize(props) {
+  const virtualize = props.get('virtualize');
+  if (!virtualize) return {};
+  const tableRef = useRef({});
+  const slots = props.get('slots');
+  const columnsSlots = slots.default();
+
+  const columns = _.flatMap(columnsSlots, (node) => {
+    if (node.type.name === 'ElTableColumn') {
+      return [{ ...node.props, header: node.children.header, default: node.children.default }];
+    }
+    return [];
+  });
+
+  const render = useCallback((props, { attrs, slots }) => {
+    return <ElTableV2 ref={tableRef} {...props} {...attrs} v-slots={slots} />;
+  }, []);
+  render.inheritAttrs = false;
+  return {};
+}
+
+handleVirtualize.order = 2;

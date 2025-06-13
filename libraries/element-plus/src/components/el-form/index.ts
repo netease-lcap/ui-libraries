@@ -5,7 +5,7 @@ import * as formItemPlugin from './plugins/form-item-plugin';
 import { withFormItem } from './plugins/form-item';
 import './index.css';
 
-const ElForm = registerComponent(ElFormPlus, { plugin: basicsPlugin });
+const ElForm = registerComponent(ElFormPlus, { plugin: basicsPlugin, name: 'ElForm' });
 const ElFormItemWrap = registerComponent(ElFormItemPlus, { plugin: formItemPlugin });
 const ElFormItem = ElFormItemPlus;
 

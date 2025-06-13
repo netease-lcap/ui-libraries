@@ -14,6 +14,7 @@ export function handleNodePath(props) {
   return {
     class: `${myClass} ${nodeId}`,
     formTagName: 'el-form-cascader',
+    tagName: 'el-cascader',
   };
 }
 
