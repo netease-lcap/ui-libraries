@@ -638,7 +638,7 @@ namespace nasl.ui {
       description: '选项值',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
+    value: V;
 
     @Prop({
       group: '主要属性',

@@ -69,18 +69,16 @@ export { ElMultiLayout, ElMultiLayoutItem } from './el-multi-layout';
 export { ElListComponents } from './el-list-components';
 
 export function transformKeys(obj: Record<string, any>): Record<string, any> {
-  return _.reduce(
+  const result = _.reduce(
     obj,
     (result, value, key) => {
-      if (_.includes(key, '_')) {
-        _.set(result, key.replace('_', '.'), value);
-      } else {
-        result[key] = value;
-      }
+      const keys = _.includes(key, '_') ? key.replace('_', '.') : key;
+      _.set(result, keys, value);
       return result;
     },
     {} as Record<string, any>,
   );
+  return { el: result };
 }
 
 export const locale = { zhCn };

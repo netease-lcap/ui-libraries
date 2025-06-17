@@ -1,6 +1,14 @@
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { ElPagination } from 'element-plus';
+// import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+// import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+import en from 'element-plus/dist/locale/en.mjs';
+
 import _ from 'lodash';
+import i18n from '../../../../dist-theme/i18n.json';
+import { transformKeys } from '@/components/index';
+
 import Component from '../index';
 
 export default {
@@ -247,6 +255,16 @@ export const Example2 = {
         console.log(el, 'el');
         console.log(mytable.value.reload(), 'logCellClick');
       };
+      console.log(zhCn, 'zhCn');
+      const config = {
+        round: true,
+      };
+      const language = ref('zh-cn');
+      const locale = computed(() => (language.value === 'zh-cn' ? zhCn : en));
+      console.log(transformKeys(i18n['zh-CN']), 'i18n');
+      const myLocale = transformKeys(i18n['zh-CN']);
+      const i18nn=i18n
+
       return {
         tableData,
         pageSize2,
@@ -254,9 +272,17 @@ export const Example2 = {
         mytable,
         selectedRowKeys,
         logCellClick,
+        zhCn,
+        language,
+        locale,
+        i18nn,
+        config,
+        myLocale,
+        transformKeys,
       };
     },
     template: `
+    <config-provider :locale="transformKeys(i18nn['zh-CN'])" :button="config">
 <el-table
 ref="mytable"
 row-key="index"
@@ -297,6 +323,9 @@ dragSort="row"
   <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
   <el-table-column prop="confirmTime" label="确认时间" width="160"></el-table-column>
 </el-table>
+<el-pagination  :total="100" />
+      <el-button >中文</el-button>
+</config-provider>
     `,
   }),
 };
