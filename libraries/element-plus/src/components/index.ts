@@ -1,4 +1,5 @@
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+import _ from 'lodash';
 
 export { ElFlex } from './el-flex';
 export { ElText } from './el-text';
@@ -66,6 +67,20 @@ export { ElTimeline, ElTimelineItem } from './el-timeline';
 export { ElWatermark } from './el-watermark';
 export { ElMultiLayout, ElMultiLayoutItem } from './el-multi-layout';
 export { ElListComponents } from './el-list-components';
+
+export function transformKeys(obj: Record<string, any>): Record<string, any> {
+  return _.reduce(
+    obj,
+    (result, value, key) => {
+      if (_.includes(key, '_')) {
+        _.set(result, key.replace('_', '.'), value);
+      } else {
+        result[key] = value;
+      }
+      return result;
+    },
+    {} as Record<string, any>,
+  );
+}
+
 export const locale = { zhCn };
-
-

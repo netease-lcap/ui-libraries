@@ -7,9 +7,9 @@ import * as Components from './components';
 // console.log(provideGlobalConfig, 'provideGlobalConfig');
 
 export const install: Plugin = (app) => {
-  app.use(ElementPlus, {
-    locale: zhCn,
-  });
+  // app.use(ElementPlus, {
+  //   locale: zhCn,
+  // });
   Object.keys(Components).forEach((name) => {
     app.component(name, Components[name]);
   });
