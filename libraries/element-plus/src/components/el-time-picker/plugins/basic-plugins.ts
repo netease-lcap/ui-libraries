@@ -87,5 +87,25 @@ export function handleTagName(props) {
     class: `${className} el-time-picker`,
   };
 }
+export function handleDisabledFunction(props) {
+  const disabledHours = props.get('disabledHours') ?? (() => []);
+  const disabledMinutes = props.get('disabledMinutes') ?? (() => []);
+  const disabledSeconds = props.get('disabledSeconds') ?? (() => []);
+
+  return {
+    disabledHours: _.wrap(disabledHours, (fn, timeRole, comparingDate: dayjs.Dayjs) => {
+      const resultComparingDate = comparingDate ? comparingDate.format('YYYY-MM-DD HH:mm:ss') : comparingDate;
+      return _.attempt(fn, timeRole, resultComparingDate);
+    }),
+    disabledMinutes: _.wrap(disabledMinutes, (fn, hour, timeRole, comparingDate: dayjs.Dayjs) => {
+      const resultComparingDate = comparingDate ? comparingDate.format('YYYY-MM-DD HH:mm:ss') : comparingDate;
+      return _.attempt(fn, hour, timeRole, resultComparingDate);
+    }),
+    disabledSeconds: _.wrap(disabledSeconds, (fn, hour, minute, timeRole, comparingDate: dayjs.Dayjs) => {
+      const resultComparingDate = comparingDate ? comparingDate.format('YYYY-MM-DD HH:mm:ss') : comparingDate;
+      return _.attempt(fn, hour, minute, timeRole, resultComparingDate);
+    }),
+  };
+}
 
 export { handleIcon } from '@/plugins/common/icon';

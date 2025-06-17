@@ -1,11 +1,21 @@
+import _ from 'lodash';
+import { registerComponent } from '@/plugins';
 import ElMultiLayoutPlus from './multi-layout';
 import ElMultiLayoutItemPlus from './multi-layout-item';
 
-import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
 import * as itemPlugins from './plugins/item-plugins';
 
-export const ElMultiLayout = registerComponent(ElMultiLayoutPlus, { plugin: basicsPlugin });
-export const ElMultiLayoutItem = registerComponent(ElMultiLayoutItemPlus, { plugin: itemPlugins });
+function ElMultiLayoutRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
 
+const ElMultiLayout = registerComponent(ElMultiLayoutPlus, { plugin: basicsPlugin });
+const ElMultiLayoutItem = registerComponent(ElMultiLayoutItemPlus, { plugin: itemPlugins });
+
+ElMultiLayout.BaseComponent = ElMultiLayoutPlus;
+ElMultiLayoutItem.BaseComponent = ElMultiLayoutItemPlus;
+
+export { ElMultiLayoutRegister, ElMultiLayout, ElMultiLayoutItem };
 export default ElMultiLayout;

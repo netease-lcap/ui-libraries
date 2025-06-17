@@ -1,7 +1,14 @@
 import { ElTabs as ElTabsPlus, ElTabPane } from 'element-plus';
+import _ from 'lodash';
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
 
+function ElTabsRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
+
 const ElTabs = registerComponent(ElTabsPlus, { plugin: basicsPlugin });
-export { ElTabs, ElTabPane };
+ElTabs.BaseComponent = ElTabsPlus;
+export { ElTabsPlus, ElTabs, ElTabPane, ElTabsRegister };
 export default ElTabs;

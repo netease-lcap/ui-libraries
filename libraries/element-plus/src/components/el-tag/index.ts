@@ -1,8 +1,23 @@
 import { ElTag as ElTagPlus, ElCheckTag as ElCheckTagPlus } from 'element-plus';
-
+import _ from 'lodash';
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
 
-export const ElTag = registerComponent(ElTagPlus, { plugin: basicsPlugin });
-export const ElCheckTag = registerComponent(ElCheckTagPlus, { plugin: basicsPlugin });
+function ElTagRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
+
+function ElCheckTagRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
+
+const ElTag = registerComponent(ElTagPlus, { plugin: basicsPlugin });
+const ElCheckTag = registerComponent(ElCheckTagPlus, { plugin: basicsPlugin });
+
+ElTag.BaseComponent = ElTagPlus;
+ElCheckTag.BaseComponent = ElCheckTagPlus;
+
+export { ElTagPlus, ElCheckTagPlus, ElTag, ElCheckTag, ElTagRegister, ElCheckTagRegister };
 export default ElTag;

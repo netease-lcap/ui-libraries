@@ -1,10 +1,22 @@
+import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as plugins from './plugins';
 import './index.css';
 
 function AbsoluteLayout(props, { slots }) {
-  return <div class="el-absolute-layout" {...props}>{slots.default()}</div>;
+  return (
+    <div class="el-absolute-layout" {...props}>
+      {slots.default()}
+    </div>
+  );
 }
-export const ElAbsoluteLayout = registerComponent(AbsoluteLayout, plugins);
 
+function ElAbsoluteLayoutRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(plugins, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
+
+const ElAbsoluteLayout = registerComponent(AbsoluteLayout, plugins);
+ElAbsoluteLayout.BaseComponent = AbsoluteLayout;
+export { ElAbsoluteLayoutRegister, ElAbsoluteLayout };
 export default ElAbsoluteLayout;
