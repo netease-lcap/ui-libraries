@@ -9,7 +9,6 @@ function ElWatermarkRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElWatermark = registerComponent(ElWatermarkPlus, { plugin: basicsPlugin });
-ElWatermark.BaseComponent = ElWatermarkPlus;
 
 export { ElWatermarkPlus, ElWatermark, ElWatermarkRegister };
 export default ElWatermark;

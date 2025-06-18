@@ -13,7 +13,6 @@ function ElDatePickerRegister(BaseComponent, plugin = {}, extend = true) {
 const ElDatePicker = registerComponent(ElDatePickerPlus, { plugin: basicsPlugin });
 const ElFormDatePicker = withFormItem(ElDatePicker, 'el-form-date-picker');
 
-ElDatePicker.BaseComponent = ElDatePickerPlus;
 
 export { ElDatePickerPlus, ElDatePicker, ElFormDatePicker, ElDatePickerRegister };
 export default ElDatePicker;

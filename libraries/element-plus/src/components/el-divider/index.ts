@@ -9,7 +9,6 @@ function ElDividerRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElDivider = registerComponent(ElDividerPlus, { plugin: basicsPlugin });
-ElDivider.BaseComponent = ElDividerPlus;
 
 export { ElDividerPlus, ElDivider, ElDividerRegister };
 export default ElDivider;

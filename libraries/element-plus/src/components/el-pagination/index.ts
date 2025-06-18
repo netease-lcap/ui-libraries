@@ -10,7 +10,6 @@ function ElPaginationRegister(BaseComponent, plugin = {}, extend = true) {
 
 const ElPagination = registerComponent(ElPaginationPlus, { plugin: basicPlugin });
 
-ElPagination.BaseComponent = ElPaginationPlus;
 
 export { ElPaginationPlus, ElPagination, ElPaginationRegister };
 export default ElPagination;

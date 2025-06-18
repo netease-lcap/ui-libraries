@@ -12,7 +12,6 @@ function ElDescriptionsRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElDescriptions = registerComponent(ElDescriptionsPlus, { plugin: basicPlugin });
-ElDescriptions.BaseComponent = ElDescriptionsPlus;
 
 export { ElDescriptionsPlus, ElDescriptions, ElDescriptionsItem, ElDescriptionsCell, ElDescriptionsRegister };
 export default ElDescriptions;

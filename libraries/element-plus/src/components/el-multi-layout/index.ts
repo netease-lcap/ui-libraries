@@ -14,8 +14,6 @@ function ElMultiLayoutRegister(BaseComponent, plugin = {}, extend = true) {
 const ElMultiLayout = registerComponent(ElMultiLayoutPlus, { plugin: basicsPlugin });
 const ElMultiLayoutItem = registerComponent(ElMultiLayoutItemPlus, { plugin: itemPlugins });
 
-ElMultiLayout.BaseComponent = ElMultiLayoutPlus;
-ElMultiLayoutItem.BaseComponent = ElMultiLayoutItemPlus;
 
 export { ElMultiLayoutRegister, ElMultiLayout, ElMultiLayoutItem };
 export default ElMultiLayout;

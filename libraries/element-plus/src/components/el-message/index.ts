@@ -11,8 +11,6 @@ function ElMessageRegister(BaseComponent, plugin = {}, extend = true) {
 const ElMessageDesigner = MessageDesigner;
 const ElMessage = Message;
 
-ElMessageDesigner.BaseComponent = MessageDesigner;
-ElMessage.BaseComponent = Message;
 
 export { ElMessageDesigner, ElMessageRegister, ElMessage };
 export default Message;

@@ -16,7 +16,6 @@ const ElSelect = registerComponent<ISelectProps>(ElSelectV2Plus, {
 });
 const ElFormSelect = withFormItem(ElSelect, 'el-form-select');
 
-ElSelect.BaseComponent = ElSelectV2Plus;
 
 export { ElSelectV2Plus, ElSelect, ElOption, ElFormSelect, ElSelectRegister };
 export type { ISelectProps };

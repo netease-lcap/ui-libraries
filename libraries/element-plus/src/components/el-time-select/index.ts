@@ -12,7 +12,6 @@ function ElTimeSelectRegister(BaseComponent, plugin = {}, extend = true) {
 const ElTimeSelect = registerComponent(ElTimeSelectPlus, { plugin: basicPlugin });
 const ElFormTimeSelect = withFormItem(ElTimeSelect, 'el-form-time-select');
 
-ElTimeSelect.BaseComponent = ElTimeSelectPlus;
 
 export default ElTimeSelect;
 

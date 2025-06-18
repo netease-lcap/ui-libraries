@@ -12,6 +12,5 @@ function ElColRegister(BaseComponent, plugin = {}, extend = true) {
 const ElRow = ElRowPlus;
 const ElCol = registerComponent(ElColPlus, { plugin: columnPlugin });
 
-ElCol.BaseComponent = ElColPlus;
 
 export { ElRowPlus, ElColPlus, ElRow, ElCol, ElColRegister };

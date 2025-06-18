@@ -12,7 +12,6 @@ function ElTransferRegister(BaseComponent, plugin = {}, extend = true) {
 const ElTransfer = registerComponent(ElTransferPlus, { plugin: basicsPlugin });
 const ElFormTransfer = withFormItem(ElTransfer, 'el-form-transfer');
 
-ElTransfer.BaseComponent = ElTransferPlus;
 
 export { ElTransferPlus, ElTransfer, ElFormTransfer, ElTransferRegister };
 export default ElTransfer;

@@ -13,7 +13,6 @@ function ElInputTagRegister(BaseComponent, plugin = {}, extend = true) {
 const ElInputTag = registerComponent(ElInputTagPlus, { plugin: basicsPlugin });
 const ElFormInputTag = withFormItem(ElInputTag, 'el-form-input-tag');
 
-ElInputTag.BaseComponent = ElInputTagPlus;
 
 export { ElInputTagPlus, ElInputTag, ElFormInputTag, ElInputTagRegister };
 export default ElInputTag;

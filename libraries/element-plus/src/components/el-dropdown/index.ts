@@ -24,8 +24,6 @@ const ElDropdownItem = registerComponent(ElDropdownItemPlus, { plugin: itemPlugi
 
 const ElDropdownMenu = ElDropdownMenuPlus;
 
-ElDropdown.BaseComponent = ElDropdownPlus;
-ElDropdownItem.BaseComponent = ElDropdownItemPlus;
 
 export { ElDropdownPlus, ElDropdownItemPlus, ElDropdownMenuPlus, ElDropdown, ElDropdownItem, ElDropdownMenu, ElDropdownRegister, ElDropdownItemRegister };
 

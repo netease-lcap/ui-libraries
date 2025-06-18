@@ -18,8 +18,6 @@ function ElAnchorLinkRegister(BaseComponent, plugin = {}, extend = true) {
 const ElAnchor = registerComponent(ElAnchorPlus, { plugin: basicsPlugin });
 const ElAnchorLink = registerComponent(ElAnchorLinkPlus, { plugin: itemPlugins });
 
-ElAnchor.BaseComponent = ElAnchorPlus;
-ElAnchorLink.BaseComponent = ElAnchorLinkPlus;
 
 export const ElAnchorItem = AnchorItem;
 export { ElAnchorPlus, ElAnchorLinkPlus, ElAnchor, ElAnchorLink, ElAnchorRegister, ElAnchorLinkRegister };

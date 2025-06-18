@@ -9,6 +9,5 @@ function ElAlertRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElAlert = registerComponent(ElAlertPlus, { plugin: basicsPlugin });
-ElAlert.BaseComponent = ElAlertPlus;
 export { ElAlertPlus, ElAlert, ElAlertRegister };
 export default ElAlert;

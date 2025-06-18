@@ -10,6 +10,5 @@ function ElCardRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElCard = registerComponent(ElCardPlus, { plugin: basicsPlugin });
-ElCard.BaseComponent = ElCardPlus;
 export { ElCardPlus, ElCard, ElCardRegister };
 export default ElCard;

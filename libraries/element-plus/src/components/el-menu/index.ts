@@ -29,10 +29,6 @@ const ElMenuItem = registerComponent(ElMenuItemPlus, { plugin: menuItemPlugin })
 const ElMenuItemGroup = registerComponent(ElMenuItemGroupPlus, { plugin: itemPlugin });
 const ElSubMenu = registerComponent(ElSubMenuPlus, { plugin: itemPlugin });
 
-ElMenu.BaseComponent = ElMenuPlus;
-ElMenuItem.BaseComponent = ElMenuItemPlus;
-ElMenuItemGroup.BaseComponent = ElMenuItemGroupPlus;
-ElSubMenu.BaseComponent = ElSubMenuPlus;
 
 export { ElMenu, ElMenuItem, ElMenuItemGroup, ElSubMenu, ElMenuRegister, ElMenuItemRegister, ElMenuItemGroupRegister, ElSubMenuRegister };
 export default ElMenu;

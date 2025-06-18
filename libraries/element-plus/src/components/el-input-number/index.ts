@@ -13,7 +13,6 @@ function ElInputNumberRegister(BaseComponent, plugin = {}, extend = true) {
 const ElInputNumber = registerComponent(ElInputNumberPlus, { plugin: basicsPlugin });
 const ElFormInputNumber = withFormItem(ElInputNumber, 'el-form-input-number');
 
-ElInputNumber.BaseComponent = ElInputNumberPlus;
 
 
 export { ElInputNumberPlus, ElInputNumber, ElFormInputNumber, ElInputNumberRegister };

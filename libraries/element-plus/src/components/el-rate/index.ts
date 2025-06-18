@@ -13,7 +13,6 @@ function ElRateRegister(BaseComponent, plugin = {}, extend = true) {
 const ElRate = registerComponent(ElRatePlus, { plugin: basicsPlugin });
 const ElFormRate = withFormItem(ElRate, 'el-form-rate');
 
-ElRate.BaseComponent = ElRatePlus;
 
 export { ElRatePlus, ElRate, ElFormRate, ElRateRegister };
 export default ElRate;

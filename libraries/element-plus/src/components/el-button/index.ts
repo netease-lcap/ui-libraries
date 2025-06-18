@@ -11,7 +11,6 @@ function ElButtonRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElButton = registerComponent(ElButtonPlus, { plugin: basicsPlugin });
-ElButton.BaseComponent = ElButtonPlus;
 export { ElButtonPlus, ElButton, ElButtonRegister };
 
 export default ElButton;

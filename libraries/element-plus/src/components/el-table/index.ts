@@ -30,9 +30,6 @@ const ElTableToolBar = registerComponent<{ columns: any; selectedColumns: any; s
   name: 'ElTableToolBar',
 });
 
-ElTable.BaseComponent = ElTablePlus;
-ElTableColumn.BaseComponent = ElTableColumnPlus;
-ElTableToolBar.BaseComponent = ElFlex;
 
 export { ElTableColumn, ElTable, ElTablePlus, ElTableToolBar, ElTableRegister, ElTableColumnRegister, ElTableToolBarRegister };
 export default ElTable;

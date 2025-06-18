@@ -9,7 +9,6 @@ function ElResultRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElResult = registerComponent(ElResultPlus, { plugin: basicsPlugin });
-ElResult.BaseComponent = ElResultPlus;
 
 export { ElResultPlus, ElResult, ElResultRegister };
 export default ElResult;

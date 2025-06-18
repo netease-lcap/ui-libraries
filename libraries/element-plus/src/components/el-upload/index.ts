@@ -15,7 +15,6 @@ const ElUpload = registerComponent(ElUploadPlus, {
 
 const ElFormUpload = withFormItem(ElUpload, 'el-form-upload');
 
-ElUpload.BaseComponent = ElUploadPlus;
 
 export default ElUpload;
 

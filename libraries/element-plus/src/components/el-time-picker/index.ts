@@ -16,7 +16,6 @@ const ElTimePicker = registerComponent(ElTimePickerPlus, {
 
 const ElFormTimePicker = withFormItem(ElTimePicker, 'el-time-picker');
 
-ElTimePicker.BaseComponent = ElTimePickerPlus;
 
 export default ElTimePicker;
 

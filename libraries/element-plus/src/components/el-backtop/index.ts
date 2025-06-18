@@ -11,6 +11,5 @@ function ElBacktopRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElBacktop = registerComponent(ElBacktopPlus, { plugin: basicsPlugin });
-ElBacktop.BaseComponent = ElBacktopPlus;
 export { ElBacktopPlus, ElBacktop, ElBacktopRegister, ElBacktopDesigner };
 export default ElBacktop;

@@ -9,7 +9,6 @@ function ElPopoverRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElPopover = registerComponent(ElPopoverPlus, { plugin: basicsPlugin });
-ElPopover.BaseComponent = ElPopoverPlus;
 
 export { ElPopoverPlus, ElPopover, ElPopoverRegister };
 export default ElPopover;

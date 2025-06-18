@@ -17,7 +17,6 @@ const ElMention = registerComponent(ElMentionPlus, {
 
 const ElFormMention = withFormItem(ElMention, 'el-form-mention');
 
-ElMention.BaseComponent = ElMentionPlus;
 
 export { ElMentionPlus, ElMention, ElFormMention, ElMentionRegister };
 export default ElMentionPlus;

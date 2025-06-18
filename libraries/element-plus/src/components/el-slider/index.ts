@@ -13,7 +13,6 @@ function ElSliderRegister(BaseComponent, plugin = {}, extend = true) {
 const ElSlider = registerComponent(ElSliderPlus, { plugin: basicsPlugin });
 const ElFormSlider = withFormItem(ElSlider, 'el-form-slider');
 
-ElSlider.BaseComponent = ElSliderPlus;
 
 export { ElSliderPlus, ElSlider, ElFormSlider, ElSliderRegister };
 export default ElSlider;

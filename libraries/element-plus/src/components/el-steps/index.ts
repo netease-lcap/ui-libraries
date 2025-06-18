@@ -17,8 +17,6 @@ function ElStepRegister(BaseComponent, plugin = {}, extend = true) {
 const ElSteps = registerComponent(ElStepsPlus, { plugin: basicsPlugin });
 const ElStep = registerComponent(ElStepPlus, { plugin: itemPlugin });
 
-ElSteps.BaseComponent = ElStepsPlus;
-ElStep.BaseComponent = ElStepPlus;
 
 export { ElStepsPlus, ElStepPlus, ElSteps, ElStep, ElStepsRegister, ElStepRegister };
 export default ElSteps;

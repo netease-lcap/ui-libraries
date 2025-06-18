@@ -13,7 +13,6 @@ function ElSwitchRegister(BaseComponent, plugin = {}, extend = true) {
 const ElSwitch = registerComponent(ElSwitchPlus, { plugin: basicsPlugin });
 const ElFormSwitch = withFormItem(ElSwitch, 'el-form-switch');
 
-ElSwitch.BaseComponent = ElSwitchPlus;
 
 export { ElSwitchPlus, ElSwitch, ElFormSwitch, ElSwitchRegister };
 export default ElSwitch;

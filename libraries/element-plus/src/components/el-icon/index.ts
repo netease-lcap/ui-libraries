@@ -9,6 +9,5 @@ function ElIconRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElIcon = Icon;
-ElIcon.BaseComponent = Icon;
 export { ElIconRegister, ElIcon, Icon };
 export default ElIcon;

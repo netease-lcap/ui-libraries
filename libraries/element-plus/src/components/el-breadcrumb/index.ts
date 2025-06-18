@@ -17,7 +17,5 @@ function ElBreadcrumbItemRegister(BaseComponent, plugin = {}, extend = true) {
 const ElBreadcrumb = registerComponent(ElBreadcrumbPlus, { plugin: basicsPlugin });
 const ElBreadcrumbItem = registerComponent(ElBreadcrumbItemPulus, { plugin: itemPlugins });
 
-ElBreadcrumb.BaseComponent = ElBreadcrumbPlus;
-ElBreadcrumbItem.BaseComponent = ElBreadcrumbItemPulus;
 export { ElBreadcrumbPlus, ElBreadcrumb, ElBreadcrumbItem, ElBreadcrumbRegister, ElBreadcrumbItemRegister };
 export default ElBreadcrumb;

@@ -9,7 +9,6 @@ function ElAffixRegister(BaseComponent, plugin = {}, extend = true) {
 }
 const ElAffix = registerComponent(ElAffixPlus, { plugin: basicsPlugin });
 
-ElAffix.BaseComponent = ElAffixPlus;
 
 export { ElAffixPlus, ElAffix, ElAffixRegister };
 export default ElAffix;

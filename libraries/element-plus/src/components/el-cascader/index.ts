@@ -11,7 +11,6 @@ function ElCascaderRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElCascader = registerComponent(ElCascaderPlus, { plugin: basicsPlugin });
-ElCascader.BaseComponent = ElCascaderPlus;
 const ElFormCascader = withFormItem(ElCascader, 'el-form-cascader');
 
 export { ElCascaderPlus, ElCascader, ElFormCascader, ElCascaderRegister };

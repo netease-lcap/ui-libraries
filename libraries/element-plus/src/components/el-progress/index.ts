@@ -9,7 +9,6 @@ function ElProgressRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElProgress = registerComponent(ElProgressPlus, { plugin: basicsPlugin });
-ElProgress.BaseComponent = ElProgressPlus;
 
 export { ElProgressPlus, ElProgress, ElProgressRegister };
 export default ElProgress;
