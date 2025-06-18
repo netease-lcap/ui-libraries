@@ -11,8 +11,5 @@ function ElNotificationRegister(BaseComponent, plugin = {}, extend = true) {
 const ElNotificationDesigner = NotificationDesigner;
 const ElNotification = Notification;
 
-ElNotificationDesigner.BaseComponent = NotificationDesigner;
-ElNotification.BaseComponent = Notification;
-
 export { ElNotificationRegister, ElNotificationDesigner, ElNotification };
 export default Notification;

@@ -2,7 +2,7 @@ import { RouterView } from 'vue-router';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 // import RouterView from './router-view';
-import * as plugins from './plugins';
+// import * as plugins from './plugins';
 // import ElRouterView from './router-view';
 
 function ElRouterViewRegister(BaseComponent, plugin = {}, extend = true) {
@@ -11,8 +11,6 @@ function ElRouterViewRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElRouterView = RouterView;
-
-ElRouterView.BaseComponent = RouterView;
 
 export { ElRouterViewRegister, ElRouterView };
 export default ElRouterView;

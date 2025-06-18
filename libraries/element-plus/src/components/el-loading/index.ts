@@ -9,6 +9,5 @@ function ElLoadingRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElLoading = registerComponent(Loading, { plugin: basicsPlugin });
-ElLoading.BaseComponent = Loading;
 export { ElLoadingRegister, ElLoading };
 export default ElLoading;

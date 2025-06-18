@@ -9,6 +9,5 @@ function ElFlexRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElFlex = Flex;
-ElFlex.BaseComponent = Flex;
 export { ElFlexRegister, ElFlex, Flex };
 export default ElFlex;

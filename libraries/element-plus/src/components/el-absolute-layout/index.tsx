@@ -17,6 +17,6 @@ function ElAbsoluteLayoutRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElAbsoluteLayout = registerComponent(AbsoluteLayout, plugins);
-ElAbsoluteLayout.BaseComponent = AbsoluteLayout;
+
 export { ElAbsoluteLayoutRegister, ElAbsoluteLayout };
 export default ElAbsoluteLayout;

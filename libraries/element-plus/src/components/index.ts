@@ -8,7 +8,14 @@ export { ElInputPlus, ElInput, ElFormInput, ElInputRegister } from './el-input';
 export { ElSelect, ElOption, ElFormSelect, ElSelectRegister } from './el-select';
 export { ElCascader, ElFormCascader, ElCascaderRegister } from './el-cascader';
 export { ElCheckbox, ElCheckboxGroup, ElFormCheckboxGroup, ElCheckboxRegister } from './el-checkbox';
-export { ElTable, ElTableColumn, ElTablePlus, ElTableRegister, ElTableColumnRegister, ElTableToolBarRegister } from './el-table';
+export {
+  ElTable,
+  ElTableColumn,
+  ElTablePlus,
+  ElTableRegister,
+  ElTableColumnRegister,
+  ElTableToolBarRegister,
+} from './el-table';
 export { ElFormItemWrap, ElForm, ElFormItem, ElFormRegister, ElFormItemWrapRegister } from './el-form';
 // export { ElPagination } from 'element-plus';
 export { ElAbsoluteLayout, ElAbsoluteLayoutRegister } from './el-absolute-layout';
@@ -29,11 +36,20 @@ export { ElPagination, ElPaginationRegister } from './el-pagination';
 export { ElDescriptions, ElDescriptionsItem, ElDescriptionsCell, ElDescriptionsRegister } from './el-descriptions';
 export { ElImage, ElImageViewer, ElImageRegister, ElImageViewerRegister } from './el-image';
 export { ElScrollbar, ElScrollbarRegister } from './el-scrollbar';
-export { ElMenu, ElMenuItem, ElMenuItemGroup, ElSubMenu, ElMenuRegister, ElMenuItemRegister, ElMenuItemGroupRegister, ElSubMenuRegister } from './el-menu';
+export {
+  ElMenu,
+  ElMenuItem,
+  ElMenuItemGroup,
+  ElSubMenu,
+  ElMenuRegister,
+  ElMenuItemRegister,
+  ElMenuItemGroupRegister,
+  ElSubMenuRegister,
+} from './el-menu';
 export { ElUpload, ElFormUpload, ElUploadRegister } from './el-upload';
 export { ElTimePicker, ElFormTimePicker, ElTimePickerRegister } from './el-time-picker';
 export { ElTimeSelect, ElFormTimeSelect, ElTimeSelectRegister } from './el-time-select';
-export { ElIcon } from './el-icon';
+export { ElIcon, ElIconRegister } from './el-icon';
 export { ElMention, ElFormMention, ElMentionRegister } from './el-mention';
 export { ElBreadcrumb, ElBreadcrumbItem, ElBreadcrumbRegister, ElBreadcrumbItemRegister } from './el-breadcrumb';
 export { ElBacktop, ElBacktopDesigner, ElBacktopRegister } from './el-backtop';
@@ -65,8 +81,8 @@ export { ElCollapse, ElCollapseItem, ElCollapseRegister, ElCollapseItemRegister 
 export { ElDivider, ElDividerRegister } from './el-divider';
 export { ElTimeline, ElTimelineItem, ElTimelineRegister, ElTimelineItemRegister } from './el-timeline';
 export { ElWatermark, ElWatermarkRegister } from './el-watermark';
-export { ElMultiLayout, ElMultiLayoutItem } from './el-multi-layout';
-export { ElListComponents } from './el-list-components';
+export { ElMultiLayout, ElMultiLayoutItem, ElMultiLayoutRegister } from './el-multi-layout';
+export { ElListComponents, ElListComponentsRegister } from './el-list-components';
 // import elementPlus from 'element-plus';
 // export { elementPlus };
 

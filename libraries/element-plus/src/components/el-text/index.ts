@@ -8,6 +8,5 @@ function ElTextRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElText = Text;
-ElText.BaseComponent = Text;
 export { ElTextRegister, ElText };
 export default ElText;

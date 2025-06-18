@@ -7,7 +7,5 @@ function ElListComponentsRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-ElListComponents.BaseComponent = ElListComponents;
-
 export { ElListComponentsRegister, ElListComponents };
 export default ElListComponents;
