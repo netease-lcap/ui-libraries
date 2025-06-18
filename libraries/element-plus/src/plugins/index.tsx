@@ -66,8 +66,7 @@ export function registerComponent<T>(Component, options) {
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
       // const provideRef = injectRef?.value ? { ...injectRef.value } : ref({});
-      const provideRef = ref({});
-      provideRef.value = { ...(injectRef?.value ?? {}) };
+      const provideRef = ref(injectRef);
       const router = useRouter?.();
       const route = useRoute?.();
       const useStore = createStore((set) => ({
@@ -129,7 +128,7 @@ export function registerComponent<T>(Component, options) {
       );
 
       watch(componentRef, (value) => _.defaults(exposeRef.value, value));
-      // watch(injectRef, (value) => _.defaults(provideRef.value, value), { immediate: true });
+      watch(injectRef, (value) => _.defaults(provideRef.value, value), { immediate: true });
       expose(exposeRef.value);
 
       provide($provide, provideRef);
