@@ -9,6 +9,5 @@ function ElDialogRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElDialog = registerComponent(ElDialogPlus, { plugin: basicsPlugin });
-ElDialog.BaseComponent = ElDialogPlus;
 export { ElDialogPlus, ElDialog, ElDialogRegister };
 export default ElDialog;

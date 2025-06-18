@@ -67,7 +67,6 @@ const EditDefault = {
             })
             ?.map((node) => cloneVNode(node, {
                 onValidateSuccess: () => {
-                  // editable.value = false;
                 },
                 ref: formItemRef,
               }))}
