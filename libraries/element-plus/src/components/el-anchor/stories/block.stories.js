@@ -39,24 +39,6 @@ export const Default = {
   }),
 };
 
-export const DataSource = {
-  name: '使用数据源',
-  render: () => ({
-    template: `<el-anchor :dataSource="[{}]"></el-anchor>`,
-  }),
-};
-
-// /*  数据源截图 */
-// export const Demo1 = {
-//   name: '数据源',
-//   render: () => ({
-//     components: {
-//       exampleDemo: BlockDemo1,
-//     },
-//     template: '<example-demo></example-demo>',
-//   }),
-// };
-
 export const AnchorItem = {
   name: '锚点项',
   render: () => ({

@@ -39,12 +39,3 @@ export const Default = {
     </el-collapse>`,
   }),
 };
-
-export const DataSource = {
-  name: '使用数据源',
-  render: () => ({
-    template: `
-      <el-collapse :dataSource="[{}]"></el-collapse>
-    `,
-  }),
-};
