@@ -206,6 +206,44 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
   return `<ElFormInputPro ${formItemAttrs.join(' ')} placeholder="请输入${label}"></ElFormInputPro>`;
 }
 
+type MinMaxString = `${'min' | 'max'}(${string})`;
+/**
+ * 类型守卫函数，判断字符串是否符合min/max格式
+ */
+function isMinMaxString(str: string): str is MinMaxString {
+  return /^(min|max)\([-+]?\d+\)$/.test(str);
+}
+
+/**
+ * 解析带min/max前缀的数字字符串，确保结果在 JS 安全整数范围内
+ * @param str - 格式为 "min(数字)" 或 "max(数字)" 的字符串
+ * @returns 处理后的安全整数
+ */
+function parseSafeNumberRule(str: string): string {
+  const match = str.match(/^(min|max)\(([-+]?\d+)\)$/);
+  if (!match) {
+    return str;
+  }
+  const [, prefix, numStr] = match;
+  try {
+    // 使用BigInt确保精度
+    const bigNum = BigInt(numStr);
+    const minSafe = BigInt(Number.MIN_SAFE_INTEGER);
+    const maxSafe = BigInt(Number.MAX_SAFE_INTEGER);
+    let safeNumber;
+    if (bigNum < minSafe) {
+      safeNumber = Number.MIN_SAFE_INTEGER;
+    } else if (bigNum > maxSafe) {
+      safeNumber = Number.MAX_SAFE_INTEGER;
+    } else {
+      safeNumber = Number(bigNum); // 转换回number
+    }
+    return `${prefix}(${safeNumber})`;
+  } catch (error) {
+    return str;
+  }
+}
+
 /**
  * 表单项
  * @param {*} entity
@@ -226,10 +264,14 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
     const rules: Array<string> = [];
     if (options.needRules && property.rules && property.rules.length) {
       property.rules.forEach((rule) => {
+        let curRule = rule;
         if (!rule.endsWith(')')) {
-          rule += '()';
+          curRule += '()';
         }
-        rules.push(`nasl.validation.${rule}`);
+        if (isMinMaxString(curRule)) {
+          curRule = parseSafeNumberRule(curRule);
+        }
+        rules.push(`nasl.validation.${curRule}`);
       });
     }
     if (required) rules.push('nasl.validation.required()');

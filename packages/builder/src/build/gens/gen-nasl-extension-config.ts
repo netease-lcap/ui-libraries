@@ -1,9 +1,11 @@
 import path from 'path';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
+import { capitalize } from 'lodash';
 import genNaslComponentConfig, { processComponentConfigExtends } from './gen-nasl-component-config';
 import genNaslLogicsConfig from './gen-nasl-logics-config';
 import { LCAP_UI_CONFIG_PATH } from '../../overload/constants';
+import logger from '../../utils/logger';
 
 export interface GenNaslExtensionConfigProps {
   // cwd
@@ -104,6 +106,137 @@ function getFrontEndLibray(frameworkKind, frameworkUI, viewComponents, logics) {
   });
 }
 
+function getConfiguration(rootPath: string) {
+  const configurationPath = path.resolve(rootPath, 'src/settings', 'configuration.json');
+  let properties = [];
+  try {
+    const isExists = fs.existsSync(configurationPath);
+    if (!isExists) {
+      return undefined;
+    }
+
+    const configurationList = fs.readJSONSync(configurationPath);
+    properties = configurationList.map((item: any) => {
+        item.concept = 'ConfigProperty';
+        return item;
+      }) || [];
+
+    return {
+      concept: 'Configuration',
+      groups: [
+        {
+          name: 'custom',
+          concept: 'ConfigGroup',
+          properties,
+        },
+      ],
+    };
+  } catch (error) {
+    logger.error('configuration格式不对,请检查');
+  }
+
+  return undefined;
+}
+
+/* 获取数据类型 */
+function formatTypeAnnotation(type, pkg: any) {
+  const typeAnnotation: any = {
+    concept: 'TypeAnnotation',
+  };
+  const resultArr = /(\[([\s\S]*)\])/.exec(type);
+  const resultMap = /(<([\s\S]*,[\s\S]*)>)/.exec(type);
+  if (resultArr) {
+    typeAnnotation.typeName = 'List';
+    typeAnnotation.typeKind = 'generic';
+    typeAnnotation.typeNamespace = 'nasl.collection';
+    typeAnnotation.typeArguments = [];
+    typeAnnotation.typeArguments[0] = formatTypeAnnotation(resultArr[2], pkg);
+  } else if (resultMap) {
+    const resultMapList = resultMap[2].split(',');
+    typeAnnotation.typeName = 'Map';
+    typeAnnotation.typeKind = 'generic';
+    typeAnnotation.typeNamespace = 'nasl.collection';
+    typeAnnotation.typeArguments = [];
+    typeAnnotation.typeArguments[0] = formatTypeAnnotation(resultMapList[0], pkg);
+    typeAnnotation.typeArguments[1] = formatTypeAnnotation(resultMapList[1], pkg);
+  } else {
+    const baseTypeList = ['Long', 'Boolean', 'Decimal', 'String', 'Date', 'DateTime', 'Time'];
+    const targeType = capitalize(type);
+    if (baseTypeList.includes(targeType)) {
+      typeAnnotation.typeKind = 'primitive';
+      typeAnnotation.typeName = targeType;
+      typeAnnotation.typeNamespace = 'nasl.core';
+    } else {
+      typeAnnotation.typeKind = 'reference';
+      typeAnnotation.typeName = targeType;
+      typeAnnotation.typeNamespace = `extensions.${pkg.name}.structures`;
+    }
+  }
+  return typeAnnotation;
+}
+
+function getStructures(rootPath: string, pkg: any) {
+  const configFilePath = path.resolve(rootPath, 'src/settings', 'structures.json');
+  const isExists = fs.existsSync(configFilePath);
+  if (!isExists) {
+    return undefined;
+  }
+
+  try {
+    const resultList: any[] = [];
+    const structureList = fs.readJSONSync(configFilePath);
+    Object.keys(structureList).forEach((item) => {
+      const resultObj: any = {};
+      resultObj.name = item;
+      const structureData = structureList[item];
+      const resultStructureList = Object.keys(structureData).map((it) => {
+        const structureOpions = structureData[it];
+        if (it === '__description') {
+          resultObj.description = structureOpions;
+          return null;
+        }
+          const list = structureOpions.split('-');
+          const obj = {
+            title: list[1],
+            name: it,
+            defaultValue: list[2] || undefined,
+            typeAnnotation: formatTypeAnnotation(list[0], pkg),
+          };
+          return obj;
+      });
+      resultObj.properties = resultStructureList.filter((item) => !!item);
+      resultList.push(resultObj);
+    });
+
+    return resultList;
+  } catch (error) {
+    logger.error('structures格式不对,请检查');
+  }
+
+  return undefined;
+}
+
+function getAnnotations(rootPath: string) {
+  const configFilePath = path.resolve(rootPath, 'src/settings', 'annotations.json');
+  const isExists = fs.existsSync(configFilePath);
+  if (!isExists) {
+    return undefined;
+  }
+
+  try {
+    const annotationList = fs.readJSONSync(configFilePath);
+    return annotationList.map((item: any) => ({
+      ...item,
+      concept: item.concept ?? 'Annotation',
+      applyTo: item.applyTo ?? ['ViewElement'],
+    }));
+  } catch (e) {
+    logger.error('annotations格式不对,请检查');
+  }
+
+  return undefined;
+}
+
 export default async function getNaslExtensionConfig({
   rootPath,
   assetsPublicPath,
@@ -125,7 +258,11 @@ export default async function getNaslExtensionConfig({
     });
 
     const projectAssetPath = 'assets';
-    if (componentConfig.icon && componentConfig.icon.indexOf('.') !== -1 && fs.existsSync(path.join(rootPath, projectAssetPath, componentConfig.icon))) {
+    if (
+      componentConfig.icon
+      && componentConfig.icon.indexOf('.') !== -1
+      && fs.existsSync(path.join(rootPath, projectAssetPath, componentConfig.icon))
+    ) {
       componentConfig.icon = `${assetsPublicPath}/${libInfo}/${projectAssetPath}/${componentConfig.icon}`;
     }
 
@@ -159,6 +296,10 @@ export default async function getNaslExtensionConfig({
   const logics = await genNaslLogicsConfig(rootPath);
   const feLibraries = getFrontEndLibray(frameworkKind, frameworkUI, viewComponents, logics);
 
+  const configuration = getConfiguration(rootPath);
+  const structures = getStructures(rootPath, pkgInfo);
+  const annotations = getAnnotations(rootPath);
+
   return {
     config: {
       name: pkgInfo.name,
@@ -169,6 +310,9 @@ export default async function getNaslExtensionConfig({
       subType: 'extension',
       version: pkgInfo.version,
       frontends: feLibraries,
+      configuration,
+      structures,
+      annotations,
       externalDependencyMap: {
         npm: getPeerDependencies(pkgInfo),
       },

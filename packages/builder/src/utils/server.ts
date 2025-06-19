@@ -2,6 +2,7 @@
 /* eslint-disable global-require */
 import pc from 'picocolors';
 import { isFunction } from 'lodash';
+import open from 'open';
 import httpsConfig from './https';
 
 const fs = require('fs');
@@ -105,6 +106,7 @@ LiveServer.start = function (options) {
   const cors = options.cors || false;
   const https = options.https || null;
   const middlewares = options.middlewares || [];
+  const openPath = options.openURL || '';
 
   // Setup a web server
   const app = connect();
@@ -140,6 +142,26 @@ LiveServer.start = function (options) {
     protocol = 'http';
   }
 
+  let resolve; let
+reject;
+  const resultPromise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+
+  let clients: any[] = [];
+
+  const result = {
+    server,
+    send: (msg) => {
+      clients.forEach((ws) => {
+        if (!ws) {
+          return;
+        }
+        ws.send(msg);
+      });
+    },
+  };
   // Handle server startup errors
   server.addListener('error', (e) => {
     if (e.code === 'EADDRINUSE') {
@@ -151,6 +173,7 @@ LiveServer.start = function (options) {
     } else {
       console.log(pc.red(e.toString()));
       LiveServer.shutdown();
+      reject(e);
     }
   });
 
@@ -163,7 +186,7 @@ LiveServer.start = function (options) {
     const openHost = host === '0.0.0.0' ? '127.0.0.1' : host;
 
     const serveURL = `${protocol}://${serveHost}:${address.port}`;
-    const openURL = `${protocol}://${openHost}:${address.port}`;
+    const openURL = `${protocol}://${openHost}:${address.port}${openPath}`;
 
     let serveURLs = [serveURL];
     if (address.address === '0.0.0.0') {
@@ -198,13 +221,20 @@ LiveServer.start = function (options) {
     } else {
       console.log(pc.green(`Serving ${root} at ${openURL} (${serveURL})`));
     }
+
+    resolve(result);
+
+    if (openPath) {
+      setTimeout(() => {
+        open(openURL);
+      }, 1000);
+    }
   });
 
   // Setup server to listen at port
   server.listen(port, host);
 
   // WebSocket
-  let clients: any[] = [];
   server.addListener('upgrade', (request, socket, head) => {
     const ws = new WebSocket(request, socket, head);
     ws.onopen = function () {
@@ -233,17 +263,7 @@ LiveServer.start = function (options) {
     clients.push(ws);
   });
 
-  return {
-    server,
-    send: (msg) => {
-      clients.forEach((ws) => {
-        if (!ws) {
-          return;
-        }
-        ws.send(msg);
-      });
-    },
-  };
+  return resultPromise;
 };
 
 LiveServer.shutdown = () => {

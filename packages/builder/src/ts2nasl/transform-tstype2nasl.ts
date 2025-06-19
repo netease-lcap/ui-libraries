@@ -46,7 +46,7 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference, typeNames): 
       inferred: false,
       ruleMap: new Map(),
       typeArguments,
-    };
+    } as any;
   } else if (typeName.type === 'Identifier') {
     const primitive = isPrimitive(typeName.name);
 
@@ -63,7 +63,7 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference, typeNames): 
         inferred: false,
         ruleMap: new Map(),
         typeArguments: [],
-      };
+      } as any;
     }
 
     const NaslTypes = ['Current', 'CurrentDynamic'];
@@ -91,7 +91,7 @@ function transformTSTypeReference(node: babelTypes.TSTypeReference, typeNames): 
       inferred: false,
       ruleMap: new Map(),
       typeArguments,
-    };
+    } as any;
   }
 
   return undefined;
@@ -108,7 +108,7 @@ function transformTSUnionType(node: babelTypes.TSUnionType, typeNames): TypeAnno
     inferred: false,
     ruleMap: new Map(),
     typeArguments,
-  };
+  } as any;
 }
 
 function transformTSFunctionType(node: babelTypes.TSFunctionType, typeNames): TypeAnnotation {
@@ -151,7 +151,7 @@ function transformTSFunctionType(node: babelTypes.TSFunctionType, typeNames): Ty
     ruleMap: new Map(),
     typeArguments,
     returnType,
-  };
+  } as any;
 }
 
 function transformTSTypeLiteral(node: babelTypes.TSTypeLiteral, typeNames: string[]): TypeAnnotation {
@@ -188,7 +188,7 @@ function transformTSTypeLiteral(node: babelTypes.TSTypeLiteral, typeNames: strin
     inferred: false,
     ruleMap: new Map(),
     properties,
-  };
+  } as any;
 }
 // eslint-disable-next-line consistent-return
 function transformTypeAnnotation(node: babelTypes.TSType, typeNames: string[] = []): TypeAnnotation | undefined {
