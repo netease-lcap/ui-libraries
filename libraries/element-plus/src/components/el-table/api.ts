@@ -226,22 +226,6 @@ namespace nasl.ui {
     })
     border: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Bottom Content',
-    //   description: '表格底部内容，可以用于自定义列设置等。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // bottomContent: any;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '单元格数据为空时呈现的内容',
-    //   description: '单元格数据为空时呈现的内容',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // cellEmptyContent: any;
-
     @Prop({
       group: '数据属性',
       title: '数据源',

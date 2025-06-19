@@ -938,6 +938,8 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
+
+      structured: true,
       // selector: 'multiple',
       selector: [
         {
@@ -1259,6 +1261,18 @@ namespace nasl.ui {
       description: '对标题进行自定义',
     })
     slotTitle: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '多级表头',
+      description: '多级表头',
+      snippets: [
+        {
+          title: '表格列',
+          code: '<el-table-column-pro data-nodepath-multiple="ture"><template #title><el-text text="表格列"></el-text></template></el-table-column-pro>',
+        },
+      ],
+    })
+    slotDefault: () => Array<ViewComponent>;
 
     // @Slot({
     //   title: '展开列内容',

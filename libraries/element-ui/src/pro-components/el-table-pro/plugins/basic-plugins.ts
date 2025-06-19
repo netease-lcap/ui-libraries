@@ -266,8 +266,9 @@ export const useTable: NaslComponentPluginOptions = {
       const columns = vnodes?.flatMap((vnode) => {
         if (!vnode.tag?.includes('ElTableColumnPro')) return [];
         const attrs = _.get(vnode, 'data.attrs', {});
-        const { cell, title, edit, children } = _.get(vnode, 'data.scopedSlots', {});
-        const childrens = _.isFunction(children) ? { children: renderSlot(children()) } : {};
+        const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
+        const children = _.get(vnode, 'componentOptions.children', {});
+        const childrens = children?.length ? { children: renderSlot(children) } : {};
         const listeners = _.get(vnode, 'componentOptions.listeners', {});
         const titleProps = _.isFunction(title)
           ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
