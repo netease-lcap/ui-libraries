@@ -7,7 +7,7 @@ import { ElPagination } from 'element-plus';
 
 import _ from 'lodash';
 // import i18n from '../../../../dist-theme/i18n.json';
-import { transformKeys } from '@/components/index';
+import { transformKeys } from '@/utils';
 
 import Component from '../index';
 

@@ -86,17 +86,6 @@ export { ElListComponents, ElListComponentsRegister } from './el-list-components
 // import elementPlus from 'element-plus';
 // export { elementPlus };
 
-export function transformKeys(obj: Record<string, any>): Record<string, any> {
-  const result = _.reduce(
-    obj,
-    (result, value, key) => {
-      const keys = _.includes(key, '_') ? key.replace('_', '.') : key;
-      _.set(result, keys, value);
-      return result;
-    },
-    {} as Record<string, any>,
-  );
-  return { el: result };
-}
+
 
 export const locale = { zhCn };
