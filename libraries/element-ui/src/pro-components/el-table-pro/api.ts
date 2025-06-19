@@ -485,6 +485,29 @@ namespace nasl.ui {
       order: nasl.core.String;
       compare?: Function;
     } = { field: undefined, order: 'desc' };
+
+
+
+    @Prop({
+      group: '样式属性',
+      title: '表格行动态样式',
+      description: '动态设置表格行背景色、字体颜色等样式',
+      docDescription: '动态设置表格行背景色、字体颜色等样式',
+      bindOpen: true,
+      setter: {
+          concept: 'AnonymousFunctionSetter',
+      }
+    })
+    rowStyle: (current: Current<T>) => {
+      /**
+       * @title 表格行背景颜色
+       */
+      backgroundColor?: nasl.core.String,
+      /**
+       * @title 表格行字体颜色
+       */
+      color?: nasl.core.String
+    };
     // @Prop({
     //   group: '主要属性',
     //   title: 'Pagination Affixed Bottom',
@@ -685,7 +708,7 @@ namespace nasl.ui {
         options: [{ title: '行拖拽' }, { title: '关闭拖拽' }],
       },
 
-      if: (_) => _.treeDisplay === false,
+      // if: (_) => _.treeDisplay === false,
     })
     dragSort: 'row' | 'disabled' = 'disabled';
 

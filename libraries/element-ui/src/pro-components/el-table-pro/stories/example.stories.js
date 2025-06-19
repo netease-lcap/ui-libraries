@@ -120,31 +120,24 @@ export const Default = {
 
    @display-columns-change="log"
    :resizable="true"
-   :treeDisplay="true"
-   :selection="true"
-   :hasIndexColumn="true"
    :multiple="false"
    @cell-click="log"
    :onDragSort="onDragSortChange"
     >
 
-    <el-table-column-pro title="申请人" colKey="createTime">
+    <el-table-column-pro title="申请人" colKey="createTime"> </el-table-column-pro>
 
-    </el-table-column-pro>
-
-        <el-table-column-pro title="渠道" colKey="channel" :sorter="true" :autoMerge="true" >
+        <el-table-column-pro title="渠道" colKey="channel" :sorter="true" :autoMerge="true" align="right" >
     <template #cell="cell">
-      <div>{{ cell.item.channel }}</div>
+    </template>
+    <template #children>
+    <el-table-column-pro title="申请人" colKey="createTime"> </el-table-column-pro>
+    <el-table-column-pro title="申请人" colKey="createTime"> </el-table-column-pro>
     </template>
     </el-table-column-pro>
 
-    <el-table-column-pro title="渠道" colKey="createTime" width="300" > </el-table-column-pro>
 
-    <template #expanded-row="{ item }">
-      <div class="more-detail">
-        <p class="title"><b>集群名称:</b></p><p class="content">{{item.channel}}</p><br/>
-      </div>
-    </template>
+
     </el-table-pro>`,
   }),
 };

@@ -2,7 +2,7 @@
 /* 组件功能扩展插件 */
 // export {};
 import _, { isFunction, isNil } from 'lodash';
-import { computed, ref, watch, onMounted, provide, getCurrentInstance } from '@vue/composition-api';
+import { computed, ref, watch, onMounted, provide, getCurrentInstance, toRef } from '@vue/composition-api';
 import {
   SelectOptions,
   Table,
@@ -209,6 +209,7 @@ export const useTable: NaslComponentPluginOptions = {
     ])({ type: hasIndexColumn.value });
     const sort = ref<string | null>(sorting.value?.field);
     const order = ref<string | null>(sorting.value?.order);
+    const rowStyle = props.useComputed('rowStyle', (value) => (_.isFunction(value) ? value : () => {}));
     const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
     const tree = props.useComputed('treeDisplay', (value) => (value
         ? {
@@ -265,9 +266,8 @@ export const useTable: NaslComponentPluginOptions = {
       const columns = vnodes?.flatMap((vnode) => {
         if (!vnode.tag?.includes('ElTableColumnPro')) return [];
         const attrs = _.get(vnode, 'data.attrs', {});
-
-        // const nodePath = _.get(attrs, 'data-nodepath');
-        const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
+        const { cell, title, edit, children } = _.get(vnode, 'data.scopedSlots', {});
+        const childrens = _.isFunction(children) ? { children: renderSlot(children()) } : {};
         const listeners = _.get(vnode, 'componentOptions.listeners', {});
         const titleProps = _.isFunction(title)
           ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
@@ -291,8 +291,13 @@ export const useTable: NaslComponentPluginOptions = {
             ...attrs,
             ...cellProps,
             ...titleProps,
-            attrs: {
-              // 'data-nodepath': nodePath,
+            ...childrens,
+            attrs: ({ row }) => {
+              return {
+                style: {
+                  ...(_.attempt(rowStyle.value, row) || {}),
+                },
+              };
             },
           },
         ];
@@ -405,6 +410,11 @@ export const useTable: NaslComponentPluginOptions = {
       };
     });
     provide(IN_ELEMENT_FORM, false);
+    const attr = ref(1);
+    setTimeout(() => {
+      attr.value = 2;
+      console.log('update');
+    }, 4000);
     return {
       data,
       onPageChange,
@@ -474,6 +484,7 @@ export const useTable: NaslComponentPluginOptions = {
         },
       },
       [$render](resultVNode, h, context) {
+        console.log('render update', attr.value);
         const vnodes = ctx.setupContext.slots?.default?.();
         const columns = renderSlot(vnodes);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];

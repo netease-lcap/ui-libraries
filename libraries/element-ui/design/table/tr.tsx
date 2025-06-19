@@ -26,10 +26,9 @@ import { getCellKey, SkipSpansValue } from './hooks/useRowspanAndColspan';
 import useLazyLoad from '../hooks/useLazyLoad';
 import { PaginationProps } from '../pagination';
 import { VirtualScrollConfig } from '../hooks/useVirtualScrollNew';
-import {
-  BaseTableCellParams, TableRowData, RowspanColspan, ElPrimaryTableProps, ElBaseTableProps,
-} from './type';
+import { BaseTableCellParams, TableRowData, RowspanColspan, ElPrimaryTableProps, ElBaseTableProps } from './type';
 import { AttachNode } from '../common';
+import _ from 'lodash';
 
 export interface RenderElExtra {
   rowAndColFixedPosition: RowAndColFixedPosition;
@@ -102,9 +101,7 @@ export function renderCell(
   const { col, row, rowIndex } = params;
   // support serial number column
   if (col.colKey === 'serial-number') {
-    const {
-      current, pageSize, defaultCurrent, defaultPageSize,
-    } = extra?.pagination || {};
+    const { current, pageSize, defaultCurrent, defaultPageSize } = extra?.pagination || {};
     const tCurrent = current || defaultCurrent;
     const tPageSize = pageSize || defaultPageSize;
     if (tPageSize && tCurrent) {
@@ -175,16 +172,20 @@ export default defineComponent({
       tableDraggableClasses,
     } = useClassName();
 
-    const trStyles = computed(() => getRowFixedStyles(
-      get(props.row, props.rowKey || 'id'),
-      props.rowIndex,
-      props.dataLength,
-      props.fixedRows,
-      props.rowAndColFixedPosition,
-      tableRowFixedClasses,
-    ));
+    const trStyles = computed(() =>
+      getRowFixedStyles(
+        get(props.row, props.rowKey || 'id'),
+        props.rowIndex,
+        props.dataLength,
+        props.fixedRows,
+        props.rowAndColFixedPosition,
+        tableRowFixedClasses,
+      ),
+    );
 
-    const trAttributes = computed(() => formatRowAttributes(props.rowAttributes, { row: props.row, rowIndex: props.rowIndex, type: 'body' }));
+    const trAttributes = computed(() =>
+      formatRowAttributes(props.rowAttributes, { row: props.row, rowIndex: props.rowIndex, type: 'body' }),
+    );
 
     const classes = computed(() => {
       const customClasses = formatRowClassNames(
@@ -267,8 +268,7 @@ export default defineComponent({
           tooltipContent={content && (() => content)}
           tooltipProps={tooltipProps}
           overlayClassName={this.ellipsisOverlayClassName}
-          classPrefix={this.classPrefix}
-        >
+          classPrefix={this.classPrefix}>
           {cellNode}
         </ElEllipsis>
       );
@@ -306,8 +306,9 @@ export default defineComponent({
       };
       const normalAttrs = isFunction(col.attrs) ? col.attrs({ ...params, type: 'td' }) : col.attrs;
       const attrs: { [key: string]: any } = { ...normalAttrs, ...cellSpans };
+
       return (
-        <td class={classes} attrs={attrs} style={{ ...tdStyles.style, ...attrs.style }} onClick={onClick}>
+        <td class={classes} attrs={_.omit(attrs, ['style'])} style={{ ...tdStyles.style, ...attrs.style }} onClick={onClick}>
           {col.ellipsis ? this.renderEllipsisCell(h, params, { cellNode }) : cellNode}
         </td>
       );
@@ -315,9 +316,7 @@ export default defineComponent({
   },
 
   render(h) {
-    const {
-      row, rowIndex, dataLength, rowAndColFixedPosition,
-    } = this;
+    const { row, rowIndex, dataLength, rowAndColFixedPosition } = this;
     const columnVNodeList = this.columns?.map((col, colIndex) => {
       const cellSpans: RowspanColspan = {};
       const params = {
@@ -349,8 +348,7 @@ export default defineComponent({
         attrs={attrs}
         style={this.trStyles?.style}
         class={this.classes}
-        on={this.getTrListeners(row, rowIndex)}
-      >
+        on={this.getTrListeners(row, rowIndex)}>
         {this.hasLazyLoadHolder ? [<td style={{ height: `${this.tRowHeight}px`, border: 'none' }} />] : columnVNodeList}
       </tr>
     );
