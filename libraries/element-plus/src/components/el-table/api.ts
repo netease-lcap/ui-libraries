@@ -226,6 +226,7 @@ namespace nasl.ui {
     })
     border: nasl.core.Boolean = false;
 
+
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -904,6 +905,7 @@ namespace nasl.ui {
           title: '表格列',
           code: `<el-table-column data-nodepath-multiple="ture">
                     <template #header><el-text text="表格列"></el-text></template>
+                    <template #default="current"></template>
                 </el-table-column>`,
         },
       ],
@@ -1290,6 +1292,7 @@ namespace nasl.ui {
           title: '表格列',
           code: `<el-table-column data-nodepath-multiple="ture">
                     <template #header><el-text text="表格列"></el-text></template>
+                    <template #default="current"></template>
                 </el-table-column>`,
         },
       ],
