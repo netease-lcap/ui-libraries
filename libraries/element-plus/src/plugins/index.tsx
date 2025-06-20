@@ -10,7 +10,7 @@ import { createStore } from 'zustand/vanilla';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { $deletePropsList, $provide } from '@/plugins/constants';
+import { $deletePropsList, $provide, $tagName } from '@/plugins/constants';
 import { scheduler } from '@/plugins/hooks';
 import '@/utils/index';
 
@@ -76,6 +76,7 @@ export function registerComponent<T>(Component, options) {
           ref: {},
           router,
           route,
+          [$tagName]: options.name,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
         props: {

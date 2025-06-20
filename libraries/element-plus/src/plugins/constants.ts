@@ -5,6 +5,8 @@ export const $valueKey = Symbol('valueKey');
 
 export const $provide = Symbol('provide');
 export const $inject = Symbol('inject');
+export const $formTagName = Symbol('formTagName');
+export const $tagName = Symbol('tagName');
 
 export const $dataSourceDeleteField = ['dataSource', 'textField', 'valueField', 'parentField', 'childrenField'];
 
