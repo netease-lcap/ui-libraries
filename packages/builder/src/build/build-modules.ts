@@ -195,7 +195,7 @@ async function viteBuildModules(options: BuildModulesOptions, components: Compon
   buildConfig.plugins.push({
     name: 'vite:lcap-collect-export',
     renderChunk(_, chunk) {
-      if (!Array.isArray(exportsMap[chunk.name])) {
+      if (!Array.isArray(exportsMap[chunk.name]) || chunk.fileName.startsWith('_chunks')) {
         return;
       }
 
