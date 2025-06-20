@@ -14,19 +14,17 @@ function generateElementUIComponent(context: OverloadComponentContext) {
     ' <base-component />',
     '</template>',
     '<script>',
-    ...context.naslUIConfig.sourceDocURL ? [
-      '/**',
-      ` * 组件文档地址： ${context.naslUIConfig.sourceDocURL}`,
-      ' */',
-    ] : [],
-    context.isWithForm ? `import { BaseComponent, lowCodeFormFieldMixin } from '${LCAP_UI_PACKAGE_NAME}';` : `import { BaseComponent } from '${LCAP_UI_PACKAGE_NAME}';`,
+    ...(context.naslUIConfig.sourceDocURL
+      ? ['/**', ` * 组件文档地址： ${context.naslUIConfig.sourceDocURL}`, ' */']
+      : []),
+    context.isWithForm
+      ? `import { BaseComponent, lowCodeFormFieldMixin } from '${LCAP_UI_PACKAGE_NAME}';`
+      : `import { BaseComponent } from '${LCAP_UI_PACKAGE_NAME}';`,
     '',
     'export default {',
     `  name: '${context.tagName}',`,
     '  inheritAttrs: false,',
-    ...context.isWithForm ? [
-      `  mixins: [lowCodeFormFieldMixin('${context.tagName}', '${withFormTagName}')],`,
-    ] : [],
+    ...(context.isWithForm ? [`  mixins: [lowCodeFormFieldMixin('${context.tagName}', '${withFormTagName}')],`] : []),
     '  components: {',
     '    BaseComponent,',
     '  },',
@@ -37,13 +35,21 @@ function generateElementUIComponent(context: OverloadComponentContext) {
     '',
   ].join('\n');
   const indexCode = [
-    `import { extendComponent,${context.isWithForm ? ' WithFormItem,' : ''} ${context.naslUIConfig.name} } from '${LCAP_UI_PACKAGE_NAME}';`,
+    `import { extendComponent,${context.isWithForm ? ' WithFormItem,' : ''} ${
+      context.naslUIConfig.name
+    } } from '${LCAP_UI_PACKAGE_NAME}';`,
     `import Extend${context.naslUIConfig.name} from './index.vue';`,
     '',
     `export const ${context.name} = extendComponent(${context.naslUIConfig.name}, Extend${context.naslUIConfig.name});`,
-    ...context.isWithForm ? [
-      `export const ${withFormName} = WithFormItem(${context.name}, { name: '${withFormTagName}', methodNames: [${context.naslUIConfig.methods.map((m) => `'${m.name}'`).join(', ')}] });`,
-    ] : [],
+    ...(context.isWithForm
+      ? [
+          `export const ${withFormName} = WithFormItem(${
+            context.name
+          }, { name: '${withFormTagName}', methodNames: [${context.naslUIConfig.methods
+            .map((m) => `'${m.name}'`)
+            .join(', ')}] });`,
+        ]
+      : []),
     `export default ${context.name};`,
     '',
   ].join('\n');
@@ -63,11 +69,7 @@ async function generateVueComponent(context: OverloadComponentContext) {
   });
 
   const methodCodes = context.naslUIConfig.methods.map((m) => {
-    return [
-      `    ${m.name}(...args) {`,
-      `      this.$refs.base.${m.name}(...args)`,
-      '    },',
-    ].join('\n');
+    return [`    ${m.name}(...args) {`, `      this.$refs.base.${m.name}(...args)`, '    },'].join('\n');
   });
 
   const templateCodes = [
@@ -85,11 +87,7 @@ async function generateVueComponent(context: OverloadComponentContext) {
     '<script>',
     'export default {',
     `  name: '${context.tagName}',`,
-    ...(methodCodes.length > 0 ? [
-      '  methods: {',
-      ...methodCodes,
-      '  }',
-    ] : []),
+    ...(methodCodes.length > 0 ? ['  methods: {', ...methodCodes, '  }'] : []),
     '};',
     '</script>',
     '<style>',
@@ -104,7 +102,7 @@ async function generateVueComponent(context: OverloadComponentContext) {
 
 async function generateReactComponent(context: OverloadComponentContext) {
   const code = [
-    'import React, { forwardRef } from \'react\'',
+    "import React, { forwardRef } from 'react'",
     `import { ${context.naslUIConfig.name} } from '${LCAP_UI_PACKAGE_NAME}'`,
     '',
     `const ${context.name} = forwardRef<any, any>((props, ref) => {`,
@@ -127,6 +125,68 @@ async function generateReactComponent(context: OverloadComponentContext) {
   fs.writeFileSync(path.resolve(context.componentFolderPath, 'index.tsx'), code, 'utf-8');
 }
 
+async function generateElementPlusComponent(context) {
+  const withFormName = addPrefix(getWithFormName(context.naslUIConfig.name), context.prefix);
+  const withFormTagName = kebabCase(withFormName);
+  const componentFileName = `${context.name}.tsx`;
+  const indexCode = [
+    `import ${context.name} from './${componentFileName}';`,
+    ...(context.isWithForm
+      ? [
+          `import { withFormItem } from '${LCAP_UI_PACKAGE_NAME}';`,
+          '',
+          `export const ${withFormName} = withFormItem(${context.name},  '${withFormTagName}');`,
+        ]
+      : []),
+    '',
+    'export {',
+    `  ${context.name},`,
+    '};',
+    '',
+    `export default ${context.name};`,
+    '',
+  ].join('\n');
+  const BaseComponentName = `${context.naslUIConfig.name}Plus`;
+  const RegisterFunctionName = `${context.naslUIConfig.name}Register`;
+  const componentCode = [
+    'import { defineComponent, ref } from \'vue\';',
+    `import { ${BaseComponentName} as ${context.naslUIConfig.name}, ${RegisterFunctionName} as registerComponent } from '${LCAP_UI_PACKAGE_NAME}';`,
+    '',
+    `const ${context.name} = defineComponent({`,
+    `  name: '${context.naslUIConfig.name}Extend',`,
+    '  setup(props, { attrs, slots, expose }) {',
+    '    const componentRef = ref(null);',
+    '',
+    '    expose({',
+    '       componentRef,',
+    '    });',
+    '',
+    '    return () => {',
+    '      return (',
+    `        <${context.naslUIConfig.name}`,
+    '          {...props}',
+    '          {...attrs}',
+    '          v-slots={slots}',
+    '          ref={componentRef}',
+    '        />',
+    '      );',
+    '    };',
+    '  },',
+    '});',
+    '',
+    `export default registerComponent(${context.name}, { name: '${context.tagName}' });`,
+  ].join('\n');
+
+  const indexVuePath = path.resolve(context.componentFolderPath, 'index.vue');
+
+  if (fs.existsSync(indexVuePath)) {
+    fs.rmSync(indexVuePath); // 删除 vue 文件
+  }
+
+  fs.writeFileSync(path.resolve(context.componentFolderPath, 'index.ts'), indexCode, 'utf-8');
+  fs.writeFileSync(path.resolve(context.componentFolderPath, componentFileName), componentCode, 'utf-8');
+}
+
 // 添加 index.ts 中的子组件 exports
 function addIndexExports(context: OverloadComponentContext) {
   const indexPath = getPath(path.resolve(context.componentFolderPath, './index'));
@@ -146,7 +206,11 @@ function addIndexExports(context: OverloadComponentContext) {
   }
 
   const codes = fs.readFileSync(indexPath, 'utf-8').split('\n');
-  codes.push(`import { ${needExportNames.map((n) => `${n} as ${context.replaceNameMap[n]}`).join(', ')} } from '${LCAP_UI_PACKAGE_NAME}';`);
+  codes.push(
+    `import { ${needExportNames
+      .map((n) => `${n} as ${context.replaceNameMap[n]}`)
+      .join(', ')} } from '${LCAP_UI_PACKAGE_NAME}';`,
+  );
   codes.push(`export { ${needExportNames.map((n) => context.replaceNameMap[n]).join(', ')} };\n`);
   fs.writeFileSync(indexPath, codes.join('\n'), 'utf-8');
 }
@@ -168,14 +232,18 @@ function addComponentsExports(context: OverloadComponentContext) {
 }
 
 export async function generateComponentFile(context: OverloadComponentContext) {
-  switch (context.framework) {
-    case 'vue2':
+  switch (true) {
+    case context.framework === 'vue2':
       await generateVueComponent(context);
       break;
-    case 'react':
+    case context.framework === 'react':
       await generateReactComponent(context);
       break;
-    default: break;
+    case context.framework === 'vue3' && context.libInfo.name === '@lcap/element-plus':
+      await generateElementPlusComponent(context);
+      break;
+    default:
+      break;
   }
 
   addIndexExports(context);
