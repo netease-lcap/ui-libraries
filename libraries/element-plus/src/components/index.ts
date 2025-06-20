@@ -16,7 +16,7 @@ export {
   ElTableColumnRegister,
   ElTableToolBarRegister,
 } from './el-table';
-export { ElFormItemWrap, ElForm, ElFormItem, ElFormRegister, ElFormItemWrapRegister } from './el-form';
+export { ElFormItemWrap, ElForm, ElFormItem, ElFormRegister, ElFormItemWrapRegister, withFormItem } from './el-form';
 // export { ElPagination } from 'element-plus';
 export { ElAbsoluteLayout, ElAbsoluteLayoutRegister } from './el-absolute-layout';
 export { ElRouterView, ElRouterViewRegister } from './el-router-view';
