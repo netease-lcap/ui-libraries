@@ -904,7 +904,6 @@ namespace nasl.ui {
           title: '表格列',
           code: `<el-table-column data-nodepath-multiple="ture">
                     <template #header><el-text text="表格列"></el-text></template>
-                    <template #default="current"></template>
                 </el-table-column>`,
         },
       ],
@@ -1291,7 +1290,6 @@ namespace nasl.ui {
           title: '表格列',
           code: `<el-table-column data-nodepath-multiple="ture">
                     <template #header><el-text text="表格列"></el-text></template>
-                    <template #default="current"></template>
                 </el-table-column>`,
         },
       ],
