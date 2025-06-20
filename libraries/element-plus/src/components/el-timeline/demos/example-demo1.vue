@@ -4,6 +4,7 @@
       v-for="(activity, index) in activities"
       :key="index"
       :timestamp="activity.timestamp"
+      :icon="activity.icon"
     >
       {{ activity.content }}
     </el-timeline-item>
@@ -23,6 +24,7 @@ const activities = [
   {
     content: 'Success',
     timestamp: '2018-04-11',
+    icon: 'Clock'
   },
 ]
 </script>

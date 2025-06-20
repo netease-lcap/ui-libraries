@@ -5,6 +5,13 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'container',
+      style: [
+        {
+          selector: '.el-affix',
+          declaration: 'min-height: 32px !important; width: 100% !important;',
+          append: true,
+        },
+      ]
     },
   })
   @Component({

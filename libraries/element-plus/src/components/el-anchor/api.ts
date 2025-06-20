@@ -7,6 +7,7 @@ namespace nasl.ui {
       idetype: 'container',
       structured: true,
       childAccept: "target.tag === 'el-anchor-link'",
+      forceUpdateWhenAttributeChange: true,
       dataSource: {
         dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
@@ -48,7 +49,6 @@ namespace nasl.ui {
       description: '展示数据的输入源，可设置为集合类型变量（List<T, V>）或输出参数为集合类型的逻辑。',
       docDescription: '支持动态绑定集合类型变量（List<T, V>）或输出参数为集合类型的逻辑',
       designerValue: [{}],
-      bindOpen: true,
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
@@ -183,7 +183,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       parentAccept: "target.tag === 'el-anchor'",
-      structured: true,
+      // structured: true,
     },
   })
   @Component({
@@ -199,13 +199,13 @@ namespace nasl.ui {
   }
 
   export class ElAnchorLinkOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '链接文本',
-      description: '链接的文本内容',
-      setter: { concept: 'InputSetter' },
-    })
-    title: nasl.core.String;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '链接文本',
+    //   description: '链接的文本内容',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // title: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -221,17 +221,17 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '子链接',
-      description: '子链接',
-      snippets: [
-        {
-          title: '子链接',
-          code: `<el-anchor-link><el-text text="标题"></el-text></el-anchor-link>`,
-        },
-      ],
-    })
-    slotSubLink: () => Array<ViewComponent>;
+    // @Slot({
+    //   title: '子链接',
+    //   description: '子链接',
+    //   snippets: [
+    //     {
+    //       title: '子链接',
+    //       code: `<el-anchor-link><el-text text="标题"></el-text></el-anchor-link>`,
+    //     },
+    //   ],
+    // })
+    // slotSubLink: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({

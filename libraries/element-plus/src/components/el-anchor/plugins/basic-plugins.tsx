@@ -28,7 +28,7 @@ export function handleDataSource(props) {
               _.map(dataSource, (item) => (
                 <el-anchor-link
                   {...item}
-                  href={`${_.get(item, hrefField, '').startsWith('#') ? '' : '#'}${_.get(item, hrefField, '')}`}
+                  href={_.get(item, hrefField, '')}
                   v-slots={{
                     default: () => slots.content?.({ item }),
                   }}

@@ -8,6 +8,7 @@
     typeField="type1"
     colorField="color1"
     sizeField="size1"
+    iconField="icon"
     style="max-width: 600px">
     <template #content="current">
       {{ current.item.text }}
@@ -46,6 +47,7 @@ const data = [
     type1: 'warning',
     color1: 'yellow',
     size1: 'large',
+    icon: 'Clock',
   },
 ];
 </script>
