@@ -15,7 +15,7 @@ function ElTimelineItemRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElTimeline = registerComponent(ElTimelinePlus, { plugin: basicsPlugin });
-const ElTimelineItem = registerComponent(ElTimelineItemPlus, { plugin: basicsPlugin });
+const ElTimelineItem = registerComponent(ElTimelineItemPlus, { plugin: itemPlugins });
 
 
 export { ElTimelinePlus, ElTimelineItemPlus, ElTimeline, ElTimelineItem, ElTimelineRegister, ElTimelineItemRegister };
