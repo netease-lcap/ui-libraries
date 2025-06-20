@@ -73,7 +73,7 @@ export interface LcapBuildOptions extends LcapMetaOptions {
    * - false: 打包
    * - 'auto': 自动处理， 默认值， 基础组件支持模块化加载时打包
    */
-  lcapUIExternal?: true | false | 'auto';
+  lcapUIExternal?: true | 'auto';
   dependencies?: Dependency[];
   reportCSSInfo?: {
     enabled: true; // 为 true 时才会构建 index-css-info-map.json
