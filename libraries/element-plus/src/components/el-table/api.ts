@@ -991,6 +991,7 @@ namespace nasl.ui {
         // header: 'display: inline-block;',
       },
       useTemplateInDefaultSlot: true,
+      namedSlotOmitWrapper:['default'],
       selector: [
         {
           expression: 'this',
