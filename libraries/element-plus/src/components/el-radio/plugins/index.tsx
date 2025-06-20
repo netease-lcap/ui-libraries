@@ -10,6 +10,7 @@ export { handleControllableValue } from '@/plugins/common/index';
 export function handleTagName(props) {
   return {
     formTagName: 'el-form-radio-group',
+    tagName: 'el-radio-group',
   };
 }
 

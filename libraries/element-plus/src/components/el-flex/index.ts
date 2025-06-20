@@ -1,4 +1,13 @@
+import _ from 'lodash';
 import Flex from './flex';
+import { registerComponent } from '@/plugins';
+// import * as basicsPlugin from './plugins/index';
 
-export const ElFlex = Flex;
+function ElFlexRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign({}, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
+
+const ElFlex = Flex;
+export { ElFlexRegister, ElFlex, Flex };
 export default ElFlex;

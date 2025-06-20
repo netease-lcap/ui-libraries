@@ -2,7 +2,7 @@
 /* 组件功能扩展插件 */
 // export {};
 import _, { isFunction, isNil } from 'lodash';
-import { computed, ref, watch, onMounted, provide, getCurrentInstance } from '@vue/composition-api';
+import { computed, ref, watch, onMounted, provide, getCurrentInstance, toRef } from '@vue/composition-api';
 import {
   SelectOptions,
   Table,
@@ -77,6 +77,11 @@ const formComponentMap = {
 export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', event: 'update:selectedRowKeys' }]);
 
+function handleDynamicColumn(vnode) {
+  const dataSource = [];
+  const data = ref(dataSource);
+}
+
 const isEditColumn = ({ type, edit }) => {
   const isEditColumn = type === 'editable';
 
@@ -97,7 +102,8 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit })
   const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
   const abortEditOnEvent = attrs?.abortEditOnEvent ? [attrs?.abortEditOnEvent] : [];
-  const rules = _.map(attrs?.rules, (item) => ({
+  const rules =
+    _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
         const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
@@ -209,13 +215,16 @@ export const useTable: NaslComponentPluginOptions = {
     ])({ type: hasIndexColumn.value });
     const sort = ref<string | null>(sorting.value?.field);
     const order = ref<string | null>(sorting.value?.order);
+    const rowStyle = props.useComputed('rowStyle', (value) => (_.isFunction(value) ? value : () => {}));
     const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
-    const tree = props.useComputed('treeDisplay', (value) => (value
+    const tree = props.useComputed('treeDisplay', (value) =>
+      value
         ? {
             childrenKey: 'children',
             checkStrictly: checkStrictly.value,
           }
-        : undefined));
+        : undefined,
+    );
 
     const data = props.useComputed('data', (v) => {
       const treeDisplay = props.get('treeDisplay');
@@ -265,9 +274,9 @@ export const useTable: NaslComponentPluginOptions = {
       const columns = vnodes?.flatMap((vnode) => {
         if (!vnode.tag?.includes('ElTableColumnPro')) return [];
         const attrs = _.get(vnode, 'data.attrs', {});
-
-        const nodePath = _.get(attrs, 'data-nodepath');
         const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
+        const children = _.get(vnode, 'componentOptions.children', {});
+        const childrens = children?.length ? { children: renderSlot(children) } : {};
         const listeners = _.get(vnode, 'componentOptions.listeners', {});
         const titleProps = _.isFunction(title)
           ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
@@ -291,8 +300,13 @@ export const useTable: NaslComponentPluginOptions = {
             ...attrs,
             ...cellProps,
             ...titleProps,
-            attrs: {
-              'data-nodepath': nodePath,
+            ...childrens,
+            attrs: ({ row }) => {
+              return {
+                style: {
+                  ...(_.attempt(rowStyle.value, row) || {}),
+                },
+              };
             },
           },
         ];
@@ -381,11 +395,13 @@ export const useTable: NaslComponentPluginOptions = {
         });
       }
     });
-    const columnController = props.useRef('columnController', (v) => (v
+    const columnController = props.useRef('columnController', (v) =>
+      v
         ? {
             placement: 'top-right',
           }
-        : {}));
+        : {},
+    );
 
     // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
     const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
@@ -405,6 +421,11 @@ export const useTable: NaslComponentPluginOptions = {
       };
     });
     provide(IN_ELEMENT_FORM, false);
+    const attr = ref(1);
+    setTimeout(() => {
+      attr.value = 2;
+      console.log('update');
+    }, 4000);
     return {
       data,
       onPageChange,
@@ -474,6 +495,7 @@ export const useTable: NaslComponentPluginOptions = {
         },
       },
       [$render](resultVNode, h, context) {
+        console.log('render update', attr.value);
         const vnodes = ctx.setupContext.slots?.default?.();
         const columns = renderSlot(vnodes);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];

@@ -26,5 +26,6 @@ export function handleDataSource(props) {
     loading,
     ...dataSourceResult,
     formTagName: 'el-form-tree-select',
+    tagName: 'el-tree-select',
   };
 }

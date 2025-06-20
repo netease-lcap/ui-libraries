@@ -20,11 +20,26 @@ export default defineConfig(({ command }) => {
         type: 'nasl.ui',
         framework: 'vue3',
         pnpm: true,
+        // ide: {
+        //   setters: {
+        //     rootPath: path.resolve(rootPath, '../../setters'),
+        //     entries: {
+        //       ExInputSetter: 'src/setters/InputSetter.vue',
+        //       ExNormalSetter: 'src/setters/NormalSetter.vue',
+        //     },
+        //   },
+        // },
         modules: {
           entries: {
             install: 'src/install',
+            utils: 'src/utils',
           },
           tsconfigPath: 'tsconfig.build.json',
+        },
+        i18n: {
+          'zh-CN': './src/locale/langs/zh-cn.json',
+          'en-US': './src/locale/langs/en.json',
+          ja: './src/locale/langs/ja.json',
         },
         reportCSSInfo: {
           enabled: true,
@@ -200,6 +215,18 @@ export default defineConfig(({ command }) => {
               selectorPrefixMap: {
                 'el-mention-dropdown': false,
               },
+            },
+            ElFlex: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElAbsoluteLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElRow: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElCol: {
+              hideSelectorRegexps: [/>\*/],
             },
             ...batchDepCSSInfo([
               'ElCascader',

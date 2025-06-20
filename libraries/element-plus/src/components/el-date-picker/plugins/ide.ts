@@ -16,6 +16,7 @@ export function handleNodePath(props) {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
     formTagName: 'el-form-date-picker',
+    tagName: 'el-date-picker',
   };
 }
 handleNodePath.type = $ide;

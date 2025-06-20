@@ -5,26 +5,8 @@ import generate from '@babel/generator';
 import traverse from '@babel/traverse';
 import { OverloadComponentContext } from './context';
 import { LCAP_UI_PATH } from './constants';
-import { addPrefix } from './utils';
-
-const TEMP_IDEUSAGE_VAR_NAME = '_TEMP_VAR';
-
-function getAST(obj: any) {
-  const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(obj)};`;
-  const tempAST = babel.parseSync(code);
-  let ast;
-  if (tempAST) {
-    traverse(tempAST, {
-      VariableDeclarator(p) {
-        if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init) {
-          ast = p.node.init;
-        }
-      }
-    });
-  }
-
-  return ast;
-}
+import { addPrefix, replaceAllTagNameInCode } from './utils';
+import { getAST } from '../utils/babel-utils';
 
 export function transformAPITs(tsCode, context: OverloadComponentContext, all: boolean = false) {
   const ast = babel.parse(tsCode, {
@@ -198,7 +180,14 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
                   return ext;
                 });
               }
-              const ast = getAST(obj);
+              let ast;
+
+              if (key === 'ideusage') {
+                ast = getAST(replaceAllTagNameInCode(JSON.stringify(obj), context.replaceTagMap), false);
+              } else {
+                ast = getAST(obj);
+              }
+
               if (!ast) {
                 return;
               }

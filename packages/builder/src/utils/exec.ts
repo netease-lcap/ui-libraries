@@ -13,7 +13,6 @@ export function execSync(...args: Array<string>) {
   logger.info('execute command: ', command);
   const result = spawnSync(command, { shell: true, stdio: 'inherit' });
   if (result.status !== null && result.status > 0) {
-    logger.error('execute command error: ', command);
     // 异常退出
     throw new Error(`execute command error: ${command}`);
   }
@@ -29,10 +28,26 @@ export function execSync(...args: Array<string>) {
  */
 export function exec(...args: Array<string>) {
   const command = args.join(' ');
-
+  let ended = false;
   return new Promise(((resolve, reject) => {
     const result = spawn(command, { shell: true, stdio: 'inherit' });
-    result.on('error', reject);
-    result.on('close', (code) => (code === 0 ? resolve(true) : reject()));
+    result.on('error', (e) => {
+      if (!ended) {
+        ended = true;
+        reject(e);
+      }
+    });
+    result.on('exit', (code) => {
+      if (!ended) {
+        ended = true;
+        (code === 0 ? resolve(true) : reject());
+      }
+    });
+    result.on('close', (code) => {
+      if (!ended) {
+        ended = true;
+        (code === 0 ? resolve(true) : reject());
+      }
+    });
   }));
 }

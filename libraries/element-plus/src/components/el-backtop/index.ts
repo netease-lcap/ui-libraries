@@ -1,8 +1,15 @@
 import { ElBacktop as ElBacktopPlus } from 'element-plus';
+import _ from 'lodash';
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
 import BacktopDesigner from './designer.vue';
 
-export const ElBacktopDesigner = BacktopDesigner;
-export const ElBacktop = registerComponent(ElBacktopPlus, { plugin: basicsPlugin });
+const ElBacktopDesigner = BacktopDesigner;
+function ElBacktopRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
+
+const ElBacktop = registerComponent(ElBacktopPlus, { plugin: basicsPlugin });
+export { ElBacktopPlus, ElBacktop, ElBacktopRegister, ElBacktopDesigner };
 export default ElBacktop;

@@ -7,14 +7,15 @@ namespace nasl.ui {
       idetype: 'container',
       structured: true,
       childAccept: "target.tag === 'el-carousel-item'",
+      forceUpdateWhenAttributeChange: true,
       dataSource: {
         dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 1,
         emptySlot: {
           display: 'inline',
           condition: "!this.getAttribute('dataSource')",
           accept: false,
         },
-        propertyName: ':dataSource',
       },
       additionalAttribute: {
         ":autoplay": "\"false\"",
@@ -53,7 +54,6 @@ namespace nasl.ui {
       description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}],
-      bindOpen: true,
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 

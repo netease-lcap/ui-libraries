@@ -3,8 +3,9 @@ import path from 'path';
 import fs from 'fs-extra';
 import genThemeConfig, { ThemeConfig } from './gens/gen-theme-config';
 import { themePath } from '../constants/input-paths';
+import { getComponentMetaInfos } from '../utils/lcap';
 import logger from '../utils/logger';
-import type { LcapBuildOptions } from './types';
+import type { LcapBuildOptions, BuildMode } from './types';
 
 const LIVE_RELOAD = {
   html: `<script type="text/javascript">
@@ -100,6 +101,7 @@ export async function viteBuildTheme(themeConfig: ThemeConfig, options: LcapBuil
     configFile: false,
     envFile: false,
     ...config,
+    mode: watch ? 'staging' : 'production',
   });
 }
 
@@ -126,44 +128,15 @@ const getGroupIndex = (n) => {
   return i === -1 ? 20 : i;
 };
 
-async function getComponentList(options: LcapBuildOptions) {
-  if (options.type === 'extension') {
-    const config = fs.readJSONSync(path.resolve(options.rootPath, 'nasl.extension.json'));
-    const list: any[] = [];
+function getComponentList(options: LcapBuildOptions) {
+  const components = getComponentMetaInfos(options.rootPath, true);
 
-    if (config && Array.isArray(config.frontends) && config.frontends.length > 0) {
-      config.frontends.forEach((fe) => {
-        (fe.viewComponents || []).forEach((comp) => {
-          const index = list.findIndex((it) => it.name === comp.name);
-          if (index === -1) {
-            list.push(comp);
-          }
-        });
-      });
-    }
-    return list.map(({
-      name, kebabName,
-      group, title, children,
-      show,
-    }) => {
-      return {
-        name: options.framework.startsWith('vue') ? kebabName : name,
-        group,
-        title,
-        show,
-        children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
-      };
-    });
-  }
-
-  const components = fs.readJSONSync(path.resolve(options.rootPath, options.destDir, 'nasl.ui.json')) || [];
-
-  return components.map(({
+  const list = components.map(({
     name,
     kebabName,
     group,
-    title,
-    children,
+    title = '',
+    children = [],
     show,
   }) => {
     return {
@@ -173,14 +146,25 @@ async function getComponentList(options: LcapBuildOptions) {
       children: children.map((child) => (options.framework.startsWith('vue') ? child.kebabName : child.name)),
       show,
     };
-  }).sort((a, b) => (getGroupIndex(a.group) - getGroupIndex(b.group)));
+  });
+
+  if (options.type === 'extension') {
+    return list;
+  }
+
+  return list.sort((a, b) => (getGroupIndex(a.group) - getGroupIndex(b.group)));
 }
 
-export async function buildTheme(options: LcapBuildOptions, watch?: boolean) {
+export async function buildTheme(options: LcapBuildOptions, mode: BuildMode = 'production') {
   const components = await getComponentList(options);
 
+  // 如果组件列表为空，则不构建 theme
+  if (components.length === 0) {
+    return;
+  }
+
   const themeConfig = genThemeConfig({
-    components: components || [],
+    components: components as any[],
     themeVarCssPath: options.theme.themeVarCssPath || '',
     themeComponentFolder: options.theme.themeComponentFolder || '',
     previewPages: options.theme.previewPages || [],
@@ -198,6 +182,10 @@ export async function buildTheme(options: LcapBuildOptions, watch?: boolean) {
   await fs.writeJSON(path.join(options.destDir, 'theme.config.json'), themeConfig, { spaces: 2 });
   logger.success('生成 theme.config.json 成功！');
 
-  await viteBuildTheme(themeConfig, options, watch);
+  // 非 staging 模式下，才进行 vite theme 构建
+  if (mode !== 'staging') {
+    await viteBuildTheme(themeConfig, options, mode === 'watch');
+  }
+
   logger.success('构建theme 成功');
 }

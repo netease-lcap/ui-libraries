@@ -140,6 +140,7 @@ export default defineConfig(({ command }) => {
               mainSelectorMap: {
                 '.el-col': true,
               },
+              hideSelectorRegexps: [/>\*/],
             },
             ElDrawer: {
               selectorPrefixMap: {
@@ -239,6 +240,15 @@ export default defineConfig(({ command }) => {
               mainSelectorMap: {
                 '.el-tooltip__popper': true,
               },
+            },
+            ElFlex: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElAbsoluteLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElRow: {
+              hideSelectorRegexps: [/>\*/],
             },
           },
         },

@@ -107,8 +107,7 @@ export function withFormItem(Component, name) {
             ref={formItemRef}
             v-slots={{
               label: slots.label,
-            }}
-          >
+            }}>
             <Component
               {..._.omit(_.assign({}, props, attrs), $formItemProps)}
               v-slots={slots}
@@ -127,14 +126,18 @@ export function withFormItem(Component, name) {
 export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
   const formTagName = props.get('formTagName');
+  const tagName = props.get('tagName');
   useEffect(() => {
     const inject = props.get('inject');
     const { isInForm } = inject?.value?.[$formProvide] ?? {};
-    const isInIDE = isInForm && nodePath;
-    if (!isInIDE) return;
+    if (!nodePath) return;
     const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
-    elem?.setAttribute('data-has-mutation', 'true');
-    elem?.setAttribute('data-element-tag', formTagName);
+    if (isInForm) {
+      elem?.setAttribute('data-has-mutation', 'true');
+      elem?.setAttribute('data-element-tag', formTagName);
+    } else {
+      elem?.setAttribute('data-element-tag', tagName);
+    }
   }, []);
 }
 

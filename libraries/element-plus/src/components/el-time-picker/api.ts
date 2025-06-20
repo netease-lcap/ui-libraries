@@ -117,7 +117,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledHours: (role: nasl.core.String, comparingDate: any) => nasl.collection.List<nasl.core.Integer>;
+    disabledHours: (timeRole: nasl.core.String, comparingDate: nasl.core.String) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -129,7 +129,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => nasl.collection.List<nasl.core.Integer>;
+    disabledMinutes: (hour: nasl.core.Integer, timeRole: nasl.core.String, comparingDate: nasl.core.String) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -141,7 +141,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => nasl.collection.List<nasl.core.Integer>;
+    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, timeRole: nasl.core.String, comparingDate: nasl.core.String) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',

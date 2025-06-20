@@ -181,7 +181,12 @@ export default function transformFunc2NaslLogic(node: babelTypes.ExportNamedDecl
                     description: '',
                     typeAnnotation: arg,
                   })),
-                  returns: typeAnnotation.returnType,
+                  returns: (typeAnnotation.returnType || []).map((t, i) => ({
+                    concept: 'Return',
+                    name: `result${i > 0 ? `_${i}` : ''}`,
+                    description: '',
+                    typeAnnotation: t,
+                  })),
                   variables: [],
                   playground: [],
                   body: [

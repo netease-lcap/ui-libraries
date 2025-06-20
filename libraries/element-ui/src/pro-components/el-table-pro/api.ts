@@ -485,6 +485,29 @@ namespace nasl.ui {
       order: nasl.core.String;
       compare?: Function;
     } = { field: undefined, order: 'desc' };
+
+
+
+    @Prop({
+      group: '样式属性',
+      title: '表格行动态样式',
+      description: '动态设置表格行背景色、字体颜色等样式',
+      docDescription: '动态设置表格行背景色、字体颜色等样式',
+      bindOpen: true,
+      setter: {
+          concept: 'AnonymousFunctionSetter',
+      }
+    })
+    rowStyle: (current: Current<T>) => {
+      /**
+       * @title 表格行背景颜色
+       */
+      backgroundColor?: nasl.core.String,
+      /**
+       * @title 表格行字体颜色
+       */
+      color?: nasl.core.String
+    };
     // @Prop({
     //   group: '主要属性',
     //   title: 'Pagination Affixed Bottom',
@@ -685,7 +708,7 @@ namespace nasl.ui {
         options: [{ title: '行拖拽' }, { title: '关闭拖拽' }],
       },
 
-      if: (_) => _.treeDisplay === false,
+      // if: (_) => _.treeDisplay === false,
     })
     dragSort: 'row' | 'disabled' = 'disabled';
 
@@ -915,7 +938,19 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
-      selector: 'multiple',
+
+      structured: true,
+      // selector: 'multiple',
+      selector: [
+        {
+          expression: "this.getElement(el => el.slotTarget === 'title')",
+          cssSelector: "th"
+        },
+        {
+          expression: "this.getElement(el => el.slotTarget === 'cell')",
+          cssSelector: "td"
+        },
+      ],
       namedSlotOmitWrapper:['cell','edit'],
       slotInlineStyle: {
         title: 'min-width: 30px',
@@ -985,6 +1020,16 @@ namespace nasl.ui {
     })
     rules: nasl.core.String;
 
+    @Prop({
+      group: '主要属性',
+      title: '对齐方式',
+      description: '对齐方式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '右对齐' }, { title: '居中对齐' }],
+      },
+    })
+    align: 'left' | 'right' | 'center' = 'left';
 
 
 
@@ -1000,95 +1045,8 @@ namespace nasl.ui {
     })
     abortEditOnEvent: 'onChange' | 'onBlur' | '' =''
 
-    // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
-    //   group: '数据属性',
-    //   title: '排序初始顺序',
-    //   description: '该列首次点击时的排序顺序',
-    //   docDescription:
-    //     '该列首次点击时的排序顺序。与表格属性中的"默认排序顺序"相同',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [{ title: '升序' }, { title: '倒序' }],
-    //   },
-    //   if: (_) => _.sortable === true,
-    // })
-    // defaultOrder: 'asc' | 'desc' = 'asc';
 
-    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'type'>({
-    //   group: '数据属性',
-    //   title: '列类型',
-    //   description:
-    //     '支持序号列、单/多选、树形列和编辑列切换，序号列支持按照数字排序。选择编辑列需要先设置列字段。',
-    //   docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [
-    //       { title: '普通列' },
-    //       { title: '序号列' },
-    //       { title: '单选列' },
-    //       { title: '多选列' },
-    //       { title: '展开列' },
-    //       { title: '树形列' },
-    //       {
-    //         title: '编辑列',
-    //         tooltip: '与列字段关联，列字段不能为空',
-    //         disabledIf: (_) => _.field === null,
-    //       },
-    //       { title: '拖拽标识列' },
-    //     ],
-    //   },
-    // })
-    // type:
-    //   | 'normal'
-    //   | 'index'
-    //   | 'radio'
-    //   | 'checkbox'
-    //   | 'expander'
-    //   | 'tree'
-    //   | 'editable'
-    //   | 'dragHandler' = 'normal';
-
-    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'autoIndex'>({
-    //   group: '数据属性',
-    //   title: '换页继续编号',
-    //   description: '换页后，继续上一页的列序号进行编号',
-    //   docDescription: '支持换页后，继续上一页的列序号进行编号',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    //   if: (_) => _.type === 'index',
-    // })
-    // autoIndex: nasl.core.Boolean = false;
-
-    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'startIndex'>({
-    //   group: '数据属性',
-    //   title: '起始序号',
-    //   description: '序号列的起始序号',
-    //   docDescription: '当列类型为"序号列"时有效。默认值为1',
-    //   setter: {
-    //     concept: 'NumberInputSetter',
-    //   },
-    //   if: (_) => _.type === 'index' && _.autoIndex !== true,
-    // })
-    // startIndex: nasl.core.Decimal | nasl.core.Integer = 1;
-
-    // @Prop({
-    //   group: '数据属性',
-    //   title: '双击处理函数',
-    //   description: '用于可编辑表格，双击表格列时的处理函数',
-    //   docDescription:
-    //     '用于可编辑表格，双击表格列时的处理函数。在表格是"可编辑"的表格时有效',
-    // })
-    // private dblclickHandler: Function;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '表格标题',
-    //   tooltipLink:
-    //     'https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/05.%E8%A1%A8%E6%A0%BC/100.%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC.html',
-    //   docDescription: '表格上方的标题信息。默认为空',
-    // })
-    // private title: nasl.core.String;
+    
 
     @Prop({
       group: '主要属性',
@@ -1133,32 +1091,6 @@ namespace nasl.ui {
     })
     autoMerge: nasl.core.Boolean = false;
 
-    // dragSort: 'row' | 'row-handler' | 'col' | 'row-handler-col' | 'drag-col';
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '隐藏列',
-    //   docDescription:
-    //     '开启后，当表格横向滚动条滚动时，该列会固定不会跟随滚动条滚动',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // hidden: nasl.core.Boolean = false;
-
-    // @Prop<UTableViewColumnOptions<T, V, P, M>, 'expanderPosition'>({
-    //   group: '样式属性',
-    //   title: '展开列图标位置',
-    //   description: '展开列图标的位置',
-    //   docDescription: '展开列图标的位置。默认"左侧"。',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [{ title: '左侧' }, { title: '右侧' }],
-    //   },
-    //   if: (_) => _.type === 'expander',
-    // })
-    // expanderPosition: 'left' | 'right' = 'left';
-
     @Prop({
       group: '样式属性',
       title: '列宽度',
@@ -1179,25 +1111,6 @@ namespace nasl.ui {
       row: T;
     }) => any
 
-    // @Prop({
-    //   group: '样式属性',
-    //   title: '合并列数',
-    //   setter: {
-    //     concept: 'NumberInputSetter',
-    //     min: 1,
-    //     precision: 0,
-    //   },
-    // })
-    // colSpan: nasl.core.Integer;
-
-    // @Prop({
-    //   group: '样式属性',
-    //   title: '自动合并相同数据',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // autoRowSpan: nasl.core.Boolean = false;
 
     @Slot({
       title: '单元格',
@@ -1216,6 +1129,22 @@ namespace nasl.ui {
       description: '对标题进行自定义',
     })
     slotTitle: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '多级表头',
+      description: '多级表头',
+      snippets: [
+        {
+          title: '表格列',
+          code: '<el-table-column-pro data-nodepath-multiple="ture"><template #title><el-text text="表格列"></el-text></template></el-table-column-pro>',
+        },
+        // {
+        //   title: '表格动态列列',
+        //   code: '<el-table-column-dynamic-pro data-nodepath-multiple="ture"><template #title><el-text text="表格列"></el-text></template></el-table-column-dynamic-pro>',
+        // }
+      ],
+    })
+    slotDefault: () => Array<ViewComponent>;
 
     // @Slot({
     //   title: '展开列内容',

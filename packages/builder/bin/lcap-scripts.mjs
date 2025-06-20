@@ -14,6 +14,8 @@ const {
   overload,
   watch,
   create,
+  play,
+  parse,
 } = commands;
 
 // eslint-disable-next-line no-underscore-dangle
@@ -47,8 +49,9 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
 
   program.command('build')
     .description('构建流程，vite build 生成 theme.config.json usage.json, nasl.ui.json, i18n.json 等文件')
-    .action(async () => {
-      await build();
+    .option('--staging', '预览构建, 不构建耗时的任务，例如 pack, 模块构建')
+    .action(async (options) => {
+      await build(cwd, options);
     });
 
   program.command('deploy')
@@ -66,6 +69,8 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .description('创建依赖库组件、逻辑...')
     .option('--component', '创建组件')
     .option('--logic', '创建逻辑')
+    .option('--schema <schema>', '通过 schema 文件创建组件')
+    .option('--prompt <prompt>', '创建组件时，输入信息，JSON 格式')
     .action(async (options) => {
       await create(cwd, {
         ...options,
@@ -91,6 +96,31 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .option('--https', '启动https')
     .action(async ({ ...args }) => {
       await watch(cwd, args);
+    });
+
+  program.command('parse')
+    .description('解析 npm 包')
+    .argument('<pkg>', 'npm 包名，例如: antd、 element-ui@beta')
+    .option('-l, --local <local>', '本地包路径')
+    .option('-o, --output <file>', '输出的文件名， 默认 schema.json')
+    .option('-t, --tempDir <dir>', '临时目录')
+    .option('-n, --npmClient <client>', 'npm 客户端，npm、yarn、pnpm, 默认npm')
+    .option('--generate', '解析完成后是否生成代码')
+    .action(async (pkg, options) => {
+      await parse(cwd, {
+        ...options,
+        pkg,
+      });
+    });
+
+  program.command('play')
+    .description('api.ts可视化编辑')
+    .option('--port <port>', '端口')
+    .option('--https', '启动https')
+    .option('--noPreview', '不启动预览')
+    .option('--noWatch', '不监听文件变化自动构建')
+    .action(async ({ ...args }) => {
+      await play(cwd, args);
     });
 
   program.parse(process.argv);

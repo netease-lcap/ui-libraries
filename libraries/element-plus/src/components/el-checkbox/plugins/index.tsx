@@ -10,6 +10,7 @@ export { handleControllableValue } from '@/plugins/common/index';
 export function handleTagName(props) {
   return {
     formTagName: 'el-form-checkbox-group',
+    tagName: 'el-checkbox-group',
   };
 }
 

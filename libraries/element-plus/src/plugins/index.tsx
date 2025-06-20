@@ -58,12 +58,14 @@ export function registerComponent<T>(Component, options) {
 
     setup(props, { attrs, slots, emit, expose }) {
       const componentRef = ref(null);
+      const { usePlugin } = props as any;
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
       let Render = Component;
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
+      // const provideRef = injectRef?.value ? { ...injectRef.value } : ref({});
       const provideRef = ref(injectRef);
       const router = useRouter?.();
       const route = useRoute?.();
@@ -126,7 +128,7 @@ export function registerComponent<T>(Component, options) {
       );
 
       watch(componentRef, (value) => _.defaults(exposeRef.value, value));
-      watch(injectRef, (value) => _.defaults(provideRef.value, value), { deep: true, immediate: true });
+      watch(injectRef, (value) => _.defaults(provideRef.value, value), { immediate: true });
       expose(exposeRef.value);
 
       provide($provide, provideRef);
