@@ -78,8 +78,27 @@ export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', event: 'update:selectedRowKeys' }]);
 
 function handleDynamicColumn(vnode) {
-  const dataSource = [];
-  const data = ref(dataSource);
+  const data = ref([]);
+  const getDataSource = computed(() => {
+    const dataSource = vnode.data.attrs.dataSource;
+    if (Array.isArray(dataSource)) {
+      return async () => dataSource;
+    }
+    if (typeof dataSource === 'object' && Array.isArray(dataSource.list)) {
+      return async () => dataSource.list;
+    }
+    if (typeof dataSource === 'function') {
+      return dataSource;
+    }
+    return async () => [];
+  });
+  watch(getDataSource, async (dataSource) => {
+    data.value = await dataSource();
+  });
+  return {
+    data,
+    ...vnode.data.attrs,
+  };
 }
 
 const isEditColumn = ({ type, edit }) => {

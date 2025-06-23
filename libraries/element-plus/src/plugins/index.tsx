@@ -58,7 +58,6 @@ export function registerComponent<T>(Component, options) {
 
     setup(props, { attrs, slots, emit, expose }) {
       const componentRef = ref(null);
-      const { usePlugin } = props as any;
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
@@ -66,7 +65,8 @@ export function registerComponent<T>(Component, options) {
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
       // const provideRef = injectRef?.value ? { ...injectRef.value } : ref({});
-      const provideRef = ref(injectRef);
+      const provideRef = ref({});
+      Object.assign(provideRef.value, injectRef.value);
       const router = useRouter?.();
       const route = useRoute?.();
       const useStore = createStore((set) => ({
