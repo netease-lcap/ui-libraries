@@ -14,7 +14,7 @@ import { genQueryLogic, genTextTemplate, genColumnMeta } from './genCommonBlock'
 function genTableColumnTemplate(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
   const { lowerEntityName, title } = genColumnMeta(property, nameGroup);
   return `<ElTableColumn
-    colKey="${lowerEntityName}.${property.name}"
+    prop="${lowerEntityName}.${property.name}"
     slotHeader={
         <ElText text="${title}"></ElText>
     }
