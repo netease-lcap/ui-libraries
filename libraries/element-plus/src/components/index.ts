@@ -72,7 +72,7 @@ export { ElResult, ElResultRegister } from './el-result';
 export { ElTag, ElCheckTag, ElTagRegister, ElCheckTagRegister } from './el-tag';
 export { ElDropdown, ElDropdownItem, ElDropdownMenu, ElDropdownRegister, ElDropdownItemRegister } from './el-dropdown';
 export { ElRadio, ElRadioGroup, ElFormRadioGroup, ElRadioGroupRegister } from './el-radio';
-export { ElConfigProvider as ConfigProvider } from 'element-plus';
+export { ConfigProvider } from './el-config-provider';
 export { ElAffix, ElAffixRegister } from './el-affix';
 export { ElAnchor, ElAnchorLink, ElAnchorItem, ElAnchorRegister, ElAnchorLinkRegister } from './el-anchor';
 export { ElBadge, ElBadgeRegister } from './el-badge';
