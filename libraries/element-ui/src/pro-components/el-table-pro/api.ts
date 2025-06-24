@@ -1168,5 +1168,115 @@ namespace nasl.ui {
   }
 
   export class ElTableColumnDynamicProOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
+    @Prop({
+      group: '数据属性',
+      title: '列字段',
+      description: 'data 项中的字段',
+      docDescription: '数据项中对应的字段名，如createdTime',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    colKey: (item: T) => any;
+
+    @Prop({
+      group: '数据属性',
+      title: '排序',
+      description: '设置该列是否可以排序',
+      docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    sorter: nasl.core.Boolean = false;
+
+
+    @Prop({
+      group: '主要属性',
+      title: '对齐方式',
+      description: '对齐方式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '右对齐' }, { title: '居中对齐' }],
+      },
+    })
+    align: 'left' | 'right' | 'center' = 'left';
+
+
+    
+
+    @Prop({
+      group: '主要属性',
+      title: '固定列',
+      description:
+        '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: ' 左侧固定' }, { title: '右侧固定' }, { title: '不固定' }],
+      },
+    })
+    fixed: 'left' | 'right' | '' = '';
+
+    @Prop({
+      group: '主要属性',
+      title: '表头文本过长省略',
+      description: '文字过长是否省略显示。默认文字超出时会换行。',
+      docDescription: '开启后，该列表头文本过长会省略显示，否则换行显示，默认关闭',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    ellipsisTitle: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '内容区文本过长省略',
+      description: '文字过长是否省略显示。默认文字超出时会换行。',
+      docDescription: '开启后，该列文本过长会省略显示，否则换行显示，默认关闭',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    ellipsis: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '自动合并相同数据',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    autoMerge: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '列宽度',
+      description: '设置列宽度，可设置为数字或百分比',
+      docDescription:
+        '列宽，可以作为最小宽度使用。当列宽总和小于 table 元素时，浏览器根据宽度设置情况自动分配宽度；当列宽总和大于 table 元素，表现为定宽。可以同时调整 table 元素的宽度来达到自己想要的效果	',
+    })
+    width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
+
+
+
+    @Slot({
+      title: '单元格',
+      description: '对单元格的数据展示进行自定义',
+    })
+    slotCell: (current: Current<T>) => Array<ViewComponent>;
+
+    @Slot({
+      title: '编辑单元格',
+      description: '对单元格的编辑数据展示进行自定义',
+    })
+    slotEdit: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '标题',
+      description: '对标题进行自定义',
+    })
+    slotTitle: (current: Current<T>) => Array<ViewComponent>;
+
+
   }
 }
