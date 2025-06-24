@@ -145,19 +145,12 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-form :model="model" ref="formRef" >
+    <el-form :model="model" ref="formRef" :inline="true">
     {{inputName}}
     <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
-     <el-form-input-number :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-cascader :rules="rules"    label="input212"  data-nodepath="input21" :dataSource="list" />
-    <el-form-input-tag :rules="rules"   label="input21"  data-nodepath="input21" />
-    <el-form-rate :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-slider :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-switch :rules="rules"  v-model="switchValue" label="input21" data-nodepath="switch" />
-    <el-form-tree-select :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-checkbox-group label="ww" :rules="rules" :isRequired="true" :dataSource="list"></el-form-checkbox-group>
     <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-button @click="handleClick(formRef)" >Submit</el-button>
 
     <a @click="handleClick(formRef)" >Submit</a>
     <a @click="handleClick(formRef)" >Submit2</a>

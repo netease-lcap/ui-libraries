@@ -190,6 +190,18 @@ export const 树形 = {
             },
           };
         },
+        dynamicColumns: async () => {
+          return [
+            {
+              title: '申请人2',
+              colKey: 'channel',
+            },
+            {
+              title: '申请人3',
+              colKey: 'channel',
+            },
+          ];
+        },
       };
     },
     methods: {
@@ -211,7 +223,13 @@ export const 树形 = {
 
    @drag-sort="onDragSortChange"
     >
-      <el-table-column-pro title="申请人" colKey="channel"></el-table-column-pro>
+      <el-table-column-dynamic-pro title="title" colKey="colKey" :dataSource="dynamicColumns">
+      <template #title="item">
+        <el-text>
+        123
+        </el-text>
+      </template>
+      </el-table-column-dynamic-pro>
     
     </el-table-pro>
     `,

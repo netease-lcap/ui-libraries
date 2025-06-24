@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { useMemo } from '@/plugins/hooks';
+import { useMemo, useState } from '@/plugins/hooks';
 import { ElBreadcrumbItem } from '../index';
 import { ElIcon } from '../../index';
 import { useCallback } from '../../../plugins/hooks';
@@ -9,13 +9,18 @@ export function handleAutoCrumbs(props) {
   const showInDesigner = props.get('showInDesigner');
   const slots = props.get('slots');
   const route = props.get('route');
+  const [routeInfo, setRouteInfo] = useState(route);
+  const router = props.get('router');
+  router.afterEach((to, from) => {
+    setRouteInfo(to);
+  });
 
   const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
 
   const routerMeta = useMemo(() => {
-    if (!route?.path) return [];
+    if (!routeInfo?.path) return [];
     return _.reduce(
-      route.matched,
+      routeInfo.matched,
       (pre: Array<{ title: string; to: string }>, curMatch) => {
         const meta = _.assign(
           {},
@@ -23,6 +28,9 @@ export function handleAutoCrumbs(props) {
           _.get(curMatch, 'components.default.__vccOpts.meta', {}),
           _.get(curMatch, 'components.default.meta', {}),
         );
+        if (!meta?.crumb && !meta?.name) {
+          return pre;
+        }
         return pre.concat({
           title: meta?.crumb || curMatch.name || curMatch.path,
           to: curMatch.path,
@@ -30,7 +38,7 @@ export function handleAutoCrumbs(props) {
       },
       [],
     );
-  }, [route]);
+  }, [routeInfo]);
 
   const defaultSlots = useCallback(() => {
     return routerMeta.map((item) => (

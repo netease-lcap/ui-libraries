@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter, onBeforeRouteUpdate, onBeforeRouteLeave, } from 'vue-router';
 
 // import create from 'zustand-vue';
 import { createStore } from 'zustand/vanilla';
