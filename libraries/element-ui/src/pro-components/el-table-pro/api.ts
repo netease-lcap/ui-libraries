@@ -486,8 +486,6 @@ namespace nasl.ui {
       compare?: Function;
     } = { field: undefined, order: 'desc' };
 
-
-
     @Prop({
       group: '样式属性',
       title: '表格行动态样式',
@@ -495,18 +493,18 @@ namespace nasl.ui {
       docDescription: '动态设置表格行背景色、字体颜色等样式',
       bindOpen: true,
       setter: {
-          concept: 'AnonymousFunctionSetter',
-      }
+        concept: 'AnonymousFunctionSetter',
+      },
     })
     rowStyle: (current: Current<T>) => {
       /**
        * @title 表格行背景颜色
        */
-      backgroundColor?: nasl.core.String,
+      backgroundColor?: nasl.core.String;
       /**
        * @title 表格行字体颜色
        */
-      color?: nasl.core.String
+      color?: nasl.core.String;
     };
     // @Prop({
     //   group: '主要属性',
@@ -623,7 +621,7 @@ namespace nasl.ui {
       description: '列配置功能中，当前显示的列。支持语法糖 `.sync`。',
       setter: { concept: 'InputSetter' },
     })
-    displayColumns: nasl.collection.List<nasl.core.String> 
+    displayColumns: nasl.collection.List<nasl.core.String>;
 
     @Prop({
       group: '交互属性',
@@ -944,14 +942,14 @@ namespace nasl.ui {
       selector: [
         {
           expression: "this.getElement(el => el.slotTarget === 'title')",
-          cssSelector: "th"
+          cssSelector: 'th',
         },
         {
           expression: "this.getElement(el => el.slotTarget === 'cell')",
-          cssSelector: "td"
+          cssSelector: 'td',
         },
       ],
-      namedSlotOmitWrapper:['cell','edit'],
+      namedSlotOmitWrapper: ['cell', 'edit'],
       slotInlineStyle: {
         title: 'min-width: 30px',
         cell: 'min-width: 30px',
@@ -996,7 +994,6 @@ namespace nasl.ui {
     })
     sorter: nasl.core.Boolean = false;
 
-
     @Prop({
       group: '数据属性',
       title: '列类型',
@@ -1004,11 +1001,10 @@ namespace nasl.ui {
       docDescription: '列类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '普通列' }, { title: '编辑列' } ],
+        options: [{ title: '普通列' }, { title: '编辑列' }],
       },
     })
-    type: 'normal' | 'editable'  = 'normal';
-
+    type: 'normal' | 'editable' = 'normal';
 
     @Prop<ElTableColumnProOptions<T, V, P, M>, 'rules'>({
       group: '主要属性',
@@ -1031,22 +1027,17 @@ namespace nasl.ui {
     })
     align: 'left' | 'right' | 'center' = 'left';
 
-
-
     @Prop<ElTableColumnProOptions<T, V, P, M>, 'abortEditOnEvent'>({
       group: '主要属性',
       title: '退出编辑事件',
       description: '退出编辑事件',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '改变后' }, { title: '失去焦点后' },{ title: '点击其他单元格' }],
+        options: [{ title: '改变后' }, { title: '失去焦点后' }, { title: '点击其他单元格' }],
       },
       if: (_) => _.type === 'editable',
     })
-    abortEditOnEvent: 'onChange' | 'onBlur' | '' =''
-
-
-    
+    abortEditOnEvent: 'onChange' | 'onBlur' | '' = '';
 
     @Prop({
       group: '主要属性',
@@ -1104,13 +1095,7 @@ namespace nasl.ui {
       title: '行编辑编辑完成',
       description: '退出编辑态后触发',
     })
-    onRowEdit: (event: {
-      colIndex: number;
-      rowIndex: number;
-      newRowData: T;
-      row: T;
-    }) => any
-
+    onRowEdit: (event: { colIndex: number; rowIndex: number; newRowData: T; row: T }) => any;
 
     @Slot({
       title: '单元格',
@@ -1160,24 +1145,58 @@ namespace nasl.ui {
     // slotExpander: (current: Current<T>) => Array<ViewComponent>;
   }
 
-
-  export class ElTableColumnDynamicPro<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponent {
-    constructor(options?: Partial<ElTableColumnDynamicProOptions<T, V, P, M>>) {
+  export class ElTableColumnDynamicPro<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    T1,
+  > extends ViewComponent {
+    constructor(options?: Partial<ElTableColumnDynamicProOptions<T, V, P, M, T1>>) {
       super();
     }
   }
 
-  export class ElTableColumnDynamicProOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class ElTableColumnDynamicProOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    T1,
+  > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
+      title: '数据源',
+      description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
+      tooltipLink:
+        'https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/05.%E8%A1%A8%E6%A0%BC/100.%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC.html',
+      docDescription:
+        '表格展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
+      designerValue: [{}],
+      bindOpen: true,
+    })
+    dataSource: { list: nasl.collection.List<T1>; total: nasl.core.Integer } | nasl.collection.List<T1>;
+
+    @Prop({
+      group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      tooltipLink:
+        'https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/05.%E8%A1%A8%E6%A0%BC/100.%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC.html',
+      docDescription: '表格每一行的数据类型。该属性为展示属性，由数据源推导得到，无需填写',
+    })
+    dataSchema: T1;
+
+    @Prop<ElTableColumnDynamicProOptions<T, V, P, M, T1>, 'colKey'>({
+      group: '数据属性',
       title: '列字段',
-      description: 'data 项中的字段',
-      docDescription: '数据项中对应的字段名，如createdTime',
+      description: '在单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
+      docDescription: '在表格开启了单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
-    colKey: (item: T) => any;
+    colKey: (item: T1) => any = ((item: any) => item.value) as any;
 
     @Prop({
       group: '数据属性',
@@ -1190,7 +1209,6 @@ namespace nasl.ui {
     })
     sorter: nasl.core.Boolean = false;
 
-
     @Prop({
       group: '主要属性',
       title: '对齐方式',
@@ -1201,9 +1219,6 @@ namespace nasl.ui {
       },
     })
     align: 'left' | 'right' | 'center' = 'left';
-
-
-    
 
     @Prop({
       group: '主要属性',
@@ -1257,8 +1272,6 @@ namespace nasl.ui {
     })
     width: nasl.core.String | nasl.core.Decimal | nasl.core.Integer;
 
-
-
     @Slot({
       title: '单元格',
       description: '对单元格的数据展示进行自定义',
@@ -1276,7 +1289,5 @@ namespace nasl.ui {
       description: '对标题进行自定义',
     })
     slotTitle: (current: Current<T>) => Array<ViewComponent>;
-
-
   }
 }
