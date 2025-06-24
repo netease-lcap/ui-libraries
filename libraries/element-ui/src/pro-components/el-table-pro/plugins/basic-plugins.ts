@@ -348,12 +348,9 @@ export const useTable: NaslComponentPluginOptions = {
       };
     };
     async function handleDynamicColumn(vnode) {
-      console.log(vnode, 'vnode');
       const attrs = renderColumn(vnode);
-      console.log(attrs, 'obj');
       const data = ref([]);
       const columns = ref([]);
-
       const getDataSourceFn = async () => {
         const { dataSource } = vnode.data.attrs;
         if (Array.isArray(dataSource)) {

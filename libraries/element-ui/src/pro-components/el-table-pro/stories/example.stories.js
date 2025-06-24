@@ -190,6 +190,100 @@ export const 树形 = {
             },
           };
         },
+        treeData: async (params) => {
+          return {
+            list: [
+              {
+                tree: {
+                  id: 0,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: null,
+                  name: '根节点',
+                },
+              },
+              {
+                tree: {
+                  id: 1,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 0,
+                  name: '根节点-子节点1',
+                },
+              },
+              {
+                tree: {
+                  id: 2,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 0,
+                  name: '根节点-子节点2',
+                },
+              },
+              {
+                tree: {
+                  id: 3,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 1,
+                  name: '根节点-子节点1-子子节点1',
+                },
+              },
+              {
+                tree: {
+                  id: 4,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 1,
+                  name: '根节点-子节点1-子子节点2',
+                },
+              },
+              {
+                tree: {
+                  id: 5,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 2,
+                  name: '根节点-子节点2-子子节点1',
+                },
+              },
+              {
+                tree: {
+                  id: 6,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 2,
+                  name: '根节点-子节点2-子子节点2',
+                },
+              },
+              {
+                tree: {
+                  id: 7,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 2,
+                  name: '根节点-子节点2-子子节点2',
+                },
+              },
+            ],
+          };
+        },
         dynamicColumns: async () => {
           return [
             {
@@ -206,29 +300,29 @@ export const 树形 = {
     },
     methods: {
       async onDragSortChange(value) {
-        console.log(
-          JSON.stringify(value.data[0].add.index),
-          JSON.stringify(value.newData[0].add.index),
-          'onDragSortChange',
-        );
+        console.log(value, 'onDragSortChange');
+        // console.log(
+        //   JSON.stringify(value.data[0].add.index),
+        //   JSON.stringify(value.newData[0].add.index),
+        //   'onDragSortChange',
+        // );
       },
     },
     template: `
     <el-table-pro
-        row-key="add.index"
-    :dataSource="data"
+        row-key="tree.id"
+    :dataSource="treeData"
     :treeDisplay="true"
+    parentField="tree.parentid"
     :hasIndexColumn="true"
    dragSort="row"
 
    @drag-sort="onDragSortChange"
     >
+    <el-table-column-pro title="title" colKey="tree.name">
+    </el-table-column-pro>
       <el-table-column-dynamic-pro title="title" colKey="colKey" :dataSource="dynamicColumns">
-      <template #title="item">
-        <el-text>
-        123
-        </el-text>
-      </template>
+ 
       </el-table-column-dynamic-pro>
     
     </el-table-pro>
@@ -253,7 +347,7 @@ export const 可编辑表格 = {
     },
     data() {
       return {
-        data:  (params) => {
+        data: (params) => {
           const initialData = [];
           const total = 200;
           for (let i = 0; i < total; i++) {
