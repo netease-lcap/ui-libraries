@@ -966,6 +966,7 @@ namespace nasl.ui {
     }
   }
 
+
   export class ElTableColumnProOptions<
     T,
     V,
@@ -1145,6 +1146,35 @@ namespace nasl.ui {
     // slotExpander: (current: Current<T>) => Array<ViewComponent>;
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      parentAccept: "['el-table-pro'].includes(target.tag)",
+      childAccept: false,
+
+      structured: true,
+      // selector: 'multiple',
+      selector: [
+        {
+          expression: "this.getElement(el => el.slotTarget === 'title')",
+          cssSelector: 'th',
+        },
+        {
+          expression: "this.getElement(el => el.slotTarget === 'cell')",
+          cssSelector: 'td',
+        },
+      ],
+      namedSlotOmitWrapper: ['cell', 'edit'],
+      slotInlineStyle: {
+        title: 'min-width: 30px',
+        cell: 'min-width: 30px',
+      },
+    },
+  })
+  @Component({
+    title: '动态表格列',
+    description: '动态表格列',
+  })
   export class ElTableColumnDynamicPro<
     T,
     V,
