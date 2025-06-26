@@ -66,8 +66,7 @@ const EditDefault = {
               editable,
             })
             ?.map((node) => cloneVNode(node, {
-                onValidateSuccess: () => {
-                },
+                onValidateSuccess: () => {},
                 ref: formItemRef,
               }))}
           <el-icon
@@ -79,7 +78,7 @@ const EditDefault = {
             }}
             size={18}
             name="DocumentAdd"
-            style={{ marginLeft: '10px', marginBottom: '18px' }}
+            style={{ marginLeft: '10px' }}
           />
         </div>
       );

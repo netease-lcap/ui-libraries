@@ -258,6 +258,11 @@ export const Example2 = {
       const config = {
         round: true,
       };
+      const dataSource = async () => {
+        return [
+         
+        ];
+      };
 
       return {
         tableData,
@@ -268,6 +273,7 @@ export const Example2 = {
         logCellClick,
         config,
         transformKeys,
+        dataSource,
       };
     },
     template: `
@@ -282,6 +288,7 @@ class="my-table"
 :sorting="{ field: 'createTime', order: 'desc' }"
 :showJumper="true"
 :columnConfig="true"
+:editTable="true"
 :pageSizes="[10, 100, 200, 300, 400]"
 v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
@@ -293,7 +300,20 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column  :resizable="false" prop="applicant" label="申请人" width="300" fixedPosition="left" @edit-change="logCellClick">
+  <el-table-column :editable="true"  :resizable="false" prop="applicant" label="申请人" width="300" fixedPosition="left" @edit-change="logCellClick">
+  <template #header>
+    <div>申请人</div>
+  </template>
+  <template #default="current">
+  <el-form-select 
+  :dataSource="dataSource" 
+  valueField="entid.id"
+  labelField="entid.name"
+  >
+    <template #label>
+    </template>
+  </el-form-select>
+  </template>
 
   </el-table-column>
   <el-table-column prop="status" label="申请状态" width="350">
