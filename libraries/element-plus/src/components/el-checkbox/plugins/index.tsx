@@ -3,9 +3,7 @@ import _ from 'lodash';
 import { ElCheckbox, ElCheckboxButton } from 'element-plus';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-
-import { useMemo } from '@/plugins/hooks';
-import { ElCheckbox, ElCheckboxButton } from 'element-plus';
+import { useMemo, useCallback } from '@/plugins/hooks';
 
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -56,6 +54,10 @@ export function handleItemType(props) {
     [
       _.matches('button'),
       _.constant(_.map(slots.default?.(), (node) => <ElCheckboxButton {...node.props} v-slots={node.children} />)),
+    ],
+    [
+      _.matches('border'),
+      _.constant(_.map(slots.default?.(), (node) => <ElCheckbox {...node.props} v-slots={node.children} border/>)),
     ],
     [_.stubTrue, slots.default],
   ]);
