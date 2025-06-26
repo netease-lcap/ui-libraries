@@ -4,9 +4,7 @@ import { ElCheckbox, ElCheckboxButton } from 'element-plus';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
-import { useMemo } from '@/plugins/hooks';
-import { ElCheckbox, ElCheckboxButton } from 'element-plus';
-
+import { useMemo, useCallback } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
