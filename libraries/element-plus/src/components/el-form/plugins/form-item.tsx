@@ -6,7 +6,7 @@ import { ElFormItemWrap } from '@/components/el-form';
 import { $formProvide, $formItemProps } from '@/components/el-form/constants';
 import { useEffect } from '@/plugins/hooks';
 import { categoryStyles } from '@/utils';
-import { $provide } from '@/plugins/constants';
+import { $provide, $formTagName } from '@/plugins/constants';
 
 type FormItemProvide = {
   [$formProvide]: {
@@ -107,9 +107,10 @@ export function withFormItem(Component, name) {
             ref={formItemRef}
             v-slots={{
               label: slots.label,
-            }}>
+            }}
+          >
             <Component
-              {..._.omit(_.assign({}, props, attrs), $formItemProps)}
+              {..._.omit(_.assign({ [$formTagName]: name }, props, attrs), $formItemProps)}
               v-slots={slots}
               style={style.value.innerStyle}
               v-on={emit}

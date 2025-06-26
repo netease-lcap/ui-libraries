@@ -30,7 +30,7 @@ export const Default = {
     template: `
     <div>
     {{value}}
-    <el-pagination      :pageSizes="[1, 2, 3, 4]"  layout="prev, pager,sizes, next" :total="50" />
+    <el-pagination :total="50" :pageSizes="[1, 2, 3, 4]"  layout="prev,pager,sizes, next" prev-text="prevText" next-text="nextText" />
     <button @click="handleUpdatePageSize">更新  </button>
     </div>
     `,

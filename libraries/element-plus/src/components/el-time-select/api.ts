@@ -136,7 +136,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIconName: nasl.core.String = 'Clock';
+    prefixIconName: nasl.core.String;
 
     @Prop({
       title: '清除图标',
@@ -147,7 +147,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    clearIconName: nasl.core.String = 'CircleClose';
+    clearIconName: nasl.core.String;
 
     @Prop({
       group: '样式属性',
@@ -188,10 +188,10 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
-      additionalAttribute: {
-        prefixIconName: '"Clock"',
-        clearIconName: '"CircleClose"',
-      },
+      // additionalAttribute: {
+      //   prefixIconName: '"Clock"',
+      //   clearIconName: '"CircleClose"',
+      // },
     },
     extends: [
       {
@@ -208,7 +208,11 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormTimeSelect extends ViewComponent {
-    constructor(options?: Partial<ElFormTimeSelectOptions & ElFormItemProOptions & Omit<ElTimeSelectOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<
+        ElFormTimeSelectOptions & ElFormItemProOptions & Omit<ElTimeSelectOptions, keyof ElFormItemProOptions>
+      >,
+    ) {
       super();
     }
   }

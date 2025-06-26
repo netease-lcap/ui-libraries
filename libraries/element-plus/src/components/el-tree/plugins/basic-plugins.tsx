@@ -1,6 +1,11 @@
 import _ from 'lodash';
 import { ElTreeV2 } from 'element-plus';
-import { useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
+import {
+  useRequestDataSource,
+  useHandleMapField,
+  useFormatDataSource,
+  useDataSourceToTree,
+} from '@/plugins/common/dataSource';
 import { useMemo, useCallback } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 
@@ -10,7 +15,9 @@ export function handleDataSource(props) {
   const valueField = props.get('valueField', 'value');
   const parentField = props.get('parentField');
   const slotsProps = props.get('slots');
-  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'parentField', 'childrenField']);
+  const deletePropsList = props
+    .get($deletePropsList, [])
+    .concat(['textField', 'valueField', 'parentField', 'childrenField']);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
@@ -21,8 +28,8 @@ export function handleDataSource(props) {
   const slotItemToDefault = useMemo(() => {
     const hasItemSlot = _.isFunction(slotsProps?.item);
     return hasItemSlot ? { default: ({ node }) => slotsProps.item({ item: node }) } : {};
-  }, [slotsProps]);
-  const slots = useMemo(() => _.assign(slotsProps, { ...slotItemToDefault }), [slotsProps, slotItemToDefault]);
+  }, [slotsProps.item]);
+  const slots = _.assign(slotsProps, { ...slotItemToDefault });
 
   return {
     [$deletePropsList]: deletePropsList,

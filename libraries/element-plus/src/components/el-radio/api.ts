@@ -107,6 +107,21 @@ namespace nasl.ui {
     size: 'small' | 'default' | 'large' = 'default';
 
     @Prop({
+      group: '主要属性',
+      title: '类型',
+      description: '单选框组类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '默认' },
+          { title: '边框' },
+          { title: '按钮' },
+        ],
+      },
+    })
+    type: 'default' | 'border' | 'button' = 'default';
+
+    @Prop({
       group: '状态属性',
       title: '禁用',
       description: '是否禁用全部子单选框',

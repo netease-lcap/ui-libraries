@@ -135,7 +135,6 @@ namespace nasl.ui {
       title: '数据源',
       description: '树数据',
       designerValue: [{}, {}, {}],
-      bindOpen: true,
     })
     dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
@@ -301,7 +300,6 @@ namespace nasl.ui {
       description: '节点点击时触发',
     })
     onNodeClick: (event: {
-      node: {
         actived: nasl.core.Boolean;
         checked: nasl.core.Boolean;
         data: T;
@@ -311,7 +309,6 @@ namespace nasl.ui {
         loading: nasl.core.Boolean;
         value: V;
         label: nasl.core.String;
-      };
     }) => any;
 
     @Event({

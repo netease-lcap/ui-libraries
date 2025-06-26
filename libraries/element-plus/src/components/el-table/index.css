@@ -7,7 +7,7 @@
 }
 .el-table.sticky-table .el-table__header-wrapper {
   position: sticky; 
-  top: 8px; 
+  top: var(--el-table-sticky-offset); 
   z-index: 5;
 }
 

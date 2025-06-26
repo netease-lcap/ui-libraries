@@ -3,10 +3,11 @@ import { ElIcon } from '@/components';
 export function handleIcon(props) {
   const clearIconName = props.get('clearIconName');
   const prefixIconName = props.get('prefixIconName');
-
+  const clearIcon = clearIconName ? { clearIcon: <ElIcon name={clearIconName} /> } : {};
+  const prefixIcon = prefixIconName ? { prefixIcon: <ElIcon name={prefixIconName} /> } : {};
   return {
-    clearIcon: <ElIcon name={clearIconName} />,
-    prefixIcon: <ElIcon name={prefixIconName} />,
+    ...clearIcon,
+    ...prefixIcon,
   };
 }
 

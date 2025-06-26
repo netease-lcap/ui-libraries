@@ -95,7 +95,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前的文件列表',
     })
-    value: nasl.core.String;
+    modelValue: nasl.core.String;
 
     @Prop({
       group: '数据属性',

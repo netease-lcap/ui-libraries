@@ -69,6 +69,32 @@ namespace nasl.ui {
     })
     highThreshold: nasl.core.Integer = 4;
 
+    @Prop({
+      group: '数据属性',
+      title: '低分颜色',
+      description: '低分颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    lowColor: nasl.core.String = '#F7BA2A';
+
+    @Prop({
+      group: '数据属性',
+      title: '中等颜色',
+      description: '中等颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    mediumColor: nasl.core.String = '#F7BA2A';
+
+    @Prop({
+      group: '数据属性',
+      title: '高分颜色',
+      description: '高分颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    highColor: nasl.core.String = '#F7BA2A';
+
+
+
     // @Prop({
     //   group: '主要属性',
     //   title: '颜色数组',

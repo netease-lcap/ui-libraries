@@ -2,7 +2,8 @@
 import _ from 'lodash';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useMemo } from '@/plugins/hooks';
+import { useMemo, useCallback } from '@/plugins/hooks';
+import { ElRadio, ElRadioButton } from 'element-plus';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
@@ -39,5 +40,25 @@ export function handleDataSource(props) {
     loading,
     data,
     slots: _.assign(slots, dataSourceSlots),
+  };
+}
+
+export function handleItemType(props) {
+  const type = props.get('type');
+  const slots = props.get('slots');
+  const condToDefaultRender = _.cond([
+    [
+      _.matches('button'),
+      _.constant(_.map(slots.default?.(), (node) => <ElRadioButton {...node.props} v-slots={node.children} />)),
+    ],
+    [
+      _.matches('border'),
+      _.constant(_.map(slots.default?.(), (node) => <ElRadio {...node.props} v-slots={node.children} border/>)),
+    ],
+    [_.stubTrue, slots.default],
+  ]);
+  const defaultRender = useCallback(() => condToDefaultRender(type), [type, slots.default]);
+  return {
+    slots: _.assign(slots, { default: defaultRender }),
   };
 }

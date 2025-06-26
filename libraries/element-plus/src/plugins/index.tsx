@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter, onBeforeRouteUpdate, onBeforeRouteLeave, } from 'vue-router';
 
 // import create from 'zustand-vue';
 import { createStore } from 'zustand/vanilla';
@@ -10,7 +10,7 @@ import { createStore } from 'zustand/vanilla';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { $deletePropsList, $provide } from '@/plugins/constants';
+import { $deletePropsList, $provide, $tagName } from '@/plugins/constants';
 import { scheduler } from '@/plugins/hooks';
 import '@/utils/index';
 
@@ -58,7 +58,6 @@ export function registerComponent<T>(Component, options) {
 
     setup(props, { attrs, slots, emit, expose }) {
       const componentRef = ref(null);
-      const { usePlugin } = props as any;
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
@@ -66,7 +65,8 @@ export function registerComponent<T>(Component, options) {
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
       // const provideRef = injectRef?.value ? { ...injectRef.value } : ref({});
-      const provideRef = ref(injectRef);
+      const provideRef = ref({});
+      Object.assign(provideRef.value, injectRef.value);
       const router = useRouter?.();
       const route = useRoute?.();
       const useStore = createStore((set) => ({
@@ -76,6 +76,7 @@ export function registerComponent<T>(Component, options) {
           ref: {},
           router,
           route,
+          [$tagName]: options.name,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
         props: {

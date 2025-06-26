@@ -123,7 +123,7 @@ namespace nasl.ui {
       description: '上一页文本',
       setter: { concept: 'InputSetter' },
     })
-    prevtext: nasl.core.String;
+    prevText: nasl.core.String;
 
     @Prop({
       group: '交互属性',
@@ -131,7 +131,7 @@ namespace nasl.ui {
       description: '下一页文本',
       setter: { concept: 'InputSetter' },
     })
-    nexttext: nasl.core.String;
+    nextText: nasl.core.String;
 
     @Prop({
       group: '主要属性',

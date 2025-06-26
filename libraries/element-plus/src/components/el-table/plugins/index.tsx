@@ -106,6 +106,7 @@ export function handlePageProps(props) {
   const showJumper = props.get('showJumper');
   const onSelectionChange = props.get('onSelectionChange', () => {});
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
+  const rowKey = props.get('rowKey');
 
   return {
     pageProps: {
@@ -114,8 +115,8 @@ export function handlePageProps(props) {
       total,
     },
     pagination,
-    onSelectionChange: _.wrap(onSelectionChange, (fn, value) => {
-      _.attempt(fn, { newSelection: value });
+    onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
+      _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey)) });
     }),
   };
 }
@@ -164,7 +165,7 @@ export function handleDataSource(props) {
   const onSuccess = props.get('onSuccess', () => {});
   const ref = props.get('ref');
   const defaultParams = [{ currentPage, pageSize, order, sort, pagination }];
-  const valueField = props.get('valueField');
+  const rowKey = props.get('rowKey');
   const parentField = props.get('parentField');
   const {
     data: resultData = { list: [], total: 0 },
@@ -180,7 +181,7 @@ export function handleDataSource(props) {
     run({ currentPage, pageSize, order, sort, pagination, ...params });
   };
   const { list: data, total } = resultData as { list: any; total: number };
-  const treeData = useDataSourceToTree(data, parentField, valueField);
+  const treeData = useDataSourceToTree(data, parentField, rowKey);
   const selfRef = _.assign(ref, { reload, data: treeData });
 
   const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
@@ -287,10 +288,17 @@ export function handleSticky(props) {
   const stickyName = props.get('sticky') ? 'sticky-table' : '';
   const className = props.get('class', '');
   const classNames = `${stickyName} ${className}`;
+  const styleProps = props.get('style');
+  const stickyOffset = props.get('stickyOffset', 8);
   return {
     class: classNames,
+    style: {
+      '--el-table-sticky-offset': `${stickyOffset}px`,
+      ...styleProps,
+    },
   };
 }
+handleSticky.order = 3;
 
 function handleVirtualize(props) {
   const virtualize = props.get('virtualize');
