@@ -7,6 +7,7 @@ import { useMemo } from '@/plugins/hooks';
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
   const nameField = props.get('nameField') || 'name';
+  const labelField = props.get('labelField') || 'label';
   const slots = props.get('slots');
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
   const ref = props.get('ref');
@@ -15,28 +16,26 @@ export function handleDataSource(props) {
     dataSource: useFormatDataSource(data),
     fieldsMap: {
       name: nameField,
+      label: labelField,
     },
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 
   const dataSourceSlots = useMemo(
-    () =>
-      _.isNil(dataConfig)
+    () => (_.isNil(dataConfig)
         ? {}
         : {
-            default: () =>
-              _.map(dataSource, (item) => (
-                <el-carousel-item
-                  {...item}
-                  v-slots={{
+            default: () => _.map(dataSource, (item) => (
+              <el-carousel-item
+                {...item}
+                v-slots={{
                     default: () => slots.content?.({ item }),
                   }}
-                />
+              />
               )),
-          },
+          }),
     [dataSource, slots, dataConfig],
   );
-
 
   return {
     [$deletePropsList]: deletePropsList,

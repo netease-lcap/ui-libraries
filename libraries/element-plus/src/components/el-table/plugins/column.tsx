@@ -97,7 +97,7 @@ export function handleEditable(props) {
   return {
     slots: {
       ...slots,
-      default: (item) => <EditDefault item={item} slots={slots} editChange={editChange} />,
+      default: useCallback((item) => <EditDefault item={item} slots={slots} editChange={editChange} />, [slots]),
     },
   };
 }

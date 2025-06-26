@@ -100,6 +100,16 @@ namespace nasl.ui {
     nameField: (item: T) => nasl.core.String = ((item: any) => item.name) as any;
 
     @Prop({
+      group: '数据属性',
+      title: '标签字段',
+      description: '集合的元素类型中，用于设置子项标签字段',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    labelField: (item: T) => nasl.core.String = ((item: any) => item.label) as any;
+
+    @Prop({
       group: '主要属性',
       title: '高度',
       description: '走马灯高度，例如：150px',
