@@ -1718,6 +1718,7 @@ export default {
                 this.currentValues = values;
             }
             // 暂存选中行
+            this.checkedItems = {};
             if (this.currentData) {
                 this.currentData.forEach((item) => {
                     if (item.checked) {
