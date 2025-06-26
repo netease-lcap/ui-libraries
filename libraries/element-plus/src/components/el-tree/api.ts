@@ -300,7 +300,6 @@ namespace nasl.ui {
       description: '节点点击时触发',
     })
     onNodeClick: (event: {
-      node: {
         actived: nasl.core.Boolean;
         checked: nasl.core.Boolean;
         data: T;
@@ -310,7 +309,6 @@ namespace nasl.ui {
         loading: nasl.core.Boolean;
         value: V;
         label: nasl.core.String;
-      };
     }) => any;
 
     @Event({

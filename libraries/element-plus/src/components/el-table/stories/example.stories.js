@@ -149,7 +149,7 @@ export const Example1 = {
         console.log('object');
       }, 1000);
       const logCellClick = (...el) => {
-        console.log(tableData2.value, 'logCellClick');
+        console.log(el, 'logCellClick');
       };
       return {
         tableData,
@@ -166,7 +166,7 @@ export const Example1 = {
     <el-flex style="border: 1px solid red;">
 <el-table
 ref="mytable"
-row-key="name"
+row-key="id"
 :dataSource="tableData2"
 style="width: 100%;"
 v-model:currentPage="currentPage"
@@ -253,7 +253,7 @@ export const Example2 = {
       }, 1000);
       const logCellClick = (el) => {
         console.log(el, 'el');
-        console.log(mytable.value.reload(), 'logCellClick');
+        // console.log(mytable.value.reload(), 'logCellClick');
       };
       const config = {
         round: true,
@@ -286,12 +286,14 @@ class="my-table"
 :pagination="true"
 :showTotal="true"
 :sorting="{ field: 'createTime', order: 'desc' }"
+
 :showJumper="true"
 :columnConfig="true"
 :editTable="true"
 :pageSizes="[10, 100, 200, 300, 400]"
 v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
+@selection-change="logCellClick"
 dragSort="row"
 :selection="true"
   :border="true"
@@ -300,22 +302,7 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column :editable="true"  :resizable="false" prop="applicant" label="申请人" width="300" fixedPosition="left" @edit-change="logCellClick">
-  <template #header>
-    <div>申请人</div>
-  </template>
-  <template #default="current">
-  <el-form-select 
-  :dataSource="dataSource" 
-  valueField="entid.id"
-  labelField="entid.name"
-  >
-    <template #label>
-    </template>
-  </el-form-select>
-  </template>
-
-  </el-table-column>
+  <el-table-column prop="index" type="selection" width="55" />
   <el-table-column prop="status" label="申请状态" width="350">
   <template #header>
     <div>申请状态</div>

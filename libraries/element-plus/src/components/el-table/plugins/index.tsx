@@ -106,6 +106,7 @@ export function handlePageProps(props) {
   const showJumper = props.get('showJumper');
   const onSelectionChange = props.get('onSelectionChange', () => {});
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
+  const rowKey = props.get('rowKey');
 
   return {
     pageProps: {
@@ -114,8 +115,8 @@ export function handlePageProps(props) {
       total,
     },
     pagination,
-    onSelectionChange: _.wrap(onSelectionChange, (fn, value) => {
-      _.attempt(fn, { newSelection: value });
+    onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
+      _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey)) });
     }),
   };
 }
