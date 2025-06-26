@@ -65,11 +65,11 @@ async function generateThemeVarsFile(context: OverloadComponentContext, themeFol
   fs.writeFileSync(path.resolve(themeFolder, 'vars.css'), code, 'utf-8');
 }
 
-const VUE_PREVIEW_CODE = `<template>
+const VUE_PREVIEW_CODE = (framework) => `<template>
   <demo-preview></demo-preview>
 </template>
 <script>
-import createStoriesPreview from '@lcap/builder/input/vue2/stories-preview';
+import createStoriesPreview from '@lcap/builder/input/${framework}/stories-preview';
 import * as stories from '../stories/block.stories';
 
 const DemoPreview = createStoriesPreview(stories);
@@ -82,7 +82,6 @@ export default {
 
 </script>
 `;
-
 const REACT_PREVIEW_CODE = `import createStoriesPreview from '@lcap/builder/input/react/stories-preview';
 import * as stories from '../stories/block.stories';
 
@@ -91,7 +90,7 @@ export default createStoriesPreview(stories);
 
 async function generateThemePreviewFile(context: OverloadComponentContext, themeFolder: string) {
   if (context.framework.startsWith('vue')) {
-    fs.writeFileSync(path.resolve(themeFolder, 'index.vue'), VUE_PREVIEW_CODE, 'utf-8');
+    fs.writeFileSync(path.resolve(themeFolder, 'index.vue'), VUE_PREVIEW_CODE(context.framework), 'utf-8');
     return;
   }
 

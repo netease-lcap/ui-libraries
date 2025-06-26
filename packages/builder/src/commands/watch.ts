@@ -274,6 +274,7 @@ export default async (rootPath: string, { port, https, middlewares, onFirstBuild
   if (fs.existsSync(buildOptions.destDir)) {
     await fs.remove(buildOptions.destDir);
   }
+  let buildError = false;
   // 构建 ide 和 运行时文件， watch;
   await Promise.all([
     buildIDE(buildOptions, true, send),
@@ -285,7 +286,16 @@ export default async (rootPath: string, { port, https, middlewares, onFirstBuild
       plugins: [
         ...viteConfig.plugins as any[],
         {
+          buildEnd(error) {
+            if (error) {
+              buildError = true;
+            }
+          },
           async closeBundle() {
+            if (buildError) {
+              return;
+            }
+
             if (onceBuilded) {
               send('update.runtime');
               return;

@@ -100,6 +100,10 @@ async function zipExtension(root: string, destDir: string, modulesOutDir: string
     fs.unlinkSync(zipTgzPath);
     fs.unlinkSync(packPath);
   }
+
+  if (fs.existsSync(path.resolve(root, 'source.zip'))) {
+    fs.unlinkSync(path.resolve(root, 'source.zip'));
+  }
 }
 
 function getIgnores(root) {

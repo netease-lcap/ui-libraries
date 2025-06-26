@@ -202,7 +202,7 @@ function getBlockCodeFromFile(filePath, context: OverloadComponentContext) {
 }
 
 export function generateBlockFile(context: OverloadComponentContext) {
-  if (context.framework.startsWith('vue2')) {
+  if (['vue2', 'vue3'].includes(context.framework)) {
     const content = getBlockCodeFromData(context);
     fs.writeFileSync(path.resolve(context.componentFolderPath, 'stories/block.stories.js'), replaceAllTagName(content, context.replaceTagMap), 'utf-8');
     return;
