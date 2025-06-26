@@ -152,13 +152,7 @@ namespace nasl.ui {
     })
     max: nasl.core.Decimal | nasl.core.Integer;
 
-    @Prop({
-      group: '数据属性',
-      title: '类型',
-      description: '类型',
-      setter: { concept: 'EnumSelectSetter', options: [{ title: '普通' }, { title: '按钮' }] },
-    })
-    type: 'normal' | 'button' = 'normal';
+
 
     // @Prop({
     //   group: '数据属性',
