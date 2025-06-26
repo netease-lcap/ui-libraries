@@ -197,7 +197,7 @@ export const Example2 = {
     },
     template: `
     <div>
-     <el-checkbox-group :dataSource="dataSource" id="my1">
+     <el-checkbox-group :dataSource="dataSource" id="my1" type="button">
         <el-checkbox label="Option1" value="Value1" />
         <el-checkbox label="Option2" value="Value2" />
         <template #item="{item}">

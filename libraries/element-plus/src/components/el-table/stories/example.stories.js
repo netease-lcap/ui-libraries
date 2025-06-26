@@ -163,11 +163,12 @@ export const Example1 = {
       };
     },
     template: `
-    <div>
+    <el-flex style="border: 1px solid red;">
 <el-table
 ref="mytable"
 row-key="name"
 :dataSource="tableData2"
+style="width: 100%;"
 v-model:currentPage="currentPage"
 :showTotal="true"
 height=""
@@ -203,8 +204,7 @@ dragSort="row"
 
 
 </el-table>
-<el-button @click="logCellClick">添加行</el-button>
-    </div>
+    </el-flex>
     `,
   }),
 };

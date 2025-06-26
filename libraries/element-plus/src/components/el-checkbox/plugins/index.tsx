@@ -1,8 +1,9 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
+import { ElCheckbox, ElCheckboxButton } from 'element-plus';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useMemo } from '@/plugins/hooks';
+import { useMemo, useCallback } from '@/plugins/hooks';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
@@ -29,7 +30,9 @@ export function handleDataSource(props) {
     () => (_.isNil(dataConfig)
         ? {}
         : {
-            default: () => _.map(dataSource, (item) => <el-checkbox {...item}>{slots.item ? slots.item({ item }) : item.label}</el-checkbox>),
+            default: () => _.map(dataSource, (item) => (
+              <el-checkbox {...item}>{slots.item ? slots.item({ item }) : item.label}</el-checkbox>
+              )),
           }),
     [dataSource, slots, dataConfig],
   );
@@ -43,16 +46,18 @@ export function handleDataSource(props) {
   };
 }
 
-// export function handleControllableValue(props: any) {
-//   const ref = props.get('ref');
-//   const [, setValue, valueProps] = useControllableValue(props);
-//   return {
-//     ...valueProps,
-//     formTagName: 'el-form-checkbox-group',
-//     ref: Object.assign(ref, {
-//       resetField: () => {
-//         setValue([]);
-//       },
-//     }),
-//   };
-// }
+export function handleItemType(props) {
+  const type = props.get('type');
+  const slots = props.get('slots');
+  const condToDefaultRender = _.cond([
+    [
+      _.matches('button'),
+      _.constant(_.map(slots.default?.(), (node) => <ElCheckboxButton {...node.props} v-slots={node.children} />)),
+    ],
+    [_.stubTrue, slots.default],
+  ]);
+  const defaultRender = useCallback(() => condToDefaultRender(type), [type, slots.default]);
+  return {
+    slots: _.assign(slots, { default: defaultRender }),
+  };
+}

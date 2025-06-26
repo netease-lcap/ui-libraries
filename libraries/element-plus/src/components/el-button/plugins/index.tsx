@@ -46,8 +46,7 @@ export function handlePopupconfirmButton(props) {
         icon={selfProps.popconfirmIcon}
         confirmButtonText={selfProps.confirmButtonText ?? '确认'}
         cancelButtonText={selfProps.cancelButtonText ?? '取消'}
-        onConfirm={selfProps.onClick}
-      >
+        onConfirm={selfProps.onClick}>
         {{
           reference: () => getReferenceButton({ ...selfProps, ...attrs }),
         }}
