@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useMemo } from '@/plugins/hooks';
+import { useMemo, useCallback } from '@/plugins/hooks';
 import { ElRadio, ElRadioButton } from 'element-plus';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -46,22 +46,19 @@ export function handleDataSource(props) {
 export function handleItemType(props) {
   const type = props.get('type');
   const slots = props.get('slots');
-  const defaultSlots = slots.default?.() ?? [];
-  const defaultRenderCond = _.cond([
+  const condToDefaultRender = _.cond([
     [
       _.matches('button'),
-      _.constant(_.map(defaultSlots, (node) => <ElRadioButton {...node.props} v-slots={node.children} />)),
+      _.constant(_.map(slots.default?.(), (node) => <ElRadioButton {...node.props} v-slots={node.children} />)),
     ],
     [
       _.matches('border'),
-      _.constant(_.map(defaultSlots, (node) => <ElRadio {...node.props} v-slots={node.children} border />)),
+      _.constant(_.map(slots.default?.(), (node) => <ElRadio {...node.props} v-slots={node.children} border/>)),
     ],
-    [_.stubTrue, _.constant(_.map(defaultSlots, (node) => <ElRadio {...node.props} v-slots={node.children} />))],
+    [_.stubTrue, slots.default],
   ]);
+  const defaultRender = useCallback(() => condToDefaultRender(type), [type, slots.default]);
   return {
-    slots: {
-      ...slots,
-      default: () => defaultRenderCond(type),
-    },
+    slots: _.assign(slots, { default: defaultRender }),
   };
 }
