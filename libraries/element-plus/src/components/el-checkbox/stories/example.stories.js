@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import _ from 'lodash';
 import Component from '../index';
 // import { ElSelect, ElOption } from '../index';
+import ExampleDemo1 from '../demos/example-demo1.vue';
 
 export default {
   id: 'el-checkbox-examples',
@@ -216,5 +217,15 @@ export const Example2 = {
     </div>
 
     `,
+  }),
+};
+
+export const Example3 = {
+  name: '不同类型',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo1,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };
