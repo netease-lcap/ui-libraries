@@ -1,3 +1,4 @@
 .el-form-item {
   width: fit-content;
+  margin-bottom: 0;
 }

@@ -77,11 +77,6 @@ const formComponentMap = {
 export { useDataSource } from '@lcap/vue2-utils';
 export const useUpdateSync = createUseUpdateSync([{ name: 'selectedRowKeys', event: 'update:selectedRowKeys' }]);
 
-function handleDynamicColumn(vnode) {
-  const dataSource = [];
-  const data = ref(dataSource);
-}
-
 const isEditColumn = ({ type, edit }) => {
   const isEditColumn = type === 'editable';
 
@@ -102,8 +97,7 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit })
   const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
   const abortEditOnEvent = attrs?.abortEditOnEvent ? [attrs?.abortEditOnEvent] : [];
-  const rules =
-    _.map(attrs?.rules, (item) => ({
+  const rules = _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
         const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
@@ -215,16 +209,15 @@ export const useTable: NaslComponentPluginOptions = {
     ])({ type: hasIndexColumn.value });
     const sort = ref<string | null>(sorting.value?.field);
     const order = ref<string | null>(sorting.value?.order);
+    const dynamicColumns = ref([]);
     const rowStyle = props.useComputed('rowStyle', (value) => (_.isFunction(value) ? value : () => {}));
     const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
-    const tree = props.useComputed('treeDisplay', (value) =>
-      value
+    const tree = props.useComputed('treeDisplay', (value) => (value
         ? {
             childrenKey: 'children',
             checkStrictly: checkStrictly.value,
           }
-        : undefined,
-    );
+        : undefined));
 
     const data = props.useComputed('data', (v) => {
       const treeDisplay = props.get('treeDisplay');
@@ -316,6 +309,72 @@ export const useTable: NaslComponentPluginOptions = {
         .concat(columns)
         .filter((item) => !_.isEmpty(item));
     };
+
+    const renderColumn = (vnode) => {
+      const attrs = _.get(vnode, 'data.attrs', {});
+      const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
+      const children = _.get(vnode, 'componentOptions.children', {});
+      const childrens = children?.length ? { children: renderSlot(children) } : {};
+      const listeners = _.get(vnode, 'componentOptions.listeners', {});
+      const titleProps = _.isFunction(title)
+        ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
+        : {};
+
+      const cellRender = _.cond([
+        [isEditColumn, editColumnProps],
+        [
+          _.conforms({ cell: _.isFunction }),
+          _.constant({ cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col }) }),
+        ],
+        [
+          _.matches({ type: 'number' }),
+          _.constant({ cell: (h, { rowIndex }) => pageSize.value * (current.value - 1) + rowIndex + 1 }),
+        ],
+        [_.conforms({ type: _.isString }), _.constant({})],
+      ]);
+      const cellProps = cellRender({ type: attrs.type, cell, attrs, listeners, edit });
+      return {
+        ...attrs,
+        ...cellProps,
+        ...titleProps,
+        ...childrens,
+        attrs: ({ row }) => {
+          return {
+            style: {
+              ...(_.attempt(rowStyle.value, row) || {}),
+            },
+          };
+        },
+      };
+    };
+    async function handleDynamicColumn(vnode) {
+      const attrs = renderColumn(vnode);
+      const data = ref([]);
+      const columns = ref([]);
+      const getDataSourceFn = async () => {
+        const { dataSource } = vnode.data.attrs;
+        if (Array.isArray(dataSource)) {
+          return dataSource;
+        }
+        if (typeof dataSource === 'object' && Array.isArray(dataSource.list)) {
+          return dataSource.list;
+        }
+        if (typeof dataSource === 'function') {
+          const res = await dataSource();
+          return _.isArray(res) ? res : res.list;
+        }
+        return [];
+      };
+      data.value = await getDataSourceFn();
+
+      columns.value = data.value.map((item) => {
+        return {
+          ...attrs,
+          colKey: _.get(item, attrs?.colKey, 'index'),
+        };
+      });
+      return columns;
+    }
     const scroll = props.useComputed('virtual', (value) => (value ? { scroll: { type: 'virtual' } } : {}));
 
     const onLoadData = props.get('onLoadData');
@@ -395,16 +454,30 @@ export const useTable: NaslComponentPluginOptions = {
         });
       }
     });
-    const columnController = props.useRef('columnController', (v) =>
-      v
+    const columnController = props.useRef('columnController', (v) => (v
         ? {
             placement: 'top-right',
           }
-        : {},
-    );
+        : {}));
 
     // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
     const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
+    onMounted(() => {
+      const slotDefault = props.get('slotDefault');
+      const slotDefaultVnodes = slotDefault?.() ?? [];
+      const dynamicColumnsProps = slotDefaultVnodes.filter((item) => item.tag?.includes('el-table-column-dynamic-pro'));
+      const promise = _.map(dynamicColumnsProps, async (item, index) => {
+        const result = await handleDynamicColumn(item);
+        return result;
+      });
+      Promise.all(promise).then((res) => {
+        dynamicColumns.value = res;
+      });
+      setTimeout(() => {
+        console.log(dynamicColumns.value, 'dynamicColumns');
+      }, 1000);
+    });
+
     watch(
       () => props.get('displayColumns'),
       (value) => {
@@ -421,11 +494,11 @@ export const useTable: NaslComponentPluginOptions = {
       };
     });
     provide(IN_ELEMENT_FORM, false);
-    const attr = ref(1);
-    setTimeout(() => {
-      attr.value = 2;
-      console.log('update');
-    }, 4000);
+    // const attr = ref(1);
+    // setTimeout(() => {
+    //   attr.value = 2;
+    //   console.log('update');
+    // }, 4000);
     return {
       data,
       onPageChange,
@@ -434,6 +507,7 @@ export const useTable: NaslComponentPluginOptions = {
       pagination,
       tree,
       columnController,
+      dynamicColumns,
       displayColumns,
       onDisplayColumnsChange,
       rowKey: valueField,
@@ -495,9 +569,9 @@ export const useTable: NaslComponentPluginOptions = {
         },
       },
       [$render](resultVNode, h, context) {
-        console.log('render update', attr.value);
         const vnodes = ctx.setupContext.slots?.default?.();
-        const columns = renderSlot(vnodes);
+        const dynamicColumnss = dynamicColumns.value?.flatMap((item) => item.value) ?? [];
+        const columns = renderSlot(vnodes).concat(dynamicColumnss);
         autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];
         if (!context.propsData?.props?.displayColumns) {
           resultVNode.componentOptions.propsData.displayColumns = columns.map((item) => item.colKey);

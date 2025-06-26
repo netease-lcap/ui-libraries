@@ -94,8 +94,8 @@ export function handleResponse(props) {
   const onChange = props.get('onChange');
   const urlField = props.get('urlField') || 'filePath';
   const converter = props.get('converter') || 'simple';
-  const value = props.get('value');
-  const setValue = props.get('onUpdate:value') ?? (() => {});
+  const value = props.get('modelValue');
+  const setValue = props.get('onUpdate:modelValue') ?? (() => {});
   const defaultFileList = getFileListByValue(value, converter, undefined);
   return {
     fileList: defaultFileList,

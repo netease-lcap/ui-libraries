@@ -6,13 +6,16 @@ export * from './dom';
 function filterUnderfinedValue(object: Record<string, string>) {
   return Object.fromEntries(Object.entries(object).filter(([, value]) => !_.isUndefined(value)));
 }
+
 const selfAttempt = _.attempt;
 const attempt = _.wrap(selfAttempt, (fn, ...arg: [any, any]) => {
   if (_.isArray(arg[0])) {
     return arg[0].map((item) => fn(item, ...arg.slice(1)));
   }
   const result = fn(...arg);
-  if (_.isError(result)) console.log(result);
+  if (_.isError(result) && process.env.VUE_IS_DEVTOOLS) {
+    console.error(result);
+  }
   return result;
 });
 

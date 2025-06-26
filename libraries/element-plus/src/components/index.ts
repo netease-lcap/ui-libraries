@@ -5,7 +5,7 @@ export { ElFlex } from './el-flex';
 export { ElText } from './el-text';
 export { ElTabs, ElTabPane, ElTabsRegister } from './el-tabs';
 export { ElInputPlus, ElInput, ElFormInput, ElInputRegister } from './el-input';
-export { ElSelect, ElOption, ElFormSelect, ElSelectRegister } from './el-select';
+export { ElSelect, ElOption, ElFormSelect, ElSelectRegister, ElSelectPlus } from './el-select';
 export { ElCascader, ElFormCascader, ElCascaderRegister } from './el-cascader';
 export { ElCheckbox, ElCheckboxGroup, ElFormCheckboxGroup, ElCheckboxRegister } from './el-checkbox';
 export {
@@ -16,7 +16,7 @@ export {
   ElTableColumnRegister,
   ElTableToolBarRegister,
 } from './el-table';
-export { ElFormItemWrap, ElForm, ElFormItem, ElFormRegister, ElFormItemWrapRegister } from './el-form';
+export { ElFormItemWrap, ElForm, ElFormItem, ElFormRegister, ElFormItemWrapRegister, withFormItem } from './el-form';
 // export { ElPagination } from 'element-plus';
 export { ElAbsoluteLayout, ElAbsoluteLayoutRegister } from './el-absolute-layout';
 export { ElRouterView, ElRouterViewRegister } from './el-router-view';
@@ -72,7 +72,7 @@ export { ElResult, ElResultRegister } from './el-result';
 export { ElTag, ElCheckTag, ElTagRegister, ElCheckTagRegister } from './el-tag';
 export { ElDropdown, ElDropdownItem, ElDropdownMenu, ElDropdownRegister, ElDropdownItemRegister } from './el-dropdown';
 export { ElRadio, ElRadioGroup, ElFormRadioGroup, ElRadioGroupRegister } from './el-radio';
-export { ElConfigProvider as ConfigProvider } from 'element-plus';
+export { ConfigProvider } from './el-config-provider';
 export { ElAffix, ElAffixRegister } from './el-affix';
 export { ElAnchor, ElAnchorLink, ElAnchorItem, ElAnchorRegister, ElAnchorLinkRegister } from './el-anchor';
 export { ElBadge, ElBadgeRegister } from './el-badge';
@@ -85,7 +85,5 @@ export { ElMultiLayout, ElMultiLayoutItem, ElMultiLayoutRegister } from './el-mu
 export { ElListComponents, ElListComponentsRegister } from './el-list-components';
 // import elementPlus from 'element-plus';
 // export { elementPlus };
-
-
 
 export const locale = { zhCn };
