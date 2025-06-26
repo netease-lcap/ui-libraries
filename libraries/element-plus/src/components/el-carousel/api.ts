@@ -18,15 +18,15 @@ namespace nasl.ui {
         },
       },
       additionalAttribute: {
-        ":autoplay": "\"false\"",
+        ':autoplay': '"false"',
         arrow: '"always"',
       },
       events: {
         click: true,
       },
       displaySlotConditions: {
-        content: "!!this.getAttribute('dataSource')"
-      }
+        content: "!!this.getAttribute('dataSource')",
+      },
     },
   })
   @Component({
@@ -41,6 +41,30 @@ namespace nasl.ui {
       description: '清除缓存，重新加载',
     })
     reload(): void {}
+
+    @Method({
+      title: 'undefined',
+      description: '手动切换幻灯片',
+    })
+    setActiveItem(
+      @Param({
+        title: 'undefined',
+        description: '传入需要切换的幻灯片的索引，从 0 开始；或相应 el-carousel-item 的 name 属性值',
+      })
+      index: nasl.core.String | nasl.core.Integer,
+    ): void {}
+
+    @Method({
+      title: 'undefined',
+      description: '切换至上一张幻灯片',
+    })
+    prev(): void {}
+
+    @Method({
+      title: 'undefined',
+      description: '切换至下一张幻灯片',
+    })
+    next(): void {}
 
     constructor(options?: Partial<ElCarouselOptions<T>>) {
       super();
@@ -66,22 +90,22 @@ namespace nasl.ui {
     dataSchema: T;
 
     @Prop({
+      group: '数据属性',
+      title: '名字字段',
+      description: '集合的元素类型中，用于设置子项名字字段',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    nameField: (item: T) => nasl.core.String = ((item: any) => item.name) as any;
+
+    @Prop({
       group: '主要属性',
       title: '高度',
       description: '走马灯高度，例如：150px',
       setter: { concept: 'InputSetter' },
     })
     height: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '偏移量',
-      description: '偏移量',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    offset: nasl.core.Integer = 0;
 
     @Prop({
       group: '主要属性',
@@ -110,7 +134,7 @@ namespace nasl.ui {
       description: '是否自动切换',
       setter: { concept: 'SwitchSetter' },
     })
-    closable: nasl.core.Boolean = true;
+    autoplay: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
@@ -203,7 +227,7 @@ namespace nasl.ui {
       title: '当前激活面板改变时触发',
       description: '当前激活面板改变时触发(如果是手风琴模式，参数 `activeNames` 类型为`string`，否则为`array`)',
     })
-    onChange: (current: nasl.core.Integer, prev: nasl.core.Integer) => nasl.core.Boolean;
+    onChange: (event: { current: nasl.core.Integer; prev: nasl.core.Integer }) => any;
 
     @Slot({
       title: '内容',

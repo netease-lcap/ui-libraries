@@ -1,6 +1,7 @@
 import ElRadio from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
+import ExampleDemo3 from '../demos/example-demo3.vue';
 
 export default {
   id: 'el-radio-examples',
@@ -29,6 +30,16 @@ export const Example2 = {
   render: () => ({
     components: {
       exampleDemo: ExampleDemo2,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+export const Example3 = {
+  name: '不同类型',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo3,
     },
     template: '<example-demo></example-demo>',
   }),

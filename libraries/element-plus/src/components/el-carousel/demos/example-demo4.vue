@@ -1,12 +1,14 @@
 <template>
-  <el-carousel :dataSource="data" height="200px">
+  <el-carousel ref="carouselRef" :dataSource="data" height="200px" nameField="label">
     <template #content="current">
       {{ current.item.content }}
     </template>
   </el-carousel>
+  <el-button @click="setActiveItem">设置激活</el-button>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 const data = [
   {
     name: '1',
@@ -19,6 +21,12 @@ const data = [
     content: 'content2',
   },
 ];
+
+const carouselRef = ref();
+
+const setActiveItem = () => {
+  carouselRef.value.setActiveItem('label2');
+};
 </script>
 
 <style scoped>

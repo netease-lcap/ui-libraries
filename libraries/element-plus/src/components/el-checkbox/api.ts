@@ -81,6 +81,32 @@ namespace nasl.ui {
     })
     modelValue: nasl.collection.List<V>;
 
+    @Prop({
+      group: '样式属性',
+      title: '尺寸',
+      description: '多选框组尺寸',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
+      },
+    })
+    size: 'default' | 'large' | 'small' = 'default';
+
+    @Prop({
+      group: '主要属性',
+      title: '类型',
+      description: '多选框组类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '默认' },
+          { title: '边框' },
+          { title: '按钮' },
+        ],
+      },
+    })
+    type: 'default' | 'border' | 'button' = 'default';
+
     // @Prop<ElCheckboxGroupOptions<T, V>, 'itemProps'>({
     //   group: '数据属性',
     //   title: '多选项属性设置',
