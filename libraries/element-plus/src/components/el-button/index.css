@@ -1,5 +1,9 @@
-/* Button component custom styles */ 
+/* Button component custom styles */
 .el-button.el-button--small {
-  --el-button-size:24px;
-  height: var(--el-button-size)
+  --el-button-size: 24px;
+  height: var(--el-button-size);
+}
+
+.el-button .el-button__right-icon {
+  margin-left: 6px;
 }

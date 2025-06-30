@@ -114,11 +114,19 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '图标',
-      description: '图标组件',
+      title: '左图标',
+      description: '左图标组件',
       setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
     })
     icon: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '右图标',
+      description: '右图标组件',
+      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+    })
+    rightIcon: nasl.core.String;
 
     @Prop({
       group: '主要属性',

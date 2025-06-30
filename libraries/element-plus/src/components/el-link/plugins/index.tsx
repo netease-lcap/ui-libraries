@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
 import { getPropsIcon } from '@/plugins/common/icon';
+import { useCallback } from '@/plugins/hooks';
 
 export * from './ide';
 
@@ -45,3 +46,15 @@ export function handleHrefToRouter(props) {
     ...hrefObject,
   };
 }
+
+export function handleRightIcon(props) {
+  const rightIcon = props.get('rightIcon');
+  if (!rightIcon) return {};
+  const slots = props.get('slots');
+  return {
+    slots: _.assign({}, slots, {
+      default: () => [slots.default?.(), getPropsIcon({ name: rightIcon, class: 'el-link__right-icon' })],
+    }),
+  };
+}
+handleRightIcon.order = 5;
