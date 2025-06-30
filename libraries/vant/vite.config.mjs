@@ -23,6 +23,7 @@ export default defineConfig(({ command }) => {
         modules: {
           entries: {
             install: 'src/install',
+            utils: 'src/utils',
           },
           tsconfigPath: 'tsconfig.build.json',
         },
