@@ -675,6 +675,7 @@ export default {
             this.$emit('input', value, this);
             this.$emit('update:value', value, this);
             this.$emit('checkAll', { value, oldValue, checked }, this);
+            this.$emit('check-all', { value, oldValue, checked }, this);
         },
         onChangePageSize(event) {
             this.currentPageSize = event.pageSize;
