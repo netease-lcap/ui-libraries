@@ -1,7 +1,8 @@
 import { VNode } from 'vue';
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils';
 import { PopupProps } from '@element-pro';
-import { isFunction } from 'lodash';
+import { isFunction, uniqueId } from 'lodash';
+import { nextTick } from '@vue/composition-api';
 import cls from 'classnames';
 
 function getThemeStyles(vnode: VNode) {
@@ -19,7 +20,7 @@ function getThemeStyles(vnode: VNode) {
   return style;
 }
 
-function getOverlayClassName(vnode: VNode, overlayClassName: PopupProps['overlayClassName']) {
+function getOverlayClassName(vnode: VNode, overlayClassName: PopupProps['overlayClassName'], tempOverlayClassName: string) {
   let className = overlayClassName ?? [];
 
   if (!Array.isArray(className)) {
@@ -39,10 +40,15 @@ function getOverlayClassName(vnode: VNode, overlayClassName: PopupProps['overlay
 export const usePopupTheme: NaslComponentPluginOptions = {
   setup(props, ctx) {
     const themeStyle = getThemeStyles(isFunction(ctx.getVNode) ? ctx.getVNode() : ctx.setupContext.parent.$vnode);
+    const tempOverlayClassName = ctx.isDesigner ? uniqueId(`cw-ide-style-pp-`) : '';
 
     return {
       popupProps: props.useComputed('popupProps', (popupProps = {}) => {
         const overlayClassName = getOverlayClassName(isFunction(ctx.getVNode) ? ctx.getVNode() : ctx.setupContext.parent.$vnode, popupProps.overlayClassName);
+
+        if (ctx.isDesigner && tempOverlayClassName) {
+          overlayClassName.push(tempOverlayClassName);
+        }
 
         return {
           ...popupProps,
@@ -51,6 +57,15 @@ export const usePopupTheme: NaslComponentPluginOptions = {
             ...themeStyle,
           },
           overlayClassName,
+          onVisibleChange: ctx.isDesigner ? (visible, context) => {
+            popupProps.onVisibleChange?.(visible, context);
+            if (visible) {
+              nextTick(() => {
+                const nodePath = ctx.setupContext.attrs['data-nodepath'] as string;
+                document.querySelector(`.${tempOverlayClassName}`)?.setAttribute('data-nodepath', nodePath);
+              });
+            }
+          } : popupProps.onVisibleChange,
         } as PopupProps;
       }),
     };
