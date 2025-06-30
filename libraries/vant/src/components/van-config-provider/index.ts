@@ -1,7 +1,7 @@
 import { defineComponent, h } from 'vue';
 
-export const VanConfigProvider = defineComponent({
-  name: 'VanConfigProvider',
+export const ConfigProvider = defineComponent({
+  name: 'ConfigProvider',
   props: {
     theme: {
       type: Object,
@@ -13,4 +13,4 @@ export const VanConfigProvider = defineComponent({
   },
 });
 
-export default VanConfigProvider;
+export default ConfigProvider;
