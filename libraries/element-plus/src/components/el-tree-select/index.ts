@@ -13,6 +13,5 @@ function ElTreeSelectRegister(BaseComponent, plugin = {}, extend = true) {
 const ElTreeSelect = registerComponent(ElTreeSelectPlus, { plugin: basicsPlugin });
 const ElFormTreeSelect = withFormItem(ElTreeSelect, 'el-form-tree-select');
 
-
 export { ElTreeSelectPlus, ElTreeSelect, ElFormTreeSelect, ElTreeSelectRegister };
 export default ElTreeSelect;

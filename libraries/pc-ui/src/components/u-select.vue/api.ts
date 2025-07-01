@@ -662,6 +662,16 @@ namespace nasl.ui {
         }) => any;
 
         @Event({
+            title: '全选后',
+            description: '选择全选时触发',
+        })
+        onCheckAll: (event: {
+            value: V;
+            oldValue: V;
+            checked: nasl.core.Boolean;
+        }) => any;
+
+        @Event({
             title: '改变后',
             description: '选择值改变时触发。单选模式中：',
         })

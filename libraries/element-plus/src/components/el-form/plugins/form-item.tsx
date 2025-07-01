@@ -47,6 +47,7 @@ export function withFormItem(Component, name) {
       const { vnode } = getCurrentInstance() as { vnode: VNode };
       const { props: vnodeProps } = vnode;
       const isControlled = Object.prototype.hasOwnProperty.call(vnodeProps, 'modelValue');
+
       const modelValue = computed(() => (isControlled ? props?.modelValue : value?.[prop.value]));
       const style = computed(() => categoryStyles(_.assign({}, props?.style, attrs.style)));
       const onUpdateModelValue = (value) => {
@@ -63,6 +64,15 @@ export function withFormItem(Component, name) {
           elem?.setAttribute('data-element-tag', name.replace('el-form-', 'el-'));
         }
       });
+      watch(
+        () => props?.modelValue,
+        (value) => {
+          _.attempt(setValue, prop.value, value);
+        },
+        {
+          deep: true,
+        },
+      );
       // watch(
       //   provide,
       //   (value) => {
@@ -92,6 +102,9 @@ export function withFormItem(Component, name) {
           resetField: () => {
             onUpdateModelValue(undefined);
           },
+          getModelValue: () => {
+            return modelValue.value;
+          },
         });
         _.attempt(setValue, prop.value, modelValue.value);
       });
@@ -107,11 +120,10 @@ export function withFormItem(Component, name) {
             ref={formItemRef}
             v-slots={{
               label: slots.label,
-            }}
-          >
+            }}>
             <Component
               {..._.omit(_.assign({ [$formTagName]: name }, props, attrs), $formItemProps)}
-              v-slots={slots}
+              v-slots={_.omit(slots, ['label'])}
               style={style.value.innerStyle}
               v-on={emit}
               ref={componentRef}

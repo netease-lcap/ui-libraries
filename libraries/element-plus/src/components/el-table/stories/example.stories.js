@@ -259,9 +259,7 @@ export const Example2 = {
         round: true,
       };
       const dataSource = async () => {
-        return [
-         
-        ];
+        return [];
       };
 
       return {
