@@ -81,3 +81,32 @@ export const Example3 = {
     `,
   }),
 }; 
+
+/* 右图标按钮 */
+export const Example6 = {
+  name: '图标按钮',
+  render: () => ({
+    setup() {
+      const rightIcon = ref('Clock');
+      const changeRightIcon = () => {
+        rightIcon.value = rightIcon.value === 'Clock' ? undefined : 'Clock';
+      };
+      const handleClick = () => {
+        console.log('点击了按钮');
+      };
+      return {
+        rightIcon,
+        changeRightIcon,
+        handleClick,
+      };
+    },
+    template: `
+    <div>
+      <el-link icon="Clock" :rightIcon="rightIcon" @click="handleClick">链接</el-link>
+      <div>
+        <el-link type="primary" @click="changeRightIcon">切换rightIcon</el-link>
+      </div>
+    </div>
+    `,
+  }),
+};

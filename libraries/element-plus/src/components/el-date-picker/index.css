@@ -4,4 +4,5 @@
 
 .el-date-editor {
   --el-date-editor-width: 240px;
+  flex: unset;
 }

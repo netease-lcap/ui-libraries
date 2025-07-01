@@ -151,3 +151,30 @@ export const Example5 = {
     `,
   }),
 };
+
+/* 右图标按钮 */
+export const Example6 = {
+  name: '图标按钮',
+  render: () => ({
+    setup() {
+      const rightIcon = ref('Clock');
+      const changeRightIcon = () => {
+        rightIcon.value = rightIcon.value === 'Clock' ? undefined : 'Clock';
+      };
+      const handleClick = () => {
+        console.log('点击了按钮');
+      };
+      return {
+        rightIcon,
+        changeRightIcon,
+        handleClick,
+      };
+    },
+    template: `
+    <div>
+      <el-button icon="Clock" :rightIcon="rightIcon" @click="handleClick">文字按钮</el-button>
+      <el-button type="primary" @click="changeRightIcon">切换rightIcon</el-button>
+    </div>
+    `,
+  }),
+};
