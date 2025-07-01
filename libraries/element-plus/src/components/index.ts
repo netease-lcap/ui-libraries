@@ -6,7 +6,13 @@ export { ElTabs, ElTabPane, ElTabsRegister, ElTabsPlus } from './el-tabs';
 export { ElInputPlus, ElInput, ElFormInput, ElInputRegister } from './el-input';
 export { ElSelect, ElOption, ElFormSelect, ElSelectRegister, ElSelectPlus } from './el-select';
 export { ElCascader, ElFormCascader, ElCascaderRegister, ElCascaderPlus } from './el-cascader';
-export { ElCheckbox, ElCheckboxGroup, ElFormCheckboxGroup, ElCheckboxRegister } from './el-checkbox';
+export {
+  ElCheckbox,
+  ElCheckboxGroup,
+  ElFormCheckboxGroup,
+  ElCheckboxRegister,
+  ElCheckboxGroupPlus,
+} from './el-checkbox';
 export {
   ElTable,
   ElTableColumn,
@@ -53,20 +59,24 @@ export {
   ElMenuItemRegister,
   ElMenuItemGroupRegister,
   ElSubMenuRegister,
+  ElMenuPlus,
+  ElMenuItemPlus,
+  ElMenuItemGroupPlus,
+  ElSubMenuPlus,
 } from './el-menu';
-export { ElUpload, ElFormUpload, ElUploadRegister } from './el-upload';
-export { ElTimePicker, ElFormTimePicker, ElTimePickerRegister } from './el-time-picker';
-export { ElTimeSelect, ElFormTimeSelect, ElTimeSelectRegister } from './el-time-select';
+export { ElUpload, ElFormUpload, ElUploadRegister, ElUploadPlus } from './el-upload';
+export { ElTimePicker, ElFormTimePicker, ElTimePickerRegister, ElTimePickerPlus } from './el-time-picker';
+export { ElTimeSelect, ElFormTimeSelect, ElTimeSelectRegister, ElTimeSelectPlus } from './el-time-select';
 export { ElIcon, ElIconRegister } from './el-icon';
-export { ElMention, ElFormMention, ElMentionRegister } from './el-mention';
+export { ElMention, ElFormMention, ElMentionRegister, ElMentionPlus } from './el-mention';
 export { ElBreadcrumb, ElBreadcrumbItem, ElBreadcrumbRegister, ElBreadcrumbItemRegister } from './el-breadcrumb';
 export { ElBacktop, ElBacktopDesigner, ElBacktopRegister } from './el-backtop';
 export { ElPageHeader, ElPageHeaderRegister } from './el-page-header';
-export { ElSteps, ElStep, ElStepsRegister, ElStepRegister } from './el-steps';
-export { ElAlert, ElAlertRegister } from './el-alert';
-export { ElDialog, ElDialogRegister } from './el-dialog';
-export { ElDrawer, ElDrawerRegister } from './el-drawer';
-export { ElPopover, ElPopoverRegister } from './el-popover';
+export { ElSteps, ElStep, ElStepsRegister, ElStepRegister, ElStepsPlus, ElStepPlus } from './el-steps';
+export { ElAlert, ElAlertRegister, ElAlertPlus } from './el-alert';
+export { ElDialog, ElDialogRegister, ElDialogPlus } from './el-dialog';
+export { ElDrawer, ElDrawerRegister, ElDrawerPlus } from './el-drawer';
+export { ElPopover, ElPopoverRegister, ElPopoverPlus } from './el-popover';
 export { ElMessage, ElMessageDesigner, ElMessageRegister } from './el-message';
 export { ElMessageBox, ElMessageBoxDesigner, ElMessageBoxRegister } from './el-message-box';
 export { ElNotification, ElNotificationDesigner, ElNotificationRegister } from './el-notification';
