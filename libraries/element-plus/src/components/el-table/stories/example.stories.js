@@ -2,9 +2,8 @@ import { ref, watch, computed } from 'vue';
 import { ElPagination } from 'element-plus';
 // import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 // import zhCn from 'element-plus/es/locale/lang/zh-cn';
-import es from 'element-plus/es/locale/lang/es';
 // import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
-import en from 'element-plus/dist/locale/en.mjs';
+// import en from 'element-plus/dist/locale/en.mjs';
 
 import _ from 'lodash';
 // import i18n from '../../../../dist-theme/i18n.json';
@@ -31,7 +30,6 @@ export const Example1 = {
     setup() {
       const activeName = ref('first');
       const tableData = async (page) => {
-        console.log(page, 'pagerequest====');
         const arr = [
           {
             date: '2016-05-03',
@@ -150,9 +148,8 @@ export const Example1 = {
         console.log('object');
       }, 1000);
       const logCellClick = (...el) => {
-        console.log(el, 'logCellClick');
+        console.log(tableData2.value, 'logCellClick');
       };
-      
       return {
         tableData,
         tableData2,
@@ -168,12 +165,11 @@ export const Example1 = {
     <el-flex style="border: 1px solid red;">
 <el-table
 ref="mytable"
-row-key="id"
+row-key="name"
 :dataSource="tableData2"
 style="width: 100%;"
 v-model:currentPage="currentPage"
 :showTotal="true"
-height=""
 @selection-change="logCellClick"
 field="six.name"
 order="descending"
@@ -189,16 +185,9 @@ dragSort="row"
 :stripe="true"
 >
 
-<el-table-column label="申请人"  style="color:red"  sortable>
-  <div>123</div>
-</el-table-column>
 
-    <el-table-column label="渠道" prop="address"  >
-        <template #default="current">
-          <div>{{current.item.address}}</div>
-          <el-input v-model="current.item.address" />
-        </template>
-    </el-table-column>
+
+
 
     <el-table-column prop="six.name" label="Date" sortable="none" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
@@ -219,7 +208,6 @@ export const Example2 = {
       const activeName = ref('first');
       const total = 28;
       const tableData = async (pageObj = { currentPage: 1, pageSize: 20 }) => {
-        console.log(pageObj, 'pagerequest====');
         const initialData = [];
         for (let i = 0; i < total; i++) {
           initialData.push({
@@ -247,15 +235,9 @@ export const Example2 = {
         },
       ]);
 
-      watch(selectedRowKeys, (el) => {
-        console.log(el, 'log');
-      });
-      setTimeout(() => {
-        console.log(mytable, 'mytable====');
-      }, 1000);
       const logCellClick = (el) => {
         console.log(el, 'el');
-        // console.log(mytable.value.reload(), 'logCellClick');
+        console.log(mytable.value.reload(), 'logCellClick');
       };
       const config = {
         round: true,
@@ -263,7 +245,6 @@ export const Example2 = {
       const dataSource = async () => {
         return [];
       };
-      const locale = ref(es);
 
       return {
         tableData,
@@ -275,11 +256,10 @@ export const Example2 = {
         config,
         transformKeys,
         dataSource,
-        locale,
       };
     },
     template: `
-    <config-provider  :button="config" :locale="locale">
+    <config-provider  :button="config">
 <el-table
 ref="mytable"
 row-key="index"
@@ -295,7 +275,6 @@ class="my-table"
 :pageSizes="[10, 100, 200, 300, 400]"
 v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
-@selection-change="logCellClick"
 dragSort="row"
 :selection="true"
   :border="true"
@@ -305,17 +284,7 @@ dragSort="row"
   size=small"
 >
   <el-table-column prop="index" type="selection" width="55" />
-  <el-table-column prop="status" label="申请状态" width="350">
-  <template #header>
-    <div>申请状态</div>
-  </template>
-  <template #default="current">
-    <div>{{current.item.status}}</div>
-  </template>
 
-  </el-table-column>
-  <el-table-column  label="签署方式">
-  </el-table-column>
     <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
     <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
   <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
