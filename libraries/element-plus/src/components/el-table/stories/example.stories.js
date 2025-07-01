@@ -2,8 +2,9 @@ import { ref, watch, computed } from 'vue';
 import { ElPagination } from 'element-plus';
 // import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 // import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import es from 'element-plus/es/locale/lang/es';
 // import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
-// import en from 'element-plus/dist/locale/en.mjs';
+import en from 'element-plus/dist/locale/en.mjs';
 
 import _ from 'lodash';
 // import i18n from '../../../../dist-theme/i18n.json';
@@ -151,6 +152,7 @@ export const Example1 = {
       const logCellClick = (...el) => {
         console.log(el, 'logCellClick');
       };
+      
       return {
         tableData,
         tableData2,
@@ -261,6 +263,7 @@ export const Example2 = {
       const dataSource = async () => {
         return [];
       };
+      const locale = ref(es);
 
       return {
         tableData,
@@ -272,10 +275,11 @@ export const Example2 = {
         config,
         transformKeys,
         dataSource,
+        locale,
       };
     },
     template: `
-    <config-provider  :button="config">
+    <config-provider  :button="config" :locale="locale">
 <el-table
 ref="mytable"
 row-key="index"
