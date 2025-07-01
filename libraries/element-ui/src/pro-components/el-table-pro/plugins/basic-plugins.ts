@@ -97,7 +97,8 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit })
   const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
   const abortEditOnEvent = attrs?.abortEditOnEvent ? [attrs?.abortEditOnEvent] : [];
-  const rules = _.map(attrs?.rules, (item) => ({
+  const rules =
+    _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
         const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
@@ -212,12 +213,14 @@ export const useTable: NaslComponentPluginOptions = {
     const dynamicColumns = ref([]);
     const rowStyle = props.useComputed('rowStyle', (value) => (_.isFunction(value) ? value : () => {}));
     const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
-    const tree = props.useComputed('treeDisplay', (value) => (value
+    const tree = props.useComputed('treeDisplay', (value) =>
+      value
         ? {
             childrenKey: 'children',
             checkStrictly: checkStrictly.value,
           }
-        : undefined));
+        : undefined,
+    );
 
     const data = props.useComputed('data', (v) => {
       const treeDisplay = props.get('treeDisplay');
@@ -316,9 +319,6 @@ export const useTable: NaslComponentPluginOptions = {
       const children = _.get(vnode, 'componentOptions.children', {});
       const childrens = children?.length ? { children: renderSlot(children) } : {};
       const listeners = _.get(vnode, 'componentOptions.listeners', {});
-      const titleProps = _.isFunction(title)
-        ? { title: (h, { row, rowIndex, col }) => title({ row, index: rowIndex, col }) }
-        : {};
 
       const cellRender = _.cond([
         [isEditColumn, editColumnProps],
@@ -336,8 +336,9 @@ export const useTable: NaslComponentPluginOptions = {
       return {
         ...attrs,
         ...cellProps,
-        ...titleProps,
+        // ...titleProps,
         ...childrens,
+        title,
         attrs: ({ row }) => {
           return {
             style: {
@@ -347,6 +348,7 @@ export const useTable: NaslComponentPluginOptions = {
         },
       };
     };
+
     async function handleDynamicColumn(vnode) {
       const attrs = renderColumn(vnode);
       const data = ref([]);
@@ -363,6 +365,9 @@ export const useTable: NaslComponentPluginOptions = {
           const res = await dataSource();
           return _.isArray(res) ? res : res.list;
         }
+        if (ctx.isDesigner) {
+          return [{ index: 1 }];
+        }
         return [];
       };
       data.value = await getDataSourceFn();
@@ -370,6 +375,7 @@ export const useTable: NaslComponentPluginOptions = {
       columns.value = data.value.map((item) => {
         return {
           ...attrs,
+          title: _.isFunction(attrs?.title) ? attrs?.title({ item }) : '',
           colKey: _.get(item, attrs?.colKey, 'index'),
         };
       });
@@ -454,11 +460,13 @@ export const useTable: NaslComponentPluginOptions = {
         });
       }
     });
-    const columnController = props.useRef('columnController', (v) => (v
+    const columnController = props.useRef('columnController', (v) =>
+      v
         ? {
             placement: 'top-right',
           }
-        : {}));
+        : {},
+    );
 
     // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
     const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
@@ -473,9 +481,6 @@ export const useTable: NaslComponentPluginOptions = {
       Promise.all(promise).then((res) => {
         dynamicColumns.value = res;
       });
-      setTimeout(() => {
-        console.log(dynamicColumns.value, 'dynamicColumns');
-      }, 1000);
     });
 
     watch(
@@ -572,10 +577,10 @@ export const useTable: NaslComponentPluginOptions = {
         const vnodes = ctx.setupContext.slots?.default?.();
         const dynamicColumnss = dynamicColumns.value?.flatMap((item) => item.value) ?? [];
         const columns = renderSlot(vnodes).concat(dynamicColumnss);
-        autoMergeFields.value = columns?.filter?.((item) => item.autoMerge) ?? [];
+        autoMergeFields.value = columns?.filter?.((item) => item?.autoMerge) ?? [];
         if (!context.propsData?.props?.displayColumns) {
-          resultVNode.componentOptions.propsData.displayColumns = columns.map((item) => item.colKey);
-          context.propsData.props.displayColumns = columns.map((item) => item.colKey);
+          resultVNode.componentOptions.propsData.displayColumns = columns.map((item) => item?.colKey);
+          context.propsData.props.displayColumns = columns.map((item) => item?.colKey);
         }
         if (tree.value) {
           context.propsData.props.columns = columns;

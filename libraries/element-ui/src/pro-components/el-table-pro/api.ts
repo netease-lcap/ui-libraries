@@ -858,6 +858,10 @@ namespace nasl.ui {
           title: '表格列',
           code: '<el-table-column-pro data-nodepath-multiple="ture"><template #title><el-text text="表格列"></el-text></template></el-table-column-pro>',
         },
+        {
+          title: '动态列',
+          code: '<el-table-column-dynamic-pro data-nodepath-multiple="ture"><template #title><el-text text="表格列"></el-text></template></el-table-column-dynamic-pro>',
+        },
       ],
     })
     slotDefault: () => Array<ViewComponent>;
@@ -936,7 +940,6 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
-
       structured: true,
       // selector: 'multiple',
       selector: [
@@ -1318,6 +1321,6 @@ namespace nasl.ui {
       title: '标题',
       description: '对标题进行自定义',
     })
-    slotTitle: (current: Current<T>) => Array<ViewComponent>;
+    slotTitle: (current: { item: T1 }) => Array<ViewComponent>;
   }
 }

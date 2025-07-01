@@ -35,6 +35,7 @@ export const Default = {
               index: i,
               applicant: ['贾明', '张三', '王芳'][i % 3],
               status: i % 3,
+              colKey: { matters: 'matters' },
               channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
               children: [
                 {
@@ -115,7 +116,6 @@ export const Default = {
    @sort-change="onSortChange"
    :onRowClick="log"
    dragSort="row"
-   :columnController="false"
    :headerAffixedTop="true"
 
    @display-columns-change="log"
@@ -125,17 +125,11 @@ export const Default = {
    :onDragSort="onDragSortChange"
     >
 
-    <el-table-column-pro title="申请人" colKey="createTime"> </el-table-column-pro>
-
-        <el-table-column-pro title="渠道" colKey="channel" :sorter="true" :autoMerge="true" align="right" >
-    <template #cell="cell">
+    <el-table-column-dynamic-pro title="title" colKey="colKey.matters" data-nodepath="123">
+    <template #title="item">
+      <el-text :text="item.matters"></el-text>
     </template>
-    <template #children>
-    <el-table-column-pro title="申请人" colKey="createTime"> </el-table-column-pro>
-    <el-table-column-pro title="申请人" colKey="createTime"> </el-table-column-pro>
-    </template>
-    </el-table-column-pro>
-
+    </el-table-column-dynamic-pro>
 
 
     </el-table-pro>`,
