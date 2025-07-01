@@ -18,6 +18,12 @@ const attempt = _.wrap(selfAttempt, (fn, ...arg: [any, any]) => {
   }
   return result;
 });
+const mergeRef = (ref) => {
+  return (componentRef) => {
+    Object.assign(ref, componentRef);
+    return componentRef;
+  };
+};
 
 function isValidTime(time) {
   return !_.isNil(time) && dayjs(time).isValid();
@@ -43,6 +49,7 @@ _.mixin({
   isValidLink,
   stringToAscii,
   isValidTime,
+  mergeRef,
 });
 // _.mixin
 declare module 'lodash' {
@@ -52,6 +59,7 @@ declare module 'lodash' {
     isValidLink: typeof isValidLink;
     stringToAscii: typeof stringToAscii;
     isValidTime: typeof isValidTime;
+    mergeRef: typeof mergeRef;
   }
 }
 

@@ -57,14 +57,12 @@ export function registerComponent<T>(Component, options) {
     props: Component.props,
 
     setup(props, { attrs, slots, emit, expose }) {
-      const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
       let Render = Component;
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
-      // const provideRef = injectRef?.value ? { ...injectRef.value } : ref({});
       const provideRef = ref({});
       Object.assign(provideRef.value, injectRef.value);
       const router = useRouter?.();
@@ -76,6 +74,7 @@ export function registerComponent<T>(Component, options) {
           ref: {},
           router,
           route,
+          mergeRef: _.mergeRef(exposeRef.value),
           [$tagName]: options.name,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
         },
@@ -128,18 +127,16 @@ export function registerComponent<T>(Component, options) {
         { deep: true, immediate: true },
       );
 
-      watch(componentRef, (value) => _.defaults(exposeRef.value, value));
       watch(injectRef, (value) => _.defaults(provideRef.value, value), { immediate: true });
       expose(exposeRef.value);
 
       provide($provide, provideRef);
-
       return () => {
         return (
           <Render
             {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(componentState, 'value.state.slots', {}) }}
-            ref={componentRef}
+            ref={_.mergeRef(exposeRef.value)}
           />
         );
       };

@@ -120,7 +120,8 @@ export function withFormItem(Component, name) {
             ref={formItemRef}
             v-slots={{
               label: slots.label,
-            }}>
+            }}
+          >
             <Component
               {..._.omit(_.assign({ [$formTagName]: name }, props, attrs), $formItemProps)}
               v-slots={_.omit(slots, ['label'])}

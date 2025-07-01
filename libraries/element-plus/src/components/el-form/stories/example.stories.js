@@ -150,12 +150,26 @@ export const Example2 = {
     <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
     <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
     <el-button @click="handleClick(formRef)" >Submit</el-button>
 
     <a @click="handleClick(formRef)" >Submit</a>
     <a @click="handleClick(formRef)" >Submit2</a>
     </el-form>
 
+    <el-form :model="model" ref="formRef" >
+    {{inputName}}
+    <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
+    <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-button @click="handleClick(formRef)" >Submit</el-button>
+
+    <a @click="handleClick(formRef)" >Submit</a>
+    <a @click="handleClick(formRef)" >Submit2</a>
+    </el-form>
 
     </div>
 
