@@ -6,7 +6,6 @@ import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/
 
 import { useMemo, useCallback } from '@/plugins/hooks';
 
-
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
 
@@ -58,7 +57,7 @@ export function handleItemType(props) {
     ],
     [
       _.matches('border'),
-      _.constant(_.map(slots.default?.(), (node) => <ElCheckbox {...node.props} v-slots={node.children} border/>)),
+      _.constant(_.map(slots.default?.(), (node) => <ElCheckbox {...node.props} v-slots={node.children} border />)),
     ],
     [_.stubTrue, slots.default],
   ]);

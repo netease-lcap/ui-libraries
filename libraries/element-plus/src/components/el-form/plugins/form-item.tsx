@@ -73,24 +73,6 @@ export function withFormItem(Component, name) {
           deep: true,
         },
       );
-      // watch(
-      //   provide,
-      //   (value) => {
-      //     const { isInForm } = value?.[$formProvide] ?? {};
-      //     if (!isInForm) {
-      //       const nodePath = attrs['data-nodepath'];
-      //       onMounted(() => {
-      //         const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
-      //         elem?.setAttribute('data-has-mutation', 'true');
-      //         elem?.setAttribute('data-element-tag', name.replace('el-form-', 'el-'));
-      //       });
-      //     }
-      //   },
-      //   {
-      //     immediate: true,
-      //     deep: true,
-      //   },
-      // );
       nextTick(() => {
         Object.assign(myRef.value, formItemRef.value, componentRef.value);
       });

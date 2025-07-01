@@ -11,6 +11,5 @@ function ElMessageBoxRegister(BaseComponent, plugin = {}, extend = true) {
 const ElMessageBox = MessageBox;
 const ElMessageBoxDesigner = MessageBoxDesigner;
 
-
 export { ElMessageBoxRegister, ElMessageBox, ElMessageBoxDesigner };
 export default ElMessageBox;

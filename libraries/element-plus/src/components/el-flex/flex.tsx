@@ -45,7 +45,7 @@ export default defineComponent({
     return () => {
       return (
         <div
-          style={style.value}
+          style={style.value as any}
           class={props.mode === 'flex' ? 'el-flex' : 'el-flex--block'}
         >
           {renderChildren()}

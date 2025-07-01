@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import { useMemo } from '@/plugins/hooks';
-import { categoryStyles } from '@/utils';
+// import { categoryStyles } from '@/utils';
 
 export function handlePropName(props) {
   const propProps = props.get('prop');

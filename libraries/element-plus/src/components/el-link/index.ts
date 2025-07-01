@@ -9,8 +9,7 @@ function ElLinkRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElLink = registerComponent(ElLinkPlus, { plugin: basicsPlugin });
-
+const ElLink = registerComponent(ElLinkPlus, { plugin: basicsPlugin, name: 'el-link' });
 
 export { ElLinkPlus, ElLink, ElLinkRegister };
 export default ElLink;

@@ -9,9 +9,8 @@ function ElCheckboxRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElCheckboxGroup = registerComponent(ElCheckboxGroupPlus, { plugin: basicsPlugin });
+const ElCheckboxGroup = registerComponent(ElCheckboxGroupPlus, { plugin: basicsPlugin, name: 'el-checkbox-group' });
 const ElFormCheckboxGroup = withFormItem(ElCheckboxGroup, 'el-form-checkbox-group');
-
 
 export { ElCheckbox, ElCheckboxGroupPlus, ElCheckboxGroup, ElFormCheckboxGroup, ElCheckboxRegister };
 export default ElCheckbox;

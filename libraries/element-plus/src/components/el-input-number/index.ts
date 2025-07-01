@@ -10,10 +10,8 @@ function ElInputNumberRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElInputNumber = registerComponent(ElInputNumberPlus, { plugin: basicsPlugin });
+const ElInputNumber = registerComponent(ElInputNumberPlus, { plugin: basicsPlugin, name: 'el-input-number' });
 const ElFormInputNumber = withFormItem(ElInputNumber, 'el-form-input-number');
-
-
 
 export { ElInputNumberPlus, ElInputNumber, ElFormInputNumber, ElInputNumberRegister };
 export default ElInputNumber;

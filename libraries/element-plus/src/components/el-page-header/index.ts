@@ -1,6 +1,6 @@
 import { ElPageHeader as ElPageHeaderPlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 
 function ElPageHeaderRegister(BaseComponent, plugin = {}, extend = true) {
@@ -8,7 +8,7 @@ function ElPageHeaderRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElPageHeader = registerComponent(ElPageHeaderPlus, { plugin: basicsPlugin });
+const ElPageHeader = registerComponent(ElPageHeaderPlus, { plugin: basicsPlugin, name: 'el-page-header' });
 
 export { ElPageHeaderPlus, ElPageHeader, ElPageHeaderRegister };
 export default ElPageHeader;

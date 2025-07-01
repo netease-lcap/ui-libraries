@@ -11,6 +11,6 @@ export function handleIcon(props) {
   };
 }
 
-export const getPropsIcon = function (props: any) {
+export function getPropsIcon(props: any) {
   return props.name ? <ElIcon {...props} /> : null;
-};
+}

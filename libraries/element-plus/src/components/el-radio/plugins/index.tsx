@@ -1,9 +1,9 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
+import { ElRadio, ElRadioButton } from 'element-plus';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo, useCallback } from '@/plugins/hooks';
-import { ElRadio, ElRadioButton } from 'element-plus';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
@@ -29,7 +29,9 @@ export function handleDataSource(props) {
     () => (_.isNil(dataConfig)
         ? {}
         : {
-            default: () => _.map(dataSource, (item) => <el-radio {...item}>{slots.item ? slots.item({ item }) : item.label}</el-radio>),
+            default: () => _.map(dataSource, (item) => (
+              <el-radio {...item}>{slots.item ? slots.item({ item }) : item.label}</el-radio>
+              )),
           }),
     [dataSource, slots, dataConfig],
   );
@@ -53,7 +55,7 @@ export function handleItemType(props) {
     ],
     [
       _.matches('border'),
-      _.constant(_.map(slots.default?.(), (node) => <ElRadio {...node.props} v-slots={node.children} border/>)),
+      _.constant(_.map(slots.default?.(), (node) => <ElRadio {...node.props} v-slots={node.children} border />)),
     ],
     [_.stubTrue, slots.default],
   ]);

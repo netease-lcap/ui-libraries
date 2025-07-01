@@ -1,6 +1,6 @@
 import { ElTree as ElTreePlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 
 function ElTreeRegister(BaseComponent, plugin = {}, extend = true) {
@@ -8,7 +8,7 @@ function ElTreeRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElTree = registerComponent(ElTreePlus, { plugin: basicsPlugin });
+const ElTree = registerComponent(ElTreePlus, { plugin: basicsPlugin, name: 'el-tree' });
 
 export { ElTreePlus, ElTree, ElTreeRegister };
 export default ElTree;

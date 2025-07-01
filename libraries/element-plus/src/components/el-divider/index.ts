@@ -1,6 +1,6 @@
 import { ElDivider as ElDividerPlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 
 function ElDividerRegister(BaseComponent, plugin = {}, extend = true) {
@@ -8,7 +8,7 @@ function ElDividerRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElDivider = registerComponent(ElDividerPlus, { plugin: basicsPlugin });
+const ElDivider = registerComponent(ElDividerPlus, { plugin: basicsPlugin, name: 'el-divider' });
 
 export { ElDividerPlus, ElDivider, ElDividerRegister };
 export default ElDivider;

@@ -9,9 +9,8 @@ function ElTimeSelectRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElTimeSelect = registerComponent(ElTimeSelectPlus, { plugin: basicPlugin });
+const ElTimeSelect = registerComponent(ElTimeSelectPlus, { plugin: basicPlugin, name: 'el-time-select' });
 const ElFormTimeSelect = withFormItem(ElTimeSelect, 'el-form-time-select');
-
 
 export default ElTimeSelect;
 

@@ -1,6 +1,6 @@
 import { ElBadge as ElBadgePlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 
 function ElBadgeRegister(BaseComponent, plugin = {}, extend = true) {
@@ -8,9 +8,7 @@ function ElBadgeRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElBadge = registerComponent(ElBadgePlus, { plugin: basicsPlugin });
-
+const ElBadge = registerComponent(ElBadgePlus, { plugin: basicsPlugin, name: 'el-badge' });
 
 export { ElBadgePlus, ElBadge, ElBadgeRegister };
 export default ElBadge;
-

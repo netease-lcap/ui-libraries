@@ -1,6 +1,6 @@
 import { ElTooltip as ElTooltipPlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 
 function ElTooltipRegister(BaseComponent, plugin = {}, extend = true) {
@@ -8,6 +8,6 @@ function ElTooltipRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElTooltip = registerComponent(ElTooltipPlus, { plugin: basicsPlugin });
+const ElTooltip = registerComponent(ElTooltipPlus, { plugin: basicsPlugin, name: 'el-tooltip' });
 export { ElTooltipPlus, ElTooltip, ElTooltipRegister };
 export default ElTooltip;

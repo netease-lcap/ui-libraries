@@ -10,7 +10,7 @@ function ElInputRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElInput = registerComponent(ElInputPlus, { plugin: basicsPlugin, name: 'ElInput' });
+const ElInput = registerComponent(ElInputPlus, { plugin: basicsPlugin, name: 'el-input' });
 const ElFormInput = withFormItem(ElInput, 'el-form-input');
 
 export { ElInputPlus, ElInput, ElFormInput, ElInputRegister };

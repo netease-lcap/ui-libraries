@@ -242,6 +242,10 @@
   },
   "ElButton": {
     ".el-button": "按钮",
+    ".el-button .el-button__right-icon": "",
+    ".el-button .el-button__right-icon:active,.el-button .el-button__right-icon._active": "",
+    ".el-button .el-button__right-icon:focus,.el-button .el-button__right-icon._focus": "",
+    ".el-button .el-button__right-icon:hover,.el-button .el-button__right-icon._hover": "",
     ".el-button [class*=el-icon] svg": "按钮>图标>svg",
     ".el-button [class*=el-icon] svg:active,.el-button [class*=el-icon] svg._active": "按钮>图标>svg:鼠标按下",
     ".el-button [class*=el-icon] svg:focus,.el-button [class*=el-icon] svg._focus": "按钮>图标>svg:获得焦点",
@@ -1525,6 +1529,10 @@
   },
   "ElForm": {
     ".el-form": "表单",
+    ".el-form .el-button": "",
+    ".el-form .el-button:active,.el-form .el-button._active": "",
+    ".el-form .el-button:focus,.el-form .el-button._focus": "",
+    ".el-form .el-button:hover,.el-form .el-button._hover": "",
     ".el-form--inline": "行内表单",
     ".el-form--inline .el-form-item": "行内表单项",
     ".el-form--inline .el-form-item:active,.el-form--inline .el-form-item._active": "行内表单项:鼠标按下",
@@ -4373,6 +4381,10 @@
   },
   "ElLink": {
     ".el-link": "链接",
+    ".el-link .el-link__right-icon": "",
+    ".el-link .el-link__right-icon:active,.el-link .el-link__right-icon._active": "",
+    ".el-link .el-link__right-icon:focus,.el-link .el-link__right-icon._focus": "",
+    ".el-link .el-link__right-icon:hover,.el-link .el-link__right-icon._hover": "",
     ".el-link [class*=el-icon-]+span": "链接>图标后文本",
     ".el-link [class*=el-icon-]+span:active,.el-link [class*=el-icon-]+span._active": "链接>图标后文本:鼠标按下",
     ".el-link [class*=el-icon-]+span:focus,.el-link [class*=el-icon-]+span._focus": "链接>图标后文本:获得焦点",
@@ -4390,7 +4402,11 @@
     ".el-link.el-link--primary": "链接:主要态",
     ".el-link.el-link--success": "链接:成功态",
     ".el-link.el-link--warning": "链接:警告态",
-    ".el-link.is-disabled": "链接:禁用态"
+    ".el-link.is-disabled": "链接:禁用态",
+    ".el-link>.el-icon": "",
+    ".el-link>.el-icon:active,.el-link>.el-icon._active": "",
+    ".el-link>.el-icon:focus,.el-link>.el-icon._focus": "",
+    ".el-link>.el-icon:hover,.el-link>.el-icon._hover": ""
   },
   "ElListComponents": {
     ".el-list-components__frag": "",

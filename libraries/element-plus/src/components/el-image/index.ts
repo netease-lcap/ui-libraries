@@ -14,9 +14,8 @@ function ElImageViewerRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElImage = registerComponent(ElImagePlus, { plugin: basicPlugin });
-const ElImageViewer = registerComponent(ElImageViewerPlus, { plugin: previewPlugin });
-
+const ElImage = registerComponent(ElImagePlus, { plugin: basicPlugin, name: 'el-image' });
+const ElImageViewer = registerComponent(ElImageViewerPlus, { plugin: previewPlugin, name: 'el-image-viewer' });
 
 export default ElImage;
 

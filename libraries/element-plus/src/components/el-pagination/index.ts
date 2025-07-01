@@ -8,8 +8,7 @@ function ElPaginationRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElPagination = registerComponent(ElPaginationPlus, { plugin: basicPlugin });
-
+const ElPagination = registerComponent(ElPaginationPlus, { plugin: basicPlugin, name: 'el-pagination' });
 
 export { ElPaginationPlus, ElPagination, ElPaginationRegister };
 export default ElPagination;

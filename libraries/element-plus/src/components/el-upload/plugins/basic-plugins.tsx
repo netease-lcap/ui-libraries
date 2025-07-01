@@ -6,6 +6,7 @@ import { useRef } from '@/plugins/hooks';
 
 type Converter = 'json' | 'simple';
 
+// TODO
 const getFileNameByURL = (url) => {
   const match = url.match(/\/([^/]+)$/);
   return match ? match[1] : null;
@@ -77,9 +78,8 @@ const getValueByList = (fileList: UploadFile[], converter: Converter, urlField: 
     .map((item) => {
       if (item.response) {
         return formatResponse(urlField, item.response, item);
-      } else {
-        return item;
       }
+        return item;
     });
 
   return converter === 'simple' ? successFiles.map((x) => x.url || '').join(',') : JSON.stringify(successFiles);
@@ -162,8 +162,8 @@ export function handleEvent(props) {
       _.isFunction(beforeUpload) && _.attempt(beforeUpload, rawFile);
     },
     beforeRemove: (uploadFile: UploadFile, uploadFiles: UploadFile[]) => {
-      _.isFunction(beforeRemove) &&
-        _.attempt(beforeRemove, {
+      _.isFunction(beforeRemove)
+        && _.attempt(beforeRemove, {
           uploadFile,
           uploadFiles,
         });
@@ -195,8 +195,7 @@ export function handleSlots(props) {
       }
     : {};
 
-  const pictureCardSlot =
-    listType === 'picture-card'
+  const pictureCardSlot = listType === 'picture-card'
       ? {
           trigger: (
             <ElFlex direction="column" alignment="center">
@@ -206,15 +205,15 @@ export function handleSlots(props) {
         }
       : {};
 
-  const uploadSlot =
-    !autoUpload && showUploadButton
+  const uploadSlot = !autoUpload && showUploadButton
       ? {
           default: (
             <ElButton
               text={triggerUploadText}
               onClick={() => {
                 ref?.submit();
-              }}></ElButton>
+              }}
+            />
           ),
         }
       : {};

@@ -6,7 +6,7 @@ import { useMemo } from '@/plugins/hooks';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
-  
+
   // 批量获取所有需要的字段
   const fields = [
     'timestampField',
@@ -58,20 +58,18 @@ export function handleDataSource(props) {
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 
   const dataSourceSlots = useMemo(
-    () =>
-      _.isNil(dataConfig)
+    () => (_.isNil(dataConfig)
         ? {}
         : {
-            default: () =>
-              _.map(dataSource, (item) => (
-                <el-timeline-item
-                  {...item}
-                  v-slots={{
+            default: () => _.map(dataSource, (item) => (
+              <el-timeline-item
+                {...item}
+                v-slots={{
                     default: () => slots.content?.({ item }),
                   }}
-                />
+              />
               )),
-          },
+          }),
     [dataSource, slots, dataConfig],
   );
 

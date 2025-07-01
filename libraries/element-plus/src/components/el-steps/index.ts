@@ -1,6 +1,6 @@
 import { ElSteps as ElStepsPlus, ElStep as ElStepPlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 import * as itemPlugin from './plugins/item-plugins';
 
@@ -14,9 +14,8 @@ function ElStepRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElSteps = registerComponent(ElStepsPlus, { plugin: basicsPlugin });
-const ElStep = registerComponent(ElStepPlus, { plugin: itemPlugin });
-
+const ElSteps = registerComponent(ElStepsPlus, { plugin: basicsPlugin, name: 'el-steps' });
+const ElStep = registerComponent(ElStepPlus, { plugin: itemPlugin, name: 'el-step' });
 
 export { ElStepsPlus, ElStepPlus, ElSteps, ElStep, ElStepsRegister, ElStepRegister };
 export default ElSteps;

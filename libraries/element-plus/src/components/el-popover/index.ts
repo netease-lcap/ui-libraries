@@ -1,6 +1,6 @@
 import { ElPopover as ElPopoverPlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 
 function ElPopoverRegister(BaseComponent, plugin = {}, extend = true) {
@@ -8,7 +8,7 @@ function ElPopoverRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElPopover = registerComponent(ElPopoverPlus, { plugin: basicsPlugin });
+const ElPopover = registerComponent(ElPopoverPlus, { plugin: basicsPlugin, name: 'el-popover' });
 
 export { ElPopoverPlus, ElPopover, ElPopoverRegister };
 export default ElPopover;

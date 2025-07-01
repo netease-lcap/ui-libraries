@@ -1,6 +1,6 @@
 import { ElResult as ElResultPlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 
 function ElResultRegister(BaseComponent, plugin = {}, extend = true) {
@@ -8,7 +8,7 @@ function ElResultRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElResult = registerComponent(ElResultPlus, { plugin: basicsPlugin });
+const ElResult = registerComponent(ElResultPlus, { plugin: basicsPlugin, name: 'el-result' });
 
 export { ElResultPlus, ElResult, ElResultRegister };
 export default ElResult;

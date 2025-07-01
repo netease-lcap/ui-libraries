@@ -1,6 +1,6 @@
 import { ElTable as ElTablePlus, ElTableColumn as ElTableColumnPlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import { ElFlex } from '@/components/el-flex';
 
 import * as basicsPlugin from './plugins/index';
@@ -23,13 +23,20 @@ function ElTableToolBarRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElTable = registerComponent(ElTablePlus, { plugin: basicsPlugin, name: 'ElTable' });
-const ElTableColumn = registerComponent(ElTableColumnPlus, { plugin: columnPlugin, name: 'ElTableColumn' });
+const ElTable = registerComponent(ElTablePlus, { plugin: basicsPlugin, name: 'el-table' });
+const ElTableColumn = registerComponent(ElTableColumnPlus, { plugin: columnPlugin, name: 'el-table-column' });
 const ElTableToolBar = registerComponent<{ columns: any; selectedColumns: any; setSelectedColumns: any }>(ElFlex, {
   plugin: tableToolBarPlugin,
-  name: 'ElTableToolBar',
+  name: 'el-table-tool-bar',
 });
 
-
-export { ElTableColumn, ElTable, ElTablePlus, ElTableToolBar, ElTableRegister, ElTableColumnRegister, ElTableToolBarRegister };
+export {
+  ElTableColumn,
+  ElTable,
+  ElTablePlus,
+  ElTableToolBar,
+  ElTableRegister,
+  ElTableColumnRegister,
+  ElTableToolBarRegister,
+};
 export default ElTable;

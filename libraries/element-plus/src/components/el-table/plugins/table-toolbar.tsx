@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { useState } from '@/plugins/hooks';
 
+// TODO
 export function tableToolBarPlugin(props) {
   const columns = props.get('columns');
   const value = props.get('selectedColumns');
@@ -14,7 +14,6 @@ export function tableToolBarPlugin(props) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 0' }}>
           <div />
           <el-flex style={{ display: 'flex', alignItems: 'center' }}>
-            {/* <el-icon name="Refresh" size="18px" /> */}
             <el-popover title="列配置" key="12" trigger="click" width="200" show-arrow={false}>
               {{
                 reference: <el-icon name="Setting" size="18px" />,

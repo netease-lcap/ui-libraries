@@ -1,6 +1,11 @@
 import _ from 'lodash';
 import { h } from 'vue';
-import { useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
+import {
+  useRequestDataSource,
+  useHandleMapField,
+  useFormatDataSource,
+  useDataSourceToTree,
+} from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { ElSubMenu, ElMenuItem } from '@/components';
@@ -11,12 +16,15 @@ export const handleDataSource = (props) => {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const parentField = props.get('parentField');
-  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'parentField', 'childrenField', 'dataSource']);
+  const deletePropsList = props
+    .get($deletePropsList, [])
+    .concat(['textField', 'valueField', 'parentField', 'childrenField', 'dataSource']);
   const ref = props.get('ref');
   const { data, run: reload } = useRequestDataSource(dataConfig, {});
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
+  // TODO
   const renderMenuItem = (item) => {
     if (item.children && item.children.length) {
       return (
@@ -85,4 +93,4 @@ export const handleSlotDefault = (props) => {
   };
 };
 
-export * from './ide'
+export * from './ide';

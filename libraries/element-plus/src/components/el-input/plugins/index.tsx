@@ -19,5 +19,3 @@ export function handleSuffixIcon(props) {
     prefixIcon: getPropsIcon({ name: prefixIcon }),
   };
 }
-
-

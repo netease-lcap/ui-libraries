@@ -26,7 +26,5 @@ export function handleRange(props) {
     const jsonRange = _.attempt(JSON.parse, range);
     return _.isArray(jsonRange) ? { range: jsonRange.map((item) => new Date(item)) } : {};
   }, [range]);
-  return {
-    ...rangeProps,
-  };
+  return _.assign({}, rangeProps);
 }

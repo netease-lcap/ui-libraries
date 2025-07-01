@@ -80,11 +80,19 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '偏移量',
-      description: '偏移量, 示例：[10, 10]',
+      title: '左偏移量',
+      description: '左偏移量, 示例：10',
       setter: { concept: 'InputSetter' },
     })
-    offset: nasl.collection.List<nasl.core.Integer>;
+    leftOffset: nasl.core.Integer;
+
+    @Prop({
+      group: '主要属性',
+      title: '上偏移量',
+      description: '上偏移量, 示例：10',
+      setter: { concept: 'InputSetter' },
+    })
+    topOffset: nasl.core.Integer;
 
     @Slot({
       title: '默认内容',

@@ -13,6 +13,7 @@ function ElSelectRegister(BaseComponent, plugin = {}, extend = true) {
 
 const ElSelect = registerComponent<ISelectProps>(ElSelectPlus, {
   plugin: basicsPlugin,
+  name: 'el-select',
 });
 const ElFormSelect = withFormItem(ElSelect, 'el-form-select');
 

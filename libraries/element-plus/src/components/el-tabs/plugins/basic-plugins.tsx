@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { useControllableValue, useMemo } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { ElIcon } from '../../index';
+import { getPropsIcon } from '@/plugins/common/icon';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -18,23 +18,24 @@ export function handleDataSource(props) {
   const dataSource = useHandleMapField({ textField, valueField, value: 'name', dataSource: useFormatDataSource(data) });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 
-  const [value, setValue, updateVal] = useControllableValue(props);
+  const [, , updateVal] = useControllableValue(props);
 
-  const dataSourceSlots = useMemo(() => (
-    _.isNil(dataConfig)
-    ? {}
-    : {
-      default: () => _.map(dataSource, (item) => (
-        <el-tab-pane
-          {...item}
-          v-slots={{
-            label: () => slots?.label?.({ item }),
-            default: () => slots?.content?.({ item }),
-          }}
-        />
-      )),
-    }
-  ), [dataConfig, dataSource, textField, valueField, slots]);
+  const dataSourceSlots = useMemo(
+    () => (_.isNil(dataConfig)
+        ? {}
+        : {
+            default: () => _.map(dataSource, (item) => (
+              <el-tab-pane
+                {...item}
+                v-slots={{
+                    label: () => slots?.label?.({ item }),
+                    default: () => slots?.content?.({ item }),
+                  }}
+              />
+              )),
+          }),
+    [dataConfig, dataSource, textField, valueField, slots],
+  );
 
   return {
     [$deletePropsList]: deletePropsList,
@@ -52,18 +53,10 @@ export function handleDataSource(props) {
 export function handleAddIcon(props) {
   const addIcon = props.get('addIcon');
   const slots = props.get('slots');
-  if (!addIcon) return {};
-
-  const addIconSlot = {
-    'add-icon': () => {
-      return <ElIcon name={addIcon} />;
-    },
-  };
 
   return {
-    slots: {
-      ...slots,
-      ...addIconSlot,
-    },
+    slots: _.assign(slots, {
+      'add-icon': () => getPropsIcon({ name: addIcon }),
+    }),
   };
 }

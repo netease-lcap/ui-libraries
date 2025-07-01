@@ -12,11 +12,10 @@ function ElTimePickerRegister(BaseComponent, plugin = {}, extend = true) {
 
 const ElTimePicker = registerComponent(ElTimePickerPlus, {
   plugin: basicPlugin,
+  name: 'el-time-picker',
 });
 
-const ElFormTimePicker = withFormItem(ElTimePicker, 'el-time-picker');
+const ElFormTimePicker = withFormItem(ElTimePicker, 'el-form-time-picker');
 
-
+export { ElTimePickerPlus, ElTimePicker, ElTimePickerRegister, ElFormTimePicker };
 export default ElTimePicker;
-
-export { ElTimePickerPlus, ElTimePicker, ElFormTimePicker, ElTimePickerRegister };

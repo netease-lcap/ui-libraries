@@ -20,21 +20,19 @@ export function handleDataSource(props) {
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 
   const dataSourceSlots = useMemo(
-    () =>
-      _.isNil(dataConfig)
+    () => (_.isNil(dataConfig)
         ? {}
         : {
-            default: () =>
-              _.map(dataSource, (item) => (
-                <el-anchor-link
-                  {...item}
-                  href={_.get(item, hrefField, '')}
-                  v-slots={{
+            default: () => _.map(dataSource, (item) => (
+              <el-anchor-link
+                {...item}
+                href={_.get(item, hrefField, '')}
+                v-slots={{
                     default: () => slots.content?.({ item }),
                   }}
-                />
+              />
               )),
-          },
+          }),
     [dataSource, slots, dataConfig],
   );
 

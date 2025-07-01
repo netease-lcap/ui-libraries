@@ -8,7 +8,7 @@ function ElScrollbarRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElScrollbar = registerComponent(ElScrollbarPlus, { plugin: basicPlugin });
+const ElScrollbar = registerComponent(ElScrollbarPlus, { plugin: basicPlugin, name: 'el-scrollbar' });
 
 export default ElScrollbar;
 

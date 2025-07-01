@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
 import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
-import { useRoute, useRouter, onBeforeRouteUpdate, onBeforeRouteLeave, } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 // import create from 'zustand-vue';
 import { createStore } from 'zustand/vanilla';
@@ -57,6 +57,7 @@ export function registerComponent<T>(Component, options) {
     props: Component.props,
 
     setup(props, { attrs, slots, emit, expose }) {
+      console.log('render Component', options.name);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });

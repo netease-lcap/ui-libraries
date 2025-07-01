@@ -1,4 +1,9 @@
-import { ElMenu as ElMenuPlus, ElMenuItem as ElMenuItemPlus, ElMenuItemGroup as ElMenuItemGroupPlus, ElSubMenu as ElSubMenuPlus } from 'element-plus';
+import {
+  ElMenu as ElMenuPlus,
+  ElMenuItem as ElMenuItemPlus,
+  ElMenuItemGroup as ElMenuItemGroupPlus,
+  ElSubMenu as ElSubMenuPlus,
+} from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins/basic-plugins';
@@ -24,11 +29,23 @@ function ElSubMenuRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElMenu = registerComponent(ElMenuPlus, { plugin: basicPlugin });
-const ElMenuItem = registerComponent(ElMenuItemPlus, { plugin: menuItemPlugin });
-const ElMenuItemGroup = registerComponent(ElMenuItemGroupPlus, { plugin: itemPlugin });
-const ElSubMenu = registerComponent(ElSubMenuPlus, { plugin: itemPlugin });
+const ElMenu = registerComponent(ElMenuPlus, { plugin: basicPlugin, name: 'el-menu' });
+const ElMenuItem = registerComponent(ElMenuItemPlus, { plugin: menuItemPlugin, name: 'el-menu-item' });
+const ElMenuItemGroup = registerComponent(ElMenuItemGroupPlus, { plugin: itemPlugin, name: 'el-menu-item-group' });
+const ElSubMenu = registerComponent(ElSubMenuPlus, { plugin: itemPlugin, name: 'el-sub-menu' });
 
-
-export { ElMenu, ElMenuItem, ElMenuItemGroup, ElSubMenu, ElMenuRegister, ElMenuItemRegister, ElMenuItemGroupRegister, ElSubMenuRegister };
+export {
+  ElMenu,
+  ElMenuPlus,
+  ElMenuItem,
+  ElMenuItemPlus,
+  ElMenuItemGroup,
+  ElMenuItemGroupPlus,
+  ElSubMenu,
+  ElSubMenuPlus,
+  ElMenuRegister,
+  ElMenuItemRegister,
+  ElMenuItemGroupRegister,
+  ElSubMenuRegister,
+};
 export default ElMenu;

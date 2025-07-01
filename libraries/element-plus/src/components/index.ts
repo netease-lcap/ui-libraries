@@ -1,12 +1,11 @@
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
-import _ from 'lodash';
 
 export { ElFlex } from './el-flex';
 export { ElText } from './el-text';
-export { ElTabs, ElTabPane, ElTabsRegister } from './el-tabs';
+export { ElTabs, ElTabPane, ElTabsRegister, ElTabsPlus } from './el-tabs';
 export { ElInputPlus, ElInput, ElFormInput, ElInputRegister } from './el-input';
 export { ElSelect, ElOption, ElFormSelect, ElSelectRegister, ElSelectPlus } from './el-select';
-export { ElCascader, ElFormCascader, ElCascaderRegister } from './el-cascader';
+export { ElCascader, ElFormCascader, ElCascaderRegister, ElCascaderPlus } from './el-cascader';
 export { ElCheckbox, ElCheckboxGroup, ElFormCheckboxGroup, ElCheckboxRegister } from './el-checkbox';
 export {
   ElTable,
@@ -16,7 +15,16 @@ export {
   ElTableColumnRegister,
   ElTableToolBarRegister,
 } from './el-table';
-export { ElFormItemWrap, ElForm, ElFormItem, ElFormRegister, ElFormItemWrapRegister, withFormItem } from './el-form';
+export {
+  ElFormItemWrap,
+  ElForm,
+  ElFormItem,
+  ElFormRegister,
+  ElFormItemWrapRegister,
+  withFormItem,
+  ElFormPlus,
+  ElFormItemPlus,
+} from './el-form';
 // export { ElPagination } from 'element-plus';
 export { ElAbsoluteLayout, ElAbsoluteLayoutRegister } from './el-absolute-layout';
 export { ElRouterView, ElRouterViewRegister } from './el-router-view';
@@ -31,11 +39,11 @@ export { ElTreeSelect, ElTreeSelectPlus, ElFormTreeSelect, ElTreeSelectRegister 
 export { ElSlider, ElSliderPlus, ElFormSlider, ElSliderRegister } from './el-slider';
 export { ElCalendar, ElCalendarPlus, ElCalendarRegister } from './el-calendar';
 export { ElCard, ElCardPlus, ElCardRegister } from './el-card';
-export { ElRow, ElCol, ElColRegister } from './el-row';
-export { ElPagination, ElPaginationRegister } from './el-pagination';
-export { ElDescriptions, ElDescriptionsItem, ElDescriptionsCell, ElDescriptionsRegister } from './el-descriptions';
-export { ElImage, ElImageViewer, ElImageRegister, ElImageViewerRegister } from './el-image';
-export { ElScrollbar, ElScrollbarRegister } from './el-scrollbar';
+export { ElRow, ElCol, ElColRegister, ElRowPlus } from './el-row';
+export { ElPagination, ElPaginationRegister, ElPaginationPlus } from './el-pagination';
+export { ElDescriptions, ElDescriptionsItem, ElDescriptionsRegister, ElDescriptionsPlus } from './el-descriptions';
+export { ElImage, ElImageViewer, ElImageRegister, ElImageViewerRegister, ElImagePlus } from './el-image';
+export { ElScrollbar, ElScrollbarRegister, ElScrollbarPlus } from './el-scrollbar';
 export {
   ElMenu,
   ElMenuItem,
@@ -63,24 +71,38 @@ export { ElMessage, ElMessageDesigner, ElMessageRegister } from './el-message';
 export { ElMessageBox, ElMessageBoxDesigner, ElMessageBoxRegister } from './el-message-box';
 export { ElNotification, ElNotificationDesigner, ElNotificationRegister } from './el-notification';
 export { ElLoading, ElLoadingRegister } from './el-loading';
-export { ElDatePicker, ElFormDatePicker, ElDatePickerRegister } from './el-date-picker';
-export { ElTransfer, ElFormTransfer, ElTransferRegister } from './el-transfer';
-export { ElTree, ElTreeRegister } from './el-tree';
-export { ElTooltip, ElTooltipRegister } from './el-tooltip';
-export { ElProgress, ElProgressRegister } from './el-progress';
-export { ElResult, ElResultRegister } from './el-result';
-export { ElTag, ElCheckTag, ElTagRegister, ElCheckTagRegister } from './el-tag';
-export { ElDropdown, ElDropdownItem, ElDropdownMenu, ElDropdownRegister, ElDropdownItemRegister } from './el-dropdown';
-export { ElRadio, ElRadioGroup, ElFormRadioGroup, ElRadioGroupRegister } from './el-radio';
+export { ElDatePicker, ElFormDatePicker, ElDatePickerRegister, ElDatePickerPlus } from './el-date-picker';
+export { ElTransfer, ElFormTransfer, ElTransferRegister, ElTransferPlus } from './el-transfer';
+export { ElTree, ElTreeRegister, ElTreePlus } from './el-tree';
+export { ElTooltip, ElTooltipRegister, ElTooltipPlus } from './el-tooltip';
+export { ElProgress, ElProgressRegister, ElProgressPlus } from './el-progress';
+export { ElResult, ElResultRegister, ElResultPlus } from './el-result';
+export { ElTag, ElCheckTag, ElTagRegister, ElCheckTagRegister, ElTagPlus, ElCheckTagPlus } from './el-tag';
+export {
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
+  ElDropdownRegister,
+  ElDropdownItemRegister,
+  ElDropdownPlus,
+} from './el-dropdown';
+export { ElRadio, ElRadioGroup, ElFormRadioGroup, ElRadioGroupRegister, ElRadioGroupPlus } from './el-radio';
 export { ConfigProvider } from './el-config-provider';
-export { ElAffix, ElAffixRegister } from './el-affix';
-export { ElAnchor, ElAnchorLink, ElAnchorItem, ElAnchorRegister, ElAnchorLinkRegister } from './el-anchor';
-export { ElBadge, ElBadgeRegister } from './el-badge';
-export { ElCarousel, ElCarouselItem, ElCarouselRegister, ElCarouselItemRegister } from './el-carousel';
-export { ElCollapse, ElCollapseItem, ElCollapseRegister, ElCollapseItemRegister } from './el-collapse';
-export { ElDivider, ElDividerRegister } from './el-divider';
-export { ElTimeline, ElTimelineItem, ElTimelineRegister, ElTimelineItemRegister } from './el-timeline';
-export { ElWatermark, ElWatermarkRegister } from './el-watermark';
+export { ElAffix, ElAffixRegister, ElAffixPlus } from './el-affix';
+export {
+  ElAnchor,
+  ElAnchorLink,
+  ElAnchorItem,
+  ElAnchorRegister,
+  ElAnchorLinkRegister,
+  ElAnchorPlus,
+} from './el-anchor';
+export { ElBadge, ElBadgeRegister, ElBadgePlus } from './el-badge';
+export { ElCarousel, ElCarouselItem, ElCarouselRegister, ElCarouselItemRegister, ElCarouselPlus } from './el-carousel';
+export { ElCollapse, ElCollapseItem, ElCollapseRegister, ElCollapseItemRegister, ElCollapsePlus } from './el-collapse';
+export { ElDivider, ElDividerRegister, ElDividerPlus } from './el-divider';
+export { ElTimeline, ElTimelineItem, ElTimelineRegister, ElTimelineItemRegister, ElTimelinePlus } from './el-timeline';
+export { ElWatermark, ElWatermarkRegister, ElWatermarkPlus } from './el-watermark';
 export { ElMultiLayout, ElMultiLayoutItem, ElMultiLayoutRegister } from './el-multi-layout';
 export { ElListComponents, ElListComponentsRegister } from './el-list-components';
 // import elementPlus from 'element-plus';

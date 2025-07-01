@@ -7,12 +7,11 @@ export function handleSlots(props) {
   const titleSlot = slots.title;
 
   const wrappedSlots = useMemo(
-    () =>
-      _.isNil(titleSlot)
+    () => (_.isNil(titleSlot)
         ? {}
         : {
             title: (arg) => <div class="el-collapse-item__title">{titleSlot?.(arg)}</div>,
-          },
+          }),
     [titleSlot],
   );
 

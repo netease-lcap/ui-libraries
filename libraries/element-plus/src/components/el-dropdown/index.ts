@@ -7,7 +7,6 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
 import * as itemPlugins from './plugins/item-plugins';
-import { withFormItem } from '@/components/el-form';
 
 function ElDropdownRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
@@ -19,12 +18,20 @@ function ElDropdownItemRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElDropdown = registerComponent(ElDropdownPlus, { plugin: basicsPlugin });
-const ElDropdownItem = registerComponent(ElDropdownItemPlus, { plugin: itemPlugins });
+const ElDropdown = registerComponent(ElDropdownPlus, { plugin: basicsPlugin, name: 'el-dropdown' });
+const ElDropdownItem = registerComponent(ElDropdownItemPlus, { plugin: itemPlugins, name: 'el-dropdown-item' });
 
 const ElDropdownMenu = ElDropdownMenuPlus;
 
-
-export { ElDropdownPlus, ElDropdownItemPlus, ElDropdownMenuPlus, ElDropdown, ElDropdownItem, ElDropdownMenu, ElDropdownRegister, ElDropdownItemRegister };
+export {
+  ElDropdownPlus,
+  ElDropdownItemPlus,
+  ElDropdownMenuPlus,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
+  ElDropdownRegister,
+  ElDropdownItemRegister,
+};
 
 export default ElDropdown;

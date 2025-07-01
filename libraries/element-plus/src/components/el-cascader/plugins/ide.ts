@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
-import { $deletePropsList, $ide, $formTagName, $tagName } from '@/plugins/constants';
+import { $ide, $formTagName, $tagName } from '@/plugins/constants';
 import { useEffect, useMemo } from '@/plugins/hooks';
 
 export function handleNodePath(props) {

@@ -1,9 +1,9 @@
 // /* 组件功能扩展插件 */
 import _ from 'lodash';
 import dayjs from 'dayjs';
-import { useControllableValue } from '@/plugins/hooks';
-import { useMemo } from '../../../plugins/hooks';
+import { useControllableValue, useMemo } from '@/plugins/hooks';
 import { FORM_TAG_NAME } from '../constants';
+import { getPropsIcon } from '@/plugins/common/icon';
 
 type GetTimeValueParams = {
   isEffectiveTime: boolean;
@@ -13,6 +13,7 @@ type GetTimeValueParams = {
   endValue: string;
   value: string[];
 };
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 export function handleRange(props) {
   const type = props.get('type') ?? 'date';
@@ -78,15 +79,11 @@ export function handleDateValue(props) {
   const result = {
     modelValue: value,
     'onUpdate:modelValue': _.wrap(setValue, (fn, time: Date | Array<Date> | null) => {
-      // const modelValue = _.isNil(time) ? undefined : new Date(time).toJSON();
-      // _.attempt(fn, modelValue);
       _.attempt(fn, time);
     }),
   };
   return isRange ? {} : result;
 }
-
-export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 export function handleTagName() {
   return {
@@ -94,4 +91,11 @@ export function handleTagName() {
   };
 }
 
-export { handleIcon } from '@/plugins/common/icon';
+export function handleIcon(props) {
+  const prefixIconName = props.get('prefixIconName');
+  const clearIconName = props.get('clearIconName');
+  return {
+    prefixIcon: getPropsIcon({ name: prefixIconName }),
+    clearIcon: getPropsIcon({ name: clearIconName }),
+  };
+}

@@ -24,6 +24,7 @@ export function handleDataSource(props) {
     dataSource: useFormatDataSource(data),
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
+  // TODO
   const dropdownSlotRender = useCallback(() => {
     if (dataConfig) {
       return (
@@ -59,7 +60,7 @@ export function handleDefaultSlot(props) {
   return {
     slots: {
       ...slots,
-      default: slots.default ? () => <div style="width: auto;">{slots.default()}</div> : undefined,
+      default: slots.default ? () => <div style={{ width: 'auto' }}>{slots.default()}</div> : undefined,
     },
   };
 }

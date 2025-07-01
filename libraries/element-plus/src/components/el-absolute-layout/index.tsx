@@ -16,7 +16,7 @@ function ElAbsoluteLayoutRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElAbsoluteLayout = registerComponent(AbsoluteLayout, plugins);
+const ElAbsoluteLayout = registerComponent(AbsoluteLayout, { plugin: plugins, name: 'el-absolute-layout' });
 
 export { ElAbsoluteLayoutRegister, ElAbsoluteLayout };
 export default ElAbsoluteLayout;

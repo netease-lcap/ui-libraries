@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <el-date-picker :modelValue="value" type="date" placeholder="Pick a day2" @change="onChange" /> -->
-    <el-date-picker v-model="value" type="date" placeholder="Pick a day2" @change="onChange" @calendar-change="calendarChange" />
+    <el-date-picker prefixicon="Plus" v-model="value" type="date" placeholder="Pick a day2" @change="onChange" @calendar-change="calendarChange" />
   </div>
 </template>
 
