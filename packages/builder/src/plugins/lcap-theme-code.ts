@@ -145,6 +145,7 @@ function genThemeEntryCode({ framework, type, pkg }: LcapCodeGenOption) {
       `import App from '${normalizePath(path.resolve(__dirname, '../../input/vue2/App'))}';`,
       'Vue.config.productionTip = false;',
       'const app = new Vue({ ...App });',
+      'window.Vue = Vue;',
       'app.$mount("#app");',
     ].join('\n');
   }
@@ -156,6 +157,7 @@ function genThemeEntryCode({ framework, type, pkg }: LcapCodeGenOption) {
       'import * as Library from "@/index"',
       `import App from '${normalizePath(path.resolve(__dirname, '../../input/vue3/App'))}';`,
       'const app = createApp(App);',
+      'window.__app = app;',
       ...(hasLcapUI ? [
         'import "virtual-lcap:lcap-ui.css";',
         'import * as LcapUI from "virtual-lcap:lcap-ui";',
