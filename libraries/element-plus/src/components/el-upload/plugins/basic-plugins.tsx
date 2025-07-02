@@ -79,7 +79,7 @@ const getValueByList = (fileList: UploadFile[], converter: Converter, urlField: 
       if (item.response) {
         return formatResponse(urlField, item.response, item);
       }
-        return item;
+      return item;
     });
 
   return converter === 'simple' ? successFiles.map((x) => x.url || '').join(',') : JSON.stringify(successFiles);

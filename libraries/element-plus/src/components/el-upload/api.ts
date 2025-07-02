@@ -55,19 +55,19 @@ namespace nasl.ui {
     })
     submit(): void {}
 
-    @Prop({
-      title: '文件列表',
-    })
-    fileList: nasl.collection.List<{
-      name: nasl.core.String;
-      percentage?: nasl.core.Decimal;
-      status: 'ready' | 'uploading' | 'success' | 'fail';
-      size?: nasl.core.Integer;
-      response?: any;
-      uid: nasl.core.Integer;
-      url?: nasl.core.String;
-      raw?: any;
-    }>;
+    // @Prop({
+    //   title: '文件列表',
+    // })
+    // fileList: nasl.collection.List<{
+    //   name: nasl.core.String;
+    //   percentage?: nasl.core.Decimal;
+    //   status: 'ready' | 'uploading' | 'success' | 'fail';
+    //   size?: nasl.core.Integer;
+    //   response?: any;
+    //   uid: nasl.core.Integer;
+    //   url?: nasl.core.String;
+    //   raw?: any;
+    // }>;
   }
 
   export class ElUploadOptions extends ViewComponentOptions {
@@ -357,7 +357,7 @@ namespace nasl.ui {
       title: '移除文件前',
       description: '移除文件前的钩子',
     })
-    onBeforeRemove: (event: any) => any;
+    onBeforeRemove: () => any;
 
     @Slot({
       title: '上传提示',

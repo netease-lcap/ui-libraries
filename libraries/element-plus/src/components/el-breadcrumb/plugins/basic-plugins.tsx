@@ -1,8 +1,7 @@
 import _ from 'lodash';
-import { useMemo, useState } from '@/plugins/hooks';
+import { useMemo, useState, useCallback } from '@/plugins/hooks';
 import { ElBreadcrumbItem } from '../index';
-import { ElIcon } from '../../index';
-import { useCallback } from '../../../plugins/hooks';
+import { getPropsIcon } from '@/plugins/common/icon';
 
 export function handleAutoCrumbs(props) {
   const auto = props.get('auto');
@@ -15,7 +14,6 @@ export function handleAutoCrumbs(props) {
 
   const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
 
-  // TODO 整理代码
   const routerMeta = useMemo(() => {
     if (!routeInfo?.path) return [];
     return _.reduce(
@@ -42,7 +40,7 @@ export function handleAutoCrumbs(props) {
 
   const defaultSlots = useCallback(() => {
     return routerMeta.map((item) => (
-      <ElBreadcrumbItem key={item.to} to={{ path: item.to }}>
+      <ElBreadcrumbItem replace={false} key={item.to} to={{ path: item.to }}>
         {{
           default: () => item.title,
         }}
@@ -51,14 +49,13 @@ export function handleAutoCrumbs(props) {
   }, [routerMeta]);
 
   const result = useMemo(
-    () => (!isNotAutoCrumbs
-        ? {
-            slots: {
-              ...slots,
+    () => (isNotAutoCrumbs
+        ? {}
+        : {
+            slots: _.assign({}, slots, {
               default: defaultSlots,
-            },
-          }
-        : {}),
+            }),
+          }),
     [isNotAutoCrumbs, defaultSlots, slots],
   );
   return result;
@@ -66,9 +63,7 @@ export function handleAutoCrumbs(props) {
 
 export function handleSeparatorIcon(props) {
   const separatorIcon = props.get('separatorIcon');
-  if (!separatorIcon) return {};
-  const separatorIconComp = <ElIcon name={separatorIcon} />;
   return {
-    separatorIcon: separatorIconComp,
+    separatorIcon: getPropsIcon({ name: separatorIcon }),
   };
 }
