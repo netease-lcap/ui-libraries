@@ -6,9 +6,10 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
-import { useMemo } from '@/plugins/hooks';
+import { useMemo, useState, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { ElSubMenu, ElMenuItem } from '@/components';
+import { useEffect } from '../../../plugins/hooks';
 
 export const handleDataSource = (props) => {
   const dataConfig = props.get('dataSource');
@@ -90,6 +91,20 @@ export const handleSlotDefault = (props) => {
         return vnodes;
       },
     },
+  };
+};
+
+export const handleRouter = (props) => {
+  const router = props.get('router');
+  const route = props.get('route');
+  const [active, setActive] = useControllableValue(props, {
+    defaultValuePropName: 'defaultActive',
+    defaultValue: route.path,
+  });
+  router.afterEach((to) => setActive(to.path));
+  useEffect(() => setActive(route.path), [route.path]);
+  return {
+    defaultActive: active,
   };
 };
 

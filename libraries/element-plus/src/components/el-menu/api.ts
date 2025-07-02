@@ -11,18 +11,17 @@ namespace nasl.ui {
         click: true,
       },
       dataSource: {
-        dismiss:
-          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
         loopRule: 'nth-last-child(-n+2)',
-        loopElem: ".el-tabs__nav > .el-tabs__item",
+        loopElem: '.el-tabs__nav > .el-tabs__item',
         propertyName: ':dataSource',
         displayData: "\"[{label: '菜单一', value: '0'},{label:'菜单二', value: '1'}, {label:'菜单三', value: '2'}]\"",
       },
       additionalAttribute: {
         ':collapseTransition': '"false"',
         menuTrigger: 'click',
-        ":showInDesigner": "\"true\"",
+        ':showInDesigner': '"true"',
       },
       snippetsDisplayConditions: {
         default: "this.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",
@@ -84,7 +83,7 @@ namespace nasl.ui {
       },
       onChange: [
         {
-         clear: ['collapse'], 
+          clear: ['collapse'],
           if: (_) => _ === 'horizontal',
         },
       ],
@@ -145,8 +144,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '是否使用 vue-router 的模式',
-      description:
-        '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
+      description: '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
       setter: { concept: 'SwitchSetter' },
     })
     router: nasl.core.Boolean = false;
@@ -155,7 +153,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '当前激活菜单的标识',
       description: '当前激活菜单的 标识',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'InputSetter', autoClear: true },
     })
     defaultActive: nasl.core.String;
 
@@ -516,7 +514,6 @@ namespace nasl.ui {
     }
   }
   export class ElMenuItemGroupOptions extends ViewComponentOptions {
-
     @Slot({
       title: '默认',
       description: '默认',
