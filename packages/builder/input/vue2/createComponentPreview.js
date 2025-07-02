@@ -16,9 +16,9 @@ export default (stories) => {
       };
     }).filter((c) => c.orderIndex > -1).sort((a, b) => a.orderIndex - b.orderIndex);
   }
-
   return {
     name: 'ThemeComponentPreviews',
+    inject: ['getRenderKey'],
     props: {
       componentNames: {
         type: Array,
@@ -88,7 +88,7 @@ export default (stories) => {
           class: styles.componentPreview,
         },
         this.visibleStories.map((c) => h(ComponentWrap, {
-          key: c.name,
+          key: this.getRenderKey() + c.name,
           props: {
             name: c.name,
             demo: c.demo,
