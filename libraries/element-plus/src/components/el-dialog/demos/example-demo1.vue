@@ -7,8 +7,8 @@
     <el-dialog
       ref="dialogRef"
       title="Tips"
+      
       width="500"
-      closeIcon="setting"
     >
       <span>This is a message</span>
       <template #footer>

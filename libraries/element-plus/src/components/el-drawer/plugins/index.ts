@@ -4,7 +4,7 @@ import { useCallback, useControllableValue } from '@/plugins/hooks';
 export function handleDrawerRef(props) {
   const [, setValue, valueProps] = useControllableValue(props);
   const ref = props.get('ref');
-  const onBeforeClose = props.get('onBeforeClose', () => {});
+  const onBeforeClose = props.get('onBeforeClose', (done) => _.attempt(done));
   const beforeClose = useCallback(
     _.wrap(onBeforeClose, (fn, ...args) => _.attempt(fn, ...args)),
     [onBeforeClose],
