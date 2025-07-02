@@ -1,3 +1,15 @@
-.el-input{
-  --el-input-width:240px;
+.el-input {
+  --el-input-width: 240px;
+}
+
+.el-input-group__append,
+.el-input-group__prepend {
+  padding: unset;
+}
+
+.el-input-group__append .el-button,
+.el-input-group__append .el-select,
+.el-input-group__prepend .el-button,
+.el-input-group__prepend .el-select {
+  margin: unset;
 }
