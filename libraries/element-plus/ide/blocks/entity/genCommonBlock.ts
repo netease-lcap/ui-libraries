@@ -30,7 +30,7 @@ function genWhereExpression(entity: naslTypes.Entity) {
  * @param {*} supportFilter
  * @returns
  */
-export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: NameGroup, supportPage: boolean = true, supportSort: boolean, supportFilter: boolean): string {
+function genOldQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: NameGroup, supportPage: boolean = true, supportSort: boolean, supportFilter: boolean): string {
   allEntities = Array.from(allEntities);
   const entity = allEntities.shift();
   if (!entity) {
@@ -58,6 +58,65 @@ export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: N
         ${supportSort ? '.ORDER_BY([sort, order])' : ''})${supportPage ? ', page, size)' : ''}
         return result;
     }`;
+}
+
+/**
+ * 生成新的查询逻辑。IDE 4.0以上
+ * @param allEntities
+ * @param nameGroup
+ * @param supportSort
+ * @param supportFilter
+ * @returns
+ */
+function genNewQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: NameGroup, supportPage: boolean = true, supportSort: boolean, supportFilter: boolean): string {
+  allEntities = Array.from(allEntities);
+  const entity = allEntities.shift();
+  if (!entity) {
+    return '';
+  }
+  const namespace = entity.getNamespace();
+  const entityLowerName = firstLowerCase(entity.name);
+  const properties = entity.properties.filter((property) => property?.display.inFilter);
+  return `export function ${nameGroup.logic}(${supportPage ? 'page: Long, size: Long' : ''}${supportSort ? ', sort: String, order: String' : ''}${supportFilter ? `, filter: ${namespace}.${entity.name}` : ''}) {
+        let result;
+        result = ${supportPage ? 'PAGINATE(' : ''}FROM(${namespace}.${entity.name}Entity, ${entity.name} => $()
+        ${allEntities.map((relationEntity) => {
+    const onExpressions = entity.properties
+      ?.filter((property) => property.relationEntity === relationEntity.name)
+      .map((leftProperty) => {
+        return `${entity.name}.${leftProperty.name} == ${relationEntity.name}.${leftProperty.relationProperty}`;
+      }).join('&&');
+    return `.LEFT_JOIN(${namespace}.${relationEntity.name}Entity, ${relationEntity.name} => ON(${onExpressions})`;
+  }).join('\n')}
+  ${supportFilter && properties.length ? `.WHERE(${genWhereExpression(entity)})` : ''}
+    .SELECT({
+            ${entityLowerName}: ${entity.name},
+            ${allEntities.map((relationEntity) => `${firstLowerCase(relationEntity.name)}: ${relationEntity.name}`).join(',')}
+        })
+        ${supportSort ? '.ORDER_BY((resultItem)=>[[resultItem[sort], order]])' : ''})${allEntities.map(()=>`)`).join('')}${supportPage ? ', page, size)' : ''}
+        return result;
+    }`;
+}
+
+/**
+ * 生成后端数据查询逻辑
+ * @param {*} allEntities
+ * @param {*} nameGroup
+ * @param {*} supportSort
+ * @param {*} supportFilter
+ * @returns
+ */
+export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: NameGroup, supportPage: boolean = true, supportSort: boolean, supportFilter: boolean): string {
+  const entity = allEntities[0];
+  if (!entity) {
+    return '';
+  }
+  const ideVersion = entity.app?.ideVersion;
+  const ideVersions = ideVersion?.split('.');
+  if (ideVersions && ideVersions.length >= 2 && Number(ideVersions[0]) >= 4) {
+    return genNewQueryLogic(allEntities, nameGroup, supportPage, supportSort, supportFilter);
+  }
+  return genOldQueryLogic(allEntities, nameGroup, supportPage, supportSort, supportFilter);
 }
 
 /**
