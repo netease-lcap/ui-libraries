@@ -18,7 +18,8 @@ export function handleDialogRef(props) {
       open: () => setValue(true),
       close: () => setValue(false),
     }),
-    closeIcon: getPropsIcon(closeIcon),
+
+    closeIcon: getPropsIcon({ name: closeIcon }),
     beforeClose,
   };
 }

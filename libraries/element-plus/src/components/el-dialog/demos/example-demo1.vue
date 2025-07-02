@@ -1,14 +1,13 @@
 <template>
   <div>
-    <el-button plain @click="dialogVisible = true">
-      Click to open the Dialog
+    <el-button plain @click="dialogRef?.open()">
+      Click to open the Dialog1
     </el-button>
 
     <el-dialog
-      v-model="dialogVisible"
+      ref="dialogRef"
       title="Tips"
       width="500"
-      @before-close="handleClose"
       closeIcon="setting"
     >
       <span>This is a message</span>
@@ -25,10 +24,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, useTemplateRef } from 'vue'
 import { ElMessageBox } from 'element-plus'
 
 const dialogVisible = ref(false)
+const dialogRef = ref(null)
+console.log(dialogRef,'dialogRef');
 
 const handleClose = (done: () => void) => {
   ElMessageBox.confirm('Are you sure to close this dialog?')

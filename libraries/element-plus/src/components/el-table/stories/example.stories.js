@@ -285,7 +285,12 @@ dragSort="row"
 >
   <el-table-column prop="index" type="selection" width="55" >
 
-    <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
+    <el-table-column prop="createTime" label="创建时间" width="160">
+      <el-table :dataSource="tableData" :pagination="false">
+
+      <el-table-column prop="createTime" label="创建时间" width="160">
+      </el-table>
+    </el-table-column>
     <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
     </el-table-column>
   <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
