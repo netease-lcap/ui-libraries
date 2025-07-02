@@ -24,7 +24,7 @@ function ElTableToolBarRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElTable = registerComponent(ElTablePlus, { plugin: basicsPlugin, name: 'el-table' });
-const ElTableColumn = registerComponent(ElTableColumnPlus, { plugin: columnPlugin, name: 'el-table-column' });
+const ElTableColumn = registerComponent(ElTableColumnPlus, { plugin: columnPlugin, name: 'ElTableColumn' });
 const ElTableToolBar = registerComponent<{ columns: any; selectedColumns: any; setSelectedColumns: any }>(ElFlex, {
   plugin: tableToolBarPlugin,
   name: 'el-table-tool-bar',

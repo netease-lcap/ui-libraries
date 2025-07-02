@@ -27,13 +27,14 @@ export function handleAutoCrumbs(props) {
           _.get(curMatch, 'components.default.__vccOpts.meta', {}),
           _.get(curMatch, 'components.default.meta', {}),
         );
-        if (!meta?.crumb && !meta?.name) {
-          return pre;
-        }
-        return pre.concat({
-          title: meta?.crumb || curMatch.name || curMatch.path,
-          to: curMatch.path,
-        });
+        const hasPageName = meta?.crumb || meta?.name;
+        const currentPageInfo = hasPageName
+          ? {
+              title: meta?.crumb || curMatch.name || curMatch.path,
+              to: curMatch.path,
+            }
+          : [];
+        return pre.concat(currentPageInfo);
       },
       [],
     );

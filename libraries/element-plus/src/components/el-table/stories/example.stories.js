@@ -283,10 +283,11 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column prop="index" type="selection" width="55" />
+  <el-table-column prop="index" type="selection" width="55" >
 
     <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
     <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
+    </el-table-column>
   <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
   <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
   <el-table-column prop="confirmTime" label="确认时间" width="160"></el-table-column>
