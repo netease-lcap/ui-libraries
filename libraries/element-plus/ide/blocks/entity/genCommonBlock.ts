@@ -114,9 +114,9 @@ export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: N
   const ideVersion = entity.app?.ideVersion;
   const ideVersions = ideVersion?.split('.');
   if (ideVersions && ideVersions.length >= 2 && Number(ideVersions[0]) >= 4) {
-    return genNewQueryLogic(allEntities, nameGroup, supportSort, supportFilter);
+    return genNewQueryLogic(allEntities, nameGroup, supportPage, supportSort, supportFilter);
   }
-  return genOldQueryLogic(allEntities, nameGroup, supportSort, supportFilter);
+  return genOldQueryLogic(allEntities, nameGroup, supportPage, supportSort, supportFilter);
 }
 
 /**
