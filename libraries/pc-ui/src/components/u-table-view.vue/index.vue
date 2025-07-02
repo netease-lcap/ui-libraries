@@ -1730,8 +1730,29 @@ export default {
             // 3123124215948800: values变化后充值了item.checked状态，需要递归处理父级的半勾选状态
             if (this.treeDisplay) {
                 Object.keys(this.checkedItems).forEach((itemKey) => {
-                    this.checkRecursively(this.checkedItems[itemKey], true, this.treeCheckType);
+                    this.handleHalfCheckedForTreeDisplay(this.checkedItems[itemKey], this.treeCheckType);
                 });
+            }
+        },
+        handleHalfCheckedForTreeDisplay(item, direction = 'up+down') {
+            if (direction.includes('up')) {
+                if (item.parentPointer) {
+                    const parentItem = this.currentData.find((citem) => citem === item.parentPointer);
+                    if (parentItem && !parentItem.disabled) {
+                        const children = this.$at(parentItem, this.childrenField) || [];
+                        let checkedLength = 0;
+                        children.forEach((item) => {
+                            if (item.checked)
+                                checkedLength++;
+                            if (item.checked === null)
+                                checkedLength += 0.5;
+                        });
+                        if (checkedLength > 0 && checkedLength < children.length) {
+                            parentItem.checked = null;
+                        }
+                        this.handleHalfCheckedForTreeDisplay(parentItem, 'up');
+                    }
+                }
             }
         },
         onClickRow(e, item, rowIndex) {
