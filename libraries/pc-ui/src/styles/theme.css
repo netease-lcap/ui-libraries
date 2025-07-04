@@ -397,6 +397,7 @@
     --sidebar-divider-margin-y: 8px; /* @group 分隔符 */ /* @desc 侧边栏分隔符左外边距,如：1px */ /* @prefix sidebar-divider */ /* @excludeTags u-sidebar-item,u-sidebar-group */ /* @depStaticStyles { "u-sidebar-divider": ["margin-top", "margin-bottom"] } */
     --sidebar-divider-height: var(--border-width-base); /* @group 分隔符 */ /* @desc 侧边栏分隔符高度,如：1px */ /* @prefix sidebar-divider */ /* @excludeTags u-sidebar-item,u-sidebar-group */ /* @depStaticStyles { "u-sidebar-divider": ["height"] } */
     --sidebar-divider-background: #3d4654; /* @group 分隔符 */ /* @desc 侧边栏分隔符背景色,如：#223325 */ /* @type color */ /* @prefix sidebar-divider */ /* @excludeTags u-sidebar-item,u-sidebar-group */ /* @depStaticStyles { "u-sidebar-divider": ["background-color"] } */
+    --sidebar-group-expand-icon-size: 14px; /* @group 分组 */ /* @desc 侧边栏分组头部展开图标大小,如：14px */ /* @prefix sidebar-group */
 
     --sidebar-width: 240px; /* @hidden */
     --sidebar-background-inverse: #2b333f; /* @hidden */
