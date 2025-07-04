@@ -282,6 +282,7 @@
     --collapse-item-expander-color-disabled: var(--brand-disabled-dark); /* @type color */ /* @desc 面板项展开箭头颜色（禁用状态）,如：#223325 */
     --collapse-item-expander-font-size: 18px; /* @desc 面板项展开箭头大小,如：1px */
     --collapse-item-content-padding: 20px; /* @desc 面板项内容区内边距,如：1px */
+    --collapse-item-expander-expand-transform: rotate(90deg); /* @desc 面板项展开箭头旋转角度,如：rotate(90deg) */
     --collapse-transition-duration: var(--transition-duration-base); /* @desc 面板展开动画快慢参数,如：0.2s */
 
     --collapse-item-head-padding-small: 6px 8px 6px 32px; /* @hidden */

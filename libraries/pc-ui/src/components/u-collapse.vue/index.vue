@@ -21,6 +21,7 @@ export default {
         appear: String,
         disabled: { type: Boolean, default: false },
         fill: { type: String, default: 'head' },
+        expandIcon: { type: String },
         showExtraEmptySlot: { type: Boolean, default: false },
     },
     data() {
