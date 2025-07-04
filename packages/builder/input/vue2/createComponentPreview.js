@@ -88,7 +88,7 @@ export default (stories) => {
           class: styles.componentPreview,
         },
         this.visibleStories.map((c) => h(ComponentWrap, {
-          key: this.getRenderKey() + c.name,
+          key: this.getRenderKey ? this.getRenderKey() + c.name : c.name,
           props: {
             name: c.name,
             demo: c.demo,

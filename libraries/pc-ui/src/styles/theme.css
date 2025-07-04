@@ -325,6 +325,7 @@
     --navbar-group-color-hover: white;/* @type color */ /* @desc 导航栏分组悬浮字体颜色 */
 
     --navbar-divider-line-background: transparent;/* @type color */ /* @desc 导航栏菜单项分隔线颜色 */
+    --navbar-item-expand-icon-size: 14px;/* @desc 导航栏菜单项展开图标大小 */
 
     --navbar-item-color-inverse: white;/* @hidden */
     --navbar-item-line-transition-duration: 0.5s;/* @hidden */
