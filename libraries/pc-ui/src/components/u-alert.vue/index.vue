@@ -6,7 +6,8 @@
         :bordered="bordered"
     >
         <div :class="$style.content" :horizontal="horizontal">
-            <i v-if="showIcon" :class="$style.icon"></i>
+            <i-ico v-if="showIcon && icon" :name="icon" :class="$style.typeIcon"></i-ico>
+            <i v-if="showIcon && !icon" :class="$style.icon"></i>
             <div>
                 <div :class="$style.title" vusion-slot-name="title" vusion-slot-name-edit="title">
                     <slot name="title">
@@ -25,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <a :class="$style.close" v-if="closeable" @click="close"></a>
+        <a :class="[$style.close, { [$style.useIcon]: !!closeIcon }]" v-if="closeable" @click="close"><i-ico v-if="closeIcon" :name="closeIcon"></i-ico></a>
     </div>
 </template>
 
@@ -64,11 +65,31 @@ export default {
             type: String,
             default: 'left',
         },
+        closeIcon: {
+            type: String,
+        },
+        infoIcon: {
+            type: String,
+        },
+        successIcon: {
+            type: String,
+        },
+        warningIcon: {
+            type: String,
+        },
+        errorIcon: {
+            type: String,
+        },
     },
     data() {
         return {
             currentVisible: true,
         };
+    },
+    computed: {
+        icon() {
+          return this[`${this.type}Icon`];
+        },
     },
     methods: {
         close() {
@@ -95,6 +116,11 @@ export default {
     flex: 1;
     font-size: 14px;
 }
+
+.typeIcon {
+  font-size: inherit;
+}
+.typeIcon,
 .icon {
     align-self: flex-start;
     margin-right: 8px;
@@ -102,6 +128,7 @@ export default {
 .icon::after {
     background: radial-gradient(circle, #fff 45%, transparent 45%);
 }
+
 .title {
     display: inline;
     color: var(--alert-title-color);
@@ -129,9 +156,18 @@ content: "\e64b";
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
 }
-.close:hover::after {
+.close:hover {
     color: var(--alert-close-hover-color);
 }
+
+.close.useIcon {
+  font-size: inherit;
+}
+
+.close.useIcon::after {
+  content: none;
+}
+
 .content[horizontal="left"] {
     justify-content: flex-start;
 }
