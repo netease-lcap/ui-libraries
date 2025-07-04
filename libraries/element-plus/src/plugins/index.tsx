@@ -85,7 +85,7 @@ export function registerComponent<T>(Component, options) {
           slots,
         },
 
-        setvalue: (commit, tr) => {
+        setValue: (commit, tr) => {
           const getNewStateFn = _.cond([
             [_.isFunction, _.identity],
             [_.isPlainObject, (state) => (store) => ({ state: { ...store.state, ...state } })],
@@ -99,7 +99,7 @@ export function registerComponent<T>(Component, options) {
         ['updateQueen', new Set()],
         ['getState', getState],
       ]);
-      const { setvalue: setValue } = getState() as any;
+      const { setValue } = getState() as any;
       subscribe((props: any) => {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
         const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);

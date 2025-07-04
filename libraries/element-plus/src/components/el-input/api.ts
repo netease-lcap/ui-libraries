@@ -351,17 +351,17 @@ namespace nasl.ui {
     // })
     // slotDefault: () => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '前置',
-    //   description: '前置',
-    // })
-    // slotPrepend: () => Array<ViewComponent>;
+    @Slot({
+      title: '前置',
+      description: '前置',
+    })
+    slotPrepend: () => Array<ViewComponent>;
 
-    // @Slot({
-    //   title: '后置',
-    //   description: '后置',
-    // })
-    // slotAppend: () => Array<ViewComponent>;
+    @Slot({
+      title: '后置',
+      description: '后置',
+    })
+    slotAppend: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({

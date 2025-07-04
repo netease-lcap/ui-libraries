@@ -59,9 +59,15 @@ export const Example1 = {
     },
     template: `
     <div>
-      {{activeName}}-
-      {{name}}
-      <el-input  ref="myref" data-nodepath="1234"  ></el-input>
+ 
+      <el-input  ref="myref" data-nodepath="1234"  >
+
+      </el-input>
+      <br/>
+            <el-input type="textarea"  ref="myref" data-nodepath="1234"  >
+      <template #append>  </template>
+        <template #prepend>  </template>
+      </el-input
     </div>
     `,
   }),

@@ -58,23 +58,51 @@ export const Example2 = {
     setup() {
       const activeName = ref('first');
       const name = ref('myName');
-      const list = ref([{ value: 1, label: '1' }, { value: 2, label: '2' }, { value: 3, label: '3' }]);
-      // const list = ref([1, 2, 3]);
-// list.value = async () => {
-//         return new Promise((res) => {
-//           setTimeout(() => {
-//             const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+      const list = ref([
+        { value: 1, label: '1' },
 
-//             const value = ref();
-//             const options = Array.from({ length: 1000 }).map((_, idx) => ({
-//               value: `Option ${idx + 1}`,
-//               label: `${initials[idx % 10]}${idx}`,
-//             }));
-//             res(options);
-//             // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
-//           }, 1000);
-//         });
-//       };
+      ]);
+      setTimeout(() => {
+        list.value = [
+          { value: 2, label: '2' },
+          { value: 3, label: '3' },
+        ];
+      }, 3000);
+      // const list = ref([1, 2, 3]);
+      // list.value = async () => {
+      //         return new Promise((res) => {
+      //           setTimeout(() => {
+      //             const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+
+      //             const value = ref();
+      //             const options = Array.from({ length: 1000 }).map((_, idx) => ({
+      //               value: `Option ${idx + 1}`,
+      //               label: `${initials[idx % 10]}${idx}`,
+      //             }));
+      //             res(options);
+      //             // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
+      //           }, 1000);
+      //         });
+      //       };
+      const listFn = ref(() => {
+        console.log('listFn');
+        return new Promise((res) => {
+          setTimeout(() => {
+            res(list.value);
+          }, 1000);
+        });
+      });
+      setTimeout(() => {
+        
+      listFn.value = () => {
+        console.log('listFn2');
+        return new Promise((res) => {
+          setTimeout(() => {
+            res(list.value);
+          }, 1000);
+        });
+      };
+      }, 3000);
       const select = ref('');
 
       const handleClick = (tab) => {
@@ -101,11 +129,16 @@ export const Example2 = {
         list,
         handleClick,
         handleChange,
+        listFn,
       };
     },
     template: `
     <div>
-    <el-select ref="select" v-model="activeName"  clearable :dataSource="list" multiple >
+    <el-table :data="list">
+    <el-table-column prop="value" label="value" />
+    <el-table-column prop="label" label="label" />
+    </el-table>
+    <el-select class="my-select" append-to=".my-select"  ref="select" v-model="activeName"  clearable :dataSource="listFn" multiple >
 
     </el-select>
     {{ activeName }}

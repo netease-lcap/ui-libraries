@@ -13,8 +13,8 @@ const attempt = _.wrap(selfAttempt, (fn, ...arg: [any, any]) => {
     return arg[0].map((item) => fn(item, ...arg.slice(1)));
   }
   const result = fn(...arg);
-  if (_.isError(result) && process.env.VUE_IS_DEVTOOLS) {
-    console.error(result);
+  if (_.isError(result)) {
+    console.error('components error', result);
   }
   return result;
 });
