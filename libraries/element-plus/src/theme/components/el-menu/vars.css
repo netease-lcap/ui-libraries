@@ -1,0 +1,80 @@
+/**
+ * @component el-menu
+ */
+:root {
+  /**
+   * @desc 激活菜单项颜色
+   * @type color
+   */
+  --el-menu-active-color: var(--el-color-primary);
+  /**
+   * @desc 菜单项文本颜色
+   * @type color
+   */
+  --el-menu-text-color: var(--el-text-color-primary);
+  /**
+   * @desc 菜单项悬停文本颜色
+   * @type color
+   */
+  --el-menu-hover-text-color: var(--el-color-primary);
+  /**
+   * @desc 菜单背景颜色
+   * @type color
+   */
+  --el-menu-bg-color: var(--el-fill-color-blank);
+  /**
+   * @desc 菜单项悬停背景颜色
+   * @type color
+   */
+  --el-menu-hover-bg-color: var(--el-color-primary-light-9);
+  /**
+   * @desc 菜单项高度
+   * @type input
+   */
+  --el-menu-item-height: 56px;
+  /**
+   * @desc 子菜单项高度
+   * @type input
+   */
+  --el-menu-sub-item-height: calc(var(--el-menu-item-height) - 6px);
+  /**
+   * @desc 水平菜单项高度
+   * @type input
+   */
+  --el-menu-horizontal-height: 60px;
+  /**
+   * @desc 水平子菜单项高度
+   * @type input
+   */
+  --el-menu-horizontal-sub-item-height: 36px;
+  /**
+   * @desc 菜单项字体大小
+   * @type input
+   */
+  --el-menu-item-font-size: var(--el-font-size-base);
+  /**
+   * @desc 菜单项悬停背景颜色
+   * @type input
+   */
+  --el-menu-item-hover-fill: var(--el-color-primary-light-9);
+  /**
+   * @desc 菜单边框颜色
+   * @type color
+   */
+  --el-menu-border-color: var(--el-border-color);
+  /**
+   * @desc 菜单基础层级间距
+   * @type input
+   */
+  --el-menu-base-level-padding: 20px;
+  /**
+   * @desc 菜单层级间距
+   * @type input
+   */
+  --el-menu-level-padding: 20px;
+  /**
+   * @desc 菜单项图标宽度
+   * @type input
+   */
+  --el-menu-icon-width: 24px;
+}

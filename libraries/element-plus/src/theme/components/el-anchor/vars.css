@@ -1,0 +1,40 @@
+/**
+ * @component el-anchor
+ */
+.el-anchor {
+  /**
+   * @desc 锚点背景颜色
+   * @type color
+   */
+  --el-anchor-bg-color: var(--el-bg-color);
+  /**
+   * @desc 锚点内边距
+   * @type input
+   */
+  --el-anchor-padding-indent: 14px;
+  /**
+   * @desc 锚点行高
+   * @type input
+   */
+  --el-anchor-line-height: 22px;
+  /**
+   * @desc 锚点字体大小
+   * @type input
+   */
+  --el-anchor-font-size: 12px;
+  /**
+   * @desc 锚点文本颜色
+   * @type color
+   */
+  --el-anchor-color: var(--el-text-color-secondary);
+  /**
+   * @desc 锚点激活颜色
+   * @type color
+   */
+  --el-anchor-active-color: var(--el-color-primary);
+  /**
+   * @desc 锚点激活颜色
+   * @type color
+   */
+  --el-anchor-marker-bg-color: var(--el-color-primary);
+}

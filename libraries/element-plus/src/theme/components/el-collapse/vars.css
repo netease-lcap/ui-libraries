@@ -1,0 +1,45 @@
+/**
+ * @component el-collapse
+ */
+.el-collapse {
+  /**
+   * @desc 折叠面板边框颜色
+   * @type color
+   */
+  --el-collapse-border-color: var(--el-border-color-lighter);
+  /**
+   * @desc 折叠面板高度
+   * @type input
+   */
+  --el-collapse-header-height: 48px;
+  /**
+   * @desc 折叠面板标题背景颜色
+   * @type color
+   */
+  --el-collapse-header-bg-color: var(--el-fill-color-blank);
+  /**
+   * @desc 折叠面板标题文本颜色
+   * @type color
+   */
+  --el-collapse-header-text-color: var(--el-text-color-primary);
+  /**
+   * @desc 折叠面板标题字体大小
+   * @type input
+   */
+  --el-collapse-header-font-size: 13px;
+  /**
+   * @desc 折叠面板内容背景颜色
+   * @type color
+   */
+  --el-collapse-content-bg-color: var(--el-fill-color-blank);
+  /**
+   * @desc 折叠面板内容字体大小
+   * @type input
+   */
+  --el-collapse-content-font-size: 13px;
+  /**
+   * @desc 折叠面板内容文本颜色
+   * @type color
+   */
+  --el-collapse-content-text-color: var(--el-text-color-primary);
+}
