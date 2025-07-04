@@ -909,9 +909,30 @@ importers:
 
   libraries/vant:
     dependencies:
+      '@lcap/validator':
+        specifier: workspace:*
+        version: link:../../packages/validator
+      '@vue/shared':
+        specifier: ^3.5.13
+        version: 3.5.13
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
+      immutable:
+        specifier: 5.0.0-beta.4
+        version: 5.0.0-beta.4
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      normalize.css:
+        specifier: ^7.0.0
+        version: 7.0.0
+      vue-hooks-plus:
+        specifier: ^2.2.1
+        version: 2.2.1(vue@3.5.13(typescript@5.6.3))
+      zustand:
+        specifier: ^5.0.3
+        version: 5.0.3(@types/react@18.2.45)(react@18.2.0)(use-sync-external-store@1.2.0(react@18.2.0))
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^3.2.2
@@ -1011,7 +1032,7 @@ importers:
         version: 7.23.3(@babel/core@7.23.6)
       '@babel/traverse':
         specifier: ^7.23.7
-        version: 7.23.7(supports-color@5.5.0)
+        version: 7.23.7
       '@babel/types':
         specifier: ^7.22.10
         version: 7.23.6
@@ -1260,7 +1281,7 @@ importers:
         version: 0.16.0(ejs@3.1.9)(handlebars@4.7.8)(lodash@4.17.21)(pug@3.0.2)
       debug:
         specifier: ^4.3.4
-        version: 4.3.4(supports-color@5.5.0)
+        version: 4.3.4(supports-color@9.4.0)
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
@@ -11876,8 +11897,8 @@ packages:
   vue-component-type-helpers@2.1.10:
     resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==, tarball: https://registry.npmmirror.com/vue-component-type-helpers/-/vue-component-type-helpers-2.1.10.tgz}
 
-  vue-component-type-helpers@2.2.10:
-    resolution: {integrity: sha512-iDUO7uQK+Sab2tYuiP9D1oLujCWlhHELHMgV/cB13cuGbG4qwkLHvtfWb6FzvxrIOPDnU0oHsz2MlQjhYDeaHA==, tarball: https://registry.npmmirror.com/vue-component-type-helpers/-/vue-component-type-helpers-2.2.10.tgz}
+  vue-component-type-helpers@3.0.1:
+    resolution: {integrity: sha512-j23mCB5iEbGsyIhnVdXdWUOg+UdwmVxpKnYYf2j+4ppCt5VSFXKjwu9YFt0QYxUaf5G99PuHsVfRScjHCRSsGQ==, tarball: https://registry.npmmirror.com/vue-component-type-helpers/-/vue-component-type-helpers-3.0.1.tgz}
 
   vue-cropper@0.5.11:
     resolution: {integrity: sha512-UeA3qL2BLCTGkOEAxEsxSNFO+qLYAn6YRHv4oS32cP9lMhF1vFmnAf/z+ZamtR0/Fh3sbZeZUCLVR2Ol2/dpTQ==, tarball: https://registry.npmmirror.com/vue-cropper/-/vue-cropper-0.5.11.tgz}
@@ -12718,10 +12739,10 @@ snapshots:
       '@babel/helpers': 7.23.6
       '@babel/parser': 7.23.6
       '@babel/template': 7.22.15
-      '@babel/traverse': 7.23.7(supports-color@5.5.0)
+      '@babel/traverse': 7.23.7
       '@babel/types': 7.23.6
       convert-source-map: 2.0.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -13006,7 +13027,7 @@ snapshots:
   '@babel/helpers@7.23.6':
     dependencies:
       '@babel/template': 7.22.15
-      '@babel/traverse': 7.23.7(supports-color@5.5.0)
+      '@babel/traverse': 7.23.7
       '@babel/types': 7.23.6
     transitivePeerDependencies:
       - supports-color
@@ -13730,6 +13751,21 @@ snapshots:
       '@babel/code-frame': 7.26.2
       '@babel/parser': 7.26.9
       '@babel/types': 7.26.9
+
+  '@babel/traverse@7.23.7':
+    dependencies:
+      '@babel/code-frame': 7.23.5
+      '@babel/generator': 7.23.6
+      '@babel/helper-environment-visitor': 7.22.20
+      '@babel/helper-function-name': 7.23.0
+      '@babel/helper-hoist-variables': 7.22.5
+      '@babel/helper-split-export-declaration': 7.22.6
+      '@babel/parser': 7.23.6
+      '@babel/types': 7.23.6
+      debug: 4.3.4(supports-color@9.4.0)
+      globals: 11.12.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@babel/traverse@7.23.7(supports-color@5.5.0)':
     dependencies:
@@ -16079,7 +16115,7 @@ snapshots:
     dependencies:
       '@babel/generator': 7.23.6
       '@babel/parser': 7.23.6
-      '@babel/traverse': 7.23.7(supports-color@5.5.0)
+      '@babel/traverse': 7.23.7
       '@babel/types': 7.23.6
       '@storybook/csf': 0.1.2
       '@storybook/types': 7.6.17
@@ -16350,7 +16386,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.13(typescript@5.6.3)
-      vue-component-type-helpers: 2.2.10
+      vue-component-type-helpers: 3.0.1
 
   '@storybook/vue@7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)':
     dependencies:
@@ -16992,7 +17028,7 @@ snapshots:
       '@typescript-eslint/type-utils': 6.15.0(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/utils': 6.15.0(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/visitor-keys': 6.15.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       eslint: 8.56.0
       graphemer: 1.4.0
       ignore: 5.3.0
@@ -17022,7 +17058,7 @@ snapshots:
       '@typescript-eslint/types': 6.15.0
       '@typescript-eslint/typescript-estree': 6.15.0(typescript@5.3.3)
       '@typescript-eslint/visitor-keys': 6.15.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       eslint: 8.56.0
     optionalDependencies:
       typescript: 5.3.3
@@ -17055,7 +17091,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 6.15.0(typescript@5.3.3)
       '@typescript-eslint/utils': 6.15.0(eslint@8.56.0)(typescript@5.3.3)
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       eslint: 8.56.0
       ts-api-utils: 1.0.3(typescript@5.3.3)
     optionalDependencies:
@@ -17194,7 +17230,7 @@ snapshots:
     dependencies:
       '@ampproject/remapping': 2.2.1
       '@bcoe/v8-coverage': 0.2.3
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       istanbul-lib-coverage: 3.2.2
       istanbul-lib-report: 3.0.1
       istanbul-lib-source-maps: 4.0.1
@@ -19936,7 +19972,7 @@ snapshots:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.3
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.2.2
@@ -21317,7 +21353,7 @@ snapshots:
     dependencies:
       chalk: 5.3.0
       commander: 11.1.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       execa: 8.0.1
       lilconfig: 3.0.0
       listr2: 8.0.0
@@ -22939,7 +22975,7 @@ snapshots:
   react-docgen@7.0.1:
     dependencies:
       '@babel/core': 7.23.6
-      '@babel/traverse': 7.23.7(supports-color@5.5.0)
+      '@babel/traverse': 7.23.7
       '@babel/types': 7.23.6
       '@types/babel__core': 7.20.5
       '@types/babel__traverse': 7.20.5
@@ -24129,7 +24165,7 @@ snapshots:
       bundle-require: 4.2.1(esbuild@0.21.5)
       cac: 6.7.14
       chokidar: 3.5.3
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       esbuild: 0.21.5
       execa: 5.1.1
       globby: 11.1.0
@@ -24503,7 +24539,7 @@ snapshots:
       acorn-walk: 8.3.1
       cac: 6.7.14
       chai: 4.3.10
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4(supports-color@9.4.0)
       execa: 8.0.1
       local-pkg: 0.5.0
       magic-string: 0.30.5
@@ -24548,7 +24584,7 @@ snapshots:
 
   vue-component-type-helpers@2.1.10: {}
 
-  vue-component-type-helpers@2.2.10: {}
+  vue-component-type-helpers@3.0.1: {}
 
   vue-cropper@0.5.11: {}
 

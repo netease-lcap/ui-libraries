@@ -58,10 +58,7 @@ export const Example2 = {
     setup() {
       const activeName = ref('first');
       const name = ref('myName');
-      const list = ref([
-        { value: 1, label: '1' },
-
-      ]);
+      const list = ref([{ value: 1, label: '1' }]);
       setTimeout(() => {
         list.value = [
           { value: 2, label: '2' },
@@ -93,15 +90,14 @@ export const Example2 = {
         });
       });
       setTimeout(() => {
-        
-      listFn.value = () => {
-        console.log('listFn2');
-        return new Promise((res) => {
-          setTimeout(() => {
-            res(list.value);
-          }, 1000);
-        });
-      };
+        listFn.value = () => {
+          console.log('listFn2');
+          return new Promise((res) => {
+            setTimeout(() => {
+              res(list.value);
+            }, 1000);
+          });
+        };
       }, 3000);
       const select = ref('');
 
@@ -138,7 +134,7 @@ export const Example2 = {
     <el-table-column prop="value" label="value" />
     <el-table-column prop="label" label="label" />
     </el-table>
-    <el-select class="my-select" append-to=".my-select"  ref="select" v-model="activeName"  clearable :dataSource="listFn" multiple >
+    <el-select class="my-select"   ref="select" v-model="activeName"  clearable :dataSource="listFn" multiple >
 
     </el-select>
     {{ activeName }}

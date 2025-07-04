@@ -99,10 +99,10 @@ export const handleRouter = (props) => {
   const route = props.get('route');
   const [active, setActive] = useControllableValue(props, {
     defaultValuePropName: 'defaultActive',
-    defaultValue: route.path,
+    defaultValue: route?.path,
   });
-  router.afterEach((to) => setActive(to.path));
-  useEffect(() => setActive(route.path), [route.path]);
+  router?.afterEach((to) => setActive(to.path));
+  useEffect(() => setActive(route?.path), [route?.path]);
   return {
     defaultActive: active,
   };

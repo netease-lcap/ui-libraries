@@ -67,6 +67,13 @@
     "vue-router": "^3.3.4"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "@lcap/validator": "workspace:*",
+    "@vue/shared": "^3.5.13",
+    "dayjs": "^1.11.13",
+    "immutable": "5.0.0-beta.4",
+    "lodash": "^4.17.21",
+    "normalize.css": "^7.0.0",
+    "vue-hooks-plus": "^2.2.1",
+    "zustand": "^5.0.3"
   }
 }
