@@ -413,3 +413,7 @@
 .el-button--small {
   --el-button-size: var(--el-button-small-size);
 }
+
+body {
+  background-color: var(--el-bg-color-page);
+}
