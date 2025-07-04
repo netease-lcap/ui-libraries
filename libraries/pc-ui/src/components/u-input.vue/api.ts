@@ -170,6 +170,18 @@ namespace nasl.ui {
         })
         clearable: nasl.core.Boolean;
 
+
+        @Prop<UInputOptions, 'clearIcon'>({
+            group: '交互属性',
+            title: '清除图标',
+            description: '设置清除图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: (_) => _.clearable,
+        })
+        clearIcon: nasl.core.String;
+
         @Prop({
             group: '状态属性',
             title: '显示状态',
@@ -180,6 +192,28 @@ namespace nasl.ui {
             },
         })
         password: nasl.core.Boolean = false;
+
+        @Prop<UInputOptions, 'visibleIcon'>({
+            group: '交互属性',
+            title: '显示图标',
+            description: '设置显示图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: (_) => _.password,
+        })
+        visibleIcon: nasl.core.String;
+
+        @Prop<UInputOptions, 'invisibleIcon'>({
+            group: '交互属性',
+            title: '隐藏图标',
+            description: '设置隐藏图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: (_) => _.password,
+        })
+        invisibleIcon: nasl.core.String;
 
         @Prop({
             group: '状态属性',
