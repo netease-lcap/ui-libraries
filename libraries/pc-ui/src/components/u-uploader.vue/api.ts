@@ -477,6 +477,54 @@ namespace nasl.ui {
         })
         lcapIsCompress: nasl.core.Boolean;
 
+        @Prop<UUploaderOptions, 'previewIcon'>({
+            group: '主要属性',
+            title: '预览图标',
+            description: '预览图标',
+            docDescription: '预览图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.listType === 'card',
+        })
+        previewIcon: nasl.core.String;
+
+
+        @Prop<UUploaderOptions, 'addIcon'>({
+            group: '主要属性',
+            title: '添加图标',
+            description: '添加图标',
+            docDescription: '添加图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.listType === 'card',
+        })
+        addIcon: nasl.core.String = 'add';
+
+        @Prop<UUploaderOptions, 'uploadIcon'>({
+            group: '主要属性',
+            title: '上传图标',
+            description: '上传图标',
+            docDescription: '上传图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.draggable === true,
+        })
+        uploadIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '删除图标',
+            description: '删除图标',
+            docDescription: '删除图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        removeIcon: nasl.core.String = 'remove';
+
         @Prop({
             group: '交互属性',
             title: '可拖拽',

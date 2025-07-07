@@ -10,7 +10,7 @@
 export default {
     data() {
         return {
-            files: 'https://static-vusion.163yun.com/assets/breakfast.png,https://static-vusion.163yun.com/assets/salad.png',
+            files: 'https://static-vusion.nos.lcap.163yun.com/assets/breakfast.png,https://static-vusion.nos.lcap.163yun.com/assets/salad.png',
         };
     },
 };

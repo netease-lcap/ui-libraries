@@ -1454,6 +1454,7 @@
     --uploader-draggable-border-color-hover: var(--brand-primary); /* @type color */ /* @desc 拖拽上传文件窗口边框颜色（hover状态）,如 #223325 */ /* @depAttrs { "draggable": [true] } */
     --uploader-draggable-border-radius: var(--border-radius-large); /* @desc 拖拽上传文件窗口圆角大小,如 1px */ /* @depAttrs { "draggable": [true] } */
     --uploader-draggable-padding: 12px 0 20px; /* @desc 拖拽上传文件窗口内边距大小,如 1px */ /* @depAttrs { "draggable": [true] } */
+    --uploader-draggable-icon-size: 24px; /* @desc 拖拽上传文件窗口图标大小,如 1px */ /* @depAttrs { "draggable": [true] } */
 
     --uploader-list-image-margin-top: 6px; /* @hidden */
     --uploader-draggable-color: #666; /* @hidden */
