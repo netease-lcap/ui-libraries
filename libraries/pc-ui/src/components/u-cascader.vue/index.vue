@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.root" :clearable="clearable && !!currentValue" :opened="currentOpened"
+    <div :class="[$style.root, {[$style.useIcon]: !!suffixIcon}]" :clearable="clearable && !!currentValue" :opened="currentOpened"
         @keydown.up.prevent="$refs.popper.currentOpened ? shift(-1) : open()"
         @keydown.down.prevent="$refs.popper.currentOpened ? shift(+1) : open()"
         @keydown.left.prevent="horizontalShift(-1)"
@@ -16,6 +16,7 @@
             @focus="focus" @blur="blur"
             @input="onInput"
             @clear="clear"
+            :prefix="prefixIcon"
             :color="formItemVM && formItemVM.color"
             :autofocus="autofocus"
             ref="input">
@@ -35,6 +36,8 @@
                         :is-input="isInput"
                         :lazy="lazy"
                         :opened="currentOpened"
+                        :expand-icon="menuExpandIcon"
+                        :loading-icon="loadingIcon"
                         :field="field"
                         :data="item"
                         :change-on-select="changeOnSelect"
@@ -44,7 +47,10 @@
                 </template>
             </m-popper>
         </u-input>
-        <span v-show="clearable && currentValue && !disabled && !readonly && !isPreview" :class="$style.clearable" @click="clear" @mousedown.prevent></span>
+        <span v-show="clearable && currentValue && !disabled && !readonly && !isPreview" :class="[$style.clearable, {[$style.useIcon]: !!clearIcon}]" @click="clear" @mousedown.prevent>
+          <i-ico :name="clearIcon" v-if="clearIcon" notext :class="$style.icon"></i-ico>
+        </span>
+        <i-ico :name="suffixIcon" notext :class="$style.icon" v-if="suffixIcon"></i-ico>
     </div>
 </template>
 
@@ -117,6 +123,22 @@ export default {
         },
 
         filterHightlighterColor: {
+            type: String,
+        },
+        clearIcon: {
+            type: String,
+            default: 'close',
+        },
+        menuExpandIcon: {
+            type: String,
+        },
+        prefixIcon: {
+            type: String,
+        },
+        suffixIcon: {
+            type: String,
+        },
+        loadingIcon: {
             type: String,
         },
     },
