@@ -1789,6 +1789,7 @@
     --modal-dialog-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3); /* @desc 弹窗阴影效果,如 1px */
     --modal-title-font-size: var(--font-size-large); /* @desc 弹窗标题的字号,如 1px */
     --modal-close-right: 24px; /* @desc  弹窗关闭按钮的右边距,如 1px */
+    --modal-close-icon-size: 12px; /* @desc 弹窗关闭按钮的图标大小,如 1px */
     --modal-close-color: var(--gray-dark);  /* @type color */ /* @desc 弹窗关闭按钮的颜色,如 #223325 */
     --modal-close-color-hover: var(--gray-darker);  /* @type color */ /* @desc 弹窗关闭按钮的颜色（hover状态）,如 #223325 */
     --modal-body-margin: 25px 24px; /* @desc 弹窗内容区的外间距,如 1px */
