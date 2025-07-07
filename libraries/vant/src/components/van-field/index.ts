@@ -1,5 +1,6 @@
 import { Field as VantField } from 'vant';
 import _ from 'lodash';
+import { defineComponent } from 'vue';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins';
 import './index.css';

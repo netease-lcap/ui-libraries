@@ -343,16 +343,5 @@ namespace nasl.ui {
     })
     slotButton: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '右侧图标',
-      description: '自定义右侧图标',
-    })
-    slotRightIcon: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '左侧图标',
-      description: '自定义左侧图标',
-    })
-    slotLeftIcon: () => Array<ViewComponent>;
   }
 } 

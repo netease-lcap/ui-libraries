@@ -1,5 +1,5 @@
 import _ from 'lodash';
-// import dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 // export * from './dom';
 
@@ -13,15 +13,21 @@ const attempt = _.wrap(selfAttempt, (fn, ...arg: [any, any]) => {
     return arg[0].map((item) => fn(item, ...arg.slice(1)));
   }
   const result = fn(...arg);
-  if (_.isError(result) && process.env.VUE_IS_DEVTOOLS) {
-    console.error(result);
+  if (_.isError(result)) {
+    console.error('components error', result);
   }
   return result;
 });
+const mergeRef = (ref) => {
+  return (componentRef) => {
+    Object.assign(ref, componentRef);
+    return componentRef;
+  };
+};
 
-// function isValidTime(time) {
-//   return !_.isNil(time) && dayjs(time).isValid();
-// }
+function isValidTime(time) {
+  return !_.isNil(time) && dayjs(time).isValid();
+}
 
 function isValidLink(link: string) {
   const pattern = /^(http(s)?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/;
@@ -42,7 +48,8 @@ _.mixin({
   attempt,
   isValidLink,
   stringToAscii,
-  // isValidTime,
+  isValidTime,
+  mergeRef,
 });
 // _.mixin
 declare module 'lodash' {
@@ -51,7 +58,8 @@ declare module 'lodash' {
     attempt: typeof _.attempt;
     isValidLink: typeof isValidLink;
     stringToAscii: typeof stringToAscii;
-    // isValidTime: typeof isValidTime;
+    isValidTime: typeof isValidTime;
+    mergeRef: typeof mergeRef;
   }
 }
 

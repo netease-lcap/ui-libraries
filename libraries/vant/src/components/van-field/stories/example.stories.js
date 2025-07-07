@@ -1,9 +1,9 @@
-import VanField from '../index';
+import Component from '../index';
 
 export default {
   id: 'van-field-examples',
   title: '组件列表/Field 输入框/示例',
-  component: VanField,
+  component: Component,
   parameters: {
     layout: 'padded',
   },

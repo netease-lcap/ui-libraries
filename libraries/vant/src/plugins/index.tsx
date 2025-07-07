@@ -57,6 +57,7 @@ export function registerComponent<T>(Component, options) {
     props: Component.props,
 
     setup(props, { attrs, slots, emit, expose }) {
+      console.log(props, 'props');
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
