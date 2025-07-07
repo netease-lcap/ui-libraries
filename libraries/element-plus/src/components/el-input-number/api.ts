@@ -4,6 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'element',
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -137,6 +138,14 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // valueOnClear: nasl.core.Decimal | null;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

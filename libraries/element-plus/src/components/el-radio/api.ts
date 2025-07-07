@@ -22,6 +22,7 @@ namespace nasl.ui {
           default: 'display: inline-block;',
         },
       },
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -136,6 +137,14 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     private name: nasl.core.String;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
 
     @Event({

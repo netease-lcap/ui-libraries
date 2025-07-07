@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins/basic-plugins';
 import { withFormItem } from '@/components/el-form';
+import './index.css';
 
 function ElUploadRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicPlugin, plugin) : plugin;

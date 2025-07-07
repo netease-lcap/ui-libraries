@@ -2,7 +2,7 @@ import _ from 'lodash';
 import dayjs from 'dayjs';
 import { useMemo, useControllableValue } from '@/plugins/hooks';
 import { getNaslTimeValue, getFormatTimeValue, isValidStringTime } from './utils';
-import { getPropsIcon } from '@/plugins/common/icon';
+import { getIsPreview, getRender, getFormatDateOrTime } from '@/plugins/common/preview';
 
 export * from './ide';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -16,7 +16,6 @@ type GetTimeValueParams = {
   value: string[];
 };
 
-// TODO
 const getTimeValue = _.cond([
   [_.matches({ isNilTime: true, isControlledTime: true }), _.constant([])],
   [_.matches({ isEffectiveTime: false }), _.constant([])],
@@ -45,9 +44,9 @@ export function handleRangeDateValue(props) {
   };
 
   const [value, setValue] = useControllableValue(props);
-  // TODO 修复类型
   const timeValue = useMemo(
-    () => getTimeValue({
+    () =>
+      getTimeValue({
         isEffectiveTime,
         isNilTime,
         isControlledTime,
@@ -69,6 +68,7 @@ export function handleRangeDateValue(props) {
 
 export function handleDateValue(props) {
   const isRange = props.get('isRange');
+
   const [value, setValue] = useControllableValue(props);
   const result = {
     modelValue: value ? getFormatTimeValue(value) : '',
@@ -110,11 +110,25 @@ export function handleDisabledFunction(props) {
   };
 }
 
-export function handleIcon(props) {
-  const prefixIconName = props.get('prefixIconName');
-  const clearIconName = props.get('clearIconName');
+export { handleIcon } from '@/plugins/common/icon';
+
+export function handlePreview(props) {
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const isPreview = getIsPreview(props);
+
+  const previewRender = (insProps) => {
+    const inIDE = !!props.get('data-nodepath');
+    const { format = 'HH:mm:ss', modelValue } = insProps;
+    const values = _.compact(_.castArray(modelValue));
+    const previewText = inIDE || _.isEmpty(values) ? '-' : _.map(values, (v) => getFormatDateOrTime(v, format)).join(' ~ ');
+    return <el-text text={previewText}></el-text>;
+  };
+
+  const { render, insRef } = getRender(Component, previewRender, isPreview);
+
   return {
-    prefixIcon: getPropsIcon({ name: prefixIconName }),
-    clearIcon: getPropsIcon({ name: clearIconName }),
+    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+    render,
   };
 }

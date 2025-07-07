@@ -3,6 +3,7 @@ import _ from 'lodash';
 import isNil from 'lodash/isNil';
 import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
 import { useRef } from '@/plugins/hooks';
+import { getIsPreview, getRender } from '@/plugins/common/preview';
 
 type Converter = 'json' | 'simple';
 
@@ -292,3 +293,25 @@ handlePreviewRender.order = 1;
 export * from './ide';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+
+export function handlePreview(props) {
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const isPreview = getIsPreview(props);
+
+  const previewRender = (insProps, { attrs, slots }) => {
+    const inIDE = !!props.get('data-nodepath');
+    const myClass = props.get('class', '');
+    return inIDE ? (
+      <el-text text="-"></el-text>
+    ) : (
+      <Component {...{ insProps }} {...attrs} class={`${myClass} el-upload__preview`} />
+    );
+  };
+
+  const { render, insRef } = getRender(Component, previewRender, isPreview);
+  return {
+    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+    render,
+  };
+}

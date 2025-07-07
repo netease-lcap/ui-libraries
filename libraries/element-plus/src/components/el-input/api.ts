@@ -12,6 +12,7 @@ namespace nasl.ui {
       //   expression: 'this',
       //   cssSelector: '.el-input',
       // },
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -143,6 +144,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     readonly: nasl.core.Boolean;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     // @Prop<ElInputProOptions, 'showLimitNumber'>({
     //   group: '主要属性',

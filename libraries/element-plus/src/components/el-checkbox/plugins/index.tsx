@@ -5,7 +5,9 @@ import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
 import { useMemo, useCallback } from '@/plugins/hooks';
+import { getIsPreview, getRender, getListPreviewText } from '@/plugins/common/preview';
 
+export * from './ide';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
 
@@ -64,5 +66,26 @@ export function handleItemType(props) {
   const defaultRender = useCallback(() => condToDefaultRender(type), [type, slots.default]);
   return {
     slots: _.assign(slots, { default: defaultRender }),
+  };
+}
+
+export function handlePreview(props) {
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const isPreview = getIsPreview(props);
+
+  const previewRender = (insProps) => {
+    const inIDE = !!props.get('data-nodepath');
+    const textField = props.get('textField', 'label');
+    const valueField = props.get('valueField', 'value');
+    const value = getListPreviewText(textField, valueField, insProps.data, insProps.modelValue);
+    const previewText = inIDE ? '-' : value;
+    return <el-preview text={previewText}></el-preview>;
+  };
+
+  const { render, insRef } = getRender(Component, previewRender, isPreview);
+  return {
+    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+    render,
   };
 }
