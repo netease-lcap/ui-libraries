@@ -108,6 +108,8 @@ export default {
         renderOptimize: { type: Boolean, default: false },
         showEmpty: { type: Boolean, default: true },
         hiddenMask: { type: Boolean, default: false },
+        loadingIcon: { type: String, default: 'loading' },
+        expandIcon: { type: String },
     },
     data() {
         return {

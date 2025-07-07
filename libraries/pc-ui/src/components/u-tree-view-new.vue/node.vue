@@ -17,15 +17,17 @@
         @dragleave="onDragLeave($event)"
         @dragend="onDragEnd($event)"
         @drop="onDrop($event)">
-        <u-loading v-if="loading" :class="$style.loading" size="small"></u-loading>
-        <div :class="$style.expander"
+        <u-loading v-if="loading" :icon="rootVM.loadingIcon" :class="$style.loading" size="small"></u-loading>
+        <div :class="[$style.expander, { [$style.useIcon]: !!rootVM.expandIcon }]"
             ref="clickExpander"
             v-else-if="hasChildren || nodeVMs.length || (node && !$at(node, rootVM.isLeafField) && rootVM.currentDataSource && rootVM.currentDataSource.load && !rootVM.parentField)"
             :expand-trigger="rootVM.expandTrigger" :expanded="currentExpanded"
             @click="rootVM.expandTrigger === 'click-expander' && ($event.stopPropagation(), toggle())"
             :check-controlled="rootVM.checkControlled"
             :style="{ width : expanderWidth? expanderWidth + 'px':'' }"
-            :dragover="expanderDragover"></div>
+            :dragover="expanderDragover">
+            <i-ico :name="rootVM.expandIcon" notext :class="$style.icon" v-if="rootVM.expandIcon"></i-ico>
+        </div>
         <div :class="$style.text" :style="{ marginLeft : expanderWidth? expanderWidth + 'px':'' }" :draggable="draggable || rootVM.draggable">
             <u-checkbox v-if="rootVM.checkable" :value="currentChecked" :disabled="currentDisabled" :readonly="currentReadOnly" @check="check($event.value)" @click.native.stop></u-checkbox>
             <span vusion-slot-name="item">
@@ -718,6 +720,14 @@ content: "\e679";
 
 .expander[dragover] {
     color: var(--tree-view-node-expander-color-hover);
+}
+
+.expander.useIcon::before {
+  content: none;
+}
+
+.expander.useIcon > .icon {
+  font-size: inherit;
 }
 
 .loading {
