@@ -9,4 +9,5 @@ function ElTextRegister(BaseComponent, plugin = {}, extend = true) {
 
 const ElText = Text;
 export { ElTextRegister, ElText };
+export { default as ElPreview } from './el-preview.vue';
 export default ElText;

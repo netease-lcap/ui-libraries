@@ -1,7 +1,7 @@
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 export { ElFlex } from './el-flex';
-export { ElText } from './el-text';
+export { ElText, ElPreview } from './el-text';
 export { ElTabs, ElTabPane, ElTabsRegister, ElTabsPlus } from './el-tabs';
 export { ElInputPlus, ElInput, ElFormInput, ElInputRegister } from './el-input';
 export { ElSelect, ElOption, ElFormSelect, ElSelectRegister, ElSelectPlus } from './el-select';

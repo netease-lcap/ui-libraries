@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { getPropsIcon } from '@/plugins/common/icon';
+import { getIsPreview, getRender } from '@/plugins/common/preview';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
@@ -34,5 +35,25 @@ export function handleAppend(props) {
 
   return {
     slots: _.assign(slots, append, prepend),
+  };
+}
+
+
+export function handlePreview(props) {
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const isPreview = getIsPreview(props);
+
+  const previewRender = (insProps) => {
+    const inIDE = !!props.get('data-nodepath');
+    const previewText = inIDE || _.isEmpty(insProps.modelValue) ? '-' : insProps.modelValue;
+    return <el-preview text={previewText}></el-preview>;
+  };
+
+  const { render, insRef } = getRender(Component, previewRender, isPreview);
+
+  return {
+    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+    render,
   };
 }

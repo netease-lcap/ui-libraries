@@ -1,9 +1,10 @@
 // /* 组件功能扩展插件 */
 import _ from 'lodash';
 import dayjs from 'dayjs';
-import { useControllableValue, useMemo } from '@/plugins/hooks';
+import { useControllableValue } from '@/plugins/hooks';
+import { useMemo } from '../../../plugins/hooks';
 import { FORM_TAG_NAME } from '../constants';
-import { getPropsIcon } from '@/plugins/common/icon';
+import { getIsPreview, getRender, getFormatDateOrTime } from '@/plugins/common/preview';
 
 type GetTimeValueParams = {
   isEffectiveTime: boolean;
@@ -13,7 +14,6 @@ type GetTimeValueParams = {
   endValue: string;
   value: string[];
 };
-export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 export function handleRange(props) {
   const type = props.get('type') ?? 'date';
@@ -53,7 +53,8 @@ export function handleRangeDateValue(props) {
   };
 
   const timeValue = useMemo(
-    () => getTimeValue({
+    () =>
+      getTimeValue({
         isEffectiveTime,
         isNilTime,
         isControlledTime,
@@ -79,11 +80,15 @@ export function handleDateValue(props) {
   const result = {
     modelValue: value,
     'onUpdate:modelValue': _.wrap(setValue, (fn, time: Date | Array<Date> | null) => {
+      // const modelValue = _.isNil(time) ? undefined : new Date(time).toJSON();
+      // _.attempt(fn, modelValue);
       _.attempt(fn, time);
     }),
   };
   return isRange ? {} : result;
 }
+
+export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 export function handleTagName() {
   return {
@@ -91,11 +96,26 @@ export function handleTagName() {
   };
 }
 
-export function handleIcon(props) {
-  const prefixIconName = props.get('prefixIconName');
-  const clearIconName = props.get('clearIconName');
+export { handleIcon } from '@/plugins/common/icon';
+
+export function handlePreview(props) {
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const isPreview = getIsPreview(props);
+
+  const previewRender = (insProps) => {
+    const inIDE = !!props.get('data-nodepath');
+    const { format = 'YYYY-MM-DD', modelValue } = insProps;
+    const values = _.compact(_.castArray(modelValue));
+    const previewText =
+      inIDE || _.isEmpty(values) ? '-' : _.map(values, (v) => getFormatDateOrTime(v, format)).join(' ~ ');
+    return <el-text text={previewText}></el-text>;
+  };
+
+  const { render, insRef } = getRender(Component, previewRender, isPreview);
+
   return {
-    prefixIcon: getPropsIcon({ name: prefixIconName }),
-    clearIcon: getPropsIcon({ name: clearIconName }),
+    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+    render,
   };
 }

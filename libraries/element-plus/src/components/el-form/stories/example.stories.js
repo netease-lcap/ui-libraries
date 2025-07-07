@@ -1,6 +1,7 @@
 import { ref, watch } from 'vue';
 import Component from '../index';
 // import { ElSelect, ElOption } from '../index';
+import ExampleDemo1 from '../demos/example-demo1.vue';
 
 export default {
   id: 'el-form-examples',
@@ -214,5 +215,15 @@ export const Example3 = {
       <el-input label="input2" data-nodepath="input2" v-model="inputName" :rules="rules" />
     </el-form>
     `,
+  }),
+};
+
+export const Example4 = {
+  name: '表单预览',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo1,
+    },
+    template: '<example-demo />',
   }),
 };

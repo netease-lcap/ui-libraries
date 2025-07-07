@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 6,
     ideusage: {
       idetype: 'element',
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -131,6 +132,14 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     name: nasl.core.String;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     @Event({
       title: '值变化时',

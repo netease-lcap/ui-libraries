@@ -1,0 +1,8 @@
+.el-upload__preview .el-upload,
+.el-upload__preview .el-icon--close {
+  display: none !important;
+}
+
+.el-upload__preview .el-upload-list {
+  margin: unset;
+}

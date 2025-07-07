@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 8,
     ideusage: {
       idetype: 'element',
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -182,6 +183,14 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // scoreTemplate: nasl.core.String = '{value}';
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',

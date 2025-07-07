@@ -12,6 +12,7 @@ namespace nasl.ui {
           expression: "!this.getAttribute('hasTip')?.value",
         }
       ],
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -316,6 +317,14 @@ namespace nasl.ui {
       if: (_) => _.autoUpload !== true
     })
     showUploadButton: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     @Event({
       title: '文件上传成功时',
