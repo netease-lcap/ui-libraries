@@ -17,6 +17,7 @@
         @clear="clearValue"
         :prefix="preIcon?preIcon:undefined"
         :suffix="suffixIcon?suffixIcon:undefined"
+        :clear-icon="clearIcon?clearIcon:undefined"
         :pre-icon="preIcon"
         :suffix-icon="suffixIcon"
         :color="formItemVM && formItemVM.color">
@@ -139,6 +140,9 @@ export default {
         suffixIcon: {
             type: String,
             default: '',
+        },
+        clearIcon: {
+            type: String,
         },
         clearable: { type: Boolean, default: true },
         preview: { type: Boolean, default: false },
