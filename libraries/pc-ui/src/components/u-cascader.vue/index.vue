@@ -50,7 +50,7 @@
         <span v-show="clearable && currentValue && !disabled && !readonly && !isPreview" :class="[$style.clearable, {[$style.useIcon]: !!clearIcon}]" @click="clear" @mousedown.prevent>
           <i-ico :name="clearIcon" v-if="clearIcon" notext :class="$style.icon"></i-ico>
         </span>
-        <i-ico :name="suffixIcon" notext :class="$style.icon" v-if="suffixIcon"></i-ico>
+        <i-ico :name="suffixIcon" notext :class="$style.icon" v-if="suffixIcon && !isPreview"></i-ico>
     </div>
 </template>
 

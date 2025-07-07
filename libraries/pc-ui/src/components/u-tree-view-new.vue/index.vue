@@ -1,6 +1,6 @@
 <template>
 <div :class="$style.root" :readonly="readonly" :readonly-mode="readonlyMode" :disabled="disabled">
-    <u-loading v-if="loading" size="small"></u-loading>
+    <u-loading v-if="loading" size="small" :icon="loadingIcon"></u-loading>
     <template v-else-if="currentDataSource">
         <u-tree-view-node-new
             :renderOptimize="renderOptimize"
