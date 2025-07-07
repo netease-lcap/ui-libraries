@@ -101,7 +101,7 @@ export default {
             type: String,
         },
         autoselect: { type: Boolean, default: false },
-        clearIcon: { type: String, default: 'close' },
+        clearIcon: { type: String },
         visibleIcon: { type: String },
         invisibleIcon: { type: String },
     },
