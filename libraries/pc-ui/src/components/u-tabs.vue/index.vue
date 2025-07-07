@@ -10,7 +10,9 @@
                     && !!$attrs['vusion-node-path']"></s-empty>
             </span>
             <nav :class="$style.nav" :scrollable="showScrollButtons === 'always' || (showScrollButtons === 'auto' && scrollable)">
-                <span :class="$style.prev" @click="scrollPrev" :vusion-click-enabled="$env.VUE_APP_DESIGNER"></span>
+                <span :class="[$style.prev, {[$style.useIcon]: !!prevIcon}]" @click="scrollPrev" :vusion-click-enabled="$env.VUE_APP_DESIGNER">
+                  <i-ico :name="prevIcon" v-if="prevIcon" notext :class="$style.icon"></i-ico>
+                </span>
                 <div ref="scrollView" :class="$style['scroll-view']">
                     <div :class="$style.scroll">
                         <template v-if="dataSource !== undefined">
@@ -33,7 +35,9 @@
                                             && !($scopedSlots.title && $scopedSlots.title(itemVM))
                                             && !!$attrs['vusion-node-path']">
                                     </s-empty>
-                                    <span v-if="closable || $at(itemVM, closableField)" :class="$style.close" @click.stop="close(itemVM)"></span>
+                                    <span v-if="closable || $at(itemVM, closableField)" :class="[$style.close, {[$style.useIcon]: !!closeIcon}]" @click.stop="close(itemVM)">
+                                      <i-ico :name="closeIcon" v-if="closeIcon" notext :class="$style.icon"></i-ico>
+                                    </span>
                                 </span>
                                 </a>
                             </template>
@@ -69,14 +73,18 @@
                                                 v-if="$env.VUE_APP_DESIGNER && !itemVM.$slots.title && !itemVM.title && !!$attrs['vusion-node-path']">
                                             </s-empty>
                                         </f-slot>
-                                        <span v-if="closable || itemVM.closable" :class="$style.close" @click.stop="close(itemVM)"></span>
+                                        <span v-if="closable || itemVM.closable" :class="[$style.close, {[$style.useIcon]: !!closeIcon}]" @click.stop="close(itemVM)">
+                                          <i-ico :name="closeIcon" v-if="closeIcon" notext :class="$style.icon"></i-ico>
+                                        </span>
                                     </span>
                                 </a>
                             </template>
                         </template>
                     </div>
                 </div>
-                <span :class="$style.next" @click="scrollNext" :vusion-click-enabled="$env.VUE_APP_DESIGNER"></span>
+                <span :class="[$style.next, {[$style.useIcon]: !!nextIcon}]" @click="scrollNext" :vusion-click-enabled="$env.VUE_APP_DESIGNER">
+                  <i-ico :name="nextIcon" v-if="nextIcon" notext :class="$style.icon"></i-ico>
+                </span>
             </nav>
         </div>
         <div :class="$style.body" :fullContainer="fullContainer">
@@ -157,6 +165,9 @@ export default {
         closableField: { type: String, default: 'closable' },
         fullContainer:{ type: Boolean, default: false },
         uniqValue:{ type: Boolean, default: false },
+        closeIcon: { type: String },
+        prevIcon: { type: String },
+        nextIcon: { type: String },
     },
     data() {
         return {

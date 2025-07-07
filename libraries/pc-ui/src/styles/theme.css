@@ -1507,6 +1507,7 @@
     --tabs-item-close-margin-left: var(--space-small); /* @desc tab项关闭按钮左侧间距,如 1px */ /* @prefix tabs */
     --tabs-item-close-color: var(--color-light); /* @type color */ /* @desc tab项关闭按钮颜色,如 #223325 */ /* @prefix tabs */
     --tabs-item-close-hover-color: var(--color-base); /* @type color */ /* @desc tab项关闭按钮悬停颜色,如 #223325 */ /* @prefix tabs */
+    --tabs-control-icon-size: 16px; /* @desc tab项控制按钮图标大小,如 1px */ /* @prefix tabs */
 
     --tabs-item-background-disabled: transparent; /* @hidden */
     --tabs-item-height-small: 30px; /* @hidden */
