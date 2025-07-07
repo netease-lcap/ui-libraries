@@ -1,0 +1,21 @@
+.van-field {
+  --van-field-label-width: 6.2em;
+  --van-field-label-color: #323233;
+  --van-field-label-margin-right: 12px;
+  --van-field-input-text-color: #323233;
+  --van-field-input-error-text-color: #ee0a24;
+  --van-field-input-disabled-text-color: #c8c9cc;
+  --van-field-placeholder-text-color: #969799;
+  --van-field-icon-size: 16px;
+  --van-field-clear-icon-size: 16px;
+  --van-field-clear-icon-color: #c8c9cc;
+  --van-field-right-icon-color: #969799;
+  --van-field-error-message-color: #ee0a24;
+  --van-field-error-message-font-size: 12px;
+  --van-field-text-area-min-height: 60px;
+  --van-field-word-limit-color: #969799;
+  --van-field-word-limit-font-size: 12px;
+  --van-field-word-limit-line-height: 16px;
+  --van-field-disabled-text-color: #c8c9cc;
+  --van-field-required-mark-color: #ee0a24;
+} 

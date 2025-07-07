@@ -1,0 +1,15 @@
+.van-picker {
+  --van-picker-background-color: #fff;
+  --van-picker-toolbar-height: 44px;
+  --van-picker-title-font-size: 16px;
+  --van-picker-title-line-height: 20px;
+  --van-picker-action-padding: 0 16px;
+  --van-picker-action-font-size: 14px;
+  --van-picker-confirm-action-color: #1989fa;
+  --van-picker-cancel-action-color: #646566;
+  --van-picker-option-font-size: 14px;
+  --van-picker-option-text-color: #323233;
+  --van-picker-option-disabled-opacity: 0.3;
+  --van-picker-loading-icon-color: #1989fa;
+  --van-picker-loading-mask-color: rgba(255, 255, 255, 0.9);
+} 

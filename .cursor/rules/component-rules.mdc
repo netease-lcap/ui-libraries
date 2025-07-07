@@ -1,0 +1,19 @@
+---
+alwaysApply: true
+---
+# 组件规则
+
+## 组件vant规则
+
+- 组件命名使用驼峰命名法
+- 组件命名使用小写字母
+- libraies/vant 组件命名使用 vant- 前缀
+- libraies/vant 组件的api.ts 对齐 vant4 的api https://vant-ui.github.io/vant/#/zh-CN/
+- libraies/vant 的组件使用vant4 做组件库,使用vant4 的api 和 组件库的api 对齐
+- libraies/vant 的组件是一个中间层,开发方式和 libraies/element-plus 一致,在 index.ts中使用 registerComponent 注册组件和插件目录开发
+- libraies/vant 的组件 api.ts 如果在 libraies/element-plus 中存在相同 key 名称，那么group title description 保持一致
+- libraies/vant 的文件结构保持与 libraies/element-plus 一致
+- libraies/vant plugin 写法与 libraies/element-plus 一致
+- libraies/vant 的组件的api.ts 语法 与 libraies/element-plus 一致
+- libraies/vant 的组件如果组件名称与 libraies/element-plus 不相同,但是组件中文名称相同,那么组件的api.ts 的group title description 保持一致
+- libraies/vant 的组件也使用和 libraies/element-plus 一样的开发模式,使用registerComponent注册组件和插件目录开发

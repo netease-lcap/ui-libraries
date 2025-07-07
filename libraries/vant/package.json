@@ -59,12 +59,12 @@
     "vite": "^6.0.1",
     "vitest": "^1.1.0",
     "vue": "^3.5.13",
-    "vue-router": "^3.3.4",
+    "vue-router": "^4.5.0",
     "vue-tsc": "^2.1.10"
   },
   "peerDependencies": {
     "vue": "^3.5.0",
-    "vue-router": "^3.3.4"
+    "vue-router": "^4.5.0"
   },
   "dependencies": {
     "@lcap/validator": "workspace:*",
@@ -73,6 +73,7 @@
     "immutable": "5.0.0-beta.4",
     "lodash": "^4.17.21",
     "normalize.css": "^7.0.0",
+    "vant": "^4.9.20",
     "vue-hooks-plus": "^2.2.1",
     "zustand": "^5.0.3"
   }
