@@ -12,7 +12,7 @@ export function handleNodePath(props) {
   const nodeId = useMemo(() => _.uniqueId('Input_'), []);
   useEffect(() => {
     const node = document.querySelector(`.${nodeId}`);
-    const inputParent = node?.closest('.el-input') ?? node?.closest('.el-textarea');
+    const inputParent = node?.closest('.el-input') ?? node?.closest('.el-textarea') ?? node;
     inputParent?.setAttribute('data-nodepath', nodePath);
   }, []);
   return {

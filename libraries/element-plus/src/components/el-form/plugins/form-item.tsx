@@ -15,6 +15,7 @@ type FormItemProvide = {
     isInForm: boolean;
     setFormitem: (key: string, value: any) => void;
     deleteFormitem: (key: string) => void;
+    preview: boolean;
   };
 };
 

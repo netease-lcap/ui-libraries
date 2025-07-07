@@ -11,7 +11,7 @@ export function handleNodePath(props) {
   const isRange = props.get('isRange');
   useEffect(() => {
     const node = document.querySelector(`.${nodeId}`);
-    const inputNumberElement = node?.closest('.el-date-editor');
+    const inputNumberElement = node?.closest('.el-date-editor') ?? node;
     inputNumberElement?.setAttribute('data-nodepath', nodePath);
   }, []);
   return {

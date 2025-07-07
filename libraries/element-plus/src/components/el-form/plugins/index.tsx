@@ -9,7 +9,7 @@ export function handleModelValue(props) {
   const provide = props.get('provide');
   const ref = props.get('ref');
   const formItemList = useRef({});
-
+  const preview = props.get('preview') ?? false;
   return {
     model,
     provide: Object.assign(provide, {
@@ -25,6 +25,7 @@ export function handleModelValue(props) {
         deleteFormitem: (key) => {
           delete formItemList.value[key];
         },
+        preview,
       },
     }),
     ref: Object.assign(ref, {

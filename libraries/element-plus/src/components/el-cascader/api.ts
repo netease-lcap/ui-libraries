@@ -22,6 +22,7 @@ namespace nasl.ui {
       slotInlineStyle: {
         option: 'min-height: 0;',
       },
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -467,6 +468,14 @@ namespace nasl.ui {
     //   description: '输入框失去焦点时触发',
     // })
     // onBlur: (event: any) => any;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     @Event({
       title: '选中值变化时',
