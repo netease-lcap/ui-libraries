@@ -29,14 +29,16 @@ import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import { repeatClick, clickOutside } from '../../directives';
 import { noopFormatter, NumberFormatter } from '../../utils/Formatters';
+import UInput from '../u-input.vue';
 import UPreview from '../u-text.vue';
 import MPreview from '../u-text.vue/preview';
 const isNil = (value) => (typeof value === 'string' && value.trim() === '') || value === null || value === undefined;
 
 export default {
     name: 'u-number-input',
-    component: {
-        UPreview
+    components: {
+        UInput,
+        UPreview,
     },
     directives: { repeatClick, clickOutside },
     mixins: [

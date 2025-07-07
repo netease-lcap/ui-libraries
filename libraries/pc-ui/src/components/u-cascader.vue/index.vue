@@ -58,13 +58,14 @@
 import { sync } from '@lcap/vue2-utils';
 import UCascaderItem from './item.vue';
 import MField from '../m-field.vue';
+import UInput from '../u-input.vue';
 import MPreview from '../u-text.vue/preview';
 import SupportDataSource from '../../mixins/support.datasource';
 import treeDataSource from '../../mixins/tree.datasource';
 
 export default {
     name: 'u-cascader',
-    components: { UCascaderItem },
+    components: { UCascaderItem, UInput },
     mixins: [
       MField,
       SupportDataSource,

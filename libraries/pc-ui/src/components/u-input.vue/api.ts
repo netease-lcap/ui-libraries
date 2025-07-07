@@ -195,7 +195,7 @@ namespace nasl.ui {
 
         @Prop<UInputOptions, 'visibleIcon'>({
             group: '交互属性',
-            title: '显示图标',
+            title: '密码显示图标',
             description: '设置显示图标',
             setter: {
                 concept: 'IconSetter',
@@ -206,7 +206,7 @@ namespace nasl.ui {
 
         @Prop<UInputOptions, 'invisibleIcon'>({
             group: '交互属性',
-            title: '隐藏图标',
+            title: '密码隐藏图标',
             description: '设置隐藏图标',
             setter: {
                 concept: 'IconSetter',
