@@ -12,7 +12,7 @@
             </div>
         </slot>
     </div>
-    <u-input v-if="filterable" :class="$style.filter" :disabled="disabled" :placeholder="placeholder" :size="filterSize" prefix="search" :clearable="clearable"
+    <u-input v-if="filterable" :class="$style.filter" :disabled="disabled" :placeholder="placeholder" :size="filterSize" :prefix="searchIcon" :clearable="clearable"
         :value="filterText" @input="onInput">
     </u-input>
     <div ref="body" :class="$style.body" @scroll.stop="onScroll">
@@ -206,6 +206,7 @@ export default {
         ellipsisTitle: { type: [Boolean, String], default: false },
         selectedValuesData: Array, // 如果是分页数据，选中的值在可能在下拉框里没有，导致选中值展示不出来。这里传入该字段，用于展示选中的值
         designerMode: { type: String, default: 'success' }, // 配合IDE编辑器展示不同表格状态
+        searchIcon: { type: String, default: 'search' },
         rowStyle: { type: Function }
     },
     data() {
