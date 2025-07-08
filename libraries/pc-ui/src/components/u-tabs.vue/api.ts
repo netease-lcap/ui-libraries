@@ -135,6 +135,36 @@ namespace nasl.ui {
         })
         closableField: nasl.core.String = 'closable';
 
+        @Prop({
+            group: '主要属性',
+            title: '关闭图标',
+            description: '设置标签关闭图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        closeIcon: nasl.core.String = 'close';
+
+        @Prop({
+            group: '主要属性',
+            title: '上一页图标',
+            description: '设置标签上一页图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        prevIcon: nasl.core.String = 'left-arrow';
+
+        @Prop({
+            group: '主要属性',
+            title: '下一页图标',
+            description: '设置标签下一页图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        nextIcon: nasl.core.String = 'right-arrow';
+
         @Prop<UTabsOptions<T, V>, 'loadOnActive'>({
           group: '主要属性',
           title: '仅在显示时加载内容',
@@ -211,8 +241,6 @@ namespace nasl.ui {
             },
         })
         fullContainer: nasl.core.Boolean = false;
-
-        
 
         @Event({
             title: '点击后',

@@ -1,6 +1,6 @@
 <template>
 <div :class="$style.root" :readonly="readonly" :readonly-mode="readonlyMode" :disabled="disabled">
-    <u-loading v-if="loading" size="small"></u-loading>
+    <u-loading v-if="loading" size="small" :icon="loadingIcon"></u-loading>
     <template v-else-if="currentDataSource">
         <u-tree-view-node-new
             :renderOptimize="renderOptimize"
@@ -108,6 +108,8 @@ export default {
         renderOptimize: { type: Boolean, default: false },
         showEmpty: { type: Boolean, default: true },
         hiddenMask: { type: Boolean, default: false },
+        loadingIcon: { type: String, default: 'loading' },
+        expandIcon: { type: String },
     },
     data() {
         return {

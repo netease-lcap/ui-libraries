@@ -52,17 +52,23 @@
     overflow: hidden;
 }
 
+.clearable.useIcon,
 .clearable::before {
-    display: block;
-    position: absolute;
-    right: 8px;
-    top: 0;
-    bottom: 0;
-    z-index: 1;
-    line-height: 1;
-    height: 1em;
-    margin: auto;
-content: "\e66e";
+  display: block;
+  position: absolute;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  line-height: 1;
+  height: 1em;
+  margin: auto;
+  cursor: var(--cursor-pointer);
+  color: var(--select-icon-color);
+}
+
+.clearable::before {
+    content: "\e66e";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -73,14 +79,28 @@ content: "\e66e";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-    cursor: var(--cursor-pointer);
-    color: var(--select-icon-color);
 }
+
+.root[end] .clearable.useIcon,
 .root[end] .clearable::before {
     right: 24px;
 }
+
+.clearable.useIcon:hover,
 .clearable:hover::before {
     color: var(--select-icon-color-hover);
+}
+.clearable.useIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.clearable.useIcon svg {
+    font-size: inherit;
+}
+
+.clearable.useIcon::before {
+    content: none;
 }
 
 .root[filterable] {

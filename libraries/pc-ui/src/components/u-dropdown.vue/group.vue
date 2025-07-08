@@ -18,7 +18,8 @@
                 <s-empty v-if="!$slots.title && !title && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
             </div>
             <div>
-                <u-loading v-if="loading" size="small"></u-loading>
+                <u-loading v-if="loading" :icon="rootVM.loadingIcon" size="small"></u-loading>
+                <i-ico v-else-if="rootVM.menuExpandIcon" :class="[$style.expander, $style.menuExpandIcon]" :name="rootVM.menuExpandIcon"></i-ico>
                 <span v-else :class="$style.expander"></span>
                 <span :class="$style.extra">
                     <slot name="extra"></slot>
@@ -302,6 +303,18 @@ content: "\e661";
 /* @TODO: replace by icon-font */
 .expander[expanded]::after {
     transform: rotate(90deg);
+}
+
+.expander.menuExpandIcon {
+  font-size: var(--dropdown-expand-icon-size, 14px);
+}
+
+.expander.menuExpandIcon svg {
+  font-size: inherit;
+}
+
+.expander.menuExpandIcon::after {
+    content: none;
 }
 
 .popper {

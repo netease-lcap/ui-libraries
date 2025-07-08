@@ -1,5 +1,11 @@
 <template>
-    <div :class="[$style.root, isPreview ? $style.preview : '', isPreview && !$env.VUE_APP_DESIGNER ? $style.disEvent: '']"
+    <div
+        :class="[
+          $style.root,
+          isPreview ? $style.preview : '',
+          isPreview && !$env.VUE_APP_DESIGNER ? $style.disEvent: '',
+          { [$style.useIcon]: !!suffixIcon }
+        ]"
         :color="color || formItemVM && formItemVM.color"
         :readonly="readonly"
         :disabled="currentDisabled"
@@ -63,8 +69,9 @@
           </u-input>
         </div>
         <span v-if="clearable && (!!checkableValue || !!selectedItem)"
-            :class="$style.clearable"
+            :class="[$style.clearable, { [$style.useIcon]: !!clearIcon }]"
             @click.stop="clear">
+            <i-ico :name="clearIcon" :class="$style.icon" v-if="clearIcon"></i-ico>
         </span>
         <m-popper ref="popper"
             :class="$style.popper"
@@ -113,6 +120,8 @@
                 :caseSensitive="caseSensitive"
                 :showEmpty="showEmpty"
                 :hiddenMask="hiddenMask"
+                :loading-icon="loadingIcon"
+                :expand-icon="expandIcon"
                 @change="$emit('change', $event, this)"
                 @before-select="$emit('before-select', $event, this)"
                 @select="$emit('select', $event, this)"
@@ -130,6 +139,7 @@
                 <slot></slot>
             </u-tree-view-new>
         </m-popper>
+        <i-ico :name="suffixIcon" notext :class="$style.icon" v-if="suffixIcon && !isPreview"></i-ico>
     </div>
 </template>
 
@@ -210,6 +220,10 @@ export default {
         renderOptimize: { type: Boolean, default: false },
         showEmpty: { type: Boolean, default: true },
         hiddenMask: { type: Boolean, default: false },
+        loadingIcon: { type: String, default: 'loading' },
+        expandIcon: { type: String },
+        suffixIcon: { type: String },
+        clearIcon: { type: String },
     },
     data() {
         return {
@@ -722,6 +736,25 @@ export default {
 }
 
 .clearable::before {
+    content: "\e66e";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.clearable.useIcon::before {
+  content: none;
+}
+
+.clearable.useIcon > .icon,
+.clearable::before {
   display: block;
   opacity: 0;
   position: absolute;
@@ -732,21 +765,11 @@ export default {
   line-height: 1;
   height: 1em;
   margin: auto;
-content: "\e66e";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
   cursor: var(--cursor-pointer);
   color: #a7afbb;
 }
 
+.root[clearable]:hover .clearable.useIcon > .icon,
 .root[clearable]:hover .clearable::before {
   opacity: 1;
 }
@@ -755,19 +778,9 @@ content: "\e66e";
   cursor: text;
 }
 
+.root.useIcon > .icon,
 .root::after {
   position: absolute;
-content: "\e65d";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
   font-size: var(--tree-select-new-arrow-size);
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x));
   top: 0;
@@ -778,10 +791,37 @@ content: "\e65d";
   color: var(--tree-select-new-arrow-color);
   transition: transform var(--tree-select-new-transition-duration-base);
 }
+
+.root::after {
+    content: "\e65d";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root.useIcon::after {
+  content: none;
+}
+
+.root.useIcon > .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.root[opened].useIcon > .icon,
 .root[opened]::after {
   transform: rotate(-180deg);
 }
 
+.root[clearable].useIcon > .icon,
 .root[clearable]::after {
   display: none;
 }
@@ -882,6 +922,8 @@ content: "\e663";
 .root[size$="mini"] .item {
   padding: 0 var(--tree-select-new-padding-x-mini);
 }
+
+.root[size$="mini"].useIcon > .icon,
 .root[size$="mini"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-mini));
 }
@@ -908,6 +950,8 @@ content: "\e663";
 .root[size$="small"] .item {
   padding: 0 var(--tree-select-new-padding-x-small);
 }
+
+.root[size$="small"].useIcon > .icon,
 .root[size$="small"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-small));
 }
@@ -938,9 +982,12 @@ content: "\e663";
 .root[size$="normal"] .item {
   padding: 0 var(--tree-select-new-padding-x);
 }
+
+.root[size$="normal"].useIcon > .icon,
 .root[size$="normal"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x));
 }
+
 .root[size^="normal"] {
   height: var(--tree-select-new-height);
   line-height: calc(var(--tree-select-new-height) - var(--tree-select-new-border-width) * 2);
@@ -964,9 +1011,12 @@ content: "\e663";
 .root[size$="medium"] .item {
   padding: 0 var(--tree-select-new-padding-x-medium);
 }
+
+.root[size$="medium"].useIcon > .icon,
 .root[size$="medium"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-medium));
 }
+
 .root[size^="medium"] {
   height: var(--tree-select-new-height-medium);
   line-height: calc(
@@ -994,9 +1044,12 @@ content: "\e663";
 .root[size$="large"] .item {
   padding: 0 var(--tree-select-new-padding-x-large);
 }
+
+.root[size$="large"].useIcon > .icon,
 .root[size$="large"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-large));
 }
+
 .root[size^="large"] {
   height: var(--tree-select-new-height-large);
   line-height: calc(
@@ -1024,9 +1077,12 @@ content: "\e663";
 .root[size$="huge"] .item {
   padding: 0 var(--tree-select-new-padding-x-huge);
 }
+
+.root[size$="huge"].useIcon > .icon,
 .root[size$="huge"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-huge));
 }
+
 .root[size^="huge"] {
   height: var(--tree-select-new-height-huge);
   line-height: calc(var(--tree-select-new-height-huge) - var(--tree-select-new-border-width) * 2);
@@ -1117,6 +1173,8 @@ content: "\e663";
 .root[width="mini"] .item {
   padding: 0 var(--tree-select-new-padding-x-mini);
 }
+
+.root[width="mini"].useIcon > .icon,
 .root[width="mini"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-mini));
 }
@@ -1143,6 +1201,8 @@ content: "\e663";
 .root[width="small"] .item {
   padding: 0 var(--tree-select-new-padding-x-small);
 }
+
+.root[width="small"].useIcon > .icon,
 .root[width="small"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-small));
 }
@@ -1173,6 +1233,8 @@ content: "\e663";
 .root[width="normal"] .item {
   padding: 0 var(--tree-select-new-padding-x);
 }
+
+.root[width="normal"].useIcon > .icon,
 .root[width="normal"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x));
 }
@@ -1199,9 +1261,12 @@ content: "\e663";
 .root[width="medium"] .item {
   padding: 0 var(--tree-select-new-padding-x-medium);
 }
+
+.root[width="medium"].useIcon > .icon,
 .root[width="medium"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-medium));
 }
+
 .root[height="medium"] {
   height: var(--tree-select-new-height-medium);
   line-height: calc(
@@ -1229,9 +1294,12 @@ content: "\e663";
 .root[width="large"] .item {
   padding: 0 var(--tree-select-new-padding-x-large);
 }
+
+.root[width="large"].useIcon > .icon,
 .root[width="large"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-large));
 }
+
 .root[height="large"] {
   height: var(--tree-select-new-height-large);
   line-height: calc(
@@ -1259,9 +1327,12 @@ content: "\e663";
 .root[width="huge"] .item {
   padding: 0 var(--tree-select-new-padding-x-huge);
 }
+
+.root[width="huge"].useIcon > .icon,
 .root[width="huge"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-huge));
 }
+
 .root[height="huge"] {
   height: var(--tree-select-new-height-huge);
   line-height: calc(var(--tree-select-new-height-huge) - var(--tree-select-new-border-width) * 2);

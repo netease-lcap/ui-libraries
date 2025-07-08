@@ -174,6 +174,17 @@ namespace nasl.ui {
         })
         collapsible: nasl.core.Boolean = false;
 
+        @Prop<USidebarOptions<T, V>, 'groupExpandIcon'>({
+            group: '交互属性',
+            title: '展开图标',
+            description: '侧边栏展开图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.collapsible === true,
+        })
+        groupExpandIcon: nasl.core.String = 'right-arrow';
+
         @Prop<USidebarOptions<T, V>, 'accordion'>({
             group: '交互属性',
             title: '手风琴模式',

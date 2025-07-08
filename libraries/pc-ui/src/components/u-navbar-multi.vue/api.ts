@@ -181,6 +181,39 @@ namespace nasl.ui {
         })
         disabled: nasl.core.Boolean = false;
 
+        @Prop({
+          group: '主要属性',
+          title: '展开图标',
+          description: '切换展开收起图标',
+          docDescription: '支持自定义展开图标，默认使用右箭头图标',
+          setter: {
+              concept: 'IconSetter',
+          },
+        })
+        expandIcon: nasl.core.String = 'bottom-arrow';
+
+        @Prop({
+          group: '主要属性',
+          title: '子菜单展开图标',
+          description: '切换展开收起图标',
+          docDescription: '支持自定义子菜单展开图标，默认使用右箭头图标',
+          setter: {
+              concept: 'IconSetter',
+          },
+        })
+        popupExpandIcon: nasl.core.String = 'right-arrow';
+
+        @Prop({
+          group: '主要属性',
+          title: '加载图标',
+          description: '加载图标',
+          docDescription: '支持自定义加载图标，默认使用加载图标',
+          setter: {
+              concept: 'IconSetter',
+          },
+        })
+        loadingIcon: nasl.core.String = 'loading';
+
         @Event({
             title: '选择后',
             description: '选择某一项后触发。',

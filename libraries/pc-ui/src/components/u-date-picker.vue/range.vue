@@ -9,6 +9,7 @@
         :left-value="genDisplayFormatText(showStartDate)"
         :right-value="genDisplayFormatText(showEndDate)"
         :clearable="clearable"
+        :clear-icon="clearIcon ? clearIcon : undefined"
         :placeholder="placeholder"
         :placeholder-right="placeholderRight"
         @left-click="toggle(true)"
@@ -102,6 +103,9 @@ export default {
             default: 'calendar',
         },
         suffixIcon: { type: String },
+        clearIcon: {
+            type: String,
+        },
         startDate: { type: [String, Number, Date] },
         endDate: { type: [String, Number, Date] },
         minDate: [String, Number, Date],

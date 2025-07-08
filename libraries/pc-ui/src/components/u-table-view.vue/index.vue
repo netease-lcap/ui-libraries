@@ -185,6 +185,9 @@
         :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
         :page-size="currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
         :size="paginationSize"
+        :next-icon="nextIcon"
+        :prev-icon="prevIcon"
+        :select-dropdown-icon="selectDropdownIcon"
         :max-page="currentDataSource.paging.number"
         @change="page($event.page)" @change-page-size="onChangePageSize">
     </u-pagination>
@@ -382,6 +385,9 @@ export default {
         nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
         lazyLoad: { type: Boolean, default: false }, // 懒加载
         bufferSize: { type: Number, default: 10 },
+        prevIcon: { type: String },
+        nextIcon: { type: String },
+        selectDropdownIcon: { type: String },
     },
     data() {
         return {

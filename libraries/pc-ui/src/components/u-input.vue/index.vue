@@ -27,7 +27,9 @@
         :title="!showTitle || (!valueEmpty && !disabled) ? null : ($attrs.title || placeholder)">
     <slot></slot>
     <span :class="$style.suffix" v-if="password || suffix || clearable">
-        <span :class="$style.password" v-if="password" @click.stop="togglePassword"></span>
+        <span :class="[$style.password, { [$style.useIcon]: !!passwordIcon }]" v-if="password" @click.stop="togglePassword">
+          <i-ico v-if="passwordIcon" :name="passwordIcon"></i-ico>
+        </span>
         <span v-if="suffix" @click="!disabled && $emit('click-suffix', $event, this)">
             <slot name="suffix">
                 <i-ico
@@ -39,7 +41,10 @@
         </span>
         <!-- <i-ico v-else-if="suffix" notext :name="suffix"
             @click="$emit('click-suffix', $event, this)"></i-ico> -->
-        <span :class="$style.clearable" v-if="clearable && !valueEmpty && !readonly && !disabled" @click.stop="clear"></span>
+
+        <span :class="[$style.clearable, { [$style.useIcon]: !!clearIcon }]" v-if="showClear" @click.stop="clear">
+          <i-ico v-if="clearIcon" :name="clearIcon"></i-ico>
+        </span>
     </span>
 </div>
 <u-preview v-else :text="currentValue"></u-preview>
@@ -96,6 +101,9 @@ export default {
             type: String,
         },
         autoselect: { type: Boolean, default: false },
+        clearIcon: { type: String },
+        visibleIcon: { type: String },
+        invisibleIcon: { type: String },
     },
     data() {
         return {
@@ -129,6 +137,12 @@ export default {
                 return false;
             }
             return currentValue === undefined || currentValue === '' || currentValue === null;
+        },
+        showClear() {
+          return this.clearable && !this.valueEmpty && !this.readonly && !this.disabled;
+        },
+        passwordIcon() {
+          return this.showPassword ? this.visibleIcon : this.invisibleIcon;
         },
     },
     watch: {

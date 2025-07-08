@@ -54,6 +54,12 @@
     overflow: hidden;
     color: var(--input-placeholder-color);
 }
+
+.clearable,
+.password {
+  color: var(--input-icon-color);
+}
+
 .clearable::before,
 .password::before {
     display: inline-block;
@@ -65,11 +71,21 @@
     height: 1em;
     margin: auto;
     cursor: var(--cursor-pointer);
-    color: var(--input-icon-color);
 }
 
-.clearable:hover::before,
-.password:hover::before {
+.clearable.useIcon svg,
+.password.useIcon svg {
+  font-size: inherit;
+}
+
+.clearable.useIcon::before,
+.root[password][show-password] .password.useIcon::before,
+.password.useIcon::before {
+    content: none;
+}
+
+.clearable:hover,
+.password:hover {
     color: var(--input-icon-color-hover);
 }
 

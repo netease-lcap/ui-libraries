@@ -108,6 +108,7 @@ export default {
         showCollapseIcon: { type: Boolean, default: true },
         expandIcon: { type: String, default: 'expand' },
         foldIcon: { type: String, default: 'fold' },
+        groupExpandIcon: { type: String, default: 'right-arrow' },
     },
     data() {
         return {
