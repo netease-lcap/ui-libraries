@@ -112,7 +112,7 @@ export const UModal = {
         isFootSlotEmpty: { type: Boolean, default: false },
         showHead: { type: Boolean, default: true },
         disableRootElemShift:  { type: Boolean, default: false }, // 取消根节点移位
-        closeIcon: { type: String, default: 'close' },
+        closeIcon: { type: String },
     },
     data() {
         return {
