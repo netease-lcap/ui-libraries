@@ -373,12 +373,34 @@ export default {
                         return noFinished && this.currentValue || [];
                     }
                     const values = value.split(',');
-                    const currentValue = this.currentValue ? [...this.currentValue] : [];
-                    values.forEach((item, index) => {
-                        currentValue[index] = currentValue[index] || {};
-                        currentValue[index].url = values[index];
-                        currentValue[index].name = this.handleFileName(values[index]);
-                    });
+                    let currentValue = this.currentValue ? [...this.currentValue] : [];
+
+                    for (let i = 0; i < currentValue.length; i++) {
+                      if (values.length === 0) {
+                        currentValue = currentValue.filter((item, index) => index < i || item.status === 'uploading' || item.status === 'error');
+                        break;
+                      }
+
+                      const item = currentValue[i];
+                      if (item.status === 'uploading' || item.status === 'error') {
+                        continue;
+                      }
+
+
+                      const url = values.shift();
+                      item.url = url;
+                      item.name = this.handleFileName(url);
+                      item.status = 'success';
+                    }
+
+                    if (values.length > 0) {
+                      currentValue = currentValue.concat(values.map((url) => ({
+                        url,
+                        name: this.handleFileName(url),
+                        status: 'success',
+                      })));
+                    }
+
                     return currentValue;
                 } catch (err) {
                     return [];
@@ -396,7 +418,7 @@ export default {
                 return value;
         },
         simpleConvert(value) {
-            return value.map((x) => (x.url || '')).join(',');
+            return value.filter((x) => x.status !== 'uploading' && x.status !== 'error').map((x) => (x.url || '')).join(',');
         },
         getUrl(item) {
           const IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
