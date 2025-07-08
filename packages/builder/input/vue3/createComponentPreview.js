@@ -20,7 +20,11 @@ export default (stories) => {
 
   return defineComponent({
     name: 'ThemeComponentPreviews',
-    inject: ['getRenderKey'],
+    inject: {
+      getRenderKey: {
+        default: () => () => '',
+      },
+    },
     props: {
       componentNames: {
         type: Array,
@@ -90,7 +94,7 @@ export default (stories) => {
           class: styles.componentPreview,
         },
         this.visibleStories.map((c) => h(ComponentWrap, {
-          key: this.getRenderKey ? `${this.getRenderKey()}_${c.name}` : c.name,
+          key: `${this.getRenderKey()}_${c.name}`,
           name: c.name,
           demo: c.demo,
           title: c.title || c.name,
