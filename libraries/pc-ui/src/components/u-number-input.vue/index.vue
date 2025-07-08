@@ -3,11 +3,15 @@
         :readonly="readonly" :disabled="disabled" :clearable="clearable"
         @keydown.native.up.prevent="increase" @keydown.native.down.prevent="decrease" @keydown.native.enter="onEnter"
         @input="onInput" @focus="onFocus" @blur="onBlur" v-bind="$attrs" v-on="listeners" v-click-outside="handleClickOutside"
-        :hide-buttons="hideButtons" :color="formItemVM && formItemVM.color" :prefix="!!showPrefix" :suffix="!!showSuffix">
-        <span :class="$style.button" v-if="!hideButtons" :disabled="currentValue >= max" role="up" v-repeat-click="increase"
-            tabindex="-1" @keydown.prevent></span>
-        <span :class="$style.button" v-if="!hideButtons" :disabled="currentValue <= min" role="down" v-repeat-click="decrease"
-            tabindex="-1" @keydown.prevent></span>
+        :hide-buttons="hideButtons" :color="formItemVM && formItemVM.color" :prefix="!!showPrefix" :suffix="!!showSuffix" :clear-icon="clearIcon">
+        <span :class="[$style.button, {[$style.useIcon]: !!nextIcon}]" v-if="!hideButtons" :disabled="currentValue >= max" role="up" v-repeat-click="increase"
+            tabindex="-1" @keydown.prevent>
+            <i-ico :name="nextIcon" v-if="nextIcon" notext></i-ico>
+        </span>
+        <span :class="[$style.button, {[$style.useIcon]: !!prevIcon}]" v-if="!hideButtons" :disabled="currentValue <= min" role="down" v-repeat-click="decrease"
+            tabindex="-1" @keydown.prevent>
+            <i-ico :name="prevIcon" v-if="prevIcon" notext></i-ico>
+        </span>
         <slot></slot>
 
         <template #prefix>
@@ -25,14 +29,16 @@ import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import { repeatClick, clickOutside } from '../../directives';
 import { noopFormatter, NumberFormatter } from '../../utils/Formatters';
+import UInput from '../u-input.vue';
 import UPreview from '../u-text.vue';
 import MPreview from '../u-text.vue/preview';
 const isNil = (value) => (typeof value === 'string' && value.trim() === '') || value === null || value === undefined;
 
 export default {
     name: 'u-number-input',
-    component: {
-        UPreview
+    components: {
+        UInput,
+        UPreview,
     },
     directives: { repeatClick, clickOutside },
     mixins: [
@@ -102,6 +108,21 @@ export default {
         unitValue: {
             type: String,
             default: '',
+        },
+        plusIcon: {
+            type: String,
+        },
+        minusIcon: {
+            type: String,
+        },
+        upIcon: {
+            type: String,
+        },
+        downIcon: {
+            type: String,
+        },
+        clearIcon: {
+            type: String,
         },
     },
     data() {
@@ -184,6 +205,12 @@ export default {
             }
 
             return texts.join(' ');
+        },
+        prevIcon() {
+            return this.buttonDisplay === 'bothEnds' ? this.minusIcon : this.downIcon;
+        },
+        nextIcon() {
+            return this.buttonDisplay === 'bothEnds' ? this.plusIcon : this.upIcon;
         },
     },
     watch: {
@@ -569,6 +596,11 @@ content: "\e65d";
 
 .root[button-display="bothEnds"] .button[role="down"]::before {
     content: '-';
+}
+
+.root[button-display="bothEnds"] .button.useIcon::before,
+.root[button-display="tail"] .button.useIcon::before {
+  content: none;
 }
 
 .button::before {

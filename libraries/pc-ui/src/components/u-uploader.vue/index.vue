@@ -1,11 +1,12 @@
 <template>
 <div :class="$style.root">
-    <div v-if="draggable && !isPreview && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.draggable" :dragover="dragover" @click="select()"
+    <div v-if="draggable && !isPreview && (!readonly || $env.VUE_APP_DESIGNER)" :class="[$style.draggable, { [$style.useIcon]: !!uploadIcon }]" :dragover="dragover" @click="select()"
         :tabindex="readonly || disabled ? '' : 0"
         @drop.prevent="onDrop"
         @paste="onPaste"
         @dragover.prevent="dragover = true"
         @dragleave.prevent="dragover = false">
+        <i-ico :name="uploadIcon" v-if="uploadIcon" notext :class="$style.uploadIcon"></i-ico>
         <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
         <div>
             <div v-if="dragDescription" vusion-slot-name="dragDescription" :class="$style.dragDescription"><slot name="dragDescription">{{ dragDescription }}</slot></div>
@@ -37,12 +38,12 @@
                                 <i-ico :name="downloadIcon" icotype="only"></i-ico>
                             </a>
                         </span>
-                        <i-ico name="remove" :class="$style.remove" v-if="!readonly && !disabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" v-if="!readonly && !disabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
                     </div>
                       <div v-else>
                         <div :class="$style.thumb"><img :class="$style.img" v-if="listType === 'image'" :src="getUrl(item)"></div>
                         <a :class="$style.link" :href="encodeUrl(item.url)" target="_blank" download role="download">{{ item.name || item.url }}</a>
-                        <i-ico name="remove" v-if="!readonly && !disabled && !isPreview" :class="$style.remove" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" v-if="!readonly && !disabled && !isPreview" @click="remove(index)"></i-ico>
                     </div>
                     <u-linear-progress v-if="item.showProgress && !$env.VUE_APP_DESIGNER" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                 </template>
@@ -54,15 +55,24 @@
                 <div :class="$style.mask" :multiple="multiple || readonly" :show-progress="item.showProgress">
                     <u-linear-progress v-if="item.showProgress" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                     <div :class="$style.buttons">
-                        <span v-if="!readonly && !disabled && !isPreview" :class="$style.button" role="remove" @click.stop="remove(index)"></span>
-                        <span :class="$style.button" role="preview" @click.stop="onPreview(item, index)"></span>
-                        <a v-if="downLoadFilename" :class="$style.button" @click.stop :href="encodeUrl(item.url)" target="_blank" role="download" :download="downLoadFilename"></a>
-                        <a v-else :class="$style.button" :href="encodeUrl(item.url)" @click.stop target="_blank" download role="download"></a>
+                        <span v-if="!readonly && !disabled && !isPreview" :class="[$style.button, { [$style.useIcon]: !!removeIcon }]" role="remove" @click.stop="remove(index)">
+                          <i-ico :name="removeIcon" v-if="removeIcon" notext :class="$style.icon"></i-ico>
+                        </span>
+                        <span :class="[$style.button, { [$style.useIcon]: !!previewIcon }]" role="preview" @click.stop="onPreview(item, index)">
+                          <i-ico :name="previewIcon" v-if="previewIcon" notext :class="$style.icon"></i-ico>
+                        </span>
+                        <a v-if="downLoadFilename" :class="[$style.button, { [$style.useIcon]: !!downloadIcon }]" @click.stop :href="encodeUrl(item.url)" target="_blank" role="download" :download="downLoadFilename">
+                          <i-ico :name="downloadIcon" v-if="downloadIcon" notext :class="$style.icon"></i-ico>
+                        </a>
+                        <a v-else :class="[$style.button, { [$style.useIcon]: !!downloadIcon }]" :href="encodeUrl(item.url)" @click.stop target="_blank" download role="download">
+                          <i-ico :name="downloadIcon" v-if="downloadIcon" notext :class="$style.icon"></i-ico>
+                        </a>
                     </div>
                 </div>
             </div>
             <div :class="$style.cardwrap" v-if="uploadEnable && !draggable && (!readonly || $env.VUE_APP_DESIGNER)">
-                <div :class="$style.card" role="select" @click="select()">
+                <div :class="[$style.card, { [$style.useIcon]: !!addIcon }]" role="select" @click="select()">
+                    <i-ico :name="addIcon" v-if="addIcon" notext :class="$style.addIcon"></i-ico>
                     <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
                 </div>
                 <div v-if="description" :class="$style.description">{{ description }}</div>
@@ -177,6 +187,10 @@ export default {
         fileType: { type: String, default: 'default' },
         iconMap: { type: Object, default: () => ({ 'doc|docx': 'file-doc', 'jpg|jpeg|png|bmp|gif|tiff|tif|webp|svg|psd|raw': 'file-jpg', pdf: 'file-pdf', xlsx: 'file-xlxs', txt: 'file-txt', 'ppt|pptx': 'file-ppt', zip: 'file-zip', csv: 'file-csv' }) },
         downloadIcon: { type: String, default: 'download' },
+        previewIcon: { type: String },
+        removeIcon: { type: String },
+        uploadIcon: { type: String },
+        addIcon: { type: String },
         fileIconSwitcher: { type: Boolean, default: true },
         downloadIconSwitcher: { type: Boolean, default: true },
         fileSize: { type: Boolean, default: true },
@@ -1090,6 +1104,23 @@ content: "\e663";
       color: var(--brand-primary);
   }
 
+  .card.useIcon::before {
+    content: none;
+  }
+
+  .card.useIcon {
+    color: var(--uploader-border-color);
+    font-size: var(--uploader-card-icon-font-size);
+  }
+
+  .card.useIcon:hover {
+    color: var(--brand-primary);
+  }
+
+  .card.useIcon .addIcon {
+    font-size: inherit;
+  }
+
   .card:not(:last-child) {
       margin-right: var(--uploader-card-space);
   }
@@ -1128,6 +1159,8 @@ content: "\e663";
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
   }
 
   .button {
@@ -1185,6 +1218,14 @@ content: "\e663";
     font-smoothing: antialiased;
   }
 
+  .button.useIcon::before {
+    content: none;
+  }
+
+  .button.useIcon .icon {
+    font-size: inherit;
+  }
+
   .draggable {
       overflow: hidden;
       cursor: var(--cursor-pointer);
@@ -1204,7 +1245,7 @@ content: "\e663";
   }
 
   .draggable::before {
-    font-size: 24px;
+    font-size: var(--uploader-draggable-icon-size, 24px);
     content: "\e656";
     font-family: "lcap-ui-icons";
     font-style: normal;
@@ -1221,6 +1262,20 @@ content: "\e663";
   .draggable:focus::before,
   .draggable[dragover]::before{
       color: var(--uploader-draggable-color-hover);
+  }
+
+  .draggable.useIcon::before {
+    content: none;
+  }
+
+  .draggable.useIcon .uploadIcon {
+    font-size: var(--uploader-draggable-icon-size, 24px);
+    color: var(--uploader-draggable-icon-color);
+  }
+
+  .draggable.useIcon:hover .uploadIcon,
+  .draggable.useIcon:focus .uploadIcon {
+    color: var(--uploader-draggable-color-hover);
   }
 
   .dragDescription{

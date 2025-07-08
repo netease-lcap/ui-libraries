@@ -90,6 +90,26 @@ namespace nasl.ui {
         })
         interval: nasl.core.Integer = 4000;
 
+        @Prop({
+            group: '主要属性',
+            title: '切换上一张图标',
+            description: '设置切换上一张图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        prevIcon: nasl.core.String = 'left-arrow';
+
+        @Prop({
+            group: '主要属性',
+            title: '切换下一张图标',
+            description: '设置切换下一张图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        nextIcon: nasl.core.String = 'right-arrow';
+
         @Event({
             title: '选择前',
             description: '选择某一页前触发',

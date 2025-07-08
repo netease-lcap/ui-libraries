@@ -200,6 +200,27 @@ namespace nasl.ui {
         })
         disabled: nasl.core.Boolean = false;
 
+        @Prop({
+            group: '主要属性',
+            title: '展开图标',
+            description: '设置展开图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        expandIcon: nasl.core.String;
+
+
+        @Prop({
+            group: '主要属性',
+            title: '加载图标',
+            description: '设置加载图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        loadingIcon: nasl.core.String = 'loading';
+
         @Event({
             title: '选择前',
             description: '选择某一项前触发',

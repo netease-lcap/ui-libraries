@@ -251,6 +251,37 @@ namespace nasl.ui {
         })
         preview: nasl.core.Boolean = false;
 
+        @Prop<UTransferOptions<T, V>, 'searchIcon'>({
+            group: '主要属性',
+            title: '搜索图标',
+            description: '设置搜索图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.filterable === true,
+        })
+        searchIcon: nasl.core.String = 'search';
+
+        @Prop({
+            group: '主要属性',
+            title: '向左箭头图标',
+            description: '设置向左箭头图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        leftArrowIcon: nasl.core.String = 'left-arrow';
+
+        @Prop({
+            group: '主要属性',
+            title: '向右箭头图标',
+            description: '设置向右箭头图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        rightArrowIcon: nasl.core.String = 'right-arrow';
+
         @Event({
             title: '数据转移时',
             description: '数据转移时触发',

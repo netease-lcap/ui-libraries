@@ -143,6 +143,49 @@ namespace nasl.ui {
         })
         type: 'text' | 'primary' | 'primary_secondary' | 'normal' | 'more' = 'text';
 
+        @Prop<UDropdownOptions<T, V>, 'expandIcon'>({
+            group: '主要属性',
+            title: '展开图标',
+            description: '设置展开图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.type !== 'more',
+        })
+        expandIcon: nasl.core.String = 'bottom-arrow';
+
+        @Prop<UDropdownOptions<T, V>, 'moreIcon'>({
+            group: '主要属性',
+            title: '更多图标',
+            description: '设置更多图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.type === 'more',
+        })
+        moreIcon: nasl.core.String = 'more';
+
+        @Prop<UDropdownOptions<T, V>, 'menuExpandIcon'>({
+            group: '主要属性',
+            title: '菜单展开图标',
+            description: '设置菜单展开图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        menuExpandIcon: nasl.core.String = 'right-arrow';
+
+        @Prop<UDropdownOptions<T, V>, 'loadingIcon'>({
+          group: '主要属性',
+          title: '加载图标',
+          description: '设置加载图标',
+          setter: {
+              concept: 'IconSetter',
+          },
+          if: _ => _.hasDataSource === true,
+        })
+        loadingIcon: nasl.core.String = 'loading';
+
         @Prop({
             group: '主要属性',
             title: '弹出方向',

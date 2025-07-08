@@ -904,6 +904,39 @@ namespace nasl.ui {
         color?: nasl.core.String
       };
 
+      @Prop<UTableViewOptions<T, V, P, M>, 'prevIcon'>({
+        group: '交互属性',
+        title: '上一页图标',
+        description: '设置上一页图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.pagination === true,
+      })
+      prevIcon: nasl.core.String;
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'nextIcon'>({
+        group: '交互属性',
+        title: '下一页图标',
+        description: '设置下一页图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.pagination === true,
+      })
+      nextIcon: nasl.core.String;
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'selectDropdownIcon'>({
+        group: '交互属性',
+        title: '选择下拉图标',
+        description: '设置选择下拉图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.pagination === true && _.showSizer === true,
+      })
+      selectDropdownIcon: nasl.core.String;
+
       @Event({
           title: '加载前',
           description: '加载前触发',

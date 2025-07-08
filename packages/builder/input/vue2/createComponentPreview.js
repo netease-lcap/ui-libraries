@@ -18,7 +18,11 @@ export default (stories) => {
   }
   return {
     name: 'ThemeComponentPreviews',
-    inject: ['getRenderKey'],
+    inject: {
+      getRenderKey: {
+        default: () => () => '',
+      },
+    },
     props: {
       componentNames: {
         type: Array,
