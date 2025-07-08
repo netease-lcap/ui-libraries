@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
-/* eslint-disable no-shadow */
+
 import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 

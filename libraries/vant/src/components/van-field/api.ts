@@ -342,6 +342,5 @@ namespace nasl.ui {
       description: '自定义按钮',
     })
     slotButton: () => Array<ViewComponent>;
-
   }
-} 
+}

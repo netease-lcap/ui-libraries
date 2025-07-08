@@ -1,6 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-param-reassign */
-/* eslint-disable react-refresh/only-export-components */
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { watch } from 'vue';

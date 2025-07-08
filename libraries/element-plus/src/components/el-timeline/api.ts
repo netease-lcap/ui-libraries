@@ -59,7 +59,7 @@ namespace nasl.ui {
       docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
     })
     dataSchema: T;
-    
+
     @Prop<ElTimelineOptions<T, V>, 'timestampField'>({
       group: '数据属性',
       title: '时间戳字段',
@@ -70,7 +70,7 @@ namespace nasl.ui {
       },
     })
     timestampField: (item: T) => V = ((item: any) => item.timestamp) as any;
-    
+
     @Prop<ElTimelineOptions<T, V>, 'hideTimestampField'>({
       group: '数据属性',
       title: '隐藏时间戳字段',
@@ -81,7 +81,7 @@ namespace nasl.ui {
       },
     })
     hideTimestampField: (item: T) => V = ((item: any) => item.hideTimestamp) as any;
-    
+
     @Prop<ElTimelineOptions<T, V>, 'centerField'>({
       group: '数据属性',
       title: '垂直居中字段',
@@ -92,7 +92,7 @@ namespace nasl.ui {
       },
     })
     centerField: (item: T) => V = ((item: any) => item.center) as any;
-    
+
     @Prop<ElTimelineOptions<T, V>, 'placementField'>({
       group: '数据属性',
       title: '时间戳位置字段',
@@ -103,7 +103,7 @@ namespace nasl.ui {
       },
     })
     placementField: (item: T) => V = ((item: any) => item.placement) as any;
-    
+
     @Prop<ElTimelineOptions<T, V>, 'typeField'>({
       group: '数据属性',
       title: '节点类型字段',
@@ -114,18 +114,19 @@ namespace nasl.ui {
       },
     })
     typeField: (item: T) => V = ((item: any) => item.type) as any;
-    
+
     @Prop<ElTimelineOptions<T, V>, 'colorField'>({
       group: '数据属性',
       title: '节点颜色字段',
       description: `集合的元素类型中，用于标识节点颜色的属性, 'hsl' | 'hsv' | 'hex' | 'rgb'`,
       docDescription: '集合的元素类型中，用于标识节点颜色的属性，支持自定义变更',
+      
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
     colorField: (item: T) => V = ((item: any) => item.color) as any;
-    
+
     @Prop<ElTimelineOptions<T, V>, 'sizeField'>({
       group: '数据属性',
       title: '节点尺寸字段',
@@ -136,7 +137,7 @@ namespace nasl.ui {
       },
     })
     sizeField: (item: T) => V = ((item: any) => item.size) as any;
-    
+
     @Prop<ElTimelineOptions<T, V>, 'iconField'>({
       group: '数据属性',
       title: '自定义图标字段',
@@ -147,7 +148,7 @@ namespace nasl.ui {
       },
     })
     iconField: (item: T) => V = ((item: any) => item.icon) as any;
-    
+
     @Prop<ElTimelineOptions<T, V>, 'hollowField'>({
       group: '数据属性',
       title: '空心点字段',
@@ -288,7 +289,7 @@ namespace nasl.ui {
       },
     })
     icon: nasl.core.String;
-    
+
     @Prop({
       group: '主要属性',
       title: '空心点',
@@ -302,7 +303,7 @@ namespace nasl.ui {
       description: 'Timeline-Item 的内容',
     })
     slotDefault: () => Array<ViewComponent>;
-    
+
     // @Slot({
     //   title: 'Dot',
     //   description: 'Timeline-Item 的自定义节点',

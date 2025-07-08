@@ -14,20 +14,20 @@ namespace nasl.ui {
     description: '用于从一组选项中进行选择',
     group: 'Selector',
   })
-  export class VanPicker extends ViewComponent {
-    constructor(options?: Partial<VanPickerOptions>) {
+  export class VanPicker<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(options?: Partial<VanPickerOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class VanPickerOptions extends ViewComponentOptions {
+  export class VanPickerOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
       description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
     })
-    dataSource: { list: nasl.collection.List<any>; total: nasl.core.Integer } | nasl.collection.List<any>;
+    dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
@@ -38,7 +38,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    textField: (item: any) => any = ((item: any) => item.text) as any;
+    textField: (item: T) => any = ((item: any) => item.text) as any;
 
     @Prop({
       group: '数据属性',
@@ -49,7 +49,16 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: any) => any = ((item: any) => item.value) as any;
+    valueField: (item: T) => V = ((item: any) => item.value) as any;
+
+    @Prop({
+      group: '数据属性',
+      title: '父级字段',
+      description: '集合的元素类型中，用于标识父级值的属性',
+      docDescription: '集合的元素类型中，用于标识父级值的属性，支持自定义变更',
+      setter: { concept: 'PropertySelectSetter' },
+    })
+    parentField: (item: T) => V = ((item: any) => item.parent) as any;
 
     @Prop({
       group: '数据属性',
@@ -58,7 +67,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: nasl.core.String | nasl.core.Integer | nasl.collection.List<nasl.core.String | nasl.core.Integer>;
+    modelValue: P extends true ? (M extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
 
     @Prop({
       group: '主要属性',
@@ -70,11 +79,27 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '标题',
-      description: '选择器标题',
+      title: '确认按钮文本',
+      description: '确认按钮文本',
       setter: { concept: 'InputSetter' },
     })
-    title: nasl.core.String = '';
+    confirmButtonText: nasl.core.String = '确认';
+
+    @Prop({
+      group: '主要属性',
+      title: '取消按钮文本',
+      description: '取消按钮文本',
+      setter: { concept: 'InputSetter' },
+    })
+    cancelButtonText: nasl.core.String = '取消';
+
+    @Prop({
+      group: '主要属性',
+      title: '工具栏位置',
+      description: '工具栏位置',
+      setter: { concept: 'EnumSelectSetter', options: [{ title: '顶部' }, { title: '底部' }] },
+    })
+    toolbarPosition: 'top' | 'bottom' = 'top';
 
     @Prop({
       group: '主要属性',
@@ -107,6 +132,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     loading: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示选中值',
+      description: '是否显示选中值',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showToolbar: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -185,14 +218,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '显示工具栏',
-      description: '是否显示顶部工具栏',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showToolbar: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
       title: '点击遮罩关闭',
       description: '点击遮罩层时是否关闭选择器',
       setter: { concept: 'SwitchSetter' },
@@ -226,30 +251,6 @@ namespace nasl.ui {
       trigger: 'clear' | 'check' | 'default';
     }) => any;
 
-    @Event({
-      title: '清空时',
-      description: '清空时触发',
-    })
-    onClear: (event: any) => any;
-
-    @Event({
-      title: '下拉框显示或隐藏时',
-      description: '下拉框显示或隐藏时触发',
-    })
-    onVisibleChange: (event: nasl.core.Boolean) => any;
-
-    @Event({
-      title: '失去焦点时',
-      description: '失去焦点时触发',
-    })
-    onBlur: (event: any) => any;
-
-    @Event({
-      title: '获得焦点时',
-      description: '获得焦点时触发',
-    })
-    onFocus: (event: any) => any;
-
     @Slot({
       title: '标题',
       description: '自定义标题内容',
@@ -257,15 +258,12 @@ namespace nasl.ui {
     slotTitle: () => Array<ViewComponent>;
 
     @Slot({
-      title: '工具栏',
-      description: '自定义工具栏内容',
-    })
-    slotToolbar: () => Array<ViewComponent>;
-
-    @Slot({
       title: '选项',
       description: '自定义选项内容',
     })
-    slotOption: (option: { text: nasl.core.String; value: nasl.core.String | nasl.core.Integer }) => Array<ViewComponent>;
+    slotOption: (option: {
+      text: nasl.core.String;
+      value: nasl.core.String | nasl.core.Integer;
+    }) => Array<ViewComponent>;
   }
-} 
+}
