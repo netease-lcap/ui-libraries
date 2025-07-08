@@ -299,6 +299,13 @@ export default {
             this.showEndDate = this.format(endDate, this.getFormatString());
             const showStartDate = this.returnTime(this.showStartDate);
             const showEndDate = this.returnTime(this.showEndDate);
+
+            const sDate = new Date(this.transformDate(showStartDate));
+            const eDate = new Date(this.transformDate(showEndDate));
+
+            this.$emit('update:startDate', this.toValue(sDate));
+            this.$emit('update:endDate', this.toValue(eDate));
+
             /**
              * @event select 选择某一项时触发
              * @property {object} sender 事件发送对象
@@ -306,8 +313,8 @@ export default {
              */
             this.$emit('select', {
                 sender: this,
-                startDate: new Date(this.transformDate(showStartDate)),
-                endDate: new Date(this.transformDate(showEndDate)),
+                startDate: sDate,
+                endDate: eDate,
             });
             this.toggle(false);
         },
