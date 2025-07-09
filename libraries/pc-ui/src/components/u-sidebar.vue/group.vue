@@ -45,6 +45,7 @@
         @before-open="$event=>collapsible === false && $event.preventDefault()"
         @update:opened="toggle($event)"
         :offset="popperOffset"
+        @click="$event.stopPropagation()"
     >
         <div :class="$style.body">
             <u-sidebar-item
