@@ -37,6 +37,7 @@ namespace nasl.ui {
     image: 'default' | 'error' | 'network' | 'search' = 'default';
 
     @Prop({
+      // TODO: 文档中是 image-size: number|string|Array
       group: '主要属性',
       title: '图片大小',
       description: '图片大小',
@@ -53,6 +54,7 @@ namespace nasl.ui {
     description: nasl.core.String = '暂无数据';
 
     @Prop({
+      //HUSK: 文档中没有提到 customImage
       group: '主要属性',
       title: '自定义图片',
       description: '自定义图片 URL',
@@ -61,6 +63,7 @@ namespace nasl.ui {
     customImage: nasl.core.String;
 
     @Prop({
+      //HUSK: 文档中没有提到 imageWidth
       group: '样式属性',
       title: '图片宽度',
       description: '图片宽度',
@@ -69,6 +72,7 @@ namespace nasl.ui {
     imageWidth: nasl.core.String = '160px';
 
     @Prop({
+      //HUSK: 文档中没有提到 imageWidth
       group: '样式属性',
       title: '图片高度',
       description: '图片高度',
@@ -77,6 +81,7 @@ namespace nasl.ui {
     imageHeight: nasl.core.String = '160px';
 
     @Prop({
+      //HUSK: 文档中没有提到 descriptionColor
       group: '样式属性',
       title: '描述文字颜色',
       description: '描述文字颜色',
@@ -85,6 +90,7 @@ namespace nasl.ui {
     descriptionColor: nasl.core.String = '#969799';
 
     @Prop({
+      //HUSK: 文档中没有提到 descriptionFontSize
       group: '样式属性',
       title: '描述文字大小',
       description: '描述文字大小',
@@ -93,6 +99,7 @@ namespace nasl.ui {
     descriptionFontSize: nasl.core.String = '14px';
 
     @Prop({
+      //HUSK: 文档中没有提到 bottomMarginTop
       group: '样式属性',
       title: '底部内容上边距',
       description: '底部内容上边距',
@@ -101,6 +108,7 @@ namespace nasl.ui {
     bottomMarginTop: nasl.core.String = '24px';
 
     @Prop({
+      //HUSK: 文档中没有提到 showImage
       group: '主要属性',
       title: '显示图片',
       description: '是否显示图片',
@@ -109,6 +117,7 @@ namespace nasl.ui {
     showImage: nasl.core.Boolean = true;
 
     @Prop({
+      //HUSK: 文档中没有提到 showDescription
       group: '主要属性',
       title: '显示描述',
       description: '是否显示描述文字',

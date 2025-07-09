@@ -21,7 +21,9 @@ namespace nasl.ui {
   }
 
   export class VanPickerOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
+    
     @Prop({
+      //HUSK: 文档中没有提到dataSource
       group: '数据属性',
       title: '数据源',
       description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
@@ -30,6 +32,7 @@ namespace nasl.ui {
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
     @Prop({
+      //HUSK: 文档中没有提到textField
       group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
@@ -41,6 +44,7 @@ namespace nasl.ui {
     textField: (item: T) => any = ((item: any) => item.text) as any;
 
     @Prop({
+      //HUSK: 文档中没有提到valueField
       group: '数据属性',
       title: '值字段',
       description: '集合的元素类型中，用于标识选中值的属性',
@@ -52,6 +56,7 @@ namespace nasl.ui {
     valueField: (item: T) => V = ((item: any) => item.value) as any;
 
     @Prop({
+      //HUSK: 文档中没有提到parentField
       group: '数据属性',
       title: '父级字段',
       description: '集合的元素类型中，用于标识父级值的属性',
@@ -61,6 +66,7 @@ namespace nasl.ui {
     parentField: (item: T) => V = ((item: any) => item.parent) as any;
 
     @Prop({
+      //TODO: 官方文档中是 v-model，但是这里却是 modelValue
       group: '数据属性',
       sync: true,
       title: '选中值',
@@ -134,6 +140,8 @@ namespace nasl.ui {
     loading: nasl.core.Boolean = false;
 
     @Prop({
+      //TODO: 官方文档中是 show-toolbar，但是这里却是 showToolbar，
+      // 且官方文档中默认为true，这里却是false
       group: '主要属性',
       title: '显示选中值',
       description: '是否显示选中值',
@@ -177,6 +185,8 @@ namespace nasl.ui {
     size: 'small' | 'default' | 'large' = 'default';
 
     @Prop({
+      //TODO: 官方文档中是 allow-html，但是这里却是 allowHtml
+      // 且官方文档中默认为false，这里却是true
       group: '主要属性',
       title: '允许HTML',
       description: '是否允许选项内容包含HTML',
@@ -185,6 +195,8 @@ namespace nasl.ui {
     allowHtml: nasl.core.Boolean = true;
 
     @Prop({
+      //TODO: 官方文档中是 option-height，但是这里却是 optionHeight
+      // 且类型需支持 number|string
       group: '主要属性',
       title: '选项高度',
       description: '选项的高度，单位为px',
@@ -193,6 +205,8 @@ namespace nasl.ui {
     optionHeight: nasl.core.Integer = 44;
 
     @Prop({
+      //TODO: 官方文档中是 swipe-duration，但是这里却是 swipeDuration
+      //且类型需支持 number|string，默认值为1000
       group: '主要属性',
       title: '滑动动画时长',
       description: '滑动动画的时长，单位为ms',
@@ -239,6 +253,13 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     safeAreaInsetBottom: nasl.core.Boolean = true;
+
+
+    //TODO: 缺失columns属性
+    //TODO: 缺失columns-field-names属性
+    //TODO: 缺失title属性
+
+
 
     @Event({
       title: '选中值变化时',

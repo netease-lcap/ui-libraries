@@ -20,6 +20,7 @@ namespace nasl.ui {
   }
 
   export class VanBadgeOptions extends ViewComponentOptions {
+    // HACK：vant中未出现这个配置
     @Prop({
       group: '主要属性',
       title: '显示值',
@@ -29,6 +30,7 @@ namespace nasl.ui {
     value: any;
 
     @Prop({
+      // TODO: 文档中是 number | string，但却是Decimal类型
       group: '主要属性',
       title: '最大值',
       description: "最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型",
@@ -37,6 +39,7 @@ namespace nasl.ui {
     max: nasl.core.Decimal;
 
     @Prop({
+      // TODO: 文档参数名应该是 dot，但是文档中是isDot
       group: '主要属性',
       title: '小圆点',
       description: '小圆点',
@@ -45,6 +48,7 @@ namespace nasl.ui {
     isDot: nasl.core.Boolean = false;
 
     @Prop({
+      // HACK：vant中未出现这个配置
       group: '主要属性',
       title: '隐藏',
       description: '隐藏 badge',
@@ -53,6 +57,7 @@ namespace nasl.ui {
     hidden: nasl.core.Boolean = false;
 
     @Prop({
+      // HACK：vant中未出现这个配置
       group: '主要属性',
       title: '类型',
       description: '类型',
@@ -80,6 +85,7 @@ namespace nasl.ui {
     color: nasl.core.String = '';
 
     @Prop({
+      // TODO：文档中是统一的offset，而这里分成了2个不同的leftOffset和topOffset
       group: '主要属性',
       title: '左偏移量',
       description: '左偏移量, 示例：10',
@@ -88,6 +94,7 @@ namespace nasl.ui {
     leftOffset: nasl.core.Integer;
 
     @Prop({
+      // TODO：文档中是统一的offset，而这里分成了2个不同的leftOffset和topOffset
       group: '主要属性',
       title: '上偏移量',
       description: '上偏移量, 示例：10',
@@ -107,6 +114,7 @@ namespace nasl.ui {
     position: 'top-right' | 'bottom-right' | 'top-left' | 'bottom-left' = 'top-right';
 
     @Prop({
+      //TODO: 类型应该是String + number
       group: '主要属性',
       title: '内容',
       description: '徽标内容',
@@ -115,6 +123,7 @@ namespace nasl.ui {
     content: nasl.core.String;
 
     @Prop({
+      // HACK：vant中未出现这个配置
       group: '主要属性',
       title: '徽标样式',
       description: '徽标样式',
@@ -123,6 +132,7 @@ namespace nasl.ui {
     badgeStyle: nasl.core.String;
 
     @Slot({
+      // HACK：vant中未出现这个配置
       title: '默认内容',
       description: '自定义默认内容',
     })

@@ -26,6 +26,7 @@ namespace nasl.ui {
   }
 
   export class VanButtonOptions extends ViewComponentOptions {
+    // TODO: 可选值应该是 large small mini
     @Prop({
       group: '样式属性',
       title: '尺寸',
@@ -38,6 +39,7 @@ namespace nasl.ui {
     size: 'default' | 'large' | 'small' = 'default';
 
     @Prop({
+      // TODO: 多了 info；缺少默认 default；空串 '' 不在文档里
       group: '主要属性',
       title: '类型',
       description: '按钮类型',
@@ -57,6 +59,7 @@ namespace nasl.ui {
     plain: nasl.core.Boolean = false;
 
     @Prop({
+      // TODO: 文档中没有默认值“按钮”
       group: '主要属性',
       title: '按钮文字',
       description: '按钮文字',
@@ -65,6 +68,7 @@ namespace nasl.ui {
     text: nasl.core.String = '按钮';
 
     @Prop({
+      // HACK: 文档中没有提到 link
       group: '主要属性',
       title: '链接按钮',
       description: '是否为链接按钮',
@@ -81,6 +85,7 @@ namespace nasl.ui {
     round: nasl.core.Boolean = false;
 
     @Prop({
+      // HACK: 文档中没有提到 circle
       group: '样式属性',
       title: '圆形按钮',
       description: '是否为圆形按钮',
@@ -97,6 +102,7 @@ namespace nasl.ui {
     loading: nasl.core.Boolean = false;
 
     @Prop({
+      //HACK : 文档中没有loadingIcon
       group: '主要属性',
       title: '加载图标',
       description: '自定义加载中图标组件',
@@ -113,6 +119,7 @@ namespace nasl.ui {
     disabled: nasl.core.Boolean = false;
 
     @Prop({
+      // TODO: 文档中只有单独一个icon，没有提到左图标和右图标
       group: '主要属性',
       title: '左图标',
       description: '左图标组件',
@@ -121,6 +128,7 @@ namespace nasl.ui {
     icon: nasl.core.String;
 
     @Prop({
+      // TODO: 文档中只有单独一个icon，没有提到左图标和右图标
       group: '主要属性',
       title: '右图标',
       description: '右图标组件',
@@ -129,6 +137,7 @@ namespace nasl.ui {
     rightIcon: nasl.core.String;
 
     @Prop({
+      //HACK : 文档中没有autofocus
       group: '主要属性',
       title: '自动聚焦',
       description: '原生 autofocus 属性',
@@ -137,6 +146,7 @@ namespace nasl.ui {
     autofocus: nasl.core.Boolean = false;
 
     @Prop({
+      // TODO: 文档中是 native-type，但是这里却是 nativeType
       group: '主要属性',
       title: '原生类型',
       description: '原生 type 属性',
@@ -156,6 +166,7 @@ namespace nasl.ui {
     autoInsertSpace: nasl.core.Boolean;
 
     @Prop({
+      // HACK: 文档中没有提到 isPopConfirm
       group: '主要属性',
       title: '是否开启二次确认',
       description: '是否开启二次确认',
@@ -164,6 +175,7 @@ namespace nasl.ui {
     isPopConfirm: nasl.core.Boolean;
 
     @Prop<VanButtonOptions, 'title'>({
+      // HACK: 文档中没有提到 title
       group: '主要属性',
       title: '二次确认标题',
       description: '二次确认标题',
@@ -173,6 +185,7 @@ namespace nasl.ui {
     title: nasl.core.String = '确认操作？';
 
     @Prop<VanButtonOptions, 'confirmButtonText'>({
+      // HACK: 文档中没有提到 confirmButtonText
       group: '主要属性',
       title: '弹框确认按钮文字',
       description: '二次确认弹框确认按钮文字',
@@ -182,6 +195,7 @@ namespace nasl.ui {
     confirmButtonText: nasl.core.String = '确认';
 
     @Prop<VanButtonOptions, 'cancelButtonText'>({
+      // HACK: 文档中没有提到 cancelButtonText
       group: '主要属性',
       title: '弹框取消按钮文字',
       description: '二次确认弹框取消按钮文字',
@@ -207,6 +221,7 @@ namespace nasl.ui {
     block: nasl.core.Boolean = false;
 
     @Prop({
+      // TODO: 文档中是 loading-text，但是这里却是 loadingText
       group: '主要属性',
       title: '加载文字',
       description: '加载状态下的文字',
@@ -226,12 +241,29 @@ namespace nasl.ui {
     loadingType: 'circular' | 'spinner' = 'circular';
 
     @Prop({
+      // TODO: 文档中是 loading-size，但是这里却是 loadingSize
       group: '主要属性',
       title: '加载大小',
       description: '加载图标大小',
       setter: { concept: 'InputSetter' },
     })
     loadingSize: nasl.core.String;
+
+    // TODO: 缺失文档中的 icon-prefix
+
+    // TODO: 缺失文档中的 icon-position
+
+    // TODO: 缺失文档中的 tag
+
+    // TODO: 缺失文档中的 square
+
+    // TODO: 缺失文档中的 hairline
+
+    // TODO: 缺失文档中的 to
+
+    // TODO: 缺失文档中的 replace
+    
+
 
     @Event({
       title: '点击时',

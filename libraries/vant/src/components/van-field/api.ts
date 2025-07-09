@@ -21,6 +21,7 @@ namespace nasl.ui {
   }
 
   export class VanFieldOptions extends ViewComponentOptions {
+    // TODO: 文档中是 v-model，但是这里却是 modelValue
     @Prop({
       group: '数据属性',
       sync: true,
@@ -31,6 +32,7 @@ namespace nasl.ui {
     modelValue: nasl.core.String;
 
     @Prop({
+      //TODO: 官方是所有原生 type 的值(也包括digit)，但是这里却是枚举
       group: '主要属性',
       title: '类型',
       description: '输入框类型',
@@ -81,6 +83,7 @@ namespace nasl.ui {
     readonly: nasl.core.Boolean = false;
 
     @Prop({
+      //TODO: 官方文档中是 number | string，但是这里却是Decimal类型
       group: '主要属性',
       title: '最大文本长度',
       description: '用户最多可以输入的文本长度',
@@ -89,6 +92,7 @@ namespace nasl.ui {
     maxlength: nasl.core.String | nasl.core.Decimal;
 
     @Prop({
+      //TODO: 官方文档中是在“large"和 "normal"之间选择，这里是small和large
       group: '主要属性',
       title: '尺寸',
       description: '输入框尺寸',
@@ -157,6 +161,8 @@ namespace nasl.ui {
     showLabel: nasl.core.Boolean = true;
 
     @Prop({
+      //TODO: required 这个属性不仅能接受 true/false 两个布尔值，
+      // 还支持一个特殊值 'auto'，表示让组件自己根据上下文自动决定是否加星号
       group: '主要属性',
       title: '是否必填',
       description: '是否必填',
@@ -173,6 +179,7 @@ namespace nasl.ui {
     autofocus: nasl.core.Boolean = false;
 
     @Prop({
+      //TODO: 官方文档中只支持String
       group: '主要属性',
       title: '自动完成',
       description: '自动完成',
@@ -197,6 +204,8 @@ namespace nasl.ui {
     rows: nasl.core.Integer = 3;
 
     @Prop({
+      //TODO: vant同时支持 { maxHeight, minHeight } 对象,
+      // 代码只支持 boolean。
       group: '主要属性',
       title: '自动调整高度',
       description: '是否自动调整高度',
@@ -221,6 +230,8 @@ namespace nasl.ui {
     minHeight: nasl.core.String;
 
     @Prop({
+      //TODO: 官方文档中是 input-align，但是这里却是 inputAlign,
+      // 且官方文档中是只支持center和 right
       group: '主要属性',
       title: '输入框对齐方式',
       description: '输入框对齐方式',
@@ -232,6 +243,7 @@ namespace nasl.ui {
     inputAlign: 'left' | 'center' | 'right' = 'left';
 
     @Prop({
+
       group: '主要属性',
       title: '错误信息',
       description: '错误信息',
@@ -246,6 +258,31 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     error: nasl.core.Boolean = false;
+
+
+    //TODO: 缺失name属性
+    //TODO: 缺失id属性
+    //TODO: 缺失border属性
+    //TODO: 缺失colon属性
+    //TODO: 缺失center属性
+    //TODO: 缺失clear-icon属性
+    //TODO: 缺失clear-trigger属性
+    //TODO: 缺失clickable属性
+    //TODO: 缺失is-link属性
+    //TODO: 缺失show-word-limit属性
+    //TODO: 缺失error-message属性
+    //TODO: 缺失error-message-align属性
+    //TODO: 缺失formatter属性
+    //TODO: 缺失format-trigger属性
+    //TODO: 缺失arrow-direction属性
+    //TODO: 缺失label-class属性
+    //TODO: 缺失icon-prefix属性
+    //TODO: 缺失rules属性
+    //TODO: 缺失autocapitalize属性
+    //TODO: 缺失enterkeyhint属性
+    //TODO: 缺失autocorrect属性
+    //TODO: 缺失inputmode属性
+
 
     @Event({
       title: '输入时',

@@ -33,6 +33,7 @@ namespace nasl.ui {
     text: nasl.core.String = '';
 
     @Prop({
+      //TODO: 缺少 'default' 默认值；初始值 '' 应改为 'default'
       group: '主要属性',
       title: '类型',
       description: '标签类型',
@@ -58,6 +59,7 @@ namespace nasl.ui {
     color: nasl.core.String;
 
     @Prop({
+      //TODO: 官方用 'medium' ，而代码用 'default'
       group: '主要属性',
       title: '尺寸',
       description: '标签尺寸',
@@ -73,6 +75,7 @@ namespace nasl.ui {
     size: 'small' | 'default' | 'large' = 'default';
 
     @Prop({
+      //HUSK: 文档中没有提到effect
       group: '主要属性',
       title: '主题',
       description: '标签主题',
@@ -88,6 +91,8 @@ namespace nasl.ui {
     effect: 'dark' | 'light' | 'plain' = 'light';
 
     @Prop({
+      // TODO: vant文档中应该是closeable，而不是closable,
+      // 但修改以后会和el中的描述不一样，el中也是closable
       group: '交互属性',
       title: '可关闭',
       description: '是否可关闭',
@@ -96,6 +101,8 @@ namespace nasl.ui {
     closable: nasl.core.Boolean = false;
 
     @Prop({
+      // HUSK: 文档中没有提到disableTransitions,
+      // TODO: 描述与el不一样
       group: '交互属性',
       title: '禁用渐变动画',
       description: '是否禁用渐变动画',
@@ -104,6 +111,7 @@ namespace nasl.ui {
     disableTransitions: nasl.core.Boolean = false;
 
     @Prop({
+      //TODO: 官方文档中是 mark，但是这里却是 hit,且描述与el不一样
       group: '交互属性',
       title: '描边',
       description: '是否有边框描边',
@@ -112,6 +120,7 @@ namespace nasl.ui {
     hit: nasl.core.Boolean = false;
 
     @Prop({
+      //TODO: 和el中的描述不一样
       group: '交互属性',
       title: '圆角',
       description: '是否为圆角标签',
@@ -120,6 +129,7 @@ namespace nasl.ui {
     round: nasl.core.Boolean = false;
 
     @Prop({
+      //HUSK: 文档中没有提到icon
       group: '主要属性',
       title: '图标',
       description: '标签左侧图标',
