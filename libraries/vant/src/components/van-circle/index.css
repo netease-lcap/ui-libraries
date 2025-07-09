@@ -1,0 +1,55 @@
+.van-circle {
+  position: relative;
+  display: inline-block;
+  width: var(--circle-size, 100px);
+  height: var(--circle-size, 100px);
+}
+
+.van-circle__svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.van-circle__layer {
+  stroke: var(--van-circle-layer-color, #ebedf0);
+  fill: var(--van-circle-fill, #fff);
+}
+
+.van-circle__hover {
+  stroke: var(--van-circle-color, #1989fa);
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.3s ease-in-out;
+}
+
+.van-circle__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--circle-text-color, #323233);
+  font-size: var(--circle-text-size, 14px);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1;
+}
+
+.van-circle__text--top {
+  top: 0;
+  transform: translate(-50%, 0);
+}
+
+.van-circle__text--bottom {
+  top: 100%;
+  transform: translate(-50%, -100%);
+}
+
+.van-circle--clockwise .van-circle__hover {
+  stroke-dasharray: var(--van-circle-dasharray);
+}
+
+.van-circle--counter-clockwise .van-circle__hover {
+  stroke-dasharray: var(--van-circle-dasharray);
+  transform: rotate(180deg);
+} 

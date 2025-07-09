@@ -139,4 +139,4 @@ namespace nasl.ui {
     })
     onClose: (event: MouseEvent) => void;
   }
-} 
+}

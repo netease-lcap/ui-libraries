@@ -13,4 +13,4 @@ function VanBadgeRegister(BaseComponent, plugin = {}, extend = true) {
 const VanBadge = registerComponent(VantBadge, { plugin: basicPlugin, name: 'van-badge' });
 export { VantBadge, VanBadge, VanBadgeRegister };
 
-export default VanBadge; 
+export default VanBadge;

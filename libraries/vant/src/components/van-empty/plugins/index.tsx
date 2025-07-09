@@ -4,7 +4,7 @@ export function handleEmptyStyle(props) {
   const descriptionColor = props.get('descriptionColor') ?? '#969799';
   const descriptionFontSize = props.get('descriptionFontSize') ?? '14px';
   const bottomMarginTop = props.get('bottomMarginTop') ?? '24px';
-  
+
   return {
     style: {
       '--empty-image-width': imageWidth,
@@ -19,10 +19,10 @@ export function handleEmptyStyle(props) {
 export function handleEmptyImage(props) {
   const image = props.get('image') ?? 'default';
   const customImage = props.get('customImage');
-  
+
   if (customImage) {
     return { image: customImage };
   }
-  
+
   return { image };
-} 
+}

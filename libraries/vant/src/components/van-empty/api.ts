@@ -134,4 +134,4 @@ namespace nasl.ui {
     })
     slotDescription: () => Array<ViewComponent>;
   }
-} 
+}

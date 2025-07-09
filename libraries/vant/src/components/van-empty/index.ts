@@ -13,4 +13,4 @@ function VanEmptyRegister(BaseComponent, plugin = {}, extend = true) {
 const VanEmpty = registerComponent(VantEmpty, { plugin: basicPlugin, name: 'van-empty' });
 export { VantEmpty, VanEmpty, VanEmptyRegister };
 
-export default VanEmpty; 
+export default VanEmpty;

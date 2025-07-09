@@ -4,7 +4,7 @@ export function handleDividerStyle(props) {
   const borderStyle = props.get('borderStyle') ?? 'solid';
   const marginLeft = props.get('marginLeft') ?? '16px';
   const marginRight = props.get('marginRight') ?? '16px';
-  
+
   return {
     style: {
       color,
@@ -14,4 +14,4 @@ export function handleDividerStyle(props) {
       marginRight,
     },
   };
-} 
+}

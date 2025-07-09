@@ -13,4 +13,4 @@ function VanDividerRegister(BaseComponent, plugin = {}, extend = true) {
 const VanDivider = registerComponent(VantDivider, { plugin: basicPlugin, name: 'van-divider' });
 export { VantDivider, VanDivider, VanDividerRegister };
 
-export default VanDivider; 
+export default VanDivider;

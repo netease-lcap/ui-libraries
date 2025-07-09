@@ -115,4 +115,4 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
   }
-} 
+}

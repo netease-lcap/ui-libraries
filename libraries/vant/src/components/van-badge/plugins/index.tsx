@@ -4,4 +4,4 @@ export function handleLeftOffset(props) {
   return {
     offset: [leftOffset, topOffset],
   };
-} 
+}
