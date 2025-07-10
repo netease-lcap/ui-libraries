@@ -4,7 +4,7 @@ import '@/utils/index';
 export { VanText } from './van-text';
 // export { VanPicker } from './van-picker';
 // export { VanField } from './van-field';
-// export { VanButton } from './van-button';
+export { VanButton } from './van-button';
 // export { VanTag } from './van-tag';
 // export { VanBadge } from './van-badge';
 // export { VanDivider } from './van-divider';

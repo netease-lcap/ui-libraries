@@ -27,9 +27,9 @@ export const Default = {
   }),
   args: {
     text: '默认按钮',
-    type: '',
-    size: 'default',
+    type: 'primary',
     disabled: false,
+    plain: false,
     loading: false,
   },
 };
