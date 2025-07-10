@@ -480,7 +480,7 @@ export default {
                 return undefined;
             const inFixedLeftList = this.isInFixedList(columnVM, this.fixedLeftList);
             let isLastInList = list[columnIndex + 1] && !list[columnIndex + 1].fixed;
-            if (columnVM.$parent.isGroup) {
+            if (columnVM.$parent.isGroup && this.visibleTableHeadTrArr) {
                 const groupList = this.visibleTableHeadTrArr.find((tableHeadTr) => tableHeadTr.includes(columnVM.$parent));
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
@@ -504,7 +504,7 @@ export default {
         isFirstRightFixed(columnVM, columnIndex, list) {
             const inFixedRightList = this.isInFixedList(columnVM, this.fixedRightList);
             let isLastInList = list[columnIndex - 1] && !list[columnIndex - 1].fixed;
-            if (columnVM.$parent.isGroup) {
+            if (columnVM.$parent.isGroup && this.visibleTableHeadTrArr) {
                 const groupList = this.visibleTableHeadTrArr.find((tableHeadTr) => tableHeadTr.includes(columnVM.$parent));
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
@@ -671,6 +671,7 @@ export default {
             this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
         },
         onScrollView(data) {
+            this.$emit('scroll-view', data);
             this.hasScroll = true;
             if (!this.useStickyFixed) {
                 this.syncScrollViewScroll(data.scrollTop, data.target);

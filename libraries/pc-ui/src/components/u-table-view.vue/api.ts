@@ -515,6 +515,46 @@ namespace nasl.ui {
       ellipsis: nasl.core.Boolean = false;
 
       @Prop({
+        group: '主要属性',
+        title: '显示表尾计算行',
+        docDescription: '是否在表尾显示功能行。默认关闭',
+        setter: {
+            concept: 'SwitchSetter',
+        },
+        onChange: [{
+            clear: ['footerCalcType', 'footerCalcText'],
+            if: (_) => _ === false,
+          }],
+     })
+     footerCalcShow: nasl.core.Boolean = false;
+      
+     @Prop({
+        group: '主要属性',
+        title: '表尾计算行第一列文本',
+        docDescription: '表尾计算行第一列文本',
+        if: _ => _.footerCalcShow === true,
+     })
+     footerCalcText: nasl.core.String = '合计';
+
+     @Prop({
+        group: '主要属性',
+        title: '表尾计算行功能选项',
+        docDescription: '表尾计算行功能选项。默认求和',
+        setter: {
+            concept: 'EnumSelectSetter',
+            options: [
+                { title: '求和' },
+                { title: '最大值' },
+                { title: '最小值' },
+                { title: '平均值' },
+            ],
+        },
+        if: _ => _.footerCalcShow === true,
+     })
+     footerCalcType: 'sum' | 'max' | 'min' | 'average' = 'sum';
+
+
+      @Prop({
           group: '交互属性',
           title: '悬浮高亮行',
           description: '表格行在悬浮时是否高亮显示',
