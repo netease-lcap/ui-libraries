@@ -68,8 +68,30 @@
         :showHead="showHead"
         :rootWidth="rootWidth"
         :value-field="valueField"
-        :useMask="useMask">
+        :useMask="useMask"
+        
+        @scroll-view="onScrollViewRenderTable">
     </u-table-designer>
+    <u-table-render-footer
+        v-if="footerCalcShow"
+        ref="footerRender"
+        :visibleColumnVMs="visibleColumnVMs"
+        :currentData="currentData"
+        :currentDataSource="currentDataSource"
+        :calcType="footerCalcType"
+        :calcText="footerCalcText"
+        
+        :useStickyFixed="useStickyFixed"
+        :fixedRightList="fixedRightList"
+        :fixedLeftList="fixedLeftList"
+
+        :tableWidth="tableWidth"
+        :columnVMsMap="columnVMsMap"
+
+        :line="line"
+        :ellipsis="ellipsis"
+        >
+    </u-table-render-footer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
         :total-items="currentDataSource.total" :page="currentDataSource.paging && currentDataSource.paging.number"
@@ -178,8 +200,29 @@
         :currentValues="currentValues"
         :lazyLoad="lazyLoad"
         :bufferSize="bufferSize"
-        @resize="onResizerDragEnd">
+        @resize="onResizerDragEnd"
+        @scroll-view="onScrollViewRenderTable">
     </u-table-render>
+    <u-table-render-footer
+        v-if="footerCalcShow && currentData && currentData.length > 0"
+        ref="footerRender"
+        :visibleColumnVMs="visibleColumnVMs"
+        :currentData="currentData"
+        :currentDataSource="currentDataSource"
+        :calcType="footerCalcType"
+        :calcText="footerCalcText"
+        
+        :useStickyFixed="useStickyFixed"
+        :fixedRightList="fixedRightList"
+        :fixedLeftList="fixedLeftList"
+
+        :tableWidth="tableWidth"
+        :columnVMsMap="columnVMsMap"
+
+        :line="line"
+        :ellipsis="ellipsis"
+        >
+    </u-table-render-footer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
         :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
@@ -219,6 +262,7 @@ import * as xlsxUtils from '../../utils/xlsx';
 import UTableRender from './render.table.vue';
 import UTableDesigner from './designer.table.vue';
 import TreeTableMixin from './tree-table-mixins';
+import UTableRenderFooter from './render.footer.vue';
 
 export default {
     name: 'u-table-view',
@@ -227,6 +271,7 @@ export default {
         SEmpty,
         UTableRender,
         UTableDesigner,
+        UTableRenderFooter,
     },
     mixins: [
       MEmitter,
@@ -388,6 +433,15 @@ export default {
         prevIcon: { type: String },
         nextIcon: { type: String },
         selectDropdownIcon: { type: String },
+
+        footerCalcType: { type: String, default: 'sum' },
+        footerCalcText: {
+            type: String,
+            default() {
+                return this.$tt('footerCalc');
+            },
+        },
+        footerCalcShow: { type: Boolean, default: false },
     },
     data() {
         return {
@@ -1069,7 +1123,8 @@ export default {
                         const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
                         const headHeight = headEl ? headEl.offsetHeight : 0;
                         const paginationHeight = this.getPaginationHeight();
-                        this.bodyHeight = rootHeight - titleHeight - headHeight - paginationHeight;
+                        const footerHeight = this.$refs.footerRender ? this.$refs.footerRender.$el.offsetHeight : 0;
+                        this.bodyHeight = rootHeight - titleHeight - headHeight - paginationHeight - footerHeight;
                     }
                 } else {
                     this.bodyHeight = undefined;
@@ -1078,7 +1133,8 @@ export default {
                 // 当 root 设置了 height，设置 table 的 height，避免隐藏列时的闪烁
                 if (this.$el.style.height !== '' && this.$el.style.height !== 'auto') {
                     const paginationHeight = this.getPaginationHeight();
-                    this.tableHeight = this.$el.offsetHeight - paginationHeight;
+                    const footerHeight = this.$refs.footerRender ? this.$refs.footerRender.$el.offsetHeight : 0;
+                    this.tableHeight = this.$el.offsetHeight - paginationHeight - footerHeight;
                 } else {
                     this.tableHeight = undefined;
                 }
@@ -2956,6 +3012,9 @@ export default {
         // for 外部调用
         resetEdit(item) {
             item.editing = '';
+        },
+        onScrollViewRenderTable(data) {
+            this.$refs.footerRender && this.$refs.footerRender.syncScroll(data);
         },
     },
 };
