@@ -20,27 +20,7 @@ namespace nasl.ui {
   }
 
   export class VanDividerOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '分割线方向',
-      description: '设置分割线方向',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '水平' }, { title: '垂直' }],
-      },
-    })
-    direction: 'horizontal' | 'vertical' = 'horizontal';
 
-    @Prop({
-      group: '主要属性',
-      title: '分割线文案的位置',
-      description: '设置分割线文案的位置',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '左侧' }, { title: '右侧' }, { title: '中心' }],
-      },
-    })
-    contentPosition: 'left' | 'right' | 'center' = 'center';
 
     @Prop({
       group: '主要属性',
@@ -60,54 +40,22 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '内容',
-      description: '分割线内容',
-      setter: { concept: 'InputSetter' },
-    })
-    content: nasl.core.String;
-
-    @Prop({
-      group: '样式属性',
-      title: '颜色',
-      description: '分割线颜色',
-      setter: { concept: 'InputSetter' },
-    })
-    color: nasl.core.String = '#dcdee0';
-
-    @Prop({
-      group: '样式属性',
-      title: '字体大小',
-      description: '文字字体大小',
-      setter: { concept: 'InputSetter' },
-    })
-    fontSize: nasl.core.String = '14px';
-
-    @Prop({
-      group: '样式属性',
-      title: '边框样式',
-      description: '边框样式',
+      title: '内容位置',
+      description: '内容位置',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '实线' }, { title: '虚线' }, { title: '点线' }],
+        options: [{ title: '左' }, { title: '右' }, { title: '居中' }],
       },
     })
-    borderStyle: 'solid' | 'dashed' | 'dotted' = 'solid';
+    contentPosition: 'left' | 'right' | 'center' = 'center';
 
     @Prop({
       group: '主要属性',
-      title: '左边距',
-      description: '左边距',
-      setter: { concept: 'InputSetter' },
+      title: '垂直分割线',
+      description: '是否为垂直分割线',
+      setter: { concept: 'SwitchSetter' },
     })
-    marginLeft: nasl.core.String = '16px';
-
-    @Prop({
-      group: '主要属性',
-      title: '右边距',
-      description: '右边距',
-      setter: { concept: 'InputSetter' },
-    })
-    marginRight: nasl.core.String = '16px';
+    vertical: nasl.core.Boolean = false;
 
     @Slot({
       title: 'Default',

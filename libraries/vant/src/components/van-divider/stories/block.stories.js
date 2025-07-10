@@ -1,8 +1,8 @@
 import Component from '../index';
 
 export default {
-  id: 'van-button-blocks',
-  title: '组件列表/Button 按钮/区块',
+  id: 'van-divider-blocks',
+  title: '组件列表/Divider 分割线/区块',
   component: Component,
   parameters: {
     layout: 'padded',
@@ -11,13 +11,13 @@ export default {
 };
 
 export const Block1 = {
-  name: '按钮',
+  name: '分割线',
   render: () => ({
     setup() {
       return {};
     },
     template: `
-      <van-button  text="按钮" ></van-button>
+      <van-divider>分割线</van-divider>
     `,
   }),
 };

@@ -1,8 +1,8 @@
 import Component from '../index';
 
 export default {
-  id: 'van-button-blocks',
-  title: '组件列表/Button 按钮/区块',
+  id: 'van-empty-blocks',
+  title: '组件列表/Empty 空状态/区块',
   component: Component,
   parameters: {
     layout: 'padded',
@@ -11,13 +11,13 @@ export default {
 };
 
 export const Block1 = {
-  name: '按钮',
+  name: '空状态',
   render: () => ({
     setup() {
       return {};
     },
     template: `
-      <van-button  text="按钮" ></van-button>
+      <van-empty image="default" description="暂无数据" />
     `,
   }),
 };

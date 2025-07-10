@@ -47,7 +47,7 @@ namespace nasl.ui {
         ],
       },
     })
-    type: '' | 'primary' | 'success' | 'warning' | 'danger' = '';
+    type: 'default' | 'primary' | 'success' | 'warning' | 'danger' = 'default';
 
     @Prop({
       group: '主要属性',
@@ -73,59 +73,52 @@ namespace nasl.ui {
     size: 'small' | 'default' | 'large' = 'default';
 
     @Prop({
-      group: '主要属性',
-      title: '主题',
-      description: '标签主题',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '深色' },
-          { title: '浅色' },
-          { title: '朴素' },
-        ],
-      },
-    })
-    effect: 'dark' | 'light' | 'plain' = 'light';
-
-    @Prop({
       group: '交互属性',
       title: '可关闭',
       description: '是否可关闭',
       setter: { concept: 'SwitchSetter' },
     })
-    closable: nasl.core.Boolean = false;
+    closeable: nasl.core.Boolean = false;
 
     @Prop({
       group: '交互属性',
-      title: '禁用渐变动画',
-      description: '是否禁用渐变动画',
+      title: '是否展示标签',
+      description: '是否展示标签',
       setter: { concept: 'SwitchSetter' },
     })
-    disableTransitions: nasl.core.Boolean = false;
+    show: nasl.core.Boolean = true;
 
     @Prop({
       group: '交互属性',
-      title: '描边',
-      description: '是否有边框描边',
+      title: '是否朴素',
+      description: '是否朴素',
       setter: { concept: 'SwitchSetter' },
     })
-    hit: nasl.core.Boolean = false;
+    plain: nasl.core.Boolean = false;
 
     @Prop({
       group: '交互属性',
-      title: '圆角',
-      description: '是否为圆角标签',
+      title: '是否圆角',
+      description: '是否圆角',
       setter: { concept: 'SwitchSetter' },
     })
     round: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '图标',
-      description: '标签左侧图标',
-      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+      group: '交互属性',
+      title: '是否标记',
+      description: '是否标记',
+      setter: { concept: 'SwitchSetter' },
     })
-    icon: nasl.core.String;
+    mark: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '交互属性',
+      title: '文本颜色',
+      description: '文本颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    textColor: nasl.core.String;
 
     @Event({
       title: '点击',

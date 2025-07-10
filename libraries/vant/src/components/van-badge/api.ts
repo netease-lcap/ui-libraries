@@ -22,14 +22,6 @@ namespace nasl.ui {
   export class VanBadgeOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
-      title: '显示值',
-      description: '显示值',
-      setter: { concept: 'InputSetter' },
-    })
-    value: any;
-
-    @Prop({
-      group: '主要属性',
       title: '最大值',
       description: "最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型",
       setter: { concept: 'NumberInputSetter' },
@@ -42,26 +34,7 @@ namespace nasl.ui {
       description: '小圆点',
       setter: { concept: 'SwitchSetter' },
     })
-    isDot: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '隐藏',
-      description: '隐藏 badge',
-      setter: { concept: 'SwitchSetter' },
-    })
-    hidden: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '类型',
-      description: '类型',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '主要' }, { title: '成功' }, { title: '警告' }, { title: '危险' }, { title: '信息' }],
-      },
-    })
-    type: 'primary' | 'success' | 'warning' | 'danger' | 'info' = 'danger';
+    dot: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -77,7 +50,7 @@ namespace nasl.ui {
       description: '背景色',
       setter: { concept: 'InputSetter' },
     })
-    color: nasl.core.String = '';
+    color: nasl.core.String = '#ee0a24';
 
     @Prop({
       group: '主要属性',
@@ -113,14 +86,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     content: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '徽标样式',
-      description: '徽标样式',
-      setter: { concept: 'InputSetter' },
-    })
-    badgeStyle: nasl.core.String;
 
     @Slot({
       title: '默认内容',

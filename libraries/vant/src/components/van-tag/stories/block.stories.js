@@ -1,8 +1,8 @@
 import Component from '../index';
 
 export default {
-  id: 'van-button-blocks',
-  title: '组件列表/Button 按钮/区块',
+  id: 'van-tag-blocks',
+  title: '组件列表/Tag 标签/区块',
   component: Component,
   parameters: {
     layout: 'padded',
@@ -17,7 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-      <van-button  text="按钮" ></van-button>
+      <van-tag text="标签" ></van-tag>
     `,
   }),
 };
