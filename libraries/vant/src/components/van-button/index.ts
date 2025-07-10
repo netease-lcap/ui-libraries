@@ -1,6 +1,5 @@
 import { Button as VantButton } from 'vant';
 import _ from 'lodash';
-import { defineComponent } from 'vue';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins';
 

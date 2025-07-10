@@ -162,7 +162,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class VanFormRate extends ViewComponent {
-    constructor(options?: Partial<VanFormRateOptions & ElFormItemProOptions & Omit<VanRateOptions, keyof ElFormItemProOptions>>) {
+    constructor(options?: Partial<VanFormRateOptions >) {
       super();
     }
   }

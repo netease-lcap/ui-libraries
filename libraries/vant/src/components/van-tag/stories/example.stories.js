@@ -24,10 +24,9 @@ export const Default = {
   }),
   args: {
     text: '标签',
-    type: '',
+    type: 'primary',
     size: 'default',
-    effect: 'light',
-    closable: false,
+    closeable: true,
   },
 };
 

@@ -263,7 +263,7 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class VanFormSearch extends ViewComponent {
-    constructor(options?: Partial<VanFormSearchOptions & ElFormItemProOptions & Omit<VanSearchOptions, keyof ElFormItemProOptions>>) {
+    constructor(options?: Partial<VanFormSearchOptions >) {
       super();
     }
   }
