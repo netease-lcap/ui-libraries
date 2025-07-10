@@ -586,4 +586,12 @@ td[sub-form-drop-column]::after {
     border-top: 0;
 }
 
+.footer-calc {
+    overflow: hidden;
+}
+
+.footer-calc .cell {
+    background-color: var(--table-view-footer-calc-background);
+}
+
 
