@@ -14,10 +14,10 @@ export function handlePreview(props) {
     const previewText = inIDE || _.isNil(insProps.modelValue) ? '-' : insProps.modelValue;
     // return <el-text text={previewText}></el-text>;
   };
-  
+
   // const { render, insRef } = getRender(Component, previewRender, isPreview);
   return {
     // ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
     // render,
   };
-} 
+}
