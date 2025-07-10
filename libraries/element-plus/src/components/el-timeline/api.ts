@@ -69,7 +69,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    timestampField: (item: T) => V = ((item: any) => item.timestamp) as any;
+    timestampField: (item: T) => nasl.core.String = ((item: any) => item.timestamp) as any;
 
     @Prop<ElTimelineOptions<T, V>, 'hideTimestampField'>({
       group: '数据属性',
@@ -80,7 +80,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    hideTimestampField: (item: T) => V = ((item: any) => item.hideTimestamp) as any;
+    hideTimestampField: (item: T) => nasl.core.Boolean = ((item: any) => item.hideTimestamp) as any;
 
     @Prop<ElTimelineOptions<T, V>, 'centerField'>({
       group: '数据属性',
@@ -91,7 +91,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    centerField: (item: T) => V = ((item: any) => item.center) as any;
+    centerField: (item: T) => nasl.core.Boolean = ((item: any) => item.center) as any;
 
     @Prop<ElTimelineOptions<T, V>, 'placementField'>({
       group: '数据属性',
@@ -102,7 +102,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    placementField: (item: T) => V = ((item: any) => item.placement) as any;
+    placementField: (item: T) => nasl.core.String = ((item: any) => item.placement) as any;
 
     @Prop<ElTimelineOptions<T, V>, 'typeField'>({
       group: '数据属性',
@@ -113,7 +113,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    typeField: (item: T) => V = ((item: any) => item.type) as any;
+    typeField: (item: T) => nasl.core.String = ((item: any) => item.type) as any;
 
     @Prop<ElTimelineOptions<T, V>, 'colorField'>({
       group: '数据属性',
@@ -125,7 +125,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    colorField: (item: T) => V = ((item: any) => item.color) as any;
+    colorField: (item: T) => nasl.core.String = ((item: any) => item.color) as any;
 
     @Prop<ElTimelineOptions<T, V>, 'sizeField'>({
       group: '数据属性',
@@ -136,7 +136,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    sizeField: (item: T) => V = ((item: any) => item.size) as any;
+    sizeField: (item: T) => nasl.core.String = ((item: any) => item.size) as any;
 
     @Prop<ElTimelineOptions<T, V>, 'iconField'>({
       group: '数据属性',
@@ -147,7 +147,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    iconField: (item: T) => V = ((item: any) => item.icon) as any;
+    iconField: (item: T) => nasl.core.String = ((item: any) => item.icon) as any;
 
     @Prop<ElTimelineOptions<T, V>, 'hollowField'>({
       group: '数据属性',
@@ -158,7 +158,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    hollowField: (item: T) => V = ((item: any) => item.hollow) as any;
+    hollowField: (item: T) => nasl.core.Boolean = ((item: any) => item.hollow) as any;
 
     @Slot({
       title: 'Default',
