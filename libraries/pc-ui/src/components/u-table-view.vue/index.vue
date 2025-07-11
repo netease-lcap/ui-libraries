@@ -69,7 +69,7 @@
         :rootWidth="rootWidth"
         :value-field="valueField"
         :useMask="useMask"
-        
+
         @scroll-view="onScrollViewRenderTable">
     </u-table-designer>
     <u-table-render-footer
@@ -80,7 +80,7 @@
         :currentDataSource="currentDataSource"
         :calcType="footerCalcType"
         :calcText="footerCalcText"
-        
+
         :useStickyFixed="useStickyFixed"
         :fixedRightList="fixedRightList"
         :fixedLeftList="fixedLeftList"
@@ -96,6 +96,9 @@
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
         :total-items="currentDataSource.total" :page="currentDataSource.paging && currentDataSource.paging.number"
         :page-size="currentDataSource.paging && currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
+        :next-icon="nextIcon"
+        :prev-icon="prevIcon"
+        :select-dropdown-icon="selectDropdownIcon"
         :size="paginationSize"
         @change="page($event.page)" @change-page-size="onChangePageSize">
     </u-pagination>
@@ -211,7 +214,7 @@
         :currentDataSource="currentDataSource"
         :calcType="footerCalcType"
         :calcText="footerCalcText"
-        
+
         :useStickyFixed="useStickyFixed"
         :fixedRightList="fixedRightList"
         :fixedLeftList="fixedLeftList"
@@ -1655,7 +1658,7 @@ export default {
                         }
                     },
                 ));
-                
+
                 const newResult = this.removeExcludeColumns(footerRes, excludeColumns, [], titleColIndexRelations);
                 res = res.concat(newResult[0]);
                 this.exportFooterData = undefined;
