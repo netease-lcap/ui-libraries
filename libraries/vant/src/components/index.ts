@@ -13,3 +13,4 @@ export { VanEmpty } from './van-empty';
 // export { VanPasswordInput } from './van-password-input';
 // export { VanRate } from './van-rate';
 // export { VanSearch } from './van-search';
+export { VanIcon } from './van-icon';
