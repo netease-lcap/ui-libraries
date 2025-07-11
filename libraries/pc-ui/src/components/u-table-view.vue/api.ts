@@ -517,12 +517,12 @@ namespace nasl.ui {
       @Prop({
         group: '主要属性',
         title: '显示表尾计算行',
-        docDescription: '是否在表尾显示功能行。默认关闭',
+        description: '是否在表尾显示功能行。默认关闭',
         setter: {
             concept: 'SwitchSetter',
         },
         onChange: [{
-            clear: ['footerCalcType', 'footerCalcText'],
+            clear: ['footerCalcType', 'footerCalcText', 'footerCalcFormater'],
             if: (_) => _ === false,
           }],
      })
@@ -531,7 +531,7 @@ namespace nasl.ui {
      @Prop({
         group: '主要属性',
         title: '表尾计算行第一列文本',
-        docDescription: '表尾计算行第一列文本',
+        description: '表尾计算行第一列文本',
         if: _ => _.footerCalcShow === true,
      })
      footerCalcText: nasl.core.String = '合计';
@@ -539,7 +539,7 @@ namespace nasl.ui {
      @Prop({
         group: '主要属性',
         title: '表尾计算行功能选项',
-        docDescription: '表尾计算行功能选项。默认求和',
+        description: '表尾计算行功能选项。默认求和',
         setter: {
             concept: 'EnumSelectSetter',
             options: [
@@ -553,6 +553,17 @@ namespace nasl.ui {
      })
      footerCalcType: 'sum' | 'max' | 'min' | 'average' = 'sum';
 
+     @Prop({
+        group: '主要属性',
+        title: '表尾计算行格式设置',
+        description: '可为计算结果设置格式，如增加前后缀等。默认不设置',
+        bindOpen: true,
+        setter: {
+            concept: 'AnonymousFunctionSetter',
+        },
+        if: _ => _.footerCalcShow === true,
+      })
+      footerCalcFormater: (item: {value:nasl.core.Integer | nasl.core.Decimal | nasl.core.String , index: nasl.core.Integer}) => nasl.core.String;
 
       @Prop({
           group: '交互属性',

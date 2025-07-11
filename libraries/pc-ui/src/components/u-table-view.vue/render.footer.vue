@@ -1,22 +1,26 @@
 <template>
   <div :class="$style['footer-calc']" ref="footer">
-    <u-table :line="line" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth)}">
+    <u-table :line="line" :sticky-fixed="useStickyFixed" :style="{ width: number2Pixel(tableWidth) }">
       <colgroup>
         <col v-for="(columnVM, columnIndex) in visibleColumnVMs" :key="columnIndex" :width="columnVM.computedWidth" />
       </colgroup>
       <tbody>
         <tr :class="$style.row">
-          <td v-for="(columnVM, columnIndex) in visibleColumnVMs"
+          <td
+            v-for="(columnVM, columnIndex) in visibleColumnVMs"
             :class="$style.cell"
             :style="getStyle('td', columnVM, {})"
             :last-left-fixed="isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, {}, 0)"
             :first-right-fixed="isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs)"
-            :shadow="(isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, {}, 0) && !scrollXStart) || (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs) && !scrollXEnd)"
+            :shadow="
+              (isTdLastLeftFixed(columnVM, columnIndex, visibleColumnVMs, {}, 0) && !scrollXStart) ||
+              (isFirstRightFixed(columnVM, columnIndex, visibleColumnVMs) && !scrollXEnd)
+            "
             :colspan="getItemColSpan({}, 0, columnIndex)"
             :rowspan="getItemRowSpan({}, 0, columnIndex)"
             :ellipsis="getTdEllipsis(columnVM)"
             v-ellipsis-title>
-            <span>{{ calcData[columnIndex] }}</span>
+            <span>{{ formater(calcData[columnIndex], columnIndex) }}</span>
           </td>
         </tr>
       </tbody>
@@ -41,7 +45,10 @@ const CALC_CONFIG = {
   [CALC_TYPES.SUM]: { label: 'footerCalc', operation: (values) => values.reduce((a, b) => a + b, 0) },
   [CALC_TYPES.MAX]: { label: 'footerCalcMax', operation: (values) => Math.max.apply(null, values) },
   [CALC_TYPES.MIN]: { label: 'footerCalcMin', operation: (values) => Math.min.apply(null, values) },
-  [CALC_TYPES.AVG]: { label: 'footerCalcAverage', operation: (values) => values.reduce((a, b) => a + b, 0) / values.length },
+  [CALC_TYPES.AVG]: {
+    label: 'footerCalcAverage',
+    operation: (values) => values.reduce((a, b) => a + b, 0) / values.length,
+  },
 };
 
 export default {
@@ -71,6 +78,7 @@ export default {
       type: String,
       default: CALC_TYPES.SUM,
     },
+    calcFormater: Function,
   },
   computed: {
     calcData() {
@@ -84,6 +92,7 @@ export default {
       if (!config) {
         throw new Error(`不支持的计算类型: ${calcType}`);
       }
+      const currentData = this.currentData || [];
 
       const results = [];
       this.visibleColumnVMs.forEach((columnVM, columnIndex) => {
@@ -91,11 +100,13 @@ export default {
           results[columnIndex] = this.calcText || this.$tt(config.label);
         } else {
           let valueField = columnVM.field;
-          if(this.currentDataSource && this.currentDataSource.isSimpleItem) {
+          if (this.currentDataSource && this.currentDataSource.isSimpleItem) {
             valueField = 'simple';
           }
           if (valueField) {
-            const values = this.currentData.map((item) => isNumber(this.$at(item, valueField)) ? this.$at(item, valueField) : NaN);
+            const values = currentData.map((item) =>
+              isNumber(this.$at(item, valueField)) ? this.$at(item, valueField) : NaN,
+            );
             const precisions = [];
             let notNumber = true;
 
@@ -150,12 +161,18 @@ export default {
     getTdEllipsis(columnVM) {
       let ellipsis = false;
       if (columnVM.ellipsis === undefined) {
-          ellipsis = this.ellipsis;
+        ellipsis = this.ellipsis;
       } else {
-          ellipsis = columnVM.ellipsis;
+        ellipsis = columnVM.ellipsis;
       }
       return ellipsis && columnVM.type !== 'editable';
-    }
+    },
+    formater(value, index) {
+      if (this.calcFormater && index !== 0) {
+        return this.calcFormater({ value, index });
+      }
+      return value;
+    },
   },
 };
 </script>
