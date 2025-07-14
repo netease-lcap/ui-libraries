@@ -1,4 +1,3 @@
-import { multiply } from 'lodash';
 import VanUploader from '../index';
 
 export default {
@@ -17,16 +16,30 @@ export const Default = {
     setup() {
       return {
         args,
-        values: [
-          { url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg' },
-          // Uploader 根据文件后缀来判断是否为图片文件
-          // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
-          { url: 'https://cloud-image', isImage: true },
-        ],
       };
     },
+    data() {
+      return {
+        // values: JSON.stringify([
+        //   { url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg' },
+        //   // Uploader 根据文件后缀来判断是否为图片文件
+        //   // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
+        //   { url: 'https://cloud-image', isImage: true },
+        // ]),
+        values: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg,https://cloud-image',
+      };
+    },
+    methods: {
+      onOversize(file, detail) {
+        console.log('oversize', file, detail);
+      },
+      onUpdateModelValue(fileList) {
+        console.log('onUpdateModelValue', fileList);
+      },
+    },
     template: `
-      <van-uploader v-model:modelValue="values" multiple v-bind="args"/>
+      <van-uploader v-model="values" multiple v-bind="args" @oversize="onOversize" @update:uploadedModelValue="onUpdateModelValue"></van-uploader>
+      {{ values }}
     `,
   }),
   args: {
@@ -35,5 +48,9 @@ export const Default = {
     ttlValue: 1,
     multiple: true,
     autoUpload: true,
+    maxSize: '10KB',
+    maxCount: Infinity,
+    lcapIsCompress: true,
+    viaOriginURL: '',
   },
 };
