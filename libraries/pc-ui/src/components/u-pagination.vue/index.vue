@@ -2,7 +2,7 @@
 <nav :class="$style.root" :disabled="disabled" :readonly="readonly" :simple="simple" :size="size">
     <template v-if="simple">
         <a :class="[$style.item, {[$style.useIcon]: !!prevIcon}]" role="prev" :disabled="currentPage <= 1" @click="select(currentPage - 1)">
-          <i-ico :name="prevIcon" notext></i-ico>
+          <i-ico v-if="prevIcon" :name="prevIcon" notext></i-ico>
         </a>
         <div :class="$style['jumper-wrap']">
             <u-number-input :class="$style.jumper" :value="currentPage"
@@ -11,7 +11,7 @@
             </u-number-input> / {{ currentTotalPage }}
         </div>
         <a :class="[$style.item, {[$style.useIcon]: !!nextIcon}]" role="next" :disabled="currentPage >= currentTotalPage" @click="select(currentPage + 1)">
-          <i-ico :name="nextIcon" notext></i-ico>
+          <i-ico v-if="nextIcon" :name="nextIcon" notext></i-ico>
         </a>
     </template>
     <template v-else>

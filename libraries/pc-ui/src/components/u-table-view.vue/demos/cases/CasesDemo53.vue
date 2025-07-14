@@ -1,8 +1,11 @@
 <!-- 纯数组前端分页 -->
 <template>
     <u-linear-layout direction="vertical">
-        <u-button @click="changeData">changeData</u-button>
-        <u-table-view striped :data="data" pageable :page-size="10" footerCalcShow>
+        <u-linear-layout>
+            <u-button @click="changeData">changeData</u-button>
+            <u-button @click="exportExcel">导出 Excel</u-button>
+        </u-linear-layout>
+        <u-table-view ref="tableView" striped :data="data" pageable :page-size="10" footerCalcShow :footerCalcFormater="footerCalcFormater">
             <u-table-view-column title="用户名" field="name" width="15%"></u-table-view-column>
             <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
             <u-table-view-column title="地址" field="address"></u-table-view-column>
@@ -42,6 +45,16 @@ export default {
                 return item;
             });
         },
+        exportExcel() {
+            // this.$refs.tableView.exportExcel('', '', '', '', '', ['地址', '最近登录时间'], false);
+            this.$refs.tableView.exportExcel();
+        },
+        footerCalcFormater(item) {
+            if (item.value) {
+                return item.value + '元';
+            }
+            return item.value;
+        }
     },
 };
 </script>

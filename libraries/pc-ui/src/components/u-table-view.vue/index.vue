@@ -69,18 +69,18 @@
         :rootWidth="rootWidth"
         :value-field="valueField"
         :useMask="useMask"
-        
+
         @scroll-view="onScrollViewRenderTable">
     </u-table-designer>
     <u-table-render-footer
         v-if="footerCalcShow"
         ref="footerRender"
         :visibleColumnVMs="visibleColumnVMs"
-        :currentData="currentData"
+        :currentData="currentFooterData"
         :currentDataSource="currentDataSource"
         :calcType="footerCalcType"
         :calcText="footerCalcText"
-        
+
         :useStickyFixed="useStickyFixed"
         :fixedRightList="fixedRightList"
         :fixedLeftList="fixedLeftList"
@@ -96,6 +96,9 @@
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
         :total-items="currentDataSource.total" :page="currentDataSource.paging && currentDataSource.paging.number"
         :page-size="currentDataSource.paging && currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
+        :next-icon="nextIcon"
+        :prev-icon="prevIcon"
+        :select-dropdown-icon="selectDropdownIcon"
         :size="paginationSize"
         @change="page($event.page)" @change-page-size="onChangePageSize">
     </u-pagination>
@@ -207,11 +210,11 @@
         v-if="footerCalcShow && currentData && currentData.length > 0"
         ref="footerRender"
         :visibleColumnVMs="visibleColumnVMs"
-        :currentData="currentData"
+        :currentData="currentFooterData"
         :currentDataSource="currentDataSource"
         :calcType="footerCalcType"
         :calcText="footerCalcText"
-        
+
         :useStickyFixed="useStickyFixed"
         :fixedRightList="fixedRightList"
         :fixedLeftList="fixedLeftList"
@@ -221,6 +224,8 @@
 
         :line="line"
         :ellipsis="ellipsis"
+
+        :calcFormater="footerCalcFormater"
         >
     </u-table-render-footer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
@@ -442,6 +447,7 @@ export default {
             },
         },
         footerCalcShow: { type: Boolean, default: false },
+        footerCalcFormater: Function,
     },
     data() {
         return {
@@ -487,6 +493,7 @@ export default {
             tableHeadTrArr: [],
             currentPageSize: undefined,
             rootWidth: undefined,
+            exportFooterData: undefined,
         };
     },
     provide() {
@@ -565,6 +572,12 @@ export default {
         },
         isDesignerSubForm() {
             return this.$env.VUE_APP_DESIGNER && this.subForm;
+        },
+        currentFooterData() {
+            if (this.exportFooterData) {
+                return this.exportFooterData;
+            }
+            return this.currentData;
         },
     },
     watch: {
@@ -1613,6 +1626,46 @@ export default {
                 }
             });
             // console.timeEnd('复原表格');
+
+            if (this.footerCalcShow && this.$refs.footerRender) {
+                this.exportFooterData = arr;
+                await new Promise((res) => {
+                    this.$once('hook:updated', res);
+                });
+                const footerEl = this.$refs.footerRender.$el;
+                const bodyEl = footerEl && footerEl.querySelector('tbody');
+                const trs = Array.from(bodyEl.childNodes).filter((tr) => tr.nodeName === 'TR');
+                // let footerData = this.$refs.footerRender.getCalculation(this.footerCalcType, arr) || [];
+                // 为了与主表格保持一致，将footerData转换为字符串
+                // footerData = footerData.map((item)=>item+'');
+                const footerRes = trs.map((tr, rowIndex) => Array.from(tr.childNodes).map(
+                    (node, colIndex) => {
+                        if (node.nodeName === 'TD') {
+                            let title = node.innerText;
+                            const data = {
+                                v: title,
+                            };
+                            if (includeStyles) {
+                                const style = getXslxStyle(node);
+                                Object.assign(data, {
+                                    s: style.s,
+                                    rect: style.rect,
+                                });
+                            }
+                            return data;
+                        } else {
+                            return null;
+                        }
+                    },
+                ));
+
+                const newResult = this.removeExcludeColumns(footerRes, excludeColumns, [], titleColIndexRelations);
+                res = res.concat(newResult[0]);
+                this.exportFooterData = undefined;
+                await new Promise((res) => {
+                    this.$once('hook:updated', res);
+                });
+            }
 
             return [res, mergesMap, headerRowCount];
         },
