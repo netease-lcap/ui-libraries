@@ -16,25 +16,14 @@ export const Default = {
     setup() {
       return {
         args,
+        currentRate: 10,
       };
     },
     template: `
-      <van-circle v-bind="args" />
+      <van-circle  :currentRate="currentRate" v-bind="args" />
     `,
   }),
   args: {
-    value: 30,
-    rate: 100,
-    size: '100px',
-    strokeWidth: 40,
-    color: '#337eff',
-    layerColor: '#E5E5E5',
-    fill: '#ffffff',
-    text: '30%',
-    speed: 0,
-    clockwise: true,
-    strokeLinecap: 'round',
-    showText: true,
   },
 };
 
@@ -43,11 +32,11 @@ export const DifferentValues = {
   render: () => ({
     template: `
       <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-        <van-circle value="0" text="0%" />
-        <van-circle value="25" text="25%" />
-        <van-circle value="50" text="50%" />
-        <van-circle value="75" text="75%" />
-        <van-circle value="100" text="100%" />
+        <van-circle :currentRate="0" text="0%" />
+        <van-circle :currentRate="25" text="25%" />
+        <van-circle :currentRate="50" text="50%" />
+        <van-circle :currentRate="75" text="75%" />
+        <van-circle :currentRate="100" text="100%" />
       </div>
     `,
   }),

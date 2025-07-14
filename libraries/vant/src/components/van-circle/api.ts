@@ -28,10 +28,9 @@ namespace nasl.ui {
       setter: {
         concept: 'NumberInputSetter',
         min: 0,
-        max: 100,
       },
     })
-    value: nasl.core.Decimal = 0;
+    currentRate: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -40,7 +39,6 @@ namespace nasl.ui {
       setter: {
         concept: 'NumberInputSetter',
         min: 0,
-        max: 100,
       },
     })
     rate: nasl.core.Decimal = 100;
@@ -55,22 +53,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '进度条宽度',
-      description: '进度条宽度',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-      },
-    })
-    strokeWidth: nasl.core.Decimal = 40;
-
-    @Prop({
-      group: '主要属性',
       title: '进度条颜色',
       description: '进度条颜色',
       setter: { concept: 'InputSetter' },
     })
-    color: nasl.core.String = '#337eff';
+    color: nasl.core.String = '#1989fa';
 
     @Prop({
       group: '主要属性',
@@ -78,7 +65,7 @@ namespace nasl.ui {
       description: '轨道颜色',
       setter: { concept: 'InputSetter' },
     })
-    layerColor: nasl.core.String = '#E5E5E5';
+    layerColor: nasl.core.String = 'white';
 
     @Prop({
       group: '主要属性',
@@ -86,7 +73,7 @@ namespace nasl.ui {
       description: '填充颜色',
       setter: { concept: 'InputSetter' },
     })
-    fill: nasl.core.String = '#ffffff';
+    fill: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -121,10 +108,10 @@ namespace nasl.ui {
       description: '线条端点样式',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '默认' }, { title: '圆形' }, { title: '方形' }],
+        options: [{ title: '默认' }, { title: '方形' }],
       },
     })
-    strokeLinecap: 'butt' | 'round' | 'square' = 'round';
+    strokeLinecap: 'round' | 'butt' = 'round';
 
     @Prop({
       group: '样式属性',
