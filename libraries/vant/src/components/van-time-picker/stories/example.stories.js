@@ -18,11 +18,27 @@ export const Default = {
         args,
       };
     },
+    data() {
+      return {
+        value: '12:00',
+      };
+    },
     template: `
-      <van-time-picker v-bind="args" />
+      <van-time-picker v-bind="args" v-model="value">
+        <template #label>
+          <div>文本</div>
+        </template>
+      </van-time-picker>
+      <div>{{ value }}</div>
     `,
   }),
   args: {
-    value: new Date(),
+    unit: 'hour',
+    minTime: '07:40:00',
+    maxTime: '10:20:00',
+    title: '时间选择器',
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    showToolbar: true,
   },
 };

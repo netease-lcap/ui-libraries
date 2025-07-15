@@ -1,0 +1,3 @@
+.field:not([class*="van-field--disabled"]) {
+    cursor: pointer;
+}
