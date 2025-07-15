@@ -2,6 +2,7 @@ import { TimePicker as VantTimePicker } from 'vant';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins';
+import './index.css';
 
 function VanTimePickerRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign({}, plugin) : plugin;

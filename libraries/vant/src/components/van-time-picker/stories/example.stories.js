@@ -26,7 +26,19 @@ export const Default = {
     template: `
       <van-time-picker v-bind="args" v-model="value">
         <template #label>
-          <div>文本</div>
+          <div>标题</div>
+        </template>
+        <template #topbar-left>
+          <van-icon name="arrow-left" />
+        </template>
+        <template #topbar-center>
+          <div>时间选择</div>
+        </template>
+        <template #bottombar-left>
+          <van-button round>取消</van-button>
+        </template>
+        <template #bottombar-right>
+          <van-button type="primary" round>确定</van-button>
         </template>
       </van-time-picker>
       <div>{{ value }}</div>
@@ -40,5 +52,6 @@ export const Default = {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     showToolbar: true,
+    isRange: true,
   },
 };
