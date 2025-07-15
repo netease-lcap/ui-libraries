@@ -190,7 +190,7 @@ namespace nasl.ui {
       description: '设置验证规则，简写格式为字符串类型，完整格式或混合格式为数组类型',
       bindHide: true
     })
-    rules: nasl.collection.List<nasl.core.String>;
+    rules: nasl.core.String;
     @Prop({
       group: '样式属性',
       title: '显示底边框',
