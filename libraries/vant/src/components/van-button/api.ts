@@ -8,9 +8,6 @@ namespace nasl.ui {
       editable: 'text',
       textholder: 'text',
       forceUpdateWhenAttributeChange: true,
-      events: {
-        click: true,
-      },
     },
   })
   @Component({

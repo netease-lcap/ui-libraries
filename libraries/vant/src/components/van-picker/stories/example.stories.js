@@ -34,11 +34,9 @@ export const Default = {
     },
     template: `
       <van-picker 
-        v-bind="args" 
         :dataSource="columns"
         @change="handleChange"
         @clear="handleClear"
-        @visible-change="handleVisibleChange"
       />
     `,
   }),

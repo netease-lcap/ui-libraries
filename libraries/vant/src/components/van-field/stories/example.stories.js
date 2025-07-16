@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import Component from '../index';
 
 export default {
@@ -14,9 +15,10 @@ export const Default = {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     setup() {
+      const value = ref('');
       return {
         args,
-        value: '',
+        value,
         handleInput(value) {
           console.log('输入值:', value);
         },
@@ -35,15 +37,16 @@ export const Default = {
       };
     },
     template: `
+    <div>
+    {{value}}
       <van-field 
-        v-bind="args" 
-        v-model="value"
-        @input="handleInput"
-        @change="handleChange"
-        @clear="handleClear"
-        @focus="handleFocus"
-        @blur="handleBlur"
-      />
+      v-model="value"
+      >
+      <template #label>
+          <span>用户名</span>
+      </template>
+      </van-field>
+    </div>
     `,
   }),
   args: {
@@ -285,4 +288,4 @@ export const Readonly = {
     placeholder: '请输入内容',
     readonly: true,
   },
-}; 
+};

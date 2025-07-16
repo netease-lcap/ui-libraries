@@ -56,7 +56,6 @@ export function registerComponent<T>(Component, options) {
     props: Component.props,
 
     setup(props, { attrs, slots, emit, expose }) {
-      console.log(props, 'props');
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
@@ -108,7 +107,7 @@ export function registerComponent<T>(Component, options) {
         const isRenderChange = Component !== commitState.get('render');
         Render = isRenderChange ? commitJsState.render : Render;
         componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
-        Object.assign(exposeRef.value, ref);
+        _.assign(exposeRef.value, ref);
         Object.assign(provideRef.value, commitJsState.provide);
       });
 

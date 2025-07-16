@@ -32,6 +32,22 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '名称',
+      description: '输入框名称',
+      setter: { concept: 'InputSetter' },
+    })
+    name: nasl.core.String = '';
+
+    @Prop({
+      group: '主要属性',
+      title: '输入框id',
+      description: '输入框id',
+      setter: { concept: 'InputSetter' },
+    })
+    id: nasl.core.String = '';
+
+    @Prop({
+      group: '主要属性',
       title: '类型',
       description: '输入框类型',
       setter: {
@@ -55,6 +71,14 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     placeholder: nasl.core.String = '请输入内容';
+
+    @Prop({
+      group: '主要属性',
+      title: '开启点击反馈',
+      description: '是否开启点击反馈',
+      setter: { concept: 'SwitchSetter' },
+    })
+    clickable: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -90,6 +114,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '冒号',
+      description: '是否显示冒号',
+      setter: { concept: 'SwitchSetter' },
+    })
+    colon: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '尺寸',
       description: '输入框尺寸',
       setter: {
@@ -120,14 +152,6 @@ namespace nasl.ui {
       },
     })
     suffixIcon: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '标签',
-      description: '输入框标签',
-      setter: { concept: 'InputSetter' },
-    })
-    label: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -167,7 +191,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '自动聚焦',
-      description: '自动聚焦',
+      description: '是否自动聚焦，iOS 系统不支持该属性',
       setter: { concept: 'SwitchSetter' },
     })
     autofocus: nasl.core.Boolean = false;
@@ -234,18 +258,50 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '错误信息',
-      description: '错误信息',
+      description: '底部错误提示文案，为空时不展示',
       setter: { concept: 'InputSetter' },
     })
     errorMessage: nasl.core.String;
 
     @Prop({
       group: '主要属性',
+      title: '错误信息对齐方式',
+      description: '错误信息对齐方式',
+      setter: { concept: 'EnumSelectSetter', options: [{ title: '居中' }, { title: '右对齐' }] },
+    })
+    errorMessageAlign: 'center' | 'right' = 'center';
+
+    @Prop({
+      group: '主要属性',
       title: '错误状态',
-      description: '是否显示错误状态',
+      description: '是否将输入内容标红',
       setter: { concept: 'SwitchSetter' },
     })
     error: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '格式化函数',
+      description: '自定义格式化函数',
+      setter: { concept: 'AnonymousFunctionSetter' },
+    })
+    formatter: (value: string) => string;
+
+    @Prop({
+      group: '主要属性',
+      title: '格式化触发时机',
+      description: '格式化触发时机',
+      setter: { concept: 'EnumSelectSetter', options: [{ title: '输入时' }, { title: '失焦时' }] },
+    })
+    formatTrigger: 'onChange' | 'onBlur' = 'onChange';
+
+    @Prop({
+      group: '主要属性',
+      title: '显示字数统计',
+      description: '是否显示字数统计',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showWordLimit: nasl.core.Boolean = false;
 
     @Event({
       title: '输入时',
@@ -253,11 +309,6 @@ namespace nasl.ui {
     })
     onInput: (event: nasl.core.String) => any;
 
-    @Event({
-      title: '改变时',
-      description: '输入框值改变时触发',
-    })
-    onChange: (event: nasl.core.String) => any;
 
     @Event({
       title: '清空按钮点击时',
@@ -307,23 +358,6 @@ namespace nasl.ui {
     })
     onCompositionstart: (event: any) => any;
 
-    @Event({
-      title: '粘贴时',
-      description: '粘贴事件',
-    })
-    onPaste: (event: any) => any;
-
-    @Slot({
-      title: '前置',
-      description: '前置内容',
-    })
-    slotPrepend: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '后置',
-      description: '后置内容',
-    })
-    slotAppend: () => Array<ViewComponent>;
 
     @Slot({
       title: '标签',
@@ -331,16 +365,5 @@ namespace nasl.ui {
     })
     slotLabel: () => Array<ViewComponent>;
 
-    @Slot({
-      title: '输入框',
-      description: '自定义输入框',
-    })
-    slotInput: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '按钮',
-      description: '自定义按钮',
-    })
-    slotButton: () => Array<ViewComponent>;
   }
 }

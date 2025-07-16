@@ -2,8 +2,8 @@ import 'vant/lib/index.css';
 import '@/utils/index';
 
 export { VanText } from './van-text';
-// export { VanPicker } from './van-picker';
-// export { VanField } from './van-field';
+export { VanPicker } from './van-picker';
+export { VanField } from './van-field';
 export { VanButton } from './van-button';
 export { VanTag } from './van-tag';
 export { VanBadge } from './van-badge';
