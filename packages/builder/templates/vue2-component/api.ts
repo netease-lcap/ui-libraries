@@ -1,6 +1,6 @@
 /// <reference types="@nasl/types" />
 namespace extensions.{{pkgName}}.viewComponents {
-  const { Component, Prop, ViewComponent, Slot, Method, Event, ViewComponentOptions } = nasl.ui;
+  const { Component, Prop, ViewComponent, Slot, Method, Param, Event, ViewComponentOptions } = nasl.ui;
 
   @ExtensionComponent({
     type: '{{type}}',
