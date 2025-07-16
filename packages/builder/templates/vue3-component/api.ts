@@ -27,5 +27,15 @@ namespace extensions.{{pkgName}}.viewComponents {
       }
     })
     text: nasl.core.String = '';
+
+    @Prop({
+      title: '类型',
+      description: '类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '主要' }, { title: '次要' }, { title: '默认' }]
+      }
+    })
+    type: 'primary' | 'secondary' | 'default' = 'default';
   }
 }
