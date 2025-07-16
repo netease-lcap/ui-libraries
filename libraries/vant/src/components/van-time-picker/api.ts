@@ -5,7 +5,7 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: "drawerdropdown",
-      cacheOpenKey: "show",
+      cacheOpenKey: "popupOpened",
       drawerCSSSelector: ".van-popup",
       dataSource: {},
     },
@@ -20,6 +20,48 @@ namespace nasl.ui {
     constructor(options?: Partial<VanTimePickerOptions>) {
       super();
     }
+
+    @Prop({
+      title: '值',
+    })
+    modelValue: VanTimePickerOptions['modelValue'];
+
+    @Prop({
+      title: '起始值',
+    })
+    startValue: VanTimePickerOptions['startValue'];
+
+    @Prop({
+      title: '结束值',
+    })
+    endValue: VanTimePickerOptions['endValue'];
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+    })
+    preview: nasl.core.Boolean;
+
+    @Method({
+      title: 'undefined',
+      description: '打开'
+    })
+    open(): any {}
+
+    @Method({
+      title: 'undefined',
+      description: '关闭'
+    })
+    close(): any {}
   }
 
   export class VanTimePickerOptions extends ViewComponentOptions {
@@ -36,7 +78,7 @@ namespace nasl.ui {
 
     @Prop<VanTimePickerOptions, 'modelValue'>({
       group: '数据属性',
-      title: '绑定值',
+      title: '值',
       sync: true,
       description: '绑定值',
       setter: { concept: 'InputSetter' },
@@ -75,8 +117,43 @@ namespace nasl.ui {
           title: '秒',
         }]
       },
+      onChange: [{ clear: ['showFormatter'] }],
     })
-    unit: 'hour' | 'minute' | 'second' = 'minute';
+    unit: 'hour' | 'minute' | 'second' = 'second';
+
+    @Prop<VanTimePickerOptions, 'showFormatter'>({
+      group: '数据属性',
+      title: '展示格式',
+      description: '展示格式',
+      setter: {
+        concept: "EnumSelectSetter",
+        options: [
+          {
+            title: '12:09:09',
+            if: _ => _.unit === 'second'
+          },
+          {
+            title: '12时09分09秒',
+            if: _ => _.unit === 'second'
+          }, {
+            title: '12:09',
+            if: _ => _.unit === 'minute'
+          }, {
+            title: '12时09分',
+            if: _ => _.unit === 'minute'
+          },
+          {
+            title: '12',
+            if: _ => _.unit === 'hour'
+          },
+          {
+            title: '12时',
+            if: _ => _.unit === 'hour'
+          }
+        ],
+      }
+    })
+    showFormatter: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' | 'HH时' | 'HH' = 'HH:mm:ss';
 
     @Prop<VanTimePickerOptions, 'maxTime'>({
       group: '数据属性',
@@ -94,37 +171,40 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '是否显示顶部栏',
+      title: '对齐方式',
+      description: '设置右侧内容的对齐方式',
+      setter: {
+        concept: "EnumSelectSetter",
+        options: [{
+          title: '左'
+        }, {
+          title: '中'
+        }, {
+          title: '右'
+        }]
+      }
+    })
+    inputAlign: 'left' | 'center' | 'right' = 'right';
+
+    @Prop({
+      group: '主要属性',
+      title: '占位提示',
+      description: '',
+      setter: {
+        concept: "InputSetter"
+      },
+      implicitToString: true,
+    })
+    placeholder: nasl.core.String;
+
+    @Prop({
+      group: '交互属性',
+      title: '点击遮罩层后关闭',
       setter: {
         concept: "SwitchSetter"
-      },
-      onChange: [{ clear: ['title', 'confirmButtonText', 'cancelButtonText'] }],
+      }
     })
-    showToolbar: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '顶部栏标题',
-      implicitToString: true,
-      if: (_) => _.showToolbar === true,
-    })
-    title: nasl.core.String = '';
-
-    @Prop({
-      group: '主要属性',
-      title: '确认按钮文本',
-      implicitToString: true,
-      if: (_) => _.showToolbar === true,
-    })
-    confirmButtonText: nasl.core.String = '确定';
-
-    @Prop({
-      group: '主要属性',
-      title: '取消按钮文本',
-      implicitToString: true,
-      if: (_) => _.showToolbar === true,
-    })
-    cancelButtonText: nasl.core.String = '取消';
+    closeOnClickOverlay: nasl.core.Boolean = true;
 
     @Prop({
       group: '状态属性',
@@ -148,10 +228,61 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '状态属性',
+      title: '弹出状态',
+      setter: {
+        concept: "SwitchSetter"
+      }
+    })
+    popupOpened: nasl.core.Boolean;
+
+    @Event({
+      title: '确认',
+      description: '点击完成按钮时触发的事件'
+    })
+    onConfirm: (event: any) => void;
+
+    @Event({
+      title: '取消',
+      description: '点击完成取消时触发的事件'
+    })
+    onCancel: (event: any) => void;
+
     @Slot({
       title: '组件插槽',
       description: '标题'
     })
     slotLabel: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '组件插槽',
+      description: '顶部栏左侧'
+    })
+    slotTopbarleft: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '组件插槽',
+      description: '顶部栏右侧'
+    })
+    slotTopbarright: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '组件插槽',
+      description: '顶部栏中间'
+    })
+    slotTopbarcenter: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '组件插槽',
+      description: '底部栏左侧'
+    })
+    slotBottombarleft: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '组件插槽',
+      description: '底部栏右侧'
+    })
+    slotBottombarright: () => Array<ViewComponent>;
   }
 }

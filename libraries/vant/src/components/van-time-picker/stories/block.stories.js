@@ -17,7 +17,20 @@ export const Block1 = {
       return {};
     },
     template: `
-      <van-time-picker><template #label><van-text text="标题"></van-text></template></van-time-picker>
+      <van-time-picker>
+        <template #label>
+          <van-text text="标题"></van-text>
+        </template>
+        <template #topbarleft>
+          <van-icon name="arrow-left" />
+        </template>
+        <template #bottombarleft>
+          <van-button :round="true" text="取消" />
+        </template>
+        <template #bottombarright>
+          <van-button type="primary" :round="true" text="确认" />
+        </template>
+      </van-time-picker>
     `,
   }),
 };

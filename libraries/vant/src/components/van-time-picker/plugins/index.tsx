@@ -2,9 +2,8 @@ import { Popup, Field, timePickerProps, Tabs, Tab, TimePicker } from 'vant';
 import { createNamespace } from 'vant/es/utils';
 import { ref } from 'vue';
 import _ from 'lodash';
-import { useCallback, useMemo, useControllableValue } from '@/plugins/hooks';
-import styles from '../index.module.css';
-import { getFormatTimeValue, isValidStringTime } from './utils';
+import { useCallback, useMemo } from '@/plugins/hooks';
+import { toValue, getCurrentValue, getFormatValue } from './utils-format';
 
 const [name, bem] = createNamespace('time-picker');
 
@@ -25,7 +24,7 @@ function getUnitIndex(unit: string) {
   };
 }
 export function handleColumnsType(props: any) {
-  const unit = props.get('unit') || 'minute';
+  const unit = props.get('unit') || 'second';
   const { index, columnsType } = useMemo(() => {
     return getUnitIndex(unit);
   }, [unit]);
@@ -38,30 +37,33 @@ export function handleColumnsType(props: any) {
 handleColumnsType.order = 1;
 
 /**
- * 将字符串转换为数组
- * @param value
- * @returns
+ * 处理自定义属性
  */
-function toValues(value: string | Array<string>) {
-  if (typeof value === 'string' && isValidStringTime(value)) {
-    return value.split(':');
-  }
-  return value;
+export function handleCustomProps(props: any) {
+  const formatValue = ref('');
+  const popupOpened = props.get('popupOpened');
+  const popupVisible = ref(popupOpened);
+  const inputAlign = props.get('inputAlign') || 'right';
+  const unit = props.get('unit') || 'second';
+  const refProp = props.get('ref');
+  const open = () => {
+    popupVisible.value = true;
+  };
+  const close = () => {
+    popupVisible.value = false;
+  };
+  const selfRef = _.assign(refProp, { open, close });
+  return {
+    formatValue,
+    popupVisible,
+    showToolbar: false,
+    inputAlign,
+    unit,
+    ref: selfRef,
+  };
 }
+handleCustomProps.order = 0;
 
-/**
- * 将数组转换为字符串
- * @param values
- * @returns
- */
-function toValue(values: Array<string>) {
-  return values.join(':');
-}
-
-function getCurrentValue(value: string | Array<string>, unitIndex: number) {
-  const values = toValues(value || []);
-  return values.slice(0, unitIndex + 1);
-}
 /**
  * 处理 modelValue
  * @param props
@@ -70,52 +72,62 @@ function getCurrentValue(value: string | Array<string>, unitIndex: number) {
 export function handleModelValue(props: any) {
   const modelValue = props.get('modelValue');
   const unitIndex = props.get('unitIndex');
-  const showToolbar = props.get('showToolbar');
-  const emit = props.get('emit');
+  const formatValue = props.get('formatValue');
   const currentValue = useMemo(() => {
     return getCurrentValue(modelValue, unitIndex);
   }, [modelValue, unitIndex]);
-  const formatValue = ref(currentValue.join(':'));
+  formatValue.value = getFormatValue([currentValue], props.get('unit'), props.get('showFormatter'));
+  const currentValueRef = ref(currentValue);
+  const onSetCurrentValue = (value: Array<string>) => {
+    currentValueRef.value = value;
+  };
   return {
     modelValue: currentValue,
-    'onUpdate:modelValue': (value: Array<string>) => {
-      if (showToolbar === false) {
-        emit('update:modelValue', toValue(value));
-      }
-    },
-    formatValue,
+    onSetCurrentValue,
+    currentValueRef,
   };
 }
 handleModelValue.order = 2;
 
+/**
+ * 处理范围模式下的 modelValue
+ * @param props
+ * @returns
+ */
 export function handleRangeModelValue(props: any) {
-  const isRange = props.get('isRange');
-  if (isRange === false) {
-    return {};
-  }
   const startValue = props.get('startValue');
   const endValue = props.get('endValue');
   const unitIndex = props.get('unitIndex');
-  const emit = props.get('emit');
+  const formatValue = props.get('formatValue');
+  // 开始值：转成数组
   const currentStartValue = useMemo(() => {
     return getCurrentValue(startValue, unitIndex);
   }, [startValue, unitIndex]);
+  // 结束值：转成数组
   const currentEndValue = useMemo(() => {
     return getCurrentValue(endValue, unitIndex);
   }, [endValue, unitIndex]);
+  // 开始值：用于改变时暂存数据
+  const currentStartValueRef = ref(currentStartValue);
+  // 结束值：用于改变时暂存数据
+  const currentEndValueRef = ref(currentEndValue);
+  // 设置开始值
+  const onSetCurrentStartValue = (value: Array<string>) => {
+    currentStartValueRef.value = value;
+  };
+  // 设置结束值
+  const onSetCurrentEndValue = (value: Array<string>) => {
+    currentEndValueRef.value = value;
+  };
+  // 格式化值
+  formatValue.value = getFormatValue([currentStartValue, currentEndValue], props.get('unit'), props.get('showFormatter'));
   return {
     startValue: currentStartValue,
     endValue: currentEndValue,
-    'onUpdate:startValue': (value: Array<string>) => {
-      //   emit('update:startValue', toValue(value));
-      currentStartValue.value = value;
-    },
-    'onUpdate:endValue': (value: Array<string>) => {
-      //   emit('update:endValue', toValue(value));
-      currentEndValue.value = value;
-    },
-    currentStartValue,
-    currentEndValue,
+    onSetCurrentStartValue,
+    onSetCurrentEndValue,
+    currentStartValueRef,
+    currentEndValueRef,
   };
 }
 handleRangeModelValue.order = 2;
@@ -127,15 +139,15 @@ handleRangeModelValue.order = 2;
  */
 export function handleCancelButtonClick(props: any) {
   const onCancel = props.get('onCancel');
-  const show = props.get('show');
+  const popupVisible = props.get('popupVisible');
   const onCancelClick = useCallback(
     (data: any) => {
       if (_.isFunction(onCancel)) {
         _.attempt(onCancel);
       }
-      show.value = false;
+      popupVisible.value = false;
     },
-    [onCancel, show],
+    [onCancel, popupVisible],
   );
   return {
     onCancel: onCancelClick,
@@ -150,33 +162,42 @@ handleCancelButtonClick.order = 4;
  */
 export function handleConfirmButtonClick(props: any) {
   const onConfirm = props.get('onConfirm');
-  const show = props.get('show');
+  const popupVisible = props.get('popupVisible');
   const formatValue = props.get('formatValue');
   const unitIndex = props.get('unitIndex');
   const isRange = props.get('isRange');
   const emit = props.get('emit');
+  const currentStartValueRef = props.get('currentStartValueRef');
+  const currentEndValueRef = props.get('currentEndValueRef');
+  const currentValueRef = props.get('currentValueRef');
   const onConfirmClick = useCallback(
     (data: any) => {
       if (_.isFunction(onConfirm)) {
         _.attempt(onConfirm);
       }
-      show.value = false;
+      popupVisible.value = false;
 
       if (isRange === true) {
-        const currentStartValue = props.get('currentStartValue') || [];
-        const currentEndValue = props.get('currentEndValue') || [];
+        const currentStartValue = currentStartValueRef?.value || [];
+        const currentEndValue = currentEndValueRef?.value || [];
         const startValues = currentStartValue?.slice(0, unitIndex + 1);
-        const endValues = currentEndValue?.slice(unitIndex + 1);
-        formatValue.value = `${startValues.join(':')} - ${endValues.join(':')}`;
-        emit('update:startValue', toValue(startValues));
-        emit('update:endValue', toValue(endValues));
+        const endValues = currentEndValue?.slice(0, unitIndex + 1);
+        formatValue.value = getFormatValue([startValues, endValues], props.get('unit'), props.get('showFormatter'));
+        const startValue = toValue(startValues);
+        const endValue = toValue(endValues);
+        emit('update:startValue', startValue);
+        emit('sync:state', 'startValue', startValue);
+        emit('update:endValue', endValue);
+        emit('sync:state', 'endValue', endValue);
       } else {
-        const values = data.selectedValues.slice(0, unitIndex + 1);
-        formatValue.value = values.join(':');
-        emit('update:modelValue', toValue(values));
+        const currentValue = currentValueRef?.value || [];
+        formatValue.value = getFormatValue([currentValue], props.get('unit'), props.get('showFormatter'));
+        const currentValueStr = toValue(currentValue);
+        emit('update:modelValue', currentValueStr);
+        emit('sync:state', 'modelValue', currentValueStr);
       }
     },
-    [onConfirm, formatValue, unitIndex, show],
+    [onConfirm, unitIndex, popupVisible, currentStartValueRef, currentEndValueRef, currentValueRef],
   );
   return {
     onConfirm: onConfirmClick,
@@ -184,65 +205,90 @@ export function handleConfirmButtonClick(props: any) {
 }
 handleConfirmButtonClick.order = 4;
 
+/**
+ * 渲染头部工具栏
+ * @param options
+ * @returns
+ */
 function renderToolBar(options: any) {
-  const { props, attrs, slots } = options;
-  const topSlot = slots['topbar-left'];
-  const topRightSlot = slots['topbar-right'];
-  const topCenterSlot = slots['topbar-center'];
+  const { props, slots } = options;
+  const topSlot = slots.topbarleft;
+  const topRightSlot = slots.topbarright;
+  const topCenterSlot = slots.topbarcenter;
   const onCancel = () => {
-    props['onCancel']?.();
+    props.onCancel?.();
   };
   const onConfirm = () => {
-    props['onConfirm']?.();
+    props.onConfirm?.();
   };
   return (
     <div class={[bem('toolbar'), 'van-picker__toolbar']}>
-      <div class={bem('cancel')} onClick={onCancel}>
+      <div class={bem('cancel')} onClick={onCancel} onKeydown={onCancel} role="button" tabindex="0">
         {topSlot && topSlot()}
       </div>
       <div class={bem('title')}>{topCenterSlot && topCenterSlot()}</div>
-      <div class={bem('confirm')} onClick={onConfirm}>
+      <div class={bem('confirm')} onClick={onConfirm} onKeydown={onConfirm} role="button" tabindex="0">
         {topRightSlot && topRightSlot()}
       </div>
     </div>
   );
 }
 
+/**
+ * 渲染底部栏
+ * @param options
+ * @returns
+ */
 function renderBottomBar(options: any) {
-  const { props, attrs, slots } = options;
-  const bottomSlot = slots['bottombar-left'];
-  const bottomRightSlot = slots['bottombar-right'];
+  const { props, slots } = options;
+  const bottomSlot = slots.bottombarleft;
+  const bottomRightSlot = slots.bottombarright;
   const onCancel = () => {
-    props['onCancel']?.();
+    props.onCancel?.();
   };
   const onConfirm = () => {
-    props['onConfirm']?.();
+    props.onConfirm?.();
   };
   return (
     <div class={bem('bottom-bar')}>
-      <div class={bem('bottom-bar-left')} onClick={onCancel}>
+      <div class={bem('bottom-bar-left')} onClick={onCancel} onKeydown={onCancel} role="button" tabindex="0">
         {bottomSlot && bottomSlot()}
       </div>
-      <div class={bem('bottom-bar-right')} onClick={onConfirm}>
+      <div class={bem('bottom-bar-right')} onClick={onConfirm} onKeydown={onConfirm} role="button" tabindex="0">
         {bottomRightSlot && bottomRightSlot()}
       </div>
     </div>
   );
 }
 
+/**
+ * 渲染范围模式下的内容
+ * @param options
+ * @returns
+ */
 function renderRangeContent(options: any) {
-  const { props, attrs, slots } = options;
-  let { currentStartValue, currentEndValue } = props;
+  const { props } = options;
+  const {
+    startValue,
+    endValue,
+    onSetCurrentStartValue,
+    onSetCurrentEndValue,
+    currentStartValueRef,
+    currentEndValueRef,
+  } = props;
+  const { minTime, maxTime } = props;
   return (
     <Tabs line-width="150px" lazyRender={false}>
       <Tab title="开始">
         <TimePicker
           {..._.pick(props, Object.keys(timePickerProps))}
           showToolbar={false}
-          modelValue={currentStartValue}
-          onUpdate:modelValue={(value) => {
-            currentStartValue = value;
+          modelValue={startValue}
+          maxTime={toValue(currentEndValueRef) ?? maxTime}
+          onChange={(value) => {
+            onSetCurrentStartValue(value.selectedValues);
           }}
+          key="start"
         />
       </Tab>
       <Tab style={{ flex: '0 0 20px' }} title="至" disabled />
@@ -250,59 +296,80 @@ function renderRangeContent(options: any) {
         <TimePicker
           {..._.pick(props, Object.keys(timePickerProps))}
           showToolbar={false}
-          modelValue={currentEndValue}
-          onUpdate:modelValue={(value) => {
-            currentEndValue = value;
+          modelValue={endValue}
+          minTime={toValue(currentStartValueRef) ?? minTime}
+          onChange={(value) => {
+            onSetCurrentEndValue(value.selectedValues);
           }}
+          key="end"
         />
       </Tab>
     </Tabs>
   );
 }
 
+/**
+ * 渲染基本模式下的内容
+ * @param options
+ * @returns
+ */
 function renderBasicContent(options: any) {
-  const { props, attrs, slots } = options;
-  const { modelValue, formatValue, 'onUpdate:modelValue': onUpdateModelValue } = props;
+  const { props } = options;
+  const { modelValue, onSetCurrentValue } = props;
   return (
     <TimePicker
       {..._.pick(props, Object.keys(timePickerProps))}
-      v-slots={slots}
       modelValue={modelValue}
-      onUpdate:modelValue={onUpdateModelValue}
+      onChange={(value) => {
+        onSetCurrentValue(value.selectedValues);
+      }}
+      key="basic"
     />
   );
 }
 
 /**
- * 处理基本渲染
+ * 处理组件渲染
  * @param props
  * @returns
  */
 export function handleBasicRender(props: any) {
-  const TimePickerComponent = props.get('render');
-  const show = ref(props.get('show') || false);
+  const popupVisible = ref(props.get('popupVisible') || false);
   const disabled = props.get('disabled');
   const onFieldClick = () => {
     if (disabled) {
       return;
     }
-    show.value = true;
+    popupVisible.value = true;
   };
   const render = useCallback(
     (props, { attrs, slots }) => {
       const label = slots.label?.();
-      const { modelValue, formatValue, 'onUpdate:modelValue': onUpdateModelValue, isRange } = props;
+      const {
+        formatValue,
+        isRange,
+        placeholder,
+        inputAlign,
+        closeOnClickOverlay,
+      } = props;
       return (
         <div {...attrs}>
           <Field
             readonly
             disabled={disabled}
-            class={styles.field}
+            class={bem('field')}
             v-slots={{ label }}
             onClick={onFieldClick}
             modelValue={formatValue}
+            placeholder={placeholder}
+            inputAlign={inputAlign}
           />
-          <Popup v-model:show={show.value} position="bottom" round {...attrs}>
+          <Popup
+            v-model:show={popupVisible.value}
+            position="bottom"
+            round
+            closeOnClickOverlay={closeOnClickOverlay}
+            {...attrs}>
             <div class={bem('content-wrapper')}>
               {renderToolBar({ props, attrs, slots })}
               {isRange === true
@@ -325,6 +392,6 @@ export function handleBasicRender(props: any) {
     [props],
   );
 
-  return { render, ...props, show };
+  return { render, ...props, popupVisible };
 }
 handleBasicRender.order = 3;

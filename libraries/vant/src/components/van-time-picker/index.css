@@ -10,3 +10,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.van-time-picker__cancel {
+  cursor: pointer;
+}
+
+.van-time-picker__field:not([class*="van-field--disabled"]) {
+  cursor: pointer;
+}

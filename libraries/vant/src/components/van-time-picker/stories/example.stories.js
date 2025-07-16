@@ -21,37 +21,52 @@ export const Default = {
     data() {
       return {
         value: '12:00',
+        startValue: '12:00',
+        endValue: '13:00',
       };
     },
+    methods: {
+      onConfirm(event) {
+        console.log('onConfirm', event);
+      },
+      onCancel(event) {
+        console.log('onCancel', event);
+      },
+      open() {
+        this.$refs.timePicker.open();
+      },
+    },
     template: `
-      <van-time-picker v-bind="args" v-model="value">
+      <van-button @click="open">打开</van-button>
+      <van-time-picker ref="timePicker" v-bind="args" v-model:modelValue="value" v-model:startValue="startValue" v-model:endValue="endValue" @confirm="onConfirm" @cancel="onCancel">
         <template #label>
           <div>标题</div>
         </template>
-        <template #topbar-left>
+        <template #topbarleft>
           <van-icon name="arrow-left" />
         </template>
-        <template #topbar-center>
+        <template #topbarcenter>
           <div>时间选择</div>
         </template>
-        <template #bottombar-left>
-          <van-button round>取消</van-button>
+        <template #bottombarleft>
+          <van-button :round="true">取消</van-button>
         </template>
-        <template #bottombar-right>
-          <van-button type="primary" round>确定</van-button>
+        <template #bottombarright>
+          <van-button type="primary" :round="true">确认</van-button>
         </template>
       </van-time-picker>
       <div>{{ value }}</div>
+      <div>{{ startValue }}</div>
+      <div>{{ endValue }}</div>
     `,
   }),
   args: {
-    unit: 'hour',
-    minTime: '07:40:00',
-    maxTime: '10:20:00',
-    title: '时间选择器',
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+    unit: null,
+    // minTime: '07:40:00',
+    // maxTime: '10:20:00',
     showToolbar: true,
     isRange: true,
+    closeOnClickOverlay: true,
+    showFormatter: 'HH时mm分ss秒',
   },
 };
