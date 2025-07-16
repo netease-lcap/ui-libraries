@@ -23,8 +23,7 @@ export const Default = {
       <van-circle  :currentRate="currentRate" v-bind="args" />
     `,
   }),
-  args: {
-  },
+  args: {},
 };
 
 export const DifferentValues = {
@@ -189,4 +188,4 @@ export const CustomFill = {
       </div>
     `,
   }),
-}; 
+};

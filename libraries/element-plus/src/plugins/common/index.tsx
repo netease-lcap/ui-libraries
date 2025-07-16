@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { useControllableValue } from '@/plugins/hooks';
 
 export function handleControllableValue(props: any) {
