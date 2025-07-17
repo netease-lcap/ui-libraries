@@ -136,6 +136,7 @@ export function registerComponent<T>(Component, options) {
             {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(componentState, 'value.state.slots', {}) }}
             ref={_.mergeRef(exposeRef.value)}
+            expose={exposeRef.value}
           />
         );
       };

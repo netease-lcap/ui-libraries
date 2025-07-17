@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import VanPicker from '../index';
 
 export default {
@@ -14,13 +15,23 @@ export const Default = {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     setup() {
+      const value = ref(['2']);
+      const pickerRef = ref(null);
+      setTimeout(() => {
+        console.log(pickerRef, '==pickerRef');
+      }, 3000);
       return {
         args,
-        columns: [
-          { text: '选项1', value: '1' },
-          { text: '选项2', value: '2' },
-          { text: '选项3', value: '3' },
-        ],
+        value,
+        pickerRef,
+        columns: async () => {
+          await new Promise((resolve) => setTimeout(resolve, 3000));
+          return [
+            { text: '选项1', value: '1' },
+            { text: '选项2', value: '2' },
+            { text: '选项3', value: '3' },
+          ];
+        },
         handleChange(event) {
           console.log('选中值变化:', event);
         },
@@ -34,6 +45,8 @@ export const Default = {
     },
     template: `
       <van-picker 
+        v-model="value"
+        ref="pickerRef"
         :dataSource="columns"
         @change="handleChange"
         @clear="handleClear"
@@ -177,4 +190,4 @@ export const DifferentSizes = {
   args: {
     clearable: true,
   },
-}; 
+};

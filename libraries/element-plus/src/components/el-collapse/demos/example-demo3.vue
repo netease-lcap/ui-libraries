@@ -17,9 +17,9 @@
 // 模拟后端请求
 const mockRequest = (data, timeout = 300) => new Promise((res, rej) => setTimeout(() => res(data), timeout));
 let data = [
-  { name: '1', title: 'text1', content: 'content1' },
-  { name: '2', title: 'text2', content: 'content2' },
-  { name: '3', title: 'text3', content: 'content3' },
+  // { name: '1', title: 'text1', content: 'content1' },
+  // { name: '2', title: 'text2', content: 'content2' },
+  // { name: '3', title: 'text3', content: 'content3' },
 ];
 // 模拟数据服务
 const mockService = {

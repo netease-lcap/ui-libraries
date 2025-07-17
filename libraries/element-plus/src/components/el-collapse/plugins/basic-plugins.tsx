@@ -40,13 +40,13 @@ export function handleDataSource(props) {
     [dataSource, slots, dataConfig],
   );
 
-  const displayClass = useMemo(() => {
-    const isEmpty = _.isNil(dataConfig) || _.isEmpty(data);
-    return isEmpty ? styles.empty : '';
-  }, [dataSource, data, dataConfig]);
+  // const displayClass = useMemo(() => {
+  //   const isEmpty = dataConfig && _.isEmpty(data);
+  //   return isEmpty ? styles.empty : '';
+  // }, [dataSource, data, dataConfig]);
 
   return {
-    class: displayClass,
+    // class: displayClass,
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
     loading,

@@ -19,6 +19,7 @@ const attempt = _.wrap(selfAttempt, (fn, ...arg: [any, any]) => {
   return result;
 });
 const mergeRef = (ref) => {
+  console.log(ref, '==ref');
   return (componentRef) => {
     Object.assign(ref, componentRef);
     return componentRef;

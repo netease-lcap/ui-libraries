@@ -15,8 +15,8 @@ function ElCollapseItemRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElCollapse = registerComponent(ElCollapsePlus, { plugin: basicsPlugin, name: 'el-collapse' });
-const ElCollapseItem = registerComponent(ElCollapseItemPlus, { plugin: itemPlugins, name: 'el-collapse-item' });
+const ElCollapse = registerComponent(ElCollapsePlus, { plugin: basicsPlugin });
+const ElCollapseItem = registerComponent(ElCollapseItemPlus, { plugin: itemPlugins });
 
 export { ElCollapsePlus, ElCollapseItemPlus, ElCollapse, ElCollapseItem, ElCollapseRegister, ElCollapseItemRegister };
 export default ElCollapse;
