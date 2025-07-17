@@ -161,7 +161,7 @@ function transformValue(node: DefaultValue, typeAnnotation?: Annotation): any {
   if (node.type === 'ArrayExpression') {
     return {
       concept: 'NewList',
-      items: node.elements.map((item) => transformValue(item as DefaultValue)),
+      items: node.elements.map((item) => transformValue(item as DefaultValue)).filter(Boolean),
       typeAnnotation: transformTypeAnnotation(typeAnnotation as any),
     };
   }
