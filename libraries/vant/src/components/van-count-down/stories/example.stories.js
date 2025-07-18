@@ -19,10 +19,18 @@ export const Default = {
       };
     },
     template: `
-      <van-count-down v-bind="args" />
+      <van-count-down v-bind="args" @change="change" @finish="finish" />
     `,
   }),
   args: {
-    value: new Date(),
+    time: 30 * 60 * 60 * 1000,
+    millisecond: true,
+    format: 'HH:mm:ss:SS',
+    onChange(e) {
+      console.log('onChange', e);
+    },
+    onFinish(e) {
+      console.log('onFinish', e);
+    },
   },
 };
