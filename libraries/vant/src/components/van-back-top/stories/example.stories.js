@@ -23,6 +23,23 @@ export const Default = {
     `,
   }),
   args: {
-    value: new Date(),
+  },
+};
+
+export const SlotExample = {
+  name: '自定义内容',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `
+      <van-back-top v-bind="args"><van-icon name="back-top" style="font-size: 20px;font-weight:600"/></van-back-top>
+    `,
+  }),
+  args: {
+    customContent: false,
   },
 };

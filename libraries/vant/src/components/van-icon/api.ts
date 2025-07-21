@@ -12,7 +12,7 @@ namespace nasl.ui {
     title: '图标',
     icon: 'icon',
     description: '用于显示图标',
-    group: 'Icon',
+    group: 'Display',
   })
   export class VanIcon extends ViewComponent {
     constructor(options?: Partial<VanIconOptions>) {
