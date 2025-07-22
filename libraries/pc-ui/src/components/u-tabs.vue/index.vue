@@ -229,6 +229,9 @@ export default {
     },
     methods: {
         onClick(itemVM, e) {
+            if (this.readonly || this.disabled || (itemVM && itemVM.disabled)) {
+                return; // Prevent replication
+            }
             this.click(itemVM);
             this.select(itemVM); // 为了兼容
             if (this.router) {
