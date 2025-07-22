@@ -18,16 +18,21 @@ export const Default = {
         args,
       };
     },
+    data() {
+      return {
+        active: 0,
+      };
+    },
     template: `
-     <van-tabs v-bind="args">
-      <van-tab title="标签 1">内容 1</van-tab>
-      <van-tab title="标签 2">内容 2</van-tab>
-      <van-tab title="标签 3">内容 3</van-tab>
-      <van-tab title="标签 4">内容 4</van-tab>
+    {{ active }}
+     <van-tabs v-bind="args" border v-model:active="active">
+      <van-tab name="a"><template #title><van-text text="标签1"></van-text></template>内容 1</van-tab>
+      <van-tab name="b"><template #title><van-text text="标签2"></van-text></template>内容 2</van-tab>
+      <van-tab name="c"><template #title><van-text text="标签3"></van-text></template>内容 3</van-tab>
+      <van-tab name="d"><template #title><van-text text="标签4"></van-text></template>内容 4</van-tab>
     </van-tabs>
     `,
   }),
   args: {
-    value: new Date(),
   },
 };
