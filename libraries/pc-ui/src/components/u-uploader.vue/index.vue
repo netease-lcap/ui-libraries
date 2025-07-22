@@ -165,7 +165,7 @@ export default {
         dragDescription: {
             type: String,
             default() {
-                return '点击/拖动/粘贴文件到这里';
+                return '点击/拖动文件到这里';
             },
         },
         description: String, // 上传限制描述等
