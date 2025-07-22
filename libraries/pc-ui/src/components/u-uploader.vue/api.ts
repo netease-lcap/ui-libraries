@@ -49,14 +49,6 @@ namespace nasl.ui {
         private dataType: nasl.core.String = 'json';
 
         @Prop({
-            title: '是否可以粘贴',
-            setter: {
-                concept: 'SwitchSetter',
-            },
-        })
-        private pastable: nasl.core.Boolean = false;
-
-        @Prop({
             group: '数据属性',
             title: '值',
             description: '当前文件列表',
@@ -407,7 +399,7 @@ namespace nasl.ui {
             docDescription: '拖拽位置的文字指引',
             implicitToString: true,
         })
-        dragDescription: nasl.core.String = '点击/拖动/粘贴文件到这里';
+        dragDescription: nasl.core.String = '点击/拖动文件到这里';
 
         @Prop({
             group: '主要属性',
@@ -534,6 +526,18 @@ namespace nasl.ui {
             },
         })
         draggable: nasl.core.Boolean = false;
+
+        @Prop<UUploaderOptions, 'pastable'>({
+          group: '交互属性',
+          title: '是否可以粘贴',
+          description: '开启后支持粘贴上传文件，默认关闭',
+          docDescription: '开启后支持粘贴上传文件，默认关闭',
+          setter: {
+              concept: 'SwitchSetter',
+          },
+          if: _ => _.draggable === true,
+        })
+        pastable: nasl.core.Boolean = false;
 
         @Prop({
             group: '状态属性',

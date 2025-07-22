@@ -151,8 +151,8 @@ export default {
     align-items: center;
 }
 .iconwrap {
-    /* font-size: 16px;  */
-    /* padding: 8px; */
+  display: inline-flex;
+  align-items: center;
 }
 
 .iconcus {
@@ -177,7 +177,8 @@ export default {
     color: #666;
 }
 .textleft {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin-left: 6px;
 }
 </style>
