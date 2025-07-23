@@ -36,7 +36,7 @@ namespace nasl.ui {
       description: '搜索框为空的显示文字',
       setter: { concept: 'InputSetter' },
     })
-    placeholder: nasl.core.String = '请输入搜索关键词';
+    placeholder: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -64,17 +64,41 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '搜索框 id',
+      description: '搜索框 id',
+      setter: { concept: 'InputSetter' },
+    })
+    id: nasl.core.String = 'vant-search-n-input';
+
+    @Prop({
+      group: '主要属性',
       title: '显示清除图标',
       description: '清除图标的显示时机',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '一直显示' },
-          { title: '输入框获取焦点且不为空时展示' },
-        ],
+        options: [{ title: '一直显示' }, { title: '输入框获取焦点且不为空时展示' }],
       },
     })
     clearTrigger: 'always' | 'focus' = 'focus';
+
+    @Prop({
+      group: '主要属性',
+      title: '格式化函数',
+      description: '格式化函数',
+      setter: { concept: 'AnonymousFunctionSetter' },
+    })
+    formatter: (value: nasl.core.String) => nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '格式化触发时机',
+      description: '格式化触发时机',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '失去焦点时' }, { title: '输入框内容变化时' }],
+      },
+    })
+    formatTrigger: 'onBlur' | 'onChange' = 'onChange';
 
     @Prop({
       group: '主要属性',
@@ -82,28 +106,11 @@ namespace nasl.ui {
       description: '设置对齐方式',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '左对齐' },
-          { title: '居中对齐' },
-          { title: '右对齐' },
-        ],
+        options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }],
       },
     })
     inputAlign: 'left' | 'center' | 'right' = 'left';
 
-    @Prop({
-      group: '主要属性',
-      title: '搜索图标位置',
-      description: '设置搜索图标位置',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '左' },
-          { title: '右' },
-        ],
-      },
-    })
-    iconAlign: 'left' | 'right' = 'left';
 
     @Prop({
       group: '主要属性',
@@ -111,10 +118,7 @@ namespace nasl.ui {
       description: '选择搜索框为方形或圆形',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '方形' },
-          { title: '圆形' },
-        ],
+        options: [{ title: '方形' }, { title: '圆形' }],
       },
     })
     shape: 'square' | 'round' = 'square';
@@ -125,7 +129,7 @@ namespace nasl.ui {
       description: '搜索框背景色',
       setter: { concept: 'InputSetter' },
     })
-    background: nasl.core.String = '#f7f8fa';
+    background: nasl.core.String = '#f2f2f2';
 
     @Prop({
       group: '主要属性',
@@ -138,18 +142,19 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '自动聚焦',
-      description: '自动聚焦',
+      description: '自动聚焦,iOS 系统不支持该属性',
       setter: { concept: 'SwitchSetter' },
     })
     autofocus: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<VanSearchOptions, 'actionText'>({
       group: '主要属性',
       title: '按钮文字',
-      description: '搜索按钮文字',
+      description: '取消按钮文字',
       setter: { concept: 'InputSetter' },
+      if: (_) => _.showAction,
     })
-    actionText: nasl.core.String;
+    actionText: nasl.core.String = '取消';
 
     @Prop({
       group: '主要属性',
@@ -167,33 +172,17 @@ namespace nasl.ui {
     })
     autocomplete: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '拼写检查',
-      description: '是否开启拼写检查',
-      setter: { concept: 'SwitchSetter' },
-    })
-    spellcheck: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '状态属性',
-      title: '预览',
-      description: '是否预览',
-      setter: { concept: 'SwitchSetter' },
-    })
-    preview: nasl.core.Boolean = false;
-
     @Event({
       title: '确定搜索时触发',
       description: '确定搜索时触发',
     })
     onSearch: (value: nasl.core.String) => any;
 
-    @Event({
-      title: '输入框内容变化时触发',
-      description: '输入框内容变化时触发',
-    })
-    onInput: (value: nasl.core.String) => any;
+    // @Event({
+    //   title: '输入框内容变化时触发',
+    //   description: '输入框内容变化时触发',
+    // })
+    // onInput: (value: nasl.core.String) => any;
 
     @Event({
       title: '输入框获得焦点时触发',
@@ -211,7 +200,13 @@ namespace nasl.ui {
       title: '点击搜索图标时触发',
       description: '点击搜索图标时触发',
     })
-    onIconSearch: (event: any) => any;
+    clickLeftIcon: (event: any) => any;
+
+    @Event({
+      title: '点击搜索图标时触发',
+      description: '点击搜索图标时触发',
+    })
+    clickRightIcon: (event: any) => any;
 
     @Event({
       title: '点击输入区域时触发',
@@ -229,13 +224,8 @@ namespace nasl.ui {
       title: '点击操作按钮时触发',
       description: '点击操作按钮时触发',
     })
-    onAction: (event: any) => any;
+    onCancel: (event: any) => any;
 
-    @Slot({
-      title: '自定义搜索图标',
-      description: '自定义搜索图标',
-    })
-    slotIcon: () => Array<ViewComponent>;
 
     @Slot({
       title: '自定义操作按钮',
@@ -244,16 +234,17 @@ namespace nasl.ui {
     slotAction: () => Array<ViewComponent>;
 
     @Slot({
-      title: '自定义左侧内容',
-      description: '自定义左侧内容',
+      title: '自定义左侧内容(搜索框外)',
+      description: '自定义左侧内容(搜索框外)',
     })
     slotLeft: () => Array<ViewComponent>;
 
     @Slot({
-      title: '自定义右侧内容',
-      description: '自定义右侧内容',
+      title: '自定义左侧内容(搜索框内)',
+      description: '自定义左侧内容(搜索框内)',
     })
-    slotRight: () => Array<ViewComponent>;
+    slotLabel: () => Array<ViewComponent>;
+
   }
 
   @Component({
@@ -263,10 +254,10 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class VanFormSearch extends ViewComponent {
-    constructor(options?: Partial<VanFormSearchOptions >) {
+    constructor(options?: Partial<VanFormSearchOptions>) {
       super();
     }
   }
 
   export class VanFormSearchOptions extends ViewComponentOptions {}
-} 
+}

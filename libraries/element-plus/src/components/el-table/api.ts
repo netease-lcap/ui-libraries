@@ -89,7 +89,7 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: ElTableOptions<T, V, P, M>['dataSource'];
+    data: nasl.collection.List<T>;
 
     @Prop({
       title: '分页大小',

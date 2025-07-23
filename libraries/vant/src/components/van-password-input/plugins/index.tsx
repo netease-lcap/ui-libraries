@@ -1,53 +1,42 @@
-export function handlePasswordInputStyle(props) {
-  const gutter = props.get('gutter') ?? '0px';
-  const size = props.get('size') ?? '35px';
-  const color = props.get('color') ?? '#1989fa';
-  const backgroundColor = props.get('backgroundColor') ?? '#f2f3f5';
-  const borderColor = props.get('borderColor') ?? '#ebedf0';
-  const borderRadius = props.get('borderRadius') ?? '4px';
+import _ from 'lodash';
+// import { getIsPreview, getRender } from '@/plugins/common/preview';
+export { handleControllableValue } from '@/plugins/common/index';
+export * from './ide';
 
+export function handlePreview(props) {
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  // const isPreview = getIsPreview(props);
+
+  const previewRender = (insProps) => {
+    // const inIDE = !!props.get('data-nodepath');
+    // const previewText = inIDE || _.isNil(insProps.modelValue) ? '-' : insProps.modelValue;
+
+    // return <van-text>{previewText}</van-text>;
+  };
+
+  // const { render, insRef } = getRender(Component, previewRender, isPreview);
   return {
-    style: {
-      '--password-input-gutter': gutter,
-      '--password-input-size': size,
-      '--password-input-color': color,
-      '--password-input-background-color': backgroundColor,
-      '--password-input-border-color': borderColor,
-      '--password-input-border-radius': borderRadius,
-    },
+    // ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+    // render,
   };
 }
 
-export function handlePasswordInputProps(props) {
-  const modelValue = props.get('modelValue') ?? '';
-  const length = props.get('length') ?? 6;
-  const placeholder = props.get('placeholder') ?? '请输入密码';
-  const disabled = props.get('disabled') ?? false;
-  const readonly = props.get('readonly') ?? false;
-  const autofocus = props.get('autofocus') ?? false;
-  const mask = props.get('mask') ?? true;
-  const showCursor = props.get('showCursor') ?? true;
-  const error = props.get('error') ?? false;
-  const errorMessage = props.get('errorMessage');
-  const maxlength = props.get('maxlength');
-  const minlength = props.get('minlength');
-  const required = props.get('required') ?? false;
-  const name = props.get('name');
+export function handleVModelValue(props) {
+  const vModel = props.get('v-model');
+  const modelValue = props.get('modelValue');
+  const updateModelValue = props.get('onUpdate:modelValue');
+
+  if (_.isNil(vModel)) {
+    return {
+      modelValue,
+      'onUpdate:modelValue': updateModelValue,
+    };
+  }
 
   return {
-    modelValue,
-    length,
-    placeholder,
-    disabled,
-    readonly,
-    autofocus,
-    mask,
-    showCursor,
-    error,
-    errorMessage,
-    maxlength,
-    minlength,
-    required,
-    name,
+    modelValue: vModel,
+    'onUpdate:modelValue': updateModelValue,
   };
 }
+

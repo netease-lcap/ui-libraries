@@ -16,35 +16,54 @@ export const Default = {
     setup() {
       return {
         args,
+        value: '',
+        handleChange(value) {
+          console.log('密码输入改变:', value);
+        },
+        handleComplete(value) {
+          console.log('密码输入完成:', value);
+        },
       };
     },
     template: `
-      <van-password-input v-bind="args" />
+      <div style="padding: 20px;">
+        <van-password-input 
+          v-model="value" 
+          v-bind="args" 
+          @change="handleChange"
+          @complete="handleComplete">
+        </van-password-input>
+        <p style="margin-top: 10px;">当前密码: {{ value }}</p>
+      </div>
     `,
   }),
   args: {
-    modelValue: '',
     length: 6,
-    placeholder: '请输入密码',
     disabled: false,
     readonly: false,
     autofocus: false,
-    mask: true,
-    showCursor: true,
-    error: false,
-    errorMessage: '',
   },
 };
 
-export const DifferentLengths = {
-  name: '不同长度',
+export const CustomLength = {
+  name: '自定义长度',
   render: () => ({
+    setup() {
+      return {
+        value: '',
+        handleChange(value) {
+          console.log('密码输入改变:', value);
+        },
+      };
+    },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input length="4" placeholder="4位密码" />
-        <van-password-input length="6" placeholder="6位密码" />
-        <van-password-input length="8" placeholder="8位密码" />
-        <van-password-input length="10" placeholder="10位密码" />
+      <div style="padding: 20px;">
+        <van-password-input 
+          v-model="value" 
+          :length="4"
+          @change="handleChange">
+        </van-password-input>
+        <p style="margin-top: 10px;">当前密码: {{ value }}</p>
       </div>
     `,
   }),
@@ -53,34 +72,23 @@ export const DifferentLengths = {
 export const ShowPassword = {
   name: '显示密码',
   render: () => ({
+    setup() {
+      return {
+        value: '',
+        handleChange(value) {
+          console.log('密码输入改变:', value);
+        },
+      };
+    },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input :mask="true" placeholder="隐藏密码" />
-        <van-password-input :mask="false" placeholder="显示密码" />
-      </div>
-    `,
-  }),
-};
-
-export const Cursor = {
-  name: '光标显示',
-  render: () => ({
-    template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input :show-cursor="true" placeholder="显示光标" />
-        <van-password-input :show-cursor="false" placeholder="隐藏光标" />
-      </div>
-    `,
-  }),
-};
-
-export const ErrorState = {
-  name: '错误状态',
-  render: () => ({
-    template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input error placeholder="错误状态" />
-        <van-password-input error error-message="密码错误，请重新输入" placeholder="错误状态" />
+      <div style="padding: 20px;">
+        <van-password-input 
+          v-model="value" 
+          :length="6"
+          :show-password="true"
+          @change="handleChange">
+        </van-password-input>
+        <p style="margin-top: 10px;">当前密码: {{ value }}</p>
       </div>
     `,
   }),
@@ -89,109 +97,147 @@ export const ErrorState = {
 export const Disabled = {
   name: '禁用状态',
   render: () => ({
+    setup() {
+      return {
+        value: '123456',
+      };
+    },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input disabled placeholder="禁用状态" />
-        <van-password-input readonly placeholder="只读状态" />
+      <div style="padding: 20px;">
+        <van-password-input 
+          v-model="value" 
+          :length="6"
+          disabled>
+        </van-password-input>
+        <p style="margin-top: 10px;">当前密码: {{ value }}</p>
       </div>
     `,
   }),
 };
 
-export const CustomSize = {
-  name: '自定义尺寸',
+export const WithError = {
+  name: '错误状态',
   render: () => ({
+    setup() {
+      return {
+        value: '',
+        handleChange(value) {
+          console.log('密码输入改变:', value);
+        },
+      };
+    },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input size="25px" placeholder="小尺寸" />
-        <van-password-input size="35px" placeholder="默认尺寸" />
-        <van-password-input size="45px" placeholder="大尺寸" />
-        <van-password-input size="55px" placeholder="超大尺寸" />
+      <div style="padding: 20px;">
+        <van-password-input 
+          v-model="value" 
+          :length="6"
+          error-info="密码格式不正确"
+          @change="handleChange">
+        </van-password-input>
+        <p style="margin-top: 10px;">当前密码: {{ value }}</p>
       </div>
     `,
   }),
 };
 
-export const CustomGutter = {
-  name: '自定义间距',
+export const WithInfo = {
+  name: '提示信息',
   render: () => ({
+    setup() {
+      return {
+        value: '',
+        handleChange(value) {
+          console.log('密码输入改变:', value);
+        },
+      };
+    },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input gutter="0px" placeholder="无间距" />
-        <van-password-input gutter="4px" placeholder="小间距" />
-        <van-password-input gutter="8px" placeholder="默认间距" />
-        <van-password-input gutter="16px" placeholder="大间距" />
+      <div style="padding: 20px;">
+        <van-password-input 
+          v-model="value" 
+          :length="6"
+          info="请输入6位数字密码"
+          @change="handleChange">
+        </van-password-input>
+        <p style="margin-top: 10px;">当前密码: {{ value }}</p>
       </div>
     `,
   }),
 };
 
-export const CustomColors = {
-  name: '自定义颜色',
+export const Highlight = {
+  name: '高亮状态',
   render: () => ({
+    setup() {
+      return {
+        value: '',
+        handleChange(value) {
+          console.log('密码输入改变:', value);
+        },
+      };
+    },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input color="#1989fa" placeholder="蓝色主题" />
-        <van-password-input color="#07c160" placeholder="绿色主题" />
-        <van-password-input color="#ee0a24" placeholder="红色主题" />
-        <van-password-input color="#ff976a" placeholder="橙色主题" />
-        <van-password-input color="#7232dd" placeholder="紫色主题" />
+      <div style="padding: 20px;">
+        <van-password-input 
+          v-model="value" 
+          :length="6"
+          :highlight="true"
+          @change="handleChange">
+        </van-password-input>
+        <p style="margin-top: 10px;">当前密码: {{ value }}</p>
       </div>
     `,
   }),
 };
 
-export const CustomBackground = {
-  name: '自定义背景',
+export const CustomStyle = {
+  name: '自定义样式',
   render: () => ({
+    setup() {
+      return {
+        value: '',
+        handleChange(value) {
+          console.log('密码输入改变:', value);
+        },
+      };
+    },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input background-color="#f7f8fa" placeholder="浅灰背景" />
-        <van-password-input background-color="#e8f4fd" placeholder="浅蓝背景" />
-        <van-password-input background-color="#f0f9ff" placeholder="浅青背景" />
-        <van-password-input background-color="#f0fdf4" placeholder="浅绿背景" />
+      <div style="padding: 20px;">
+        <van-password-input 
+          v-model="value" 
+          :length="6"
+          theme="round"
+          size="large"
+          background-color="#f7f8fa"
+          border-color="#1989fa"
+          @change="handleChange">
+        </van-password-input>
+        <p style="margin-top: 10px;">当前密码: {{ value }}</p>
       </div>
     `,
   }),
 };
 
-export const CustomBorder = {
-  name: '自定义边框',
+export const WithMaxLength = {
+  name: '最大长度限制',
   render: () => ({
+    setup() {
+      return {
+        value: '',
+        handleChange(value) {
+          console.log('密码输入改变:', value);
+        },
+      };
+    },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input border-color="#1989fa" placeholder="蓝色边框" />
-        <van-password-input border-color="#07c160" placeholder="绿色边框" />
-        <van-password-input border-color="#ee0a24" placeholder="红色边框" />
-        <van-password-input border-color="#ff976a" placeholder="橙色边框" />
-      </div>
-    `,
-  }),
-};
-
-export const CustomBorderRadius = {
-  name: '自定义圆角',
-  render: () => ({
-    template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input border-radius="0px" placeholder="直角" />
-        <van-password-input border-radius="4px" placeholder="小圆角" />
-        <van-password-input border-radius="8px" placeholder="中圆角" />
-        <van-password-input border-radius="16px" placeholder="大圆角" />
-        <van-password-input border-radius="50%" placeholder="圆形" />
-      </div>
-    `,
-  }),
-};
-
-export const Validation = {
-  name: '验证功能',
-  render: () => ({
-    template: `
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <van-password-input minlength="4" maxlength="8" placeholder="4-8位密码" />
-        <van-password-input required placeholder="必填密码" />
-        <van-password-input name="password" placeholder="表单字段" />
+      <div style="padding: 20px;">
+        <van-password-input 
+          v-model="value" 
+          :length="6"
+          :maxlength="4"
+          @change="handleChange">
+        </van-password-input>
+        <p style="margin-top: 10px;">当前密码: {{ value }}</p>
       </div>
     `,
   }),

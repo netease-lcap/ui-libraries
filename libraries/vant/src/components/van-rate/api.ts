@@ -135,6 +135,14 @@ namespace nasl.ui {
     touchable: nasl.core.Boolean = true;
 
     @Prop({
+      group: '主要属性',
+      title: '清除',
+      description: '是否允许再次点击后清除',
+      setter: { concept: 'SwitchSetter' },
+    })
+    clearable: nasl.core.Boolean = false;
+
+    @Prop({
       group: '状态属性',
       title: '预览',
       description: '是否预览',

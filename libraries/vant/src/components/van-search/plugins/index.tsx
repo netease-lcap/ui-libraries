@@ -10,8 +10,9 @@ export function handlePreview(props) {
   // const isPreview = getIsPreview(props);
 
   const previewRender = (insProps) => {
-    const inIDE = !!props.get('data-nodepath');
-    const previewText = inIDE || _.isNil(insProps.modelValue) ? '-' : insProps.modelValue;
+    // const inIDE = !!props.get('data-nodepath');
+    // const previewText = inIDE || _.isNil(insProps.modelValue) ? '-' : insProps.modelValue;
+
     // return <el-text text={previewText}></el-text>;
   };
 

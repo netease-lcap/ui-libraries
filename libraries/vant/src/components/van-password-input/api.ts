@@ -2,15 +2,16 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 15,
+    order: 1,
     ideusage: {
-      idetype: 'container',
+      idetype: 'element',
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
     title: '密码输入框',
-    icon: 'password-input',
-    description: '密码输入框，用于安全地输入密码。',
+    icon: 'password',
+    description: '用于输入密码，支持显示/隐藏密码',
     group: 'Form',
   })
   export class VanPasswordInput extends ViewComponent {
@@ -22,32 +23,28 @@ namespace nasl.ui {
   export class VanPasswordInputOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
+      title: '绑定值',
       sync: true,
-      title: '值',
-      description: '密码输入框的值',
+      description: '密码输入框绑定值',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: nasl.core.String;
+    modelValue: nasl.core.String = '';
 
     @Prop({
-      group: '主要属性',
-      title: '密码长度',
+      group: '数据属性',
+      title: '长度',
       description: '密码长度',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 1,
-        max: 20,
-      },
+      setter: { concept: 'NumberInputSetter' },
     })
-    length: nasl.core.Decimal = 6;
+    length: nasl.core.Integer = 6;
 
     @Prop({
-      group: '主要属性',
-      title: '占位符',
-      description: '占位符',
-      setter: { concept: 'InputSetter' },
+      group: '数据属性',
+      title: '自动聚焦',
+      description: '是否自动聚焦',
+      setter: { concept: 'SwitchSetter' },
     })
-    placeholder: nasl.core.String = '请输入密码';
+    autofocus: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -60,18 +57,34 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '只读',
-      description: '只读状态',
+      description: '是否只读',
       setter: { concept: 'SwitchSetter' },
     })
     readonly: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
-      title: '自动聚焦',
-      description: '自动聚焦',
+      title: '占位符',
+      description: '占位符',
+      setter: { concept: 'InputSetter' },
+    })
+    placeholder: nasl.core.String = '请输入密码';
+
+    @Prop({
+      group: '主要属性',
+      title: '名称',
+      description: '标识符',
+      setter: { concept: 'InputSetter' },
+    })
+    name: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示密码',
+      description: '是否显示密码',
       setter: { concept: 'SwitchSetter' },
     })
-    autofocus: nasl.core.Boolean = false;
+    showPassword: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -79,23 +92,7 @@ namespace nasl.ui {
       description: '是否隐藏密码',
       setter: { concept: 'SwitchSetter' },
     })
-    mask: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '聚焦时显示光标',
-      description: '聚焦时是否显示光标',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showCursor: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '错误状态',
-      description: '是否显示错误状态',
-      setter: { concept: 'SwitchSetter' },
-    })
-    error: nasl.core.Boolean = false;
+    hidePassword: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
@@ -103,136 +100,136 @@ namespace nasl.ui {
       description: '错误信息',
       setter: { concept: 'InputSetter' },
     })
-    errorMessage: nasl.core.String;
+    errorInfo: nasl.core.String;
 
     @Prop({
-      group: '样式属性',
-      title: '输入框间距',
-      description: '输入框间距',
+      group: '主要属性',
+      title: '提示信息',
+      description: '提示信息',
       setter: { concept: 'InputSetter' },
     })
-    gutter: nasl.core.String = '0px';
+    info: nasl.core.String;
 
     @Prop({
-      group: '样式属性',
-      title: '输入框大小',
-      description: '输入框大小',
-      setter: { concept: 'InputSetter' },
+      group: '主要属性',
+      title: '高亮',
+      description: '是否高亮',
+      setter: { concept: 'SwitchSetter' },
     })
-    size: nasl.core.String = '35px';
+    highlight: nasl.core.Boolean = false;
 
     @Prop({
-      group: '样式属性',
-      title: '输入框颜色',
-      description: '输入框颜色',
-      setter: { concept: 'InputSetter' },
+      group: '主要属性',
+      title: '聚焦',
+      description: '是否聚焦',
+      setter: { concept: 'SwitchSetter' },
     })
-    color: nasl.core.String = '#1989fa';
+    focused: nasl.core.Boolean = false;
 
     @Prop({
-      group: '样式属性',
-      title: '输入框背景色',
-      description: '输入框背景色',
-      setter: { concept: 'InputSetter' },
+      group: '主要属性',
+      title: '清除',
+      description: '是否显示清除按钮',
+      setter: { concept: 'SwitchSetter' },
     })
-    backgroundColor: nasl.core.String = '#f2f3f5';
-
-    @Prop({
-      group: '样式属性',
-      title: '输入框边框颜色',
-      description: '输入框边框颜色',
-      setter: { concept: 'InputSetter' },
-    })
-    borderColor: nasl.core.String = '#ebedf0';
-
-    @Prop({
-      group: '样式属性',
-      title: '输入框圆角',
-      description: '输入框圆角',
-      setter: { concept: 'InputSetter' },
-    })
-    borderRadius: nasl.core.String = '4px';
+    clearable: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
       title: '最大长度',
       description: '最大输入长度',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 1,
-        max: 20,
-      },
+      setter: { concept: 'NumberInputSetter' },
     })
-    maxlength: nasl.core.Decimal;
+    maxlength: nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
       title: '最小长度',
       description: '最小输入长度',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    minlength: nasl.core.Integer;
+
+    @Prop({
+      group: '样式属性',
+      title: '尺寸',
+      description: '密码输入框尺寸',
       setter: {
-        concept: 'NumberInputSetter',
-        min: 1,
-        max: 20,
+        concept: 'EnumSelectSetter',
+        options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
       },
     })
-    minlength: nasl.core.Decimal;
+    size: 'default' | 'large' | 'small' = 'default';
 
     @Prop({
-      group: '主要属性',
-      title: '必填',
-      description: '是否必填',
-      setter: { concept: 'SwitchSetter' },
+      group: '样式属性',
+      title: '主题',
+      description: '主题风格',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '默认' }, { title: '圆角' }],
+      },
     })
-    required: nasl.core.Boolean = false;
+    theme: 'default' | 'round' = 'default';
 
     @Prop({
-      group: '主要属性',
-      title: '名称',
-      description: '表单字段名称',
+      group: '样式属性',
+      title: '背景色',
+      description: '背景色',
       setter: { concept: 'InputSetter' },
     })
-    name: nasl.core.String;
+    backgroundColor: nasl.core.String;
+
+    @Prop({
+      group: '样式属性',
+      title: '边框颜色',
+      description: '边框颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    borderColor: nasl.core.String;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     @Event({
-      title: '输入时',
-      description: '输入时触发',
+      title: '值改变时',
+      description: '值改变时触发',
     })
-    onInput: (event: nasl.core.String) => any;
-
-    @Event({
-      title: '完成时',
-      description: '密码输入完成时触发',
-    })
-    onFinish: (event: nasl.core.String) => any;
+    onChange: (value: nasl.core.String) => void;
 
     @Event({
       title: '聚焦时',
-      description: '获得焦点时触发',
+      description: '聚焦时触发',
     })
-    onFocus: (event: any) => any;
+    onFocus: (event: {}) => void;
 
     @Event({
       title: '失焦时',
-      description: '失去焦点时触发',
+      description: '失焦时触发',
     })
-    onBlur: (event: any) => any;
+    onBlur: (event: {}) => void;
 
     @Event({
       title: '点击时',
       description: '点击时触发',
     })
-    onClick: (event: any) => any;
+    onClick: (event: {}) => void;
 
     @Event({
-      title: '键盘按下时',
-      description: '键盘按下时触发',
+      title: '清除时',
+      description: '清除时触发',
     })
-    onKeydown: (event: any) => any;
+    onClear: (event: {}) => void;
 
-    @Slot({
-      title: 'Default',
-      description: '自定义输入框内容',
+    @Event({
+      title: '完成时',
+      description: '输入完成时触发',
     })
-    slotDefault: () => Array<ViewComponent>;
+    onComplete: (value: nasl.core.String) => void;
   }
 }

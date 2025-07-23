@@ -1,16 +1,11 @@
-import { PasswordInput as VantPasswordInput } from 'vant';
-import _ from 'lodash';
+import { PasswordInput as VanPasswordInputOrigin } from 'vant';
 import { registerComponent } from '@/plugins';
-import * as basicPlugin from './plugins';
+import * as plugins from './plugins';
 
-import './index.css';
-
-function VanPasswordInputRegister(BaseComponent, plugin = {}, extend = true) {
-  const componentPlugin = extend ? _.assign(basicPlugin, plugin) : plugin;
-  return registerComponent(BaseComponent, { plugin: componentPlugin });
-}
-
-const VanPasswordInput = registerComponent(VantPasswordInput, { plugin: basicPlugin, name: 'van-password-input' });
-export { VantPasswordInput, VanPasswordInput, VanPasswordInputRegister };
+export const VanPasswordInput = registerComponent(VanPasswordInputOrigin, {
+  plugin: plugins,
+  name: 'van-password-input',
+});
 
 export default VanPasswordInput;
+

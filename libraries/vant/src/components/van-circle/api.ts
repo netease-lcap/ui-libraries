@@ -24,7 +24,7 @@ namespace nasl.ui {
       group: '主要属性',
       sync: true,
       title: '进度值',
-      description: '**进度值（必填）**',
+      description: '进度值',
       setter: {
         concept: 'NumberInputSetter',
         min: 0,
@@ -77,14 +77,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '文字',
-      description: '显示的文字',
-      setter: { concept: 'InputSetter' },
-    })
-    text: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
       title: '动画速度',
       description: '动画速度（0 表示无动画）',
       setter: {
@@ -114,47 +106,23 @@ namespace nasl.ui {
     strokeLinecap: 'round' | 'butt' = 'round';
 
     @Prop({
-      group: '样式属性',
-      title: '显示文字',
-      description: '是否显示文字',
-      setter: { concept: 'SwitchSetter' },
+      group: '主要属性',
+      title: '线条宽度',
+      description: '线条宽度',
+      setter: { concept: 'NumberInputSetter' },
     })
-    showText: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '样式属性',
-      title: '文字颜色',
-      description: '文字颜色',
-      setter: { concept: 'InputSetter' },
-    })
-    textColor: nasl.core.String = '#323233';
-
-    @Prop({
-      group: '样式属性',
-      title: '文字大小',
-      description: '文字大小',
-      setter: { concept: 'InputSetter' },
-    })
-    textSize: nasl.core.String = '14px';
-
-    @Prop({
-      group: '样式属性',
-      title: '文字位置',
-      description: '文字位置',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '居中' }, { title: '顶部' }, { title: '底部' }],
-      },
-    })
-    textPosition: 'center' | 'top' | 'bottom' = 'center';
+    strokeWidth: nasl.core.Decimal = 40;
 
     @Prop({
       group: '主要属性',
-      title: '格式化函数',
-      description: '自定义文字格式化函数',
-      setter: { concept: 'AnonymousFunctionSetter' },
+      title: '开始位置',
+      description: '开始位置',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '顶部' }, { title: '右侧' }, { title: '底部' }, { title: '左侧' }],
+      },
     })
-    private format: (value: any) => any;
+    startPosition: 'top' | 'right' | 'bottom' | 'left' = 'top';
 
     @Slot({
       title: 'Default',
