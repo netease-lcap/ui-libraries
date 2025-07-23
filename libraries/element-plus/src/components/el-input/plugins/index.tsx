@@ -30,14 +30,14 @@ export function handleSuffixIcon(props) {
 
 export function handleAppend(props) {
   const slots = props.get('slots');
-  const append = _.isEmpty(_.attempt(slots.append)) ? { append: undefined } : { append: slots.append };
-  const prepend = _.isEmpty(_.attempt(slots.prepend)) ? { prepend: undefined } : { prepend: slots.prepend };
+  const { append: appendSlot = () => {}, prepend: prependSlot = () => {} } = _.pick(slots, ['append', 'prepend']);
+  const append = _.isEmpty(_.attempt(appendSlot)) ? { append: undefined } : { append: appendSlot() };
+  const prepend = _.isEmpty(_.attempt(prependSlot)) ? { prepend: undefined } : { prepend: prependSlot() };
 
   return {
     slots: _.assign(slots, append, prepend),
   };
 }
-
 
 export function handlePreview(props) {
   const ref = props.get('ref');
@@ -47,7 +47,7 @@ export function handlePreview(props) {
   const previewRender = (insProps) => {
     const inIDE = !!props.get('data-nodepath');
     const previewText = inIDE || _.isEmpty(insProps.modelValue) ? '-' : insProps.modelValue;
-    return <el-preview text={previewText}></el-preview>;
+    return <el-preview text={previewText} />;
   };
 
   const { render, insRef } = getRender(Component, previewRender, isPreview);
