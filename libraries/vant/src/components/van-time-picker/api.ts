@@ -117,7 +117,22 @@ namespace nasl.ui {
           title: '秒',
         }]
       },
-      onChange: [{ clear: ['showFormatter'] }],
+      onChange: [{
+        update: {
+          showFormatter: 'HH',
+        },
+        if: (_) => _ === 'hour',
+      }, {
+        update: {
+          showFormatter: 'HH:mm',
+        },
+        if: (_) => _ === 'minute',
+      }, {
+        update: {
+          showFormatter: 'HH:mm:ss',
+        },
+        if: (_) => _ === 'second',
+       }],
     })
     unit: 'hour' | 'minute' | 'second' = 'second';
 
@@ -153,7 +168,7 @@ namespace nasl.ui {
         ],
       }
     })
-    showFormatter: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' | 'HH时' | 'HH' = 'HH:mm:ss';
+    showFormatter: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' | 'HH' | 'HH时' = 'HH:mm:ss';
 
     @Prop<VanTimePickerOptions, 'maxTime'>({
       group: '数据属性',
@@ -198,6 +213,37 @@ namespace nasl.ui {
     placeholder: nasl.core.String;
 
     @Prop({
+      group: '主要属性',
+      title: '取消按钮文本',
+      description: '取消按钮文本',
+      setter: {
+        concept: "InputSetter"
+      },
+    })
+    cancelButtonText : nasl.core.String = '取消';
+
+    @Prop({
+      group: '主要属性',
+      title: '确认按钮文本',
+      description: '确认按钮文本',
+      setter: {
+        concept: "InputSetter"
+      },
+    })
+    confirmButtonText : nasl.core.String = '确认';
+
+    @Prop({
+      group: '主要属性',
+      title: '下一步按钮文本',
+      description: '下一步按钮文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true,
+    })
+    nextStepText: nasl.core.String;
+
+    @Prop({
       group: '交互属性',
       title: '点击遮罩层后关闭',
       setter: {
@@ -235,7 +281,7 @@ namespace nasl.ui {
         concept: "SwitchSetter"
       }
     })
-    popupOpened: nasl.core.Boolean;
+    popupOpened: nasl.core.Boolean = false;
 
     @Event({
       title: '确认',
@@ -257,32 +303,8 @@ namespace nasl.ui {
 
     @Slot({
       title: '组件插槽',
-      description: '顶部栏左侧'
+      description: '顶部栏标题'
     })
-    slotTopbarleft: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '组件插槽',
-      description: '顶部栏右侧'
-    })
-    slotTopbarright: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '组件插槽',
-      description: '顶部栏中间'
-    })
-    slotTopbarcenter: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '组件插槽',
-      description: '底部栏左侧'
-    })
-    slotBottombarleft: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '组件插槽',
-      description: '底部栏右侧'
-    })
-    slotBottombarright: () => Array<ViewComponent>;
+    slotTitle: () => Array<ViewComponent>;
   }
 }

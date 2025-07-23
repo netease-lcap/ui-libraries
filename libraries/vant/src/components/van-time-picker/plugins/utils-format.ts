@@ -74,15 +74,15 @@ export function getCurrentValue(value: string | Array<string>, unitIndex: number
  * @returns
  */
 function getDisplayFormatter(unit: string, format: string) {
+  if (format) {
+    return format;
+  }
   const map = {
     minute: ['HH:mm', 'HH时mm分'],
     second: ['HH:mm:ss', 'HH时mm分ss秒'],
     hour: ['HH', 'HH时'],
   };
   const formatters = map[unit];
-  if (formatters.includes(format)) {
-    return format;
-  }
   return formatters[0];
 }
 

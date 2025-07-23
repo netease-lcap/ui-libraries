@@ -42,17 +42,8 @@ export const Default = {
         <template #label>
           <div>标题</div>
         </template>
-        <template #topbarleft>
-          <van-icon name="arrow-left" />
-        </template>
-        <template #topbarcenter>
+        <template #title>
           <div>时间选择</div>
-        </template>
-        <template #bottombarleft>
-          <van-button :round="true">取消</van-button>
-        </template>
-        <template #bottombarright>
-          <van-button type="primary" :round="true">确认</van-button>
         </template>
       </van-time-picker>
       <div>{{ value }}</div>
@@ -65,8 +56,11 @@ export const Default = {
     // minTime: '07:40:00',
     // maxTime: '10:20:00',
     showToolbar: true,
-    isRange: true,
+    isRange: false,
     closeOnClickOverlay: true,
     showFormatter: 'HH时mm分ss秒',
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    nextStepText: '下一步',
   },
 };

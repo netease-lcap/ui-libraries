@@ -21,14 +21,8 @@ export const Block1 = {
         <template #label>
           <van-text text="标题"></van-text>
         </template>
-        <template #topbarleft>
-          <van-icon name="arrow-left" />
-        </template>
-        <template #bottombarleft>
-          <van-button :round="true" text="取消" />
-        </template>
-        <template #bottombarright>
-          <van-button type="primary" :round="true" text="确认" />
+        <template #title>
+          <van-text text="时间选择"></van-text>
         </template>
       </van-time-picker>
     `,

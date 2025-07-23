@@ -1,4 +1,4 @@
-import { Popup, Field, timePickerProps, Tabs, Tab, TimePicker } from 'vant';
+import { Popup, Field, timePickerProps, TimePicker, PickerGroup, pickerGroupProps } from 'vant';
 import { createNamespace } from 'vant/es/utils';
 import { ref } from 'vue';
 import _ from 'lodash';
@@ -28,6 +28,7 @@ export function handleColumnsType(props: any) {
   const { index, columnsType } = useMemo(() => {
     return getUnitIndex(unit);
   }, [unit]);
+  const isRange = props.get('isRange');
   return {
     unitIndex: index,
     columnsType,
@@ -56,7 +57,6 @@ export function handleCustomProps(props: any) {
   return {
     formatValue,
     popupVisible,
-    showToolbar: false,
     inputAlign,
     unit,
     ref: selfRef,
@@ -76,6 +76,10 @@ export function handleModelValue(props: any) {
   const currentValue = useMemo(() => {
     return getCurrentValue(modelValue, unitIndex);
   }, [modelValue, unitIndex]);
+  const isRange = props.get('isRange');
+  if (isRange) {
+    return {};
+  }
   formatValue.value = getFormatValue([currentValue], props.get('unit'), props.get('showFormatter'));
   const currentValueRef = ref(currentValue);
   const onSetCurrentValue = (value: Array<string>) => {
@@ -107,6 +111,10 @@ export function handleRangeModelValue(props: any) {
   const currentEndValue = useMemo(() => {
     return getCurrentValue(endValue, unitIndex);
   }, [endValue, unitIndex]);
+  const isRange = props.get('isRange');
+  if (!isRange) {
+    return {};
+  }
   // 开始值：用于改变时暂存数据
   const currentStartValueRef = ref(currentStartValue);
   // 结束值：用于改变时暂存数据
@@ -120,7 +128,11 @@ export function handleRangeModelValue(props: any) {
     currentEndValueRef.value = value;
   };
   // 格式化值
-  formatValue.value = getFormatValue([currentStartValue, currentEndValue], props.get('unit'), props.get('showFormatter'));
+  formatValue.value = getFormatValue(
+    [currentStartValue, currentEndValue],
+    props.get('unit'),
+    props.get('showFormatter'),
+  );
   return {
     startValue: currentStartValue,
     endValue: currentEndValue,
@@ -167,19 +179,15 @@ export function handleConfirmButtonClick(props: any) {
   const unitIndex = props.get('unitIndex');
   const isRange = props.get('isRange');
   const emit = props.get('emit');
-  const currentStartValueRef = props.get('currentStartValueRef');
-  const currentEndValueRef = props.get('currentEndValueRef');
-  const currentValueRef = props.get('currentValueRef');
   const onConfirmClick = useCallback(
     (data: any) => {
       if (_.isFunction(onConfirm)) {
         _.attempt(onConfirm);
       }
       popupVisible.value = false;
-
       if (isRange === true) {
-        const currentStartValue = currentStartValueRef?.value || [];
-        const currentEndValue = currentEndValueRef?.value || [];
+        const currentStartValue = data[0]?.selectedValues || [];
+        const currentEndValue = data[1]?.selectedValues || [];
         const startValues = currentStartValue?.slice(0, unitIndex + 1);
         const endValues = currentEndValue?.slice(0, unitIndex + 1);
         formatValue.value = getFormatValue([startValues, endValues], props.get('unit'), props.get('showFormatter'));
@@ -190,76 +198,20 @@ export function handleConfirmButtonClick(props: any) {
         emit('update:endValue', endValue);
         emit('sync:state', 'endValue', endValue);
       } else {
-        const currentValue = currentValueRef?.value || [];
+        const currentValue = data?.selectedValues || [];
         formatValue.value = getFormatValue([currentValue], props.get('unit'), props.get('showFormatter'));
         const currentValueStr = toValue(currentValue);
         emit('update:modelValue', currentValueStr);
         emit('sync:state', 'modelValue', currentValueStr);
       }
     },
-    [onConfirm, unitIndex, popupVisible, currentStartValueRef, currentEndValueRef, currentValueRef],
+    [onConfirm, unitIndex, popupVisible],
   );
   return {
     onConfirm: onConfirmClick,
   };
 }
 handleConfirmButtonClick.order = 4;
-
-/**
- * 渲染头部工具栏
- * @param options
- * @returns
- */
-function renderToolBar(options: any) {
-  const { props, slots } = options;
-  const topSlot = slots.topbarleft;
-  const topRightSlot = slots.topbarright;
-  const topCenterSlot = slots.topbarcenter;
-  const onCancel = () => {
-    props.onCancel?.();
-  };
-  const onConfirm = () => {
-    props.onConfirm?.();
-  };
-  return (
-    <div class={[bem('toolbar'), 'van-picker__toolbar']}>
-      <div class={bem('cancel')} onClick={onCancel} onKeydown={onCancel} role="button" tabindex="0">
-        {topSlot && topSlot()}
-      </div>
-      <div class={bem('title')}>{topCenterSlot && topCenterSlot()}</div>
-      <div class={bem('confirm')} onClick={onConfirm} onKeydown={onConfirm} role="button" tabindex="0">
-        {topRightSlot && topRightSlot()}
-      </div>
-    </div>
-  );
-}
-
-/**
- * 渲染底部栏
- * @param options
- * @returns
- */
-function renderBottomBar(options: any) {
-  const { props, slots } = options;
-  const bottomSlot = slots.bottombarleft;
-  const bottomRightSlot = slots.bottombarright;
-  const onCancel = () => {
-    props.onCancel?.();
-  };
-  const onConfirm = () => {
-    props.onConfirm?.();
-  };
-  return (
-    <div class={bem('bottom-bar')}>
-      <div class={bem('bottom-bar-left')} onClick={onCancel} onKeydown={onCancel} role="button" tabindex="0">
-        {bottomSlot && bottomSlot()}
-      </div>
-      <div class={bem('bottom-bar-right')} onClick={onConfirm} onKeydown={onConfirm} role="button" tabindex="0">
-        {bottomRightSlot && bottomRightSlot()}
-      </div>
-    </div>
-  );
-}
 
 /**
  * 渲染范围模式下的内容
@@ -278,33 +230,34 @@ function renderRangeContent(options: any) {
   } = props;
   const { minTime, maxTime } = props;
   return (
-    <Tabs line-width="150px" lazyRender={false}>
-      <Tab title="开始">
-        <TimePicker
-          {..._.pick(props, Object.keys(timePickerProps))}
-          showToolbar={false}
-          modelValue={startValue}
-          maxTime={toValue(currentEndValueRef) ?? maxTime}
-          onChange={(value) => {
-            onSetCurrentStartValue(value.selectedValues);
-          }}
-          key="start"
-        />
-      </Tab>
-      <Tab style={{ flex: '0 0 20px' }} title="至" disabled />
-      <Tab title="结束">
-        <TimePicker
-          {..._.pick(props, Object.keys(timePickerProps))}
-          showToolbar={false}
-          modelValue={endValue}
-          minTime={toValue(currentStartValueRef) ?? minTime}
-          onChange={(value) => {
-            onSetCurrentEndValue(value.selectedValues);
-          }}
-          key="end"
-        />
-      </Tab>
-    </Tabs>
+    <PickerGroup
+      {..._.pick(props, Object.keys(pickerGroupProps))}
+      v-slots={{ ...options.slots }}
+      tabs={['开始时间', '结束时间']}
+      onCancel={props.onCancel}
+      onConfirm={props.onConfirm}
+    >
+      <TimePicker
+        {..._.pick(props, Object.keys(timePickerProps))}
+        showToolbar={false}
+        modelValue={startValue}
+        maxTime={toValue(currentEndValueRef) ?? maxTime}
+        onChange={(value) => {
+          onSetCurrentStartValue(value.selectedValues);
+        }}
+        key="start"
+      />
+      <TimePicker
+        {..._.pick(props, Object.keys(timePickerProps))}
+        showToolbar={false}
+        modelValue={endValue}
+        minTime={toValue(currentStartValueRef) ?? minTime}
+        onChange={(value) => {
+          onSetCurrentEndValue(value.selectedValues);
+        }}
+        key="end"
+      />
+    </PickerGroup>
   );
 }
 
@@ -318,12 +271,17 @@ function renderBasicContent(options: any) {
   const { modelValue, onSetCurrentValue } = props;
   return (
     <TimePicker
+      key="basic"
       {..._.pick(props, Object.keys(timePickerProps))}
       modelValue={modelValue}
+      v-slots={{
+        title: options.slots?.title?.(),
+      }}
       onChange={(value) => {
         onSetCurrentValue(value.selectedValues);
       }}
-      key="basic"
+      onCancel={props.onCancel}
+      onConfirm={props.onConfirm}
     />
   );
 }
@@ -345,13 +303,7 @@ export function handleBasicRender(props: any) {
   const render = useCallback(
     (props, { attrs, slots }) => {
       const label = slots.label?.();
-      const {
-        formatValue,
-        isRange,
-        placeholder,
-        inputAlign,
-        closeOnClickOverlay,
-      } = props;
+      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay } = props;
       return (
         <div {...attrs}>
           <Field
@@ -371,7 +323,6 @@ export function handleBasicRender(props: any) {
             closeOnClickOverlay={closeOnClickOverlay}
             {...attrs}>
             <div class={bem('content-wrapper')}>
-              {renderToolBar({ props, attrs, slots })}
               {isRange === true
                 ? renderRangeContent({
                     props,
@@ -383,7 +334,6 @@ export function handleBasicRender(props: any) {
                     attrs,
                     slots,
                   })}
-              {renderBottomBar({ props, attrs, slots })}
             </div>
           </Popup>
         </div>

@@ -1,4 +1,4 @@
-import { TimePicker as VantTimePicker } from 'vant';
+import { TimePicker as VantTimePicker, PickerGroup as VantPickerGroup } from 'vant';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins';
@@ -10,5 +10,6 @@ function VanTimePickerRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const VanTimePicker = registerComponent(VantTimePicker, { plugin: basicPlugin, name: 'van-time-picker' });
-export { VanTimePickerRegister, VanTimePicker, VantTimePicker };
+const VanPickerGroup = registerComponent(VantPickerGroup, { });
+export { VanTimePickerRegister, VanTimePicker, VantTimePicker, VanPickerGroup };
 export default VanTimePicker;
