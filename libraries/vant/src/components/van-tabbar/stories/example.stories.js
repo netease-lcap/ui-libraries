@@ -28,6 +28,6 @@ export const Default = {
     `,
   }),
   args: {
-    value: new Date(),
+    route: true,
   },
 };
