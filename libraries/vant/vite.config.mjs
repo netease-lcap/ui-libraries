@@ -22,6 +22,7 @@ export default defineConfig(({ command }) => {
         pnpm: true,
         modules: {
           entries: {
+            'components/van-config-provider/index': 'src/components/van-config-provider/index',
             install: 'src/install',
             utils: 'src/utils',
           },
