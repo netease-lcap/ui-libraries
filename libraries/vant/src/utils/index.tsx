@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import dayjs from 'dayjs';
 
-// export * from './dom';
+export * from './dom';
 
 function filterUnderfinedValue(object: Record<string, string>) {
   return Object.fromEntries(Object.entries(object).filter(([, value]) => !_.isUndefined(value)));
@@ -18,14 +18,10 @@ const attempt = _.wrap(selfAttempt, (fn, ...arg: [any, any]) => {
   }
   return result;
 });
-const mergeRef = (ref) => {
-  console.log(ref, '==ref');
-  return (componentRef) => {
-    Object.assign(ref, componentRef);
-    return componentRef;
-  };
+const mergeRef = (ref) => (componentRef) => {
+  Object.assign(ref, componentRef);
+  return componentRef;
 };
-
 function isValidTime(time) {
   return !_.isNil(time) && dayjs(time).isValid();
 }

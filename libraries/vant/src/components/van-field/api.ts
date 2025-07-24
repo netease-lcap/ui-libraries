@@ -309,7 +309,6 @@ namespace nasl.ui {
     })
     onInput: (event: nasl.core.String) => any;
 
-
     @Event({
       title: '清空按钮点击时',
       description: '清空按钮点击时触发',
@@ -358,12 +357,41 @@ namespace nasl.ui {
     })
     onCompositionstart: (event: any) => any;
 
-
     @Slot({
       title: '标签',
       description: '自定义标签',
     })
     slotLabel: () => Array<ViewComponent>;
-
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'element',
+      forceUpdateWhenAttributeChange: true,
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanField',
+      },
+    ],
+  })
+  @Component({
+    title: '表单输入框',
+    icon: 'input',
+    description: '用于表单输入文本内容',
+    group: 'Form',
+  })
+  export class VanFormField extends ViewComponent {
+    constructor(
+      options?: Partial<VanFormFieldOptions & VanFormItemOptions & Omit<VanFieldOptions, keyof VanFormItemOptions>>,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormFieldOptions extends ViewComponentOptions {}
 }

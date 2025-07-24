@@ -68,6 +68,7 @@
   },
   "dependencies": {
     "@lcap/validator": "workspace:*",
+    "@vant/use": "^1.6.0",
     "@vue/shared": "^3.5.13",
     "dayjs": "^1.11.13",
     "immutable": "5.0.0-beta.4",

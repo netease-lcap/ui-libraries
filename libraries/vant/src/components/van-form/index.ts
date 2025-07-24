@@ -1,7 +1,8 @@
-import { Form as VantForm } from 'vant';
+import { Form as VantForm, Field } from 'vant';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins';
+import * as formItemPlugin from './plugins/form-item-plugin';
 import './index.css';
 
 function VanFormRegister(BaseComponent, plugin = {}, extend = true) {
@@ -14,5 +15,10 @@ const VanForm = registerComponent(VantForm, {
   name: 'van-form',
 });
 
-export { VanForm, VanFormRegister, VantForm };
-export default VanForm; 
+const VanFormItem = registerComponent(Field, {
+  plugin: formItemPlugin,
+  name: 'van-form-item',
+});
+
+export { VanForm, VanFormRegister, VantForm, VanFormItem };
+export default VanForm;

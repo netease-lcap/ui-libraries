@@ -1,5 +1,6 @@
 export default {
-  title: 'VanForm/表单',
+  id: 'van-form-example',
+  title: '组件列表/Form 表单/示例',
   component: () => import('../index.ts'),
   argTypes: {
     disabled: {
@@ -30,36 +31,38 @@ export default {
 const Template = (args) => ({
   props: Object.keys(args),
   template: `
-    <van-form v-bind="$props" @submit="onSubmit" @failed="onFailed">
-      <van-field
-        v-model="username"
-        name="username"
-        label="用户名"
-        placeholder="请输入用户名"
-      />
-      <van-field
-        v-model="password"
-        type="password"
-        name="password"
-        label="密码"
-        placeholder="请输入密码"
-      />
-      <div style="margin: 16px;">
-        <van-button round block type="primary" native-type="submit">
-          提交
-        </van-button>
-      </div>
+    <van-form validate-trigger="onSubmit" ref="form" @submit="formSubmit">
+      <van-form-field
+             :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
+      required name="username" placeholder="请输入用户名" >
+        <template #label>
+          <span>用户名</span>
+        </template>
+      </van-form-field>
+        <van-form-field
+            :rules="[{ required: true, message: '请填写密码' }]"
+      required name="password" placeholder="请输入密码" >
+        <template #label>
+          <span>密码</span>
+        </template>
+      </van-form-field>
+
+      <van-button type="primary" @click="onSubmit">提交</van-button>
     </van-form>
   `,
   data() {
     return {
       username: '',
       password: '',
+      checked: '1',
     };
   },
   methods: {
     onSubmit(values) {
-      console.log('表单提交:', values);
+      console.log(this.$refs.form.validated(), 'form');
+    },
+    formSubmit(value) {
+      console.log(value, '====');
     },
     onFailed(errorFields, values) {
       console.log('表单校验失败:', errorFields, values);
@@ -98,4 +101,4 @@ export const Readonly = Template.bind({});
 Readonly.args = {
   ...Default.args,
   readonly: true,
-}; 
+};

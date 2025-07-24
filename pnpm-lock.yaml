@@ -912,6 +912,9 @@ importers:
       '@lcap/validator':
         specifier: workspace:*
         version: link:../../packages/validator
+      '@vant/use':
+        specifier: ^1.6.0
+        version: 1.6.0(vue@3.5.13(typescript@5.6.3))
       '@vue/shared':
         specifier: ^3.5.13
         version: 3.5.13
@@ -11913,8 +11916,8 @@ packages:
   vue-component-type-helpers@2.1.10:
     resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==, tarball: https://registry.npmmirror.com/vue-component-type-helpers/-/vue-component-type-helpers-2.1.10.tgz}
 
-  vue-component-type-helpers@3.0.1:
-    resolution: {integrity: sha512-j23mCB5iEbGsyIhnVdXdWUOg+UdwmVxpKnYYf2j+4ppCt5VSFXKjwu9YFt0QYxUaf5G99PuHsVfRScjHCRSsGQ==, tarball: https://registry.npmmirror.com/vue-component-type-helpers/-/vue-component-type-helpers-3.0.1.tgz}
+  vue-component-type-helpers@3.0.3:
+    resolution: {integrity: sha512-koiBu7lO8e6w/UlbZAAIW11qcFQocYIl7Nh/SVwGZ804ej5KrncU32bRxi2zfU2Kyf6HWuk1CeeVP2rhIL+vyQ==, tarball: https://registry.npmmirror.com/vue-component-type-helpers/-/vue-component-type-helpers-3.0.3.tgz}
 
   vue-cropper@0.5.11:
     resolution: {integrity: sha512-UeA3qL2BLCTGkOEAxEsxSNFO+qLYAn6YRHv4oS32cP9lMhF1vFmnAf/z+ZamtR0/Fh3sbZeZUCLVR2Ol2/dpTQ==, tarball: https://registry.npmmirror.com/vue-cropper/-/vue-cropper-0.5.11.tgz}
@@ -16387,7 +16390,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.13(typescript@5.6.3)
-      vue-component-type-helpers: 3.0.1
+      vue-component-type-helpers: 3.0.3
 
   '@storybook/vue@7.6.17(@babel/core@7.23.6)(css-loader@6.9.0(webpack@5.89.0))(vue@2.6.12)':
     dependencies:
@@ -24598,7 +24601,7 @@ snapshots:
 
   vue-component-type-helpers@2.1.10: {}
 
-  vue-component-type-helpers@3.0.1: {}
+  vue-component-type-helpers@3.0.3: {}
 
   vue-cropper@0.5.11: {}
 

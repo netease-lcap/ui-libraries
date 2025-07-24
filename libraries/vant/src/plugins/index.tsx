@@ -2,6 +2,7 @@
 
 import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useCustomFieldValue, CUSTOM_FIELD_INJECTION_KEY } from '@vant/use';
 
 // import create from 'zustand-vue';
 import { createStore } from 'zustand/vanilla';

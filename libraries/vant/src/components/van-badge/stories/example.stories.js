@@ -23,6 +23,7 @@ export const Default = {
         <div style="width: 40px; height: 40px; background: #f2f3f5; display: flex; align-items: center; justify-content: center;">
           内容
         </div>
+
       </van-badge>
     `,
   }),

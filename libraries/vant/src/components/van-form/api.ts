@@ -22,20 +22,14 @@ namespace nasl.ui {
     resetForm(): void {}
 
     @Method({
-      title: '校验表单',
-      description: '校验整个表单',
+      title: '校验函数',
+      description: '校验函数，包含错误文本提示等功能',
     })
-    validate(): {
+    validated	(): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;
     }
-
-    @Method({
-      title: '提交表单',
-      description: '提交表单数据',
-    })
-    submit(): void {}
 
     constructor(options?: Partial<VanFormOptions>) {
       super();
@@ -61,14 +55,36 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '标签位置',
-      description: '表单项标签的位置',
+      title: '标签对齐方式',
+      description: '表单项标签对齐方式',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '左侧' }, { title: '顶部' }],
+        options: [{ title: '左对齐' }, { title: '居中' }, { title: '右对齐' }],
       },
     })
-    labelPosition: 'left' | 'top' = 'left';
+    labelAlign: 'left' | 'center' | 'right' = 'left';
+
+    @Prop({
+      group: '主要属性',
+      title: '输入框对齐方式',
+      description: '表单项输入框对齐方式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '居中' }, { title: '右对齐' }],
+      },
+    })
+    inputAlign: 'left' | 'center' | 'right' = 'left';
+
+    @Prop({
+      group: '主要属性',
+      title: '错误提示文案对齐方式',
+      description: '错误提示文案对齐方式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左对齐' }, { title: '居中' }, { title: '右对齐' }],
+      },
+    })
+    errorMessageAlign: 'left' | 'center' | 'right' = 'left';
 
     @Prop({
       group: '主要属性',
@@ -77,28 +93,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     labelWidth: nasl.core.String | nasl.core.Decimal;
-
-    @Prop({
-      group: '主要属性',
-      title: '标签对齐方式',
-      description: '表单项标签对齐方式',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '左对齐' }, { title: '右对齐' }],
-      },
-    })
-    labelAlign: 'left' | 'right' = 'left';
-
-    @Prop({
-      group: '主要属性',
-      title: '星号位置',
-      description: '必填星号的位置',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '左侧' }, { title: '右侧' }],
-      },
-    })
-    starPosition: 'left' | 'right' = 'left';
 
     @Prop({
       group: '主要属性',
@@ -114,10 +108,10 @@ namespace nasl.ui {
       description: '表单校验触发时机',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '输入时' }, { title: '失焦时' }, { title: '提交时' }],
+        options: [{ title: '输入时' }, { title: '提交时' }],
       },
     })
-    validateTrigger: 'onChange' | 'onBlur' | 'onSubmit' = 'onBlur';
+    validateTrigger: 'onChange' | 'onSubmit' = 'onChange';
 
     @Prop({
       group: '主要属性',
@@ -142,40 +136,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     showErrorMessage: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '错误信息对齐方式',
-      description: '错误提示文案对齐方式',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '左对齐' }, { title: '居中' }, { title: '右对齐' }],
-      },
-    })
-    errorMessageAlign: 'left' | 'center' | 'right' = 'left';
-
-    @Prop({
-      group: '主要属性',
-      title: '输入框尺寸',
-      description: '输入框尺寸',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '小' }, { title: '正常' }, { title: '大' }],
-      },
-    })
-    inputAlign: 'left' | 'center' | 'right' = 'left';
-
-    @Event({
-      title: '提交时',
-      description: '提交表单且数据验证成功后触发',
-    })
-    onSubmit: (event: { values: any }) => any;
-
-    @Event({
-      title: '提交失败时',
-      description: '提交表单且数据验证失败后触发',
-    })
-    onFailed: (event: { errorFields: any; values: any }) => any;
 
     @Slot({
       title: '表单内容',
@@ -244,7 +204,7 @@ namespace nasl.ui {
       description: '是否在 label 后面添加冒号',
       setter: { concept: 'SwitchSetter' },
     })
-    colon: nasl.core.Boolean;
+    colon: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -252,82 +212,12 @@ namespace nasl.ui {
       description: '是否显示表单项必填星号',
       setter: { concept: 'SwitchSetter' },
     })
-    required: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '星号位置',
-      description: '必填星号的位置',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '左侧' }, { title: '右侧' }],
-      },
-    })
-    starPosition: 'left' | 'right';
-
-    @Prop({
-      group: '主要属性',
-      title: '校验规则',
-      description: '表单校验规则，支持传入数组',
-      setter: { concept: 'InputSetter' },
-      bindHide: true,
-    })
-    rules: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '校验触发时机',
-      description: '表单校验触发时机，优先级高于 Form 组件',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '输入时' }, { title: '失焦时' }, { title: '提交时' }],
-      },
-    })
-    validateTrigger: 'onChange' | 'onBlur' | 'onSubmit';
-
-    @Prop({
-      group: '主要属性',
-      title: '显示错误信息',
-      description: '是否显示错误提示',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showError: nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: '错误信息对齐方式',
-      description: '错误提示文案对齐方式',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '左对齐' }, { title: '居中' }, { title: '右对齐' }],
-      },
-    })
-    errorMessageAlign: 'left' | 'center' | 'right';
-
-    @Prop({
-      group: '主要属性',
-      title: '介绍文本',
-      description: '表单项介绍文本，显示在表单项下方',
-      setter: { concept: 'InputSetter' },
-    })
-    intro: nasl.core.String;
+    isRequired: nasl.core.Boolean;
 
     @Slot({
       title: '标签',
       description: '自定义表单项标签',
     })
     slotLabel: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '表单项内容',
-      description: '表单项内容',
-    })
-    slotDefault: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '标签右侧',
-      description: '标签右侧额外内容',
-    })
-    slotButton: () => Array<ViewComponent>;
   }
-} 
+}

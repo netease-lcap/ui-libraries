@@ -1,0 +1,7 @@
+.van-iframe {
+  position: relative;
+}
+.van-iframe iframe {
+  width: 100%;
+  height: 100%;
+} 

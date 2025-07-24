@@ -41,23 +41,7 @@ export const Example1 = {
     },
     template: `
     <el-form>
-        <el-form-item   :rules="[
-        {
-          required: true,
-          message: 'Please input email address',
-          trigger: 'blur',
-        },
-      ]">
-
-    <el-select v-model="activeName">
-      <el-option
-        v-for="item in list"
-        key="item.value"
-        label="item.label"
-        value="item.value"
-      />
-    </el-select>
-    </el-form-item>
+      <el-form-input :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
     </el-form>
 
     `,
