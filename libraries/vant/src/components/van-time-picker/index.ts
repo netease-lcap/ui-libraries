@@ -10,6 +10,5 @@ function VanTimePickerRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const VanTimePicker = registerComponent(VantTimePicker, { plugin: basicPlugin, name: 'van-time-picker' });
-const VanPickerGroup = registerComponent(VantPickerGroup, { });
-export { VanTimePickerRegister, VanTimePicker, VantTimePicker, VanPickerGroup };
+export { VanTimePickerRegister, VanTimePicker, VantTimePicker };
 export default VanTimePicker;

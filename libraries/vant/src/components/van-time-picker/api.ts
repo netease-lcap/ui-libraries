@@ -72,7 +72,9 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
-      onChange: [{ clear: ['startPlaceholder', 'endPlaceholder'] }],
+      onChange: [{
+        clear: ['nextStepText'],
+      }],
     })
     isRange: nasl.core.Boolean = false;
 

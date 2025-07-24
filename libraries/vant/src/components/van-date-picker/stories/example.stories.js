@@ -18,11 +18,32 @@ export const Default = {
         args,
       };
     },
+    data() {
+      return {
+        value: '2025/07/24 12:00:00',
+        startValue: '2025/07/24',
+        endValue: '2025/07/25',
+        startTimeValue: '12:00',
+        endTimeValue: '13:00',
+      };
+    },
     template: `
-      <van-date-picker v-bind="args" />
+      <van-date-picker v-bind="args" v-model:modelValue="value">
+        <template #label>
+          <div>选择日期</div>
+        </template>
+        <template #title>
+          <div>选择日期</div>
+        </template>
+      </van-date-picker>
+      {{ value }}
     `,
   }),
   args: {
-    value: new Date(),
+    // columnsType: ['year', 'month', 'day'],
+    isRange: true,
+    type: 'date',
+    converter: 'timestamp',
+    unit: 'hour',
   },
 };
