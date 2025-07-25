@@ -28,7 +28,7 @@ export const Default = {
       };
     },
     template: `
-      <van-date-picker v-bind="args" v-model:modelValue="value">
+      <van-date-picker v-bind="args" v-model:modelValue="value" v-model:startValue="startValue" v-model:endValue="endValue">
         <template #label>
           <div>选择日期</div>
         </template>
@@ -37,6 +37,8 @@ export const Default = {
         </template>
       </van-date-picker>
       {{ value }}
+      {{ startValue }}
+      {{ endValue }}
     `,
   }),
   args: {
@@ -45,5 +47,7 @@ export const Default = {
     type: 'date',
     converter: 'timestamp',
     unit: 'hour',
+    minDate: '2025/07/24 12:00:00',
+    maxDate: '2025/07/25 12:00:00',
   },
 };

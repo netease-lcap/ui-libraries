@@ -1,18 +1,18 @@
-import {
-  Popup,
-  Field,
-  datePickerProps,
-  DatePicker,
-  PickerGroup,
-  pickerGroupProps,
-  TimePicker,
-  timePickerProps,
-} from 'vant';
+import { Popup, Field, datePickerProps, DatePicker, PickerGroup, pickerGroupProps, TimePicker } from 'vant';
 import { createNamespace } from 'vant/es/utils';
 import { ref } from 'vue';
 import _ from 'lodash';
 import { useCallback, useMemo } from '@/plugins/hooks';
-import { toValue, getCurrentValue, getCurrentTimeValue, getFormatValue } from './utils-format';
+import {
+  toValue,
+  getCurrentValue,
+  getCurrentTimeValue,
+  getFormatValue,
+  getMaxMinDates,
+  getTimeBoundary,
+  getRangeMaxDate,
+  getRangeMinDate,
+} from './utils-format';
 
 const [name, bem] = createNamespace('date-picker');
 
@@ -78,6 +78,9 @@ export function handleCustomProps(props: any) {
   const close = () => {
     popupVisible.value = false;
   };
+  const { maxDateValue, minDateValue } = useMemo(() => {
+    return getMaxMinDates(props.get('maxDate'), props.get('minDate'));
+  }, [props.get('maxDate'), props.get('minDate')]);
   const selfRef = _.assign(refProp, { open, close });
   return {
     formatValue,
@@ -85,6 +88,8 @@ export function handleCustomProps(props: any) {
     inputAlign,
     unit,
     ref: selfRef,
+    maxDate: maxDateValue,
+    minDate: minDateValue,
   };
 }
 handleCustomProps.order = 0;
@@ -106,6 +111,10 @@ export function handleModelValue(props: any) {
   const currentTimeValue = useMemo(() => {
     return getCurrentTimeValue(modelValue, timeUnitIndex);
   }, [modelValue, type]);
+  const currentValueRef = ref(currentValue);
+  const onSetCurrentValue = (value: Array<string>) => {
+    currentValueRef.value = value;
+  };
   const isRange = props.get('isRange');
   if (isRange) {
     return {};
@@ -114,6 +123,8 @@ export function handleModelValue(props: any) {
   return {
     modelValue: currentValue,
     modelTimeValue: currentTimeValue,
+    onSetCurrentValue,
+    currentValueRef,
   };
 }
 handleModelValue.order = 2;
@@ -127,34 +138,52 @@ export function handleRangeModelValue(props: any) {
   const startValue = props.get('startValue');
   const endValue = props.get('endValue');
   const unitIndex = props.get('unitIndex');
+  const timeUnitIndex = props.get('timeUnitIndex');
   const formatValue = props.get('formatValue');
   // 开始值：转成数组
   const currentStartValue = useMemo(() => {
     return getCurrentValue(startValue, unitIndex);
   }, [startValue, unitIndex]);
+  const currentStartTimeValue = useMemo(() => {
+    return getCurrentTimeValue(startValue, timeUnitIndex);
+  }, [startValue, timeUnitIndex]);
   // 结束值：转成数组
   const currentEndValue = useMemo(() => {
     return getCurrentValue(endValue, unitIndex);
   }, [endValue, unitIndex]);
+  const currentEndTimeValue = useMemo(() => {
+    return getCurrentTimeValue(endValue, timeUnitIndex);
+  }, [endValue, timeUnitIndex]);
   const isRange = props.get('isRange');
   if (!isRange) {
     return {};
   }
   // 开始值：用于改变时暂存数据
   const currentStartValueRef = ref(currentStartValue);
+  const currentStartTimeValueRef = ref(currentStartTimeValue);
   // 结束值：用于改变时暂存数据
   const currentEndValueRef = ref(currentEndValue);
+  const currentEndTimeValueRef = ref(currentEndTimeValue);
   // 设置开始值
   const onSetCurrentStartValue = (value: Array<string>) => {
     currentStartValueRef.value = value;
+  };
+  const onSetCurrentStartTimeValue = (value: Array<string>) => {
+    currentStartTimeValueRef.value = value;
   };
   // 设置结束值
   const onSetCurrentEndValue = (value: Array<string>) => {
     currentEndValueRef.value = value;
   };
+  const onSetCurrentEndTimeValue = (value: Array<string>) => {
+    currentEndTimeValueRef.value = value;
+  };
   // 格式化值
   formatValue.value = getFormatValue(
-    [[currentStartValue, []], [currentEndValue, []]],
+    [
+      [currentStartValue, currentStartTimeValue],
+      [currentEndValue, currentEndTimeValue],
+    ],
     props,
   );
   return {
@@ -164,6 +193,10 @@ export function handleRangeModelValue(props: any) {
     onSetCurrentEndValue,
     currentStartValueRef,
     currentEndValueRef,
+    currentStartTimeValueRef,
+    currentEndTimeValueRef,
+    onSetCurrentStartTimeValue,
+    onSetCurrentEndTimeValue,
   };
 }
 handleRangeModelValue.order = 2;
@@ -211,12 +244,18 @@ export function handleConfirmButtonClick(props: any) {
       popupVisible.value = false;
       if (isRange === true) {
         const currentStartValue = data[0]?.selectedValues || [];
-        const currentEndValue = data[1]?.selectedValues || [];
-        const startValues = currentStartValue?.slice(0, unitIndex + 1);
-        const endValues = currentEndValue?.slice(0, unitIndex + 1);
-        formatValue.value = getFormatValue([[startValues, []], [endValues, []]], props);
-        const startValue = toValue(startValues);
-        const endValue = toValue(endValues);
+        const currentStartTimeValue = data[1]?.selectedValues || [];
+        const currentEndValue = data[2]?.selectedValues || [];
+        const currentEndTimeValue = data[3]?.selectedValues || [];
+        formatValue.value = getFormatValue(
+          [
+            [currentStartValue, currentStartTimeValue],
+            [currentEndValue, currentEndTimeValue],
+          ],
+          props,
+        );
+        const startValue = toValue(currentStartValue, currentStartTimeValue, props.get('converter'));
+        const endValue = toValue(currentEndValue, currentEndTimeValue, props.get('converter'));
         emit('update:startValue', startValue);
         emit('sync:state', 'startValue', startValue);
         emit('update:endValue', endValue);
@@ -255,14 +294,51 @@ function renderRangeContent(options: any) {
     onSetCurrentEndValue,
     currentStartValueRef,
     currentEndValueRef,
+    startTimeValue,
+    endTimeValue,
+    currentStartTimeValueRef,
+    currentEndTimeValueRef,
+    onSetCurrentStartTimeValue,
+    onSetCurrentEndTimeValue,
   } = props;
   const { minDate, maxDate, type, timeColumnsType } = props;
+  const startDateMaxDate = useMemo(() => {
+    return getMaxMinDates(getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate), minDate).maxDateValue;
+  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
+  const endDateMinDate = useMemo(() => {
+    return getMaxMinDates(maxDate, getRangeMinDate(currentStartValueRef, currentStartTimeValueRef, minDate))
+      .minDateValue;
+  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
+  const startTimeMaxTime = useMemo(() => {
+    return getTimeBoundary(
+      currentStartValueRef,
+      getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate),
+      minDate,
+    ).maxTime;
+  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
+  const startTimeMinTime = useMemo(() => {
+    return getTimeBoundary(currentStartValueRef, maxDate, minDate).minTime;
+  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
+  const endTimeMaxTime = useMemo(() => {
+    return getTimeBoundary(currentEndValueRef, maxDate, minDate).maxTime;
+  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
+  const endTimeMinTime = useMemo(() => {
+    return getTimeBoundary(
+      currentEndValueRef,
+      maxDate,
+      getRangeMinDate(currentStartValueRef, currentStartTimeValueRef, minDate),
+    ).minTime;
+  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
   const tabsData = useMemo(() => {
     if (type === 'date') {
       return ['开始日期', '结束日期'];
     }
     return ['开始日期', '开始时间', '结束日期', '结束时间'];
   }, [type]);
+  const startDateComponentRef = ref(null);
+  const endDateComponentRef = ref(null);
+  const startTimeComponentRef = ref(null);
+  const endTimeComponentRef = ref(null);
   return (
     <PickerGroup
       {..._.pick(props, Object.keys(pickerGroupProps))}
@@ -272,38 +348,69 @@ function renderRangeContent(options: any) {
       onConfirm={props.onConfirm}>
       <DatePicker
         {..._.pick(props, Object.keys(datePickerProps))}
+        ref={startDateComponentRef}
         showToolbar={false}
         modelValue={startValue}
-        maxDate={toValue(currentEndValueRef) ?? maxDate}
+        maxDate={startDateMaxDate}
+        minDate={minDate}
         onChange={(value) => {
           onSetCurrentStartValue(value.selectedValues);
+          // TimePicker 还没有触发onChange，所以需要手动获取时间
+          const startTimeValue = startTimeComponentRef.value?.getSelectedTime();
+          if (startTimeValue) {
+            onSetCurrentStartTimeValue(startTimeValue);
+          }
         }}
         key="start"
       />
       {type === 'datetime' && (
         <TimePicker
+          ref={startTimeComponentRef}
           showToolbar={false}
           columnsType={timeColumnsType}
-        //   modelValue={startValue}
-        //   maxDate={toValue(currentEndValueRef) ?? maxDate}
+          modelValue={startTimeValue}
+          maxTime={startTimeMaxTime}
+          minTime={startTimeMinTime}
+          onChange={(value) => {
+            onSetCurrentStartTimeValue(value.selectedValues);
+            const startDateValue = startDateComponentRef.value?.getSelectedDate();
+            if (startDateValue) {
+              onSetCurrentStartValue(startDateValue);
+            }
+          }}
         />
       )}
       <DatePicker
+        ref={endDateComponentRef}
         {..._.pick(props, Object.keys(datePickerProps))}
         showToolbar={false}
         modelValue={endValue}
-        minTime={toValue(currentStartValueRef) ?? minDate}
+        maxDate={maxDate}
+        minDate={endDateMinDate}
         onChange={(value) => {
           onSetCurrentEndValue(value.selectedValues);
+          const endTimeValue = endTimeComponentRef.value?.getSelectedTime();
+          if (endTimeValue) {
+            onSetCurrentEndTimeValue(endTimeValue);
+          }
         }}
         key="end"
       />
       {type === 'datetime' && (
         <TimePicker
+          ref={endTimeComponentRef}
           showToolbar={false}
-          columnsType={['hour', 'minute', 'second']}
-        //   modelValue={startValue}
-        //   maxTime={toValue(currentEndValueRef) ?? maxDate}
+          columnsType={timeColumnsType}
+          modelValue={endTimeValue}
+          maxTime={endTimeMaxTime}
+          minTime={endTimeMinTime}
+          onChange={(value) => {
+            onSetCurrentEndTimeValue(value.selectedValues);
+            const endDateValue = endDateComponentRef.value?.getSelectedDate();
+            if (endDateValue) {
+              onSetCurrentEndValue(endDateValue);
+            }
+          }}
         />
       )}
     </PickerGroup>
@@ -317,13 +424,16 @@ function renderRangeContent(options: any) {
  */
 function renderBasicContent(options: any) {
   const { props } = options;
-  const { modelValue, modelTimeValue, type, timeColumnsType } = props;
+  const { modelValue, modelTimeValue, type, timeColumnsType, minDate, maxDate, onSetCurrentValue, currentValueRef } =
+    props;
   const renderDatePicker = () => {
     return (
       <DatePicker
         key="basic"
         {..._.pick(props, Object.keys(datePickerProps))}
         modelValue={modelValue}
+        maxDate={maxDate}
+        minDate={minDate}
         v-slots={{
           title: options.slots?.title?.(),
         }}
@@ -340,9 +450,24 @@ function renderBasicContent(options: any) {
         tabs={['选择日期', '选择时间']}
         onCancel={props.onCancel}
         onConfirm={props.onConfirm}>
-        <DatePicker key="basic" {..._.pick(props, Object.keys(datePickerProps))} modelValue={modelValue} />
+        <DatePicker
+          key="basic"
+          {..._.pick(props, Object.keys(datePickerProps))}
+          modelValue={modelValue}
+          maxDate={maxDate}
+          minDate={minDate}
+          onChange={(value) => {
+            onSetCurrentValue(value.selectedValues);
+          }}
+        />
         {type === 'datetime' && (
-          <TimePicker key="time" columnsType={timeColumnsType} modelValue={modelTimeValue} />
+          <TimePicker
+            key="time"
+            columnsType={timeColumnsType}
+            modelValue={modelTimeValue}
+            maxTime={getTimeBoundary(currentValueRef, maxDate, minDate).maxTime}
+            minTime={getTimeBoundary(currentValueRef, maxDate, minDate).minTime}
+          />
         )}
       </PickerGroup>
     );
@@ -369,7 +494,6 @@ export function handleBasicRender(props: any) {
   };
   const render = useCallback(
     (props, { attrs, slots }) => {
-      const label = slots.label?.();
       const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay } = props;
       return (
         <div {...attrs}>
@@ -377,7 +501,7 @@ export function handleBasicRender(props: any) {
             readonly
             disabled={disabled}
             class={bem('field')}
-            v-slots={{ label }}
+            v-slots={{ label: slots.label }}
             onClick={onFieldClick}
             modelValue={formatValue}
             placeholder={placeholder}
