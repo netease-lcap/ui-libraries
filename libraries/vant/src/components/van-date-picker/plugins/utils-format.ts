@@ -168,10 +168,10 @@ function getDisplayFormatter(unit: string, format: string) {
     second: ['YYYY-MM-DD HH:mm:ss', 'YYYY年M月D日 HH时mm分ss秒'],
   };
   const formatters = map[unit];
-  if (format && formatters.includes(format)) {
+  if (format && formatters?.includes(format)) {
     return format;
   }
-  return formatters[0];
+  return formatters?.[0] || 'YYYY-MM-DD';
 }
 
 /**
@@ -262,7 +262,6 @@ export function getTimeBoundary(currentDate: Array<string>, maxDate: DateValue, 
       result.minTime = min.format('HH:mm:ss');
     }
   }
-  console.log('result====', result, maxDate, minDate);
   return result;
 }
 
@@ -298,4 +297,15 @@ export function getRangeMinDate(currentDate: Array<string>, currentTime: Array<s
     return current.isAfter(minDate) ? currentValue : minDate;
   }
   return minDate;
+}
+
+export function getValidUnit(unit: string, type: string) {
+  const vaildMap = {
+    date: ['day', 'month', 'year'],
+    datetime: ['second', 'minute', 'hour'],
+  };
+  if (vaildMap[type]?.includes(unit)) {
+    return unit;
+  }
+  return vaildMap[type]?.[0] || 'day';
 }

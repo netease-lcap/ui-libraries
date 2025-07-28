@@ -196,7 +196,7 @@ namespace nasl.ui {
             showFormatter: 'YYYY-MM-DD',
             converter: 'YYYY/MM/dd',
           },
-          if: (_) => _ === 'date',
+          if: (_) => _ === 'day',
         },
         {
           update: {
@@ -357,7 +357,7 @@ namespace nasl.ui {
         options: [
           {
             title: 'YYYY/MM/dd',
-            if: (_) => _.type === 'date' && _.unit === 'date',
+            if: (_) => _.type === 'date' && _.unit === 'day',
           },
           {
             title: 'YYYY/MM',

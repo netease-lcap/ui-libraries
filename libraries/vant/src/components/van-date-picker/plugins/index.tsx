@@ -12,6 +12,7 @@ import {
   getTimeBoundary,
   getRangeMaxDate,
   getRangeMinDate,
+  getValidUnit,
 } from './utils-format';
 
 const [name, bem] = createNamespace('date-picker');
@@ -47,7 +48,7 @@ function getUnitIndex(unit: string, type: string) {
 }
 
 export function handleColumnsType(props: any) {
-  const unit = props.get('unit') || 'day';
+  const unit = props.get('unit');
   const type = props.get('type') || 'date';
   const { index, columnsType, timeIndex, timeColumnsType } = useMemo(() => {
     return getUnitIndex(unit, type);
@@ -70,7 +71,9 @@ export function handleCustomProps(props: any) {
   const popupOpened = props.get('popupOpened');
   const popupVisible = ref(popupOpened);
   const inputAlign = props.get('inputAlign') || 'right';
-  const unit = props.get('unit') || 'day';
+  const type = props.get('type') || 'date';
+  const unit = props.get('unit');
+  const validUnit = getValidUnit(unit, type);
   const refProp = props.get('ref');
   const open = () => {
     popupVisible.value = true;
@@ -86,7 +89,7 @@ export function handleCustomProps(props: any) {
     formatValue,
     popupVisible,
     inputAlign,
-    unit,
+    unit: validUnit,
     ref: selfRef,
     maxDate: maxDateValue,
     minDate: minDateValue,
@@ -236,6 +239,7 @@ export function handleConfirmButtonClick(props: any) {
   const unitIndex = props.get('unitIndex');
   const isRange = props.get('isRange');
   const emit = props.get('emit');
+  const type = props.get('type');
   const onConfirmClick = useCallback(
     (data: any) => {
       if (_.isFunction(onConfirm)) {
@@ -243,10 +247,19 @@ export function handleConfirmButtonClick(props: any) {
       }
       popupVisible.value = false;
       if (isRange === true) {
-        const currentStartValue = data[0]?.selectedValues || [];
-        const currentStartTimeValue = data[1]?.selectedValues || [];
-        const currentEndValue = data[2]?.selectedValues || [];
-        const currentEndTimeValue = data[3]?.selectedValues || [];
+        let currentStartValue = [];
+        let currentStartTimeValue = [];
+        let currentEndValue = [];
+        let currentEndTimeValue = [];
+        if (type === 'date') {
+          currentStartValue = data[0]?.selectedValues || [];
+          currentEndValue = data[1]?.selectedValues || [];
+        } else {
+          currentStartValue = data[0]?.selectedValues || [];
+          currentStartTimeValue = data[1]?.selectedValues || [];
+          currentEndValue = data[2]?.selectedValues || [];
+          currentEndTimeValue = data[3]?.selectedValues || [];
+        }
         formatValue.value = getFormatValue(
           [
             [currentStartValue, currentStartTimeValue],
@@ -302,33 +315,22 @@ function renderRangeContent(options: any) {
     onSetCurrentEndTimeValue,
   } = props;
   const { minDate, maxDate, type, timeColumnsType } = props;
-  const startDateMaxDate = useMemo(() => {
-    return getMaxMinDates(getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate), minDate).maxDateValue;
-  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
-  const endDateMinDate = useMemo(() => {
-    return getMaxMinDates(maxDate, getRangeMinDate(currentStartValueRef, currentStartTimeValueRef, minDate))
-      .minDateValue;
-  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
-  const startTimeMaxTime = useMemo(() => {
-    return getTimeBoundary(
-      currentStartValueRef,
-      getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate),
-      minDate,
-    ).maxTime;
-  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
-  const startTimeMinTime = useMemo(() => {
-    return getTimeBoundary(currentStartValueRef, maxDate, minDate).minTime;
-  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
-  const endTimeMaxTime = useMemo(() => {
-    return getTimeBoundary(currentEndValueRef, maxDate, minDate).maxTime;
-  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
-  const endTimeMinTime = useMemo(() => {
-    return getTimeBoundary(
-      currentEndValueRef,
-      maxDate,
-      getRangeMinDate(currentStartValueRef, currentStartTimeValueRef, minDate),
-    ).minTime;
-  }, [currentStartValueRef, currentStartTimeValueRef, currentEndValueRef, currentEndTimeValueRef, maxDate, minDate]);
+  const startDateMaxDate = getMaxMinDates(getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate), minDate)
+    .maxDateValue;
+  const endDateMinDate = getMaxMinDates(maxDate, getRangeMinDate(currentStartValueRef, currentStartTimeValueRef, minDate))
+    .minDateValue;
+  const startTimeMaxTime = getTimeBoundary(
+    currentStartValueRef,
+    getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate),
+    minDate,
+  ).maxTime;
+  const startTimeMinTime = getTimeBoundary(currentStartValueRef, maxDate, minDate).minTime;
+  const endTimeMaxTime = getTimeBoundary(currentEndValueRef, maxDate, minDate).maxTime;
+  const endTimeMinTime = getTimeBoundary(
+    currentEndValueRef,
+    maxDate,
+    getRangeMinDate(currentStartValueRef, currentStartTimeValueRef, minDate),
+  ).minTime;
   const tabsData = useMemo(() => {
     if (type === 'date') {
       return ['开始日期', '结束日期'];
