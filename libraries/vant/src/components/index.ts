@@ -30,3 +30,6 @@ export { VanRow, VanCol } from './van-row';
 export { VanAbsoluteLayout } from './van-absolute-layout';
 export { VanRouterView } from './van-router-view';
 export { VanIframe } from './van-iframe';
+
+// 导航组件
+export { VanNavBar } from './van-nav-bar';
