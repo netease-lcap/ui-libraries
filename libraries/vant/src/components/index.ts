@@ -33,3 +33,5 @@ export { VanIframe } from './van-iframe';
 
 // 导航组件
 export { VanNavBar } from './van-nav-bar';
+export { VanIndexBar, VanIndexAnchor } from './van-index-bar';
+export { VanActionBar, VanActionBarButton, VanActionBarIcon } from './van-action-bar';

@@ -71,19 +71,19 @@ namespace nasl.ui {
     clickable: nasl.core.Boolean = true;
 
     @Slot({
-      title: 'Left',
+      title: '左侧插槽',
       description: '自定义左侧区域内容',
     })
     slotLeft: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'Right',
+      title: '右侧插槽',
       description: '自定义右侧区域内容',
     })
     slotRight: () => Array<ViewComponent>;
 
     @Slot({
-      title: 'Title',
+      title: '标题插槽',
       description: '自定义标题内容',
     })
     slotTitle: () => Array<ViewComponent>;
