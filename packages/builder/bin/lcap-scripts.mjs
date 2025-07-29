@@ -120,6 +120,8 @@ function checkNodeVersion(requireNodeVersion, frameworkName = 'lcap-scripts') {
     .option('--https', '启动https')
     .option('--noPreview', '不启动预览')
     .option('--noWatch', '不监听文件变化自动构建')
+    .option('--platform <platform>', '平台地址，默认读取 lcap 配置')
+    .option('--version <version>', 'IDE 版本号，默认 4.0.0')
     .action(async ({ ...args }) => {
       await play(cwd, args);
     });

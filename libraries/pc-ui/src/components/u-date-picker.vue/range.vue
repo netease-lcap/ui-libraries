@@ -26,6 +26,7 @@
             <u-calendar-range
                 :picker="picker"
                 ref="calendar"
+                v-if="currentOpened"
                 :min-date="minDate"
                 :year-diff="yearDiff"
                 :year-add="yearAdd"
