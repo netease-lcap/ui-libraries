@@ -33,7 +33,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "ide/**/*.ts"
-  ],
+, "src/components/van-absolute-layout/stories/block.stories.js", "src/components/van-flex/stories/block.stories.js"  ],
   "references": [
   ]
 }
