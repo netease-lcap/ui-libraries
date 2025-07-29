@@ -45,6 +45,17 @@ export const Default = {
         </template>
       </van-calendar>
       {{ value }}
+       <van-form>
+      <van-form-calendar v-bind="args" @confirm="onConfirm" @select="onSelect" v-model:modelValue="value" @open="onOpen" @close="onClose" >
+        <template #label>
+          <span>选择日期</span>
+        </template>
+        <template #subtitle>
+          <span>副标题</span>
+        </template>
+      </van-form-calendar>
+      {{ value }}
+    </van-form>
     `,
   }),
   args: {
