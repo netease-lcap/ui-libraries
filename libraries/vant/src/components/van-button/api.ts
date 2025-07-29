@@ -69,6 +69,12 @@ namespace nasl.ui {
     text: nasl.core.String = '按钮';
 
     @Prop({
+      group: '交互属性',
+      title: '链接地址',
+    })
+    hrefAndTo: nasl.core.String;
+
+    @Prop({
       group: '样式属性',
       title: '圆角按钮',
       description: '是否为圆角按钮',
@@ -96,7 +102,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '左图标',
       description: '左图标组件',
-      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+      setter: { concept: 'IconSetter', customIconFont: 'LCAP_VANT4_ICONS' },
     })
     icon: nasl.core.String;
 
