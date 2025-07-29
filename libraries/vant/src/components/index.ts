@@ -30,3 +30,15 @@ export { VanRow, VanCol } from './van-row';
 export { VanAbsoluteLayout } from './van-absolute-layout';
 export { VanRouterView } from './van-router-view';
 export { VanIframe } from './van-iframe';
+
+export { VanIcon } from './van-icon';
+export { VanCalendar } from './van-calendar';
+export { VanDatePicker } from './van-date-picker';
+export { VanTimePicker } from './van-time-picker';
+export { VanUploader } from './van-uploader';
+export { VanCollapse, VanCollapseItem } from './van-collapse';
+export { VanCountDown } from './van-count-down';
+export { VanBackTop } from './van-back-top';
+export { VanTreeSelect } from './van-tree-select';
+export { VanTabbar, VanTabbarItem } from './van-tabbar';
+export { VanTabs, VanTab } from './van-tabs';

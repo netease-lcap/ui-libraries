@@ -1,0 +1,20 @@
+.van-calendar__toolbar {
+  align-items: center;
+}
+.van-calendar__content-wrapper {
+  padding: 12px;
+}
+
+.van-calendar__bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.van-calendar__cancel {
+  cursor: pointer;
+}
+
+.van-calendar__field:not([class*="van-field--disabled"]) {
+  cursor: pointer;
+}
