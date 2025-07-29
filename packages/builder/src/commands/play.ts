@@ -15,6 +15,8 @@ export interface PlayCommandOptions {
   https?: boolean;
   noPreview?: boolean;
   noWatch?: boolean;
+  version?: string;
+  platform?: string;
 }
 
 async function startNoWatchServer(rootPath: string, options: LcapBuildOptions, { port, https, middlewares, openURL }: Pick<PlayCommandOptions, 'port' | 'https'> & { middlewares: ((req: IncomingMessage, res: ServerResponse, next: () => void) => void)[]; openURL?: string }) {
@@ -51,7 +53,7 @@ async function startNoWatchServer(rootPath: string, options: LcapBuildOptions, {
     .on('unlink', (filePath) => handleFileChange(filePath, 'unlink'));
 }
 
-export default async (rootPath: string, { port, https, noPreview, noWatch }: PlayCommandOptions) => {
+export default async (rootPath: string, { port, https, noPreview, noWatch, ...options }: PlayCommandOptions) => {
   const buildConfigs = await getBuildConfig();
 
   const base = '/play';
@@ -84,7 +86,7 @@ export default async (rootPath: string, { port, https, noPreview, noWatch }: Pla
       openURL,
       middlewares,
       onFirstBuilded: () => {
-        !noPreview && startPreview(rootPath, https);
+        !noPreview && startPreview(rootPath, https, options);
       },
     },
     buildConfigs,
