@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import { Field, Popup } from 'vant';
-import { test } from 'vitest';
-import { useMemo, useCallback, useState, useControllableValue, useEffect, useRef } from '@/plugins/hooks';
+import { useMemo, useCallback, useState, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 
 import {
