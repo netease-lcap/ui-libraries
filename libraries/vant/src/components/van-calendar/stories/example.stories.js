@@ -65,5 +65,6 @@ export const Default = {
     minDate: '2025-06-10',
     maxDate: '2025-07-31',
     maxRange: 3,
+    inputAlign: 'right',
   },
 };

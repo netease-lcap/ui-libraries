@@ -11,7 +11,6 @@ const [name, bem] = createNamespace('calendar');
  * 处理自定义属性
  */
 export function handleCustomProps(props: any) {
-  const formatValue = ref('');
   const popupOpened = props.get('popupOpened');
   const popupVisible = ref(popupOpened);
   const inputAlign = props.get('inputAlign') || 'right';
@@ -28,7 +27,6 @@ export function handleCustomProps(props: any) {
     return getMaxMinDates(props.get('maxDate'), props.get('minDate'));
   }, [props.get('maxDate'), props.get('minDate')]);
   return {
-    formatValue,
     popupVisible,
     inputAlign,
     unit,
@@ -46,17 +44,19 @@ handleCustomProps.order = 0;
  */
 export function handleModelValue(props: any) {
   const [modelValue, setModelValue] = useControllableValue(props);
-  const formatValue = props.get('formatValue');
   const type = props.get('type');
   const defaultDate = getCurrentValue(props.get('defaultDate'));
   const currentValue = useMemo(() => {
     return getCurrentValue(modelValue);
   }, [modelValue, type]);
-  formatValue.value = getFormatValue(currentValue, props);
+  const formatValue = useMemo(() => {
+    return getFormatValue(modelValue, props);
+  }, [modelValue, props]);
   return {
     modelValue: currentValue,
     setModelValue,
     defaultDate: currentValue || defaultDate || null,
+    formatValue,
   };
 }
 handleModelValue.order = 2;
@@ -71,7 +71,7 @@ export function handleConfirmButtonClick(props: any) {
   const onSelect = props.get('onSelect');
   const popupVisible = props.get('popupVisible');
   const emit = props.get('emit');
-  const formatValue = props.get('formatValue');
+  const setModelValue = props.get('setModelValue');
   const onConfirmClick = useCallback(
     (data: any) => {
       if (_.isFunction(onConfirm)) {
@@ -79,8 +79,7 @@ export function handleConfirmButtonClick(props: any) {
       }
       popupVisible.value = false;
       const currentValueStr = toValue(data, props.get('converter'));
-      formatValue.value = getFormatValue(data, props);
-      emit('update:modelValue', currentValueStr);
+      setModelValue(currentValueStr);
       emit('sync:state', 'modelValue', currentValueStr);
     },
     [onConfirm, popupVisible],
@@ -116,10 +115,10 @@ export function handleBasicRender(props: any) {
   };
   const render = useCallback(
     (props, { attrs, slots }) => {
-      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay } = props;
+      const { formatValue, placeholder, inputAlign } = props;
       const calendarProps = _.omit(props, ['show']);
       return (
-        <div {...attrs}>
+        <div {..._.pick(attrs, ['class', 'node-path', 'style'])}>
           <Field
             readonly
             disabled={disabled}
