@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { Field, Popup } from 'vant';
+import { test } from 'vitest';
 import { useMemo, useCallback, useState, useControllableValue, useEffect, useRef } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 
@@ -46,15 +47,11 @@ export function handleShowField(props) {
   const onCancelProps = props.get('onCancel');
   const onConfirmProps = props.get('onConfirm');
   const [value, setValue] = useControllableValue(props);
-  const [fieldValue, setFieldValue] = useState(value);
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const selected = _.filter(columns, (item) => _.includes(value, item.value))
-      .map((item) => item.text)
-      .join(',');
-    if (selected === value) return;
-    setFieldValue(selected);
+  const fieldValue = useMemo(() => {
+    const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item).text);
+    return selected.join(',');
   }, [value, columns]);
+  const [show, setShow] = useState(false);
   const onCancel = useCallback(
     _.wrap(onCancelProps, (fn, ...args) => {
       _.assign(fn, ...args);
@@ -66,14 +63,13 @@ export function handleShowField(props) {
     _.wrap(onConfirmProps, (fn, { selectedValues, selectedOptions, ...args }: { [x: string]: any }) => {
       _.assign(fn, { selectedValues, selectedOptions, ...args });
       setValue(selectedValues);
-      setFieldValue(_.map(selectedOptions, (item) => item.text).join(','));
       setShow(false);
     }),
     [onConfirmProps],
   );
   const render = useCallback(
     (props) => {
-      const { setShow, show, value, setFieldValue, setValue, fieldValue } = props;
+      const { setShow, show, value, setValue, fieldValue } = props;
       return [
         <Field
           modelValue={fieldValue}
@@ -84,7 +80,6 @@ export function handleShowField(props) {
           onClickRightIcon={(e) => {
             e.stopPropagation();
             setValue([]);
-            setFieldValue([]);
           }}
         />,
         <Popup show={show} onClose={() => setShow(false)} lazy-render={false} round position="bottom">
@@ -104,7 +99,6 @@ export function handleShowField(props) {
     show,
     setShow,
     value,
-    setFieldValue,
     setValue,
     fieldValue,
     onCancel,
