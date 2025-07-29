@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { ref, watch, inject, Ref, getCurrentInstance, VNode, computed, onMounted, onUnmounted, nextTick } from 'vue';
-import { VanFormItem } from '@/temp/van-form';
-import { $formProvide, $formItemProps } from '@/temp/van-form/constants';
+import { VanFormItem } from '@/components/van-form';
+import { $formProvide, $formItemProps } from '@/components/van-form/constants';
 import { useEffect } from '@/plugins/hooks';
 import { categoryStyles } from '@/utils';
 import { $provide, $formTagName } from '@/plugins/constants';

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { $formProvide } from '@/temp/van-form/constants';
+import { $formProvide } from '@/components/van-form/constants';
 import { useRef } from '@/plugins/hooks';
 
 export function handleModelValue(props) {
