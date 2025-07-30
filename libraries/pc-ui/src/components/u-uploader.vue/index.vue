@@ -343,14 +343,22 @@ export default {
             return !!iconInfo ? (iconInfo[1] || 'file-default') : 'file-default'
         },
         isURLEncoded(url) {
-            const decodedUrl = decodeURI(url); // 对 URL 进行解码
-            if (decodedUrl === url) {
-                return false; // URL 未被编码
-            } else {
-                return true; // URL 已被编码
+            try {
+              const decodedUrl = decodeURI(url); // 对 URL 进行解码
+              if (decodedUrl === url) {
+                  return false; // URL 未被编码
+              } else {
+                  return true; // URL 已被编码
+              }
+            } catch (err) {
+              return false;
             }
         },
         encodeUrl(url) {
+            if (typeof url !== 'string') {
+                return '';
+            }
+
             return this.isURLEncoded(url) ? url : encodeURI(url);
         },
         fromValue(value) {
@@ -692,7 +700,6 @@ export default {
                     }, this);
                 },
                 onError: (e, res) => {
-                    console.log('error', e)
                     const item = this.currentValue[index];
                     item.status = 'error';
 
