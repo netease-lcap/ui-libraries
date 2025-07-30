@@ -77,7 +77,7 @@ export { ElAlert, ElAlertRegister, ElAlertPlus } from './el-alert';
 export { ElDialog, ElDialogRegister, ElDialogPlus } from './el-dialog';
 export { ElDrawer, ElDrawerRegister, ElDrawerPlus } from './el-drawer';
 export { ElPopover, ElPopoverRegister, ElPopoverPlus } from './el-popover';
-export { ElMessage, ElMessageDesigner, ElMessageRegister } from './el-message';
+export { ElMessage, ElMessageDesigner, ElMessageRegister, Message } from './el-message';
 export { ElMessageBox, ElMessageBoxDesigner, ElMessageBoxRegister } from './el-message-box';
 export { ElNotification, ElNotificationDesigner, ElNotificationRegister } from './el-notification';
 export { ElLoading, ElLoadingRegister } from './el-loading';
