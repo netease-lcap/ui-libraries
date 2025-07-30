@@ -2,8 +2,8 @@ import 'vant/lib/index.css';
 import '@/utils/index';
 
 export { VanText } from './van-text';
-export { VanPicker } from './van-picker';
 export { VanField, VanFormField } from './van-field';
+export { VanPicker } from './van-picker';
 export { VanButton } from './van-button';
 export { VanTag } from './van-tag';
 export { VanBadge } from './van-badge';
@@ -23,11 +23,9 @@ export { VanSidebar, VanSidebarItem } from './van-sidebar';
 export { VanSearch } from './van-search';
 export { VanRate } from './van-rate';
 export { VanForm } from './van-form';
-
-// 布局组件
+export { VanList } from './van-list';
 export { VanFlex } from './van-flex';
 export { VanRow, VanCol } from './van-row';
-export { VanAbsoluteLayout } from './van-absolute-layout';
 export { VanRouterView } from './van-router-view';
 export { VanIframe } from './van-iframe';
 
@@ -42,3 +40,5 @@ export { VanBackTop } from './van-back-top';
 export { VanTreeSelect } from './van-tree-select';
 export { VanTabbar, VanTabbarItem } from './van-tabbar';
 export { VanTabs, VanTab } from './van-tabs';
+export { VanAbsoluteLayout } from './van-absolute-layout';
+export { Cell as VanCell } from 'vant';

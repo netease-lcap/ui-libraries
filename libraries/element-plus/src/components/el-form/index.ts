@@ -19,6 +19,7 @@ function ElFormItemWrapRegister(BaseComponent, plugin = {}, extend = true) {
 const ElForm = registerComponent(ElFormPlus, { plugin: basicsPlugin, name: 'el-form' });
 const ElFormItemWrap = registerComponent(ElFormItemPlus, { plugin: formItemPlugin, name: 'el-form-item' });
 const ElFormItem = ElFormItemPlus;
+const ElFormItemPro = ElFormItemPlus;
 
 export {
   ElForm,
@@ -28,6 +29,7 @@ export {
   ElFormRegister,
   ElFormItemWrapRegister,
   ElFormItemPlus,
+  ElFormItemPro,
   ElFormPlus,
 };
 export default ElForm;

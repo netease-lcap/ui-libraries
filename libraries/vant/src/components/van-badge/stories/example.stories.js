@@ -28,12 +28,8 @@ export const Default = {
     `,
   }),
   args: {
-    value: 5,
+    content: 5,
     max: 99,
-    isDot: false,
-    hidden: false,
-    type: 'danger',
-    showZero: true,
   },
 };
 

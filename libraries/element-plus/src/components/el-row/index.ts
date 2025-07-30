@@ -13,5 +13,3 @@ const ElRow = ElRowPlus;
 const ElCol = registerComponent(ElColPlus, { plugin: columnPlugin, name: 'el-col' });
 
 export { ElRowPlus, ElColPlus, ElRow, ElCol, ElColRegister };
-
-

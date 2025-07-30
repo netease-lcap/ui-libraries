@@ -17,7 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-      <van-badge  text="徽标" ></van-badge>
+      <van-badge content="2"></van-badge>
     `,
   }),
 };

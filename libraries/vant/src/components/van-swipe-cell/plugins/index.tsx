@@ -1,3 +1,12 @@
 import _ from 'lodash';
-// import { getIsPreview, getRender } from '@/plugins/common/preview';
-export { handleControllableValue } from '@/plugins/common/index';
+
+export * from './ide';
+
+export function handleBeforeClose(props) {
+  const onBeforeClose = props.get('onBeforeClose');
+  return {
+    beforeClose: _.wrap(onBeforeClose, (fn, ...args) => {
+      return _.attempt(fn, ...args);
+    }),
+  };
+}

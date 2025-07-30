@@ -19,4 +19,4 @@ function VanAbsoluteLayoutRegister(BaseComponent, plugin = {}, extend = true) {
 const VanAbsoluteLayout = registerComponent(AbsoluteLayout, { plugin: plugins, name: 'van-absolute-layout' });
 
 export { VanAbsoluteLayoutRegister, VanAbsoluteLayout };
-export default VanAbsoluteLayout; 
+export default VanAbsoluteLayout;

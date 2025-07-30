@@ -7,6 +7,14 @@ namespace nasl.ui {
       idetype: 'container',
       structured: true,
       childAccept: true,
+      translateBindingProperty: ['leftWidth', 'rightWidth'],
+      useSwipe: {
+        prop: 'swipeState',
+        left: '`left`',
+        right: '`right`',
+        init: '``',
+      },
+      namedSlotOmitWrapper: ['left', 'right'],
     },
   })
   @Component({
@@ -106,6 +114,12 @@ namespace nasl.ui {
     })
     onClose: (event: { position: 'left' | 'right'; name: nasl.core.String | nasl.core.Integer }) => void;
 
+    @Event({
+      title: '关闭前',
+      description: '关闭前的回调函数，返回 false 可阻止关闭',
+    })
+    onBeforeClose: (event: { position: 'left' | 'right'; name: nasl.core.String | nasl.core.Integer }) => void;
+
     @Slot({
       title: '默认',
       description: '默认插槽',
@@ -123,5 +137,6 @@ namespace nasl.ui {
       description: '右侧滑动区域',
     })
     slotRight: () => Array<ViewComponent>;
+
   }
 }

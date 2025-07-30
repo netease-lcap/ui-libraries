@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import Component from '../index';
 
 export default {
@@ -14,8 +15,13 @@ export const Default = {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     setup() {
+      const swipeCell = ref(null);
+      setTimeout(() => {
+        console.log(swipeCell, 'swipeCell');
+      }, 1000);
       return {
         args,
+        swipeCell,
         handleClick(event) {
           console.log('点击事件:', event);
         },
@@ -25,16 +31,22 @@ export const Default = {
         handleClose(event) {
           console.log('关闭事件:', event);
         },
+        handleBeforeClose(event) {
+          console.log('关闭前事件:', event);
+          return false;
+        },
       };
     },
     template: `
       <div style="padding: 20px;">
         <van-swipe-cell 
+          ref="swipeCell"
           v-bind="args" 
           @click="handleClick"
+          @before-close="handleBeforeClose"
           @open="handleOpen"
           @close="handleClose">
-          <van-cell title="单元格" value="内容"></van-cell>
+          <van-text>123</van-text>
           <template #right>
             <van-button square type="danger" text="删除"></van-button>
           </template>
@@ -44,8 +56,6 @@ export const Default = {
   }),
   args: {
     name: 'swipe-cell-1',
-    leftWidth: 0,
-    rightWidth: 0,
     disabled: false,
   },
 };
@@ -216,7 +226,7 @@ export const AsyncAction = {
         async handleDelete() {
           this.loading = true;
           // 模拟异步操作
-          await new Promise(resolve => setTimeout(resolve, 1000));
+          await new Promise((resolve) => setTimeout(resolve, 1000));
           console.log('删除成功');
           this.loading = false;
         },
@@ -281,4 +291,4 @@ export const CustomStyle = {
       </div>
     `,
   }),
-}; 
+};
