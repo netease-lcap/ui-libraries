@@ -17,7 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-      <van-button  text="按钮" ></van-button>
+      <van-button text="按钮" ></van-button>
     `,
   }),
 };

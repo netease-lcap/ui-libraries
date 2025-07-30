@@ -1,8 +1,8 @@
 import Component from '../index';
 
 export default {
-  id: 'van-badge-blocks',
-  title: '组件列表/Badge 徽标/区块',
+  id: 'van-progress-blocks',
+  title: '组件列表/Progress 进度条/区块',
   component: Component,
   parameters: {
     layout: 'padded',
@@ -11,13 +11,13 @@ export default {
 };
 
 export const Block1 = {
-  name: '按钮',
+  name: '线性进度条',
   render: () => ({
     setup() {
       return {};
     },
     template: `
-      <van-badge content="2"></van-badge>
+      <van-progress :percentage="50"></van-progress>
     `,
   }),
 };
