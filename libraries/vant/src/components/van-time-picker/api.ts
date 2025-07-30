@@ -286,16 +286,64 @@ namespace nasl.ui {
     popupOpened: nasl.core.Boolean = false;
 
     @Event({
-      title: '确认',
+      title: '确认时',
       description: '点击完成按钮时触发的事件'
     })
-    onConfirm: (event: any) => void;
+    onConfirm: (event: {
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    } | Array<{
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    }>) => void;
 
     @Event({
-      title: '取消',
+      title: '取消时',
       description: '点击完成取消时触发的事件'
     })
-    onCancel: (event: any) => void;
+    onCancel: (event: {
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    } | Array<{
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    }>) => void;
+
+    @Event({
+      title: '改变时',
+      description: '值变化时触发的事件'
+    })
+    onChange: (event: {
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    } | Array<{
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    }>) => void;
 
     @Slot({
       title: '组件插槽',

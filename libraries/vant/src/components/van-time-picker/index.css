@@ -1,3 +1,7 @@
+.van-time-picker__root {
+  width: 100%;
+  cursor: pointer;
+}
 .van-time-picker__toolbar {
   align-items: center;
 }

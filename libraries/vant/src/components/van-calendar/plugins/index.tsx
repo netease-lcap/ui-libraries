@@ -121,7 +121,7 @@ export function handleBasicRender(props: any) {
       const { formatValue, placeholder, inputAlign } = props;
       const calendarProps = _.omit(props, ['show']);
       return (
-        <div {..._.pick(attrs, ['class', 'node-path', 'style'])} class={bem('root')}>
+        <div {..._.pick(attrs, ['class', 'data-nodepath', 'style'])} class={bem('root')}>
           <Field
             readonly
             disabled={disabled}

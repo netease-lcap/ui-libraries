@@ -32,7 +32,7 @@ export { VanIframe } from './van-iframe';
 export { VanIcon } from './van-icon';
 export { VanCalendar, VanFormCalendar } from './van-calendar';
 export { VanDatePicker } from './van-date-picker';
-export { VanTimePicker } from './van-time-picker';
+export { VanTimePicker, VanFormTimePicker } from './van-time-picker';
 export { VanUploader } from './van-uploader';
 export { VanCollapse, VanCollapseItem } from './van-collapse';
 export { VanCountDown } from './van-count-down';

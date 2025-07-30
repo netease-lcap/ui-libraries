@@ -1,8 +1,8 @@
 import { Popup, Field, timePickerProps, TimePicker, PickerGroup, pickerGroupProps } from 'vant';
 import { createNamespace } from 'vant/es/utils';
-import { ref } from 'vue';
 import _ from 'lodash';
-import { useCallback, useMemo } from '@/plugins/hooks';
+import { ref } from 'vue';
+import { useCallback, useMemo, useControllableValue, useRef } from '@/plugins/hooks';
 import { toValue, getCurrentValue, getFormatValue } from './utils-format';
 
 const [name, bem] = createNamespace('time-picker');
@@ -41,7 +41,6 @@ handleColumnsType.order = 1;
  * 处理自定义属性
  */
 export function handleCustomProps(props: any) {
-  const formatValue = ref('');
   const popupOpened = props.get('popupOpened');
   const popupVisible = ref(popupOpened);
   const inputAlign = props.get('inputAlign') || 'right';
@@ -55,7 +54,6 @@ export function handleCustomProps(props: any) {
   };
   const selfRef = _.assign(refProp, { open, close });
   return {
-    formatValue,
     popupVisible,
     inputAlign,
     unit,
@@ -70,25 +68,24 @@ handleCustomProps.order = 0;
  * @returns
  */
 export function handleModelValue(props: any) {
-  const modelValue = props.get('modelValue');
+  const [modelValue, setModelValue] = useControllableValue(props);
   const unitIndex = props.get('unitIndex');
-  const formatValue = props.get('formatValue');
+  const showFormatter = props.get('showFormatter');
+  const unit = props.get('unit');
   const currentValue = useMemo(() => {
     return getCurrentValue(modelValue, unitIndex);
   }, [modelValue, unitIndex]);
+  const formatValue = useMemo(() => {
+    return getFormatValue([currentValue], unit, showFormatter);
+  }, [currentValue, unit, showFormatter]);
   const isRange = props.get('isRange');
   if (isRange) {
     return {};
   }
-  formatValue.value = getFormatValue([currentValue], props.get('unit'), props.get('showFormatter'));
-  const currentValueRef = ref(currentValue);
-  const onSetCurrentValue = (value: Array<string>) => {
-    currentValueRef.value = value;
-  };
   return {
     modelValue: currentValue,
-    onSetCurrentValue,
-    currentValueRef,
+    formatValue,
+    setModelValue,
   };
 }
 handleModelValue.order = 2;
@@ -99,10 +96,13 @@ handleModelValue.order = 2;
  * @returns
  */
 export function handleRangeModelValue(props: any) {
-  const startValue = props.get('startValue');
-  const endValue = props.get('endValue');
+  const [startValue, setStartValue] = useControllableValue(props, {
+    valuePropName: 'startValue',
+  });
+  const [endValue, setEndValue] = useControllableValue(props, {
+    valuePropName: 'endValue',
+  });
   const unitIndex = props.get('unitIndex');
-  const formatValue = props.get('formatValue');
   // 开始值：转成数组
   const currentStartValue = useMemo(() => {
     return getCurrentValue(startValue, unitIndex);
@@ -111,14 +111,16 @@ export function handleRangeModelValue(props: any) {
   const currentEndValue = useMemo(() => {
     return getCurrentValue(endValue, unitIndex);
   }, [endValue, unitIndex]);
-  const isRange = props.get('isRange');
-  if (!isRange) {
-    return {};
-  }
+  const showFormatter = props.get('showFormatter');
+  const unit = props.get('unit');
+  // 格式化值
+  const formatValue = useMemo(() => {
+    return getFormatValue([currentStartValue, currentEndValue], unit, showFormatter);
+  }, [currentStartValue, currentEndValue, unit, showFormatter]);
   // 开始值：用于改变时暂存数据
-  const currentStartValueRef = ref(currentStartValue);
+  const currentStartValueRef = useRef(currentStartValue);
   // 结束值：用于改变时暂存数据
-  const currentEndValueRef = ref(currentEndValue);
+  const currentEndValueRef = useRef(currentEndValue);
   // 设置开始值
   const onSetCurrentStartValue = (value: Array<string>) => {
     currentStartValueRef.value = value;
@@ -127,12 +129,10 @@ export function handleRangeModelValue(props: any) {
   const onSetCurrentEndValue = (value: Array<string>) => {
     currentEndValueRef.value = value;
   };
-  // 格式化值
-  formatValue.value = getFormatValue(
-    [currentStartValue, currentEndValue],
-    props.get('unit'),
-    props.get('showFormatter'),
-  );
+  const isRange = props.get('isRange');
+  if (!isRange) {
+    return {};
+  }
   return {
     startValue: currentStartValue,
     endValue: currentEndValue,
@@ -140,6 +140,9 @@ export function handleRangeModelValue(props: any) {
     onSetCurrentEndValue,
     currentStartValueRef,
     currentEndValueRef,
+    formatValue,
+    setStartValue,
+    setEndValue,
   };
 }
 handleRangeModelValue.order = 2;
@@ -155,7 +158,7 @@ export function handleCancelButtonClick(props: any) {
   const onCancelClick = useCallback(
     (data: any) => {
       if (_.isFunction(onCancel)) {
-        _.attempt(onCancel);
+        _.attempt(onCancel, data);
       }
       popupVisible.value = false;
     },
@@ -175,14 +178,16 @@ handleCancelButtonClick.order = 4;
 export function handleConfirmButtonClick(props: any) {
   const onConfirm = props.get('onConfirm');
   const popupVisible = props.get('popupVisible');
-  const formatValue = props.get('formatValue');
   const unitIndex = props.get('unitIndex');
   const isRange = props.get('isRange');
   const emit = props.get('emit');
+  const setModelValue = props.get('setModelValue');
+  const setStartValue = props.get('setStartValue');
+  const setEndValue = props.get('setEndValue');
   const onConfirmClick = useCallback(
     (data: any) => {
       if (_.isFunction(onConfirm)) {
-        _.attempt(onConfirm);
+        _.attempt(onConfirm, data);
       }
       popupVisible.value = false;
       if (isRange === true) {
@@ -190,22 +195,20 @@ export function handleConfirmButtonClick(props: any) {
         const currentEndValue = data[1]?.selectedValues || [];
         const startValues = currentStartValue?.slice(0, unitIndex + 1);
         const endValues = currentEndValue?.slice(0, unitIndex + 1);
-        formatValue.value = getFormatValue([startValues, endValues], props.get('unit'), props.get('showFormatter'));
         const startValue = toValue(startValues);
         const endValue = toValue(endValues);
-        emit('update:startValue', startValue);
+        setStartValue(startValue);
+        setEndValue(endValue);
         emit('sync:state', 'startValue', startValue);
-        emit('update:endValue', endValue);
         emit('sync:state', 'endValue', endValue);
       } else {
         const currentValue = data?.selectedValues || [];
-        formatValue.value = getFormatValue([currentValue], props.get('unit'), props.get('showFormatter'));
         const currentValueStr = toValue(currentValue);
-        emit('update:modelValue', currentValueStr);
+        setModelValue(currentValueStr);
         emit('sync:state', 'modelValue', currentValueStr);
       }
     },
-    [onConfirm, unitIndex, popupVisible],
+    [onConfirm, unitIndex, popupVisible, isRange],
   );
   return {
     onConfirm: onConfirmClick,
@@ -268,7 +271,7 @@ function renderRangeContent(options: any) {
  */
 function renderBasicContent(options: any) {
   const { props } = options;
-  const { modelValue, onSetCurrentValue } = props;
+  const { modelValue } = props;
   return (
     <TimePicker
       key="basic"
@@ -276,9 +279,6 @@ function renderBasicContent(options: any) {
       modelValue={modelValue}
       v-slots={{
         title: options.slots?.title?.(),
-      }}
-      onChange={(value) => {
-        onSetCurrentValue(value.selectedValues);
       }}
       onCancel={props.onCancel}
       onConfirm={props.onConfirm}
@@ -305,7 +305,7 @@ export function handleBasicRender(props: any) {
       const label = slots.label?.();
       const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay } = props;
       return (
-        <div {...attrs}>
+        <div {...attrs} class={bem('root')}>
           <Field
             readonly
             disabled={disabled}

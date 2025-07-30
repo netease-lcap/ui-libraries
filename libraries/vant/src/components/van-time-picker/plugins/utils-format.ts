@@ -45,7 +45,7 @@ function toValues(value: string | Array<string>) {
  * @returns
  */
 export function toValue(values: Array<string>) {
-  return values.length > 0 ? values.join(':') : null;
+  return values && Array.isArray(values) && values.length > 0 ? values.join(':') : null;
 }
 
 /**
