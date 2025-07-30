@@ -46,12 +46,15 @@ export function handleModelValue(props: any) {
   const [modelValue, setModelValue] = useControllableValue(props);
   const type = props.get('type');
   const defaultDate = getCurrentValue(props.get('defaultDate'));
+  const showFormatter = props.get('showFormatter');
+  const advancedFormatEnable = props.get('advancedFormatEnable');
+  const advancedFormatValue = props.get('advancedFormatValue');
   const currentValue = useMemo(() => {
     return getCurrentValue(modelValue);
   }, [modelValue, type]);
   const formatValue = useMemo(() => {
-    return getFormatValue(modelValue, props);
-  }, [modelValue, props]);
+    return getFormatValue(modelValue, { showFormatter, advancedFormatEnable, advancedFormatValue, type });
+  }, [modelValue, showFormatter, advancedFormatEnable, advancedFormatValue, type]);
   return {
     modelValue: currentValue,
     setModelValue,
@@ -118,7 +121,7 @@ export function handleBasicRender(props: any) {
       const { formatValue, placeholder, inputAlign } = props;
       const calendarProps = _.omit(props, ['show']);
       return (
-        <div {..._.pick(attrs, ['class', 'node-path', 'style'])}>
+        <div {..._.pick(attrs, ['class', 'node-path', 'style'])} class={bem('root')}>
           <Field
             readonly
             disabled={disabled}

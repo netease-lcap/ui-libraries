@@ -122,11 +122,8 @@ function getDisplayFormatter(format: string) {
  * @param props 属性
  * @returns 格式化值
  */
-export function getFormatValue(value: DateValue | Array<DateValue>, props: any) {
-  const format = props.get('showFormatter');
-  const advancedFormatEnable = props.get('advancedFormatEnable');
-  const advancedFormatValue = props.get('advancedFormatValue');
-  const type = props.get('type');
+export function getFormatValue(value: DateValue | Array<DateValue>, options: any) {
+  const { showFormatter, advancedFormatEnable, advancedFormatValue, type } = options;
   const isEmpty = Array.isArray(value) ? value.every((value) => value === null) : value === null;
   if (isEmpty) {
     return '';
@@ -134,7 +131,7 @@ export function getFormatValue(value: DateValue | Array<DateValue>, props: any) 
   if (type === 'multiple' && Array.isArray(value)) {
     return `选择了${value.length}个日期`;
   }
-  const finalFormat = advancedFormatEnable && advancedFormatValue ? advancedFormatValue : getDisplayFormatter(format);
+  const finalFormat = advancedFormatEnable && advancedFormatValue ? advancedFormatValue : getDisplayFormatter(showFormatter);
   if (type === 'range' && Array.isArray(value)) {
     return `${dayjs(value[0]).format(finalFormat)} - ${dayjs(value[1]).format(finalFormat)}`;
   }

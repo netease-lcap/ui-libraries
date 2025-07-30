@@ -1,3 +1,7 @@
+.van-calendar__root {
+  width: 100%;
+  cursor: pointer;
+}
 .van-calendar__toolbar {
   align-items: center;
 }
