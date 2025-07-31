@@ -9,17 +9,17 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-const data = [
-  {
-    name: '1',
-    label: 'label1',
-    content: 'content1',
-  },
-  {
-    name: '2',
-    label: 'label2',
-    content: 'content2',
-  },
+const data = [{}
+  // {
+  //   name: '1',
+  //   label: 'label1',
+  //   content: 'content1',
+  // },
+  // {
+  //   name: '2',
+  //   label: 'label2',
+  //   content: 'content2',
+  // },
 ];
 
 const carouselRef = ref();
