@@ -32,6 +32,17 @@ function getLcapUIPkgName(rootPath) {
   return '';
 }
 
+function getGlobalName(pkgName: string) {
+  return {
+    '@lcap/element-plus': 'ElementPlus',
+    '@lcap/element-ui': 'ElementUI',
+    '@lcap/vant': 'LcapVant',
+    '@lcap/pc-react-ui': 'antd',
+    '@lcap/pc-ui': 'CloudUI',
+    '@lcap/mobile-ui': 'vant',
+  }[pkgName] || 'LcapUI';
+}
+
 function addResolve(config: UserConfig, options: LcapUseNaslUIPluginOptions, useModules: boolean) {
   if (!config.resolve) {
     config.resolve = {
@@ -139,7 +150,7 @@ function setExtenalBuildConfig(config: UserConfig, options: LcapUseNaslUIPluginO
 
   if (lcapUIPkgName) {
     (config.build.rollupOptions.external as any).push(lcapUIPkgName);
-    globals[lcapUIPkgName] = options.framework === 'react' ? 'antd' : 'LcapUI';
+    globals[lcapUIPkgName] = getGlobalName(lcapUIPkgName);
     const alias = (config.resolve && config.resolve.alias ? config.resolve.alias : []) as Alias[];
     const alia = alias.find((it) => it.find === LCAP_UI_PACKAGE_NAME);
     if (alia && command === 'build') {
