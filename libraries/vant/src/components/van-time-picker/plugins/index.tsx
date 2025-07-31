@@ -305,7 +305,7 @@ export function handleBasicRender(props: any) {
       const label = slots.label?.();
       const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay } = props;
       return (
-        <div {...attrs} class={bem('root')}>
+        <div {..._.pick(attrs, ['class', 'style', 'data-nodepath'])} class={bem('root')}>
           <Field
             readonly
             disabled={disabled}

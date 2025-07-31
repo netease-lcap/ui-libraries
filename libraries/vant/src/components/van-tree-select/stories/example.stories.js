@@ -186,3 +186,71 @@ export const DataSourceAsyncParent = {
   }),
   args: {},
 };
+
+export const FormItem = {
+  name: '表单项',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        args,
+      };
+    },
+    data() {
+      return {
+        activeId: null,
+        activeIndex: null,
+      };
+    },
+    methods: {
+      clickNav(e) {
+        console.log('clickNav', e);
+      },
+      clickItem(e) {
+        console.log('clickItem', e);
+      },
+    },
+    template: `
+      <van-form>
+        <van-form-tree-select v-bind="args"
+        v-model:activeId="activeId"
+        v-model:mainActiveIndex="activeIndex"
+        @click-nav="clickNav"
+        @click-item="clickItem">
+      <template #navtext="content">{{ content.item.text }}ss</template>
+        <template #rightcontent>
+          DDDD
+        </template>
+        </van-form-tree-select>
+      </van-form>
+      <div>{{ activeId }}</div>
+      <div>{{ activeIndex }}</div>
+    `,
+  }),
+  args: {
+    dataSource: [
+      {
+        text: '浙江',
+        children: [
+          { text: '杭州', id: 1 },
+          { text: '温州', id: 2 },
+          { text: '宁波', id: 3, disabled: true },
+        ],
+      },
+      {
+        text: '江苏',
+        children: [
+          { text: '南京', id: 4 },
+          { text: '无锡', id: 5 },
+          { text: '徐州', id: 6 },
+        ],
+      },
+      { text: '福建', disabled: true },
+    ],
+    selectedIcon: 'success',
+    customContent: false,
+    customNavText: false,
+    multiple: false,
+    max: 2,
+  },
+};

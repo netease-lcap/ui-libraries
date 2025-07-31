@@ -181,17 +181,14 @@ function getDisplayFormatter(unit: string, format: string) {
  * @param format
  * @returns
  */
-export function getFormatValue(values: Array<Array<Array<string>>>, props: any) {
-  const unit = props.get('unit');
-  const format = props.get('showFormatter');
-  const advancedFormatEnable = props.get('advancedFormatEnable');
-  const advancedFormatValue = props.get('advancedFormatValue');
+export function getFormatValue(values: Array<Array<Array<string>>>, options: any) {
+  const { unit, showFormatter, advancedFormatEnable, advancedFormatValue } = options;
   const isEmpty = values.every((value) => value.length === 0);
   if (isEmpty) {
     return '';
   }
   const finalFormat =
-    advancedFormatEnable && advancedFormatValue ? advancedFormatValue : getDisplayFormatter(unit, format);
+    advancedFormatEnable && advancedFormatValue ? advancedFormatValue : getDisplayFormatter(unit, showFormatter);
   return values
     .map((value) => {
       const dateValueStr = value[0].join('/');

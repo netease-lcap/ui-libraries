@@ -2,7 +2,7 @@ import { Popup, Field, datePickerProps, DatePicker, PickerGroup, pickerGroupProp
 import { createNamespace } from 'vant/es/utils';
 import { ref } from 'vue';
 import _ from 'lodash';
-import { useCallback, useMemo } from '@/plugins/hooks';
+import { useCallback, useMemo, useControllableValue } from '@/plugins/hooks';
 import {
   toValue,
   getCurrentValue,
@@ -67,7 +67,6 @@ handleColumnsType.order = 1;
  * 处理自定义属性
  */
 export function handleCustomProps(props: any) {
-  const formatValue = ref('');
   const popupOpened = props.get('popupOpened');
   const popupVisible = ref(popupOpened);
   const inputAlign = props.get('inputAlign') || 'right';
@@ -86,7 +85,6 @@ export function handleCustomProps(props: any) {
   }, [props.get('maxDate'), props.get('minDate')]);
   const selfRef = _.assign(refProp, { open, close });
   return {
-    formatValue,
     popupVisible,
     inputAlign,
     unit: validUnit,
@@ -103,10 +101,9 @@ handleCustomProps.order = 0;
  * @returns
  */
 export function handleModelValue(props: any) {
-  const modelValue = props.get('modelValue');
+  const [modelValue, setModelValue] = useControllableValue(props);
   const unitIndex = props.get('unitIndex');
   const timeUnitIndex = props.get('timeUnitIndex');
-  const formatValue = props.get('formatValue');
   const type = props.get('type');
   const currentValue = useMemo(() => {
     return getCurrentValue(modelValue, unitIndex);
@@ -118,16 +115,24 @@ export function handleModelValue(props: any) {
   const onSetCurrentValue = (value: Array<string>) => {
     currentValueRef.value = value;
   };
+  const unit = props.get('unit');
+  const showFormatter = props.get('showFormatter');
+  const advancedFormatEnable = props.get('advancedFormatEnable');
+  const advancedFormatValue = props.get('advancedFormatValue');
+  const formatValue = useMemo(() => {
+    return getFormatValue([[currentValue, currentTimeValue]], { unit, showFormatter, advancedFormatEnable, advancedFormatValue });
+  }, [currentValue, unit, showFormatter, advancedFormatEnable, advancedFormatValue]);
   const isRange = props.get('isRange');
   if (isRange) {
     return {};
   }
-  formatValue.value = getFormatValue([[currentValue, currentTimeValue]], props);
   return {
     modelValue: currentValue,
+    setModelValue,
     modelTimeValue: currentTimeValue,
     onSetCurrentValue,
     currentValueRef,
+    formatValue,
   };
 }
 handleModelValue.order = 2;
@@ -138,11 +143,14 @@ handleModelValue.order = 2;
  * @returns
  */
 export function handleRangeModelValue(props: any) {
-  const startValue = props.get('startValue');
-  const endValue = props.get('endValue');
+  const [startValue, setStartValue] = useControllableValue(props, {
+    valuePropName: 'startValue',
+  });
+  const [endValue, setEndValue] = useControllableValue(props, {
+    valuePropName: 'endValue',
+  });
   const unitIndex = props.get('unitIndex');
   const timeUnitIndex = props.get('timeUnitIndex');
-  const formatValue = props.get('formatValue');
   // 开始值：转成数组
   const currentStartValue = useMemo(() => {
     return getCurrentValue(startValue, unitIndex);
@@ -182,16 +190,24 @@ export function handleRangeModelValue(props: any) {
     currentEndTimeValueRef.value = value;
   };
   // 格式化值
-  formatValue.value = getFormatValue(
-    [
-      [currentStartValue, currentStartTimeValue],
-      [currentEndValue, currentEndTimeValue],
-    ],
-    props,
-  );
+  const unit = props.get('unit');
+  const showFormatter = props.get('showFormatter');
+  const advancedFormatEnable = props.get('advancedFormatEnable');
+  const advancedFormatValue = props.get('advancedFormatValue');
+  const formatValue = useMemo(() => {
+    return getFormatValue(
+      [
+        [currentStartValue, currentStartTimeValue],
+        [currentEndValue, currentEndTimeValue],
+      ],
+      { unit, showFormatter, advancedFormatEnable, advancedFormatValue },
+    );
+  }, [currentStartValue, currentStartTimeValue, currentEndValue, currentEndTimeValue, unit, showFormatter, advancedFormatEnable, advancedFormatValue]);
   return {
     startValue: currentStartValue,
+    setStartValue,
     endValue: currentEndValue,
+    setEndValue,
     onSetCurrentStartValue,
     onSetCurrentEndValue,
     currentStartValueRef,
@@ -200,6 +216,7 @@ export function handleRangeModelValue(props: any) {
     currentEndTimeValueRef,
     onSetCurrentStartTimeValue,
     onSetCurrentEndTimeValue,
+    formatValue,
   };
 }
 handleRangeModelValue.order = 2;
@@ -235,11 +252,13 @@ handleCancelButtonClick.order = 4;
 export function handleConfirmButtonClick(props: any) {
   const onConfirm = props.get('onConfirm');
   const popupVisible = props.get('popupVisible');
-  const formatValue = props.get('formatValue');
   const unitIndex = props.get('unitIndex');
   const isRange = props.get('isRange');
   const emit = props.get('emit');
   const type = props.get('type');
+  const setStartValue = props.get('setStartValue');
+  const setEndValue = props.get('setEndValue');
+  const setModelValue = props.get('setModelValue');
   const onConfirmClick = useCallback(
     (data: any) => {
       if (_.isFunction(onConfirm)) {
@@ -260,18 +279,11 @@ export function handleConfirmButtonClick(props: any) {
           currentEndValue = data[2]?.selectedValues || [];
           currentEndTimeValue = data[3]?.selectedValues || [];
         }
-        formatValue.value = getFormatValue(
-          [
-            [currentStartValue, currentStartTimeValue],
-            [currentEndValue, currentEndTimeValue],
-          ],
-          props,
-        );
         const startValue = toValue(currentStartValue, currentStartTimeValue, props.get('converter'));
         const endValue = toValue(currentEndValue, currentEndTimeValue, props.get('converter'));
-        emit('update:startValue', startValue);
+        setStartValue(startValue);
+        setEndValue(endValue);
         emit('sync:state', 'startValue', startValue);
-        emit('update:endValue', endValue);
         emit('sync:state', 'endValue', endValue);
       } else {
         let currentDateValue = data?.selectedValues || [];
@@ -281,7 +293,7 @@ export function handleConfirmButtonClick(props: any) {
           currentTimeValue = data[1]?.selectedValues || [];
         }
         const currentValueStr = toValue(currentDateValue, currentTimeValue, props.get('converter'));
-        emit('update:modelValue', currentValueStr);
+        setModelValue(currentValueStr);
         emit('sync:state', 'modelValue', currentValueStr);
       }
     },
@@ -498,7 +510,7 @@ export function handleBasicRender(props: any) {
     (props, { attrs, slots }) => {
       const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay } = props;
       return (
-        <div {...attrs}>
+        <div {..._.pick(attrs, ['class', 'style', 'data-nodepath'])} class={bem('root')}>
           <Field
             readonly
             disabled={disabled}

@@ -31,13 +31,13 @@ export { VanIframe } from './van-iframe';
 
 export { VanIcon } from './van-icon';
 export { VanCalendar, VanFormCalendar } from './van-calendar';
-export { VanDatePicker } from './van-date-picker';
+export { VanDatePicker, VanFormDatePicker } from './van-date-picker';
 export { VanTimePicker, VanFormTimePicker } from './van-time-picker';
-export { VanUploader } from './van-uploader';
+export { VanUploader, VanFormUploader } from './van-uploader';
 export { VanCollapse, VanCollapseItem } from './van-collapse';
 export { VanCountDown } from './van-count-down';
 export { VanBackTop } from './van-back-top';
-export { VanTreeSelect } from './van-tree-select';
+export { VanTreeSelect, VanFormTreeSelect } from './van-tree-select';
 export { VanTabbar, VanTabbarItem } from './van-tabbar';
 export { VanTabs, VanTab } from './van-tabs';
 export { VanAbsoluteLayout } from './van-absolute-layout';

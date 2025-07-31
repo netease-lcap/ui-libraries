@@ -1,3 +1,7 @@
+.van-date-picker__root {
+  width: 100%;
+  cursor: pointer;
+}
 .van-date-picker__toolbar {
   align-items: center;
 }
