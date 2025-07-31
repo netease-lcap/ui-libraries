@@ -5,6 +5,7 @@ import { useEffect, useMemo } from '@/plugins/hooks';
 
 export function handleNodePath(props) {
   const nodePath = props.get('data-nodepath');
+  const vusionD2cId = props.get('vusion-d2c-id');
   const myClass = props.get('class', '');
   const nodeId = useMemo(() => _.uniqueId('Cascader_'), []);
   const formTagName = props.get($formTagName) || 'el-form-cascader';
@@ -12,6 +13,7 @@ export function handleNodePath(props) {
   useEffect(() => {
     const node = document.querySelector(`.${nodeId}`);
     node?.setAttribute('data-nodepath', nodePath);
+    node?.setAttribute('vusion-d2c-id', vusionD2cId);
   }, []);
   return {
     class: `${myClass} ${nodeId}`,

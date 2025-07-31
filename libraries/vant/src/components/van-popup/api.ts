@@ -243,11 +243,11 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
 
-    // TODO LD: 遮罩层内容和弹窗的层级是一致的，这种插槽怎么挂
-    // @Slot({
-    //   title: '遮罩层内容',
-    //   description: '遮罩层的内容'
-    // })
-    // slotOverlayContent: () => Array<ViewComponent>;
+    @Slot({
+      title: '遮罩层内容',
+      description: '遮罩层的内容'
+    })
+    'slot-overlay-content': () => Array<ViewComponent>;
+    slotOverlayContent: () => Array<ViewComponent>;
   }
 }

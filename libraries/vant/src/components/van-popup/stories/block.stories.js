@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<van-popup style="padding: 64px;"><template #default><van-text text="内容"></van-text></template><template #overlayContent><van-text text="遮罩层内容"></van-text></template></van-popup>',
+    template: '<van-popup style="padding: 64px;"><template #default><van-text text="内容"></van-text></template><template #overlay-content><van-text text="遮罩层内容"></van-text></template></van-popup>',
   }),
 };

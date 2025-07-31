@@ -121,14 +121,12 @@ namespace nasl.ui {
     })
     rightIcon: nasl.core.String;
 
-    // TODO LD: 参数
     @Event({
       title: '点击通知栏',
       description: '点击通知栏时触发',
     })
     onClick: (event: any) => void;
 
-    // TODO LD: 参数
     @Event({
       title: '关闭通知栏',
       description: '关闭通知栏时触发',
