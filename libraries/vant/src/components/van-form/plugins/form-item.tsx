@@ -66,9 +66,9 @@ export function withFormItem(Component, name) {
           deep: true,
         },
       );
-      // nextTick(() => {
-      //   Object.assign(myRef.value, formItemRef.value, componentRef.value);
-      // });
+      nextTick(() => {
+        Object.assign(myRef.value, formItemRef.value, componentRef.value);
+      });
 
       expose(myRef.value);
 

@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 1,
+    show:false,
     ideusage: {
       idetype: 'element',
       forceUpdateWhenAttributeChange: 'preview',

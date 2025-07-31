@@ -7,4 +7,4 @@ export const VanStepper = registerComponent(VanStepperOrigin, {
   name: 'van-stepper',
 });
 
-export default VanStepper; 
+export default VanStepper;

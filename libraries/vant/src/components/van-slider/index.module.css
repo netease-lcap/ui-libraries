@@ -1,0 +1,20 @@
+.van-slider-room {
+  min-height: 8vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.van-slider-room-vertical {
+  height: 150px;
+  min-width: 8vw;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+}

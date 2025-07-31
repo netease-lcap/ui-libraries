@@ -5,13 +5,12 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'element',
-      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
-    title: '步进器',
-    icon: 'stepper',
-    description: '用于数量选择，支持步进和手动输入',
+    title: '数字输入',
+    icon: 'numberh5',
+    description: '数字输入框',
     group: 'Form',
   })
   export class VanStepper extends ViewComponent {
@@ -68,7 +67,6 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     step: nasl.core.Integer = 1;
-    
 
     @Prop({
       group: '数据属性',
@@ -164,7 +162,7 @@ namespace nasl.ui {
       description: '输入框占位提示文字',
       setter: { concept: 'InputSetter' },
     })
-    placeholder: nasl.core.String ;
+    placeholder: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -197,7 +195,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     allowEmpty: nasl.core.Boolean = false;
-
 
     @Prop({
       group: '样式属性',

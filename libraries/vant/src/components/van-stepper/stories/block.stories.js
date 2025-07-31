@@ -17,7 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-      <van-stepper v-model="1" ></van-stepper>
+      <van-stepper ></van-stepper>
     `,
   }),
 };

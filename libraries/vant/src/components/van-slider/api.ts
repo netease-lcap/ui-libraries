@@ -5,7 +5,6 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'element',
-      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -87,7 +86,7 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '进度条高度',
-      description: '进度条高度，垂直模式时必填',
+      description: '进度条高度',
       setter: { concept: 'InputSetter' },
     })
     barHeight: nasl.core.String = '2px';
@@ -150,12 +149,46 @@ namespace nasl.ui {
       title: '开始拖动时',
       description: '开始拖动时触发',
     })
-    onDragStart: (event: {}) => void;
+    onDragStart: (event: TouchEvent) => void;
 
     @Event({
       title: '结束拖动时',
       description: '结束拖动时触发',
     })
-    onDragEnd: (event: {}) => void;
+    onDragEnd: (event: TouchEvent) => void;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'container',
+      extends: [
+        {
+          name: 'VanFormItem',
+        },
+        {
+          name: 'VanSlider',
+        },
+      ],
+    },
+  })
+  export class VanFormSlider<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(
+      options?: Partial<
+        VanFormSliderOptions<T, V, P, M, C> &
+          VanFormItemOptions &
+          Omit<VanSliderOptions<T, V, P, M, C>, keyof VanFormItemOptions>
+      >,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormSliderOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends VanSliderOptions<T, V, P, M, C> {}
 }
