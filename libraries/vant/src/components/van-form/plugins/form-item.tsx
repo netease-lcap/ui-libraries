@@ -86,7 +86,6 @@ export function withFormItem(Component, name) {
       onUnmounted(() => {
         deleteFormitem?.(propName.value);
       });
-      console.log(modelValue, 'modelValue.value');
       return () => {
         return (
           <VanFormItem
@@ -102,7 +101,7 @@ export function withFormItem(Component, name) {
                   style={style.value.innerStyle}
                   v-on={emit}
                   ref={componentRef}
-                  modelValue={modelValue}
+                  modelValue={modelValue.value}
                   onUpdate:modelValue={onUpdateModelValue}
                 />
               ),
@@ -115,7 +114,7 @@ export function withFormItem(Component, name) {
 }
 export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
-  const formTagName = props.get('formTagName');
+  const formTagName = props.get($formTagName);
   const tagName = props.get('tagName');
   useEffect(() => {
     const inject = props.get('inject');

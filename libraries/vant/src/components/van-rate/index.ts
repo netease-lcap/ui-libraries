@@ -1,8 +1,8 @@
 import { Rate as VantRate } from 'vant';
 import _ from 'lodash';
-import { defineComponent } from 'vue';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins';
+import { withFormItem } from '@/components/van-form/plugins/form-item';
 
 import './index.css';
 
@@ -12,6 +12,8 @@ function VanRateRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const VanRate = registerComponent(VantRate, { plugin: basicPlugin, name: 'van-rate' });
-export { VantRate, VanRate, VanRateRegister };
+const VanFormRate = withFormItem(VanRate, 'van-form-rate');
+
+export { VantRate, VanRate, VanRateRegister, VanFormRate };
 
 export default VanRate;

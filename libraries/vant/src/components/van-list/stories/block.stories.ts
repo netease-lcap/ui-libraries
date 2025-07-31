@@ -13,9 +13,9 @@ export const Default = {
   name: '基础列表',
   render: () => ({
     setup() {},
-    template: `
-      <van-list> </van-list>
+    template: `    <van-list data-nodepath="1908c2e6023f486688753b41f4ae903e" key="component-1908c2e6023f486688753b41f4ae903e" :dataSource="[{}, {}, {}]"   >
+
+    </van-list>
     `,
   }),
 };
-

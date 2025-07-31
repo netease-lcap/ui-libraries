@@ -1,8 +1,0 @@
-.van-list__item {
-  padding: 16px;
-  border-bottom: 1px solid #ebedf0;
-}
-
-.van-list__item:last-child {
-  border-bottom: none;
-} 

@@ -3,6 +3,7 @@ import { useMemo } from '@/plugins/hooks';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 // import { getIsPreview, getRender } from '@/plugins/common/preview';
 export { handleControllableValue } from '@/plugins/common/index';
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');

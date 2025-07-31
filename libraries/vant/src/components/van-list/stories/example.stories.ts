@@ -1,5 +1,4 @@
 import { ref } from 'vue';
-import Component from '../index';
 
 interface ListItem {
   id: number;
@@ -25,15 +24,7 @@ export const Default = {
       const finished = ref(false);
 
       // 模拟数据加载
-      const loadData = async () => {
-        const newItems: ListItem[] = Array.from({ length: 10 }, (_, index) => ({
-          id: list.value.length + index + 1,
-          title: `列表项 ${list.value.length + index + 1}`,
-          desc: `这是第 ${list.value.length + index + 1} 个列表项的描述信息`,
-        }));
-
-        return newItems;
-      };
+      const loadData = [{}, {}, {}];
       console.log('object');
 
       return {
@@ -47,11 +38,10 @@ export const Default = {
     template: `
       <div style="height: 400px; overflow-y: auto;">
         <van-list
-          :isCell="true"
-          :dataSource="loadData"
+          :dataSource="[{}, {}, {}]"
         >
           <template #default="item">
-            <span>{{item.title}}</span>
+            <span>1</span>
           </template>
         </van-list>
       </div>

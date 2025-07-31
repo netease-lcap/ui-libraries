@@ -10,19 +10,14 @@ namespace nasl.ui {
       events: {
         click: true,
       },
+      namedSlotOmitWrapper: ['item'],
       dataSource: {
-        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss: "this.getDefaultElements().length > 0 && !this.getAttribute('dataSource')",
         display: 3,
-        loopRule: 'nth-last-child(-n+2)',
-        loopElem: '.van-sidebar-item',
+        loopRule: 'nth-child(n+2)',
+        loopElem: 'div',
         propertyName: ':dataSource',
-        displayData: "\"[{text: '导航一', value: '0'},{text:'导航二', value: '1'}, {text:'导航三', value: '2'}]\"",
-      },
-      additionalAttribute: {
-        ':showInDesigner': '"true"',
-      },
-      snippetsDisplayConditions: {
-        default: [0, 1, 2],
+        displayData: "\"[{title: '导航一', value: '0'},{title:'导航二', value: '1'}, {title:'导航三', value: '2'}]\"",
       },
     },
   })
@@ -42,17 +37,6 @@ namespace nasl.ui {
     constructor(options?: Partial<VanSidebarOptions<T, V>>) {
       super();
     }
-
-    @Method({
-      title: '激活指定项',
-      description: '激活指定的导航项',
-    })
-    setActiveItem(
-      @Param({
-        title: '导航项标识',
-      })
-      index: nasl.core.String,
-    ): void {}
   }
 
   export class VanSidebarOptions<T, V> extends ViewComponentOptions {
@@ -74,42 +58,21 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop<VanSidebarOptions<T, V>, 'valueField'>({
-      group: '数据属性',
-      title: '值字段',
-      description: '集合的元素类型中，用于标识选中值的属性',
-      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
-      setter: {
-        concept: 'PropertySelectSetter',
-      },
-    })
-    valueField: (item: T) => V = ((item: any) => item.value) as any;
-
-    @Prop<VanSidebarOptions<T, V>, 'textField'>({
-      group: '数据属性',
-      title: '文本字段',
-      description: '集合的元素类型中，用于显示文本的属性名称',
-      docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
-      setter: {
-        concept: 'PropertySelectSetter',
-      },
-    })
-    textField: (item: T) => any = ((item: any) => item.text) as any;
 
     @Prop({
       group: '数据属性',
       sync: true,
       title: '当前激活的导航项',
-      description: '当前激活的导航项的标识',
+      description: '当前激活的导航项的索引',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: V;
+    modelValue: nasl.core.Integer;
 
     @Event({
       title: '值改变时',
       description: '当前激活的导航项改变时触发',
     })
-    onChange: (value: V) => void;
+    onChange: (value: nasl.core.Integer) => void;
 
     @Slot({
       title: '默认',
@@ -117,20 +80,29 @@ namespace nasl.ui {
       snippets: [
         {
           title: '导航项',
-          code: '<van-sidebar-item><template #default><el-text text="导航项"></el-text></template></van-sidebar-item>',
+          code: '<van-sidebar-item title="导航项" />',
         },
       ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '导航项',
+      description: '导航项的内容',
+    })
+    slotItem: (current: T) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
       editable: 'text',
       textholder: 'text',
       forceUpdateWhenAttributeChange: true,
+      operator: {
+        delete: "!this.getParent().getParent().getAttribute('dataSource')",
+      },
     },
   })
   @Component({
@@ -168,7 +140,7 @@ namespace nasl.ui {
       description: '导航项的徽标内容',
       setter: { concept: 'InputSetter' },
     })
-    badge: nasl.core.String;
+    badge: nasl.core.String | nasl.core.Integer;
 
     @Prop({
       group: '样式属性',
@@ -178,11 +150,6 @@ namespace nasl.ui {
     })
     dot: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '交互属性',
-      title: '链接地址',
-    })
-    hrefAndTo: nasl.core.String;
 
     @Event({
       title: '点击',
@@ -190,10 +157,6 @@ namespace nasl.ui {
     })
     onClick: (event: MouseEvent) => void;
 
-    @Slot({
-      title: '默认',
-      description: '导航项的内容',
-    })
-    slotDefault: () => Array<ViewComponent>;
+
   }
 }

@@ -19,7 +19,7 @@ export function handleDataSource(props) {
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
-    : { default: () => _.map(dataSource, (item) => cellWrap(_.attempt(slots.default, item))) };
+    : { default: () => _.map(dataSource, (item) => cellWrap(slots?.item?.(item))) };
   return {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
