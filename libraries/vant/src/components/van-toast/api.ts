@@ -98,7 +98,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '自定义图标',
       description: '自定义图标，支持传入图标名称或图片链接，等同于 Icon 组件的 name 属性',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
     })
     icon: nasl.core.String;
 

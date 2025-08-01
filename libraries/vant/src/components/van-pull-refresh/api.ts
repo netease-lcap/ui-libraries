@@ -15,7 +15,7 @@ namespace nasl.ui {
     title: '下拉刷新',
     icon: 'pull-refresh',
     description: '用于提供下拉刷新的交互操作。',
-    group: 'Display',
+    group: 'Feedback',
   })
   export class VanPullRefresh extends ViewComponent {
     constructor(options?: Partial<VanPullRefreshOptions>) {

@@ -110,30 +110,33 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '当前步骤对应的底部图标',
+      title: '当前步骤图标',
       description: '当前步骤对应的底部图标',
       setter: {
-        concept: 'InputSetter',
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
       },
     })
     activeIcon: nasl.core.String = 'checked';
 
     @Prop({
       group: '主要属性',
-      title: '非当前步骤对应的底部图标',
+      title: '非当前步骤图标',
       description: '非当前步骤对应的底部图标',
       setter: {
-        concept: 'InputSetter',
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
       },
     })
     inactiveIcon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: '已完成步骤对应的底部图标',
+      title: '已完成步骤图标',
       description: '已完成步骤对应的底部图标，优先级高于 inactive-icon',
       setter: {
-        concept: 'InputSetter',
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
       },
     })
     finishIcon: nasl.core.String;
