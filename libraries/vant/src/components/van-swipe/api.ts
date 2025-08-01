@@ -190,21 +190,18 @@ namespace nasl.ui {
     })
     isIndicator: nasl.core.Boolean = false;
 
-    // TODO LD: 这里需要修改，需要接收参数
     @Event({
       title: '每一页轮播结束后触发',
       description: '每一页轮播结束后触发',
     })
     onChange: (current: { index: number }) => void;
 
-    // TODO LD: 这里需要修改，需要接收参数
     @Event({
       title: '当用户开始拖动轮播组件时触发',
       description: '当用户开始拖动轮播组件时触发',
     })
     onDragStart: (current: { index: number }) => void;
 
-    // TODO LD: 这里需要修改，需要接收参数
     @Event({
       title: '当用户结束拖动轮播组件时触发',
       description: '当用户结束拖动轮播组件时触发',
@@ -225,7 +222,6 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<VanSwipeItem>;
 
-    // TODO LD: 这里需要修改，需要接收参数
     @Slot({
       title: '自定义指示器',
       description: '自定义指示器',

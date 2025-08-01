@@ -102,7 +102,6 @@ namespace nasl.ui {
     })
     onRefresh: () => void;
 
-    // TODO LD: 参数
     @Event({
       title: '拖动时或状态改变时触发',
       description: '拖动时或状态改变时触发',

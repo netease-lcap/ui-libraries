@@ -108,14 +108,12 @@ namespace nasl.ui {
     })
     onEnd: () => void;
 
-    // TODO LD: 参数
     @Event({
       title: '签名过程中触发',
       description: '签名过程中触发',
     })
     onSigning: (event: any) => void;
 
-    // TODO LD: 参数
     @Event({
       title: '点击确定按钮时触发',
       description: '点击确定按钮时触发',
