@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-param-reassign */
 import fs from 'fs-extra';
 import path from 'path';
@@ -34,13 +36,13 @@ export function buildThemeOld(rootPath, destDir) {
   });
 }
 
-export function buildNaslUI(options: LcapBuildOptions) {
+export async function buildNaslUI(options: LcapBuildOptions) {
   if (options.type !== 'nasl.ui') {
     return;
   }
 
   logger.start('开始生成 nasl.ui.json...');
-  let naslUIConfig = genNaslUIConfig({
+  let naslUIConfig = await genNaslUIConfig({
     rootPath: options.rootPath,
     framework: options.framework,
     components: options.components,
@@ -48,9 +50,9 @@ export function buildNaslUI(options: LcapBuildOptions) {
   });
 
   if (options.dependencies && options.dependencies.length > 0) {
-    options.dependencies.forEach(({ rootPath, config }) => {
+    for (const { rootPath, config } of options.dependencies) {
       const configFn = typeof config === 'function' ? config : (c) => c;
-      const list = genNaslUIConfig({
+      const list = await genNaslUIConfig({
         rootPath,
         framework: options.framework,
         components: getConfigComponents(rootPath),
@@ -59,7 +61,7 @@ export function buildNaslUI(options: LcapBuildOptions) {
       });
 
       naslUIConfig.unshift(...list.map((it) => configFn(it)));
-    });
+    }
   }
 
   naslUIConfig = naslUIConfig.sort((c1, c2) => {

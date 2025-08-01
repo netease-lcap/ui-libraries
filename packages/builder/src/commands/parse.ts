@@ -119,5 +119,5 @@ export default async function executeParse(rootPath: string, options: ParseComma
 
   addPkg(rootPath, npmClient, pkg);
 
-  await executeCreateForSchema(rootPath, getExtensionProjectMeta(rootPath), output);
+  await executeCreateForSchema(rootPath, await getExtensionProjectMeta(rootPath), output);
 }
