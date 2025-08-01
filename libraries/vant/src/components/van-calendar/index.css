@@ -19,6 +19,18 @@
   cursor: pointer;
 }
 
-.van-calendar__field:not([class*="van-field--disabled"]) {
-  cursor: pointer;
+.van-calendar__rangevalue {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: end;
+}
+.van-calendar__startvalue {
+  text-align: left;
+}
+.van-calendar__endvalue {
+  text-align: left;
+}
+.van-calendar__separator {
+  margin: 0 5px;
 }

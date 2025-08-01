@@ -19,6 +19,18 @@
   cursor: pointer;
 }
 
-.van-date-picker__field:not([class*="van-field--disabled"]) {
-  cursor: pointer;
+.van-date-picker__rangevalue {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: end;
+}
+.van-date-picker__startvalue {
+  text-align: left;
+}
+.van-date-picker__endvalue {
+  text-align: left;
+}
+.van-date-picker__separator {
+  margin: 0 5px;
 }

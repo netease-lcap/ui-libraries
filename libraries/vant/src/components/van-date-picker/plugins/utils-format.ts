@@ -198,8 +198,7 @@ export function getFormatValue(values: Array<Array<Array<string>>>, options: any
         return '';
       }
       return dayjs(dateValue).format(finalFormat);
-    })
-    .join(' - ');
+    });
 }
 
 /**

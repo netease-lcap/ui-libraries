@@ -15,6 +15,7 @@ export function handleCustomProps(props: any) {
   const popupVisible = ref(popupOpened);
   const inputAlign = props.get('inputAlign') || 'right';
   const unit = props.get('unit') || 'day';
+  const inLink = _.isNil(props.get('inLink')) ? true : props.get('inLink');
   const refProp = props.get('ref');
   const open = () => {
     popupVisible.value = true;
@@ -33,6 +34,7 @@ export function handleCustomProps(props: any) {
     ref: selfRef,
     maxDate: maxDateValue,
     minDate: minDateValue,
+    inLink,
   };
 }
 handleCustomProps.order = 0;
@@ -118,19 +120,38 @@ export function handleBasicRender(props: any) {
   };
   const render = useCallback(
     (props, { attrs, slots }) => {
-      const { formatValue, placeholder, inputAlign } = props;
+      const { formatValue, placeholder, inputAlign, inLink, type } = props;
       const calendarProps = _.omit(props, ['show']);
+      const inputSlot = useCallback(() => {
+        if (!formatValue) {
+          return null;
+        }
+        if (type === 'range') {
+          return (
+            <div class={bem('rangevalue')}>
+              <div class={bem('startvalue')}>{formatValue[0]}</div>
+              <div class={bem('separator')}>-</div>
+              <div class={bem('endvalue')}>{formatValue[1]}</div>
+            </div>
+          );
+        }
+        return <div class={bem('value')}>{formatValue}</div>;
+      }, [formatValue, type]);
       return (
         <div {..._.pick(attrs, ['class', 'data-nodepath', 'style'])} class={bem('root')}>
           <Field
             readonly
+            type="textarea"
+            rows="1"
+            autosize
             disabled={disabled}
             class={bem('field')}
-            v-slots={{ label: slots.label }}
+            v-slots={{ label: slots.label, input: inputSlot }}
             onClick={onFieldClick}
             modelValue={formatValue}
             placeholder={placeholder}
             inputAlign={inputAlign}
+            isLink={inLink}
           />
           <Calendar v-model:show={popupVisible.value} {...calendarProps} v-slots={slots} />
         </div>

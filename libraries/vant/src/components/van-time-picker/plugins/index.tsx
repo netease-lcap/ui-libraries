@@ -2,7 +2,7 @@ import { Popup, Field, timePickerProps, TimePicker, PickerGroup, pickerGroupProp
 import { createNamespace } from 'vant/es/utils';
 import _ from 'lodash';
 import { ref } from 'vue';
-import { useCallback, useMemo, useControllableValue, useRef } from '@/plugins/hooks';
+import { useCallback, useMemo, useControllableValue } from '@/plugins/hooks';
 import { toValue, getCurrentValue, getFormatValue } from './utils-format';
 
 const [name, bem] = createNamespace('time-picker');
@@ -45,6 +45,7 @@ export function handleCustomProps(props: any) {
   const popupVisible = ref(popupOpened);
   const inputAlign = props.get('inputAlign') || 'right';
   const unit = props.get('unit') || 'second';
+  const inLink = _.isNil(props.get('inLink')) ? true : props.get('inLink');
   const refProp = props.get('ref');
   const open = () => {
     popupVisible.value = true;
@@ -58,6 +59,7 @@ export function handleCustomProps(props: any) {
     inputAlign,
     unit,
     ref: selfRef,
+    inLink,
   };
 }
 handleCustomProps.order = 0;
@@ -118,9 +120,9 @@ export function handleRangeModelValue(props: any) {
     return getFormatValue([currentStartValue, currentEndValue], unit, showFormatter);
   }, [currentStartValue, currentEndValue, unit, showFormatter]);
   // 开始值：用于改变时暂存数据
-  const currentStartValueRef = useRef(currentStartValue);
+  const currentStartValueRef = ref(currentStartValue);
   // 结束值：用于改变时暂存数据
-  const currentEndValueRef = useRef(currentEndValue);
+  const currentEndValueRef = ref(currentEndValue);
   // 设置开始值
   const onSetCurrentStartValue = (value: Array<string>) => {
     currentStartValueRef.value = value;
@@ -303,18 +305,33 @@ export function handleBasicRender(props: any) {
   const render = useCallback(
     (props, { attrs, slots }) => {
       const label = slots.label?.();
-      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay } = props;
+      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay, inLink } = props;
+      const inputSlot = useCallback(() => {
+        if (!formatValue) {
+          return null;
+        }
+        if (isRange) {
+          return (
+            <div class={bem('rangevalue')}>
+              <div class={bem('startvalue')}>{formatValue[0]}</div>
+              <div class={bem('separator')}>-</div>
+              <div class={bem('endvalue')}>{formatValue[1]}</div>
+            </div>
+          );
+        }
+        return <div class={bem('value')}>{formatValue[0]}</div>;
+      }, [formatValue, isRange]);
       return (
         <div {..._.pick(attrs, ['class', 'style', 'data-nodepath'])} class={bem('root')}>
           <Field
-            readonly
             disabled={disabled}
             class={bem('field')}
-            v-slots={{ label }}
+            v-slots={{ label, input: inputSlot }}
             onClick={onFieldClick}
             modelValue={formatValue}
             placeholder={placeholder}
             inputAlign={inputAlign}
+            isLink={inLink}
           />
           <Popup
             v-model:show={popupVisible.value}

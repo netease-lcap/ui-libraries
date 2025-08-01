@@ -50,6 +50,7 @@ function getUnitIndex(unit: string, type: string) {
 export function handleColumnsType(props: any) {
   const unit = props.get('unit');
   const type = props.get('type') || 'date';
+  const inLink = _.isNil(props.get('inLink')) ? true : props.get('inLink');
   const { index, columnsType, timeIndex, timeColumnsType } = useMemo(() => {
     return getUnitIndex(unit, type);
   }, [unit, type]);
@@ -59,6 +60,7 @@ export function handleColumnsType(props: any) {
     unit,
     timeUnitIndex: timeIndex,
     timeColumnsType,
+    inLink,
   };
 }
 handleColumnsType.order = 1;
@@ -508,18 +510,34 @@ export function handleBasicRender(props: any) {
   };
   const render = useCallback(
     (props, { attrs, slots }) => {
-      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay } = props;
+      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay, inLink } = props;
+      const inputSlot = useCallback(() => {
+        if (!formatValue) {
+          return null;
+        }
+        if (isRange) {
+          return (
+            <div class={bem('rangevalue')}>
+              <div class={bem('startvalue')}>{formatValue[0]}</div>
+              <div class={bem('separator')}>-</div>
+              <div class={bem('endvalue')}>{formatValue[1]}</div>
+            </div>
+          );
+        }
+        return <div class={bem('value')}>{formatValue[0]}</div>;
+      }, [formatValue, isRange]);
       return (
         <div {..._.pick(attrs, ['class', 'style', 'data-nodepath'])} class={bem('root')}>
           <Field
             readonly
             disabled={disabled}
             class={bem('field')}
-            v-slots={{ label: slots.label }}
+            v-slots={{ label: slots.label, input: inputSlot }}
             onClick={onFieldClick}
             modelValue={formatValue}
             placeholder={placeholder}
             inputAlign={inputAlign}
+            isLink={inLink}
           />
           <Popup
             v-model:show={popupVisible.value}

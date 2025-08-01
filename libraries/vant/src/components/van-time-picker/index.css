@@ -18,7 +18,18 @@
 .van-time-picker__cancel {
   cursor: pointer;
 }
-
-.van-time-picker__field:not([class*="van-field--disabled"]) {
-  cursor: pointer;
+.van-time-picker__rangevalue {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: end;
+}
+.van-time-picker__startvalue {
+  text-align: left;
+}
+.van-time-picker__endvalue {
+  text-align: left;
+}
+.van-time-picker__separator {
+  margin: 0 5px;
 }

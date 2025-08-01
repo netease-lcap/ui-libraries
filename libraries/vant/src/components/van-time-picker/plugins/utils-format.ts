@@ -107,6 +107,5 @@ export function getFormatValue(values: Array<Array<string>>, unit: string, forma
       }
       const date = getFormatTimeValue(valueStr);
       return dayjs(date).format(format);
-    })
-    .join(' - ');
+    });
 }

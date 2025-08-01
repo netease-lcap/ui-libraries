@@ -133,7 +133,7 @@ export function getFormatValue(value: DateValue | Array<DateValue>, options: any
   }
   const finalFormat = advancedFormatEnable && advancedFormatValue ? advancedFormatValue : getDisplayFormatter(showFormatter);
   if (type === 'range' && Array.isArray(value)) {
-    return `${dayjs(value[0]).format(finalFormat)} - ${dayjs(value[1]).format(finalFormat)}`;
+    return [dayjs(value[0]).format(finalFormat), dayjs(value[1]).format(finalFormat)];
   }
   if (type === 'single' && !Array.isArray(value)) {
     return dayjs(value).format(finalFormat);

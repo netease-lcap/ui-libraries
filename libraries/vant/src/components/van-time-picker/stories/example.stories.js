@@ -52,7 +52,7 @@ export const Default = {
     `,
   }),
   args: {
-    unit: null,
+    unit: 'second',
     minTime: '07:40:00',
     maxTime: '10:20:00',
     isRange: false,
@@ -109,7 +109,7 @@ export const FormItem = {
     `,
   }),
   args: {
-    unit: null,
+    unit: 'second',
     minTime: '07:40:00',
     maxTime: '13:20:00',
     isRange: false,
