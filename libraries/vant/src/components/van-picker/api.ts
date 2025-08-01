@@ -180,15 +180,35 @@ namespace nasl.ui {
     slotTitle: () => Array<ViewComponent>;
   }
 
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'drawerdropdown',
+      drawerCSSSelector: '.van-popup',
+      cacheOpenKey: 'show',
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource')",
+        display: 6,
+        loopRule: 'nth-child(n+2)',
+        loopElem: "> label[class^='u-radios_radio']:not([data-nodepath])",
+      },
+    },
+  })
+  @Component({
+    title: '表单选择器',
+    icon: 'picker',
+    description: '表单选择器',
+    group: 'Selector',
+  })
   export class VanFormPicker<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(
       options?: Partial<
-        VanFormPickerOptions & VanFormItemOptions & Omit<VanPickerOptions<T, V, P, M, C>, keyof VanFormItemOptions>
+        VanFormPickerOptions<T, V, P, M, C> & VanFormItemOptions & Omit<VanPickerOptions<T, V, P, M, C>, keyof VanFormItemOptions>
       >,
     ) {
       super();
     }
   }
 
-  export class VanFormPickerOptions extends ViewComponentOptions {}
+  export class VanFormPickerOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {}
 }
