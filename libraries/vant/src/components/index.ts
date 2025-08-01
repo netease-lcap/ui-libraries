@@ -11,7 +11,7 @@ export { VanDivider } from './van-divider';
 export { VanEmpty } from './van-empty';
 export { VanCircle } from './van-circle';
 export { VanSlider } from './van-slider';
-export { VanStepper } from './van-stepper';
+export { VanStepperNumber } from './van-stepper-number';
 export { VanSwitch } from './van-switch';
 export { VanPasswordInput } from './van-password-input';
 export { VanRadio, VanRadioGroup } from './van-radio';

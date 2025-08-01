@@ -10,7 +10,7 @@ import {
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 
-// export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
 
 export function handleDataSource(props) {
@@ -50,7 +50,11 @@ export function handleShowField(props) {
     const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item).text);
     return selected.join(',');
   }, [value, columns]);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useControllableValue(props, {
+    defaultValue: false,
+    valuePropName: 'show',
+    trigger: 'onUpdate:show',
+  });
   const onCancel = useCallback(
     _.wrap(onCancelProps, (fn, ...args) => {
       _.assign(fn, ...args);
@@ -68,20 +72,33 @@ export function handleShowField(props) {
   );
   const render = useCallback(
     (props) => {
-      const { setShow, show, value, setValue, fieldValue } = props;
+      const { setShow, show, value, setValue, fieldValue, clearable } = props;
+      const rightIcon = clearable ? 'clear' : '';
       return [
         <Field
           modelValue={fieldValue}
           onClick={() => setShow(true)}
+          data-nodepath={props['data-nodepath']}
+          data-enable-events={props['data-enable-events']}
           readonly
           is-link
-          right-icon="clear"
+          right-icon={rightIcon}
           onClickRightIcon={(e) => {
             e.stopPropagation();
             setValue([]);
           }}
         />,
-        <Popup show={show} onClose={() => setShow(false)} lazy-render={false} round position="bottom">
+        <Popup
+          show={show}
+          onClose={() => setShow(false)}
+          lazy-render={false}
+          round
+          position="bottom"
+          data-drawer-dropdown-status={props['data-drawer-dropdown-status']}
+          data-drawer-dropdown-selector={props['data-drawer-dropdown-selector']}
+          data-nodepath={props['data-nodepath']}
+          ide-draggable={props['ide-draggable']}
+        >
           <Component
             {..._.omit(props, ['value', 'modelValue', 'pickerValue', 'onUpdate:modelValue'])}
             modelValue={value}

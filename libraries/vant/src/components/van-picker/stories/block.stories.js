@@ -14,7 +14,7 @@ export const Default = {
   render: () => ({
     setup() {},
     template: `
-      <van-picker></van-picker>
+      <van-picker ></van-picker>
     `,
   }),
 };

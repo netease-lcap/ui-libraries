@@ -8,21 +8,21 @@ namespace nasl.ui {
     },
   })
   @Component({
-    title: '数字输入',
+    title: '步进器',
     icon: 'numberh5',
-    description: '数字输入框',
+    description: '数字步进器',
     group: 'Form',
   })
-  export class VanStepper extends ViewComponent {
-    constructor(options?: Partial<VanStepperOptions>) {
+  export class VanStepperNumber extends ViewComponent {
+    constructor(options?: Partial<VanStepperNumberOptions>) {
       super();
     }
   }
 
-  export class VanStepperOptions extends ViewComponentOptions {
+  export class VanStepperNumberOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '绑定值',
+      title: '值',
       sync: true,
       description: '步进器绑定值',
     })
@@ -69,14 +69,6 @@ namespace nasl.ui {
     step: nasl.core.Integer = 1;
 
     @Prop({
-      group: '数据属性',
-      title: '精度',
-      description: '数值精度',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    precision: nasl.core.Integer = 0;
-
-    @Prop({
       group: '主要属性',
       title: '禁用',
       description: '是否禁用步进器',
@@ -102,14 +94,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '只读',
-      description: '是否只读',
-      setter: { concept: 'SwitchSetter' },
-    })
-    readonly: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
       title: '禁用输入框',
       description: '是否禁用输入框',
       setter: { concept: 'SwitchSetter' },
@@ -126,27 +110,19 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '异步变更',
-      description: '是否开启异步变更，开启后需要手动控制输入值',
-      setter: { concept: 'SwitchSetter' },
-    })
-    asyncChange: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
       title: '输入框宽度',
       description: '输入框宽度，默认单位为 px',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'NumberInputSetter' },
     })
-    inputWidth: nasl.core.String = '32px';
+    inputWidth: nasl.core.Integer = 32;
 
     @Prop({
       group: '主要属性',
       title: '按钮大小',
       description: '按钮大小，默认单位为 px',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'NumberInputSetter' },
     })
-    buttonSize: nasl.core.String = '28px';
+    buttonSize: nasl.core.Integer = 28;
 
     @Prop({
       group: '主要属性',
@@ -243,4 +219,27 @@ namespace nasl.ui {
     })
     onBlur: (event: {}) => void;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'element',
+    },
+  })
+  @Component({
+    title: '表单步进器',
+    description: '表单步进器',
+    group: 'Form',
+  })
+  export class VanFormStepperNumber extends VanStepperNumber {
+    constructor(
+      options?: Partial<
+        VanFormStepperNumberOptions & VanFormItemOptions & Omit<VanStepperNumberOptions, keyof VanFormItemOptions>
+      >,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormStepperNumberOptions extends VanStepperNumberOptions {}
 }

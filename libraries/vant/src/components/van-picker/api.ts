@@ -4,8 +4,15 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'element',
-      forceUpdateWhenAttributeChange: true,
+      idetype: 'drawerdropdown',
+      drawerCSSSelector: '.van-popup',
+      cacheOpenKey: 'show',
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource')",
+        display: 6,
+        loopRule: 'nth-child(n+2)',
+        loopElem: "> label[class^='u-radios_radio']:not([data-nodepath])",
+      },
     },
   })
   @Component({
@@ -20,7 +27,13 @@ namespace nasl.ui {
     }
   }
 
-  export class VanPickerOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
+  export class VanPickerOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -111,22 +124,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '禁用组件',
-      description: '是否禁用组件',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '只读',
-      description: '是否只读',
-      setter: { concept: 'SwitchSetter' },
-    })
-    readonly: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
       title: '加载中',
       description: '是否显示加载状态',
       setter: { concept: 'SwitchSetter' },
@@ -135,54 +132,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '显示选中值',
-      description: '是否显示选中值',
+      title: '显示顶部栏',
+      description: '是否显示顶部栏',
       setter: { concept: 'SwitchSetter' },
     })
-    showToolbar: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '是否多选',
-      description: '是否允许多选',
-      setter: { concept: 'SwitchSetter' },
-    })
-    multiple: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '是否可搜索',
-      description: '是否可搜索',
-      setter: { concept: 'SwitchSetter' },
-    })
-    filterable: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '无数据文本',
-      description: '无选项时显示的文字',
-      setter: { concept: 'InputSetter' },
-    })
-    noDataText: nasl.core.String = '暂无数据';
-
-    @Prop({
-      group: '样式属性',
-      title: '尺寸',
-      description: '组件尺寸。可选项：small/default/large。',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '小' }, { title: '正常' }, { title: '大' }],
-      },
-    })
-    size: 'small' | 'default' | 'large' = 'default';
-
-    @Prop({
-      group: '主要属性',
-      title: '允许HTML',
-      description: '是否允许选项内容包含HTML',
-      setter: { concept: 'SwitchSetter' },
-    })
-    allowHtml: nasl.core.Boolean = true;
+    showToolbar: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
@@ -198,7 +152,7 @@ namespace nasl.ui {
       description: '滑动动画的时长，单位为ms',
       setter: { concept: 'NumberInputSetter' },
     })
-    swipeDuration: nasl.core.Integer = 300;
+    swipeDuration: nasl.core.Integer = 1000;
 
     @Prop({
       group: '主要属性',
@@ -207,38 +161,6 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     visibleOptionNum: nasl.core.Integer = 6;
-
-    @Prop({
-      group: '主要属性',
-      title: '默认选中索引',
-      description: '默认选中项的索引',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    defaultIndex: nasl.core.Integer = 0;
-
-    @Prop({
-      group: '主要属性',
-      title: '点击遮罩关闭',
-      description: '点击遮罩层时是否关闭选择器',
-      setter: { concept: 'SwitchSetter' },
-    })
-    closeOnClickOverlay: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '点击按钮关闭',
-      description: '点击按钮时是否关闭选择器',
-      setter: { concept: 'SwitchSetter' },
-    })
-    closeOnClickAction: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '安全区域适配',
-      description: '是否开启底部安全区域适配',
-      setter: { concept: 'SwitchSetter' },
-    })
-    safeAreaInsetBottom: nasl.core.Boolean = true;
 
     @Event({
       title: '选中值变化时',
@@ -256,14 +178,17 @@ namespace nasl.ui {
       description: '自定义标题内容',
     })
     slotTitle: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '选项',
-      description: '自定义选项内容',
-    })
-    slotOption: (option: {
-      text: nasl.core.String;
-      value: nasl.core.String | nasl.core.Integer;
-    }) => Array<ViewComponent>;
   }
+
+  export class VanFormPicker<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    constructor(
+      options?: Partial<
+        VanFormPickerOptions & VanFormItemOptions & Omit<VanPickerOptions<T, V, P, M, C>, keyof VanFormItemOptions>
+      >,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormPickerOptions extends ViewComponentOptions {}
 }
