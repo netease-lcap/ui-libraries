@@ -244,12 +244,11 @@ namespace nasl.ui {
     })
     isCustomContent: nasl.core.Boolean = false;
 
-    // TODO LD: 入参
     @Event({
       title: '点击选项时触发',
       description: '点击选项时触发',
     })
-    onSelect: (action: any, index: number) => void;
+    onSelect: (current: { action: any, index: number }) => void;
 
     @Event({
       title: '打开菜单时触发',
@@ -293,7 +292,6 @@ namespace nasl.ui {
     })
     slotReference: () => Array<ViewComponent>;
 
-    // TODO LD: 入参
     @Slot({
       title: '自定义选项内容',
       description: '自定义选项内容',
