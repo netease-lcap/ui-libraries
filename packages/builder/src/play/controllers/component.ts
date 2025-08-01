@@ -76,7 +76,7 @@ export const removeComponent = createAPIHandler('/api/component/remove', 'POST',
   const { name } = req.data;
   const { rootPath } = req.context;
 
-  removeComponentFiles(rootPath, name);
+  await removeComponentFiles(rootPath, name);
 
   return true;
 });
