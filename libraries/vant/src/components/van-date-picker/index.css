@@ -1,0 +1,36 @@
+.van-date-picker__root {
+  width: 100%;
+  cursor: pointer;
+}
+.van-date-picker__toolbar {
+  align-items: center;
+}
+.van-date-picker__content-wrapper {
+  padding: 12px;
+}
+
+.van-date-picker__bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.van-date-picker__cancel {
+  cursor: pointer;
+}
+
+.van-date-picker__rangevalue {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+}
+.van-date-picker__startvalue {
+  text-align: left;
+}
+.van-date-picker__endvalue {
+  text-align: left;
+}
+.van-date-picker__separator {
+  margin: 0 5px;
+}
