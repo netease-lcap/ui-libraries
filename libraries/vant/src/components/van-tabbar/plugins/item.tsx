@@ -1,4 +1,5 @@
 import { useMemo, useCallback } from '@/plugins/hooks';
+import VanIcon from '@/components/van-icon';
 
 export function handleDestination(props: any) {
   const destination = props.get('destination');
@@ -18,7 +19,7 @@ export function handleIcon(props: any) {
   const icon = props.get('icon');
   const iconSlot = useCallback(() => {
     if (icon) {
-      return <van-icon name={icon} />;
+      return <VanIcon name={icon} />;
     }
     return null;
   }, [icon]);

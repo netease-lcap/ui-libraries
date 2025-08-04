@@ -37,28 +37,40 @@ export function handleEvent(props) {
   const onOversize = props.get('onOversize');
   return {
     beforeRead: useCallback((file: File, detail: any) => {
+      let result = true;
       if (_.isFunction(beforeRead)) {
-        return _.attempt(beforeRead, file, detail);
+        result = _.attempt(beforeRead, {
+          file,
+          item: detail,
+        });
       }
-      return true;
+      return !(result === false);
     }, [beforeRead]),
     beforeDelete: useCallback((file: File, detail: any) => {
       if (_.isFunction(beforeDelete)) {
-        return _.attempt(beforeDelete, file, detail);
+        return _.attempt(beforeDelete, {
+          file,
+          item: detail,
+        });
       }
       return true;
     }, [beforeDelete]),
     afterRead: useCallback((file: any, detail: any) => {
       postAfterRead(props, file);
       if (_.isFunction(afterRead)) {
-        _.attempt(afterRead, file, detail);
+        _.attempt(afterRead, {
+          file,
+          item: detail,
+        });
       }
     }, [afterRead]),
     onOversize: useCallback((file: any, detail) => {
       // TODO: 出错信息toast提示
-      console.log('onOversize1111', file);
       if (_.isFunction(onOversize)) {
-        _.attempt(onOversize, file, detail);
+        _.attempt(onOversize, {
+          file,
+          item: detail,
+        });
       }
     }, [onOversize]),
   };

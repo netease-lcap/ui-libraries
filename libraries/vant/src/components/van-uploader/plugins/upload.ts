@@ -1,3 +1,5 @@
+import { unref } from 'vue';
+import _ from 'lodash';
 import { ExtendedUploaderFileListItem } from './types';
 import ajax from './ajax';
 
@@ -22,7 +24,7 @@ function handleFileName(url: string) {
  * @param options 选项
  */
 function onPost(item: ExtendedUploaderFileListItem, index: number, options: any) {
-  const { headers, formData, action, withCredentials, name, urlField, modelValue, emit, onUpdateModelValue } = options;
+  const { headers, formData, action, withCredentials, name, urlField, modelValue, emit, onUpdateModelValue, currentFileList } = options;
   const requestData = {
     url: action,
     headers,
@@ -46,19 +48,18 @@ function onPost(item: ExtendedUploaderFileListItem, index: number, options: any)
     onSuccess: (res: any) => {
       if (res.Code === 200 && Array.isArray(res.Data)) {
         res = {
-          [urlField]: res.Data.map((f) => f[urlField])[0],
+          [urlField]: res.Data.map((f) => _.get(f, urlField))[0],
         };
       }
       item.status = 'success';
       item.message = '';
       item.percent = 100;
-      if (res[urlField]) {
-        item.url = res[urlField];
+      if (_.has(res, urlField)) {
+        item.url = _.get(res, urlField);
       }
       item.name = item?.url ? handleFileName(item?.url) || '' : item?.file?.name || '';
       item.response = res;
-      //   emit('update:modelValue', [...modelValue, item]);
-      onUpdateModelValue([...modelValue, item]);
+      onUpdateModelValue([...unref(currentFileList)]);
       emit('success', {
         res,
         file: item.file,
@@ -103,6 +104,7 @@ export function postAfterRead(props: any, file: ExtendedUploaderFileListItem | A
   const urlField = props.get('urlField');
   const modelValue = props.get('modelValue');
   const onUpdateModelValue = props.get('onUpdateModelValue');
+  const currentFileList = props.get('currentFileList');
   fileList.forEach((item, index) => {
     onPost(item, index, {
       headers,
@@ -114,6 +116,7 @@ export function postAfterRead(props: any, file: ExtendedUploaderFileListItem | A
       modelValue,
       emit,
       onUpdateModelValue,
+      currentFileList,
     });
   });
 }
