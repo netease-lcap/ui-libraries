@@ -1,6 +1,6 @@
-import { useMemo } from '@/plugins/hooks';
+import { useMemo, useCallback } from '@/plugins/hooks';
 
-export default function handleDestination(props: any) {
+export function handleDestination(props: any) {
   const destination = props.get('destination');
   const link = props.get('link');
   const href = props.get('href');
@@ -11,5 +11,20 @@ export default function handleDestination(props: any) {
   return {
     url: urlSelf,
     to: toSelf,
+  };
+}
+
+export function handleIcon(props: any) {
+  const icon = props.get('icon');
+  const iconSlot = useCallback(() => {
+    if (icon) {
+      return <van-icon name={icon} />;
+    }
+    return null;
+  }, [icon]);
+  return {
+    slots: {
+      icon: iconSlot,
+    },
   };
 }

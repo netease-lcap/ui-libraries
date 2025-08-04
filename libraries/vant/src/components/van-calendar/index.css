@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .van-calendar__startvalue {
   text-align: left;
