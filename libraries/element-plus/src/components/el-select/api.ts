@@ -178,7 +178,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
+    modelValue: M extends true ? nasl.collection.List<V> :V 
 
     @Prop({
       group: '主要属性',
