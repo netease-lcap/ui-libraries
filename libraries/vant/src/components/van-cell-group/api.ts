@@ -62,6 +62,16 @@ namespace nasl.ui {
     })
     border: nasl.core.Boolean = true;
 
+    @Prop({
+      group: '主要属性',
+      title: '分组标题',
+      description: '是否使用分组标题',
+      setter: {
+        concept: "SwitchSetter"
+      }
+    })
+    useTitle: nasl.core.Boolean = false;
+
     @Slot({
       title: '默认插槽',
       description: '插入`<van-cell>`子组件。',
@@ -175,7 +185,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '展示右侧箭头并开启点击反馈',
-      description: '是否展示右侧箭头并开启点击反馈',
+      description: '是否展示右侧箭头并开启点击反馈，优先级低于右侧图标',
       setter: {
         concept: "SwitchSetter"
       }

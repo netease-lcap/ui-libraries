@@ -110,7 +110,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    loadingFiled: (item: T) => any = ((item: any)  => item.text) as any;
+    loadingField: (item: T) => any = ((item: any)  => item.text) as any;
 
     @Prop({
       group: '数据属性',
