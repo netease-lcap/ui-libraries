@@ -26,7 +26,7 @@ namespace nasl.ui {
     title: '加载中',
     icon: 'loading',
     description: '加载中',
-    group: 'Display',
+    group: 'Feedback',
   })
   export class VanLoading extends ViewComponent {
     constructor(options?: Partial<VanLoadingOptions>) {

@@ -143,7 +143,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '关闭图标',
       description: '关闭图标名称或图片链接',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
       if: (_) => _.closeable,
     })
     closeIcon: nasl.core.String = 'cross';

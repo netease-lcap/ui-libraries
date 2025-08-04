@@ -29,7 +29,7 @@ namespace nasl.ui {
     title: '动作面板',
     icon: 'picker',
     description: '底部弹起的模态面板，包含与当前情境相关的多个选项。',
-    group: "Selector"
+    group: "Feedback"
   })
   export class VanActionSheet<T, V, M extends nasl.core.Boolean, P extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(options?: Partial<VanActionSheetOptions<T, V, M, P, C>>) {
@@ -157,6 +157,10 @@ namespace nasl.ui {
       title: '关闭按钮图标',
       description: '关闭按钮的图标',
       implicitToString: true,
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
       if: (_) => !!_.title && _.closeable,
     })
     closeIcon: nasl.core.String = 'cross';
