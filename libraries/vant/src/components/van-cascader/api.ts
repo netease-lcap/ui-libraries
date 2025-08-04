@@ -20,7 +20,6 @@ namespace nasl.ui {
     }
   }
 
-
   export class VanCascaderOptions<
     T,
     V,
@@ -186,12 +185,20 @@ namespace nasl.ui {
   > extends ViewComponent {
     constructor(
       options?: Partial<
-        VanFormCascaderOptions & VanFormItemOptions & Omit<VanCascaderOptions<T, V, P, M, C>, keyof VanFormItemOptions>
+        VanFormCascaderOptions<T, V, P, M, C> &
+          VanFormItemOptions &
+          Omit<VanCascaderOptions<T, V, P, M, C>, keyof VanFormItemOptions>
       >,
     ) {
       super();
     }
   }
 
-  export class VanFormCascaderOptions extends ViewComponentOptions {}
+  export class VanFormCascaderOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {}
 }
