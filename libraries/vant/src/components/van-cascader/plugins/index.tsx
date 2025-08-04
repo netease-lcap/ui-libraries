@@ -10,7 +10,6 @@ import {
 } from '@/plugins/common/dataSource';
 
 export { handleControllableValue } from '@/plugins/common/index';
-// export * from './ide';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -30,35 +29,80 @@ export function handleDataSource(props) {
   };
 }
 
-export function handleShowField(props) {
-  const Component = props.get('render');
-  const columns = props.get('columns');
-  const onCancelProps = props.get('onCancel');
-  const onConfirmProps = props.get('onConfirm');
+/**
+ * 优化后的查找路径函数，使用数组迭代替代for循环，避免使用循环和生成器
+ * @param {Array} options - 级联数据源
+ * @param {any} targetValue - 目标值
+ * @returns {string|null} - 返回路径字符串，未找到返回null
+ */
+function findRegionPath(options, targetValue) {
+  // 内部递归函数，返回路径数组或null
+  function search(arr, currentPathArr) {
+    if (!Array.isArray(arr) || arr.length === 0) return null;
+    return arr.reduce((result, item) => {
+      if (result) return result;
+      const nextPathArr = currentPathArr.concat(item.text);
+      if (item.value === targetValue) {
+        return nextPathArr.join('/');
+      }
+      if (Array.isArray(item.children) && item.children.length > 0) {
+        const childResult = search(item.children, nextPathArr);
+        if (childResult) return childResult;
+      }
+      return null;
+    }, null);
+  }
+  return search(options, []);
+}
+export function handlewFieldState(props) {
+  const options = props.get('options');
+  const onCancelProps = props.get('onCancel', () => {});
+  const onFinishProps = props.get('onFinish', () => {});
+  const onCloseProps = props.get('onClose', () => {});
   const [value, setValue] = useControllableValue(props);
-  const fieldValue = useMemo(() => {
-    const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item).text);
-    return selected.join(',');
-  }, [value, columns]);
+  const fieldValue = useMemo(() => findRegionPath(options, value), [value, options]);
   const [show, setShow] = useControllableValue(props, {
-    defaultValue: false,
     valuePropName: 'show',
   });
+
   const onCancel = useCallback(
     _.wrap(onCancelProps, (fn, ...args) => {
-      _.assign(fn, ...args);
+      _.attempt(fn, ...args);
       setShow(false);
     }),
     [onCancelProps],
   );
-  const onConfirm = useCallback(
-    _.wrap(onConfirmProps, (fn, { selectedValues, selectedOptions, ...args }: { [x: string]: any }) => {
-      _.assign(fn, { selectedValues, selectedOptions, ...args });
-      setValue(selectedValues);
+
+  const onFinish = useCallback(
+    _.wrap(onFinishProps, (fn, { value, selectedOptions, ...args }: { [x: string]: any }) => {
+      _.attempt(fn, { value, selectedOptions, ...args });
+      setValue(value);
       setShow(false);
     }),
-    [onConfirmProps],
+    [onFinishProps],
   );
+
+  const onClose = useCallback(
+    _.wrap(onCloseProps, (fn, ...args) => {
+      _.attempt(fn, ...args);
+      setShow(false);
+    }),
+    [onCloseProps],
+  );
+  return {
+    show,
+    setShow,
+    value,
+    setValue,
+    fieldValue,
+    onCancel,
+    onFinish,
+    onClose,
+  };
+}
+
+export function handleFieldRender(props) {
+  const Component = props.get('render');
   const render = useCallback(
     (props) => {
       const { setShow, show, value, setValue, fieldValue, clearable } = props;
@@ -79,7 +123,9 @@ export function handleShowField(props) {
         />,
         <Popup
           show={show}
-          onClose={() => setShow(false)}
+          onClose={() => {
+            setShow(false);
+          }}
           lazy-render={false}
           round
           position="bottom"
@@ -98,15 +144,7 @@ export function handleShowField(props) {
     },
     [Component],
   );
-
   return {
     render,
-    show,
-    setShow,
-    value,
-    setValue,
-    fieldValue,
-    onCancel,
-    onConfirm,
   };
 }

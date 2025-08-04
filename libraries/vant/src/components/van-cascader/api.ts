@@ -20,6 +20,7 @@ namespace nasl.ui {
     }
   }
 
+
   export class VanCascaderOptions<
     T,
     V,
@@ -146,8 +147,6 @@ namespace nasl.ui {
     })
     onChange: (value: V) => void;
 
- 
-
     @Event({
       title: '点击时',
       description: '点击时触发',
@@ -166,4 +165,33 @@ namespace nasl.ui {
     })
     onBlur: (event: any) => void;
   }
+
+  @IDEExtraInfo({
+    order: 1,
+    ideusage: {
+      idetype: 'element',
+    },
+  })
+  @Component({
+    title: '表单级联选择器',
+    description: '表单级联选择器，用于选择多级数据。',
+    group: 'Form',
+  })
+  export class VanFormCascader<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponent {
+    constructor(
+      options?: Partial<
+        VanFormCascaderOptions & VanFormItemOptions & Omit<VanCascaderOptions<T, V, P, M, C>, keyof VanFormItemOptions>
+      >,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormCascaderOptions extends ViewComponentOptions {}
 }
