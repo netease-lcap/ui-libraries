@@ -10,6 +10,7 @@ import {
 } from '@/plugins/common/dataSource';
 
 export { handleControllableValue } from '@/plugins/common/index';
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -30,7 +31,6 @@ export function handleDataSource(props) {
 }
 
 /**
- * 优化后的查找路径函数，使用数组迭代替代for循环，避免使用循环和生成器
  * @param {Array} options - 级联数据源
  * @param {any} targetValue - 目标值
  * @returns {string|null} - 返回路径字符串，未找到返回null
@@ -54,6 +54,7 @@ function findRegionPath(options, targetValue) {
   }
   return search(options, []);
 }
+
 export function handlewFieldState(props) {
   const options = props.get('options');
   const onCancelProps = props.get('onCancel', () => {});
