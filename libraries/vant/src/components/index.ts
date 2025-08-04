@@ -58,6 +58,6 @@ export { VanDialog } from './van-dialog';
 export { VanDropdownMenu, VanDropdownItem } from './van-dropdown-menu';
 export { VanSwipe, VanSwipeItem } from './van-swipe';
 export { VanSteps, VanStep } from './van-steps';
-export { VanToast } from './van-toast';
+export { VanToast, Message } from './van-toast';
 export { VanNotify } from './van-notify';
 export { VanPopoverCombination } from './van-popover-combination';
