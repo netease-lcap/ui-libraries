@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { ref } from 'vue';
-import { useMemo, useControllableValue, useCallback } from '@/plugins/hooks';
+import { ref, unref } from 'vue';
+import { useMemo, useControllableValue, useCallback, useRef } from '@/plugins/hooks';
 import { ExtendedUploaderFileListItem } from './types';
 
 type Converter = 'json' | 'simple';
@@ -14,27 +14,25 @@ const getFileNameByURL = (url) => {
  * 根据value获取文件列表
  * @param value 值
  * @param converter 转换器
- * @param fileList 文件列表
  * @returns 文件列表
  */
-const getFileListByValue = (value, converter: Converter = 'simple', fileList) => {
-  if (Array.isArray(fileList)) {
-    return fileList as ExtendedUploaderFileListItem[];
-  }
-
+const getFileListByValue = (value, converter: Converter = 'simple') => {
   if (!value) {
     return [];
   }
 
   if (converter === 'simple') {
-    const values = value.split(',');
-    return values.map((v) => {
-      return {
-        url: v,
-        name: getFileNameByURL(v),
-        status: 'success',
-      } as ExtendedUploaderFileListItem;
-    });
+    if (typeof value === 'string') {
+      const values = value.split(',');
+      return values.map((v) => {
+        return {
+          url: v,
+          name: getFileNameByURL(v),
+          status: 'success',
+        } as ExtendedUploaderFileListItem;
+      });
+    }
+    return [];
   }
 
   try {
@@ -83,7 +81,7 @@ const formatResponse = (urlField, res, uploadFile) => {
  */
 const getValueByList = (fileList: ExtendedUploaderFileListItem[], converter: Converter, urlField: string) => {
   const successFiles = fileList
-    .filter((item) => item.status === 'success')
+    .filter((item) => item.status === 'success' || item.status === undefined)
     .map((item) => {
       if (item.response) {
         return formatResponse(urlField, item.response, item);
@@ -103,13 +101,17 @@ export function handleModelValue(props) {
   const [value, setValue] = useControllableValue(props);
   const urlField = props.get('urlField') || 'filePath';
   const converter = props.get('converter') || 'simple';
-  const defaultFileList = useMemo(() => getFileListByValue(value, converter, undefined), [value, converter]);
+  const defaultFileList = useMemo(() => getFileListByValue(value, converter), [value, converter]);
   const autoUpload = props.get('autoUpload');
   const onUpdateModelValue = useCallback((fileList: ExtendedUploaderFileListItem[]) => {
     const value = getValueByList(fileList, converter, urlField);
     setValue(value);
   }, [converter, urlField, setValue]);
-  const currentFileList = ref(defaultFileList);
+  const currentFileList = useRef(defaultFileList);
+  const onSetCurrentFileList = (fileList: ExtendedUploaderFileListItem[]) => {
+    currentFileList.value = fileList;
+    onUpdateModelValue(fileList);
+  };
   return {
     modelValue: currentFileList,
     'onUpdate:modelValue': (fileList: ExtendedUploaderFileListItem[]) => {
@@ -118,10 +120,10 @@ export function handleModelValue(props) {
           file.status = 'success';
         });
       }
-      onUpdateModelValue(fileList);
-      currentFileList.value = fileList;
+      onSetCurrentFileList(fileList);
     },
     onUpdateModelValue,
+    currentFileList,
   };
 }
 handleModelValue.order = 1;

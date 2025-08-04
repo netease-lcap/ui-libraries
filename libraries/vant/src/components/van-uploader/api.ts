@@ -45,7 +45,7 @@ namespace nasl.ui {
       description: '接受上传的文件类型',
       setter: { concept: 'InputSetter' },
     })
-    accept: nasl.core.String;
+    accept: nasl.core.String = 'image/*';
 
     @Prop({
       group: '主要属性',
@@ -252,7 +252,7 @@ namespace nasl.ui {
       description: '是否显示删除按钮',
       setter: { concept: 'SwitchSetter' },
     })
-    deletable: nasl.core.Boolean = false;
+    deletable: nasl.core.Boolean = true;
 
     @Prop({
       group: '样式属性',
@@ -268,7 +268,7 @@ namespace nasl.ui {
       description: '是否展示上传区域',
       setter: { concept: 'SwitchSetter' },
     })
-    showUpload: nasl.core.Boolean = false;
+    showUpload: nasl.core.Boolean = true;
 
     @Prop({
       group: '样式属性',
@@ -277,6 +277,51 @@ namespace nasl.ui {
       setter: { concept: 'EnumSelectSetter', options: [{ title: '直接调起摄像头' }, { title: '相册' }] },
     })
     capture: 'camera' | 'album' = 'album';
+
+    @Event({
+      title: '文件读取前',
+      description: '文件读取前的回调函数，返回 false 可终止文件读取'
+    })
+    onBeforeRead: (event: {
+      file: {
+        name: nasl.core.String;
+        size: nasl.core.Integer;
+        type: nasl.core.String;
+      };
+      item: {
+        index: nasl.core.Integer;
+      };
+    }) => void;
+
+    @Event({
+      title: '文件读取后',
+      description: '文件读取后的回调函数'
+    })
+    onAfterRead: (event: {
+      file: {
+        name: nasl.core.String;
+        size: nasl.core.Integer;
+        type: nasl.core.String;
+      };
+      item: {
+        index: nasl.core.Integer;
+      };
+    }) => void;
+
+    @Event({
+      title: '文件删除前',
+      description: '文件删除前的回调函数，返回 false 可终止文件删除'
+    })
+    onBeforeDelete: (event: {
+      file: {
+        name: nasl.core.String;
+        size: nasl.core.Integer;
+        type: nasl.core.String;
+      };
+      item: {
+        index: nasl.core.Integer;
+      };
+    }) => void;
 
     @Event({
       title: '文件大小超额',
@@ -289,8 +334,6 @@ namespace nasl.ui {
         type: nasl.core.String;
       };
       message: nasl.core.String;
-      name: nasl.core.String;
-      size: nasl.core.Integer;
       status: nasl.core.String;
     }) => void;
 
@@ -306,12 +349,10 @@ namespace nasl.ui {
       };
       item: {
         message: nasl.core.String;
-        name: nasl.core.String;
         percent: nasl.core.Integer;
-        size: nasl.core.Integer;
         status: nasl.core.String;
-        uid: nasl.core.Integer;
-        url: nasl.core.String;
+        content: nasl.core.String;
+        objectUrl: nasl.core.String;
       };
     }) => void;
 
@@ -327,17 +368,10 @@ namespace nasl.ui {
       };
       item: {
         message: nasl.core.String;
-        name: nasl.core.String;
         percent: nasl.core.Integer;
-        size: nasl.core.Integer;
         status: nasl.core.String;
-        url: nasl.core.String;
-        response: {
-          filePath: nasl.core.String;
-          msg: nasl.core.String;
-          result: nasl.core.String;
-          success: nasl.core.Boolean;
-        };
+        content: nasl.core.String;
+        objectUrl: nasl.core.String;
       };
     }) => void;
 
@@ -355,7 +389,6 @@ namespace nasl.ui {
         message: nasl.core.String;
         name: nasl.core.String;
         percent: nasl.core.Integer;
-        size: nasl.core.Integer;
         status: nasl.core.String;
         url: nasl.core.String;
         response: {
@@ -379,17 +412,10 @@ namespace nasl.ui {
       };
       item: {
         message: nasl.core.String;
-        name: nasl.core.String;
         percent: nasl.core.Integer;
-        size: nasl.core.Integer;
         status: nasl.core.String;
-        url: nasl.core.String;
-        response: {
-          filePath: nasl.core.String;
-          msg: nasl.core.String;
-          result: nasl.core.String;
-          success: nasl.core.Boolean;
-        };
+        content: nasl.core.String;
+        objectUrl: nasl.core.String;
       };
     }) => void;
   }
