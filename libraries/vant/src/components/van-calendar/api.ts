@@ -369,7 +369,23 @@ namespace nasl.ui {
       title: '点击副标题时',
       description: '点击日历副标题时触发',
     })
-    onClickSubtitle: (event: MouseEvent) => void;
+    onClickSubtitle: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Event({
       title: '点击禁用日期时',
@@ -381,7 +397,23 @@ namespace nasl.ui {
       title: '点击遮罩层时',
       description: '点击遮罩层时触发',
     })
-    onClickOverlay: (event: MouseEvent) => void;
+    onClickOverlay: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Event({
       title: '面板切换时',

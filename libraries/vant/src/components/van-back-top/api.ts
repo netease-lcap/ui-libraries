@@ -80,7 +80,23 @@ namespace nasl.ui {
       title: '点击',
       description: '点击组件时触发',
     })
-    onClick: (event: MouseEvent) => any;
+    onClick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Slot({
       title: 'default',

@@ -18,13 +18,19 @@ export const Default = {
         args,
       };
     },
+    data() {
+      return {
+        value: 2,
+      };
+    },
     template: `
-     <van-tabbar v-bind="args">
+     <van-tabbar v-bind="args" v-model="value">
       <van-tabbar-item icon="home-o">标签</van-tabbar-item>
       <van-tabbar-item icon="search">标签</van-tabbar-item>
       <van-tabbar-item icon="friends-o">标签</van-tabbar-item>
       <van-tabbar-item icon="setting-o">标签</van-tabbar-item>
     </van-tabbar>
+    {{ value }}
     `,
   }),
   args: {

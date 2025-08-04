@@ -28,7 +28,7 @@ namespace nasl.ui {
       description: '当前激活标签',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String | nasl.core.Integer;
+    modelValue: nasl.core.String | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
@@ -77,7 +77,9 @@ namespace nasl.ui {
       title: '标签改变',
       description: '切换标签时触发'
     })
-    onChange: (event: nasl.core.String) => void;
+    onChange: (event: {
+      index: nasl.core.Integer | nasl.core.String;
+    }) => void;
 
     @Slot({
       title: '标签项',
@@ -111,6 +113,13 @@ namespace nasl.ui {
   export class VanTabbarItemOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
+      title: '选项值',
+      description: '用于标识选项的值',
+    })
+    name: nasl.core.String | nasl.core.Integer;
+
+    @Prop({
+      group: '主要属性',
       title: '图标',
       description: '图标',
       setter: {

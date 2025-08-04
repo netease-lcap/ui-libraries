@@ -16,14 +16,18 @@ export const Default = {
     setup() {
       return {
         args,
+        handleLoad: (e) => {
+          console.log('load', e);
+        },
       };
     },
     template: `
-      <van-icon v-bind="args" />
+      <van-icon v-bind="args" @load="handleLoad" />
     `,
   }),
   args: {
-    name: 'chat-o',
+    name: 'search',
+    defaultName: 'photo-o',
     dot: true,
     badge: '1',
   },

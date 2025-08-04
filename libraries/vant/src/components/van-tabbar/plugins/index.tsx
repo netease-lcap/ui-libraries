@@ -10,9 +10,7 @@ export function handleCustomProps(props: any) {
 }
 
 export function handleModelValue(props: any) {
-  const [value, setValue] = useControllableValue(props, {
-    valuePropName: 'value',
-  });
+  const [value, setValue] = useControllableValue(props);
   const currentValue = useMemo(() => {
     return value;
   }, [value]);

@@ -33,7 +33,7 @@ const isSvgUrl = (name) => {
 const OnlineSvgIcon = defineComponent({
   name: 'OnlineSvgIcon',
   props: VanIconPropsDefine,
-  setup(props: VanIconProps) {
+  setup(props: VanIconProps, { emit }) {
     const svgContent = ref('');
 
     const fetchSvg = async () => {
@@ -41,6 +41,7 @@ const OnlineSvgIcon = defineComponent({
         const response = await fetch(props.name);
         const text = await response.text();
         svgContent.value = text;
+        emit('load');
       } catch (error) {
         console.error('Failed to load SVG:', error);
       }
@@ -69,7 +70,7 @@ export default defineComponent({
   components: {
     OnlineSvgIcon,
   },
-  setup(props: VanIconProps) {
+  setup(props: VanIconProps, { attrs }) {
     function renderChildren(): VNode<RendererNode, RendererElement> {
       // 处理SVG URL
       if (isSvgUrl(props.name)) {
@@ -80,13 +81,13 @@ export default defineComponent({
         });
       }
       return h(VanIconPlus, {
-        name: props.name,
+        name: props.name || (attrs.defaultName as string),
         dot: props.dot,
         badge: props.badge,
       });
     }
     return () => {
-      return !props.name ? null : renderChildren();
+      return !props.name && !attrs.defaultName ? null : renderChildren();
     };
   },
 });

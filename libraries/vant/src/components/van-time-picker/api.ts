@@ -46,11 +46,6 @@ namespace nasl.ui {
     })
     readonly: nasl.core.Boolean;
 
-    @Prop({
-      title: '预览',
-    })
-    preview: nasl.core.Boolean;
-
     @Method({
       title: 'undefined',
       description: '打开'

@@ -372,7 +372,7 @@ function renderRangeContent(options: any) {
         onChange={(value) => {
           onSetCurrentStartValue(value.selectedValues);
           // TimePicker 还没有触发onChange，所以需要手动获取时间
-          const startTimeValue = startTimeComponentRef.value?.getSelectedTime();
+          const startTimeValue = (startTimeComponentRef.value as any)?.getSelectedTime();
           if (startTimeValue) {
             onSetCurrentStartTimeValue(startTimeValue);
           }
@@ -389,7 +389,7 @@ function renderRangeContent(options: any) {
           minTime={startTimeMinTime}
           onChange={(value) => {
             onSetCurrentStartTimeValue(value.selectedValues);
-            const startDateValue = startDateComponentRef.value?.getSelectedDate();
+            const startDateValue = (startDateComponentRef.value as any)?.getSelectedDate();
             if (startDateValue) {
               onSetCurrentStartValue(startDateValue);
             }
@@ -405,7 +405,7 @@ function renderRangeContent(options: any) {
         minDate={endDateMinDate}
         onChange={(value) => {
           onSetCurrentEndValue(value.selectedValues);
-          const endTimeValue = endTimeComponentRef.value?.getSelectedTime();
+          const endTimeValue = (endTimeComponentRef.value as any)?.getSelectedTime();
           if (endTimeValue) {
             onSetCurrentEndTimeValue(endTimeValue);
           }
@@ -422,7 +422,7 @@ function renderRangeContent(options: any) {
           minTime={endTimeMinTime}
           onChange={(value) => {
             onSetCurrentEndTimeValue(value.selectedValues);
-            const endDateValue = endDateComponentRef.value?.getSelectedDate();
+            const endDateValue = (endDateComponentRef.value as any)?.getSelectedDate();
             if (endDateValue) {
               onSetCurrentEndValue(endDateValue);
             }

@@ -73,7 +73,7 @@ namespace nasl.ui {
       minutes: nasl.core.Integer;
       seconds: nasl.core.Integer;
       total: nasl.core.Integer;
-    }) => any;
+    }) => void;
 
   }
 }

@@ -17,6 +17,25 @@ namespace nasl.ui {
     constructor(options?: Partial<VanUploaderOptions>) {
       super();
     }
+    @Prop({
+      title: '值',
+    })
+    modelValue: VanUploaderOptions['modelValue'];
+
+    @Prop({
+      title: '上传地址',
+    })
+    action: VanUploaderOptions['action'];
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
   }
 
   export class VanUploaderOptions extends ViewComponentOptions {
@@ -226,14 +245,6 @@ namespace nasl.ui {
       settable: true,
     })
     disabled: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '状态属性',
-      title: '预览',
-      description: '是否预览',
-      setter: { concept: 'SwitchSetter' },
-    })
-    preview: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',

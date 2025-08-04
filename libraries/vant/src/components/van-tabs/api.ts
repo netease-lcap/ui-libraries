@@ -22,10 +22,23 @@ namespace nasl.ui {
     })
     active: VanTabsOptions['active'];
 
-    @Prop({
-      title: '禁用',
+    @Method({
+      title: 'resize',
+      description: '外层元素大小或组件显示状态变化时，可以调用此方法来触发重绘'
     })
-    disabled: nasl.core.Boolean;
+    resize(): any {}
+
+    @Method({
+      title: 'scrollTo',
+      description: '滚动到指定位置'
+    })
+    scrollTo(
+      @Param({
+          title: '标签页',
+          description: '要滚动到的标签页的选项值',
+      })
+      name?: nasl.core.Integer | nasl.core.String,
+    ): void {}
 
     constructor(options?: Partial<VanTabsOptions>) {
       super();
@@ -155,25 +168,55 @@ namespace nasl.ui {
       title: '点击标签',
       description: '点击标签时触发'
     })
-    onClickTab: (event: nasl.core.String) => void;
+    onClickTab: (event: {
+      name: nasl.core.String | nasl.core.Integer;
+      title: nasl.core.String;
+      disabled: nasl.core.Boolean;
+      event: {
+        altKey: nasl.core.Boolean;
+        button: nasl.core.Integer;
+        clientX: nasl.core.Integer;
+        clientY: nasl.core.Integer;
+        ctrlKey: nasl.core.Boolean;
+        metaKey: nasl.core.Boolean;
+        movementX: nasl.core.Integer;
+        movementY: nasl.core.Integer;
+        offsetX: nasl.core.Integer;
+        offsetY: nasl.core.Integer;
+        pageX: nasl.core.Integer;
+        pageY: nasl.core.Integer;
+        screenX: nasl.core.Integer;
+        screenY: nasl.core.Integer;
+        which: nasl.core.Integer;
+      }
+    }) => void;
 
     @Event({
       title: '标签改变',
       description: '当前激活的标签改变时触发'
     })
-    onChange: (event: nasl.core.String) => void;
+    onChange: (event: {
+      name: nasl.core.String | nasl.core.Integer;
+      title: nasl.core.String;
+    }) => void;
 
     @Event({
       title: '标签首次渲染时',
       description: '标签内容首次渲染时触发（仅在开启延迟渲染后触发）'
     })
-    onRendered: (event: nasl.core.String) => void;
+    onRendered: (event: {
+      name: nasl.core.String | nasl.core.Integer;
+      title: nasl.core.String;
+    }) => void;
 
     @Event({
       title: '滚动时',
       description: '滚动时触发，仅在 sticky 模式下生效'
     })
-    onScroll: (event: nasl.core.String) => void;
+    onScroll: (event: {
+      scrollTop: nasl.core.Integer;
+      isFixed: nasl.core.Boolean;
+    }) => void;
 
     @Slot({
       title: '默认',
