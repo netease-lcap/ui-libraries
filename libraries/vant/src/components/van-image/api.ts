@@ -134,7 +134,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '失败时提示的图标',
       description: '失败时提示的图标',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
     })
     errorIcon: nasl.core.String = 'photo-fail';
 
@@ -142,7 +145,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '加载时提示的图标',
       description: '加载时提示的图标',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
     })
     loadingIcon: nasl.core.String = 'photo';
 
