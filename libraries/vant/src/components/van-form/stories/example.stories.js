@@ -1,3 +1,5 @@
+import { ref } from 'vue';
+
 export default {
   id: 'van-form-example',
   title: '组件列表/Form 表单/示例',
@@ -30,24 +32,35 @@ export default {
 
 const Template = (args) => ({
   props: Object.keys(args),
+  setup() {
+    const pickerValue = ref([]);
+    const fieldValue = ref('');
+    const cascaderValue = ref('2');
+    return {
+      pickerValue,
+      fieldValue,
+      cascaderValue,
+    };
+  },
   template: `
     <van-form validate-trigger="onSubmit" ref="form" @submit="formSubmit">
-      <van-form-field
-             :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
-      required name="username" placeholder="请输入用户名" >
-        <template #label>
-          <span>用户名</span>
-        </template>
-      </van-form-field>
-        <van-form-field
-            :rules="[{ required: true, message: '请填写密码' }]"
-      required name="password" placeholder="请输入密码" >
-        <template #label>
-          <span>密码</span>
-        </template>
-      </van-form-field>
 
-      <van-button type="primary" @click="onSubmit">提交</van-button>
+      <van-form-cascader
+        :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
+        v-model="cascaderValue"
+        required name="cascader" placeholder="请选择级联选择器"
+        :dataSource="[{ text: '男', value: '1' }, { text: '女', value: '2' }]"
+        clearable
+      >
+        <template #label>
+          <span>级联选择器</span>
+        </template>
+      </van-form-cascader>
+      {{cascaderValue}}级联选择器
+      <van-flex>
+        <van-button type="primary" @click="onSubmit">提交</van-button>
+        <van-button type="primary" @click="onReset">重构</van-button>
+      </van-flex>
     </van-form>
   `,
   data() {
@@ -66,6 +79,9 @@ const Template = (args) => ({
     },
     onFailed(errorFields, values) {
       console.log('表单校验失败:', errorFields, values);
+    },
+    onReset() {
+      console.log(this.$refs.form.resetForm(), 'form');
     },
   },
 });

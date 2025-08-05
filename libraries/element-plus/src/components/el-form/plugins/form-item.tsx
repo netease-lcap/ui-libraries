@@ -46,8 +46,7 @@ export function withFormItem(Component, name) {
         deleteFormitem,
       } = provide?.value?.[$formProvide] ?? {};
       const { vnode } = getCurrentInstance() as { vnode: VNode };
-      const { props: vnodeProps } = vnode;
-      const isControlled = Object.prototype.hasOwnProperty.call(vnodeProps, 'modelValue');
+      const isControlled = _.has(vnode, 'props.modelValue');
 
       const modelValue = computed(() => (isControlled ? props?.modelValue : value?.[prop.value]));
       const style = computed(() => categoryStyles(_.assign({}, props?.style, attrs.style)));

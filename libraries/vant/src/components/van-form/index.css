@@ -2,3 +2,8 @@
 .van-form .van-cell .van-cell.van-field {
   padding: 0;
 }
+
+/* van-form 组件样式 */
+.van-form .van-cell .van-cell::after {
+  border: none;
+}

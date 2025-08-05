@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { $router } from '@/plugins/constants';
 
 export function handleHrefToRouter(props) {
   const destination = props.get('destination');
@@ -6,7 +7,7 @@ export function handleHrefToRouter(props) {
   const href = props.get('href');
   const target = props.get('target');
   const onClick = props.get('onClick');
-  const router = props.get('router');
+  const router = props.get($router);
   const destinationToRouterClick = _.cond([
     [_.matches({ target: '_blank' }), _.constant(() => {})],
     [

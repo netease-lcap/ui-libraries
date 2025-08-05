@@ -2,7 +2,6 @@
 
 import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useCustomFieldValue, CUSTOM_FIELD_INJECTION_KEY } from '@vant/use';
 
 // import create from 'zustand-vue';
 import { createStore } from 'zustand/vanilla';
@@ -10,7 +9,7 @@ import { createStore } from 'zustand/vanilla';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { $deletePropsList, $provide, $tagName } from '@/plugins/constants';
+import { $deletePropsList, $provide, $tagName, $router, $route } from '@/plugins/constants';
 import { scheduler } from '@/plugins/hooks';
 import '@/utils/index';
 
@@ -72,8 +71,8 @@ export function registerComponent<T>(Component, options) {
           inject: injectRef,
           provide: {},
           ref: {},
-          router,
-          route,
+          [$router]: router,
+          [$route]: route,
           mergeRef: _.mergeRef(exposeRef.value),
           [$tagName]: options.name,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],

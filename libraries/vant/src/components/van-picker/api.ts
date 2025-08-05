@@ -80,7 +80,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: P extends true ? (M extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
+    modelValue: nasl.collection.List<V>;
 
     @Prop({
       group: '主要属性',
@@ -203,12 +203,20 @@ namespace nasl.ui {
   export class VanFormPicker<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(
       options?: Partial<
-        VanFormPickerOptions<T, V, P, M, C> & VanFormItemOptions & Omit<VanPickerOptions<T, V, P, M, C>, keyof VanFormItemOptions>
+        VanFormPickerOptions<T, V, P, M, C> &
+          VanFormItemOptions &
+          Omit<VanPickerOptions<T, V, P, M, C>, keyof VanFormItemOptions>
       >,
     ) {
       super();
     }
   }
 
-  export class VanFormPickerOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {}
+  export class VanFormPickerOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {}
 }

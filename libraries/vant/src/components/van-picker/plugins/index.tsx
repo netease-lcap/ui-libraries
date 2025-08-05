@@ -110,7 +110,8 @@ export function handleFieldRender(props) {
           data-drawer-dropdown-status={props['data-drawer-dropdown-status']}
           data-drawer-dropdown-selector={props['data-drawer-dropdown-selector']}
           data-nodepath={props['data-nodepath']}
-          ide-draggable={props['ide-draggable']}>
+          ide-draggable={props['ide-draggable']}
+        >
           <Component
             {..._.omit(props, ['value', 'modelValue', 'pickerValue', 'onUpdate:modelValue'])}
             modelValue={value}
