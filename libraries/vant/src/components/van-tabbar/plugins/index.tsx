@@ -1,11 +1,16 @@
 import _ from 'lodash';
 import { useMemo, useControllableValue } from '@/plugins/hooks';
+import { $deletePropsList } from '@/plugins/constants';
 
 export function handleCustomProps(props: any) {
   let isFixed = props.get('isFixed');
   isFixed = _.isNil(isFixed) ? false : isFixed;
+  const deletePropsList = props
+  .get($deletePropsList, [])
+  .concat(['isFixed']);
   return {
     fixed: isFixed,
+    [$deletePropsList]: deletePropsList,
   };
 }
 

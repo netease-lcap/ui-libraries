@@ -308,6 +308,9 @@ export function handleBasicRender(props: any) {
       const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay, inLink } = props;
       const inputSlot = useCallback(() => {
         if (!formatValue) {
+          if (placeholder) {
+            return <div class={bem('placeholder')}>{placeholder}</div>;
+          }
           return null;
         }
         if (isRange) {
@@ -320,7 +323,7 @@ export function handleBasicRender(props: any) {
           );
         }
         return <div class={bem('value')}>{formatValue[0]}</div>;
-      }, [formatValue, isRange]);
+      }, [formatValue, isRange, placeholder]);
       return (
         <div {..._.pick(attrs, ['class', 'style', 'data-nodepath'])} class={bem('root')}>
           <Field

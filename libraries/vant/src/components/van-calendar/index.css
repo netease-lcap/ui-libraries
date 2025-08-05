@@ -34,3 +34,6 @@
 .van-calendar__separator {
   margin: 0 5px;
 }
+.van-calendar__placeholder {
+  color: #999;
+}

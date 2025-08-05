@@ -83,7 +83,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       if: (_) => !_.isRange,
     })
-    modelValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+    modelValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
 
     @Prop<VanDatePickerOptions, 'startValue'>({
       group: '数据属性',
@@ -92,7 +92,7 @@ namespace nasl.ui {
       sync: true,
       if: (_) => _.isRange === true,
     })
-    startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+    startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
 
     @Prop<VanDatePickerOptions, 'endValue'>({
       group: '数据属性',
@@ -101,21 +101,21 @@ namespace nasl.ui {
       sync: true,
       if: (_) => _.isRange === true,
     })
-    endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime;
+    endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
       title: '最小日期值',
       description: '最小可选的日期值，默认为10年前，日期填写格式为“yyyy-mm-dd”',
     })
-    minDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    minDate: nasl.core.String | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
       title: '最大日期值',
       description: '最大可选的日期值，默认为10年后，日期填写格式为“yyyy-mm-dd”',
     })
-    maxDate: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    maxDate: nasl.core.String | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
 
     @Prop<VanDatePickerOptions, 'type'>({
       group: '主要属性',
@@ -311,7 +311,6 @@ namespace nasl.ui {
       | 'YYYY年M月'
       | 'YYYY-MM'
       | 'M/YYYY'
-      | 'D/M/YYYY'
       | 'YYYY年'
       | 'YYYY'
       | 'YYYY年M月D日 HH:mm:ss'

@@ -19,12 +19,12 @@ namespace nasl.ui {
         slotWrapperInlineStyle: {
           default: 'display: inline-block;',
         },
-        displayData: "\"[{text: '{{文本字段}}', children:[{text: '{{文本字段}}'}]},{text: '{{文本字段}}'}, {text: '{{文本字段}}'}]\"",
         propertyName: ":dataSource",
       },
       additionalAttribute: {
         mainActiveIndex: '"0"',
       },
+      translateBindingProperty: ["textField"],
     },
   })
   @Component({
@@ -45,7 +45,7 @@ namespace nasl.ui {
     @Prop({
       title: '右侧选中项的值',
     })
-    activeId: nasl.collection.List<V>;
+    activeId: M extends true ? nasl.collection.List<V> : V;
 
     @Method({
       title: 'undefined',

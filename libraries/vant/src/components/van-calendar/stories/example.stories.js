@@ -33,10 +33,12 @@ export const Default = {
     data() {
       return {
         value: '2025-07-20',
+        startValue: '2025-06-10',
+        endValue: '2025-07-31',
       };
     },
     template: `
-      <van-calendar v-bind="args" @confirm="onConfirm" @select="onSelect" v-model:modelValue="value" @open="onOpen" @close="onClose" >
+      <van-calendar v-bind="args" @confirm="onConfirm" @select="onSelect" v-model:modelValue="value" v-model:startValue="startValue" v-model:endValue="endValue" @open="onOpen" @close="onClose" >
         <template #label>
           <span>选择日期</span>
         </template>
@@ -45,19 +47,22 @@ export const Default = {
         </template>
       </van-calendar>
       {{ value }}
+       {{ startValue }}
+        {{ endValue}}
     `,
   }),
   args: {
-    type: 'multiple',
+    multiple: true,
+    isRange: false,
     switchMode: 'month',
     show: true,
     minDate: '2025-06-10',
     maxDate: '2025-07-31',
     maxRange: 3,
     inputAlign: 'right',
+    placeholder: '请选择日期',
   },
 };
-
 
 export const FormItem = {
   name: '表单项',

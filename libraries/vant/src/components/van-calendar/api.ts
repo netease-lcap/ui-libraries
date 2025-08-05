@@ -16,14 +16,14 @@ namespace nasl.ui {
     description: '日历展示',
     group: 'Selector',
   })
-  export class VanCalendar extends ViewComponent {
-    constructor(options?: Partial<VanCalendarOptions>) {
+  export class VanCalendar<M extends nasl.core.Boolean> extends ViewComponent {
+    constructor(options?: Partial<VanCalendarOptions<M>>) {
       super();
     }
     @Prop({
       title: '值',
     })
-    modelValue: VanCalendarOptions['modelValue'];
+    modelValue: VanCalendarOptions<M>['modelValue'];
 
     @Method({
       title: 'undefined',
@@ -38,45 +38,62 @@ namespace nasl.ui {
     close(): any {}
   }
 
-  export class VanCalendarOptions extends ViewComponentOptions {
+  export class VanCalendarOptions<M extends nasl.core.Boolean> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '类型',
-      description: '类型',
+      title: '是否多选',
+      description: '右侧选项是否允许多选',
+      setter: { concept: 'SwitchSetter' },
+      onChange: [{ clear: ['startValue', 'endValue','isRange'] }],
+      if: (_) => !_.isRange,
+    })
+    multiple: M = false as any;
+
+    @Prop({
+      group: '数据属性',
+      title: '区间选择',
+      description: '是否支持进行时间区间选择，关闭则为日期选择',
       setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          {
-            title: '单个日期',
-          },
-          {
-            title: '多个日期',
-          },
-          {
-            title: '范围',
-          },
-        ],
+        concept: 'SwitchSetter',
       },
       onChange: [
         {
-          clear: ['maxRange', 'showRangePrompt', 'rangePrompt'],
+          clear: ['modelValue', 'startValue', 'endValue','multiple'],
         },
       ],
+      if: (_) => !_.multiple,
     })
-    type: 'single' | 'multiple' | 'range' = 'single';
+    isRange: nasl.core.Boolean = false;
 
     @Prop({
       group: '数据属性',
       title: '值',
       sync: true,
-      description: '绑定值',
+      description: '当类型为多个日期或者范围时，值为数组',
       setter: { concept: 'InputSetter' },
+      if: (_) => !_.isRange,
     })
-    modelValue:
-      | nasl.core.Date
-      | nasl.core.String
-      | nasl.core.Integer
-      | nasl.collection.List<nasl.core.Date | nasl.core.String | nasl.core.Integer>;
+    modelValue: M extends 'multiple'
+      ? nasl.collection.List<nasl.core.String> | nasl.collection.List<nasl.core.Integer>
+      : nasl.core.Date | nasl.core.String | nasl.core.Integer;
+
+    @Prop<VanCalendarOptions<M>, 'startValue'>({
+      group: '数据属性',
+      title: '起始值',
+      description: '默认显示的起始时间值，格式如2025-07-24',
+      sync: true,
+      if: (_) => _.isRange === true,
+    })
+    startValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
+
+    @Prop<VanCalendarOptions<M>, 'endValue'>({
+      group: '数据属性',
+      title: '结束值',
+      description: '默认显示的结束时间值，格式如2025-07-24',
+      sync: true,
+      if: (_) => _.isRange === true,
+    })
+    endValue: nasl.core.String | nasl.core.Date | nasl.core.DateTime | nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
@@ -139,7 +156,7 @@ namespace nasl.ui {
     })
     switchMode: 'none' | 'month' | 'year' = 'none';
 
-    @Prop<VanCalendarOptions, 'showFormatter'>({
+    @Prop<VanCalendarOptions<M>, 'showFormatter'>({
       group: '主要属性',
       title: '展示格式',
       description: '展示格式',
@@ -162,13 +179,9 @@ namespace nasl.ui {
       },
       if: (_) => !_.advancedFormatEnable,
     })
-    showFormatter:
-      | 'YYYY年M月D日'
-      | 'YYYY-MM-DD'
-      | 'M/D/YYYY'
-      | 'D/M/YYYY' = 'YYYY-MM-DD';
+    showFormatter: 'YYYY年M月D日' | 'YYYY-MM-DD' | 'M/D/YYYY' | 'D/M/YYYY' = 'YYYY-MM-DD';
 
-    @Prop<VanCalendarOptions, 'advancedFormatEnable'>({
+    @Prop<VanCalendarOptions<M>, 'advancedFormatEnable'>({
       group: '主要属性',
       title: '高级格式化',
       description: '用来控制数字的展示格式',
@@ -179,7 +192,7 @@ namespace nasl.ui {
     })
     advancedFormatEnable: nasl.core.Boolean = false;
 
-    @Prop<VanCalendarOptions, 'advancedFormatValue'>({
+    @Prop<VanCalendarOptions<M>, 'advancedFormatValue'>({
       group: '主要属性',
       title: '高级格式化内容',
       description: '用来控制数字的展示格式',
@@ -188,7 +201,7 @@ namespace nasl.ui {
     })
     advancedFormatValue: nasl.core.String;
 
-    @Prop<VanCalendarOptions, 'converter'>({
+    @Prop<VanCalendarOptions<M>, 'converter'>({
       group: '主要属性',
       title: '转换器',
       description: '将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式',
@@ -210,11 +223,7 @@ namespace nasl.ui {
         ],
       },
     })
-    converter:
-      | 'YYYY/MM/dd'
-      | 'Unix 时间戳'
-      | 'JSON'
-      | 'Date 对象' = 'YYYY/MM/dd';
+    converter: 'YYYY/MM/dd' | 'Unix 时间戳' | 'JSON' | 'Date 对象' = 'YYYY/MM/dd';
 
     @Prop({
       group: '主要属性',
@@ -354,10 +363,7 @@ namespace nasl.ui {
       title: '月份进入可视区域时',
       description: '当某个月份进入可视区域时触发（切换模式为平铺月份时生效）',
     })
-    onMonthShow: (event: {
-      date: Date;
-      title: string;
-    }) => void;
+    onMonthShow: (event: { date: Date; title: string }) => void;
 
     @Event({
       title: '超过最大范围时',
@@ -419,9 +425,7 @@ namespace nasl.ui {
       title: '面板切换时',
       description: '面板切换时触发',
     })
-    onPanelChange: (event: {
-      date: Date;
-    }) => void;
+    onPanelChange: (event: { date: Date }) => void;
 
     @Slot({
       title: '组件插槽',

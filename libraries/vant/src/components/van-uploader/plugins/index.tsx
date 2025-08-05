@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ExtendedUploaderFileListItem } from './types';
+import { showToast } from 'vant';
 import { postAfterRead } from './upload';
 import { useCallback } from '@/plugins/hooks';
 
@@ -47,13 +47,14 @@ export function handleEvent(props) {
       return !(result === false);
     }, [beforeRead]),
     beforeDelete: useCallback((file: File, detail: any) => {
+      let result = true;
       if (_.isFunction(beforeDelete)) {
-        return _.attempt(beforeDelete, {
+        result = _.attempt(beforeDelete, {
           file,
           item: detail,
         });
       }
-      return true;
+      return !(result === false);
     }, [beforeDelete]),
     afterRead: useCallback((file: any, detail: any) => {
       postAfterRead(props, file);
@@ -65,13 +66,13 @@ export function handleEvent(props) {
       }
     }, [afterRead]),
     onOversize: useCallback((file: any, detail) => {
-      // TODO: 出错信息toast提示
       if (_.isFunction(onOversize)) {
         _.attempt(onOversize, {
           file,
           item: detail,
         });
       }
+      showToast('文件大小超出限制');
     }, [onOversize]),
   };
 }
