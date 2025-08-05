@@ -1,0 +1,9 @@
+.van-icon > span > svg {
+  width: 1em;
+  height: 1em;
+}
+
+.van-icon .van-badge--fixed {
+  transform-origin: 100%;
+  position: absolute;
+}
