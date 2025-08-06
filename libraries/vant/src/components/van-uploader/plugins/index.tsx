@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { showToast } from 'vant';
 import { postAfterRead } from './upload';
-import { useCallback } from '@/plugins/hooks';
+import { useCallback, useMemo } from '@/plugins/hooks';
 
 export * from './modelValue';
 export * from './maxSize';
@@ -17,10 +17,23 @@ export function handleCustomProps(props) {
   autoUpload = _.isNil(autoUpload) ? true : autoUpload;
   const name = props.get('name') || 'file';
   const urlField = props.get('urlField') || 'filePath';
+  const readonly = props.get('readonly');
+  const disabled = props.get('disabled');
+  const deletable = props.get('deletable');
+  const deletableValue = useMemo(() => {
+    if (readonly) {
+      return false;
+    }
+    if (disabled) {
+      return false;
+    }
+    return deletable;
+  }, [readonly, disabled, deletable]);
   return {
     autoUpload,
     name,
     urlField,
+    deletable: deletableValue,
   };
 }
 handleCustomProps.order = 1;

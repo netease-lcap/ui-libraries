@@ -76,7 +76,7 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '外边框',
-      description: '是否显示标签栏外边框，仅在 type="line" 时有效',
+      description: '是否显示标签栏外边框，仅在样式类型为线条时有效',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -87,12 +87,24 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '标题过长省略',
-      description: '是否省略过长的标题文字（仅在 shrink 为 false 且 tab 数量小于等于 swipe-threshold 时生效）',
+      description: '是否省略过长的标题文字（仅在收缩布局关闭时且标签页数量小于等于滚动阈值时生效）',
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => !_.shrink,
     })
     ellipsis: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
+      title: '滚动阈值',
+      description: '标签数量超过阈值且总宽度超过标签栏宽度时开始横向滚动（仅在收缩布局关闭且标题过长省略打开时生效）',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+      if: (_) => _.ellipsis && !_.shrink,
+    })
+    swipThreshold: nasl.core.Integer = 5;
 
     @Prop({
       group: '交互属性',
@@ -219,8 +231,13 @@ namespace nasl.ui {
     }) => void;
 
     @Slot({
-      title: '默认',
-      description: '显示的内容',
+      title: '标签页',
+      description: '插入`<van-tab>`子组件。',
+      emptyBackground: 'add-sub',
+      snippets: [{
+        title: '标签页',
+        code: '<van-tab><template #title><van-text text="标签"></van-text></template><van-text text="内容"></van-text></van-tab>'
+      }]
     })
     slotDefault: () => Array<ViewComponent>;
   }
