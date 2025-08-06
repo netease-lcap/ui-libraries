@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'container',
+      structured: true,
       childAccept: "['van-tabbar-item'].includes(target.tag)",
     },
   })
@@ -87,7 +88,7 @@ namespace nasl.ui {
       emptyBackground: 'add-sub',
       snippets: [{
         title: '标签项',
-        code: '<van-tabbar-item icon="默认" style="font-size:24px"><van-text text="标签"></van-text></van-tabbar-item>'
+        code: '<van-tabbar-item icon="home-o"><van-text text="标签"></van-text></van-tabbar-item>'
       }]
     })
     slotDefault: () => Array<VanTabbarItem>;

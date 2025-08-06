@@ -1,4 +1,5 @@
 import { useCallback } from '@/plugins/hooks';
+import VanIcon from '@/components/van-icon';
 
 export function handleRightIcon(props) {
   const rightIcon = props.get('rightIcon');
@@ -6,7 +7,7 @@ export function handleRightIcon(props) {
   const getRightIcon = useCallback(() => {
     if (rightIcon) {
       return {
-        'right-icon': () => <van-icon name={rightIcon} class="van-collapse-item__right-icon" />,
+        'right-icon': () => <VanIcon name={rightIcon} class="van-collapse-item__right-icon" />,
       };
     }
     return {};

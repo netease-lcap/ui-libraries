@@ -34,5 +34,21 @@
   margin: 0 5px;
 }
 .van-time-picker__placeholder {
-  color: #999;
+  color: var(--van-field-placeholder-text-color);
+}
+.van-time-picker__field .van-field__control--left .van-time-picker__rangevalue {
+  justify-content: flex-start;
+}
+.van-time-picker__field .van-field__control--center .van-time-picker__rangevalue {
+  justify-content: center;
+}
+.van-time-picker__field .van-field__control--right .van-time-picker__rangevalue {
+  justify-content: flex-end;
+}
+.van-time-picker__field.van-field--disabled .van-field__control--custom {
+  color: var(--van-field-disabled-text-color);
+}
+.van-time-picker__field.van-field--disabled .van-field__control--custom:hover,
+.van-time-picker__field.van-time-picker__readonly:hover{
+  cursor: default;
 }

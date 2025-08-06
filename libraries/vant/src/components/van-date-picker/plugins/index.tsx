@@ -503,15 +503,16 @@ function renderBasicContent(options: any) {
 export function handleBasicRender(props: any) {
   const popupVisible = ref(props.get('popupVisible') || false);
   const disabled = props.get('disabled');
+  const readonly = props.get('readonly');
   const onFieldClick = () => {
-    if (disabled) {
+    if (disabled || readonly) {
       return;
     }
     popupVisible.value = true;
   };
   const render = useCallback(
     (props, { attrs, slots }) => {
-      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay, inLink } = props;
+      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay, inLink, readonly } = props;
       const inputSlot = useCallback(() => {
         if (!formatValue) {
           if (placeholder) {
@@ -535,7 +536,7 @@ export function handleBasicRender(props: any) {
           <Field
             readonly
             disabled={disabled}
-            class={bem('field')}
+            class={[bem('field'), readonly && bem('readonly')]}
             v-slots={{ label: slots.label, input: inputSlot }}
             onClick={onFieldClick}
             modelValue={formatValue}

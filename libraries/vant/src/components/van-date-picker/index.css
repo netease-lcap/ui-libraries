@@ -35,5 +35,21 @@
   margin: 0 5px;
 }
 .van-date-picker__placeholder {
-  color: #999;
+  color: var(--van-field-placeholder-text-color);
+}
+.van-date-picker__field .van-field__control--left .van-date-picker__rangevalue {
+  justify-content: flex-start;
+}
+.van-date-picker__field .van-field__control--center .van-date-picker__rangevalue {
+  justify-content: center;
+}
+.van-date-picker__field .van-field__control--right .van-date-picker__rangevalue {
+  justify-content: flex-end;
+}
+.van-date-picker__field.van-field--disabled .van-field__control--custom {
+  color: var(--van-field-disabled-text-color);
+}
+.van-date-picker__field.van-field--disabled .van-field__control--custom:hover,
+.van-date-picker__field.van-date-picker__readonly:hover{
+  cursor: default;
 }
