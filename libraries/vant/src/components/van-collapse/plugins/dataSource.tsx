@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { useMemo } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
+import { VanCollapseItem } from '../index';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -26,7 +27,7 @@ export function handleDataSource(props) {
         ? {}
         : {
             default: () => _.map(dataSource, (item) => (
-              <van-collapse-item
+              <VanCollapseItem
                 key={item.name}
                 {...item}
                 v-slots={{
@@ -37,7 +38,7 @@ export function handleDataSource(props) {
                 rightIcon={rightIcon}
               >
                 {slots.content?.({ item })}
-              </van-collapse-item>
+              </VanCollapseItem>
             )),
           }),
     [dataSource, slots, dataConfig],

@@ -17,6 +17,24 @@ namespace nasl.ui {
     constructor(options?: Partial<VanCountDownOptions>) {
       super();
     }
+
+    @Method({
+      title: '开始倒计时',
+      description: '开始倒计时',
+    })
+    start(): void {}
+
+    @Method({
+      title: '暂停倒计时',
+      description: '暂停倒计时',
+    })
+    pause(): void {}
+
+    @Method({
+      title: '开始倒计时',
+      description: '重设倒计时，若 auto-start 为 true，重设后会自动开始倒计时',
+    })
+    reset(): void {}
   }
 
   export class VanCountDownOptions extends ViewComponentOptions {
@@ -46,7 +64,7 @@ namespace nasl.ui {
       description: '时间格式',
       setter: { concept: 'InputSetter' },
     })
-    format: nasl.core.String;
+    format: nasl.core.String = 'HH:mm:ss';
 
     @Prop({
       group: '主要属性',
