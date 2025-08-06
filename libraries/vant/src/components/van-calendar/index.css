@@ -35,5 +35,21 @@
   margin: 0 5px;
 }
 .van-calendar__placeholder {
-  color: #999;
+  color: var(--van-field-placeholder-text-color);
+}
+.van-calendar__field .van-field__control--left .van-calendar__rangevalue {
+  justify-content: flex-start;
+}
+.van-calendar__field .van-field__control--center .van-calendar__rangevalue {
+  justify-content: center;
+}
+.van-calendar__field .van-field__control--right .van-calendar__rangevalue {
+  justify-content: flex-end;
+}
+.van-calendar__field.van-field--disabled .van-field__control--custom {
+  color: var(--van-field-disabled-text-color);
+}
+.van-calendar__field.van-field--disabled .van-field__control--custom:hover,
+.van-calendar__field.van-calendar__readonly:hover{
+  cursor: default;
 }

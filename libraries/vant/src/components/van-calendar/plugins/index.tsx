@@ -155,15 +155,16 @@ handleConfirmButtonClick.order = 4;
 export function handleBasicRender(props: any) {
   const popupVisible = ref(props.get('popupVisible') || false);
   const disabled = props.get('disabled');
+  const readonly = props.get('readonly');
   const onFieldClick = () => {
-    if (disabled) {
+    if (disabled || readonly) {
       return;
     }
     popupVisible.value = true;
   };
   const render = useCallback(
     (props, { attrs, slots }) => {
-      const { formatValue, placeholder, inputAlign, inLink, type } = props;
+      const { formatValue, placeholder, inputAlign, inLink, type, readonly } = props;
       const calendarProps = _.omit(props, ['show']);
       const inputSlot = useCallback(() => {
         if (!formatValue) {
@@ -191,7 +192,7 @@ export function handleBasicRender(props: any) {
             rows="1"
             autosize
             disabled={disabled}
-            class={bem('field')}
+            class={[bem('field'), readonly && bem('readonly')]}
             v-slots={{ label: slots.label, input: inputSlot }}
             onClick={onFieldClick}
             modelValue={formatValue}

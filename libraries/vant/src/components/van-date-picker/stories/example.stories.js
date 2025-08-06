@@ -20,7 +20,7 @@ export const Default = {
     },
     data() {
       return {
-        value: '2025/07/24 12:00:00',
+        value: '2025/07/18 12:00:00',
         startValue: '2025/07/24',
         endValue: '2025/07/25',
         startTimeValue: '12:00',
@@ -49,6 +49,10 @@ export const Default = {
     unit: 'hour',
     minDate: '2025/07/24 12:00:00',
     maxDate: '2025/07/25 12:00:00',
+    popupOpened: false,
+    readonly: true,
+    disabled: true,
+    inputAlign: 'left',
   },
 };
 

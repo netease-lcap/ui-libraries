@@ -87,6 +87,10 @@ export const Default = {
     lcapIsCompress: true,
     viaOriginURL: '',
     converter: 'json',
+    readonly: false,
+    disabled: false,
+    deletable: true,
+    showUpload: true,
   },
 };
 
