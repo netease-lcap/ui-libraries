@@ -53,6 +53,18 @@ namespace nasl.ui {
       description: '清除缓存，重新加载',
     })
     reload(): void {}
+
+    @Method({
+      title: '切换',
+      description: '切换所有面板展开状态，传 true 为全部展开，false 为全部收起，不传参为全部切换',
+    })
+    toggleAll(
+      @Param({
+        title: '是否展开',
+        description: '设置展开状态',
+    })
+    expand?: nasl.core.Boolean,
+    ): void {}
   }
 
   export class VanCollapseOptions<T, V> extends ViewComponentOptions {
@@ -61,7 +73,7 @@ namespace nasl.ui {
       title: '数据源',
       description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
-      designerValue: [{}, {}, {}],
+      bindOpen: true,
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
@@ -162,25 +174,25 @@ namespace nasl.ui {
       title: '内容',
       description: 'Collapse Item内容',
     })
-    slotContent: () => Array<ViewComponent>;
+    slotContent: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
       title: '标题栏左侧内容',
       description: 'Collapse Item标题栏左侧内容',
     })
-    slotTitle: () => Array<ViewComponent>;
+    slotTitle: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
       title: '标题栏右侧内容',
       description: 'Collapse Item自定义标题栏右侧内容',
     })
-    slotValue: () => Array<ViewComponent>;
+    slotValue: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
       title: '标题栏描述信息',
       description: 'Collapse Item自定义标题栏描述信息',
     })
-    slotLabel: () => Array<ViewComponent>;
+    slotLabel: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
@@ -203,6 +215,18 @@ namespace nasl.ui {
     constructor(options?: Partial<VanCollapseItemOptions<T, V>>) {
       super();
     }
+
+    @Method({
+      title: '切换',
+      description: '切换面板展开状态，传 true 为展开，false 为收起，不传参为切换',
+    })
+    toggle(
+      @Param({
+        title: '是否展开',
+        description: '设置展开状态',
+    })
+    expand?: nasl.core.Boolean,
+    ): void {}
   }
 
   export class VanCollapseItemOptions<T, V> extends ViewComponentOptions {
