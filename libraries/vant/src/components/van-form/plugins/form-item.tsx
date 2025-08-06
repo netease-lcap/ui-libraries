@@ -113,7 +113,7 @@ export function withFormItem(Component, name) {
 }
 export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
-  const formTagName = props.get($formTagName);
+  const formTagName = props.get('formTagName');
   const tagName = props.get('tagName');
   useEffect(() => {
     const inject = props.get('inject');

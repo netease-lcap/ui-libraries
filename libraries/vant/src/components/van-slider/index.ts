@@ -8,8 +8,6 @@ export const VanSlider = registerComponent(VanSliderOrigin, {
   name: 'van-slider',
 });
 
-export const VanFormSlider = withFormItem(VanSlider, {
-  name: 'van-form-slider',
-});
+export const VanFormSlider = withFormItem(VanSlider, 'van-form-slider');
 
 export default VanSlider;

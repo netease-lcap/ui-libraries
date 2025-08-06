@@ -99,6 +99,8 @@ export function handlewFieldState(props) {
     onCancel,
     onFinish,
     onClose,
+    tagName: 'van-cascader',
+    formTagName: 'van-form-cascader',
   };
 }
 

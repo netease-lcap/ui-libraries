@@ -8,5 +8,6 @@ export const VanSwitch = registerComponent(VanSwitchOrigin, {
   name: 'van-switch',
 });
 const VanFormSwitch = withFormItem(VanSwitch, 'van-form-switch');
+
 export { VanFormSwitch };
 export default VanSwitch;

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { Field, Popup } from 'vant';
 import { useMemo, useCallback, useState, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
+import { categoryProps } from '@/utils/dom';
 
 import {
   useRequestDataSource,
@@ -87,12 +88,14 @@ export function handleFieldRender(props) {
     (props) => {
       const { setShow, show, value, setValue, fieldValue, clearable } = props;
       const rightIcon = clearable ? 'clear' : '';
+      const outerProps = categoryProps(props);
       return [
         <Field
           modelValue={fieldValue}
           onClick={() => setShow(true)}
-          data-nodepath={props['data-nodepath']}
-          data-enable-events={props['data-enable-events']}
+          // data-nodepath={props['data-nodepath']}
+          // data-enable-events={props['data-enable-events']}
+          {...outerProps}
           readonly
           is-link
           right-icon={rightIcon}
@@ -107,9 +110,10 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          data-drawer-dropdown-status={props['data-drawer-dropdown-status']}
-          data-drawer-dropdown-selector={props['data-drawer-dropdown-selector']}
-          data-nodepath={props['data-nodepath']}
+          {...outerProps}
+          // data-drawer-dropdown-status={props['data-drawer-dropdown-status']}
+          // data-drawer-dropdown-selector={props['data-drawer-dropdown-selector']}
+          // data-nodepath={props['data-nodepath']}
           ide-draggable={props['ide-draggable']}
         >
           <Component

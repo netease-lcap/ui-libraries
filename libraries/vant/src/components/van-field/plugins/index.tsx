@@ -19,5 +19,7 @@ export const handleInput = (props) => {
   return {
     onInput,
     onChange,
+    tagName: 'van-field',
+    formTagName: 'van-form-field',
   };
 };

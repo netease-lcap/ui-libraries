@@ -24,5 +24,7 @@ export function handleDataSource(props) {
     ref: selfRef,
     loading,
     slots: _.assign(slots, dataSourceSlots),
+    tagName: 'van-checkbox-group',
+    formTagName: 'van-form-checkbox-group',
   };
 }

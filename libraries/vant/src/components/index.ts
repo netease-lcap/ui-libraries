@@ -10,18 +10,18 @@ export { VanBadge } from './van-badge';
 export { VanDivider } from './van-divider';
 export { VanEmpty } from './van-empty';
 export { VanCircle } from './van-circle';
-export { VanSlider } from './van-slider';
-export { VanStepperNumber } from './van-stepper-number';
-export { VanSwitch } from './van-switch';
+export { VanSlider, VanFormSlider } from './van-slider';
+export { VanStepperNumber, VanFormStepperNumber } from './van-stepper-number';
+export { VanSwitch, VanFormSwitch } from './van-switch';
 export { VanPasswordInput } from './van-password-input';
-export { VanRadio, VanRadioGroup } from './van-radio';
+export { VanRadio, VanRadioGroup, VanFormRadioGroup } from './van-radio';
 export { VanProgress } from './van-progress';
 export { VanSwipeCell } from './van-swipe-cell';
-export { VanCheckbox, VanCheckboxGroup } from './van-checkbox';
+export { VanCheckbox, VanCheckboxGroup, VanFormCheckboxGroup } from './van-checkbox';
 export { VanCascader, VanFormCascader } from './van-cascader';
 export { VanSidebar, VanSidebarItem } from './van-sidebar';
-export { VanSearch } from './van-search';
-export { VanRate } from './van-rate';
+export { VanSearch, VanFormSearch } from './van-search';
+export { VanRate, VanFormRate } from './van-rate';
 export { VanForm } from './van-form';
 export { VanList } from './van-list';
 export { VanFlex } from './van-flex';
@@ -49,7 +49,13 @@ export { VanSignature } from './van-signature';
 export { VanTextEllipsis } from './van-text-ellipsis';
 export { VanImage } from './van-image';
 export { VanLoading } from './van-loading';
-export { VanSkeleton, VanSkeletonTitle, VanSkeletonParagraph, VanSkeletonImage, VanSkeletonAvatar } from './van-skeleton';
+export {
+  VanSkeleton,
+  VanSkeletonTitle,
+  VanSkeletonParagraph,
+  VanSkeletonImage,
+  VanSkeletonAvatar,
+} from './van-skeleton';
 export { VanPullRefresh } from './van-pull-refresh';
 export { VanDialog } from './van-dialog';
 export { VanDropdownMenu, VanDropdownItem } from './van-dropdown-menu';

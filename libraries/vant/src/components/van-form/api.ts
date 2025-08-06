@@ -5,7 +5,6 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'container',
-      structured: true,
     },
   })
   @Component({

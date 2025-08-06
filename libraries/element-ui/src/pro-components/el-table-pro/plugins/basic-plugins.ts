@@ -97,8 +97,7 @@ const editColumnProps = ({ type, cell, attrs, listeners: listenersProps, edit })
   const onRowEdit = _.get(listenersProps, 'row-edit', () => {});
   const nodepath = _.get(attrs, 'data-nodepath', false);
   const abortEditOnEvent = attrs?.abortEditOnEvent ? [attrs?.abortEditOnEvent] : [];
-  const rules =
-    _.map(attrs?.rules, (item) => ({
+  const rules = _.map(attrs?.rules, (item) => ({
       trigger: 'all',
       validator: (val) => {
         const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
@@ -213,14 +212,12 @@ export const useTable: NaslComponentPluginOptions = {
     const dynamicColumns = ref([]);
     const rowStyle = props.useComputed('rowStyle', (value) => (_.isFunction(value) ? value : () => {}));
     const checkStrictly = props.useComputed('checkStrictly', (value) => !!value);
-    const tree = props.useComputed('treeDisplay', (value) =>
-      value
+    const tree = props.useComputed('treeDisplay', (value) => (value
         ? {
             childrenKey: 'children',
             checkStrictly: checkStrictly.value,
           }
-        : undefined,
-    );
+        : undefined));
 
     const data = props.useComputed('data', (v) => {
       const treeDisplay = props.get('treeDisplay');
@@ -460,13 +457,11 @@ export const useTable: NaslComponentPluginOptions = {
         });
       }
     });
-    const columnController = props.useRef('columnController', (v) =>
-      v
+    const columnController = props.useRef('columnController', (v) => (v
         ? {
             placement: 'top-right',
           }
-        : {},
-    );
+        : {}));
 
     // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
     const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
