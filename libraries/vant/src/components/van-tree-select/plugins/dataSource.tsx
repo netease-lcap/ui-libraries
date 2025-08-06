@@ -16,6 +16,7 @@ export function handleDataSource(props) {
   const disabledField = props.get('disabledField') || 'disabled';
   const dotField = props.get('dotField') || 'dot';
   const badgeField = props.get('badgeField') || 'badge';
+  const nodePath = props.get('data-nodepath');
   const deletePropsList = props
     .get($deletePropsList, [])
     .concat(['textField', 'valueField', 'parentField', 'childrenField', 'disabledField', 'dotField', 'badgeField']);
@@ -33,7 +34,23 @@ export function handleDataSource(props) {
       badge: badgeField,
     },
   });
-  const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
+  const RawTreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
+  const TreeData = useMemo(() => {
+    if (!_.isNil(parentField) && !nodePath) {
+      return RawTreeData;
+    }
+    if (!RawTreeData || !Array.isArray(RawTreeData) || RawTreeData.length === 0) {
+      return [];
+    }
+    const handler = (data) => {
+      return _.map(data, (item) => ({
+        text: _.get(item, textField),
+        id: _.get(item, valueField),
+        children: handler(item.children),
+      }));
+    };
+    return handler(RawTreeData);
+  }, [RawTreeData, textField, valueField]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData, items: TreeData }), [TreeData, reload, ref]);
   const dataSourceResult = _.isEmpty(TreeData) ? {} : { data: TreeData, items: TreeData };
 

@@ -34,3 +34,6 @@
 .van-date-picker__separator {
   margin: 0 5px;
 }
+.van-date-picker__placeholder {
+  color: #999;
+}

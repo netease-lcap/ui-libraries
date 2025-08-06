@@ -51,7 +51,7 @@ function toTimeValues(value: DateValue | Array<string>) {
  * @returns
  */
 export function toTimeValue(values: Array<string>) {
-  return values.length > 0 ? values.join(':') : null;
+  return values && values.length > 0 ? values.join(':') : null;
 }
 
 /**
@@ -60,7 +60,7 @@ export function toTimeValue(values: Array<string>) {
  * @returns
  */
 export function toDateValue(values: Array<string>) {
-  return values.length > 0 ? values.join('/') : null;
+  return values && values.length > 0 ? values.join('/') : null;
 }
 
 /**
@@ -183,7 +183,7 @@ function getDisplayFormatter(unit: string, format: string) {
  */
 export function getFormatValue(values: Array<Array<Array<string>>>, options: any) {
   const { unit, showFormatter, advancedFormatEnable, advancedFormatValue } = options;
-  const isEmpty = values.every((value) => value.length === 0);
+  const isEmpty = values.every((value) => value?.every((value) => value.length === 0));
   if (isEmpty) {
     return '';
   }

@@ -37,7 +37,9 @@ export const Default = {
         v-model:activeId="activeId"
         v-model:mainActiveIndex="activeIndex"
         @click-nav="clickNav"
-        @click-item="clickItem">
+        @click-item="clickItem"
+        textField="text1"
+        valueField="id1">
       <template #navtext="content">{{ content.item.text }}ss</template>
         <template #rightcontent>
           DDDD
@@ -50,22 +52,22 @@ export const Default = {
   args: {
     dataSource: [
       {
-        text: '浙江',
+        text1: '浙江',
         children: [
-          { text: '杭州', id: 1 },
-          { text: '温州', id: 2 },
-          { text: '宁波', id: 3, disabled: true },
+          { text1: '杭州', id1: 1 },
+          { text1: '温州', id1: 2 },
+          { text1: '宁波', id1: 3, disabled: true },
         ],
       },
       {
-        text: '江苏',
+        text1: '江苏',
         children: [
-          { text: '南京', id: 4 },
-          { text: '无锡', id: 5 },
-          { text: '徐州', id: 6 },
+          { text1: '南京', id1: 4 },
+          { text1: '无锡', id1: 5 },
+          { text1: '徐州', id1: 6 },
         ],
       },
-      { text: '福建', disabled: true },
+      { text1: '福建', disabled: true },
     ],
     selectedIcon: 'success',
     customContent: false,
@@ -141,15 +143,15 @@ export const DataSourceAsyncParent = {
         activeId: null,
         activeIndex: null,
         parentData: [
-          { id: 1000, text1: '浙江', parentId: null, dot1: true },
-          { id: 1, text1: '杭州', parentId: 1000 },
-          { id: 2, text1: '温州', parentId: 1000 },
-          { id: 3, text1: '宁波', parentId: 1000, disabled: true },
-          { id: 1001, text1: '江苏', parentId: null, badge1: 1 },
-          { id: 4, text1: '南京', parentId: 1001 },
-          { id: 5, text1: '无锡', parentId: 1001 },
-          { id: 6, text1: '徐州', parentId: 1001 },
-          { id: 1002, text1: '福建', parentId: null, disabled: true },
+          { id1: 1000, text1: '浙江', parentId: null, dot1: true },
+          { id1: 1, text1: '杭州', parentId: 1000 },
+          { id1: 2, text1: '温州', parentId: 1000 },
+          { id1: 3, text1: '宁波', parentId: 1000, disabled: true },
+          { id1: 1001, text1: '江苏', parentId: null, badge1: 1 },
+          { id1: 4, text1: '南京', parentId: 1001 },
+          { id1: 5, text1: '无锡', parentId: 1001 },
+          { id1: 6, text1: '徐州', parentId: 1001 },
+          { id1: 1002, text1: '福建', parentId: null, disabled: true },
         ],
       };
     },
@@ -172,7 +174,7 @@ export const DataSourceAsyncParent = {
       <van-tree-select
         :dataSource="loadData"
         parentField="parentId"
-        valueField="id"
+        valueField="id1"
         textField="text1"
         dotField="dot1"
         badgeField="badge1"

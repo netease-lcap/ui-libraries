@@ -57,6 +57,12 @@ export const Default = {
     },
     template: `
       <van-uploader v-model="values" multiple v-bind="args"
+        :headers="{'LCAPTEST': 'test'}"
+        :viaOriginURL="true"
+        :data="{\&quot;testfata\&quot;:\&quot;ddd\&quot;}"
+        :access="private"
+        :ttl="true"
+        :ttlValue="1"
         @oversize="onOversize"
         @success="onSuccess"
         @error="onError"

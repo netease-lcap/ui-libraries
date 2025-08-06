@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import _ from 'lodash';
 import { useCallback, useMemo, useControllableValue } from '@/plugins/hooks';
 import { getMaxMinDates, getCurrentValue, toValue, getFormatValue } from './utils-format';
+import { $deletePropsList } from '@/plugins/constants';
 
 const [name, bem] = createNamespace('calendar');
 
@@ -17,6 +18,14 @@ export function handleCustomProps(props: any) {
   const unit = props.get('unit') || 'day';
   const inLink = _.isNil(props.get('inLink')) ? true : props.get('inLink');
   const refProp = props.get('ref');
+  const isRange = props.get('isRange');
+  const multiple = props.get('multiple');
+  let type = 'single';
+  if (isRange) {
+    type = 'range';
+  } else if (multiple) {
+    type = 'multiple';
+  }
   const open = () => {
     popupVisible.value = true;
   };
@@ -27,6 +36,9 @@ export function handleCustomProps(props: any) {
   const { maxDateValue, minDateValue } = useMemo(() => {
     return getMaxMinDates(props.get('maxDate'), props.get('minDate'));
   }, [props.get('maxDate'), props.get('minDate')]);
+  const deletePropsList = props
+  .get($deletePropsList, [])
+  .concat(['multiple', 'isRange']);
   return {
     popupVisible,
     inputAlign,
@@ -35,6 +47,8 @@ export function handleCustomProps(props: any) {
     maxDate: maxDateValue,
     minDate: minDateValue,
     inLink,
+    type,
+    [$deletePropsList]: deletePropsList,
   };
 }
 handleCustomProps.order = 0;
@@ -46,23 +60,42 @@ handleCustomProps.order = 0;
  */
 export function handleModelValue(props: any) {
   const [modelValue, setModelValue] = useControllableValue(props);
+  const [startValue, setStartValue] = useControllableValue(props, {
+    valuePropName: 'startValue',
+  });
+  const [endValue, setEndValue] = useControllableValue(props, {
+    valuePropName: 'endValue',
+  });
   const type = props.get('type');
   const defaultDate = getCurrentValue(props.get('defaultDate'));
   const showFormatter = props.get('showFormatter');
   const advancedFormatEnable = props.get('advancedFormatEnable');
   const advancedFormatValue = props.get('advancedFormatValue');
   const currentValue = useMemo(() => {
-    return getCurrentValue(modelValue);
-  }, [modelValue, type]);
+    let values = modelValue;
+    if (type === 'range') {
+      values = [startValue, endValue];
+    }
+    return getCurrentValue(values);
+  }, [modelValue, type, startValue, endValue]);
   const formatValue = useMemo(() => {
-    return getFormatValue(modelValue, { showFormatter, advancedFormatEnable, advancedFormatValue, type });
-  }, [modelValue, showFormatter, advancedFormatEnable, advancedFormatValue, type]);
-  return {
+    let values = modelValue;
+    if (type === 'range') {
+      values = [startValue, endValue];
+    }
+    return getFormatValue(values, { showFormatter, advancedFormatEnable, advancedFormatValue, type });
+  }, [modelValue, showFormatter, advancedFormatEnable, advancedFormatValue, type, startValue, endValue]);
+  const returnData = {
     modelValue: currentValue,
     setModelValue,
-    defaultDate: currentValue || defaultDate || null,
     formatValue,
-  };
+    setStartValue,
+    setEndValue,
+  } as any;
+  if (currentValue || defaultDate) {
+    returnData.defaultDate = currentValue || defaultDate;
+  }
+  return returnData;
 }
 handleModelValue.order = 2;
 
@@ -77,6 +110,9 @@ export function handleConfirmButtonClick(props: any) {
   const popupVisible = props.get('popupVisible');
   const emit = props.get('emit');
   const setModelValue = props.get('setModelValue');
+  const setStartValue = props.get('setStartValue');
+  const setEndValue = props.get('setEndValue');
+  const type = props.get('type');
   const onConfirmClick = useCallback(
     (data: any) => {
       if (_.isFunction(onConfirm)) {
@@ -84,8 +120,15 @@ export function handleConfirmButtonClick(props: any) {
       }
       popupVisible.value = false;
       const currentValueStr = toValue(data, props.get('converter'));
-      setModelValue(currentValueStr);
-      emit('sync:state', 'modelValue', currentValueStr);
+      if (type === 'range' && currentValueStr) {
+        setStartValue(currentValueStr[0]);
+        setEndValue(currentValueStr[1]);
+        emit('sync:state', 'startValue', currentValueStr[0]);
+        emit('sync:state', 'endValue', currentValueStr[1]);
+      } else {
+        setModelValue(currentValueStr);
+        emit('sync:state', 'modelValue', currentValueStr);
+      }
     },
     [onConfirm, popupVisible],
   );
@@ -124,6 +167,9 @@ export function handleBasicRender(props: any) {
       const calendarProps = _.omit(props, ['show']);
       const inputSlot = useCallback(() => {
         if (!formatValue) {
+          if (placeholder) {
+            return <div class={bem('placeholder')}>{placeholder}</div>;
+          }
           return null;
         }
         if (type === 'range') {
@@ -136,7 +182,7 @@ export function handleBasicRender(props: any) {
           );
         }
         return <div class={bem('value')}>{formatValue}</div>;
-      }, [formatValue, type]);
+      }, [formatValue, type, placeholder]);
       return (
         <div {..._.pick(attrs, ['class', 'data-nodepath', 'style'])} class={bem('root')}>
           <Field

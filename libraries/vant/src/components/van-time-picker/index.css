@@ -33,3 +33,6 @@
 .van-time-picker__separator {
   margin: 0 5px;
 }
+.van-time-picker__placeholder {
+  color: #999;
+}

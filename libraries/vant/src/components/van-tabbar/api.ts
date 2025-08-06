@@ -55,7 +55,7 @@ namespace nasl.ui {
         concept: "SwitchSetter"
       }
     })
-    route: nasl.core.Boolean = false;
+    useRoute: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',

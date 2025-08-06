@@ -150,7 +150,7 @@ namespace nasl.ui {
       description: '上传时附带的额外参数',
       setter: { concept: 'InputSetter' },
     })
-    data: nasl.core.String;
+    data: object;
 
     @Prop({
       group: '主要属性',

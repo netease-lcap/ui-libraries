@@ -1,5 +1,6 @@
 import { useMemo, useCallback } from '@/plugins/hooks';
 import VanIcon from '@/components/van-icon';
+import { $deletePropsList } from '@/plugins/constants';
 
 export function handleDestination(props: any) {
   const destination = props.get('destination');
@@ -9,9 +10,13 @@ export function handleDestination(props: any) {
   const url = props.get('url');
   const toSelf = useMemo(() => to || destination, [destination, to]);
   const urlSelf = useMemo(() => url || href || link, [href, link, url]);
+  const deletePropsList = props
+    .get($deletePropsList, [])
+    .concat(['destination', 'link', 'href']);
   return {
     url: urlSelf,
     to: toSelf,
+    [$deletePropsList]: deletePropsList,
   };
 }
 

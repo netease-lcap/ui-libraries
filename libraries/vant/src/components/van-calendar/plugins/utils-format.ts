@@ -124,7 +124,7 @@ function getDisplayFormatter(format: string) {
  */
 export function getFormatValue(value: DateValue | Array<DateValue>, options: any) {
   const { showFormatter, advancedFormatEnable, advancedFormatValue, type } = options;
-  const isEmpty = Array.isArray(value) ? value.every((value) => value === null) : value === null;
+  const isEmpty = Array.isArray(value) ? value.every((value) => !value) : !value;
   if (isEmpty) {
     return '';
   }
