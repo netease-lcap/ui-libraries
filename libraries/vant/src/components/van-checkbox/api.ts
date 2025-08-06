@@ -172,18 +172,18 @@ namespace nasl.ui {
   }
 
   export class VanCheckboxOptions extends ViewComponentOptions {
-    @Prop({
-      group: '数据属性',
-      title: '绑定值',
-      sync: true,
-      description: '复选框绑定值',
-    })
-    modelValue: nasl.core.Boolean;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '绑定值',
+    //   sync: true,
+    //   description: '复选框绑定值',
+    // })
+    // modelValue: nasl.core.Boolean;
 
     @Prop({
       group: '数据属性',
-      title: '选项名称',
-      description: '复选框的名称',
+      title: '标识符',
+      description: '复选框的',
       setter: { concept: 'InputSetter' },
     })
     name: nasl.core.String | nasl.core.Integer | nasl.core.Boolean | nasl.core.Decimal;
@@ -250,7 +250,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '是否半选',
-      description: '是否为不确定状态',
+      description: '是否半选',
       setter: { concept: 'SwitchSetter' },
     })
     indeterminate: nasl.core.Boolean = false;

@@ -34,18 +34,21 @@ export const Default = {
         handleBlur() {
           console.log('失去焦点');
         },
+        handleClick() {
+          console.log('点击');
+        },
       };
     },
     template: `
     <div>
     {{value}}
-      <van-field 
-      v-model="value"
-      >
-      <template #label>
-          <span>用户名</span>
-      </template>
-      </van-field>
+  <van-field
+    v-model="value"
+    clearable
+    label="文本"
+    left-icon="music-o"
+    placeholder="显示清除图标"
+  />
     </div>
     `,
   }),

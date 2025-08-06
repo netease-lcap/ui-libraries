@@ -6,6 +6,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
+      translateBindingProperty: ['modelValue'],
     },
   })
   @Component({
@@ -28,7 +29,7 @@ namespace nasl.ui {
       description: '输入框的值',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: nasl.core.String;
+    modelValue: nasl.core.String | nasl.core.Integer | nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -110,10 +111,10 @@ namespace nasl.ui {
       description: '输入框尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '小' }, { title: '正常' }, { title: '大' }],
+        options: [{ title: '正常' }, { title: '大' }],
       },
     })
-    size: 'small' | 'default' | 'large' = 'default';
+    size: 'default' | 'large' = 'default';
 
     @Prop({
       group: '主要属性',
@@ -158,14 +159,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '是否显示标签',
-      description: '是否显示标签',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showLabel: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
       title: '自动聚焦',
       description: '是否自动聚焦，iOS 系统不支持该属性',
       setter: { concept: 'SwitchSetter' },
@@ -206,23 +199,6 @@ namespace nasl.ui {
     })
     autosize: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '最大高度',
-      description: '最大高度',
-      setter: { concept: 'InputSetter' },
-      if: (_) => _.type === 'textarea',
-    })
-    maxHeight: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '最小高度',
-      description: '最小高度',
-      setter: { concept: 'InputSetter' },
-      if: (_) => _.type === 'textarea',
-    })
-    minHeight: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -248,7 +224,9 @@ namespace nasl.ui {
       description: '自定义格式化函数',
       setter: { concept: 'AnonymousFunctionSetter' },
     })
-    formatter: (value: string) => string;
+    formatter: (
+      value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal,
+    ) => nasl.core.String | nasl.core.Integer | nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -262,6 +240,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '显示字数统计',
       description: '是否显示字数统计',
+      if: (_) => _.maxlength && _.maxlength > 0,
       setter: { concept: 'SwitchSetter' },
     })
     showWordLimit: nasl.core.Boolean = false;

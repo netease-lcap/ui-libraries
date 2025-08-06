@@ -12,6 +12,7 @@ export function handleWarp(props) {
     (props) => {
       const { style, innerStyle } = categoryStyles(props.style);
       const outerProps = categoryProps(props);
+      console.log(props,'===');
       const className = props.vertical ? styles['van-slider-room-vertical'] : styles['van-slider-room'];
       return (
         <div data-nodepath={nodePath} style={style} class={className} {...outerProps}>

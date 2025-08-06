@@ -93,8 +93,6 @@ export function handleFieldRender(props) {
         <Field
           modelValue={fieldValue}
           onClick={() => setShow(true)}
-          // data-nodepath={props['data-nodepath']}
-          // data-enable-events={props['data-enable-events']}
           {...outerProps}
           readonly
           is-link
@@ -111,9 +109,6 @@ export function handleFieldRender(props) {
           round
           position="bottom"
           {...outerProps}
-          // data-drawer-dropdown-status={props['data-drawer-dropdown-status']}
-          // data-drawer-dropdown-selector={props['data-drawer-dropdown-selector']}
-          // data-nodepath={props['data-nodepath']}
           ide-draggable={props['ide-draggable']}
         >
           <Component

@@ -44,6 +44,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+    })
+    dataSchema: T;
+
+    @Prop({
+      group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
       docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',

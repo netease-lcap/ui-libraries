@@ -21,5 +21,8 @@ export const handleInput = (props) => {
     onChange,
     tagName: 'van-field',
     formTagName: 'van-form-field',
+    onClear: () => {
+      console.log('onClear');
+    },
   };
 };

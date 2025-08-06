@@ -158,10 +158,10 @@ export const DataSourceAsync = {
       </div>
       <van-collapse v-model="activeNames" :accordion="true" :dataSource="loadData" ref="collapseRef">
           <template #title="{ item }">
-            {{ item.title }}
+          1
           </template>
           <template #content="{ item }">
-            {{ item.content }}
+          2
           </template>
       </van-collapse>
       {{ activeNames }}

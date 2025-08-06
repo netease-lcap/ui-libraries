@@ -115,13 +115,6 @@ namespace nasl.ui {
     })
     buttonSize: nasl.core.Integer = 24;
 
-    @Prop({
-      group: '样式属性',
-      title: '滑块按钮颜色',
-      description: '滑块按钮颜色',
-      setter: { concept: 'InputSetter' },
-    })
-    buttonColor: nasl.core.String = '#ffffff';
 
     @Prop({
       group: '主要属性',

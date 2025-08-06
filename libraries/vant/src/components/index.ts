@@ -1,8 +1,9 @@
+import '@vant/touch-emulator';
 import 'vant/lib/index.css';
 import '@/utils/index';
 
 export { VanText } from './van-text';
-export { VanField, VanFormField } from './van-field';
+export { VanField, VanFormField, VantField } from './van-field';
 export { VanPicker, VanFormPicker } from './van-picker';
 export { VanButton } from './van-button';
 export { VanTag } from './van-tag';
