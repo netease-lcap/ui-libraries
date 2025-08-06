@@ -29,10 +29,10 @@ namespace nasl.ui {
       description: '按钮尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
+        options: [{ title: '默认' }, { title: '大' }, { title: '小' }, { title: '迷你' }],
       },
     })
-    size: 'default' | 'large' | 'small' = 'default';
+    size: 'normal' | 'large' | 'small' | 'mini' = 'normal';
 
     @Prop({
       group: '主要属性',
@@ -40,17 +40,10 @@ namespace nasl.ui {
       description: '按钮类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '主要' },
-          { title: '成功' },
-          { title: '信息' },
-          { title: '警告' },
-          { title: '危险' },
-        ],
+        options: [{ title: '默认' }, { title: '主要' }, { title: '成功' }, { title: '警告' }, { title: '危险' }],
       },
     })
-    type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
+    type: 'default' | 'primary' | 'success' | 'warning' | 'danger';
 
     @Prop({
       group: '主要属性',

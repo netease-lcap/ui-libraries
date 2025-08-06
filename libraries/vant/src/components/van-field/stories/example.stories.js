@@ -45,10 +45,14 @@ export const Default = {
   <van-field
     v-model="value"
     clearable
-    label="文本"
     left-icon="music-o"
     placeholder="显示清除图标"
-  />
+    colon
+  >
+  <template #label>
+    <span>用户名</span>
+  </template>
+  </van-field>
     </div>
     `,
   }),

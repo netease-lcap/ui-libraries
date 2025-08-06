@@ -47,7 +47,7 @@ export function handlewFieldState(props) {
   const onConfirmProps = props.get('onConfirm', () => {});
   const [value, setValue] = useControllableValue(props);
   const fieldValue = useMemo(() => {
-    const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item).text);
+    const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item)?.text);
     return _.join(selected, ',');
   }, [value, columns]);
   const [show, setShow] = useControllableValue(props, {
@@ -92,6 +92,7 @@ export function handleFieldRender(props) {
       return [
         <Field
           modelValue={fieldValue}
+          placeholder={props.placeholder}
           onClick={() => setShow(true)}
           {...outerProps}
           readonly
