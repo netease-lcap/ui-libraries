@@ -1,6 +1,7 @@
 import { Tabs as VantTabs, Tab as VantTab } from 'vant';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
+import * as basicPlugins from './plugins/index';
 import * as itemPlugins from './plugins/item';
 
 function VanTabsRegister(BaseComponent, plugin = {}, extend = true) {
@@ -8,7 +9,7 @@ function VanTabsRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const VanTabs = VantTabs;
+const VanTabs = registerComponent(VantTabs, { plugin: basicPlugins });
 const VanTab = registerComponent(VantTab, { plugin: itemPlugins });
 export { VanTabsRegister, VanTabs, VantTabs, VanTab, VantTab };
 export default VanTabs;
