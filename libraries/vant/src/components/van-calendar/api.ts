@@ -73,9 +73,9 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       if: (_) => !_.isRange,
     })
-    modelValue: M extends 'multiple'
-      ? nasl.collection.List<nasl.core.String> | nasl.collection.List<nasl.core.Integer>
-      : nasl.core.Date | nasl.core.String | nasl.core.Integer;
+    modelValue: M extends true
+      ? nasl.collection.List<nasl.core.String> | nasl.collection.List<nasl.core.Date> | nasl.collection.List<nasl.core.Integer>
+      : nasl.core.String | nasl.core.Date | nasl.core.Integer;
 
     @Prop<VanCalendarOptions<M>, 'startValue'>({
       group: '数据属性',
@@ -154,7 +154,7 @@ namespace nasl.ui {
         ],
       },
     })
-    switchMode: 'none' | 'month' | 'year' = 'none';
+    switchMode: 'none' | 'month' | 'year-month' = 'none';
 
     @Prop<VanCalendarOptions<M>, 'showFormatter'>({
       group: '主要属性',

@@ -37,6 +37,12 @@ namespace nasl.ui {
       title: '只读',
     })
     readonly: nasl.core.Boolean;
+
+    @Method({
+      title: '手动上传文件列表',
+      description: '手动上传文件列表',
+    })
+    submit(): void {}
   }
 
   export class VanUploaderOptions extends ViewComponentOptions {

@@ -89,22 +89,20 @@ function onPost(item: ExtendedUploaderFileListItem, index: number, options: any)
  * 如果autoUpload为true，则自动上传到服务器
  * @param file 文件
  */
-export function postAfterRead(props: any, file: ExtendedUploaderFileListItem | Array<ExtendedUploaderFileListItem>) {
-  const autoUpload = props.get('autoUpload');
-  if (!autoUpload) {
-    return;
-  }
+export function postAfterRead(options: any, file: ExtendedUploaderFileListItem | Array<ExtendedUploaderFileListItem>) {
+  const {
+    headers,
+    formData,
+    action,
+    name,
+    urlField,
+    modelValue,
+    onUpdateModelValue,
+    currentFileList,
+    emit,
+    withCredentials,
+  } = options;
   const fileList = Array.isArray(file) ? file : [file];
-  const headers = props.get('headers');
-  const formData = props.get('data');
-  const action = props.get('action');
-  const name = props.get('name');
-  const withCredentials = props.get('withCredentials');
-  const emit = props.get('emit');
-  const urlField = props.get('urlField');
-  const modelValue = props.get('modelValue');
-  const onUpdateModelValue = props.get('onUpdateModelValue');
-  const currentFileList = props.get('currentFileList');
   fileList.forEach((item, index) => {
     onPost(item, index, {
       headers,

@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'container',
+      parentAccept: "target.tag !== 'van-absolute-layout'"
     },
   })
   @Component({

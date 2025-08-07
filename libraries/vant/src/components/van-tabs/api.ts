@@ -8,6 +8,7 @@ namespace nasl.ui {
       structured: true,
       containerDirection: 'row',
       childAccept: "target.tag === 'van-tab'",
+      forceRefresh: true,
     },
   })
   @Component({
@@ -262,7 +263,8 @@ namespace nasl.ui {
       events: {
         click: true,
       },
-      forceRefresh: 'parent',
+      forceRefresh: true,
+      namedSlotOmitWrapper: ['title'],
     },
   })
   @Component({
