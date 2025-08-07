@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { useMemo, useControllableValue, useEffect } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
+import { VanStep } from '../index';
 
 const STEP_NAME_PREFIX = '__STEP__';
 
@@ -33,7 +34,7 @@ export function handleDataSource(props) {
       ? {}
       : {
         default: () => _.map(dataSource, (item) => (
-          <van-step
+          <VanStep
             {...item}
             v-slots={{
               default: () => slotsProps?.content?.({ item }),

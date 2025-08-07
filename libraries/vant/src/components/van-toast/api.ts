@@ -58,6 +58,7 @@ namespace nasl.ui {
       description: '是否显示',
       setter: { concept: 'SwitchSetter' },
       sync: true,
+      settable: true,
     })
     show: nasl.core.Boolean = false;
 
@@ -147,7 +148,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '展示时长',
+      title: '展示时长(ms)',
       description: '展示时长, 值为 0 时，toast 不会消失',
       setter: { concept: 'NumberInputSetter', min: 0 },
     })

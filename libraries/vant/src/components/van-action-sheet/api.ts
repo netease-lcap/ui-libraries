@@ -70,7 +70,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    nameField: (item: T) => any = ((item: any)  => item.text) as any;
+    nameField: (item: T) => nasl.core.String = ((item: any)  => item.name) as any;
 
     @Prop({
       group: '数据属性',
@@ -80,7 +80,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    subNameField: (item: T) => any = ((item: any)  => item.text) as any;
+    subNameField: (item: T) => nasl.core.String = ((item: any)  => item.subName) as any;
 
     @Prop({
       group: '数据属性',
@@ -90,7 +90,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    colorField: (item: T) => any = ((item: any)  => item.text) as any;
+    colorField: (item: T) => nasl.core.String = ((item: any)  => item.color) as any;
 
     @Prop({
       group: '数据属性',
@@ -100,7 +100,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    iconField: (item: T) => any = ((item: any)  => item.text) as any;
+    iconField: (item: T) => nasl.core.String = ((item: any)  => item.icon) as any;
 
     @Prop({
       group: '数据属性',
@@ -110,7 +110,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    loadingField: (item: T) => any = ((item: any)  => item.text) as any;
+    loadingField: (item: T) => nasl.core.Boolean = ((item: any)  => item.loading) as any;
 
     @Prop({
       group: '数据属性',
@@ -120,15 +120,17 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    disabledField: (item: T) => any = ((item: any)  => item.text) as any;
+    disabledField: (item: T) => nasl.core.Boolean = ((item: any)  => item.disabled) as any;
 
     @Prop({
       group: '主要属性',
       title: '是否显示',
       description: '是否显示动作面板',
+      sync: true,
       setter: {
         concept: "SwitchSetter"
-      }
+      },
+      settable: true,
     })
     show: nasl.core.Boolean = false;
 
@@ -344,6 +346,6 @@ namespace nasl.ui {
       title: '自定义选项内容',
       description: '自定义选项内容',
     })
-    slotAction: (current: Current<T>, index: number) => void;
+    slotAction: (current: Current<T>) => Array<ViewComponent>;
   }
 }

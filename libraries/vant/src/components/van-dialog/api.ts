@@ -33,6 +33,8 @@ namespace nasl.ui {
       title: '是否显示弹窗',
       description: '是否显示弹窗',
       setter: { concept: 'SwitchSetter' },
+      sync: true,
+      settable: true,
     })
     show: nasl.core.Boolean = false;
 

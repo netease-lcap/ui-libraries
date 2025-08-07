@@ -58,6 +58,7 @@ namespace nasl.ui {
       description: '是否显示',
       setter: { concept: 'SwitchSetter' },
       sync: true,
+      settable: true,
     })
     show: nasl.core.Boolean = false;
 
@@ -296,6 +297,6 @@ namespace nasl.ui {
       title: '自定义选项内容',
       description: '自定义选项内容',
     })
-    slotAction: (current: Current<T>, index: nasl.core.Integer) => Array<ViewComponent>;
+    slotAction: (current: Current<T>) => Array<ViewComponent>;
   }
 }
