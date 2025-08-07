@@ -105,13 +105,13 @@ namespace nasl.ui {
     })
     block: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否开启图片懒加载',
-      description: '是否开启图片懒加载，须配合 Lazyload 组件使用',
-      setter: { concept: 'SwitchSetter' },
-    })
-    lazyLoad: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否开启图片懒加载',
+    //   description: '是否开启图片懒加载，须配合 Lazyload 组件使用',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // lazyLoad: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

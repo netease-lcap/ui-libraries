@@ -43,6 +43,7 @@ namespace nasl.ui {
       description: '是否显示',
       setter: { concept: 'SwitchSetter' },
       sync: true,
+      settable: true,
     })
     show: nasl.core.Boolean = false;
 
