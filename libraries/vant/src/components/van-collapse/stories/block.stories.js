@@ -40,12 +40,3 @@ export const Block1 = {
     `,
   }),
 };
-
-export const DataSource = {
-  name: '使用数据源',
-  render: () => ({
-    template: `
-      <van-collapse :dataSource="[{}]"></van-collapse>
-    `,
-  }),
-};

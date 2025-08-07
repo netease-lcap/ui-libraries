@@ -54,9 +54,14 @@ export const Default = {
       onBeforeDelete(event) {
         console.log('before-delete', event);
       },
+      onClickSubmit() {
+        this.$refs.uploader.submit();
+      }
     },
     template: `
+    <van-button @click="onClickSubmit">上传服务器</van-button>
       <van-uploader v-model="values" multiple v-bind="args"
+        ref="uploader"
         :headers="{'LCAPTEST': 'test'}"
         :viaOriginURL="true"
         :data="{\&quot;testfata\&quot;:\&quot;ddd\&quot;}"

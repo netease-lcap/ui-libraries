@@ -27,8 +27,14 @@ export const Default = {
         endTimeValue: '13:00',
       };
     },
+    methods: {
+      onClickOpen() {
+        this.$refs.datepicker.open();
+      },
+    },
     template: `
-      <van-date-picker v-bind="args" v-model:modelValue="value" v-model:startValue="startValue" v-model:endValue="endValue">
+    <van-button @click="onClickOpen">打开/关闭</van-button>
+      <van-date-picker v-bind="args" v-model:modelValue="value" v-model:startValue="startValue" v-model:endValue="endValue" ref="datepicker">
         <template #label>
           <div>选择日期</div>
         </template>
@@ -50,9 +56,9 @@ export const Default = {
     minDate: '2025/07/24 12:00:00',
     maxDate: '2025/07/25 12:00:00',
     popupOpened: false,
-    readonly: true,
-    disabled: true,
-    inputAlign: 'left',
+    readonly: false,
+    disabled: false,
+    inputAlign: 'right',
   },
 };
 

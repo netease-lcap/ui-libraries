@@ -1,10 +1,11 @@
 import { Field, Calendar } from 'vant';
 import { createNamespace } from 'vant/es/utils';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import _ from 'lodash';
-import { useCallback, useMemo, useControllableValue } from '@/plugins/hooks';
+import { useCallback, useMemo, useControllableValue, useEffect } from '@/plugins/hooks';
 import { getMaxMinDates, getCurrentValue, toValue, getFormatValue } from './utils-format';
 import { $deletePropsList } from '@/plugins/constants';
+import { categoryProps } from '@/utils/dom';
 
 const [name, bem] = createNamespace('calendar');
 
@@ -13,7 +14,20 @@ const [name, bem] = createNamespace('calendar');
  */
 export function handleCustomProps(props: any) {
   const popupOpened = props.get('popupOpened');
-  const popupVisible = ref(popupOpened);
+  const [popupShow, setPopupShow] = useControllableValue(props, {
+    valuePropName: 'popupShow',
+    defaultValuePropName: 'popupOpened',
+  });
+  // 当这个属性绑定的是动态表达式的时候，需要改变
+  useEffect(() => {
+    watch(
+      popupOpened,
+      () => {
+        setPopupShow(popupOpened);
+      },
+      { immediate: true },
+    );
+  }, [popupOpened]);
   const inputAlign = props.get('inputAlign') || 'right';
   const unit = props.get('unit') || 'day';
   const inLink = _.isNil(props.get('inLink')) ? true : props.get('inLink');
@@ -27,10 +41,10 @@ export function handleCustomProps(props: any) {
     type = 'multiple';
   }
   const open = () => {
-    popupVisible.value = true;
+    setPopupShow(true);
   };
   const close = () => {
-    popupVisible.value = false;
+    setPopupShow(false);
   };
   const selfRef = _.assign(refProp, { open, close });
   const { maxDateValue, minDateValue } = useMemo(() => {
@@ -40,7 +54,8 @@ export function handleCustomProps(props: any) {
   .get($deletePropsList, [])
   .concat(['multiple', 'isRange']);
   return {
-    popupVisible,
+    popupShow,
+    setPopupShow,
     inputAlign,
     unit,
     ref: selfRef,
@@ -105,20 +120,18 @@ handleModelValue.order = 2;
  * @returns
  */
 export function handleConfirmButtonClick(props: any) {
-  const onConfirm = props.get('onConfirm');
   const onSelect = props.get('onSelect');
-  const popupVisible = props.get('popupVisible');
+  const onConfirmProps = props.get('onConfirm', () => {});
+  const setPopupShow = props.get('setPopupShow');
   const emit = props.get('emit');
   const setModelValue = props.get('setModelValue');
   const setStartValue = props.get('setStartValue');
   const setEndValue = props.get('setEndValue');
   const type = props.get('type');
-  const onConfirmClick = useCallback(
+  const onConfirm = useCallback(
     (data: any) => {
-      if (_.isFunction(onConfirm)) {
-        _.attempt(onConfirm, data);
-      }
-      popupVisible.value = false;
+      _.attempt(onConfirmProps, data);
+      setPopupShow(false);
       const currentValueStr = toValue(data, props.get('converter'));
       if (type === 'range' && currentValueStr) {
         setStartValue(currentValueStr[0]);
@@ -130,7 +143,7 @@ export function handleConfirmButtonClick(props: any) {
         emit('sync:state', 'modelValue', currentValueStr);
       }
     },
-    [onConfirm, popupVisible],
+    [onConfirmProps],
   );
   const onSelectFunction = useCallback(
     (data: any) => {
@@ -141,7 +154,7 @@ export function handleConfirmButtonClick(props: any) {
     [onSelect],
   );
   return {
-    onConfirm: onConfirmClick,
+    onConfirm,
     onSelect: onSelectFunction,
   };
 }
@@ -153,20 +166,19 @@ handleConfirmButtonClick.order = 4;
  * @returns
  */
 export function handleBasicRender(props: any) {
-  const popupVisible = ref(props.get('popupVisible') || false);
-  const disabled = props.get('disabled');
-  const readonly = props.get('readonly');
-  const onFieldClick = () => {
-    if (disabled || readonly) {
-      return;
-    }
-    popupVisible.value = true;
-  };
+  const setPopupShow = props.get('setPopupShow');
   const render = useCallback(
     (props, { attrs, slots }) => {
-      const { formatValue, placeholder, inputAlign, inLink, type, readonly } = props;
+      const { formatValue, placeholder, inputAlign, inLink, type, readonly, disabled, popupShow } = props;
       const calendarProps = _.omit(props, ['show']);
-      const inputSlot = useCallback(() => {
+      const outerProps = categoryProps(props);
+      const onFieldClick = () => {
+        if (disabled || readonly) {
+          return;
+        }
+        setPopupShow(true);
+      };
+      const inputSlot = () => {
         if (!formatValue) {
           if (placeholder) {
             return <div class={bem('placeholder')}>{placeholder}</div>;
@@ -183,9 +195,9 @@ export function handleBasicRender(props: any) {
           );
         }
         return <div class={bem('value')}>{formatValue}</div>;
-      }, [formatValue, type, placeholder]);
+      };
       return (
-        <div {..._.pick(attrs, ['class', 'data-nodepath', 'style'])} class={bem('root')}>
+        <div {..._.pick(attrs, ['class', 'style'])} {...outerProps} class={bem('root')}>
           <Field
             readonly
             type="textarea"
@@ -200,13 +212,17 @@ export function handleBasicRender(props: any) {
             inputAlign={inputAlign}
             isLink={inLink}
           />
-          <Calendar v-model:show={popupVisible.value} {...calendarProps} v-slots={slots} />
+          <Calendar
+            show={popupShow}
+            {...calendarProps}
+            onClose={() => setPopupShow(false)}
+            v-slots={slots} />
         </div>
       );
     },
-    [props],
+    [],
   );
 
-  return { render, ...props, popupVisible };
+  return { render };
 }
 handleBasicRender.order = 3;

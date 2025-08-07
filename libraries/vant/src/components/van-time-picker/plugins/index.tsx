@@ -1,9 +1,10 @@
 import { Popup, Field, timePickerProps, TimePicker, PickerGroup, pickerGroupProps } from 'vant';
 import { createNamespace } from 'vant/es/utils';
 import _ from 'lodash';
-import { ref } from 'vue';
-import { useCallback, useMemo, useControllableValue } from '@/plugins/hooks';
+import { ref, watch } from 'vue';
+import { useCallback, useMemo, useControllableValue, useEffect } from '@/plugins/hooks';
 import { toValue, getCurrentValue, getFormatValue } from './utils-format';
+import { categoryProps } from '@/utils/dom';
 
 const [name, bem] = createNamespace('time-picker');
 
@@ -28,7 +29,6 @@ export function handleColumnsType(props: any) {
   const { index, columnsType } = useMemo(() => {
     return getUnitIndex(unit);
   }, [unit]);
-  const isRange = props.get('isRange');
   return {
     unitIndex: index,
     columnsType,
@@ -42,20 +42,34 @@ handleColumnsType.order = 1;
  */
 export function handleCustomProps(props: any) {
   const popupOpened = props.get('popupOpened');
-  const popupVisible = ref(popupOpened);
+  const [popupShow, setPopupShow] = useControllableValue(props, {
+    valuePropName: 'popupShow',
+    defaultValuePropName: 'popupOpened',
+  });
+  // 当这个属性绑定的是动态表达式的时候，需要改变
+  useEffect(() => {
+    watch(
+      popupOpened,
+      () => {
+        setPopupShow(popupOpened);
+      },
+      { immediate: true },
+    );
+  }, [popupOpened]);
   const inputAlign = props.get('inputAlign') || 'right';
   const unit = props.get('unit') || 'second';
   const inLink = _.isNil(props.get('inLink')) ? true : props.get('inLink');
   const refProp = props.get('ref');
   const open = () => {
-    popupVisible.value = true;
+    setPopupShow(true);
   };
   const close = () => {
-    popupVisible.value = false;
+    setPopupShow(false);
   };
   const selfRef = _.assign(refProp, { open, close });
   return {
-    popupVisible,
+    popupShow,
+    setPopupShow,
     inputAlign,
     unit,
     ref: selfRef,
@@ -155,22 +169,19 @@ handleRangeModelValue.order = 2;
  * @returns
  */
 export function handleCancelButtonClick(props: any) {
-  const onCancel = props.get('onCancel');
-  const popupVisible = props.get('popupVisible');
-  const onCancelClick = useCallback(
-    (data: any) => {
-      if (_.isFunction(onCancel)) {
-        _.attempt(onCancel, data);
-      }
-      popupVisible.value = false;
-    },
-    [onCancel, popupVisible],
+  const onCancelProps = props.get('onCancel', () => {});
+  const setPopupShow = props.get('setPopupShow');
+  const onCancel = useCallback(
+    _.wrap(onCancelProps, (fn, ...args) => {
+      _.attempt(fn, ...args);
+      setPopupShow(false);
+    }),
+    [onCancelProps],
   );
   return {
-    onCancel: onCancelClick,
+    onCancel,
   };
 }
-handleCancelButtonClick.order = 4;
 
 /**
  * 处理确认按钮点击
@@ -178,20 +189,18 @@ handleCancelButtonClick.order = 4;
  * @returns
  */
 export function handleConfirmButtonClick(props: any) {
-  const onConfirm = props.get('onConfirm');
-  const popupVisible = props.get('popupVisible');
+  const onConfirmProps = props.get('onConfirm', () => {});
+  const setPopupShow = props.get('setPopupShow');
   const unitIndex = props.get('unitIndex');
   const isRange = props.get('isRange');
   const emit = props.get('emit');
   const setModelValue = props.get('setModelValue');
   const setStartValue = props.get('setStartValue');
   const setEndValue = props.get('setEndValue');
-  const onConfirmClick = useCallback(
+  const onConfirm = useCallback(
     (data: any) => {
-      if (_.isFunction(onConfirm)) {
-        _.attempt(onConfirm, data);
-      }
-      popupVisible.value = false;
+      _.attempt(onConfirmProps, data);
+      setPopupShow(false);
       if (isRange === true) {
         const currentStartValue = data[0]?.selectedValues || [];
         const currentEndValue = data[1]?.selectedValues || [];
@@ -210,13 +219,12 @@ export function handleConfirmButtonClick(props: any) {
         emit('sync:state', 'modelValue', currentValueStr);
       }
     },
-    [onConfirm, unitIndex, popupVisible, isRange],
+    [onConfirmProps, unitIndex, isRange],
   );
   return {
-    onConfirm: onConfirmClick,
+    onConfirm,
   };
 }
-handleConfirmButtonClick.order = 4;
 
 /**
  * 渲染范围模式下的内容
@@ -240,8 +248,7 @@ function renderRangeContent(options: any) {
       v-slots={{ ...options.slots }}
       tabs={['开始时间', '结束时间']}
       onCancel={props.onCancel}
-      onConfirm={props.onConfirm}
-    >
+      onConfirm={props.onConfirm}>
       <TimePicker
         {..._.pick(props, Object.keys(timePickerProps))}
         showToolbar={false}
@@ -280,7 +287,7 @@ function renderBasicContent(options: any) {
       {..._.pick(props, Object.keys(timePickerProps))}
       modelValue={modelValue}
       v-slots={{
-        title: options.slots?.title?.(),
+        title: options.slots?.title,
       }}
       onCancel={props.onCancel}
       onConfirm={props.onConfirm}
@@ -294,75 +301,83 @@ function renderBasicContent(options: any) {
  * @returns
  */
 export function handleBasicRender(props: any) {
-  const popupVisible = ref(props.get('popupVisible') || false);
-  const disabled = props.get('disabled');
-  const readonly = props.get('readonly');
-  const onFieldClick = () => {
-    if (disabled || readonly) {
-      return;
-    }
-    popupVisible.value = true;
-  };
-  const render = useCallback(
-    (props, { attrs, slots }) => {
-      const label = slots.label?.();
-      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay, inLink, readonly } = props;
-      const inputSlot = useCallback(() => {
-        if (!formatValue) {
-          if (placeholder) {
-            return <div class={bem('placeholder')}>{placeholder}</div>;
-          }
-          return null;
+  const setPopupShow = props.get('setPopupShow');
+  const render = useCallback((props, { attrs, slots }) => {
+    const label = slots.label?.();
+    const {
+      formatValue,
+      isRange,
+      placeholder,
+      inputAlign,
+      closeOnClickOverlay,
+      inLink,
+      readonly,
+      disabled,
+      popupShow,
+    } = props;
+    const outerProps = categoryProps(props);
+    const onFieldClick = () => {
+      if (disabled || readonly) {
+        return;
+      }
+      setPopupShow(true);
+    };
+    const inputSlot = () => {
+      if (!formatValue) {
+        if (placeholder) {
+          return <div class={bem('placeholder')}>{placeholder}</div>;
         }
-        if (isRange) {
-          return (
-            <div class={bem('rangevalue')}>
-              <div class={bem('startvalue')}>{formatValue[0]}</div>
-              <div class={bem('separator')}>-</div>
-              <div class={bem('endvalue')}>{formatValue[1]}</div>
-            </div>
-          );
-        }
-        return <div class={bem('value')}>{formatValue[0]}</div>;
-      }, [formatValue, isRange, placeholder]);
-      return (
-        <div {..._.pick(attrs, ['class', 'style', 'data-nodepath'])} class={bem('root')}>
-          <Field
-            disabled={disabled}
-            class={[bem('field'), readonly && bem('readonly')]}
-            v-slots={{ label, input: inputSlot }}
-            onClick={onFieldClick}
-            modelValue={formatValue}
-            placeholder={placeholder}
-            inputAlign={inputAlign}
-            isLink={inLink}
-          />
-          <Popup
-            v-model:show={popupVisible.value}
-            position="bottom"
-            round
-            closeOnClickOverlay={closeOnClickOverlay}
-            {...attrs}>
-            <div class={bem('content-wrapper')}>
-              {isRange === true
-                ? renderRangeContent({
-                    props,
-                    attrs,
-                    slots,
-                  })
-                : renderBasicContent({
-                    props,
-                    attrs,
-                    slots,
-                  })}
-            </div>
-          </Popup>
-        </div>
-      );
-    },
-    [props],
-  );
+        return null;
+      }
+      if (isRange) {
+        return (
+          <div class={bem('rangevalue')}>
+            <div class={bem('startvalue')}>{formatValue[0]}</div>
+            <div class={bem('separator')}>-</div>
+            <div class={bem('endvalue')}>{formatValue[1]}</div>
+          </div>
+        );
+      }
+      return <div class={bem('value')}>{formatValue[0]}</div>;
+    };
+    return (
+      <div {..._.pick(attrs, ['class', 'style'])} {...outerProps} class={bem('root')}>
+        <Field
+          disabled={disabled}
+          class={[bem('field'), readonly && bem('readonly')]}
+          v-slots={{ label, input: inputSlot }}
+          onClick={onFieldClick}
+          modelValue={formatValue}
+          placeholder={placeholder}
+          inputAlign={inputAlign}
+          isLink={inLink}
+        />
+        <Popup
+          show={popupShow}
+          onClose={() => setPopupShow(false)}
+          position="bottom"
+          round
+          closeOnClickOverlay={closeOnClickOverlay}
+          {..._.pick(attrs, ['class', 'style'])}
+          {...outerProps}>
+          <div class={bem('content-wrapper')}>
+            {isRange === true
+              ? renderRangeContent({
+                  props,
+                  attrs,
+                  slots,
+                })
+              : renderBasicContent({
+                  props,
+                  attrs,
+                  slots,
+                })}
+          </div>
+        </Popup>
+      </div>
+    );
+  }, []);
 
-  return { render, ...props, popupVisible };
+  return { render };
 }
 handleBasicRender.order = 3;
