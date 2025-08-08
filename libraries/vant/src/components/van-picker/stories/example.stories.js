@@ -46,6 +46,7 @@ export const Default = {
     template: `
       <van-picker 
         v-model="value"
+        placeholder="xx"
         ref="pickerRef"
         :dataSource="columns"
         @change="handleChange"

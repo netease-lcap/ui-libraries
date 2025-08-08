@@ -139,6 +139,22 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '显示前缀',
+      description: '是否显示前缀',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showPrepend: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示后缀',
+      description: '是否显示后缀',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showAppend: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '只读',
       description: '只读状态',
       setter: { concept: 'SwitchSetter' },

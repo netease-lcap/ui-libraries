@@ -1,0 +1,13 @@
+.van-hairline--top-bottom:empty::after {
+  border-width: 0;
+}
+.van-collapse-item__right-icon::before {
+  height: var(--van-cell-line-height);
+  font-size: var(--van-cell-icon-size);
+  line-height: var(--van-cell-line-height);
+  transform: rotate(0deg);
+  transition: transform var(--van-collapse-item-duration), -webkit-transform var(--van-collapse-item-duration);
+}
+.van-collapse-item__title--expanded .van-collapse-item__right-icon::before {
+  transform: rotate(-180deg);
+}

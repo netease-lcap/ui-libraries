@@ -181,14 +181,14 @@ namespace nasl.ui {
     onBlur: (event: Event) => void;
 
     @Event({
-      title: '点击搜索图标时触发',
-      description: '点击搜索图标时触发',
+      title: '点击左侧搜索图标时触发',
+      description: '点击左侧搜索图标时触发',
     })
     clickLeftIcon: (event: MouseEvent) => void;
 
     @Event({
-      title: '点击搜索图标时触发',
-      description: '点击搜索图标时触发',
+      title: '点击右侧搜索图标时触发',
+      description: '点击右侧搜索图标时触发',
     })
     clickRightIcon: (event: MouseEvent) => void;
 

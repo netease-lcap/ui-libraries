@@ -105,13 +105,13 @@ namespace nasl.ui {
     })
     block: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否开启图片懒加载',
-      description: '是否开启图片懒加载，须配合 Lazyload 组件使用',
-      setter: { concept: 'SwitchSetter' },
-    })
-    lazyLoad: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否开启图片懒加载',
+    //   description: '是否开启图片懒加载，须配合 Lazyload 组件使用',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // lazyLoad: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -129,22 +129,27 @@ namespace nasl.ui {
     })
     showLoading: nasl.core.Boolean = true;
 
-    // 这两个 icon 只接受 string 类型，不接受组件，不能用 cw 的图标组件
-    @Prop({
-      group: '主要属性',
-      title: '失败时提示的图标',
-      description: '失败时提示的图标',
-      setter: { concept: 'InputSetter' },
-    })
-    errorIcon: nasl.core.String = 'photo-fail';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '失败时提示的图标',
+    //   description: '失败时提示的图标',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_VANT4_ICONS',
+    //   },
+    // })
+    // errorIcon: nasl.core.String = 'photo-fail';
 
-    @Prop({
-      group: '主要属性',
-      title: '加载时提示的图标',
-      description: '加载时提示的图标',
-      setter: { concept: 'InputSetter' },
-    })
-    loadingIcon: nasl.core.String = 'photo';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '加载时提示的图标',
+    //   description: '加载时提示的图标',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_VANT4_ICONS',
+    //   },
+    // })
+    // loadingIcon: nasl.core.String = 'photo';
 
     @Prop({
       group: '主要属性',

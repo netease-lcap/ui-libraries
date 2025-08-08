@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { onMounted, onUnmounted, ref, getCurrentInstance } from 'vue';
+import { onMounted, onUnmounted, ref, getCurrentInstance, unref } from 'vue';
 import { PluginBase } from '@/types';
 
 interface Hook {
@@ -267,9 +267,8 @@ export function useControllableValue(props: any, options: Options = {}) {
     _.attempt(onChangeProps, ...args);
   };
   const value = useMemo(() => (isControlled ? propsValue : stateValue), [stateValue, isControlled]);
-
   return [
-    value,
+    unref(value),
     onChange,
     {
       [valuePropName]: value,

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { Field, Popup } from 'vant';
 import { useMemo, useCallback, useState, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
+import { categoryProps } from '@/utils/dom';
 
 import {
   useRequestDataSource,
@@ -40,15 +41,14 @@ export function handleDataSource(props) {
   };
 }
 
-export function handleShowField(props) {
-  const Component = props.get('render');
+export function handlewFieldState(props) {
   const columns = props.get('columns');
-  const onCancelProps = props.get('onCancel');
-  const onConfirmProps = props.get('onConfirm');
+  const onCancelProps = props.get('onCancel', () => {});
+  const onConfirmProps = props.get('onConfirm', () => {});
   const [value, setValue] = useControllableValue(props);
   const fieldValue = useMemo(() => {
-    const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item).text);
-    return selected.join(',');
+    const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item)?.text);
+    return _.join(selected, ',');
   }, [value, columns]);
   const [show, setShow] = useControllableValue(props, {
     defaultValue: false,
@@ -57,29 +57,44 @@ export function handleShowField(props) {
   });
   const onCancel = useCallback(
     _.wrap(onCancelProps, (fn, ...args) => {
-      _.assign(fn, ...args);
+      _.attempt(fn, ...args);
       setShow(false);
     }),
     [onCancelProps],
   );
   const onConfirm = useCallback(
     _.wrap(onConfirmProps, (fn, { selectedValues, selectedOptions, ...args }: { [x: string]: any }) => {
-      _.assign(fn, { selectedValues, selectedOptions, ...args });
+      _.attempt(fn, { selectedValues, selectedOptions, ...args });
       setValue(selectedValues);
       setShow(false);
     }),
     [onConfirmProps],
   );
+
+  return {
+    show,
+    setShow,
+    value,
+    setValue,
+    fieldValue,
+    onCancel,
+    onConfirm,
+  };
+}
+
+export function handleFieldRender(props) {
+  const Component = props.get('render');
   const render = useCallback(
     (props) => {
       const { setShow, show, value, setValue, fieldValue, clearable } = props;
       const rightIcon = clearable ? 'clear' : '';
+      const outerProps = categoryProps(props);
       return [
         <Field
           modelValue={fieldValue}
+          placeholder={props.placeholder}
           onClick={() => setShow(true)}
-          data-nodepath={props['data-nodepath']}
-          data-enable-events={props['data-enable-events']}
+          {...outerProps}
           readonly
           is-link
           right-icon={rightIcon}
@@ -94,9 +109,7 @@ export function handleShowField(props) {
           lazy-render={false}
           round
           position="bottom"
-          data-drawer-dropdown-status={props['data-drawer-dropdown-status']}
-          data-drawer-dropdown-selector={props['data-drawer-dropdown-selector']}
-          data-nodepath={props['data-nodepath']}
+          {...outerProps}
           ide-draggable={props['ide-draggable']}
         >
           <Component
@@ -109,15 +122,7 @@ export function handleShowField(props) {
     },
     [Component],
   );
-
   return {
     render,
-    show,
-    setShow,
-    value,
-    setValue,
-    fieldValue,
-    onCancel,
-    onConfirm,
   };
 }

@@ -15,6 +15,10 @@ export const Default = {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     setup() {
+      const comRef = ref();
+      setTimeout(() => {
+        console.log(comRef, 'comRef');
+      }, 3000);
       return {
         args,
         value: ref([]),
@@ -70,11 +74,13 @@ export const Default = {
         handleBlur(event) {
           console.log('级联选择器失焦:', event);
         },
+        comRef,
       };
     },
     template: `
       <div style="padding: 20px;">
         <van-cascader 
+          ref="comRef"
           v-model="value" 
           v-bind="args" 
           :dataSource="dataSource"
@@ -656,4 +662,4 @@ export const Readonly = {
       </div>
     `,
   }),
-}; 
+};

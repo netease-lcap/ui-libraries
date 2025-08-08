@@ -2,17 +2,23 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
     ideusage: {
-      idetype: 'element',
-      forceUpdateWhenAttributeChange: 'preview',
+      idetype: 'drawerdropdown',
+      drawerCSSSelector: '.van-popup',
+      cacheOpenKey: 'show',
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource')",
+        display: 6,
+        loopRule: 'nth-child(n+2)',
+        loopElem: "> label[class^='u-radios_radio']:not([data-nodepath])",
+      },
     },
   })
   @Component({
     title: '级联选择器',
     icon: 'cascade-select',
     description: '级联选择器，用于选择多级数据。',
-    group: 'Form',
+    group: 'Selector',
   })
   export class VanCascader<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(options?: Partial<VanCascaderOptions<T, V, P, M, C>>) {
@@ -146,8 +152,6 @@ namespace nasl.ui {
     })
     onChange: (value: V) => void;
 
- 
-
     @Event({
       title: '点击时',
       description: '点击时触发',
@@ -166,4 +170,49 @@ namespace nasl.ui {
     })
     onBlur: (event: any) => void;
   }
+
+  @IDEExtraInfo({
+    order: 1,
+    ideusage: {
+      idetype: 'drawerdropdown',
+      drawerCSSSelector: '.van-popup',
+      cacheOpenKey: 'show',
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource')",
+        display: 6,
+        loopRule: 'nth-child(n+2)',
+        loopElem: "> label[class^='u-radios_radio']:not([data-nodepath])",
+      },
+    },
+  })
+  @Component({
+    title: '表单级联选择器',
+    description: '表单级联选择器，用于选择多级数据。',
+    group: 'Selector',
+  })
+  export class VanFormCascader<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponent {
+    constructor(
+      options?: Partial<
+        VanFormCascaderOptions<T, V, P, M, C> &
+          VanFormItemOptions &
+          Omit<VanCascaderOptions<T, V, P, M, C>, keyof VanFormItemOptions>
+      >,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormCascaderOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {}
 }

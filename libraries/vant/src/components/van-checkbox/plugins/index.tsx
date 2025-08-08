@@ -1,9 +1,9 @@
 import _ from 'lodash';
+import { Checkbox as VantCheckbox } from 'vant';
 import { useMemo } from '@/plugins/hooks';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 
 export { handleControllableValue } from '@/plugins/common/index';
-// export * from './ide';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -17,12 +17,14 @@ export function handleDataSource(props) {
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
     : {
-        default: () => _.map(dataSource, (item) => <van-checkbox {...item}>{item.text}</van-checkbox>),
+        default: () => _.map(dataSource, (item) => <VantCheckbox {...item}>{item.text}</VantCheckbox>),
       };
 
   return {
     ref: selfRef,
     loading,
     slots: _.assign(slots, dataSourceSlots),
+    tagName: 'van-checkbox-group',
+    formTagName: 'van-form-checkbox-group',
   };
 }

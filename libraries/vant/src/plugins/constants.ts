@@ -7,6 +7,9 @@ export const $provide = Symbol('provide');
 export const $inject = Symbol('inject');
 export const $formTagName = Symbol('formTagName');
 export const $tagName = Symbol('tagName');
+export const $router = Symbol('router');
+
+export const $route = Symbol('route');
 
 export const $dataSourceDeleteField = ['dataSource', 'textField', 'valueField', 'parentField', 'childrenField'];
 

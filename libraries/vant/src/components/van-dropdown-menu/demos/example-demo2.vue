@@ -12,10 +12,8 @@
           <van-switch v-model="switch2" />
         </template>
       </van-cell>
-      <div style="padding: 5px 16px;">
-        <van-button type="primary" block round @click="onConfirm">
-          确认
-        </van-button>
+      <div style="padding: 5px 16px">
+        <van-button type="primary" block round @click="onConfirm"> 确认 </van-button>
       </div>
     </van-dropdown-item>
   </van-dropdown-menu>
@@ -37,7 +35,7 @@ const switch1 = ref(false);
 const switch2 = ref(false);
 
 const onConfirm = () => {
-  menuRef.value?.close?.();
+  // menuRef.value?.close?.();
   // itemRef.value?.toggle?.();
 };
 </script>

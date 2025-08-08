@@ -9,6 +9,7 @@ namespace nasl.ui {
       slotWrapperInlineStyle: {
         action: 'display: inline-block',
       },
+      translateBindingProperty: ["content"],
     }
   })
   

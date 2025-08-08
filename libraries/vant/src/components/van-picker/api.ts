@@ -44,6 +44,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+    })
+    dataSchema: T;
+
+    @Prop({
+      group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
       docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
@@ -80,7 +88,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: P extends true ? (M extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
+    modelValue: nasl.collection.List<V>;
 
     @Prop({
       group: '主要属性',
@@ -203,12 +211,20 @@ namespace nasl.ui {
   export class VanFormPicker<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(
       options?: Partial<
-        VanFormPickerOptions<T, V, P, M, C> & VanFormItemOptions & Omit<VanPickerOptions<T, V, P, M, C>, keyof VanFormItemOptions>
+        VanFormPickerOptions<T, V, P, M, C> &
+          VanFormItemOptions &
+          Omit<VanPickerOptions<T, V, P, M, C>, keyof VanFormItemOptions>
       >,
     ) {
       super();
     }
   }
 
-  export class VanFormPickerOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {}
+  export class VanFormPickerOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {}
 }

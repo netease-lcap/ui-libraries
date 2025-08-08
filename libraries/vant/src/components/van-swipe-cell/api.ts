@@ -90,8 +90,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '是否阻止第五',
-      description: '是否阻止第五',
+      title: '是否阻止冒泡',
+      description: '是否阻止冒泡',
       setter: { concept: 'SwitchSetter' },
     })
     stopPropagationIsFifth: nasl.core.Boolean = false;

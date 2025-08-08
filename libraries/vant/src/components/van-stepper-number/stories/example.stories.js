@@ -24,7 +24,7 @@ export const Default = {
     },
     template: `
       <div style="padding: 20px;">
-        <van-stepper v-model="value" v-bind="args" @change="handleChange"></van-stepper>
+        <van-stepper-number v-model="value" v-bind="args" @change="handleChange"></van-stepper-number>
         <p style="margin-top: 10px;">当前值: {{ value }}</p>
       </div>
     `,

@@ -38,8 +38,7 @@ export function withFormItem(Component, name) {
       const provide = inject($provide) as Ref<FormItemProvide>;
       const { setValue, value = valueRef, setFormitem, deleteFormitem } = provide?.value?.[$formProvide] ?? {};
       const { vnode } = getCurrentInstance() as { vnode: VNode };
-      const { props: vnodeProps } = vnode;
-      const isControlled = Object.prototype.hasOwnProperty.call(vnodeProps, 'modelValue');
+      const isControlled = _.has(vnode, 'props.modelValue');
 
       const modelValue = computed(() => (isControlled ? props?.modelValue : value?.[propName.value]));
       const style = computed(() => categoryStyles(_.assign({}, props?.style, attrs.style)));
@@ -58,7 +57,7 @@ export function withFormItem(Component, name) {
         }
       });
       watch(
-        () => props?.modelValue,
+        () => modelValue.value,
         (value) => {
           _.attempt(setValue, propName.value, value);
         },
@@ -71,11 +70,11 @@ export function withFormItem(Component, name) {
       });
 
       expose(myRef.value);
-
       onMounted(() => {
         setFormitem?.(propName.value, {
           resetField: () => {
             onUpdateModelValue(undefined);
+            _.attempt(_.get(componentRef, 'value.resetField', () => {}));
           },
           getModelValue: () => {
             return modelValue.value;
@@ -114,7 +113,7 @@ export function withFormItem(Component, name) {
 }
 export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
-  const formTagName = props.get($formTagName);
+  const formTagName = props.get('formTagName');
   const tagName = props.get('tagName');
   useEffect(() => {
     const inject = props.get('inject');

@@ -19,6 +19,7 @@ namespace nasl.ui {
           append: true,
         },
       ],
+      translateBindingProperty: ['rowWidth'],
     },
   })
   @Component({
@@ -48,7 +49,7 @@ namespace nasl.ui {
       description: '段落占位图宽度，可传数组来设置每一行的宽度',
       setter: { concept: 'InputSetter' },
     })
-    rowWidth: nasl.core.String = '100%';
+    rowWidth: nasl.core.String | nasl.core.Integer | Array<nasl.core.String> | Array<nasl.core.Integer> = '100%';
 
     @Prop({
       group: '主要属性',

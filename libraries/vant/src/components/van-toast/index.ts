@@ -1,4 +1,4 @@
-import { Toast as VantToast } from 'vant';
+import { Toast as VantToast, showToast } from 'vant';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins/index';
@@ -13,5 +13,20 @@ const VanToast = registerComponent(VantToast, {
   name: 'van-toast',
 });
 
-export { VanToast, VanToastRegister, VantToast };
+const Message = {
+  info: (msg: string) => {
+    showToast({
+      type: 'text',
+      message: msg,
+    });
+  },
+  error: (msg: string) => {
+    showToast({
+      type: 'fail',
+      message: msg,
+    });
+  },
+};
+
+export { VanToast, VanToastRegister, VantToast, Message };
 export default VanToast;

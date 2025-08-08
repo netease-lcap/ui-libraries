@@ -9,6 +9,7 @@ export function handleModelValue(props) {
   const ref = props.get('ref');
   const formItemList = useRef({});
   const preview = props.get('preview') ?? false;
+
   return {
     model,
     provide: Object.assign(provide, {
@@ -32,12 +33,14 @@ export function handleModelValue(props) {
         _.forEach(Object.entries(formItemList.value), ([key, item]: any) => {
           model.value[key] = item?.getModelValue?.() ?? model.value[key];
         });
+        console.log(model, 'model');
         return ref.validate().then(
           () => ({ valid: true }),
           () => ({ valid: false }),
         );
       },
       resetForm: () => {
+        ref.resetValidation();
         _.values(formItemList.value).forEach((item) => _.attempt(item.resetField));
       },
     }),

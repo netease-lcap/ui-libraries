@@ -58,6 +58,7 @@ namespace nasl.ui {
       description: '是否显示',
       setter: { concept: 'SwitchSetter' },
       sync: true,
+      settable: true,
     })
     show: nasl.core.Boolean = false;
 
@@ -98,7 +99,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '自定义图标',
       description: '自定义图标，支持传入图标名称或图片链接，等同于 Icon 组件的 name 属性',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
     })
     icon: nasl.core.String;
 
@@ -144,7 +148,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '展示时长',
+      title: '展示时长(ms)',
       description: '展示时长, 值为 0 时，toast 不会消失',
       setter: { concept: 'NumberInputSetter', min: 0 },
     })

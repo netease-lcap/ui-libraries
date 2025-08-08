@@ -26,7 +26,7 @@ namespace nasl.ui {
       sync: true,
       description: '步进器绑定值',
     })
-    modelValue: nasl.core.Integer;
+    modelValue: nasl.core.Integer | nasl.core.Decimal;
 
     @Prop({
       group: '数据属性',
@@ -46,7 +46,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '自动校正超',
+      title: '自动校正',
       description: '是否自动校正超出范围的值',
       setter: { concept: 'SwitchSetter' },
     })

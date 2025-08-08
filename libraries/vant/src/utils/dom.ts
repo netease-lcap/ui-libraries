@@ -27,3 +27,12 @@ export function categoryStyles(style: Record<string, string> = {}) {
     { style: {}, innerStyle: {} },
   );
 }
+
+export function categoryProps(props: Record<string, any> = {}) {
+  return Object.keys(props).reduce((outerProps: Record<string, any>, key) => {
+    if (key.startsWith('data-')) {
+      outerProps[key] = props[key];
+    }
+    return outerProps;
+  }, {});
+}
