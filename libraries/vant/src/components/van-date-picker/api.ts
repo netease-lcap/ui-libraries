@@ -501,13 +501,41 @@ namespace nasl.ui {
       title: '确认',
       description: '点击完成按钮时触发的事件',
     })
-    onConfirm: (event: any) => void;
+    onConfirm: (event: {
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    } | Array<{
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    }>) => void;
 
     @Event({
       title: '取消',
       description: '点击完成取消时触发的事件',
     })
-    onCancel: (event: any) => void;
+    onCancel: (event: {
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    } | Array<{
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    }>) => void;
 
     @Slot({
       title: '组件插槽',

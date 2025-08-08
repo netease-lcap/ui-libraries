@@ -56,18 +56,12 @@ export const Default = {
       },
       onClickSubmit() {
         this.$refs.uploader.submit();
-      }
+      },
     },
     template: `
     <van-button @click="onClickSubmit">上传服务器</van-button>
       <van-uploader v-model="values" multiple v-bind="args"
         ref="uploader"
-        :headers="{'LCAPTEST': 'test'}"
-        :viaOriginURL="true"
-        :data="{\&quot;testfata\&quot;:\&quot;ddd\&quot;}"
-        :access="private"
-        :ttl="true"
-        :ttlValue="1"
         @oversize="onOversize"
         @success="onSuccess"
         @error="onError"
@@ -83,19 +77,22 @@ export const Default = {
   }),
   args: {
     access: 'public',
-    ttl: null,
+    ttl: true,
     ttlValue: 1,
+    lcapIsCompress: true,
+    viaOriginURL: true,
+    data: { testfata: 'ddd' },
+    headers: { LCAPTEST: 'test' },
     multiple: true,
     autoUpload: true,
     maxSize: '10KB',
     maxCount: Infinity,
-    lcapIsCompress: true,
-    viaOriginURL: '',
     converter: 'json',
     readonly: false,
     disabled: false,
     deletable: true,
     showUpload: true,
+    accept: '.zip',
   },
 };
 

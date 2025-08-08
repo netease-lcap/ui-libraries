@@ -31,10 +31,20 @@ export const Default = {
       onClickOpen() {
         this.$refs.datepicker.open();
       },
+      onChangeModelValue() {
+        this.value = new Date();
+      },
+      onConfirm(event) {
+        console.log('onConfirm', event);
+      },
+      onCancel(event) {
+        console.log('onCancel', event);
+      },
     },
     template: `
-    <van-button @click="onClickOpen">打开/关闭</van-button>
-      <van-date-picker v-bind="args" v-model:modelValue="value" v-model:startValue="startValue" v-model:endValue="endValue" ref="datepicker">
+      <van-button @click="onClickOpen">打开/关闭</van-button>
+      <van-button @click="onChangeModelValue">改变modelValue</van-button>
+      <van-date-picker v-bind="args" v-model:modelValue="value" v-model:startValue="startValue" v-model:endValue="endValue" ref="datepicker" @confirm="onConfirm" @cancel="onCancel">
         <template #label>
           <div>选择日期</div>
         </template>
@@ -49,12 +59,12 @@ export const Default = {
   }),
   args: {
     // columnsType: ['year', 'month', 'day'],
-    isRange: true,
+    // isRange: true,
     type: 'date',
     converter: 'timestamp',
     unit: 'hour',
-    minDate: '2025/07/24 12:00:00',
-    maxDate: '2025/07/25 12:00:00',
+    // minDate: '2025/07/24 12:00:00',
+    // maxDate: '2025/07/25 12:00:00',
     popupOpened: false,
     readonly: false,
     disabled: false,

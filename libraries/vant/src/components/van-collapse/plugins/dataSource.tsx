@@ -9,7 +9,9 @@ export function handleDataSource(props) {
   const nameField = props.get('nameField') || 'name';
   const slots = props.get('slots');
   const disabledField = props.get('disabledField') || 'disabled';
-  const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
+  const deletePropsList = props.get($deletePropsList)
+  .concat($dataSourceDeleteField)
+  .concat(['disabledField', 'data', 'loading']);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
   const dataSource = useHandleMapField({

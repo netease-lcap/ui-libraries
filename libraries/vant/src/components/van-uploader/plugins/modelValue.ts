@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { ref, unref } from 'vue';
 import { useMemo, useControllableValue, useCallback, useRef } from '@/plugins/hooks';
 import { ExtendedUploaderFileListItem } from './types';
 

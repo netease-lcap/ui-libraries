@@ -78,9 +78,7 @@ namespace nasl.ui {
       title: '标签改变',
       description: '切换标签时触发'
     })
-    onChange: (event: {
-      index: nasl.core.Integer | nasl.core.String;
-    }) => void;
+    onChange: (event: nasl.core.Integer | nasl.core.String) => void;
 
     @Slot({
       title: '标签项',

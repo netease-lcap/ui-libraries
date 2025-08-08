@@ -321,13 +321,13 @@ namespace nasl.ui {
       title: '确认时',
       description: '点击完成按钮时触发的事件',
     })
-    onConfirm: (event: Date | Array<Date>) => void;
+    onConfirm: (event: nasl.core.Date | Array<nasl.core.Date>) => void;
 
     @Event({
       title: '选择时',
       description: '选择日期时触发的事件',
     })
-    onSelect: (event: Date | Array<Date>) => void;
+    onSelect: (event: nasl.core.Date | Array<nasl.core.Date>) => void;
 
     @Event({
       title: '打开时',
@@ -357,13 +357,13 @@ namespace nasl.ui {
       title: '取消选择时',
       description: '当日历组件的选择类型为多个日期时，取消选中日期时触发',
     })
-    onUnselect: (event: Date) => void;
+    onUnselect: (event: nasl.core.Date) => void;
 
     @Event({
       title: '月份进入可视区域时',
       description: '当某个月份进入可视区域时触发（切换模式为平铺月份时生效）',
     })
-    onMonthShow: (event: { date: Date; title: string }) => void;
+    onMonthShow: (event: { date: nasl.core.Date; title: nasl.core.String }) => void;
 
     @Event({
       title: '超过最大范围时',
@@ -397,7 +397,7 @@ namespace nasl.ui {
       title: '点击禁用日期时',
       description: '点击禁用日期时触发',
     })
-    onClickDisabledDate: (event: Date | Array<Date>) => void;
+    onClickDisabledDate: (event: nasl.core.Date | Array<nasl.core.Date>) => void;
 
     @Event({
       title: '点击遮罩层时',
@@ -425,7 +425,7 @@ namespace nasl.ui {
       title: '面板切换时',
       description: '面板切换时触发',
     })
-    onPanelChange: (event: { date: Date }) => void;
+    onPanelChange: (event: { date: nasl.core.Date }) => void;
 
     @Slot({
       title: '组件插槽',
