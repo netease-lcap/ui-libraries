@@ -103,7 +103,6 @@ namespace nasl.ui {
     })
     onClickAction: () => void;
 
-    // TODO LD:这里的 slot 需要接收参数，应该怎么设置？
     @Slot({
       title: '自定义操作',
       description: '自定义操作',

@@ -26,6 +26,16 @@ namespace nasl.ui {
   export class VanPullRefreshOptions extends ViewComponentOptions {
     @Prop({
       group: '主要属性',
+      title: '是否处于加载状态',
+      description: '是否处于加载状态',
+      setter: { concept: 'SwitchSetter' },
+      sync: true,
+      settable: true,
+    })
+    modelValue: nasl.core.Boolean;
+
+    @Prop({
+      group: '主要属性',
       title: '下拉过程提示文案',
       description: '下拉过程提示文案',
       setter: { concept: 'InputSetter' },
@@ -96,6 +106,38 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '主要属性',
+      title: '自定义下拉过程内容',
+      description: '自定义下拉过程内容，将覆盖“下拉过程提示文案”',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isCustomPulling: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '自定义释放过程内容',
+      description: '自定义释放过程内容，将覆盖“释放过程提示文案”',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isCustomLoosing: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '自定义加载过程内容',
+      description: '自定义加载过程内容，将覆盖“加载过程提示文案”',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isCustomLoading: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '自定义刷新成功提示内容',
+      description: '自定义刷新成功提示内容，将覆盖“刷新成功提示文案”',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isCustomSuccess: nasl.core.Boolean = false;
+
     @Event({
       title: '下拉刷新时触发',
       description: '下拉刷新时触发',
@@ -120,21 +162,18 @@ namespace nasl.ui {
     })
     slotNormal: () => Array<ViewComponent>;
 
-    // TODO LD: 参数
     @Slot({
       title: '下拉过程中顶部内容',
       description: '下拉过程中顶部内容',
     })
     slotPulling: (current: { distance: nasl.core.Decimal }) => Array<ViewComponent>;
 
-    // TODO LD: 参数
     @Slot({
       title: '释放过程中顶部内容',
       description: '释放过程中顶部内容',
     })
     slotLoosing: (current: { distance: nasl.core.Decimal }) => Array<ViewComponent>;
 
-    // TODO LD: 参数
     @Slot({
       title: '加载过程中顶部内容',
       description: '加载过程中顶部内容',
