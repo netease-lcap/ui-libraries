@@ -188,17 +188,13 @@ namespace nasl.ui {
       title: '点击左侧导航',
       description: '点击左侧导航时触发',
     })
-    onClickNav: (event: {
-      index: nasl.core.Integer;
-    }) => any;
+    onClickNav: (event: nasl.core.Integer) => any;
 
     @Event({
       title: '点击右侧选择项',
       description: '点击右侧选择项时触发',
     })
-    onClickItem: (event: {
-      item: T;
-    }) => any;
+    onClickItem: (event: T) => any;
 
     @Slot({
       title: '右侧区域内容',

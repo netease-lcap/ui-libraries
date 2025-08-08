@@ -42,7 +42,7 @@ function getSizeLimit(val: string | number) {
  * @returns 属性
  */
 export function getSizeForFile(props) {
-  const maxSize = props.get('maxSize');
+  const maxSize = props.get('maxSize') || 50;
   const SIZE_UNITS = {
     KB: 1024,
     MB: 1024 ** 2,

@@ -23,8 +23,13 @@ export const Default = {
         activeNames: '1',
       };
     },
+    methods: {
+      onChange(event) {
+        console.log('onChange', event);
+      },
+    },
     template: `
-      <van-collapse>
+      <van-collapse @change="onChange">
         <van-collapse-item name="1" :border="false" :rightIcon="args.rightIcon">
           <template #title>
             <van-text text="标题1"></van-text>

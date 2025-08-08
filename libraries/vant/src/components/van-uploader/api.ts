@@ -218,7 +218,7 @@ namespace nasl.ui {
         min: 0
       }
     })
-    maxCount: nasl.core.Integer = 999;
+    maxCount: nasl.core.Integer;
     
     @Prop({
       group: '主要属性',

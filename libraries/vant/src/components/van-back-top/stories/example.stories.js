@@ -18,8 +18,14 @@ export const Default = {
         args,
       };
     },
+    methods: {
+      onClick(event) {
+        console.log('onClick', event);
+      },
+    },
     template: `
-      <van-back-top v-bind="args" />
+    <div style="height: 2000px"></div>
+      <van-back-top v-bind="args"  @click="onClick"/>
     `,
   }),
   args: {
