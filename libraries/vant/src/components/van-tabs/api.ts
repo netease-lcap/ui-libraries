@@ -15,7 +15,7 @@ namespace nasl.ui {
     title: '选项卡',
     icon: 'tabs',
     description: '选项卡',
-    group: 'Display',
+    group: 'Selector',
   })
   export class VanTabs extends ViewComponent {
     @Prop({

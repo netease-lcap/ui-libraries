@@ -17,7 +17,7 @@ export const Default = {
     setup() {
       const reff = ref('');
       setTimeout(() => {
-        console.log(reff.value.reload(),'ff');
+        console.log(reff.value.reload(), 'ff');
       }, 1000);
       return {
         args,
@@ -32,9 +32,54 @@ export const Default = {
         dataSource: async () => {
           console.log('reload');
           return [
-            { value: '1', text: '选项1' },
-            { value: '2', text: '选项2' },
-            { value: '3', text: '选项3' },
+            {
+              liu_form: {
+                id: 1,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                property1: '语文',
+                property2: null,
+                property3: null,
+                property4: null,
+                property5: null,
+                property6: null,
+                property7: null,
+              },
+            },
+            {
+              liu_form: {
+                id: 2,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                property1: '数学',
+                property2: null,
+                property3: null,
+                property4: null,
+                property5: null,
+                property6: null,
+                property7: null,
+              },
+            },
+            {
+              liu_form: {
+                id: 3,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                property1: '英语',
+                property2: null,
+                property3: null,
+                property4: null,
+                property5: null,
+                property6: null,
+                property7: null,
+              },
+            },
           ];
         },
       };
@@ -44,6 +89,7 @@ export const Default = {
         <van-checkbox-group 
           v-bind="args"
           ref='reff'
+          textField="liu_form.property1"
           :dataSource="dataSource"
           @change="handleChange"
           @click="handleClick">

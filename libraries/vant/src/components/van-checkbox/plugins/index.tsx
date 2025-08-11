@@ -13,12 +13,19 @@ export function handleDataSource(props) {
   const slots = props.get('slots');
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
-  const dataSource = useHandleMapField({ textField, valueField, value: 'name', dataSource: useFormatDataSource(data) });
+  const dataSource = useHandleMapField({
+    textField,
+    valueField,
+    label: 'test',
+    value: 'name',
+    dataSource: useFormatDataSource(data),
+  });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
+  console.log(dataSource, 'datas');
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
     : {
-        default: () => _.map(dataSource, (item) => <VantCheckbox {...item}>{item.text}</VantCheckbox>),
+        default: () => _.map(dataSource, (item) => <VantCheckbox {...item}>{item.test}</VantCheckbox>),
       };
 
   return {
