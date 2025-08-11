@@ -223,7 +223,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
     },
     extends: [
       {
@@ -239,7 +239,7 @@ namespace nasl.ui {
     description: '表单步进器',
     group: 'Form',
   })
-  export class VanFormStepperNumber extends VanStepperNumber {
+  export class VanFormStepperNumber extends ViewComponent {
     constructor(
       options?: Partial<
         VanFormStepperNumberOptions & VanFormItemOptions & Omit<VanStepperNumberOptions, keyof VanFormItemOptions>
@@ -249,5 +249,5 @@ namespace nasl.ui {
     }
   }
 
-  export class VanFormStepperNumberOptions extends VanStepperNumberOptions {}
+  export class VanFormStepperNumberOptions extends ViewComponentOptions {}
 }

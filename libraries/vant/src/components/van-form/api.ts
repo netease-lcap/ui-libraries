@@ -207,6 +207,15 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '验证规则',
+      description: '表单字段校验规则。',
+      setter: { concept: 'InputSetter' },
+      bindHide: true,
+    })
+    rules: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
       title: '必填',
       description: '是否显示表单项必填星号',
       setter: { concept: 'SwitchSetter' },

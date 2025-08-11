@@ -287,6 +287,11 @@ namespace nasl.ui {
       },
     ],
   })
+  @Component({
+    title: '表单复选框组',
+    description: '表单复选框组',
+    group: 'Form',
+  })
   export class VanFormCheckboxGroup<T, V> extends ViewComponent {
     constructor(
       options?: Partial<
