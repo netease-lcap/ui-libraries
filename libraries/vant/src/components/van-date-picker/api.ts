@@ -616,4 +616,37 @@ namespace nasl.ui {
     })
     slotTitle: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'drawerdropdown',
+      cacheOpenKey: 'popupOpened',
+      drawerCSSSelector: '.van-popup',
+      dataSource: {},
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanDatePicker',
+      },
+    ],
+  })
+  @Component({
+    title: '表单日期选择器',
+    icon: 'date-picker',
+    description: '用于表单日期选择',
+    group: 'Form',
+  })
+  export class VanFormDatePicker extends ViewComponent {
+    constructor(
+      options?: Partial<VanFormDatePickerOptions & VanFormItemOptions & Omit<VanDatePickerOptions, keyof VanFormItemOptions>>,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormDatePickerOptions extends ViewComponentOptions {}
 }
