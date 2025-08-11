@@ -95,6 +95,11 @@ namespace nasl.ui {
       },
     ],
   })
+  @Component({
+    title: '表单开关',
+    icon: 'switch',
+    description: '表示两种相互对立的状态间的切换，多用于触发「开/关」',
+  })
   export class VanFormSwitch extends ViewComponent {
     constructor(
       options?: Partial<VanFormSwitchOptions & VanFormItemOptions & Omit<VanSwitchOptions, keyof VanFormItemOptions>>,

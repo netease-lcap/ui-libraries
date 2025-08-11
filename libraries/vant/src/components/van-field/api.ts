@@ -300,8 +300,11 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
       forceUpdateWhenAttributeChange: true,
+      displaySlotInline: {
+        label: true,
+      },
     },
     extends: [
       {
