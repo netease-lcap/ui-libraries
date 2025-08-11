@@ -241,6 +241,28 @@ namespace nasl.ui {
     nextStepText: nasl.core.String;
 
     @Prop({
+      group: '主要属性',
+      title: '开始时间标签项文本',
+      description: '开始时间标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true,
+    })
+    startTimeTabTitle : nasl.core.String = '开始时间';
+
+    @Prop({
+      group: '主要属性',
+      title: '结束时间标签项文本',
+      description: '结束时间标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true,
+    })
+    endTimeTabTitle : nasl.core.String = '结束时间';
+
+    @Prop({
       group: '交互属性',
       title: '点击遮罩层后关闭',
       setter: {
