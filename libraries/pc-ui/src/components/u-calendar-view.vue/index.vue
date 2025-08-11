@@ -335,6 +335,10 @@ export default {
                     if (this.selectedDates[0]) {
                         this.year = this.selectedDates[0].year();
                         this.month = this.selectedDates[0].month();
+                    } else {
+                        // fix: 3191090264602624
+                        this.year = minYear;
+                        this.month = minMonth;
                     }
                 } else {
                     // 当前日期不在配置日期范围内，重新赋值成最小日期
