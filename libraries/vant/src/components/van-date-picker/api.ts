@@ -458,6 +458,73 @@ namespace nasl.ui {
     nextStepText: nasl.core.String;
 
     @Prop({
+      group: '主要属性',
+      title: '选择日期标签项文本',
+      description: '选择日期标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => !_.isRange && _.type === 'datetime',
+    })
+    datetimeDateTabTitle : nasl.core.String = '选择日期';
+
+    @Prop({
+      group: '主要属性',
+      title: '选择时间标签项文本',
+      description: '选择时间标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => !_.isRange && _.type === 'datetime',
+    })
+    datetimeTimeTabTitle : nasl.core.String = '选择时间';
+
+
+    @Prop({
+      group: '主要属性',
+      title: '开始日期标签项文本',
+      description: '开始日期标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true,
+    })
+    startDateTabTitle : nasl.core.String = '开始日期';
+
+    @Prop({
+      group: '主要属性',
+      title: '开始时间标签项文本',
+      description: '开始时间标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true && _.type === 'datetime',
+    })
+    startTimeTabTitle : nasl.core.String = '开始时间';
+
+    @Prop({
+      group: '主要属性',
+      title: '结束日期标签项文本',
+      description: '结束日期标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true,
+    })
+    endDateTabTitle : nasl.core.String = '结束日期';
+
+    @Prop({
+      group: '主要属性',
+      title: '结束时间标签项文本',
+      description: '结束时间标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true && _.type === 'datetime',
+    })
+    endTimeTabTitle : nasl.core.String = '结束时间';
+
+    @Prop({
       group: '交互属性',
       title: '点击遮罩层后关闭',
       setter: {

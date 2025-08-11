@@ -61,6 +61,8 @@ export const Default = {
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     nextStepText: '下一步',
+    startTimeTabTitle: '',
+    endTimeTabTitle: '',
   },
 };
 

@@ -232,6 +232,14 @@ namespace nasl.ui {
     maxSize: nasl.core.Decimal = 50;
 
     @Prop({
+      group: '主要属性',
+      title: '超出大小限制时提示',
+      description: '超出大小限制时提示',
+      setter: { concept: 'InputSetter' },
+    })
+    oversizeErrorMsg: nasl.core.String = '文件大小超出限制';
+
+    @Prop({
       group: '状态属性',
       title: '只读',
       description: '正常显示，但禁止选择/输入',
