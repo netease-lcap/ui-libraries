@@ -19,24 +19,24 @@ export const Default = {
     template: `
       <van-index-bar>
         <van-index-anchor index="A">A</van-index-anchor>
-        <van-cell title="文本" />
-        <van-cell title="文本" />
-        <van-cell title="文本" />
+        <van-flex></van-flex>
+        <van-flex></van-flex>
+        <van-flex></van-flex>
 
         <van-index-anchor index="B">B</van-index-anchor>
-        <van-cell title="文本" />
-        <van-cell title="文本" />
-        <van-cell title="文本" />
+        <van-flex></van-flex>
+        <van-flex></van-flex>
+        <van-flex></van-flex>
 
         <van-index-anchor index="C">C</van-index-anchor>
-        <van-cell title="文本" />
-        <van-cell title="文本" />
-        <van-cell title="文本" />
+        <van-flex></van-flex>
+        <van-flex></van-flex>
+        <van-flex></van-flex>
 
         <van-index-anchor index="D">D</van-index-anchor>
-        <van-cell title="文本" />
-        <van-cell title="文本" />
-        <van-cell title="文本" />
+        <van-flex></van-flex>
+        <van-flex></van-flex>
+        <van-flex></van-flex>
       </van-index-bar>
     `,
   }),

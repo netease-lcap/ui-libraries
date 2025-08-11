@@ -2,8 +2,11 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
+    order: 5,
     ideusage: {
       idetype: 'container',
+      structured: true,
+      forceUpdateWhenAttributeChange: true,
     },
   })
   @Component({
@@ -71,10 +74,25 @@ namespace nasl.ui {
     @Slot({
       title: '默认插槽',
       description: '索引栏的内容',
+      snippets: [{
+        title: '索引锚点',
+        code: '<van-index-anchor index="A">A</van-index-anchor>'
+      }]
     })
     slotDefault: () => ViewComponent[];
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      idetype: 'container',
+      parentAccept: "target.tag.endsWith('van-index-bar')",
+      forceRefresh: 'parent',
+    },
+  })
+  @Component({
+    title: '索引锚点',
+    description: '索引锚点',
+  })
   export class VanIndexAnchor<T> extends ViewComponent {
     constructor(options?: Partial<VanIndexAnchorOptions<T>>) {
       super();

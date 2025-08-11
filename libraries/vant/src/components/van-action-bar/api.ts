@@ -4,6 +4,9 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      structured: true,
+      childAccept: "['van-action-bar-button', 'van-action-bar-icon'].includes(target.tag)",
+      forceUpdateWhenAttributeChange: true,
     },
   })
   @Component({
@@ -38,10 +41,27 @@ namespace nasl.ui {
     @Slot({
       title: '默认插槽',
       description: '',
+      snippets: [{
+        title: '动作栏按钮',
+        code: '<van-action-bar-button type="primary" text="按钮" />'
+      }, {
+        title: '动作栏图标',
+        code: '<van-action-bar-icon icon="chat-o" text="图标" />'
+      }]
     })
     slotDefault: () => ViewComponent[];
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      parentAccept: "target.tag.endsWith('van-action-bar')",
+      forceRefresh: 'parent',
+    }
+  })
+  @Component({
+    title: '动作栏按钮',
+    description: '动作栏按钮',
+  })
   export class VanActionBarButton<T> extends ViewComponent {
     constructor(options?: Partial<VanActionBarButtonOptions<T>>) {
       super();
@@ -81,7 +101,7 @@ namespace nasl.ui {
       description: '左侧图标名称或图片链接',
       setter: { concept: 'IconSetter', customIconFont: 'LCAP_VANT_ICONS' },
     })
-    icon: nasl.core.String;
+    private icon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -100,6 +120,16 @@ namespace nasl.ui {
     loading: nasl.core.Boolean = false;
   }
 
+  @IDEExtraInfo({
+    ideusage: {
+      parentAccept: "target.tag.endsWith('van-action-bar')",
+      forceRefresh: 'parent',
+    }
+  })
+  @Component({
+    title: '动作栏图标',
+    description: '动作栏图标',
+  })
   export class VanActionBarIcon<T> extends ViewComponent {
     constructor(options?: Partial<VanActionBarIconOptions<T>>) {
       super();
