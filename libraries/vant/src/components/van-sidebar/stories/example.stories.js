@@ -24,6 +24,50 @@ export const Default = {
         handleChange(value) {
           console.log('导航值改变:', value);
         },
+        load: () => {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve([
+                {
+                  person: {
+                    id: 3186072722427392,
+                    createdTime: '2025-08-04T07:29:49.000Z',
+                    updatedTime: '2025-08-04T07:29:49.000Z',
+                    createdBy: null,
+                    updatedBy: null,
+                    name: '张三',
+                    age: '123',
+                    sex: '男',
+                  },
+                },
+                {
+                  person: {
+                    id: 3186073370111488,
+                    createdTime: '2025-08-04T07:31:08.000Z',
+                    updatedTime: '2025-08-04T07:31:08.000Z',
+                    createdBy: null,
+                    updatedBy: null,
+                    name: '李四',
+                    age: '28',
+                    sex: '女',
+                  },
+                },
+                {
+                  person: {
+                    id: 3186073450229248,
+                    createdTime: '2025-08-04T07:31:18.000Z',
+                    updatedTime: '2025-08-04T07:31:18.000Z',
+                    createdBy: null,
+                    updatedBy: null,
+                    name: '王五',
+                    age: '40',
+                    sex: '男',
+                  },
+                },
+              ]);
+            }, 1000);
+          });
+        },
       };
     },
     template: `
@@ -31,12 +75,15 @@ export const Default = {
         <van-sidebar 
           v-model="activeIndex" 
           v-bind="args"
+          :dataSource="load"
           @select="handleSelect"
           @change="handleChange">
-          <van-sidebar-item index="1" title="导航一" />
-          <van-sidebar-item index="2" title="导航二" />
-          <van-sidebar-item index="3" title="导航三" />
-          <van-sidebar-item index="4" title="导航四" />
+          <template #item="{ current }">
+            <van-sidebar-item :index="current.person.id" :title="current.person.name" />
+          </template>
+        <van-sidebar-item title="导航一"></van-sidebar-item>
+        <van-sidebar-item title="导航二"></van-sidebar-item>
+        <van-sidebar-item title="导航三"></van-sidebar-item>
         </van-sidebar>
         <div style="flex: 1; padding: 20px;">
           <p>当前选中: {{ activeIndex }}</p>
@@ -236,4 +283,4 @@ export const NoIndicator = {
       </div>
     `,
   }),
-}; 
+};

@@ -220,7 +220,7 @@ namespace nasl.ui {
       description: '是否显示表单项必填星号',
       setter: { concept: 'SwitchSetter' },
     })
-    isRequired: nasl.core.Boolean;
+    required: nasl.core.Boolean;
 
     @Slot({
       title: '标签',
