@@ -225,6 +225,14 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'element',
     },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanStepperNumber',
+      },
+    ],
   })
   @Component({
     title: '表单步进器',
