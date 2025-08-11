@@ -24,6 +24,7 @@ export function handleDeleteProps(props) {
       'lcapIsCompress',
       'converter',
       'withCredentials',
+      'oversizeErrorMsg',
     ]);
   return {
     [$deletePropsList]: deletePropsList,
@@ -43,6 +44,7 @@ export function handleCustomProps(props) {
   const readonly = props.get('readonly');
   const disabled = props.get('disabled');
   const deletable = props.get('deletable');
+  const oversizeErrorMsg = props.get('oversizeErrorMsg') || '文件大小超出限制';
   const deletableValue = useMemo(() => {
     if (readonly) {
       return false;
@@ -57,6 +59,7 @@ export function handleCustomProps(props) {
     name,
     urlField,
     deletable: deletableValue,
+    oversizeErrorMsg,
   };
 }
 handleCustomProps.order = 1;
@@ -82,6 +85,7 @@ export function handleEvent(props) {
   const onUpdateModelValue = props.get('onUpdateModelValue');
   const currentFileList = props.get('currentFileList');
   const autoUpload = props.get('autoUpload');
+  const oversizeErrorMsg = props.get('oversizeErrorMsg');
 
   const submitFn = useCallback(() => {
     const files = currentFileList.value?.filter((item) => item.file && !item.url);
@@ -189,9 +193,9 @@ export function handleEvent(props) {
             item: detail,
           });
         }
-        showToast('文件大小超出限制');
+        showToast(oversizeErrorMsg);
       },
-      [onOversize],
+      [onOversize, oversizeErrorMsg],
     ),
     ref: selfRef,
   };

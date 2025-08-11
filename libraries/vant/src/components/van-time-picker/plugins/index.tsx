@@ -67,6 +67,8 @@ export function handleCustomProps(props: any) {
     setPopupShow(false);
   };
   const selfRef = _.assign(refProp, { open, close });
+  const startTimeTabTitle = props.get('startTimeTabTitle') || '开始时间';
+  const endTimeTabTitle = props.get('endTimeTabTitle') || '结束时间';
   return {
     popupShow,
     setPopupShow,
@@ -74,6 +76,8 @@ export function handleCustomProps(props: any) {
     unit,
     ref: selfRef,
     inLink,
+    startTimeTabTitle,
+    endTimeTabTitle,
   };
 }
 handleCustomProps.order = 0;
@@ -246,7 +250,7 @@ function renderRangeContent(options: any) {
     <PickerGroup
       {..._.pick(props, Object.keys(pickerGroupProps))}
       v-slots={{ ...options.slots }}
-      tabs={['开始时间', '结束时间']}
+      tabs={[props.startTimeTabTitle, props.endTimeTabTitle]}
       onCancel={props.onCancel}
       onConfirm={props.onConfirm}>
       <TimePicker

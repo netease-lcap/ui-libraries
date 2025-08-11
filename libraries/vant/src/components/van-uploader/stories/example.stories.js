@@ -93,6 +93,7 @@ export const Default = {
     deletable: true,
     showUpload: true,
     accept: '.zip',
+    oversizeErrorMsg: '',
   },
 };
 

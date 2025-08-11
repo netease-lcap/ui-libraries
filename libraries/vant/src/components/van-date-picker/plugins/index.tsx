@@ -100,6 +100,12 @@ export function handleCustomProps(props: any) {
     return getMaxMinDates(props.get('maxDate'), props.get('minDate'));
   }, [props.get('maxDate'), props.get('minDate')]);
   const selfRef = _.assign(refProp, { open, close });
+  const startTimeTabTitle = props.get('startTimeTabTitle') || '开始时间';
+  const endTimeTabTitle = props.get('endTimeTabTitle') || '结束时间';
+  const startDateTabTitle = props.get('startDateTabTitle') || '开始日期';
+  const endDateTabTitle = props.get('endDateTabTitle') || '结束日期';
+  const datetimeDateTabTitle = props.get('datetimeDateTabTitle') || '选择日期';
+  const datetimeTimeTabTitle = props.get('datetimeTimeTabTitle') || '选择时间';
   return {
     popupShow,
     setPopupShow,
@@ -109,6 +115,12 @@ export function handleCustomProps(props: any) {
     maxDate: maxDateValue,
     minDate: minDateValue,
     type,
+    startTimeTabTitle,
+    endTimeTabTitle,
+    startDateTabTitle,
+    endDateTabTitle,
+    datetimeDateTabTitle,
+    datetimeTimeTabTitle,
   };
 }
 handleCustomProps.order = 0;
@@ -339,6 +351,10 @@ function renderRangeContent(options: any) {
     currentEndTimeValueRef,
     onSetCurrentStartTimeValue,
     onSetCurrentEndTimeValue,
+    startTimeTabTitle,
+    endTimeTabTitle,
+    startDateTabTitle,
+    endDateTabTitle,
   } = props;
   const { minDate, maxDate, type, timeColumnsType } = props;
   const startDateMaxDate = getMaxMinDates(getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate), minDate)
@@ -359,10 +375,10 @@ function renderRangeContent(options: any) {
   ).minTime;
   const tabsData = useMemo(() => {
     if (type === 'date') {
-      return ['开始日期', '结束日期'];
+      return [props.startDateTabTitle, props.endDateTabTitle];
     }
-    return ['开始日期', '开始时间', '结束日期', '结束时间'];
-  }, [type]);
+    return [props.startDateTabTitle, props.startTimeTabTitle, props.endDateTabTitle, props.endTimeTabTitle];
+  }, [type, startDateTabTitle, endDateTabTitle, startDateTabTitle, startTimeTabTitle, endDateTabTitle, endTimeTabTitle]);
   const startDateComponentRef = ref(null);
   const endDateComponentRef = ref(null);
   const startTimeComponentRef = ref(null);
@@ -475,7 +491,7 @@ function renderBasicContent(options: any) {
       <PickerGroup
         {..._.pick(props, Object.keys(pickerGroupProps))}
         v-slots={{ ...options.slots }}
-        tabs={['选择日期', '选择时间']}
+        tabs={[props.datetimeDateTabTitle, props.datetimeTimeTabTitle]}
         onCancel={props.onCancel}
         onConfirm={props.onConfirm}>
         <DatePicker
