@@ -7,6 +7,9 @@ namespace nasl.ui {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
       translateBindingProperty: ['modelValue'],
+      displaySlotInline: {
+        label: true,
+      },
     },
   })
   @Component({

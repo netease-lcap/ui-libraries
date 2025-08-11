@@ -93,8 +93,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '左图标',
-      description: '左图标组件',
+      title: '图标',
+      description: '图标组件',
       setter: { concept: 'IconSetter', customIconFont: 'LCAP_VANT4_ICONS' },
     })
     icon: nasl.core.String;

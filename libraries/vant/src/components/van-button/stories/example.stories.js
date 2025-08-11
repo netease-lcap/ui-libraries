@@ -27,6 +27,8 @@ export const Default = {
   }),
   args: {
     text: '默认按钮',
+    icon: 'plus',
+    iconPosition: 'right',
     type: 'primary',
     disabled: false,
     plain: false,
@@ -248,4 +250,4 @@ export const Block = {
       </div>
     `,
   }),
-}; 
+};
