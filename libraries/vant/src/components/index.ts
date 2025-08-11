@@ -65,3 +65,6 @@ export { VanSteps, VanStep } from './van-steps';
 export { VanToast, Message } from './van-toast';
 export { VanNotify } from './van-notify';
 export { VanPopoverCombination } from './van-popover-combination';
+export { VanNavBar } from './van-nav-bar';
+export { VanIndexBar, VanIndexAnchor } from './van-index-bar';
+export { VanActionBar, VanActionBarButton, VanActionBarIcon } from './van-action-bar';
