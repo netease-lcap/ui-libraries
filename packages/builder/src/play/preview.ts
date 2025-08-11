@@ -5,7 +5,7 @@ import { getComponentMetaInfos } from '../utils/lcap';
 import { exec } from '../utils/exec';
 
 let previewURL = '';
-export async function startPreview(rootPath: string, https: boolean = false) {
+export async function startPreview(rootPath: string, https: boolean = false, options: { version?: string; platform?: string }) {
   const config = await getLcapConfig();
   const meta = await getExtensionProjectMeta(rootPath);
   const componentList = await getComponentMetaInfos(rootPath, true);
@@ -15,11 +15,11 @@ export async function startPreview(rootPath: string, https: boolean = false) {
   });
 
   const protocol = https ? 'https' : 'http';
-  let platformURL = config.platformURL || 'https://csforkf.lcap.codewave-test.163yun.com/';
+  let platformURL = options.platform || config.platformURL || 'https://csforkf.lcap.codewave-test.163yun.com/';
 
   platformURL = `${protocol}${platformURL.substring(platformURL.indexOf('://'))}`;
 
-  const version = '4.0.0';
+  const version = options.version || '4.0.0';
 
   const commands: string[] = [
     'npx lcap-ide-server-proxy localserver',

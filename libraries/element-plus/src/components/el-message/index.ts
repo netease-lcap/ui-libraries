@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { ElMessage as ElMessagePlus } from 'element-plus';
 import Message from './message';
 import MessageDesigner from './designer.vue';
 import { registerComponent } from '@/plugins';
@@ -11,6 +12,5 @@ function ElMessageRegister(BaseComponent, plugin = {}, extend = true) {
 const ElMessageDesigner = MessageDesigner;
 const ElMessage = Message;
 
-
-export { ElMessageDesigner, ElMessageRegister, ElMessage };
+export { ElMessageDesigner, ElMessageRegister, ElMessage, ElMessagePlus as Message };
 export default Message;

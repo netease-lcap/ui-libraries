@@ -11,6 +11,7 @@ function VanListRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const VanList = registerComponent(VantList, { plugin: basicPlugin, name: 'van-list' });
+
 export { VantList, VanList, VanListRegister };
 
-export default VanList; 
+export default VanList;

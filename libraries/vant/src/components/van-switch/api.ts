@@ -5,7 +5,6 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'element',
-      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -23,7 +22,7 @@ namespace nasl.ui {
   export class VanSwitchOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '绑定值',
+      title: '值',
       sync: true,
       description: '开关绑定值',
     })
@@ -51,7 +50,7 @@ namespace nasl.ui {
       description: '开关尺寸',
       setter: { concept: 'NumberInputSetter' },
     })
-    size: nasl.core.Integer;
+    size: nasl.core.Integer = 26;
 
     @Prop({
       group: '主要属性',
@@ -81,4 +80,28 @@ namespace nasl.ui {
     })
     onClick: (event: {}) => void;
   }
-} 
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanSwitch',
+      },
+    ],
+  })
+  export class VanFormSwitch extends ViewComponent {
+    constructor(
+      options?: Partial<VanFormSwitchOptions & VanFormItemOptions & Omit<VanSwitchOptions, keyof VanFormItemOptions>>,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormSwitchOptions extends ViewComponentOptions {}
+}

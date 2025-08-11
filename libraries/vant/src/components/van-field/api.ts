@@ -4,8 +4,9 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
       forceUpdateWhenAttributeChange: true,
+      translateBindingProperty: ['modelValue'],
     },
   })
   @Component({
@@ -28,23 +29,7 @@ namespace nasl.ui {
       description: '输入框的值',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '名称',
-      description: '输入框名称',
-      setter: { concept: 'InputSetter' },
-    })
-    name: nasl.core.String = '';
-
-    @Prop({
-      group: '主要属性',
-      title: '输入框id',
-      description: '输入框id',
-      setter: { concept: 'InputSetter' },
-    })
-    id: nasl.core.String = '';
+    modelValue: nasl.core.String | nasl.core.Integer | nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -126,10 +111,10 @@ namespace nasl.ui {
       description: '输入框尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '小' }, { title: '正常' }, { title: '大' }],
+        options: [{ title: '正常' }, { title: '大' }],
       },
     })
-    size: 'small' | 'default' | 'large' = 'default';
+    size: 'default' | 'large' = 'default';
 
     @Prop({
       group: '主要属性',
@@ -137,10 +122,10 @@ namespace nasl.ui {
       description: '组件前置图标',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+        customIconFont: 'LCAP_VANT4_ICONS',
       },
     })
-    prefixIcon: nasl.core.String;
+    leftIcon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -148,10 +133,10 @@ namespace nasl.ui {
       description: '组件后置图标',
       setter: {
         concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+        customIconFont: 'LCAP_VANT4_ICONS',
       },
     })
-    suffixIcon: nasl.core.String;
+    rightIcon: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -171,22 +156,6 @@ namespace nasl.ui {
       },
     })
     labelAlign: 'left' | 'top' | 'right' = 'left';
-
-    @Prop({
-      group: '主要属性',
-      title: '是否显示标签',
-      description: '是否显示标签',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showLabel: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '是否必填',
-      description: '是否必填',
-      setter: { concept: 'SwitchSetter' },
-    })
-    required: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -217,6 +186,7 @@ namespace nasl.ui {
       title: '多行文本行数',
       description: '多行文本的行数',
       setter: { concept: 'NumberInputSetter', min: 1 },
+      if: (_) => _.type === 'textarea',
     })
     rows: nasl.core.Integer = 3;
 
@@ -225,24 +195,10 @@ namespace nasl.ui {
       title: '自动调整高度',
       description: '是否自动调整高度',
       setter: { concept: 'SwitchSetter' },
+      if: (_) => _.type === 'textarea',
     })
     autosize: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '最大高度',
-      description: '最大高度',
-      setter: { concept: 'InputSetter' },
-    })
-    maxHeight: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '最小高度',
-      description: '最小高度',
-      setter: { concept: 'InputSetter' },
-    })
-    minHeight: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -254,23 +210,6 @@ namespace nasl.ui {
       },
     })
     inputAlign: 'left' | 'center' | 'right' = 'left';
-
-    @Prop({
-      group: '主要属性',
-      title: '错误信息',
-      description: '底部错误提示文案，为空时不展示',
-      setter: { concept: 'InputSetter' },
-    })
-    errorMessage: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '错误信息对齐方式',
-      description: '错误信息对齐方式',
-      setter: { concept: 'EnumSelectSetter', options: [{ title: '居中' }, { title: '右对齐' }] },
-    })
-    errorMessageAlign: 'center' | 'right' = 'center';
-
     @Prop({
       group: '主要属性',
       title: '错误状态',
@@ -285,7 +224,9 @@ namespace nasl.ui {
       description: '自定义格式化函数',
       setter: { concept: 'AnonymousFunctionSetter' },
     })
-    formatter: (value: string) => string;
+    formatter: (
+      value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal,
+    ) => nasl.core.String | nasl.core.Integer | nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -299,6 +240,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '显示字数统计',
       description: '是否显示字数统计',
+      if: (_) => _.maxlength && _.maxlength > 0,
       setter: { concept: 'SwitchSetter' },
     })
     showWordLimit: nasl.core.Boolean = false;
@@ -307,7 +249,13 @@ namespace nasl.ui {
       title: '输入时',
       description: '输入框值发生变化时触发',
     })
-    onInput: (event: nasl.core.String) => any;
+    onInput: (value: nasl.core.String | nasl.core.Decimal) => void;
+
+    @Event({
+      title: '值改变时',
+      description: '值改变时触发',
+    })
+    onChange: (value: nasl.core.String | nasl.core.Decimal) => void;
 
     @Event({
       title: '清空按钮点击时',
@@ -319,43 +267,25 @@ namespace nasl.ui {
       title: '点击时',
       description: '点击组件时触发',
     })
-    onClick: (event: any) => any;
+    onClick: (event: MouseEvent) => void;
+
+    @Event({
+      title: '点击输入区',
+      description: '点击输入区域时触发',
+    })
+    onClickInput: (event: MouseEvent) => void;
 
     @Event({
       title: '获得焦点时',
       description: '获得焦点时触发',
     })
-    onFocus: (event: any) => any;
+    onFocus: (event: Event) => void;
 
     @Event({
       title: '失去焦点时',
       description: '失去焦点时触发',
     })
-    onBlur: (event: any) => any;
-
-    @Event({
-      title: '键盘按下时',
-      description: '键盘按下时触发',
-    })
-    onKeydown: (event: any) => any;
-
-    @Event({
-      title: '键盘释放时',
-      description: '释放键盘时触发',
-    })
-    onKeyup: (event: any) => any;
-
-    @Event({
-      title: '中文输入结束时',
-      description: '中文输入结束时触发',
-    })
-    onCompositionend: (event: any) => any;
-
-    @Event({
-      title: '中文输入开始时',
-      description: '中文输入开始时触发',
-    })
-    onCompositionstart: (event: any) => any;
+    onBlur: (event: Event) => void;
 
     @Slot({
       title: '标签',

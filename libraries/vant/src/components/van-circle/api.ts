@@ -9,9 +9,9 @@ namespace nasl.ui {
   })
   @Component({
     title: '环形进度条',
-    icon: 'circle-progress',
-    description: '环形进度条，用于展示操作进度，告知用户当前状态和预期。',
-    group: 'Feedback',
+    icon: 'circular-progress',
+    description: '圆环形的进度条组件',
+    group: 'Display',
   })
   export class VanCircle extends ViewComponent {
     constructor(options?: Partial<VanCircleOptions>) {
@@ -45,6 +45,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '文本',
+      description: '文本',
+      setter: { concept: 'InputSetter' },
+    })
+    text: nasl.core.String = '圆环';
+
+    @Prop({
+      group: '主要属性',
       title: '尺寸',
       description: '环形进度条尺寸',
       setter: { concept: 'InputSetter' },
@@ -66,14 +74,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     layerColor: nasl.core.String = 'white';
-
-    @Prop({
-      group: '主要属性',
-      title: '填充颜色',
-      description: '填充颜色',
-      setter: { concept: 'InputSetter' },
-    })
-    fill: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -123,11 +123,5 @@ namespace nasl.ui {
       },
     })
     startPosition: 'top' | 'right' | 'bottom' | 'left' = 'top';
-
-    @Slot({
-      title: 'Default',
-      description: '自定义文字内容',
-    })
-    slotDefault: () => Array<ViewComponent>;
   }
 }

@@ -33,10 +33,10 @@ export const Default = {
           v-bind="args"
           @select="handleSelect"
           @change="handleChange">
-          <van-sidebar-item index="1" text="导航一" />
-          <van-sidebar-item index="2" text="导航二" />
-          <van-sidebar-item index="3" text="导航三" />
-          <van-sidebar-item index="4" text="导航四" />
+          <van-sidebar-item index="1" title="导航一" />
+          <van-sidebar-item index="2" title="导航二" />
+          <van-sidebar-item index="3" title="导航三" />
+          <van-sidebar-item index="4" title="导航四" />
         </van-sidebar>
         <div style="flex: 1; padding: 20px;">
           <p>当前选中: {{ activeIndex }}</p>

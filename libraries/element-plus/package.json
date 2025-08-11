@@ -28,7 +28,7 @@
     "deploy:one": "lcap-scripts deploy --images",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "check:api": "tsc -p tsconfig.api.json",
-    "test": "echo \"no test config\"",
+    "test": "vitest",
     "test:dev": "vitest dev",
     "test:coverage": "vitest run --coverage"
   },
@@ -50,6 +50,10 @@
     "@types/lodash": "^4.17.13",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
+    "@vitest/coverage-v8": "^2.0.5",
+    "@vitest/ui": "^2.0.5",
+    "@vue/test-utils": "^2.0.0",
+    "@vueuse/core": "^9.1.0",
     "autoprefixer": "^10.4.16",
     "color": "^4.2.3",
     "fs-extra": "^11.2.0",
@@ -57,7 +61,7 @@
     "storybook": "^8.4.6",
     "typescript": "~5.6.2",
     "vite": "^6.0.1",
-    "vitest": "^1.1.0",
+    "vitest": "^2.0.5",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vue-tsc": "^2.1.10"
@@ -74,7 +78,9 @@
     "element-plus": "2.9.11",
     "immutable": "5.0.0-beta.4",
     "lodash": "^4.17.21",
+    "lodash-unified": "^1.0.3",
     "normalize.css": "^7.0.0",
+    "type-fest": "^2.14.0",
     "vue-hooks-plus": "^2.2.1",
     "zustand": "^5.0.3"
   }

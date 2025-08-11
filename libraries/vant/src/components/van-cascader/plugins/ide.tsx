@@ -17,5 +17,6 @@ export function handleNodePath(props) {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
     tagName: 'van-cascader',
+    formTagName: 'van-form-cascader',
   };
 }

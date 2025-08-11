@@ -38,13 +38,7 @@ namespace nasl.ui {
       description: '标签类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '主要' },
-          { title: '成功' },
-          { title: '警告' },
-          { title: '危险' },
-        ],
+        options: [{ title: '默认' }, { title: '主要' }, { title: '成功' }, { title: '警告' }, { title: '危险' }],
       },
     })
     type: 'default' | 'primary' | 'success' | 'warning' | 'danger' = 'default';
@@ -63,14 +57,10 @@ namespace nasl.ui {
       description: '标签尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '小' },
-          { title: '正常' },
-          { title: '大' },
-        ],
+        options: [{ title: '正常' }, { title: '大' }],
       },
     })
-    size: 'small' | 'default' | 'large' = 'default';
+    size: 'default' | 'large' = 'default';
 
     @Prop({
       group: '交互属性',

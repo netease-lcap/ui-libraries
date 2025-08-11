@@ -1,22 +1,30 @@
-import _ from 'lodash';
-// import { getIsPreview, getRender } from '@/plugins/common/preview';
+import { useCallback } from '@/plugins/hooks';
+import { categoryStyles, categoryProps } from '@/utils/dom';
+import styles from '../index.module.css';
+
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
-export * from './ide';
 
-export function handlePreview(props) {
-  const ref = props.get('ref');
+export function handleWarp(props) {
+  const nodePath = props.get('data-nodepath');
   const Component = props.get('render');
-  // const isPreview = getIsPreview(props);
-
-  const previewRender = (insProps) => {
-    // const inIDE = !!props.get('data-nodepath');
-    // const previewText = inIDE || _.isNil(insProps.modelValue) ? '-' : insProps.modelValue;
-    // return <van-text>{previewText}</van-text>;
-  };
-
-  // const { render, insRef } = getRender(Component, previewRender, isPreview);
+  const render = useCallback(
+    (props) => {
+      const { style, innerStyle } = categoryStyles(props.style);
+      const outerProps = categoryProps(props);
+      console.log(props,'===');
+      const className = props.vertical ? styles['van-slider-room-vertical'] : styles['van-slider-room'];
+      return (
+        <div data-nodepath={nodePath} style={style} class={className} {...outerProps}>
+          <Component {...props} style={innerStyle} />
+        </div>
+      );
+    },
+    [Component],
+  );
   return {
-    // ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
-    // render,
+    render,
+    tagName: 'van-slider',
+    formTagName: 'van-form-slider',
   };
 }

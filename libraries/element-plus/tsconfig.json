@@ -26,20 +26,11 @@
     "emitDecoratorMetadata": true,
     "noImplicitAny": false,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@element-plus/*": ["./ep-test/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "ide/**/*.ts"
-  ],
-  "references": [
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "es",
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "ide/**/*.ts"],
+  "references": [],
+  "exclude": ["node_modules", "dist", "es"]
 }

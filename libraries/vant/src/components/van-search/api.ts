@@ -4,8 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'vant',
-      forceUpdateWhenAttributeChange: 'preview',
+      idetype: 'container',
     },
   })
   @Component({
@@ -23,7 +22,7 @@ namespace nasl.ui {
   export class VanSearchOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '绑定值',
+      title: '值',
       sync: true,
       description: '搜索框的值',
       setter: { concept: 'InputSetter' },
@@ -61,14 +60,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     clearable: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '搜索框 id',
-      description: '搜索框 id',
-      setter: { concept: 'InputSetter' },
-    })
-    id: nasl.core.String = 'vant-search-n-input';
 
     @Prop({
       group: '主要属性',
@@ -110,7 +101,6 @@ namespace nasl.ui {
       },
     })
     inputAlign: 'left' | 'center' | 'right' = 'left';
-
 
     @Prop({
       group: '主要属性',
@@ -176,62 +166,49 @@ namespace nasl.ui {
       title: '确定搜索时触发',
       description: '确定搜索时触发',
     })
-    onSearch: (value: nasl.core.String) => any;
-
-    // @Event({
-    //   title: '输入框内容变化时触发',
-    //   description: '输入框内容变化时触发',
-    // })
-    // onInput: (value: nasl.core.String) => any;
+    onSearch: (value: nasl.core.String) => void;
 
     @Event({
       title: '输入框获得焦点时触发',
       description: '输入框获得焦点时触发',
     })
-    onFocus: (event: any) => any;
+    onFocus: (event: Event) => void;
 
     @Event({
       title: '输入框失去焦点时触发',
       description: '输入框失去焦点时触发',
     })
-    onBlur: (event: any) => any;
+    onBlur: (event: Event) => void;
 
     @Event({
-      title: '点击搜索图标时触发',
-      description: '点击搜索图标时触发',
+      title: '点击左侧搜索图标时触发',
+      description: '点击左侧搜索图标时触发',
     })
-    clickLeftIcon: (event: any) => any;
+    clickLeftIcon: (event: MouseEvent) => void;
 
     @Event({
-      title: '点击搜索图标时触发',
-      description: '点击搜索图标时触发',
+      title: '点击右侧搜索图标时触发',
+      description: '点击右侧搜索图标时触发',
     })
-    clickRightIcon: (event: any) => any;
+    clickRightIcon: (event: MouseEvent) => void;
 
     @Event({
       title: '点击输入区域时触发',
       description: '点击输入区域时触发',
     })
-    onClickInput: (event: any) => any;
+    onClickInput: (event: MouseEvent) => void;
 
     @Event({
       title: '点击清除图标时触发',
       description: '点击清除图标时触发',
     })
-    onClear: (event: any) => any;
+    onClear: (event: MouseEvent) => void;
 
     @Event({
       title: '点击操作按钮时触发',
       description: '点击操作按钮时触发',
     })
-    onCancel: (event: any) => any;
-
-
-    @Slot({
-      title: '自定义操作按钮',
-      description: '自定义操作按钮',
-    })
-    slotAction: () => Array<ViewComponent>;
+    onCancel: () => void;
 
     @Slot({
       title: '自定义左侧内容(搜索框外)',
@@ -244,9 +221,22 @@ namespace nasl.ui {
       description: '自定义左侧内容(搜索框内)',
     })
     slotLabel: () => Array<ViewComponent>;
-
   }
 
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanSearch',
+      },
+    ],
+  })
   @Component({
     title: '搜索框表单项',
     icon: 'search',
@@ -254,7 +244,9 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class VanFormSearch extends ViewComponent {
-    constructor(options?: Partial<VanFormSearchOptions>) {
+    constructor(
+      options?: Partial<VanFormSearchOptions & VanFormItemOptions & Omit<VanSearchOptions, keyof VanFormItemOptions>>,
+    ) {
       super();
     }
   }

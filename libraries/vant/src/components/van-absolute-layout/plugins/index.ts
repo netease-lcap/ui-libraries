@@ -1,1 +1,1 @@
-export { handleControllableValue } from '@/plugins/common/index'; 
+export { handleControllableValue } from '@/plugins/common/index';

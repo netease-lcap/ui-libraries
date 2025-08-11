@@ -19,7 +19,7 @@ export const Default = {
       };
     },
     template: `
-      <van-empty v-bind="args" />
+      <van-empty v-bind="args" style="font-size:17px" />
     `,
   }),
   args: {
@@ -36,7 +36,7 @@ export const ImageTypes = {
   render: () => ({
     template: `
       <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-        <van-empty image="default" description="暂无数据" />
+        <van-empty  image="default" description="暂无数据" />
         <van-empty image="error" description="加载失败" />
         <van-empty image="network" description="网络错误" />
         <van-empty image="search" description="暂无搜索结果" />

@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import { Field, Popup } from 'vant';
-import { useMemo, useCallback, useState, useControllableValue, useEffect, useRef } from '@/plugins/hooks';
+import { useMemo, useCallback, useState, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
+import { categoryProps } from '@/utils/dom';
 
 import {
   useRequestDataSource,
@@ -10,7 +11,7 @@ import {
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 
-// export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
 
 export function handleDataSource(props) {
@@ -40,54 +41,77 @@ export function handleDataSource(props) {
   };
 }
 
-export function handleShowField(props) {
-  const Component = props.get('render');
+export function handlewFieldState(props) {
   const columns = props.get('columns');
-  const onCancelProps = props.get('onCancel');
-  const onConfirmProps = props.get('onConfirm');
+  const onCancelProps = props.get('onCancel', () => {});
+  const onConfirmProps = props.get('onConfirm', () => {});
   const [value, setValue] = useControllableValue(props);
-  const [fieldValue, setFieldValue] = useState(value);
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const selected = _.filter(columns, (item) => _.includes(value, item.value))
-      .map((item) => item.text)
-      .join(',');
-    if (selected === value) return;
-    setFieldValue(selected);
+  const fieldValue = useMemo(() => {
+    const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item)?.text);
+    return _.join(selected, ',');
   }, [value, columns]);
+  const [show, setShow] = useControllableValue(props, {
+    defaultValue: false,
+    valuePropName: 'show',
+    trigger: 'onUpdate:show',
+  });
   const onCancel = useCallback(
     _.wrap(onCancelProps, (fn, ...args) => {
-      _.assign(fn, ...args);
+      _.attempt(fn, ...args);
       setShow(false);
     }),
     [onCancelProps],
   );
   const onConfirm = useCallback(
     _.wrap(onConfirmProps, (fn, { selectedValues, selectedOptions, ...args }: { [x: string]: any }) => {
-      _.assign(fn, { selectedValues, selectedOptions, ...args });
+      _.attempt(fn, { selectedValues, selectedOptions, ...args });
       setValue(selectedValues);
-      setFieldValue(_.map(selectedOptions, (item) => item.text).join(','));
       setShow(false);
     }),
     [onConfirmProps],
   );
+
+  return {
+    show,
+    setShow,
+    value,
+    setValue,
+    fieldValue,
+    onCancel,
+    onConfirm,
+  };
+}
+
+export function handleFieldRender(props) {
+  const Component = props.get('render');
   const render = useCallback(
     (props) => {
-      const { setShow, show, value, setFieldValue, setValue, fieldValue } = props;
+      const { setShow, show, value, setValue, fieldValue, clearable } = props;
+      const rightIcon = clearable ? 'clear' : '';
+      const outerProps = categoryProps(props);
       return [
         <Field
           modelValue={fieldValue}
+          placeholder={props.placeholder}
           onClick={() => setShow(true)}
+          {...outerProps}
           readonly
           is-link
-          right-icon="clear"
+          right-icon={rightIcon}
           onClickRightIcon={(e) => {
             e.stopPropagation();
             setValue([]);
-            setFieldValue([]);
           }}
         />,
-        <Popup show={show} onClose={() => setShow(false)} lazy-render={false} round position="bottom">
+        <Popup
+          show={show}
+          onClose={() => setShow(false)}
+          lazy-render={false}
+          round
+          position="bottom"
+          {...outerProps}
+          ide-draggable={props['ide-draggable']}
+        >
           <Component
             {..._.omit(props, ['value', 'modelValue', 'pickerValue', 'onUpdate:modelValue'])}
             modelValue={value}
@@ -98,16 +122,7 @@ export function handleShowField(props) {
     },
     [Component],
   );
-
   return {
     render,
-    show,
-    setShow,
-    value,
-    setFieldValue,
-    setValue,
-    fieldValue,
-    onCancel,
-    onConfirm,
   };
 }

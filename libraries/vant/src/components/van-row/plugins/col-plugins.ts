@@ -27,7 +27,18 @@ export function columnPlugin(props) {
   const keys = ['xs', 'sm', 'md', 'lg', 'xl'];
   const deletePropsList = props
     .get($deletePropsList, [])
-    .concat(['xsSpan', 'xsOffset', 'smSpan', 'smOffset', 'mdSpan', 'mdOffset', 'lgSpan', 'lgOffset', 'xlSpan', 'xlOffset']);
+    .concat([
+      'xsSpan',
+      'xsOffset',
+      'smSpan',
+      'smOffset',
+      'mdSpan',
+      'mdOffset',
+      'lgSpan',
+      'lgOffset',
+      'xlSpan',
+      'xlOffset',
+    ]);
 
   const newKeys = {};
   keys.forEach((key) => {
@@ -38,4 +49,4 @@ export function columnPlugin(props) {
     [$deletePropsList]: deletePropsList,
     ...newKeys,
   };
-} 
+}

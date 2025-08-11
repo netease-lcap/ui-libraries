@@ -21,15 +21,3 @@ export const Block1 = {
     `,
   }),
 };
-
-export const Block2 = {
-  name: '环形进度条',
-  render: () => ({
-    setup() {
-      return {};
-    },
-    template: `
-      <van-progress type="circle" :percentage="50"></van-progress>
-    `,
-  }),
-}; 

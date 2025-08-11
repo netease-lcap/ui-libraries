@@ -3,27 +3,27 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 1,
+    show: true,
     ideusage: {
       idetype: 'container',
       dataSource: {
         display: 3,
-        loopElem: '.van-list__item',
+        loopElem: 'div',
+        loopRule: 'nth-child(n+2)',
         displayData: '"[{}, {}, {}]"',
         propertyName: ':dataSource',
         emptySlot: {
-          condition: 'this.elementsLength() === 0',
-          accept: "target.concept === 'Entity'",
+          condition: '!this.getAttribute("dataSource")',
+          accept: false,
         },
       },
-      childAccept: false,
-      useTemplateInDefaultSlot: true,
     },
   })
   @Component({
     title: '列表',
-    icon: 'list',
-    description: '瀑布流滚动加载，用于展示长列表，当列表即将滚动到底部时，会触发事件并加载更多列表项。',
-    group: 'Display',
+    icon: 'list-view',
+    description: '用于列举大量数据的列表框',
+    group: 'Table',
   })
   export class VanList<T> extends ViewComponent {
     @Prop({
@@ -60,29 +60,37 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否正在加载',
-      description: '是否处于加载状态，加载过程中不触发load事件',
-      setter: { concept: 'SwitchSetter' },
-    })
-    loading: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否正在加载',
+    //   description: '是否处于加载状态，加载过程中不触发load事件',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // loading: nasl.core.Boolean = false;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否已加载完成',
+    //   description: '是否已加载完成，完成后不再触发load事件',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // finished: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
-      title: '是否已加载完成',
-      description: '是否已加载完成，完成后不再触发load事件',
+      title: '单元格模式',
+      description: '是否为单元格模式',
       setter: { concept: 'SwitchSetter' },
     })
-    finished: nasl.core.Boolean = false;
+    isCell: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否加载失败',
-      description: '是否加载失败，失败后点击错误提示可以重新触发load事件',
-      setter: { concept: 'SwitchSetter' },
-    })
-    error: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否加载失败',
+    //   description: '是否加载失败，失败后点击错误提示可以重新触发load事件',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // error: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -138,34 +146,10 @@ namespace nasl.ui {
     })
     onLoad: (event: any) => any;
 
-    @Event({
-      title: '下拉刷新事件',
-      description: '下拉刷新时触发',
-    })
-    onRefresh: (event: any) => any;
-
     @Slot({
-      title: '默认',
-      description: '列表项内容',
+      title: '项',
+      description: '自定义选项的结构和样式',
     })
-    slotDefault: (current: Current<T>) => Array<ViewComponent>;
-
-    @Slot({
-      title: '加载中',
-      description: '自定义底部加载中提示',
-    })
-    slotLoading: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '加载完成',
-      description: '自定义底部加载完成提示',
-    })
-    slotFinished: () => Array<ViewComponent>;
-
-    @Slot({
-      title: '加载失败',
-      description: '自定义底部加载失败提示',
-    })
-    slotError: () => Array<ViewComponent>;
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
-} 
+}

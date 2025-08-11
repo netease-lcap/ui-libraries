@@ -15,6 +15,10 @@ export const Default = {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     setup() {
+      const reff = ref('');
+      setTimeout(() => {
+        console.log(reff.value.reload(),'ff');
+      }, 1000);
       return {
         args,
         checked: ref(false),
@@ -24,16 +28,26 @@ export const Default = {
         handleClick(event) {
           console.log('复选框点击:', event);
         },
+        reff,
+        dataSource: async () => {
+          console.log('reload');
+          return [
+            { value: '1', text: '选项1' },
+            { value: '2', text: '选项2' },
+            { value: '3', text: '选项3' },
+          ];
+        },
       };
     },
     template: `
       <div style="padding: 20px;">
-        <van-checkbox 
-          v-model="checked" 
-          v-bind="args" 
+        <van-checkbox-group 
+          v-bind="args"
+          ref='reff'
+          :dataSource="dataSource"
           @change="handleChange"
           @click="handleClick">
-        </van-checkbox>
+        </van-checkbox-group>
         <p style="margin-top: 10px;">当前状态: {{ checked ? '选中' : '未选中' }}</p>
       </div>
     `,
@@ -432,7 +446,7 @@ export const ListExample = {
           if (checkedValues.value.length === items.value.length) {
             checkedValues.value = [];
           } else {
-            checkedValues.value = items.value.map(item => item.id.toString());
+            checkedValues.value = items.value.map((item) => item.id.toString());
           }
         },
       };
@@ -459,4 +473,4 @@ export const ListExample = {
       </div>
     `,
   }),
-}; 
+};

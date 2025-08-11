@@ -29,10 +29,10 @@ namespace nasl.ui {
       description: '按钮尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
+        options: [{ title: '默认' }, { title: '大' }, { title: '小' }, { title: '迷你' }],
       },
     })
-    size: 'default' | 'large' | 'small' = 'default';
+    size: 'normal' | 'large' | 'small' | 'mini' = 'normal';
 
     @Prop({
       group: '主要属性',
@@ -40,17 +40,10 @@ namespace nasl.ui {
       description: '按钮类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '主要' },
-          { title: '成功' },
-          { title: '信息' },
-          { title: '警告' },
-          { title: '危险' },
-        ],
+        options: [{ title: '默认' }, { title: '主要' }, { title: '成功' }, { title: '警告' }, { title: '危险' }],
       },
     })
-    type: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
+    type: 'default' | 'primary' | 'success' | 'warning' | 'danger';
 
     @Prop({
       group: '主要属性',
@@ -67,6 +60,12 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     text: nasl.core.String = '按钮';
+
+    @Prop({
+      group: '交互属性',
+      title: '链接地址',
+    })
+    hrefAndTo: nasl.core.String;
 
     @Prop({
       group: '样式属性',
@@ -96,7 +95,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '左图标',
       description: '左图标组件',
-      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+      setter: { concept: 'IconSetter', customIconFont: 'LCAP_VANT4_ICONS' },
     })
     icon: nasl.core.String;
 

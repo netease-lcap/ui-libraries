@@ -4,13 +4,13 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 3,
     ideusage: {
-      idetype: "container",
+      idetype: 'container',
       childAccept: "target.tag === 'van-col'",
       structured: true,
       displaySlotInline: {
         label: true,
       },
-    }
+    },
   })
   @Component({
     title: '栅格布局',
@@ -32,31 +32,35 @@ namespace nasl.ui {
       setter: {
         concept: 'CapsulesSetter',
         options: [
-            { title: '左对齐', icon: 'horizontal-justify-start', tooltip: '左对齐' },
-            { title: '居中对齐', icon: 'horizontal-justify-center', tooltip: '居中对齐' },
-            { title: '右对齐', icon: 'horizontal-justify-end', tooltip: '右对齐' },
-            {
-              title: '平均分布(两端不留空)',
-              icon: 'horizontal-justify-space-between',
-              tooltip: '平均分布(两端不留空)' ,
-            },
-            {
-              title: '平均分布',
-              icon: 'horizontal-justify-space-around',
-              tooltip: '平均分布',
-            }
+          { title: '左对齐', icon: 'horizontal-justify-start', tooltip: '左对齐' },
+          { title: '居中对齐', icon: 'horizontal-justify-center', tooltip: '居中对齐' },
+          { title: '右对齐', icon: 'horizontal-justify-end', tooltip: '右对齐' },
+          {
+            title: '平均分布(两端不留空)',
+            icon: 'horizontal-justify-space-between',
+            tooltip: '平均分布(两端不留空)',
+          },
+          {
+            title: '平均分布',
+            icon: 'horizontal-justify-space-around',
+            tooltip: '平均分布',
+          },
         ],
       },
     })
-    justify: 'start' | 'end' | 'center' | 'space-around' | 'space-between' = 'start';
+    justify: 'start' | 'center' | 'end' | 'space-around' | 'space-between' = 'start';
 
     @Prop({
       group: '主要属性',
       title: '纵轴对齐',
       description: 'flex 布局下的纵轴对齐方式',
       setter: {
-          concept: 'CapsulesSetter',
-          options: [{ title: '顶对齐', icon: 'horizontal-alignment-start', tooltip: '顶对齐' }, { title: '垂直居中', icon: 'horizontal-alignment-center', tooltip: '垂直居中' }, { title: '底对齐', icon: 'horizontal-alignment-end', tooltip: '底对齐' }],
+        concept: 'CapsulesSetter',
+        options: [
+          { title: '顶对齐', icon: 'horizontal-alignment-start', tooltip: '顶对齐' },
+          { title: '垂直居中', icon: 'horizontal-alignment-center', tooltip: '垂直居中' },
+          { title: '底对齐', icon: 'horizontal-alignment-end', tooltip: '底对齐' },
+        ],
       },
     })
     align: 'top' | 'middle' | 'bottom' = 'top';
@@ -64,7 +68,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '列间隔',
-      description: '列间隔',
+      description: '列元素之间的间距（单位为 px）',
       setter: { concept: 'NumberInputSetter' },
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 0;
@@ -81,18 +85,18 @@ namespace nasl.ui {
       title: '自定义默认内容',
       description: '自定义默认内容',
       emptyBackground: 'add-sub',
-      snippets: [{ title: '列', code: '<van-col :span="1"></van-col>' }],
+      snippets: [{ title: '列', code: '<van-col :span="8"></van-col>' }],
     })
     slotDefault: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
     ideusage: {
-      idetype: "container",
+      idetype: 'container',
       slotInlineStyle: {
-        default: "min-width:auto"
-      }
-    }
+        default: 'min-width:auto',
+      },
+    },
   })
   @Component({
     title: '栅格列',
@@ -112,7 +116,7 @@ namespace nasl.ui {
       description: '栅格占据的列数',
       setter: { concept: 'NumberInputSetter', min: 0, max: 24 },
     })
-    span: nasl.core.Decimal | nasl.core.Integer = 24;
+    span: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
@@ -120,7 +124,7 @@ namespace nasl.ui {
       description: '栅格左侧的间隔格数',
       setter: { concept: 'NumberInputSetter', min: 0, max: 24 },
     })
-    offset: nasl.core.Decimal | nasl.core.Integer = 0;
+    offset: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
@@ -130,149 +134,11 @@ namespace nasl.ui {
     })
     tag: nasl.core.String = 'div';
 
-    @Prop({
-      group: '主要属性',
-      title: '栅格向右移动格数',
-      description: '栅格向右移动格数',
-      setter: { concept: 'NumberInputSetter', min: 0, max: 24 },
-    })
-    push: nasl.core.Decimal | nasl.core.Integer = 0;
-
-    @Prop({
-      group: '主要属性',
-      title: '栅格向左移动格数',
-      description: '栅格向左移动格数',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    pull: nasl.core.Decimal | nasl.core.Integer = 0;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Xs栅格占据的列数',
-      description: '`<768px` 响应式栅格占据的列数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    xsSpan: nasl.core.Decimal | nasl.core.Integer;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Xs左侧的间隔格数',
-      description: '`<768px` 响应式栅格左侧的间隔格数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    xsOffset: nasl.core.Decimal | nasl.core.Integer;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Sm栅格占据的列数',
-      description: '`≥768px` 响应式栅格占据的列数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    smSpan: nasl.core.Decimal | nasl.core.Integer;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Sm左侧的间隔格数',
-      description: '`≥768px` 响应式栅格左侧的间隔格数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    smOffset: nasl.core.Decimal | nasl.core.Integer;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Md栅格占据的列数',
-      description: '`≥992px` 响应式栅格占据的列数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    mdSpan: nasl.core.Decimal | nasl.core.Integer;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Md左侧的间隔格数',
-      description: '`≥992px` 响应式栅格左侧的间隔格数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    mdOffset: nasl.core.Decimal | nasl.core.Integer;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Lg栅格占据的列数',
-      description: '`≥1200px` 响应式栅格占据的列数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    lgSpan: nasl.core.Decimal | nasl.core.Integer;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Lg左侧的间隔格数',
-      description: '`≥1200px` 响应式栅格左侧的间隔格数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    lgOffset: nasl.core.Decimal | nasl.core.Integer;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Xl栅格占据的列数',
-      description: '`≥1920px` 响应式栅格占据的列数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    xlSpan: nasl.core.Decimal | nasl.core.Integer;
-
-    @Prop({
-      group: '主要属性',
-      title: 'Xl左侧的间隔格数',
-      description: '`≥1920px` 响应式栅格左侧的间隔格数',
-      setter: {
-        concept: 'NumberInputSetter',
-        min: 0,
-        max: 24,
-      },
-    })
-    xlOffset: nasl.core.Decimal | nasl.core.Integer;
-
     @Event({
       title: '点击栅格列',
       description: '点击栅格列时触发',
     })
-    onClick: (event: {
-        column: nasl.core.Integer;
-    }) => any;
+    onClick: (event: { column: nasl.core.Integer }) => any;
 
     @Slot({
       title: '自定义默认内容',
@@ -280,4 +146,4 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
   }
-} 
+}

@@ -4,8 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
     ideusage: {
-      idetype: 'vant',
-      forceUpdateWhenAttributeChange: 'preview',
+      idetype: 'container',
     },
   })
   @Component({
@@ -23,7 +22,7 @@ namespace nasl.ui {
   export class VanRateOptions extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '绑定值',
+      title: '值',
       sync: true,
       description: '评分的值',
       setter: { concept: 'NumberInputSetter' },
@@ -84,7 +83,7 @@ namespace nasl.ui {
       description: '选中时的颜色',
       setter: { concept: 'InputSetter' },
     })
-    color: nasl.core.String = '#ffd21e';
+    color: nasl.core.String = '#ee0a24';
 
     @Prop({
       group: '样式属性',
@@ -106,7 +105,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '选中时的图标',
       description: '选中时的图标名称',
-      setter: { concept: 'IconSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
     })
     icon: nasl.core.String = 'star';
 
@@ -114,17 +116,12 @@ namespace nasl.ui {
       group: '主要属性',
       title: '未选中时的图标',
       description: '未选中时的图标名称',
-      setter: { concept: 'IconSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
     })
     voidIcon: nasl.core.String = 'star-o';
-
-    @Prop({
-      group: '主要属性',
-      title: '半选时的图标',
-      description: '半选时的图标名称',
-      setter: { concept: 'IconSetter' },
-    })
-    halfIcon: nasl.core.String = 'star';
 
     @Prop({
       group: '主要属性',
@@ -142,27 +139,28 @@ namespace nasl.ui {
     })
     clearable: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '状态属性',
-      title: '预览',
-      description: '是否预览',
-      setter: { concept: 'SwitchSetter' },
-    })
-    preview: nasl.core.Boolean = false;
-
     @Event({
       title: '值改变时',
       description: '分值改变时触发',
     })
-    onChange: (value: nasl.core.Decimal) => any;
+    onChange: (value: nasl.core.Decimal) => void;
 
-    @Event({
-      title: '点击时',
-      description: '点击评分时触发',
-    })
-    onClick: (value: nasl.core.Decimal) => any;
   }
 
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanRate',
+      },
+    ],
+  })
   @Component({
     title: '评分表单项',
     icon: 'rate',
@@ -170,7 +168,11 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class VanFormRate extends ViewComponent {
-    constructor(options?: Partial<VanFormRateOptions >) {
+    constructor(
+      options?: Partial<
+        VanFormRateOptions & VanFormItemOptions & Omit<VanRateOptions, keyof VanFormItemOptions>
+      >,
+    ) {
       super();
     }
   }

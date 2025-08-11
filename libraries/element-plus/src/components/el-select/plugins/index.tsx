@@ -5,6 +5,7 @@ import { useMemo, useCallback, GetAccumulatedMapType } from '@/plugins/hooks';
 import { SelectAccumulateTypes } from './type';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
+import { ElOption } from '../index';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
@@ -21,7 +22,7 @@ export function handleDataSource(props: GetAccumulatedMapType<typeof SelectAccum
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
-    : { default: () => _.map(dataSource, (item) => <el-option {...item} />) };
+    : { default: () => _.map(dataSource, (item) => <ElOption {...item} />) };
 
   return {
     [$deletePropsList]: deletePropsList,

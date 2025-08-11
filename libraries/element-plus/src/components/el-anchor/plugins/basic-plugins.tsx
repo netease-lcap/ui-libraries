@@ -1,6 +1,7 @@
 /* 组件功能扩展插件 */
 import _ from 'lodash';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
+import { ElAnchorLink } from '@/components/el-anchor/index';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
 
@@ -24,7 +25,7 @@ export function handleDataSource(props) {
         ? {}
         : {
             default: () => _.map(dataSource, (item) => (
-              <el-anchor-link
+              <ElAnchorLink
                 {...item}
                 href={_.get(item, hrefField, '')}
                 v-slots={{

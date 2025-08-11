@@ -35,4 +35,4 @@ export const Complex = {
       </van-absolute-layout>
     `,
   }),
-}; 
+};

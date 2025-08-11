@@ -68,13 +68,14 @@
   },
   "dependencies": {
     "@lcap/validator": "workspace:*",
+    "@vant/touch-emulator": "^1.4.0",
     "@vant/use": "^1.6.0",
     "@vue/shared": "^3.5.13",
     "dayjs": "^1.11.13",
     "immutable": "5.0.0-beta.4",
     "lodash": "^4.17.21",
     "normalize.css": "^7.0.0",
-    "vant": "^4.9.21",
+    "vant": "4.9.21",
     "vue-hooks-plus": "^2.2.1",
     "zustand": "^5.0.3"
   }

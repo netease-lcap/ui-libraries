@@ -7,6 +7,7 @@ function ElAffixRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
   return registerComponent(BaseComponent, { plugin: componentPlugin, name: 'el-affix' });
 }
+
 const ElAffix = registerComponent(ElAffixPlus, { plugin: basicsPlugin, name: 'el-affix' });
 
 export { ElAffixPlus, ElAffix, ElAffixRegister };

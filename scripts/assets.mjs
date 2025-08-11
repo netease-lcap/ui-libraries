@@ -42,7 +42,7 @@ const libraries = [
   'libraries/pc-ui',
   'libraries/element-ui',
   'libraries/element-plus',
-  'libraries/vant',
+  // 'libraries/vant',
 ];
 
 libraries.forEach((libPath) => {

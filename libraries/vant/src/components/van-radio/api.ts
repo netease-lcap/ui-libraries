@@ -2,92 +2,6 @@
 
 namespace nasl.ui {
   @IDEExtraInfo({
-    order: 1,
-    ideusage: {
-      idetype: 'element',
-      forceUpdateWhenAttributeChange: 'preview',
-    },
-  })
-  @Component({
-    title: '单选框',
-    icon: 'radio',
-    description: '在一组备选项中进行单选',
-    group: 'Form',
-  })
-  export class VanRadio extends ViewComponent {
-    constructor(options?: Partial<VanRadioOptions>) {
-      super();
-    }
-  }
-
-  export class VanRadioOptions extends ViewComponentOptions {
-    @Prop({
-      group: '数据属性',
-      title: '选项名称',
-      description: '单选框的名称',
-      setter: { concept: 'InputSetter' },
-    })
-    name: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '禁用',
-      description: '是否禁用单选框',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '形状',
-      description: '单选框形状',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '圆形' }, { title: '方形' }],
-      },
-    })
-    shape: 'round' | 'square' = 'round';
-
-    @Prop({
-      group: '主要属性',
-      title: '选中颜色',
-      description: '选中时的颜色',
-      setter: { concept: 'InputSetter' },
-    })
-    checkedColor: nasl.core.String = '#1989fa';
-
-    @Prop({
-      group: '主要属性',
-      title: '标签禁用',
-      description: '是否禁用文本内容点击',
-      setter: { concept: 'SwitchSetter' },
-    })
-    labelDisabled: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '标签位置',
-      description: '标签位置',
-      setter: { concept: 'EnumSelectSetter', options: [{ title: '左侧' }, { title: '右侧' }] },
-    })
-    labelPosition: 'left' | 'right' = 'right';
-
-    @Prop({
-      group: '主要属性',
-      title: '图标大小',
-      description: '图标大小',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    iconSize: nasl.core.Integer = 20;
-
-    @Event({
-      title: '点击时',
-      description: '点击时触发',
-    })
-    onClick: (event: {}) => void;
-  }
-
-  @IDEExtraInfo({
     order: 2,
     ideusage: {
       idetype: 'container',
@@ -108,12 +22,11 @@ namespace nasl.ui {
           default: 'display: inline-block;',
         },
       },
-      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
     title: '单选组',
-    icon: 'radio-group',
+    icon: 'radios',
     description: '单选框组，用于管理多个单选框',
     group: 'Form',
   })
@@ -126,9 +39,9 @@ namespace nasl.ui {
   export class VanRadioGroupOptions<T, V> extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
-      title: '绑定值',
+      title: '选中值',
       sync: true,
-      description: '单选组绑定值',
+      description: '选中的值',
     })
     modelValue: V;
 
@@ -181,7 +94,7 @@ namespace nasl.ui {
         options: [{ title: '水平' }, { title: '垂直' }],
       },
     })
-    direction: 'horizontal' | 'vertical' = 'horizontal';
+    direction: 'horizontal' | 'vertical' = 'vertical';
 
     @Prop({
       group: '主要属性',
@@ -197,10 +110,83 @@ namespace nasl.ui {
       description: '单选框形状',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '圆形' }, { title: '方形' }],
+        options: [{ title: '圆形' }, { title: '点' }, { title: '方形' }],
       },
     })
-    shape: 'round' | 'square' = 'round';
+    shape: 'round' | 'dot' | 'square' = 'round';
+
+    @Prop({
+      group: '主要属性',
+      title: '选中颜色',
+      description: '选中时的颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    checkedColor: nasl.core.String = '#1989fa';
+
+    @Event({
+      title: '值改变时',
+      description: '值改变时触发',
+    })
+    onChange: (value: V) => void;
+
+    @Slot({
+      title: '默认',
+      description: '插入 van-radio 子组件',
+      snippets: [
+        {
+          title: '单选项',
+          code: '<van-radio name="value" ><van-text text="单选项"></van-text></van-radio>',
+        },
+      ],
+    })
+    slotDefault: () => Array<ViewComponent>;
+  }
+
+  @IDEExtraInfo({
+    order: 1,
+    ideusage: {
+      idetype: 'container',
+    },
+  })
+  @Component({
+    title: '单选框',
+    icon: 'radio',
+    description: '在一组备选项中进行单选',
+    group: 'Form',
+  })
+  export class VanRadio extends ViewComponent {
+    constructor(options?: Partial<VanRadioOptions>) {
+      super();
+    }
+  }
+
+  export class VanRadioOptions extends ViewComponentOptions {
+    @Prop({
+      group: '数据属性',
+      title: '选项名称',
+      description: '单选框的名称',
+      setter: { concept: 'InputSetter' },
+    })
+    name: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '禁用',
+      description: '是否禁用单选框',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '形状',
+      description: '单选框形状',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '圆形' }, { title: '点' }, { title: '方形' }],
+      },
+    })
+    shape: 'round' | 'dot' | 'square' = 'round';
 
     @Prop({
       group: '主要属性',
@@ -211,29 +197,64 @@ namespace nasl.ui {
     checkedColor: nasl.core.String = '#1989fa';
 
     @Prop({
-      group: '状态属性',
-      title: '预览',
-      description: '是否预览',
+      group: '主要属性',
+      title: '标签禁用',
+      description: '是否禁用文本内容点击',
       setter: { concept: 'SwitchSetter' },
     })
-    preview: nasl.core.Boolean = false;
+    labelDisabled: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '标签位置',
+      description: '标签位置',
+      setter: { concept: 'EnumSelectSetter', options: [{ title: '左侧' }, { title: '右侧' }] },
+    })
+    labelPosition: 'left' | 'right' = 'right';
+
+    @Prop({
+      group: '主要属性',
+      title: '图标大小',
+      description: '图标大小',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    iconSize: nasl.core.Integer = 20;
 
     @Event({
-      title: '值改变时',
-      description: '值改变时触发',
+      title: '点击时',
+      description: '点击时触发',
     })
-    onChange: (value: nasl.core.String | nasl.core.Integer | nasl.core.Boolean) => void;
+    onClick: (event: {}) => void;
 
     @Slot({
       title: '默认',
-      description: '插入 van-radio 子组件',
-      snippets: [
-        {
-          title: '单选项',
-          code: '<van-radio value="value" label="单选项"></van-radio>',
-        },
-      ],
     })
     slotDefault: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanRadioGroup',
+      },
+    ],
+  })
+  export class VanFormRadioGroup<T, V> extends ViewComponent {
+    constructor(
+      options?: Partial<
+        VanFormRadioGroupOptions<T, V> & VanFormItemOptions & Omit<VanRadioGroupOptions<T, V>, keyof VanFormItemOptions>
+      >,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormRadioGroupOptions<T, V> extends ViewComponentOptions {}
 }

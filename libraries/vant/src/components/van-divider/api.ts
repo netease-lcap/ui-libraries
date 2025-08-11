@@ -49,13 +49,6 @@ namespace nasl.ui {
     })
     contentPosition: 'left' | 'right' | 'center' = 'center';
 
-    @Prop({
-      group: '主要属性',
-      title: '垂直分割线',
-      description: '是否为垂直分割线',
-      setter: { concept: 'SwitchSetter' },
-    })
-    vertical: nasl.core.Boolean = false;
 
     @Slot({
       title: 'Default',

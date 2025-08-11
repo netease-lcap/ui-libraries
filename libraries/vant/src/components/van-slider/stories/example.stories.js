@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import Component from '../index';
 
 export default {
@@ -14,9 +15,10 @@ export const Default = {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     setup() {
+      const value = ref([0, 100]);
       return {
         args,
-        value: 50,
+        value,
         handleChange(value) {
           console.log('滑块值改变:', value);
         },
@@ -24,7 +26,8 @@ export const Default = {
     },
     template: `
       <div style="padding: 20px;">
-        <van-slider v-model="value" v-bind="args" @change="handleChange"></van-slider>
+      {{value}}
+        <van-slider range buttonColor="#1989fa" v-model="value" v-bind="args" @change="handleChange"></van-slider>
         <p style="margin-top: 10px;">当前值: {{ value }}</p>
       </div>
     `,
@@ -188,4 +191,4 @@ export const Range = {
       </div>
     `,
   }),
-}; 
+};

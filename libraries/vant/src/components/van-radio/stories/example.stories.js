@@ -40,7 +40,9 @@ export const Default = {
           value-field="value"
           text-field="text"
           @change="handleChange">
-
+          <template #item="{ current }">
+            <van-radio :name="current.value" >{{current.text}}</van-radio>
+          </template>
         </van-radio-group>
         <p style="margin-top: 10px;">当前选中: {{ value }}</p>
       </div>

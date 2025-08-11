@@ -30,9 +30,11 @@ export function handleSuffixIcon(props) {
 
 export function handleAppend(props) {
   const slots = props.get('slots');
+  const showAppend = props.get('showAppend');
+  const showPrepend = props.get('showPrepend');
   const { append: appendSlot = () => {}, prepend: prependSlot = () => {} } = _.pick(slots, ['append', 'prepend']);
-  const append = _.isEmpty(_.attempt(appendSlot)) ? { append: undefined } : { append: appendSlot() };
-  const prepend = _.isEmpty(_.attempt(prependSlot)) ? { prepend: undefined } : { prepend: prependSlot() };
+  const append = showAppend ? { append: appendSlot() } : { append: undefined };
+  const prepend = showPrepend ? { prepend: prependSlot() } : { prepend: undefined };
 
   return {
     slots: _.assign(slots, append, prepend),

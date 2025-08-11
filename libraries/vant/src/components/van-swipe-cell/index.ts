@@ -7,4 +7,4 @@ export const VanSwipeCell = registerComponent(VanSwipeCellOrigin, {
   name: 'van-swipe-cell',
 });
 
-export default VanSwipeCell; 
+export default VanSwipeCell;

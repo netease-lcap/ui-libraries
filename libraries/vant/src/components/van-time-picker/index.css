@@ -1,0 +1,59 @@
+.van-time-picker__root {
+  width: 100%;
+  cursor: pointer;
+}
+.van-time-picker__toolbar {
+  align-items: center;
+}
+.van-time-picker__content-wrapper {
+  padding: 12px;
+}
+
+.van-time-picker__bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.van-time-picker__cancel {
+  cursor: pointer;
+}
+.van-time-picker__rangevalue {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+}
+.van-time-picker__startvalue {
+  text-align: left;
+}
+.van-time-picker__endvalue {
+  text-align: left;
+}
+.van-time-picker__separator {
+  margin: 0 5px;
+}
+.van-time-picker__placeholder {
+  color: var(--van-field-placeholder-text-color);
+}
+.van-time-picker__field .van-field__control--left .van-time-picker__rangevalue {
+  justify-content: flex-start;
+}
+.van-time-picker__field .van-field__control--center .van-time-picker__rangevalue {
+  justify-content: center;
+}
+.van-time-picker__field .van-field__control--right .van-time-picker__rangevalue {
+  justify-content: flex-end;
+}
+.van-time-picker__field .van-field__control--custom {
+  cursor: pointer;
+}
+.van-time-picker__field.van-field--disabled .van-field__control--custom {
+  color: var(--van-field-disabled-text-color);
+}
+.van-time-picker__field.van-field--disabled:hover,
+.van-time-picker__field.van-field--disabled .van-field__control--custom:hover,
+.van-time-picker__field.van-time-picker__readonly:hover,
+.van-time-picker__field.van-time-picker__readonly .van-field__control--custom:hover{
+  cursor: default;
+}

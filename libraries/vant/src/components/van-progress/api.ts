@@ -9,9 +9,9 @@ namespace nasl.ui {
   })
   @Component({
     title: '进度条',
-    icon: 'progress',
+    icon: 'linear-progress',
     description: '用于展示操作进度，告知用户当前状态和预期。',
-    group: 'Feedback',
+    group: 'Display',
   })
   export class VanProgress extends ViewComponent {
     constructor(options?: Partial<VanProgressOptions>) {
@@ -31,8 +31,6 @@ namespace nasl.ui {
       },
     })
     percentage: nasl.core.Decimal = 0;
-
-
 
     @Prop({
       group: '主要属性',
@@ -58,7 +56,6 @@ namespace nasl.ui {
     })
     strokeWidth: nasl.core.Decimal = 4;
 
-
     @Prop({
       group: '主要属性',
       title: '是否显示文字',
@@ -82,7 +79,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     textColor: nasl.core.String = '#fff';
-
 
     @Prop({
       group: '主要属性',
