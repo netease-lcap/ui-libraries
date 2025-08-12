@@ -146,13 +146,13 @@ namespace nasl.ui {
         title: '关闭后',
         description: '关闭提示时触发',
     })
-    onClose: (event: {}) => any;
+    onClose: () => void;
 
     @Event({
       title: '点击时',
       description: '点击时触发',
     })
-    onClick: (event: {}) => any;
+    onClick: () => void;
 
     @Slot({
         title: '通知内容',

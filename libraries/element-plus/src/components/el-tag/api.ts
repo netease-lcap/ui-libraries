@@ -125,13 +125,45 @@ namespace nasl.ui {
       title: '点击',
       description: '点击 Tag 时触发的事件',
     })
-    onClick: (event: MouseEvent) => void;
+    onClick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Event({
       title: '关闭',
       description: '关闭 Tag 时触发的事件',
     })
-    onClose: (event: MouseEvent) => void;
+    onClose: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
   }
   
   @IDEExtraInfo({
@@ -198,7 +230,7 @@ namespace nasl.ui {
       title: '点击',
       description: '点击 Check Tag 时触发的事件',
     })
-    onChange: (event: MouseEvent) => void;
+    onChange: (event: { value: nasl.core.Boolean }) => void;
   }
   
   

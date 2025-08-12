@@ -264,37 +264,37 @@ namespace nasl.ui {
       title: '显示时触发',
       description: '显示时触发',
     })
-    onShow: (event: any) => any;
+    onShow: () => void;
 
     @Event({
       title: '显示动画播放前触发',
       description: '显示动画播放前触发',
     })
-    onBeforeEnter: (event: any) => any;
+    onBeforeEnter: () => void;
 
     @Event({
       title: '显示动画播放完毕后触发',
       description: '显示动画播放完毕后触发',
     })
-    onAfterEnter: (event: any) => any;
+    onAfterEnter: () => void;
 
     @Event({
       title: '隐藏时触发',
       description: '隐藏时触发',
     })
-    onHide: (event: any) => any;
+    onHide: () => void;
 
     @Event({
       title: '隐藏动画播放前触发',
       description: '隐藏动画播放前触发',
     })
-    onBeforeLeave: (event: any) => any;
+    onBeforeLeave: () => void;
 
     @Event({
       title: '隐藏动画播放完毕后触发',
       description: '隐藏动画播放完毕后触发',
     })
-    onAfterLeave: (event: any) => any;
+    onAfterLeave: () => void;
 
     @Slot({
       title: 'Default',
