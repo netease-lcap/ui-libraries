@@ -1,4 +1,4 @@
-import { $ide } from '@/plugins/constants';
+import { $deletePropsList, $ide } from '@/plugins/constants';
 
 export function handleDisplayDataSource(props) {
   const nodePath = props.get('data-nodepath');
@@ -21,3 +21,16 @@ export function handleDisplayDataSource(props) {
 }
 handleDisplayDataSource.type = $ide;
 handleDisplayDataSource.order = 0;
+
+export function handleDeleteNodepath(props) {
+  const nodePath = props.get('data-nodepath');
+  if (nodePath) {
+    const isInForm = props.get('isInForm');
+    const deletePropsList = props.get($deletePropsList).concat([isInForm ? 'data-nodepath' : '']);
+    return {
+      [$deletePropsList]: deletePropsList,
+    };
+  }
+  return {};
+}
+handleDeleteNodepath.type = $ide;
