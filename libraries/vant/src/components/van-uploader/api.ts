@@ -434,4 +434,35 @@ namespace nasl.ui {
       };
     }) => void;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'element',
+      ignoreProperty: ["showUpload"],
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanUploader',
+      },
+    ],
+  })
+  @Component({
+    title: '表单上传组件',
+    icon: 'uploader',
+    description: '用于表单上传',
+    group: 'Form',
+  })
+  export class VanFormUploader extends ViewComponent {
+    constructor(
+      options?: Partial<VanFormUploaderOptions & VanFormItemOptions & Omit<VanUploaderOptions, keyof VanFormItemOptions>>,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormUploaderOptions extends ViewComponentOptions {}
 }

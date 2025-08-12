@@ -7,7 +7,17 @@ import { getMaxMinDates, getCurrentValue, toValue, getFormatValue } from './util
 import { $deletePropsList } from '@/plugins/constants';
 import { categoryProps } from '@/utils/dom';
 
+export { handleControllableValue } from '@/plugins/common/index';
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
+
 const [name, bem] = createNamespace('calendar');
+
+export function handleFormTagName(props) {
+  return {
+    tagName: 'van-calendar',
+    formTagName: 'van-form-calendar',
+  };
+}
 
 /**
  * 处理自定义属性

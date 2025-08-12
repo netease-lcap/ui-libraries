@@ -208,4 +208,34 @@ namespace nasl.ui {
     })
     slotNavtext: (current: Current<T>) => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanTreeSelect',
+      },
+    ],
+  })
+  @Component({
+    title: '表单分类选择',
+    icon: 'tree-view-new',
+    description: '用于表单分类选择',
+    group: 'Form',
+  })
+  export class VanFormTreeSelect<T, V, M extends nasl.core.Boolean> extends ViewComponent {
+    constructor(
+      options?: Partial<VanFormTreeSelectOptions<T,V,M> & VanFormItemOptions & Omit<VanTreeSelectOptions<T,V,M>, keyof VanFormItemOptions>>,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormTreeSelectOptions<T, V, M extends nasl.core.Boolean> extends ViewComponentOptions {}
 }

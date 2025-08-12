@@ -6,7 +6,17 @@ import { useCallback, useMemo, useControllableValue, useEffect } from '@/plugins
 import { toValue, getCurrentValue, getFormatValue } from './utils-format';
 import { categoryProps } from '@/utils/dom';
 
+export { handleControllableValue } from '@/plugins/common/index';
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
+
 const [name, bem] = createNamespace('time-picker');
+
+export function handleFormTagName(props) {
+  return {
+    tagName: 'van-time-picker',
+    formTagName: 'van-form-time-picker',
+  };
+}
 
 /**
  * 处理单位
