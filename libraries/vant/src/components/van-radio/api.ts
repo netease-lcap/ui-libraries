@@ -246,6 +246,11 @@ namespace nasl.ui {
       },
     ],
   })
+  @Component({
+    title: '表单单选组',
+    icon: 'radio',
+    description: '表单单选组，用于管理多个单选框',
+  })
   export class VanFormRadioGroup<T, V> extends ViewComponent {
     constructor(
       options?: Partial<

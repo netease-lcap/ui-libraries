@@ -165,6 +165,11 @@ namespace nasl.ui {
       ],
     },
   })
+  @Component({
+    title: '表单滑块',
+    icon: 'slider',
+    description: '表单滑块，用于管理滑块',
+  })
   export class VanFormSlider<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(
       options?: Partial<
