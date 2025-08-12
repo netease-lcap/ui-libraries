@@ -170,22 +170,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '自动完成',
-      description: '自动完成',
-      setter: { concept: 'SwitchSetter' },
-    })
-    autocomplete: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '拼写检查',
-      description: '是否开启拼写检查',
-      setter: { concept: 'SwitchSetter' },
-    })
-    spellcheck: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
       title: '多行文本行数',
       description: '多行文本的行数',
       setter: { concept: 'NumberInputSetter', min: 1 },
