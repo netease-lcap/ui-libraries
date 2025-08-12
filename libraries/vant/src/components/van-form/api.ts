@@ -189,13 +189,13 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '标签对齐方式',
-      description: '表单项标签对齐方式，优先级高于 Form 组件的 labelAlign',
+      description: '标签对齐方式',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '左对齐' }, { title: '右对齐' }],
+        options: [{ title: '左对齐' }, { title: '顶部对齐' }, { title: '右对齐' }],
       },
     })
-    labelAlign: 'left' | 'right';
+    labelAlign: 'left' | 'top' | 'right' = 'left';
 
     @Prop({
       group: '主要属性',

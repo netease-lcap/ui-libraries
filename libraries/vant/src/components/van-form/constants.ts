@@ -4,7 +4,7 @@ export const $formItemProps = [
   'for',
   'inlineMessage',
   'label',
-  'labelPosition',
+  'labelAlign',
   'labelWidth',
   'rules',
   'name',
@@ -16,4 +16,5 @@ export const $formItemProps = [
   'data-nodepath',
   'data-enable-events',
   'style',
+  'colon',
 ];

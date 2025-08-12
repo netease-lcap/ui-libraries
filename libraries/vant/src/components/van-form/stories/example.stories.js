@@ -168,12 +168,12 @@ Default.args = {
 export const WithColon = () => ({
   setup() {},
   template: `
-  <van-form>
-    <van-form-picker :label-width="100" data-nodepath="12">
+  <van-form >
+    <van-form-field labelAlign="right">
       <template #label>
-        <span>用户名</span>
+        <span>用户名1</span>
       </template>
-    </van-form-picker>
+    </van-form-field>
     <van-form>
   `,
 });
