@@ -24,7 +24,7 @@ namespace nasl.ui {
       title: '校验函数',
       description: '校验函数，包含错误文本提示等功能',
     })
-    validated	(): {
+    validated(): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;
@@ -169,14 +169,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     name: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '标签文本',
-      description: '表单项标签',
-      setter: { concept: 'InputSetter' },
-    })
-    label: nasl.core.String;
 
     @Prop({
       group: '主要属性',
