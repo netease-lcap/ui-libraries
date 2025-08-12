@@ -329,7 +329,7 @@ export function handleBasicRender(props: any) {
       disabled,
       popupShow,
     } = props;
-    const outerProps = categoryProps(props);
+    const { outerProps, innerProps } = categoryProps(props);
     const onFieldClick = () => {
       if (disabled || readonly) {
         return;
@@ -373,7 +373,7 @@ export function handleBasicRender(props: any) {
           round
           closeOnClickOverlay={closeOnClickOverlay}
           {..._.pick(attrs, ['class', 'style'])}
-          {...outerProps}>
+          {...innerProps}>
           <div class={bem('content-wrapper')}>
             {isRange === true
               ? renderRangeContent({

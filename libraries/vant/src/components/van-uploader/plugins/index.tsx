@@ -10,6 +10,7 @@ export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 export * from './modelValue';
 export * from './maxSize';
 export * from './requestData';
+export * from './ide';
 
 export function handleFormTagName(props) {
   return {
