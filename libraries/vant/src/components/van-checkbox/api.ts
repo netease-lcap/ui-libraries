@@ -277,6 +277,18 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'container',
+      dataSource: {
+        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        display: 3,
+        loopRule: 'nth-child(n+2)',
+        loopElem: '.van-checkbox',
+        emptySlot: {
+          display: 'inline',
+          condition: "!this.getAttribute('dataSource')",
+          accept: false,
+          content: '请绑定数据源或插入子节点',
+        },
+      },
     },
     extends: [
       {

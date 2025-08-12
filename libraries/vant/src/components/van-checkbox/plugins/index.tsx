@@ -21,7 +21,6 @@ export function handleDataSource(props) {
     dataSource: useFormatDataSource(data),
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
-  console.log(dataSource, 'datas');
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
     : {
