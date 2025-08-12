@@ -69,8 +69,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
-      title: '圆角按钮',
-      description: '是否为圆角按钮',
+      title: '圆形按钮',
+      description: '是否为圆形按钮',
       setter: { concept: 'SwitchSetter' },
     })
     round: nasl.core.Boolean = false;

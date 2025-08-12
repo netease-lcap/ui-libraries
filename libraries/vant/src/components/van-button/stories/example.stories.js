@@ -22,7 +22,7 @@ export const Default = {
       };
     },
     template: `
-      <van-button v-bind="args" @click="handleClick"></van-button>
+      <van-button v-bind="args" @click="handleClick" loadingText="加载中..."></van-button>
     `,
   }),
   args: {
@@ -32,7 +32,7 @@ export const Default = {
     type: 'primary',
     disabled: false,
     plain: false,
-    loading: false,
+    loading: true,
   },
 };
 
