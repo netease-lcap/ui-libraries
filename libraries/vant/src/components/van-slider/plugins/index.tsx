@@ -2,6 +2,15 @@ import { useCallback } from '@/plugins/hooks';
 import { categoryStyles, categoryProps } from '@/utils/dom';
 import styles from '../index.module.css';
 
+export function handleDefaultValue(props) {
+  const range = props.get('range');
+  const defaultValue = range ? [] : undefined;
+  return {
+    defaultValue,
+  };
+}
+handleDefaultValue.order = 1;
+
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
 
