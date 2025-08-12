@@ -16,7 +16,17 @@ import {
 } from './utils-format';
 import { categoryProps } from '@/utils/dom';
 
+export { handleControllableValue } from '@/plugins/common/index';
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
+
 const [name, bem] = createNamespace('date-picker');
+
+export function handleFormTagName(props) {
+  return {
+    tagName: 'van-date-picker',
+    formTagName: 'van-form-date-picker',
+  };
+}
 
 /**
  * 处理单位

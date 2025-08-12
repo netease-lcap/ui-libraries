@@ -4,9 +4,19 @@ import { postAfterRead } from './upload';
 import { useCallback, useMemo } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 
+export { handleControllableValue } from '@/plugins/common/index';
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
+
 export * from './modelValue';
 export * from './maxSize';
 export * from './requestData';
+
+export function handleFormTagName(props) {
+  return {
+    tagName: 'van-uploader',
+    formTagName: 'van-form-uploader',
+  };
+}
 
 export function handleDeleteProps(props) {
   const deletePropsList = props

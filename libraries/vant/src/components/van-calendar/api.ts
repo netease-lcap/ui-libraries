@@ -445,4 +445,37 @@ namespace nasl.ui {
     })
     slotSubtitle: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'drawerdropdown',
+      cacheOpenKey: 'popupOpened',
+      drawerCSSSelector: '.van-popup',
+      dataSource: {},
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanCalendar',
+      },
+    ],
+  })
+  @Component({
+    title: '表单日历',
+    icon: 'calendar',
+    description: '用于表单日历选择',
+    group: 'Form',
+  })
+  export class VanFormCalendar<M extends nasl.core.Boolean> extends ViewComponent {
+    constructor(
+      options?: Partial<VanFormCalendarOptions<M> & VanFormItemOptions & Omit<VanCalendarOptions<M>, keyof VanFormItemOptions>>,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormCalendarOptions<M extends nasl.core.Boolean> extends ViewComponentOptions {}
 }

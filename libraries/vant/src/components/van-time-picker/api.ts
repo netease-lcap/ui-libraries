@@ -374,4 +374,37 @@ namespace nasl.ui {
     })
     slotTitle: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: "drawerdropdown",
+      cacheOpenKey: "popupOpened",
+      drawerCSSSelector: ".van-popup",
+      dataSource: {},
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanTimePicker',
+      },
+    ],
+  })
+  @Component({
+    title: '表单时间选择器',
+    icon: 'time-picker',
+    description: '用于表单时间选择',
+    group: 'Form',
+  })
+  export class VanFormTimePicker extends ViewComponent {
+    constructor(
+      options?: Partial<VanFormTimePickerOptions & VanFormItemOptions & Omit<VanTimePickerOptions, keyof VanFormItemOptions>>,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormTimePickerOptions extends ViewComponentOptions {}
 }
