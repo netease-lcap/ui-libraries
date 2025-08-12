@@ -49,7 +49,7 @@ namespace nasl.ui {
       description: '文本',
       setter: { concept: 'InputSetter' },
     })
-    text: nasl.core.String = '圆环';
+    text: nasl.core.String;
 
     @Prop({
       group: '主要属性',
