@@ -88,7 +88,7 @@ export function handleFieldRender(props) {
     (props) => {
       const { setShow, show, value, setValue, fieldValue, clearable } = props;
       const rightIcon = clearable ? 'clear' : '';
-      const outerProps = categoryProps(props);
+      const { outerProps, innerProps } = categoryProps(props);
       return [
         <Field
           modelValue={fieldValue}
@@ -109,7 +109,7 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          {...outerProps}
+          {...innerProps}
           ide-draggable={props['ide-draggable']}
         >
           <Component

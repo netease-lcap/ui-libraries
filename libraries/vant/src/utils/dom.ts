@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { $rootStyle, $bothStyle } from '@/plugins/constants';
 
 export function setElStyle(style: Record<string, any>, el: HTMLElement) {
@@ -29,10 +30,12 @@ export function categoryStyles(style: Record<string, string> = {}) {
 }
 
 export function categoryProps(props: Record<string, any> = {}) {
-  return Object.keys(props).reduce((outerProps: Record<string, any>, key) => {
-    if (key.startsWith('data-')) {
-      outerProps[key] = props[key];
-    }
-    return outerProps;
+  const matches = (str: string) => /^(data-|ide-)/.test(str);
+  const propsWithDataStart = Object.keys(props).reduce((outerProps: Record<string, any>, key) => {
+    return matches(key) ? _.assign(outerProps, { [key]: props[key] }) : outerProps;
   }, {});
+  return {
+    outerProps: propsWithDataStart,
+    innerProps: props.isInForm ? propsWithDataStart : _.omit(props, ['data-nodepath']),
+  };
 }

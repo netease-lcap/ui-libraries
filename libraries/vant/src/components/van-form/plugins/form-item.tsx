@@ -97,6 +97,7 @@ export function withFormItem(Component, name) {
                 <Component
                   {..._.omit(_.assign({ [$formTagName]: name }, props, attrs), $formItemProps)}
                   v-slots={_.omit(slots, ['label'])}
+                  data-nodepath={attrs['data-nodepath']}
                   style={style.value.innerStyle}
                   v-on={emit}
                   ref={componentRef}
@@ -115,9 +116,9 @@ export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
   const formTagName = props.get('formTagName');
   const tagName = props.get('tagName');
+  const inject = props.get('inject');
+  const { isInForm } = inject?.value?.[$formProvide] ?? {};
   useEffect(() => {
-    const inject = props.get('inject');
-    const { isInForm } = inject?.value?.[$formProvide] ?? {};
     if (!nodePath) return;
     const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
     if (isInForm) {
@@ -126,7 +127,10 @@ export function handleComponentInForm(props) {
     } else {
       elem?.setAttribute('data-element-tag', tagName);
     }
-  }, []);
+  }, [isInForm]);
+  return {
+    isInForm,
+  };
 }
 
 handleComponentInForm.order = 6;

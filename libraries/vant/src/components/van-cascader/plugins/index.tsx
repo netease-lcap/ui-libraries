@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { Field, Popup } from 'vant';
 import { useMemo, useControllableValue, useCallback } from '@/plugins/hooks';
+import { categoryProps } from '@/utils/dom';
 
 import {
   useRequestDataSource,
@@ -109,13 +110,13 @@ export function handleFieldRender(props) {
   const render = useCallback(
     (props) => {
       const { setShow, show, value, setValue, fieldValue, clearable } = props;
+      const { outerProps, innerProps } = categoryProps(props);
       const rightIcon = clearable ? 'clear' : '';
       return [
         <Field
           modelValue={fieldValue}
           onClick={() => setShow(true)}
-          data-nodepath={props['data-nodepath']}
-          data-enable-events={props['data-enable-events']}
+          {...outerProps}
           readonly
           is-link
           right-icon={rightIcon}
@@ -132,10 +133,7 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          data-drawer-dropdown-status={props['data-drawer-dropdown-status']}
-          data-drawer-dropdown-selector={props['data-drawer-dropdown-selector']}
-          data-nodepath={props['data-nodepath']}
-          ide-draggable={props['ide-draggable']}
+          {...innerProps}
         >
           <Component
             {..._.omit(props, ['value', 'modelValue', 'pickerValue', 'onUpdate:modelValue'])}
