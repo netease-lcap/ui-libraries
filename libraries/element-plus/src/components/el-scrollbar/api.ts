@@ -160,7 +160,7 @@ namespace nasl.ui {
       title: '滚动时',
       description: '当滚动条滚动时触发',
     })
-    onScroll: (event: { scrollTop: number; scrollLeft: number }) => any;
+    onScroll: (event: { scrollTop: nasl.core.Integer; scrollLeft: nasl.core.Integer }) => any;
 
     @Slot({
       title: 'Default',
