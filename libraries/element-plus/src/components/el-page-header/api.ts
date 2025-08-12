@@ -62,7 +62,7 @@ namespace nasl.ui {
       title: '点击左侧区域触发',
       description: '点击左侧区域触发',
     })
-    onBack: (event: any) => any;
+    onBack: () => void;
 
     @Slot({
       title: '标题内容',
