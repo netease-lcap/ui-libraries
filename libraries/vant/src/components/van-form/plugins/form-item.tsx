@@ -90,6 +90,7 @@ export function withFormItem(Component, name) {
           <VanFormItem
             {..._.pick(_.assign({}, props, attrs, { name: propName.value }), $formItemProps)}
             style={style.value.style}
+            class={`${name} ${_.get(attrs, 'class', '')}`}
             ref={formItemRef}
             v-slots={{
               label: slots.label,

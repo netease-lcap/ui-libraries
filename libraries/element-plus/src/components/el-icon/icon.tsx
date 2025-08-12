@@ -16,7 +16,7 @@ export const ElIconPropsDefine = {
 
 // 检查是否是SVG URL
 const isSvgUrl = (name) => {
-  return name && name.indexOf('/') !== -1 && /\.svg/i.test(name);
+  return name && name?.indexOf('/') !== -1 && /\.svg/i.test(name);
 };
 
 // 在线SVG组件

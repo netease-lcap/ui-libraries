@@ -69,7 +69,13 @@ export { ElTimePicker, ElFormTimePicker, ElTimePickerRegister, ElTimePickerPlus 
 export { ElTimeSelect, ElFormTimeSelect, ElTimeSelectRegister, ElTimeSelectPlus } from './el-time-select';
 export { ElIcon, ElIconRegister } from './el-icon';
 export { ElMention, ElFormMention, ElMentionRegister, ElMentionPlus } from './el-mention';
-export { ElBreadcrumb, ElBreadcrumbItem, ElBreadcrumbRegister, ElBreadcrumbItemRegister } from './el-breadcrumb';
+export {
+  ElBreadcrumb,
+  ElBreadcrumbItem,
+  ElBreadcrumbRegister,
+  ElBreadcrumbItemRegister,
+  ElBreadcrumbItemPlus,
+} from './el-breadcrumb';
 export { ElBacktop, ElBacktopDesigner, ElBacktopRegister } from './el-backtop';
 export { ElPageHeader, ElPageHeaderRegister } from './el-page-header';
 export { ElSteps, ElStep, ElStepsRegister, ElStepRegister, ElStepsPlus, ElStepPlus } from './el-steps';

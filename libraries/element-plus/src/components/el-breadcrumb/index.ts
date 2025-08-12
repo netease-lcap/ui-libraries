@@ -1,6 +1,6 @@
 import {
   ElBreadcrumb as ElBreadcrumbPlus,
-  ElBreadcrumbItem as ElBreadcrumbItemPulus,
+  ElBreadcrumbItem as ElBreadcrumbItemPlus,
   BreadcrumbItemProps,
 } from 'element-plus';
 import _ from 'lodash';
@@ -19,10 +19,16 @@ function ElBreadcrumbItemRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElBreadcrumb = registerComponent(ElBreadcrumbPlus, { plugin: basicsPlugin, name: 'el-breadcrumb' });
-const ElBreadcrumbItem = registerComponent<BreadcrumbItemProps>(ElBreadcrumbItemPulus, {
+const ElBreadcrumbItem = registerComponent<BreadcrumbItemProps>(ElBreadcrumbItemPlus, {
   plugin: itemPlugins,
-  name: 'el-breadcrumb-item',
 });
 
-export { ElBreadcrumbPlus, ElBreadcrumb, ElBreadcrumbItem, ElBreadcrumbRegister, ElBreadcrumbItemRegister };
+export {
+  ElBreadcrumbPlus,
+  ElBreadcrumb,
+  ElBreadcrumbItem,
+  ElBreadcrumbRegister,
+  ElBreadcrumbItemRegister,
+  ElBreadcrumbItemPlus,
+};
 export default ElBreadcrumb;

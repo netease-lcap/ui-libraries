@@ -295,6 +295,11 @@ export default defineConfig(({ command }) => {
     },
     test: {
       environment: 'jsdom',
+
+      // 显示更详细的测试日志
+      verbose: true,
+      // 输出测试执行时间
+      reporters: ['default', 'verbose'],
     },
   };
 });

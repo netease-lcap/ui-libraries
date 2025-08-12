@@ -1,9 +1,9 @@
-import Component from '../index';
+import Component, { ElBreadcrumbItemPlus } from '../index';
 
 export default {
   id: 'el-breadcrumb-examples',
   title: '组件列表/Breadcrumb 面包屑/示例',
-  component: Component,
+  component: ElBreadcrumbItemPlus,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'padded',
@@ -28,11 +28,9 @@ export const Example1 = {
 export const Example2 = {
   name: '图标分割',
   render: () => ({
-    template: `<div><el-breadcrumb separator="/" separatorIcon='warning'>
-  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-  <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-  <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-</el-breadcrumb></div>`,
+    template: `<el-breadcrumb >
+  <el-breadcrumb-item-plus>A</el-breadcrumb-item-plus>
+  <el-breadcrumb-item-plus>B</el-breadcrumb-item-plus>
+</el-breadcrumb>`,
   }),
 };
