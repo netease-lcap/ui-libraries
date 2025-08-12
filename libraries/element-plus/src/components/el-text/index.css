@@ -1,7 +1,7 @@
 .el-text {
   white-space: pre-wrap;
   max-width: 100%;
-  word-break: keep-all;
+
 }
 body{
   color: var(--el-text-color);

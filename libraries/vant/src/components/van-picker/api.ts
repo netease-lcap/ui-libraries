@@ -201,6 +201,14 @@ namespace nasl.ui {
         loopElem: "> label[class^='u-radios_radio']:not([data-nodepath])",
       },
     },
+    extends:[
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanPicker',
+      },
+    ],
   })
   @Component({
     title: '表单选择器',
