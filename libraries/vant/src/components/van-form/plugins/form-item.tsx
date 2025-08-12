@@ -4,7 +4,7 @@ import { VanFormItem } from '@/components/van-form';
 import { $formProvide, $formItemProps } from '@/components/van-form/constants';
 import { useEffect } from '@/plugins/hooks';
 import { categoryStyles } from '@/utils';
-import { $provide, $formTagName } from '@/plugins/constants';
+import { $provide, $formTagName, $ide } from '@/plugins/constants';
 
 type FormItemProvide = {
   [$formProvide]: {
@@ -134,4 +134,4 @@ export function handleComponentInForm(props) {
   };
 }
 
-handleComponentInForm.order = 6;
+handleComponentInForm.type = $ide;
