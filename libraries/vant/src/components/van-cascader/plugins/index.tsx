@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { Field, Popup } from 'vant';
 import { useMemo, useControllableValue, useCallback } from '@/plugins/hooks';
 import { categoryProps } from '@/utils/dom';
+import { $mergeRef } from '@/plugins/constants';
 
 import {
   useRequestDataSource,
@@ -58,6 +59,7 @@ function findRegionPath(options, targetValue) {
 
 export function handlewFieldState(props) {
   const options = props.get('options');
+  const mergeRef = props.get($mergeRef);
   const onCancelProps = props.get('onCancel', () => {});
   const onFinishProps = props.get('onFinish', () => {});
   const onCloseProps = props.get('onClose', () => {});
@@ -92,6 +94,7 @@ export function handlewFieldState(props) {
     [onCloseProps],
   );
   return {
+    mergeRef,
     show,
     setShow,
     value,
@@ -109,8 +112,8 @@ export function handleFieldRender(props) {
   const Component = props.get('render');
   const render = useCallback(
     (props) => {
-      const { setShow, show, value, setValue, fieldValue, clearable } = props;
-      const { outerProps, innerProps } = categoryProps(props);
+      const { setShow, show, value, setValue, fieldValue, clearable, mergeRef, ...componentProps } = props;
+      const { outerProps, innerProps } = categoryProps(componentProps);
       const rightIcon = clearable ? 'clear' : '';
       return [
         <Field
@@ -136,9 +139,19 @@ export function handleFieldRender(props) {
           {...innerProps}
         >
           <Component
-            {..._.omit(props, ['value', 'modelValue', 'pickerValue', 'onUpdate:modelValue'])}
+            {..._.omit(props, [
+              'value',
+              'modelValue',
+              'pickerValue',
+              'onUpdate:modelValue',
+              'mergeRef',
+              'setValue',
+              'setShow',
+              'expose',
+              'show',
+            ])}
             modelValue={value}
-            ref={props.mergeRef}
+            ref={mergeRef}
           />
         </Popup>,
       ];

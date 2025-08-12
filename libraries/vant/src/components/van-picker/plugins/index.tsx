@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { Field, Popup } from 'vant';
 import { useMemo, useCallback, useControllableValue } from '@/plugins/hooks';
-import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
+import { $deletePropsList, $dataSourceDeleteField, $mergeRef } from '@/plugins/constants';
 import { categoryProps } from '@/utils/dom';
 
 import {
@@ -43,6 +43,7 @@ export function handleDataSource(props) {
 
 export function handlewFieldState(props) {
   const columns = props.get('columns');
+  const mergeRef = props.get($mergeRef);
   const onCancelProps = props.get('onCancel', () => {});
   const onConfirmProps = props.get('onConfirm', () => {});
   const [value, setValue] = useControllableValue(props);
@@ -72,6 +73,7 @@ export function handlewFieldState(props) {
   );
 
   return {
+    mergeRef,
     show,
     setShow,
     value,
@@ -86,9 +88,10 @@ export function handleFieldRender(props) {
   const Component = props.get('render');
   const render = useCallback(
     (props) => {
-      const { setShow, show, value, setValue, fieldValue, clearable } = props;
+      const { setShow, show, value, setValue, fieldValue, clearable, mergeRef, ...componentProps } = props;
       const rightIcon = clearable ? 'clear' : '';
-      const { outerProps, innerProps } = categoryProps(props);
+      const { outerProps, innerProps } = categoryProps(componentProps);
+
       return [
         <Field
           modelValue={fieldValue}
@@ -109,13 +112,22 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          {...innerProps}
-          ide-draggable={props['ide-draggable']}
+          {..._.omit(innerProps, 'columns', 'expose')}
         >
           <Component
-            {..._.omit(props, ['value', 'modelValue', 'pickerValue', 'onUpdate:modelValue'])}
+            {..._.omit(props, [
+              'value',
+              'modelValue',
+              'pickerValue',
+              'onUpdate:modelValue',
+              'mergeRef',
+              'setValue',
+              'setShow',
+              'expose',
+              'show',
+            ])}
             modelValue={value}
-            ref={props.mergeRef}
+            ref={mergeRef}
           />
         </Popup>,
       ];

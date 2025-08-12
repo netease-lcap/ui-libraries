@@ -11,6 +11,8 @@ export const $router = Symbol('router');
 
 export const $route = Symbol('route');
 
+export const $mergeRef = Symbol('mergeRef');
+
 export const $dataSourceDeleteField = ['dataSource', 'textField', 'valueField', 'parentField', 'childrenField'];
 
 export const $rootStyle = [
