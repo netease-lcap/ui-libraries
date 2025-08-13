@@ -187,8 +187,6 @@ dragSort="row"
 
 
 
-
-
     <el-table-column prop="six.name" label="Date" sortable="none" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
     <el-table-column type="normal" prop="address" label="Address" />
@@ -200,16 +198,21 @@ dragSort="row"
   }),
 };
 
-/*  基础的、简洁的标签页。 */
+/*  基础的、简洁的标签页。主题 demo 勿动 */
 export const Example2 = {
   name: '示例2',
   render: () => ({
     setup() {
       const activeName = ref('first');
       const total = 28;
-      const tableData = async (pageObj = { currentPage: 1, pageSize: 20 }) => {
+      const tableData = async (pageObj) => {
+        console.log(pageObj, 'pagerequest====');
         const initialData = [];
-        for (let i = 0; i < total; i++) {
+        for (
+          let i = (pageObj.currentPage - 1) * pageObj.pageSize;
+          i < pageObj.currentPage * pageObj.pageSize && i < total;
+          i++
+        ) {
           initialData.push({
             index: i + 1,
             applicant: ['贾明', '张三', '王芳'][i % 3],
@@ -235,75 +238,54 @@ export const Example2 = {
         },
       ]);
 
-      const logCellClick = (el) => {
-        console.log(el, 'el');
-        console.log(mytable.value.reload(), 'logCellClick');
-      };
-      const config = {
-        round: true,
-      };
-      const dataSource = async () => {
-        return [];
-      };
-
+      watch(selectedRowKeys, (el) => {
+        console.log(el, 'log');
+      });
+      // setTimeout(() => {
+      //   console.log(selectedRowKeys,'selectedRowKeys');
+      // }, 1000);
       return {
         tableData,
         pageSize2,
         currentPage,
         mytable,
         selectedRowKeys,
-        logCellClick,
-        config,
-        transformKeys,
-        dataSource,
       };
     },
     template: `
-    <config-provider  :button="config">
 <el-table
 ref="mytable"
 row-key="index"
-class="my-table"
 :dataSource="tableData"
 :pagination="true"
+v-model:currentPage="currentPage"
+v-model:pageSize="pageSize2"
 :showTotal="true"
 :sorting="{ field: 'createTime', order: 'desc' }"
-
 :showJumper="true"
-:columnConfig="true"
-:editTable="true"
 :pageSizes="[10, 100, 200, 300, 400]"
 v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
 dragSort="row"
 :selection="true"
-  :border="true"
+  bordered
   hover
   stripe
   showHeader
   size=small"
 >
-  <el-table-column prop="index" type="selection" width="55" >
-
-    <el-table-column prop="createTime" label="创建时间" width="160">
-      <el-table :dataSource="tableData" :pagination="false">
-
-      <el-table-column prop="createTime" label="创建时间" width="160">
-      </el-table>
-    </el-table-column>
-    <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
-    </el-table-column>
-  <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
-  <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
-  <el-table-column prop="confirmTime" label="确认时间" width="160"></el-table-column>
+  <el-table-column prop="applicant" title="申请人" width="100" fixedPosition="left"></el-table-column>
+  <el-table-column prop="status" title="申请状态" width="150" sorter></el-table-column>
+  <el-table-column prop="channel" title="签署方式" width="200"></el-table-column>
+  <el-table-column prop="email" title="邮箱地址" width="200" ellipsis></el-table-column>
+  <el-table-column prop="createTime" title="创建时间" width="160"></el-table-column>
+  <el-table-column prop="applyTime" title="申请时间" width="160"></el-table-column>
+  <el-table-column prop="modifyTime" title="修改时间" width="160"></el-table-column>
+  <el-table-column prop="confirmTime" title="确认时间" width="160"></el-table-column>
 </el-table>
-<el-pagination  :total="100" />
-      <el-button >中文</el-button>
-</config-provider>
     `,
   }),
 };
-
 export const Default = {
   name: '基础翻页',
   render: () => ({
