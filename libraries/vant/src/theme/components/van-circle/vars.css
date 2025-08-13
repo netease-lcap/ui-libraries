@@ -1,0 +1,34 @@
+/**
+ * @component van-circle
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-circle-size: 100px;
+  /**
+   * @type color
+   */
+  --van-circle-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-circle-layer-color: var(--van-white);
+  /**
+   * @type color
+   */
+  --van-circle-text-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-circle-text-font-weight: var(--van-font-bold);
+  /**
+   * @type input
+   */
+  --van-circle-text-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-circle-text-line-height: var(--van-line-height-md);
+}

@@ -1,0 +1,22 @@
+/**
+ * @component van-signature
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-signature-padding: var(--van-padding-xs);
+  /**
+   * @type input
+   */
+  --van-signature-content-height: 200px;
+  /**
+   * @type color
+   */
+  --van-signature-content-background: var(--van-background-2);
+  /**
+   * @type input
+   */
+  --van-signature-content-border: 1px dotted #dadada;
+}

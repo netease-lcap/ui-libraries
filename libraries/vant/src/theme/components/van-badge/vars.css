@@ -1,0 +1,46 @@
+/**
+ * @component van-badge
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-badge-size: 16px;
+  /**
+   * @type color
+   */
+  --van-badge-color: var(--van-white);
+  /**
+   * @type input
+   */
+  --van-badge-padding: 0 3px;
+  /**
+   * @type input
+   */
+  --van-badge-font-size: var(--van-font-size-sm);
+  /**
+   * @type input
+   */
+  --van-badge-font-weight: var(--van-font-bold);
+  /**
+   * @type input
+   */
+  --van-badge-border-width: var(--van-border-width);
+  /**
+   * @type color
+   */
+  --van-badge-background: var(--van-danger-color);
+  /**
+   * @type color
+   */
+  --van-badge-dot-color: var(--van-danger-color);
+  /**
+   * @type input
+   */
+  --van-badge-dot-size: 8px;
+  /**
+   * @type input
+   */
+  --van-badge-font: -apple-system-font, helvetica neue, arial, sans-serif;
+}

@@ -1,0 +1,38 @@
+/**
+ * @component van-empty
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-empty-padding: var(--van-padding-xl) 0;
+  /**
+   * @type input
+   */
+  --van-empty-image-size: 160px;
+  /**
+   * @type input
+   */
+  --van-empty-description-margin-top: var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-empty-description-padding: 0 60px;
+  /**
+   * @type color
+   */
+  --van-empty-description-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-empty-description-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-empty-description-line-height: var(--van-line-height-md);
+  /**
+   * @type input
+   */
+  --van-empty-bottom-margin-top: 24px;
+}

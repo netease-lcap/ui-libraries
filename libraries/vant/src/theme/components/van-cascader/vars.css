@@ -1,0 +1,58 @@
+/**
+ * @component van-cascader
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-cascader-header-height: 48px;
+  /**
+   * @type input
+   */
+  --van-cascader-header-padding: 0 var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-cascader-title-font-size: var(--van-font-size-lg);
+  /**
+   * @type input
+   */
+  --van-cascader-title-line-height: 20px;
+  /**
+   * @type input
+   */
+  --van-cascader-close-icon-size: 22px;
+  /**
+   * @type color
+   */
+  --van-cascader-close-icon-color: var(--van-gray-5);
+  /**
+   * @type input
+   */
+  --van-cascader-selected-icon-size: 18px;
+  /**
+   * @type input
+   */
+  --van-cascader-tabs-height: 48px;
+  /**
+   * @type color
+   */
+  --van-cascader-active-color: var(--van-primary-color);
+  /**
+   * @type input
+   */
+  --van-cascader-options-height: 384px;
+  /**
+   * @type color
+   */
+  --van-cascader-option-disabled-color: var(--van-text-color-3);
+  /**
+   * @type color
+   */
+  --van-cascader-tab-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-cascader-unselected-tab-color: var(--van-text-color-2);
+}

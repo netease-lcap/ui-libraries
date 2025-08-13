@@ -1,0 +1,26 @@
+/**
+ * @component van-rate
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-rate-icon-size: 20px;
+  /**
+   * @type input
+   */
+  --van-rate-icon-gutter: var(--van-padding-base);
+  /**
+   * @type color
+   */
+  --van-rate-icon-void-color: var(--van-gray-5);
+  /**
+   * @type color
+   */
+  --van-rate-icon-full-color: var(--van-danger-color);
+  /**
+   * @type color
+   */
+  --van-rate-icon-disabled-color: var(--van-gray-5);
+}

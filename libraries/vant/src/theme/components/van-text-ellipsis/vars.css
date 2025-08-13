@@ -1,0 +1,14 @@
+/**
+ * @component van-text-ellipsis
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-text-ellipsis-line-height: 1.6;
+  /**
+   * @type color
+   */
+  --van-text-ellipsis-action-color: var(--van-blue);
+}

@@ -1,0 +1,54 @@
+/**
+ * @component van-tabs
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-tab-text-color: var(--van-gray-7);
+  /**
+   * @type color
+   */
+  --van-tab-active-text-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-tab-disabled-text-color: var(--van-text-color-3);
+  /**
+   * @type input
+   */
+  --van-tab-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-tab-line-height: var(--van-line-height-md);
+  /**
+   * @type color
+   */
+  --van-tabs-default-color: var(--van-primary-color);
+  /**
+   * @type input
+   */
+  --van-tabs-line-height: 44px;
+  /**
+   * @type input
+   */
+  --van-tabs-card-height: 30px;
+  /**
+   * @type color
+   */
+  --van-tabs-nav-background: var(--van-background-2);
+  /**
+   * @type input
+   */
+  --van-tabs-bottom-bar-width: 40px;
+  /**
+   * @type input
+   */
+  --van-tabs-bottom-bar-height: 3px;
+  /**
+   * @type color
+   */
+  --van-tabs-bottom-bar-color: var(--van-primary-color);
+}

@@ -1,0 +1,26 @@
+/**
+ * @component van-loading
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-loading-text-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-loading-text-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   */
+  --van-loading-spinner-color: var(--van-gray-5);
+  /**
+   * @type input
+   */
+  --van-loading-spinner-size: 30px;
+  /**
+   * @type input
+   */
+  --van-loading-spinner-duration: .8s;
+}

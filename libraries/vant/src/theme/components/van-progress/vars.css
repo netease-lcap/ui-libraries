@@ -1,0 +1,42 @@
+/**
+ * @component van-progress
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-progress-height: 4px;
+  /**
+   * @type color
+   */
+  --van-progress-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-progress-inactive-color: var(--van-gray-5);
+  /**
+   * @type color
+   */
+  --van-progress-background: var(--van-gray-3);
+  /**
+   * @type input
+   */
+  --van-progress-pivot-padding: 0 5px;
+  /**
+   * @type color
+   */
+  --van-progress-pivot-text-color: var(--van-white);
+  /**
+   * @type input
+   */
+  --van-progress-pivot-font-size: var(--van-font-size-xs);
+  /**
+   * @type input
+   */
+  --van-progress-pivot-line-height: 1.6;
+  /**
+   * @type color
+   */
+  --van-progress-pivot-background: var(--van-primary-color);
+}

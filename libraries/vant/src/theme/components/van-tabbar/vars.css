@@ -1,0 +1,46 @@
+/**
+ * @component van-tabbar
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-tabbar-height: 50px;
+  /**
+   * @type input
+   */
+  --van-tabbar-z-index: 1;
+  /**
+   * @type color
+   */
+  --van-tabbar-background: var(--van-background-2);
+  /**
+   * @type input
+   */
+  --van-tabbar-item-font-size: var(--van-font-size-sm);
+  /**
+   * @type color
+   */
+  --van-tabbar-item-text-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-tabbar-item-active-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-tabbar-item-active-background: var(--van-background-2);
+  /**
+   * @type input
+   */
+  --van-tabbar-item-line-height: 1;
+  /**
+   * @type input
+   */
+  --van-tabbar-item-icon-size: 22px;
+  /**
+   * @type input
+   */
+  --van-tabbar-item-icon-margin-bottom: var(--van-padding-base);
+}

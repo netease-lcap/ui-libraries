@@ -1,0 +1,18 @@
+/**
+ * @component van-count-down
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-count-down-text-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-count-down-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-count-down-line-height: var(--van-line-height-md);
+}

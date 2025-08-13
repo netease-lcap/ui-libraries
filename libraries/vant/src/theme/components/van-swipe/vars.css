@@ -1,0 +1,30 @@
+/**
+ * @component van-swipe
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-swipe-indicator-size: 6px;
+  /**
+   * @type input
+   */
+  --van-swipe-indicator-margin: var(--van-padding-sm);
+  /**
+   * @type input
+   */
+  --van-swipe-indicator-active-opacity: 1;
+  /**
+   * @type input
+   */
+  --van-swipe-indicator-inactive-opacity: .3;
+  /**
+   * @type color
+   */
+  --van-swipe-indicator-active-background: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-swipe-indicator-inactive-background: var(--van-border-color);
+}

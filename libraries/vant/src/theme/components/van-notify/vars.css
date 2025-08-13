@@ -1,0 +1,38 @@
+/**
+ * @component van-notify
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-notify-text-color: var(--van-white);
+  /**
+   * @type input
+   */
+  --van-notify-padding: var(--van-padding-xs) var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-notify-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-notify-line-height: var(--van-line-height-md);
+  /**
+   * @type color
+   */
+  --van-notify-primary-background: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-notify-success-background: var(--van-success-color);
+  /**
+   * @type color
+   */
+  --van-notify-danger-background: var(--van-danger-color);
+  /**
+   * @type color
+   */
+  --van-notify-warning-background: var(--van-warning-color);
+}

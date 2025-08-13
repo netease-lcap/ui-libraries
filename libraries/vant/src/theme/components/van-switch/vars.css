@@ -1,0 +1,46 @@
+/**
+ * @component van-switch
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-switch-size: 26px;
+  /**
+   * @type input
+   */
+  --van-switch-width: calc(1.8em + 4px) ;
+  /**
+   * @type input
+   */
+  --van-switch-height: calc(1em + 4px) ;
+  /**
+   * @type input
+   */
+  --van-switch-node-size: 1em;
+  /**
+   * @type color
+   */
+  --van-switch-node-background: var(--van-white);
+  /**
+   * @type input
+   */
+  --van-switch-node-shadow: 0 3px 1px 0 rgba(0, 0, 0, .05);
+  /**
+   * @type color
+   */
+  --van-switch-background: rgba(120, 120, 128, .16);
+  /**
+   * @type color
+   */
+  --van-switch-on-background: var(--van-primary-color);
+  /**
+   * @type input
+   */
+  --van-switch-duration: var(--van-duration-base);
+  /**
+   * @type input
+   */
+  --van-switch-disabled-opacity: var(--van-disabled-opacity);
+}

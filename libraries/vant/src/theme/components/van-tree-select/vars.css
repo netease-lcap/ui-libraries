@@ -1,0 +1,38 @@
+/**
+ * @component van-tree-select
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-tree-select-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   */
+  --van-tree-select-nav-background: var(--van-background);
+  /**
+   * @type color
+   */
+  --van-tree-select-content-background: var(--van-background-2);
+  /**
+   * @type input
+   */
+  --van-tree-select-nav-item-padding: 14px var(--van-padding-sm);
+  /**
+   * @type input
+   */
+  --van-tree-select-item-height: 48px;
+  /**
+   * @type color
+   */
+  --van-tree-select-item-active-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-tree-select-item-disabled-color: var(--van-gray-5);
+  /**
+   * @type input
+   */
+  --van-tree-select-item-selected-size: 16px;
+}

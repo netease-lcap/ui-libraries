@@ -1,0 +1,66 @@
+/**
+ * @component van-password-input
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-password-input-height: 50px;
+  /**
+   * @type input
+   */
+  --van-password-input-margin: 0 var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-password-input-font-size: 20px;
+  /**
+   * @type input
+   */
+  --van-password-input-radius: 6px;
+  /**
+   * @type color
+   */
+  --van-password-input-background: var(--van-background-2);
+  /**
+   * @type color
+   */
+  --van-password-input-info-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-password-input-info-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   */
+  --van-password-input-error-info-color: var(--van-danger-color);
+  /**
+   * @type input
+   */
+  --van-password-input-dot-size: 10px;
+  /**
+   * @type color
+   */
+  --van-password-input-dot-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-password-input-text-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-password-input-cursor-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-password-input-cursor-width: 1px;
+  /**
+   * @type input
+   */
+  --van-password-input-cursor-height: 40%;
+  /**
+   * @type input
+   */
+  --van-password-input-cursor-duration: 1s;
+}

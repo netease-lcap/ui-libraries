@@ -1,0 +1,42 @@
+/**
+ * @component van-notice-bar
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-notice-bar-height: 40px;
+  /**
+   * @type input
+   */
+  --van-notice-bar-padding: 0 var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-notice-bar-wrapable-padding: var(--van-padding-xs) var(--van-padding-md);
+  /**
+   * @type color
+   */
+  --van-notice-bar-text-color: var(--van-orange-dark);
+  /**
+   * @type input
+   */
+  --van-notice-bar-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-notice-bar-line-height: 24px;
+  /**
+   * @type color
+   */
+  --van-notice-bar-background: var(--van-orange-light);
+  /**
+   * @type input
+   */
+  --van-notice-bar-icon-size: 16px;
+  /**
+   * @type input
+   */
+  --van-notice-bar-icon-min-width: 24px;
+}

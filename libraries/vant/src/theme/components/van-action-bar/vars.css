@@ -1,0 +1,71 @@
+/**
+ * @component van-action-bar
+ */
+:root,
+:host {
+  /**
+   * @desc 底部操作栏背景色
+   * @type color
+   */
+  --van-action-bar-background: var(--van-background-2);
+  /**
+   * @desc 底部操作栏高度
+   * @type input
+   */
+  --van-action-bar-height: 50px;
+  /**
+   * @desc 底部操作栏按钮高度
+   * @type input
+   */
+  --van-action-bar-button-height: 40px;
+  /**
+   * @desc 底部操作栏按钮警告色
+   * @type color
+   */
+  --van-action-bar-button-warning-color: var(--van-gradient-orange);
+  /**
+   * @desc 底部操作栏按钮危险色
+   * @type color
+   */
+  --van-action-bar-button-danger-color: var(--van-gradient-red);
+  /**
+   * @desc 底部操作栏图标宽度
+   * @type input
+   */
+  --van-action-bar-icon-width: 48px;
+  /**
+   * @desc 底部操作栏图标高度
+   * @type input
+   */
+  --van-action-bar-icon-height: 100%;
+  /**
+   * @desc 底部操作栏图标颜色
+   * @type color
+   */
+  --van-action-bar-icon-color: var(--van-text-color);
+  /**
+   * @desc 底部操作栏图标大小
+   * @type input
+   */
+  --van-action-bar-icon-size: 18px;
+  /**
+   * @desc 底部操作栏图标字体大小
+   * @type input
+   */
+  --van-action-bar-icon-font-size: var(--van-font-size-xs);
+  /**
+   * @desc 底部操作栏图标激活颜色
+   * @type color
+   */
+  --van-action-bar-icon-active-color: var(--van-active-color);
+  /**
+   * @desc 底部操作栏图标文本颜色
+   * @type color
+   */
+  --van-action-bar-icon-text-color: var(--van-text-color);
+  /**
+   * @desc 底部操作栏图标背景色
+   * @type color
+   */
+  --van-action-bar-icon-background: var(--van-background-2);
+}

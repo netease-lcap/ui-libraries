@@ -1,0 +1,58 @@
+/**
+ * @component van-dropdown-menu
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-dropdown-menu-height: 48px;
+  /**
+   * @type color
+   */
+  --van-dropdown-menu-background: var(--van-background-2);
+  /**
+   * @type input
+   */
+  --van-dropdown-menu-shadow: 0 2px 12px rgba(100, 101, 102, .12);
+  /**
+   * @type input
+   */
+  --van-dropdown-menu-title-font-size: 15px;
+  /**
+   * @type color
+   */
+  --van-dropdown-menu-title-text-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-dropdown-menu-title-active-text-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-dropdown-menu-title-disabled-text-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-dropdown-menu-title-padding: 0 var(--van-padding-xs);
+  /**
+   * @type input
+   */
+  --van-dropdown-menu-title-line-height: var(--van-line-height-lg);
+  /**
+   * @type color
+   */
+  --van-dropdown-menu-option-active-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-dropdown-menu-option-disabled-color: var(--van-text-color-3);
+  /**
+   * @type input
+   */
+  --van-dropdown-menu-content-max-height: 80%;
+  /**
+   * @type input
+   */
+  --van-dropdown-item-z-index: 10;
+}

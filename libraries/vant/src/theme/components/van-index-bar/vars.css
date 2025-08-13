@@ -1,0 +1,58 @@
+/**
+ * @component van-index-bar
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-index-bar-sidebar-z-index: 2;
+  /**
+   * @type input
+   */
+  --van-index-bar-index-font-size: var(--van-font-size-xs);
+  /**
+   * @type input
+   */
+  --van-index-bar-index-line-height: var(--van-line-height-xs);
+  /**
+   * @type color
+   */
+  --van-index-bar-index-active-color: var(--van-primary-color);
+  /**
+   * @type input
+   */
+  --van-index-anchor-z-index: 1;
+  /**
+   * @type input
+   */
+  --van-index-anchor-padding: 0 var(--van-padding-md);
+  /**
+   * @type color
+   */
+  --van-index-anchor-text-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-index-anchor-font-weight: var(--van-font-bold);
+  /**
+   * @type input
+   */
+  --van-index-anchor-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-index-anchor-line-height: 32px;
+  /**
+   * @type input
+   */
+  --van-index-anchor-background: transparent;
+  /**
+   * @type color
+   */
+  --van-index-anchor-sticky-text-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-index-anchor-sticky-background: var(--van-background-2);
+}

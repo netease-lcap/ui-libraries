@@ -1,0 +1,42 @@
+/**
+ * @component van-nav-bar
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-nav-bar-height: 46px;
+  /**
+   * @type color
+   */
+  --van-nav-bar-background: var(--van-background-2);
+  /**
+   * @type input
+   */
+  --van-nav-bar-arrow-size: 16px;
+  /**
+   * @type color
+   */
+  --van-nav-bar-icon-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-nav-bar-text-color: var(--van-primary-color);
+  /**
+   * @type input
+   */
+  --van-nav-bar-title-font-size: var(--van-font-size-lg);
+  /**
+   * @type color
+   */
+  --van-nav-bar-title-text-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-nav-bar-z-index: 1;
+  /**
+   * @type input
+   */
+  --van-nav-bar-disabled-opacity: var(--van-disabled-opacity);
+}

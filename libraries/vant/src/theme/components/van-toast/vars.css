@@ -1,0 +1,66 @@
+/**
+ * @component van-toast
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-toast-max-width: 70%;
+  /**
+   * @type input
+   */
+  --van-toast-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   */
+  --van-toast-text-color: var(--van-white);
+  /**
+   * @type color
+   */
+  --van-toast-loading-icon-color: var(--van-white);
+  /**
+   * @type input
+   */
+  --van-toast-line-height: var(--van-line-height-md);
+  /**
+   * @type input
+   */
+  --van-toast-radius: var(--van-radius-lg);
+  /**
+   * @type color
+   */
+  --van-toast-background: rgba(0, 0, 0, .7);
+  /**
+   * @type input
+   */
+  --van-toast-icon-size: 36px;
+  /**
+   * @type input
+   */
+  --van-toast-text-min-width: 96px;
+  /**
+   * @type input
+   */
+  --van-toast-text-padding: var(--van-padding-xs) var(--van-padding-sm);
+  /**
+   * @type input
+   */
+  --van-toast-default-padding: var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-toast-default-width: 88px;
+  /**
+   * @type input
+   */
+  --van-toast-default-min-height: 88px;
+  /**
+   * @type input
+   */
+  --van-toast-position-top-distance: 20%;
+  /**
+   * @type input
+   */
+  --van-toast-position-bottom-distance: 20%;
+}

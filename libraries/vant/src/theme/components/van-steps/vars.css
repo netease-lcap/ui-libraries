@@ -1,0 +1,54 @@
+/**
+ * @component van-steps
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-steps-background: var(--van-background-2);
+  /**
+   * @type color
+   */
+  --van-step-text-color: var(--van-text-color-2);
+  /**
+   * @type color
+   */
+  --van-step-active-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-step-process-text-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-step-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   */
+  --van-step-line-color: var(--van-border-color);
+  /**
+   * @type color
+   */
+  --van-step-finish-line-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-step-finish-text-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-step-icon-size: 12px;
+  /**
+   * @type input
+   */
+  --van-step-circle-size: 5px;
+  /**
+   * @type color
+   */
+  --van-step-circle-color: var(--van-gray-6);
+  /**
+   * @type input
+   */
+  --van-step-horizontal-title-font-size: var(--van-font-size-sm);
+}

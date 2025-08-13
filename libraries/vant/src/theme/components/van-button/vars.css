@@ -1,0 +1,142 @@
+/**
+ * @component van-button
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-button-mini-height: 24px;
+  /**
+   * @type input
+   */
+  --van-button-mini-padding: 0 var(--van-padding-base);
+  /**
+   * @type input
+   */
+  --van-button-mini-font-size: var(--van-font-size-xs);
+  /**
+   * @type input
+   */
+  --van-button-small-height: 32px;
+  /**
+   * @type input
+   */
+  --van-button-small-padding: 0 var(--van-padding-xs);
+  /**
+   * @type input
+   */
+  --van-button-small-font-size: var(--van-font-size-sm);
+  /**
+   * @type input
+   */
+  --van-button-normal-padding: 0 15px;
+  /**
+   * @type input
+   */
+  --van-button-normal-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-button-large-height: 50px;
+  /**
+   * @type input
+   */
+  --van-button-default-height: 44px;
+  /**
+   * @type input
+   */
+  --van-button-default-line-height: 1.2;
+  /**
+   * @type input
+   */
+  --van-button-default-font-size: var(--van-font-size-lg);
+  /**
+   * @type color
+   */
+  --van-button-default-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-button-default-background: var(--van-background-2);
+  /**
+   * @type color
+   */
+  --van-button-default-border-color: var(--van-gray-4);
+  /**
+   * @type color
+   */
+  --van-button-primary-color: var(--van-white);
+  /**
+   * @type color
+   */
+  --van-button-primary-background: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-button-primary-border-color: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-button-success-color: var(--van-white);
+  /**
+   * @type color
+   */
+  --van-button-success-background: var(--van-success-color);
+  /**
+   * @type color
+   */
+  --van-button-success-border-color: var(--van-success-color);
+  /**
+   * @type color
+   */
+  --van-button-danger-color: var(--van-white);
+  /**
+   * @type color
+   */
+  --van-button-danger-background: var(--van-danger-color);
+  /**
+   * @type color
+   */
+  --van-button-danger-border-color: var(--van-danger-color);
+  /**
+   * @type color
+   */
+  --van-button-warning-color: var(--van-white);
+  /**
+   * @type color
+   */
+  --van-button-warning-background: var(--van-warning-color);
+  /**
+   * @type color
+   */
+  --van-button-warning-border-color: var(--van-warning-color);
+  /**
+   * @type input
+   */
+  --van-button-border-width: var(--van-border-width);
+  /**
+   * @type input
+   */
+  --van-button-radius: var(--van-radius-md);
+  /**
+   * @type input
+   */
+  --van-button-round-radius: var(--van-radius-max);
+  /**
+   * @type color
+   */
+  --van-button-plain-background: var(--van-white);
+  /**
+   * @type input
+   */
+  --van-button-disabled-opacity: var(--van-disabled-opacity);
+  /**
+   * @type input
+   */
+  --van-button-icon-size: 1.2em;
+  /**
+   * @type input
+   */
+  --van-button-loading-icon-size: 20px;
+}

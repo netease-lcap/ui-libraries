@@ -1,0 +1,34 @@
+/**
+ * @component van-back-top
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-back-top-size: 40px;
+  /**
+   * @type input
+   */
+  --van-back-top-right: 30px;
+  /**
+   * @type input
+   */
+  --van-back-top-bottom: 40px;
+  /**
+   * @type input
+   */
+  --van-back-top-z-index: 100;
+  /**
+   * @type input
+   */
+  --van-back-top-icon-size: 20px;
+  /**
+   * @type color
+   */
+  --van-back-top-text-color: #fff;
+  /**
+   * @type color
+   */
+  --van-back-top-background: var(--van-blue);
+}

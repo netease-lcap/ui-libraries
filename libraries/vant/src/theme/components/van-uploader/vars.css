@@ -1,0 +1,110 @@
+/**
+ * @component van-uploader
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-uploader-size: 80px;
+  /**
+   * @type input
+   */
+  --van-uploader-icon-size: 24px;
+  /**
+   * @type color
+   */
+  --van-uploader-icon-color: var(--van-gray-4);
+  /**
+   * @type color
+   */
+  --van-uploader-text-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-uploader-text-font-size: var(--van-font-size-sm);
+  /**
+   * @type color
+   */
+  --van-uploader-upload-background: var(--van-gray-1);
+  /**
+   * @type color
+   */
+  --van-uploader-upload-active-color: var(--van-active-color);
+  /**
+   * @type color
+   */
+  --van-uploader-delete-color: var(--van-white);
+  /**
+   * @type input
+   */
+  --van-uploader-delete-icon-size: 14px;
+  /**
+   * @type color
+   */
+  --van-uploader-delete-background: rgba(0, 0, 0, .7);
+  /**
+   * @type color
+   */
+  --van-uploader-file-background: var(--van-background);
+  /**
+   * @type input
+   */
+  --van-uploader-file-icon-size: 20px;
+  /**
+   * @type color
+   */
+  --van-uploader-file-icon-color: var(--van-gray-7);
+  /**
+   * @type input
+   */
+  --van-uploader-file-name-padding: 0 var(--van-padding-base);
+  /**
+   * @type input
+   */
+  --van-uploader-file-name-margin-top: var(--van-padding-xs);
+  /**
+   * @type input
+   */
+  --van-uploader-file-name-font-size: var(--van-font-size-sm);
+  /**
+   * @type color
+   */
+  --van-uploader-file-name-text-color: var(--van-gray-7);
+  /**
+   * @type color
+   */
+  --van-uploader-mask-text-color: var(--van-white);
+  /**
+   * @type color
+   */
+  --van-uploader-mask-background: rgba(50, 50, 51, .88);
+  /**
+   * @type input
+   */
+  --van-uploader-mask-icon-size: 22px;
+  /**
+   * @type input
+   */
+  --van-uploader-mask-message-font-size: var(--van-font-size-sm);
+  /**
+   * @type input
+   */
+  --van-uploader-mask-message-line-height: var(--van-line-height-xs);
+  /**
+   * @type input
+   */
+  --van-uploader-loading-icon-size: 22px;
+  /**
+   * @type color
+   */
+  --van-uploader-loading-icon-color: var(--van-white);
+  /**
+   * @type input
+   */
+  --van-uploader-disabled-opacity: var(--van-disabled-opacity);
+  /**
+   * @type input
+   */
+  --van-uploader-border-radius: 0px;
+}

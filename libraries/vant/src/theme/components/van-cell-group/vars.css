@@ -1,0 +1,122 @@
+/**
+ * @component van-cell-group
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-cell-group-background: var(--van-background-2);
+  /**
+   * @type color
+   */
+  --van-cell-group-title-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-cell-group-title-padding: var(--van-padding-md) var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-cell-group-title-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-cell-group-title-line-height: 16px;
+  /**
+   * @type input
+   */
+  --van-cell-group-inset-padding: 0 var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-cell-group-inset-radius: var(--van-radius-lg);
+  /**
+   * @type input
+   */
+  --van-cell-group-inset-title-padding: var(--van-padding-md) var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-cell-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-cell-line-height: 24px;
+  /**
+   * @type input
+   */
+  --van-cell-vertical-padding: 10px;
+  /**
+   * @type input
+   */
+  --van-cell-horizontal-padding: var(--van-padding-md);
+  /**
+   * @type color
+   */
+  --van-cell-text-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-cell-background: var(--van-background-2);
+  /**
+   * @type color
+   */
+  --van-cell-border-color: var(--van-border-color);
+  /**
+   * @type color
+   */
+  --van-cell-active-color: var(--van-active-color);
+  /**
+   * @type color
+   */
+  --van-cell-required-color: var(--van-danger-color);
+  /**
+   * @type color
+   */
+  --van-cell-label-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-cell-label-font-size: var(--van-font-size-sm);
+  /**
+   * @type input
+   */
+  --van-cell-label-line-height: var(--van-line-height-sm);
+  /**
+   * @type input
+   */
+  --van-cell-label-margin-top: var(--van-padding-base);
+  /**
+   * @type color
+   */
+  --van-cell-value-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-cell-value-font-size: inherit;
+  /**
+   * @type input
+   */
+  --van-cell-icon-size: 16px;
+  /**
+   * @type color
+   */
+  --van-cell-right-icon-color: var(--van-gray-6);
+  /**
+   * @type input
+   */
+  --van-cell-large-vertical-padding: var(--van-padding-sm);
+  /**
+   * @type input
+   */
+  --van-cell-large-title-font-size: var(--van-font-size-lg);
+  /**
+   * @type input
+   */
+  --van-cell-large-label-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-cell-large-value-font-size: inherit;
+}

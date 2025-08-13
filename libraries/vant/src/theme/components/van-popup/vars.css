@@ -1,0 +1,34 @@
+/**
+ * @component van-popup
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-popup-background: var(--van-background-2);
+  /**
+   * @type input
+   */
+  --van-popup-transition: transform var(--van-duration-base);
+  /**
+   * @type input
+   */
+  --van-popup-round-radius: 16px;
+  /**
+   * @type input
+   */
+  --van-popup-close-icon-size: 22px;
+  /**
+   * @type color
+   */
+  --van-popup-close-icon-color: var(--van-gray-5);
+  /**
+   * @type input
+   */
+  --van-popup-close-icon-margin: 16px;
+  /**
+   * @type input
+   */
+  --van-popup-close-icon-z-index: 1;
+}

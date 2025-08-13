@@ -1,0 +1,42 @@
+/**
+ * @component van-skeleton
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-skeleton-duration: 1.2s;
+  /**
+   * @type input
+   */
+  --van-skeleton-image-size: 96px;
+  /**
+   * @type input
+   */
+  --van-skeleton-image-radius: 24px;
+  /**
+   * @type input
+   */
+  --van-skeleton-title-width: 40%;
+  /**
+   * @type input
+   */
+  --van-skeleton-paragraph-height: 16px;
+  /**
+   * @type color
+   */
+  --van-skeleton-paragraph-background: var(--van-active-color);
+  /**
+   * @type input
+   */
+  --van-skeleton-paragraph-margin-top: var(--van-padding-sm);
+  /**
+   * @type input
+   */
+  --van-skeleton-avatar-size: 32px;
+  /**
+   * @type color
+   */
+  --van-skeleton-avatar-background: var(--van-active-color);
+}

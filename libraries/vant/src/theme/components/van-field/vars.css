@@ -1,0 +1,82 @@
+/**
+ * @component van-field
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-field-label-width: 6.2em;
+  /**
+   * @type color
+   */
+  --van-field-label-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-field-label-margin-right: var(--van-padding-sm);
+  /**
+   * @type color
+   */
+  --van-field-input-text-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-field-input-error-text-color: var(--van-danger-color);
+  /**
+   * @type color
+   */
+  --van-field-input-disabled-text-color: var(--van-text-color-3);
+  /**
+   * @type color
+   */
+  --van-field-placeholder-text-color: var(--van-text-color-3);
+  /**
+   * @type input
+   */
+  --van-field-icon-size: 18px;
+  /**
+   * @type input
+   */
+  --van-field-clear-icon-size: 18px;
+  /**
+   * @type color
+   */
+  --van-field-clear-icon-color: var(--van-gray-5);
+  /**
+   * @type color
+   */
+  --van-field-right-icon-color: var(--van-gray-6);
+  /**
+   * @type color
+   */
+  --van-field-error-message-color: var(--van-danger-color);
+  /**
+   * @type input
+   */
+  --van-field-error-message-font-size: 12px;
+  /**
+   * @type input
+   */
+  --van-field-text-area-min-height: 60px;
+  /**
+   * @type color
+   */
+  --van-field-word-limit-color: var(--van-gray-7);
+  /**
+   * @type input
+   */
+  --van-field-word-limit-font-size: var(--van-font-size-sm);
+  /**
+   * @type input
+   */
+  --van-field-word-limit-line-height: 16px;
+  /**
+   * @type color
+   */
+  --van-field-disabled-text-color: var(--van-text-color-3);
+  /**
+   * @type color
+   */
+  --van-field-required-mark-color: var(--van-red);
+}

@@ -1,0 +1,50 @@
+/**
+ * @component van-search
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-search-padding: 10px var(--van-padding-sm);
+  /**
+   * @type color
+   */
+  --van-search-background: var(--van-background-2);
+  /**
+   * @type color
+   */
+  --van-search-content-background: var(--van-background);
+  /**
+   * @type input
+   */
+  --van-search-input-height: 34px;
+  /**
+   * @type input
+   */
+  --van-search-label-padding: 0 5px;
+  /**
+   * @type color
+   */
+  --van-search-label-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-search-label-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   */
+  --van-search-left-icon-color: var(--van-gray-6);
+  /**
+   * @type input
+   */
+  --van-search-action-padding: 0 var(--van-padding-xs);
+  /**
+   * @type color
+   */
+  --van-search-action-text-color: var(--van-text-color);
+  /**
+   * @type input
+   */
+  --van-search-action-font-size: var(--van-font-size-md);
+}

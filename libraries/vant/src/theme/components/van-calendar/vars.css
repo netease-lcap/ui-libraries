@@ -1,0 +1,122 @@
+/**
+ * @component van-calendar
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-calendar-background: var(--van-background-2);
+  /**
+   * @type input
+   */
+  --van-calendar-popup-height: 80%;
+  /**
+   * @type input
+   */
+  --van-calendar-header-shadow: 0 2px 10px rgba(125, 126, 128, .16);
+  /**
+   * @type input
+   */
+  --van-calendar-header-title-height: 44px;
+  /**
+   * @type input
+   */
+  --van-calendar-header-title-font-size: var(--van-font-size-lg);
+  /**
+   * @type input
+   */
+  --van-calendar-header-subtitle-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-calendar-header-action-width: 28px;
+  /**
+   * @type color
+   */
+  --van-calendar-header-action-color: var(--van-text-color);
+  /**
+   * @type color
+   */
+  --van-calendar-header-action-disabled-color: var(--van-text-color-3);
+  /**
+   * @type input
+   */
+  --van-calendar-weekdays-height: 30px;
+  /**
+   * @type input
+   */
+  --van-calendar-weekdays-font-size: var(--van-font-size-sm);
+  /**
+   * @type input
+   */
+  --van-calendar-month-title-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   */
+  --van-calendar-month-mark-color: rgba(242, 243, 245, .8);
+  /**
+   * @type input
+   */
+  --van-calendar-month-mark-font-size: 160px;
+  /**
+   * @type input
+   */
+  --van-calendar-day-height: 64px;
+  /**
+   * @type input
+   */
+  --van-calendar-day-font-size: var(--van-font-size-lg);
+  /**
+   * @type input
+   */
+  --van-calendar-day-margin-bottom: 4px;
+  /**
+   * @type color
+   */
+  --van-calendar-day-disabled-color: var(--van-text-color-3);
+  /**
+   * @type color
+   */
+  --van-calendar-range-edge-color: var(--van-white);
+  /**
+   * @type color
+   */
+  --van-calendar-range-edge-background: var(--van-primary-color);
+  /**
+   * @type color
+   */
+  --van-calendar-range-middle-color: var(--van-primary-color);
+  /**
+   * @type input
+   */
+  --van-calendar-range-middle-background-opacity: .1;
+  /**
+   * @type input
+   */
+  --van-calendar-selected-day-size: 54px;
+  /**
+   * @type color
+   */
+  --van-calendar-selected-day-color: var(--van-white);
+  /**
+   * @type color
+   */
+  --van-calendar-selected-day-background: var(--van-primary-color);
+  /**
+   * @type input
+   */
+  --van-calendar-info-font-size: var(--van-font-size-xs);
+  /**
+   * @type input
+   */
+  --van-calendar-info-line-height: var(--van-line-height-xs);
+  /**
+   * @type input
+   */
+  --van-calendar-confirm-button-height: 36px;
+  /**
+   * @type input
+   */
+  --van-calendar-confirm-button-margin: 7px 0;
+}

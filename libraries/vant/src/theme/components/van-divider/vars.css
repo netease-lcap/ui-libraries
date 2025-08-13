@@ -1,0 +1,42 @@
+/**
+ * @component van-divider
+ */
+:root,
+:host {
+  /**
+   * @type input
+   */
+  --van-divider-margin: var(--van-padding-md) 0;
+  /**
+   * @type input
+   */
+  --van-divider-vertical-margin: 0 var(--van-padding-xs);
+  /**
+   * @type color
+   */
+  --van-divider-text-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-divider-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-divider-line-height: 24px;
+  /**
+   * @type color
+   */
+  --van-divider-border-color: var(--van-border-color);
+  /**
+   * @type input
+   */
+  --van-divider-content-padding: var(--van-padding-md);
+  /**
+   * @type input
+   */
+  --van-divider-content-left-width: 10%;
+  /**
+   * @type input
+   */
+  --van-divider-content-right-width: 10%;
+}

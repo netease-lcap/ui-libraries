@@ -1,0 +1,22 @@
+/**
+ * @component van-list
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-list-text-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-list-text-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   */
+  --van-list-text-line-height: 50px;
+  /**
+   * @type input
+   */
+  --van-list-loading-icon-size: 16px;
+}

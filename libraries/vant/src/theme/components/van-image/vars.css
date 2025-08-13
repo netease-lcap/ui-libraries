@@ -1,0 +1,34 @@
+/**
+ * @component van-image
+ */
+:root,
+:host {
+  /**
+   * @type color
+   */
+  --van-image-placeholder-text-color: var(--van-text-color-2);
+  /**
+   * @type input
+   */
+  --van-image-placeholder-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   */
+  --van-image-placeholder-background: var(--van-background);
+  /**
+   * @type input
+   */
+  --van-image-loading-icon-size: 32px;
+  /**
+   * @type color
+   */
+  --van-image-loading-icon-color: var(--van-gray-4);
+  /**
+   * @type input
+   */
+  --van-image-error-icon-size: 32px;
+  /**
+   * @type color
+   */
+  --van-image-error-icon-color: var(--van-gray-4);
+}
