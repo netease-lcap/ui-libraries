@@ -25,11 +25,95 @@ export const Default = {
         value,
         pickerRef,
         columns: async () => {
-          await new Promise((resolve) => setTimeout(resolve, 3000));
           return [
-            { text: '选项1', value: '1' },
-            { text: '选项2', value: '2' },
-            { text: '选项3', value: '3' },
+            {
+              tree: {
+                id: 3188075897259520,
+                createdTime: '2025-08-07T03:25:17.000Z',
+                updatedTime: '2025-08-07T03:34:12.000Z',
+                createdBy: null,
+                updatedBy: null,
+                parentid: 0,
+                treename222: '父节点2',
+              },
+            },
+            {
+              tree: {
+                id: 3188076644189696,
+                createdTime: '2025-08-07T03:26:48.000Z',
+                updatedTime: '2025-08-07T03:34:15.000Z',
+                createdBy: null,
+                updatedBy: null,
+                parentid: 0,
+                treename222: '父节点1',
+              },
+            },
+            {
+              tree: {
+                id: 3188081854883328,
+                createdTime: '2025-08-07T03:37:24.000Z',
+                updatedTime: '2025-08-07T03:37:24.000Z',
+                createdBy: null,
+                updatedBy: null,
+                parentid: 3188075897259520,
+                treename222: '父节点1-孩子节点1',
+              },
+            },
+            {
+              tree: {
+                id: 3188081919485440,
+                createdTime: '2025-08-07T03:37:32.000Z',
+                updatedTime: '2025-08-07T03:37:32.000Z',
+                createdBy: null,
+                updatedBy: null,
+                parentid: 3188075897259520,
+                treename222: '父节点1-孩子节点2',
+              },
+            },
+            {
+              tree: {
+                id: 3188082239071744,
+                createdTime: '2025-08-07T03:38:11.000Z',
+                updatedTime: '2025-08-07T03:38:11.000Z',
+                createdBy: null,
+                updatedBy: null,
+                parentid: 3188075897259520,
+                treename222: '父节点2-孩子节点1',
+              },
+            },
+            {
+              tree: {
+                id: 3188082318419456,
+                createdTime: '2025-08-07T03:38:21.000Z',
+                updatedTime: '2025-08-07T03:38:21.000Z',
+                createdBy: null,
+                updatedBy: null,
+                parentid: 3188075897259520,
+                treename222: '父节点2-孩子节点2',
+              },
+            },
+            {
+              tree: {
+                id: 3188082453202432,
+                createdTime: '2025-08-07T03:38:37.000Z',
+                updatedTime: '2025-08-07T03:38:37.000Z',
+                createdBy: null,
+                updatedBy: null,
+                parentid: 3188081854883328,
+                treename222: '父节点1-孩子节点1-孙子节点1',
+              },
+            },
+            {
+              tree: {
+                id: 3188082590918144,
+                createdTime: '2025-08-07T03:38:54.000Z',
+                updatedTime: '2025-08-07T03:38:54.000Z',
+                createdBy: null,
+                updatedBy: null,
+                parentid: 3188081854883328,
+                treename222: '父节点1-孩子节点1-孙子节点2',
+              },
+            },
           ];
         },
         handleChange(event) {
@@ -46,6 +130,8 @@ export const Default = {
     template: `
       <van-picker 
         v-model="value"
+        textField="tree.treename222"
+        valueField="tree.id"
         placeholder="xx"
         ref="pickerRef"
         :dataSource="columns"

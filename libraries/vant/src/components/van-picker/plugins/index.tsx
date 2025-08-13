@@ -23,7 +23,7 @@ export function handleDataSource(props) {
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
-  const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
+  const dataSource = useHandleMapField({ textField, valueField, label: 'text', dataSource: useFormatDataSource(data) });
   const TreeData = useMemo(
     () => useDataSourceToTree(dataSource, parentField, valueField),
     [dataSource, parentField, valueField],

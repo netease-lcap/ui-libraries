@@ -21,7 +21,7 @@ export function handleDataSource(props) {
   const parentField = props.get('parentField', 'parentid');
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
-  const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
+  const dataSource = useHandleMapField({ textField, label: 'text', valueField, dataSource: useFormatDataSource(data) });
   const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
 
