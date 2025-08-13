@@ -122,7 +122,7 @@ namespace nasl.ui {
         ]
       }
     })
-    size: 'large' | 'normal';
+    size: 'large' | 'normal' = 'normal';
 
     @Prop({
       group: '主要属性',
