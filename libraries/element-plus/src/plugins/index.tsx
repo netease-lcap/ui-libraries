@@ -49,7 +49,7 @@ export class PluginOptions {
   };
 }
 
-export function registerComponent<T>(Component, options) {
+export function registerComponent<T>(Component: T, options) {
   return defineComponent<T>({
     name: options.name || 'HocBaseComponents',
     components: { Component },
@@ -132,6 +132,7 @@ export function registerComponent<T>(Component, options) {
 
       provide($provide, provideRef);
       return () => {
+        console.log(componentState.value.state, '=========');
         return (
           <Render
             {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}

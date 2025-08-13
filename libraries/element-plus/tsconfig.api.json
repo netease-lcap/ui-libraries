@@ -21,7 +21,7 @@
     "lib": ["esnext", "dom"],
     "paths": {
       "@/*": ["*"],
-      "@element-plus/*": ["./ep-test/*"]
+      "@ep-test/*": ["./ep-test/*"]
     }
   },
   "include": [

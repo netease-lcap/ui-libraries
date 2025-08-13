@@ -75,12 +75,11 @@ export function handlePreview(props) {
       if (modelValue.length === 0) return '-';
       if (!multiple) {
         return getPathText(data, modelValue);
-      } else {
+      }
         return modelValue
           .filter(_.isArray)
           .map((path) => getPathText(data, path))
           .join(', ');
-      }
     };
 
     const multiple = props.get('multiple', false);
@@ -88,7 +87,7 @@ export function handlePreview(props) {
     const inIDE = !!props.get('data-nodepath');
     const { options = [], modelValue = [] } = insProps;
     const previewText = inIDE ? '-' : getListPreviewText(options, modelValue);
-    return <el-preview text={previewText}></el-preview>;
+    return <el-preview text={previewText} />;
   };
 
   const { render, insRef } = getRender(Component, previewRender, isPreview);

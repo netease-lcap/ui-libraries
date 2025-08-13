@@ -71,78 +71,79 @@ export const Example2 = {
           }, 3000);
         });
       };
-      const dataSource = () => new Promise((res) => {
-        setTimeout(() => {
-          res([
-            {
-              entity1: {
-                id: 0,
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项5',
-                fid: 1,
+      const dataSource = () =>
+        new Promise((res) => {
+          setTimeout(() => {
+            res([
+              {
+                entity1: {
+                  id: 0,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项5',
+                  fid: 1,
+                },
               },
-            },
-            {
-              entity1: {
-                id: 1,
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项6',
-                fid: 2,
+              {
+                entity1: {
+                  id: 1,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项6',
+                  fid: 2,
+                },
               },
-            },
-            {
-              entity1: {
-                id: 3,
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项3',
-                fid: 0,
+              {
+                entity1: {
+                  id: 3,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项3',
+                  fid: 0,
+                },
               },
-            },
-            {
-              entity1: {
-                id: 7,
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项2',
-                fid: 1,
+              {
+                entity1: {
+                  id: 7,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项2',
+                  fid: 1,
+                },
               },
-            },
-            {
-              entity1: {
-                id: 8,
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项1.1',
-                fid: 2,
+              {
+                entity1: {
+                  id: 8,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项1.1',
+                  fid: 2,
+                },
               },
-            },
-            {
-              entity1: {
-                id: 9,
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项4',
-                fid: 0,
+              {
+                entity1: {
+                  id: 9,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项4',
+                  fid: 0,
+                },
               },
-            },
-          ]);
-        }, 1000);
-      });
+            ]);
+          }, 1000);
+        });
       const select = ref('');
       const options = ref([
         {
@@ -172,6 +173,10 @@ export const Example2 = {
         name.value = 'myname';
         // list.value.push({ value: 4 });
       }, 3000);
+      const refs = ref({});
+      setTimeout(() => {
+        console.log(refs, 'ss');
+      }, 1000);
 
       return {
         name,
@@ -181,11 +186,12 @@ export const Example2 = {
         list,
         dataSource,
         handleClick,
+        refs,
       };
     },
     template: `
     <div>
-    <el-cascader ref="select" data-nodepath="123"  filterable :multiple="true" :placeholder="12" valueField="entity1.id"
+    <el-cascader ref="refs" data-nodepath="123"  filterable :multiple="true" :placeholder="12" valueField="entity1.id"
         textField="entity1.property1"
         parentField="entity1.fid" :dataSource="dataSource"  >
 
@@ -200,6 +206,35 @@ export const Example2 = {
 export const Example3 = {
   name: '级联选择器',
   render: () => ({
-    template: '<el-cascader class="my-cascader andy" data-nodepath="123" />',
+    setup() {
+      const value = ref([
+        ['zhejiang', 'hangzhou'],
+        ['zhejiang', 'ningbo'],
+      ]);
+      return {
+        OPTIONS: [
+          {
+            value: 'zhejiang',
+            label: 'Zhejiang',
+            children: [
+              {
+                value: 'hangzhou',
+                label: 'Hangzhou',
+              },
+              {
+                value: 'ningbo',
+                label: 'Ningbo',
+              },
+              {
+                value: 'wenzhou',
+                label: 'Wenzhou',
+              },
+            ],
+          },
+        ],
+        value,
+      };
+    },
+    template: '<el-cascader v-model="value" :multiple="true" :options="OPTIONS" class="my-cascader andy" data-nodepath="123" />',
   }),
 };

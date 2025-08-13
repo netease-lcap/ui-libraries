@@ -27,7 +27,7 @@
     "noImplicitAny": false,
     "paths": {
       "@/*": ["./src/*"],
-      "@element-plus/*": ["./ep-test/*"]
+      "@ep-test/*": ["./ep-test/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "ide/**/*.ts"],

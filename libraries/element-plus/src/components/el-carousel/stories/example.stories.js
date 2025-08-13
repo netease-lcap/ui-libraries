@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import Component from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
@@ -16,17 +17,37 @@ export default {
   argTypes: {},
 };
 
-
 export const Example1 = {
   name: '基础用法',
   render: () => ({
     components: {
       exampleDemo: ExampleDemo1,
     },
-    template: '<example-demo></example-demo>',
+    setup() {
+      const reff = ref();
+      setTimeout(() => {
+        console.log(reff, 'ffff');
+        reff.value.setActiveItem(2);
+
+        console.log(reff, 'rrrr');
+      }, 100);
+      return {
+        reff,
+        data: [1, 2, 3, 4],
+      };
+    },
+    template: `  <div class="block text-center">
+    <span class="demonstration">
+      Switch when indicator is hovered (default)
+    </span>
+    <el-carousel ref="reff" height="150px">
+      <el-carousel-item v-for="item in 4" :key="item">
+        <h3 class="small justify-center" text="2xl">{{ item }}</h3>
+      </el-carousel-item>
+    </el-carousel>
+  </div>`,
   }),
 };
-
 
 export const Example2 = {
   name: '卡片模式',
@@ -37,7 +58,6 @@ export const Example2 = {
     template: '<example-demo></example-demo>',
   }),
 };
-
 
 export const Example3 = {
   name: '垂直排列',
