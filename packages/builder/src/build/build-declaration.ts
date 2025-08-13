@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable global-require */
-import * as babel from '@babel/core';
 import * as babelTypes from '@babel/types';
 import generate from '@babel/generator';
 import traverse from '@babel/traverse';
@@ -10,7 +9,7 @@ import { cloneDeep } from 'lodash';
 import { execSync } from '../utils/exec';
 import logger from '../utils/logger';
 import { LcapBuildOptions } from './types';
-import { getNodeCode, getSlotName } from '../utils/babel-utils';
+import { getNodeCode, getSlotName, babelParser } from '../shared';
 import { type NaslUIComponentConfig } from '../overload';
 
 function putComponentMap(components: NaslUIComponentConfig[], componentMap: Record<string, NaslUIComponentConfig> = {}) {
@@ -275,16 +274,7 @@ function addExtendsClassProperties(ast: babelTypes.File, componentMap: Record<st
 }
 
 function transformTsCode(tsCode: string, componentMap: Record<string, NaslUIComponentConfig>, componentList: NaslUIComponentConfig[]) {
-  const ast = babel.parse(tsCode, {
-    filename: 'result.ts',
-    presets: [require('@babel/preset-typescript')],
-    plugins: [
-      [require('@babel/plugin-proposal-decorators'), { legacy: true }],
-      // 'babel-plugin-parameter-decorator'
-    ],
-    rootMode: 'root',
-    root: __dirname,
-  }) as babelTypes.File;
+  const ast = babelParser.parse(tsCode) as babelTypes.File;
 
   addExportAndComment(ast, componentMap);
   addExtendsClassProperties(ast, componentMap, componentList);

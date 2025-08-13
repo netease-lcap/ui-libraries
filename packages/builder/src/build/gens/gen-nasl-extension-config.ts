@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-await-in-loop */
 import path from 'path';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
@@ -248,13 +251,17 @@ export default async function getNaslExtensionConfig({
   const pkgInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
   const frameworkKind = framework || getFrameWorkKind(pkgInfo);
   const libInfo = [pkgInfo.name, '@', pkgInfo.version].join('');
-  const viewComponents = glob.sync(`${componentPath}/**/api.ts`, { cwd: rootPath, absolute: true }).map((tsPath) => {
-    const componentConfig = genNaslComponentConfig({
+  const tsPaths = glob.sync(`${componentPath}/**/api.ts`, { cwd: rootPath, absolute: true });
+
+  const viewComponents: any[] = [];
+
+  for (const tsPath of tsPaths) {
+    const componentConfig = await genNaslComponentConfig({
       apiPath: tsPath,
-      assetsPublicPath,
+      assetsPublicPath: assetsPublicPath || '',
       rootPath,
       libInfo,
-      framework,
+      framework: framework as any,
     });
 
     const projectAssetPath = 'assets';
@@ -278,8 +285,8 @@ export default async function getNaslExtensionConfig({
       });
     }
 
-    return componentConfig;
-  });
+    viewComponents.push(componentConfig);
+  }
 
   const lcapUIConfigPath = path.resolve(rootPath, LCAP_UI_CONFIG_PATH);
   let lcapUIComponents: any[] = [];

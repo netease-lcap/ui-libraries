@@ -3,7 +3,7 @@ import path from 'path';
 import pc from 'picocolors';
 import prompts from 'prompts';
 import { camelCase, kebabCase, upperFirst } from 'lodash';
-import { getComponentList, type ProjectMetaInfo } from '../utils/project';
+import { getLcapUIComponentList, type ProjectMetaInfo } from '../utils/project';
 import { copy } from '../utils/fs';
 import logger from '../utils/logger';
 import overloadComponent from '../commands/overload';
@@ -33,7 +33,7 @@ function isSupportFork(metaInfo: ProjectMetaInfo) {
 }
 
 export async function getCreateComponentOptions(rootPath: string, metaInfo: ProjectMetaInfo) {
-  const componentList = getComponentList(rootPath);
+  const componentList = await getLcapUIComponentList(rootPath);
   let result: CreateComponentOptions = {
     name: '',
     title: '',
