@@ -20,6 +20,27 @@ export default defineConfig(({ command }) => {
         type: 'nasl.ui',
         framework: 'vue3',
         pnpm: true,
+        theme: {
+          previewPages: [
+            {
+              name: 'dashboard',
+              title: 'Dashboard',
+              viewport: {
+                width: 375,
+                height: 815,
+              },
+            },
+            {
+              name: 'form',
+              title: '表单页',
+              viewport: {
+                width: 375,
+                height: 815,
+              },
+            },
+          ],
+          themeComponentFolder: './src/theme/components',
+        },
         modules: {
           entries: {
             'components/van-config-provider/index': 'src/components/van-config-provider/index',

@@ -94,25 +94,14 @@
       </van-cell-group>
     </div>
 
-    <!-- 邀请访客按钮 -->
-    <div class="invite-section">
-      <van-button
-        type="primary"
-        size="large"
-        block
-        class="invite-btn"
-        icon="plus"
-      >
-        邀请访客
-      </van-button>
-    </div>
-
     <!-- 底部导航栏 -->
     <van-tabbar v-model="activeTab" class="dashboard-tabbar">
       <van-tabbar-item icon="home-o" name="home">首页</van-tabbar-item>
       <van-tabbar-item icon="friends-o" name="visitors">访客</van-tabbar-item>
       <van-tabbar-item icon="location-o" name="location">位置</van-tabbar-item>
     </van-tabbar>
+
+
   </div>
 </template>
 
@@ -126,7 +115,8 @@ const activeTab = ref('home')
 .dashboard {
   min-height: 100vh;
   background-color: var(--van-background);
-  padding-bottom: 50px;
+  padding-bottom: 60px;
+  color: var(--van-text-color);
 }
 
 .dashboard-header {
@@ -231,21 +221,16 @@ const activeTab = ref('home')
   flex: 1;
 }
 
-.invite-section {
-  padding: var(--van-padding-md);
-  margin-top: var(--van-padding-lg);
-}
 
-.invite-btn {
-  height: 44px;
-  border-radius: var(--van-radius-lg);
-  font-size: var(--van-font-size-lg);
-  font-weight: var(--van-font-bold);
-}
 
 .dashboard-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: var(--van-background-2);
   border-top: 1px solid var(--van-border-color);
+  z-index: 99;
 }
 
 .dashboard-tabbar .van-tabbar-item--active {
