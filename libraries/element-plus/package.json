@@ -28,7 +28,7 @@
     "deploy:one": "lcap-scripts deploy --images",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "check:api": "tsc -p tsconfig.api.json",
-    "test": "vitest",
+    "test": "vitest ",
     "test:dev": "vitest dev",
     "test:coverage": "vitest run --coverage"
   },
@@ -61,7 +61,7 @@
     "storybook": "^8.4.6",
     "typescript": "~5.6.2",
     "vite": "^6.0.1",
-    "vitest": "^2.0.5",
+    "vitest": "^2.1.9",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vue-tsc": "^2.1.10"
