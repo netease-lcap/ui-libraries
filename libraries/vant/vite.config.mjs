@@ -28,6 +28,11 @@ export default defineConfig(({ command }) => {
           },
           tsconfigPath: 'tsconfig.build.json',
         },
+        i18n: {
+          'zh-CN': './src/locale/langs/zh-CN.json',
+          'en-US': './src/locale/langs/en-US.json',
+          ja: './src/locale/langs/ja-JP.json',
+        },
       }),
     ],
     resolve: {
