@@ -134,4 +134,5 @@ export function handleComponentInForm(props) {
   };
 }
 
+handleComponentInForm.order = 6;
 handleComponentInForm.type = $ide;

@@ -57,14 +57,7 @@ const Template = (args) => ({
         </template>
       </van-form-field>
       {{pickerValue}}选择器
-      <van-form-picker
-             :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
-             v-model="pickerValue"
-      required name="gender" placeholder="请选择性别"
-        :dataSource="[{ text: '男', value: '1' }, { text: '女', value: '2' }]"
-        clearable
-      >
-      </van-form-picker>
+
       {{cascaderValue}}级联选择器
       <van-form-cascader
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
@@ -106,6 +99,7 @@ const Template = (args) => ({
           <span>评分</span>
         </template>
       </van-form-rate>
+      <van-switch></van-switch>
       <van-form-switch
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
         required name="switch" placeholder="请选择开关"
