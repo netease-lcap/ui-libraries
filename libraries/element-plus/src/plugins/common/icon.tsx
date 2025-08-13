@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { ElIcon } from '@/components';
 
 export function handleIcon(props) {
@@ -12,5 +13,9 @@ export function handleIcon(props) {
 }
 
 export function getPropsIcon(props: any) {
-  return props.name ? <ElIcon {...props} /> : null;
+  return _.cond([
+    [_.matches({ name: _.isString }), (props) => <ElIcon {...props} />],
+    [_.matches({ name: _.isNil }), _.constant(null)],
+    [_.conforms({ name: (name) => _.isFunction(name.setup) }), (props) => props.name],
+  ])(props);
 }

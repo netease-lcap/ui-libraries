@@ -29,7 +29,7 @@ describe('Breadcrumb.vue', () => {
 
   it('separatorIcon', () => {
     const wrapper = _mount(() => (
-      <Breadcrumb separatorIcon="Check">
+      <Breadcrumb separatorIcon={Check}>
         <BreadcrumbItem>A</BreadcrumbItem>
       </Breadcrumb>
     ));
@@ -39,7 +39,7 @@ describe('Breadcrumb.vue', () => {
 
   it('to', () => {
     const wrapper = _mount(() => (
-      <Breadcrumb separator="?" separatorIcon="Check">
+      <Breadcrumb separator="?" separatorIcon={Check}>
         <BreadcrumbItem to="/index">A</BreadcrumbItem>
       </Breadcrumb>
     ));

@@ -1,4 +1,4 @@
-import { ElButton as ElButtonPlus } from 'element-plus';
+import { ElButton as ElButtonPlus, ElButtonGroup } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
@@ -11,6 +11,6 @@ function ElButtonRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElButton = registerComponent(ElButtonPlus, { plugin: basicsPlugin, name: 'el-button' });
-export { ElButtonPlus, ElButton, ElButtonRegister };
+export { ElButtonPlus, ElButton, ElButtonRegister, ElButtonGroup };
 
 export default ElButton;

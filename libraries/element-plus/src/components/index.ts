@@ -125,3 +125,4 @@ export { ElListComponents, ElListComponentsRegister } from './el-list-components
 // export { elementPlus };
 
 export const locale = { zhCn };
+export { Search } from '@element-plus/icons-vue';
