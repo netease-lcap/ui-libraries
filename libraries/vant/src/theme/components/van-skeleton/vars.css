@@ -5,38 +5,47 @@
 :host {
   /**
    * @type input
+   * @desc 骨架屏动画时长
    */
   --van-skeleton-duration: 1.2s;
   /**
    * @type input
+   * @desc 骨架屏图片尺寸
    */
   --van-skeleton-image-size: 96px;
   /**
    * @type input
+   * @desc 骨架屏图片圆角半径
    */
   --van-skeleton-image-radius: 24px;
   /**
    * @type input
+   * @desc 骨架屏标题宽度
    */
   --van-skeleton-title-width: 40%;
   /**
    * @type input
+   * @desc 骨架屏段落高度
    */
   --van-skeleton-paragraph-height: 16px;
   /**
    * @type color
+   * @desc 骨架屏段落背景色
    */
   --van-skeleton-paragraph-background: var(--van-active-color);
   /**
    * @type input
+   * @desc 骨架屏段落上边距
    */
   --van-skeleton-paragraph-margin-top: var(--van-padding-sm);
   /**
    * @type input
+   * @desc 骨架屏头像尺寸
    */
   --van-skeleton-avatar-size: 32px;
   /**
    * @type color
+   * @desc 骨架屏头像背景色
    */
   --van-skeleton-avatar-background: var(--van-active-color);
 }

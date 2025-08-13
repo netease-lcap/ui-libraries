@@ -5,38 +5,47 @@
 :host {
   /**
    * @type input
+   * @desc 导航栏高度
    */
   --van-nav-bar-height: 46px;
   /**
    * @type color
+   * @desc 导航栏背景色
    */
   --van-nav-bar-background: var(--van-background-2);
   /**
    * @type input
+   * @desc 导航栏箭头大小
    */
   --van-nav-bar-arrow-size: 16px;
   /**
    * @type color
+   * @desc 导航栏图标颜色
    */
   --van-nav-bar-icon-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 导航栏文字颜色
    */
   --van-nav-bar-text-color: var(--van-primary-color);
   /**
    * @type input
+   * @desc 导航栏标题字体大小
    */
   --van-nav-bar-title-font-size: var(--van-font-size-lg);
   /**
    * @type color
+   * @desc 导航栏标题文字颜色
    */
   --van-nav-bar-title-text-color: var(--van-text-color);
   /**
    * @type input
+   * @desc 导航栏层级
    */
   --van-nav-bar-z-index: 1;
   /**
    * @type input
+   * @desc 导航栏禁用状态透明度
    */
   --van-nav-bar-disabled-opacity: var(--van-disabled-opacity);
 }

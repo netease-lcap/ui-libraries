@@ -5,78 +5,97 @@
 :host {
   /**
    * @type input
+   * @desc 对话框宽度
    */
   --van-dialog-width: 320px;
   /**
    * @type input
+   * @desc 对话框小屏幕宽度
    */
   --van-dialog-small-screen-width: 90%;
   /**
    * @type input
+   * @desc 对话框字体大小
    */
   --van-dialog-font-size: var(--van-font-size-lg);
   /**
    * @type input
+   * @desc 对话框过渡动画
    */
   --van-dialog-transition: var(--van-duration-base);
   /**
    * @type input
+   * @desc 对话框圆角半径
    */
   --van-dialog-radius: 16px;
   /**
    * @type color
+   * @desc 对话框背景色
    */
   --van-dialog-background: var(--van-background-2);
   /**
    * @type input
+   * @desc 对话框头部字体粗细
    */
   --van-dialog-header-font-weight: var(--van-font-bold);
   /**
    * @type input
+   * @desc 对话框头部行高
    */
   --van-dialog-header-line-height: 24px;
   /**
    * @type input
+   * @desc 对话框头部上内边距
    */
   --van-dialog-header-padding-top: 26px;
   /**
    * @type input
+   * @desc 对话框头部独立内边距
    */
   --van-dialog-header-isolated-padding: var(--van-padding-lg) 0;
   /**
    * @type input
+   * @desc 对话框消息内边距
    */
   --van-dialog-message-padding: var(--van-padding-lg);
   /**
    * @type input
+   * @desc 对话框消息字体大小
    */
   --van-dialog-message-font-size: var(--van-font-size-md);
   /**
    * @type input
+   * @desc 对话框消息行高
    */
   --van-dialog-message-line-height: var(--van-line-height-md);
   /**
    * @type input
+   * @desc 对话框消息最大高度
    */
   --van-dialog-message-max-height: 60vh;
   /**
    * @type color
+   * @desc 对话框有标题时消息文字颜色
    */
   --van-dialog-has-title-message-text-color: var(--van-gray-7);
   /**
    * @type input
+   * @desc 对话框有标题时消息上内边距
    */
   --van-dialog-has-title-message-padding-top: var(--van-padding-xs);
   /**
    * @type input
+   * @desc 对话框按钮高度
    */
   --van-dialog-button-height: 48px;
   /**
    * @type input
+   * @desc 对话框圆角按钮高度
    */
   --van-dialog-round-button-height: 36px;
   /**
    * @type color
+   * @desc 对话框确认按钮文字颜色
    */
   --van-dialog-confirm-button-text-color: var(--van-primary-color);
 }

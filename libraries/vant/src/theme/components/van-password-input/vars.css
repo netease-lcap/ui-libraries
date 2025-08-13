@@ -5,62 +5,77 @@
 :host {
   /**
    * @type input
+   * @desc 密码输入框高度
    */
   --van-password-input-height: 50px;
   /**
    * @type input
+   * @desc 密码输入框边距
    */
   --van-password-input-margin: 0 var(--van-padding-md);
   /**
    * @type input
+   * @desc 密码输入框字体大小
    */
   --van-password-input-font-size: 20px;
   /**
    * @type input
+   * @desc 密码输入框圆角半径
    */
   --van-password-input-radius: 6px;
   /**
    * @type color
+   * @desc 密码输入框背景色
    */
   --van-password-input-background: var(--van-background-2);
   /**
    * @type color
+   * @desc 密码输入框信息颜色
    */
   --van-password-input-info-color: var(--van-text-color-2);
   /**
    * @type input
+   * @desc 密码输入框信息字体大小
    */
   --van-password-input-info-font-size: var(--van-font-size-md);
   /**
    * @type color
+   * @desc 密码输入框错误信息颜色
    */
   --van-password-input-error-info-color: var(--van-danger-color);
   /**
    * @type input
+   * @desc 密码输入框圆点尺寸
    */
   --van-password-input-dot-size: 10px;
   /**
    * @type color
+   * @desc 密码输入框圆点颜色
    */
   --van-password-input-dot-color: var(--van-text-color);
   /**
    * @type color
+   * @desc 密码输入框文字颜色
    */
   --van-password-input-text-color: var(--van-text-color);
   /**
    * @type color
+   * @desc 密码输入框光标颜色
    */
   --van-password-input-cursor-color: var(--van-text-color);
   /**
    * @type input
+   * @desc 密码输入框光标宽度
    */
   --van-password-input-cursor-width: 1px;
   /**
    * @type input
+   * @desc 密码输入框光标高度
    */
   --van-password-input-cursor-height: 40%;
   /**
    * @type input
+   * @desc 密码输入框光标动画时长
    */
   --van-password-input-cursor-duration: 1s;
 }

@@ -5,106 +5,132 @@
 :host {
   /**
    * @type input
+   * @desc 文件上传器尺寸
    */
   --van-uploader-size: 80px;
   /**
    * @type input
+   * @desc 文件上传器图标大小
    */
   --van-uploader-icon-size: 24px;
   /**
    * @type color
+   * @desc 文件上传器图标颜色
    */
   --van-uploader-icon-color: var(--van-gray-4);
   /**
    * @type color
+   * @desc 文件上传器文字颜色
    */
   --van-uploader-text-color: var(--van-text-color-2);
   /**
    * @type input
+   * @desc 文件上传器文字字体大小
    */
   --van-uploader-text-font-size: var(--van-font-size-sm);
   /**
    * @type color
+   * @desc 文件上传器上传背景色
    */
   --van-uploader-upload-background: var(--van-gray-1);
   /**
    * @type color
+   * @desc 文件上传器上传激活状态颜色
    */
   --van-uploader-upload-active-color: var(--van-active-color);
   /**
    * @type color
+   * @desc 文件上传器删除按钮颜色
    */
   --van-uploader-delete-color: var(--van-white);
   /**
    * @type input
+   * @desc 文件上传器删除图标大小
    */
   --van-uploader-delete-icon-size: 14px;
   /**
    * @type color
+   * @desc 文件上传器删除按钮背景色
    */
   --van-uploader-delete-background: rgba(0, 0, 0, .7);
   /**
    * @type color
+   * @desc 文件上传器文件背景色
    */
   --van-uploader-file-background: var(--van-background);
   /**
    * @type input
+   * @desc 文件上传器文件图标大小
    */
   --van-uploader-file-icon-size: 20px;
   /**
    * @type color
+   * @desc 文件上传器文件图标颜色
    */
   --van-uploader-file-icon-color: var(--van-gray-7);
   /**
    * @type input
+   * @desc 文件上传器文件名内边距
    */
   --van-uploader-file-name-padding: 0 var(--van-padding-base);
   /**
    * @type input
+   * @desc 文件上传器文件名上边距
    */
   --van-uploader-file-name-margin-top: var(--van-padding-xs);
   /**
    * @type input
+   * @desc 文件上传器文件名字体大小
    */
   --van-uploader-file-name-font-size: var(--van-font-size-sm);
   /**
    * @type color
+   * @desc 文件上传器文件名文字颜色
    */
   --van-uploader-file-name-text-color: var(--van-gray-7);
   /**
    * @type color
+   * @desc 文件上传器遮罩文字颜色
    */
   --van-uploader-mask-text-color: var(--van-white);
   /**
    * @type color
+   * @desc 文件上传器遮罩背景色
    */
   --van-uploader-mask-background: rgba(50, 50, 51, .88);
   /**
    * @type input
+   * @desc 文件上传器遮罩图标大小
    */
   --van-uploader-mask-icon-size: 22px;
   /**
    * @type input
+   * @desc 文件上传器遮罩消息字体大小
    */
   --van-uploader-mask-message-font-size: var(--van-font-size-sm);
   /**
    * @type input
+   * @desc 文件上传器遮罩消息行高
    */
   --van-uploader-mask-message-line-height: var(--van-line-height-xs);
   /**
    * @type input
+   * @desc 文件上传器加载图标大小
    */
   --van-uploader-loading-icon-size: 22px;
   /**
    * @type color
+   * @desc 文件上传器加载图标颜色
    */
   --van-uploader-loading-icon-color: var(--van-white);
   /**
    * @type input
+   * @desc 文件上传器禁用状态透明度
    */
   --van-uploader-disabled-opacity: var(--van-disabled-opacity);
   /**
    * @type input
+   * @desc 文件上传器圆角半径
    */
   --van-uploader-border-radius: 0px;
 }

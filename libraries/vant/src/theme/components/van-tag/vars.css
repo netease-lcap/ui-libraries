@@ -5,66 +5,82 @@
 :host {
   /**
    * @type input
+   * @desc 标签内边距
    */
   --van-tag-padding: 0 var(--van-padding-base);
   /**
    * @type color
+   * @desc 标签文字颜色
    */
   --van-tag-text-color: var(--van-white);
   /**
    * @type input
+   * @desc 标签字体大小
    */
   --van-tag-font-size: var(--van-font-size-sm);
   /**
    * @type input
+   * @desc 标签圆角半径
    */
   --van-tag-radius: 2px;
   /**
    * @type input
+   * @desc 标签行高
    */
   --van-tag-line-height: 16px;
   /**
    * @type input
+   * @desc 标签中等尺寸内边距
    */
   --van-tag-medium-padding: 2px 6px;
   /**
    * @type input
+   * @desc 标签大尺寸内边距
    */
   --van-tag-large-padding: var(--van-padding-base) var(--van-padding-xs);
   /**
    * @type input
+   * @desc 标签大尺寸圆角半径
    */
   --van-tag-large-radius: var(--van-radius-md);
   /**
    * @type input
+   * @desc 标签大尺寸字体大小
    */
   --van-tag-large-font-size: var(--van-font-size-md);
   /**
    * @type input
+   * @desc 标签圆形圆角半径
    */
   --van-tag-round-radius: var(--van-radius-max);
   /**
    * @type color
+   * @desc 标签危险类型颜色
    */
   --van-tag-danger-color: var(--van-danger-color);
   /**
    * @type color
+   * @desc 标签主要类型颜色
    */
   --van-tag-primary-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 标签成功类型颜色
    */
   --van-tag-success-color: var(--van-success-color);
   /**
    * @type color
+   * @desc 标签警告类型颜色
    */
   --van-tag-warning-color: var(--van-warning-color);
   /**
    * @type color
+   * @desc 标签默认颜色
    */
   --van-tag-default-color: var(--van-gray-6);
   /**
    * @type color
+   * @desc 标签朴素类型背景色
    */
   --van-tag-plain-background: var(--van-background-2);
 }

@@ -5,58 +5,72 @@
 :host {
   /**
    * @type input
+   * @desc 侧边导航栏宽度
    */
   --van-sidebar-width: 80px;
   /**
    * @type input
+   * @desc 侧边导航栏字体大小
    */
   --van-sidebar-font-size: var(--van-font-size-md);
   /**
    * @type input
+   * @desc 侧边导航栏行高
    */
   --van-sidebar-line-height: var(--van-line-height-md);
   /**
    * @type color
+   * @desc 侧边导航栏文字颜色
    */
   --van-sidebar-text-color: var(--van-text-color);
   /**
    * @type color
+   * @desc 侧边导航栏禁用状态文字颜色
    */
   --van-sidebar-disabled-text-color: var(--van-text-color-3);
   /**
    * @type input
+   * @desc 侧边导航栏内边距
    */
   --van-sidebar-padding: 20px var(--van-padding-sm);
   /**
    * @type color
+   * @desc 侧边导航栏激活状态颜色
    */
   --van-sidebar-active-color: var(--van-active-color);
   /**
    * @type color
+   * @desc 侧边导航栏背景色
    */
   --van-sidebar-background: var(--van-background);
   /**
    * @type input
+   * @desc 侧边导航栏选中状态字体粗细
    */
   --van-sidebar-selected-font-weight: var(--van-font-bold);
   /**
    * @type color
+   * @desc 侧边导航栏选中状态文字颜色
    */
   --van-sidebar-selected-text-color: var(--van-text-color);
   /**
    * @type input
+   * @desc 侧边导航栏选中状态边框宽度
    */
   --van-sidebar-selected-border-width: 4px;
   /**
    * @type input
+   * @desc 侧边导航栏选中状态边框高度
    */
   --van-sidebar-selected-border-height: 16px;
   /**
    * @type color
+   * @desc 侧边导航栏选中状态边框颜色
    */
   --van-sidebar-selected-border-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 侧边导航栏选中状态背景色
    */
   --van-sidebar-selected-background: var(--van-background-2);
 }

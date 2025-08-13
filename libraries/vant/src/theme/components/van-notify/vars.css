@@ -5,34 +5,42 @@
 :host {
   /**
    * @type color
+   * @desc 通知栏文字颜色
    */
   --van-notify-text-color: var(--van-white);
   /**
    * @type input
+   * @desc 通知栏内边距
    */
   --van-notify-padding: var(--van-padding-xs) var(--van-padding-md);
   /**
    * @type input
+   * @desc 通知栏字体大小
    */
   --van-notify-font-size: var(--van-font-size-md);
   /**
    * @type input
+   * @desc 通知栏行高
    */
   --van-notify-line-height: var(--van-line-height-md);
   /**
    * @type color
+   * @desc 通知栏主要类型背景色
    */
   --van-notify-primary-background: var(--van-primary-color);
   /**
    * @type color
+   * @desc 通知栏成功类型背景色
    */
   --van-notify-success-background: var(--van-success-color);
   /**
    * @type color
+   * @desc 通知栏危险类型背景色
    */
   --van-notify-danger-background: var(--van-danger-color);
   /**
    * @type color
+   * @desc 通知栏警告类型背景色
    */
   --van-notify-warning-background: var(--van-warning-color);
 }

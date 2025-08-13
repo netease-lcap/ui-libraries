@@ -5,38 +5,47 @@
 :host {
   /**
    * @type input
+   * @desc 进度条高度
    */
   --van-progress-height: 4px;
   /**
    * @type color
+   * @desc 进度条颜色
    */
   --van-progress-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 进度条非激活状态颜色
    */
   --van-progress-inactive-color: var(--van-gray-5);
   /**
    * @type color
+   * @desc 进度条背景色
    */
   --van-progress-background: var(--van-gray-3);
   /**
    * @type input
+   * @desc 进度条文字内边距
    */
   --van-progress-pivot-padding: 0 5px;
   /**
    * @type color
+   * @desc 进度条文字颜色
    */
   --van-progress-pivot-text-color: var(--van-white);
   /**
    * @type input
+   * @desc 进度条文字字体大小
    */
   --van-progress-pivot-font-size: var(--van-font-size-xs);
   /**
    * @type input
+   * @desc 进度条文字行高
    */
   --van-progress-pivot-line-height: 1.6;
   /**
    * @type color
+   * @desc 进度条文字背景色
    */
   --van-progress-pivot-background: var(--van-primary-color);
 }

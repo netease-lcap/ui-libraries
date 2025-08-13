@@ -5,138 +5,172 @@
 :host {
   /**
    * @type input
+   * @desc 按钮迷你尺寸高度
    */
   --van-button-mini-height: 24px;
   /**
    * @type input
+   * @desc 按钮迷你尺寸内边距
    */
   --van-button-mini-padding: 0 var(--van-padding-base);
   /**
    * @type input
+   * @desc 按钮迷你尺寸字体大小
    */
   --van-button-mini-font-size: var(--van-font-size-xs);
   /**
    * @type input
+   * @desc 按钮小尺寸高度
    */
   --van-button-small-height: 32px;
   /**
    * @type input
+   * @desc 按钮小尺寸内边距
    */
   --van-button-small-padding: 0 var(--van-padding-xs);
   /**
    * @type input
+   * @desc 按钮小尺寸字体大小
    */
   --van-button-small-font-size: var(--van-font-size-sm);
   /**
    * @type input
+   * @desc 按钮普通尺寸内边距
    */
   --van-button-normal-padding: 0 15px;
   /**
    * @type input
+   * @desc 按钮普通尺寸字体大小
    */
   --van-button-normal-font-size: var(--van-font-size-md);
   /**
    * @type input
+   * @desc 按钮大尺寸高度
    */
   --van-button-large-height: 50px;
   /**
    * @type input
+   * @desc 按钮默认高度
    */
   --van-button-default-height: 44px;
   /**
    * @type input
+   * @desc 按钮默认行高
    */
   --van-button-default-line-height: 1.2;
   /**
    * @type input
+   * @desc 按钮默认字体大小
    */
   --van-button-default-font-size: var(--van-font-size-lg);
   /**
    * @type color
+   * @desc 按钮默认文字颜色
    */
   --van-button-default-color: var(--van-text-color);
   /**
    * @type color
+   * @desc 按钮默认背景色
    */
   --van-button-default-background: var(--van-background-2);
   /**
    * @type color
+   * @desc 按钮默认边框颜色
    */
   --van-button-default-border-color: var(--van-gray-4);
   /**
    * @type color
+   * @desc 按钮主要类型文字颜色
    */
   --van-button-primary-color: var(--van-white);
   /**
    * @type color
+   * @desc 按钮主要类型背景色
    */
   --van-button-primary-background: var(--van-primary-color);
   /**
    * @type color
+   * @desc 按钮主要类型边框颜色
    */
   --van-button-primary-border-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 按钮成功类型文字颜色
    */
   --van-button-success-color: var(--van-white);
   /**
    * @type color
+   * @desc 按钮成功类型背景色
    */
   --van-button-success-background: var(--van-success-color);
   /**
    * @type color
+   * @desc 按钮成功类型边框颜色
    */
   --van-button-success-border-color: var(--van-success-color);
   /**
    * @type color
+   * @desc 按钮危险类型文字颜色
    */
   --van-button-danger-color: var(--van-white);
   /**
    * @type color
+   * @desc 按钮危险类型背景色
    */
   --van-button-danger-background: var(--van-danger-color);
   /**
    * @type color
+   * @desc 按钮危险类型边框颜色
    */
   --van-button-danger-border-color: var(--van-danger-color);
   /**
    * @type color
+   * @desc 按钮警告类型文字颜色
    */
   --van-button-warning-color: var(--van-white);
   /**
    * @type color
+   * @desc 按钮警告类型背景色
    */
   --van-button-warning-background: var(--van-warning-color);
   /**
    * @type color
+   * @desc 按钮警告类型边框颜色
    */
   --van-button-warning-border-color: var(--van-warning-color);
   /**
    * @type input
+   * @desc 按钮边框宽度
    */
   --van-button-border-width: var(--van-border-width);
   /**
    * @type input
+   * @desc 按钮圆角半径
    */
   --van-button-radius: var(--van-radius-md);
   /**
    * @type input
+   * @desc 按钮圆形圆角半径
    */
   --van-button-round-radius: var(--van-radius-max);
   /**
    * @type color
+   * @desc 按钮朴素类型背景色
    */
   --van-button-plain-background: var(--van-white);
   /**
    * @type input
+   * @desc 按钮禁用状态透明度
    */
   --van-button-disabled-opacity: var(--van-disabled-opacity);
   /**
    * @type input
+   * @desc 按钮图标大小
    */
   --van-button-icon-size: 1.2em;
   /**
    * @type input
+   * @desc 按钮加载图标大小
    */
   --van-button-loading-icon-size: 20px;
 }

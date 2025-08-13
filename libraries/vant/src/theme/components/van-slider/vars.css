@@ -5,38 +5,47 @@
 :host {
   /**
    * @type color
+   * @desc 滑块激活状态背景色
    */
   --van-slider-active-background: var(--van-primary-color);
   /**
    * @type color
+   * @desc 滑块非激活状态背景色
    */
   --van-slider-inactive-background: var(--van-gray-3);
   /**
    * @type input
+   * @desc 滑块禁用状态透明度
    */
   --van-slider-disabled-opacity: var(--van-disabled-opacity);
   /**
    * @type input
+   * @desc 滑块条高度
    */
   --van-slider-bar-height: 2px;
   /**
    * @type input
+   * @desc 滑块按钮宽度
    */
   --van-slider-button-width: 24px;
   /**
    * @type input
+   * @desc 滑块按钮高度
    */
   --van-slider-button-height: 24px;
   /**
    * @type input
+   * @desc 滑块按钮圆角半径
    */
   --van-slider-button-radius: 50%;
   /**
    * @type color
+   * @desc 滑块按钮背景色
    */
   --van-slider-button-background: var(--van-white);
   /**
    * @type input
+   * @desc 滑块按钮阴影
    */
   --van-slider-button-shadow: 0 1px 2px rgba(0, 0, 0, .5);
 }

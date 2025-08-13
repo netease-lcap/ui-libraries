@@ -5,50 +5,62 @@
 :host {
   /**
    * @type color
+   * @desc 标签页文字颜色
    */
   --van-tab-text-color: var(--van-gray-7);
   /**
    * @type color
+   * @desc 标签页激活状态文字颜色
    */
   --van-tab-active-text-color: var(--van-text-color);
   /**
    * @type color
+   * @desc 标签页禁用状态文字颜色
    */
   --van-tab-disabled-text-color: var(--van-text-color-3);
   /**
    * @type input
+   * @desc 标签页字体大小
    */
   --van-tab-font-size: var(--van-font-size-md);
   /**
    * @type input
+   * @desc 标签页行高
    */
   --van-tab-line-height: var(--van-line-height-md);
   /**
    * @type color
+   * @desc 标签页默认颜色
    */
   --van-tabs-default-color: var(--van-primary-color);
   /**
    * @type input
+   * @desc 标签页行高
    */
   --van-tabs-line-height: 44px;
   /**
    * @type input
+   * @desc 标签页卡片高度
    */
   --van-tabs-card-height: 30px;
   /**
    * @type color
+   * @desc 标签页导航背景色
    */
   --van-tabs-nav-background: var(--van-background-2);
   /**
    * @type input
+   * @desc 标签页底部条宽度
    */
   --van-tabs-bottom-bar-width: 40px;
   /**
    * @type input
+   * @desc 标签页底部条高度
    */
   --van-tabs-bottom-bar-height: 3px;
   /**
    * @type color
+   * @desc 标签页底部条颜色
    */
   --van-tabs-bottom-bar-color: var(--van-primary-color);
 }

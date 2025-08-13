@@ -5,26 +5,32 @@
 :host {
   /**
    * @type input
+   * @desc 轮播指示器尺寸
    */
   --van-swipe-indicator-size: 6px;
   /**
    * @type input
+   * @desc 轮播指示器边距
    */
   --van-swipe-indicator-margin: var(--van-padding-sm);
   /**
    * @type input
+   * @desc 轮播指示器激活状态透明度
    */
   --van-swipe-indicator-active-opacity: 1;
   /**
    * @type input
+   * @desc 轮播指示器非激活状态透明度
    */
   --van-swipe-indicator-inactive-opacity: .3;
   /**
    * @type color
+   * @desc 轮播指示器激活状态背景色
    */
   --van-swipe-indicator-active-background: var(--van-primary-color);
   /**
    * @type color
+   * @desc 轮播指示器非激活状态背景色
    */
   --van-swipe-indicator-inactive-background: var(--van-border-color);
 }

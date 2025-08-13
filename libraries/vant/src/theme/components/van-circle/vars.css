@@ -5,30 +5,37 @@
 :host {
   /**
    * @type input
+   * @desc 环形进度条尺寸
    */
   --van-circle-size: 100px;
   /**
    * @type color
+   * @desc 环形进度条颜色
    */
   --van-circle-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 环形进度条层颜色
    */
   --van-circle-layer-color: var(--van-white);
   /**
    * @type color
+   * @desc 环形进度条文字颜色
    */
   --van-circle-text-color: var(--van-text-color);
   /**
    * @type input
+   * @desc 环形进度条文字字体粗细
    */
   --van-circle-text-font-weight: var(--van-font-bold);
   /**
    * @type input
+   * @desc 环形进度条文字字体大小
    */
   --van-circle-text-font-size: var(--van-font-size-md);
   /**
    * @type input
+   * @desc 环形进度条文字行高
    */
   --van-circle-text-line-height: var(--van-line-height-md);
 }

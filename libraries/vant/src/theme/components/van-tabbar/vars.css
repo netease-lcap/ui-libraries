@@ -5,42 +5,52 @@
 :host {
   /**
    * @type input
+   * @desc 标签栏高度
    */
   --van-tabbar-height: 50px;
   /**
    * @type input
+   * @desc 标签栏层级
    */
   --van-tabbar-z-index: 1;
   /**
    * @type color
+   * @desc 标签栏背景色
    */
   --van-tabbar-background: var(--van-background-2);
   /**
    * @type input
+   * @desc 标签栏项目字体大小
    */
   --van-tabbar-item-font-size: var(--van-font-size-sm);
   /**
    * @type color
+   * @desc 标签栏项目文字颜色
    */
   --van-tabbar-item-text-color: var(--van-text-color);
   /**
    * @type color
+   * @desc 标签栏项目激活状态颜色
    */
   --van-tabbar-item-active-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 标签栏项目激活状态背景色
    */
   --van-tabbar-item-active-background: var(--van-background-2);
   /**
    * @type input
+   * @desc 标签栏项目行高
    */
   --van-tabbar-item-line-height: 1;
   /**
    * @type input
+   * @desc 标签栏项目图标大小
    */
   --van-tabbar-item-icon-size: 22px;
   /**
    * @type input
+   * @desc 标签栏项目图标下边距
    */
   --van-tabbar-item-icon-margin-bottom: var(--van-padding-base);
 }

@@ -5,34 +5,42 @@
 :host {
   /**
    * @type input
+   * @desc 空状态内边距
    */
   --van-empty-padding: var(--van-padding-xl) 0;
   /**
    * @type input
+   * @desc 空状态图片尺寸
    */
   --van-empty-image-size: 160px;
   /**
    * @type input
+   * @desc 空状态描述上边距
    */
   --van-empty-description-margin-top: var(--van-padding-md);
   /**
    * @type input
+   * @desc 空状态描述内边距
    */
   --van-empty-description-padding: 0 60px;
   /**
    * @type color
+   * @desc 空状态描述颜色
    */
   --van-empty-description-color: var(--van-text-color-2);
   /**
    * @type input
+   * @desc 空状态描述字体大小
    */
   --van-empty-description-font-size: var(--van-font-size-md);
   /**
    * @type input
+   * @desc 空状态描述行高
    */
   --van-empty-description-line-height: var(--van-line-height-md);
   /**
    * @type input
+   * @desc 空状态底部上边距
    */
   --van-empty-bottom-margin-top: 24px;
 }

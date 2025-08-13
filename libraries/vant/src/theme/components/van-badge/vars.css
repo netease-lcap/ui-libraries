@@ -5,42 +5,52 @@
 :host {
   /**
    * @type input
+   * @desc 徽标尺寸
    */
   --van-badge-size: 16px;
   /**
    * @type color
+   * @desc 徽标文字颜色
    */
   --van-badge-color: var(--van-white);
   /**
    * @type input
+   * @desc 徽标内边距
    */
   --van-badge-padding: 0 3px;
   /**
    * @type input
+   * @desc 徽标字体大小
    */
   --van-badge-font-size: var(--van-font-size-sm);
   /**
    * @type input
+   * @desc 徽标字体粗细
    */
   --van-badge-font-weight: var(--van-font-bold);
   /**
    * @type input
+   * @desc 徽标边框宽度
    */
   --van-badge-border-width: var(--van-border-width);
   /**
    * @type color
+   * @desc 徽标背景色
    */
   --van-badge-background: var(--van-danger-color);
   /**
    * @type color
+   * @desc 徽标圆点颜色
    */
   --van-badge-dot-color: var(--van-danger-color);
   /**
    * @type input
+   * @desc 徽标圆点尺寸
    */
   --van-badge-dot-size: 8px;
   /**
    * @type input
+   * @desc 徽标字体
    */
   --van-badge-font: -apple-system-font, helvetica neue, arial, sans-serif;
 }

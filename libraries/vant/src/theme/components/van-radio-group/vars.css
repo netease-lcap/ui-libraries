@@ -5,42 +5,52 @@
 :host {
   /**
    * @type input
+   * @desc 单选框尺寸
    */
   --van-radio-size: 20px;
   /**
    * @type input
+   * @desc 单选框圆点尺寸
    */
   --van-radio-dot-size: 8px;
   /**
    * @type color
+   * @desc 单选框边框颜色
    */
   --van-radio-border-color: var(--van-gray-5);
   /**
    * @type input
+   * @desc 单选框过渡动画时长
    */
   --van-radio-duration: var(--van-duration-fast);
   /**
    * @type input
+   * @desc 单选框标签边距
    */
   --van-radio-label-margin: var(--van-padding-xs);
   /**
    * @type color
+   * @desc 单选框标签颜色
    */
   --van-radio-label-color: var(--van-text-color);
   /**
    * @type color
+   * @desc 单选框选中图标颜色
    */
   --van-radio-checked-icon-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 单选框禁用图标颜色
    */
   --van-radio-disabled-icon-color: var(--van-gray-5);
   /**
    * @type color
+   * @desc 单选框禁用标签颜色
    */
   --van-radio-disabled-label-color: var(--van-text-color-3);
   /**
    * @type color
+   * @desc 单选框禁用背景色
    */
   --van-radio-disabled-background: var(--van-border-color);
 }

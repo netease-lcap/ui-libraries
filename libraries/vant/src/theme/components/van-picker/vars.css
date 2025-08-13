@@ -5,62 +5,77 @@
 :host {
   /**
    * @type color
+   * @desc 选择器背景色
    */
   --van-picker-background: var(--van-background-2);
   /**
    * @type input
+   * @desc 选择器工具栏高度
    */
   --van-picker-toolbar-height: 44px;
   /**
    * @type input
+   * @desc 选择器标题字体大小
    */
   --van-picker-title-font-size: var(--van-font-size-lg);
   /**
    * @type input
+   * @desc 选择器标题行高
    */
   --van-picker-title-line-height: var(--van-line-height-md);
   /**
    * @type input
+   * @desc 选择器操作按钮内边距
    */
   --van-picker-action-padding: 0 var(--van-padding-md);
   /**
    * @type input
+   * @desc 选择器操作按钮字体大小
    */
   --van-picker-action-font-size: var(--van-font-size-md);
   /**
    * @type color
+   * @desc 选择器确认操作按钮颜色
    */
   --van-picker-confirm-action-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 选择器取消操作按钮颜色
    */
   --van-picker-cancel-action-color: var(--van-text-color-2);
   /**
    * @type input
+   * @desc 选择器选项字体大小
    */
   --van-picker-option-font-size: var(--van-font-size-lg);
   /**
    * @type input
+   * @desc 选择器选项内边距
    */
   --van-picker-option-padding: 0 var(--van-padding-base);
   /**
    * @type color
+   * @desc 选择器选项文字颜色
    */
   --van-picker-option-text-color: var(--van-text-color);
   /**
    * @type input
+   * @desc 选择器选项禁用状态透明度
    */
   --van-picker-option-disabled-opacity: .3;
   /**
    * @type color
+   * @desc 选择器加载图标颜色
    */
   --van-picker-loading-icon-color: var(--van-primary-color);
   /**
    * @type color
+   * @desc 选择器加载遮罩颜色
    */
   --van-picker-loading-mask-color: rgba(255, 255, 255, .9);
   /**
    * @type input
+   * @desc 选择器遮罩颜色
    */
   --van-picker-mask-color: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .4)), linear-gradient(0deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .4));
 }

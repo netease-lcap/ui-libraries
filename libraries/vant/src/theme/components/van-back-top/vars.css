@@ -5,30 +5,37 @@
 :host {
   /**
    * @type input
+   * @desc 回到顶部按钮尺寸
    */
   --van-back-top-size: 40px;
   /**
    * @type input
+   * @desc 回到顶部按钮右边距
    */
   --van-back-top-right: 30px;
   /**
    * @type input
+   * @desc 回到顶部按钮下边距
    */
   --van-back-top-bottom: 40px;
   /**
    * @type input
+   * @desc 回到顶部按钮层级
    */
   --van-back-top-z-index: 100;
   /**
    * @type input
+   * @desc 回到顶部按钮图标大小
    */
   --van-back-top-icon-size: 20px;
   /**
    * @type color
+   * @desc 回到顶部按钮文字颜色
    */
   --van-back-top-text-color: #fff;
   /**
    * @type color
+   * @desc 回到顶部按钮背景色
    */
   --van-back-top-background: var(--van-blue);
 }
