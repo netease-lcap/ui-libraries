@@ -4,10 +4,11 @@ import { normalizePath } from 'vite';
 import { type MaterialSchema, type MaterialComponent } from '@lcap/material-parser';
 import prompts from 'prompts';
 import { kebabCase, upperFirst } from 'lodash';
-import { ProjectMetaInfo } from '../utils/project';
+import { ExtensionProjectInfo as ProjectMetaInfo, getComponentMetaInfos, SchemaUtils } from '../shared';
 import { createComponent, getTagName, COMPONENTS_FOLDER } from './component';
-import { getComponentMetaInfos, Schema, WriteOptions } from '../utils/lcap';
-import { normalizeString } from '../utils/schema-utils';
+import { Schema, WriteOptions } from '../utils/lcap';
+
+const { normalizeString } = SchemaUtils;
 
 const EMPTY_API_TS = ({
   pkgName,
@@ -188,7 +189,7 @@ export async function executeCreateForSchema(rootPath: string, metaInfo: Project
     throw new Error(`schema 文件 ${schema} 中没有组件`);
   }
 
-  const apiComponentList = getComponentMetaInfos(rootPath, true);
+  const apiComponentList = await getComponentMetaInfos(rootPath, true);
 
   const components = material.components.filter((c) => (
     name ? c.name === name

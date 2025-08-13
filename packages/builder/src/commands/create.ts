@@ -48,7 +48,7 @@ export default async (rootPath: string, options: any) => {
 
   const prompt = options.prompt ? JSON.parse(options.prompt) : null;
 
-  const projectMetaInfo = getExtensionProjectMeta(rootPath);
+  const projectMetaInfo = await getExtensionProjectMeta(rootPath);
 
   switch (type) {
     case 'schema':
