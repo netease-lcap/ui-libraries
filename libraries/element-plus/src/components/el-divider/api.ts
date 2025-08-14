@@ -32,26 +32,26 @@ namespace nasl.ui {
     })
     direction: 'horizontal' | 'vertical' = 'horizontal';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '分隔符样式',
-    //   description: '设置分隔符样式',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [
-    //       { title: '不显示' },
-    //       { title: '圆点' },
-    //       { title: '方形虚线' },
-    //       { title: '实线' },
-    //       { title: '双实线' },
-    //       { title: '雕刻效果' },
-    //       { title: '浮雕效果' },
-    //       { title: '陷入效果' },
-    //       { title: '突出效果' },
-    //     ],
-    //   },
-    // })
-    // borderStyle: 'none' | 'dotted' | 'dashed' | 'solid' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' = 'solid';
+    @Prop({
+      group: '主要属性',
+      title: '分隔符样式',
+      description: '设置分隔符样式',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '不显示' },
+          { title: '圆点' },
+          { title: '方形虚线' },
+          { title: '实线' },
+          { title: '双实线' },
+          { title: '雕刻效果' },
+          { title: '浮雕效果' },
+          { title: '陷入效果' },
+          { title: '突出效果' },
+        ],
+      },
+    })
+    borderStyle: 'none' | 'dotted' | 'dashed' | 'solid' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' = 'solid';
 
     @Prop({
       group: '主要属性',

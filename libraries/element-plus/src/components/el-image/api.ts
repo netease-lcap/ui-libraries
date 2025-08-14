@@ -126,7 +126,7 @@ namespace nasl.ui {
       title: '图片预览切换时',
       description: '图片预览切换时',
     })
-    onSwitch: (index: nasl.core.Integer) => any;
+    onSwitchChange: (index: nasl.core.Integer) => any;
 
     @Event({
       title: '图片预览关闭时',

@@ -35,7 +35,7 @@ body{
   font-weight: bold;
 }
 
-.el-text.el-text--color-default {
+.el-text--color-default {
   color: inherit;
   font-size: inherit;
   font-weight: inherit;
