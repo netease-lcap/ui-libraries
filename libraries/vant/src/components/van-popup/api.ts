@@ -20,6 +20,17 @@ namespace nasl.ui {
     group: "Feedback"
   })
   export class VanPopup extends ViewComponent {
+    @Method({
+      title: '显示弹出层',
+      description: '显示弹出层',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭弹出层',
+      description: '关闭弹出层',
+    })
+    close(): void {}
     constructor(options?: Partial<VanPopupOptions>) {
       super();
     }
