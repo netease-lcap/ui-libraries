@@ -75,7 +75,7 @@ export default defineComponent({
         }
       }
 
-      return <ElIconPlus>{iconComponent ? h(iconComponent) : props.name}</ElIconPlus>;
+      return <ElIconPlus>{iconComponent ? h(iconComponent) : null}</ElIconPlus>;
     }
     return () => {
       return !props.name ? null : renderChildren();

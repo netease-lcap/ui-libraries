@@ -41,11 +41,13 @@ export function handleDataSource(props) {
 export function handleCascaderProps(props) {
   const multiple = props.get('multiple', false);
   const checkStrictly = props.get('checkStrictly', false);
+  const propsProps = props.get('props');
 
   return {
     props: {
       multiple,
       checkStrictly,
+      ...(_.isObject(propsProps) ? propsProps : {}),
     },
   };
 }
@@ -76,10 +78,10 @@ export function handlePreview(props) {
       if (!multiple) {
         return getPathText(data, modelValue);
       }
-        return modelValue
-          .filter(_.isArray)
-          .map((path) => getPathText(data, path))
-          .join(', ');
+      return modelValue
+        .filter(_.isArray)
+        .map((path) => getPathText(data, path))
+        .join(', ');
     };
 
     const multiple = props.get('multiple', false);

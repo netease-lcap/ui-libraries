@@ -205,11 +205,9 @@ export const Example2 = {
 
 export const Example3 = {
   name: '级联选择器',
-  render: () => ({
+  render: (args) => ({
     setup() {
       const value = ref([
-        ['zhejiang', 'hangzhou'],
-        ['zhejiang', 'ningbo'],
       ]);
       return {
         OPTIONS: [
@@ -235,6 +233,9 @@ export const Example3 = {
         value,
       };
     },
-    template: '<el-cascader v-model="value" :multiple="true" :options="OPTIONS" class="my-cascader andy" data-nodepath="123" />',
+    template: '<el-cascader v-bind="args"   :filterable="true" :modelValue="value"  :multiple="true" :options="OPTIONS" />',
+    args: {
+      filterable: true,
+    },
   }),
 };

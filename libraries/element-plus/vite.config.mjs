@@ -259,8 +259,8 @@ export default defineConfig(({ command }) => {
         '@': path.resolve(rootPath, './src'),
         '@ep-test': path.resolve(rootPath, './ep-test'),
         // 'element-plus': path.resolve(rootPath, 'node_modules/element-plus'),
-        // 'element-plus/es': path.resolve(rootPath, 'node_modules/element-plus/es'),
-        // 'element-plus/lib': path.resolve(rootPath, 'node_modules/element-plus/lib'),
+        'element-plus/es': path.resolve(rootPath, 'node_modules/element-plus/es'),
+        'element-plus/lib': path.resolve(rootPath, 'node_modules/element-plus/lib'),
       },
     },
     define: {
