@@ -1,0 +1,71 @@
+/**
+ * @component van-cascader
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 级联选择器头部高度
+   */
+  --van-cascader-header-height: 48px;
+  /**
+   * @type input
+   * @desc 级联选择器头部内边距
+   */
+  --van-cascader-header-padding: 0 var(--van-padding-md);
+  /**
+   * @type input
+   * @desc 级联选择器标题字体大小
+   */
+  --van-cascader-title-font-size: var(--van-font-size-lg);
+  /**
+   * @type input
+   * @desc 级联选择器标题行高
+   */
+  --van-cascader-title-line-height: 20px;
+  /**
+   * @type input
+   * @desc 级联选择器关闭图标大小
+   */
+  --van-cascader-close-icon-size: 22px;
+  /**
+   * @type color
+   * @desc 级联选择器关闭图标颜色
+   */
+  --van-cascader-close-icon-color: var(--van-gray-5);
+  /**
+   * @type input
+   * @desc 级联选择器选中图标大小
+   */
+  --van-cascader-selected-icon-size: 18px;
+  /**
+   * @type input
+   * @desc 级联选择器标签页高度
+   */
+  --van-cascader-tabs-height: 48px;
+  /**
+   * @type color
+   * @desc 级联选择器激活状态颜色
+   */
+  --van-cascader-active-color: var(--van-primary-color);
+  /**
+   * @type input
+   * @desc 级联选择器选项高度
+   */
+  --van-cascader-options-height: 384px;
+  /**
+   * @type color
+   * @desc 级联选择器选项禁用状态颜色
+   */
+  --van-cascader-option-disabled-color: var(--van-text-color-3);
+  /**
+   * @type color
+   * @desc 级联选择器标签颜色
+   */
+  --van-cascader-tab-color: var(--van-text-color);
+  /**
+   * @type color
+   * @desc 级联选择器未选中标签颜色
+   */
+  --van-cascader-unselected-tab-color: var(--van-text-color-2);
+}

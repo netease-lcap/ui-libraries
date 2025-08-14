@@ -53,7 +53,7 @@ export const Vertical = {
         <van-step>
           <van-text text="步骤三"></van-text>
         </van-step>
-      </el-steps>
+      </van-steps>
     `,
   }),
   decorators: [
