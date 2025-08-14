@@ -2,9 +2,9 @@
 <!--  Dialog 弹出一个对话框，适合需要定制性更大的场景。 -->
 <template>
   <div>
-    <el-button type="text" @click="handleOpen">点击打开 Dialog</el-button>
+    <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
 
-    <el-dialog ref="dialog" title="提示" style="background-color: red;" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+    <el-dialog title="提示" style="background-color: red;" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
       <span>这是一段信息</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
@@ -26,9 +26,6 @@ export default {
     }
   },
   methods: {
-    handleOpen() {
-      console.log(this.$refs.dialog);
-    },
     handleClose(done) {
       this.$confirm('确认关闭？')
         .then((_) => {
