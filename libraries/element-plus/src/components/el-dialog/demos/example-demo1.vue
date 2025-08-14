@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button plain @click="dialogRef?.open()">
+    <el-button plain @click="handleOpen">
       Click to open the Dialog1
     </el-button>
 
@@ -39,5 +39,9 @@ const handleClose = (done: () => void) => {
     .catch(() => {
       // catch error
     })
+}
+
+const handleOpen = () => {
+  console.log(dialogRef.value);
 }
 </script>

@@ -16,6 +16,7 @@ export function getPropsIcon(props: any) {
   return _.cond([
     [_.matches({ name: _.isString }), (props) => <ElIcon {...props} />],
     [_.matches({ name: _.isNil }), _.constant(null)],
-    [_.conforms({ name: (name) => _.isFunction(name.setup) }), (props) => props.name],
+    [_.conforms({ name: (name) => _.isFunction(name?.setup) }), (props) => props.name],
+    [_.stubTrue, _.constant(null)],
   ])(props);
 }
