@@ -35,6 +35,7 @@ export const Default = {
           <van-text>标题2</van-text>
         </template>
         <van-flex />
+      </van-dropdown-item>
     </van-dropdown-menu>`,
   }),
 };

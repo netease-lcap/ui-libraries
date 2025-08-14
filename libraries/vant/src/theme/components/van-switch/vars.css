@@ -1,0 +1,56 @@
+/**
+ * @component van-switch
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 开关尺寸
+   */
+  --van-switch-size: 26px;
+  /**
+   * @type input
+   * @desc 开关宽度
+   */
+  --van-switch-width: calc(1.8em + 4px) ;
+  /**
+   * @type input
+   * @desc 开关高度
+   */
+  --van-switch-height: calc(1em + 4px) ;
+  /**
+   * @type input
+   * @desc 开关节点尺寸
+   */
+  --van-switch-node-size: 1em;
+  /**
+   * @type color
+   * @desc 开关节点背景色
+   */
+  --van-switch-node-background: var(--van-white);
+  /**
+   * @type input
+   * @desc 开关节点阴影
+   */
+  --van-switch-node-shadow: 0 3px 1px 0 rgba(0, 0, 0, .05);
+  /**
+   * @type color
+   * @desc 开关背景色
+   */
+  --van-switch-background: rgba(120, 120, 128, .16);
+  /**
+   * @type color
+   * @desc 开关开启状态背景色
+   */
+  --van-switch-on-background: var(--van-primary-color);
+  /**
+   * @type input
+   * @desc 开关过渡动画时长
+   */
+  --van-switch-duration: var(--van-duration-base);
+  /**
+   * @type input
+   * @desc 开关禁用状态透明度
+   */
+  --van-switch-disabled-opacity: var(--van-disabled-opacity);
+}
