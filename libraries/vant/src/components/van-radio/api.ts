@@ -146,6 +146,9 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'container',
+      displaySlotInline: {
+        label: true,
+      },
     },
   })
   @Component({

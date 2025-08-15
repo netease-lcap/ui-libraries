@@ -200,6 +200,9 @@ namespace nasl.ui {
         loopRule: 'nth-child(n+2)',
         loopElem: "> label[class^='u-radios_radio']:not([data-nodepath])",
       },
+      displaySlotInline: {
+        label: true,
+      },
     },
     extends:[
       {

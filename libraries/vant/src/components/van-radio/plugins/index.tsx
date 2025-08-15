@@ -16,7 +16,7 @@ export function handleDataSource(props) {
   const dataSource = useHandleMapField({
     textField,
     valueField,
-    label: 'test',
+    label: 'text',
     value: 'name',
     dataSource: useFormatDataSource(data),
   });

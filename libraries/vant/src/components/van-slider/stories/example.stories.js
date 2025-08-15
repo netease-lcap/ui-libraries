@@ -173,7 +173,7 @@ export const Range = {
   name: '范围选择',
   render: () => ({
     setup() {
-      const value = ref([20, 80]);
+      const value = ref(undefined);
       return {
         value,
         handleChange(value) {

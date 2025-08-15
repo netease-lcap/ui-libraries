@@ -151,6 +151,9 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'container',
+      displaySlotInline: {
+        label: true,
+      },
     },
     extends: [
       {

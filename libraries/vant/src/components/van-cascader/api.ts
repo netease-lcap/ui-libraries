@@ -164,11 +164,7 @@ namespace nasl.ui {
     })
     onFocus: (event: any) => void;
 
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: any) => void;
+
   }
 
   @IDEExtraInfo({
@@ -182,6 +178,9 @@ namespace nasl.ui {
         display: 6,
         loopRule: 'nth-child(n+2)',
         loopElem: "> label[class^='u-radios_radio']:not([data-nodepath])",
+      },
+      displaySlotInline: {
+        label: true,
       },
     },
   })

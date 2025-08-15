@@ -110,7 +110,7 @@ namespace nasl.ui {
         options: [{ title: '输入时' }, { title: '提交时' }],
       },
     })
-    validateTrigger: 'onChange' | 'onSubmit' = 'onChange';
+    validateTrigger: 'onChange' | 'onSubmit' = 'onSubmit';
 
     @Prop({
       group: '主要属性',
@@ -122,16 +122,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '显示错误信息',
-      description: '是否显示错误提示',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showError: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '显示错误图标',
-      description: '是否在校验不通过时在输入框右侧显示错误图标',
+      title: '显示错误提示',
+      description: '是否在校验不通过时在输入框下方展示错误提示',
       setter: { concept: 'SwitchSetter' },
     })
     showErrorMessage: nasl.core.Boolean = true;
@@ -149,6 +141,10 @@ namespace nasl.ui {
       structured: false,
       forceUpdateWhenAttributeChange: true,
       forceRefresh: true,
+      namedSlotOmitWrapper: ['label'],
+      displaySlotInline: {
+        label: true,
+      },
     },
   })
   @Component({
@@ -162,13 +158,13 @@ namespace nasl.ui {
   }
 
   export class VanFormItemOptions extends ViewComponentOptions {
-    @Prop({
-      group: '数据属性',
-      title: '字段名',
-      description: '表单字段名，提交表单和重置表单时的标识',
-      setter: { concept: 'InputSetter' },
-    })
-    name: nasl.core.String;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '字段名',
+    //   description: '表单字段名，提交表单和重置表单时的标识',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // name: nasl.core.String;
 
     @Prop({
       group: '主要属性',
