@@ -104,7 +104,7 @@ namespace nasl.ui {
       description: '是否可以清空选项',
       setter: { concept: 'SwitchSetter' },
     })
-    closeable: nasl.core.Boolean = false;
+    clearable: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

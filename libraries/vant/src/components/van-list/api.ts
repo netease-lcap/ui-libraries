@@ -8,7 +8,7 @@ namespace nasl.ui {
       idetype: 'container',
       dataSource: {
         display: 3,
-        loopElem: 'div',
+        loopElem: ' > div',
         loopRule: 'nth-child(n+2)',
         displayData: '"[{}, {}, {}]"',
         propertyName: ':dataSource',

@@ -33,7 +33,7 @@ namespace nasl.ui {
       description: '滑块绑定值',
       setter: { concept: 'NumberInputSetter' },
     })
-    modelValue: M extends true ? nasl.core.Integer[] : nasl.core.Integer;
+    modelValue: M extends true ? nasl.collection.List<nasl.core.Integer> : nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
@@ -114,7 +114,6 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     buttonSize: nasl.core.Integer = 24;
-
 
     @Prop({
       group: '主要属性',
