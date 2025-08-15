@@ -32,6 +32,17 @@ namespace nasl.ui {
     group: "Feedback"
   })
   export class VanActionSheet<T, V, M extends nasl.core.Boolean, P extends nasl.core.Boolean, C> extends ViewComponent {
+    @Method({
+      title: '显示动作面板',
+      description: '显示动作面板',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭动作面板',
+      description: '关闭动作面板',
+    })
+    close(): void {}
     constructor(options?: Partial<VanActionSheetOptions<T, V, M, P, C>>) {
       super();
     }
