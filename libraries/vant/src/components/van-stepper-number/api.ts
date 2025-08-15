@@ -66,7 +66,7 @@ namespace nasl.ui {
       description: '每次点击时改变的值',
       setter: { concept: 'NumberInputSetter' },
     })
-    step: nasl.core.Integer = 1;
+    step: nasl.core.Integer | nasl.core.Decimal = 1;
 
     @Prop({
       group: '主要属性',

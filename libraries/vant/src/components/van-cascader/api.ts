@@ -108,9 +108,9 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '标题',
-      description: '标题',
-      setter: { concept: 'SwitchSetter' },
+      title: '顶部标题',
+      description: '顶部标题',
+      setter: { concept: 'InputSetter' },
     })
     title: nasl.core.String;
 
