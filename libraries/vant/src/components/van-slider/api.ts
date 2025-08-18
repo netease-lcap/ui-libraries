@@ -157,15 +157,15 @@ namespace nasl.ui {
       displaySlotInline: {
         label: true,
       },
-      extends: [
-        {
-          name: 'VanFormItem',
-        },
-        {
-          name: 'VanSlider',
-        },
-      ],
     },
+    extends: [
+      {
+        name: 'VanSlider',
+      },
+      {
+        name: 'VanFormItem',
+      },
+    ],
   })
   @Component({
     title: '表单滑块',
