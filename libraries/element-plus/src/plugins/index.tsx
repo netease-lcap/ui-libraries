@@ -132,7 +132,6 @@ export function registerComponent<T>(Component, options) {
 
       provide($provide, provideRef);
       return () => {
-        console.log(componentState.value.state, '=========');
         return (
           <Render
             {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}

@@ -4,7 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 1,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
     },
   })
   @Component({
@@ -190,5 +190,5 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
     C,
-  > extends VanSliderOptions<T, V, P, M, C> {}
+  > extends ViewComponentOptions {}
 }

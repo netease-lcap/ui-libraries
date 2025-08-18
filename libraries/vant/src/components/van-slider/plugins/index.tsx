@@ -1,13 +1,13 @@
+import _ from 'lodash';
 import { useCallback } from '@/plugins/hooks';
 import { categoryStyles, categoryProps } from '@/utils/dom';
 import styles from '../index.module.css';
-import _ from 'lodash';
 
 export function handleDefaultValue(props) {
   const modelValueProps = props.get('modelValue');
   const isArrayModelValue = _.isArray(modelValueProps);
   const range = props.get('range');
-  const modelValue = range && isArrayModelValue ? modelValueProps : [0,0];
+  const modelValue = range && isArrayModelValue ? modelValueProps : [0, 0];
   return {
     modelValue,
   };
