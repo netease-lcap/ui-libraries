@@ -13,7 +13,7 @@ namespace nasl.ui {
     title: '签名',
     icon: 'signature',
     description: '用于签名场景的组件，基于 Canvas 实现。',
-    group: 'Display',
+    group: 'FeedBack',
   })
   export class VanSignature extends ViewComponent {
     @Event({

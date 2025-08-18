@@ -27,7 +27,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '动作面板',
-    icon: 'picker',
+    icon: 'action-sheet',
     description: '底部弹起的模态面板，包含与当前情境相关的多个选项。',
     group: "Feedback"
   })
