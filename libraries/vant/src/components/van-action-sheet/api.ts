@@ -121,7 +121,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    loadingField: (item: T) => nasl.core.Boolean = ((item: any)  => item.loading) as any;
+    loadingField: (item: T) => nasl.core.String = ((item: any)  => item.loading) as any;
 
     @Prop({
       group: '数据属性',
@@ -131,7 +131,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    disabledField: (item: T) => nasl.core.Boolean = ((item: any)  => item.disabled) as any;
+    disabledField: (item: T) => nasl.core.String = ((item: any)  => item.disabled) as any;
 
     @Prop({
       group: '主要属性',
