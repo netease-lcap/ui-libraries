@@ -46,7 +46,7 @@ export { VanNoticeBar } from './van-notice-bar';
 export { VanPopup } from './van-popup';
 export { VanCellGroup, VanCell } from './van-cell-group';
 export { VanActionSheet } from './van-action-sheet';
-export { VanSignature } from './van-signature';
+export { VanSignature, VanFormSignature } from './van-signature';
 export { VanTextEllipsis } from './van-text-ellipsis';
 export { VanImage } from './van-image';
 export { VanLoading } from './van-loading';
