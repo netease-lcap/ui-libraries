@@ -158,6 +158,7 @@ export const Example6 = {
     <div>
       <el-button icon="Clock" :rightIcon="rightIcon" @click="handleClick">文字按钮</el-button>
       <el-button type="primary" @click="changeRightIcon">切换rightIcon</el-button>
+      <el-button  type="primary" text="创 建"  icon="Service" :autofocus="false" rightIcon="Search" ></el-button>
     </div>
     `,
   }),
