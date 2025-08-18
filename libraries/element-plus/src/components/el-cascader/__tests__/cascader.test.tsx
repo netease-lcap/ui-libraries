@@ -297,6 +297,8 @@ describe('Cascader.vue', () => {
 
     const input = wrapper.find('input');
     input.element.value = 'Ni';
+
+    // expect(wrapper.html()).toMatchSnapshot();
     await input.trigger('compositionstart');
     await input.trigger('input');
     input.element.value = 'Ha';
