@@ -189,16 +189,15 @@ export function getFormatValue(values: Array<Array<Array<string>>>, options: any
   }
   const finalFormat =
     advancedFormatEnable && advancedFormatValue ? advancedFormatValue : getDisplayFormatter(unit, showFormatter);
-  return values
-    .map((value) => {
-      const dateValueStr = value[0].join('/');
-      const timeValueStr = value[1]?.join(':');
-      const dateValue = `${dateValueStr} ${timeValueStr}`;
-      if (!isValidStringTime(dateValue)) {
-        return '';
-      }
-      return dayjs(dateValue).format(finalFormat);
-    });
+  return values.map((value) => {
+    const dateValueStr = value[0].join('/');
+    const timeValueStr = value[1]?.join(':');
+    const dateValue = `${dateValueStr} ${timeValueStr}`;
+    if (!isValidStringTime(dateValue)) {
+      return '';
+    }
+    return dayjs(dateValue).format(finalFormat);
+  });
 }
 
 /**
@@ -229,7 +228,7 @@ export function getMaxMinDates(maxDate: DateValue, minDate: DateValue) {
  */
 export function getTimeBoundary(currentDate: Array<string>, maxDate: DateValue, minDate: DateValue) {
   const currentDateValue = toDateValue(currentDate);
-  const current = dayjs(currentDateValue);
+  const current = dayjs(currentDateValue || minDate);
   const result: { maxTime?: any; minTime?: any } = {
     maxTime: '23:59:59',
     minTime: '00:00:00',
