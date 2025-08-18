@@ -27,7 +27,7 @@ namespace nasl.ui {
   })
   @Component({
     title: '动作面板',
-    icon: 'picker',
+    icon: 'action-sheet',
     description: '底部弹起的模态面板，包含与当前情境相关的多个选项。',
     group: "Feedback"
   })
@@ -121,7 +121,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    loadingField: (item: T) => nasl.core.Boolean = ((item: any)  => item.loading) as any;
+    loadingField: (item: T) => nasl.core.String = ((item: any)  => item.loading) as any;
 
     @Prop({
       group: '数据属性',
@@ -131,7 +131,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    disabledField: (item: T) => nasl.core.Boolean = ((item: any)  => item.disabled) as any;
+    disabledField: (item: T) => nasl.core.String = ((item: any)  => item.disabled) as any;
 
     @Prop({
       group: '主要属性',
