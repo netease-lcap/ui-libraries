@@ -450,6 +450,12 @@ namespace nasl.ui {
       },
     ],
   })
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'container',
+    },
+  })
   @Component({
     title: '表单上传组件',
     icon: 'uploader',
@@ -464,5 +470,11 @@ namespace nasl.ui {
     }
   }
 
-  export class VanFormUploaderOptions extends ViewComponentOptions {}
+  export class VanFormUploaderOptions extends ViewComponentOptions {
+    @Slot({
+      title: '组件插槽',
+      description: '标题',
+    })
+    slotLabel: () => Array<ViewComponent>;
+  }
 }

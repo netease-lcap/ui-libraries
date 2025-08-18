@@ -180,8 +180,8 @@ export function handleBasicRender(props: any) {
   const render = useCallback(
     (props, { attrs, slots }) => {
       const { formatValue, placeholder, inputAlign, inLink, type, readonly, disabled, popupShow } = props;
-      const calendarProps = _.omit(props, ['show']);
       const { outerProps, innerProps } = categoryProps(props);
+      const calendarProps = _.omit(props, ['show'].concat(Object.keys(innerProps)));
       const onFieldClick = () => {
         if (disabled || readonly) {
           return;
@@ -225,6 +225,7 @@ export function handleBasicRender(props: any) {
           <Calendar
             show={popupShow}
             {...innerProps}
+            {...calendarProps}
             onClose={() => setPopupShow(false)}
             v-slots={slots} />
         </div>
