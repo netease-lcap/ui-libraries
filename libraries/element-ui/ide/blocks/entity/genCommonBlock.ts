@@ -250,7 +250,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         placeholder="请选择${label}">
     </ElFormDateTimePickerPro>`;
   }
-  const namespaceArr = propertyTypeNamespace.split('.');
+  const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
