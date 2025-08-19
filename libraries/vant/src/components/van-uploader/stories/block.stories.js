@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<van-uploader />',
+    template: '<van-uploader action="/upload"/>',
   }),
 };
