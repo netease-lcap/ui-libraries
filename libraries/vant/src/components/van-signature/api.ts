@@ -118,7 +118,7 @@ namespace nasl.ui {
       title: '点击确定按钮时触发',
       description: '点击确定按钮时触发',
     })
-    onSubmit: (data: any) => void;
+    onSubmit: (event: { image: nasl.core.String, canvas: HTMLCanvasElement }) => void;
 
     @Event({
       title: '点击取消按钮时触发',
