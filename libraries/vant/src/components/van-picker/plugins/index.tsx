@@ -10,6 +10,7 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
+
 import { handleControllableValue } from '@/plugins/common/index';
 
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
@@ -25,7 +26,7 @@ handleDefaultValue.order = 2;
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
-  const textField = props.get('textField');
+  const textField = props.get('textField') || 'text';
   const valueField = props.get('valueField');
   const parentField = props.get('parentField');
   const slots = props.get('slots');
@@ -55,7 +56,11 @@ export function handlewFieldState(props) {
   const mergeRef = props.get($mergeRef);
   const onCancelProps = props.get('onCancel', () => {});
   const onConfirmProps = props.get('onConfirm', () => {});
-  const [value, setValue] = useControllableValue(props);
+  const value = props.get('modelValue');
+  const setValue = props.get('onUpdate:modelValue');
+  // const [value, setValue] = useControllableValue(props, {
+  //   defaultValue: [],
+  // });
   const fieldValue = useMemo(() => {
     const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item)?.text);
     return _.join(selected, ',');
@@ -103,10 +108,10 @@ export function handleFieldRender(props) {
 
       return [
         <Field
-          modelValue={fieldValue}
           placeholder={props.placeholder}
           onClick={() => setShow(true)}
-          {...outerProps}
+          {..._.omit(outerProps, 'onUpdate:modelValue')}
+          modelValue={fieldValue}
           readonly
           is-link
           right-icon={rightIcon}
@@ -121,7 +126,7 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          {..._.omit(innerProps, 'columns', 'expose')}
+          {..._.omit(innerProps, 'columns', 'expose', 'onConfirm')}
         >
           <Component
             {..._.omit(props, [

@@ -59,7 +59,7 @@ const Template = (args) => ({
       {{pickerValue}}选择器
 
       {{cascaderValue}}级联选择器
-      <van-form-cascader
+      <van-cascader
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
         v-model="cascaderValue"
         required name="cascader" placeholder="请选择级联选择器"
@@ -69,7 +69,7 @@ const Template = (args) => ({
         <template #label>
           <span>级联选择器</span>
         </template>
-      </van-form-cascader>
+      </van-cascader>
       <van-form-radio-group
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
         v-model="radioValue"
