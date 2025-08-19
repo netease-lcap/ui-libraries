@@ -365,17 +365,7 @@ namespace nasl.ui {
       which: nasl.core.Integer;
     }) => any;
 
-    @Event({
-      title: '聚焦时',
-      description: '聚焦时触发',
-    })
-    onFocus: (event: FocusEvent) => void;
 
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: FocusEvent) => void;
 
     @Slot({
       title: '默认',
@@ -468,6 +458,7 @@ namespace nasl.ui {
       title: '是否禁用',
       description: '是否禁用',
       setter: { concept: 'SwitchSetter' },
+      bindHide: true,
     })
     disabled: nasl.core.Boolean = false;
 
@@ -698,17 +689,7 @@ namespace nasl.ui {
       which: nasl.core.Integer;
     }) => any;
 
-    @Event({
-      title: '聚焦时',
-      description: '聚焦时触发',
-    })
-    onFocus: (event: FocusEvent) => void;
 
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: FocusEvent) => void;
 
     @Slot({
       title: '菜单项内容',

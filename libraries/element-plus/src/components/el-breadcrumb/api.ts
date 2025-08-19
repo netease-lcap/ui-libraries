@@ -8,7 +8,7 @@ namespace nasl.ui {
       structured: true,
       childAccept: "target.tag === 'el-breadcrumb-item'",
       additionalAttribute: {
-        ":showInDesigner": "\"true\"",
+        ':showInDesigner': '"true"',
       },
       forceUpdateWhenAttributeChange: true,
     },
@@ -85,19 +85,18 @@ namespace nasl.ui {
   export class ElBreadcrumbItemOptions extends ViewComponentOptions {
     @Prop({
       group: '交互属性',
-      title: '链接地址'
+      title: '链接地址',
     })
     hrefAndTo: nasl.core.String;
 
     @Prop({
       group: '主要属性',
       title: '替换路由',
-      description:
-        '在使用 to 进行路由跳转时，启用 replace 将不会向 history 添加新记录',
+      description: '在使用 to 进行路由跳转时，启用 replace 将不会向 history 添加新记录',
       setter: { concept: 'SwitchSetter' },
     })
     replace: nasl.core.Boolean = false;
-    
+
     @Event({
       title: '点击',
       description: '在元素上按下并释放任意鼠标按钮时触发。',
@@ -251,18 +250,6 @@ namespace nasl.ui {
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
     }) => any;
-
-    @Event({
-      title: '聚焦时',
-      description: '聚焦时触发',
-    })
-    onFocus: (event: FocusEvent) => void;
-
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: FocusEvent) => void;
 
     @Slot({
       title: '内容',

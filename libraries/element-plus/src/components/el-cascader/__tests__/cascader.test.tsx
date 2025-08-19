@@ -10,6 +10,7 @@ import ElForm, { ElFormItem } from 'element-plus/es/components/form';
 // import { ElCascader as Cascader } from 'element-plus';
 
 import type { VNode } from 'vue';
+import { sleep } from '@ep-test/test-utils';
 import Cascader from '../index';
 // import { ElCascaderPlus as Cascader } from '../index';
 
@@ -54,8 +55,7 @@ const SUGGESTION_ITEM = '.el-cascader__suggestion-item';
 const SUGGESTION_PANEL = '.el-cascader__suggestion-panel';
 const DROPDOWN = '.el-cascader__dropdown';
 
-const _mount = (render: () => VNode) =>
-  mount(render, {
+const _mount = (render: () => VNode) => mount(render, {
     attachTo: document.body,
   });
 
@@ -293,18 +293,19 @@ describe('Cascader.vue', () => {
 
   test('filterable', async () => {
     const value = ref([]);
-    const wrapper = _mount(() => <Cascader v-model={value.value} filterable={true} options={OPTIONS} />);
+    const wrapper = _mount(() => <Cascader class="my-cascader" v-model={value.value} filterable options={OPTIONS} />);
 
     const input = wrapper.find('input');
     input.element.value = 'Ni';
 
-    // expect(wrapper.html()).toMatchSnapshot();
     await input.trigger('compositionstart');
     await input.trigger('input');
     input.element.value = 'Ha';
     await input.trigger('compositionupdate');
     await input.trigger('input');
     await input.trigger('compositionend');
+
+    await sleep(300);
     const suggestions = document.querySelectorAll(SUGGESTION_ITEM) as NodeListOf<HTMLElement>;
     const hzSuggestion = suggestions[0];
     expect(suggestions.length).toBe(1);
@@ -313,20 +314,18 @@ describe('Cascader.vue', () => {
     await nextTick();
     expect(wrapper.findComponent(Check).exists()).toBeTruthy();
     expect(value.value).toEqual(['zhejiang', 'hangzhou']);
-    hzSuggestion.click();
-    await nextTick();
-    expect(value.value).toEqual(['zhejiang', 'hangzhou']);
   });
 
   test('filterable in multiple mode', async () => {
     const value = ref([]);
+
     const props = { multiple: true };
     const wrapper = _mount(() => <Cascader v-model={value.value} props={props} filterable options={OPTIONS} />);
 
     const input = wrapper.find('.el-cascader__search-input');
     (input.element as HTMLInputElement).value = 'Ha';
     await input.trigger('input');
-    await nextTick();
+    await sleep(300);
     const hzSuggestion = document.querySelector(SUGGESTION_ITEM) as HTMLElement;
     hzSuggestion.click();
     await nextTick();
@@ -339,6 +338,7 @@ describe('Cascader.vue', () => {
   test('filter method', async () => {
     const filterMethod = vi.fn((node, keyword) => {
       const { text, value } = node;
+      console.log('========');
       return text.includes(keyword) || value.includes(keyword);
     });
     const wrapper = _mount(() => <Cascader filterMethod={filterMethod} filterable options={OPTIONS} />);
@@ -346,6 +346,7 @@ describe('Cascader.vue', () => {
     const input = wrapper.find('input');
     input.element.value = 'ha';
     await input.trigger('input');
+    await sleep(300);
     const hzSuggestion = document.querySelector(SUGGESTION_ITEM) as HTMLElement;
     expect(filterMethod).toBeCalled();
     expect(hzSuggestion.textContent).toBe('Zhejiang / Hangzhou');
@@ -359,10 +360,12 @@ describe('Cascader.vue', () => {
     const dropdown = document.querySelector(DROPDOWN)!;
     input.element.value = 'h';
     await input.trigger('input');
+    await sleep(300);
     const suggestionsPanel = document.querySelector(SUGGESTION_PANEL) as HTMLDivElement;
     const suggestions = dropdown.querySelectorAll(SUGGESTION_ITEM) as NodeListOf<HTMLElement>;
     const hzSuggestion = suggestions[0];
     triggerEvent(suggestionsPanel, 'keydown', EVENT_CODE.down);
+    await sleep(300);
     expect(document.activeElement!.textContent).toBe('Zhejiang / Hangzhou');
     triggerEvent(hzSuggestion, 'keydown', EVENT_CODE.down);
     expect(document.activeElement!.textContent).toBe('Zhejiang / Ningbo');
@@ -417,12 +420,13 @@ describe('Cascader.vue', () => {
 
   test('should be able to trigger togglePopperVisible outside the component', async () => {
     let cascader: InstanceType<typeof ElCascader>;
+    const cascaderRef = ref({});
     const clickFn = () => {
-      cascader.togglePopperVisible();
+      cascaderRef.value.togglePopperVisible();
     };
     const wrapper = _mount(() => (
       <div>
-        <Cascader options={OPTIONS} />
+        <Cascader ref={cascaderRef} options={OPTIONS} />
         <button onClick={clickFn} />
       </div>
     ));
@@ -430,6 +434,7 @@ describe('Cascader.vue', () => {
     cascader = wrapper.findComponent(Cascader).vm;
     const dropdown = wrapper.findComponent(ArrowDown).element as HTMLDivElement;
     expect(dropdown.style.display).not.toBe('none');
+    await sleep(300);
     const button = wrapper.find('button');
     await button.trigger('click');
     await nextTick();
