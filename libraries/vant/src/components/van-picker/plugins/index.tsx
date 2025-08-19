@@ -10,9 +10,18 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
+import { handleControllableValue } from '@/plugins/common/index';
 
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
-export { handleControllableValue } from '@/plugins/common/index';
+
+export function handleDefaultValue(props) {
+  const { modelValue, ...valueProps } = handleControllableValue(props.merge({ defaultValue: [] }));
+  return {
+    modelValue: _.isArray(modelValue) ? modelValue : [],
+    ...valueProps,
+  };
+}
+handleDefaultValue.order = 2;
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
