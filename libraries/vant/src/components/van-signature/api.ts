@@ -13,7 +13,7 @@ namespace nasl.ui {
     title: '签名',
     icon: 'signature',
     description: '用于签名场景的组件，基于 Canvas 实现。',
-    group: 'FeedBack',
+    group: 'Form',
   })
   export class VanSignature extends ViewComponent {
     @Event({
@@ -118,7 +118,7 @@ namespace nasl.ui {
       title: '点击确定按钮时触发',
       description: '点击确定按钮时触发',
     })
-    onSubmit: (data: any) => void;
+    onSubmit: (event: { image: nasl.core.String, canvas: HTMLCanvasElement }) => void;
 
     @Event({
       title: '点击取消按钮时触发',
@@ -132,4 +132,35 @@ namespace nasl.ui {
     })
     slotTips: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'container',
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanSignature',
+      },
+    ],
+  })
+  @Component({
+    title: '表单签名',
+    description: '表单签名',
+    group: 'Form',
+  })
+  export class VanFormSignature extends ViewComponent {
+    constructor(
+      options?: Partial<
+        VanFormSignatureOptions & VanFormItemOptions & Omit<VanSignatureOptions, keyof VanFormItemOptions>
+      >,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormSignatureOptions extends ViewComponentOptions {}
 } 

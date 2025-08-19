@@ -438,7 +438,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
       ignoreProperty: ["showUpload"],
     },
     extends: [
@@ -449,12 +449,6 @@ namespace nasl.ui {
         name: 'VanUploader',
       },
     ],
-  })
-  @IDEExtraInfo({
-    order: 2,
-    ideusage: {
-      idetype: 'container',
-    },
   })
   @Component({
     title: '表单上传组件',
