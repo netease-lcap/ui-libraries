@@ -194,7 +194,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
         }>
     </UDateTimePicker>`;
   } else {
-    const namespaceArr = propertyTypeNamespace.split('.');
+    const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
     const type = namespaceArr.pop();
     if (type === 'enums') {
       const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;

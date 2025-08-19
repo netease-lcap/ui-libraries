@@ -271,7 +271,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         modelValue={$sync(${vModel})}>
     </ElFormDatePicker>`;
   }
-  const namespaceArr = propertyTypeNamespace.split('.');
+  const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
