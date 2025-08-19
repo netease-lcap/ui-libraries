@@ -57,9 +57,13 @@ export const Default = {
       onClickSubmit() {
         this.$refs.uploader.submit();
       },
+      onChangeValues() {
+        this.values = '';
+      }
     },
     template: `
     <van-button @click="onClickSubmit">上传服务器</van-button>
+    <van-button @click="onChangeValues">改变值</van-button>
       <van-uploader v-model="values" multiple v-bind="args"
         ref="uploader"
         @oversize="onOversize"
