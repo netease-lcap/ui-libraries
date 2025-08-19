@@ -92,13 +92,13 @@ namespace nasl.ui {
     // })
     // error: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '滚动触发加载的阈值',
-      description: '滚动条与底部距离小于 offset 时触发load事件',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    offset: nasl.core.Decimal = 300;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '滚动触发加载的阈值',
+    //   description: '滚动条与底部距离小于 offset 时触发load事件',
+    //   setter: { concept: 'NumberInputSetter' },
+    // })
+    // offset: nasl.core.Decimal = 300;
 
     // @Prop({
     //   group: '主要属性',
@@ -140,11 +140,11 @@ namespace nasl.ui {
     // })
     // immediateCheck: nasl.core.Boolean = true;
 
-    @Event({
-      title: '加载事件',
-      description: '滚动条与底部距离小于 offset 时触发',
-    })
-    onLoad: (event: any) => any;
+    // @Event({
+    //   title: '加载事件',
+    //   description: '滚动条与底部距离小于 offset 时触发',
+    // })
+    // onLoad: (event: any) => any;
 
     @Slot({
       title: '项',

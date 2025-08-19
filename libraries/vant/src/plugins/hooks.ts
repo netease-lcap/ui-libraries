@@ -249,7 +249,7 @@ export function useControllableValue(props: any, options: Options = {}) {
   const propsValue = props.get(valuePropName);
   const defaultValueProps = props.get(defaultValuePropName);
   const initialValue = useMemo(() => {
-    const controlledInitialValue = propsValue || defaultValueProps || defaultValue;
+    const controlledInitialValue = propsValue ?? defaultValueProps ?? defaultValue;
     const uncontrolledInitialValue = defaultValueProps ?? defaultValue;
     return isControlled ? controlledInitialValue : uncontrolledInitialValue;
   }, [isControlled, propsValue, defaultValueProps, defaultValue]);
