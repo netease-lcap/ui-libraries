@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<van-pull-refresh style="min-height: 100vh;"><template #default><van-text text="下拉刷新" /></template></van-pull-refresh>',
+    template: '<van-pull-refresh style="min-height: 100vh;"><van-text text="下拉刷新" /></van-pull-refresh>',
   }),
 };
