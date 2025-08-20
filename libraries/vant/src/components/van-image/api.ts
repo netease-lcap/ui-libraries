@@ -31,7 +31,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '图片链接',
       description: '图片链接',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'ImageSetter' },
+      settable: true,
     })
     src: nasl.core.String;
 
