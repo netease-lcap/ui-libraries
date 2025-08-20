@@ -99,14 +99,17 @@ const getValueByList = (fileList: ExtendedUploaderFileListItem[], converter: Con
  * @returns 属性
  */
 export function handleModelValue(props) {
-  const [value, setValue] = useControllableValue(props);
   const [currentFileList, setCurrentFileList] = useState([]);
+  const [value, setValue] = useControllableValue(props, {
+    onValueEffect: (value) => {
+      const converter = props.get('converter') || 'simple';
+      const defaultFileList = getFileListByValue(value, converter);
+      setCurrentFileList(defaultFileList);
+    },
+  });
   const urlField = props.get('urlField') || 'filePath';
   const converter = props.get('converter') || 'simple';
-  useEffect(() => {
-    const defaultFileList = getFileListByValue(value, converter);
-    setCurrentFileList(defaultFileList);
-  }, [value, converter]);
+
   const autoUpload = props.get('autoUpload');
   const onUpdateModelValue = useCallback(
     (fileList: ExtendedUploaderFileListItem[]) => {
@@ -116,8 +119,8 @@ export function handleModelValue(props) {
     [converter, urlField, setValue],
   );
   const onSetCurrentFileList = (fileList: ExtendedUploaderFileListItem[]) => {
-    setCurrentFileList(fileList);
     onUpdateModelValue(fileList);
+    setCurrentFileList(fileList);
   };
   return {
     modelValue: currentFileList,
@@ -165,17 +168,7 @@ export function handleUpload(props) {
       },
       files,
     );
-  }, [
-    action,
-    headers,
-    formData,
-    name,
-    urlField,
-    modelValue,
-    currentFileList,
-    withCredentials,
-    onSetCurrentFileList,
-  ]);
+  }, [action, headers, formData, name, urlField, modelValue, currentFileList, withCredentials, onSetCurrentFileList]);
   const refProp = props.get('ref');
   const selfRef = _.assign(refProp, { submit: submitFn });
 

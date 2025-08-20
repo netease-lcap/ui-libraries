@@ -19,6 +19,7 @@ interface Options {
   valuePropName?: string;
   trigger?: string;
   onChange?: (...args: any[]) => void;
+  onValueEffect?: (...args: any[]) => void;
 }
 interface Fiber {
   workInProgressState: Hook;
@@ -235,6 +236,7 @@ export function useCallback(callBack, dep) {
 
 export function useControllableValue(props: any, options: Options = {}) {
   const instance = useMemo(() => getCurrentInstance(), []);
+
   const { vnode } = instance;
   const emit = props.get('emit');
   const vProps = vnode.props || {};
@@ -244,9 +246,13 @@ export function useControllableValue(props: any, options: Options = {}) {
     valuePropName = 'modelValue',
     trigger = `onUpdate:${valuePropName}`,
     onChange: onChangeProps = () => {},
+    onValueEffect = () => {},
   } = options || {};
+
   const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
+  const priorValue = useRef({});
   const propsValue = props.get(valuePropName);
+
   const defaultValueProps = props.get(defaultValuePropName);
   const initialValue = useMemo(() => {
     const controlledInitialValue = propsValue ?? defaultValueProps ?? defaultValue;
@@ -256,6 +262,11 @@ export function useControllableValue(props: any, options: Options = {}) {
   const [stateValue, setStateValue] = useState(initialValue);
   const triggerProps = props.get(trigger, () => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
+  useEffect(() => {
+    if (priorValue.value !== propsValue && isControlled) {
+      onValueEffect(propsValue);
+    }
+  }, [propsValue, isControlled]);
 
   const onChange = (...args) => {
     if (isControlled) {
@@ -263,10 +274,12 @@ export function useControllableValue(props: any, options: Options = {}) {
     } else {
       setStateValue(...args);
     }
+    priorValue.value = args[0];
     _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);
   };
   const value = useMemo(() => (isControlled ? propsValue : stateValue), [stateValue, isControlled]);
+
   return [
     unref(value),
     onChange,
