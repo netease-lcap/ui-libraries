@@ -174,7 +174,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '步骤条项',
-          code: '<van-step><template #default><van-text text="步骤 N"></van-text></template></van-step>',
+          code: '<van-step><van-text text="步骤 N"></van-text></van-step>',
         },
       ],
     })
