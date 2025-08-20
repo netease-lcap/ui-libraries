@@ -59,11 +59,21 @@ export const Default = {
       },
       onChangeValues() {
         this.values = '';
-      }
+      },
+      onChangeValues1() {
+        this.values = JSON.stringify([
+          { url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg' },
+          // Uploader 根据文件后缀来判断是否为图片文件
+          // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
+          { url: 'https://cloud-image', isImage: true },
+          { url: 'http://dev-zxrtest25082001-csforkf.lcap.codewave-test.163yun.com/upload/app/239a90ab-c020-42f7-bad5-5475c9c185e2/login_20250820180500818_ori_pms11755770700891.png' },
+        ]);
+      },
     },
     template: `
     <van-button @click="onClickSubmit">上传服务器</van-button>
     <van-button @click="onChangeValues">改变值</van-button>
+    <van-button @click="onChangeValues1">改变值1</van-button>
       <van-uploader v-model="values" multiple v-bind="args"
         ref="uploader"
         @oversize="onOversize"
@@ -89,14 +99,14 @@ export const Default = {
     headers: { LCAPTEST: 'test' },
     multiple: true,
     autoUpload: true,
-    maxSize: '10KB',
+    maxSize: Infinity,
     maxCount: Infinity,
     converter: 'json',
     readonly: false,
     disabled: false,
     deletable: true,
     showUpload: true,
-    accept: '.zip',
+    accept: '',
     oversizeErrorMsg: '',
   },
 };

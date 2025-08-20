@@ -1,6 +1,5 @@
 import _ from 'lodash';
-import { ref } from 'vue';
-import { useMemo, useControllableValue, useCallback, useState, useEffect } from '@/plugins/hooks';
+import { useControllableValue, useCallback, useState, useEffect } from '@/plugins/hooks';
 import { ExtendedUploaderFileListItem } from './types';
 import { postAfterRead } from './upload';
 
@@ -110,7 +109,6 @@ export function handleModelValue(props) {
   const urlField = props.get('urlField') || 'filePath';
   const converter = props.get('converter') || 'simple';
 
-  const autoUpload = props.get('autoUpload');
   const onUpdateModelValue = useCallback(
     (fileList: ExtendedUploaderFileListItem[]) => {
       const value = getValueByList(fileList, converter, urlField);
@@ -125,11 +123,6 @@ export function handleModelValue(props) {
   return {
     modelValue: currentFileList,
     'onUpdate:modelValue': (fileList: ExtendedUploaderFileListItem[]) => {
-      if (!autoUpload) {
-        fileList.forEach((file) => {
-          file.status = 'success';
-        });
-      }
       onSetCurrentFileList(fileList);
     },
     onUpdateModelValue,
