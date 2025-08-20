@@ -1,16 +1,42 @@
 <template>
-  <demo-preview></demo-preview>
+  <div class="toast-container">
+    <van-toast :show="true" type="text" :forbid-click="false" :close-on-click="false" :close-on-click-overlay="false">
+      <template #message>
+        文字提示
+      </template>
+    </van-toast>
+    <van-toast :show="true" type="loading" :forbid-click="false" :close-on-click="false"
+      :close-on-click-overlay="false">
+      <template #message>
+        加载中...
+      </template>
+    </van-toast>
+    <van-toast :show="true" type="success" :forbid-click="false" :close-on-click="false"
+      :close-on-click-overlay="false">
+      <template #message>
+        成功
+      </template>
+    </van-toast>
+    <van-toast :show="true" type="fail" :forbid-click="false" :close-on-click="false" :close-on-click-overlay="false">
+      <template #message>
+        失败
+      </template>
+    </van-toast>
+  </div>
 </template>
-<script>
-// 默认可使用组件区块实例作为主题配置预览
-import createStoriesPreview from '@lcap/builder/input/vue3/stories-preview';
-import * as stories from '../../../components/van-toast/stories/block.stories';
 
-const DemoPreview = createStoriesPreview(stories);
+<style>
+.toast-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  height: fit-content;
+  align-items: center;
+}
 
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-</script>
+.toast-container .van-toast {
+  position: static !important;
+  transform: none !important;
+}
+</style>

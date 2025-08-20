@@ -1,16 +1,19 @@
 <template>
-  <demo-preview></demo-preview>
+  <div>
+    <van-skeleton :isCustomSkeleton="true" :row="3" title avatar round>
+      <template #template>
+        <div :style="{ display: 'flex', width: '100%' }">
+          <van-skeleton-avatar />
+          <div :style="{ flex: 1, marginLeft: '16px' }">
+            <van-skeleton-title />
+            <van-skeleton-paragraph row-width="60%" />
+            <van-skeleton-paragraph />
+            <van-skeleton-paragraph />
+            <van-skeleton-paragraph />
+            <van-skeleton-image style="margin-top: 10px;" />
+          </div>
+        </div>
+      </template>
+    </van-skeleton>
+  </div>
 </template>
-<script>
-// 默认可使用组件区块实例作为主题配置预览
-import createStoriesPreview from '@lcap/builder/input/vue3/stories-preview';
-import * as stories from '../../../components/van-skeleton/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-</script>
