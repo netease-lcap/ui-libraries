@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { Field, Popup } from 'vant';
-import { useMemo, useCallback, useState, useControllableValue } from '@/plugins/hooks';
-import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
+import { useMemo, useCallback, useControllableValue } from '@/plugins/hooks';
+import { $deletePropsList, $dataSourceDeleteField, $mergeRef } from '@/plugins/constants';
 import { categoryProps } from '@/utils/dom';
 
 import {
@@ -11,19 +11,29 @@ import {
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 
+import { handleControllableValue } from '@/plugins/common/index';
+
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
-export { handleControllableValue } from '@/plugins/common/index';
+
+export function handleDefaultValue(props) {
+  const { modelValue, ...valueProps } = handleControllableValue(props.merge({ defaultValue: [] }));
+  return {
+    modelValue: _.isArray(modelValue) ? modelValue : [],
+    ...valueProps,
+  };
+}
+handleDefaultValue.order = 2;
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
-  const textField = props.get('textField');
+  const textField = props.get('textField') || 'text';
   const valueField = props.get('valueField');
   const parentField = props.get('parentField');
   const slots = props.get('slots');
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
-  const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
+  const dataSource = useHandleMapField({ textField, valueField, label: 'text', dataSource: useFormatDataSource(data) });
   const TreeData = useMemo(
     () => useDataSourceToTree(dataSource, parentField, valueField),
     [dataSource, parentField, valueField],
@@ -43,9 +53,14 @@ export function handleDataSource(props) {
 
 export function handlewFieldState(props) {
   const columns = props.get('columns');
+  const mergeRef = props.get($mergeRef);
   const onCancelProps = props.get('onCancel', () => {});
   const onConfirmProps = props.get('onConfirm', () => {});
-  const [value, setValue] = useControllableValue(props);
+  const value = props.get('modelValue');
+  const setValue = props.get('onUpdate:modelValue');
+  // const [value, setValue] = useControllableValue(props, {
+  //   defaultValue: [],
+  // });
   const fieldValue = useMemo(() => {
     const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item)?.text);
     return _.join(selected, ',');
@@ -72,6 +87,7 @@ export function handlewFieldState(props) {
   );
 
   return {
+    mergeRef,
     show,
     setShow,
     value,
@@ -86,15 +102,16 @@ export function handleFieldRender(props) {
   const Component = props.get('render');
   const render = useCallback(
     (props) => {
-      const { setShow, show, value, setValue, fieldValue, clearable } = props;
+      const { setShow, show, value, setValue, fieldValue, clearable, mergeRef, ...componentProps } = props;
       const rightIcon = clearable ? 'clear' : '';
-      const outerProps = categoryProps(props);
+      const { outerProps, innerProps } = categoryProps(componentProps);
+
       return [
         <Field
-          modelValue={fieldValue}
           placeholder={props.placeholder}
           onClick={() => setShow(true)}
-          {...outerProps}
+          {..._.omit(outerProps, 'onUpdate:modelValue')}
+          modelValue={fieldValue}
           readonly
           is-link
           right-icon={rightIcon}
@@ -109,13 +126,22 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          {...outerProps}
-          ide-draggable={props['ide-draggable']}
+          {..._.omit(innerProps, 'columns', 'expose', 'onConfirm')}
         >
           <Component
-            {..._.omit(props, ['value', 'modelValue', 'pickerValue', 'onUpdate:modelValue'])}
+            {..._.omit(props, [
+              'value',
+              'modelValue',
+              'pickerValue',
+              'onUpdate:modelValue',
+              'mergeRef',
+              'setValue',
+              'setShow',
+              'expose',
+              'show',
+            ])}
             modelValue={value}
-            ref={props.mergeRef}
+            ref={mergeRef}
           />
         </Popup>,
       ];

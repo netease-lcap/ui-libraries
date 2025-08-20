@@ -4,7 +4,7 @@ import { VanFormItem } from '@/components/van-form';
 import { $formProvide, $formItemProps } from '@/components/van-form/constants';
 import { useEffect } from '@/plugins/hooks';
 import { categoryStyles } from '@/utils';
-import { $provide, $formTagName } from '@/plugins/constants';
+import { $provide, $formTagName, $ide } from '@/plugins/constants';
 
 type FormItemProvide = {
   [$formProvide]: {
@@ -90,6 +90,7 @@ export function withFormItem(Component, name) {
           <VanFormItem
             {..._.pick(_.assign({}, props, attrs, { name: propName.value }), $formItemProps)}
             style={style.value.style}
+            class={`${name} ${_.get(attrs, 'class', '')}`}
             ref={formItemRef}
             v-slots={{
               label: slots.label,
@@ -97,6 +98,7 @@ export function withFormItem(Component, name) {
                 <Component
                   {..._.omit(_.assign({ [$formTagName]: name }, props, attrs), $formItemProps)}
                   v-slots={_.omit(slots, ['label'])}
+                  data-nodepath={attrs['data-nodepath']}
                   style={style.value.innerStyle}
                   v-on={emit}
                   ref={componentRef}
@@ -115,9 +117,9 @@ export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
   const formTagName = props.get('formTagName');
   const tagName = props.get('tagName');
+  const inject = props.get('inject');
+  const { isInForm } = inject?.value?.[$formProvide] ?? {};
   useEffect(() => {
-    const inject = props.get('inject');
-    const { isInForm } = inject?.value?.[$formProvide] ?? {};
     if (!nodePath) return;
     const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
     if (isInForm) {
@@ -126,7 +128,11 @@ export function handleComponentInForm(props) {
     } else {
       elem?.setAttribute('data-element-tag', tagName);
     }
-  }, []);
+  }, [isInForm]);
+  return {
+    isInForm,
+  };
 }
 
 handleComponentInForm.order = 6;
+handleComponentInForm.type = $ide;

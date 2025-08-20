@@ -1,8 +1,8 @@
 import { Popup, Field, datePickerProps, DatePicker, PickerGroup, pickerGroupProps, TimePicker } from 'vant';
 import { createNamespace } from 'vant/es/utils';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import _ from 'lodash';
-import { useCallback, useMemo, useControllableValue } from '@/plugins/hooks';
+import { useCallback, useMemo, useControllableValue, useEffect } from '@/plugins/hooks';
 import {
   toValue,
   getCurrentValue,
@@ -14,8 +14,19 @@ import {
   getRangeMinDate,
   getValidUnit,
 } from './utils-format';
+import { categoryProps } from '@/utils/dom';
+
+export { handleControllableValue } from '@/plugins/common/index';
+export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 
 const [name, bem] = createNamespace('date-picker');
+
+export function handleFormTagName(props) {
+  return {
+    tagName: 'van-date-picker',
+    formTagName: 'van-form-date-picker',
+  };
+}
 
 /**
  * 处理单位
@@ -70,30 +81,56 @@ handleColumnsType.order = 1;
  */
 export function handleCustomProps(props: any) {
   const popupOpened = props.get('popupOpened');
-  const popupVisible = ref(popupOpened);
+  const [popupShow, setPopupShow] = useControllableValue(props, {
+    valuePropName: 'popupShow',
+    defaultValuePropName: 'popupOpened',
+  });
+  // 当这个属性绑定的是动态表达式的时候，需要改变
+  useEffect(() => {
+    watch(
+      popupOpened,
+      () => {
+        setPopupShow(popupOpened);
+      },
+      { immediate: true },
+    );
+  }, [popupOpened]);
   const inputAlign = props.get('inputAlign') || 'right';
   const type = props.get('type') || 'date';
   const unit = props.get('unit');
   const validUnit = getValidUnit(unit, type);
   const refProp = props.get('ref');
   const open = () => {
-    popupVisible.value = true;
+    setPopupShow(true);
   };
   const close = () => {
-    popupVisible.value = false;
+    setPopupShow(false);
   };
   const { maxDateValue, minDateValue } = useMemo(() => {
     return getMaxMinDates(props.get('maxDate'), props.get('minDate'));
   }, [props.get('maxDate'), props.get('minDate')]);
   const selfRef = _.assign(refProp, { open, close });
+  const startTimeTabTitle = props.get('startTimeTabTitle') || '开始时间';
+  const endTimeTabTitle = props.get('endTimeTabTitle') || '结束时间';
+  const startDateTabTitle = props.get('startDateTabTitle') || '开始日期';
+  const endDateTabTitle = props.get('endDateTabTitle') || '结束日期';
+  const datetimeDateTabTitle = props.get('datetimeDateTabTitle') || '选择日期';
+  const datetimeTimeTabTitle = props.get('datetimeTimeTabTitle') || '选择时间';
   return {
-    popupVisible,
+    popupShow,
+    setPopupShow,
     inputAlign,
     unit: validUnit,
     ref: selfRef,
     maxDate: maxDateValue,
     minDate: minDateValue,
     type,
+    startTimeTabTitle,
+    endTimeTabTitle,
+    startDateTabTitle,
+    endDateTabTitle,
+    datetimeDateTabTitle,
+    datetimeTimeTabTitle,
   };
 }
 handleCustomProps.order = 0;
@@ -230,19 +267,17 @@ handleRangeModelValue.order = 2;
  * @returns
  */
 export function handleCancelButtonClick(props: any) {
-  const onCancel = props.get('onCancel');
-  const popupVisible = props.get('popupVisible');
-  const onCancelClick = useCallback(
-    (data: any) => {
-      if (_.isFunction(onCancel)) {
-        _.attempt(onCancel);
-      }
-      popupVisible.value = false;
-    },
-    [onCancel, popupVisible],
+  const onCancelProps = props.get('onCancel', () => {});
+  const setPopupShow = props.get('setPopupShow');
+  const onCancel = useCallback(
+    _.wrap(onCancelProps, (fn, ...args) => {
+      _.attempt(fn, ...args);
+      setPopupShow(false);
+    }),
+    [onCancelProps],
   );
   return {
-    onCancel: onCancelClick,
+    onCancel,
   };
 }
 handleCancelButtonClick.order = 4;
@@ -253,8 +288,8 @@ handleCancelButtonClick.order = 4;
  * @returns
  */
 export function handleConfirmButtonClick(props: any) {
-  const onConfirm = props.get('onConfirm');
-  const popupVisible = props.get('popupVisible');
+  const onConfirmProps = props.get('onConfirm', () => {});
+  const setPopupShow = props.get('setPopupShow');
   const unitIndex = props.get('unitIndex');
   const isRange = props.get('isRange');
   const emit = props.get('emit');
@@ -262,12 +297,10 @@ export function handleConfirmButtonClick(props: any) {
   const setStartValue = props.get('setStartValue');
   const setEndValue = props.get('setEndValue');
   const setModelValue = props.get('setModelValue');
-  const onConfirmClick = useCallback(
+  const onConfirm = useCallback(
     (data: any) => {
-      if (_.isFunction(onConfirm)) {
-        _.attempt(onConfirm);
-      }
-      popupVisible.value = false;
+      _.attempt(onConfirmProps, data);
+      setPopupShow(false);
       if (isRange === true) {
         let currentStartValue = [];
         let currentStartTimeValue = [];
@@ -300,10 +333,10 @@ export function handleConfirmButtonClick(props: any) {
         emit('sync:state', 'modelValue', currentValueStr);
       }
     },
-    [onConfirm, unitIndex, popupVisible],
+    [onConfirmProps, unitIndex],
   );
   return {
-    onConfirm: onConfirmClick,
+    onConfirm,
   };
 }
 handleConfirmButtonClick.order = 4;
@@ -328,6 +361,10 @@ function renderRangeContent(options: any) {
     currentEndTimeValueRef,
     onSetCurrentStartTimeValue,
     onSetCurrentEndTimeValue,
+    startTimeTabTitle,
+    endTimeTabTitle,
+    startDateTabTitle,
+    endDateTabTitle,
   } = props;
   const { minDate, maxDate, type, timeColumnsType } = props;
   const startDateMaxDate = getMaxMinDates(getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate), minDate)
@@ -348,10 +385,10 @@ function renderRangeContent(options: any) {
   ).minTime;
   const tabsData = useMemo(() => {
     if (type === 'date') {
-      return ['开始日期', '结束日期'];
+      return [props.startDateTabTitle, props.endDateTabTitle];
     }
-    return ['开始日期', '开始时间', '结束日期', '结束时间'];
-  }, [type]);
+    return [props.startDateTabTitle, props.startTimeTabTitle, props.endDateTabTitle, props.endTimeTabTitle];
+  }, [type, startDateTabTitle, endDateTabTitle, startDateTabTitle, startTimeTabTitle, endDateTabTitle, endTimeTabTitle]);
   const startDateComponentRef = ref(null);
   const endDateComponentRef = ref(null);
   const startTimeComponentRef = ref(null);
@@ -452,7 +489,7 @@ function renderBasicContent(options: any) {
         maxDate={maxDate}
         minDate={minDate}
         v-slots={{
-          title: options.slots?.title?.(),
+          title: options.slots?.title,
         }}
         onCancel={props.onCancel}
         onConfirm={props.onConfirm}
@@ -464,7 +501,7 @@ function renderBasicContent(options: any) {
       <PickerGroup
         {..._.pick(props, Object.keys(pickerGroupProps))}
         v-slots={{ ...options.slots }}
-        tabs={['选择日期', '选择时间']}
+        tabs={[props.datetimeDateTabTitle, props.datetimeTimeTabTitle]}
         onCancel={props.onCancel}
         onConfirm={props.onConfirm}>
         <DatePicker
@@ -501,19 +538,18 @@ function renderBasicContent(options: any) {
  * @returns
  */
 export function handleBasicRender(props: any) {
-  const popupVisible = ref(props.get('popupVisible') || false);
-  const disabled = props.get('disabled');
-  const readonly = props.get('readonly');
-  const onFieldClick = () => {
-    if (disabled || readonly) {
-      return;
-    }
-    popupVisible.value = true;
-  };
+  const setPopupShow = props.get('setPopupShow');
   const render = useCallback(
     (props, { attrs, slots }) => {
-      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay, inLink, readonly } = props;
-      const inputSlot = useCallback(() => {
+      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay, inLink, readonly, disabled, popupShow } = props;
+      const { outerProps, innerProps } = categoryProps(props);
+      const onFieldClick = () => {
+        if (disabled || readonly) {
+          return;
+        }
+        setPopupShow(true);
+      };
+      const inputSlot = () => {
         if (!formatValue) {
           if (placeholder) {
             return <div class={bem('placeholder')}>{placeholder}</div>;
@@ -530,9 +566,9 @@ export function handleBasicRender(props: any) {
           );
         }
         return <div class={bem('value')}>{formatValue[0]}</div>;
-      }, [formatValue, isRange, placeholder]);
+      };
       return (
-        <div {..._.pick(attrs, ['class', 'style', 'data-nodepath'])} class={bem('root')}>
+        <div {..._.pick(attrs, ['class', 'style'])} {...outerProps} class={bem('root')}>
           <Field
             readonly
             disabled={disabled}
@@ -544,11 +580,14 @@ export function handleBasicRender(props: any) {
             isLink={inLink}
           />
           <Popup
-            v-model:show={popupVisible.value}
+            show={popupShow}
+            onClose={() => setPopupShow(false)}
             position="bottom"
             round
+            lazy-render={false}
             closeOnClickOverlay={closeOnClickOverlay}
-            {...attrs}>
+            {..._.pick(attrs, ['class', 'style'])}
+            {...innerProps}>
             <div class={bem('content-wrapper')}>
               {isRange === true
                 ? renderRangeContent({
@@ -566,9 +605,9 @@ export function handleBasicRender(props: any) {
         </div>
       );
     },
-    [props],
+    [],
   );
 
-  return { render, ...props, popupVisible };
+  return { render };
 }
 handleBasicRender.order = 3;

@@ -14,7 +14,7 @@ export function handleDataSource(props) {
   const dataSourceSlot = _.isNil(dataConfig)
     ? {}
     : {
-        default: () => _.map(dataSource, (item) => slots.item({ current: item })),
+        default: () => _.map(dataSource, (item) => slots.item(item)),
       };
 
   return {

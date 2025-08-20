@@ -608,12 +608,12 @@ function convertFinalCSSInfoToDesc(cssInfo: FinalComponentCSSInfo) {
   return result;
 }
 
-export default function buildCSSInfo(options: LcapBuildOptions) {
+export default async function buildCSSInfo(options: LcapBuildOptions) {
   if (!options.reportCSSInfo || !options.reportCSSInfo.enabled) {
     return;
   }
 
-  const components = getComponentMetaInfos(options.rootPath, true);
+  const components = await getComponentMetaInfos(options.rootPath, true);
   const componentNameMap: Record<string, string | undefined> = {}; // { componentName: parentName }
   components.forEach((component) => {
     // 这里用了个技巧，先匹配子组件

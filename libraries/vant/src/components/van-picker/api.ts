@@ -200,7 +200,18 @@ namespace nasl.ui {
         loopRule: 'nth-child(n+2)',
         loopElem: "> label[class^='u-radios_radio']:not([data-nodepath])",
       },
+      displaySlotInline: {
+        label: true,
+      },
     },
+    extends:[
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanPicker',
+      },
+    ],
   })
   @Component({
     title: '表单选择器',

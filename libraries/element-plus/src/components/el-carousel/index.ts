@@ -15,7 +15,7 @@ function ElCarouselItemRegister(BaseComponent, plugin = {}, extend = true) {
 }
 
 const ElCarousel = registerComponent(ElCarouselPlus, { plugin: basicsPlugin, name: 'el-carousel' });
-const ElCarouselItem = registerComponent(ElCarouselItemPlus, { plugin: itemPlugins, name: 'el-carousel-item' });
+const ElCarouselItem = registerComponent(ElCarouselItemPlus, { plugin: itemPlugins });
 
 export { ElCarouselPlus, ElCarouselItemPlus, ElCarousel, ElCarouselItem, ElCarouselRegister, ElCarouselItemRegister };
 export default ElCarousel;

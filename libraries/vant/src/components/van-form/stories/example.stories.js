@@ -57,16 +57,9 @@ const Template = (args) => ({
         </template>
       </van-form-field>
       {{pickerValue}}选择器
-      <van-form-picker
-             :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
-             v-model="pickerValue"
-      required name="gender" placeholder="请选择性别"
-        :dataSource="[{ text: '男', value: '1' }, { text: '女', value: '2' }]"
-        clearable
-      >
-      </van-form-picker>
+
       {{cascaderValue}}级联选择器
-      <van-form-cascader
+      <van-cascader
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
         v-model="cascaderValue"
         required name="cascader" placeholder="请选择级联选择器"
@@ -76,7 +69,7 @@ const Template = (args) => ({
         <template #label>
           <span>级联选择器</span>
         </template>
-      </van-form-cascader>
+      </van-cascader>
       <van-form-radio-group
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
         v-model="radioValue"
@@ -106,6 +99,7 @@ const Template = (args) => ({
           <span>评分</span>
         </template>
       </van-form-rate>
+      <van-switch></van-switch>
       <van-form-switch
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
         required name="switch" placeholder="请选择开关"
@@ -168,12 +162,12 @@ Default.args = {
 export const WithColon = () => ({
   setup() {},
   template: `
-  <van-form>
-    <van-form-picker :label-width="100" data-nodepath="12">
+  <van-form >
+    <van-form-field labelAlign="right">
       <template #label>
-        <span>用户名</span>
+        <span>用户名1</span>
       </template>
-    </van-form-picker>
+    </van-form-field>
     <van-form>
   `,
 });

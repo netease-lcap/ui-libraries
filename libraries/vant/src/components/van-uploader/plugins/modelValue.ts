@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { ref, unref } from 'vue';
-import { useMemo, useControllableValue, useCallback, useRef } from '@/plugins/hooks';
+import { ref } from 'vue';
+import { useMemo, useControllableValue, useCallback } from '@/plugins/hooks';
 import { ExtendedUploaderFileListItem } from './types';
 
 type Converter = 'json' | 'simple';
@@ -107,7 +107,7 @@ export function handleModelValue(props) {
     const value = getValueByList(fileList, converter, urlField);
     setValue(value);
   }, [converter, urlField, setValue]);
-  const currentFileList = useRef(defaultFileList);
+  const currentFileList = ref(defaultFileList);
   const onSetCurrentFileList = (fileList: ExtendedUploaderFileListItem[]) => {
     currentFileList.value = fileList;
     onUpdateModelValue(fileList);

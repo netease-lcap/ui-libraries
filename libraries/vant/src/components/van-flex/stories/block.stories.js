@@ -10,11 +10,31 @@ export default {
 };
 
 export const Default = {
-  name: 'Flex',
+  name: '单行排布',
   render: () => ({
     setup() {},
     template: `
       <van-flex></van-flex>
     `,
+  }),
+};
+
+export const MultiLine = {
+  name: '多行排布',
+  render: () => ({
+    template: `<van-flex direction="vertical" mode="block">
+    <van-flex direction="horizontal" mode="block">
+    </van-flex>
+    <van-flex direction="horizontal" mode="block">
+    </van-flex>
+    </van-flex>`,
+  }),
+};
+
+export const SpaceBetween = {
+  name: '两端排布',
+  render: () => ({
+    template:
+      '<van-flex justify="space-between"><van-flex :wrap="true"></van-flex><van-flex :wrap="true"></van-flex></van-flex>',
   }),
 };

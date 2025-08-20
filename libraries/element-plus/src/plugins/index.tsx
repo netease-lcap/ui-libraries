@@ -10,7 +10,7 @@ import { createStore } from 'zustand/vanilla';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { $deletePropsList, $provide, $tagName } from '@/plugins/constants';
+import { $deletePropsList, $provide, $tagName, $mergeRef } from '@/plugins/constants';
 import { scheduler } from '@/plugins/hooks';
 import '@/utils/index';
 
@@ -74,9 +74,9 @@ export function registerComponent<T>(Component, options) {
           ref: {},
           router,
           route,
-          mergeRef: _.mergeRef(exposeRef.value),
+          [$mergeRef]: _.mergeRef(exposeRef.value),
           [$tagName]: options.name,
-          [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
+          [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList, $mergeRef, $tagName],
         },
         props: {
           ...props,
@@ -104,12 +104,20 @@ export function registerComponent<T>(Component, options) {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
         const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
-        const commitJsState = commitState.delete('ref').toJS();
+        const commitImmutableState = commitState.deleteAll(commitState.get($deletePropsList));
+        const provide = commitState.get('provide');
         const isRenderChange = Component !== commitState.get('render');
-        Render = isRenderChange ? commitJsState.render : Render;
-        componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
+        Render = isRenderChange ? commitState.get('render') : Render;
+        const keys = commitImmutableState.keySeq().toArray();
+        _.forEach(keys, (key) => {
+          _.assign(componentState.value.state, {
+            [key]: commitImmutableState.get(key),
+          });
+        });
+        // componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
+
         Object.assign(exposeRef.value, ref);
-        Object.assign(provideRef.value, commitJsState.provide);
+        Object.assign(provideRef.value, provide);
       });
 
       watch(

@@ -56,7 +56,7 @@ export const Example2 = {
   name: '异步函数',
   render: () => ({
     setup() {
-      const activeName = ref('first');
+      const activeName = ref([1, 2]);
       const name = ref('myName');
       const list = ref([{ value: 1, label: '1' }]);
       setTimeout(() => {
@@ -85,7 +85,16 @@ export const Example2 = {
         console.log('listFn');
         return new Promise((res) => {
           setTimeout(() => {
-            res(list.value);
+            res([
+              {
+                label: '1',
+                value: 1,
+              },
+              {
+                label: '2',
+                value: 2,
+              },
+            ]);
           }, 1000);
         });
       });
@@ -134,7 +143,7 @@ export const Example2 = {
     <el-table-column prop="value" label="value" />
     <el-table-column prop="label" label="label" />
     </el-table>
-    <el-select class="my-select"   ref="select" v-model="activeName"  clearable :dataSource="listFn" multiple >
+    <el-select :preview="true" class="my-select"   ref="select" v-model="activeName"  clearable :dataSource="listFn" multiple >
 
     </el-select>
     {{ activeName }}

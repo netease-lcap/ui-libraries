@@ -8,7 +8,7 @@ namespace nasl.ui {
       idetype: 'container',
       dataSource: {
         display: 3,
-        loopElem: 'div',
+        loopElem: ' > div',
         loopRule: 'nth-child(n+2)',
         displayData: '"[{}, {}, {}]"',
         propertyName: ':dataSource',
@@ -92,21 +92,21 @@ namespace nasl.ui {
     // })
     // error: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '滚动触发加载的阈值',
-      description: '滚动条与底部距离小于 offset 时触发load事件',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    offset: nasl.core.Decimal = 300;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '滚动触发加载的阈值',
+    //   description: '滚动条与底部距离小于 offset 时触发load事件',
+    //   setter: { concept: 'NumberInputSetter' },
+    // })
+    // offset: nasl.core.Decimal = 300;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否开启下拉刷新',
-      description: '是否开启下拉刷新',
-      setter: { concept: 'SwitchSetter' },
-    })
-    pullRefresh: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否开启下拉刷新',
+    //   description: '是否开启下拉刷新',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // pullRefresh: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',
@@ -132,19 +132,19 @@ namespace nasl.ui {
     })
     errorText: nasl.core.String = '请求失败，点击重新加载';
 
-    @Prop({
-      group: '主要属性',
-      title: '是否在初始化时立即执行滚动位置检查',
-      description: '是否在初始化时立即执行滚动位置检查',
-      setter: { concept: 'SwitchSetter' },
-    })
-    immediateCheck: nasl.core.Boolean = true;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '是否在初始化时立即执行滚动位置检查',
+    //   description: '是否在初始化时立即执行滚动位置检查',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // immediateCheck: nasl.core.Boolean = true;
 
-    @Event({
-      title: '加载事件',
-      description: '滚动条与底部距离小于 offset 时触发',
-    })
-    onLoad: (event: any) => any;
+    // @Event({
+    //   title: '加载事件',
+    //   description: '滚动条与底部距离小于 offset 时触发',
+    // })
+    // onLoad: (event: any) => any;
 
     @Slot({
       title: '项',

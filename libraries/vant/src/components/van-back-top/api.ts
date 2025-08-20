@@ -5,13 +5,14 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'container',
+      parentAccept: "target.tag !== 'van-absolute-layout'"
     },
   })
   @Component({
     title: '返回顶部',
     icon: 'backtop',
-    description: '返回顶部',
-    group: 'Display',
+    description: '回到顶部',
+    group: 'Navigation',
   })
   export class VanBackTop extends ViewComponent {
     constructor(options?: Partial<VanBackTopOptions>) {

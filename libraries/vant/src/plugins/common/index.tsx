@@ -5,17 +5,19 @@ import { useEffect, useMemo, useControllableValue } from '@/plugins/hooks';
 
 export function handleControllableValue(props: any) {
   const ref = props.get('ref');
+  const defaultValue = props.get('defaultValue');
   const field = useMemo(() => inject(CUSTOM_FIELD_INJECTION_KEY, null), []);
   const [value, setValue, valueProps] = useControllableValue(props, {
+    defaultValue,
     onChange: (value, triggerChange) => {
-      _.set(field, 'customValue.value', () => value);
+      // _.set(field, 'customValue.value', () => value);
       field?.resetValidation?.();
       !triggerChange && field?.validateWithTrigger?.('onChange');
     },
   });
   useEffect(() => {
     _.set(field, 'customValue.value', () => value);
-  }, []);
+  }, [value]);
 
   return {
     ...valueProps,

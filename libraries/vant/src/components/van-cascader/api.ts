@@ -104,13 +104,13 @@ namespace nasl.ui {
       description: '是否可以清空选项',
       setter: { concept: 'SwitchSetter' },
     })
-    closeable: nasl.core.Boolean = false;
+    clearable: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
-      title: '标题',
-      description: '标题',
-      setter: { concept: 'SwitchSetter' },
+      title: '顶部标题',
+      description: '顶部标题',
+      setter: { concept: 'InputSetter' },
     })
     title: nasl.core.String;
 
@@ -158,17 +158,8 @@ namespace nasl.ui {
     })
     onClick: (event: any) => void;
 
-    @Event({
-      title: '聚焦时',
-      description: '聚焦时触发',
-    })
-    onFocus: (event: any) => void;
 
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: any) => void;
+
   }
 
   @IDEExtraInfo({
@@ -182,6 +173,9 @@ namespace nasl.ui {
         display: 6,
         loopRule: 'nth-child(n+2)',
         loopElem: "> label[class^='u-radios_radio']:not([data-nodepath])",
+      },
+      displaySlotInline: {
+        label: true,
       },
     },
   })

@@ -54,15 +54,18 @@ export const Default = {
       onBeforeDelete(event) {
         console.log('before-delete', event);
       },
+      onClickSubmit() {
+        this.$refs.uploader.submit();
+      },
+      onChangeValues() {
+        this.values = '';
+      }
     },
     template: `
+    <van-button @click="onClickSubmit">上传服务器</van-button>
+    <van-button @click="onChangeValues">改变值</van-button>
       <van-uploader v-model="values" multiple v-bind="args"
-        :headers="{'LCAPTEST': 'test'}"
-        :viaOriginURL="true"
-        :data="{\&quot;testfata\&quot;:\&quot;ddd\&quot;}"
-        :access="private"
-        :ttl="true"
-        :ttlValue="1"
+        ref="uploader"
         @oversize="onOversize"
         @success="onSuccess"
         @error="onError"
@@ -78,19 +81,23 @@ export const Default = {
   }),
   args: {
     access: 'public',
-    ttl: null,
+    ttl: true,
     ttlValue: 1,
+    lcapIsCompress: true,
+    viaOriginURL: true,
+    data: { testfata: 'ddd' },
+    headers: { LCAPTEST: 'test' },
     multiple: true,
     autoUpload: true,
     maxSize: '10KB',
     maxCount: Infinity,
-    lcapIsCompress: true,
-    viaOriginURL: '',
     converter: 'json',
     readonly: false,
     disabled: false,
     deletable: true,
     showUpload: true,
+    accept: '.zip',
+    oversizeErrorMsg: '',
   },
 };
 

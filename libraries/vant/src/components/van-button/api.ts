@@ -43,7 +43,7 @@ namespace nasl.ui {
         options: [{ title: '默认' }, { title: '主要' }, { title: '成功' }, { title: '警告' }, { title: '危险' }],
       },
     })
-    type: 'default' | 'primary' | 'success' | 'warning' | 'danger';
+    type: 'default' | 'primary' | 'success' | 'warning' | 'danger' = 'default';
 
     @Prop({
       group: '主要属性',
@@ -69,8 +69,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
-      title: '圆角按钮',
-      description: '是否为圆角按钮',
+      title: '圆形按钮',
+      description: '是否为圆形按钮',
       setter: { concept: 'SwitchSetter' },
     })
     round: nasl.core.Boolean = false;
@@ -93,8 +93,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '左图标',
-      description: '左图标组件',
+      title: '图标',
+      description: '图标组件',
       setter: { concept: 'IconSetter', customIconFont: 'LCAP_VANT4_ICONS' },
     })
     icon: nasl.core.String;

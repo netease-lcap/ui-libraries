@@ -264,7 +264,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
     return `<VanDatetimePicker type="datetime" value={$sync(${vModel})} title="请选择${property.label || property.name
     }" labelField="" inputAlign="left"></VanDatetimePicker>`;
   }
-  const namespaceArr = propertyTypeNamespace.split('.');
+  const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;

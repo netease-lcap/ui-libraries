@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
 import path from 'path';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
@@ -19,12 +21,12 @@ export interface ParseOption {
   extConfig: Record<string, any>;
 }
 
-export default function genNaslUIConfig({
+export default async function genNaslUIConfig({
   rootPath,
   assetsPublicPath,
   components,
   framework,
-}: GenNaslUIConfigProps): any[] {
+}: GenNaslUIConfigProps): Promise<any[]> {
   const packageInfo = fs.readJSONSync(path.join(rootPath, 'package.json'));
   const libInfo = [packageInfo.name, '@', packageInfo.version].join('');
 
@@ -56,14 +58,14 @@ export default function genNaslUIConfig({
 
   const componentConfigs: any[] = [];
 
-  waitParseList.forEach(({ apiPath, extConfig }) => {
-    const componentConfig = genNaslComponentConfig({
+  for (const { apiPath, extConfig } of waitParseList) {
+    const componentConfig = await genNaslComponentConfig({
       apiPath,
-      assetsPublicPath,
+      assetsPublicPath: assetsPublicPath || '',
       rootPath,
       extraConfig: extConfig,
       libInfo,
-      framework,
+      framework: framework as any,
     });
 
     const projectAssetPath = 'assets';
@@ -74,7 +76,7 @@ export default function genNaslUIConfig({
     if (componentConfig) {
       componentConfigs.push(componentConfig);
     }
-  });
+  }
 
   processComponentConfigExtends(componentConfigs);
 

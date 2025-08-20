@@ -16,7 +16,7 @@ export const ElIconPropsDefine = {
 
 // 检查是否是SVG URL
 const isSvgUrl = (name) => {
-  return name && name.indexOf('/') !== -1 && /\.svg/i.test(name);
+  return name && name?.indexOf('/') !== -1 && /\.svg/i.test(name);
 };
 
 // 在线SVG组件
@@ -75,7 +75,7 @@ export default defineComponent({
         }
       }
 
-      return <ElIconPlus>{iconComponent ? h(iconComponent) : props.name}</ElIconPlus>;
+      return <ElIconPlus>{iconComponent ? h(iconComponent) : null}</ElIconPlus>;
     }
     return () => {
       return !props.name ? null : renderChildren();

@@ -1,3 +1,6 @@
 .van-tree-select {
   width: 100%;
 }
+.van-form-tree-select > .van-field__value{
+  overflow: hidden;
+}

@@ -4,10 +4,10 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
     ideusage: {
-      "idetype": "container",
-      "structured": true,
-      "childAccept": "target.tag === 'el-descriptions-item'"
-    }
+      idetype: 'container',
+      structured: true,
+      childAccept: "target.tag === 'el-descriptions-item'",
+    },
   })
   @Component({
     title: '描述列表',
@@ -59,7 +59,7 @@ namespace nasl.ui {
       description: '列表的尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{title: '默认' }, { title: '大型' }, { title: '小型' }],
+        options: [{ title: '默认' }, { title: '大型' }, { title: '小型' }],
       },
     })
     size: '' | 'large' | 'small' = '';
@@ -96,24 +96,24 @@ namespace nasl.ui {
 
   @IDEExtraInfo({
     ideusage: {
-      "idetype": "container",
-      "forceRefresh": "parent",
-      "parentAccept": "target.tag === 'el-descriptions'",
-      "selector": [
+      idetype: 'container',
+      forceRefresh: 'parent',
+      parentAccept: "target.tag === 'el-descriptions'",
+      selector: [
         {
-          "expression": "this",
-          "cssSelector": ".el-descriptions__cell"
+          expression: 'this',
+          cssSelector: '.el-descriptions__cell',
         },
         {
-          "expression": "this.getElement(el => el.slotTarget === 'label')",
-          "cssSelector": ".el-descriptions__cell"
+          expression: "this.getElement(el => el.slotTarget === 'label')",
+          cssSelector: '.el-descriptions__cell',
         },
         {
-          "expression": "this.getElement(el => el.slotTarget === 'content')",
-          "cssSelector": ".el-descriptions__cell"
-        }
+          expression: "this.getElement(el => el.slotTarget === 'content')",
+          cssSelector: '.el-descriptions__cell',
+        },
       ],
-    }
+    },
   })
   @Component({
     title: '描述列表项',
@@ -131,6 +131,7 @@ namespace nasl.ui {
       group: '样式属性',
       title: '列的数量',
       description: '往右侧占据列的数量',
+      bindHide: true,
       setter: {
         concept: 'NumberInputSetter',
         precision: 0,
@@ -143,10 +144,11 @@ namespace nasl.ui {
       group: '样式属性',
       title: '跨越行数',
       description: '单元格应该跨越的行数',
-      setter: { 
+      bindHide: true,
+      setter: {
         concept: 'NumberInputSetter',
         precision: 0,
-        min: 1, 
+        min: 1,
       },
     })
     rowspan: nasl.core.Integer = 1;

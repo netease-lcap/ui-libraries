@@ -173,8 +173,9 @@ export const Range = {
   name: '范围选择',
   render: () => ({
     setup() {
+      const value = ref(undefined);
       return {
-        value: [20, 80],
+        value,
         handleChange(value) {
           console.log('滑块值改变:', value);
         },
@@ -183,8 +184,8 @@ export const Range = {
     template: `
       <div style="padding: 20px;">
         <van-slider 
-          v-model="value" 
-          range
+          v-model:modelValue="value" 
+          :range="true"
           @change="handleChange"
         ></van-slider>
         <p style="margin-top: 10px;">范围选择，当前值: {{ value }}</p>

@@ -215,6 +215,7 @@ export const FormItem = {
     template: `
       <van-form>
         <van-form-tree-select v-bind="args"
+        class="myTree"
         v-model:activeId="activeId"
         v-model:mainActiveIndex="activeIndex"
         @click-nav="clickNav"

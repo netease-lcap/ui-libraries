@@ -32,7 +32,9 @@ export function useHandleMapField(filedInfo: {
   return useMemo(
     () => _.map(dataSource, (item: any) => ({
         ...item,
-        ...Object.fromEntries(Object.entries(fieldsMap || {}).map(([key, path]) => [key, _.get(item, path, undefined)])),
+        ...Object.fromEntries(
+          Object.entries(fieldsMap || {}).map(([key, path]) => [key, _.get(item, path, undefined)]),
+        ),
         [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
         [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
         [disabled]: !_.isObject(item) ? item : _.get(item, disabledField || 'disabled', false),
@@ -106,7 +108,7 @@ export function useDataSourceToTree(
   parentField: string,
   valueField: string = 'value',
 ): DataSourceArrayType {
-  if (_.isNil(parentField)) return dataSource;
+  if (_.isNil(parentField) || !parentField) return dataSource;
   const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField, item), item]));
   return dataSource.reduce((acc, item) => {
     const parent = map.get(_.get(item, parentField));

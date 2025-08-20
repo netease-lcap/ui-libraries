@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { useMemo, useCallback } from '@/plugins/hooks';
-import { $deletePropsList } from '@/plugins/constants';
+import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import {
   useRequestDataSource,
   useHandleMapField,
@@ -19,7 +19,8 @@ export function handleDataSource(props) {
   const nodePath = props.get('data-nodepath');
   const deletePropsList = props
     .get($deletePropsList, [])
-    .concat(['textField', 'valueField', 'parentField', 'childrenField', 'disabledField', 'dotField', 'badgeField']);
+    .concat($dataSourceDeleteField)
+    .concat(['disabledField', 'dotField', 'badgeField', 'data', 'loading']);
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
   const dataSource = useHandleMapField({

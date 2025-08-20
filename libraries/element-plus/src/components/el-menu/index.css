@@ -24,3 +24,7 @@
   gap: 12px;
   margin-left: 12px;
 }
+
+.el-menu .el-text {
+  word-break: keep-all;
+}

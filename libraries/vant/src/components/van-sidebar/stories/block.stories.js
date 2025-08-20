@@ -21,7 +21,7 @@ export const Block1 = {
             <van-sidebar-item title="导航一" />
             <van-sidebar-item title="导航二" />
             <van-sidebar-item title="导航三" />
-          <template #item="{ current }">
+          <template #item=" current ">
             <van-sidebar-item title="导航项"/>
           </template>
         </van-sidebar>

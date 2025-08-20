@@ -20,6 +20,17 @@ namespace nasl.ui {
     group: "Feedback"
   })
   export class VanPopup extends ViewComponent {
+    @Method({
+      title: '显示弹出层',
+      description: '显示弹出层',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭弹出层',
+      description: '关闭弹出层',
+    })
+    close(): void {}
     constructor(options?: Partial<VanPopupOptions>) {
       super();
     }
@@ -196,19 +207,67 @@ namespace nasl.ui {
       title: '点击弹出层',
       description: '点击弹出层时触发'
     })
-    onClick: (event: any) => void;
+    onClick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Event({
       title: '点击遮罩层',
       description: '点击遮罩层时触发'
     })
-    onClickOverlay: (event: any) => void;
+    onClickOverlay: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Event({
       title: '点击关闭图标',
       description: '点击关闭图标时触发'
     })
-    onClickCloseIcon: (event: any) => void;
+    onClickCloseIcon: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Event({
       title: '打开弹出层',

@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import { Field, Popup } from 'vant';
 import { useMemo, useControllableValue, useCallback } from '@/plugins/hooks';
+import { categoryProps } from '@/utils/dom';
+import { $mergeRef } from '@/plugins/constants';
 
 import {
   useRequestDataSource,
@@ -10,16 +12,17 @@ import {
 } from '@/plugins/common/dataSource';
 
 export { handleControllableValue } from '@/plugins/common/index';
+
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
-  const textField = props.get('textField', 'text');
+  const textField = props.get('textField') || 'text';
   const valueField = props.get('valueField', 'value');
   const parentField = props.get('parentField', 'parentid');
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
-  const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
+  const dataSource = useHandleMapField({ textField, label: 'text', valueField, dataSource: useFormatDataSource(data) });
   const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
 
@@ -57,10 +60,12 @@ function findRegionPath(options, targetValue) {
 
 export function handlewFieldState(props) {
   const options = props.get('options');
+  const mergeRef = props.get($mergeRef);
   const onCancelProps = props.get('onCancel', () => {});
   const onFinishProps = props.get('onFinish', () => {});
   const onCloseProps = props.get('onClose', () => {});
-  const [value, setValue] = useControllableValue(props);
+  const value = props.get('modelValue');
+  const setValue = props.get('onUpdate:modelValue');
   const fieldValue = useMemo(() => findRegionPath(options, value), [value, options]);
   const [show, setShow] = useControllableValue(props, {
     valuePropName: 'show',
@@ -91,6 +96,7 @@ export function handlewFieldState(props) {
     [onCloseProps],
   );
   return {
+    mergeRef,
     show,
     setShow,
     value,
@@ -108,14 +114,14 @@ export function handleFieldRender(props) {
   const Component = props.get('render');
   const render = useCallback(
     (props) => {
-      const { setShow, show, value, setValue, fieldValue, clearable } = props;
+      const { setShow, show, value, setValue, fieldValue, clearable, mergeRef, ...componentProps } = props;
+      const { outerProps, innerProps } = categoryProps(componentProps);
       const rightIcon = clearable ? 'clear' : '';
       return [
         <Field
-          modelValue={fieldValue}
           onClick={() => setShow(true)}
-          data-nodepath={props['data-nodepath']}
-          data-enable-events={props['data-enable-events']}
+          {..._.omit(outerProps, 'onUpdate:modelValue')}
+          modelValue={fieldValue}
           readonly
           is-link
           right-icon={rightIcon}
@@ -132,15 +138,21 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          data-drawer-dropdown-status={props['data-drawer-dropdown-status']}
-          data-drawer-dropdown-selector={props['data-drawer-dropdown-selector']}
-          data-nodepath={props['data-nodepath']}
-          ide-draggable={props['ide-draggable']}
-        >
+          {...innerProps}>
           <Component
-            {..._.omit(props, ['value', 'modelValue', 'pickerValue', 'onUpdate:modelValue'])}
+            {..._.omit(props, [
+              'value',
+              'modelValue',
+              'pickerValue',
+              'onUpdate:modelValue',
+              'mergeRef',
+              'setValue',
+              'setShow',
+              'expose',
+              'show',
+            ])}
             modelValue={value}
-            ref={props.mergeRef}
+            ref={mergeRef}
           />
         </Popup>,
       ];

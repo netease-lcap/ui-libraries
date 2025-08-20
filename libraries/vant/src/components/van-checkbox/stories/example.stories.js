@@ -16,14 +16,25 @@ export const Default = {
     props: Object.keys(argTypes),
     setup() {
       const reff = ref('');
-      setTimeout(() => {
-        console.log(reff.value.reload(),'ff');
-      }, 1000);
+
+      const value = ref([]);
+      // setTimeout(() => {
+      //   value.value = ['1'];
+      // }, 1000);
+      const aa = ref(0);
       return {
         args,
+        value,
+        aa,
         checked: ref(false),
         handleChange(value) {
           console.log('复选框值改变:', value);
+          if (aa.value == 3) {
+            return;
+          } else {
+            aa.value++;
+            value.value = ['1','2']; 
+          }
         },
         handleClick(event) {
           console.log('复选框点击:', event);
@@ -32,22 +43,80 @@ export const Default = {
         dataSource: async () => {
           console.log('reload');
           return [
-            { value: '1', text: '选项1' },
-            { value: '2', text: '选项2' },
-            { value: '3', text: '选项3' },
+            {
+              liu_form: {
+                id: 1,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                property1: '语文',
+                property2: null,
+                property3: null,
+                property4: null,
+                property5: null,
+                property6: null,
+                property7: null,
+              },
+            },
+            {
+              liu_form: {
+                id: 2,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                property1: '数学',
+                property2: null,
+                property3: null,
+                property4: null,
+                property5: null,
+                property6: null,
+                property7: null,
+              },
+            },
+            {
+              liu_form: {
+                id: 3,
+                createdTime: null,
+                updatedTime: null,
+                createdBy: null,
+                updatedBy: null,
+                property1: '英语',
+                property2: null,
+                property3: null,
+                property4: null,
+                property5: null,
+                property6: null,
+                property7: null,
+              },
+            },
           ];
         },
       };
     },
     template: `
       <div style="padding: 20px;">
-        <van-checkbox-group 
+      <van-checkbox-group
+          v-model="value"
           v-bind="args"
-          ref='reff'
+          textField="liu_form.property1"
+          valueField="liu_form.id"
+          :dataSource="dataSource"
+        </van-checkbox-group>
+        <van-form>
+        <van-form-checkbox-group 
+          v-bind="args"
+          textField="liu_form.property1"
+          valueField="liu_form.id"
           :dataSource="dataSource"
           @change="handleChange"
           @click="handleClick">
-        </van-checkbox-group>
+          <template #label>
+          <span>12</span>
+          </template>
+        </van-form-checkbox-group>
+        </van-form>
         <p style="margin-top: 10px;">当前状态: {{ checked ? '选中' : '未选中' }}</p>
       </div>
     `,
@@ -91,13 +160,13 @@ export const CheckboxGroup = {
     },
     template: `
       <div style="padding: 20px;">
-        <van-checkbox-group 
+        <van-from-checkbox-group 
           v-model="checkedValues" 
           :dataSource="dataSource"
           value-field="value"
           text-field="text"
           @change="handleChange">
-        </van-checkbox-group>
+        </van-from-checkbox-group>
         <p style="margin-top: 10px;">当前选中: {{ checkedValues.join(', ') }}</p>
       </div>
     `,

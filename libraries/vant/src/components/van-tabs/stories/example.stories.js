@@ -23,10 +23,24 @@ export const Default = {
         active: 0,
       };
     },
+    methods: {
+      onChange(event) {
+        console.log('onChange', event);
+      },
+      onRendered(event) {
+        console.log('onRendered', event);
+      },
+      onClick(event) {
+        console.log('onClick', event);
+      },
+      onScroll(event) {
+        console.log('onScroll', event);
+      },
+    },
     template: `
     {{ active }}
-     <van-tabs v-bind="args" border v-model:active="active">
-      <van-tab name="a"><template #title><van-text text="标签1"></van-text></template>内容 1</van-tab>
+     <van-tabs v-bind="args" border v-model:active="active" @change="onChange" @rendered="onRendered" @click-tab="onClick" @scroll="onScroll">
+      <van-tab name="a"><template #title><van-text text="标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1标签1"></van-text></template>内容 1</van-tab>
       <van-tab name="b"><template #title><van-text text="标签2"></van-text></template>内容 2</van-tab>
       <van-tab name="c"><template #title><van-text text="标签3"></van-text></template>内容 3</van-tab>
       <van-tab name="d"><template #title><van-text text="标签4"></van-text></template>内容 4</van-tab>
@@ -34,5 +48,6 @@ export const Default = {
     `,
   }),
   args: {
+    ellipsis: true,
   },
 };

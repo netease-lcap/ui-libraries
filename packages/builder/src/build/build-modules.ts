@@ -347,7 +347,7 @@ export async function buildModules(options: LcapBuildOptions) {
   }
 
   logger.start('开始模块构建....');
-  const components = getComponentMetaInfos(options.rootPath, true);
+  const components = await getComponentMetaInfos(options.rootPath, true);
   const exportsMap = await viteBuildModules(buildModulesOptions, components);
   const moduleInfo = await generateModulesJSON(buildModulesOptions, exportsMap, components);
 

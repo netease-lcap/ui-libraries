@@ -118,25 +118,12 @@ export const Clearable = {
   render: () => ({
     setup() {
       return {
-        value: ref(['330000', '330100', '330106']),
-        dataSource: async () => {
-          return [
-            {
-              text: '浙江省',
-              value: '330000',
-              children: [
-                {
-                  text: '杭州市',
-                  value: '330100',
-                  children: [
-                    { text: '西湖区', value: '330106' },
-                    { text: '余杭区', value: '330110' },
-                  ],
-                },
-              ],
-            },
-          ];
-        },
+        value: ref('330100'),
+        dataSource: [
+          { text: '浙江省', value: '330000', children: [{ text: '杭州市', value: '330100' }] },
+          { text: '江苏省', value: '320000', children: [{ text: '南京市', value: '320100' }] },
+        ],
+
         handleChange(value) {
           console.log('级联选择器值改变:', value);
         },
@@ -144,14 +131,15 @@ export const Clearable = {
     },
     template: `
       <div style="padding: 20px;">
-        <van-cascader 
-          v-model="value" 
-          clearable
-          placeholder="请选择地区"
-          :dataSource="dataSource"
-          value-field="value"
-          text-field="text"
-          children-field="children"
+          <van-cascader 
+          placeholder="手动输入数据源"
+          :dataSource="[
+            { text: '浙江省', value: '330000', children: [{ text: '杭州市', value: '330100' }] },
+            { text: '江苏省', value: '320000', children: [{ text: '南京市', value: '320100' }] },
+          ]"
+          v-dependencies.reload="[]" 
+          valueField="" 
+          textField="" parentField=""
           @change="handleChange">
         </van-cascader>
         <p style="margin-top: 10px;">当前选中: {{ value.join(' / ') }}</p>

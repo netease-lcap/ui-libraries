@@ -8,13 +8,14 @@ namespace nasl.ui {
       structured: true,
       containerDirection: 'row',
       childAccept: "target.tag === 'van-tab'",
+      forceRefresh: true,
     },
   })
   @Component({
     title: '选项卡',
     icon: 'tabs',
     description: '选项卡',
-    group: 'Display',
+    group: 'Selector',
   })
   export class VanTabs extends ViewComponent {
     @Prop({
@@ -207,19 +208,13 @@ namespace nasl.ui {
       title: '标签改变',
       description: '当前激活的标签改变时触发'
     })
-    onChange: (event: {
-      name: nasl.core.String | nasl.core.Integer;
-      title: nasl.core.String;
-    }) => void;
+    onChange: (event: nasl.core.String | nasl.core.Integer) => void;
 
     @Event({
       title: '标签首次渲染时',
       description: '标签内容首次渲染时触发（仅在开启延迟渲染后触发）'
     })
-    onRendered: (event: {
-      name: nasl.core.String | nasl.core.Integer;
-      title: nasl.core.String;
-    }) => void;
+    onRendered: (event: nasl.core.String | nasl.core.Integer) => void;
 
     @Event({
       title: '滚动时',
@@ -262,7 +257,8 @@ namespace nasl.ui {
       events: {
         click: true,
       },
-      forceRefresh: 'parent',
+      forceRefresh: true,
+      namedSlotOmitWrapper: ['title'],
     },
   })
   @Component({

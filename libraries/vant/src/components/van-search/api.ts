@@ -148,6 +148,28 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '左侧图标',
+      description: '左侧图标',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
+    })
+    leftIcon: nasl.core.String = 'search';
+
+    @Prop({
+      group: '主要属性',
+      title: '右侧图标',
+      description: '右侧图标',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_VANT4_ICONS',
+      },
+    })
+    rightIcon: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
       title: '显示操作按钮',
       description: '是否显示操作按钮',
       setter: { concept: 'SwitchSetter' },

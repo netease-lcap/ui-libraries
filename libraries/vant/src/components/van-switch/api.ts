@@ -85,6 +85,9 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'container',
+      displaySlotInline: {
+        label: true,
+      },
     },
     extends: [
       {
@@ -94,6 +97,11 @@ namespace nasl.ui {
         name: 'VanSwitch',
       },
     ],
+  })
+  @Component({
+    title: '表单开关',
+    icon: 'switch',
+    description: '表示两种相互对立的状态间的切换，多用于触发「开/关」',
   })
   export class VanFormSwitch extends ViewComponent {
     constructor(

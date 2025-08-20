@@ -37,6 +37,12 @@ namespace nasl.ui {
       title: '只读',
     })
     readonly: nasl.core.Boolean;
+
+    @Method({
+      title: '手动上传文件列表',
+      description: '手动上传文件列表',
+    })
+    submit(): void {}
   }
 
   export class VanUploaderOptions extends ViewComponentOptions {
@@ -212,7 +218,7 @@ namespace nasl.ui {
         min: 0
       }
     })
-    maxCount: nasl.core.Integer = 999;
+    maxCount: nasl.core.Integer;
     
     @Prop({
       group: '主要属性',
@@ -224,6 +230,14 @@ namespace nasl.ui {
       }
     })
     maxSize: nasl.core.Decimal = 50;
+
+    @Prop({
+      group: '主要属性',
+      title: '超出大小限制时提示',
+      description: '超出大小限制时提示',
+      setter: { concept: 'InputSetter' },
+    })
+    oversizeErrorMsg: nasl.core.String = '文件大小超出限制';
 
     @Prop({
       group: '状态属性',
@@ -419,5 +433,42 @@ namespace nasl.ui {
         objectUrl: nasl.core.String;
       };
     }) => void;
+  }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'container',
+      ignoreProperty: ["showUpload"],
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanUploader',
+      },
+    ],
+  })
+  @Component({
+    title: '表单上传组件',
+    icon: 'uploader',
+    description: '用于表单上传',
+    group: 'Form',
+  })
+  export class VanFormUploader extends ViewComponent {
+    constructor(
+      options?: Partial<VanFormUploaderOptions & VanFormItemOptions & Omit<VanUploaderOptions, keyof VanFormItemOptions>>,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormUploaderOptions extends ViewComponentOptions {
+    @Slot({
+      title: '组件插槽',
+      description: '标题',
+    })
+    slotLabel: () => Array<ViewComponent>;
   }
 }

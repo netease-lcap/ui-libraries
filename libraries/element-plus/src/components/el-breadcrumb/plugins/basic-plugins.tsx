@@ -10,7 +10,7 @@ export function handleAutoCrumbs(props) {
   const route = props.get('route');
   const [routeInfo, setRouteInfo] = useState(route);
   const router = props.get('router');
-  router.afterEach((to) => setRouteInfo(to));
+  router?.afterEach?.((to) => setRouteInfo(to));
 
   const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
 

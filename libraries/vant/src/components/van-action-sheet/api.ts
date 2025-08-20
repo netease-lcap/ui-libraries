@@ -27,11 +27,22 @@ namespace nasl.ui {
   })
   @Component({
     title: '动作面板',
-    icon: 'picker',
+    icon: 'action-sheet',
     description: '底部弹起的模态面板，包含与当前情境相关的多个选项。',
     group: "Feedback"
   })
   export class VanActionSheet<T, V, M extends nasl.core.Boolean, P extends nasl.core.Boolean, C> extends ViewComponent {
+    @Method({
+      title: '显示动作面板',
+      description: '显示动作面板',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭动作面板',
+      description: '关闭动作面板',
+    })
+    close(): void {}
     constructor(options?: Partial<VanActionSheetOptions<T, V, M, P, C>>) {
       super();
     }
@@ -110,7 +121,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    loadingField: (item: T) => nasl.core.Boolean = ((item: any)  => item.loading) as any;
+    loadingField: (item: T) => nasl.core.String = ((item: any)  => item.loading) as any;
 
     @Prop({
       group: '数据属性',
@@ -120,7 +131,7 @@ namespace nasl.ui {
         concept: "PropertySelectSetter"
       }
     })
-    disabledField: (item: T) => nasl.core.Boolean = ((item: any)  => item.disabled) as any;
+    disabledField: (item: T) => nasl.core.String = ((item: any)  => item.disabled) as any;
 
     @Prop({
       group: '主要属性',
@@ -322,7 +333,23 @@ namespace nasl.ui {
       title: '点击遮罩层时触发',
       description: '点击遮罩层时触发',
     })
-    onClickOverlay: (event: any) => void;
+    onClickOverlay: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
     
     @Slot({
       title: '自定义面板的展示内容',

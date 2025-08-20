@@ -29,6 +29,13 @@ export const Default = {
 
       return {
         args,
+        columns: [
+          { text: '选项1', value: '1' },
+          { text: '选项2', value: '2' },
+          { text: '选项3', value: '3' },
+          { text: '选项4', value: '4' },
+          { text: '选项5', value: '5' },
+        ].flatMap((item) => [item, item, item, item, item]),
         list,
         loading,
         finished,
@@ -36,15 +43,15 @@ export const Default = {
       };
     },
     template: `
-      <div style="height: 400px; overflow-y: auto;">
         <van-list
-          :dataSource="[{}, {}, {}]"
+          style="height: 400px; "
+          :dataSource="columns"
+          :isCell="true"
         >
-          <template #default="item">
-            <span>1</span>
+          <template #item="item">
+            <span>2</span>
           </template>
         </van-list>
-      </div>
     `,
   }),
 };

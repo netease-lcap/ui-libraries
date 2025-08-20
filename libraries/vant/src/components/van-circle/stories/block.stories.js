@@ -17,7 +17,7 @@ export const Block1 = {
       return {};
     },
     template: `
-      <van-circle  text="圆环" ></van-circle>
+      <van-circle  ></van-circle>
     `,
   }),
 };

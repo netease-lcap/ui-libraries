@@ -128,8 +128,8 @@ const getGroupIndex = (n) => {
   return i === -1 ? 20 : i;
 };
 
-function getComponentList(options: LcapBuildOptions) {
-  const components = getComponentMetaInfos(options.rootPath, true);
+async function getComponentList(options: LcapBuildOptions) {
+  const components = await getComponentMetaInfos(options.rootPath, true);
 
   const list = components.map(({
     name,

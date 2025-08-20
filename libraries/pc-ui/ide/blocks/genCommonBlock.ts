@@ -261,7 +261,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         emptyValueIsNull={true}>
     </UDateTimePicker>`;
   }
-  const namespaceArr = propertyTypeNamespace.split('.');
+  const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;

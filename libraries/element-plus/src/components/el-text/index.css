@@ -1,6 +1,7 @@
 .el-text {
   white-space: pre-wrap;
   max-width: 100%;
+
 }
 body{
   color: var(--el-text-color);
@@ -34,7 +35,7 @@ body{
   font-weight: bold;
 }
 
-.el-text.el-text--color-default {
+.el-text--color-default {
   color: inherit;
   font-size: inherit;
   font-weight: inherit;

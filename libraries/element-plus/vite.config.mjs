@@ -257,6 +257,10 @@ export default defineConfig(({ command }) => {
       extensions: ['.js', '.ts', '.tsx', '.jsx', '.vue', '.mjs', '.cjs', '.json'],
       alias: {
         '@': path.resolve(rootPath, './src'),
+        '@ep-test': path.resolve(rootPath, './ep-test'),
+        // 'element-plus': path.resolve(rootPath, 'node_modules/element-plus'),
+        'element-plus/es': path.resolve(rootPath, 'node_modules/element-plus/es'),
+        'element-plus/lib': path.resolve(rootPath, 'node_modules/element-plus/lib'),
       },
     },
     define: {
@@ -295,6 +299,11 @@ export default defineConfig(({ command }) => {
     },
     test: {
       environment: 'jsdom',
+
+      // 显示更详细的测试日志
+      verbose: true,
+      // 输出测试执行时间
+      reporters: ['default', 'verbose'],
     },
   };
 });

@@ -46,10 +46,15 @@
 .van-calendar__field .van-field__control--right .van-calendar__rangevalue {
   justify-content: flex-end;
 }
+.van-calendar__field .van-field__control--custom {
+  cursor: pointer;
+}
 .van-calendar__field.van-field--disabled .van-field__control--custom {
   color: var(--van-field-disabled-text-color);
 }
+.van-date-picker__field.van-field--disabled:hover,
 .van-calendar__field.van-field--disabled .van-field__control--custom:hover,
-.van-calendar__field.van-calendar__readonly:hover{
+.van-date-picker__field.van-date-picker__readonly:hover,
+.van-date-picker__field.van-date-picker__readonly .van-field__control--custom:hover {
   cursor: default;
 }

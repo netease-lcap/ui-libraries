@@ -22,15 +22,17 @@ export const Default = {
       };
     },
     template: `
-      <van-button v-bind="args" @click="handleClick"></van-button>
+      <van-button v-bind="args" @click="handleClick" loadingText="加载中..."></van-button>
     `,
   }),
   args: {
     text: '默认按钮',
+    icon: 'plus',
+    iconPosition: 'right',
     type: 'primary',
     disabled: false,
     plain: false,
-    loading: false,
+    loading: true,
   },
 };
 
@@ -248,4 +250,4 @@ export const Block = {
       </div>
     `,
   }),
-}; 
+};

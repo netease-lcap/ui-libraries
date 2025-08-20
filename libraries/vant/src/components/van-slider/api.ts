@@ -4,7 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 1,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
     },
   })
   @Component({
@@ -33,7 +33,7 @@ namespace nasl.ui {
       description: '滑块绑定值',
       setter: { concept: 'NumberInputSetter' },
     })
-    modelValue: M extends true ? nasl.core.Integer[] : nasl.core.Integer;
+    modelValue: M extends true ? nasl.collection.List<nasl.core.Integer> : nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
@@ -115,7 +115,6 @@ namespace nasl.ui {
     })
     buttonSize: nasl.core.Integer = 24;
 
-
     @Prop({
       group: '主要属性',
       title: '只读',
@@ -155,15 +154,23 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'container',
-      extends: [
-        {
-          name: 'VanFormItem',
-        },
-        {
-          name: 'VanSlider',
-        },
-      ],
+      displaySlotInline: {
+        label: true,
+      },
     },
+    extends: [
+      {
+        name: 'VanSlider',
+      },
+      {
+        name: 'VanFormItem',
+      },
+    ],
+  })
+  @Component({
+    title: '表单滑块',
+    icon: 'slider',
+    description: '表单滑块，用于管理滑块',
   })
   export class VanFormSlider<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(
@@ -183,5 +190,5 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
     C,
-  > extends VanSliderOptions<T, V, P, M, C> {}
+  > extends ViewComponentOptions {}
 }

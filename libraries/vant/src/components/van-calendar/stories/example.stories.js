@@ -42,9 +42,6 @@ export const Default = {
         <template #label>
           <span>选择日期</span>
         </template>
-        <template #subtitle>
-          <span>副标题</span>
-        </template>
       </van-calendar>
       {{ value }}
        {{ startValue }}
@@ -55,7 +52,7 @@ export const Default = {
     multiple: true,
     isRange: false,
     switchMode: 'month',
-    show: true,
+    popupOpened: true,
     minDate: '2025-06-10',
     maxDate: '2025-07-31',
     maxRange: 3,

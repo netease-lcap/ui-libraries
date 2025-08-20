@@ -180,7 +180,7 @@ namespace nasl.ui {
     onChange: (event: any) => any;
 
     @Event({
-      title: '上一页点击时触发',
+      title: '上一页点击时',
       description: '上一页点击时触发',
     })
     onPrevClick: (event: any) => any;

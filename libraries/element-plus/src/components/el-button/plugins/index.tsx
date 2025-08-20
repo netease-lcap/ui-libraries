@@ -11,7 +11,7 @@ export function handleTextToslot(props) {
   const slots = props.get('slots');
   const icon = props.get('icon');
   const deletePropsList = props.get($deletePropsList).concat(['text']);
-  const defaultSlot = text ? { default: () => text } : {};
+  const defaultSlot = _.isString(text) ? { default: () => text } : {};
   return {
     slots: _.assign(slots, defaultSlot),
     [$deletePropsList]: deletePropsList,

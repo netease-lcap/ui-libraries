@@ -14,7 +14,7 @@ export const Default = {
   render: () => ({
     setup() {},
     template: `
-      <van-search >
+      <van-search  >
 
       </van-search>
     `,

@@ -16,7 +16,7 @@ export const Default = {
     setup() {
       return {
         args,
-        currentRate: 10,
+        currentRate: 33,
       };
     },
     template: `

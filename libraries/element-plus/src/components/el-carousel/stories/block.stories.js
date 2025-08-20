@@ -24,7 +24,7 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: `<el-carousel height="150">
+    template: `<el-carousel height="150" :motionBlur="true" :interval="1000">
       <el-carousel-item name="1" label="label1">
         <el-text text="content1"></el-text>
       </el-carousel-item>

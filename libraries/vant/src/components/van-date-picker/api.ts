@@ -458,6 +458,73 @@ namespace nasl.ui {
     nextStepText: nasl.core.String;
 
     @Prop({
+      group: '主要属性',
+      title: '选择日期标签项文本',
+      description: '选择日期标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => !_.isRange && _.type === 'datetime',
+    })
+    datetimeDateTabTitle : nasl.core.String = '选择日期';
+
+    @Prop({
+      group: '主要属性',
+      title: '选择时间标签项文本',
+      description: '选择时间标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => !_.isRange && _.type === 'datetime',
+    })
+    datetimeTimeTabTitle : nasl.core.String = '选择时间';
+
+
+    @Prop({
+      group: '主要属性',
+      title: '开始日期标签项文本',
+      description: '开始日期标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true,
+    })
+    startDateTabTitle : nasl.core.String = '开始日期';
+
+    @Prop({
+      group: '主要属性',
+      title: '开始时间标签项文本',
+      description: '开始时间标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true && _.type === 'datetime',
+    })
+    startTimeTabTitle : nasl.core.String = '开始时间';
+
+    @Prop({
+      group: '主要属性',
+      title: '结束日期标签项文本',
+      description: '结束日期标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true,
+    })
+    endDateTabTitle : nasl.core.String = '结束日期';
+
+    @Prop({
+      group: '主要属性',
+      title: '结束时间标签项文本',
+      description: '结束时间标签项文本',
+      setter: {
+        concept: "InputSetter"
+      },
+      if: (_) => _.isRange === true && _.type === 'datetime',
+    })
+    endTimeTabTitle : nasl.core.String = '结束时间';
+
+    @Prop({
       group: '交互属性',
       title: '点击遮罩层后关闭',
       setter: {
@@ -501,13 +568,41 @@ namespace nasl.ui {
       title: '确认',
       description: '点击完成按钮时触发的事件',
     })
-    onConfirm: (event: any) => void;
+    onConfirm: (event: {
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    } | Array<{
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    }>) => void;
 
     @Event({
       title: '取消',
       description: '点击完成取消时触发的事件',
     })
-    onCancel: (event: any) => void;
+    onCancel: (event: {
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    } | Array<{
+      selectedIndexes: Array<nasl.core.Integer>,
+      selectedValues: Array<nasl.core.String>,
+      selectedOptions: Array<{
+        text: nasl.core.String,
+        value: nasl.core.String,
+      }>,
+    }>) => void;
 
     @Slot({
       title: '组件插槽',
@@ -521,4 +616,37 @@ namespace nasl.ui {
     })
     slotTitle: () => Array<ViewComponent>;
   }
+
+  @IDEExtraInfo({
+    order: 2,
+    ideusage: {
+      idetype: 'drawerdropdown',
+      cacheOpenKey: 'popupOpened',
+      drawerCSSSelector: '.van-popup',
+      dataSource: {},
+    },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanDatePicker',
+      },
+    ],
+  })
+  @Component({
+    title: '表单日期选择器',
+    icon: 'date-picker',
+    description: '用于表单日期选择',
+    group: 'Form',
+  })
+  export class VanFormDatePicker extends ViewComponent {
+    constructor(
+      options?: Partial<VanFormDatePickerOptions & VanFormItemOptions & Omit<VanDatePickerOptions, keyof VanFormItemOptions>>,
+    ) {
+      super();
+    }
+  }
+
+  export class VanFormDatePickerOptions extends ViewComponentOptions {}
 }

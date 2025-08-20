@@ -7,6 +7,9 @@ namespace nasl.ui {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
       translateBindingProperty: ['modelValue'],
+      displaySlotInline: {
+        label: true,
+      },
     },
   })
   @Component({
@@ -167,22 +170,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '自动完成',
-      description: '自动完成',
-      setter: { concept: 'SwitchSetter' },
-    })
-    autocomplete: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '拼写检查',
-      description: '是否开启拼写检查',
-      setter: { concept: 'SwitchSetter' },
-    })
-    spellcheck: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
       title: '多行文本行数',
       description: '多行文本的行数',
       setter: { concept: 'NumberInputSetter', min: 1 },
@@ -218,15 +205,15 @@ namespace nasl.ui {
     })
     error: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '格式化函数',
-      description: '自定义格式化函数',
-      setter: { concept: 'AnonymousFunctionSetter' },
-    })
-    formatter: (
-      value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal,
-    ) => nasl.core.String | nasl.core.Integer | nasl.core.Decimal;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '格式化函数',
+    //   description: '自定义格式化函数',
+    //   setter: { concept: 'AnonymousFunctionSetter' },
+    // })
+    // formatter: (
+    //   value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal,
+    // ) => nasl.core.String | nasl.core.Integer | nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -297,8 +284,11 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
       forceUpdateWhenAttributeChange: true,
+      displaySlotInline: {
+        label: true,
+      },
     },
     extends: [
       {

@@ -66,7 +66,7 @@ namespace nasl.ui {
       description: '每次点击时改变的值',
       setter: { concept: 'NumberInputSetter' },
     })
-    step: nasl.core.Integer = 1;
+    step: nasl.core.Integer | nasl.core.Decimal = 1;
 
     @Prop({
       group: '主要属性',
@@ -223,15 +223,23 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
     },
+    extends: [
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanStepperNumber',
+      },
+    ],
   })
   @Component({
     title: '表单步进器',
     description: '表单步进器',
     group: 'Form',
   })
-  export class VanFormStepperNumber extends VanStepperNumber {
+  export class VanFormStepperNumber extends ViewComponent {
     constructor(
       options?: Partial<
         VanFormStepperNumberOptions & VanFormItemOptions & Omit<VanStepperNumberOptions, keyof VanFormItemOptions>
@@ -241,5 +249,5 @@ namespace nasl.ui {
     }
   }
 
-  export class VanFormStepperNumberOptions extends VanStepperNumberOptions {}
+  export class VanFormStepperNumberOptions extends ViewComponentOptions {}
 }
