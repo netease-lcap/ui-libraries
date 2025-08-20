@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import { ref } from 'vue';
-import { useMemo, useControllableValue, useCallback } from '@/plugins/hooks';
+import { useMemo, useControllableValue, useCallback, useState, useEffect } from '@/plugins/hooks';
 import { ExtendedUploaderFileListItem } from './types';
+import { postAfterRead } from './upload';
 
 type Converter = 'json' | 'simple';
 
@@ -99,17 +100,23 @@ const getValueByList = (fileList: ExtendedUploaderFileListItem[], converter: Con
  */
 export function handleModelValue(props) {
   const [value, setValue] = useControllableValue(props);
+  const [currentFileList, setCurrentFileList] = useState([]);
   const urlField = props.get('urlField') || 'filePath';
   const converter = props.get('converter') || 'simple';
-  const defaultFileList = useMemo(() => getFileListByValue(value, converter), [value, converter]);
+  useEffect(() => {
+    const defaultFileList = getFileListByValue(value, converter);
+    setCurrentFileList(defaultFileList);
+  }, [value, converter]);
   const autoUpload = props.get('autoUpload');
-  const onUpdateModelValue = useCallback((fileList: ExtendedUploaderFileListItem[]) => {
-    const value = getValueByList(fileList, converter, urlField);
-    setValue(value);
-  }, [converter, urlField, setValue]);
-  const currentFileList = ref(defaultFileList);
+  const onUpdateModelValue = useCallback(
+    (fileList: ExtendedUploaderFileListItem[]) => {
+      const value = getValueByList(fileList, converter, urlField);
+      setValue(value);
+    },
+    [converter, urlField, setValue],
+  );
   const onSetCurrentFileList = (fileList: ExtendedUploaderFileListItem[]) => {
-    currentFileList.value = fileList;
+    setCurrentFileList(fileList);
     onUpdateModelValue(fileList);
   };
   return {
@@ -124,6 +131,60 @@ export function handleModelValue(props) {
     },
     onUpdateModelValue,
     currentFileList,
+    onSetCurrentFileList,
   };
 }
 handleModelValue.order = 1;
+
+export function handleUpload(props) {
+  const headers = props.get('headers');
+  const formData = props.get('data');
+  const action = props.get('action');
+  const name = props.get('name');
+  const withCredentials = props.get('withCredentials');
+  const emit = props.get('emit');
+  const urlField = props.get('urlField');
+  const modelValue = props.get('modelValue');
+  const currentFileList = props.get('currentFileList');
+  const autoUpload = props.get('autoUpload');
+  const onSetCurrentFileList = props.get('onSetCurrentFileList');
+  const submitFn = useCallback(() => {
+    const files = currentFileList?.filter((item) => item.file && !item.url);
+    postAfterRead(
+      {
+        action,
+        headers,
+        formData,
+        name,
+        urlField,
+        modelValue,
+        currentFileList,
+        emit,
+        withCredentials,
+        onSetCurrentFileList,
+      },
+      files,
+    );
+  }, [
+    action,
+    headers,
+    formData,
+    name,
+    urlField,
+    modelValue,
+    currentFileList,
+    withCredentials,
+    onSetCurrentFileList,
+  ]);
+  const refProp = props.get('ref');
+  const selfRef = _.assign(refProp, { submit: submitFn });
+
+  useEffect(() => {
+    if (autoUpload) {
+      submitFn();
+    }
+  }, [currentFileList, autoUpload]);
+  return {
+    ref: selfRef,
+  };
+}
