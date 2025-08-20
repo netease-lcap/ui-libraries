@@ -1,16 +1,3 @@
 <template>
-  <demo-preview></demo-preview>
-</template>
-<script>
-// 默认可使用组件区块实例作为主题配置预览
-import createStoriesPreview from '@lcap/builder/input/vue3/stories-preview';
-import * as stories from '../../../components/van-notice-bar/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-</script>
+  <van-notice-bar scrollable left-icon="volume-o" rightIcon="star-o" text="技术是开发它的人的共同灵魂。" />
+</template> 

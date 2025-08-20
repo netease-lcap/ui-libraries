@@ -1,16 +1,27 @@
 <template>
-  <demo-preview></demo-preview>
+  <div style="height: 300px; position: relative;">
+    <van-popup 
+      :show="true" 
+      :style="{ padding: '64px' }"
+      :lock-scroll="false"
+      :close-on-click-overlay="false"
+      overlayClass="popup-mask-class"
+      round
+      closeable
+    >
+      <template #overlay-content>
+          <span>遮罩层的额外内容</span>
+      </template>
+      内容
+    </van-popup>
+  </div>
 </template>
-<script>
-// 默认可使用组件区块实例作为主题配置预览
-import createStoriesPreview from '@lcap/builder/input/vue3/stories-preview';
-import * as stories from '../../../components/van-popup/stories/block.stories';
 
-const DemoPreview = createStoriesPreview(stories);
-
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-</script>
+<style>
+.popup-mask-class {
+  position: unset!important;
+}
+.popup-mask-class +.van-popup {
+  position: absolute!important;
+}
+</style>

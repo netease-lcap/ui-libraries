@@ -1,16 +1,19 @@
 <template>
-  <demo-preview></demo-preview>
+  <van-pull-refresh v-model="isLoading" @refresh="onRefresh" style="min-height: 300px;">
+    <p>刷新次数: {{ count }}</p>
+  </van-pull-refresh>
 </template>
-<script>
-// 默认可使用组件区块实例作为主题配置预览
-import createStoriesPreview from '@lcap/builder/input/vue3/stories-preview';
-import * as stories from '../../../components/van-pull-refresh/stories/block.stories';
 
-const DemoPreview = createStoriesPreview(stories);
+<script setup lang="ts">
+import { ref } from 'vue';
+const count = ref(0);
 
-export default {
-  components: {
-    DemoPreview,
-  },
-};
+function onRefresh() {
+  setTimeout(() => {
+    count.value++;
+    isLoading.value = false;
+  }, 1000);
+}
+
+const isLoading = ref(false);
 </script>
