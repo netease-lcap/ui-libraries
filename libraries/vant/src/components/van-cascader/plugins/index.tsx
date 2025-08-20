@@ -17,7 +17,7 @@ export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
-  const textField = props.get('textField', 'text');
+  const textField = props.get('textField') || 'text';
   const valueField = props.get('valueField', 'value');
   const parentField = props.get('parentField', 'parentid');
   const ref = props.get('ref');
