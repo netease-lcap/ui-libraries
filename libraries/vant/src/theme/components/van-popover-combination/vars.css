@@ -1,0 +1,81 @@
+/**
+ * @component van-popover-combination
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 弹出框箭头大小
+   */
+  --van-popover-arrow-size: 6px;
+  /**
+   * @type input
+   * @desc 弹出框圆角半径
+   */
+  --van-popover-radius: var(--van-radius-lg);
+  /**
+   * @type input
+   * @desc 弹出框操作按钮宽度
+   */
+  --van-popover-action-width: 128px;
+  /**
+   * @type input
+   * @desc 弹出框操作按钮高度
+   */
+  --van-popover-action-height: 44px;
+  /**
+   * @type input
+   * @desc 弹出框操作按钮字体大小
+   */
+  --van-popover-action-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   * @desc 弹出框操作按钮行高
+   */
+  --van-popover-action-line-height: var(--van-line-height-md);
+  /**
+   * @type input
+   * @desc 弹出框操作按钮图标大小
+   */
+  --van-popover-action-icon-size: 20px;
+  /**
+   * @type input
+   * @desc 弹出框水平操作按钮高度
+   */
+  --van-popover-horizontal-action-height: 34px;
+  /**
+   * @type input
+   * @desc 弹出框水平操作按钮图标大小
+   */
+  --van-popover-horizontal-action-icon-size: 16px;
+  /**
+   * @type color
+   * @desc 弹出框浅色主题文字颜色
+   */
+  --van-popover-light-text-color: var(--van-text-color);
+  /**
+   * @type color
+   * @desc 弹出框浅色主题背景色
+   */
+  --van-popover-light-background: var(--van-background-2);
+  /**
+   * @type color
+   * @desc 弹出框浅色主题禁用操作按钮文字颜色
+   */
+  --van-popover-light-action-disabled-text-color: var(--van-text-color-3);
+  /**
+   * @type color
+   * @desc 弹出框深色主题文字颜色
+   */
+  --van-popover-dark-text-color: var(--van-white);
+  /**
+   * @type color
+   * @desc 弹出框深色主题背景色
+   */
+  --van-popover-dark-background: #4a4a4a;
+  /**
+   * @type color
+   * @desc 弹出框深色主题禁用操作按钮文字颜色
+   */
+  --van-popover-dark-action-disabled-text-color: var(--van-text-color-2);
+}

@@ -71,8 +71,7 @@ export const Example2 = {
           }, 3000);
         });
       };
-      const dataSource = () =>
-        new Promise((res) => {
+      const dataSource = () => new Promise((res) => {
           setTimeout(() => {
             res([
               {
@@ -207,8 +206,11 @@ export const Example3 = {
   name: '级联选择器',
   render: (args) => ({
     setup() {
-      const value = ref([
-      ]);
+      const value = ref([]);
+      const cascaderRef = ref(null);
+      setTimeout(() => {
+        console.log(cascaderRef, 'cascaderRef');
+      }, 3000);
       return {
         OPTIONS: [
           {
@@ -231,11 +233,23 @@ export const Example3 = {
           },
         ],
         value,
+        args,
+        filterMethod(node, keyword) {
+          const { text, value } = node;
+          return text.includes(keyword) || value.includes(keyword);
+        },
+        cascaderRef,
       };
     },
-    template: '<el-cascader v-bind="args"   :filterable="true" :modelValue="value"  :multiple="true" :options="OPTIONS" />',
+    template: `
+    <div>
+    <el-cascader ref="cascaderRef" v-model="value" :filterMethod="filterMethod"  :filterable="true"  :options="OPTIONS" />
+    {{value}}
+    </div>
+    `,
     args: {
       filterable: true,
+      multiple: true,
     },
   }),
 };

@@ -12,11 +12,12 @@ import {
 } from '@/plugins/common/dataSource';
 
 export { handleControllableValue } from '@/plugins/common/index';
+
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
-  const textField = props.get('textField', 'text');
+  const textField = props.get('textField') || 'text';
   const valueField = props.get('valueField', 'value');
   const parentField = props.get('parentField', 'parentid');
   const ref = props.get('ref');
@@ -63,7 +64,8 @@ export function handlewFieldState(props) {
   const onCancelProps = props.get('onCancel', () => {});
   const onFinishProps = props.get('onFinish', () => {});
   const onCloseProps = props.get('onClose', () => {});
-  const [value, setValue] = useControllableValue(props);
+  const value = props.get('modelValue');
+  const setValue = props.get('onUpdate:modelValue');
   const fieldValue = useMemo(() => findRegionPath(options, value), [value, options]);
   const [show, setShow] = useControllableValue(props, {
     valuePropName: 'show',
@@ -117,9 +119,9 @@ export function handleFieldRender(props) {
       const rightIcon = clearable ? 'clear' : '';
       return [
         <Field
-          modelValue={fieldValue}
           onClick={() => setShow(true)}
-          {...outerProps}
+          {..._.omit(outerProps, 'onUpdate:modelValue')}
+          modelValue={fieldValue}
           readonly
           is-link
           right-icon={rightIcon}
@@ -136,8 +138,7 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          {...innerProps}
-        >
+          {...innerProps}>
           <Component
             {..._.omit(props, [
               'value',

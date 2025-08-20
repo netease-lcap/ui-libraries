@@ -142,7 +142,7 @@ namespace nasl.ui {
         loopRule: 'nth-child(n+2)',
         loopElem: ".van-popup .van-cell",
       },
-      forceRefresh: 'parent',
+      forceRefresh: { slot: 'title' },
     },
   })
   @Component({

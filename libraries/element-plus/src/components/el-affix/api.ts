@@ -11,7 +11,7 @@ namespace nasl.ui {
           declaration: 'min-height: 32px !important; width: 100% !important;',
           append: true,
         },
-      ]
+      ],
     },
   })
   @Component({
@@ -43,10 +43,10 @@ namespace nasl.ui {
       description: '固钉位置',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '顶部' }, { title: '底部' }, { title: '默认' }],
+        options: [{ title: '顶部' }, { title: '底部' }],
       },
     })
-    position: 'top' | 'bottom' | '' = '';
+    position: 'top' | 'bottom' = 'top';
 
     // @Prop({
     //   group: '主要属性',

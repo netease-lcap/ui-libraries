@@ -15,7 +15,7 @@ export const Default = {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     setup() {
-      const value = ref(['2']);
+      const value = ref();
       const pickerRef = ref(null);
       setTimeout(() => {
         console.log(pickerRef, '==pickerRef');
@@ -128,7 +128,7 @@ export const Default = {
       };
     },
     template: `
-      <van-picker 
+      <van-form-picker 
         v-model="value"
         textField="tree.treename222"
         valueField="tree.id"

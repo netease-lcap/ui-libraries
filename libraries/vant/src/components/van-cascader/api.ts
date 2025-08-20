@@ -158,11 +158,6 @@ namespace nasl.ui {
     })
     onClick: (event: any) => void;
 
-    @Event({
-      title: '聚焦时',
-      description: '聚焦时触发',
-    })
-    onFocus: (event: any) => void;
 
 
   }

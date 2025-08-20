@@ -1,16 +1,19 @@
 <template>
-  <demo-preview></demo-preview>
+  <div>
+    <van-row gutter="24">
+      <van-col span="8">
+        <van-image width="100" height="100" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg">
+          <van-text>默认</van-text>
+        </van-image>
+      </van-col>
+      <van-col span="8">
+        <van-image width="100" height="100" />
+        <van-text>加载中</van-text>
+      </van-col>
+      <van-col span="8">
+        <van-image width="100" height="100" src="http://x" />
+        <van-text>加载失败</van-text>
+      </van-col>
+    </van-row>
+  </div>
 </template>
-<script>
-// 默认可使用组件区块实例作为主题配置预览
-import createStoriesPreview from '@lcap/builder/input/vue3/stories-preview';
-import * as stories from '../../../components/van-image/stories/block.stories';
-
-const DemoPreview = createStoriesPreview(stories);
-
-export default {
-  components: {
-    DemoPreview,
-  },
-};
-</script>

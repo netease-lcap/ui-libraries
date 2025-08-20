@@ -10,14 +10,14 @@ export function handleControllableValue(props: any) {
   const [value, setValue, valueProps] = useControllableValue(props, {
     defaultValue,
     onChange: (value, triggerChange) => {
-      _.set(field, 'customValue.value', () => value);
+      // _.set(field, 'customValue.value', () => value);
       field?.resetValidation?.();
       !triggerChange && field?.validateWithTrigger?.('onChange');
     },
   });
   useEffect(() => {
     _.set(field, 'customValue.value', () => value);
-  }, []);
+  }, [value]);
 
   return {
     ...valueProps,

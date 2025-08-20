@@ -1,16 +1,35 @@
 <template>
-  <demo-preview></demo-preview>
+  <div style="height: 500px; position: relative;">
+    <van-action-sheet 
+      :show="true" 
+      :actions="actions"
+      title="动作面板"
+      cancel-text="取消"
+      description="动作面板的描述信息"
+      :duration="0"
+      :lock-scroll="false"
+      overlay-class="modal-mask-class"
+      :close-on-click-overlay="false"
+      :close-on-click-action="false"
+    />
+  </div>
 </template>
-<script>
-// 默认可使用组件区块实例作为主题配置预览
-import createStoriesPreview from '@lcap/builder/input/vue3/stories-preview';
-import * as stories from '../../../components/van-action-sheet/stories/block.stories';
 
-const DemoPreview = createStoriesPreview(stories);
+<script setup>
+import { ref } from 'vue';
 
-export default {
-  components: {
-    DemoPreview,
-  },
-};
+const actions = ref([
+  { name: '选项1' },
+  { name: '选项2' },
+  { name: '选项3' },
+]);
 </script>
+
+<style>
+.modal-mask-class {
+  position: unset!important;
+}
+.modal-mask-class +.van-popup {
+  position: absolute!important;
+}
+</style>

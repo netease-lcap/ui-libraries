@@ -23,6 +23,6 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<van-cell-group><template #default><van-cell><template #title>单元格标题</template><template #value>单元格内容</template></van-cell></template></van-cell-group>',
+    template: '<van-cell-group><van-cell><template #title>单元格标题</template><template #value>单元格内容</template></van-cell></van-cell-group>',
   }),
 };

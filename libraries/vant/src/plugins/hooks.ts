@@ -274,7 +274,7 @@ export function useControllableValue(props: any, options: Options = {}) {
     } else {
       setStateValue(...args);
     }
-    priorValue.value = args[0];
+    priorValue.value = _.get(args, 0, null);
     _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);
   };
