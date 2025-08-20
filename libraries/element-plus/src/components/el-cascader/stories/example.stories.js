@@ -243,7 +243,7 @@ export const Example3 = {
     },
     template: `
     <div>
-    <el-cascader ref="cascaderRef" :filterMethod="filterMethod"  :filterable="true"  :options="OPTIONS" />
+    <el-cascader ref="cascaderRef" v-model="value" :filterMethod="filterMethod"  :filterable="true"  :options="OPTIONS" />
     {{value}}
     </div>
     `,
