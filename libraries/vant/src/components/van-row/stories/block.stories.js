@@ -26,12 +26,12 @@ export const Default = {
 export const Demo2 = {
   name: '4列样式（2:4:8:10）',
   render: () => ({
-    template: `<el-row>
+    template: `<van-row>
       <van-col :span="2"></van-col>
       <van-col :span="4"></van-col>
       <van-col :span="8"></van-col>
       <van-col :span="10"></van-col>
-    </el-row>`,
+    </van-row>`,
   }),
 };
 
