@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { showToast } from 'vant';
-import { postAfterRead } from './upload';
 import { useCallback, useMemo } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 
@@ -85,50 +84,8 @@ export function handleEvent(props) {
   const beforeDelete = props.get('onBeforeDelete');
   const afterRead = props.get('onAfterRead');
   const onOversize = props.get('onOversize');
-  const headers = props.get('headers');
-  const formData = props.get('data');
-  const action = props.get('action');
-  const name = props.get('name');
-  const withCredentials = props.get('withCredentials');
-  const emit = props.get('emit');
-  const urlField = props.get('urlField');
-  const modelValue = props.get('modelValue');
-  const onUpdateModelValue = props.get('onUpdateModelValue');
-  const currentFileList = props.get('currentFileList');
-  const autoUpload = props.get('autoUpload');
   const oversizeErrorMsg = props.get('oversizeErrorMsg');
 
-  const submitFn = useCallback(() => {
-    const files = currentFileList.value?.filter((item) => item.file && !item.url);
-    postAfterRead(
-      {
-        action,
-        headers,
-        formData,
-        name,
-        urlField,
-        modelValue,
-        onUpdateModelValue,
-        currentFileList,
-        emit,
-        withCredentials,
-      },
-      files,
-    );
-  }, [
-    action,
-    headers,
-    formData,
-    name,
-    urlField,
-    modelValue,
-    onUpdateModelValue,
-    currentFileList,
-    autoUpload,
-    withCredentials,
-  ]);
-  const refProp = props.get('ref');
-  const selfRef = _.assign(refProp, { submit: submitFn });
   return {
     beforeRead: useCallback(
       (file: File, detail: any) => {
@@ -158,23 +115,6 @@ export function handleEvent(props) {
     ),
     afterRead: useCallback(
       (file: any, detail: any) => {
-        if (autoUpload) {
-          postAfterRead(
-            {
-              action,
-              headers,
-              formData,
-              name,
-              urlField,
-              modelValue,
-              onUpdateModelValue,
-              currentFileList,
-              emit,
-              withCredentials,
-            },
-            file,
-          );
-        }
         if (_.isFunction(afterRead)) {
           _.attempt(afterRead, {
             file,
@@ -184,16 +124,6 @@ export function handleEvent(props) {
       },
       [
         afterRead,
-        action,
-        headers,
-        formData,
-        name,
-        urlField,
-        modelValue,
-        onUpdateModelValue,
-        currentFileList,
-        autoUpload,
-        withCredentials,
       ],
     ),
     onOversize: useCallback(
@@ -208,6 +138,5 @@ export function handleEvent(props) {
       },
       [onOversize, oversizeErrorMsg],
     ),
-    ref: selfRef,
   };
 }

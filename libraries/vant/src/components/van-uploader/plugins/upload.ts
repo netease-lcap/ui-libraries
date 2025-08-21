@@ -24,7 +24,7 @@ function handleFileName(url: string) {
  * @param options 选项
  */
 function onPost(item: ExtendedUploaderFileListItem, index: number, options: any) {
-  const { headers, formData, action, withCredentials, name, urlField, modelValue, emit, onUpdateModelValue, currentFileList } = options;
+  const { headers, formData, action, withCredentials, name, urlField, emit, currentFileList, onSetCurrentFileList } = options;
   const requestData = {
     url: action,
     headers,
@@ -39,6 +39,7 @@ function onPost(item: ExtendedUploaderFileListItem, index: number, options: any)
       item.percent = e.percent;
       item.status = 'uploading';
       item.message = '上传中...';
+      onSetCurrentFileList(currentFileList);
       emit('progress', {
         e,
         file: item.file,
@@ -59,7 +60,7 @@ function onPost(item: ExtendedUploaderFileListItem, index: number, options: any)
       }
       item.name = item?.url ? handleFileName(item?.url) || '' : item?.file?.name || '';
       item.response = res;
-      onUpdateModelValue([...unref(currentFileList)]);
+      onSetCurrentFileList(currentFileList);
       emit('success', {
         res,
         file: item.file,
@@ -69,6 +70,7 @@ function onPost(item: ExtendedUploaderFileListItem, index: number, options: any)
     onError: (err: any) => {
       item.status = 'failed';
       item.message = '上传失败';
+      onSetCurrentFileList(currentFileList);
       emit('error', {
         e: err,
         file: item.file,
@@ -76,6 +78,7 @@ function onPost(item: ExtendedUploaderFileListItem, index: number, options: any)
       });
     },
     onStart: (e: any) => {
+      onSetCurrentFileList(currentFileList);
       emit('start', {
         e,
         file: item.file,
@@ -97,10 +100,10 @@ export function postAfterRead(options: any, file: ExtendedUploaderFileListItem |
     name,
     urlField,
     modelValue,
-    onUpdateModelValue,
     currentFileList,
     emit,
     withCredentials,
+    onSetCurrentFileList,
   } = options;
   const fileList = Array.isArray(file) ? file : [file];
   fileList.forEach((item, index) => {
@@ -113,8 +116,8 @@ export function postAfterRead(options: any, file: ExtendedUploaderFileListItem |
       urlField,
       modelValue,
       emit,
-      onUpdateModelValue,
       currentFileList,
+      onSetCurrentFileList,
     });
   });
 }
