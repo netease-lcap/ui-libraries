@@ -85,15 +85,15 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop({
-      group: '数据属性',
-      title: '选项文字字段',
-      description: '集合的元素类型中，用于选项文字字段',
-      setter: {
-        concept: 'PropertySelectSetter',
-      },
-    })
-    textField: (item: T) => nasl.core.String = ((item: any) => item.text) as any;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '选项文字字段',
+    //   description: '集合的元素类型中，用于选项文字字段',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    // })
+    // textField: (item: T) => nasl.core.String = ((item: any) => item.text) as any;
 
     @Prop({
       group: '数据属性',
@@ -249,7 +249,7 @@ namespace nasl.ui {
       title: '点击选项时触发',
       description: '点击选项时触发',
     })
-    onSelect: (current: { action: any, index: number }) => void;
+    onSelect: (event: T) => void;
 
     @Event({
       title: '打开菜单时触发',
@@ -313,6 +313,6 @@ namespace nasl.ui {
       title: '自定义选项内容',
       description: '自定义选项内容',
     })
-    slotAction: (current: Current<T>) => Array<ViewComponent>;
+    slotAction: (current: {action: Current<T>, index: nasl.core.Integer}) => Array<ViewComponent>;
   }
 }
