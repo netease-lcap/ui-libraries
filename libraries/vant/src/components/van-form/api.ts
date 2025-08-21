@@ -101,16 +101,16 @@ namespace nasl.ui {
     })
     colon: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '校验触发时机',
-      description: '表单校验触发时机',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '输入时' }, { title: '提交时' }],
-      },
-    })
-    validateTrigger: 'onChange' | 'onSubmit' = 'onSubmit';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '校验触发时机',
+    //   description: '表单校验触发时机',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '输入时' }, { title: '提交时' }],
+    //   },
+    // })
+    // validateTrigger: 'onChange' | 'onSubmit' = 'onSubmit';
 
     @Prop({
       group: '主要属性',

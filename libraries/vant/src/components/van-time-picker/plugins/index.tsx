@@ -147,7 +147,7 @@ export function handleRangeModelValue(props: any) {
   const formatValue = useMemo(() => {
     return getFormatValue([currentStartValue, currentEndValue], unit, showFormatter);
   }, [currentStartValue, currentEndValue, unit, showFormatter]);
-  // 开始值：用于改变时暂存数据
+  // TODO 开始值：用于改变时暂存数据
   const currentStartValueRef = ref(currentStartValue);
   // 结束值：用于改变时暂存数据
   const currentEndValueRef = ref(currentEndValue);
