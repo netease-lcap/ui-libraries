@@ -16,6 +16,7 @@ export function handleControllableValue(props: any) {
     },
   });
   useEffect(() => {
+    field?.resetValidation?.();
     _.set(field, 'customValue.value', () => value);
     field?.validateWithTrigger?.('onChange');
   }, [value]);
