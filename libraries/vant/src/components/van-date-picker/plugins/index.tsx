@@ -151,6 +151,7 @@ export function handleModelValue(props: any) {
   const currentTimeValue = useMemo(() => {
     return getCurrentTimeValue(modelValue, timeUnitIndex);
   }, [modelValue, type]);
+  // TODO usestate
   const currentValueRef = ref(currentValue);
   const onSetCurrentValue = (value: Array<string>) => {
     currentValueRef.value = value;
@@ -209,7 +210,7 @@ export function handleRangeModelValue(props: any) {
   if (!isRange) {
     return {};
   }
-  // 开始值：用于改变时暂存数据
+  //TODO 开始值：用于改变时暂存数据
   const currentStartValueRef = ref(currentStartValue);
   const currentStartTimeValueRef = ref(currentStartTimeValue);
   // 结束值：用于改变时暂存数据

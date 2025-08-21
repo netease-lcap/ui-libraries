@@ -30,7 +30,7 @@ export function handleDataSource(props) {
   return {
     ref: selfRef,
     loading,
-    slots: _.assign(slots, dataSourceSlots),
+    slots: _.assign({}, slots, dataSourceSlots),
     tagName: 'van-radio-group',
     formTagName: 'van-form-radio-group',
   };

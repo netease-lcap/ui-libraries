@@ -33,7 +33,6 @@ export function handleModelValue(props) {
         _.forEach(Object.entries(formItemList.value), ([key, item]: any) => {
           model.value[key] = item?.getModelValue?.() ?? model.value[key];
         });
-        console.log(model, 'model');
         return ref.validate().then(
           () => ({ valid: true }),
           () => ({ valid: false }),

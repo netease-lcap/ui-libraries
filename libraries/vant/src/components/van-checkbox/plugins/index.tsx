@@ -32,14 +32,13 @@ export function handleDataSource(props) {
   return {
     ref: selfRef,
     loading,
-    slots: _.assign(slots, dataSourceSlots),
+    slots: _.assign({}, slots, dataSourceSlots),
     tagName: 'van-checkbox-group',
     formTagName: 'van-form-checkbox-group',
     onChange: (value) => {
       // van checkbox 监听了值改变触发 change 会导致问题所以这里给置空
     },
     'onUpdate:modelValue': _.wrap(onUpdateModelValue, (fn, value) => {
-      console.log(value,'==');
       _.attempt(onChange, value);
       _.attempt(fn, value);
     }),

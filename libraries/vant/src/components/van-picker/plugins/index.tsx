@@ -30,6 +30,7 @@ export function handleDataSource(props) {
   const valueField = props.get('valueField');
   const parentField = props.get('parentField');
   const slots = props.get('slots');
+
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
@@ -56,6 +57,7 @@ export function handlewFieldState(props) {
   const mergeRef = props.get($mergeRef);
   const onCancelProps = props.get('onCancel', () => {});
   const onConfirmProps = props.get('onConfirm', () => {});
+
   const value = props.get('modelValue');
   const setValue = props.get('onUpdate:modelValue');
   // const [value, setValue] = useControllableValue(props, {
@@ -126,8 +128,7 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          {..._.omit(innerProps, 'columns', 'expose', 'onConfirm')}
-        >
+          {..._.omit(innerProps, 'columns', 'expose', 'onConfirm')}>
           <Component
             {..._.omit(props, [
               'value',
