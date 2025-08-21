@@ -373,6 +373,6 @@ namespace nasl.ui {
       title: '自定义选项内容',
       description: '自定义选项内容',
     })
-    slotAction: (current: Current<T>) => Array<ViewComponent>;
+    slotAction: (current: {action: T, index: nasl.core.Integer}) => Array<ViewComponent>;
   }
 }

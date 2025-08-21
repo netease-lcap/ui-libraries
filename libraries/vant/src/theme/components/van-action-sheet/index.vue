@@ -19,9 +19,9 @@
 import { ref } from 'vue';
 
 const actions = ref([
-  { name: '选项1' },
-  { name: '选项2' },
-  { name: '选项3' },
+  { name: '选项1-禁用', disabled: true },
+  { name: '选项2', icon: 'star-o', subname: '二级标题' },
+  { name: '选项3', loading: true },
 ]);
 </script>
 

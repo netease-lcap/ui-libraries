@@ -30,7 +30,7 @@ export function handleDataSource(props) {
   const ref = props.get('ref');
 
   const staticActions = props.get('actions');
-  const textField = props.get('textField') || 'text';
+  // const textField = props.get('textField') || 'text';
   const iconField = props.get('iconField') || 'icon';
   const colorField = props.get('colorField') || 'color';
   const disabledField = props.get('disabledField') || 'disabled';
@@ -44,10 +44,11 @@ export function handleDataSource(props) {
       return [];
     }
     return _.map(dataSource, (item) => ({
-      text: item[textField],
+      // text: item[textField],
       color: item[colorField],
       icon: item[iconField],
       disabled: item[disabledField],
+      ...item,
     }));
   }, [dataSource, colorField, iconField, disabledField]);
 
