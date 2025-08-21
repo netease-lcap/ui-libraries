@@ -1,9 +1,5 @@
-import {
-  computed,
-  defineComponent,
-  isVNode,
-  cloneVNode,
-} from 'vue';
+import { computed, defineComponent, isVNode, cloneVNode, inject } from 'vue';
+import { formContextKey } from 'element-plus';
 import { ElFlexPropsDefine, type ElFlexProps } from './props';
 import { useChildSlots } from './hooks';
 import './index.css';
@@ -13,15 +9,21 @@ export default defineComponent({
   props: ElFlexPropsDefine,
   setup(props: ElFlexProps) {
     const getChildSlots = useChildSlots();
+    const formContext = inject(formContextKey);
+
 
     const style = computed(() => {
-      return props.mode === 'flex' ? {
-        flexDirection: props.direction === 'horizontal' ? 'row' : 'column',
-        justifyContent: props.justify,
-        alignItems: props.alignment,
-        flexWrap: props.wrap ? 'wrap' : 'nowrap',
-        gap: `${props.gutter}px`,
-      } : {};
+      return props.mode === 'flex'
+        ? {
+            flexDirection: props.direction === 'horizontal' ? 'row' : 'column',
+            justifyContent: props.justify,
+            alignItems: props.alignment,
+            flexWrap: props.wrap ? 'wrap' : 'nowrap',
+            '--el-flex-form-label-width':
+              formContext?.labelWidth === 'auto' ? formContext?.autoLabelWidth : formContext?.labelWidth,
+            gap: `${props.gutter}px`,
+          }
+        : {};
     });
 
     function renderChildren() {
@@ -44,10 +46,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <div
-          style={style.value as any}
-          class={props.mode === 'flex' ? 'el-flex' : 'el-flex--block'}
-        >
+        <div style={style.value as any} class={props.mode === 'flex' ? 'el-flex' : 'el-flex--block'}>
           {renderChildren()}
         </div>
       );

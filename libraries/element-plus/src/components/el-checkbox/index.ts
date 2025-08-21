@@ -1,4 +1,4 @@
-import { ElCheckbox, ElCheckboxGroup as ElCheckboxGroupPlus } from 'element-plus';
+import { ElCheckbox, ElCheckboxGroup as ElCheckboxGroupPlus, ElCheckboxButton } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicsPlugin from './plugins/index';
@@ -12,5 +12,5 @@ function ElCheckboxRegister(BaseComponent, plugin = {}, extend = true) {
 const ElCheckboxGroup = registerComponent(ElCheckboxGroupPlus, { plugin: basicsPlugin, name: 'el-checkbox-group' });
 const ElFormCheckboxGroup = withFormItem(ElCheckboxGroup, 'el-form-checkbox-group');
 
-export { ElCheckbox, ElCheckboxGroupPlus, ElCheckboxGroup, ElFormCheckboxGroup, ElCheckboxRegister };
+export { ElCheckbox, ElCheckboxGroupPlus, ElCheckboxGroup, ElFormCheckboxGroup, ElCheckboxRegister, ElCheckboxButton };
 export default ElCheckbox;
