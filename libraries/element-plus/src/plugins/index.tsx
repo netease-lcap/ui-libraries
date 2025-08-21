@@ -104,7 +104,8 @@ export function registerComponent<T>(Component, options) {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
         const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
-        const commitImmutableState = commitState.deleteAll(commitState.get($deletePropsList));
+        const commitImmutableState = commitState;
+
         const provide = commitState.get('provide');
         const isRenderChange = Component !== commitState.get('render');
         Render = isRenderChange ? commitState.get('render') : Render;
@@ -114,7 +115,7 @@ export function registerComponent<T>(Component, options) {
             [key]: commitImmutableState.get(key),
           });
         });
-        // componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
+        componentState.value.state[$deletePropsList] = commitState.get($deletePropsList);
 
         Object.assign(exposeRef.value, ref);
         Object.assign(provideRef.value, provide);

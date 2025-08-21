@@ -11,7 +11,7 @@ export function handleDataSource(props) {
   const textField = props.get('textField', 'text');
   const valueField = props.get('valueField', 'value');
   const onUpdateModelValue = props.get('onUpdate:modelValue');
-  const onChange = props.get('onChange');
+  const onChange = props.get('onChange', () => {});
   const slots = props.get('slots');
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
