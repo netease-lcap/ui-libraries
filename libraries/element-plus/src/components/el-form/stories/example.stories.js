@@ -211,3 +211,86 @@ export const Example4 = {
     template: '<example-demo />',
   }),
 };
+
+export const Example5 = {
+  name: 'label竖着排列对齐',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        Example4,
+        args,
+      };
+    },
+    template: `
+    <div>
+      <el-form v-bind="args"   >
+        <el-flex class="el-flex-form-item">
+          <el-form-input label="aaaaaaaaaaaaa" class="my-label" />
+          <el-form-input class="my-label" />
+        </el-flex>
+      </el-form>
+    </div>
+    `,
+  }),
+  args: {
+    labelPosition: 'top',
+  },
+};
+
+export const Example6 = {
+  name: 'button对齐',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        Example4,
+        args,
+      };
+    },
+    template: `
+    <div>
+      <el-form v-bind="args"   >
+        <el-flex class="el-flex-form-item">
+          <el-form-input label="aaaaaaaa" class="my-label" />
+        </el-flex>
+        <el-flex class="el-flex-form-item">
+            <el-button>Submit</el-button>
+        </el-flex>
+      </el-form>
+    </div>
+    `,
+  }),
+  args: {
+    labelPosition: 'left',
+    labelWidth: '100px',
+  },
+};
+
+export const Example7 = {
+  name: '表单inline',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        Example4,
+        args,
+      };
+    },
+    template: `
+    <div>
+      <el-form v-bind="args"   >
+        <el-flex class="el-flex-form-item">
+          <el-form-input label="aaaaaaaa" class="my-label" />
+        </el-flex>
+        <el-flex class="el-flex-form-item">
+          <el-form-input label="aaaaaaaa" class="my-label" />
+        </el-flex>
+      </el-form>
+    </div>
+    `,
+  }),
+  args: {
+    inline: true,
+  },
+};

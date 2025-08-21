@@ -38,8 +38,8 @@ export function useHandleMapField(filedInfo: {
         ...Object.fromEntries(Object.entries(fieldsMap || {}).map(([key, path]) => [key, _.get(item, path, undefined)])),
         [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
         [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
-        [disabled]: !_.isObject(item) ? item : _.get(item, disabledField || 'disabled', false),
-        [divided]: !_.isObject(item) ? item : _.get(item, dividedField || 'divided', false),
+        [disabled]: !_.isObject(item) ? false : _.get(item, disabledField || 'disabled', false),
+        [divided]: !_.isObject(item) ? false : _.get(item, dividedField || 'divided', false),
       })),
     [label, value, textField, valueField, dataSource],
   ) as DataSourceArrayType;

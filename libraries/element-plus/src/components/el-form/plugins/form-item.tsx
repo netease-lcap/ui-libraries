@@ -99,6 +99,7 @@ export function withFormItem(Component, name) {
           <ElFormItemWrap
             {..._.pick(_.assign({}, props, attrs, { prop: prop.value }), $formItemProps)}
             style={style.value.style}
+            class={slots.label && props.label ? 'el-form-item-has-label' : `${attrs.class ?? ''}`}
             ref={formItemRef}
             v-slots={{
               label: slots.label,

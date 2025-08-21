@@ -34,6 +34,7 @@ export function handleDataSource(props) {
       icon: item[iconField],
       loading: item[loadingField],
       disabled: item[disabledField],
+      ...item,
       callback: () => onCallBack(item),
     }));
   }, [dataSource, nameField, subNameField, colorField, iconField, loadingField, disabledField]);

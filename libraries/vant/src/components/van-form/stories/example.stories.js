@@ -39,7 +39,7 @@ const Template = (args) => ({
     const radioValue = ref('');
     const checkboxValue = ref([]);
     setTimeout(() => {
-      fieldValue.value=33
+      cascaderValue.value = ['1'];
     }, 3000);
     return {
       pickerValue,
@@ -62,17 +62,17 @@ const Template = (args) => ({
       {{pickerValue}}选择器
 
       {{cascaderValue}}级联选择器
-      <van-form-cascader
+      <van-form-picker
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
         v-model="cascaderValue"
         required name="cascader" placeholder="请选择级联选择器"
-        :dataSource="[{ text: '男', value: '1' }, { text: '女', value: '2' }]"
+        :dataSource="[{ text: '男', value: '1' }, { text: '女', value: '2' },{text: '书', value: '3'},  { text: '语文', value: '4' }, { text: '数学', value: '5' }]"
         clearable
       >
         <template #label>
           <span>级联选择器</span>
         </template>
-      </van-form-cascader>
+      </van-form-picker>
       <van-form-radio-group
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
         v-model="radioValue"
