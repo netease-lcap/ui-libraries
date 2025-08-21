@@ -75,7 +75,6 @@ const Template = (args) => ({
       </van-form-picker>
       <van-form-radio-group
         :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"
-        v-model="radioValue"
         required name="radio" placeholder="请选择性别"
         :dataSource="[{ text: '男', value: '1' }, { text: '女', value: '2' }]"
         clearable
