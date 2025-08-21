@@ -85,15 +85,15 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
-    @Prop({
-      group: '数据属性',
-      title: '选项文字字段',
-      description: '集合的元素类型中，用于选项文字字段',
-      setter: {
-        concept: 'PropertySelectSetter',
-      },
-    })
-    textField: (item: T) => nasl.core.String = ((item: any) => item.text) as any;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '选项文字字段',
+    //   description: '集合的元素类型中，用于选项文字字段',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    // })
+    // textField: (item: T) => nasl.core.String = ((item: any) => item.text) as any;
 
     @Prop({
       group: '数据属性',
