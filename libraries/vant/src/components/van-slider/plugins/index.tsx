@@ -4,9 +4,10 @@ import { categoryStyles, categoryProps } from '@/utils/dom';
 import styles from '../index.module.css';
 
 export function handleDefaultValue(props) {
+  const range = props.get('range');
+  if (!range) return {};
   const modelValueProps = props.get('modelValue');
   const isArrayModelValue = _.isArray(modelValueProps);
-  const range = props.get('range');
   const modelValue = range && isArrayModelValue ? modelValueProps : [0, 0];
   return {
     modelValue,
