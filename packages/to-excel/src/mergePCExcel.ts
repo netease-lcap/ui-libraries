@@ -28,7 +28,7 @@ async function main() {
   const elPlusHeaders = elPlusHeaderRow.values as string[];
 
   // 需要拼接的列名
-  const mergeKeys = ['子组件名称', '子组件标题', '属性名称', '可访问属性名称', '事件名称', '方法名称', '方法参数', '方法返回值', '插槽名称'];
+  const mergeKeys = ['子组件名称', '子组件标题', '属性名称', '属性类型', '属性双向绑定（model/sync）', '可访问属性名称', '事件名称', '事件类型', '方法名称', '方法参数', '方法返回值', '插槽名称', '插槽类型'];
 
   // 构建ElementPlus数据Map，key为ElButton等
   const elPlusDataMap: Record<string, any[]> = {};

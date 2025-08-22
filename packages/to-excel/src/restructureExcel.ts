@@ -3,8 +3,11 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 
 async function main() {
-  const inputPath = path.join(__dirname, '../out/组件总表（ElementPlus）.xlsx');
-  const outputPath = path.join(__dirname, '../out1/组件总表（ElementPlus）-重组.xlsx');
+  // const inputPath = path.join(__dirname, '../out/组件总表（ElementPlus）.xlsx');
+  // const outputPath = path.join(__dirname, '../out1/组件总表（ElementPlus）-重组.xlsx');
+
+   const inputPath = path.join(__dirname, '../out/组件总表（PC+H5）.xlsx');
+  const outputPath = path.join(__dirname, '../out1/组件总表（PC+H5）-重组.xlsx');
 
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(inputPath);
@@ -47,15 +50,15 @@ async function main() {
   }
 
   // 属性名
-  const propsMap = collectBySubName(workbook.getWorksheet('组件属性汇总'), '属性名称');
+  const propsMap = collectBySubName(workbook.getWorksheet('组件属性汇总'), '属性名称', ['双向绑定（model/sync）', '属性类型']);
   // 可访问属性名
   const readablePropsMap = collectBySubName(workbook.getWorksheet('组件可访问属性汇总'), '属性名称');
   // 事件名
-  const eventsMap = collectBySubName(workbook.getWorksheet('组件事件汇总'), '事件名称');
+  const eventsMap = collectBySubName(workbook.getWorksheet('组件事件汇总'), '事件名称', ['事件类型']);
   // 方法名、参数、返回值
   const methodsMap = collectBySubName(workbook.getWorksheet('组件方法汇总'), '方法名称', ['方法参数', '方法返回值']);
   // 插槽名
-  const slotsMap = collectBySubName(workbook.getWorksheet('组件插槽汇总'), '插槽名称');
+  const slotsMap = collectBySubName(workbook.getWorksheet('组件插槽汇总'), '插槽名称', ['插槽类型']);
 
   // 3. 整合数据，按端生成两个sheet
   const outWorkbook = new ExcelJS.Workbook();
@@ -65,12 +68,16 @@ async function main() {
       { header: '子组件名称', key: 'subName', width: 30 },
       { header: '子组件标题', key: 'subTitle', width: 20 },
       { header: '属性名称', key: 'prop', width: 30 },
+      { header: '属性类型', key: 'propType', width: 30 },
+      { header: '属性双向绑定（model/sync）', key: 'propSync', width: 30 },
       { header: '可访问属性名称', key: 'readableProp', width: 30 },
       { header: '事件名称', key: 'event', width: 30 },
+      { header: '事件类型', key: 'eventType', width: 30 },
       { header: '方法名称', key: 'method', width: 30 },
       { header: '方法参数', key: 'methodParams', width: 40 },
       { header: '方法返回值', key: 'methodReturns', width: 40 },
       { header: '插槽名称', key: 'slot', width: 30 },
+      { header: '插槽类型', key: 'slotType', width: 30 },
     ];
     baseRows.forEach((row, i) => {
       const arr = row as any[];
@@ -84,7 +91,7 @@ async function main() {
       // 属性
       if (propsMap[group][subNameKey]) {
         propsMap[group][subNameKey].forEach((p) => {
-          outSheet.addRow({ subName, subTitle, prop: p.name });
+          outSheet.addRow({ subName, subTitle, prop: p.name, propType: p['属性类型'], propSync: p['双向绑定（model/sync）'] });
         });
       }
       // 可访问属性
@@ -96,7 +103,7 @@ async function main() {
       // 事件
       if (eventsMap[group][subNameKey]) {
         eventsMap[group][subNameKey].forEach((e) => {
-          outSheet.addRow({ subName, subTitle, event: e.name });
+          outSheet.addRow({ subName, subTitle, event: e.name, eventType: e['事件类型'] });
         });
       }
       // 方法
@@ -108,7 +115,7 @@ async function main() {
       // 插槽
       if (slotsMap[group][subNameKey]) {
         slotsMap[group][subNameKey].forEach((s) => {
-          outSheet.addRow({ subName, subTitle, slot: s.name });
+          outSheet.addRow({ subName, subTitle, slot: s.name, slotType: s['插槽类型'] });
         });
       }
     });
