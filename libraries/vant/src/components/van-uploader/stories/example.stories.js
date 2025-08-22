@@ -1,0 +1,158 @@
+import VanUploader from '../index';
+
+export default {
+  id: 'van-uploader-examples',
+  title: '组件列表/Uploader 上传/示例',
+  component: VanUploader,
+  parameters: {
+    layout: 'padded',
+  },
+};
+
+export const Default = {
+  name: '基础用法',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        args,
+      };
+    },
+    data() {
+      return {
+        values: JSON.stringify([
+          { url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg' },
+          // Uploader 根据文件后缀来判断是否为图片文件
+          // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
+          { url: 'https://cloud-image', isImage: true },
+        ]),
+        // values: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg,https://cloud-image',
+      };
+    },
+    methods: {
+      onOversize(event) {
+        console.log('oversize', event);
+      },
+      onSuccess(event) {
+        console.log('success', event);
+      },
+      onError(event) {
+        console.log('error', event);
+      },
+      onProgress(event) {
+        console.log('progress', event);
+      },
+      onStart(event) {
+        console.log('start', event);
+      },
+      onAfterRead(event) {
+        console.log('after-read', event);
+      },
+      onBeforeRead(event) {
+        console.log('before-read', event);
+      },
+      onBeforeDelete(event) {
+        console.log('before-delete', event);
+      },
+      onClickSubmit() {
+        this.$refs.uploader.submit();
+      },
+      onChangeValues() {
+        this.values = '';
+      },
+      onChangeValues1() {
+        this.values = JSON.stringify([
+          { url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg' },
+          // Uploader 根据文件后缀来判断是否为图片文件
+          // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
+          { url: 'https://cloud-image', isImage: true },
+          { url: 'http://dev-zxrtest25082001-csforkf.lcap.codewave-test.163yun.com/upload/app/239a90ab-c020-42f7-bad5-5475c9c185e2/login_20250820180500818_ori_pms11755770700891.png' },
+        ]);
+      },
+    },
+    template: `
+    <van-button @click="onClickSubmit">上传服务器</van-button>
+    <van-button @click="onChangeValues">改变值</van-button>
+    <van-button @click="onChangeValues1">改变值1</van-button>
+      <van-uploader v-model="values" multiple v-bind="args"
+        ref="uploader"
+        @oversize="onOversize"
+        @success="onSuccess"
+        @error="onError"
+        @progress="onProgress"
+        @start="onStart"
+        @delete="onDelete"
+        @after-read="onAfterRead"
+        @before-read="onBeforeRead"
+        @before-delete="onBeforeDelete"
+      ></van-uploader>
+      {{ values }}
+    `,
+  }),
+  args: {
+    access: 'public',
+    ttl: true,
+    ttlValue: 1,
+    lcapIsCompress: true,
+    viaOriginURL: true,
+    data: { testfata: 'ddd' },
+    headers: { LCAPTEST: 'test' },
+    multiple: true,
+    autoUpload: true,
+    maxSize: Infinity,
+    maxCount: Infinity,
+    converter: 'json',
+    readonly: false,
+    disabled: false,
+    deletable: true,
+    showUpload: true,
+    accept: '',
+    oversizeErrorMsg: '',
+  },
+};
+
+export const FormItem = {
+  name: '表单项',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        args,
+      };
+    },
+    data() {
+      return {
+        // values: JSON.stringify([
+        //   { url: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg' },
+        //   // Uploader 根据文件后缀来判断是否为图片文件
+        //   // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
+        //   { url: 'https://cloud-image', isImage: true },
+        // ]),
+        values: 'https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg,https://cloud-image',
+      };
+    },
+    methods: {
+      onOversize(file, detail) {
+        console.log('oversize', file, detail);
+      },
+    },
+    template: `
+      <van-form>
+        <van-form-uploader v-model="values" multiple v-bind="args" @oversize="onOversize"></van-form-uploader>
+      </van-form>
+      {{ values }}
+    `,
+  }),
+  args: {
+    access: 'public',
+    ttl: null,
+    ttlValue: 1,
+    multiple: true,
+    autoUpload: true,
+    maxSize: '10KB',
+    maxCount: Infinity,
+    lcapIsCompress: true,
+    viaOriginURL: '',
+    converter: 'json',
+  },
+};

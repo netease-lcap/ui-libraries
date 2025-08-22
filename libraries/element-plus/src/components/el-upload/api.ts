@@ -12,6 +12,7 @@ namespace nasl.ui {
           expression: "!this.getAttribute('hasTip')?.value",
         }
       ],
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -55,19 +56,19 @@ namespace nasl.ui {
     })
     submit(): void {}
 
-    @Prop({
-      title: '文件列表',
-    })
-    fileList: nasl.collection.List<{
-      name: nasl.core.String;
-      percentage?: nasl.core.Decimal;
-      status: 'ready' | 'uploading' | 'success' | 'fail';
-      size?: nasl.core.Integer;
-      response?: any;
-      uid: nasl.core.Integer;
-      url?: nasl.core.String;
-      raw?: any;
-    }>;
+    // @Prop({
+    //   title: '文件列表',
+    // })
+    // fileList: nasl.collection.List<{
+    //   name: nasl.core.String;
+    //   percentage?: nasl.core.Decimal;
+    //   status: 'ready' | 'uploading' | 'success' | 'fail';
+    //   size?: nasl.core.Integer;
+    //   response?: any;
+    //   uid: nasl.core.Integer;
+    //   url?: nasl.core.String;
+    //   raw?: any;
+    // }>;
   }
 
   export class ElUploadOptions extends ViewComponentOptions {
@@ -95,7 +96,7 @@ namespace nasl.ui {
       sync: true,
       docDescription: '当前的文件列表',
     })
-    value: nasl.core.String;
+    modelValue: nasl.core.String;
 
     @Prop({
       group: '数据属性',
@@ -317,6 +318,14 @@ namespace nasl.ui {
     })
     showUploadButton: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
     @Event({
       title: '文件上传成功时',
       description: '文件上传成功时的钩子',
@@ -357,7 +366,7 @@ namespace nasl.ui {
       title: '移除文件前',
       description: '移除文件前的钩子',
     })
-    onBeforeRemove: (event: any) => any;
+    onBeforeRemove: () => any;
 
     @Slot({
       title: '上传提示',

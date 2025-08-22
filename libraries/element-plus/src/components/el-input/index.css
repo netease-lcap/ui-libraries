@@ -1,3 +1,7 @@
-.el-input{
-  --el-input-width:240px;
+.el-input,
+.el-textarea {
+  --el-input-width: 240px;
+}
+.el-textarea {
+  width: 240px;
 }

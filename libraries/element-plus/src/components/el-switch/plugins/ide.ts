@@ -9,13 +9,14 @@ export function handleNodePath(props) {
   const nodeId = useMemo(() => _.uniqueId('Switch_'), []);
   useEffect(() => {
     const node = document.querySelector(`.${nodeId}`);
-    const switchElement = node?.closest('.el-switch');
+    const switchElement = node?.closest('.el-switch') ?? node;
     switchElement?.setAttribute('data-nodepath', nodePath);
   }, []);
   return {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
     formTagName: 'el-form-switch',
+    tagName: 'el-switch',
   };
 }
 

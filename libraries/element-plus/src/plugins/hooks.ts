@@ -99,10 +99,8 @@ export function useState(initialstate?) {
   }
   const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
   const localSetValue = (value) => {
-    // console.log(value, 'value-data');
     hook.isSetValue = true;
     const state = currentFiber.getState().state[hook?.storeKey];
-    // console.log(state, 'state-data');
     // TODO 判断是否相等
     // if (_.isEqual(value, state)) {
     //   return;
@@ -281,14 +279,21 @@ export function useControllableValue(props: any, options: Options = {}) {
   ];
 }
 
+const hookObject = {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+};
 export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
   const updateQueen = fiberMap.get('updateQueen');
   const getState = fiberMap.get('getState');
-  const setValue = getState().setvalue;
+  const { setValue } = getState() as any;
   return pluginHooks?.reduce((ImmutableProps, handleFn) => {
     const isMount = !fiberMap.has(handleFn);
     const storeKey = _.uniqueId('storeKey');
-    const fiber = isMount
+    const fiber: Fiber = isMount
       ? {
           workInProgressState: null,
           workInProgressEffect: null,
@@ -299,7 +304,7 @@ export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
         }
       : fiberMap.get(handleFn);
     fiberNode.setCurrentFiber(fiber, isMount);
-    const result = _.attempt(_.bind(handleFn, fiber), ImmutableProps);
+    const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookObject)), ImmutableProps);
     fiberMap.set(handleFn, fiber);
     return ImmutableProps.merge(result);
   }, ImmutableProps);

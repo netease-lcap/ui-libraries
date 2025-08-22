@@ -1,0 +1,51 @@
+/**
+ * @component van-divider
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 分割线边距
+   */
+  --van-divider-margin: var(--van-padding-md) 0;
+  /**
+   * @type input
+   * @desc 分割线垂直边距
+   */
+  --van-divider-vertical-margin: 0 var(--van-padding-xs);
+  /**
+   * @type color
+   * @desc 分割线文字颜色
+   */
+  --van-divider-text-color: var(--van-text-color-2);
+  /**
+   * @type input
+   * @desc 分割线字体大小
+   */
+  --van-divider-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   * @desc 分割线行高
+   */
+  --van-divider-line-height: 24px;
+  /**
+   * @type color
+   * @desc 分割线边框颜色
+   */
+  --van-divider-border-color: var(--van-border-color);
+  /**
+   * @type input
+   * @desc 分割线内容内边距
+   */
+  --van-divider-content-padding: var(--van-padding-md);
+  /**
+   * @type input
+   * @desc 分割线内容左侧宽度
+   */
+  --van-divider-content-left-width: 10%;
+  /**
+   * @type input
+   * @desc 分割线内容右侧宽度
+   */
+  --van-divider-content-right-width: 10%;
+}

@@ -671,7 +671,8 @@
             },
             "displaySlotConditions": {
                 "empty": false
-            }
+            },
+            "ignoreProperty": ["pageSize"]
         }
     },
     {
@@ -685,7 +686,8 @@
                     "condition": "!this.getAttribute('dataSource')",
                     "accept": "target.concept === 'Entity'"
                 }
-            }
+            },
+            "ignoreProperty": ["pageSize"]
         }
     },
     {
@@ -953,7 +955,7 @@
             "idetype": "container",
             "structured": true,
             "childAccept":"target.tag === 'u-tab'",
-            "ignoreProperty": ["loadOnActive"],
+            "ignoreProperty": ["loadOnActive", "readonly"],
             "additionalAttribute": {
               ":loadOnActive": "\"false\""
             },
@@ -1003,6 +1005,7 @@
             "idetype": "container",
             "structured": true,
             "childAccept":"target.tag === 'u-selectable-step'",
+            "ignoreProperty": ["readonly"],
             "displaySlotConditions": {
                 "title": false,
                 "desc": false
@@ -1020,6 +1023,7 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept":"target.tag === 'u-selectable-steps'",
+            "ignoreProperty": ["readonly"],
             "selector": [
                 {
                     "expression": "this.getElement(el => el.slotTarget === 'title')",
@@ -1067,7 +1071,7 @@
                 "loopRule": "nth-last-child(-n+2)",
                 "loopElem": "div[class^='u-select_item']"
             },
-            "translateBindingProperty": ["value", "placeholder"],
+            "translateBindingProperty": ["placeholder"],
             "additionalAttribute": {
                 "autofocus": "\"false\"",
                 "appendTo": "\"body\""

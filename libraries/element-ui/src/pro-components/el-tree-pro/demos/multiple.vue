@@ -17,7 +17,6 @@
       :data-source="items"
       value-field="id"
       text-field="name"
-      parent-field="pid"
       children-field="children"
 
       @click="handleClick"
@@ -37,6 +36,7 @@ export default {
       valueMode: 'parentFirst', // onlyLeaf/parentFirst/all
       value: undefined,
       expanded: undefined,
+      value1: undefined,
       items: [
         {
           id: '1',

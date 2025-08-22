@@ -439,7 +439,7 @@ function genPropertyEditableTemplate(
         emptyValueIsNull={true}>
     </UDateTimePicker>`;
   }
-  const namespaceArr = propertyTypeNamespace.split('.');
+  const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;

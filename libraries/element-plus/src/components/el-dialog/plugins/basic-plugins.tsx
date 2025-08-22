@@ -1,29 +1,25 @@
 import _ from 'lodash';
-import { useControllableValue } from '@/plugins/hooks';
-import { ElIcon } from '../../index';
+import { useCallback, useControllableValue } from '@/plugins/hooks';
+import { getPropsIcon } from '@/plugins/common/icon';
 
 export function handleDialogRef(props) {
-  const [value, setValue, valueProps] = useControllableValue(props);
+  const [, setValue, valueProps] = useControllableValue(props);
   const ref = props.get('ref');
   const closeIcon = props.get('closeIcon');
-  const onBeforeClose = props.get('onBeforeClose');
-
-  const closeIconComp = _.isNil(closeIcon) ? closeIcon : <ElIcon name={closeIcon} />;
-
-  const beforeClose = _.isNil(onBeforeClose)
-    ? onBeforeClose
-    : _.wrap(onBeforeClose, (fn, ...args) => {
-        _.attempt(fn, ...args);
-      });
+  const onBeforeClose = props.get('onBeforeClose', (done) => _.attempt(done));
+  const beforeClose = useCallback(
+    _.wrap(onBeforeClose, (fn, ...args) => _.attempt(fn, ...args)),
+    [onBeforeClose],
+  );
 
   return {
     ...valueProps,
-    ref: {
-      ...ref,
+    ref: _.assign({}, ref, {
       open: () => setValue(true),
       close: () => setValue(false),
-    },
-    closeIcon: closeIconComp,
+    }),
+
+    closeIcon: getPropsIcon({ name: closeIcon }),
     beforeClose,
   };
 }

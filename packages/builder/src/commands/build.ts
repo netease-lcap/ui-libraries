@@ -1,8 +1,20 @@
 import { execSync } from '../utils/exec';
 import logger from '../utils/logger';
 
-export default () => {
+interface BuildCommandOptions {
+  staging?: boolean;
+}
+
+export default (rootPath: string, options: BuildCommandOptions) => {
   logger.start('start building......');
-  execSync('npx vite build');
+  const commands = [
+    'npx vite build',
+  ];
+
+  if (options.staging) {
+    commands.push('--mode staging');
+  }
+
+  execSync(commands.join(' '));
   logger.success('build success!');
 };

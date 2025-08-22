@@ -22,6 +22,7 @@ namespace nasl.ui {
           default: 'display: inline-block;',
         },
       },
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -107,6 +108,21 @@ namespace nasl.ui {
     size: 'small' | 'default' | 'large' = 'default';
 
     @Prop({
+      group: '主要属性',
+      title: '类型',
+      description: '单选框组类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '默认' },
+          { title: '边框' },
+          { title: '按钮' },
+        ],
+      },
+    })
+    type: 'default' | 'border' | 'button' = 'default';
+
+    @Prop({
       group: '状态属性',
       title: '禁用',
       description: '是否禁用全部子单选框',
@@ -121,6 +137,14 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     private name: nasl.core.String;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
 
     @Event({

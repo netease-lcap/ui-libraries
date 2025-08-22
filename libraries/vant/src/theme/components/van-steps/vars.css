@@ -1,0 +1,66 @@
+/**
+ * @component van-steps
+ */
+:root,
+:host {
+  /**
+   * @type color
+   * @desc 步骤条背景色
+   */
+  --van-steps-background: var(--van-background-2);
+  /**
+   * @type color
+   * @desc 步骤文字颜色
+   */
+  --van-step-text-color: var(--van-text-color-2);
+  /**
+   * @type color
+   * @desc 步骤激活状态颜色
+   */
+  --van-step-active-color: var(--van-primary-color);
+  /**
+   * @type color
+   * @desc 步骤进行中文字颜色
+   */
+  --van-step-process-text-color: var(--van-text-color);
+  /**
+   * @type input
+   * @desc 步骤字体大小
+   */
+  --van-step-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   * @desc 步骤线条颜色
+   */
+  --van-step-line-color: var(--van-border-color);
+  /**
+   * @type color
+   * @desc 步骤完成线条颜色
+   */
+  --van-step-finish-line-color: var(--van-primary-color);
+  /**
+   * @type color
+   * @desc 步骤完成文字颜色
+   */
+  --van-step-finish-text-color: var(--van-text-color);
+  /**
+   * @type input
+   * @desc 步骤图标大小
+   */
+  --van-step-icon-size: 12px;
+  /**
+   * @type input
+   * @desc 步骤圆点尺寸
+   */
+  --van-step-circle-size: 5px;
+  /**
+   * @type color
+   * @desc 步骤圆点颜色
+   */
+  --van-step-circle-color: var(--van-gray-6);
+  /**
+   * @type input
+   * @desc 步骤水平标题字体大小
+   */
+  --van-step-horizontal-title-font-size: var(--van-font-size-sm);
+}

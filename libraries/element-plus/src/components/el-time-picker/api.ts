@@ -117,7 +117,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledHours: (role: nasl.core.String, comparingDate: any) => nasl.collection.List<nasl.core.Integer>;
+    disabledHours: (timeRole: nasl.core.String, comparingDate: nasl.core.String) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -129,7 +129,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => nasl.collection.List<nasl.core.Integer>;
+    disabledMinutes: (hour: nasl.core.Integer, timeRole: nasl.core.String, comparingDate: nasl.core.String) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -141,7 +141,7 @@ namespace nasl.ui {
           concept: 'AnonymousFunctionSetter',
       }
     })
-    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => nasl.collection.List<nasl.core.Integer>;
+    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, timeRole: nasl.core.String, comparingDate: nasl.core.String) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -167,6 +167,14 @@ namespace nasl.ui {
     })
     readonly: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
     @Prop<ElTimePickerOptions, 'format'>({
       group: '主要属性',
       title: '格式化',
@@ -189,7 +197,6 @@ namespace nasl.ui {
       description: '非范围选择时的占位内容',
       setter: { concept: 'InputSetter' },
       if: (_) => !_.isRange,
-      sync: true,
     })
     placeholder: nasl.core.String = '请选择时间';
 

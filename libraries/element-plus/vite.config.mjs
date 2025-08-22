@@ -20,11 +20,27 @@ export default defineConfig(({ command }) => {
         type: 'nasl.ui',
         framework: 'vue3',
         pnpm: true,
+        // ide: {
+        //   setters: {
+        //     rootPath: path.resolve(rootPath, '../../setters'),
+        //     entries: {
+        //       ExInputSetter: 'src/setters/InputSetter.vue',
+        //       ExNormalSetter: 'src/setters/NormalSetter.vue',
+        //     },
+        //   },
+        // },
         modules: {
           entries: {
+            'components/el-config-provider/index': 'src/components/el-config-provider/index',
             install: 'src/install',
+            utils: 'src/utils',
           },
           tsconfigPath: 'tsconfig.build.json',
+        },
+        i18n: {
+          'zh-CN': './src/locale/langs/zh-cn.json',
+          'en-US': './src/locale/langs/en.json',
+          ja: './src/locale/langs/ja.json',
         },
         reportCSSInfo: {
           enabled: true,
@@ -201,23 +217,38 @@ export default defineConfig(({ command }) => {
                 'el-mention-dropdown': false,
               },
             },
-            ...batchDepCSSInfo([
-              'ElCascader',
-              'ElCheckboxGroup',
-              'ElDatePicker',
-              'ElInput',
-              'ElInputNumber',
-              'ElInputTag',
-              'ElRadioGroup',
-              'ElRate',
-              'ElSelect',
-              'ElSlider',
-              'ElSwitch',
-              'ElTimePicker',
-              'ElTimeSelect',
-              'ElTransfer',
-              'ElTreeSelect',
-            ], (oldName) => oldName.replace(/^El/, 'ElForm')),
+            ElFlex: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElAbsoluteLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElRow: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElCol: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ...batchDepCSSInfo(
+              [
+                'ElCascader',
+                'ElCheckboxGroup',
+                'ElDatePicker',
+                'ElInput',
+                'ElInputNumber',
+                'ElInputTag',
+                'ElRadioGroup',
+                'ElRate',
+                'ElSelect',
+                'ElSlider',
+                'ElSwitch',
+                'ElTimePicker',
+                'ElTimeSelect',
+                'ElTransfer',
+                'ElTreeSelect',
+              ],
+              (oldName) => oldName.replace(/^El/, 'ElForm'),
+            ),
           },
         },
       }),
@@ -226,12 +257,17 @@ export default defineConfig(({ command }) => {
       extensions: ['.js', '.ts', '.tsx', '.jsx', '.vue', '.mjs', '.cjs', '.json'],
       alias: {
         '@': path.resolve(rootPath, './src'),
+        '@ep-test': path.resolve(rootPath, './ep-test'),
+        // 'element-plus': path.resolve(rootPath, 'node_modules/element-plus'),
+        'element-plus/es': path.resolve(rootPath, 'node_modules/element-plus/es'),
+        'element-plus/lib': path.resolve(rootPath, 'node_modules/element-plus/lib'),
       },
     },
     define: {
       'process.env': {
         VUE_APP_DESIGNER: false,
         NODE_ENV: command === 'build' ? 'production' : 'development',
+        VUE_IS_DEVTOOLS: command === 'build',
       },
     },
     css: {
@@ -263,6 +299,11 @@ export default defineConfig(({ command }) => {
     },
     test: {
       environment: 'jsdom',
+
+      // 显示更详细的测试日志
+      verbose: true,
+      // 输出测试执行时间
+      reporters: ['default', 'verbose'],
     },
   };
 });

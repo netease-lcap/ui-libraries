@@ -1,24 +1,21 @@
 import _ from 'lodash';
-import { useControllableValue } from '@/plugins/hooks';
+import { useCallback, useControllableValue } from '@/plugins/hooks';
 
 export function handleDrawerRef(props) {
-  const [value, setValue, valueProps] = useControllableValue(props);
+  const [, setValue, valueProps] = useControllableValue(props);
   const ref = props.get('ref');
-  const onBeforeClose = props.get('onBeforeClose');
-
-  const beforeClose = _.isNil(onBeforeClose)
-    ? onBeforeClose
-    : _.wrap(onBeforeClose, (fn, done) => {
-        _.attempt(fn, done);
-      });
+  const onBeforeClose = props.get('onBeforeClose', (done) => _.attempt(done));
+  const beforeClose = useCallback(
+    _.wrap(onBeforeClose, (fn, ...args) => _.attempt(fn, ...args)),
+    [onBeforeClose],
+  );
 
   return {
     ...valueProps,
-    ref: {
-      ...ref,
+    ref: _.assign({}, ref, {
       open: () => setValue(true),
       close: () => setValue(false),
-    },
+    }),
     beforeClose,
   };
 }

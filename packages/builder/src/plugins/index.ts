@@ -74,6 +74,7 @@ export default (options: ViteLcapPluginOptions = {}) => {
       destDir: pluginOption.destDir as string,
       type: pluginOption.type as any,
       rootPath: pluginOption.rootPath as any,
+      lcapUIExternal: pluginOption.lcapUIExternal ?? (pluginOption.framework !== 'vue2' ? true : 'auto'),
     }),
     LcapThemeCode({
       ...pluginOption.theme,

@@ -1,21 +1,23 @@
 import _ from 'lodash';
-import { useMemo } from '@/plugins/hooks';
+import { useMemo, useState, useCallback } from '@/plugins/hooks';
 import { ElBreadcrumbItem } from '../index';
-import { ElIcon } from '../../index';
-import { useCallback } from '../../../plugins/hooks';
+import { getPropsIcon } from '@/plugins/common/icon';
 
 export function handleAutoCrumbs(props) {
   const auto = props.get('auto');
   const showInDesigner = props.get('showInDesigner');
   const slots = props.get('slots');
   const route = props.get('route');
+  const [routeInfo, setRouteInfo] = useState(route);
+  const router = props.get('router');
+  router?.afterEach?.((to) => setRouteInfo(to));
 
   const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
 
   const routerMeta = useMemo(() => {
-    if (!route?.path) return [];
+    if (!routeInfo?.path) return [];
     return _.reduce(
-      route.matched,
+      routeInfo.matched,
       (pre: Array<{ title: string; to: string }>, curMatch) => {
         const meta = _.assign(
           {},
@@ -23,18 +25,22 @@ export function handleAutoCrumbs(props) {
           _.get(curMatch, 'components.default.__vccOpts.meta', {}),
           _.get(curMatch, 'components.default.meta', {}),
         );
-        return pre.concat({
-          title: meta?.crumb || curMatch.name || curMatch.path,
-          to: curMatch.path,
-        });
+        const hasPageName = meta?.crumb || meta?.name;
+        const currentPageInfo = hasPageName
+          ? {
+              title: meta?.crumb || curMatch.name || curMatch.path,
+              to: curMatch.path,
+            }
+          : [];
+        return pre.concat(currentPageInfo);
       },
       [],
     );
-  }, [route]);
+  }, [routeInfo]);
 
   const defaultSlots = useCallback(() => {
     return routerMeta.map((item) => (
-      <ElBreadcrumbItem key={item.to} to={{ path: item.to }}>
+      <ElBreadcrumbItem replace={false} key={item.to} to={{ path: item.to }}>
         {{
           default: () => item.title,
         }}
@@ -43,14 +49,13 @@ export function handleAutoCrumbs(props) {
   }, [routerMeta]);
 
   const result = useMemo(
-    () => (!isNotAutoCrumbs
-        ? {
-            slots: {
-              ...slots,
+    () => (isNotAutoCrumbs
+        ? {}
+        : {
+            slots: _.assign({}, slots, {
               default: defaultSlots,
-            },
-          }
-        : {}),
+            }),
+          }),
     [isNotAutoCrumbs, defaultSlots, slots],
   );
   return result;
@@ -58,11 +63,7 @@ export function handleAutoCrumbs(props) {
 
 export function handleSeparatorIcon(props) {
   const separatorIcon = props.get('separatorIcon');
-  if (!separatorIcon) return {};
-
-  const separatorIconComp = <ElIcon name={separatorIcon} />;
-
   return {
-    separatorIcon: separatorIconComp,
+    separatorIcon: getPropsIcon({ name: separatorIcon }),
   };
 }

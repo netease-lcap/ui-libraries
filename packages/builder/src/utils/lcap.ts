@@ -1,12 +1,14 @@
+/* eslint-disable no-await-in-loop */
 import path from 'path';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
 import { normalizePath } from 'vite';
 import { camelCase, upperFirst } from 'lodash';
+import { MaterialSchema } from '@lcap/material-parser';
 import { type NaslUIComponentConfig } from '../overload';
 import { getComponentPathInfo } from './component-path';
 import logger from './logger';
-import { getComponentMetaByApiTs } from './babel-utils';
+import { getComponentMetaByApiTs } from '../shared';
 import { ComponentMetaInfo } from './types';
 
 export const getConfigComponents = (rootPath: string) => {
@@ -39,7 +41,7 @@ export const getComponentConfigByName = (name: string, list: NaslUIComponentConf
   return flatList.find((c) => c.name === name);
 };
 
-export function getComponentMetaInfos(rootPath: string, parseAPI: boolean = false) {
+export async function getComponentMetaInfos(rootPath: string, parseAPI: boolean = false) {
   const components = getConfigComponents(rootPath);
   const packageInfo = fs.readJSONSync(path.resolve(rootPath, 'package.json'));
   const metaInfos: ComponentMetaInfo[] = [];
@@ -70,11 +72,36 @@ export function getComponentMetaInfos(rootPath: string, parseAPI: boolean = fals
     });
   }
 
+  const clearIndexs: number[] = [];
+
   if (parseAPI) {
-    return metaInfos.map(({ tsPath }) => {
-      return getComponentMetaByApiTs(tsPath);
-    }).filter((v) => !!v) as ComponentMetaInfo[];
+    for (let i = 0; i < metaInfos.length; i += 1) {
+      const { tsPath } = metaInfos[i];
+      try {
+        const componentMeta = await getComponentMetaByApiTs(tsPath);
+        if (componentMeta) {
+          metaInfos[i] = {
+            ...metaInfos[i],
+            ...componentMeta,
+          };
+        } else {
+          clearIndexs.push(i);
+        }
+      } catch (e) {
+        logger.error(`解析组件 ${tsPath} 失败`);
+        clearIndexs.push(i);
+      }
+    }
   }
 
-  return metaInfos as ComponentMetaInfo[];
+  return metaInfos.filter((_, index) => !clearIndexs.includes(index)) as ComponentMetaInfo[];
+}
+
+export interface WriteOptions {
+  type: 'pc' | 'h5' | 'both';
+  prefix: string;
+}
+
+export interface Schema extends MaterialSchema {
+  write?: WriteOptions;
 }

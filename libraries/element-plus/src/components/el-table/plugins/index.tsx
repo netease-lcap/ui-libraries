@@ -1,10 +1,11 @@
-import { ElPagination } from 'element-plus';
+import { ElPagination, ElTableV2 } from 'element-plus';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { useMemo, useRef, useCallback, useControllableValue } from '@/plugins/hooks';
+import { useMemo, useRef, useCallback, useControllableValue, useState } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
-import { useRequestDataSource } from '@/plugins/common/dataSource';
+import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
+import { ElTableToolBar } from '@/components/el-table';
 
 const orderMap = {
   descending: 'desc',
@@ -105,6 +106,7 @@ export function handlePageProps(props) {
   const showJumper = props.get('showJumper');
   const onSelectionChange = props.get('onSelectionChange', () => {});
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
+  const rowKey = props.get('rowKey');
 
   return {
     pageProps: {
@@ -113,8 +115,8 @@ export function handlePageProps(props) {
       total,
     },
     pagination,
-    onSelectionChange: _.wrap(onSelectionChange, (fn, value) => {
-      _.attempt(fn, { newSelection: value });
+    onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
+      _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey)) });
     }),
   };
 }
@@ -163,6 +165,8 @@ export function handleDataSource(props) {
   const onSuccess = props.get('onSuccess', () => {});
   const ref = props.get('ref');
   const defaultParams = [{ currentPage, pageSize, order, sort, pagination }];
+  const rowKey = props.get('rowKey');
+  const parentField = props.get('parentField');
   const {
     data: resultData = { list: [], total: 0 },
     run,
@@ -177,8 +181,10 @@ export function handleDataSource(props) {
     run({ currentPage, pageSize, order, sort, pagination, ...params });
   };
   const { list: data, total } = resultData as { list: any; total: number };
-  const selfRef = useMemo(() => _.assign(ref, { reload, data }), [data, reload, ref]);
-  const dataSourceResult = _.isEmpty(data) ? {} : { data };
+  const treeData = useDataSourceToTree(data, parentField, rowKey);
+  const selfRef = _.assign(ref, { reload, data: treeData });
+
+  const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
 
   return {
     ref: selfRef,
@@ -188,22 +194,26 @@ export function handleDataSource(props) {
   };
 }
 
-
 export function handlePaginationRender(props) {
   const Component = props.get('render');
   const ref = props.get('ref');
   const nodepath = props.get('data-nodepath');
   const tableRef = useRef({});
-  const styleProps=props.get('style');
+  const styleProps = props.get('style');
   const { style, innerStyle } = categoryStyles(styleProps);
   return {
-    ref: Object.assign(ref, tableRef.value),
-    tableStyle:innerStyle,
+    ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
+    tableStyle: innerStyle,
     style,
     render: (props, { attrs, slots }) => {
       return [
         <div data-nodepath={nodepath} style={props.style}>
-          <Component ref={tableRef} {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])} style={attrs.tableStyle} v-slots={slots} />
+          <Component
+            ref={tableRef}
+            {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])}
+            style={attrs.tableStyle}
+            v-slots={slots}
+          />
           {props.pagination && (
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
               <ElPagination {...props.pageProps} total={props.pageProps.total} />
@@ -214,6 +224,56 @@ export function handlePaginationRender(props) {
     },
   };
 }
+
+export function handleEditTable(props) {
+  const editTable = props.get('editTable');
+  if (!editTable) return {};
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const tableRef = useRef({});
+  const render = useCallback((props, { attrs, slots }) => {
+    return (
+      <el-form>
+        <Component ref={tableRef} {...props} {...attrs} v-slots={slots} />
+      </el-form>
+    );
+  }, []);
+  render.inheritAttrs = false;
+  return {
+    ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
+    render,
+  };
+}
+
+export function handleTableConfig(props) {
+  const columnConfig = props.get('columnConfig');
+  if (!columnConfig) return {};
+  const Component = props.get('render');
+  const tableRef = useRef({});
+  const render = useCallback((props, { attrs, slots }) => {
+    const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : []));
+    const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
+    return (
+      <div>
+        <ElTableToolBar columns={columns} selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} />
+        <Component
+          ref={tableRef}
+          {...props}
+          {...attrs}
+          v-slots={{
+            ...slots,
+            default: () => slots.default().filter((item) => selectedColumns.includes(item.props.prop)),
+          }}
+        />
+      </div>
+    );
+  }, []);
+  render.inheritAttrs = false;
+  return {
+    render,
+  };
+}
+
 export function handleHeight(props) {
   const height = props.get('height');
   const maxHeight = props.get('maxHeight');
@@ -223,3 +283,42 @@ export function handleHeight(props) {
     maxHeight: maxHeight === '' ? undefined : maxHeight,
   };
 }
+
+export function handleSticky(props) {
+  const stickyName = props.get('sticky') ? 'sticky-table' : '';
+  const className = props.get('class', '');
+  const classNames = `${stickyName} ${className}`;
+  const styleProps = props.get('style');
+  const stickyOffset = props.get('stickyOffset', 8);
+  return {
+    class: classNames,
+    style: {
+      '--el-table-sticky-offset': `${stickyOffset}px`,
+      ...styleProps,
+    },
+  };
+}
+handleSticky.order = 3;
+
+function handleVirtualize(props) {
+  const virtualize = props.get('virtualize');
+  if (!virtualize) return {};
+  const tableRef = useRef({});
+  const slots = props.get('slots');
+  const columnsSlots = slots.default();
+
+  const columns = _.flatMap(columnsSlots, (node) => {
+    if (node.type.name === 'ElTableColumn') {
+      return [{ ...node.props, header: node.children.header, default: node.children.default }];
+    }
+    return [];
+  });
+
+  const render = useCallback((props, { attrs, slots }) => {
+    return <ElTableV2 ref={tableRef} {...props} {...attrs} v-slots={slots} />;
+  }, []);
+  render.inheritAttrs = false;
+  return {};
+}
+
+handleVirtualize.order = 2;

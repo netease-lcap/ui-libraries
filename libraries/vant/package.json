@@ -1,8 +1,9 @@
 {
   "name": "@lcap/vant",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "author": "NetEase CodeWave FE Team",
   "main": "dist-theme/index.js",
+  "module": "dist-theme/index.mjs",
   "style": "dist-theme/index.css",
   "repository": "https://github.com/netease-lcap/ui-libraries",
   "bugs": {
@@ -17,13 +18,6 @@
     "manifest.json",
     "README.md"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist-theme/index.mjs",
-      "require": "./dist-theme/index.cjs",
-      "default": "./dist-theme/index.js"
-    }
-  },
   "scripts": {
     "dev": "npm run storybook",
     "storybook": "storybook dev -p 8008",
@@ -45,7 +39,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
     "@lcap/builder": "workspace:*",
-    "@nasl/types": "^0.1.10",
+    "@nasl/types": "^0.1.14",
     "@storybook/addon-essentials": "^8.4.6",
     "@storybook/addon-interactions": "^8.4.6",
     "@storybook/addon-onboarding": "^8.4.6",
@@ -60,18 +54,30 @@
     "autoprefixer": "^10.4.16",
     "color": "^4.2.3",
     "fs-extra": "^11.2.0",
+    "postcss": "^8.5.6",
     "storybook": "^8.4.6",
     "typescript": "~5.6.2",
     "vite": "^6.0.1",
     "vitest": "^1.1.0",
     "vue": "^3.5.13",
-    "vue-router": "^3.3.4",
+    "vue-router": "^4.5.0",
     "vue-tsc": "^2.1.10"
   },
   "peerDependencies": {
     "vue": "^3.5.0",
-    "vue-router": "^3.3.4"
+    "vue-router": "^4.5.0"
   },
   "dependencies": {
+    "@lcap/validator": "workspace:*",
+    "@vant/touch-emulator": "^1.4.0",
+    "@vant/use": "^1.6.0",
+    "@vue/shared": "^3.5.13",
+    "dayjs": "^1.11.13",
+    "immutable": "5.0.0-beta.4",
+    "lodash": "^4.17.21",
+    "normalize.css": "^7.0.0",
+    "vant": "4.9.21",
+    "vue-hooks-plus": "^2.2.1",
+    "zustand": "^5.0.3"
   }
 }

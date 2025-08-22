@@ -9,6 +9,7 @@
         :left-value="genDisplayFormatText(showStartDate)"
         :right-value="genDisplayFormatText(showEndDate)"
         :clearable="clearable"
+        :clear-icon="clearIcon ? clearIcon : undefined"
         :placeholder="placeholder"
         :placeholder-right="placeholderRight"
         @left-click="toggle(true)"
@@ -25,6 +26,7 @@
             <u-calendar-range
                 :picker="picker"
                 ref="calendar"
+                v-if="currentOpened"
                 :min-date="minDate"
                 :year-diff="yearDiff"
                 :year-add="yearAdd"
@@ -102,6 +104,9 @@ export default {
             default: 'calendar',
         },
         suffixIcon: { type: String },
+        clearIcon: {
+            type: String,
+        },
         startDate: { type: [String, Number, Date] },
         endDate: { type: [String, Number, Date] },
         minDate: [String, Number, Date],
@@ -295,6 +300,13 @@ export default {
             this.showEndDate = this.format(endDate, this.getFormatString());
             const showStartDate = this.returnTime(this.showStartDate);
             const showEndDate = this.returnTime(this.showEndDate);
+
+            const sDate = new Date(this.transformDate(showStartDate));
+            const eDate = new Date(this.transformDate(showEndDate));
+
+            this.$emit('update:startDate', this.toValue(sDate));
+            this.$emit('update:endDate', this.toValue(eDate));
+
             /**
              * @event select 选择某一项时触发
              * @property {object} sender 事件发送对象
@@ -302,8 +314,8 @@ export default {
              */
             this.$emit('select', {
                 sender: this,
-                startDate: new Date(this.transformDate(showStartDate)),
-                endDate: new Date(this.transformDate(showEndDate)),
+                startDate: sDate,
+                endDate: eDate,
             });
             this.toggle(false);
         },

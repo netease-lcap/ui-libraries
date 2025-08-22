@@ -1,10 +1,11 @@
 <template>
-<u-tree-view value="4" :data="list"></u-tree-view>
+<u-tree-view :value.sync="value" :data="list"></u-tree-view>
 </template>
 <script>
 export default {
     data() {
         return {
+            value: undefined,
             list: [
                 {
                     text: '一级分类',
@@ -55,6 +56,11 @@ export default {
                 },
             ],
         };
+    },
+    mounted() {
+        setTimeout(() => {
+            this.value = '4';
+        }, 100);
     },
 };
 </script>

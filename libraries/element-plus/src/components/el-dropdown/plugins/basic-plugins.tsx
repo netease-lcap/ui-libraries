@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
+import DataSearch from '@lcap/element-ui/design/icons/components/data-search';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
@@ -24,6 +25,48 @@ export function handleDataSource(props) {
     dataSource: useFormatDataSource(data),
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
+  // TODO
+  const condSlotRender = useCallback(
+    _.cond([
+      [
+        _.conforms({
+          dataConfig: (dataConfig) => !!dataConfig,
+          slotsItems: _.stubTrue,
+          dataSource: _.stubTrue,
+          slotsDropdown: _.stubTrue,
+        }),
+        ({ dataSource }) => {
+          console.log('dataSource');
+          return (
+            <el-dropdown-menu>
+              {dataSource.map((item) => (
+                <el-dropdown-item key={item.value} {...item}>
+                  <el-text text={item.label} />
+                </el-dropdown-item>
+              ))}
+            </el-dropdown-menu>
+          );
+        },
+      ],
+      [
+        _.conforms({
+          slotsItems: (slotsItems) => !!slotsItems,
+        }),
+        ({ slotsItems }) => {
+          console.log('slotsItems');
+          return <el-dropdown-menu>{slotsItems()}</el-dropdown-menu>;
+        },
+      ],
+      [
+        _.stubTrue,
+        ({ slotsDropdown }) => {
+          console.log('slotsDropdown');
+          return slotsDropdown?.();
+        },
+      ],
+    ]),
+    [],
+  );
   const dropdownSlotRender = useCallback(() => {
     if (dataConfig) {
       return (
@@ -41,6 +84,10 @@ export function handleDataSource(props) {
     }
     return slots.dropdown?.();
   }, [dataConfig, dataSource, slots.items, slots.dropdown]);
+  const slotDropdown = useMemo(
+    () => condSlotRender({ dataConfig, dataSource, slotsItems: slots.items, slotsDropdown: slots.dropdown }),
+    [condSlotRender, dataConfig, dataSource, slots],
+  );
 
   return {
     [$deletePropsList]: deletePropsList,
@@ -50,6 +97,7 @@ export function handleDataSource(props) {
     slots: {
       ...slots,
       dropdown: dropdownSlotRender,
+      // condSlotRender({ dataConfig, dataSource, slotsItems: slots.items, slotsDropdown: slots.dropdown }),
     },
   };
 }
@@ -59,7 +107,7 @@ export function handleDefaultSlot(props) {
   return {
     slots: {
       ...slots,
-      default: slots.default ? () => <div style="width: auto;">{slots.default()}</div> : undefined,
+      default: slots.default ? () => <div style={{ width: 'auto' }}>{slots.default()}</div> : undefined,
     },
   };
 }

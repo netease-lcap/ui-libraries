@@ -6,11 +6,12 @@ import { getPackName } from '../utils';
 import logger from '../utils/logger';
 import genNaslExtensionConfig from './gens/gen-nasl-extension-config';
 import genManifestConfig from './gens/gen-manifest-config';
-import type { BuildMode, LcapBuildOptions } from './types';
+import type { BuildMode, LcapBuildOptions, BuildModulesOptions } from './types';
 import { execSync } from '../utils/exec';
 import { buildTheme } from './build-theme';
 import buildCSSInfo from './build-css-info';
 import buildDeclaration from './build-declaration';
+import { buildModules } from './build-modules';
 
 const zipDir = (basePath, fileName = 'client.zip', files: string[] = []) => new Promise((res) => {
   const zipPath = path.resolve(basePath, fileName);
@@ -36,9 +37,16 @@ function getPath(filePath, pkg) {
   return resultPath;
 }
 
-async function zipExtension(root, destDir) {
-  const dirList: string[] = ['nasl.extension.json'];
-  const fileList = glob.sync(`${destDir}/**/*`)
+async function zipExtension(root: string, destDir: string, modulesOutDir: string | undefined) {
+  const filePaths = [
+    `${destDir}/**/*`,
+  ];
+
+  if (modulesOutDir) {
+    filePaths.push(`${modulesOutDir}/**/*`);
+  }
+
+  const fileList = glob.sync(filePaths)
     .filter((item) => item.indexOf('.') !== -1)
     .concat(['manifest', 'source.zip']);
 
@@ -46,7 +54,9 @@ async function zipExtension(root, destDir) {
     fileList.push('nasl.extension.d.ts');
   }
 
-  const zipList = dirList.concat(fileList);
+  fileList.push('nasl.extension.json');
+
+  const zipList = fileList;
   const pkg = fs.readJSONSync(path.resolve(root, 'package.json'));
   const manifestData = {
     'Plugin-Version': '1.0.0',
@@ -90,6 +100,10 @@ async function zipExtension(root, destDir) {
     fs.unlinkSync(zipTgzPath);
     fs.unlinkSync(packPath);
   }
+
+  if (fs.existsSync(path.resolve(root, 'source.zip'))) {
+    fs.unlinkSync(path.resolve(root, 'source.zip'));
+  }
 }
 
 function getIgnores(root) {
@@ -113,6 +127,7 @@ function getIgnores(root) {
 }
 
 async function buildSourceZip(root) {
+  const pkg = fs.readJSONSync(path.resolve(root, 'package.json'));
   const ignores = getIgnores(root);
   const files = await glob(['**/*'], {
     cwd: root,
@@ -120,6 +135,24 @@ async function buildSourceZip(root) {
     ignore: ignores,
     dot: true,
   });
+
+  const packageFiles = await glob('*.tgz', {
+    cwd: root,
+    absolute: false,
+    dot: true,
+  });
+
+  const pkgName = pkg.name.replace('@', '').replace('/', '-');
+
+  packageFiles.forEach((file) => {
+    const name = path.basename(file, '.tgz');
+    if (name.startsWith(pkgName)) {
+      return;
+    }
+
+    files.push(file);
+  });
+
   await zipDir(root, 'source.zip', files);
 }
 
@@ -174,7 +207,7 @@ export async function buildNaslExtension(options: LcapBuildOptions, mode: BuildM
 
   await buildNaslExtensionConfig(options);
   await buildCSSInfo(options);
-  await buildTheme(options, mode === 'watch');
+  await buildTheme(options, mode);
   await buildDeclaration(options);
   await buildNaslExtensionManifest(options, mode === 'watch');
 
@@ -182,11 +215,13 @@ export async function buildNaslExtension(options: LcapBuildOptions, mode: BuildM
     return;
   }
 
+  await buildModules(options);
+
   if (options.pnpm) {
     execSync('pnpm pack');
   } else {
     execSync('npm pack');
   }
 
-  zipExtension(options.rootPath, options.destDir);
+  zipExtension(options.rootPath, options.destDir, options.modules && (options.modules as BuildModulesOptions).outDir ? (options.modules as BuildModulesOptions).outDir : 'es');
 }

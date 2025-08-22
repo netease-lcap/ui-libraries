@@ -1,6 +1,14 @@
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { ElPagination } from 'element-plus';
+// import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+// import zhCn from 'element-plus/es/locale/lang/zh-cn';
+// import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+// import en from 'element-plus/dist/locale/en.mjs';
+
 import _ from 'lodash';
+// import i18n from '../../../../dist-theme/i18n.json';
+import { transformKeys } from '@/utils';
+
 import Component from '../index';
 
 export default {
@@ -22,7 +30,6 @@ export const Example1 = {
     setup() {
       const activeName = ref('first');
       const tableData = async (page) => {
-        console.log(page, 'pagerequest====');
         const arr = [
           {
             date: '2016-05-03',
@@ -155,14 +162,14 @@ export const Example1 = {
       };
     },
     template: `
-    <div>
+    <el-flex style="border: 1px solid red;">
 <el-table
 ref="mytable"
 row-key="name"
 :dataSource="tableData2"
+style="width: 100%;"
 v-model:currentPage="currentPage"
 :showTotal="true"
-height=""
 @selection-change="logCellClick"
 field="six.name"
 order="descending"
@@ -178,16 +185,7 @@ dragSort="row"
 :stripe="true"
 >
 
-<el-table-column label="申请人"  style="color:red"  sortable>
-  <div>123</div>
-</el-table-column>
 
-    <el-table-column label="渠道" prop="address"  >
-        <template #default="current">
-          <div>{{current.item.address}}</div>
-          <el-input v-model="current.item.address" />
-        </template>
-    </el-table-column>
 
     <el-table-column prop="six.name" label="Date" sortable="none" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
@@ -195,23 +193,26 @@ dragSort="row"
 
 
 </el-table>
-<el-button @click="logCellClick">添加行</el-button>
-    </div>
+    </el-flex>
     `,
   }),
 };
 
-/*  基础的、简洁的标签页。 */
+/*  基础的、简洁的标签页。主题 demo 勿动 */
 export const Example2 = {
   name: '示例2',
   render: () => ({
     setup() {
       const activeName = ref('first');
       const total = 28;
-      const tableData = async (pageObj = { currentPage: 1, pageSize: 20 }) => {
+      const tableData = async (pageObj) => {
         console.log(pageObj, 'pagerequest====');
         const initialData = [];
-        for (let i = 0; i < total; i++) {
+        for (
+          let i = (pageObj.currentPage - 1) * pageObj.pageSize;
+          i < pageObj.currentPage * pageObj.pageSize && i < total;
+          i++
+        ) {
           initialData.push({
             index: i + 1,
             applicant: ['贾明', '张三', '王芳'][i % 3],
@@ -240,9 +241,9 @@ export const Example2 = {
       watch(selectedRowKeys, (el) => {
         console.log(el, 'log');
       });
-      setTimeout(() => {
-        console.log(mytable, 'mytable====');
-      }, 1000);
+      // setTimeout(() => {
+      //   console.log(selectedRowKeys,'selectedRowKeys');
+      // }, 1000);
       return {
         tableData,
         pageSize2,
@@ -257,6 +258,8 @@ ref="mytable"
 row-key="index"
 :dataSource="tableData"
 :pagination="true"
+v-model:currentPage="currentPage"
+v-model:pageSize="pageSize2"
 :showTotal="true"
 :sorting="{ field: 'createTime', order: 'desc' }"
 :showJumper="true"
@@ -271,19 +274,18 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column prop="applicant" sortable="custom" label="申请人" width="100" fixedPosition="left"></el-table-column>
-  <el-table-column prop="status" label="申请状态" width="150" sorter></el-table-column>
-  <el-table-column prop="channel" label="签署方式" width="200"></el-table-column>
-  <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
-  <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
-  <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
-  <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
-  <el-table-column prop="confirmTime" label="确认时间" width="160"></el-table-column>
+  <el-table-column prop="applicant" title="申请人" width="100" fixedPosition="left"></el-table-column>
+  <el-table-column prop="status" title="申请状态" width="150" sorter></el-table-column>
+  <el-table-column prop="channel" title="签署方式" width="200"></el-table-column>
+  <el-table-column prop="email" title="邮箱地址" width="200" ellipsis></el-table-column>
+  <el-table-column prop="createTime" title="创建时间" width="160"></el-table-column>
+  <el-table-column prop="applyTime" title="申请时间" width="160"></el-table-column>
+  <el-table-column prop="modifyTime" title="修改时间" width="160"></el-table-column>
+  <el-table-column prop="confirmTime" title="确认时间" width="160"></el-table-column>
 </el-table>
     `,
   }),
 };
-
 export const Default = {
   name: '基础翻页',
   render: () => ({

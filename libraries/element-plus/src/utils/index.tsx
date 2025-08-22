@@ -6,15 +6,24 @@ export * from './dom';
 function filterUnderfinedValue(object: Record<string, string>) {
   return Object.fromEntries(Object.entries(object).filter(([, value]) => !_.isUndefined(value)));
 }
+
 const selfAttempt = _.attempt;
 const attempt = _.wrap(selfAttempt, (fn, ...arg: [any, any]) => {
   if (_.isArray(arg[0])) {
     return arg[0].map((item) => fn(item, ...arg.slice(1)));
   }
   const result = fn(...arg);
-  if (_.isError(result)) console.log(result);
+  if (_.isError(result)) {
+    console.error('components error', result);
+  }
   return result;
 });
+const mergeRef = (ref) => {
+  return (componentRef) => {
+    Object.assign(ref, componentRef);
+    return componentRef;
+  };
+};
 
 function isValidTime(time) {
   return !_.isNil(time) && dayjs(time).isValid();
@@ -40,6 +49,7 @@ _.mixin({
   isValidLink,
   stringToAscii,
   isValidTime,
+  mergeRef,
 });
 // _.mixin
 declare module 'lodash' {
@@ -49,5 +59,19 @@ declare module 'lodash' {
     isValidLink: typeof isValidLink;
     stringToAscii: typeof stringToAscii;
     isValidTime: typeof isValidTime;
+    mergeRef: typeof mergeRef;
   }
+}
+
+export function transformKeys(obj: Record<string, any>): Record<string, any> {
+  const result = _.reduce(
+    obj,
+    (result, value, key) => {
+      const keys = _.includes(key, '_') ? key.replace('_', '.') : key;
+      _.set(result, keys, value);
+      return result;
+    },
+    {} as Record<string, any>,
+  );
+  return { el: result };
 }

@@ -436,6 +436,17 @@ namespace nasl.ui {
         })
         clearable: nasl.core.Boolean = false;
 
+        @Prop<USelectOptions<T, V, P, M, C>, 'clearIcon'>({
+            group: '交互属性',
+            title: '清除图标',
+            description: '设置清除图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.clearable === true,
+        })
+        clearIcon: nasl.core.String;
+
         @Prop<USelectOptions<T, V, P, M, C>, 'tagsOverflow'>({
             group: '交互属性',
             title: '多选项展示形式',
@@ -659,6 +670,16 @@ namespace nasl.ui {
             oldValue: V;
             items: nasl.collection.List<T>;
             oldItems: nasl.collection.List<T>;
+        }) => any;
+
+        @Event({
+            title: '全选后',
+            description: '选择全选时触发',
+        })
+        onCheckAll: (event: {
+            value: V;
+            oldValue: V;
+            checked: nasl.core.Boolean;
         }) => any;
 
         @Event({

@@ -11,18 +11,17 @@ namespace nasl.ui {
         click: true,
       },
       dataSource: {
-        dismiss:
-          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
         loopRule: 'nth-last-child(-n+2)',
-        loopElem: ".el-tabs__nav > .el-tabs__item",
+        loopElem: '.el-tabs__nav > .el-tabs__item',
         propertyName: ':dataSource',
         displayData: "\"[{label: '菜单一', value: '0'},{label:'菜单二', value: '1'}, {label:'菜单三', value: '2'}]\"",
       },
       additionalAttribute: {
         ':collapseTransition': '"false"',
         menuTrigger: 'click',
-        ":showInDesigner": "\"true\"",
+        ':showInDesigner': '"true"',
       },
       snippetsDisplayConditions: {
         default: "this.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",
@@ -84,7 +83,7 @@ namespace nasl.ui {
       },
       onChange: [
         {
-         clear: ['collapse'], 
+          clear: ['collapse'],
           if: (_) => _ === 'horizontal',
         },
       ],
@@ -145,8 +144,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '是否使用 vue-router 的模式',
-      description:
-        '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
+      description: '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
       setter: { concept: 'SwitchSetter' },
     })
     router: nasl.core.Boolean = false;
@@ -155,7 +153,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '当前激活菜单的标识',
       description: '当前激活菜单的 标识',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'InputSetter', autoClear: true },
     })
     defaultActive: nasl.core.String;
 
@@ -217,55 +215,157 @@ namespace nasl.ui {
       title: '点击',
       description: '在元素上按下并释放任意鼠标按钮时触发。',
     })
-    onClick: (event: MouseEvent) => any;
+    onClick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '双击',
       description: '在元素上双击鼠标按钮时触发。',
     })
-    onDblclick: (event: MouseEvent) => any;
+    onDblclick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '右键点击',
       description: '在右键菜单显示前触发。',
     })
-    onContextmenu: (event: MouseEvent) => any;
+    onContextmenu: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '鼠标按下',
       description: '在元素上按下任意鼠标按钮时触发。',
     })
-    onMousedown: (event: MouseEvent) => any;
+    onMousedown: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '鼠标释放',
       description: '在元素上释放任意鼠标按钮时触发。',
     })
-    onMouseup: (event: MouseEvent) => any;
+    onMouseup: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '鼠标移入',
       description: '鼠标移入元素时触发。',
     })
-    onMouseenter: (event: MouseEvent) => any;
+    onMouseenter: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '鼠标移出',
       description: '鼠标移出元素时触发。',
     })
-    onMouseleave: (event: MouseEvent) => any;
+    onMouseleave: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
-    @Event({
-      title: '聚焦时',
-      description: '聚焦时触发',
-    })
-    onFocus: (event: FocusEvent) => void;
 
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: FocusEvent) => void;
 
     @Slot({
       title: '默认',
@@ -358,6 +458,7 @@ namespace nasl.ui {
       title: '是否禁用',
       description: '是否禁用',
       setter: { concept: 'SwitchSetter' },
+      bindHide: true,
     })
     disabled: nasl.core.Boolean = false;
 
@@ -438,55 +539,157 @@ namespace nasl.ui {
       title: '点击时',
       description: '点击时触发',
     })
-    onClick: (event: MouseEvent) => void;
+    onClick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Event({
       title: '双击',
       description: '在元素上双击鼠标按钮时触发。',
     })
-    onDblclick: (event: MouseEvent) => any;
+    onDblclick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '右键点击',
       description: '在右键菜单显示前触发。',
     })
-    onContextmenu: (event: MouseEvent) => any;
+    onContextmenu: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '鼠标按下',
       description: '在元素上按下任意鼠标按钮时触发。',
     })
-    onMousedown: (event: MouseEvent) => any;
+    onMousedown: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '鼠标释放',
       description: '在元素上释放任意鼠标按钮时触发。',
     })
-    onMouseup: (event: MouseEvent) => any;
+    onMouseup: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '鼠标移入',
       description: '鼠标移入元素时触发。',
     })
-    onMouseenter: (event: MouseEvent) => any;
+    onMouseenter: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '鼠标移出',
       description: '鼠标移出元素时触发。',
     })
-    onMouseleave: (event: MouseEvent) => any;
+    onMouseleave: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
-    @Event({
-      title: '聚焦时',
-      description: '聚焦时触发',
-    })
-    onFocus: (event: FocusEvent) => void;
 
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: FocusEvent) => void;
 
     @Slot({
       title: '菜单项内容',
@@ -516,7 +719,6 @@ namespace nasl.ui {
     }
   }
   export class ElMenuItemGroupOptions extends ViewComponentOptions {
-
     @Slot({
       title: '默认',
       description: '默认',

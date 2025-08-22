@@ -9,6 +9,7 @@ export function handleModelValue(props) {
   const provide = props.get('provide');
   const ref = props.get('ref');
   const formItemList = useRef({});
+  const preview = props.get('preview') ?? false;
   return {
     model,
     provide: Object.assign(provide, {
@@ -24,13 +25,19 @@ export function handleModelValue(props) {
         deleteFormitem: (key) => {
           delete formItemList.value[key];
         },
+        preview,
       },
     }),
     ref: Object.assign(ref, {
-      validated: async () => ref.validate().then(
+      validated: async () => {
+        _.forEach(Object.entries(formItemList.value), ([key, item]: any) => {
+          model.value[key] = item?.getModelValue?.() ?? model.value[key];
+        });
+        return ref.validate().then(
           () => ({ valid: true }),
           () => ({ valid: false }),
-        ),
+        );
+      },
       resetForm: () => {
         ref.resetFields();
         _.values(formItemList.value).forEach((item) => _.attempt(item.resetField));

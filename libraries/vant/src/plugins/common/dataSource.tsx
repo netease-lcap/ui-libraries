@@ -1,0 +1,123 @@
+import _ from 'lodash';
+import fp from 'lodash/fp';
+import { watch } from 'vue';
+import { useRequest } from 'vue-hooks-plus';
+import { useMemo, useState, useRef, useEffect } from '@/plugins/hooks';
+import { DataSourceType, DataSourceArrayType } from '@/types';
+
+export function useHandleMapField(filedInfo: {
+  label?: string;
+  value?: string;
+  disabled?: string;
+  divided?: string;
+  textField?: string;
+  valueField?: string;
+  disabledField?: string;
+  dividedField?: string;
+  dataSource: DataSourceType;
+  fieldsMap?: Record<string, string>;
+}) {
+  const {
+    label = 'label',
+    value = 'value',
+    textField = 'label',
+    valueField = 'value',
+    dataSource,
+    disabled = 'disabled',
+    disabledField,
+    dividedField,
+    divided = 'divided',
+    fieldsMap,
+  } = filedInfo;
+  return useMemo(
+    () => _.map(dataSource, (item: any) => ({
+        ...item,
+        ...Object.fromEntries(
+          Object.entries(fieldsMap || {}).map(([key, path]) => [key, _.get(item, path, undefined)]),
+        ),
+        [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
+        [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
+        [disabled]: !_.isObject(item) ? false : _.get(item, disabledField || 'disabled', false),
+        [divided]: !_.isObject(item) ?false : _.get(item, dividedField || 'divided', false),
+      })),
+    [label, value, textField, valueField, dataSource],
+  ) as DataSourceArrayType;
+}
+const handleLocalPageData = _.cond([
+  [
+    _.conforms({ currentPage: _.isNumber, pageSize: _.isNumber, dataSource: _.isArray, pagination: (el) => el }),
+    (params) => {
+      const { currentPage = 1, pageSize = 10, dataSource } = params;
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      return { list: dataSource.slice(start, end), total: dataSource.length };
+    },
+  ],
+  [_.stubTrue, (params) => params.dataSource],
+]);
+const handleDataSouceToFn = _.cond([
+  [_.isArray, (dataSource) => async (params: any) => handleLocalPageData({ dataSource, ...params })],
+  [
+    _.isFunction,
+    (dataSource) => async (params: any) => {
+      const data = await dataSource(params);
+      return handleLocalPageData({ dataSource: data, ...params });
+    },
+  ],
+  [_.stubTrue, () => async (params) => handleLocalPageData({ dataSource: [], ...params })],
+]);
+export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
+  const [resultData, setResult] = useState({});
+  const resultRef = useRef({});
+  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [_.cloneDeep(dataSource)]);
+
+  resultRef.value = useMemo(
+    () => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }),
+    [dataSourceFn],
+  );
+
+  useEffect(() => {
+    watch(
+      resultRef,
+      (value) => {
+        return setResult({ ...value, data: _.cloneDeep(value.data) });
+      },
+      { immediate: true, deep: true },
+    );
+  }, []);
+  const { data, run, loading } = resultData
+    ?? ({} as {
+      data?: DataSourceArrayType;
+      run?: (...args: any[]) => void;
+      loading?: boolean;
+    });
+  return { data, run, loading };
+}
+
+export function useFormatDataSource(dataSource: DataSourceArrayType): DataSourceArrayType {
+  const conformsArray = _.cond([
+    [Array.isArray, _.identity],
+    [_.conforms({ list: _.isArray }), fp.get('list')],
+    [_.stubTrue, _.stubArray],
+  ]);
+  return useMemo(() => conformsArray(dataSource), [dataSource]);
+}
+
+export function useDataSourceToTree(
+  dataSource: DataSourceArrayType,
+  parentField: string,
+  valueField: string = 'value',
+): DataSourceArrayType {
+  if (_.isNil(parentField) || !parentField) return dataSource;
+  const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField, item), item]));
+  return dataSource.reduce((acc, item) => {
+    const parent = map.get(_.get(item, parentField));
+    const value = map.get(_.get(item, valueField, item));
+    if (parent) {
+      parent.children = _.isArray(parent.children) ? parent.children.concat(value) : [value];
+    } else {
+      acc.push(value);
+    }
+    return acc;
+  }, []) as DataSourceArrayType;
+}

@@ -130,6 +130,30 @@ export default {
 .root[line] th, .root[line] thead tr {
     border-bottom: none;
 }
+.root[line] tr[selected] td,
+.root[line] tr[selected] td:first-child {
+    box-shadow: inset 1px 0 0 var(--table-view-border-color);
+}
+.root[line] tr[selected] td:last-child {
+    box-shadow: inset 1px 0 0 var(--table-view-border-color), inset -1px 0 0 var(--table-view-border-color);
+}
+/** 暂时没有需求，不使用 */
+/* .root[line] tr[selected] td{
+    box-shadow: inset 1px 0 0 var(--table-view-border-color),
+        inset 0px 1px 0px 0px var(--table-view-row-selected-border-color),
+        inset 0px -1px 0px 0px var(--table-view-row-selected-border-color);
+}
+.root[line] tr[selected] td:first-child{
+    box-shadow: inset 1px 0 0 var(--table-view-row-selected-border-color-first),
+        inset 0px 1px 0px 0px var(--table-view-row-selected-border-color),
+        inset 0px -1px 0px 0px var(--table-view-row-selected-border-color);
+}
+.root[line] tr[selected] td:last-child{
+    box-shadow: inset 1px 0 0 var(--table-view-border-color),
+        inset 0px 1px 0px 0px var(--table-view-row-selected-border-color),
+        inset 0px -1px 0px 0px var(--table-view-row-selected-border-color),
+        inset -1px 0px 0px 0px var(--table-view-row-selected-border-color-last);
+} */
 
 /* 下一个大版本放开 */
 .root[striped] thead tr {

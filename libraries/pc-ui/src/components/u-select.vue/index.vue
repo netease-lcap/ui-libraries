@@ -170,8 +170,10 @@
         clearable &&
         !!(filterable ? filterText || currentText : currentText)
       "
-      :class="$style.clearable"
-      @click.stop="clear"></span>
+      :class="[$style.clearable, { [$style.useIcon]: !!clearIcon }]"
+      @click.stop="clear">
+      <i-ico :name="clearIcon" v-if="clearIcon"></i-ico>
+    </span>
     <m-popper
       :class="$style.popper"
       ref="popper"
@@ -389,6 +391,7 @@ export default {
     isItemDisplay: { type: Boolean, default: true },
     autoCheckSelectedValue: { type: Boolean, default: true },
     optionIsSlot: { type: Boolean, default: false },
+    clearIcon: { type: String },
   },
   data() {
     return {
@@ -1002,7 +1005,7 @@ export default {
           }
         }, 0);
       } else {
-        if (this.filterable && this.filterText === '') {
+        if (this.filterable && this.filterText === '' && !this.compositionInputing) {
           if (!this.selectedVMs.length) return;
           const lastItemVM = this.selectedVMs[this.selectedVMs.length - 1];
           this.select(lastItemVM, false);

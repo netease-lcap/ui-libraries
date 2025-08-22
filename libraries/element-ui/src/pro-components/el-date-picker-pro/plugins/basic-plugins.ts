@@ -1,5 +1,5 @@
 import { CreateElement } from 'vue';
-import { NaslComponentPluginOptions, $render } from '@lcap/vue2-utils';
+import { NaslComponentPluginOptions, $render, $ref } from '@lcap/vue2-utils';
 import { DateRangeValue, DateRangePicker, DateValue, DateMultipleValue } from '@element-pro';
 import {
   usePlaceholder,
@@ -76,9 +76,10 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         const [range] = props.get<[boolean]>(['range']);
         const onChange = props.get<any>('onChange') || (() => {});
         const changeEvent = getChangeEventByValue(v, range, valueFormat, props.get<boolean>('multiple'));
-        changeValue(context.dayjsValue, v);
+        const updateValue = changeValue(context.dayjsValue, v);
         onChange({
           ...changeEvent,
+          value: updateValue,
           trigger: context.trigger,
         });
       },
@@ -99,6 +100,11 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
         context.propsData.props.rangeInputProps.suffixIcon = suffixIcon;
 
         return h(DateRangePicker, context.propsData, context.childrenNodes);
+      },
+      [$ref]: {
+        focus: () => {
+          // 假装这里有一个聚焦方法
+        },
       },
     };
   },

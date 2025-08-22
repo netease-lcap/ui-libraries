@@ -1,10 +1,17 @@
 import { ElInputTag as ElInputTagPlus } from 'element-plus';
+import _ from 'lodash';
 import './index.css';
 import { registerComponent } from '../../plugins';
 import * as basicsPlugin from './plugins/index';
 import { withFormItem } from '../../components/el-form/plugins/form-item';
 
-const ElInputTag = registerComponent(ElInputTagPlus, { plugin: basicsPlugin });
+function ElInputTagRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
+
+const ElInputTag = registerComponent(ElInputTagPlus, { plugin: basicsPlugin, name: 'el-input-tag' });
 const ElFormInputTag = withFormItem(ElInputTag, 'el-form-input-tag');
-export { ElInputTagPlus, ElInputTag, ElFormInputTag };
+
+export { ElInputTagPlus, ElInputTag, ElFormInputTag, ElInputTagRegister };
 export default ElInputTag;

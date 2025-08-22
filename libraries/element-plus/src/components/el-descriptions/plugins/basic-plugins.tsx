@@ -1,7 +1,10 @@
 import _ from 'lodash';
+import { ElDescriptionsItem } from 'element-plus';
+import { cloneVNode } from 'vue';
 import { $deletePropsList, $ide } from '@/plugins/constants';
 import { useEffect, useMemo } from '@/plugins/hooks';
 import { ElDescriptionsCell } from '../cell';
+
 export function handleNodePath(props) {
   const nodePath = props.get('data-nodepath') || '3333';
 
@@ -22,22 +25,48 @@ export function handleNodePath(props) {
 
 handleNodePath.type = $ide;
 
-
-export function handleDescriptionsCell(props) {
+export function handleDescriptionsCell2(props) {
   const slots = props.get('slots');
   const defaultSlotVNode = slots?.default?.();
-  console.log(defaultSlotVNode, 'defaultSlotVNode')
-  const node = _.map(defaultSlotVNode, (vNode) => ({
-    ...vNode,
-    children: {
-      ...vNode.children,
-      default: () => <span>{vNode.children.default()}<ElDescriptionsCell style={vNode.props.style} /></span>
-    }
-  }))
-
+  const node = _.map(defaultSlotVNode, (Vnode) => {
+    const itemClass = _.uniqueId('Descriptions_');
+    return (
+      <ElDescriptionsItem
+        {...Vnode.props}
+        class-name={`${itemClass} ${_.get(Vnode, 'props.class', '')}`}
+        label-class-name={`${itemClass} ${_.get(Vnode, 'props.labelClassName', '')}`}
+        v-slots={_.omit(Vnode.children, ['default'])}
+      >
+        {cloneVNode(Vnode, { contentClassName: itemClass })}
+      </ElDescriptionsItem>
+    );
+  });
   return {
-    slots: {
-      default: () => node
-    }
-  }
+    slots: _.assign(slots, {
+      default: () => node,
+    }),
+  };
 }
+// function handleDescriptionsCell(props) {
+//   const slots = props.get('slots');
+//   const defaultSlotVNode = slots?.default?.();
+//   console.log(defaultSlotVNode, 'defaultCurrentPage');
+//   const node = _.map(defaultSlotVNode, (vNode) => ({
+//     ...vNode,
+//     children: {
+//       ...vNode.children,
+//       default: () => (
+//         <span>
+//           {vNode.children.default()}
+//           <ElDescriptionsCell style={vNode.props.style} />
+//         </span>
+//       ),
+//     },
+//   }));
+
+//   return {
+//     slots: {
+//       default: () => node,
+//     },
+//   };
+// }

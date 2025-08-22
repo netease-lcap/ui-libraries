@@ -1,6 +1,7 @@
 import { $deletePropsList } from '@/plugins/constants';
 
 export function columnPlugin(props) {
+  // TODO
   const transformResponsiveProps = (key, keys) => {
     const [spanKey, offsetKey] = keys;
     const span = props.get(spanKey);

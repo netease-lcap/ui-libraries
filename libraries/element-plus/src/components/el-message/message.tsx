@@ -3,6 +3,7 @@ import { ElMessage as ElMessagePlus, MessageHandler } from 'element-plus';
 import { setElStyle } from '../../utils/dom';
 import { ElIcon } from '../index';
 
+// TODO
 export default defineComponent({
   name: 'ElMessage',
   props: {
@@ -69,12 +70,7 @@ export default defineComponent({
       const vnodes = slots.default?.() || [];
       const message = (
         <div class="el-message__content">
-          {props.icon && (
-            <ElIcon
-              name={props.icon}
-              class={`el-message__icon el-icon-${props.type}`}
-            />
-          )}
+          {props.icon && <ElIcon name={props.icon} class={`el-message__icon el-icon-${props.type}`} />}
           {vnodes}
         </div>
       );
@@ -95,7 +91,7 @@ export default defineComponent({
           emit('update:visible', false);
           emit('close');
         },
-      }as any);
+      } as any);
       instance = getCurrentInstance()!;
       if (!instance) {
         return;

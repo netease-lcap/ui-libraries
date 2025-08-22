@@ -1,0 +1,16 @@
+/**
+ * @component van-text-ellipsis
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 文本省略号行高
+   */
+  --van-text-ellipsis-line-height: 1.6;
+  /**
+   * @type color
+   * @desc 文本省略号操作按钮颜色
+   */
+  --van-text-ellipsis-action-color: var(--van-blue);
+}

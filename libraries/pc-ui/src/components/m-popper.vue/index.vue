@@ -226,7 +226,7 @@ export default {
                     return this.$parent.$el;
                 else if (this.reference === 'context-parent') {
                     // 求上下文中的 parent
-                    if (this.$parent === this.$vnode.context)
+                    if (this.$vnode &&this.$parent === this.$vnode.context)
                         return this.$el.parentElement; // Vue 的 vnode.parent 没有连接起来，需要自己找，不知道有没有更好的方法
                     let parentVNode = this.$parent._vnode;
                     while (
@@ -236,11 +236,13 @@ export default {
                         parentVNode = parentVNode.children.find((child) =>
                             child.elm.contains(this.$el),
                         ); // if (!parentVNode)
-                    if (parentVNode && parentVNode.context === this.$vnode.context)
+                    if (parentVNode && this.$vnode && parentVNode.context === this.$vnode.context)
                         return parentVNode.elm; // 否则，找第一个上下文一致的组件
                     let parentVM = this.$parent;
                     while (
                         parentVM
+                        && parentVM.$vnode
+                        && this.$vnode
                         && parentVM.$vnode.context !== this.$vnode.context
                     )
                         parentVM = parentVM.$parent;
@@ -462,7 +464,7 @@ export default {
             this.$emit('toggle', { opened }, this); // @deprecated end
         },
         clearTimers() {
-            this.timers.forEach((timer, index) => {
+            this.timers?.forEach((timer, index) => {
                 this.timers[index] = clearTimeout(timer);
             });
         },

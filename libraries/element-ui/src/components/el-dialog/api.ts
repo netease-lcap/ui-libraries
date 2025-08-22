@@ -170,6 +170,8 @@ namespace nasl.ui {
     })
     destroyOnClose: nasl.core.Boolean = false;
 
+    
+
     @Event({
       title: '打开的回调',
       description: '对话框打开的回调',

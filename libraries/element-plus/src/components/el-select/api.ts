@@ -84,11 +84,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '为空的内容',
-      description: '当下拉列表为空时显示的内容。',
+      title: '无选项时显示的文字',
+      description: '无选项时显示的文字，默认是 “No data”',
       setter: { concept: 'InputSetter' },
     })
-    noDataText: any;
+    noDataText: nasl.core.String = 'No data';
 
     // @Prop({
     //   group: '主要属性',
@@ -178,7 +178,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
+    modelValue: M extends true ? nasl.collection.List<V> :V 
 
     @Prop({
       group: '主要属性',
@@ -635,11 +635,10 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '选项值',
-      sync: true,
       description: '选项值',
       setter: { concept: 'InputSetter' },
     })
-    value: nasl.core.String | nasl.core.Decimal | nasl.core.Boolean;
+    value: V;
 
     @Prop({
       group: '主要属性',

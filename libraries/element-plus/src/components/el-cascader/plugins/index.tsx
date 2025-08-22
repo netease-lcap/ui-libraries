@@ -9,6 +9,7 @@ import {
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
+import { getIsPreview, getRender } from '@/plugins/common/preview';
 
 export * from './ide';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -40,11 +41,60 @@ export function handleDataSource(props) {
 export function handleCascaderProps(props) {
   const multiple = props.get('multiple', false);
   const checkStrictly = props.get('checkStrictly', false);
+  const propsProps = props.get('props');
 
   return {
     props: {
       multiple,
       checkStrictly,
+      ...(_.isObject(propsProps) ? propsProps : {}),
     },
+  };
+}
+
+export function handlePreview(props) {
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const isPreview = getIsPreview(props);
+
+  const previewRender = (insProps, { attrs }) => {
+    const getPathText = (options, path) => {
+      if (path.length === 0 || options.length === 0) return '-';
+      let currentLevel = options;
+      const pathTexts: string[] = [];
+      for (const val of path) {
+        const node = currentLevel.find((opt) => opt.value === val);
+        if (node) {
+          pathTexts.push(node.label || '');
+          currentLevel = node.children || [];
+        } else {
+          break;
+        }
+      }
+      return pathTexts.join(separator);
+    };
+    const getListPreviewText = (data, modelValue) => {
+      if (modelValue.length === 0) return '-';
+      if (!multiple) {
+        return getPathText(data, modelValue);
+      }
+      return modelValue
+        .filter(_.isArray)
+        .map((path) => getPathText(data, path))
+        .join(', ');
+    };
+
+    const multiple = props.get('multiple', false);
+    const separator = props.get('separator', ' / ');
+    const inIDE = !!props.get('data-nodepath');
+    const { options = [], modelValue = [] } = insProps;
+    const previewText = inIDE ? '-' : getListPreviewText(options, modelValue);
+    return <el-preview text={previewText} />;
+  };
+
+  const { render, insRef } = getRender(Component, previewRender, isPreview);
+  return {
+    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+    render,
   };
 }

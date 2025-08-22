@@ -1,9 +1,9 @@
-import ElRow from '../index';
+// import ElRow from '../index';
 
 export default {
   id: 'el-row-blocks',
   title: '组件列表/Row 行容器/内置区块',
-  component: ElRow,
+  // component: ElRow,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',

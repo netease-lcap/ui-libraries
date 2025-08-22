@@ -1,11 +1,15 @@
 import { ElRow as ElRowPlus, ElCol as ElColPlus } from 'element-plus';
-
+import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 // import * as basicsPlugin from './plugins/index';
 import * as columnPlugin from './plugins/col-plugins';
 
-const ElRow = ElRowPlus;
-const ElCol = registerComponent(ElColPlus, { plugin: columnPlugin });
-export { ElRow, ElCol };
+function ElColRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(columnPlugin, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
 
-export default ElRow;
+const ElRow = ElRowPlus;
+const ElCol = registerComponent(ElColPlus, { plugin: columnPlugin, name: 'el-col' });
+
+export { ElRowPlus, ElColPlus, ElRow, ElCol, ElColRegister };

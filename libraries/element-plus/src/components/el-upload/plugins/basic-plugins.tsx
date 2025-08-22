@@ -3,9 +3,11 @@ import _ from 'lodash';
 import isNil from 'lodash/isNil';
 import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
 import { useRef } from '@/plugins/hooks';
+import { getIsPreview, getRender } from '@/plugins/common/preview';
 
 type Converter = 'json' | 'simple';
 
+// TODO
 const getFileNameByURL = (url) => {
   const match = url.match(/\/([^/]+)$/);
   return match ? match[1] : null;
@@ -77,9 +79,8 @@ const getValueByList = (fileList: UploadFile[], converter: Converter, urlField: 
     .map((item) => {
       if (item.response) {
         return formatResponse(urlField, item.response, item);
-      } else {
-        return item;
       }
+      return item;
     });
 
   return converter === 'simple' ? successFiles.map((x) => x.url || '').join(',') : JSON.stringify(successFiles);
@@ -94,8 +95,8 @@ export function handleResponse(props) {
   const onChange = props.get('onChange');
   const urlField = props.get('urlField') || 'filePath';
   const converter = props.get('converter') || 'simple';
-  const value = props.get('value');
-  const setValue = props.get('onUpdate:value') ?? (() => {});
+  const value = props.get('modelValue');
+  const setValue = props.get('onUpdate:modelValue') ?? (() => {});
   const defaultFileList = getFileListByValue(value, converter, undefined);
   return {
     fileList: defaultFileList,
@@ -162,8 +163,8 @@ export function handleEvent(props) {
       _.isFunction(beforeUpload) && _.attempt(beforeUpload, rawFile);
     },
     beforeRemove: (uploadFile: UploadFile, uploadFiles: UploadFile[]) => {
-      _.isFunction(beforeRemove) &&
-        _.attempt(beforeRemove, {
+      _.isFunction(beforeRemove)
+        && _.attempt(beforeRemove, {
           uploadFile,
           uploadFiles,
         });
@@ -195,8 +196,7 @@ export function handleSlots(props) {
       }
     : {};
 
-  const pictureCardSlot =
-    listType === 'picture-card'
+  const pictureCardSlot = listType === 'picture-card'
       ? {
           trigger: (
             <ElFlex direction="column" alignment="center">
@@ -206,15 +206,15 @@ export function handleSlots(props) {
         }
       : {};
 
-  const uploadSlot =
-    !autoUpload && showUploadButton
+  const uploadSlot = !autoUpload && showUploadButton
       ? {
           default: (
             <ElButton
               text={triggerUploadText}
               onClick={() => {
                 ref?.submit();
-              }}></ElButton>
+              }}
+            />
           ),
         }
       : {};
@@ -293,3 +293,25 @@ handlePreviewRender.order = 1;
 export * from './ide';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+
+export function handlePreview(props) {
+  const ref = props.get('ref');
+  const Component = props.get('render');
+  const isPreview = getIsPreview(props);
+
+  const previewRender = (insProps, { attrs, slots }) => {
+    const inIDE = !!props.get('data-nodepath');
+    const myClass = props.get('class', '');
+    return inIDE ? (
+      <el-text text="-"></el-text>
+    ) : (
+      <Component {...{ insProps }} {...attrs} class={`${myClass} el-upload__preview`} />
+    );
+  };
+
+  const { render, insRef } = getRender(Component, previewRender, isPreview);
+  return {
+    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+    render,
+  };
+}

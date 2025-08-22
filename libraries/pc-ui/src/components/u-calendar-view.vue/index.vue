@@ -335,6 +335,10 @@ export default {
                     if (this.selectedDates[0]) {
                         this.year = this.selectedDates[0].year();
                         this.month = this.selectedDates[0].month();
+                    } else {
+                        // fix: 3191090264602624
+                        this.year = minYear;
+                        this.month = minMonth;
                     }
                 } else {
                     // 当前日期不在配置日期范围内，重新赋值成最小日期
@@ -645,10 +649,12 @@ export default {
                 const endDate = getDay(endTime, null);
                 if (!startDate)
                     return false;
-                if (endDate) {
+                // 3127312172495360: 开始时间是在当前比较的这天里，就应该是合法的。
+                if (date.format(DefaultFormatType) === startDate.format(DefaultFormatType)) {
+                    return true;
+                } else if (endDate) {
                     return date.isSameOrBefore(endDate) && date.isSameOrAfter(startDate);
                 }
-                return date.format(DefaultFormatType) === startDate.format(DefaultFormatType);
             });
             if (!validData.length)
                 return {};

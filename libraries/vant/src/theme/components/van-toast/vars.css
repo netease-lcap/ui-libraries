@@ -1,0 +1,81 @@
+/**
+ * @component van-toast
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 轻提示最大宽度
+   */
+  --van-toast-max-width: 70%;
+  /**
+   * @type input
+   * @desc 轻提示字体大小
+   */
+  --van-toast-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   * @desc 轻提示文字颜色
+   */
+  --van-toast-text-color: var(--van-white);
+  /**
+   * @type color
+   * @desc 轻提示加载图标颜色
+   */
+  --van-toast-loading-icon-color: var(--van-white);
+  /**
+   * @type input
+   * @desc 轻提示行高
+   */
+  --van-toast-line-height: var(--van-line-height-md);
+  /**
+   * @type input
+   * @desc 轻提示圆角半径
+   */
+  --van-toast-radius: var(--van-radius-lg);
+  /**
+   * @type color
+   * @desc 轻提示背景色
+   */
+  --van-toast-background: rgba(0, 0, 0, .7);
+  /**
+   * @type input
+   * @desc 轻提示图标大小
+   */
+  --van-toast-icon-size: 36px;
+  /**
+   * @type input
+   * @desc 轻提示文字最小宽度
+   */
+  --van-toast-text-min-width: 96px;
+  /**
+   * @type input
+   * @desc 轻提示文字内边距
+   */
+  --van-toast-text-padding: var(--van-padding-xs) var(--van-padding-sm);
+  /**
+   * @type input
+   * @desc 轻提示默认内边距
+   */
+  --van-toast-default-padding: var(--van-padding-md);
+  /**
+   * @type input
+   * @desc 轻提示默认宽度
+   */
+  --van-toast-default-width: 88px;
+  /**
+   * @type input
+   * @desc 轻提示默认最小高度
+   */
+  --van-toast-default-min-height: 88px;
+  /**
+   * @type input
+   * @desc 轻提示顶部位置距离
+   */
+  --van-toast-position-top-distance: 20%;
+  /**
+   * @type input
+   * @desc 轻提示底部位置距离
+   */
+  --van-toast-position-bottom-distance: 20%;
+}

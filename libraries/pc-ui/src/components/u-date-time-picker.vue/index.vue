@@ -8,6 +8,7 @@
         @clear="clearValue"
         :prefix="preIcon?preIcon:undefined"
         :suffix="suffixIcon?suffixIcon:undefined"
+        :clear-icon="clearIcon?clearIcon:undefined"
         :color="formItemVM && formItemVM.color">
         <template #prefix><i-ico v-if="preIcon" :name="preIcon" :class="[$style.preIcon]" notext slot="prefix"></i-ico></template>
         <template #suffix><i-ico v-if="suffixIcon" :name="suffixIcon" :class="[$style.suffixIcon]" notext></i-ico></template>
@@ -111,6 +112,9 @@ export default {
         suffixIcon: {
             type: String,
             default: '',
+        },
+        clearIcon: {
+            type: String,
         },
         disabled: { type: Boolean, default: false },
         preview: { type: Boolean, default: false },

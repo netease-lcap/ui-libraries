@@ -1,6 +1,7 @@
 import { ref, watch } from 'vue';
 import Component from '../index';
 // import { ElSelect, ElOption } from '../index';
+import ExampleDemo1 from '../demos/example-demo1.vue';
 
 export default {
   id: 'el-form-examples',
@@ -40,23 +41,7 @@ export const Example1 = {
     },
     template: `
     <el-form>
-        <el-form-item   :rules="[
-        {
-          required: true,
-          message: 'Please input email address',
-          trigger: 'blur',
-        },
-      ]">
-
-    <el-select v-model="activeName">
-      <el-option
-        v-for="item in list"
-        key="item.value"
-        label="item.label"
-        value="item.value"
-      />
-    </el-select>
-    </el-form-item>
+      <el-form-input :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
     </el-form>
 
     `,
@@ -145,23 +130,31 @@ export const Example2 = {
     },
     template: `
     <div>
-    <el-form :model="model" ref="formRef" inline>
+    <el-form :model="model" ref="formRef" :inline="true">
     {{inputName}}
     <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
-     <el-form-input-number :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-cascader :rules="rules"    label="input212"  data-nodepath="input21" :dataSource="list" />
-    <el-form-input-tag :rules="rules"   label="input21"  data-nodepath="input21" />
-    <el-form-rate :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-slider :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-switch :rules="rules"  v-model="switchValue" label="input21" data-nodepath="switch" />
-    <el-form-tree-select :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-checkbox-group label="ww" :rules="rules" :isRequired="true" :dataSource="list"></el-form-checkbox-group>
     <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-button @click="handleClick(formRef)" >Submit</el-button>
 
     <a @click="handleClick(formRef)" >Submit</a>
     <a @click="handleClick(formRef)" >Submit2</a>
     </el-form>
 
+    <el-form :model="model" ref="formRef" >
+    {{inputName}}
+    <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
+    <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-button @click="handleClick(formRef)" >Submit</el-button>
+
+    <a @click="handleClick(formRef)" >Submit</a>
+    <a @click="handleClick(formRef)" >Submit2</a>
+    </el-form>
 
     </div>
 
@@ -207,4 +200,97 @@ export const Example3 = {
     </el-form>
     `,
   }),
+};
+
+export const Example4 = {
+  name: '表单预览',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo1,
+    },
+    template: '<example-demo />',
+  }),
+};
+
+export const Example5 = {
+  name: 'label竖着排列对齐',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        Example4,
+        args,
+      };
+    },
+    template: `
+    <div>
+      <el-form v-bind="args"   >
+        <el-flex class="el-flex-form-item">
+          <el-form-input label="aaaaaaaaaaaaa" class="my-label" />
+          <el-form-input class="my-label" />
+        </el-flex>
+      </el-form>
+    </div>
+    `,
+  }),
+  args: {
+    labelPosition: 'top',
+  },
+};
+
+export const Example6 = {
+  name: 'button对齐',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        Example4,
+        args,
+      };
+    },
+    template: `
+    <div>
+      <el-form v-bind="args"   >
+        <el-flex class="el-flex-form-item">
+          <el-form-input label="aaaaaaaa" class="my-label" />
+        </el-flex>
+        <el-flex class="el-flex-form-item">
+            <el-button>Submit</el-button>
+        </el-flex>
+      </el-form>
+    </div>
+    `,
+  }),
+  args: {
+    labelPosition: 'left',
+    labelWidth: '100px',
+  },
+};
+
+export const Example7 = {
+  name: '表单inline',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      return {
+        Example4,
+        args,
+      };
+    },
+    template: `
+    <div>
+      <el-form v-bind="args"   >
+        <el-flex class="el-flex-form-item">
+          <el-form-input label="aaaaaaaa" class="my-label" />
+        </el-flex>
+        <el-flex class="el-flex-form-item">
+          <el-form-input label="aaaaaaaa" class="my-label" />
+        </el-flex>
+      </el-form>
+    </div>
+    `,
+  }),
+  args: {
+    inline: true,
+  },
 };

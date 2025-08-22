@@ -1,7 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {
-  Table, BaseTable, PrimaryTable, EnhancedTable,
-} from '@element-pro';
+import { Table, BaseTable, PrimaryTable, EnhancedTable } from '@element-pro';
 import { registerComponent } from '@lcap/vue2-utils';
 import {
   computed,
@@ -31,6 +29,24 @@ export default ElTablePro;
 
 export const ElTableColumnPro = defineComponent({
   name: 'ElTableColumnPro',
+  setup(props, { slots }: SetupContext) {
+    return {
+      slots,
+    };
+  },
+  render() {
+    return (
+      <div>
+        {this.slots.default?.()}
+        {this.slots.cell?.()}
+        {this.slots.title?.()}
+      </div>
+    );
+  },
+});
+
+export const ElTableColumnDynamicPro = defineComponent({
+  name: 'ElTableColumnDynamicPro',
   setup(props, { slots }: SetupContext) {
     return {
       slots,

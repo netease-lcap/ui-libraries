@@ -1,9 +1,15 @@
 import _ from 'lodash';
 import { h } from 'vue';
-import { useRequestDataSource, useHandleMapField, useFormatDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
-import { useMemo } from '@/plugins/hooks';
+import {
+  useRequestDataSource,
+  useHandleMapField,
+  useFormatDataSource,
+  useDataSourceToTree,
+} from '@/plugins/common/dataSource';
+import { useMemo, useState, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { ElSubMenu, ElMenuItem } from '@/components';
+import { useEffect } from '../../../plugins/hooks';
 
 export const handleDataSource = (props) => {
   const dataConfig = props.get('dataSource');
@@ -11,12 +17,15 @@ export const handleDataSource = (props) => {
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
   const parentField = props.get('parentField');
-  const deletePropsList = props.get($deletePropsList, []).concat(['textField', 'valueField', 'parentField', 'childrenField', 'dataSource']);
+  const deletePropsList = props
+    .get($deletePropsList, [])
+    .concat(['textField', 'valueField', 'parentField', 'childrenField', 'dataSource']);
   const ref = props.get('ref');
   const { data, run: reload } = useRequestDataSource(dataConfig, {});
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
   const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
   const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
+  // TODO
   const renderMenuItem = (item) => {
     if (item.children && item.children.length) {
       return (
@@ -56,33 +65,53 @@ handleDataSource.order = 1;
 
 export const handleSlotDefault = (props) => {
   const dataConfig = props.get('dataSource');
+  const mode = props.get('mode');
   if (dataConfig) {
     return {};
   }
-  const slots = props.get('slots');
-  const mode = props.get('mode');
-  const defaultSlot = slots?.default;
-  const vnodes = typeof defaultSlot === 'function' ? defaultSlot() : [];
-  if (mode === 'horizontal') {
-    const slotLeft = slots?.left;
-    const slotRight = slots?.right;
-    const leftNodes = typeof slotLeft === 'function' ? slotLeft() : [];
-    const rightNodes = typeof slotRight === 'function' ? slotRight() : [];
-    if (Array.isArray(leftNodes) && leftNodes.length > 0) {
-      vnodes.unshift(...leftNodes);
-    }
-
-    if (Array.isArray(rightNodes) && rightNodes.length > 0) {
-      vnodes.push(h('div', { class: 'el-menu__extra' }, rightNodes));
-    }
+  if (mode !== 'horizontal') {
+    return {};
   }
+  const slots = props.get('slots');
+  // const defaultSlot = slots?.default;
+  // if (mode === 'horizontal') {
+  //   const slotLeft = slots?.left;
+  //   const slotRight = slots?.right;
+  //   const leftNodes = typeof slotLeft === 'function' ? slotLeft() : [];
+  //   const rightNodes = typeof slotRight === 'function' ? slotRight() : [];
+  //   if (Array.isArray(leftNodes) && leftNodes.length > 0) {
+  //     vnodes.unshift(...leftNodes);
+  //   }
+
+  //   if (Array.isArray(rightNodes) && rightNodes.length > 0) {
+  //     vnodes.push(h('div', { class: 'el-menu__extra' }, rightNodes));
+  //   }
+  // }
   return {
     slots: {
       default: () => {
-        return vnodes;
+        return [
+          slots?.left?.(),
+          slots?.default?.(),
+          slots?.right?.() ? h('div', { class: 'el-menu__extra' }, slots?.right?.()) : null,
+        ];
       },
     },
   };
 };
 
-export * from './ide'
+export const handleRouter = (props) => {
+  const router = props.get('router');
+  const route = props.get('route');
+  const [active, setActive] = useControllableValue(props, {
+    defaultValuePropName: 'defaultActive',
+    defaultValue: route?.path,
+  });
+  router?.afterEach((to) => setActive(to.path));
+  useEffect(() => setActive(route?.path), [route?.path]);
+  return {
+    defaultActive: active,
+  };
+};
+
+export * from './ide';

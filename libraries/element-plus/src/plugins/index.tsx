@@ -10,7 +10,7 @@ import { createStore } from 'zustand/vanilla';
 import { Map as imMap } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { $deletePropsList, $provide } from '@/plugins/constants';
+import { $deletePropsList, $provide, $tagName, $mergeRef } from '@/plugins/constants';
 import { scheduler } from '@/plugins/hooks';
 import '@/utils/index';
 
@@ -51,20 +51,20 @@ export class PluginOptions {
 
 export function registerComponent<T>(Component, options) {
   return defineComponent<T>({
-    name: 'HocBaseComponents',
+    name: options.name || 'HocBaseComponents',
     components: { Component },
     inheritAttrs: false,
     props: Component.props,
 
     setup(props, { attrs, slots, emit, expose }) {
-      const componentRef = ref(null);
       const plugin = new PluginOptions(options);
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
       let Render = Component;
       const exposeRef = ref({});
       const injectRef = inject($provide) ?? (ref({}) as Ref);
-      const provideRef = ref(injectRef);
+      const provideRef = ref({});
+      Object.assign(provideRef.value, injectRef.value);
       const router = useRouter?.();
       const route = useRoute?.();
       const useStore = createStore((set) => ({
@@ -74,7 +74,9 @@ export function registerComponent<T>(Component, options) {
           ref: {},
           router,
           route,
-          [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
+          [$mergeRef]: _.mergeRef(exposeRef.value),
+          [$tagName]: options.name,
+          [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList, $mergeRef, $tagName],
         },
         props: {
           ...props,
@@ -83,7 +85,7 @@ export function registerComponent<T>(Component, options) {
           slots,
         },
 
-        setvalue: (commit, tr) => {
+        setValue: (commit, tr) => {
           const getNewStateFn = _.cond([
             [_.isFunction, _.identity],
             [_.isPlainObject, (state) => (store) => ({ state: { ...store.state, ...state } })],
@@ -97,17 +99,26 @@ export function registerComponent<T>(Component, options) {
         ['updateQueen', new Set()],
         ['getState', getState],
       ]);
-      const { setvalue: setValue } = getState() as any;
+      const { setValue } = getState() as any;
       subscribe((props: any) => {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
         const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
-        const commitJsState = commitState.delete('ref').toJS();
+        const commitImmutableState = commitState;
+
+        const provide = commitState.get('provide');
         const isRenderChange = Component !== commitState.get('render');
-        Render = isRenderChange ? commitJsState.render : Render;
-        componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
+        Render = isRenderChange ? commitState.get('render') : Render;
+        const keys = commitImmutableState.keySeq().toArray();
+        _.forEach(keys, (key) => {
+          _.assign(componentState.value.state, {
+            [key]: commitImmutableState.get(key),
+          });
+        });
+        componentState.value.state[$deletePropsList] = commitState.get($deletePropsList);
+
         Object.assign(exposeRef.value, ref);
-        Object.assign(provideRef.value, commitJsState.provide);
+        Object.assign(provideRef.value, provide);
       });
 
       watch(
@@ -125,18 +136,16 @@ export function registerComponent<T>(Component, options) {
         { deep: true, immediate: true },
       );
 
-      watch(componentRef, (value) => _.defaults(exposeRef.value, value));
-      watch(injectRef, (value) => _.defaults(provideRef.value, value), { deep: true, immediate: true });
+      watch(injectRef, (value) => _.defaults(provideRef.value, value), { immediate: true });
       expose(exposeRef.value);
 
       provide($provide, provideRef);
-
       return () => {
         return (
           <Render
             {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(componentState, 'value.state.slots', {}) }}
-            ref={componentRef}
+            ref={_.mergeRef(exposeRef.value)}
           />
         );
       };

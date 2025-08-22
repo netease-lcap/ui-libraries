@@ -12,9 +12,17 @@
                 </s-empty>
             </slot>
         </span>
-        <span :class="$style.expander"
+        <i-ico
+          :class="[$style.expander, $style.expandIcon]"
+          :expanded="currentExpanded"
+          v-if="parentVM.expandIcon"
+          :name="parentVM.expandIcon"
+          @click="handleExpandClick"
+        >
+        </i-ico>
+        <span v-else :class="$style.expander"
             :expanded="currentExpanded"
-            @click="parentVM.expandTrigger === 'click-expander' && ($event.stopPropagation(), toggle())"
+            @click="handleExpandClick"
         ></span>
         <span :class="$style.extra" vusion-slot-name="extra">
             <slot name="extra"></slot>
@@ -72,6 +80,12 @@ export default {
         },
     },
     methods: {
+        handleExpandClick(event) {
+          if (this.parentVM.expandTrigger === 'click-expander') {
+            event.stopPropagation();
+            this.toggle();
+          }
+        },
         expand() {
             if (this.disabled || this.parentVM.disabled)
                 return;
@@ -166,7 +180,11 @@ content: "\e661";
 }
 
 .expander[expanded] {
-    transform: rotate(90deg);
+    transform: var(--collapse-item-expander-expand-transform, rotate(90deg));
+}
+
+.expander.expandIcon::before {
+  content: none;
 }
 
 .root[disabled] .head {

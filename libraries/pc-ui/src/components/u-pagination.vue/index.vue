@@ -1,27 +1,32 @@
 <template>
 <nav :class="$style.root" :disabled="disabled" :readonly="readonly" :simple="simple" :size="size">
     <template v-if="simple">
-        <a :class="$style.item" role="prev" :disabled="currentPage <= 1" @click="select(currentPage - 1)"></a>
+        <a :class="[$style.item, {[$style.useIcon]: !!prevIcon}]" role="prev" :disabled="currentPage <= 1" @click="select(currentPage - 1)">
+          <i-ico v-if="prevIcon" :name="prevIcon" notext></i-ico>
+        </a>
         <div :class="$style['jumper-wrap']">
             <u-number-input :class="$style.jumper" :value="currentPage"
                 :min="1" :max="currentMaxPage" hide-buttons :readonly="readonly" :disabled="disabled"
                 @change="onChange($event.value, $event.oldValue)">
             </u-number-input> / {{ currentTotalPage }}
         </div>
-        <a :class="$style.item" role="next" :disabled="currentPage >= currentTotalPage" @click="select(currentPage + 1)"></a>
+        <a :class="[$style.item, {[$style.useIcon]: !!nextIcon}]" role="next" :disabled="currentPage >= currentTotalPage" @click="select(currentPage + 1)">
+          <i-ico v-if="nextIcon" :name="nextIcon" notext></i-ico>
+        </a>
     </template>
     <template v-else>
         <span v-if="showTotal" :class="$style.total">
             <slot name="total" :data="{totalItems,pageSize:currentPageSize,page:currentPage}">{{ $tt('total', { totalItems }) }}</slot>
         </span>
-        <u-select v-if="showSizer" :class="$style.sizer" v-model="currentPageSize" :readonly="readonly" :disabled="disabled" @select="onSelectPageSize">
+        <u-select v-if="showSizer" :class="$style.sizer" :suffix="selectDropdownIcon" v-model="currentPageSize" :readonly="readonly" :disabled="disabled" @select="onSelectPageSize">
             <u-select-item v-for="pageSize in pageSizeOptions" :key="pageSize" :value="pageSize">
                 {{ pageSize }}{{ $tt('pageSize') }}
             </u-select-item>
         </u-select>
         <a :class="$style['item-wrap']" :disabled="currentPage <= 1" @click="select(currentPage - 1)">
             <slot name="prev">
-                <i :class="$style.item" role="prev"></i>
+                <i-ico v-if="prevIcon" :class="[$style.item, $style.useIcon]" :name="prevIcon" notext></i-ico>
+                <i v-else :class="$style.item" role="prev"></i>
             </slot>
         </a>
         <template v-for="page in pages">
@@ -30,7 +35,8 @@
         </template>
         <a :class="$style['item-wrap']" :disabled="currentPage >= currentTotalPage" @click="select(currentPage + 1)">
             <slot name="next">
-                <i :class="$style.item" role="next"></i>
+                <i-ico v-if="nextIcon" :class="[$style.item, $style.useIcon]" :name="nextIcon" notext></i-ico>
+                <i v-else :class="$style.item" role="next"></i>
             </slot>
         </a>
         <span v-if="showJumper" :class="$style['jumper-wrap']">{{ $tt('goto') }}
@@ -103,6 +109,9 @@ export default {
         showJumper: { type: Boolean, default: false },
         simple: { type: Boolean, default: false },
         size: { type: String, default: 'normal' },
+        prevIcon: { type: String },
+        nextIcon: { type: String },
+        selectDropdownIcon: { type: String },
         maxPage: Number,
     },
     data() {
@@ -327,6 +336,15 @@ content: "\e64c";
 }
 .item[role="next"]:hover{
     color: var(--pagination-item-color-hover);
+}
+
+.item.useIcon {
+  font-size: inherit;
+}
+
+.item.useIcon[role="prev"]::before,
+.item.useIcon[role="next"]::before {
+  content: none;
 }
 
 .item[role="blank"] {

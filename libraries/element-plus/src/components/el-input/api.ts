@@ -4,18 +4,19 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
     ideusage: {
-      idetype: 'element',
+      idetype: 'container',
       additionalAttribute: {
         autofocus: '"false"',
       },
-      selector: {
-        expression: 'this',
-        cssSelector: '.el-input',
-      },
+      // selector: {
+      //   expression: 'this',
+      //   cssSelector: '.el-input',
+      // },
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
-    title: '单行输入',
+    title: '输入框',
     icon: 'input',
     description: '',
     group: 'Form',
@@ -42,10 +43,10 @@ namespace nasl.ui {
       description: '输入框类型。可选项：text/url/tel/password/search/submit/hidden',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '文本' }, { title: '链接' }, { title: '电话' }, { title: '密码' }, { title: '搜索' }],
+        options: [{ title: '文本' }, { title: '链接' }, { title: '电话' }, { title: '密码' }, { title: '搜索' }, { title: '多行文本' }],
       },
     })
-    type: 'text' | 'url' | 'tel' | 'password' | 'search' = 'text';
+      type: 'text' | 'url' | 'tel' | 'password' | 'search' | 'textarea' = 'text';
 
     @Prop({
       group: '交互属性',
@@ -138,11 +139,35 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '显示前缀',
+      description: '是否显示前缀',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showPrepend: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示后缀',
+      description: '是否显示后缀',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showAppend: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '只读',
       description: '只读状态',
       setter: { concept: 'SwitchSetter' },
     })
     readonly: nasl.core.Boolean;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     // @Prop<ElInputProOptions, 'showLimitNumber'>({
     //   group: '主要属性',
@@ -283,13 +308,45 @@ namespace nasl.ui {
       title: '鼠标移入时',
       description: '进入输入框时触发',
     })
-    onMouseenter: (event: any) => any;
+    onMouseenter: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '鼠标移出时',
       description: '离开输入框时触发',
     })
-    onMouseleave: (event: any) => any;
+    onMouseleave: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '粘贴时',
@@ -350,6 +407,18 @@ namespace nasl.ui {
     //   ],
     // })
     // slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '前置',
+      description: '前置',
+    })
+    slotPrepend: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '后置',
+      description: '后置',
+    })
+    slotAppend: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({

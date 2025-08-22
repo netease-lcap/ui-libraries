@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 8,
     ideusage: {
       idetype: 'element',
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -68,6 +69,32 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     highThreshold: nasl.core.Integer = 4;
+
+    @Prop({
+      group: '数据属性',
+      title: '低分颜色',
+      description: '低分颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    lowColor: nasl.core.String = '#F7BA2A';
+
+    @Prop({
+      group: '数据属性',
+      title: '中等颜色',
+      description: '中等颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    mediumColor: nasl.core.String = '#F7BA2A';
+
+    @Prop({
+      group: '数据属性',
+      title: '高分颜色',
+      description: '高分颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    highColor: nasl.core.String = '#F7BA2A';
+
+
 
     // @Prop({
     //   group: '主要属性',
@@ -156,6 +183,14 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // scoreTemplate: nasl.core.String = '{value}';
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',

@@ -1,0 +1,46 @@
+/**
+ * @component van-tree-select
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 树形选择器字体大小
+   */
+  --van-tree-select-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   * @desc 树形选择器导航背景色
+   */
+  --van-tree-select-nav-background: var(--van-background);
+  /**
+   * @type color
+   * @desc 树形选择器内容背景色
+   */
+  --van-tree-select-content-background: var(--van-background-2);
+  /**
+   * @type input
+   * @desc 树形选择器导航项目内边距
+   */
+  --van-tree-select-nav-item-padding: 14px var(--van-padding-sm);
+  /**
+   * @type input
+   * @desc 树形选择器项目高度
+   */
+  --van-tree-select-item-height: 48px;
+  /**
+   * @type color
+   * @desc 树形选择器项目激活状态颜色
+   */
+  --van-tree-select-item-active-color: var(--van-primary-color);
+  /**
+   * @type color
+   * @desc 树形选择器项目禁用状态颜色
+   */
+  --van-tree-select-item-disabled-color: var(--van-gray-5);
+  /**
+   * @type input
+   * @desc 树形选择器项目选中状态尺寸
+   */
+  --van-tree-select-item-selected-size: 16px;
+}

@@ -17,9 +17,14 @@ export { useFormFieldClass } from '../../../plugins/use-form-field-class';
 export { usePopupTheme } from '../../../plugins/use-popup-theme';
 
 function useTimePickerValue(props: MapGet) {
-  const valueRef = props.useRef<TimePickerValue | TimeRangeValue>(['value', 'startValue', 'endValue', 'range', 'format'], (v, startValue, endValue, range, format) => {
+  const valueRef = props.useRef(['value', 'startValue', 'endValue', 'range', 'format'], (v, startValue, endValue, range, format) => {
     if (!range) {
       return getFormatTimeValue(v, format);
+    }
+
+    if (v && !startValue && !endValue) {
+      const values = (Array.isArray(v) ? v : [v]);
+      return [getFormatTimeValue(values[0], format), getFormatTimeValue(values[1], format)];
     }
 
     return [getFormatTimeValue(startValue, format), getFormatTimeValue(endValue, format)];
@@ -194,9 +199,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         if (range) {
           onUpdateStartTime(changeEvent.startValue);
           onUpdateEndTime(changeEvent.endValue);
-        } else {
-          onUpdateValue(changeEvent.value);
         }
+
+        onUpdateValue(changeEvent.value);
 
         if (isFunction(onChange)) {
           onChange(changeEvent);

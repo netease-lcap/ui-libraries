@@ -26,7 +26,7 @@ export const ElFlexPropsDefine = {
   },
   alignment: {
     type: String,
-    default: () => 'start',
+    default: () => 'normal',
   },
   wrap: {
     type: Boolean,

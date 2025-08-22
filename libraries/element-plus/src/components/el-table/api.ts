@@ -58,6 +58,7 @@ namespace nasl.ui {
         ":expandRowKeys" : "\"[0]\""
       },
       forceUpdateWhenAttributeChange: true,
+      refreshMutationNodesWhenAttributeChange: ['editTable'],
    
       dataSource: {
         display: 3,
@@ -88,7 +89,7 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
     })
-    data: ElTableOptions<T, V, P, M>['dataSource'];
+    data: nasl.collection.List<T>;
 
     @Prop({
       title: '分页大小',
@@ -225,21 +226,6 @@ namespace nasl.ui {
     })
     border: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Bottom Content',
-    //   description: '表格底部内容，可以用于自定义列设置等。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // bottomContent: any;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '单元格数据为空时呈现的内容',
-    //   description: '单元格数据为空时呈现的内容',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // cellEmptyContent: any;
 
     @Prop({
       group: '数据属性',
@@ -458,6 +444,14 @@ namespace nasl.ui {
     })
     maxHeight: nasl.core.Decimal;
 
+    @Prop({
+      group: '主要属性',
+      title: '列配置',
+      description: '列配置',
+      setter: { concept: 'SwitchSetter' },
+    })
+    columnConfig: nasl.core.Boolean = false;
+
     @Prop<ElTableOptions<T, V, P, M>, 'pagination'>({
       group: '主要属性',
       title: '分页',
@@ -604,27 +598,28 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // rowClassName: nasl.core.String | object | any[] | any;
-    @Prop<ElTableOptions<T, V, P, M>, 'valueField'>({
+
+    
+    @Prop<ElTableOptions<T, V, P, M>, 'parentField'>({
       group: '数据属性',
-      title: '值字段',
-      description: '在单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
-      docDescription: '在表格开启了单选、多选操作、渲染树形数据中，指定数据唯一值的字段',
+      title: '父级值字段',
+      description: '在树形数据中，指定数据父级值的字段',
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
-    valueField: (item: T) => V;
+    parentField: (item: T) => V;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '唯一标识',
-    //   description:
-    //     '必需。唯一标识一行数据的字段名，来源于 `data` 中的字段。如果是字段嵌套多层，可以设置形如 `item.a.id` 的方法',
-    //      setter: {
-    //           concept: 'PropertySelectSetter',
-    //       },
-    // })
-    // rowKey: nasl.core.String = 'index';
+    @Prop({
+      group: '数据属性',
+      title: '唯一标识',
+      description:
+        '必需。唯一标识一行数据的字段名，来源于 `data` 中的字段。如果是字段嵌套多层，可以设置形如 `item.a.id` 的方法',
+         setter: {
+              concept: 'PropertySelectSetter',
+          },
+    })
+    rowKey: (item: T) => V;
 
     // @Prop({
     //   group: '主要属性',
@@ -671,6 +666,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '可编辑表格',
+      description: '可编辑表格',
+      setter: { concept: 'SwitchSetter' },
+    })
+    editTable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '表格尺寸',
       description: '表格尺寸',
       setter: {
@@ -688,6 +691,22 @@ namespace nasl.ui {
     })
     stripe: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '主要属性',
+      title: '是否表头吸顶',
+      description: '是否表头吸顶',
+      setter: { concept: 'SwitchSetter' },
+    })
+    sticky: nasl.core.Boolean = false;
+
+    @Prop<ElTableOptions<T, V, P, M>, 'stickyOffset'>({
+      group: '主要属性',
+      title: '表头吸顶偏移量',
+      description: '表头吸顶偏移量',
+      setter: { concept: 'NumberInputSetter' },
+      if: (_) => _.sticky === true,
+    })
+    stickyOffset: nasl.core.Integer = 8;
     // @Prop({
     //   group: '主要属性',
     //   title: '表格内容的总宽度',
@@ -964,12 +983,14 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      structured: { slot: 'default', empty: true },
       parentAccept: "['el-table'].includes(target.tag)",
       // childAccept: false,
       slotWrapperInlineStyle: {
-        header: 'display: inline-block;',
+        // header: 'display: inline-block;',
       },
       useTemplateInDefaultSlot: true,
+      namedSlotOmitWrapper:['default'],
       selector: [
         {
           expression: 'this',
@@ -1028,6 +1049,15 @@ namespace nasl.ui {
     })
     sortable: 'none' | 'custom' = 'none';
 
+
+    @Prop<ElTableColumnOptions<T, V, P, M>, 'resizable'>({
+      group: '样式属性',
+      title: '是否允许调整列宽',
+      description: '是否允许调整列宽,需要打开表格的边框属性',
+      setter: { concept: 'SwitchSetter' },
+    })
+    resizable: nasl.core.Boolean = true;
+
     @Prop({
       group: '样式属性',
       title: '对齐方式',
@@ -1038,6 +1068,17 @@ namespace nasl.ui {
       },
     })
     align: 'left' | 'center' | 'right' = 'left';
+
+
+    @Prop({
+      group: '数据属性',
+      title: '可编辑列',
+      description: '设置该列是否可编辑',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    editable: nasl.core.Boolean = false;
 
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
@@ -1065,6 +1106,15 @@ namespace nasl.ui {
     })
     type: 'normal' | 'selection' | 'expand' | 'index' = 'normal';
 
+
+
+    @Prop({
+      group: '数据属性',
+      title: '列标题',
+      description: '列标题用于自定义列标题',
+      setter: { concept: 'InputSetter' },
+    })
+    label: nasl.core.String;
     // @Prop<UTableViewColumnOptions<T, V, P, M>, 'autoIndex'>({
     //   group: '数据属性',
     //   title: '换页继续编号',
@@ -1237,11 +1287,26 @@ namespace nasl.ui {
     // })
     // autoRowSpan: nasl.core.Boolean = false;
 
+    @Event({
+      title: '编辑列变化时',
+      description: '编辑列变化时触发',
+    })
+    onEditChange: (event: { row: T,$index:nasl.core.Integer,cellIndex:nasl.core.Integer,}) => any;
+
     @Slot({
       title: '单元格',
       description: '对单元格的数据展示进行自定义',
+      snippets: [
+        {
+          title: '表格列',
+          code: `<el-table-column data-nodepath-multiple="ture">
+                    <template #header><el-text text="表格列"></el-text></template>
+                    <template #default="current"></template>
+                </el-table-column>`,
+        },
+      ],
     })
-    slotDefault: (current: Current<T>) => Array<ViewComponent>;
+    slotDefault: (current: {item:T,index:nasl.core.Integer,rowIndex:nasl.core.Integer,columnIndex:nasl.core.Integer,editable:nasl.core.Boolean}) => Array<ViewComponent>;
 
     // @Slot({
     //   title: '编辑单元格',

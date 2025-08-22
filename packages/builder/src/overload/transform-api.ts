@@ -1,43 +1,16 @@
 import { default as nodePath } from 'path';
-import * as babel from '@babel/core';
 import * as babelTypes from '@babel/types';
 import generate from '@babel/generator';
 import traverse from '@babel/traverse';
 import { OverloadComponentContext } from './context';
 import { LCAP_UI_PATH } from './constants';
-import { addPrefix } from './utils';
-
-const TEMP_IDEUSAGE_VAR_NAME = '_TEMP_VAR';
-
-function getAST(obj: any) {
-  const code = `const ${TEMP_IDEUSAGE_VAR_NAME} = ${JSON.stringify(obj)};`;
-  const tempAST = babel.parseSync(code);
-  let ast;
-  if (tempAST) {
-    traverse(tempAST, {
-      VariableDeclarator(p) {
-        if (p.node.id.type === 'Identifier' && p.node.id.name === TEMP_IDEUSAGE_VAR_NAME && p.node.init) {
-          ast = p.node.init;
-        }
-      }
-    });
-  }
-
-  return ast;
-}
+import { addPrefix, replaceAllTagNameInCode } from './utils';
+import { getAST, babelParser } from '../shared';
 
 export function transformAPITs(tsCode, context: OverloadComponentContext, all: boolean = false) {
-  const ast = babel.parse(tsCode, {
-    filename: 'result.ts',
-    presets: [require('@babel/preset-typescript')],
-    plugins: [
-      [require('@babel/plugin-proposal-decorators'), { legacy: true }],
-    ],
-    rootMode: 'root',
-    root: __dirname,
-  }) as babelTypes.File;
+  const ast = babelParser.parse(tsCode) as babelTypes.File;
 
-  const insertAST = babel.parseSync('const { Component, Prop, ViewComponent, Slot, Method, Param, Event, ViewComponentOptions } = nasl.ui;');
+  const insertAST = babelParser.parse('const { Component, Prop, ViewComponent, Slot, Method, Param, Event, ViewComponentOptions } = nasl.ui;') as babelTypes.File;
 
   traverse(ast, {
     TSModuleDeclaration(path) {
@@ -61,6 +34,7 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
             name: 'viewComponents'
           },
           body: tempBody,
+          kind: 'namespace',
         };
 
         if (insertAST) {
@@ -198,7 +172,14 @@ export function transformAPITs(tsCode, context: OverloadComponentContext, all: b
                   return ext;
                 });
               }
-              const ast = getAST(obj);
+              let ast;
+
+              if (key === 'ideusage') {
+                ast = getAST(replaceAllTagNameInCode(JSON.stringify(obj), context.replaceTagMap), false);
+              } else {
+                ast = getAST(obj);
+              }
+
               if (!ast) {
                 return;
               }

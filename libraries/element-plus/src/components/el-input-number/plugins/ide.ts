@@ -9,13 +9,14 @@ export function handleNodePath(props) {
   const nodeId = useMemo(() => _.uniqueId('InputNumber_'), []);
   useEffect(() => {
     const node = document.querySelector(`.${nodeId}`);
-    const inputNumberElement = node?.closest('.el-input-number');
+    const inputNumberElement = node?.closest('.el-input-number') ?? node;
     inputNumberElement?.setAttribute('data-nodepath', nodePath);
   }, []);
   return {
     class: `${myClass} ${nodeId}`,
     [$deletePropsList]: deletePropsList,
     formTagName: 'el-form-input-number',
+    tagName: 'el-input-number',
   };
 }
 

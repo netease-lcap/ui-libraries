@@ -1,7 +1,13 @@
 import { defineComponent, ref, watch } from 'vue';
+import { vLoading } from 'element-plus';
 
 export default defineComponent({
   name: 'ElLoading',
+  directives: {
+    loading: {
+      ...vLoading,
+    },
+  },
   props: {
     visible: {
       type: Boolean,

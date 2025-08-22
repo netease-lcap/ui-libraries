@@ -41,6 +41,7 @@ export const Range = {
       return {
         startValue: null,
         endValue: null,
+        values: '2025-04-22 10:38:39',
       };
     },
     methods: {
@@ -54,6 +55,13 @@ export const Range = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-time-picker-pro min-date="2025-04-22 10:38:39" time-format="HH:mm"  @confirm="confirm" :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
+    template: `
+      <div>
+        <el-date-time-picker-pro min-date="2025-04-22 10:38:39" time-format="HH:mm"   @confirm="confirm" :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" :value.sync="values" @sync:state="handleSyncState" @change="handleChange('change', $event)" @focus="handleChange('focus', $event)" @pick="handleChange('pick', $event)"></el-date-time-picker-pro>
+        <p>startValue: {{ startValue }}</p>
+        <p>endValue: {{ endValue }}</p>
+        <p>values: {{ values }}</p>
+      </div>
+    `,
   }),
 };

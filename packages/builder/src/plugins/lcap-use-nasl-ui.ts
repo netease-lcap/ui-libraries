@@ -18,6 +18,7 @@ export interface LcapUseNaslUIPluginOptions {
   framework: string;
   destDir?: string;
   type: 'nasl.ui' | 'extension';
+  lcapUIExternal?: true | 'auto';
   rootPath: string;
 }
 
@@ -29,6 +30,17 @@ function getLcapUIPkgName(rootPath) {
   }
 
   return '';
+}
+
+function getGlobalName(pkgName: string) {
+  return {
+    '@lcap/element-plus': 'ElementPlus',
+    '@lcap/element-ui': 'ElementUI',
+    '@lcap/vant': 'LcapVant',
+    '@lcap/pc-react-ui': 'antd',
+    '@lcap/pc-ui': 'CloudUI',
+    '@lcap/mobile-ui': 'vant',
+  }[pkgName] || 'LcapUI';
 }
 
 function addResolve(config: UserConfig, options: LcapUseNaslUIPluginOptions, useModules: boolean) {
@@ -58,6 +70,11 @@ function addResolve(config: UserConfig, options: LcapUseNaslUIPluginOptions, use
       find: LCAP_UI_PACKAGE_NAME,
       replacement: path.resolve(options.rootPath, './.lcap/lcap-ui/runtime/index.js'),
     });
+  } else {
+    alias.push({
+      find: LCAP_UI_PACKAGE_NAME,
+      replacement: path.resolve(options.rootPath, './.lcap/lcap-ui/package/es/index.mjs'),
+    });
   }
 
   alias.push({
@@ -78,7 +95,7 @@ function getCommonjsOptionsInclude(config: UserConfig): Array<string | RegExp> {
   return config.build.commonjsOptions.include;
 }
 
-function setExtenalBuildConfig(config: UserConfig, options: LcapUseNaslUIPluginOptions, { lcapUIPkgName, command }) {
+function setExtenalBuildConfig(config: UserConfig, options: LcapUseNaslUIPluginOptions, { lcapUIPkgName, command, useModules }) {
   if (!config.build) {
     config.build = {};
   }
@@ -99,24 +116,26 @@ function setExtenalBuildConfig(config: UserConfig, options: LcapUseNaslUIPluginO
     ...(config.build.commonjsOptions || {}),
   };
 
-  config.optimizeDeps.include?.push('virtual-lcap:lcap-ui');
-  if (config.build.commonjsOptions.requireReturnsDefault === undefined) {
-    config.build.commonjsOptions.requireReturnsDefault = (id) => {
-      return id.indexOf('vue/dist/vue.esm.js') !== -1;
-    };
-  } else if (typeof config.build.commonjsOptions.requireReturnsDefault === 'function') {
-    const temp = config.build.commonjsOptions.requireReturnsDefault;
-    config.build.commonjsOptions.requireReturnsDefault = (id) => {
-      if (id.indexOf('vue/dist/vue.esm.js') !== -1) {
-        return true;
-      }
-      return temp(id);
-    };
+  if (!useModules) {
+    config.optimizeDeps.include?.push('virtual-lcap:lcap-ui');
+    if (config.build.commonjsOptions.requireReturnsDefault === undefined) {
+      config.build.commonjsOptions.requireReturnsDefault = (id) => {
+        return id.indexOf('vue/dist/vue.esm.js') !== -1;
+      };
+    } else if (typeof config.build.commonjsOptions.requireReturnsDefault === 'function') {
+      const temp = config.build.commonjsOptions.requireReturnsDefault;
+      config.build.commonjsOptions.requireReturnsDefault = (id) => {
+        if (id.indexOf('vue/dist/vue.esm.js') !== -1) {
+          return true;
+        }
+        return temp(id);
+      };
+    }
+    config.build.commonjsOptions.include = getCommonjsOptionsInclude(config).concat([
+      '.lcap/lcap-ui/**/*.js',
+      /node_modules/,
+    ]);
   }
-  config.build.commonjsOptions.include = getCommonjsOptionsInclude(config).concat([
-    '.lcap/lcap-ui/**/*.js',
-    /node_modules/,
-  ]);
 
   if (!config.build.rollupOptions.external) {
     config.build.rollupOptions.external = [];
@@ -131,7 +150,7 @@ function setExtenalBuildConfig(config: UserConfig, options: LcapUseNaslUIPluginO
 
   if (lcapUIPkgName) {
     (config.build.rollupOptions.external as any).push(lcapUIPkgName);
-    globals[lcapUIPkgName] = options.framework === 'react' ? 'antd' : 'LcapUI';
+    globals[lcapUIPkgName] = getGlobalName(lcapUIPkgName);
     const alias = (config.resolve && config.resolve.alias ? config.resolve.alias : []) as Alias[];
     const alia = alias.find((it) => it.find === LCAP_UI_PACKAGE_NAME);
     if (alia && command === 'build') {
@@ -233,7 +252,7 @@ export default function lcapUseNaslUI(options: LcapUseNaslUIPluginOptions) {
       return undefined;
     },
     transform(code) {
-      if (!useModules || !modulesInfo || !modulesInfo.exports) {
+      if (!useModules || !modulesInfo || !modulesInfo.exports || options.lcapUIExternal === true) {
         return undefined;
       }
 
@@ -241,8 +260,8 @@ export default function lcapUseNaslUI(options: LcapUseNaslUIPluginOptions) {
     },
     config(config: UserConfig, { command }) {
       addResolve(config, options, useModules);
-      if (!useModules) {
-        setExtenalBuildConfig(config, options, { command, lcapUIPkgName });
+      if (!useModules || options.lcapUIExternal === true) {
+        setExtenalBuildConfig(config, options, { command, lcapUIPkgName, useModules });
       }
     },
   }] as Plugin[];

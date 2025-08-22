@@ -51,6 +51,14 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean;
 
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
     // @Prop({
     //   group: '主要属性',
     //   title: '布局模式',
@@ -486,30 +494,6 @@ namespace nasl.ui {
     })
     labelWidth: nasl.core.String | nasl.core.Decimal;
 
-    // @Prop<ElFormItemProOptions, 'labelEllipsis'>({
-    //   group: '主要属性',
-    //   title: '标签过长省略',
-    //   description: '文字过长是否省略显示。默认文字超出时会换行。',
-    //   docDescription: '文字过长是否省略显示，默认文字超出时会换行。',
-    //   setter: {
-    //       concept: 'EnumSelectSetter',
-    //       options: [{ title: '省略' }, { title: '文字换行' }, { title: '使用表单配置' }]
-    //   },
-    //   if: (_) => !_.hiddenLabel,
-    // })
-    // labelEllipsis: 'show' | 'hide' | '' | nasl.core.Boolean = '';
-
-    // @Prop<ElFormItemProOptions, 'requiredMark'>({
-    //   group: '主要属性',
-    //   title: '必填标记',
-    //   description: '是否显示必填符号（*），优先级高于表单设置的必填标记',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [{ title: '显示' }, { title: '隐藏' }, { title: '使用表单配置' }]
-    //    },
-    //    if: (_) => !_.hiddenLabel,
-    // })
-    // requiredMark: 'show' | 'hide' | '' | nasl.core.Boolean = '';
 
     @Prop({
       group: '主要属性',
@@ -528,53 +512,6 @@ namespace nasl.ui {
     })
     isRequired: nasl.core.Boolean = false;
 
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '忽略验证',
-    //   description: '忽略验证',
-    //   setter: {
-    //     concept: 'SwitchSetter',
-    //   },
-    // })
-    // disableValidate: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '显示错误信息',
-    //   description: '校验不通过时，是否显示错误提示信息，默认使用表单配置',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [{ title: '显示' }, { title: '隐藏' }, { title: '使用表单配置' }]
-    //   },
-    // })
-    // showErrorMessage: 'show' | 'hide' | '' | nasl.core.Boolean = '';
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '显示状态图标',
-    //   description:
-    //     '校验状态图标，值为 `true` 显示默认图标，默认图标有 成功、失败、警告 等，不同的状态图标不同。`statusIcon` 值为 `false`，不显示图标, 默认使用表单配置',
-    //     setter: {
-    //       concept: 'EnumSelectSetter',
-    //       options: [{ title: '显示' }, { title: '隐藏' }, { title: '使用表单配置' }]
-    //     },
-    // })
-    // statusIcon: 'show' | 'hide' | '' | nasl.core.Boolean = '';
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '显示校验成功的边框',
-    //   description: '是否显示校验成功的边框，默认不显示',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // successBorder: nasl.core.Boolean = false;
-
-    // @Slot({
-    //   title: '说明内容',
-    //   description: '表单项说明内容。',
-    // })
-    // slotHelp: () => Array<ViewComponent>;
 
     @Slot({
       title: '标签',

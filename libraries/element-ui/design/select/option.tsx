@@ -177,13 +177,12 @@ export default defineComponent({
       tRowHeight,
       hasLazyLoadHolder,
       handleClick,
-      dataNodepath,
     };
   },
 
   render() {
     const {
-      classes, mouseEvent, labelText, title,dataNodepath
+      classes, mouseEvent, labelText, title, dataNodepath
     } = this;
     const selfDefinedContent = renderContent(this, 'default', 'content');
     const optionChild = selfDefinedContent || <span>{labelText}</span>;

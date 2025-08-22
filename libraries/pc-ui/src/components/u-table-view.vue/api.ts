@@ -515,6 +515,57 @@ namespace nasl.ui {
       ellipsis: nasl.core.Boolean = false;
 
       @Prop({
+        group: '主要属性',
+        title: '显示表尾计算行',
+        description: '是否在表尾显示功能行。默认关闭',
+        setter: {
+            concept: 'SwitchSetter',
+        },
+        onChange: [{
+            clear: ['footerCalcType', 'footerCalcText', 'footerCalcFormater'],
+            if: (_) => _ === false,
+          }],
+     })
+     footerCalcShow: nasl.core.Boolean = false;
+      
+     @Prop({
+        group: '主要属性',
+        title: '表尾计算行第一列文本',
+        description: '表尾计算行第一列文本',
+        if: _ => _.footerCalcShow === true,
+     })
+     footerCalcText: nasl.core.String = '合计';
+
+     @Prop({
+        group: '主要属性',
+        title: '表尾计算行功能选项',
+        description: '表尾计算行功能选项。默认求和',
+        setter: {
+            concept: 'EnumSelectSetter',
+            options: [
+                { title: '求和' },
+                { title: '最大值' },
+                { title: '最小值' },
+                { title: '平均值' },
+            ],
+        },
+        if: _ => _.footerCalcShow === true,
+     })
+     footerCalcType: 'sum' | 'max' | 'min' | 'average' = 'sum';
+
+     @Prop({
+        group: '主要属性',
+        title: '表尾计算行格式设置',
+        description: '可为计算结果设置格式，如增加前后缀等。默认不设置',
+        bindOpen: true,
+        setter: {
+            concept: 'AnonymousFunctionSetter',
+        },
+        if: _ => _.footerCalcShow === true,
+      })
+      footerCalcFormater: (item: {value:nasl.core.Integer | nasl.core.Decimal | nasl.core.String , index: nasl.core.Integer}) => nasl.core.String;
+
+      @Prop({
           group: '交互属性',
           title: '悬浮高亮行',
           description: '表格行在悬浮时是否高亮显示',
@@ -708,6 +759,17 @@ namespace nasl.ui {
       nativeScroll: nasl.core.Boolean = false;
 
       @Prop({
+        group: '交互属性',
+        title: '排序触发方式',
+        docDescription: '表格排序的触发方式。默认"点击表头"。',
+        setter: {
+            concept: 'EnumSelectSetter',
+            options: [{ title: '点击表头' }, { title: '点击图标' }],
+        },
+      })
+      sortTrigger: 'head' | 'icon' = 'head';
+
+      @Prop({
           group: '状态属性',
           title: '初始即加载',
           description: '设置初始时是否立即加载',
@@ -892,6 +954,39 @@ namespace nasl.ui {
          */
         color?: nasl.core.String
       };
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'prevIcon'>({
+        group: '交互属性',
+        title: '上一页图标',
+        description: '设置上一页图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.pagination === true,
+      })
+      prevIcon: nasl.core.String;
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'nextIcon'>({
+        group: '交互属性',
+        title: '下一页图标',
+        description: '设置下一页图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.pagination === true,
+      })
+      nextIcon: nasl.core.String;
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'selectDropdownIcon'>({
+        group: '交互属性',
+        title: '选择下拉图标',
+        description: '设置选择下拉图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.pagination === true && _.showSizer === true,
+      })
+      selectDropdownIcon: nasl.core.String;
 
       @Event({
           title: '加载前',
@@ -1251,6 +1346,9 @@ namespace nasl.ui {
           title: '值字段',
           description: 'data 项中的字段',
           docDescription: '数据项中对应的字段名，如createdTime',
+          setter: {
+            concept: 'PropertySelectSetter',
+          },
       })
       field: (item: T) => any;
 
@@ -1711,7 +1809,7 @@ namespace nasl.ui {
               },
           ],
       })
-      slotDefault: SlotType<() => Array<UTableViewColumn<T, V, P, M> | ViewComponent>>;
+      slotDefault: () => Array<UTableViewColumn<T, V, P, M> | ViewComponent>;
 
       @Slot({
           title: '标题',

@@ -35,6 +35,7 @@ export const Default = {
               index: i,
               applicant: ['贾明', '张三', '王芳'][i % 3],
               status: i % 3,
+              colKey: { matters: 'matters' },
               channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
               children: [
                 {
@@ -110,40 +111,27 @@ export const Default = {
    :dataSource="data"
    :rowspanAndColspan="rowspanAndColspan"
    :selectedRowKeys.sync="selectedRowKeys"
+   width="800px"
    :columnController="false"
    @sort-change="onSortChange"
    :onRowClick="log"
    dragSort="row"
-   :columnController="false"
    :headerAffixedTop="true"
 
    @display-columns-change="log"
    :resizable="true"
-   :treeDisplay="true"
-   :selection="true"
-   :hasIndexColumn="true"
    :multiple="false"
    @cell-click="log"
    :onDragSort="onDragSortChange"
     >
 
-    <el-table-column-pro title="申请人" colKey="createTime">
-
-    </el-table-column-pro>
-
-        <el-table-column-pro title="渠道" colKey="channel" :sorter="true" :autoMerge="true" >
-    <template #cell="cell">
-      <div>{{ cell.item.channel }}</div>
+    <el-table-column-dynamic-pro title="title" colKey="colKey.matters" data-nodepath="123">
+    <template #title="item">
+      <el-text :text="item.matters"></el-text>
     </template>
-    </el-table-column-pro>
+    </el-table-column-dynamic-pro>
 
-    <el-table-column-pro title="渠道" colKey="createTime" width="300" > </el-table-column-pro>
 
-    <template #expanded-row="{ item }">
-      <div class="more-detail">
-        <p class="title"><b>集群名称:</b></p><p class="content">{{item.channel}}</p><br/>
-      </div>
-    </template>
     </el-table-pro>`,
   }),
 };
@@ -196,38 +184,270 @@ export const 树形 = {
             },
           };
         },
+        treeData: async (params) => {
+          return {
+            list: [
+              {
+                tree: {
+                  id: 0,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: null,
+                  name: '根节点',
+                },
+              },
+              {
+                tree: {
+                  id: 1,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 0,
+                  name: '根节点-子节点1',
+                },
+              },
+              {
+                tree: {
+                  id: 2,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 0,
+                  name: '根节点-子节点2',
+                },
+              },
+              {
+                tree: {
+                  id: 3,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 1,
+                  name: '根节点-子节点1-子子节点1',
+                },
+              },
+              {
+                tree: {
+                  id: 4,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 1,
+                  name: '根节点-子节点1-子子节点2',
+                },
+              },
+              {
+                tree: {
+                  id: 5,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 2,
+                  name: '根节点-子节点2-子子节点1',
+                },
+              },
+              {
+                tree: {
+                  id: 6,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 2,
+                  name: '根节点-子节点2-子子节点2',
+                },
+              },
+              {
+                tree: {
+                  id: 7,
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  parentid: 2,
+                  name: '根节点-子节点2-子子节点2',
+                },
+              },
+            ],
+          };
+        },
+        dynamicColumns: async () => {
+          return [
+            {
+              title: '申请人2',
+              colKey: 'channel',
+            },
+            {
+              title: '申请人3',
+              colKey: 'channel',
+            },
+          ];
+        },
       };
     },
     methods: {
       async onDragSortChange(value) {
-          console.log(JSON.stringify(value.data[0].add.index), JSON.stringify(value.newData[0].add.index), 'onDragSortChange');
+        console.log(value, 'onDragSortChange');
+        // console.log(
+        //   JSON.stringify(value.data[0].add.index),
+        //   JSON.stringify(value.newData[0].add.index),
+        //   'onDragSortChange',
+        // );
       },
     },
     template: `
     <el-table-pro
-        row-key="add.index"
-    :dataSource="data"
+        row-key="tree.id"
+    :dataSource="treeData"
     :treeDisplay="true"
+    parentField="tree.parentid"
     :hasIndexColumn="true"
    dragSort="row"
 
    @drag-sort="onDragSortChange"
     >
-      <el-table-column-pro title="申请人" colKey="channel"></el-table-column-pro>
+    <el-table-column-pro title="title" colKey="tree.name">
+    </el-table-column-pro>
+      <el-table-column-dynamic-pro title="title" colKey="colKey" :dataSource="dynamicColumns">
+ 
+      </el-table-column-dynamic-pro>
     
     </el-table-pro>
     `,
   }),
 };
-// <el-table-column-pro data-nodepath="123"  >
-//   <template #title="title">
-//      <div>
-//      <div>1234</div>
-//      </div>
-//  </template>
-//   <template #cell="cell">
-//       <div>
-//           <div>{{ cell.row.applicant }}</div>
-//      </div>
-//    </template>
-// </el-table-column-pro>
+
+export const 可编辑表格 = {
+  name: '可编辑表格',
+  render: () => ({
+    // moud
+    async mounted() {
+      setTimeout(() => {
+        this.hasExpandedRow = false;
+        console.log(123);
+      }, 3000);
+    },
+    watch: {
+      selectedRowKeys(value) {
+        console.log(value, '===watch');
+      },
+    },
+    data() {
+      return {
+        data: (params) => {
+          const initialData = [];
+          const total = 200;
+          for (let i = 0; i < total; i++) {
+            initialData.push({
+              index: i,
+              applicant: ['贾明', '张三', '王芳'][i % 3],
+              status: i % 3,
+              channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+              children: [
+                {
+                  channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                  children: [
+                    {
+                      channel: ['电子签署', '电子签署', '纸质签署'][i % 3],
+                    },
+                  ],
+                },
+              ],
+              detail: {
+                email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
+              },
+              matters: ['宣传物料制作费用', 'algolia 服务报销', '相关周边制作费', '激励奖品快递费'][i % 4],
+              time: [2, 10, 1][i % 3],
+              createTime: ['2022-01-01', '2022-02-01', '2022-02-01', '2022-03-01', '2022-04-01'][i % 4],
+            });
+          }
+
+          return {
+            list: initialData,
+            total,
+          };
+        },
+        hasExpandedRow: true,
+        list: [],
+        rowspan: 2,
+        type: undefined,
+        selectedRowKeys: [],
+        columns: [
+          { colKey: 'applicant', title: '申请人', width: 100 },
+          { colKey: 'status', title: '状态', width: 100 },
+          { colKey: 'channel', title: '渠道', width: 100 },
+          { colKey: 'detail.email', title: '邮箱', width: 100 },
+          { colKey: 'matters', title: '事项', width: 100 },
+          { colKey: 'time', title: '时长', width: 100 },
+          { colKey: 'createTime', title: '创建时间', width: 100 },
+        ],
+        displayColumns: undefined,
+      };
+    },
+    beforeMount() {
+      console.log(12341234);
+      this.list = this.data().list;
+      setTimeout(() => {
+        this.list[0] = { applicant: '张三22' };
+        console.log(1234);
+      }, 1000);
+    },
+    methods: {
+      log(value) {
+        console.log(value, 'log', this.list);
+        // console.log(log);
+        // this.$set(this.list, value.rowIndex, value.newRowData);
+
+        // this.displayColumns = value;
+      },
+      onSortChange(...arg) {
+        console.log(arg, 'arg===');
+      },
+      onDragSortChange(...arg) {
+        console.log(arg, 'arg===');
+      },
+    },
+    template: `<el-table-pro
+      row-key="index"
+      :dataSource="list"
+      :selectedRowKeys.sync="selectedRowKeys"
+      width="800px"
+    >
+<el-table-column-pro title="渠道"  colKey="detail.email" type="editable" :rules="[
+          { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
+    ]" @row-edit="log">
+      <template #edit>
+        <el-radio-group-pro :dataSource="[1,2,3]" data-nodepath="123">
+            <template #item="current" >
+              <el-text>123</el-text>
+            </template>
+        </el-radio-group-pro>
+      </template>
+      <template #cell="cell">
+      <div>
+      123
+      </div>
+      </template>
+    </el-table-column-pro>
+    <el-table-column-pro title="渠道"  colKey="status" type="editable" :rules="[
+          { validate: 'required', required: true, trigger: 'blur', message: '请输入用户名' },
+    ]" @row-edit="log">
+      <template #edit="cell">
+      <el-time-picker-pro :class="'class12'"  class="class" staticClass="staticClass" style="width: 100px;" :style="{height: '100px'}" statcStyle="statcStyle" ></el-time-picker-pro>
+      </template>
+      <template #cell="cell">
+      <el-text>
+      123
+      </el-text>
+      </template>
+    </el-table-column-pro>
+    </el-table-pro>`,
+  }),
+};

@@ -1,0 +1,214 @@
+{
+    "processDeclarations": [
+      {
+        "concept": "ProcessV2Declaration",
+        "props": [
+          {
+            "group": "数据属性",
+            "name": "customAttr1",
+            "title": "值",
+            "tsType": "nasl.core.String",
+            "description": "用于标识的值",
+            "bindHide": true,
+            "bindOpen": true,
+            "setter": {
+              "concept": "EnumSelectSetter",
+              "options": [
+                {
+                  "title": "子元素默认布局",
+                  "value": "none"
+                },
+                {
+                  "title": "子元素行内布局",
+                  "value": "inline"
+                },
+                {
+                  "title": "子元素块级布局",
+                  "value": "block"
+                }
+              ]
+            },
+            "if": "_ => _.direction === 'horizontal' || _.mode === 'inline' && _.direction === 'vertical' || _.mode === 'block' && _.direction === 'vertical'",
+            "onChange": [
+              {
+                "update": {
+                  "gap": "normal"
+                },
+                "if": "_ => _ === 'space-between'"
+              },
+              {
+                "update": {
+                  "gap": "normal"
+                },
+                "if": "_ => _ === 'space-around'"
+              }
+            ]
+          }
+        ],
+        "events": [
+          {
+            "name": "OnTaskCreate1",
+            "title": "自定义任务创建时"
+          }
+        ],
+        "cwProps": [
+          {
+              "name": "title",
+              "hide": true,      
+          } 
+         ]
+      },
+      {
+        "concept": "ProcessElementV2Declaration",
+        "type": "ApprovalTask",
+        "node": {
+            "type": "Gateway",
+            "icon": "xxxx",
+            "primaryColor": {
+            "dark": { "background": "#31A8F733", "border": "#31A8F7" },
+            "light": { "background": "#45B0F733", "border": "#45B0F7" }
+            },
+            "hasLogic": false
+        },
+        "props": [
+          {
+            "group": "数据属性",
+            "tabKind": "property",
+            "name": "customAttr1",
+            "title": "值",
+            "tsType": "nasl.core.String",
+            "description": "用于标识的值",
+            "bindHide": true,
+            "bindOpen": true,
+            "setter": {
+              "concept": "EnumSelectSetter",
+              "options": [
+                {
+                  "title": "子元素默认布局",
+                  "value": "none"
+                },
+                {
+                  "title": "子元素行内布局",
+                  "value": "inline"
+                },
+                {
+                  "title": "子元素块级布局",
+                  "value": "block"
+                }
+              ]
+            },
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "none"
+              }
+            },
+            "if": "_ => _.direction === 'horizontal' || _.mode === 'inline' && _.direction === 'vertical' || _.mode === 'block' && _.direction === 'vertical'",
+            "disabledIf": "_ => _.field === null",
+            "onChange": [
+              {
+                "update": {
+                  "gap": "normal"
+                },
+                "if": "_ => _ === 'space-between'"
+              },
+              {
+                "update": {
+                  "gap": "normal"
+                },
+                "if": "_ => _ === 'space-around'"
+              }
+            ]
+          }
+        ],
+        "events": [
+          {
+            "name": "OnTaskCreate1",
+            "title": "自定义任务创建时"
+          }
+        ],
+        "cwProps": [
+          {
+              "name": "assigneeV2",
+              "hide": true,      
+          },
+          {
+              "name": "approvalPolicy",
+              "hide": true,      
+          }
+         ]
+      },
+      {
+        "concept": "ProcessElementV2Declaration",
+        "type": "CustomProcessType",
+        "node": {
+            "type": "Gateway",
+            "icon": "xxxx",
+            "primaryColor": {
+            "dark": { "background": "#31A8F733", "border": "#31A8F7" },
+            "light": { "background": "#45B0F733", "border": "#45B0F7" }
+            },
+            "hasLogic": false
+        },
+        "props": [
+          {
+            "group": "数据属性",
+            "tabKind": "property",
+            "name": "customAttr1",
+            "title": "值",
+            "tsType": "nasl.core.String",
+            "description": "用于标识的值",
+            "bindHide": true,
+            "bindOpen": true,
+            "setter": {
+              "concept": "EnumSelectSetter",
+              "options": [
+                {
+                  "title": "子元素默认布局",
+                  "value": "none"
+                },
+                {
+                  "title": "子元素行内布局",
+                  "value": "inline"
+                },
+                {
+                  "title": "子元素块级布局",
+                  "value": "block"
+                }
+              ]
+            },
+            "defaultValue": {
+              "concept": "DefaultValue",
+              "expression": {
+                "concept": "StringLiteral",
+                "value": "none"
+              }
+            },
+            "if": "_ => _.direction === 'horizontal' || _.mode === 'inline' && _.direction === 'vertical' || _.mode === 'block' && _.direction === 'vertical'",
+            "disabledIf": "_ => _.field === null",
+            "onChange": [
+              {
+                "update": {
+                  "gap": "normal"
+                },
+                "if": "_ => _ === 'space-between'"
+              },
+              {
+                "update": {
+                  "gap": "normal"
+                },
+                "if": "_ => _ === 'space-around'"
+              }
+            ]
+          }
+        ],
+        "events": [
+          {
+            "name": "OnTaskCreate1",
+            "title": "自定义任务创建时"
+          }
+        ]
+      }
+    ]
+  } 

@@ -35,6 +35,7 @@
             :disabled="disabled"
             :placeholder="rightPlaceholder"
             :clearable="clearable"
+            :clear-icon="clearIcon ? clearIcon : undefined"
             @click.stop="onRightClick"
             @focus="onFocus"
             @blur="onBlur"
@@ -63,6 +64,9 @@ export default {
             default: 'calendar',
         },
         suffixIcon: {
+            type: String,
+        },
+        clearIcon: {
             type: String,
         },
         disabled: { type: Boolean, default: false },
