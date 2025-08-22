@@ -29,6 +29,7 @@
    */
   --van-popover-action-font-size: var(--van-font-size-md);
   /**
+   * @hidden 
    * @type input
    * @desc 弹出框操作按钮行高
    */
