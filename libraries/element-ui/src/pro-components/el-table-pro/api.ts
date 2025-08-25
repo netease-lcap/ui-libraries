@@ -941,6 +941,7 @@ namespace nasl.ui {
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
       structured: true,
+      forceRefresh: 'parent',
       // selector: 'multiple',
       selector: [
         {
@@ -1154,7 +1155,7 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
-
+      forceRefresh: 'parent',
       structured: true,
       // selector: 'multiple',
       selector: [
