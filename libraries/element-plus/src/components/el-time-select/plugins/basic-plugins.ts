@@ -14,9 +14,9 @@ export function handleTagName(props) {
 
 export function handleIcon(props) {
   const prefixIconName = props.get('prefixIconName');
-  const clearIconName = props.get('clearIconName');
+  // const clearIconName = props.get('clearIconName', 'Close');
   return {
     prefixIcon: getPropsIcon({ name: prefixIconName }),
-    clearIcon: getPropsIcon({ name: clearIconName }),
+    // clearIcon: getPropsIcon({ name: clearIconName }),
   };
 }

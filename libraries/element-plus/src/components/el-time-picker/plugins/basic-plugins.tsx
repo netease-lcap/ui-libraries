@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { useMemo, useControllableValue } from '@/plugins/hooks';
 import { getNaslTimeValue, getFormatTimeValue, isValidStringTime } from './utils';
 import { getIsPreview, getRender, getFormatDateOrTime } from '@/plugins/common/preview';
+import { getPropsIcon } from '@/plugins/common/icon';
 
 export * from './ide';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -45,8 +46,7 @@ export function handleRangeDateValue(props) {
 
   const [value, setValue] = useControllableValue(props);
   const timeValue = useMemo(
-    () =>
-      getTimeValue({
+    () => getTimeValue({
         isEffectiveTime,
         isNilTime,
         isControlledTime,
@@ -56,6 +56,7 @@ export function handleRangeDateValue(props) {
       }),
     [isEffectiveTime, isNilTime, isControlledTime, startValue, endValue, value],
   );
+  console.log(timeValue, '===');
   const rangeResult = {
     modelValue: timeValue,
     'onUpdate:modelValue': _.wrap(setValue, (fn, ...args) => {
@@ -73,8 +74,8 @@ export function handleDateValue(props) {
   const result = {
     modelValue: value ? getFormatTimeValue(value) : '',
     'onUpdate:modelValue': _.wrap(setValue, (fn, val: any) => {
-      const modelValue = _.isNil(val) ? undefined : new Date(dayjs(val).format()).toJSON();
-      const naslValue = getNaslTimeValue(modelValue);
+      const modelValue = val ? new Date(dayjs(val).format()).toJSON() : undefined;
+      const naslValue = val ? getNaslTimeValue(modelValue) : undefined;
       _.attempt(fn, modelValue);
       _.attempt(setValue, naslValue);
     }),
@@ -110,7 +111,13 @@ export function handleDisabledFunction(props) {
   };
 }
 
-export { handleIcon } from '@/plugins/common/icon';
+// export { handleIcon } from '@/plugins/common/icon';
+export function handleIcon(props) {
+  const prefixIconName = props.get('prefixIconName');
+  return {
+    clearIcon: getPropsIcon({ name: prefixIconName }),
+  };
+}
 
 export function handlePreview(props) {
   const ref = props.get('ref');
@@ -122,7 +129,7 @@ export function handlePreview(props) {
     const { format = 'HH:mm:ss', modelValue } = insProps;
     const values = _.compact(_.castArray(modelValue));
     const previewText = inIDE || _.isEmpty(values) ? '-' : _.map(values, (v) => getFormatDateOrTime(v, format)).join(' ~ ');
-    return <el-text text={previewText}></el-text>;
+    return <el-text text={previewText} />;
   };
 
   const { render, insRef } = getRender(Component, previewRender, isPreview);

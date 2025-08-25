@@ -138,16 +138,16 @@ namespace nasl.ui {
     })
     prefixIconName: nasl.core.String;
 
-    @Prop({
-      title: '清除图标',
-      description: '清除图标',
-      group: '主要属性',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
-      },
-    })
-    clearIconName: nasl.core.String;
+    // @Prop({
+    //   title: '清除图标',
+    //   description: '清除图标',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+    //   },
+    // })
+    // clearIconName: nasl.core.String = 'Close';
 
     @Prop({
       group: '样式属性',

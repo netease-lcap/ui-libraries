@@ -7,9 +7,11 @@
 }
 
 
-.el-form.el-form--label-top .el-flex-form-item :not(.el-form-item-has-label) {
+
+.el-form.el-form--label-top .el-flex-form-item >:not(.el-form-item-has-label) {
   align-self: flex-end;
 }
+
 
 .el-form--inline .el-flex-form-item {
   display: inline-flex;
