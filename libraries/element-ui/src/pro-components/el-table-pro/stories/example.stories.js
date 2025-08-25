@@ -125,7 +125,7 @@ export const Default = {
    :onDragSort="onDragSortChange"
     >
 
-    <el-table-column-dynamic-pro title="title" colKey="colKey.matters" data-nodepath="123">
+    <el-table-column-dynamic-pro dataSource="dynamicColumns" title="title" colKey="colKey.matters" data-nodepath="123">
     <template #title="item">
       <el-text :text="item.matters"></el-text>
     </template>
@@ -316,6 +316,12 @@ export const 树形 = {
     <el-table-column-pro title="title" colKey="tree.name">
     </el-table-column-pro>
       <el-table-column-dynamic-pro title="title" colKey="colKey" :dataSource="dynamicColumns">
+      <template #title="item">
+        <el-text >{{item.item.title}}</el-text>
+      </template>
+      <template #cell="item">
+        <el-text >1</el-text>
+      </template>
  
       </el-table-column-dynamic-pro>
     

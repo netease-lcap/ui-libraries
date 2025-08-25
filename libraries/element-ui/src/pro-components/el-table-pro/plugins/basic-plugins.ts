@@ -310,44 +310,42 @@ export const useTable: NaslComponentPluginOptions = {
         .filter((item) => !_.isEmpty(item));
     };
 
-    const renderColumn = (vnode) => {
-      const attrs = _.get(vnode, 'data.attrs', {});
-      const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
-      const children = _.get(vnode, 'componentOptions.children', {});
-      const childrens = children?.length ? { children: renderSlot(children) } : {};
-      const listeners = _.get(vnode, 'componentOptions.listeners', {});
-
-      const cellRender = _.cond([
-        [isEditColumn, editColumnProps],
-        [
-          _.conforms({ cell: _.isFunction }),
-          _.constant({ cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col }) }),
-        ],
-        [
-          _.matches({ type: 'number' }),
-          _.constant({ cell: (h, { rowIndex }) => pageSize.value * (current.value - 1) + rowIndex + 1 }),
-        ],
-        [_.conforms({ type: _.isString }), _.constant({})],
-      ]);
-      const cellProps = cellRender({ type: attrs.type, cell, attrs, listeners, edit });
-      return {
-        ...attrs,
-        ...cellProps,
-        // ...titleProps,
-        ...childrens,
-        title,
-        attrs: ({ row }) => {
-          return {
-            style: {
-              ...(_.attempt(rowStyle.value, row) || {}),
-            },
-          };
-        },
-      };
-    };
-
     async function handleDynamicColumn(vnode) {
-      const attrs = renderColumn(vnode);
+      const renderColumn = (vnode, columnsItem) => {
+        const attrs = _.get(vnode, 'data.attrs', {});
+        const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
+        const children = _.get(vnode, 'componentOptions.children', {});
+        const childrens = children?.length ? { children: renderSlot(children) } : {};
+        const listeners = _.get(vnode, 'componentOptions.listeners', {});
+
+        const cellRender = _.cond([
+          [isEditColumn, editColumnProps],
+          [
+            _.conforms({ cell: _.isFunction }),
+            _.constant({ cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col, columnsItem:columnsItem }) }),
+          ],
+          [
+            _.matches({ type: 'number' }),
+            _.constant({ cell: (h, { rowIndex }) => pageSize.value * (current.value - 1) + rowIndex + 1 }),
+          ],
+          [_.conforms({ type: _.isString }), _.constant({})],
+        ]);
+        const cellProps = cellRender({ type: attrs.type, cell, attrs, listeners, edit });
+        return {
+          ...attrs,
+          ...cellProps,
+          // ...titleProps,
+          ...childrens,
+          title,
+          attrs: ({ row }) => {
+            return {
+              style: {
+                ...(_.attempt(rowStyle.value, row) || {}),
+              },
+            };
+          },
+        };
+      };
       const data = ref([]);
       const columns = ref([]);
       const getDataSourceFn = async () => {
@@ -370,6 +368,7 @@ export const useTable: NaslComponentPluginOptions = {
       data.value = await getDataSourceFn();
 
       columns.value = data.value.map((item) => {
+        const attrs = renderColumn(vnode, item);
         return {
           ...attrs,
           title: _.isFunction(attrs?.title) ? attrs?.title({ item }) : '',
