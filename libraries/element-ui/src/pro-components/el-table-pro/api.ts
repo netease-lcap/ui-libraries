@@ -42,6 +42,9 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
+      forceRefresh: {
+        slot: 'default',
+      },
       containerDirection: 'row',
       disableSlotAutoFill: [
         {
@@ -941,7 +944,7 @@ namespace nasl.ui {
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
       structured: true,
-      forceRefresh: 'parent',
+      forceRefresh:'transparent',
       // selector: 'multiple',
       selector: [
         {
@@ -969,7 +972,6 @@ namespace nasl.ui {
       super();
     }
   }
-
 
   export class ElTableColumnProOptions<
     T,
@@ -1155,7 +1157,8 @@ namespace nasl.ui {
       idetype: 'container',
       parentAccept: "['el-table-pro'].includes(target.tag)",
       childAccept: false,
-      forceRefresh: 'parent',
+      // forceRefresh: 'parent',
+      forceRefresh:'transparent',
       structured: true,
       // selector: 'multiple',
       selector: [
