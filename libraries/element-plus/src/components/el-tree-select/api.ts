@@ -255,7 +255,7 @@ namespace nasl.ui {
     })
     defaultCheckedKeys: nasl.collection.List<V> = [];
 
-        @Prop({
+      @Prop({
       group: '状态属性',
       title: '预览',
       description: '是否预览',
@@ -264,7 +264,7 @@ namespace nasl.ui {
     preview: nasl.core.Boolean = false;
 
     @Event({
-      title: '改变时',
+      title: '复选框被点击的时',
       description: '节点选中状态变化时触发',
     })
     checkChange: (value: M extends true ? nasl.collection.List<V> : V) => any;
