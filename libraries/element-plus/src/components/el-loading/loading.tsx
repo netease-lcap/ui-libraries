@@ -46,6 +46,12 @@ export default defineComponent({
     customClass: {
       type: String,
     },
+    beforeClose: {
+      type: Function,
+    },
+    closed: {
+      type: Function,
+    },
   },
   setup(props, { slots, expose }) {
     const isVisible = ref(false);
@@ -59,8 +65,9 @@ export default defineComponent({
       svg: props.svg,
       svgViewBox: props.svgViewBox,
       customClass: props.customClass,
+      beforeClose: props.beforeClose,
+      closed: props.closed,
     });
-
     const show = () => {
       isVisible.value = true;
     };
