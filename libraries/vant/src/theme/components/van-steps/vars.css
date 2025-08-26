@@ -19,6 +19,7 @@
    */
   --van-step-active-color: var(--van-primary-color);
   /**
+   * @hidden
    * @type color
    * @desc 步骤进行中文字颜色
    */

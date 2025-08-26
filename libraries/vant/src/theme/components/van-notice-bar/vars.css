@@ -39,11 +39,13 @@
    */
   --van-notice-bar-background: var(--van-orange-light);
   /**
+   * @hidden
    * @type input
    * @desc 通知栏图标大小
    */
   --van-notice-bar-icon-size: 16px;
   /**
+   * @hidden
    * @type input
    * @desc 通知栏图标最小宽度
    */

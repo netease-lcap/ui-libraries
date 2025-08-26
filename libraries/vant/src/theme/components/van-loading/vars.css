@@ -4,11 +4,13 @@
 :root,
 :host {
   /**
+   * @hidden
    * @type color
    * @desc 加载文字颜色
    */
   --van-loading-text-color: var(--van-text-color-2);
   /**
+   * @hidden
    * @type input
    * @desc 加载文字字体大小
    */
