@@ -290,6 +290,10 @@ export const 树形 = {
             },
           ];
         },
+        dynamicColumns2: [{
+          title: '申请人4',
+          colKey: 'channel',
+        }],
       };
     },
     methods: {
@@ -301,6 +305,17 @@ export const 树形 = {
         //   'onDragSortChange',
         // );
       },
+      add() {
+        this.dynamicColumns2.push({
+          title: '申请人5',
+          colKey: 'channel',
+        });
+      },
+    },
+    mounted() {
+      setTimeout(() => {
+        this.add();
+      }, 2000);
     },
     template: `
     <el-table-pro
@@ -315,7 +330,7 @@ export const 树形 = {
     >
     <el-table-column-pro title="title" colKey="tree.name">
     </el-table-column-pro>
-      <el-table-column-dynamic-pro title="title" colKey="colKey" :dataSource="dynamicColumns">
+      <el-table-column-dynamic-pro title="title" colKey="colKey" :dataSource="dynamicColumns2">
       <template #title="item">
         <el-text >{{item.item.title}}</el-text>
       </template>

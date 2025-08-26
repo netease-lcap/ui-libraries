@@ -2,7 +2,16 @@
 /* 组件功能扩展插件 */
 // export {};
 import _, { isFunction, isNil } from 'lodash';
-import { computed, ref, watch, onMounted, provide, getCurrentInstance, toRef } from '@vue/composition-api';
+import {
+  computed,
+  ref,
+  watch,
+  onMounted,
+  provide,
+  getCurrentInstance,
+  toRef,
+  onBeforeUpdate,
+} from '@vue/composition-api';
 import {
   SelectOptions,
   Table,
@@ -218,6 +227,7 @@ export const useTable: NaslComponentPluginOptions = {
             checkStrictly: checkStrictly.value,
           }
         : undefined));
+    const dynamicColumnsNodeData = ref([]);
 
     const data = props.useComputed('data', (v) => {
       const treeDisplay = props.get('treeDisplay');
@@ -322,7 +332,9 @@ export const useTable: NaslComponentPluginOptions = {
           [isEditColumn, editColumnProps],
           [
             _.conforms({ cell: _.isFunction }),
-            _.constant({ cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col, columnsItem:columnsItem }) }),
+            _.constant({
+              cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col, columnsItem }),
+            }),
           ],
           [
             _.matches({ type: 'number' }),
@@ -464,10 +476,16 @@ export const useTable: NaslComponentPluginOptions = {
 
     // const displayColumnsProps = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
     const displayColumns = props.useRef('displayColumns', (v) => (_.isEmpty(v) ? undefined : v));
-    onMounted(() => {
+
+
+    function getDynamicColumns() {
       const slotDefault = props.get('slotDefault');
       const slotDefaultVnodes = slotDefault?.() ?? [];
       const dynamicColumnsProps = slotDefaultVnodes.filter((item) => item.tag?.includes('el-table-column-dynamic-pro'));
+
+      const dynaiceColumnsDataSouce = _.map(dynamicColumnsProps, (item) => _.get(item, 'data.attrs.dataSource', []));
+      if (_.isEqual(dynaiceColumnsDataSouce, dynamicColumnsNodeData.value)) return;
+      dynamicColumnsNodeData.value = _.cloneDeep(dynaiceColumnsDataSouce);
       const promise = _.map(dynamicColumnsProps, async (item, index) => {
         const result = await handleDynamicColumn(item);
         return result;
@@ -475,7 +493,9 @@ export const useTable: NaslComponentPluginOptions = {
       Promise.all(promise).then((res) => {
         dynamicColumns.value = res;
       });
-    });
+    }
+
+    // watch(() =>
 
     watch(
       () => props.get('displayColumns'),
@@ -571,6 +591,7 @@ export const useTable: NaslComponentPluginOptions = {
         const vnodes = ctx.setupContext.slots?.default?.();
         const dynamicColumnss = dynamicColumns.value?.flatMap((item) => item.value) ?? [];
         const columns = renderSlot(vnodes).concat(dynamicColumnss);
+        getDynamicColumns();
         autoMergeFields.value = columns?.filter?.((item) => item?.autoMerge) ?? [];
         if (!context.propsData?.props?.displayColumns) {
           resultVNode.componentOptions.propsData.displayColumns = columns.map((item) => item?.colKey);
