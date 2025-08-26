@@ -256,6 +256,14 @@ namespace nasl.ui {
     defaultCheckedKeys: nasl.collection.List<V>;
 
     @Prop({
+      group: '主要属性',
+      title: '默认展开的节点',
+      description: '默认展开的节点的 key 的数组, 仅首次生效',
+      setter: { concept: 'InputSetter' },
+    })
+    defaultExpandedKeys: nasl.collection.List<V>;
+
+    @Prop({
       group: '状态属性',
       title: '预览',
       description: '是否预览',

@@ -333,7 +333,7 @@ export const useTable: NaslComponentPluginOptions = {
           [
             _.conforms({ cell: _.isFunction }),
             _.constant({
-              cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col, columnsItem: columnItem }),
+              cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col, columnItem: columnItem }),
             }),
           ],
           [
