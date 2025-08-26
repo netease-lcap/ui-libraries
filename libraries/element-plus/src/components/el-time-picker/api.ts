@@ -308,8 +308,8 @@ namespace nasl.ui {
     onClear: (event: FocusEvent) => any;
 
     @Event({
-      title: '显示',
-      description: '显示时触发',
+      title: '下拉列表显示状态变化',
+      description: '下拉列表显示状态变化时触发',
     })
     onVisibleChange: (event: nasl.core.Boolean) => any;
   }
