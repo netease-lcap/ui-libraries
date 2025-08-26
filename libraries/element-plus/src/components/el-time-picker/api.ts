@@ -253,16 +253,16 @@ namespace nasl.ui {
     })
     prefixIconName: nasl.core.String = 'Clock';
 
-    @Prop({
-      title: '自定义清除图标',
-      description: '自定义清除图标',
-      group: '主要属性',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
-      },
-    })
-    clearIconName: nasl.core.String = 'CircleClose';
+    // @Prop({
+    //   title: '自定义清除图标',
+    //   description: '自定义清除图标',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+    //   },
+    // })
+    // clearIconName: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',
@@ -308,8 +308,8 @@ namespace nasl.ui {
     onClear: (event: FocusEvent) => any;
 
     @Event({
-      title: '显示',
-      description: '显示时触发',
+      title: '下拉列表显示状态变化',
+      description: '下拉列表显示状态变化时触发',
     })
     onVisibleChange: (event: nasl.core.Boolean) => any;
   }

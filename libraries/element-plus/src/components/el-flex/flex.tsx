@@ -13,7 +13,7 @@ export default defineComponent({
 
 
     const style = computed(() => {
-      return props.mode === 'flex'
+      return ['flex', 'form-flex'].includes(props.mode ?? '')
         ? {
             flexDirection: props.direction === 'horizontal' ? 'row' : 'column',
             justifyContent: props.justify,
@@ -29,7 +29,7 @@ export default defineComponent({
     function renderChildren() {
       const children: any[] = getChildSlots();
 
-      if (props.mode === 'flex') {
+      if (['flex', 'form-flex'].includes(props.mode ?? '')) {
         return children;
       }
 
@@ -46,7 +46,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <div style={style.value as any} class={props.mode === 'flex' ? 'el-flex' : 'el-flex--block'}>
+        <div style={style.value as any} class={[props.mode === 'flex' ? 'el-flex' : 'el-flex--block', props.mode === 'form-flex' ? 'el-form-flex' : '']}>
           {renderChildren()}
         </div>
       );

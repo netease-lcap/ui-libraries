@@ -39,6 +39,7 @@ export const Default = {
     direction: 'vertical',
     loading: false,
     loadingText: '拼命加载中',
+    class: 'test',
   },
 };
 

@@ -253,9 +253,17 @@ namespace nasl.ui {
       description: '默认选中的节点的 key 的数组, 仅首次生效',
       setter: { concept: 'InputSetter' },
     })
-    defaultCheckedKeys: nasl.collection.List<V> = [];
+    defaultCheckedKeys: nasl.collection.List<V>;
 
-        @Prop({
+    @Prop({
+      group: '主要属性',
+      title: '默认展开的节点',
+      description: '默认展开的节点的 key 的数组, 仅首次生效',
+      setter: { concept: 'InputSetter' },
+    })
+    defaultExpandedKeys: nasl.collection.List<V>;
+
+    @Prop({
       group: '状态属性',
       title: '预览',
       description: '是否预览',
@@ -264,7 +272,7 @@ namespace nasl.ui {
     preview: nasl.core.Boolean = false;
 
     @Event({
-      title: '改变时',
+      title: '复选框被点击的时',
       description: '节点选中状态变化时触发',
     })
     checkChange: (value: M extends true ? nasl.collection.List<V> : V) => any;

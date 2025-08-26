@@ -1,5 +1,5 @@
 export interface ElFlexProps {
-  mode?: 'block' | 'flex';
+  mode?: 'block' | 'flex' | 'form-flex';
   direction?: 'horizontal' | 'vertical';
   justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around';
   alignment?: 'start' | 'center' | 'end' | 'baseline' | 'stretch';

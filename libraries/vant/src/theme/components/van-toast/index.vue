@@ -1,8 +1,8 @@
 <template>
   <div class="toast-container">
-    <van-toast :show="true" type="text" :forbid-click="false" :close-on-click="false" :close-on-click-overlay="false">
+    <van-toast :show="true" type="text" :forbid-click="false" :close-on-click="false" :close-on-click-overlay="false" position="top">
       <template #message>
-        文字提示
+        文字提示-top
       </template>
     </van-toast>
     <van-toast :show="true" type="loading" :forbid-click="false" :close-on-click="false"
@@ -17,9 +17,9 @@
         成功
       </template>
     </van-toast>
-    <van-toast :show="true" type="fail" :forbid-click="false" :close-on-click="false" :close-on-click-overlay="false">
+    <van-toast :show="true" type="fail" :forbid-click="false" :close-on-click="false" :close-on-click-overlay="false" position="bottom">
       <template #message>
-        失败
+        失败-bottom
       </template>
     </van-toast>
   </div>
@@ -36,7 +36,7 @@
 }
 
 .toast-container .van-toast {
-  position: static !important;
+  position: relative !important;
   transform: none !important;
 }
 </style>

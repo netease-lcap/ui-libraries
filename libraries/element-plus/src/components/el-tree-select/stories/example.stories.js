@@ -241,7 +241,7 @@ export const Example2 = {
   render: () => ({
     setup() {
       const value = ref([]);
-      const data = [
+      const data =async ()=> [
         {
           value: '1',
           label: 'Level one 1',
@@ -294,13 +294,14 @@ export const Example2 = {
     },
     template: `
     <div>
-      <el-form-tree-select
+      <el-tree-select
         v-model="value"
-        :data="data"
-        show-checkbox	
+        :dataSource="data"
         :props="defaultProps"
         :render-after-expand="false"
         node-key="value"
+        :default-expanded-keys="['2-2-1']"
+        :autoExpandParent="true"
         multiple
         placeholder="请选择"
         style="width: 240px"

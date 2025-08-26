@@ -125,7 +125,7 @@ export const Default = {
    :onDragSort="onDragSortChange"
     >
 
-    <el-table-column-dynamic-pro title="title" colKey="colKey.matters" data-nodepath="123">
+    <el-table-column-dynamic-pro dataSource="dynamicColumns" title="title" colKey="colKey.matters" data-nodepath="123">
     <template #title="item">
       <el-text :text="item.matters"></el-text>
     </template>
@@ -290,6 +290,7 @@ export const 树形 = {
             },
           ];
         },
+        dynamicColumns2: ['channel'],
       };
     },
     methods: {
@@ -301,6 +302,14 @@ export const 树形 = {
         //   'onDragSortChange',
         // );
       },
+      add() {
+        this.dynamicColumns2.push('channel2');
+      },
+    },
+    mounted() {
+      setTimeout(() => {
+        this.add();
+      }, 2000);
     },
     template: `
     <el-table-pro
@@ -315,7 +324,14 @@ export const 树形 = {
     >
     <el-table-column-pro title="title" colKey="tree.name">
     </el-table-column-pro>
-      <el-table-column-dynamic-pro title="title" colKey="colKey" :dataSource="dynamicColumns">
+      <el-table-column-dynamic-pro title="title" colKey="colKey" :dataSource="dynamicColumns2">
+      <template #title="item">
+        <el-text >{{item.item.title}}</el-text>
+      </template>
+      <template #cell="current">
+        <el-text >{{current.item}}</el-text>
+        <el-text>{{current.columnItem}}</el-text>
+      </template>
  
       </el-table-column-dynamic-pro>
     

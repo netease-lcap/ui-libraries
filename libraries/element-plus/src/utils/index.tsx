@@ -24,6 +24,9 @@ const mergeRef = (ref) => {
     return componentRef;
   };
 };
+const mergeClass = (class1: string, class2: string) => {
+  return `${class1 ?? ''} ${class2 ?? ''}`.trim();
+};
 
 function isValidTime(time) {
   return !_.isNil(time) && dayjs(time).isValid();
@@ -50,6 +53,7 @@ _.mixin({
   stringToAscii,
   isValidTime,
   mergeRef,
+  mergeClass,
 });
 // _.mixin
 declare module 'lodash' {
@@ -60,6 +64,7 @@ declare module 'lodash' {
     stringToAscii: typeof stringToAscii;
     isValidTime: typeof isValidTime;
     mergeRef: typeof mergeRef;
+    mergeClass: typeof mergeClass;
   }
 }
 
