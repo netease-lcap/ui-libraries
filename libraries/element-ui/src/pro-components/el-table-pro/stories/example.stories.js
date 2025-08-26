@@ -290,10 +290,7 @@ export const 树形 = {
             },
           ];
         },
-        dynamicColumns2: [{
-          title: '申请人4',
-          colKey: 'channel',
-        }],
+        dynamicColumns2: ['channel'],
       };
     },
     methods: {
@@ -306,10 +303,7 @@ export const 树形 = {
         // );
       },
       add() {
-        this.dynamicColumns2.push({
-          title: '申请人5',
-          colKey: 'channel',
-        });
+        this.dynamicColumns2.push('channel2');
       },
     },
     mounted() {
@@ -334,8 +328,9 @@ export const 树形 = {
       <template #title="item">
         <el-text >{{item.item.title}}</el-text>
       </template>
-      <template #cell="item">
-        <el-text >1</el-text>
+      <template #cell="current">
+        <el-text >{{current.item}}</el-text>
+        <el-text>{{current.columnItem}}</el-text>
       </template>
  
       </el-table-column-dynamic-pro>

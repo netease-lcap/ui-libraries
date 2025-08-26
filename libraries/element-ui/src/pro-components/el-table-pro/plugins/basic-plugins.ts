@@ -321,7 +321,7 @@ export const useTable: NaslComponentPluginOptions = {
     };
 
     async function handleDynamicColumn(vnode) {
-      const renderColumn = (vnode, columnsItem) => {
+      const renderColumn = (vnode, columnItem) => {
         const attrs = _.get(vnode, 'data.attrs', {});
         const { cell, title, edit } = _.get(vnode, 'data.scopedSlots', {});
         const children = _.get(vnode, 'componentOptions.children', {});
@@ -333,7 +333,7 @@ export const useTable: NaslComponentPluginOptions = {
           [
             _.conforms({ cell: _.isFunction }),
             _.constant({
-              cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col, columnsItem }),
+              cell: (h, { row, rowIndex, col }) => cell({ item: row, index: rowIndex, col, columnsItem: columnItem }),
             }),
           ],
           [

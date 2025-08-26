@@ -253,9 +253,9 @@ namespace nasl.ui {
       description: '默认选中的节点的 key 的数组, 仅首次生效',
       setter: { concept: 'InputSetter' },
     })
-    defaultCheckedKeys: nasl.collection.List<V> = [];
+    defaultCheckedKeys: nasl.collection.List<V>;
 
-      @Prop({
+    @Prop({
       group: '状态属性',
       title: '预览',
       description: '是否预览',
