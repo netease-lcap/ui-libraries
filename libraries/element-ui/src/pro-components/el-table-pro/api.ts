@@ -1159,7 +1159,7 @@ namespace nasl.ui {
       childAccept: false,
       // forceRefresh: 'parent',
       forceRefresh:'transparent',
-      structured: true,
+      // structured: true,
       // selector: 'multiple',
       selector: [
         {
