@@ -214,7 +214,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '显示在输入框中的格式',
       description: '显示在输入框中的格式',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'InputSetter',
+        autoClear: true,
+      },
     })
     format: nasl.core.String = 'YYYY-MM-DD';
 
