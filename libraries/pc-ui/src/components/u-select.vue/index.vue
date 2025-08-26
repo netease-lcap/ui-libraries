@@ -598,18 +598,21 @@ export default {
             }
 
             // 隐藏掉超出输入框长度的元素
-            if (
-              this.collapseCounter === this.selectedVMs.length ||
-              this.selectedVMs.length === 1
-            )
-              return;
+            // 防止时序错误导致错误渲染，所以注释
+            // if (
+            //   this.collapseCounter === this.selectedVMs.length ||
+            //   this.selectedVMs.length === 1
+            // )
+            //   return;
+
             for (
-              let i = this.collapseCounter;
+              let i = 0;
               i < this.selectedVMs.length;
               i++
             ) {
+              const display = i >= this.collapseCounter ? 'none' : 'inline-block';
               this.$nextTick(() => {
-                this.$refs[`item_${i}`][0].style.display = 'none';
+                this.$refs[`item_${i}`][0].style.display = display;
               });
             }
           });
