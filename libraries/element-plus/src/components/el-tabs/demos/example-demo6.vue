@@ -8,6 +8,7 @@
     :dataSource="editableTabs"
     titleField="title"
     valueField="name"
+    @tabRemove="remove"
   >
   </el-tabs>
 </template>
@@ -15,6 +16,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { TabPaneName } from 'element-plus'
+const remove = (name: string) => {
+  console.log(name)
+}
 
 let tabIndex = 2
 const editableTabsValue = ref('2')
@@ -22,12 +26,12 @@ const editableTabs = ref([
   {
     title: 'Tab 1',
     name: '1',
-    content: 'Tab 1 content',
+    content: 'Tab 1 content2',
   },
   {
     title: 'Tab 2',
     name: '2',
-    content: 'Tab 2 content',
+    content: 'Tab 2 content2',
   },
 ])
 
@@ -35,6 +39,7 @@ const handleTabsEdit = (
   targetName: TabPaneName | undefined,
   action: 'remove' | 'add'
 ) => {
+  console.log('object');
   if (action === 'add') {
     const newTabName = `${++tabIndex}`
     editableTabs.value.push({

@@ -18,5 +18,5 @@ const ElDescriptionsItem = registerComponent(ElDescriptionsItemPlus, {
   name: 'ElDescriptionsItem',
 });
 
-export { ElDescriptionsPlus, ElDescriptions, ElDescriptionsItem, ElDescriptionsRegister };
+export { ElDescriptionsPlus, ElDescriptions, ElDescriptionsItem, ElDescriptionsRegister ,ElDescriptionsItemPlus};
 export default ElDescriptions;

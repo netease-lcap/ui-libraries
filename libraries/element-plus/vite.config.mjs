@@ -299,7 +299,24 @@ export default defineConfig(({ command }) => {
     },
     test: {
       environment: 'jsdom',
-
+      coverage: {
+        exclude: [
+          '.storybook/**',
+          'scripts/**',
+          'dist-theme/**',
+          'ep-test/**',
+          'es/**',
+          'ide/**',
+          'src/theme/**',
+          'src/styles/**',
+          'src/components/**/stories/**',
+          'src/components/**/demos/**',
+          'src/components/**/stories/**',
+          'src/components/**/demos/**',
+          'src/components/**/stories/**',
+          'src/components/**/api.ts',
+        ],
+      },
       // 显示更详细的测试日志
       verbose: true,
       // 输出测试执行时间

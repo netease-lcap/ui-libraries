@@ -233,7 +233,7 @@ namespace nasl.ui {
 
     @Event({
       title: '点击移除按钮时',
-      description: '点击移除按钮后触发',
+      description: '点击移除按钮后触发,需要有值时触发',
     })
     onTabRemove: (event: nasl.core.String) => void;
 

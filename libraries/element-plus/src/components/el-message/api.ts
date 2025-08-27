@@ -4,21 +4,21 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 4,
     ideusage: {
-      idetype: "messager",
+      idetype: 'messager',
       elementSutando: {
         condition: true,
-        component: "ElMessageDesigner",
+        component: 'ElMessageDesigner',
         selector: {
-          slot: "default",
-          cssSelector: ".el-message",
+          slot: 'default',
+          cssSelector: '.el-message',
         },
         useSlot: true,
       },
       displaySlotInline: {
         default: true,
       },
-      cacheOpenKey: "visible"
-    }
+      cacheOpenKey: 'visible',
+    },
   })
   @Component({
     title: '弹出消息',
@@ -55,15 +55,15 @@ namespace nasl.ui {
       sync: true,
     })
     visible: nasl.core.Boolean = false;
-    
+
     @Prop({
       title: '消息类型',
       description: '消息类型',
-      group: "主要属性",
+      group: '主要属性',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '信息' }, { title: '成功' }, { title: '警告' }, { title: '错误' }]
-      }
+        options: [{ title: '信息' }, { title: '成功' }, { title: '警告' }, { title: '错误' }],
+      },
     })
     type: 'info' | 'success' | 'warning' | 'error' = 'info';
 
@@ -90,10 +90,10 @@ namespace nasl.ui {
 
     @Prop({
       title: '显示时长',
-      group: "主要属性",
-      description: "显示时长, 毫秒。设为 0 则不会自动关闭",
+      group: '主要属性',
+      description: '显示时长, 毫秒。设为 0 则不会自动关闭',
       setter: {
-        concept: "NumberInputSetter",
+        concept: 'NumberInputSetter',
         min: 0,
       },
     })
@@ -109,22 +109,22 @@ namespace nasl.ui {
     })
     showClose: nasl.core.Boolean = false;
 
-    @Prop({
-      title: '居中',
-      description: '文字是否居中',
-      group: '主要属性',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    center: nasl.core.Boolean = false;
+    // @Prop({
+    //   title: '居中',
+    //   description: '文字是否居中',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // center: nasl.core.Boolean = false;
 
     @Prop({
       title: '偏移量',
-      group: "主要属性",
-      description: "距离窗口顶部的偏移量",
+      group: '主要属性',
+      description: '距离窗口顶部的偏移量',
       setter: {
-        concept: "NumberInputSetter",
+        concept: 'NumberInputSetter',
         min: 0,
       },
     })
@@ -142,12 +142,13 @@ namespace nasl.ui {
 
     @Prop({
       title: '重复次数',
-      group: "主要属性",
-      description: "重复次数，类似于 Badge 。当和 grouping 属性一起使用时作为初始数量使用",
+      group: '主要属性',
+      description: '重复次数，类似于 Badge 。当和 grouping 属性一起使用时作为初始数量使用',
       setter: {
-        concept: "NumberInputSetter",
+        concept: 'NumberInputSetter',
         min: 0,
       },
+      if: (_) => !!_.grouping,
     })
     repeatNum: nasl.core.Integer = 1;
 
