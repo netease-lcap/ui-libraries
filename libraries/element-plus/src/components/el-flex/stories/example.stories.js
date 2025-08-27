@@ -28,15 +28,15 @@ export const Default = {
     },
     template: `
       <el-flex v-bind="args" :gutter="20" @click="handleClick">
-        <div style="min-width: 100px; height: 64px;background-color:#000"></div>
-        <div style="min-width: 100px; height: 64px;background-color:#000"></div>
-        <div style="min-width: 100px; height: 64px;background-color:#000"></div>
+        <div v-for="item in 20" style="width: 100px; height: 64px;background-color:#000"></div>
+        <div style="width: 100px; height: 64px;background-color:#000"></div>
+        <div style="width: 100px; height: 64px;background-color:#000"></div>
       </el-flex>
     `,
   }),
   args: {
     gutter: 10,
-    direction: 'vertical',
+    // direction: 'vertical',
     loading: false,
     loadingText: '拼命加载中',
     class: 'test',

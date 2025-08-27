@@ -35,7 +35,7 @@ export function categoryProps(props: Record<string, any> = {}) {
     return matches(key) ? _.assign(outerProps, { [key]: props[key] }) : outerProps;
   }, {});
   return {
-    outerProps: props.isInForm ? _.omit(props, ['data-nodepath']) : propsWithDataStart,
+    outerProps: props.isInForm ? _.omit(props, []) : propsWithDataStart,
     innerProps: propsWithDataStart,
   };
 }
