@@ -215,13 +215,13 @@ namespace nasl.ui {
     //   value: nasl.core.String | nasl.core.Integer | nasl.core.Decimal,
     // ) => nasl.core.String | nasl.core.Integer | nasl.core.Decimal;
 
-    @Prop({
-      group: '主要属性',
-      title: '格式化触发时机',
-      description: '格式化触发时机',
-      setter: { concept: 'EnumSelectSetter', options: [{ title: '输入时' }, { title: '失焦时' }] },
-    })
-    formatTrigger: 'onChange' | 'onBlur' = 'onChange';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '格式化触发时机',
+    //   description: '格式化触发时机',
+    //   setter: { concept: 'EnumSelectSetter', options: [{ title: '输入时' }, { title: '失焦时' }] },
+    // })
+    // formatTrigger: 'onChange' | 'onBlur' = 'onChange';
 
     @Prop({
       group: '主要属性',
