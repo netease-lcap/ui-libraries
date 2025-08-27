@@ -132,7 +132,7 @@ namespace nasl.ui {
       description: 'dialog 打开的延时时间，单位毫秒',
       setter: { concept: 'NumberInputSetter' },
     })
-    openSelay: nasl.core.Integer = 0;
+    openDelay: nasl.core.Integer = 0;
 
     @Prop({
       group: '主要属性',
@@ -140,7 +140,7 @@ namespace nasl.ui {
       description: 'dialog 关闭的延时时间，单位毫秒',
       setter: { concept: 'NumberInputSetter' },
     })
-    closeSelay: nasl.core.Integer = 0;
+    closeDelay: nasl.core.Integer = 0;
 
     @Prop({
       group: '主要属性',
@@ -238,31 +238,31 @@ namespace nasl.ui {
       title: '打开的回调',
       description: '对话框打开的回调',
     })
-    onOpen: (event: any) => any;
+    onOpen: () => any;
 
     @Event({
       title: '打开动画结束时的回调',
       description: '对话框打开动画结束时的回调',
     })
-    onOpened: (event: any) => any;
+    onOpened: () => any;
 
     @Event({
       title: '关闭前的回调',
       description: '关闭前的回调',
     })
-    onBeforeClose: (event: any) => any;
+    onBeforeClose: (event: Function) => any;
 
     @Event({
       title: '关闭的回调',
       description: '对话框关闭的回调',
     })
-    onClose: (event: any) => any;
+    onClose: () => any;
 
     @Event({
       title: '关闭动画结束时的回调',
       description: '对话框关闭动画结束时的回调',
     })
-    onClosed: (event: any) => any;
+    onClosed: () => any;
 
     // @Event({
     //   title: '输入焦点聚焦在 Dialog 内容时的回调',

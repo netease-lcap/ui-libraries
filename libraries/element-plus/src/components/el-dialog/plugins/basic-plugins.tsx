@@ -6,9 +6,10 @@ export function handleDialogRef(props) {
   const [, setValue, valueProps] = useControllableValue(props);
   const ref = props.get('ref');
   const closeIcon = props.get('closeIcon');
-  const onBeforeClose = props.get('onBeforeClose', (done) => _.attempt(done));
+  const onBeforeClose = props.get('onBeforeClose');
+
   const beforeClose = useCallback(
-    _.wrap(onBeforeClose, (fn, ...args) => _.attempt(fn, ...args)),
+    onBeforeClose ? _.wrap(onBeforeClose, (fn, ...args) => _.attempt(fn, ...args)) : null,
     [onBeforeClose],
   );
 

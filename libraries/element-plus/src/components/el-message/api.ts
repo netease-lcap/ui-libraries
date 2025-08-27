@@ -152,11 +152,11 @@ namespace nasl.ui {
     })
     repeatNum: nasl.core.Integer = 1;
 
-    @Event({
-      title: '弹出后事件',
-      description: '弹出提示时触发',
-    })
-    onOpen: (event: {}) => any;
+    // @Event({
+    //   title: '弹出后事件',
+    //   description: '弹出提示时触发',
+    // })
+    // onOpen: (event: {}) => any;
 
     @Event({
       title: '关闭后',
