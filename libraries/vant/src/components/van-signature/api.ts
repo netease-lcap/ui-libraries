@@ -82,8 +82,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '清除按钮文案',
-      description: '清除按钮文案',
+      title: '清空按钮文案',
+      description: '清空按钮文案',
       setter: { concept: 'InputSetter' },
     })
     clearButtonText: nasl.core.String = '清空';
@@ -115,14 +115,14 @@ namespace nasl.ui {
     onSigning: (event: any) => void;
 
     @Event({
-      title: '点击确定按钮时触发',
-      description: '点击确定按钮时触发',
+      title: '点击确认按钮时触发',
+      description: '点击确认按钮时触发',
     })
     onSubmit: (event: { image: nasl.core.String, canvas: HTMLCanvasElement }) => void;
 
     @Event({
-      title: '点击取消按钮时触发',
-      description: '点击取消按钮时触发',
+      title: '点击清空按钮时触发',
+      description: '点击清空按钮时触发',
     })
     onClear: () => void;
 
