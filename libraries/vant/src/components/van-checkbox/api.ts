@@ -289,6 +289,9 @@ namespace nasl.ui {
           content: '请绑定数据源或插入子节点',
         },
       },
+      displaySlotInline: {
+        label: true,
+      },
     },
     extends: [
       {

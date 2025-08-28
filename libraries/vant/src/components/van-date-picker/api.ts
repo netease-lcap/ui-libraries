@@ -624,6 +624,9 @@ namespace nasl.ui {
       cacheOpenKey: 'popupOpened',
       drawerCSSSelector: '.van-popup',
       dataSource: {},
+      displaySlotInline: {
+        label: true,
+      },
     },
     extends: [
       {
