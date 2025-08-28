@@ -17,11 +17,11 @@ export * from './ide';
 //     render,
 //   };
 // }
-export function handleRange(props) {
-  const range = props.get('range') ?? '{}';
-  const rangeProps = useMemo(() => {
-    const jsonRange = _.attempt(JSON.parse, range);
-    return _.isArray(jsonRange) ? { range: jsonRange.map((item) => new Date(item)) } : {};
-  }, [range]);
-  return _.assign({}, rangeProps);
-}
+// export function handleRange(props) {
+//   const range = props.get('range') ?? '{}';
+//   const rangeProps = useMemo(() => {
+//     const jsonRange = _.attempt(JSON.parse, range);
+//     return _.isArray(jsonRange) ? { range: jsonRange.map((item) => new Date(item)) } : {};
+//   }, [range]);
+//   return _.assign({}, rangeProps);
+// }
