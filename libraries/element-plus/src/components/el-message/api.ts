@@ -132,7 +132,7 @@ namespace nasl.ui {
 
     @Prop({
       title: '是否合并内容相同的消息',
-      description: '合并内容相同的消息，不支持 VNode 类型的消息',
+      description: '合并内容相同的消息，不支持 VNode 类型（插槽形式）的消息，需要使用消息内容属性配置弹出消息。',
       group: '主要属性',
       setter: {
         concept: 'SwitchSetter',
@@ -151,6 +151,17 @@ namespace nasl.ui {
       if: (_) => !!_.grouping,
     })
     repeatNum: nasl.core.Integer = 1;
+
+    @Prop({
+      title: '消息内容',
+      group: '主要属性',
+      description: '消息内容',
+      setter: {
+        concept: 'InputSetter',
+      },
+      if: (_) => !!_.grouping,
+    })
+    msgContent: nasl.core.String = '消息内容';
 
     // @Event({
     //   title: '弹出后事件',
