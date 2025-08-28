@@ -6,6 +6,9 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
+      forceRefresh: {
+        slot: 'item',
+      },
       childAccept: "target.tag === 'el-checkbox-pro'",
       forceUpdateWhenAttributeChange: true,
       dataSource: {
