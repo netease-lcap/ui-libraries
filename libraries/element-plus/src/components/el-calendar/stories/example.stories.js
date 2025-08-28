@@ -21,7 +21,7 @@ export const Example1 = {
     },
     template: `
     <div>
-      <el-calendar data-nodepath="123"  v-model="value" />
+      <el-calendar data-nodepath="123" :range="['2025-06-01','2025-06-29']" />
     </div>
     `,
   }),

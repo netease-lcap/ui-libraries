@@ -114,7 +114,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
-      title: '只读未选中颜色',
+      title: '禁用未选中颜色',
       description: '只读时未选中 icon 的颜色',
       setter: { concept: 'InputSetter' },
     })
