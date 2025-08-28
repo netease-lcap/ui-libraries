@@ -34,7 +34,7 @@ namespace nasl.ui {
       description: '允许的最小值',
       setter: { concept: 'NumberInputSetter' },
     })
-    min: nasl.core.Integer = 1;
+    min: nasl.core.Integer | nasl.core.Decimal = 1;
 
     @Prop({
       group: '数据属性',
@@ -42,7 +42,7 @@ namespace nasl.ui {
       description: '允许的最大值',
       setter: { concept: 'NumberInputSetter' },
     })
-    max: nasl.core.Integer;
+    max: nasl.core.Integer | nasl.core.Decimal;
 
     @Prop({
       group: '数据属性',
