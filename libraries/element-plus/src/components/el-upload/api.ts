@@ -197,7 +197,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '上传时附带的额外参数',
-      description: '上传时附带的额外参数',
+      description: '上传时附带的额外参数{key:value}',
       setter: { concept: 'InputSetter' },
     })
     data: nasl.core.String;
