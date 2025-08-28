@@ -250,9 +250,9 @@ namespace nasl.ui {
           accept: false,
           content: '请绑定数据源或插入子节点',
         },
-        displaySlotInline: {
-          label: true,
-        },
+      },
+      displaySlotInline: {
+        label: true,
       },
     },
     extends: [
