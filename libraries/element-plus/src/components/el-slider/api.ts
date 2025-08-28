@@ -188,7 +188,7 @@ namespace nasl.ui {
     onChange: (value: nasl.core.Integer | nasl.core.Integer[]) => void;
 
     @Event({
-      title: '输入时',
+      title: '数据改变时',
       description: '数据改变时触发（拖拽过程中实时触发）',
     })
     onInput: (value: nasl.core.Integer | nasl.core.Integer[]) => void;

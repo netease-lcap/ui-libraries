@@ -250,9 +250,9 @@ namespace nasl.ui {
           accept: false,
           content: '请绑定数据源或插入子节点',
         },
-        slotWrapperInlineStyle: {
-          default: 'display: inline-block;',
-        },
+      },
+      displaySlotInline: {
+        label: true,
       },
     },
     extends: [

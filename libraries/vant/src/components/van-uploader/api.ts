@@ -440,6 +440,9 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       ignoreProperty: ["showUpload"],
+      displaySlotInline: {
+        label: true,
+      },
     },
     extends: [
       {

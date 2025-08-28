@@ -13,5 +13,17 @@
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["**/templates/*", "**/node_modules/*", "**/dist/*", "node_modules", "**/storybook-static/*"]
+  "exclude": [
+    "**/templates/*",
+    "**/node_modules/*",
+    "**/dist/*",
+    "node_modules/*",
+    "**/storybook-static/*",
+    "libraries/**/node_modules/*",
+    "libraries/**/dist-theme/*",
+    "libraries/**/design/*",
+    "packages/**/node_modules/*",
+    "packages/**/dist/*",
+    "setters/node_modules/*",
+  ]
 }

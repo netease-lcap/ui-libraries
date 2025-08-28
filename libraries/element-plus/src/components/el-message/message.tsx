@@ -47,6 +47,10 @@ export default defineComponent({
       type: Number,
       default: 1,
     },
+    msgContent: {
+      type: String,
+      default: '消息内容',
+    },
   },
 
   setup(props, { slots, emit, expose }) {
@@ -63,22 +67,30 @@ export default defineComponent({
     };
 
     const openMessage = () => {
-      if (instance) {
-        closeMessage();
-      }
+      // if (messageHandler) {
+      //   closeMessage();
+      // }
 
-      const vnodes = slots.default?.() || [];
-      const message = (
-        <div class="el-message__content">
-          {props.icon && <ElIcon name={props.icon} class={`el-message__icon el-icon-${props.type}`} />}
-          {vnodes}
-        </div>
-      );
+      const iconComp = props.icon ? <ElIcon name={props.icon} class={`el-message__icon el-icon-${props.type}`} /> : '';
+
+      // grouping 功能不支持 VNode 类型的消息，如果启用了 grouping，使用字符串类型的 message
+      let message: string | any;
+      if (props.grouping) {
+        message = props.msgContent;
+      } else {
+        // 不使用 grouping 时, 使用 VNode 格式（插槽形式）
+        const vnodes = slots.default?.() || [];
+        message = (
+          <div class="el-message__content">
+            {vnodes}
+          </div>
+        );
+      }
 
       messageHandler = ElMessagePlus({
         type: props.type,
         plain: props.plain,
-        icon: props.icon,
+        icon: iconComp,
         duration: props.duration,
         showClose: props.showClose,
         center: props.center,

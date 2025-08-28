@@ -1,27 +1,30 @@
 import _ from 'lodash';
-import { useMemo } from '@/plugins/hooks';
+import dayjs from 'dayjs';
+import { useMemo, useControllableValue } from '@/plugins/hooks';
 
 export * from './ide';
 
-// export function handleConfigProvider(props) {
-//   const Component = props.get('render');
-//   const render = useCallback((props, { attrs, slots }) => {
-//     return (
-//       <ElConfigProvider locale={zhCn}>
-//         <Component {...props} {...attrs} v-slots={slots} />
-//       </ElConfigProvider>
-//     );
-//   }, []);
-//   render.inheritAttrs = false;
-//   return {
-//     render,
-//   };
-// }
 export function handleRange(props) {
   const range = props.get('range') ?? '{}';
   const rangeProps = useMemo(() => {
-    const jsonRange = _.attempt(JSON.parse, range);
-    return _.isArray(jsonRange) ? { range: jsonRange.map((item) => new Date(item)) } : {};
+    return _.isArray(range) ? { range: range.map((item) => new Date(item)) } : {};
   }, [range]);
   return _.assign({}, rangeProps);
+}
+
+export function handleValue(props) {
+  const [value, setValue] = useControllableValue(props);
+  const modelValue = useMemo(
+    () => _.match(value)
+        .when(_.isString, () => new Date(value))
+        .when(_.isDate, () => value)
+        .otherwise(() => value),
+    [value],
+  );
+  return {
+    modelValue,
+    'onUpdate:modelValue': (value) => {
+      setValue(dayjs(value).format('YYYY-MM-DD'));
+    },
+  };
 }

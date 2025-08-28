@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import dayjs from 'dayjs';
+import { match } from 'ts-pattern';
 
 export * from './dom';
 
@@ -54,6 +55,7 @@ _.mixin({
   isValidTime,
   mergeRef,
   mergeClass,
+  match,
 });
 // _.mixin
 declare module 'lodash' {
@@ -65,6 +67,7 @@ declare module 'lodash' {
     isValidTime: typeof isValidTime;
     mergeRef: typeof mergeRef;
     mergeClass: typeof mergeClass;
+    match: typeof match;
   }
 }
 

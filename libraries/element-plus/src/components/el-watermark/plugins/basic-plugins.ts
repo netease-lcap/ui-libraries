@@ -5,7 +5,7 @@ import { useMemo } from '@/plugins/hooks';
 export function useFont(props) {
   const font = props.get('font') ?? '{}';
   const fontProps = useMemo(() => {
-    const jsonFont = _.attempt(JSON.parse, font);
+    const jsonFont = _.isObject(font) ? font : _.attempt(JSON.parse, font);
     return _.isError(jsonFont) ? {} : jsonFont;
   }, [font]);
   return {

@@ -80,6 +80,7 @@
     "lodash": "^4.17.21",
     "lodash-unified": "^1.0.3",
     "normalize.css": "^7.0.0",
+    "ts-pattern": "^5.8.0",
     "type-fest": "^2.14.0",
     "vue-hooks-plus": "^2.2.1",
     "zustand": "^5.0.3"

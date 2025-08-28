@@ -163,7 +163,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '按钮文本',
+      title: '左侧按钮文本',
       description: '穿梭按钮的文本，数组形式，长度为2，分别代表左右两个按钮的文本',
       setter: { concept: 'InputSetter' },
     })

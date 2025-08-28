@@ -180,10 +180,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       parentAccept: "target.tag === 'el-radio-group'",
-      selector: {
-        expression: 'this',
-        cssSelector: 'label.el-radio',
-      },
+
     },
   })
   @Component({
@@ -207,13 +204,13 @@ namespace nasl.ui {
     })
     value: V;
 
-    @Prop({
-      group: '数据属性',
-      title: '文本',
-      description: '单选按钮显示文本，如果未设置则作为值使用',
-      setter: { concept: 'InputSetter' },
-    })
-    label: nasl.core.String | nasl.core.Integer | nasl.core.Boolean;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '文本',
+    //   description: '单选按钮显示文本，如果未设置则作为值使用',
+    //   setter: { concept: 'InputSetter' },
+    // })
+    // label: nasl.core.String | nasl.core.Integer | nasl.core.Boolean;
 
     @Prop({
       group: '状态属性',
