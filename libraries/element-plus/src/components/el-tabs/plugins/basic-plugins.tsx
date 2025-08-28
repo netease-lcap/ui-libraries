@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
+import { ElTabPane } from 'element-plus';
 import { useControllableValue, useMemo } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
@@ -25,7 +26,7 @@ export function handleDataSource(props) {
         ? {}
         : {
             default: () => _.map(dataSource, (item) => (
-              <el-tab-pane
+              <ElTabPane
                 {...item}
                 v-slots={{
                     label: () => slots?.label?.({ item }),
