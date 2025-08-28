@@ -393,7 +393,7 @@ namespace nasl.ui {
       title: '关闭前',
       description: '关闭前触发',
     })
-    onBeforeClose: (current: { action: 'confirm' | 'cancel' | 'close', instance: any, done: any }) => any;
+    onBeforeClose: (event: { action: 'confirm' | 'cancel' | 'close', instance: any, done: any }) => any;
 
     @Event({
       title: '关闭后',
