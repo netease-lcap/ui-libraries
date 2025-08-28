@@ -16,12 +16,12 @@ export const Example1 = {
   name: '基础用法',
   render: () => ({
     setup() {
-      const value = ref(new Date('2025-03-14'));
+      const value = ref('2025-06-14');
       return { value };
     },
     template: `
     <div>
-      <el-calendar data-nodepath="123" :range="['2025-06-01','2025-06-29']" />
+      <el-calendar data-nodepath="123" v-model="value" :range="['2025-06-01','2025-06-29']" />
     </div>
     `,
   }),
