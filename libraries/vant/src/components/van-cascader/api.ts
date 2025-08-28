@@ -178,6 +178,14 @@ namespace nasl.ui {
         label: true,
       },
     },
+    extends:[
+      {
+        name: 'VanFormItem',
+      },
+      {
+        name: 'VanCascader',
+      },
+    ],
   })
   @Component({
     title: '表单级联选择器',

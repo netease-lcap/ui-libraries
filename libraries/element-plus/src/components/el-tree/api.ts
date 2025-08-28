@@ -173,8 +173,8 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '空态文本',
-      description: '数据为空时展示的文本。',
+      title: '无数据文案',
+      description: '内容为空的时候展示的文本',
       setter: { concept: 'InputSetter' },
     })
     emptyText: nasl.core.String = '';
@@ -263,7 +263,7 @@ namespace nasl.ui {
     @Prop<ElTreeOptions<T, V, M>, 'height'>({
       group: '主要属性',
       title: '高度',
-      description: '高度虚拟滚动时需要设置高度',
+      description: '高度虚拟滚动时需要设置高度, 单位为像素',
       setter: { concept: 'NumberInputSetter' },
       if: (_) => _.virtualize !== false,
     })
