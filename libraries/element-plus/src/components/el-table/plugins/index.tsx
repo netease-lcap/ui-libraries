@@ -104,6 +104,7 @@ export function handlePageProps(props) {
   const total = props.get('total');
   const showTotal = props.get('showTotal');
   const showJumper = props.get('showJumper');
+  const onPageChange = props.get('onPageChange', () => {});
   const onSelectionChange = props.get('onSelectionChange', () => {});
   const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
   const rowKey = props.get('rowKey');
@@ -113,6 +114,7 @@ export function handlePageProps(props) {
       ...pageProps,
       layout,
       total,
+      onPageChange,
     },
     pagination,
     onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
