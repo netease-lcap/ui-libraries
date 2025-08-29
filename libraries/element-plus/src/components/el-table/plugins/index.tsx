@@ -237,8 +237,10 @@ export function handlePaginationRender(props) {
 }
 
 export function handleEditTable(props) {
+  const slots = props.get('slots');
   const editTable = props.get('editTable');
-  if (!editTable) return {};
+  const editableColumn = _.find(_.attempt(slots?.default), (node) => _.get(node, 'props.type') === 'editable');
+  if (!editTable && !editableColumn) return {};
   const ref = props.get('ref');
   const Component = props.get('render');
   const tableRef = useRef({});
@@ -311,25 +313,25 @@ export function handleSticky(props) {
 }
 handleSticky.order = 3;
 
-function handleVirtualize(props) {
-  const virtualize = props.get('virtualize');
-  if (!virtualize) return {};
-  const tableRef = useRef({});
-  const slots = props.get('slots');
-  const columnsSlots = slots.default();
+// function handleVirtualize(props) {
+//   const virtualize = props.get('virtualize');
+//   if (!virtualize) return {};
+//   const tableRef = useRef({});
+//   const slots = props.get('slots');
+//   const columnsSlots = slots.default();
 
-  const columns = _.flatMap(columnsSlots, (node) => {
-    if (node.type.name === 'ElTableColumn') {
-      return [{ ...node.props, header: node.children.header, default: node.children.default }];
-    }
-    return [];
-  });
+//   const columns = _.flatMap(columnsSlots, (node) => {
+//     if (node.type.name === 'ElTableColumn') {
+//       return [{ ...node.props, header: node.children.header, default: node.children.default }];
+//     }
+//     return [];
+//   });
 
-  const render = useCallback((props, { attrs, slots }) => {
-    return <ElTableV2 ref={tableRef} {...props} {...attrs} v-slots={slots} />;
-  }, []);
-  render.inheritAttrs = false;
-  return {};
-}
+//   const render = useCallback((props, { attrs, slots }) => {
+//     return <ElTableV2 ref={tableRef} {...props} {...attrs} v-slots={slots} />;
+//   }, []);
+//   render.inheritAttrs = false;
+//   return {};
+// }
 
-handleVirtualize.order = 2;
+// handleVirtualize.order = 2;

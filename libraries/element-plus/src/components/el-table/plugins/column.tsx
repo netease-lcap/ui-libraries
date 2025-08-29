@@ -92,8 +92,9 @@ const EditDefault = {
   },
 };
 export function handleEditable(props) {
-  const editableProps = props.get('editable');
-  if (!editableProps) {
+  const editableProps = props.get('type');
+  const editable = props.get('editable');
+  if (editableProps !== 'editable' && !editable) {
     return {};
   }
 

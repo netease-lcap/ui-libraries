@@ -1084,15 +1084,15 @@ namespace nasl.ui {
     // })
     // align: 'left' | 'center' | 'right' = 'left';
 
-    @Prop({
-      group: '数据属性',
-      title: '可编辑列',
-      description: '设置该列是否可编辑',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    editable: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '可编辑列',
+    //   description: '设置该列是否可编辑',
+    //   setter: {
+    //     concept: 'SwitchSetter',
+    //   },
+    // })
+    // editable: nasl.core.Boolean = false;
 
     // @Prop<ElTableColumnProOptions<T, V, P, M>, 'defaultOrder'>({
     //   group: '数据属性',
@@ -1115,10 +1115,10 @@ namespace nasl.ui {
       docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '普通列' }, { title: '多选列' }, { title: '展开列' }, { title: '序号列' }],
+        options: [{ title: '普通列' }, { title: '多选列' }, { title: '展开列' }, { title: '序号列' },{title:'编辑列'}],
       },
     })
-    type: 'normal' | 'selection' | 'expand' | 'index' = 'normal';
+    type: 'normal' | 'selection' | 'expand' | 'index' | 'editable' = 'normal';
 
     @Prop({
       group: '数据属性',
