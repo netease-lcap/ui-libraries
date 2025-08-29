@@ -55,7 +55,6 @@ export default defineComponent({
 
   setup(props, { slots, emit, expose, attrs }) {
     let messageHandler: MessageHandler | null = null;
-    const messageId = `el-message-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
     const closeMessage = () => {
       if (messageHandler) {
@@ -71,6 +70,8 @@ export default defineComponent({
       // }
 
       const iconComp = props.icon ? <ElIcon name={props.icon} class={`el-message__icon el-icon-${props.type}`} /> : '';
+
+      const messageId = `el-message-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
       // grouping 功能不支持 VNode 类型的消息，如果启用了 grouping，使用字符串类型的 message
       let message: string | any;
