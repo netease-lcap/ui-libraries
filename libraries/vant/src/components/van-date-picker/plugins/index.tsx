@@ -59,8 +59,8 @@ function getUnitIndex(unit: string, type: string) {
 }
 
 export function handleColumnsType(props: any) {
-  const unit = props.get('unit');
   const type = props.get('type') || 'date';
+  const unit = type === 'datetime' ? 'second' : 'day';
   const inLink = _.isNil(props.get('inLink')) ? true : props.get('inLink');
   const { index, columnsType, timeIndex, timeColumnsType } = useMemo(() => {
     return getUnitIndex(unit, type);
