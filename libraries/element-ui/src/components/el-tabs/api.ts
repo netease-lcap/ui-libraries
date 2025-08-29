@@ -11,7 +11,7 @@ namespace nasl.ui {
       dataSource: {
         dismiss:
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
-        display: 3,
+        display: 1,
         loopRule: 'nth-child(n+3)',
         loopElem: ".el-tabs__nav > .el-tabs__item",
         emptySlot: {
