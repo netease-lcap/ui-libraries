@@ -154,6 +154,14 @@ export function handleSort(props) {
 }
 handleSort.order = 3;
 
+export function handleTextAlign(props) {
+  const textAlign = _.get(props.get('style'), 'text-align', 'left');
+  return {
+    style: {
+      '--cw-style-text-align': textAlign,
+    },
+  };
+}
 // 如果是 list total 就是后端分页
 export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
@@ -253,7 +261,9 @@ export function handleTableConfig(props) {
   const Component = props.get('render');
   const tableRef = useRef({});
   const render = useCallback((props, { attrs, slots }) => {
-    const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : []));
+    const columns = _.flatMap(slots.default(), (node) =>
+      node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : [],
+    );
     const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
     return (
       <div>
@@ -285,6 +295,7 @@ export function handleHeight(props) {
     maxHeight: maxHeight === '' ? undefined : maxHeight,
   };
 }
+
 
 export function handleSticky(props) {
   const stickyName = props.get('sticky') ? 'sticky-table' : '';

@@ -150,6 +150,10 @@ export const Example1 = {
       const logCellClick = (...el) => {
         console.log(tableData2.value, 'logCellClick');
       };
+      const cellStyle = (value) => {
+        console.log(value, '==value');
+        return {};
+      };
       return {
         tableData,
         tableData2,
@@ -157,7 +161,7 @@ export const Example1 = {
         currentPage,
         mytable,
         selectedRowKeys,
-        width,
+        cellStyle,
         logCellClick,
       };
     },
@@ -167,7 +171,8 @@ export const Example1 = {
 ref="mytable"
 row-key="name"
 :dataSource="tableData2"
-style="width: 100%;"
+style="--cw-style-text-align:center;text-align:center;"
+border
 v-model:currentPage="currentPage"
 :showTotal="true"
 @selection-change="logCellClick"
@@ -187,9 +192,7 @@ dragSort="row"
 
 
 
-    <el-table-column prop="six.name" label="Date" sortable="none" width="180" />
-    <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column type="normal" prop="address" label="Address" />
+    <el-table-column prop="name" label="Name" width="400" class="myclomuns" :style="{'text-align':'left'}" />
 
 
 </el-table>
@@ -253,6 +256,7 @@ export const Example2 = {
       };
     },
     template: `
+    
 <el-table
 ref="mytable"
 row-key="index"

@@ -55,11 +55,11 @@ namespace nasl.ui {
       additionalAttribute: {
         rowKey: '"index"',
         valueField: '"index"',
-        ":expandRowKeys" : "\"[0]\""
+        ':expandRowKeys': '"[0]"',
       },
       forceUpdateWhenAttributeChange: true,
       refreshMutationNodesWhenAttributeChange: ['editTable'],
-   
+
       dataSource: {
         display: 3,
         loopElem: 'table > tbody > tr',
@@ -122,7 +122,12 @@ namespace nasl.ui {
     }
   }
 
-  export class ElTableOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class ElTableOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+  > extends ViewComponentOptions {
     // @Prop({
     //   group: '主要属性',
     //   sync: true,
@@ -226,7 +231,6 @@ namespace nasl.ui {
     })
     border: nasl.core.Boolean = false;
 
-
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -255,16 +259,18 @@ namespace nasl.ui {
         concept: 'AnonymousFunctionSetter',
       },
     })
-    spanMethod: (item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => {
-      /**
-       * @title 合并行数
-       */
-      rowspan?: nasl.core.Integer;
-      /**
-       * @title 合并列数
-       */
-      colspan?: nasl.core.Integer;
-    } | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
+    spanMethod: (item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) =>
+      | {
+          /**
+           * @title 合并行数
+           */
+          rowspan?: nasl.core.Integer;
+          /**
+           * @title 合并列数
+           */
+          colspan?: nasl.core.Integer;
+        }
+      | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
 
     // @Prop({
     //   group: '主要属性',
@@ -365,7 +371,10 @@ namespace nasl.ui {
       title: '表格高度',
       description:
         '表格高度，超出后会出现滚动条。示例：100,  "30%",  "300"。值为数字类型，会自动加上单位 px。如果不是绝对固定表格高度，建议使用 `maxHeight`',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'InputSetter',
+        autoClear: true,
+      },
     })
     height: nasl.core.Decimal;
 
@@ -440,7 +449,10 @@ namespace nasl.ui {
       group: '主要属性',
       title: '表格最大高度',
       description: '表格最大高度，超出后会出现滚动条。示例：100, "30%", "300"。值为数字类型，会自动加上单位 px',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'InputSetter',
+        autoClear: true,
+      },
     })
     maxHeight: nasl.core.Decimal;
 
@@ -599,7 +611,6 @@ namespace nasl.ui {
     // })
     // rowClassName: nasl.core.String | object | any[] | any;
 
-    
     @Prop<ElTableOptions<T, V, P, M>, 'parentField'>({
       group: '数据属性',
       title: '父级值字段',
@@ -615,9 +626,9 @@ namespace nasl.ui {
       title: '唯一标识',
       description:
         '必需。唯一标识一行数据的字段名，来源于 `data` 中的字段。如果是字段嵌套多层，可以设置形如 `item.a.id` 的方法',
-         setter: {
-              concept: 'PropertySelectSetter',
-          },
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
     })
     rowKey: (item: T) => V;
 
@@ -990,7 +1001,7 @@ namespace nasl.ui {
         // header: 'display: inline-block;',
       },
       useTemplateInDefaultSlot: true,
-      namedSlotOmitWrapper:['default'],
+      namedSlotOmitWrapper: ['default'],
       selector: [
         {
           expression: 'this',
@@ -1025,7 +1036,12 @@ namespace nasl.ui {
     }
   }
 
-  export class ElTableColumnOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean> extends ViewComponentOptions {
+  export class ElTableColumnOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+  > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '列字段',
@@ -1049,7 +1065,6 @@ namespace nasl.ui {
     })
     sortable: 'none' | 'custom' = 'none';
 
-
     @Prop<ElTableColumnOptions<T, V, P, M>, 'resizable'>({
       group: '样式属性',
       title: '是否允许调整列宽',
@@ -1058,17 +1073,16 @@ namespace nasl.ui {
     })
     resizable: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '样式属性',
-      title: '对齐方式',
-      description: '设置列内容的对齐方式',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }],
-      },
-    })
-    align: 'left' | 'center' | 'right' = 'left';
-
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '对齐方式',
+    //   description: '设置列内容的对齐方式',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '左对齐' }, { title: '居中对齐' }, { title: '右对齐' }],
+    //   },
+    // })
+    // align: 'left' | 'center' | 'right' = 'left';
 
     @Prop({
       group: '数据属性',
@@ -1101,12 +1115,10 @@ namespace nasl.ui {
       docDescription: '可设置序号列、单选列、多选列、展开列或树型列',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '普通列' }, { title: '多选列' }, { title: '展开列' },{ title: '序号列' }],
+        options: [{ title: '普通列' }, { title: '多选列' }, { title: '展开列' }, { title: '序号列' }],
       },
     })
     type: 'normal' | 'selection' | 'expand' | 'index' = 'normal';
-
-
 
     @Prop({
       group: '数据属性',
@@ -1173,25 +1185,25 @@ namespace nasl.ui {
           if: (_) => _ === true,
         },
         {
-          clear: ['fixed'], 
+          clear: ['fixed'],
           if: (_) => _ === false,
         },
       ],
     })
     isFixed: nasl.core.Boolean = false;
 
-        @Prop<ElTableColumnOptions<T, V, P, M>, 'fixed'>({
-          group: '主要属性',
-          title: '固定列',
-          description:
-            '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
-          setter: {
-            concept: 'EnumSelectSetter',
-            options: [{ title: ' 左侧固定' }, { title: '右侧固定' }],
-          },
-          if: (_) => _.isFixed === true,
-        })
-        fixed: 'left' | 'right' ;
+    @Prop<ElTableColumnOptions<T, V, P, M>, 'fixed'>({
+      group: '主要属性',
+      title: '固定列',
+      description:
+        '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: ' 左侧固定' }, { title: '右侧固定' }],
+      },
+      if: (_) => _.isFixed === true,
+    })
+    fixed: 'left' | 'right';
 
     @Prop({
       group: '样式属性',
@@ -1291,7 +1303,7 @@ namespace nasl.ui {
       title: '编辑列变化时',
       description: '编辑列变化时触发',
     })
-    onEditChange: (event: { row: T,$index:nasl.core.Integer,cellIndex:nasl.core.Integer,}) => any;
+    onEditChange: (event: { row: T; $index: nasl.core.Integer; cellIndex: nasl.core.Integer }) => any;
 
     @Slot({
       title: '单元格',
@@ -1306,7 +1318,13 @@ namespace nasl.ui {
         },
       ],
     })
-    slotDefault: (current: {item:T,index:nasl.core.Integer,rowIndex:nasl.core.Integer,columnIndex:nasl.core.Integer,editable:nasl.core.Boolean}) => Array<ViewComponent>;
+    slotDefault: (current: {
+      item: T;
+      index: nasl.core.Integer;
+      rowIndex: nasl.core.Integer;
+      columnIndex: nasl.core.Integer;
+      editable: nasl.core.Boolean;
+    }) => Array<ViewComponent>;
 
     // @Slot({
     //   title: '编辑单元格',

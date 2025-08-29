@@ -44,11 +44,12 @@ describe('hooks.ts', () => {
       const [state, setState] = useState('initial');
       setState('updated');
 
+      const fiber = fiberNode.getCurrentFiber();
+      expect(fiber.updateQueen.size).toBe(1);
       // 由于使用了 _.defer，我们需要使用 flush-promises
       return new Promise((resolve) => {
         setTimeout(() => {
-          const fiber = fiberNode.getCurrentFiber();
-          expect(fiber.updateQueen.size).toBe(1);
+          expect(fiber.updateQueen.size).toBe(0);
           resolve(null);
         }, 0);
       });
@@ -56,12 +57,15 @@ describe('hooks.ts', () => {
 
     it('应该支持函数式更新', () => {
       const [state, setState] = useState({ count: 0 });
-      setState((prev) => ({ count: prev.count + 1 }));
+      setState((prev) => {
+        return { count: prev.count + 1 };
+      });
 
+      const fiber = fiberNode.getCurrentFiber();
+      expect(fiber.updateQueen.size).toBe(1);
       return new Promise((resolve) => {
         setTimeout(() => {
-          const fiber = fiberNode.getCurrentFiber();
-          expect(fiber.updateQueen.size).toBe(1);
+          expect(fiber.updateQueen.size).toBe(0);
           resolve(null);
         }, 0);
       });
