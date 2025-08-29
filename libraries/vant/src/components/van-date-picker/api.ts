@@ -137,7 +137,7 @@ namespace nasl.ui {
           update: {
             unit: 'day',
             showFormatter: 'YYYY-MM-DD',
-            converter: 'YYYY/MM/DD',
+            converter: 'YYYY-MM-DD',
           },
           if: (_) => _ === 'date',
         },
@@ -145,7 +145,7 @@ namespace nasl.ui {
           update: {
             unit: 'second',
             showFormatter: 'YYYY-MM-DD HH:mm:ss',
-            converter: 'YYYY/MM/DD HH:mm:ss',
+            converter: 'YYYY-MM-DD HH:mm:ss',
           },
           if: (_) => _ === 'datetime',
         },
@@ -189,14 +189,14 @@ namespace nasl.ui {
         {
           update: {
             showFormatter: 'YYYY-MM-DD',
-            converter: 'YYYY/MM/DD',
+            converter: 'YYYY-MM-DD',
           },
           if: (_) => _ === 'day',
         },
         {
           update: {
             showFormatter: 'YYYY-MM',
-            converter: 'YYYY/MM',
+            converter: 'YYYY-MM',
           },
           if: (_) => _ === 'month',
         },
@@ -210,21 +210,21 @@ namespace nasl.ui {
         {
           update: {
             showFormatter: 'YYYY-MM-DD HH:mm:ss',
-            converter: 'YYYY/MM/DD HH:mm:ss',
+            converter: 'YYYY-MM-DD HH:mm:ss',
           },
           if: (_) => _ === 'second',
         },
         {
           update: {
             showFormatter: 'YYYY-MM-DD HH:mm',
-            converter: 'YYYY/MM/DD HH:mm',
+            converter: 'YYYY-MM-DD HH:mm',
           },
           if: (_) => _ === 'minute',
         },
         {
           update: {
             showFormatter: 'YYYY-MM-DD HH',
-            converter: 'YYYY/MM/DD HH',
+            converter: 'YYYY-MM-DD HH',
           },
           if: (_) => _ === 'hour',
         },
@@ -350,11 +350,11 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [
           {
-            title: 'YYYY/MM/DD',
+            title: 'YYYY-MM-DD',
             if: (_) => _.type === 'date' && _.unit === 'day',
           },
           {
-            title: 'YYYY/MM',
+            title: 'YYYY-MM',
             if: (_) => _.type === 'date' && _.unit === 'month',
           },
           {
@@ -362,15 +362,15 @@ namespace nasl.ui {
             if: (_) => _.type === 'date' && _.unit === 'year',
           },
           {
-            title: 'YYYY/MM/DD HH:mm:ss',
+            title: 'YYYY-MM-DD HH:mm:ss',
             if: (_) => _.type === 'datetime' && _.unit === 'second',
           },
           {
-            title: 'YYYY/MM/DD HH:mm',
+            title: 'YYYY-MM-DD HH:mm',
             if: (_) => _.type === 'datetime' && _.unit === 'minute',
           },
           {
-            title: 'YYYY/MM/DD HH',
+            title: 'YYYY-MM-DD HH',
             if: (_) => _.type === 'datetime' && _.unit === 'hour',
           },
           {
@@ -386,13 +386,13 @@ namespace nasl.ui {
       },
     })
     converter:
-      | 'YYYY/MM/DD'
-      | 'YYYY/MM'
+      | 'YYYY-MM-DD'
+      | 'YYYY-MM'
       | 'YYYY'
-      | 'YYYY/MM/DD HH:mm:ss'
-      | 'YYYY/MM/DD HH:mm'
-      | 'YYYY/MM/DD HH'
-      | 'Unix 时间戳' | 'JSON' | 'Date 对象' = 'YYYY/MM/DD';
+      | 'YYYY-MM-DD HH:mm:ss'
+      | 'YYYY-MM-DD HH:mm'
+      | 'YYYY-MM-DD HH'
+      | 'Unix 时间戳' | 'JSON' | 'Date 对象' = 'YYYY-MM-DD';
 
     @Prop({
       group: '主要属性',

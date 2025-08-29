@@ -64,7 +64,7 @@ export function getMaxMinDates(maxDate: DateValue, minDate: DateValue) {
  * @returns
  */
 function getConverter(converter?: string) {
-  const formaters = ['YYYY/MM/DD', 'json', 'timestamp', 'date'];
+  const formaters = ['YYYY-MM-DD', 'json', 'timestamp', 'date'];
   if (converter && formaters.includes(converter)) {
     return converter;
   }

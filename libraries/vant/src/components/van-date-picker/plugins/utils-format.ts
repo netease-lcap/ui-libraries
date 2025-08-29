@@ -70,11 +70,11 @@ export function toDateValue(values: Array<string>) {
  */
 function getConverter(converter?: string) {
   const formaters = [
-    'YYYY/MM/DD HH:mm:ss',
-    'YYYY/MM/DD HH:mm',
-    'YYYY/MM/DD HH',
-    'YYYY/MM/DD',
-    'YYYY/MM',
+    'YYYY-MM-DD HH:mm:ss',
+    'YYYY-MM-DD HH:mm',
+    'YYYY-MM-DD HH',
+    'YYYY-MM-DD',
+    'YYYY-MM',
     'YYYY',
     'json',
     'timestamp',

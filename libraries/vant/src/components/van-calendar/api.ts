@@ -209,7 +209,7 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [
           {
-            title: 'YYYY/MM/DD',
+            title: 'YYYY-MM-DD',
           },
           {
             title: 'Unix 时间戳',
@@ -223,7 +223,7 @@ namespace nasl.ui {
         ],
       },
     })
-    converter: 'YYYY/MM/DD' | 'Unix 时间戳' | 'JSON' | 'Date 对象' = 'YYYY/MM/DD';
+    converter: 'YYYY-MM-DD' | 'Unix 时间戳' | 'JSON' | 'Date 对象' = 'YYYY-MM-DD';
 
     @Prop({
       group: '主要属性',
