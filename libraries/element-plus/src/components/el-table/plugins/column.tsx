@@ -4,11 +4,13 @@ import { useMemo, useState, useCallback } from '@/plugins/hooks';
 
 export function columnPlugin(props) {
   const slots = props.get('slots');
-  const textAlign = _.get(props.get('style'), 'text-align', 'left');
-  const alignProps = props.get('align');
-  const align = alignProps || textAlign;
+  const width = props.get('width') || _.get(props.get('style'), 'width', '');
+  const minWidth = props.get('minWidth') || _.get(props.get('style'), 'min-width', '');
+  const align = props.get('align') || _.get(props.get('style'), 'text-align', 'left');
   return {
     align,
+    width,
+    minWidth,
     slots: {
       ...slots,
       default: (item) => slots?.default?.({
