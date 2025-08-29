@@ -1,6 +1,7 @@
 import { ref, cloneVNode } from 'vue';
 import _ from 'lodash';
 import { useMemo, useState, useCallback } from '@/plugins/hooks';
+import { ElIcon } from '@/index';
 
 export function columnPlugin(props) {
   const slots = props.get('slots');
@@ -51,7 +52,7 @@ const EditDefault = {
             columnIndex: item.cellIndex,
             editable: editable.value,
           })}
-          <el-icon
+          <ElIcon
             onClick={() => {
               editable.value = true;
             }}
@@ -75,7 +76,7 @@ const EditDefault = {
                 onValidateSuccess: () => {},
                 ref: formItemRef,
               }))}
-          <el-icon
+          <ElIcon
             onClick={() => {
               formItemRef?.value?.validate?.()?.then(() => {
                 editable.value = false;
