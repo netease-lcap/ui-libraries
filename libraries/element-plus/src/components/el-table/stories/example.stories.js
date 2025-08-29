@@ -171,7 +171,6 @@ export const Example1 = {
 ref="mytable"
 row-key="name"
 :dataSource="tableData2"
-style="--cw-style-text-align:center;text-align:center;"
 border
 v-model:currentPage="currentPage"
 :showTotal="true"
@@ -182,7 +181,6 @@ order="descending"
 :showJumper="true"
 pageSizes="[5,10,20,50]"
 :defaultPageSize="10"
-data-nodepath="1234"
 v-model:selectedRowKeys="selectedRowKeys"
 dragSort="row"
 :pagination="false"
@@ -192,7 +190,7 @@ dragSort="row"
 
 
 
-    <el-table-column prop="name" label="Name" width="400" class="myclomuns" :style="{'text-align':'left'}" />
+    <el-table-column prop="name" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
 
 
 </el-table>

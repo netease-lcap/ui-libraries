@@ -6,6 +6,7 @@ import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
 import { ElTableToolBar } from '@/components/el-table';
+import { ElForm } from '@/index';
 
 const orderMap = {
   descending: 'desc',
@@ -217,7 +218,7 @@ export function handlePaginationRender(props) {
     style,
     render: (props, { attrs, slots }) => {
       return [
-        <div data-nodepath={nodepath} style={props.style}>
+        <div data-nodepath={nodepath} style={{ ...props.style, width: '100%' }}>
           <Component
             ref={tableRef}
             {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])}
@@ -243,9 +244,9 @@ export function handleEditTable(props) {
   const tableRef = useRef({});
   const render = useCallback((props, { attrs, slots }) => {
     return (
-      <el-form>
+      <ElForm>
         <Component ref={tableRef} {...props} {...attrs} v-slots={slots} />
-      </el-form>
+      </ElForm>
     );
   }, []);
   render.inheritAttrs = false;
@@ -261,12 +262,10 @@ export function handleTableConfig(props) {
   const Component = props.get('render');
   const tableRef = useRef({});
   const render = useCallback((props, { attrs, slots }) => {
-    const columns = _.flatMap(slots.default(), (node) =>
-      node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : [],
-    );
+    const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : []));
     const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
     return (
-      <div>
+      <div style={{ ...props.style, width: '100%' }}>
         <ElTableToolBar columns={columns} selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} />
         <Component
           ref={tableRef}
@@ -295,7 +294,6 @@ export function handleHeight(props) {
     maxHeight: maxHeight === '' ? undefined : maxHeight,
   };
 }
-
 
 export function handleSticky(props) {
   const stickyName = props.get('sticky') ? 'sticky-table' : '';
