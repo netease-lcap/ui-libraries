@@ -69,7 +69,7 @@ namespace nasl.ui {
       description: '指定索引栏挂载的节点，例如 `body`。',
       setter: { concept: 'InputSetter' },
     })
-    teleport: nasl.core.String;
+    private teleport: nasl.core.String;
 
     @Slot({
       title: '默认插槽',

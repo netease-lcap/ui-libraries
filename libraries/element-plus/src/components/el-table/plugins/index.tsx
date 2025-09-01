@@ -157,9 +157,11 @@ handleSort.order = 3;
 
 export function handleTextAlign(props) {
   const textAlign = _.get(props.get('style'), 'text-align', 'left');
+  const styleProps = props.get('style');
   return {
     style: {
       '--cw-style-text-align': textAlign,
+      ...styleProps,
     },
   };
 }

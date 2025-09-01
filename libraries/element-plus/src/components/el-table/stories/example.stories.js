@@ -172,6 +172,7 @@ ref="mytable"
 row-key="name"
 :dataSource="tableData2"
 border
+style="width: 300px"
 v-model:currentPage="currentPage"
 :showTotal="true"
 @selection-change="logCellClick"
