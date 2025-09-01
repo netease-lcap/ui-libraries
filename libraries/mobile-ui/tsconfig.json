@@ -26,6 +26,8 @@
   "exclude": [
     "**/*.spec.ts",
     "**/*.spec.js",
-    "node_modules"
+    "node_modules",
+    "dist-theme",
+    "cloudui",
   ]
 }

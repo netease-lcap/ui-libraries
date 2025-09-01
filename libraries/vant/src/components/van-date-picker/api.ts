@@ -135,17 +135,15 @@ namespace nasl.ui {
       onChange: [
         {
           update: {
-            unit: 'day',
             showFormatter: 'YYYY-MM-DD',
-            converter: 'YYYY/MM/dd',
+            converter: 'YYYY-MM-DD',
           },
           if: (_) => _ === 'date',
         },
         {
           update: {
-            unit: 'second',
             showFormatter: 'YYYY-MM-DD HH:mm:ss',
-            converter: 'YYYY/MM/dd HH:mm:ss',
+            converter: 'json',
           },
           if: (_) => _ === 'datetime',
         },
@@ -153,84 +151,6 @@ namespace nasl.ui {
     })
     type: 'date' | 'datetime' = 'date';
 
-    @Prop<VanDatePickerOptions, 'unit'>({
-      title: '最小单位',
-      group: '主要属性',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          {
-            title: '日期',
-            if: (_) => _.type === 'date',
-          },
-          {
-            title: '月份',
-            if: (_) => _.type === 'date',
-          },
-          {
-            title: '年份',
-            if: (_) => _.type === 'date',
-          },
-          {
-            title: '时',
-            if: (_) => _.type === 'datetime',
-          },
-          {
-            title: '分',
-            if: (_) => _.type === 'datetime',
-          },
-          {
-            title: '秒',
-            if: (_) => _.type === 'datetime',
-          },
-        ],
-      },
-      onChange: [
-        {
-          update: {
-            showFormatter: 'YYYY-MM-DD',
-            converter: 'YYYY/MM/dd',
-          },
-          if: (_) => _ === 'day',
-        },
-        {
-          update: {
-            showFormatter: 'YYYY-MM',
-            converter: 'YYYY/MM',
-          },
-          if: (_) => _ === 'month',
-        },
-        {
-          update: {
-            showFormatter: 'YYYY',
-            converter: 'YYYY',
-          },
-          if: (_) => _ === 'year',
-        },
-        {
-          update: {
-            showFormatter: 'YYYY-MM-DD HH:mm:ss',
-            converter: 'YYYY/MM/dd HH:mm:ss',
-          },
-          if: (_) => _ === 'second',
-        },
-        {
-          update: {
-            showFormatter: 'YYYY-MM-DD HH:mm',
-            converter: 'YYYY/MM/dd HH:mm',
-          },
-          if: (_) => _ === 'minute',
-        },
-        {
-          update: {
-            showFormatter: 'YYYY-MM-DD HH',
-            converter: 'YYYY/MM/dd HH',
-          },
-          if: (_) => _ === 'hour',
-        },
-      ],
-    })
-    unit: 'day' | 'month' | 'year' | 'hour' | 'minute' | 'second' = 'day';
 
     @Prop<VanDatePickerOptions, 'showFormatter'>({
       group: '主要属性',
@@ -241,63 +161,27 @@ namespace nasl.ui {
         options: [
           {
             title: '中国（2023年7月26日）',
-            if: (_) => _.type === 'date' && _.unit === 'day',
+            if: (_) => _.type === 'date',
           },
           {
             title: 'ISO（2023-07-26）',
-            if: (_) => _.type === 'date' && _.unit === 'day',
+            if: (_) => _.type === 'date',
           },
           {
             title: 'US（7/26/2023）',
-            if: (_) => _.type === 'date' && _.unit === 'day',
+            if: (_) => _.type === 'date',
           },
           {
             title: 'EU（26/7/2023）',
-            if: (_) => _.type === 'date' && _.unit === 'day',
-          },
-          {
-            title: '中国（2023年7月）',
-            if: (_) => _.type === 'date' && _.unit === 'month',
-          },
-          {
-            title: 'ISO（2023-07）',
-            if: (_) => _.type === 'date' && _.unit === 'month',
-          },
-          {
-            title: 'US/EU（7/2023）',
-            if: (_) => _.type === 'date' && _.unit === 'month',
-          },
-          {
-            title: '中国（2023年）',
-            if: (_) => _.type === 'date' && _.unit === 'year',
-          },
-          {
-            title: 'ISO（2023）',
-            if: (_) => _.type === 'date' && _.unit === 'year',
+            if: (_) => _.type === 'date',
           },
           {
             title: '2023年7月26日 12时09分09秒',
-            if: (_) => _.type === 'datetime' && _.unit === 'second',
+            if: (_) => _.type === 'datetime',
           },
           {
             title: '2023-07-26 12:09:09',
-            if: (_) => _.type === 'datetime' && _.unit === 'second',
-          },
-          {
-            title: '2023年7月26日 12时09分',
-            if: (_) => _.type === 'datetime' && _.unit === 'minute',
-          },
-          {
-            title: '2023-07-26 12:09',
-            if: (_) => _.type === 'datetime' && _.unit === 'minute',
-          },
-          {
-            title: '2023年7月26日 12时',
-            if: (_) => _.type === 'datetime' && _.unit === 'hour',
-          },
-          {
-            title: '2023-07-26 12',
-            if: (_) => _.type === 'datetime' && _.unit === 'hour',
+            if: (_) => _.type === 'datetime',
           },
         ],
       },
@@ -308,39 +192,28 @@ namespace nasl.ui {
       | 'YYYY-MM-DD'
       | 'M/D/YYYY'
       | 'D/M/YYYY'
-      | 'YYYY年M月'
-      | 'YYYY-MM'
-      | 'M/YYYY'
-      | 'YYYY年'
-      | 'YYYY'
       | 'YYYY年M月D日 HH:mm:ss'
-      | 'YYYY-MM-DD HH:mm:ss'
-      | 'YYYY年M月D日 HH:mm'
-      | 'YYYY-MM-DD HH:mm'
-      | 'YYYY年M月D日 HH'
-      | 'YYYY-MM-DD HH' = 'YYYY-MM-DD';
+      | 'YYYY-MM-DD HH:mm:ss' = 'YYYY-MM-DD';
 
-      @Prop<VanDatePickerOptions, 'advancedFormatEnable'>({
-        group: '主要属性',
-        title: '高级格式化',
-        description: '用来控制数字的展示格式',
-        onChange: [
-          { clear: ['advancedFormatValue'] }
-        ],
-        setter: {
-          concept: 'SwitchSetter',
-        },
-      })
-      advancedFormatEnable: nasl.core.Boolean = false;
-  
-      @Prop<VanDatePickerOptions, 'advancedFormatValue'>({
-        group: '主要属性',
-        title: '高级格式化内容',
-        description: '用来控制数字的展示格式',
-        if: _ => _.advancedFormatEnable === true,
-        bindHide: true,
-      })
-      advancedFormatValue: nasl.core.String;
+    @Prop<VanDatePickerOptions, 'advancedFormatEnable'>({
+      group: '主要属性',
+      title: '高级格式化',
+      description: '用来控制数字的展示格式',
+      onChange: [{ clear: ['advancedFormatValue'] }],
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    advancedFormatEnable: nasl.core.Boolean = false;
+
+    @Prop<VanDatePickerOptions, 'advancedFormatValue'>({
+      group: '主要属性',
+      title: '高级格式化内容',
+      description: '用来控制数字的展示格式',
+      if: (_) => _.advancedFormatEnable === true,
+      bindHide: true,
+    })
+    advancedFormatValue: nasl.core.String;
 
     @Prop<VanDatePickerOptions, 'converter'>({
       group: '主要属性',
@@ -350,28 +223,8 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [
           {
-            title: 'YYYY/MM/dd',
-            if: (_) => _.type === 'date' && _.unit === 'day',
-          },
-          {
-            title: 'YYYY/MM',
-            if: (_) => _.type === 'date' && _.unit === 'month',
-          },
-          {
-            title: 'YYYY',
-            if: (_) => _.type === 'date' && _.unit === 'year',
-          },
-          {
-            title: 'YYYY/MM/dd HH:mm:ss',
-            if: (_) => _.type === 'datetime' && _.unit === 'second',
-          },
-          {
-            title: 'YYYY/MM/dd HH:mm',
-            if: (_) => _.type === 'datetime' && _.unit === 'minute',
-          },
-          {
-            title: 'YYYY/MM/dd HH',
-            if: (_) => _.type === 'datetime' && _.unit === 'hour',
+            title: 'YYYY-MM-DD',
+            if: (_) => _.type === 'date',
           },
           {
             title: 'Unix 时间戳',
@@ -385,14 +238,7 @@ namespace nasl.ui {
         ],
       },
     })
-    converter:
-      | 'YYYY/MM/dd'
-      | 'YYYY/MM'
-      | 'YYYY'
-      | 'YYYY/MM/dd HH:mm:ss'
-      | 'YYYY/MM/dd HH:mm'
-      | 'YYYY/MM/dd HH'
-      | 'Unix 时间戳' | 'JSON' | 'Date 对象' = 'YYYY/MM/dd';
+    converter: 'YYYY-MM-DD' | 'timestamp' | 'json' | 'date' = 'YYYY-MM-DD';
 
     @Prop({
       group: '主要属性',
@@ -462,67 +308,66 @@ namespace nasl.ui {
       title: '选择日期标签项文本',
       description: '选择日期标签项文本',
       setter: {
-        concept: "InputSetter"
+        concept: 'InputSetter',
       },
       if: (_) => !_.isRange && _.type === 'datetime',
     })
-    datetimeDateTabTitle : nasl.core.String = '选择日期';
+    datetimeDateTabTitle: nasl.core.String = '选择日期';
 
     @Prop({
       group: '主要属性',
       title: '选择时间标签项文本',
       description: '选择时间标签项文本',
       setter: {
-        concept: "InputSetter"
+        concept: 'InputSetter',
       },
       if: (_) => !_.isRange && _.type === 'datetime',
     })
-    datetimeTimeTabTitle : nasl.core.String = '选择时间';
-
+    datetimeTimeTabTitle: nasl.core.String = '选择时间';
 
     @Prop({
       group: '主要属性',
       title: '开始日期标签项文本',
       description: '开始日期标签项文本',
       setter: {
-        concept: "InputSetter"
+        concept: 'InputSetter',
       },
       if: (_) => _.isRange === true,
     })
-    startDateTabTitle : nasl.core.String = '开始日期';
+    startDateTabTitle: nasl.core.String = '开始日期';
 
     @Prop({
       group: '主要属性',
       title: '开始时间标签项文本',
       description: '开始时间标签项文本',
       setter: {
-        concept: "InputSetter"
+        concept: 'InputSetter',
       },
       if: (_) => _.isRange === true && _.type === 'datetime',
     })
-    startTimeTabTitle : nasl.core.String = '开始时间';
+    startTimeTabTitle: nasl.core.String = '开始时间';
 
     @Prop({
       group: '主要属性',
       title: '结束日期标签项文本',
       description: '结束日期标签项文本',
       setter: {
-        concept: "InputSetter"
+        concept: 'InputSetter',
       },
       if: (_) => _.isRange === true,
     })
-    endDateTabTitle : nasl.core.String = '结束日期';
+    endDateTabTitle: nasl.core.String = '结束日期';
 
     @Prop({
       group: '主要属性',
       title: '结束时间标签项文本',
       description: '结束时间标签项文本',
       setter: {
-        concept: "InputSetter"
+        concept: 'InputSetter',
       },
       if: (_) => _.isRange === true && _.type === 'datetime',
     })
-    endTimeTabTitle : nasl.core.String = '结束时间';
+    endTimeTabTitle: nasl.core.String = '结束时间';
 
     @Prop({
       group: '交互属性',
@@ -568,41 +413,49 @@ namespace nasl.ui {
       title: '确认',
       description: '点击完成按钮时触发的事件',
     })
-    onConfirm: (event: {
-      selectedIndexes: Array<nasl.core.Integer>,
-      selectedValues: Array<nasl.core.String>,
-      selectedOptions: Array<{
-        text: nasl.core.String,
-        value: nasl.core.String,
-      }>,
-    } | Array<{
-      selectedIndexes: Array<nasl.core.Integer>,
-      selectedValues: Array<nasl.core.String>,
-      selectedOptions: Array<{
-        text: nasl.core.String,
-        value: nasl.core.String,
-      }>,
-    }>) => void;
+    onConfirm: (
+      event:
+        | {
+            selectedIndexes: Array<nasl.core.Integer>;
+            selectedValues: Array<nasl.core.String>;
+            selectedOptions: Array<{
+              text: nasl.core.String;
+              value: nasl.core.String;
+            }>;
+          }
+        | Array<{
+            selectedIndexes: Array<nasl.core.Integer>;
+            selectedValues: Array<nasl.core.String>;
+            selectedOptions: Array<{
+              text: nasl.core.String;
+              value: nasl.core.String;
+            }>;
+          }>,
+    ) => void;
 
     @Event({
       title: '取消',
       description: '点击完成取消时触发的事件',
     })
-    onCancel: (event: {
-      selectedIndexes: Array<nasl.core.Integer>,
-      selectedValues: Array<nasl.core.String>,
-      selectedOptions: Array<{
-        text: nasl.core.String,
-        value: nasl.core.String,
-      }>,
-    } | Array<{
-      selectedIndexes: Array<nasl.core.Integer>,
-      selectedValues: Array<nasl.core.String>,
-      selectedOptions: Array<{
-        text: nasl.core.String,
-        value: nasl.core.String,
-      }>,
-    }>) => void;
+    onCancel: (
+      event:
+        | {
+            selectedIndexes: Array<nasl.core.Integer>;
+            selectedValues: Array<nasl.core.String>;
+            selectedOptions: Array<{
+              text: nasl.core.String;
+              value: nasl.core.String;
+            }>;
+          }
+        | Array<{
+            selectedIndexes: Array<nasl.core.Integer>;
+            selectedValues: Array<nasl.core.String>;
+            selectedOptions: Array<{
+              text: nasl.core.String;
+              value: nasl.core.String;
+            }>;
+          }>,
+    ) => void;
 
     @Slot({
       title: '组件插槽',
@@ -645,7 +498,9 @@ namespace nasl.ui {
   })
   export class VanFormDatePicker extends ViewComponent {
     constructor(
-      options?: Partial<VanFormDatePickerOptions & VanFormItemOptions & Omit<VanDatePickerOptions, keyof VanFormItemOptions>>,
+      options?: Partial<
+        VanFormDatePickerOptions & VanFormItemOptions & Omit<VanDatePickerOptions, keyof VanFormItemOptions>
+      >,
     ) {
       super();
     }

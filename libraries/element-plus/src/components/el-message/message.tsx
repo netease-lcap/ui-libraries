@@ -1,4 +1,4 @@
-import { defineComponent, watch, onBeforeUnmount, getCurrentInstance, ComponentInternalInstance } from 'vue';
+import { defineComponent, watch, onBeforeUnmount, getCurrentInstance, nextTick } from 'vue';
 import { ElMessage as ElMessagePlus, MessageHandler } from 'element-plus';
 import { setElStyle } from '../../utils/dom';
 import { ElIcon } from '../index';
@@ -53,14 +53,12 @@ export default defineComponent({
     },
   },
 
-  setup(props, { slots, emit, expose }) {
+  setup(props, { slots, emit, expose, attrs }) {
     let messageHandler: MessageHandler | null = null;
-    let instance: ComponentInternalInstance | null = null;
 
     const closeMessage = () => {
       if (messageHandler) {
         const handler = messageHandler;
-        instance = null;
         messageHandler = null;
         handler?.close();
       }
@@ -72,6 +70,8 @@ export default defineComponent({
       // }
 
       const iconComp = props.icon ? <ElIcon name={props.icon} class={`el-message__icon el-icon-${props.type}`} /> : '';
+
+      const messageId = `el-message-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
       // grouping 功能不支持 VNode 类型的消息，如果启用了 grouping，使用字符串类型的 message
       let message: string | any;
@@ -87,6 +87,9 @@ export default defineComponent({
         );
       }
 
+      const classNames = attrs?.class;
+      const styleAttrs = attrs?.style;
+
       messageHandler = ElMessagePlus({
         type: props.type,
         plain: props.plain,
@@ -99,27 +102,21 @@ export default defineComponent({
         repeatNum: props.repeatNum,
         message,
         iconClass: props.icon ? 'el-message--custom-icon' : '',
+        customClass: `${messageId} ${classNames}`,
         onClose: () => {
           emit('update:visible', false);
           emit('close');
         },
       } as any);
-      instance = getCurrentInstance()!;
-      if (!instance) {
-        return;
-      }
+      // 确保 DOM 已渲染完成
+      nextTick(() => {
+        if (messageHandler && styleAttrs) {
+          const messageEl = document.querySelector(`.${messageId}`) as HTMLElement;
 
-      const { ctx } = instance as any;
-      // 处理样式
-      if (ctx.$el) {
-        if (instance?.data?.staticStyle) {
-          setElStyle(instance.data.staticStyle, ctx.$el);
+          if (messageEl && typeof styleAttrs === 'object') {
+            setElStyle(styleAttrs, messageEl);
+          }
         }
-        if (instance?.data?.style) {
-          setElStyle(instance.data.style, ctx.$el);
-        }
-      }
-      ctx.$nextTick(() => {
         emit('open');
       });
     };

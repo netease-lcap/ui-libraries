@@ -1,11 +1,17 @@
 import { ref, cloneVNode } from 'vue';
 import _ from 'lodash';
 import { useMemo, useState, useCallback } from '@/plugins/hooks';
+import { ElIcon } from '@/index';
 
 export function columnPlugin(props) {
   const slots = props.get('slots');
-
+  const width = props.get('width') || _.get(props.get('style'), 'width', '');
+  const minWidth = props.get('minWidth') || _.get(props.get('style'), 'min-width', '');
+  const align = props.get('align') || _.get(props.get('style'), 'text-align', 'left');
   return {
+    align,
+    width,
+    minWidth,
     slots: {
       ...slots,
       default: (item) => slots?.default?.({
@@ -46,7 +52,7 @@ const EditDefault = {
             columnIndex: item.cellIndex,
             editable: editable.value,
           })}
-          <el-icon
+          <ElIcon
             onClick={() => {
               editable.value = true;
             }}
@@ -70,7 +76,7 @@ const EditDefault = {
                 onValidateSuccess: () => {},
                 ref: formItemRef,
               }))}
-          <el-icon
+          <ElIcon
             onClick={() => {
               formItemRef?.value?.validate?.()?.then(() => {
                 editable.value = false;
@@ -87,8 +93,9 @@ const EditDefault = {
   },
 };
 export function handleEditable(props) {
-  const editableProps = props.get('editable');
-  if (!editableProps) {
+  const editableProps = props.get('type');
+  const editable = props.get('editable');
+  if (editableProps !== 'editable' && !editable) {
     return {};
   }
 

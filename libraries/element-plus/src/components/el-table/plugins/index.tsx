@@ -6,6 +6,7 @@ import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
 import { ElTableToolBar } from '@/components/el-table';
+import { ElForm } from '@/index';
 
 const orderMap = {
   descending: 'desc',
@@ -154,6 +155,14 @@ export function handleSort(props) {
 }
 handleSort.order = 3;
 
+export function handleTextAlign(props) {
+  const textAlign = _.get(props.get('style'), 'text-align', 'left');
+  return {
+    style: {
+      '--cw-style-text-align': textAlign,
+    },
+  };
+}
 // 如果是 list total 就是后端分页
 export function handleDataSource(props) {
   const dataSource = props.get('dataSource');
@@ -209,7 +218,7 @@ export function handlePaginationRender(props) {
     style,
     render: (props, { attrs, slots }) => {
       return [
-        <div data-nodepath={nodepath} style={props.style}>
+        <div data-nodepath={nodepath} style={{ ...props.style }} class="el-table-wrapper">
           <Component
             ref={tableRef}
             {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])}
@@ -228,16 +237,18 @@ export function handlePaginationRender(props) {
 }
 
 export function handleEditTable(props) {
+  const slots = props.get('slots');
   const editTable = props.get('editTable');
-  if (!editTable) return {};
+  const editableColumn = _.find(_.attempt(slots?.default), (node) => _.get(node, 'props.type') === 'editable');
+  if (!editTable && !editableColumn) return {};
   const ref = props.get('ref');
   const Component = props.get('render');
   const tableRef = useRef({});
   const render = useCallback((props, { attrs, slots }) => {
     return (
-      <el-form>
+      <ElForm>
         <Component ref={tableRef} {...props} {...attrs} v-slots={slots} />
-      </el-form>
+      </ElForm>
     );
   }, []);
   render.inheritAttrs = false;
@@ -256,7 +267,7 @@ export function handleTableConfig(props) {
     const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : []));
     const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
     return (
-      <div>
+      <div style={{ ...props.style }} class="el-table-wrapper">
         <ElTableToolBar columns={columns} selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} />
         <Component
           ref={tableRef}
@@ -302,25 +313,25 @@ export function handleSticky(props) {
 }
 handleSticky.order = 3;
 
-function handleVirtualize(props) {
-  const virtualize = props.get('virtualize');
-  if (!virtualize) return {};
-  const tableRef = useRef({});
-  const slots = props.get('slots');
-  const columnsSlots = slots.default();
+// function handleVirtualize(props) {
+//   const virtualize = props.get('virtualize');
+//   if (!virtualize) return {};
+//   const tableRef = useRef({});
+//   const slots = props.get('slots');
+//   const columnsSlots = slots.default();
 
-  const columns = _.flatMap(columnsSlots, (node) => {
-    if (node.type.name === 'ElTableColumn') {
-      return [{ ...node.props, header: node.children.header, default: node.children.default }];
-    }
-    return [];
-  });
+//   const columns = _.flatMap(columnsSlots, (node) => {
+//     if (node.type.name === 'ElTableColumn') {
+//       return [{ ...node.props, header: node.children.header, default: node.children.default }];
+//     }
+//     return [];
+//   });
 
-  const render = useCallback((props, { attrs, slots }) => {
-    return <ElTableV2 ref={tableRef} {...props} {...attrs} v-slots={slots} />;
-  }, []);
-  render.inheritAttrs = false;
-  return {};
-}
+//   const render = useCallback((props, { attrs, slots }) => {
+//     return <ElTableV2 ref={tableRef} {...props} {...attrs} v-slots={slots} />;
+//   }, []);
+//   render.inheritAttrs = false;
+//   return {};
+// }
 
-handleVirtualize.order = 2;
+// handleVirtualize.order = 2;

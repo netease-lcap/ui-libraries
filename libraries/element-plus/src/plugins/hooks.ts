@@ -99,8 +99,8 @@ export function useState(initialstate?) {
   }
   const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
   const localSetValue = (value) => {
+    // const state = currentFiber.getState().state[hook?.storeKey];
     hook.isSetValue = true;
-    const state = currentFiber.getState().state[hook?.storeKey];
     // TODO 判断是否相等
     // if (_.isEqual(value, state)) {
     //   return;

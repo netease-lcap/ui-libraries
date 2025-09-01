@@ -24,10 +24,9 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '数据源',
-      setter: {
-        concept: 'InputSetter',
-      },
+      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      designerValue: [{}, {}, {}],
     })
     dataSource: nasl.collection.List<T>;
 
@@ -148,7 +147,11 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormMention<T, V> extends ViewComponent {
-    constructor(options?: Partial<ElFormMentionOptions<T, V> & ElFormItemProOptions & Omit<ElMentionOptions<T, V>, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<
+        ElFormMentionOptions<T, V> & ElFormItemProOptions & Omit<ElMentionOptions<T, V>, keyof ElFormItemProOptions>
+      >,
+    ) {
       super();
     }
   }
