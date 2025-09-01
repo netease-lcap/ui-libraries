@@ -74,7 +74,7 @@ namespace nasl.ui {
       description: '文字样式, JSON格式，例如：{ "color": "rgba(0,0,0,.15)", "fontSize": 16, "fontWeight": "normal" }，需满足Font class 的规范',
       setter: { concept: 'InputSetter' },
     })
-    font: nasl.core.String;
+    font: nasl.collection.Map<nasl.core.String, nasl.core.String>;
     
     @Prop({
       group: '主要属性',
@@ -82,7 +82,7 @@ namespace nasl.ui {
       description: '水印之间的间距, 例如：[100, 100]',
       setter: { concept: 'InputSetter' },
     })
-    gap: nasl.core.String;
+    gap: nasl.collection.List<nasl.core.String>;
     
     @Prop({
       group: '主要属性',
