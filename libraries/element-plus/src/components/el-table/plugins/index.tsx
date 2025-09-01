@@ -157,9 +157,11 @@ handleSort.order = 3;
 
 export function handleTextAlign(props) {
   const textAlign = _.get(props.get('style'), 'text-align', 'left');
+  const styleProps = props.get('style');
   return {
     style: {
       '--cw-style-text-align': textAlign,
+      ...styleProps,
     },
   };
 }
@@ -264,7 +266,9 @@ export function handleTableConfig(props) {
   const Component = props.get('render');
   const tableRef = useRef({});
   const render = useCallback((props, { attrs, slots }) => {
-    const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : []));
+    const columns = _.flatMap(slots.default(), (node) =>
+      node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : [],
+    );
     const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
     return (
       <div style={{ ...props.style }} class="el-table-wrapper">

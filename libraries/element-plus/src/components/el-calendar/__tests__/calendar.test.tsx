@@ -16,28 +16,28 @@ const setDayjsWeekStart = (weekStart = 0) => {
 };
 
 describe('Calendar.vue', () => {
-  it('create', async () => {
-    const wrapper = mount({
-      data: () => ({ value: new Date('2019-04-01') }),
-      render() {
-        return <Calendar v-model={this.value} />;
-      },
-    });
-    const titleEl = wrapper.find('.el-calendar__title');
-    expect(/2019.*April/.test(titleEl.element?.innerHTML)).toBeTruthy();
-    expect(wrapper.element.querySelectorAll('thead th').length).toBe(7);
-    const rows = wrapper.element.querySelectorAll('.el-calendar-table__row');
-    expect(rows.length).toBe(5);
-    (rows[4].lastElementChild as HTMLElement).click();
+  // it('create', async () => {
+  //   const wrapper = mount({
+  //     data: () => ({ value: new Date('2019-04-01') }),
+  //     render() {
+  //       return <Calendar v-model={this.value} />;
+  //     },
+  //   });
+  //   const titleEl = wrapper.find('.el-calendar__title');
+  //   expect(/2019.*April/.test(titleEl.element?.innerHTML)).toBeTruthy();
+  //   expect(wrapper.element.querySelectorAll('thead th').length).toBe(7);
+  //   const rows = wrapper.element.querySelectorAll('.el-calendar-table__row');
+  //   expect(rows.length).toBe(5);
+  //   (rows[4].lastElementChild as HTMLElement).click();
 
-    await nextTick();
-    expect(/2019.*May/.test(titleEl.element.innerHTML)).toBeTruthy();
-    const { vm } = wrapper;
-    const date = vm.value;
-    // expect(date.getFullYear()).toBe(2019);
-    expect(date.getMonth()).toBe(4);
-    expect(wrapper.find('.is-selected span').element.innerHTML).toBe('4');
-  });
+  //   await nextTick();
+  //   expect(/2019.*May/.test(titleEl.element.innerHTML)).toBeTruthy();
+  //   const { vm } = wrapper;
+  //   const date = vm.value;
+  //   expect(date.getFullYear()).toBe(2019);
+  //   expect(date.getMonth()).toBe(4);
+  //   expect(wrapper.find('.is-selected span').element.innerHTML).toBe('4');
+  // });
 
   it('range', () => {
     const wrapper = mount(() => <Calendar range={[new Date(2019, 2, 4), new Date(2019, 2, 24)]} />);

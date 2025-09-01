@@ -182,6 +182,19 @@ describe('hooks.ts', () => {
   });
 
   describe('useControllableValue', () => {
+    it('应该处理非受控模式', () => {
+      const props = new Map([
+        ['defaultValue', 'uncontrolled'],
+        ['emit', vi.fn()],
+      ]);
+      const [value, onChange] = useControllableValue(props);
+
+      expect(value).toBe('uncontrolled');
+
+      onChange('new value');
+      expect(props.get('emit')).not.toHaveBeenCalled();
+    });
+
     it('应该处理受控模式', () => {
       // 重新 mock getCurrentInstance 为这个测试用例返回特定的值
       const mockGetCurrentInstance = vi.fn(() => ({
@@ -207,19 +220,6 @@ describe('hooks.ts', () => {
 
       // 验证 getCurrentInstance 被调用
       expect(mockGetCurrentInstance).toHaveBeenCalled();
-    });
-
-    it('应该处理非受控模式', () => {
-      const props = new Map([
-        ['defaultValue', 'uncontrolled'],
-        ['emit', vi.fn()],
-      ]);
-      const [value, onChange] = useControllableValue(props);
-
-      expect(value).toBe('uncontrolled');
-
-      onChange('new value');
-      expect(props.get('emit')).not.toHaveBeenCalled();
     });
   });
 
