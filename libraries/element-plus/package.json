@@ -49,7 +49,6 @@
     "@storybook/test": "^8.4.6",
     "@storybook/vue3": "^8.4.6",
     "@storybook/vue3-vite": "^8.4.6",
-    "@testing-library/vue": "5",
     "@types/lodash": "^4.17.13",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
