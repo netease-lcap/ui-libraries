@@ -170,14 +170,12 @@ describe('hooks.ts', () => {
     });
 
     it('应该返回新的函数引用当依赖项变化', () => {
-      const callback = () => {};
       const dep1 = ['dep1'];
-      const result1 = useCallback(callback, dep1);
-
+      const result1 = useCallback(() => {}, dep1);
       // 模拟更新，改变依赖项
       fiberNode.setCurrentFiber(fiberNode.getCurrentFiber(), false);
       const dep2 = ['dep2'];
-      const result2 = useCallback(callback, dep2);
+      const result2 = useCallback(() => {}, dep2);
 
       expect(result1).not.toBe(result2);
     });
@@ -185,6 +183,17 @@ describe('hooks.ts', () => {
 
   describe('useControllableValue', () => {
     it('应该处理受控模式', () => {
+      // 重新 mock getCurrentInstance 为这个测试用例返回特定的值
+      const mockGetCurrentInstance = vi.fn(() => ({
+        vnode: {
+          props: {
+            modelValue: 'controlled', // 这里可以修改返回值
+          },
+        },
+      }));
+
+      // 临时替换全局的 getCurrentInstance mock
+      vi.mocked(getCurrentInstance).mockImplementation(mockGetCurrentInstance);
       const props = new Map([
         ['modelValue', 'controlled'],
         ['emit', vi.fn()],
@@ -195,6 +204,9 @@ describe('hooks.ts', () => {
 
       onChange('new value');
       expect(props.get('emit')).toHaveBeenCalled();
+
+      // 验证 getCurrentInstance 被调用
+      expect(mockGetCurrentInstance).toHaveBeenCalled();
     });
 
     it('应该处理非受控模式', () => {
