@@ -17,3 +17,6 @@
 .el-table .el-table__cell.is-left{
   text-align: left;
 }
+.el-table-wrapper{
+  width: 100%;
+}

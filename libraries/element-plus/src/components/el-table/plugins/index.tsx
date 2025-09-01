@@ -218,7 +218,7 @@ export function handlePaginationRender(props) {
     style,
     render: (props, { attrs, slots }) => {
       return [
-        <div data-nodepath={nodepath} style={{ ...props.style, width: '100%' }}>
+        <div data-nodepath={nodepath} style={{ ...props.style }} class="el-table-wrapper">
           <Component
             ref={tableRef}
             {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])}
@@ -267,7 +267,7 @@ export function handleTableConfig(props) {
     const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : []));
     const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
     return (
-      <div style={{ ...props.style, width: '100%' }}>
+      <div style={{ ...props.style }} class="el-table-wrapper">
         <ElTableToolBar columns={columns} selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} />
         <Component
           ref={tableRef}
