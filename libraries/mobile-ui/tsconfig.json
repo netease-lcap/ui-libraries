@@ -21,7 +21,6 @@
   "include": [
     "types/**/*",
     "src/**/*",
-    "src-vusion/**/*"
   ],
   "exclude": [
     "**/*.spec.ts",
@@ -29,5 +28,7 @@
     "node_modules",
     "dist-theme",
     "cloudui",
+    "src-vusion",
+    "ide"
   ]
 }
