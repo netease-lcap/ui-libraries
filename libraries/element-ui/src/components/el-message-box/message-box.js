@@ -71,6 +71,18 @@ export default {
       type: String,
       default: '输入的数据不合法!',
     },
+    closeOnClickModal: {
+      type: Boolean,
+      default: true,
+    },
+    closeOnPressEscape: {
+      type: Boolean,
+      default: true,
+    },
+    closeOnHashChange: {
+      type: Boolean,
+      default: true,
+    }
   },
   watch: {
     visible: {
@@ -87,6 +99,17 @@ export default {
       },
       immediate: true,
     },
+  },
+  data() {
+    return {
+      beforeClose: null,
+    };
+  },
+  mounted() {
+    const { beforeClose } = this.$listeners;
+    if (beforeClose) {
+      this.beforeClose = beforeClose;
+    }
   },
   beforeDestroy() {
     this.closeMessageBox();
@@ -124,9 +147,11 @@ export default {
         inputValidator: this.inputValidator,
         inputErrorMessage: this.inputErrorMessage,
         showInput: this.type === 'prompt',
-        closeOnPressEscape: this.type !== 'alert',
-        closeOnClickModal: this.type !== 'alert',
+        closeOnPressEscape: this.type !== 'alert' && this.closeOnPressEscape,
+        closeOnClickModal: this.type !== 'alert' && this.closeOnClickModal,
+        closeOnHashChange: this.closeOnHashChange,
         customClass: this.$vnode.data.staticClass,
+        beforeClose: this.beforeClose,
       }).then(({ value }) => {
         this.$emit('update:visible', false);
         this.$emit('confirm', value);
