@@ -8,6 +8,7 @@ export const handleDateRange = (props) => {
     ...previewSrcList,
   };
 };
+
 export const handleSwitchChange = (props) => {
   const onSwitch = props.get('onSwitchChange');
   return {
