@@ -344,7 +344,6 @@ describe('Cascader.vue', () => {
   test('filter method', async () => {
     const filterMethod = vi.fn((node, keyword) => {
       const { text, value } = node;
-      console.log('========');
       return text.includes(keyword) || value.includes(keyword);
     });
     const wrapper = _mount(() => <Cascader filterMethod={filterMethod} filterable options={OPTIONS} />);
