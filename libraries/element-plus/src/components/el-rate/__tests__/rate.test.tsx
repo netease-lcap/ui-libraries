@@ -2,11 +2,13 @@ import { nextTick, ref } from 'vue';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { ElFormItem as FormItem } from 'element-plus/es/components/form';
+import { sleep } from '@ep-test/test-utils';
 import { ElRate as Rate } from '../index';
-
 // import type { RateInstance } from '../src/rate';
 type RateInstance = any;
-
+const _mount = (render: () => VNode) => {
+  return mount(render, { attachTo: document.body });
+};
 describe('Rate.vue', () => {
   it('create', () => {
     const wrapper = mount(Rate, {
@@ -31,16 +33,18 @@ describe('Rate.vue', () => {
 
   // it('allow half', async () => {
   //   const value = ref(0);
-  //   const wrapper = mount(() => <Rate v-model={value.value} allowHalf />);
+  //   const rateRef = ref<RateInstance>();
+  //   const wrapper = _mount(() => <Rate ref={rateRef} v-model={value.value} allowHalf />);
   //   const vm = wrapper.getComponent(Rate).vm as RateInstance;
 
   //   const secondStar = wrapper.findAll('.el-rate__item')[1].element as HTMLElement;
-  //   vm.setCurrentValue(1, {
+  //   await sleep(1000);
+  //   rateRef.value.setCurrentValue(1, {
   //     target: secondStar,
   //     offsetX: 0,
   //   } as any as MouseEvent);
   //   secondStar.click();
-  //   vm.resetCurrentValue();
+  //   rateRef.value.resetCurrentValue();
   //   expect(value.value).toEqual(0.5);
   // });
 

@@ -1,6 +1,7 @@
 import { nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import { describe, expect, test, vi } from 'vitest';
+import { sleep } from '@ep-test/test-utils';
 import { IMAGE_FAIL, IMAGE_SUCCESS, mockImageEvent } from '@ep-test/test-utils/mock';
 import type { AnchorHTMLAttributes, ImgHTMLAttributes } from 'vue';
 import { ElImagePlus as Image } from '../index';
@@ -16,7 +17,8 @@ async function doubleWait() {
   await nextTick();
 }
 
-const _mount = (template: string, data: Record<string, any>) => mount({
+const _mount = (template: string, data: Record<string, any>) =>
+  mount({
     components: {
       [Image.name!]: Image,
     },
@@ -103,17 +105,17 @@ describe('Image.vue', () => {
     expect(wrapper.find('img').classes()).toContain('el-image__preview');
   });
 
-  // test('preview initial index test', async () => {
-  //   const props: ElImageProps = {
-  //     src: IMAGE_SUCCESS,
-  //     previewSrcList: Array.from<string>({ length: 3 }).fill(IMAGE_FAIL),
-  //     initialIndex: 1,
-  //   };
-  //   const wrapper = mount(() => <Image {...props} />);
-  //   await doubleWait();
-  //   await wrapper.find('.el-image__inner').trigger('click');
-  //   expect(wrapper.findAll('.el-image-viewer__img')[1].attributes('style')).not.toContain('display: none');
-  // });
+  test('preview initial index test', async () => {
+    const props: ElImageProps = {
+      src: IMAGE_SUCCESS,
+      previewSrcList: Array.from<string>({ length: 3 }).fill(IMAGE_FAIL),
+      initialIndex: 1,
+    };
+    const wrapper = mount(() => <Image {...props} />, { attachTo: document.body });
+    await doubleWait();
+    await wrapper.find('.el-image__inner').trigger('click');
+    expect(wrapper.findAll('.el-image-viewer__img')[0].attributes('style')).not.toContain('display: none');
+  });
 
   test('native loading attributes', async () => {
     const wrapper = mount(Image, {

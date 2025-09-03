@@ -22,82 +22,84 @@ const Comp = defineComponent({
     );
   },
 });
-
+const _mount = (render: () => VNode) => mount(render, {
+    attachTo: document.body,
+  });
 describe('Tabs.vue', () => {
-  // test('create', async () => {
-  //   const wrapper = mount(() => (
-  //     <Tabs>
-  //       <TabPane label="label-1">A</TabPane>
-  //       <TabPane label="label-2">B</TabPane>
-  //       <TabPane label="label-3" ref="pane-click">
-  //         C
-  //       </TabPane>
-  //       <TabPane label="label-4">D</TabPane>
-  //     </Tabs>
-  //   ));
+  test('create', async () => {
+    const wrapper = mount(() => (
+      <Tabs>
+        <TabPane label="label-1">A</TabPane>
+        <TabPane label="label-2">B</TabPane>
+        <TabPane label="label-3" ref="pane-click">
+          C
+        </TabPane>
+        <TabPane label="label-4">D</TabPane>
+      </Tabs>
+    ));
 
-  //   const tabsWrapper = wrapper.findComponent(Tabs);
-  //   const navWrapper = wrapper.findComponent(TabNav);
-  //   const panesWrapper = wrapper.findAllComponents(TabPane);
-  //   await nextTick();
+    const tabsWrapper = wrapper.findComponent(Tabs);
+    const navWrapper = wrapper.findComponent(TabNav);
+    const panesWrapper = wrapper.findAllComponents(TabPane);
+    await nextTick();
 
-  //   const navItemsWrapper = navWrapper.findAll('.el-tabs__item');
+    const navItemsWrapper = navWrapper.findAll('.el-tabs__item');
 
-  //   expect(navItemsWrapper[0].classes('is-active')).toBe(true);
-  //   expect(panesWrapper[0].classes('el-tab-pane')).toBe(true);
-  //   expect(panesWrapper[0].attributes('id')).toBe('pane-0');
-  //   expect(panesWrapper[0].attributes('aria-hidden')).toEqual('false');
-  //   expect(tabsWrapper.vm.$.exposed!.currentName.value).toEqual('0');
+    expect(navItemsWrapper[0].classes('is-active')).toBe(true);
+    expect(panesWrapper[0].classes('el-tab-pane')).toBe(true);
+    expect(panesWrapper[0].attributes('id')).toBe('pane-0');
+    expect(panesWrapper[0].attributes('aria-hidden')).toEqual('false');
+    expect(tabsWrapper.vm.$.exposed!.currentName).toEqual('0');
 
-  //   await navItemsWrapper[2].trigger('click');
-  //   expect(navItemsWrapper[0].classes('is-active')).toBe(false);
-  //   expect(panesWrapper[0].attributes('aria-hidden')).toEqual('true');
-  //   expect(navItemsWrapper[2].classes('is-active')).toBe(true);
-  //   expect(panesWrapper[2].attributes('aria-hidden')).toEqual('false');
-  //   expect(tabsWrapper.vm.$.exposed!.currentName.value).toEqual('2');
-  // });
+    await navItemsWrapper[2].trigger('click');
+    expect(navItemsWrapper[0].classes('is-active')).toBe(false);
+    expect(panesWrapper[0].attributes('aria-hidden')).toEqual('true');
+    expect(navItemsWrapper[2].classes('is-active')).toBe(true);
+    expect(panesWrapper[2].attributes('aria-hidden')).toEqual('false');
+    expect(tabsWrapper.vm.$.exposed!.currentName).toEqual('2');
+  });
 
-  // test('active-name', async () => {
-  //   const activeName = ref<TabPaneName | undefined>('b');
-  //   const handleClick = (tab: TabsPaneContext) => {
-  //     activeName.value = tab.paneName;
-  //   };
-  //   const wrapper = mount(() => (
-  //     <Tabs v-model={activeName.value} onTabClick={handleClick}>
-  //       <TabPane name="a" label="label-1">
-  //         A
-  //       </TabPane>
-  //       <TabPane name="b" label="label-2">
-  //         B
-  //       </TabPane>
-  //       <TabPane name="c" label="label-3" ref="pane-click">
-  //         C
-  //       </TabPane>
-  //       <TabPane name="d" label="label-4">
-  //         D
-  //       </TabPane>
-  //     </Tabs>
-  //   ));
+  test('active-name', async () => {
+    const activeName = ref<TabPaneName | undefined>('b');
+    const handleClick = (tab: TabsPaneContext) => {
+      activeName.value = tab.paneName;
+    };
+    const wrapper = mount(() => (
+      <Tabs v-model={activeName.value} onTabClick={handleClick}>
+        <TabPane name="a" label="label-1">
+          A
+        </TabPane>
+        <TabPane name="b" label="label-2">
+          B
+        </TabPane>
+        <TabPane name="c" label="label-3" ref="pane-click">
+          C
+        </TabPane>
+        <TabPane name="d" label="label-4">
+          D
+        </TabPane>
+      </Tabs>
+    ));
 
-  //   const tabsWrapper = wrapper.findComponent(Tabs);
-  //   const navWrapper = wrapper.findComponent(TabNav);
-  //   const panesWrapper = wrapper.findAllComponents(TabPane);
-  //   await nextTick();
+    const tabsWrapper = wrapper.findComponent(Tabs);
+    const navWrapper = wrapper.findComponent(TabNav);
+    const panesWrapper = wrapper.findAllComponents(TabPane);
+    await nextTick();
 
-  //   const navItemsWrapper = navWrapper.findAll('.el-tabs__item');
-  //   expect(navItemsWrapper[1].classes('is-active')).toBe(true);
-  //   expect(panesWrapper[1].classes('el-tab-pane')).toBe(true);
-  //   expect(panesWrapper[1].attributes('id')).toBe('pane-b');
-  //   expect(panesWrapper[1].attributes('aria-hidden')).toEqual('false');
-  //   expect(tabsWrapper.vm.$.exposed!.currentName.value).toEqual('b');
+    const navItemsWrapper = navWrapper.findAll('.el-tabs__item');
+    expect(navItemsWrapper[1].classes('is-active')).toBe(true);
+    expect(panesWrapper[1].classes('el-tab-pane')).toBe(true);
+    expect(panesWrapper[1].attributes('id')).toBe('pane-b');
+    expect(panesWrapper[1].attributes('aria-hidden')).toEqual('false');
+    expect(tabsWrapper.vm.$.exposed!.currentName).toEqual('b');
 
-  //   await navItemsWrapper[2].trigger('click');
-  //   expect(navItemsWrapper[1].classes('is-active')).toBe(false);
-  //   expect(panesWrapper[1].attributes('aria-hidden')).toEqual('true');
-  //   expect(navItemsWrapper[2].classes('is-active')).toBe(true);
-  //   expect(panesWrapper[2].attributes('aria-hidden')).toEqual('false');
-  //   expect(tabsWrapper.vm.$.exposed!.currentName.value).toEqual('c');
-  // });
+    await navItemsWrapper[2].trigger('click');
+    expect(navItemsWrapper[1].classes('is-active')).toBe(false);
+    expect(panesWrapper[1].attributes('aria-hidden')).toEqual('true');
+    expect(navItemsWrapper[2].classes('is-active')).toBe(true);
+    expect(panesWrapper[2].attributes('aria-hidden')).toEqual('false');
+    expect(tabsWrapper.vm.$.exposed!.currentName).toEqual('c');
+  });
 
   test('card', async () => {
     const wrapper = mount(() => (

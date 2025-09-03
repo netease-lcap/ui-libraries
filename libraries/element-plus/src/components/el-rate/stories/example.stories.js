@@ -17,11 +17,15 @@ export const Example1 = {
   render: () => ({
     setup() {
       const value = ref(null);
-      return { value };
+      const rateRef = ref();
+      setTimeout(() => {
+        console.log(rateRef,'rate===');
+      }, 1000);
+      return { value, rateRef };
     },
     template: `
     <div>
-      <el-rate v-model="value" />
+      <el-rate ref="rateRef" v-model="value" allowHalf/>
     </div>
     `,
   }),

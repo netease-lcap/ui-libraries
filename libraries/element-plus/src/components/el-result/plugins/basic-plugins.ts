@@ -6,7 +6,7 @@ export function handleSlots(props) {
 
   return {
     slots: _.assign(slots, {
-      'sub-title': slots.subTitle,
+      'sub-title': slots.subTitle ?? slots['sub-title'],
     }),
   };
 }
