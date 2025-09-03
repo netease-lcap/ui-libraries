@@ -1,10 +1,11 @@
 import _ from 'lodash';
 
 export const handleDateRange = (props) => {
-  const previewSrcList = props.get('previewSrcList');
-  const listRange = _.isString(previewSrcList) ? previewSrcList?.split(',') : [];
+  const previewSrcListProps = props.get('previewSrcList');
+  const listRange = _.isString(previewSrcListProps) ? previewSrcListProps?.split(',') : [];
+  const previewSrcList = _.isEmpty(listRange) ? {} : { previewSrcList: listRange };
   return {
-    previewSrcList: listRange,
+    ...previewSrcList,
   };
 };
 export const handleSwitchChange = (props) => {

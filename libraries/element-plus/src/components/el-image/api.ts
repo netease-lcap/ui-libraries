@@ -66,7 +66,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '开启图片预览功能',
       description: '开启图片预览功能,用逗号分隔',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'InputSetter', autoClear: true },
     })
     previewSrcList: nasl.core.String = '';
 
@@ -86,7 +86,6 @@ namespace nasl.ui {
     })
     infinite: nasl.core.Boolean = true;
 
-
     @Prop({
       group: '主要属性',
       title: '图片预览的z-index值',
@@ -102,7 +101,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     lazy: nasl.core.Boolean = false;
-
 
     @Event({
       title: '图片预览',
@@ -334,4 +332,3 @@ namespace nasl.ui {
     onRotate: (deg: nasl.core.Decimal) => any;
   }
 }
-
