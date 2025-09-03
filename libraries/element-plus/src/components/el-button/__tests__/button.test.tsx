@@ -43,14 +43,14 @@ describe('Button.vue', () => {
       const wrapper = mount(() => <Button circle />);
       expect(wrapper.classes()).toContain('is-circle');
     });
-    // it('text', async () => {
-    //   const bg = ref(false);
-    //   const wrapper = mount(() => <Button text bg={bg.value} />);
-    //   expect(wrapper.classes()).toContain('is-text');
-    //   bg.value = true;
-    //   await nextTick();
-    //   expect(wrapper.classes()).toContain('is-has-bg');
-    // });
+    it('text', async () => {
+      const bg = ref(false);
+      const wrapper = mount(() => <Button text bg={bg.value} />);
+      expect(wrapper.classes()).toContain('is-text');
+      bg.value = true;
+      await nextTick();
+      expect(wrapper.classes()).toContain('is-has-bg');
+    });
     it('link', async () => {
       const wrapper = mount(() => <Button link />);
       expect(wrapper.classes()).toContain('is-link');

@@ -16,19 +16,8 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "emitDecoratorMetadata": true
   },
-  "include": [
-    "types/**/*",
-    "src/**/*",
-  ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.spec.js",
-    "node_modules",
-    "dist-theme",
-    "cloudui",
-    "src-vusion",
-    "ide"
-  ]
+  "include": ["types/**/*", "src/**/*"],
+  "exclude": ["**/*.spec.ts", "**/*.spec.js", "node_modules", "dist-theme", "cloudui", "src-vusion", "ide", "*/"]
 }

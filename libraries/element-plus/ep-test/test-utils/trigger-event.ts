@@ -3,27 +3,27 @@
  * mouseenter, mouseleave, mouseover, keyup, change, click
  */
 const triggerEvent = (elm: Element, name: string, ...opts: any[]) => {
-  let eventName: string
+  let eventName: string;
 
   if (/^mouse|click/.test(name)) {
-    eventName = 'MouseEvents'
+    eventName = 'MouseEvents';
   } else if (name.startsWith('key')) {
-    eventName = 'KeyboardEvent'
+    eventName = 'KeyboardEvent';
   } else {
-    eventName = 'HTMLEvents'
+    eventName = 'HTMLEvents';
   }
-  const evt = document.createEvent(eventName)
+  const evt = document.createEvent(eventName);
 
-  evt.initEvent(name, ...opts)
+  evt.initEvent(name, ...opts);
 
   if (name === 'keydown' && opts[0]) {
     // trigger event with keycode
     // triggerEvent(ele, 'keydown', 'ArrowDown')
-    Object.defineProperty(evt, 'code', { value: opts[0] })
+    Object.defineProperty(evt, 'code', { value: opts[0] });
   }
-  elm.dispatchEvent(evt)
+  elm.dispatchEvent(evt);
 
-  return elm
-}
+  return elm;
+};
 
-export default triggerEvent
+export default triggerEvent;

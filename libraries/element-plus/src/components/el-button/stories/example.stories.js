@@ -24,7 +24,7 @@ export const Example1 = {
     },
     template: `
     <div class="mb-4">
-      <el-button :icon="Search">默认按钮</el-button>
+      <el-button text>默认按钮</el-button>
     </div>
 
     <style>

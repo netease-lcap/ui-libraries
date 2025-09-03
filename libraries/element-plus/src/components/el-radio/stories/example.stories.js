@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import ElRadio from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
@@ -65,6 +66,21 @@ export const Example4 = {
               <div data-nodepath="5a3a6bf5258047bcb9dc02af3ec1a235"  ><EmptySlot data-emptyslot-nodepath="5a3a6bf5258047bcb9dc02af3ec1a235"  ></EmptySlot></div>
           </template>
     </el-radio-group>
+      `,
+  }),
+};
+
+export const Example5 = {
+  name: '测试',
+  render: () => ({
+    setup() {
+      const value = ref('');
+      return {
+        value,
+      };
+    },
+    template: `
+          <el-radio v-model="value" label="1"></el-radio>
       `,
   }),
 };

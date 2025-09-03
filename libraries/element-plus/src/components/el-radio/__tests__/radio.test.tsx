@@ -1,20 +1,28 @@
-import { nextTick, ref } from 'vue';
+import { nextTick, ref, VNode } from 'vue';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it, test } from 'vitest';
 import { ElFormItem } from 'element-plus/es/components/form';
+import { sleep, triggerEvent } from '@ep-test/test-utils';
+import type { RadioProps } from 'element-plus/es/components/radio/src/radio';
 import { ElRadio as Radio, ElRadioGroup as RadioGroup, ElRadioButtonPlus as RadioButton } from '../index';
 
 // import type { RadioProps } from '../src/radio'
-type RadioProps = any;
+// type RadioProps = any;
+const _mount = (render: () => VNode) => mount(render, {
+    attachTo: document.body,
+  });
 
 describe('Radio', () => {
-  // test('create', async () => {
-  //   const radio = ref('');
-  //   const wrapper = mount(() => <Radio v-model={radio.value} label="a" />);
-  //   expect(wrapper.classes()).toContain('el-radio');
-  //   await wrapper.trigger('click');
-  //   expect(wrapper.classes()).toContain('is-checked');
-  // });
+  test('create', async () => {
+    const radio = ref('');
+    const wrapper = _mount(() => <Radio v-model={radio.value} label="a" />);
+    expect(wrapper.classes()).toContain('el-radio');
+    const input = wrapper.find('.el-radio');
+    input.trigger('click');
+    await nextTick();
+
+    expect(wrapper.find('.el-radio').classes()).toContain('is-checked');
+  });
 
   test('disabled', async () => {
     const radio = ref('');
@@ -30,17 +38,18 @@ describe('Radio', () => {
     expect(wrapper.classes()).toContain('is-bordered');
   });
 
-  // test('change event', async () => {
-  //   const radio = ref('');
-  //   const changeData = ref<RadioProps['modelValue']>('');
-  //   function handleChange(val: RadioProps['modelValue']) {
-  //     changeData.value = val;
-  //   }
-  //   const wrapper = mount(() => <Radio v-model={radio.value} label="3" onChange={handleChange} />);
-  //   await wrapper.trigger('click');
-  //   await nextTick();
-  //   expect(changeData.value).toEqual('3');
-  // });
+  test('change event', async () => {
+    const radio = ref('');
+    const changeData = ref<RadioProps['modelValue']>('');
+    function handleChange(val: RadioProps['modelValue']) {
+      changeData.value = val;
+    }
+    const wrapper = _mount(() => <Radio v-model={radio.value} label="3" onChange={handleChange} />);
+    const input = wrapper.find('.el-radio');
+    await input.trigger('click');
+    await nextTick();
+    expect(changeData.value).toEqual('3');
+  });
 
   test('change event only triggers on user input', async () => {
     const radio = ref('');
@@ -48,7 +57,11 @@ describe('Radio', () => {
     function handleChange(val: RadioProps['modelValue']) {
       changeData.value = val;
     }
-    mount(() => <Radio v-model={radio.value} label="3" onChange={handleChange} />);
+    const wrapper = mount({
+      render() {
+        return <Radio v-model={radio.value} label="3" onChange={handleChange} />;
+      },
+    });
     radio.value = '3';
     await nextTick();
     expect(changeData.value).toEqual('');
@@ -57,37 +70,30 @@ describe('Radio', () => {
 });
 
 describe('Radio group', () => {
-  // it('create', async () => {
-  //   const radio = ref(3);
-  //   const wrapper = mount(() => (
-  //     <RadioGroup v-model={radio.value}>
-  //       <Radio value={3} ref="radio1">
-  //         3
-  //       </Radio>
-  //       <Radio value={6} ref="radio2">
-  //         6
-  //       </Radio>
-  //       <Radio value={9}>9</Radio>
-  //     </RadioGroup>
-  //   ));
-  //   await nextTick();
-  //   const [radio1, radio2] = wrapper.findAll('.el-radio');
-  //   expect(radio1.classes()).toContain('is-checked');
-  //   await radio2.trigger('click');
-  //   expect(radio2.classes()).toContain('is-checked');
-  //   expect(radio.value).toEqual(6);
-  // });
+  it('create', async () => {
+    const radio = ref(3);
+    const wrapper = _mount(() => (
+      <RadioGroup v-model={radio.value}>
+        <Radio value={3}>3</Radio>
+        <Radio value={6}>6</Radio>
+        <Radio value={9}>9</Radio>
+      </RadioGroup>
+    ));
+    await nextTick();
+    const [radio1, radio2] = wrapper.findAll('.el-radio');
+    expect(radio1.classes()).toContain('is-checked');
+    await radio2.trigger('click');
+    await nextTick();
+    expect(radio2.classes()).toContain('is-checked');
+    expect(radio.value).toEqual(6);
+  });
 
   it('id auto derive', async () => {
     const radioValue1 = ref(3);
     const wrapper1 = mount(() => (
       <RadioGroup v-model={radioValue1.value}>
-        <Radio value={3} ref="radio1">
-          3
-        </Radio>
-        <Radio value={6} ref="radio2">
-          6
-        </Radio>
+        <Radio value={3}>3</Radio>
+        <Radio value={6}>6</Radio>
         <Radio value={9}>9</Radio>
       </RadioGroup>
     ));
@@ -95,12 +101,8 @@ describe('Radio group', () => {
     const radioValue2 = ref(3);
     const wrapper2 = mount(() => (
       <RadioGroup v-model={radioValue2.value}>
-        <Radio value={3} ref="radio1">
-          3
-        </Radio>
-        <Radio value={6} ref="radio2">
-          6
-        </Radio>
+        <Radio value={3}>3</Radio>
+        <Radio value={6}>6</Radio>
         <Radio value={9}>9</Radio>
       </RadioGroup>
     ));
@@ -115,12 +117,8 @@ describe('Radio group', () => {
     const radio = ref(3);
     const wrapper = mount(() => (
       <RadioGroup v-model={radio.value} disabled>
-        <Radio value={3} ref="radio1">
-          3
-        </Radio>
-        <Radio value={6} ref="radio2">
-          6
-        </Radio>
+        <Radio value={3}>3</Radio>
+        <Radio value={6}>6</Radio>
         <Radio value={9}>9</Radio>
       </RadioGroup>
     ));
@@ -133,26 +131,24 @@ describe('Radio group', () => {
     expect(radio1.classes()).toContain('is-checked');
   });
 
-  // it('change event', async () => {
-  //   const radio = ref(3);
-  //   const data = ref<RadioProps['modelValue']>(0);
-  //   function onChange(val: RadioProps['modelValue']) {
-  //     data.value = val;
-  //   }
-  //   const wrapper = mount(() => (
-  //     <RadioGroup v-model={radio.value} onChange={onChange}>
-  //       <Radio value={3}>3</Radio>
-  //       <Radio value={6} ref="radio2">
-  //         6
-  //       </Radio>
-  //       <Radio value={9}>9</Radio>
-  //     </RadioGroup>
-  //   ));
-  //   const radio2 = wrapper.findAll('.el-radio').at(1);
-  //   await radio2?.trigger('click');
-  //   await nextTick();
-  //   expect(data.value).toEqual(6);
-  // });
+  it('change event', async () => {
+    const radio = ref(3);
+    const data = ref<RadioProps['modelValue']>(0);
+    function onChange(val: RadioProps['modelValue']) {
+      data.value = val;
+    }
+    const wrapper = _mount(() => (
+      <RadioGroup v-model={radio.value} onChange={onChange}>
+        <Radio value={3}>3</Radio>
+        <Radio value={6}>6</Radio>
+        <Radio value={9}>9</Radio>
+      </RadioGroup>
+    ));
+    const radio2 = wrapper.findAll('.el-radio').at(1);
+    await radio2?.trigger('click');
+    await nextTick();
+    expect(data.value).toEqual(6);
+  });
 
   it('change event only triggers on user input', async () => {
     const radio = ref(3);
@@ -160,15 +156,17 @@ describe('Radio group', () => {
     function onChange(val: RadioProps['modelValue']) {
       data.value = val;
     }
-    mount(() => (
-      <RadioGroup v-model={radio.value} onChange={onChange}>
-        <Radio value={3}>3</Radio>
-        <Radio value={6} ref="radio2">
-          6
-        </Radio>
-        <Radio value={9}>9</Radio>
-      </RadioGroup>
-    ));
+    mount({
+      render() {
+        return (
+          <RadioGroup v-model={radio.value} onChange={onChange}>
+            <Radio value={3}>3</Radio>
+            <Radio value={6}>6</Radio>
+            <Radio value={9}>9</Radio>
+          </RadioGroup>
+        );
+      },
+    });
 
     radio.value = 6;
     await nextTick();
@@ -179,12 +177,8 @@ describe('Radio group', () => {
     const radio = ref(3);
     const wrapper = mount(() => (
       <RadioGroup v-model={radio.value} disabled>
-        <RadioButton value={3} ref="radio1">
-          3
-        </RadioButton>
-        <RadioButton value={6} ref="radio2">
-          6
-        </RadioButton>
+        <RadioButton value={3}>3</RadioButton>
+        <RadioButton value={6}>6</RadioButton>
         <RadioButton value={9}>9</RadioButton>
       </RadioGroup>
     ));
@@ -199,36 +193,29 @@ describe('Radio group', () => {
 });
 
 describe('Radio Button', () => {
-  // it('create', async () => {
-  //   const radio = ref(3);
-  //   const wrapper = mount(() => (
-  //     <RadioGroup v-model={radio.value}>
-  //       <RadioButton value={3} ref="radio1">
-  //         3
-  //       </RadioButton>
-  //       <RadioButton value={6} ref="radio2">
-  //         6
-  //       </RadioButton>
-  //       <RadioButton value={9}>9</RadioButton>
-  //     </RadioGroup>
-  //   ));
-  //   const [radio1, radio2] = wrapper.findAll('.el-radio-button');
-  //   expect(radio1.classes()).toContain('is-active');
-  //   await radio2.trigger('click');
-  //   expect(radio2.classes()).toContain('is-active');
-  //   expect(radio.value).toEqual(6);
-  // });
+  it('create', async () => {
+    const radio = ref(3);
+    const wrapper = _mount(() => (
+      <RadioGroup v-model={radio.value}>
+        <RadioButton value={3}>3</RadioButton>
+        <RadioButton value={6}>6</RadioButton>
+        <RadioButton value={9}>9</RadioButton>
+      </RadioGroup>
+    ));
+    const [radio1, radio2] = wrapper.findAll('.el-radio-button');
+    expect(radio1.classes()).toContain('is-active');
+    await radio2.trigger('click');
+    await nextTick();
+    expect(radio2.classes()).toContain('is-active');
+    expect(radio.value).toEqual(6);
+  });
 
   it('custom color', () => {
     const radio = ref(3);
     const wrapper = mount(() => (
-      <RadioGroup v-model={radio.value} fill="#000" text-color="#ff0">
-        <RadioButton value={3} ref="radio1">
-          3
-        </RadioButton>
-        <RadioButton value={6} ref="radio2">
-          6
-        </RadioButton>
+      <RadioGroup v-model={radio.value} fill="#000" textColor="#ff0">
+        <RadioButton value={3}>3</RadioButton>
+        <RadioButton value={6}>6</RadioButton>
         <RadioButton value={9}>9</RadioButton>
       </RadioGroup>
     ));
@@ -238,27 +225,24 @@ describe('Radio Button', () => {
     );
   });
 
-  // it('change event', async () => {
-  //   const radio = ref(3);
-  //   const data = ref<RadioProps['modelValue']>(0);
-  //   function onChange(val: RadioProps['modelValue']) {
-  //     data.value = val;
-  //   }
-  //   const wrapper = mount(() => (
-  //     <RadioGroup v-model={radio.value} onChange={onChange}>
-  //       <RadioButton value={3} ref="radio1">
-  //         3
-  //       </RadioButton>
-  //       <RadioButton value={6} ref="radio2">
-  //         6
-  //       </RadioButton>
-  //       <RadioButton value={9}>9</RadioButton>
-  //     </RadioGroup>
-  //   ));
-  //   const radio2 = wrapper.findAll('.el-radio-button').at(1);
-  //   await radio2?.trigger('click');
-  //   expect(radio.value).toEqual(6);
-  // });
+  it('change event', async () => {
+    const radio = ref(3);
+    const data = ref<RadioProps['modelValue']>(0);
+    function onChange(val: RadioProps['modelValue']) {
+      data.value = val;
+    }
+    const wrapper = _mount(() => (
+      <RadioGroup v-model={radio.value} onChange={onChange}>
+        <RadioButton value={3}>3</RadioButton>
+        <RadioButton value={6}>6</RadioButton>
+        <RadioButton value={9}>9</RadioButton>
+      </RadioGroup>
+    ));
+    const radio2 = wrapper.findAll('.el-radio-button').at(1);
+    await radio2?.trigger('click');
+    await nextTick();
+    expect(radio.value).toEqual(6);
+  });
 
   it('change event only triggers on user input', async () => {
     const radio = ref(3);
@@ -266,17 +250,17 @@ describe('Radio Button', () => {
     function onChange(val: RadioProps['modelValue']) {
       data.value = val;
     }
-    mount(() => (
-      <RadioGroup v-model={radio.value} onChange={onChange}>
-        <RadioButton value={3} ref="radio1">
-          3
-        </RadioButton>
-        <RadioButton value={6} ref="radio2">
-          6
-        </RadioButton>
-        <RadioButton value={9}>9</RadioButton>
-      </RadioGroup>
-    ));
+    mount({
+      render() {
+        return (
+          <RadioGroup v-model={radio.value} onChange={onChange}>
+            <RadioButton value={3}>3</RadioButton>
+            <RadioButton value={6}>6</RadioButton>
+            <RadioButton value={9}>9</RadioButton>
+          </RadioGroup>
+        );
+      },
+    });
 
     radio.value = 6;
     await nextTick();
@@ -287,12 +271,8 @@ describe('Radio Button', () => {
     const radio = ref(3);
     const wrapper = mount(() => (
       <RadioGroup v-model={radio.value} size="large">
-        <RadioButton value={3} ref="radio1">
-          3
-        </RadioButton>
-        <RadioButton value={6} ref="radio2">
-          6
-        </RadioButton>
+        <RadioButton value={3}>3</RadioButton>
+        <RadioButton value={6}>6</RadioButton>
         <RadioButton value={9}>9</RadioButton>
       </RadioGroup>
     ));
@@ -302,8 +282,8 @@ describe('Radio Button', () => {
   describe('form item accessibility integration', () => {
     test('single radio group in form item', async () => {
       const wrapper = mount(() => (
-        <ElFormItem ref="item" label="Test">
-          <RadioGroup ref="radioGroup">
+        <ElFormItem label="Test">
+          <RadioGroup>
             <Radio label="Foo" value="Foo" />
             <Radio label="Bar" value="Bar" />
           </RadioGroup>
@@ -321,8 +301,8 @@ describe('Radio Button', () => {
 
     test('single radio group in form item, override label', async () => {
       const wrapper = mount(() => (
-        <ElFormItem ref="item" label="Test">
-          <RadioGroup aria-label="Foo" ref="radioGroup">
+        <ElFormItem label="Test">
+          <RadioGroup aria-label="Foo">
             <Radio label="Foo" value="Foo" />
             <Radio label="Bar" value="Bar" />
           </RadioGroup>

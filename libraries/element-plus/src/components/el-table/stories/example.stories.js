@@ -145,6 +145,7 @@ export const Example1 = {
       });
       setTimeout(() => {
         width.value = '1000px';
+        console.log(mytable, 'mytable');
         console.log('object');
       }, 1000);
       const logCellClick = (...el) => {
@@ -318,6 +319,127 @@ export const Default = {
       </template>
       </el-table-column>
     </el-table>
+    `,
+  }),
+};
+
+export const Example3 = {
+  name: '示例3',
+  render: () => ({
+    setup() {
+      const activeName = ref('first');
+      const total = 28;
+      const tableData = async (pageObj) => {
+        console.log(pageObj, 'pagerequest====');
+        const initialData = [];
+        for (
+          let i = (pageObj.currentPage - 1) * pageObj.pageSize;
+          i < pageObj.currentPage * pageObj.pageSize && i < total;
+          i++
+        ) {
+          initialData.push({
+            index: i + 1,
+            applicant: ['贾明', '张三', '王芳'][i % 3],
+            status: i % 3,
+            channel: ['电子签署', '纸质签署', '纸质签署'][i % 3],
+            email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
+            matters: ['宣传物料制作费用', 'algolia 服务报销', '相关周边制作费', '激励奖品快递费'][i % 4],
+            time: [2, 3, 1, 4][i % 4],
+            createTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
+            applyTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
+            modifyTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
+            confirmTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
+          });
+        }
+        return initialData;
+      };
+      const mytable = ref();
+      const currentPage = ref(1);
+      const pageSize2 = ref(10);
+      const selectedRowKeys = ref([
+        {
+          index: 4,
+        },
+      ]);
+
+      watch(selectedRowKeys, (el) => {
+        console.log(el, 'log');
+      });
+      function getTestData() {
+        return [
+          {
+            id: 1,
+            name: 'Toy Story',
+            release: '1995-11-22',
+            director: 'John Lasseter',
+            runtime: 80,
+          },
+          {
+            id: 2,
+            name: "A Bug's Life",
+            release: '1998-11-25',
+            director: 'John Lasseter',
+            runtime: 95,
+          },
+          {
+            id: 3,
+            name: 'Toy Story 2',
+            release: '1999-11-24',
+            director: 'John Lasseter',
+            runtime: 92,
+          },
+          {
+            id: 4,
+            name: 'Monsters, Inc.',
+            release: '2001-11-2',
+            director: 'Peter Docter',
+            runtime: 92,
+          },
+          {
+            id: 5,
+            name: 'Finding Nemo',
+            release: '2003-5-30',
+            director: 'Andrew Stanton',
+            runtime: 100,
+          },
+        ];
+      }
+
+      // setTimeout(() => {
+      //   console.log(selectedRowKeys,'selectedRowKeys');
+      // }, 1000);
+      return {
+        testData: getTestData(),
+        objectSpanMethod({ rowIndex, columnIndex }) {
+          if (columnIndex === 0) {
+            if (rowIndex % 2 === 0) {
+              return {
+                rowspan: 2,
+                colspan: 1,
+              };
+            }
+            return {
+              rowspan: 0,
+              colspan: 0,
+            };
+          }
+        },
+      };
+    },
+    template: `
+    
+         <el-table
+          :data="testData"
+          :span-method="objectSpanMethod"
+          border
+          style="width: 100%; margin-top: 20px"
+        >
+          <el-table-column prop="id" label="ID" width="180" />
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
     `,
   }),
 };

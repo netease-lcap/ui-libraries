@@ -113,11 +113,7 @@ namespace nasl.ui {
       description: '单选框组类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '边框' },
-          { title: '按钮' },
-        ],
+        options: [{ title: '默认' }, { title: '边框' }, { title: '按钮' }],
       },
     })
     type: 'default' | 'border' | 'button' = 'default';
@@ -145,7 +141,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     preview: nasl.core.Boolean = false;
-
 
     @Event({
       title: '改变后',
@@ -180,7 +175,6 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       parentAccept: "target.tag === 'el-radio-group'",
-
     },
   })
   @Component({
@@ -361,7 +355,14 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: ['slotDefault', 'useRangeValue', 'startFieldName', 'endFieldName', 'startInitialValue', 'endInitialValue'],
+        excludes: [
+          'slotDefault',
+          'useRangeValue',
+          'startFieldName',
+          'endFieldName',
+          'startInitialValue',
+          'endInitialValue',
+        ],
       },
       {
         name: 'ElRadioGroup',
@@ -375,7 +376,11 @@ namespace nasl.ui {
   })
   export class ElFormRadioGroup<T, V> extends ViewComponent {
     constructor(
-      options?: Partial<ElFormRadioGroupOptions<T, V> & ElFormItemProOptions & Omit<ElRadioGroupOptions<T, V>, keyof ElFormItemProOptions>>,
+      options?: Partial<
+        ElFormRadioGroupOptions<T, V> &
+          ElFormItemProOptions &
+          Omit<ElRadioGroupOptions<T, V>, keyof ElFormItemProOptions>
+      >,
     ) {
       super();
     }

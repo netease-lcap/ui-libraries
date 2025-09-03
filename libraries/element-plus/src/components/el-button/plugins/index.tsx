@@ -6,11 +6,12 @@ import { $PopconfirmProps } from '../constants';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { useCallback } from '@/plugins/hooks';
 // export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+
 export function handleTextToslot(props) {
   const text = props.get('text');
   const slots = props.get('slots');
   const icon = props.get('icon');
-  const deletePropsList = props.get($deletePropsList).concat(['text']);
+  const deletePropsList = props.get($deletePropsList).concat([_.isString(text) ? 'text' : '']);
   const defaultSlot = _.isString(text) ? { default: () => text } : {};
   return {
     slots: _.assign({}, slots, defaultSlot),
