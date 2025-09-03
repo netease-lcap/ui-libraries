@@ -18,6 +18,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["types/**/*", "src/**/*"],
-  "exclude": ["**/*.spec.ts", "**/*.spec.js", "node_modules", "dist-theme", "cloudui", "src-vusion", "ide", "*/"]
+  "include": ["types/**/*", "src/**/*", "src-vusion/**/*"],
+  "exclude": ["**/*.spec.ts", "**/*.spec.js", "node_modules", "dist-theme", "cloudui"]
 }
