@@ -101,11 +101,6 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
 
         return h(DateRangePicker, context.propsData, context.childrenNodes);
       },
-      [$ref]: {
-        focus: () => {
-          // 假装这里有一个聚焦方法
-        },
-      },
     };
   },
 };

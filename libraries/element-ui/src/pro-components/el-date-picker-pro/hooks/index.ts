@@ -377,6 +377,7 @@ export function usePresets(props: MapGet) {
     }
 
     return {
+      此刻: new Date(),
       今天: dayjsStartTime(dayjs()),
       昨天: dayjsStartTime(dayjs().subtract(1, 'day')),
       一周前: dayjsStartTime(dayjs().subtract(7, 'day')),
