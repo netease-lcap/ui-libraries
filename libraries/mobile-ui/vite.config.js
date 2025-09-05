@@ -319,13 +319,14 @@ export default defineConfig(({ command }) => {
       rollupOptions: {
         // 确保外部化处理那些你不想打包进库的依赖
         treeshake: false,
-        external: ['vue', 'vue-router', 'vue-i18n'],
+        external: ['vue', 'vue-router', 'vue-i18n', '@vue/composition-api'],
         output: {
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           globals: {
             vue: 'Vue',
             'vue-router': 'VueRouter',
             'vue-i18n': 'VueI18n',
+            '@vue/composition-api': 'VueCompositionAPI',
           },
           interop: 'compat',
           assetFileNames: (assetInfo) => {
