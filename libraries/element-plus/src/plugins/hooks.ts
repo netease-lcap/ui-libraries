@@ -158,10 +158,12 @@ export function useEffect(callBack, dep) {
     currentFiber.workInProgressEffect = hook;
     onMounted(() => {
       const result = callBack(...dep);
-      hook.result = _.isFunction(result) ? result : () => {};
+      hook.result = result;
     });
     onUnmounted(() => {
-      _.attempt(hook.result);
+      if (_.isFunction(hook.result)) {
+        hook.result();
+      }
     });
   } else {
     hook = currentFiber.workInProgressEffect.next;
@@ -169,7 +171,7 @@ export function useEffect(callBack, dep) {
     const isSameDep = _.every(dep, (item, index) => Object.is(item, _.get(hook, `dep.${index}`)));
     if (!_.isEmpty(dep) && !isSameDep) {
       const result = callBack(...dep);
-      hook.result = _.isFunction(result) ? result : () => {};
+      hook.result = result;
       hook.dep = dep;
     }
   }
@@ -248,12 +250,13 @@ export function useControllableValue(props: any, options: Options = {}) {
   const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
   const propsValue = props.get(valuePropName);
   const defaultValueProps = props.get(defaultValuePropName);
-  const initialValue = useMemo(() => {
-    const controlledInitialValue = propsValue ?? defaultValueProps ?? defaultValue;
-    const uncontrolledInitialValue = defaultValueProps ?? defaultValue;
-    return isControlled ? controlledInitialValue : uncontrolledInitialValue;
-  }, [isControlled, propsValue, defaultValueProps, defaultValue]);
-  const [stateValue, setStateValue] = useState(initialValue);
+  // const initialValue = useMemo(() => {
+  //   const controlledInitialValue = propsValue ?? defaultValueProps ?? defaultValue;
+  //   const uncontrolledInitialValue = defaultValueProps ?? defaultValue;
+  //   return isControlled ? controlledInitialValue : uncontrolledInitialValue;
+  // }, [isControlled, propsValue, defaultValueProps, defaultValue]);
+  const unControlledInitialValue = defaultValueProps ?? defaultValue;
+  const [stateValue, setStateValue] = useState(unControlledInitialValue);
   const triggerProps = props.get(trigger, () => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
 
@@ -266,7 +269,7 @@ export function useControllableValue(props: any, options: Options = {}) {
     _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);
   };
-  const value = useMemo(() => (isControlled ? propsValue : stateValue), [stateValue, isControlled]);
+  const value = isControlled ? propsValue : stateValue;
 
   return [
     value,
@@ -374,15 +377,15 @@ const withStringAndNumber = withString.add<add3>();
 
 type AccumulatedTypea = GetAccumulatedMapType<typeof withStringAndNumber>;
 type AccumulatedTypea2 = GetAccumulatedType<typeof withStringAndNumber>;
-function getType(params: omit<AccumulatedTypea2, AccumulatedTypea2['$deletePropsList']>) {
-  // const f = params.b;
-  const f = params.c;
-  console.log(f);
-}
-function getMapType(params: AccumulatedTypea) {
-  const f = params.get('c');
-  console.log(f);
-}
+// function getType(params: omit<AccumulatedTypea2, AccumulatedTypea2['$deletePropsList']>) {
+//   // const f = params.b;
+//   const f = params.c;
+//   console.log(f);
+// }
+// function getMapType(params: AccumulatedTypea) {
+//   const f = params.get('c');
+//   console.log(f);
+// }
 // const c: AccumulatedTypea = {};
 
 // var f=c.get('a')

@@ -31,22 +31,21 @@ describe('Rate.vue', () => {
     expect(wrapper.find('.el-rate').exists()).toBe(true);
   });
 
-  // it('allow half', async () => {
-  //   const value = ref(0);
-  //   const rateRef = ref<RateInstance>();
-  //   const wrapper = _mount(() => <Rate ref={rateRef} v-model={value.value} allowHalf />);
-  //   const vm = wrapper.getComponent(Rate).vm as RateInstance;
+  it('allow half', async () => {
+    const value = ref(0);
+    const rateRef = ref<RateInstance>();
+    const wrapper = _mount(() => <Rate ref={rateRef} v-model={value.value} allowHalf />);
+    const vm = wrapper.getComponent(Rate).vm as RateInstance;
 
-  //   const secondStar = wrapper.findAll('.el-rate__item')[1].element as HTMLElement;
-  //   await sleep(1000);
-  //   rateRef.value.setCurrentValue(1, {
-  //     target: secondStar,
-  //     offsetX: 0,
-  //   } as any as MouseEvent);
-  //   secondStar.click();
-  //   rateRef.value.resetCurrentValue();
-  //   expect(value.value).toEqual(0.5);
-  // });
+    const secondStar = wrapper.findAll('.el-rate__item')[1].element as HTMLElement;
+    rateRef.value.setCurrentValue(1, {
+      target: secondStar,
+      offsetX: 0,
+    } as any as MouseEvent);
+    secondStar.click();
+    rateRef.value.resetCurrentValue();
+    expect(value.value).toEqual(0.5);
+  });
 
   it('with texts', () => {
     const wrapper = mount(Rate, {
@@ -72,16 +71,15 @@ describe('Rate.vue', () => {
     expect(text.style.color).toEqual('red');
   });
 
-  // it('value change', async () => {
-  //   const wrapper = mount(Rate, {
-  //     props: {
-  //       modelValue: 0,
-  //     },
-  //   });
-  //   const { vm } = wrapper;
-  //   await wrapper.setProps({ modelValue: 3 });
-  //   expect(vm.modelValue).toMatchInlineSnapshot('3');
-  // });
+  it('value change', async () => {
+    const value = ref(0);
+    const wrapper = _mount(() => <Rate v-model={value.value} />);
+    // const { vm } = wrapper;
+    value.value = 3;
+
+    await nextTick();
+    expect(wrapper.findAll('.is-active').length).toMatchInlineSnapshot('3');
+  });
 
   it('click', () => {
     const value1 = ref(0);
@@ -93,13 +91,13 @@ describe('Rate.vue', () => {
     expect(value1.value).toEqual(3);
   });
 
-  // it('colors', () => {
-  //   const value = ref(4);
-  //   const wrapper = mount(() => <Rate v-model={value.value} colors={['#99A9BF', '#F7BA2A', '#FF9900']} />);
+  it('colors', () => {
+    const value = ref(4);
+    const wrapper = _mount(() => <Rate v-model={value.value} colors={['#99A9BF', '#F7BA2A', '#FF9900']} />);
 
-  //   const rateEl = wrapper.find('.el-rate').element as HTMLElement;
-  //   expect(rateEl.style.getPropertyValue('--el-rate-fill-color')).toBe('#FF9900');
-  // });
+    const rateEl = wrapper.find('.el-rate').element as HTMLElement;
+    expect(rateEl.style.getPropertyValue('--el-rate-fill-color')).toBe('#FF9900');
+  });
 
   it('change event', () => {
     const value = ref(4);

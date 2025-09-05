@@ -19,7 +19,7 @@ export const Example1 = {
   name: '基础用法',
   render: () => ({
     setup() {
-      const activeName = ref('first');
+      const activeName = ref('');
       const name = ref('myName');
       const list = [1, 2, 3];
 
@@ -27,8 +27,8 @@ export const Example1 = {
         console.log(tab);
       };
       setTimeout(() => {
-        name.value = 'newName';
-        activeName.value = 'second';
+        // name.value = 'newName';
+        // activeName.value = 'second';
       }, 3000);
 
       return {
@@ -39,14 +39,14 @@ export const Example1 = {
       };
     },
     template: `
-    <el-form-select v-model="activeName" multiple>
+    <el-select v-model="activeName" >
       <el-option
         v-for="item in list"
-        key="item.value"
-        label="item.label"
-        value="item.value"
+        :key="item"
+        :label="item"
+        :value="item"
       />
-    </el-form-select>
+    </el-select>
 
     `,
   }),

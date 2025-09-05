@@ -9,7 +9,8 @@ export function handleColor(props) {
   const lowColor = props.get('lowColor', '#F7BA2A');
   const mediumColor = props.get('mediumColor', '#F7BA2A');
   const highColor = props.get('highColor', '#F7BA2A');
-  const colors = [lowColor, mediumColor, highColor];
+  const colorsProps = props.get('colors');
+  const colors = _.isArray(colorsProps) ? colorsProps : [lowColor, mediumColor, highColor];
   return {
     colors,
   };
@@ -25,10 +26,11 @@ export function handlePreview(props) {
     const previewText = inIDE || _.isNil(insProps.modelValue) ? '-' : insProps.modelValue;
     return <el-text text={previewText} />;
   };
-
   const { render, insRef } = getRender(Component, previewRender, isPreview);
-  return {
-    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
-    render,
-  };
+  return isPreview
+    ? {
+        ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+        render,
+      }
+    : {};
 }
