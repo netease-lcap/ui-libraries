@@ -427,6 +427,14 @@ namespace nasl.ui {
     })
     triggerUploadText: nasl.core.String = '选择文件';
 
+    @Prop({
+      group: '主要属性',
+      title: '是否显示已上传文件列表',
+      description: '是否显示已上传文件列表',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showFileList: nasl.core.Boolean = true;
+
     @Event({
       title: '点击取消上传时',
       description: '点击「取消上传」时触发',

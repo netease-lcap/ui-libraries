@@ -69,6 +69,7 @@ export default defineComponent({
       imageViewerProps: props.imageViewerProps,
       fileListDisplay: props.fileListDisplay,
       onRemove: onInnerRemove,
+      showFileList: props.showFileList,
     }));
 
     const dragProps = computed<UploadDragEvents>(() => ({
