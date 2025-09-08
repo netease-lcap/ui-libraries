@@ -50,12 +50,12 @@ describe('Carousel', () => {
   //     interval: 50,
   //   });
 
-    // await nextTick();
-    // await wait(150);
-    // const items = wrapper.vm.$el.querySelectorAll('.el-carousel__item');
-    // expect(items[0].classList.contains('is-active')).toBeTruthy();
-    // await wait(150);
-    // expect(items[1].classList.contains('is-active')).toBeTruthy();
+  // await nextTick();
+  // await wait(150);
+  // const items = wrapper.vm.$el.querySelectorAll('.el-carousel__item');
+  // expect(items[0].classList.contains('is-active')).toBeTruthy();
+  // await wait(150);
+  // expect(items[1].classList.contains('is-active')).toBeTruthy();
   // });
 
   it('initial index', async () => {
@@ -151,6 +151,7 @@ describe('Carousel', () => {
     await wait();
     expect(items[0].classList.contains('is-active')).toBeTruthy();
     await items[6].click();
+
     await wait();
     expect(items[6].classList.contains('is-active')).toBeTruthy();
   });
