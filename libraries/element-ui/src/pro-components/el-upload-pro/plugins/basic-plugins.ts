@@ -319,7 +319,6 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     useSyncState({
       fileList: () => fileList.value,
     });
-    const instance = getCurrentInstance();
 
     return {
       sizeLimit,
@@ -403,9 +402,6 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       [$ref]: {
         clearFiles() {
           changeFileList([]);
-        },
-        abort() {
-          instance?.refs?.$base?.clearFiles();
         },
       },
     };

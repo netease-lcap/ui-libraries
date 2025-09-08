@@ -114,6 +114,9 @@ export default defineComponent({
   },
 
   methods: {
+    abort() {
+      this.cancelUpload({});
+    },
     renderTrigger() {
       const { UploadIcon } = this.icons;
       const getDefaultTrigger = () => {
