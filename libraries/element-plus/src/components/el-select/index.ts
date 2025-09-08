@@ -1,4 +1,4 @@
-import { ElSelect as ElSelectPlus, ElOption } from 'element-plus';
+import { ElSelect as ElSelectPlus, ElOption, ElOptionGroup } from 'element-plus';
 import type { ISelectProps } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
@@ -17,6 +17,6 @@ const ElSelect = registerComponent<ISelectProps>(ElSelectPlus, {
 });
 const ElFormSelect = withFormItem(ElSelect, 'el-form-select');
 
-export { ElSelect, ElOption, ElFormSelect, ElSelectRegister, ElSelectPlus };
+export { ElSelect, ElOption, ElOptionGroup, ElFormSelect, ElSelectRegister, ElSelectPlus };
 export type { ISelectProps };
 export default ElSelect;

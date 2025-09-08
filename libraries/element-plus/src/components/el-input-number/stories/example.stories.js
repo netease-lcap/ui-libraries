@@ -16,15 +16,18 @@ export const Example1 = {
   name: '基础用法',
   render: () => ({
     setup() {
-      const num = ref(1);
+      const num = ref(0);
       const handleChange = (value) => {
         console.log(value);
       };
-      return { num, handleChange };
+      const handleFocus = (value) => {
+        console.log(value);
+      };
+      return { num, handleChange, handleFocus };
     },
     template: `
     <div>
-      <el-input-number v-model="num" :min="1" :max="10" @change="handleChange" />
+      <el-input-number v-model="num" readonly :onFocus="handleChange"  />
     </div>
     `,
   }),
@@ -136,4 +139,4 @@ export const Example7 = {
     </div>
     `,
   }),
-}; 
+};

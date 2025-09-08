@@ -62,7 +62,6 @@ describe('Breadcrumb.vue', () => {
       ));
 
       const items = wrapper.findAllComponents(BreadcrumbItem);
-      console.log(items.length, 'items=====', wrapper);
       expect(items.at(1)!.element.getAttribute('aria-current')).toBe('page');
     });
 

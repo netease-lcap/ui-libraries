@@ -1,6 +1,7 @@
 import { nextTick, ref } from 'vue';
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
+import { sleep } from '@ep-test/test-utils';
 import { ElResult as Result } from '../index';
 // import type { ResultProps } from '../src/result'
 type ResultProps = any;
@@ -67,17 +68,20 @@ describe('Result.vue', () => {
     expect(wrapper.find('.el-result__title').text()).toBe(AXIOM);
   });
 
-  // test('should render sub-title slots', () => {
-  //   const wrapper = mount(() => (
-  //     <Result
-  //       v-slots={{
-  //         'sub-title': () => AXIOM,
-  //       }}
-  //     />
-  //   ));
-  //   expect(wrapper.find('.el-result__subtitle').exists()).toBe(true);
-  //   expect(wrapper.find('.el-result__subtitle').text()).toBe(AXIOM);
-  // });
+  test('should render sub-title slots', async () => {
+    const wrapper = mount(
+      () => (
+        <Result
+          v-slots={{
+            'sub-title': () => AXIOM,
+          }}
+        />
+      ),
+      { attachTo: document.body },
+    );
+    expect(wrapper.find('.el-result__subtitle').exists()).toBe(true);
+    expect(wrapper.find('.el-result__subtitle').text()).toBe(AXIOM);
+  });
 
   test('should render extra slots', () => {
     const wrapper = mount(() => (

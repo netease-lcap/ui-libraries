@@ -56,7 +56,6 @@ export function handleRangeDateValue(props) {
       }),
     [isEffectiveTime, isNilTime, isControlledTime, startValue, endValue, value],
   );
-  console.log(timeValue, '===');
   const rangeResult = {
     modelValue: timeValue,
     'onUpdate:modelValue': _.wrap(setValue, (fn, ...args) => {
@@ -111,7 +110,6 @@ export function handleDisabledFunction(props) {
   };
 }
 
-// export { handleIcon } from '@/plugins/common/icon';
 export function handleIcon(props) {
   const prefixIconName = props.get('prefixIconName');
   return {

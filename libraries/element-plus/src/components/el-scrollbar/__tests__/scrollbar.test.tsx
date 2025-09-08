@@ -199,12 +199,12 @@ describe('ScrollBar', () => {
     expect(wrapper.find('.el-scrollbar__view').element instanceof HTMLUListElement).toBeTruthy();
   });
 
-  // test('should render wrap-style props', async () => {
-  //   const wrapStyle = 'background: red;';
-  //   const wrapper = mount(() => <Scrollbar wrap-style={wrapStyle} />);
+  test('should render wrap-style props', async () => {
+    const wrapStyle = 'background: red;';
+    const wrapper = mount(() => <Scrollbar wrap-style={wrapStyle} />);
 
-  //   expect(wrapper.find('.el-scrollbar__wrap').attributes('style')).toContain(wrapStyle);
-  // });
+    expect(wrapper.find('.el-scrollbar__wrap').attributes('style')).toContain(wrapStyle);
+  });
 
   test('should render wrap-class props', async () => {
     const wrapClass = 'test-wrap-class';
@@ -213,12 +213,12 @@ describe('ScrollBar', () => {
     expect(wrapper.find('.el-scrollbar__wrap').classes()).toContain(wrapClass);
   });
 
-  // test('should render view-style props', async () => {
-  //   const viewStyle = 'display: inline-block;';
-  //   const wrapper = mount(() => <Scrollbar view-style={viewStyle} />);
+  test('should render view-style props', async () => {
+    const viewStyle = 'display: inline-block;';
+    const wrapper = mount(() => <Scrollbar view-style={viewStyle} />);
 
-  //   expect(wrapper.find('.el-scrollbar__view').attributes('style')).toContain(viewStyle);
-  // });
+    expect(wrapper.find('.el-scrollbar__view').attributes('style')).toContain(viewStyle);
+  });
 
   test('should render view-class props', async () => {
     const viewClass = 'test-view-class';
