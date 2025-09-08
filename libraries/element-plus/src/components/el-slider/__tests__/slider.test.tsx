@@ -413,41 +413,41 @@ describe('Slider', () => {
     mockClientWidth.mockRestore();
   });
 
-  // it('disabled', async () => {
-  //   vi.useRealTimers();
-  //   const value = ref(0);
-  //   const wrapper = mount(() => <Slider v-model={value.value} disabled />);
+  it('disabled', async () => {
+    vi.useRealTimers();
+    const value = ref(0);
+    const wrapper = mount(() => <Slider v-model={value.value} disabled />);
 
-  //   const mockClientWidth = vi
-  //     .spyOn(wrapper.find('.el-slider__runway').element, 'clientWidth', 'get')
-  //     .mockImplementation(() => 200);
+    const mockClientWidth = vi
+      .spyOn(wrapper.find('.el-slider__runway').element, 'clientWidth', 'get')
+      .mockImplementation(() => 200);
 
-  //   // 检查DOM状态：slider是否被禁用（注释掉，因为CSS类可能不同）
-  //   // expect(wrapper.classes('is-disabled')).toBe(true);
+    // 检查DOM状态：slider是否被禁用（注释掉，因为CSS类可能不同）
+    // expect(wrapper.classes('is-disabled')).toBe(true);
 
-  //   // 使用真实的用户交互：尝试拖拽slider按钮
-  //   const sliderButton = wrapper.find('.el-slider__button-wrapper');
-  //   await sliderButton.trigger('mousedown', { clientX: 0 });
+    // 使用真实的用户交互：尝试拖拽slider按钮
+    const sliderButton = wrapper.find('.el-slider__button-wrapper');
+    await sliderButton.trigger('mousedown', { clientX: 0 });
 
-  //   const mousemove = new MouseEvent('mousemove', {
-  //     screenX: 50,
-  //     screenY: 0,
-  //     clientX: 50,
-  //     clientY: 0,
-  //   });
-  //   window.dispatchEvent(mousemove);
+    const mousemove = new MouseEvent('mousemove', {
+      screenX: 50,
+      screenY: 0,
+      clientX: 50,
+      clientY: 0,
+    });
+    window.dispatchEvent(mousemove);
 
-  //   const mouseup = new MouseEvent('mouseup', {
-  //     screenX: 50,
-  //     screenY: 0,
-  //     clientX: 50,
-  //     clientY: 0,
-  //   });
-  //   window.dispatchEvent(mouseup);
-  //   await nextTick();
-  //   expect(value.value).toBe(0);
-  //   mockClientWidth.mockRestore();
-  // });
+    const mouseup = new MouseEvent('mouseup', {
+      screenX: 50,
+      screenY: 0,
+      clientX: 50,
+      clientY: 0,
+    });
+    window.dispatchEvent(mouseup);
+    await nextTick();
+    expect(value.value).toBe(0);
+    mockClientWidth.mockRestore();
+  });
 
   it('show input', async () => {
     const value = ref(0);

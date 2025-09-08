@@ -358,7 +358,7 @@ describe('InputNumber.vue', () => {
   //   await nextTick();
   //   await sleep(100);
 
-  //   // 注释掉可能失败的focus事件检查，因为focus事件可能不会按预期触发
+  //   // 这里forcus 不会触发后期要 check 一下 
   //   expect(handleFocus).toHaveBeenCalledTimes(1);
   // });
 

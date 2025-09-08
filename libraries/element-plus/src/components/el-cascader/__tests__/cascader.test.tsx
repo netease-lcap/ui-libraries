@@ -318,28 +318,55 @@ describe('Cascader.vue', () => {
     expect(value.value).toEqual(['zhejiang', 'hangzhou']);
   });
 
-  // test('filterable in multiple mode', async () => {
-  //   const value = ref([]);
+  test('filterable in multiple mode', async () => {
+    const value = ref([]);
 
-  //   const props = { multiple: true };
-  //   const wrapper = _mount(() => <Cascader v-model={value.value} props={props} filterable options={OPTIONS} />);
+    const props = { multiple: true };
+    const wrapper = _mount(() => <Cascader v-model={value.value} props={props} filterable options={OPTIONS} />);
 
-  //   const input = wrapper.find('.el-cascader__search-input');
-  //   (input.element as HTMLInputElement).value = 'Ha';
-  //   await input.trigger('input');
-  //   await sleep(300);
-  //   const hzSuggestion = document.querySelector(SUGGESTION_ITEM) as HTMLElement;
-  //   hzSuggestion.click();
-  //   await nextTick();
-  //   await nextTick();
-  //   await nextTick();
-  //   expect(value.value).toEqual([['zhejiang', 'hangzhou']]);
-  //   hzSuggestion.click();
-  //   await nextTick();
-  //   await nextTick();
-  //   await nextTick();
-  //   expect(value.value).toEqual([]);
-  // });
+    // Open the cascader by clicking on it
+    const cascader = wrapper.find(TRIGGER);
+    await cascader.trigger('click');
+    await nextTick();
+
+    // Type in the search input to filter
+    const input = wrapper.find('.el-cascader__search-input');
+    (input.element as HTMLInputElement).value = 'Ha';
+    await input.trigger('input');
+    await sleep(300);
+
+    // Check that suggestion panel is visible
+    const suggestionPanel = document.querySelector(SUGGESTION_PANEL);
+    expect(suggestionPanel).toBeTruthy();
+
+    // Click on the suggestion item to select it
+    const hzSuggestion = document.querySelector(SUGGESTION_ITEM) as HTMLElement;
+    expect(hzSuggestion).toBeTruthy();
+    hzSuggestion.click();
+    await nextTick();
+    await nextTick();
+
+    // Verify the item was selected by checking the value and DOM state
+    expect(value.value).toEqual([['zhejiang', 'hangzhou']]);
+
+    // Check that the selected item appears in the cascader display as a tag
+    const selectedTags = wrapper.findAll(TAG);
+    expect(selectedTags.length).toBe(1);
+    expect(selectedTags[0].text()).toBe('Zhejiang / Hangzhou');
+
+    // Deselect the item by clicking the close button on the tag
+    const closeButton = selectedTags[0].find('.el-tag__close');
+    expect(closeButton.exists()).toBeTruthy();
+    await closeButton.trigger('click');
+    await nextTick();
+
+    // Verify the item was deselected
+    expect(value.value).toEqual([]);
+
+    // Check that no selected tags are visible
+    const selectedTagsAfterDeselect = wrapper.findAll(TAG);
+    expect(selectedTagsAfterDeselect.length).toBe(0);
+  });
 
   test('filter method', async () => {
     const filterMethod = vi.fn((node, keyword) => {
