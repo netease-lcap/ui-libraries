@@ -21,6 +21,11 @@ import type { TagInputRemoveContext } from '../tag-input';
 export default defineComponent({
   name: 'ElDatePicker',
   props,
+  methods: {
+    focus() {
+      this.popupVisible = true;
+    },
+  },
   setup(props, { emit }) {
     const COMPONENT_NAME = usePrefixClass('date-picker');
     const { global } = useConfig('datePicker');
@@ -311,6 +316,7 @@ export default defineComponent({
       onTagRemoveClick,
       onTagClearClick,
       global,
+      inputRef,
     };
   },
   render() {

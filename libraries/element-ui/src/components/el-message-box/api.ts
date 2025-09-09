@@ -255,7 +255,7 @@ namespace nasl.ui {
     })
     closeOnClickModal: nasl.core.Boolean = true;
 
-
+ 
     @Prop({
       title: '是否按下 ESC 键关闭',
       description: '是否可以通过按下 ESC 键关闭对话框',
@@ -289,7 +289,7 @@ namespace nasl.ui {
       title: '关闭前',
       description: '关闭前触发',
     })
-    beforeClose: (event: {}) => any;
+    onBeforeClose: (action: nasl.core.String, instance: any, done: any) => any;
 
     @Event({
       title: '关闭后',

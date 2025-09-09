@@ -41,6 +41,12 @@ export const useCascaderSelect: NaslComponentPluginOptions = {
         children: childrenField.value,
         ...keys.value,
       })),
+      onRemove: (checked, node) => {
+        const onRemove = props.get<any>('onRemove');
+        if (isFunction(onRemove)) {
+          onRemove(checked, node);
+        }
+      },
       slotOptionLabel: ({ item, index }) => {
         const [optionIsSlot, slotOption] = props.get<[boolean, Slot]>(['optionIsSlot', 'slotOption']);
 

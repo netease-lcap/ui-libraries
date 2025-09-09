@@ -132,11 +132,7 @@ export const useExtendProps: NaslComponentPluginOptions = {
           content,
         );
       },
-      [$ref]: {
-        focus: () => {
-          // 假装这里有一个聚焦方法
-        },
-      },
+      [$ref]: {},
     };
   },
 };
