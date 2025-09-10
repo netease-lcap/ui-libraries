@@ -1,16 +1,19 @@
 import _ from 'lodash';
-import { onMounted, onUnmounted, ref, getCurrentInstance } from 'vue';
+import { onMounted, onUnmounted, ref, getCurrentInstance, type Ref } from 'vue';
 import { PluginBase } from '@/types';
 
 interface Hook {
   next: Hook;
   storeKey: symbol;
+  isSetValue?: boolean;
+  value?: any;
 }
 
 interface EffectHook {
   next: EffectHook;
   dep: any[];
   result: any;
+  callBack?: any;
 }
 
 interface Options {
@@ -76,14 +79,14 @@ const getStateValue = _.cond([
   [_.isObject, (state) => state],
   [_.stubTrue, (state) => state],
 ]);
-export function useState(initialstate?) {
+export function useState<T = any>(initialstate?: T): [T, (value: T | ((prevState: T) => T)) => void] {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
 
-  let hook;
+  let hook: Hook;
   if (isMount) {
     hook = {
-      next: null,
+      next: null as any,
       storeKey: Symbol('storeKey'),
       isSetValue: false,
     };
@@ -98,7 +101,7 @@ export function useState(initialstate?) {
     currentFiber.workInProgressState = currentFiber.workInProgressState.next;
   }
   const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
-  const localSetValue = (value) => {
+  const localSetValue = (value: T | ((prevState: T) => T)) => {
     // const state = currentFiber.getState().state[hook?.storeKey];
     hook.isSetValue = true;
     // TODO 判断是否相等
@@ -118,13 +121,14 @@ export function useState(initialstate?) {
   };
   return [getStateValue(state), localSetValue];
 }
-export function useRef(initialstate) {
+export function useRef<T = any>(initialstate: T): Ref<T> {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
-  let hook;
+  let hook: Hook;
   if (isMount) {
     hook = {
-      next: null,
+      next: null as any,
+      storeKey: Symbol('storeKey'),
       value: ref(initialstate),
     };
     hook.next = hook;
@@ -139,13 +143,16 @@ export function useRef(initialstate) {
   }
   return hook.value;
 }
-export function useEffect(callBack, dep) {
+export function useEffect(
+  callBack: (...args: any[]) => (() => void) | void,
+  dep: any[],
+): void {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
-  let hook;
+  let hook: EffectHook;
   if (isMount) {
     hook = {
-      next: null,
+      next: null as any,
       dep,
       result: () => {},
       callBack,
@@ -175,18 +182,17 @@ export function useEffect(callBack, dep) {
       hook.dep = dep;
     }
   }
-  return null;
 }
 
-export function useMemo(callBack, dep) {
+export function useMemo<T>(callBack: () => T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
-  let hook;
+  let hook: EffectHook;
   if (isMount) {
     hook = {
-      next: null,
+      next: null as any,
       dep,
-      result: null,
+      result: null as T,
     };
     hook.next = hook;
     if (currentFiber.workInProgressEffect) {
@@ -206,14 +212,15 @@ export function useMemo(callBack, dep) {
   }
   return hook.result;
 }
-export function useCallback(callBack, dep) {
+export function useCallback<T extends (...args: any[]) => any>(callBack: T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
-  let hook;
+  let hook: EffectHook;
   if (isMount) {
     hook = {
-      next: null,
+      next: null as any,
       dep,
+      result: null,
       callBack,
     };
     hook.next = hook;
@@ -235,9 +242,19 @@ export function useCallback(callBack, dep) {
   return hook.callBack;
 }
 
-export function useControllableValue(props: any, options: Options = {}) {
+export function useControllableValue<T = any>(
+  props: any,
+  options: Options = {},
+): [
+  T,
+  (...args: any[]) => void,
+  {
+    [key: string]: any;
+  },
+  boolean
+] {
   const instance = useMemo(() => getCurrentInstance(), []);
-  const { vnode } = instance;
+  const { vnode } = instance || { vnode: { props: {} } };
   const emit = props.get('emit');
   const vProps = vnode.props || {};
   const {
@@ -256,15 +273,15 @@ export function useControllableValue(props: any, options: Options = {}) {
   //   return isControlled ? controlledInitialValue : uncontrolledInitialValue;
   // }, [isControlled, propsValue, defaultValueProps, defaultValue]);
   const unControlledInitialValue = defaultValueProps ?? defaultValue;
-  const [stateValue, setStateValue] = useState(unControlledInitialValue);
+  const [stateValue, setStateValue] = useState<T>(unControlledInitialValue);
   const triggerProps = props.get(trigger, () => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
 
-  const onChange = (...args) => {
+  const onChange = (...args: any[]) => {
     if (isControlled) {
       emit(trigger, ...args);
     } else {
-      setStateValue(...args);
+      setStateValue(args[0] as T);
     }
     _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);
@@ -351,18 +368,24 @@ export function createPluginAccumulateTypes<T>(): AccumulateTypes<[T, PluginBase
 // 定义主类型，接受一个可选的泛型数组
 
 // 创建 AccumulateTypes 实例的辅助函数
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type omit<T, K extends keyof T> = {
   [P in Exclude<keyof T, K>]: T[P];
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type GetAccumulatedMapType<T> = T extends AccumulateTypes<infer U> ? ReturnType<T['getMapTypes']> : never;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type GetAccumulatedType<T> = T extends AccumulateTypes<infer U> ? ReturnType<T['getTypes']> : never;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type add = {
   a: string;
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type add2 = {
   b: number;
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type add3 = {
   c: boolean;
   $deletePropsList: 'a' | 'b';
@@ -375,7 +398,9 @@ const withStringAndNumber = withString.add<add3>();
 
 // 获取累积的类型: string | number | boolean
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type AccumulatedTypea = GetAccumulatedMapType<typeof withStringAndNumber>;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type AccumulatedTypea2 = GetAccumulatedType<typeof withStringAndNumber>;
 // function getType(params: omit<AccumulatedTypea2, AccumulatedTypea2['$deletePropsList']>) {
 //   // const f = params.b;
@@ -389,3 +414,143 @@ type AccumulatedTypea2 = GetAccumulatedType<typeof withStringAndNumber>;
 // const c: AccumulatedTypea = {};
 
 // var f=c.get('a')
+
+/**
+ * 插件类型定义
+ * 支持两种形式的插件：函数形式和对象形式
+ */
+
+// 定义插件函数类型，接受props参数并返回新的props
+type PluginFunction<TProps, TReturn> = (props: TProps) => TReturn;
+
+// 定义插件对象类型，包含处理函数和其他元数据
+type PluginObject<TProps, TReturn> = {
+  handle: (props: TProps) => TReturn;
+  [key: string]: any; // 允许添加其他属性，如 name, version, metadata 等
+};
+
+// 定义插件类型，可以是函数或对象
+type Plugin<TProps, TReturn> = PluginFunction<TProps, TReturn> | PluginObject<TProps, TReturn>;
+
+/**
+ * 插件累加器类型
+ * 支持链式调用，自动推导props类型并累加返回值类型
+ *
+ * @template TAccumulatedProps 当前累积的所有props类型
+ */
+class PluginAccumulateTypes<TAccumulatedProps = Record<string, never>> {
+  Plugin: Plugin<any, any>[] = [];
+
+  /**
+   * 添加插件（函数或对象形式）
+   * @param plugin 插件函数或对象
+   * @returns 新的插件累加器实例，包含累加后的类型
+   */
+  addPlugin<TReturn>(plugin: Plugin<TAccumulatedProps, TReturn>): PluginAccumulateTypes<TAccumulatedProps & TReturn> {
+    this.Plugin.push(plugin);
+    return this as any;
+  }
+
+  /**
+   * 获取当前累积的所有类型
+   * 主要用于类型推导，实际实现返回空对象
+   */
+  // eslint-disable-next-line class-methods-use-this
+  getAccumulatedTypes(): TAccumulatedProps {
+    return {} as TAccumulatedProps;
+  }
+
+  /**
+   * 执行所有插件，返回最终的props
+   * @param initialProps 初始props
+   * @returns 执行所有插件后的最终props
+   */
+  execute(initialProps: any): TAccumulatedProps {
+    return this.Plugin.reduce((props, plugin) => {
+      // 判断插件是函数还是对象
+      if (typeof plugin === 'function') {
+        return { ...props, ...plugin(props) };
+      }
+      // 对象形式的插件，调用其 handle 方法
+      return { ...props, ...plugin.handle(props) };
+    }, initialProps) as TAccumulatedProps;
+  }
+}
+
+// 使用示例
+const pluginAccumulateTypes = new PluginAccumulateTypes<PluginBase>();
+const a = pluginAccumulateTypes.addPlugin((props) => {
+  // props 的类型是 PluginBase
+  // 可以访问 props 的所有属性，如 props.ref, props.slots 等
+  // 这里演示如何使用 props 参数
+  const { ref } = props;
+  return {
+    b: 1,
+    // 可以基于 props 计算返回值
+    computedValue: ref.value ? 'has ref' : 'no ref',
+  };
+});
+const b = a
+  .addPlugin((props) => {
+    // props 的类型是 PluginBase & { b: number; computedValue: string }
+    // 可以访问 props.b, props.computedValue 以及 PluginBase 的所有属性
+    return {
+      c: 2,
+      // 可以基于之前的插件返回值进行计算
+      total: props.b + 10,
+      aff: '234',
+    };
+  })
+  .addPlugin((props) => {
+    const f = props.aff;
+  });
+const c = b.addPlugin((props) => {
+  // props 的类型是 PluginBase & { b: number; computedValue: string } & { c: number; total: number; aff: string }
+  // 可以访问所有之前插件返回的属性
+  return {
+    d: 'hello',
+    // 可以基于所有之前的返回值进行计算
+    message: `${props.computedValue} - total: ${props.total}`,
+  };
+});
+const d = c.addPlugin({
+  handle: (props) => {
+    // props 的类型是 PluginBase & { b: number; computedValue: string } & { c: number; total: number; aff: string } & { d: string; message: string }
+    // 可以访问所有之前插件返回的属性
+    return {
+      e: 'world',
+      // 可以基于所有之前的返回值进行计算
+      finalMessage: `${props.message} - aff: ${props.aff}`,
+    };
+  },
+  // 可以添加其他属性
+  name: 'finalPlugin',
+  version: '1.0.0',
+});
+
+// 最终的类型是 PluginBase & { b: number; computedValue: string } & { c: number; total: number; aff: string } & { d: string; message: string } & { e: string; finalMessage: string }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type FinalType = typeof d extends PluginAccumulateTypes<infer U> ? U : never;
+
+// 演示混合使用函数和对象形式的插件
+const mixedExample = new PluginAccumulateTypes<PluginBase>();
+const mixedA = mixedExample.addPlugin((props) => {
+  // 函数形式插件
+  // props 的类型是 PluginBase
+  const { ref } = props;
+  return { value1: 'from function', hasRef: !!ref };
+});
+const mixedB = mixedA.addPlugin({
+  // 对象形式插件
+  handle: (props) => {
+    // props 包含 value1, hasRef 以及 PluginBase 的所有属性
+    return { value2: 'from object', combined: `function: ${props.value1}` };
+  },
+  metadata: { author: 'developer' },
+});
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const mixedC = mixedB.addPlugin((props) => {
+  // 再次使用函数形式
+  // props 包含 value1, hasRef, value2, combined 以及 PluginBase 的所有属性
+  return { value3: 'final', allValues: [props.value1, props.value2, props.combined] };
+});

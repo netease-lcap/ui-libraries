@@ -1,7 +1,9 @@
-import type { Ref, VNode } from 'vue';
+import type { VNode } from 'vue';
 import { $deletePropsList } from '@/plugins/constants';
 
-type ref = Ref;
+type ref = {
+  [key: string]: any;
+};
 
 type slot = {
   default: () => any;

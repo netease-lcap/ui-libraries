@@ -2,7 +2,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react-refresh/only-export-components */
 import _ from 'lodash';
-import fp from 'lodash/fp';
 import { watch } from 'vue';
 import { useRequest } from 'vue-hooks-plus';
 import { useMemo, useState, useRef, useEffect } from '@/plugins/hooks';
@@ -19,7 +18,7 @@ export function useHandleMapField(filedInfo: {
   dividedField?: string;
   dataSource: DataSourceType;
   fieldsMap?: Record<string, string>;
-}) {
+}): DataSourceArrayType {
   const {
     label = 'label',
     value = 'value',
@@ -44,33 +43,49 @@ export function useHandleMapField(filedInfo: {
     [label, value, textField, valueField, dataSource],
   ) as DataSourceArrayType;
 }
+
 const handleLocalPageData = _.cond([
   [
-    _.conforms({ currentPage: _.isNumber, pageSize: _.isNumber, dataSource: _.isArray, pagination: (el) => el }),
-    (params) => {
+    _.conforms({ currentPage: _.isNumber, pageSize: _.isNumber, dataSource: _.isArray, pagination: (el: any) => el }),
+    (params: any) => {
       const { currentPage = 1, pageSize = 10, dataSource } = params;
       const start = (currentPage - 1) * pageSize;
       const end = start + pageSize;
       return { list: dataSource.slice(start, end), total: dataSource.length };
     },
   ],
-  [_.stubTrue, (params) => params.dataSource],
+  [_.stubTrue, (params: any) => params.dataSource],
 ]);
+
 const handleDataSouceToFn = _.cond([
-  [_.isArray, (dataSource) => async (params: any) => handleLocalPageData({ dataSource, ...params })],
+  [_.isArray, (dataSource: any[]) => async (params: any) => handleLocalPageData({ dataSource, ...params })],
   [
     _.isFunction,
-    (dataSource) => async (params: any) => {
+    (dataSource: any) => async (params: any) => {
       const data = await dataSource(params);
       return handleLocalPageData({ dataSource: data, ...params });
     },
   ],
-  [_.stubTrue, () => async (params) => handleLocalPageData({ dataSource: [], ...params })],
+  [_.stubTrue, () => async (params: any) => handleLocalPageData({ dataSource: [], ...params })],
 ]);
-export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
-  const [resultData, setResult] = useState({});
-  const resultRef = useRef({});
-  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource), [_.cloneDeep(dataSource)]);
+interface RequestOptions {
+  refreshDeps?: any[];
+  [key: string]: any;
+}
+
+interface RequestResult {
+  data?: DataSourceArrayType;
+  run?: (...args: any[]) => void;
+  loading?: boolean;
+}
+
+export function useRequestDataSource(
+  dataSource: DataSourceType,
+  options: RequestOptions = {},
+): RequestResult {
+  const [resultData, setResult] = useState<RequestResult>({});
+  const resultRef = useRef<any>({});
+  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource as any), [_.cloneDeep(dataSource)]);
 
   resultRef.value = useMemo(
     () => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }),
@@ -80,45 +95,49 @@ export function useRequestDataSource(dataSource: DataSourceType, options = {}) {
   useEffect(() => {
     watch(
       resultRef,
-      (value) => {
+      (value: any) => {
         return setResult({ ...value, data: _.cloneDeep(value.data) });
       },
       { immediate: true, deep: true },
     );
   }, []);
-  const { data, run, loading } = resultData
-    ?? ({} as {
-      data?: DataSourceArrayType;
-      run?: (...args: any[]) => void;
-      loading?: boolean;
-    });
+
+  const { data, run, loading } = resultData ?? ({} as RequestResult);
   return { data, run, loading };
 }
 
-export function useFormatDataSource(dataSource: DataSourceArrayType): DataSourceArrayType {
-  const conformsArray = _.cond([
-    [Array.isArray, _.identity],
-    [_.conforms({ list: _.isArray }), fp.get('list')],
-    [_.stubTrue, _.stubArray],
-  ]);
-  return useMemo(() => conformsArray(dataSource), [dataSource]);
+export function useFormatDataSource(dataSource?: DataSourceArrayType): DataSourceArrayType {
+  return useMemo(() => {
+    if (Array.isArray(dataSource)) {
+      return dataSource;
+    }
+    if (dataSource && typeof dataSource === 'object' && 'list' in dataSource && Array.isArray((dataSource as any).list)) {
+      return (dataSource as any).list;
+    }
+    return [];
+  }, [dataSource]);
+}
+
+interface TreeNode {
+  [key: string]: any;
+  children?: TreeNode[];
 }
 
 export function useDataSourceToTree(
   dataSource: DataSourceArrayType,
   parentField: string,
   valueField: string = 'value',
-): DataSourceArrayType {
+): TreeNode[] {
   if (_.isNil(parentField)) return dataSource;
-  const map = new Map<string, Record<string, any>>(dataSource.map((item) => [_.get(item, valueField, item), item]));
-  return dataSource.reduce((acc, item) => {
+  const map = new Map<string, TreeNode>(dataSource.map((item) => [_.get(item, valueField, item), item]));
+  return dataSource.reduce((acc: TreeNode[], item) => {
     const parent = map.get(_.get(item, parentField));
     const value = map.get(_.get(item, valueField, item));
-    if (parent) {
+    if (parent && value) {
       parent.children = _.isArray(parent.children) ? parent.children.concat(value) : [value];
-    } else {
+    } else if (value) {
       acc.push(value);
     }
     return acc;
-  }, []) as DataSourceArrayType;
+  }, []);
 }

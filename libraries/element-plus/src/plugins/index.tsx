@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
@@ -13,6 +14,7 @@ import fp from 'lodash/fp';
 import { $deletePropsList, $provide, $tagName, $mergeRef } from '@/plugins/constants';
 import { scheduler } from '@/plugins/hooks';
 import '@/utils/index';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 export class PluginOptions {
   plugin: any[] = [];
@@ -49,7 +51,7 @@ export class PluginOptions {
   };
 }
 
-export function registerComponent<T>(Component, options) {
+export function registerComponent<T>(Component: any, options: any): any {
   return defineComponent<T>({
     name: options.name || 'HocBaseComponents',
     components: { Component },
@@ -57,14 +59,15 @@ export function registerComponent<T>(Component, options) {
     props: Component.props,
 
     setup(props, { attrs, slots, emit, expose }) {
-      const plugin = new PluginOptions(options);
-      const pluginHooks = plugin.getPluginMethod();
+      const pluginHooks = options.plugin instanceof PluginAccumulateTypes
+          ? options.plugin.getPluginMethod()
+          : new PluginOptions(options).getPluginMethod();
       const componentState = ref({ state: {} });
       let Render = Component;
-      const exposeRef = ref({});
-      const injectRef = inject($provide) ?? (ref({}) as Ref);
-      const provideRef = ref({});
-      Object.assign(provideRef.value, injectRef.value);
+      const exposeRef = ref({}) as Ref<any>;
+      const injectRef = inject($provide) ?? (ref({}) as Ref<any>);
+      const provideRef = ref({}) as Ref<any>;
+      Object.assign(provideRef.value, (injectRef as any)?.value || {});
       const router = useRouter?.();
       const route = useRoute?.();
       const useStore = createStore((set) => ({
@@ -94,7 +97,7 @@ export function registerComponent<T>(Component, options) {
           return set((state) => getNewStateFn(state), tr);
         },
       }));
-      const { getState, setState, subscribe, getInitialState } = useStore;
+      const { getState, subscribe } = useStore;
       const fiberMap = new Map<string, any>([
         ['updateQueen', new Set()],
         ['getState', getState],
@@ -102,6 +105,8 @@ export function registerComponent<T>(Component, options) {
       const { setValue } = getState() as any;
       subscribe((props: any) => {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
+        // const add = imMap({ a: { b: 1 } });
+        // const f = add.get('a');
         const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
         const commitImmutableState = commitState;
