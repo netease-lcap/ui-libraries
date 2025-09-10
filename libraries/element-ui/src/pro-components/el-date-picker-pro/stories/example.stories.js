@@ -77,3 +77,47 @@ export const Range = {
     `
   }),
 };
+
+export const Focus = {
+  name: '自动聚焦示例',
+  render: () => ({
+    data() {
+      return {
+        value: '2025-04-31',
+        height: '44px',
+      };
+    },
+    methods: {
+      handleChange(name, e) {
+        console.log(name, e);
+      },
+      confirm(context) {
+        console.log(context);
+      },
+      handleSyncState(name, value) {
+        console.log('sync', name, value);
+      },
+      focusClick() {
+        console.log('focus', this.$refs.picker);
+        // return;
+        this.$refs.picker.focus();
+      }
+    },
+    template: `
+      <div>
+        <el-date-picker-pro 
+        style="width: 260px"
+        ref="picker"
+        :class="el-text" 
+        class="el-temp" 
+        @confirm="confirm" 
+        min-date="2025-04-22 10:38:39" 
+        :value.sync="value" 
+        @sync:state="handleSyncState" 
+        @change="handleChange('change', $event)" @focus="handleChange('focus', $event)" @pick="handleChange('pick', $event)"
+      ></el-date-picker-pro>
+        <button @click="focusClick">点击聚焦</button>
+        </div>
+    `,
+  }),
+};

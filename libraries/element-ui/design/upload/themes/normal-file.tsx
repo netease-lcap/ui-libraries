@@ -155,7 +155,7 @@ const NormalFile = defineComponent({
         files: this.displayFiles,
       },
     });
-    if (this.fileListDisplay === null || fileListDisplay === null) {
+    if (this.fileListDisplay === null || fileListDisplay === null || !this.showFileList) {
       fileListDisplay = null;
     }
     return (
