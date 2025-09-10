@@ -1,3 +1,4 @@
+import { Map as imMap } from 'immutable';
 import { PluginBase } from '@/types';
 
 import { $deletePropsList } from '@/plugins/constants';
@@ -253,7 +254,7 @@ const combined = customPluginAccumulateTypes.addAccumulate(anotherPluginAccumula
 // 第一个泛型保持原类型，第二个泛型会被转换
 const result = customA.execute({
   // 必须提供 PluginBase 的所有属性
-  ref: ref({}),
+  ref: { ref: () => {} },
   emit: () => {},
   provide: {},
   inject: {},

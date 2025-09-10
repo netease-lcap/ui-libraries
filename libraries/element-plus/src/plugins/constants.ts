@@ -9,7 +9,7 @@ export const $formTagName = Symbol('formTagName');
 export const $tagName = Symbol('tagName');
 export const $mergeRef = Symbol('mergeRef');
 
-export const $dataSourceDeleteField = ['dataSource', 'textField', 'valueField', 'parentField', 'childrenField'];
+export const $dataSourceDeleteField = ['dataSource', 'textField', 'valueField', 'parentField', 'childrenField'] as const;
 
 export const $rootStyle = [
   'margin',
@@ -32,7 +32,7 @@ export const $rootStyle = [
   'flexShrink',
   'flexBasis',
   'alignSelf',
-];
-export const $bothStyle = ['width', 'height', 'minWidth', 'maxWidth', 'minHeight', 'maxHeight'];
+] as const;
+export const $bothStyle = ['width', 'height', 'minWidth', 'maxWidth', 'minHeight', 'maxHeight'] as const;
 
 export const $ide = Symbol('ide');
