@@ -150,7 +150,7 @@ export default {
     display: inline-flex;
     align-items: center;
 }
-.iconwrap {
+.wrapleft .iconwrap {
   display: inline-flex;
   align-items: center;
 }
