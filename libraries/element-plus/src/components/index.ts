@@ -4,7 +4,7 @@ export { ElFlex } from './el-flex';
 export { ElText, ElPreview } from './el-text';
 export { ElTabs, ElTabPane, ElTabsRegister, ElTabsPlus } from './el-tabs';
 export { ElInputPlus, ElInput, ElFormInput, ElInputRegister } from './el-input';
-export { ElSelect, ElOption, ElFormSelect, ElSelectRegister, ElSelectPlus } from './el-select';
+export { ElSelect, ElOption, ElFormSelect, ElSelectRegister, ElSelectPlus, ElOptionGroup } from './el-select';
 export { ElCascader, ElFormCascader, ElCascaderRegister, ElCascaderPlus } from './el-cascader';
 export {
   ElCheckbox,
