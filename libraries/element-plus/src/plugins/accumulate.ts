@@ -15,11 +15,13 @@ type ImmutableMap<T> = {
   toJS(): T;
   [Symbol.iterator](): Iterator<[keyof T, T[keyof T]]>;
 };
+
 // 定义插件函数类型，接受ImmutableMap参数并返回普通对象（会被merge到ImmutableMap中）
-// 注意：TypeScript 的类型推导会自动保持字面量类型，无需手动添加 as const
+// 使用 const 泛型参数自动推导字面量类型
 type PluginFunction<TProps, TReturn> = (props: ImmutableMap<TProps>) => TReturn;
 
 // 定义插件对象类型，包含处理函数和其他元数据
+// 使用 const 泛型参数自动推导字面量类型
 type PluginObject<TProps, TReturn> = {
   handle: (props: ImmutableMap<TProps>) => TReturn;
   [key: string]: any; // 允许添加其他属性，如 name, version, metadata 等
@@ -39,10 +41,11 @@ type ConvertFieldsToString<T> = {
 };
 
 // 辅助类型：将 slot 函数转换为 slots 对象，并将 Field 结尾的字段转换为 string
-type ConvertSlotsToObject<T> = {
+// 添加第二个泛型参数用于排除指定类型中的所有 key 值
+type ConvertSlotsToObject<T, TExclude = never> = {
   slots: ExtractSlots<T>;
 } & ConvertFieldsToString<T> &
-  Omit<T, keyof ExtractSlots<T> | keyof ConvertFieldsToString<T>>;
+  Omit<T, keyof ExtractSlots<T> | keyof ConvertFieldsToString<T> | keyof TExclude>;
 
 /**
  * 插件累加器类型
@@ -58,20 +61,31 @@ type ConvertSlotsToObject<T> = {
 export class PluginAccumulateTypes<
   TInitial = Record<string, never>,
   TSecond = Record<string, never>,
-  TAccumulatedProps = PluginBase & TInitial & ConvertSlotsToObject<TSecond>,
+  TPluginContext = TInitial,
+  TAccumulatedProps = TPluginContext & ConvertSlotsToObject<TSecond, TInitial> & TInitial & PluginBase,
 > {
   Plugin: Plugin<any, any>[] = [];
 
   /**
    * 添加插件（函数或对象形式）
-   * TypeScript 的类型推导会自动保持字面量类型，无需手动添加 as const
+   * 自动应用 as const 类型推导，无需手动添加 as const
    * @param plugin 插件函数或对象
    * @returns 新的插件累加器实例，包含累加后的类型
    */
-  addPlugin<TReturn>(
-    plugin: Plugin<TAccumulatedProps, TReturn>,
-  ): PluginAccumulateTypes<TInitial, TSecond, PluginBase & TInitial & ConvertSlotsToObject<TSecond> & TReturn> {
-    // 直接存储插件，类型推导会自动保持字面量类型
+  addPlugin<const TReturn extends Record<string, any>>(
+    plugin:
+      | ((props: ImmutableMap<TAccumulatedProps>, context: ImmutableMap<TPluginContext>) => TReturn)
+      | {
+          handle: (props: ImmutableMap<TAccumulatedProps>, context: ImmutableMap<TPluginContext>) => TReturn;
+          [key: string]: any;
+        },
+  ): PluginAccumulateTypes<
+    TInitial,
+    TSecond,
+    TPluginContext,
+    TPluginContext & ConvertSlotsToObject<TSecond, TInitial> & TInitial & TReturn & PluginBase
+  > {
+    // 存储插件，使用 const 泛型参数来自动推导字面量类型
     this.Plugin.push(plugin as any);
     return this as any;
   }
@@ -82,12 +96,13 @@ export class PluginAccumulateTypes<
    * @param other 另一个 PluginAccumulateTypes 实例
    * @returns 新的插件累加器实例，包含合并后的类型
    */
-  addAccumulate<TOtherInitial, TOtherSecond, TOtherAccumulated>(
-    other: PluginAccumulateTypes<TOtherInitial, TOtherSecond, TOtherAccumulated>,
+  addAccumulate<TOtherInitial, TOtherSecond, TOtherContext, TOtherAccumulated>(
+    other: PluginAccumulateTypes<TOtherInitial, TOtherSecond, TOtherContext, TOtherAccumulated>,
   ): PluginAccumulateTypes<
     TInitial,
     TSecond,
-    PluginBase & TInitial & ConvertSlotsToObject<TSecond> & TOtherAccumulated
+    TOtherContext,
+    PluginBase & TInitial & ConvertSlotsToObject<TSecond, TInitial> & TOtherAccumulated
   > {
     // 将另一个实例的所有插件添加到当前实例中
     this.Plugin.push(...other.Plugin);

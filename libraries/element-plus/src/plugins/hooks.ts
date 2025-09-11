@@ -143,10 +143,7 @@ export function useRef<T = any>(initialstate: T): Ref<T> {
   }
   return hook.value;
 }
-export function useEffect(
-  callBack: (...args: any[]) => (() => void) | void,
-  dep: any[],
-): void {
+export function useEffect(callBack: (...args: any[]) => (() => void) | void, dep: any[]): void {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook: EffectHook;
@@ -251,7 +248,7 @@ export function useControllableValue<T = any>(
   {
     [key: string]: any;
   },
-  boolean
+  boolean,
 ] {
   const instance = useMemo(() => getCurrentInstance(), []);
   const { vnode } = instance || { vnode: { props: {} } };
@@ -306,11 +303,12 @@ const hookObject = {
   useMemo,
   useCallback,
 };
-export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
+export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap) {
   const updateQueen = fiberMap.get('updateQueen');
   const getState = fiberMap.get('getState');
   const { setValue } = getState() as any;
-  return pluginHooks?.reduce((ImmutableProps, handleFn) => {
+  return pluginHooks?.reduce((ImmutableState, pluginHook) => {
+    const handleFn = _.isFunction(pluginHook) ? pluginHook : pluginHook.handle;
     const isMount = !fiberMap.has(handleFn);
     const storeKey = _.uniqueId('storeKey');
     const fiber: Fiber = isMount
@@ -324,10 +322,10 @@ export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
         }
       : fiberMap.get(handleFn);
     fiberNode.setCurrentFiber(fiber, isMount);
-    const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookObject)), ImmutableProps);
+    const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookObject)), ImmutableState, ImmutableProps);
     fiberMap.set(handleFn, fiber);
-    return ImmutableProps.merge(result);
-  }, ImmutableProps);
+    return ImmutableState.merge(result);
+  }, ImmutableState);
 }
 
 // 合并类型数组中的所有类型

@@ -1,7 +1,6 @@
 /* 组件功能扩展插件 */
 import _ from 'lodash';
-// import { AnchorProps, AnchorInstance } from 'element-plus';
-// import { ElAnchorOptions } from 'nasl/ui';
+import { type AnchorProps } from 'element-plus';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { ElAnchorLink } from '@/components/el-anchor/index';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
@@ -9,7 +8,11 @@ import { useMemo } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { DataSourceCollectionType } from '@/types';
 
-const AnchorAccumulate = new PluginAccumulateTypes<DataSourceCollectionType, nasl.ui.ElAnchorOptions<any, any>>();
+const AnchorAccumulate = new PluginAccumulateTypes<
+  DataSourceCollectionType,
+  nasl.ui.ElAnchorOptions<any, any>,
+  AnchorProps
+>();
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
   const hrefField = props.get('hrefField') || 'href';
@@ -52,7 +55,7 @@ export function handleDataSource(props) {
 }
 export default AnchorAccumulate.addPlugin({
   name: 'handleDataSource',
-  handle: (props) => {
+  handle: (props, context) => {
     const dataConfig = props.get('dataSource');
     const hrefField = props.get('hrefField') || 'href';
     const slots = props.get('slots');

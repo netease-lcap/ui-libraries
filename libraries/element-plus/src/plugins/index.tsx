@@ -8,7 +8,7 @@ import { useRoute, useRouter } from 'vue-router';
 // import create from 'zustand-vue';
 import { createStore } from 'zustand/vanilla';
 
-import { Map as imMap } from 'immutable';
+import { Map as imMap, fromJS } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { $deletePropsList, $provide, $tagName, $mergeRef } from '@/plugins/constants';
@@ -104,10 +104,9 @@ export function registerComponent<T>(Component: any, options: any): any {
       ]);
       const { setValue } = getState() as any;
       subscribe((props: any) => {
-        const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
-        // const add = imMap({ a: { b: 1 } });
-        // const f = add.get('a');
-        const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
+        const ImmutableState = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
+        const ImmutableProps = fromJS({ ...props.props });
+        const commitState = scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
         const commitImmutableState = commitState;
 

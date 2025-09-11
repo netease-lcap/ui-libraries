@@ -2,7 +2,7 @@ import { ElAnchor as ElAnchorPlus, ElAnchorLink as ElAnchorLinkPlus } from 'elem
 import _ from 'lodash';
 import AnchorItem from './el-anchor-item.vue';
 import { registerComponent } from '@/plugins';
-import * as basicsPlugin from './plugins/index';
+import basicsPlugin from './plugins/basic-plugins';
 import * as itemPlugins from './plugins/item-plugins';
 
 function ElAnchorRegister(BaseComponent, plugin = {}, extend = true) {

@@ -452,7 +452,7 @@ describe('hooks.ts', () => {
         ['getState', () => ({ setValue: vi.fn() })],
       ] as any);
 
-      scheduler([pluginHook], immutableProps, fiberMap);
+      scheduler([pluginHook], immutableProps, immutableProps, fiberMap);
 
       expect(pluginHook).toHaveBeenCalled();
       expect(immutableProps.merge).toHaveBeenCalledWith({ test: 'result' });
@@ -467,7 +467,7 @@ describe('hooks.ts', () => {
         ['getState', () => ({ setValue: vi.fn() })],
       ] as any);
 
-      scheduler([hook1, hook2], immutableProps, fiberMap);
+      scheduler([hook1, hook2], immutableProps, immutableProps, fiberMap);
 
       expect(hook1).toHaveBeenCalled();
       expect(hook2).toHaveBeenCalled();
@@ -491,7 +491,7 @@ describe('hooks.ts', () => {
         [pluginHook, existingFiber],
       ] as any);
 
-      scheduler([pluginHook], immutableProps, fiberMap);
+      scheduler([pluginHook], immutableProps, immutableProps, fiberMap);
 
       expect(pluginHook).toHaveBeenCalled();
       expect(fiberMap.get(pluginHook)).toBe(existingFiber);
@@ -504,7 +504,7 @@ describe('hooks.ts', () => {
         ['getState', () => ({ setValue: vi.fn() })],
       ] as any);
 
-      const result = scheduler([], immutableProps, fiberMap);
+      const result = scheduler([], immutableProps, immutableProps, fiberMap);
 
       expect(result).toBe(immutableProps);
       expect(immutableProps.merge).not.toHaveBeenCalled();
@@ -517,7 +517,7 @@ describe('hooks.ts', () => {
         ['getState', () => ({ setValue: vi.fn() })],
       ] as any);
 
-      const result = scheduler(undefined, immutableProps, fiberMap);
+      const result = scheduler(undefined, immutableProps, immutableProps, fiberMap);
 
       expect(result).toBeUndefined();
       expect(immutableProps.merge).not.toHaveBeenCalled();
@@ -534,7 +534,7 @@ describe('hooks.ts', () => {
       ] as any);
 
       // _.attempt 会捕获错误并返回错误对象，不会抛出
-      scheduler([errorHook], immutableProps, fiberMap);
+      scheduler([errorHook], immutableProps, immutableProps, fiberMap);
 
       expect(errorHook).toHaveBeenCalled();
       // 确保错误被 _.attempt 处理，immutableProps.merge 仍然被调用
