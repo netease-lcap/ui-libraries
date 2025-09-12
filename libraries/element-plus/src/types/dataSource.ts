@@ -4,10 +4,12 @@
 /** 数据源数组类型，包含列表数据 */
 export type DataSourceArrayType = any[] & {
   /** 数据列表 */
-  list: any[];
+  list?: any[];
+  /** 总条数 */
+  total?: number;
 };
 /** 数据源函数类型，返回数据源数组 */
-export type DataSourceFunctionType = (...args: any[]) => DataSourceArrayType;
+export type DataSourceFunctionType = (...args: any[]) => Promise<DataSourceArrayType>;
 
 /** 值字段名称 */
 type valueField = string;

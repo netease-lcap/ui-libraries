@@ -2,10 +2,12 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react-refresh/only-export-components */
 import _ from 'lodash';
-import { watch } from 'vue';
-import { useRequest } from 'vue-hooks-plus';
+// import { watch } from 'vue';
+// import { useRequest } from 'vue-hooks-plus';
+import { match } from 'ts-pattern';
 import { useMemo, useState, useRef, useEffect } from '@/plugins/hooks';
-import { DataSourceType, DataSourceArrayType } from '@/types';
+import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
+import { useCallback } from '../hooks';
 
 export function useHandleMapField(filedInfo: {
   label?: string;
@@ -33,8 +35,10 @@ export function useHandleMapField(filedInfo: {
   } = filedInfo;
   return useMemo(
     () => _.map(dataSource, (item: any) => ({
-        ...item,
-        ...Object.fromEntries(Object.entries(fieldsMap || {}).map(([key, path]) => [key, _.get(item, path, undefined)])),
+        ...(_.isObject(item) ? item : {}),
+        ...Object.fromEntries(
+          Object.entries(fieldsMap || {}).map(([key, path]) => [key, _.get(item, path, undefined)]),
+        ),
         [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
         [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
         [disabled]: !_.isObject(item) ? false : _.get(item, disabledField || 'disabled', false),
@@ -56,6 +60,7 @@ const handleLocalPageData = _.cond([
   ],
   [_.stubTrue, (params: any) => params.dataSource],
 ]);
+// 表格本地分页
 
 const handleDataSouceToFn = _.cond([
   [_.isArray, (dataSource: any[]) => async (params: any) => handleLocalPageData({ dataSource, ...params })],
@@ -78,32 +83,28 @@ interface RequestResult {
   run?: (...args: any[]) => void;
   loading?: boolean;
 }
+const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions = {}): RequestResult => {
+  const [resultData, setResult] = useState<RequestResult>({ data: [], run: () => {}, loading: undefined });
+  const { refreshDeps = [] } = options;
+  const fn = useCallback(() => {
+    setResult({ data: [] as any, run: fn, loading: true });
+    dataSource().then((res) => {
+      const data = match(res)
+        .when(_.isArray, () => res)
+        .when(_.isObject, () => (_.isArray(res.list) ? res.list : []))
+        .otherwise(() => []);
+      setResult({ data, run: fn, loading: false });
+    });
+  }, [dataSource, ...refreshDeps]);
+  useEffect(fn, [fn]);
 
-export function useRequestDataSource(
-  dataSource: DataSourceType,
-  options: RequestOptions = {},
-): RequestResult {
-  const [resultData, setResult] = useState<RequestResult>({});
-  const resultRef = useRef<any>({});
+  return resultData ?? {};
+};
+
+export function useRequestDataSource(dataSource: DataSourceType, options: RequestOptions = {}): RequestResult {
   const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource as any), [_.cloneDeep(dataSource)]);
-
-  resultRef.value = useMemo(
-    () => useRequest(dataSourceFn, { ...options, refreshDeps: [() => dataSourceFn] }),
-    [dataSourceFn],
-  );
-
-  useEffect(() => {
-    watch(
-      resultRef,
-      (value: any) => {
-        return setResult({ ...value, data: _.cloneDeep(value.data) });
-      },
-      { immediate: true, deep: true },
-    );
-  }, []);
-
-  const { data, run, loading } = resultData ?? ({} as RequestResult);
-  return { data, run, loading };
+  const resultData = useRequest(dataSourceFn, options);
+  return resultData;
 }
 
 export function useFormatDataSource(dataSource?: DataSourceArrayType): DataSourceArrayType {
@@ -111,7 +112,12 @@ export function useFormatDataSource(dataSource?: DataSourceArrayType): DataSourc
     if (Array.isArray(dataSource)) {
       return dataSource;
     }
-    if (dataSource && typeof dataSource === 'object' && 'list' in dataSource && Array.isArray((dataSource as any).list)) {
+    if (
+      dataSource
+      && typeof dataSource === 'object'
+      && 'list' in dataSource
+      && Array.isArray((dataSource as any).list)
+    ) {
       return (dataSource as any).list;
     }
     return [];
@@ -125,7 +131,7 @@ interface TreeNode {
 
 export function useDataSourceToTree(
   dataSource: DataSourceArrayType,
-  parentField: string,
+  parentField: string = 'parent',
   valueField: string = 'value',
 ): TreeNode[] {
   if (_.isNil(parentField)) return dataSource;

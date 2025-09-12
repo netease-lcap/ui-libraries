@@ -315,6 +315,7 @@ export default defineConfig(({ command }) => {
           'src/components/**/demos/**',
           'src/components/**/stories/**',
           'src/components/**/api.ts',
+          'src/components/**/plugins.test.tsx',
         ],
       },
       // 显示更详细的测试日志
