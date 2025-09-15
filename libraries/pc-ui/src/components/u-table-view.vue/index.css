@@ -296,7 +296,7 @@ content: "\e665";
     z-index: 1;
     cursor: col-resize;
     padding: 2px;
-    background: var(--border-color-base) content-box;
+    background: var(--table-view-resizer-border-color) content-box;
     width: 5px;
 }
 /** 避免拖拽的时候点击到排序 */
@@ -327,18 +327,6 @@ content: "\e665";
 .scrollcview [class^="f-scroll-view_wrap__"] {
     position: relative;
     z-index: 0;
-}
-
-.resizer {
-    position: absolute;
-    top: 4px;
-    bottom: 4px;
-    right: -3px;
-    z-index: 1;
-    cursor: col-resize;
-    padding: 2px;
-    background: var(--border-color-base) content-box;
-    width: 5px;
 }
 
 .cell {
