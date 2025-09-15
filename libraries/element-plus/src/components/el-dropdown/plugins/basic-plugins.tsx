@@ -1,6 +1,5 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
-import DataSearch from '@lcap/element-ui/design/icons/components/data-search';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
@@ -20,9 +19,11 @@ export function handleDataSource(props) {
     value: 'command',
     textField,
     valueField,
-    disabledField,
-    dividedField,
     dataSource: useFormatDataSource(data),
+    fieldsMap: {
+      divided: dividedField,
+      disabled: disabledField,
+    },
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
   // TODO

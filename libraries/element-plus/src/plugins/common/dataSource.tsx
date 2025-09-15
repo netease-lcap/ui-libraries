@@ -4,20 +4,15 @@
 import _ from 'lodash';
 // import { watch } from 'vue';
 // import { useRequest } from 'vue-hooks-plus';
-import { match } from 'ts-pattern';
-import { useMemo, useState, useRef, useEffect } from '@/plugins/hooks';
+import { useMemo, useState, useEffect } from '@/plugins/hooks';
 import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
 import { useCallback } from '../hooks';
 
 export function useHandleMapField(filedInfo: {
   label?: string;
   value?: string;
-  disabled?: string;
-  divided?: string;
   textField?: string;
   valueField?: string;
-  disabledField?: string;
-  dividedField?: string;
   dataSource: DataSourceType;
   fieldsMap?: Record<string, string>;
 }): DataSourceArrayType {
@@ -27,25 +22,20 @@ export function useHandleMapField(filedInfo: {
     textField = 'label',
     valueField = 'value',
     dataSource,
-    disabled = 'disabled',
-    disabledField,
-    dividedField,
-    divided = 'divided',
     fieldsMap,
   } = filedInfo;
   return useMemo(
     () => _.map(dataSource, (item: any) => ({
         ...(_.isObject(item) ? item : {}),
-        ...Object.fromEntries(
-          Object.entries(fieldsMap || {}).map(([key, path]) => [key, _.get(item, path, undefined)]),
-        ),
         [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
         [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
-        [disabled]: !_.isObject(item) ? false : _.get(item, disabledField || 'disabled', false),
-        [divided]: !_.isObject(item) ? false : _.get(item, dividedField || 'divided', false),
+        ..._.omitBy(
+          _.mapValues(fieldsMap, (path) => _.get(item, path, undefined)),
+          _.isUndefined,
+        ),
       })),
     [label, value, textField, valueField, dataSource],
-  ) as DataSourceArrayType;
+  );
 }
 
 const handleLocalPageData = _.cond([
@@ -128,7 +118,7 @@ export function useFormatDataSource(dataSource?: DataSourceArrayType): DataSourc
   }, [dataSource]);
 }
 
-interface TreeNode {
+export interface TreeNode {
   [key: string]: any;
   children?: TreeNode[];
 }

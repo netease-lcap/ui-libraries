@@ -19,33 +19,6 @@ export function handleDataSource(props) {
     'iconField',
     'hollowField',
   ];
-  const [
-    timestampField,
-    hideTimestampField,
-    centerField,
-    placementField,
-    typeField,
-    colorField,
-    sizeField,
-    iconField,
-    hollowField,
-  ] = fields.map((field) => props.get(field));
-
-  // 字段映射对象构建
-  const fieldsMap = _.pickBy(
-    {
-      timestamp: timestampField,
-      hideTimestamp: hideTimestampField,
-      center: centerField,
-      placement: placementField,
-      type: typeField,
-      color: colorField,
-      size: sizeField,
-      icon: iconField,
-      hollow: hollowField,
-    },
-    (value) => !_.isUndefined(value),
-  );
 
   const slots = props.get('slots');
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
@@ -53,7 +26,7 @@ export function handleDataSource(props) {
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
   const dataSource = useHandleMapField({
     dataSource: useFormatDataSource(data),
-    fieldsMap,
+    fieldsMap: _.fromPairs(_.map(fields, (key) => [[key], props.get(key) as string])),
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 

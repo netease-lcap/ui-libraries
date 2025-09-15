@@ -3,7 +3,7 @@ import _ from 'lodash';
 import AnchorItem from './el-anchor-item.vue';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/basic-plugins';
-import * as itemPlugins from './plugins/item-plugins';
+import itemPlugins from './plugins/item-plugins';
 
 function ElAnchorRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;

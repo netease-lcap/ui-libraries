@@ -4,6 +4,7 @@ import {
   useHandleMapField,
   useFormatDataSource,
   useDataSourceToTree,
+  TreeNode,
 } from '@/plugins/common/dataSource';
 import { $deletePropsList } from '@/plugins/constants';
 import { useMemo } from '@/plugins/hooks';
@@ -13,7 +14,14 @@ export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
 export * from './ide';
 
-export function handleDataSource(props) {
+export function handleDataSource(props): {
+  [$deletePropsList]: string[];
+  ref: any;
+  loading?: boolean;
+  data?: TreeNode[];
+  formTagName: string;
+  tagName: string;
+} {
   const dataConfig = props.get('dataSource');
   const textField = props.get('textField', 'label');
   const valueField = props.get('valueField', 'value');
@@ -49,7 +57,7 @@ export function handlePreview(props) {
     const valueField = props.get('valueField', 'value');
     const value = getTreePreviewText(textField, valueField, insProps.data, _.compact(_.castArray(insProps.modelValue)));
     const previewText = inIDE ? '-' : value;
-    return <el-preview text={previewText}></el-preview>;
+    return <el-preview text={previewText} />;
   };
   const { render, insRef } = getRender(Component, previewRender, isPreview);
 

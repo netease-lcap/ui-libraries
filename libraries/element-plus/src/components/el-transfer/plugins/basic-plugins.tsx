@@ -37,8 +37,10 @@ export function handleDataSource(props) {
     value: 'key',
     textField,
     valueField,
-    disabledField,
     dataSource: useFormatDataSource(data),
+    fieldsMap: {
+      disabled: disabledField,
+    },
   });
   const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 
@@ -63,7 +65,7 @@ export function handlePreview(props) {
     const valueField = props.get('valueField', 'value');
     const value = getListPreviewText(textField, valueField, insProps.data, insProps.modelValue);
     const previewText = inIDE ? '-' : value;
-    return <el-text text={previewText}></el-text>;
+    return <el-text text={previewText} />;
   };
 
   const { render, insRef } = getRender(Component, previewRender, isPreview);

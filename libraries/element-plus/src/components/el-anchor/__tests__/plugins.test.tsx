@@ -1,9 +1,9 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { Map as imMap } from 'immutable';
-
 import { sleep } from '@ep-test/test-utils';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { fiberNode } from '@/plugins/hooks';
+import '@/utils/index';
 import AnchorAccumulate from '../plugins/basic-plugins';
 
 // Mock ElAnchorLink component
@@ -319,7 +319,7 @@ describe('basic-plugins.tsx', () => {
       // 4. 数据一致性：最终输出与函数返回值一致（经过处理）
     });
 
-    it.skip('应该正确处理复杂的数据结构', () => {
+    it('应该正确处理复杂的数据结构', () => {
       const complexDataSource = [
         {
           id: 1,
@@ -348,16 +348,16 @@ describe('basic-plugins.tsx', () => {
 
       // 检查插件能否处理复杂数据结构而不抛出错误
       expect(() => {
-        const result = plugin.handle(props, context);
-        expect(result).toBeDefined();
-        expect(result).toHaveProperty('data');
-        expect(result).toHaveProperty('loading');
-        expect(result).toHaveProperty('ref');
-        expect(result).toHaveProperty('slots');
+      const result = plugin.handle(props, context);
+      expect(result).toBeDefined();
+      expect(result).toHaveProperty('data');
+      expect(result).toHaveProperty('loading');
+      expect(result).toHaveProperty('ref');
+      expect(result).toHaveProperty('slots');
       }).not.toThrow();
     });
 
-    it.skip('应该正确处理边界情况', () => {
+    it('应该正确处理边界情况', () => {
       // 测试各种边界情况，简化为基本检查
       const testCases = [
         { dataSource: [] }, // 空数组

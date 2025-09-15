@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { match } from 'ts-pattern';
 
 export * from './dom';
+export * from './curry';
 
 function filterUnderfinedValue(object: Record<string, string>) {
   return Object.fromEntries(Object.entries(object).filter(([, value]) => !_.isUndefined(value)));

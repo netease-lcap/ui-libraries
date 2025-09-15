@@ -60,7 +60,9 @@ describe('dataSource.tsx', () => {
         dataSource,
         textField: 'name',
         valueField: 'id',
-        disabledField: 'status',
+        fieldsMap: {
+          disabled: 'status',
+        },
       });
 
       expect(result).toEqual([
@@ -68,19 +70,17 @@ describe('dataSource.tsx', () => {
           name: 'Item 1',
           id: 1,
           status: false,
+          disabled: false,
           label: 'Item 1',
           value: 1,
-          disabled: false,
-          divided: false,
         },
         {
           name: 'Item 2',
           id: 2,
           status: true,
+          disabled: true,
           label: 'Item 2',
           value: 2,
-          disabled: true,
-          divided: false,
         },
       ]);
     });
@@ -96,20 +96,14 @@ describe('dataSource.tsx', () => {
         {
           label: 'apple',
           value: 'apple',
-          disabled: false,
-          divided: false,
         },
         {
           label: 'banana',
           value: 'banana',
-          disabled: false,
-          divided: false,
         },
         {
           label: 'orange',
           value: 'orange',
-          disabled: false,
-          divided: false,
         },
       ]);
     });
@@ -124,12 +118,12 @@ describe('dataSource.tsx', () => {
         dataSource,
         label: 'customLabel',
         value: 'customValue',
-        disabled: 'customDisabled',
-        divided: 'customDivided',
         textField: 'title',
         valueField: 'key',
-        disabledField: 'inactive',
-        dividedField: 'separator',
+        fieldsMap: {
+          customDisabled: 'inactive',
+          customDivided: 'separator',
+        },
       });
 
       expect(result).toEqual([
@@ -192,11 +186,8 @@ describe('dataSource.tsx', () => {
           userAge: 25,
           categoryType: 'user',
           deepValue: 'hidden',
-          nonExistent: undefined,
           label: 'John',
           value: 1,
-          disabled: false,
-          divided: false,
         },
         {
           info: { name: 'Jane', age: 30 },
@@ -206,11 +197,8 @@ describe('dataSource.tsx', () => {
           userAge: 30,
           categoryType: 'admin',
           deepValue: 'secret',
-          nonExistent: undefined,
           label: 'Jane',
           value: 2,
-          disabled: false,
-          divided: false,
         },
       ]);
     });
@@ -226,6 +214,10 @@ describe('dataSource.tsx', () => {
         dataSource,
         textField: 'name',
         valueField: 'id',
+        fieldsMap: {
+          disabled: 'status',
+          divided: 'separator',
+        },
       });
 
       expect(result).toEqual([
@@ -233,21 +225,15 @@ describe('dataSource.tsx', () => {
           name: 'Item 1',
           label: 'Item 1',
           value: '',
-          disabled: false,
-          divided: false,
         },
         {
           id: 2,
           label: '',
           value: 2,
-          disabled: false,
-          divided: false,
         },
         {
           label: '',
           value: '',
-          disabled: false,
-          divided: false,
         },
       ]);
     });
@@ -276,8 +262,6 @@ describe('dataSource.tsx', () => {
           id: 1,
           label: 'Item 1',
           value: 1,
-          disabled: false,
-          divided: false,
         },
       ]);
 
@@ -299,8 +283,6 @@ describe('dataSource.tsx', () => {
           id: 2,
           label: 'Item 2',
           value: 2,
-          disabled: false,
-          divided: false,
         },
       ]);
     });
