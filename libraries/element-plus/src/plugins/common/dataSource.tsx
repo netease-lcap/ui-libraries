@@ -80,29 +80,33 @@ interface RequestOptions {
 
 interface RequestResult {
   data?: DataSourceArrayType;
-  run?: (...args: any[]) => void;
+  run: (...args: any[]) => void;
   loading?: boolean;
 }
 const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions = {}): RequestResult => {
-  const [resultData, setResult] = useState<RequestResult>({ data: [], run: () => {}, loading: undefined });
+  const [resultData, setResult] = useState<RequestResult>({ run: () => {} });
+  const { onBefore = () => {}, onSuccess = () => {}, formatResult = (value) => value, defaultParams = [] } = options;
   const { refreshDeps = [] } = options;
-  const fn = useCallback(() => {
-    setResult({ data: [] as any, run: fn, loading: true });
-    dataSource().then((res) => {
-      const data = match(res)
-        .when(_.isArray, () => res)
-        .when(_.isObject, () => (_.isArray(res.list) ? res.list : []))
-        .otherwise(() => []);
-      setResult({ data, run: fn, loading: false });
-    });
-  }, [dataSource, ...refreshDeps]);
-  useEffect(fn, [fn]);
+  const fn = useCallback(
+    (...res) => {
+      const params = res.length > 0 ? res : defaultParams;
+      onBefore(...params);
+      setResult({ run: fn, loading: true });
+      dataSource(...params).then((data) => {
+        setResult({ data: formatResult(data), run: fn, loading: false });
+        onSuccess(data, ...params);
+      });
+    },
+    [dataSource, ...refreshDeps],
+  );
+  useEffect(() => fn(), [fn, ...refreshDeps]);
 
   return resultData ?? {};
 };
 
 export function useRequestDataSource(dataSource: DataSourceType, options: RequestOptions = {}): RequestResult {
   const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource as any), [_.cloneDeep(dataSource)]);
+
   const resultData = useRequest(dataSourceFn, options);
   return resultData;
 }

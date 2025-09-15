@@ -117,12 +117,10 @@ describe('basic-plugins.tsx', () => {
       const result = plugin.handle(props, context);
 
       // 验证 deletePropsList Symbol 属性
-      const symbolKey = Object.getOwnPropertySymbols(result).find((s) => s.toString().includes('deletePropsList'));
+      const symbolKey = Object.getOwnPropertySymbols(result).find((s) => s.toString().includes('deletePropsList')) as symbol;
       expect(symbolKey).toBeDefined();
-      if (symbolKey) {
-        expect(Array.isArray(result[symbolKey])).toBe(true);
-        expect(result[symbolKey]).toEqual(expect.arrayContaining([...$dataSourceDeleteField]));
-      }
+      expect(Array.isArray(result[symbolKey])).toBe(true);
+      expect(result[symbolKey]).toEqual(expect.arrayContaining([...$dataSourceDeleteField]));
     });
 
     it('应该正确处理数组类型的数据源', () => {
@@ -185,9 +183,7 @@ describe('basic-plugins.tsx', () => {
       expect(result.slots).toBeDefined();
       expect(result.slots).toHaveProperty('existing'); // 应该保留原有的 slots
       // 空数据源时不应该有 default slot 或者有空的 default
-      if (result.slots.default) {
-        expect(typeof result.slots.default).toBe('function');
-      }
+      expect(typeof result.slots.default).not.toBe('function');
     });
 
     it('应该正确处理有数据源时的 slots', () => {
@@ -401,9 +397,9 @@ describe('basic-plugins.tsx', () => {
 
       expect(handleDataSourcePlugin).toBeDefined();
       expect(testPlugin).toBeDefined();
-      if (testPlugin) {
-        expect(testPlugin.name).toBe('testPlugin');
-      }
+      // if (testPlugin) {
+      expect(testPlugin?.name).toBe('testPlugin');
+      // }
     });
 
     it('应该正确处理插件的执行顺序', () => {
