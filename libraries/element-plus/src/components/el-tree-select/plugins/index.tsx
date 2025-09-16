@@ -9,6 +9,7 @@ import {
 import { $deletePropsList } from '@/plugins/constants';
 import { useMemo } from '@/plugins/hooks';
 import { getIsPreview, getRender, getTreePreviewText } from '@/plugins/common/preview';
+import { ElPreview } from '@/index';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
@@ -57,7 +58,7 @@ export function handlePreview(props) {
     const valueField = props.get('valueField', 'value');
     const value = getTreePreviewText(textField, valueField, insProps.data, _.compact(_.castArray(insProps.modelValue)));
     const previewText = inIDE ? '-' : value;
-    return <el-preview text={previewText} />;
+    return <ElPreview text={previewText} />;
   };
   const { render, insRef } = getRender(Component, previewRender, isPreview);
 
