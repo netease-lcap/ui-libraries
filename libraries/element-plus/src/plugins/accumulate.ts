@@ -7,6 +7,7 @@ import { PluginBase, DataSourceType } from '@/types';
 // 定义 Immutable Map 类型
 type ImmutableMap<T> = {
   get<K extends keyof T>(key: K): T[K];
+  get<K extends keyof T, D>(key: K, defaultValue: D): T[K] | D;
   set<K extends keyof T>(key: K, value: T[K]): ImmutableMap<T>;
   merge(other: Partial<T>): ImmutableMap<T>;
   toJS(): T;
@@ -58,17 +59,12 @@ type ConvertHrefAndToToType<T> = {
 // 3. 将 dataSource 字段转换为 DataSourceType 类型
 // 4. 将 hrefAndTo 字段展开为 href、link、destination 三个独立字段
 // 添加第二个泛型参数用于排除指定类型中的所有 key 值
-type ConvertPluginTypes<T> = {
+export type ConvertPluginTypes<T> = {
   slots: ExtractSlots<T>;
 } & ConvertFieldsToString<T> &
   ConvertDataSourceToType<T> &
   ConvertHrefAndToToType<T> &
-  Omit<
-    T,
-    | keyof ExtractSlots<T>
-    | keyof ConvertFieldsToString<T>
-    | keyof ConvertDataSourceToType<T>
-  >;
+  Omit<T, keyof ExtractSlots<T> | keyof ConvertFieldsToString<T> | keyof ConvertDataSourceToType<T>>;
 
 /**
  * 插件累加器类型
@@ -102,11 +98,7 @@ export class PluginAccumulateTypes<
     handle: (props: ImmutableMap<TAccumulatedProps>, context: ImmutableMap<TPluginContext>) => TReturn;
     name: string;
     [key: string]: any;
-  }): PluginAccumulateTypes<
-    TPluginOptions,
-    TPluginContext,
-    TPluginContext & ConvertPluginTypes<TPluginOptions> & PluginBase & TReturn
-  > {
+  }): PluginAccumulateTypes<TPluginOptions, TPluginContext, TAccumulatedProps & TReturn> {
     // 存储插件，使用 const 泛型参数来自动推导字面量类型
     this.Plugin.push(plugin as any);
     return this as any;
@@ -120,11 +112,7 @@ export class PluginAccumulateTypes<
    */
   addAccumulate<TOtherPluginOptions, TOtherContext, TOtherAccumulated>(
     other: PluginAccumulateTypes<TOtherPluginOptions, TOtherContext, TOtherAccumulated>,
-  ): PluginAccumulateTypes<
-    TPluginOptions,
-    TOtherContext,
-    PluginBase & ConvertPluginTypes<TPluginOptions> & TOtherAccumulated
-  > {
+  ): PluginAccumulateTypes<TPluginOptions, TPluginContext, TAccumulatedProps & TOtherAccumulated> {
     // 将另一个实例的所有插件添加到当前实例中
     this.Plugin.push(...other.Plugin);
     return this as any;

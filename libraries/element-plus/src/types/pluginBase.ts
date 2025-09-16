@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
 import type { RouteLocationNormalized, Router } from 'vue-router';
-import { $deletePropsList } from '@/plugins/constants';
+import { $deletePropsList, $ide, $formTagName, $tagName } from '@/plugins/constants';
 
 type ref = {
   [key: string]: any;
@@ -38,3 +38,11 @@ export type PluginBase = {
 };
 
 export type GetOptionsType<T> = T extends { new (options?: infer O): any } ? O : never;
+export interface IIdePluginBase {
+  ['data-nodepath']: string;
+  ['vusion-d2c-id']: string;
+  ['class']: string;
+  [$formTagName]: string;
+
+  [$tagName]: string;
+}

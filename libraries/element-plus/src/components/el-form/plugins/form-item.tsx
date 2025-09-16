@@ -136,6 +136,7 @@ export function handleComponentInForm(props) {
       elem?.setAttribute('data-element-tag', tagName);
     }
   }, []);
+  return {};
 }
 
 handleComponentInForm.order = 6;
