@@ -35,4 +35,3 @@ export const Demo1 = {
     template: '<deprecated-demo />',
   }),
 };
-

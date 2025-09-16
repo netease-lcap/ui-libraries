@@ -87,6 +87,22 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
+      title: '行间距',
+      description: '行间距',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    rowGap: nasl.core.Decimal | nasl.core.Integer = 0;
+
+    @Prop({
+      group: '样式属性',
+      title: '列间距',
+      description: '列间距',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    columnGap: nasl.core.Decimal | nasl.core.Integer = 0;
+
+    @Prop({
+      group: '样式属性',
       title: '均分宽度',
       description: '设置是否均分宽度',
       docDescription: `支持根据组件列表所占宽度自动均匀排布各项。

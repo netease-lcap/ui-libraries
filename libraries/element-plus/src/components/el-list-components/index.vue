@@ -7,6 +7,7 @@
           :key="comKey(item2, index2)"
           :item="item2"
           :column="column || 5"
+          :style="{ paddingRight: columnGap + 'px' ,'--cw-margin-bottom': rowGap + 'px' }"
           :equal-width="equalWidth"
           :index="comIndex(index, index2)">
           <template #default="item2">
@@ -63,6 +64,14 @@ export default {
       type: Number,
       default: 5,
     },
+    rowGap: {
+      type: Number,
+      default: 0,
+    },
+    columnGap: {
+      type: Number,
+      default: 0,
+    },
     equalWidth: {
       type: Boolean,
       default: true,
@@ -117,8 +126,8 @@ export default {
       return index1 * (this.column || 5) + index2;
     },
     comKey(item2, index2) {
-      return this.idField ? at(item2, this.idField)?.[0] || item2 : index2
-    }
+      return this.idField ? at(item2, this.idField)?.[0] || item2 : index2;
+    },
   },
 };
 </script>

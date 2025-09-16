@@ -44,5 +44,9 @@ export default {
 </script>
 <style>
 .el-list-components__item {
+  box-sizing: border-box;
+}
+.el-list-components__item:not(:last-child) {
+  margin-bottom: var(--cw-margin-bottom);
 }
 </style>
