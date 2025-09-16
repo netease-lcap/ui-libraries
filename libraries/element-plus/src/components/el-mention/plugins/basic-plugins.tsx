@@ -4,6 +4,7 @@ import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
+import { ElPreview } from '@/index';
 
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
@@ -33,7 +34,7 @@ export function handlePreview(props) {
     const inIDE = !!props.get('data-nodepath');
     const value = (insProps.modelValue ?? '').split(' ').filter(Boolean).join(', ');
     const previewText = inIDE || _.isEmpty(value) ? '-' : value;
-    return <el-preview text={previewText}></el-preview>;
+    return <ElPreview text={previewText} />;
   };
   const { render, insRef } = getRender(Component, previewRender, isPreview);
 

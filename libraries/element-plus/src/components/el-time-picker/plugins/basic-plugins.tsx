@@ -4,6 +4,7 @@ import { useMemo, useControllableValue } from '@/plugins/hooks';
 import { getNaslTimeValue, getFormatTimeValue, isValidStringTime } from './utils';
 import { getIsPreview, getRender, getFormatDateOrTime } from '@/plugins/common/preview';
 import { getPropsIcon } from '@/plugins/common/icon';
+import { ElText } from '@/index';
 
 export * from './ide';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -127,7 +128,7 @@ export function handlePreview(props) {
     const { format = 'HH:mm:ss', modelValue } = insProps;
     const values = _.compact(_.castArray(modelValue));
     const previewText = inIDE || _.isEmpty(values) ? '-' : _.map(values, (v) => getFormatDateOrTime(v, format)).join(' ~ ');
-    return <el-text text={previewText} />;
+    return <ElText text={previewText} />;
   };
 
   const { render, insRef } = getRender(Component, previewRender, isPreview);

@@ -4,6 +4,7 @@ import styles from '../index.module.css';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
+import { ElCollapseItem } from '@/index';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -27,7 +28,7 @@ export function handleDataSource(props) {
         ? {}
         : {
             default: () => _.map(dataSource, (item) => (
-              <el-collapse-item
+              <ElCollapseItem
                 {...item}
                 v-slots={{
                     title: () => slots.title?.({ item }),

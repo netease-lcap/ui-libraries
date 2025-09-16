@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
+import { ElCarouselItem } from '@/index';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -26,7 +27,7 @@ export function handleDataSource(props) {
         ? {}
         : {
             default: () => _.map(dataSource, (item) => (
-              <el-carousel-item
+              <ElCarouselItem
                 {...item}
                 v-slots={{
                     default: () => slots.content?.({ item }),

@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
-import { ElRadio, ElRadioButton } from 'element-plus';
+import { ElRadio, ElRadioButton, ElText } from 'element-plus';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo, useCallback } from '@/plugins/hooks';
@@ -32,7 +32,7 @@ export function handleDataSource(props) {
         ? {}
         : {
             default: () => _.map(dataSource, (item) => (
-              <el-radio {...item}>{slots.item ? slots.item({ item }) : item.label}</el-radio>
+              <ElRadio {...item}>{slots.item ? slots.item({ item }) : item.label}</ElRadio>
               )),
           }),
     [dataSource, slots, dataConfig],
@@ -79,7 +79,7 @@ export function handlePreview(props) {
     const previewText = inIDE
       ? '-'
       : getListPreviewText(textField, valueField, insProps.data, [insProps.modelValue] as any);
-    return <el-text text={previewText}></el-text>;
+    return <ElText text={previewText} />;
   };
 
   const { render, insRef } = getRender(Component, previewRender, isPreview);

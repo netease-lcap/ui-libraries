@@ -4,6 +4,7 @@ import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
 import { useCallback } from '../../../plugins/hooks';
+import { ElDropdownMenu, ElDropdownItem, ElText } from '@/index';
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
@@ -39,13 +40,13 @@ export function handleDataSource(props) {
         ({ dataSource }) => {
           console.log('dataSource');
           return (
-            <el-dropdown-menu>
+            <ElDropdownMenu>
               {dataSource.map((item) => (
-                <el-dropdown-item key={item.value} {...item}>
-                  <el-text text={item.label} />
-                </el-dropdown-item>
+                <ElDropdownItem key={item.value} {...item}>
+                  <ElText text={item.label} />
+                </ElDropdownItem>
               ))}
-            </el-dropdown-menu>
+            </ElDropdownMenu>
           );
         },
       ],
@@ -55,7 +56,7 @@ export function handleDataSource(props) {
         }),
         ({ slotsItems }) => {
           console.log('slotsItems');
-          return <el-dropdown-menu>{slotsItems()}</el-dropdown-menu>;
+          return <ElDropdownMenu>{slotsItems()}</ElDropdownMenu>;
         },
       ],
       [
@@ -71,17 +72,17 @@ export function handleDataSource(props) {
   const dropdownSlotRender = useCallback(() => {
     if (dataConfig) {
       return (
-        <el-dropdown-menu>
+        <ElDropdownMenu>
           {dataSource.map((item) => (
-            <el-dropdown-item key={item.value} {...item}>
-              <el-text text={item.label} />
-            </el-dropdown-item>
+            <ElDropdownItem key={item.value} {...item}>
+              <ElText text={item.label} />
+            </ElDropdownItem>
           ))}
-        </el-dropdown-menu>
+        </ElDropdownMenu>
       );
     }
     if (slots.items) {
-      return <el-dropdown-menu>{slots.items()}</el-dropdown-menu>;
+      return <ElDropdownMenu>{slots.items()}</ElDropdownMenu>;
     }
     return slots.dropdown?.();
   }, [dataConfig, dataSource, slots.items, slots.dropdown]);

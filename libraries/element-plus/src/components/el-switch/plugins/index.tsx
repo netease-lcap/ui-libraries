@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
+import { ElText } from '@/index';
+
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 export { handleControllableValue } from '@/plugins/common/index';
 export * from './ide';
@@ -12,7 +14,7 @@ export function handlePreview(props) {
   const previewRender = (insProps) => {
     const inIDE = !!props.get('data-nodepath');
     const previewText = inIDE ? '-' : insProps.modelValue ? '已开启' : '已关闭';
-    return <el-text text={previewText}></el-text>;
+    return <ElText text={previewText} />;
   };
 
   const { render, insRef } = getRender(Component, previewRender, isPreview);

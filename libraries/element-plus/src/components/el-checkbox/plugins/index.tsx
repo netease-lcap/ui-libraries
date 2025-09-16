@@ -34,7 +34,7 @@ export function handleDataSource(props) {
         ? {}
         : {
             default: () => _.map(dataSource, (item) => (
-              <el-checkbox {...item}>{slots.item ? slots.item({ item }) : item.label}</el-checkbox>
+              <ElCheckbox {...item}>{slots.item ? slots.item({ item }) : item.label}</ElCheckbox>
               )),
           }),
     [dataSource, slots, dataConfig],
@@ -80,7 +80,7 @@ export function handlePreview(props) {
     const valueField = props.get('valueField', 'value');
     const value = getListPreviewText(textField, valueField, insProps.data, insProps.modelValue);
     const previewText = inIDE ? '-' : value;
-    return <el-preview text={previewText}></el-preview>;
+    return <ElPreview text={previewText} />;
   };
 
   const { render, insRef } = getRender(Component, previewRender, isPreview);

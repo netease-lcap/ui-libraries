@@ -10,6 +10,7 @@ import {
 } from '@/plugins/common/dataSource';
 import { useMemo } from '@/plugins/hooks';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
+import { ElPreview } from '@/index';
 
 export * from './ide';
 export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -89,7 +90,7 @@ export function handlePreview(props) {
     const inIDE = !!props.get('data-nodepath');
     const { options = [], modelValue = [] } = insProps;
     const previewText = inIDE ? '-' : getListPreviewText(options, modelValue);
-    return <el-preview text={previewText} />;
+    return <ElPreview text={previewText} />;
   };
 
   const { render, insRef } = getRender(Component, previewRender, isPreview);

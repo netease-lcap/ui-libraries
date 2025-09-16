@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { ElCheckboxGroup, ElCheckbox, ElIcon, ElFlex, ElPopover } from '@/index';
 
 // TODO
 export function tableToolBarPlugin(props) {
@@ -13,32 +14,32 @@ export function tableToolBarPlugin(props) {
       return (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 0' }}>
           <div />
-          <el-flex style={{ display: 'flex', alignItems: 'center' }}>
-            <el-popover title="列配置" key="12" trigger="click" width="200" show-arrow={false}>
+          <ElFlex style={{ display: 'flex', alignItems: 'center' }}>
+            <ElPopover title="列配置" key="12" trigger="click" width="200" show-arrow={false}>
               {{
-                reference: <el-icon name="Setting" size="18px" />,
+                reference: <ElIcon name="Setting" size="18px" />,
                 default: () => {
                   return (
                     <div>
-                      <el-checkbox-group
+                      <ElCheckboxGroup
                         onChange={(value) => {
                           attrs.setValue(value);
                         }}
                       >
                         {_.map(props.columns, (item) => (
-                          <el-checkbox
+                          <ElCheckbox
                             label={item.label}
                             value={item.prop}
                             checked={props.value?.includes?.(item.prop)}
                           />
                         ))}
-                      </el-checkbox-group>
+                      </ElCheckboxGroup>
                     </div>
                   );
                 },
               }}
-            </el-popover>
-          </el-flex>
+            </ElPopover>
+          </ElFlex>
         </div>
       );
     },
