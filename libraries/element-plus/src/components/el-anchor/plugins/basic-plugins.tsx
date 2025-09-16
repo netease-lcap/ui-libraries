@@ -49,6 +49,7 @@ export default AnchorAccumulate.addPlugin({
       loading,
       data: dataSource,
       slots: _.assign(slots, dataSourceSlots),
+      add: '1324',
     };
   },
 });

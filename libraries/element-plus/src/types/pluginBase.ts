@@ -1,4 +1,5 @@
 import type { VNode } from 'vue';
+import type { RouteLocationNormalized, Router } from 'vue-router';
 import { $deletePropsList } from '@/plugins/constants';
 
 type ref = {
@@ -31,5 +32,9 @@ export type PluginBase = {
   inject: inject;
   emit: emit;
   render: render;
+  showInDesigner: boolean;
+  route: RouteLocationNormalized;
+  router: Router;
 };
+
 export type GetOptionsType<T> = T extends { new (options?: infer O): any } ? O : never;

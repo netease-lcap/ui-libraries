@@ -4,7 +4,7 @@ import { AnchorLinkProps } from 'element-plus/es/components/anchor/src/anchor-li
 
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-const AnchorLinkAccumulate = new PluginAccumulateTypes<nasl.ui.ElAnchorLinkOptions, AnchorLinkProps, Record<string, never>>();
+const AnchorLinkAccumulate = new PluginAccumulateTypes<nasl.ui.ElAnchorLinkOptions, AnchorLinkProps>();
 
 export default AnchorLinkAccumulate.addPlugin({
   name: 'handleSlots',

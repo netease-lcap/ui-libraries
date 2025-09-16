@@ -42,16 +42,33 @@ type ConvertDataSourceToType<T> = {
   [K in keyof T as K extends 'dataSource' ? K : never]: DataSourceType;
 };
 
+type ConvertHrefAndToToType<T> = {
+  [K in keyof T as K extends 'hrefAndTo' ? never : K]: T[K];
+} & (T extends { hrefAndTo: any }
+  ? {
+      href: string;
+      link: string;
+      destination: string;
+    }
+  : object);
+
 // 辅助类型：转换插件相关的类型
 // 1. 将 slot 开头的函数转换为 slots 对象
 // 2. 将 Field 结尾的字段转换为 string 类型
 // 3. 将 dataSource 字段转换为 DataSourceType 类型
+// 4. 将 hrefAndTo 字段展开为 href、link、destination 三个独立字段
 // 添加第二个泛型参数用于排除指定类型中的所有 key 值
-type ConvertPluginTypes<T, TExclude = never> = {
+type ConvertPluginTypes<T> = {
   slots: ExtractSlots<T>;
 } & ConvertFieldsToString<T> &
   ConvertDataSourceToType<T> &
-  Omit<T, keyof ExtractSlots<T> | keyof ConvertFieldsToString<T> | keyof ConvertDataSourceToType<T> | keyof TExclude>;
+  ConvertHrefAndToToType<T> &
+  Omit<
+    T,
+    | keyof ExtractSlots<T>
+    | keyof ConvertFieldsToString<T>
+    | keyof ConvertDataSourceToType<T>
+  >;
 
 /**
  * 插件累加器类型
@@ -62,17 +79,16 @@ type ConvertPluginTypes<T, TExclude = never> = {
  *   - 将 slot 开头的函数转换为 slots 对象
  *   - 将 Field 结尾的字段转换为 string 类型
  *   - 将 dataSource 字段转换为 DataSourceType 类型
+ *   - 将 hrefAndTo 字段展开为 href、link、destination 三个独立字段
  *
- * @template TPluginOptions 插件选项类型，会与 TInitial 交叉，并自动转换插件相关类型
+ * @template TPluginOptions 插件选项类型，会自动转换插件相关类型
  * @template TPluginContext 插件上下文类型
- * @template TInitial 初始值类型，会与 PluginBase 合并
  * @template TAccumulatedProps 当前累积的所有props类型
  */
 export class PluginAccumulateTypes<
-  TPluginOptions = Record<string, never>,
-  TPluginContext = Record<string, never>,
-  TInitial = object,
-  TAccumulatedProps = TPluginContext & ConvertPluginTypes<TPluginOptions, TInitial> & TInitial & PluginBase,
+  TPluginOptions = object,
+  TPluginContext = object,
+  TAccumulatedProps = TPluginContext & ConvertPluginTypes<TPluginOptions> & PluginBase,
 > {
   Plugin: Plugin<any, any>[] = [];
 
@@ -89,8 +105,7 @@ export class PluginAccumulateTypes<
   }): PluginAccumulateTypes<
     TPluginOptions,
     TPluginContext,
-    TInitial,
-    TPluginContext & ConvertPluginTypes<TPluginOptions, TInitial> & TInitial & PluginBase & TReturn
+    TPluginContext & ConvertPluginTypes<TPluginOptions> & PluginBase & TReturn
   > {
     // 存储插件，使用 const 泛型参数来自动推导字面量类型
     this.Plugin.push(plugin as any);
@@ -103,13 +118,12 @@ export class PluginAccumulateTypes<
    * @param other 另一个 PluginAccumulateTypes 实例
    * @returns 新的插件累加器实例，包含合并后的类型
    */
-  addAccumulate<TOtherPluginOptions, TOtherContext, TOtherInitial, TOtherAccumulated>(
-    other: PluginAccumulateTypes<TOtherPluginOptions, TOtherContext, TOtherInitial, TOtherAccumulated>,
+  addAccumulate<TOtherPluginOptions, TOtherContext, TOtherAccumulated>(
+    other: PluginAccumulateTypes<TOtherPluginOptions, TOtherContext, TOtherAccumulated>,
   ): PluginAccumulateTypes<
     TPluginOptions,
     TOtherContext,
-    TInitial,
-    PluginBase & TInitial & ConvertPluginTypes<TPluginOptions, TInitial> & TOtherAccumulated
+    PluginBase & ConvertPluginTypes<TPluginOptions> & TOtherAccumulated
   > {
     // 将另一个实例的所有插件添加到当前实例中
     this.Plugin.push(...other.Plugin);

@@ -2,7 +2,7 @@ import { ElCard as ElCardPlus } from 'element-plus';
 import _ from 'lodash';
 import './index.css';
 import { registerComponent } from '@/plugins';
-import * as basicsPlugin from './plugins/index';
+import basicsPlugin from './plugins/index';
 
 function ElCardRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
