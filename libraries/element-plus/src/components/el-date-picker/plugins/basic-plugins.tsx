@@ -2,14 +2,13 @@
 import _ from 'lodash';
 import dayjs from 'dayjs';
 import { DatePickerProps } from 'element-plus';
+import { $deletePropsList } from '@/plugins/constants';
 import { useControllableValue, useMemo } from '@/plugins/hooks';
 import { getIsPreview, getRender, getFormatDateOrTime } from '@/plugins/common/preview';
 import { ElText } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import idePlugin from './ide';
-
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
-
 import { handleIcon } from '@/plugins/common/icon';
 
 const DatePickerBasicAccumulate = new PluginAccumulateTypes<
@@ -41,8 +40,10 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
     handle: (props) => {
       const type = props.get('type') ?? 'date';
       const isRange = type.includes('range');
+      const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
       return {
         range: isRange,
+        [$deletePropsList]: deletePropsList,
         formTagName: 'el-form-date-picker',
         tagName: 'el-date-picker',
       };

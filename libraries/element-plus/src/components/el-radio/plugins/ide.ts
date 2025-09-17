@@ -22,8 +22,6 @@ export default RadioAccumulate.addPlugin({
     return {
       class: `${myClass} ${nodeId}`,
       [$deletePropsList]: deletePropsList,
-      formTagName: 'el-form-radio-group',
-      tagName: 'el-radio-group',
     };
   },
 });

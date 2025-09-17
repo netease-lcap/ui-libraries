@@ -6,15 +6,18 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import idePlugin from './ide';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
+import { $deletePropsList } from '@/plugins/constants';
 
 const InputTagBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElInputTagOptions, InputTagProps>();
 export default InputTagBasicAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handleDefaultPrps',
-    handle() {
+    handle(props) {
+      const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
       return {
         formTagName: 'el-form-input-tag',
         tagName: 'el-input-tag',
+        [$deletePropsList]: deletePropsList,
       };
     },
   })

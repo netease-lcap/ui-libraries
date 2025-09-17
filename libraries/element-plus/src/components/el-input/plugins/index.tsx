@@ -5,7 +5,7 @@ import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { ElPreview } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import idePlugin from './ide';
-
+import { $deletePropsList } from '@/plugins/constants';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
 
@@ -16,11 +16,13 @@ export default InputBasicAccumulate.addAccumulate(idePlugin)
     name: 'handleDefaultPrps',
     handle(props) {
       const placeholder = props.get('placeholder') ?? '请输入内容';
+      const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
       return {
         placeholder,
         rows: 3,
         formTagName: 'el-form-input',
         tagName: 'el-input',
+        [$deletePropsList]: deletePropsList,
       };
     },
   })

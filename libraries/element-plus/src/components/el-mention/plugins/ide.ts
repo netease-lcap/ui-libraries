@@ -22,8 +22,6 @@ export default MentionIdeAccumulate.addPlugin({
     return {
       class: `${myClass} ${nodeId}`,
       [$deletePropsList]: deletePropsList,
-      formTagName: 'el-form-mention',
-      tagName: 'el-mention',
     };
   },
 });

@@ -15,7 +15,7 @@ export default DescriptionsBasicAccumulate.addPlugin({
   name: 'handleNodePath',
   type: 'ide',
   handle: (props) => {
-    const nodePath = props.get('data-nodepath') || '3333';
+    const nodePath = props.get('data-nodepath');
     const myClass = props.get('class', '');
     const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
     const nodeId = useMemo(() => _.uniqueId('Descriptions_'), []);

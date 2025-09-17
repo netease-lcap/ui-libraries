@@ -1,7 +1,7 @@
 import { ElWatermark as ElWatermarkPlus } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
-import * as basicsPlugin from './plugins/index';
+import { registerComponent } from '@/plugins';
+import basicsPlugin from './plugins/basic-plugins';
 
 function ElWatermarkRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
@@ -12,4 +12,3 @@ const ElWatermark = registerComponent(ElWatermarkPlus, { plugin: basicsPlugin })
 
 export { ElWatermarkPlus, ElWatermark, ElWatermarkRegister };
 export default ElWatermark;
-

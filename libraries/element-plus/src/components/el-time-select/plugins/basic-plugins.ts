@@ -1,22 +1,36 @@
+import { TimeSelectProps } from 'element-plus';
 import { getPropsIcon } from '@/plugins/common/icon';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
-export { handleControllableValue } from '@/plugins/common/index';
+import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+import { handleControllableValue } from '@/plugins/common/index';
 
-export function handleTagName(props) {
-  const className = props.get('class') ?? '';
-  return {
-    formTagName: 'el-form-time-select',
-    tagName: 'el-time-select',
-    class: `${className} el-time-select`,
-  };
-}
-
-export function handleIcon(props) {
-  const prefixIconName = props.get('prefixIconName');
-  // const clearIconName = props.get('clearIconName', 'Close');
-  return {
-    prefixIcon: getPropsIcon({ name: prefixIconName }),
-    // clearIcon: getPropsIcon({ name: clearIconName }),
-  };
-}
+const TimeSelectBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElTimeSelectOptions, TimeSelectProps>();
+export default TimeSelectBasicAccumulate.addPlugin({
+  name: 'handleTagName',
+  handle(props) {
+    const className = props.get('class') ?? '';
+    return {
+      formTagName: 'el-form-time-select',
+      tagName: 'el-time-select',
+      class: `${className} el-time-select`,
+    };
+  },
+})
+  .addPlugin({
+    name: 'handleComponentInForm',
+    handle: handleComponentInForm,
+  })
+  .addPlugin({
+    name: 'handleControllableValue',
+    handle: handleControllableValue,
+  })
+  .addPlugin({
+    name: 'handleIcon',
+    handle(props) {
+      const prefixIconName = props.get('prefixIconName');
+      return {
+        prefixIcon: getPropsIcon({ name: prefixIconName }),
+      };
+    },
+  });

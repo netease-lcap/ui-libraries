@@ -1,13 +1,16 @@
-import { UploadFile, UploadRawFile } from 'element-plus';
+import { UploadFile, UploadRawFile, UploadContentProps } from 'element-plus';
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
 import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
 import { useRef } from '@/plugins/hooks';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
+import { $deletePropsList } from '@/plugins/constants';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import idePlugin from './ide';
+
+import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 type Converter = 'json' | 'simple';
-
-// TODO
 const getFileNameByURL = (url) => {
   const match = url.match(/\/([^/]+)$/);
   return match ? match[1] : null;
@@ -85,233 +88,269 @@ const getValueByList = (fileList: UploadFile[], converter: Converter, urlField: 
 
   return converter === 'simple' ? successFiles.map((x) => x.url || '').join(',') : JSON.stringify(successFiles);
 };
-
-export function removeValueByList(list: UploadFile[]) {
-  return Array.isArray(list) ? list.map((item) => item.url).join(',') : '';
-}
-
-export function handleResponse(props) {
-  const onRemove = props.get('onRemove');
-  const onChange = props.get('onChange');
-  const urlField = props.get('urlField') || 'filePath';
-  const converter = props.get('converter') || 'simple';
-  const value = props.get('modelValue');
-  const setValue = props.get('onUpdate:modelValue') ?? (() => {});
-  const defaultFileList = getFileListByValue(value, converter, undefined);
-  return {
-    fileList: defaultFileList,
-    onChange: (uploadFile: UploadFile, fileList: UploadFile[]) => {
-      if (uploadFile.status === 'success') {
-        const newValue = getValueByList(fileList, converter, urlField);
-        _.attempt(setValue, newValue);
-      }
-      _.attempt(onChange, uploadFile, fileList);
-    },
-    onRemove: (uploadFile, fileList) => {
-      const newValue = removeValueByList(fileList);
-      _.attempt(setValue, newValue);
-      _.attempt(onRemove, uploadFile, fileList);
-    },
-  };
-}
-
 const getLcapTtl = _.cond([
   [_.conforms({ ttl: isNil, ttlValue: isNil }), () => ({})],
   [_.conforms({ ttl: isNil, ttlValue: !isNil }), ({ ttlValue }) => ({ 'lcap-ttl': ttlValue })],
   [_.stubTrue, ({ ttl, ttlValue }) => ({ 'lcap-ttl': ttl ? ttlValue : -1 })],
 ]);
-export function handleRequestHeaders(props) {
-  const propHeaders = props.get('headers');
-  const access = props.get('access');
-  const ttl = props.get('ttl');
-  const ttlValue = props.get('ttlValue');
-
-  const { appInfo } = window as any;
-  const lcapAccessObject = access ? { 'lcap-access': access } : {};
-  const DomainName = appInfo?.domainName ? { DomainName: appInfo.domainName } : {};
-  const lcapTtl = getLcapTtl({ ttl, ttlValue });
-  const Authorization = { Authorization: getCookie('Authorization') };
-
-  return {
-    headers: _.assign(propHeaders, lcapAccessObject, DomainName, lcapTtl, Authorization),
-  };
+export function removeValueByList(list: UploadFile[]) {
+  return Array.isArray(list) ? list.map((item) => item.url).join(',') : '';
 }
-
-export function handleRequestData(props) {
-  const propData = props.get('data');
-  const lcapIsCompress = props.get('lcapIsCompress');
-  const viaOriginURL = props.get('viaOriginURL');
-  const action = props.get('action') || '/upload';
-
-  const formData = {
-    lcapIsCompress,
-    viaOriginURL,
-  };
-
-  return {
-    data: { ...(_.isObject(propData) ? propData : {}), ...formData },
-    action,
-  };
-}
-
-export function handleEvent(props) {
-  const beforeUpload = props.get('onBeforeUpload');
-  const beforeRemove = props.get('onBeforeRemove');
-
-  return {
-    beforeUpload: (rawFile: UploadRawFile) => {
-      _.isFunction(beforeUpload) && _.attempt(beforeUpload, rawFile);
-    },
-    beforeRemove: (uploadFile: UploadFile, uploadFiles: UploadFile[]) => {
-      _.isFunction(beforeRemove)
-        && _.attempt(beforeRemove, {
-          uploadFile,
-          uploadFiles,
-        });
-    },
-  };
-}
-
-export function handleSlots(props) {
-  const triggerUploadText = props.get('triggerUploadText') || '上传到服务器';
-  const slots = props.get('slots') || {};
-  const listType = props.get('listType');
-  const ref = props.get('ref');
-  const drag = props.get('drag');
-  const autoUpload = props.get('autoUpload');
-  const hasTip = props.get('hasTip');
-  const showUploadButton = props.get('showUploadButton');
-
-  const dragSlot = drag
-    ? {
-        trigger: (
-          <ElFlex direction="column" alignment="center">
-            <ElIcon class="el-icon--upload" name="UploadFilled" />
-            <ElFlex class="el-upload__text" justify="center">
-              <ElText text="拖拽到此区域 或者 " />
-              <ElText text="点击上传文件" color="primary" />
-            </ElFlex>
-          </ElFlex>
-        ),
-      }
-    : {};
-
-  const pictureCardSlot = listType === 'picture-card'
-      ? {
-          trigger: (
-            <ElFlex direction="column" alignment="center">
-              <ElIcon class="el-icon--upload" name="Plus" />
-            </ElFlex>
-          ),
-        }
-      : {};
-
-  const uploadSlot = !autoUpload && showUploadButton
-      ? {
-          default: (
-            <ElButton
-              text={triggerUploadText}
-              onClick={() => {
-                ref?.submit();
-              }}
-            />
-          ),
-        }
-      : {};
-
-  const tipSlot = hasTip ? { tip: slots.tip } : { tip: null };
-
-  return {
-    triggerUploadText,
-    slots: { ...slots, ...dragSlot, ...pictureCardSlot, ...uploadSlot, ...tipSlot },
-  };
-}
-
-export function handlePreviewRender(props) {
-  const Component = props.get('render');
-  const ref = props.get('ref');
-  const nodepath = props.get('data-nodepath');
-  const listType = props.get('listType');
-  const updateRef = useRef({});
-  const onPreview = props.get('onPreview');
-  const imageRef = useRef({});
-  const dialogRef = useRef({});
-  const urlField = props.get('url-field') || 'filePath';
-  if (listType !== 'picture-card') {
-    return {};
+const UploadBasicAccumulate = new PluginAccumulateTypes<
+  nasl.ui.ElUploadOptions,
+  UploadContentProps & {
+    'onUpdate:modelValue':(value: string) => void;
+    'onUpdate:fileList': (value: UploadFile[]) => void;
+    'onUpdate:onRemove': (value: (uploadFile: UploadFile, fileList: UploadFile[]) => void) => void;
+    'onUpdate:onChange': (value: (uploadFile: UploadFile, fileList: UploadFile[]) => void) => void;
+    'url-field': string;
   }
-  return {
-    render: (props, { attrs, slots }) => {
-      return [
-        <div data-nodepath={nodepath} style={props.style}>
-          <Component
-            ref={updateRef}
-            {..._.omit({ ...props, ...attrs }, ['style'])}
-            style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
-            v-slots={slots}
-          />
-          <ElDialog ref={dialogRef}>
-            <img
-              w-full
-              src={imageRef.value.dialogImageUrl}
-              alt="Preview Image"
-              style={{ width: '100%', height: '100%' }}
-            />
-          </ElDialog>
-        </div>,
-      ];
+>();
+
+export default UploadBasicAccumulate.addAccumulate(idePlugin)
+  .addPlugin({
+    name: 'handleTagName',
+    handle(props, context) {
+      return {
+        formTagName: 'el-form-upload',
+        tagName: 'el-upload',
+      };
     },
-    onPreview: (uploadFile: UploadFile) => {
-      const url = _.get(uploadFile, `response.${urlField}`, uploadFile.url);
-      imageRef.value.dialogImageUrl = url;
-      dialogRef.value.open();
-      _.attempt(onPreview, uploadFile);
+  })
+  .addPlugin({
+    name: 'handleComponentInForm',
+    handle: handleComponentInForm,
+  })
+  .addPlugin({
+    name: 'handlePreviewRender',
+    handle(props) {
+      const Component = props.get('render');
+      const ref = props.get('ref');
+      const nodepath = props.get('data-nodepath');
+      const listType = props.get('listType');
+      const updateRef = useRef<any>({});
+      const onPreview = props.get('onPreview');
+      const imageRef = useRef<{ dialogImageUrl?: string }>({});
+      const dialogRef = useRef<{ open?:() => void }>({});
+      const urlField = props.get('url-field') || 'filePath';
+      if (listType !== 'picture-card') {
+        return {};
+      }
+      return {
+        render: (props, { attrs, slots }) => {
+          return [
+            <div data-nodepath={nodepath} style={props.style}>
+              <Component
+                ref={updateRef}
+                {..._.omit({ ...props, ...attrs }, ['style'])}
+                style={_.pickBy(props.style, (value, key) => key?.startsWith('--'))}
+                v-slots={slots}
+              />
+              <ElDialog ref={dialogRef}>
+                <img w-full src={imageRef.value.dialogImageUrl} alt="" style={{ width: '100%', height: '100%' }} />
+              </ElDialog>
+            </div>,
+          ];
+        },
+        onPreview: (uploadFile: UploadFile) => {
+          const url = _.get(uploadFile, `response.${urlField}`, uploadFile.url);
+          imageRef.value.dialogImageUrl = url;
+          dialogRef.value.open?.();
+          _.attempt(onPreview, uploadFile);
+        },
+        ref: {
+          ...ref,
+          submit: () => {
+            updateRef.value.submit();
+          },
+          clearFiles: () => {
+            updateRef.value.clearFiles();
+          },
+          abort: () => {
+            updateRef.value.abort();
+          },
+          handleRemove: () => {
+            updateRef.value.handleRemove();
+          },
+          handleStart: () => {
+            updateRef.value.handleStart();
+          },
+        },
+      };
     },
-    ref: {
-      ...ref,
-      submit: () => {
-        updateRef.value.submit();
-      },
-      clearFiles: () => {
-        updateRef.value.clearFiles();
-      },
-      abort: () => {
-        updateRef.value.abort();
-      },
-      handleRemove: () => {
-        updateRef.value.handleRemove();
-      },
-      handleStart: () => {
-        updateRef.value.handleStart();
-      },
+  })
+  .addPlugin({
+    name: 'handleTagName',
+    handle(props) {
+      return {
+        formTagName: 'el-form-upload',
+        tagName: 'el-upload',
+      };
     },
-  };
-}
+  })
+  .addPlugin({
+    name: 'handleResponse',
+    handle(props) {
+      const onRemove = props.get('onRemove');
+      const onChange = props.get('onChange');
+      const urlField = props.get('urlField') || 'filePath';
+      const converter = props.get('converter') || 'simple';
+      const value = props.get('modelValue');
+      const setValue = props.get('onUpdate:modelValue') ?? (() => {});
+      const defaultFileList = getFileListByValue(value, converter, undefined);
+      return {
+        fileList: defaultFileList,
+        onChange: (uploadFile: UploadFile, fileList: UploadFile[]) => {
+          if (uploadFile.status === 'success') {
+            const newValue = getValueByList(fileList, converter, urlField);
+            _.attempt(setValue, newValue);
+          }
+          _.attempt(onChange, uploadFile, fileList);
+        },
+        onRemove: (uploadFile, fileList) => {
+          const newValue = removeValueByList(fileList);
+          _.attempt(setValue, newValue);
+          _.attempt(onRemove, uploadFile, fileList);
+        },
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleRequestHeaders',
+    handle(props) {
+      const propHeaders = props.get('headers');
+      const access = props.get('access');
+      const ttl = props.get('ttl');
+      const ttlValue = props.get('ttlValue');
 
-handlePreviewRender.order = 1;
+      const { appInfo } = window as any;
+      const lcapAccessObject = access ? { 'lcap-access': access } : {};
+      const DomainName = appInfo?.domainName ? { DomainName: appInfo.domainName } : {};
+      const lcapTtl = getLcapTtl({ ttl, ttlValue });
+      const Authorization = { Authorization: getCookie('Authorization') };
 
-export * from './ide';
+      return {
+        headers: _.assign(propHeaders, lcapAccessObject, DomainName, lcapTtl, Authorization),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleRequestData',
+    handle(props) {
+      const propData = props.get('data');
+      const lcapIsCompress = props.get('lcapIsCompress');
+      const viaOriginURL = props.get('viaOriginURL');
+      const action = props.get('action') || '/upload';
 
-export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+      const formData = {
+        lcapIsCompress,
+        viaOriginURL,
+      };
 
-export function handlePreview(props) {
-  const ref = props.get('ref');
-  const Component = props.get('render');
-  const isPreview = getIsPreview(props);
+      return {
+        data: { ...(_.isPlainObject(propData) ? (propData as Record<string, any>) : {}), ...formData },
+        action,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleEvent',
+    handle(props) {
+      const beforeUpload = props.get('onBeforeUpload');
+      const beforeRemove = props.get('onBeforeRemove');
 
-  const previewRender = (insProps, { attrs, slots }) => {
-    const inIDE = !!props.get('data-nodepath');
-    const myClass = props.get('class', '');
-    return inIDE ? (
-      <el-text text="-"></el-text>
-    ) : (
-      <Component {...{ insProps }} {...attrs} class={`${myClass} el-upload__preview`} />
-    );
-  };
+      return {
+        beforeUpload: (rawFile: UploadRawFile) => {
+          _.isFunction(beforeUpload) && _.attempt(beforeUpload, rawFile);
+        },
+        beforeRemove: (uploadFile: UploadFile, uploadFiles: UploadFile[]) => {
+          _.isFunction(beforeRemove)
+            && _.attempt(beforeRemove, {
+              uploadFile,
+              uploadFiles,
+            });
+        },
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleSlots',
+    handle(props) {
+      const triggerUploadText = props.get('triggerUploadText') || '上传到服务器';
+      const slots = props.get('slots') || {};
+      const listType = props.get('listType');
+      const ref = props.get('ref');
+      const drag = props.get('drag');
+      const autoUpload = props.get('autoUpload');
+      const hasTip = props.get('hasTip');
+      const showUploadButton = props.get('showUploadButton');
 
-  const { render, insRef } = getRender(Component, previewRender, isPreview);
-  return {
-    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
-    render,
-  };
-}
+      const dragSlot = drag
+        ? {
+            trigger: (
+              <ElFlex direction="column" alignment="center">
+                <ElIcon class="el-icon--upload" name="UploadFilled" />
+                <ElFlex class="el-upload__text" justify="center">
+                  <ElText text="拖拽到此区域 或者 " />
+                  <ElText text="点击上传文件" color="primary" />
+                </ElFlex>
+              </ElFlex>
+            ),
+          }
+        : {};
+
+      const pictureCardSlot = listType === 'picture-card'
+          ? {
+              trigger: (
+                <ElFlex direction="column" alignment="center">
+                  <ElIcon class="el-icon--upload" name="Plus" />
+                </ElFlex>
+              ),
+            }
+          : {};
+
+      const uploadSlot = !autoUpload && showUploadButton
+          ? {
+              default: (
+                <ElButton
+                  text={triggerUploadText}
+                  onClick={() => {
+                    ref?.submit();
+                  }}
+                />
+              ),
+            }
+          : {};
+
+      const tipSlot = hasTip ? { tip: slots.tip } : { tip: null };
+
+      return {
+        triggerUploadText,
+        slots: { ...slots, ...dragSlot, ...pictureCardSlot, ...uploadSlot, ...tipSlot },
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handlePreview',
+    handle(props) {
+      const ref = props.get('ref');
+      const Component = props.get('render');
+      const isPreview = getIsPreview(props);
+
+      const previewRender = (insProps, { attrs, slots }) => {
+        const inIDE = !!props.get('data-nodepath');
+        const myClass = props.get('class', '');
+        return inIDE ? (
+          <el-text text="-" />
+        ) : (
+          <Component {...{ insProps }} {...attrs} class={`${myClass} el-upload__preview`} />
+        );
+      };
+
+      const { render, insRef } = getRender(Component, previewRender, isPreview);
+      return {
+        ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+        render,
+      };
+    },
+  });

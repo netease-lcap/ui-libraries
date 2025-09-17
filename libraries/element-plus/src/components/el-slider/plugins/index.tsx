@@ -6,15 +6,17 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import idePlugin from './ide';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
-
+import { $deletePropsList } from '@/plugins/constants';
 const SliderAccumulate = new PluginAccumulateTypes<nasl.ui.ElSliderOptions, SliderProps>();
 export default SliderAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handleTagName',
-    handle(props, context) {
+    handle(props) {
+      const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
       return {
         formTagName: 'el-form-slider',
         tagName: 'el-slider',
+        [$deletePropsList]: deletePropsList,
       };
     },
   })

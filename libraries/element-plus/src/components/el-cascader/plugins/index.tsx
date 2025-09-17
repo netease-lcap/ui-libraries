@@ -49,7 +49,7 @@ export default CascaderAccumulate.addAccumulate(idePlugin)
       const parentField = props.get('parentField');
       const deletePropsList = props
         .get($deletePropsList)
-        .concat(['textField', 'valueField', 'parentField', 'childrenField']);
+        .concat(['data-nodepath', 'textField', 'valueField', 'parentField', 'childrenField']);
       const ref = props.get('ref');
       const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
       const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });

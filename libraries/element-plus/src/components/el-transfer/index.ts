@@ -1,7 +1,7 @@
 import { ElTransfer as ElTransferPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicsPlugin from './plugins/index';
+import basicsPlugin from './plugins/basic-plugins';
 import { withFormItem } from '@/components/el-form';
 import './index.css';
 
