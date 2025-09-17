@@ -18,8 +18,6 @@ export default CascaderAccumulate.addPlugin({
     const vusionD2cId = props.get('vusion-d2c-id');
     const myClass = props.get('class');
     const nodeId = useMemo(() => _.uniqueId('Cascader_'), []);
-    const formTagName = props.get($formTagName) || 'el-form-cascader';
-    const tagName = props.get($tagName) || 'el-cascader';
     useEffect(() => {
       const node = document.querySelector(`.${nodeId}`);
       node?.setAttribute('data-nodepath', nodePath);
@@ -27,8 +25,6 @@ export default CascaderAccumulate.addPlugin({
     }, []);
     return {
       class: `${myClass} ${nodeId}`,
-      formTagName,
-      tagName,
     };
   },
 });

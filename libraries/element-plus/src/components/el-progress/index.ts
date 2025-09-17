@@ -1,7 +1,7 @@
 import { ElProgress as ElProgressPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '../../plugins';
-import * as basicsPlugin from './plugins/index';
+import basicsPlugin from './plugins/basic-plugins';
 
 function ElProgressRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;

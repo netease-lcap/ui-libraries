@@ -3,9 +3,9 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import { ElFlex } from '@/components/el-flex';
 
-import * as basicsPlugin from './plugins/index';
-import * as columnPlugin from './plugins/column';
-import * as tableToolBarPlugin from './plugins/table-toolbar.tsx';
+import basicsPlugin from './plugins/index';
+import columnPlugin from './plugins/column';
+import tableToolBarPlugin from './plugins/table-toolbar';
 import './index.css';
 
 function ElTableRegister(BaseComponent, plugin = {}, extend = true) {

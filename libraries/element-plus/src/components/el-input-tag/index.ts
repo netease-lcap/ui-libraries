@@ -2,7 +2,7 @@ import { ElInputTag as ElInputTagPlus } from 'element-plus';
 import _ from 'lodash';
 import './index.css';
 import { registerComponent } from '../../plugins';
-import * as basicsPlugin from './plugins/index';
+import basicsPlugin from './plugins/index';
 import { withFormItem } from '../../components/el-form/plugins/form-item';
 
 function ElInputTagRegister(BaseComponent, plugin = {}, extend = true) {

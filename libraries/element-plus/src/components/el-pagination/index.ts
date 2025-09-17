@@ -1,7 +1,7 @@
 import { ElPagination as ElPaginationPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicPlugin from './plugins/basic-plugins';
+import basicPlugin from './plugins/basic-plugins';
 
 function ElPaginationRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicPlugin, plugin) : plugin;

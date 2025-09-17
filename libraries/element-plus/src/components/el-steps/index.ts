@@ -1,8 +1,8 @@
 import { ElSteps as ElStepsPlus, ElStep as ElStepPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicsPlugin from './plugins/index';
-import * as itemPlugin from './plugins/item-plugins';
+import basicsPlugin from './plugins/basic-plugins';
+import itemPlugin from './plugins/item-plugins';
 
 function ElStepsRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;

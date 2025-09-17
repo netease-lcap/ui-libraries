@@ -1,7 +1,7 @@
 import { ElRadio, ElRadioGroup as ElRadioGroupPlus, ElRadioButton as ElRadioButtonPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicsPlugin from './plugins/index';
+import basicsPlugin from './plugins/index';
 import { withFormItem } from '@/components/el-form';
 
 function ElRadioGroupRegister(BaseComponent, plugin = {}, extend = true) {

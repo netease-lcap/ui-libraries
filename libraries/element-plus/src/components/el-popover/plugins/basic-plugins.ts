@@ -1,8 +1,15 @@
-export function handlePopperClass(props) {
-  const popperClassProp = props.get('popperClass');
-  const setClass = props.get('class');
+import { PopoverProps } from 'element-plus';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-  return {
-    popperClass: `${popperClassProp} ${setClass}`,
-  };
-}
+const PopoverBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElPopoverOptions, PopoverProps>();
+export default PopoverBasicAccumulate.addPlugin({
+  name: 'handlePopperClass',
+  handle(props) {
+    const popperClassProp = props.get('popperClass');
+    const setClass = props.get('class');
+
+    return {
+      popperClass: `${popperClassProp} ${setClass}`,
+    };
+  },
+});

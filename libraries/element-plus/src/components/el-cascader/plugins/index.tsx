@@ -24,6 +24,15 @@ const CascaderAccumulate = new PluginAccumulateTypes<
 
 export default CascaderAccumulate.addAccumulate(idePlugin)
   .addPlugin({
+    name: 'handleTagName',
+    handle: () => {
+      return {
+        formTagName: 'el-form-cascader',
+        tagName: 'el-cascader',
+      };
+    },
+  })
+  .addPlugin({
     name: 'handleComponentInForm',
     handle: handleComponentInForm,
   })
@@ -88,15 +97,17 @@ export default CascaderAccumulate.addAccumulate(idePlugin)
           let currentLevel = options;
           const pathTexts: string[] = [];
 
-          return path.reduce((acc, val) => {
-            const node = currentLevel.find((opt) => opt.value === val);
-            if (node) {
-              acc.push(node.label || '');
-              currentLevel = node.children || [];
+          return path
+            .reduce((acc, val) => {
+              const node = currentLevel.find((opt) => opt.value === val);
+              if (node) {
+                acc.push(node.label || '');
+                currentLevel = node.children || [];
+                return acc;
+              }
               return acc;
-            }
-            return acc;
-          }, pathTexts).join(separator);
+            }, pathTexts)
+            .join(separator);
         };
         const getListPreviewText = (data, modelValue) => {
           if (modelValue.length === 0) return '-';

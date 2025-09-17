@@ -4521,7 +4521,12 @@
     ".el-list-components__frag": "",
     ".el-list-components__frag:active,.el-list-components__frag._active": "",
     ".el-list-components__frag:focus,.el-list-components__frag._focus": "",
-    ".el-list-components__frag:hover,.el-list-components__frag._hover": ""
+    ".el-list-components__frag:hover,.el-list-components__frag._hover": "",
+    ".el-list-components__item": "",
+    ".el-list-components__item:active,.el-list-components__item._active": "",
+    ".el-list-components__item:focus,.el-list-components__item._focus": "",
+    ".el-list-components__item:hover,.el-list-components__item._hover": "",
+    ".el-list-components__item:not(:last-child)": ""
   },
   "ElMention": {
     ".el-mention": "提及",

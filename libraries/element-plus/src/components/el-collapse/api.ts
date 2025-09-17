@@ -165,13 +165,13 @@ namespace nasl.ui {
       title: '折叠面板项标题',
       description: '折叠面板项标题',
     })
-    slotTitle: (current: Current<T>) => Array<ViewComponent>;
+    slotTitle: (current: Current<T> & { isActive: nasl.core.Boolean }) => Array<ViewComponent>;
 
     @Slot({
       title: '图标内容',
       description: '图标内容',
     })
-    slotIcon: () => Array<ViewComponent>;
+    slotIcon: (isActive: nasl.core.Boolean) => Array<ViewComponent>;
 
     @Slot({
       title: '折叠面板项内容',
@@ -228,12 +228,12 @@ namespace nasl.ui {
       title: '标题',
       description: 'Collapse Item标题',
     })
-    slotTitle: () => Array<ViewComponent>;
+    slotTitle: ({ isActive }: { isActive: nasl.core.Boolean }) => Array<ViewComponent>;
 
     @Slot({
       title: '图标内容',
       description: '图标内容',
     })
-    slotIcon: () => Array<ViewComponent>;
+    slotIcon: ({ isActive }: { isActive: nasl.core.Boolean }) => Array<ViewComponent>;
   }
 }

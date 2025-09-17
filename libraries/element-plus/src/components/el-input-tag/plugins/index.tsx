@@ -1,27 +1,50 @@
 import _ from 'lodash';
+import { InputTagProps } from 'element-plus';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { ElPreview } from '@/index';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import idePlugin from './ide';
+import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
+import { handleControllableValue } from '@/plugins/common/index';
 
-export * from './ide';
-export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
-export { handleControllableValue } from '@/plugins/common/index';
+const InputTagBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElInputTagOptions, InputTagProps>();
+export default InputTagBasicAccumulate.addAccumulate(idePlugin)
+  .addPlugin({
+    name: 'handleDefaultPrps',
+    handle() {
+      return {
+        formTagName: 'el-form-input-tag',
+        tagName: 'el-input-tag',
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleComponentInForm',
+    handle: handleComponentInForm,
+  })
+  .addPlugin({
+    name: 'handleControllableValue',
+    handle: handleControllableValue,
+  })
+  .addPlugin({
+    name: 'handlePreview',
+    handle(props) {
+      const ref = props.get('ref');
+      const Component = props.get('render');
+      const isPreview = getIsPreview(props);
 
-export function handlePreview(props) {
-  const ref = props.get('ref');
-  const Component = props.get('render');
-  const isPreview = getIsPreview(props);
+      const previewRender = (insProps) => {
+        const inIDE = !!props.get('data-nodepath');
+        const value = (insProps.modelValue || []).join(', ');
+        const previewText = inIDE || _.isEmpty(value) ? '-' : value;
+        return <ElPreview text={previewText} />;
+      };
 
-  const previewRender = (insProps) => {
-    const inIDE = !!props.get('data-nodepath');
-    const value = (insProps.modelValue || []).join(', ');
-    const previewText = inIDE || _.isEmpty(value) ? '-' : value;
-    return <ElPreview text={previewText} />;
-  };
+      const { render, insRef } = getRender(Component, previewRender, isPreview);
 
-  const { render, insRef } = getRender(Component, previewRender, isPreview);
-
-  return {
-    ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
-    render,
-  };
-}
+      return {
+        ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
+        render,
+      };
+    },
+  });

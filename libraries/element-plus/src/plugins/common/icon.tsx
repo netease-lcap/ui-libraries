@@ -3,14 +3,14 @@ import { VNode } from 'vue';
 import { ElIcon } from '@/components';
 
 // 定义 handleIcon 函数的参数类型
-interface HandleIconProps {
+type HandleIconProps = {
   get: (key: string) => any;
-}
+};
 
 // 定义 handleIcon 函数的返回类型
-interface HandleIconResult {
+type HandleIconResult = {
   prefixIcon?: VNode;
-}
+};
 
 export function handleIcon(props: HandleIconProps): HandleIconResult {
   const prefixIconName = props.get('prefixIconName');

@@ -6,9 +6,9 @@ import {
 } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicPlugin from './plugins/basic-plugins';
-import * as itemPlugin from './plugins/item-plugin';
-import * as menuItemPlugin from './plugins/menu-item';
+import basicPlugin from './plugins/basic-plugins';
+import itemPlugin from './plugins/item-plugin';
+import menuItemPlugin from './plugins/menu-item';
 
 import './index.css';
 

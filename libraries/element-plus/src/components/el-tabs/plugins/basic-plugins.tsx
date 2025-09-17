@@ -1,63 +1,75 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
-import { ElTabPane } from 'element-plus';
+import { ElTabPane, TabsProps } from 'element-plus';
 import { useControllableValue, useMemo } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { getPropsIcon } from '@/plugins/common/icon';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-export function handleDataSource(props) {
-  const dataConfig = props.get('dataSource');
-  const textField = props.get('textField') || 'label';
-  const valueField = props.get('valueField') || 'value';
-  const slots = props.get('slots');
-  const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
-  const ref = props.get('ref');
-  const onTabClick = props.get('onTabClick') ?? (() => {});
+const TabsAccumulate = new PluginAccumulateTypes<nasl.ui.ElTabsOptions<any, any>, TabsProps>();
 
-  const { data, run: reload, loading } = useRequestDataSource(dataConfig);
-  const dataSource = useHandleMapField({ textField, valueField, value: 'name', dataSource: useFormatDataSource(data) });
-  const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
+export default TabsAccumulate.addPlugin({
+  name: 'handleDataSource',
+  handle(props) {
+    const dataConfig = props.get('dataSource');
+    const textField = props.get('titleField', 'label');
+    const valueField = props.get('valueField') || 'value';
+    const slots = props.get('slots');
+    const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
+    const ref = props.get('ref');
+    const onTabClick = props.get('onTabClick') ?? (() => {});
 
-  const [, , updateVal] = useControllableValue(props);
+    const { data, run: reload, loading } = useRequestDataSource(dataConfig);
+    const dataSource = useHandleMapField({
+      textField,
+      valueField,
+      value: 'name',
+      dataSource: useFormatDataSource(data),
+    });
+    const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 
-  const dataSourceSlots = useMemo(
-    () => (_.isNil(dataConfig)
-        ? {}
-        : {
-            default: () => _.map(dataSource, (item) => (
-              <ElTabPane
-                {...item}
-                v-slots={{
-                    label: () => slots?.label?.({ item }),
-                    default: () => slots?.content?.({ item }),
-                  }}
-              />
-              )),
-          }),
-    [dataConfig, dataSource, textField, valueField, slots],
-  );
+    const [, , updateVal] = useControllableValue(props);
 
-  return {
-    [$deletePropsList]: deletePropsList,
-    ref: selfRef,
-    loading,
-    data,
-    slots: _.assign(slots, dataSourceSlots),
-    ...updateVal,
-    onTabClick: _.wrap(onTabClick, (fn, ...args) => {
-      _.attempt(fn, ...args);
-    }),
-  };
-}
+    const dataSourceSlots = useMemo(
+      () => (_.isNil(dataConfig)
+          ? {}
+          : {
+              default: () => _.map(dataSource, (item) => (
+                <ElTabPane
+                  {...item}
+                  v-slots={{
+                      label: () => slots?.label?.({ item } as any),
+                      default: () => slots?.content?.({ item } as any),
+                    }}
+                />
+                )),
+            }),
+      [dataConfig, dataSource, textField, valueField, slots],
+    );
 
-export function handleAddIcon(props) {
-  const addIcon = props.get('addIcon');
-  const slots = props.get('slots');
+    return {
+      [$deletePropsList]: deletePropsList,
+      ref: selfRef,
+      loading,
+      data,
+      slots: _.assign(slots, dataSourceSlots),
+      ...updateVal,
+      onTabClick: _.wrap(onTabClick, (fn, ...args) => {
+        _.attempt(fn, ...args);
+      }),
+    };
+  },
+}).addPlugin({
+  name: 'handleAddIcon',
+  handle(props) {
+    const addIcon = props.get('addIcon');
+    const slots = props.get('slots');
 
-  return {
-    slots: _.assign(slots, {
-      'add-icon': () => getPropsIcon({ name: addIcon }),
-    }),
-  };
-}
+    return {
+      slots: _.assign(slots, {
+        'add-icon': () => getPropsIcon({ name: addIcon }),
+      }),
+    };
+  },
+});

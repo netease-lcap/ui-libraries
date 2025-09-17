@@ -2,7 +2,7 @@
 import { ElMention as ElMentionPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicPlugin from './plugins/index';
+import basicPlugin from './plugins/basic-plugins';
 import { withFormItem } from '@/components/el-form/plugins/form-item';
 import './index.css';
 

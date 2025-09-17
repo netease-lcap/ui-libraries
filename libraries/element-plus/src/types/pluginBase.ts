@@ -35,6 +35,8 @@ export type PluginBase = {
   showInDesigner: boolean;
   route: RouteLocationNormalized;
   router: Router;
+  style: Record<string, any>;
+  class: string;
 };
 
 export type GetOptionsType<T> = T extends { new (options?: infer O): any } ? O : never;
@@ -46,3 +48,6 @@ export interface IIdePluginBase {
 
   [$tagName]: string;
 }
+export type RenderFunctionWithInheritAttrs = ((selfProps: any, context: { attrs: any,slots: any }) => VNode) & {
+  inheritAttrs?: boolean;
+};

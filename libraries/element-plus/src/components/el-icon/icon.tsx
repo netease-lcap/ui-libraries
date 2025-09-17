@@ -8,6 +8,14 @@ export interface ElIconProps {
 }
 
 export const ElIconPropsDefine = {
+  onClick: {
+    type: Function,
+    default: () => {},
+  },
+  size: {
+    type: [String, Number],
+    default: () => '',
+  },
   name: {
     type: String,
     default: () => '',

@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue';
 import { ElFlex } from '../index';
-import './multi-layout.css'
+import './multi-layout.css';
 
 export default defineComponent({
   ...ElFlex,

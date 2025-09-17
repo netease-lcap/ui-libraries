@@ -1,8 +1,8 @@
 import { ElForm as ElFormPlus, ElFormItem as ElFormItemPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicsPlugin from './plugins/index';
-import * as formItemPlugin from './plugins/form-item-plugin';
+import basicsPlugin from './plugins/index';
+import formItemPlugin from './plugins/form-item-plugin';
 import { withFormItem } from './plugins/form-item';
 import './index.css';
 

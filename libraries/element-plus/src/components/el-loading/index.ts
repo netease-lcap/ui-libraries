@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Loading from './loading';
 import { registerComponent } from '@/plugins';
-import * as basicsPlugin from './plugins/index';
+import basicsPlugin from './plugins/index';
 
 function ElLoadingRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;

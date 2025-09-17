@@ -9,6 +9,7 @@ type ImmutableMap<T> = {
   get<K extends keyof T>(key: K): T[K];
   get<K extends keyof T, D>(key: K, defaultValue: D): T[K] | D;
   set<K extends keyof T>(key: K, value: T[K]): ImmutableMap<T>;
+  has<K extends keyof T>(key: K): boolean;
   merge(other: Partial<T>): ImmutableMap<T>;
   toJS(): T;
   [Symbol.iterator](): Iterator<[keyof T, T[keyof T]]>;
@@ -50,6 +51,7 @@ type ConvertHrefAndToToType<T> = {
       href: string;
       link: string;
       destination: string;
+      target: string;
     }
   : object);
 
@@ -64,7 +66,13 @@ export type ConvertPluginTypes<T> = {
 } & ConvertFieldsToString<T> &
   ConvertDataSourceToType<T> &
   ConvertHrefAndToToType<T> &
-  Omit<T, keyof ExtractSlots<T> | keyof ConvertFieldsToString<T> | keyof ConvertDataSourceToType<T>>;
+  Omit<
+    T,
+    | keyof ExtractSlots<T>
+    | keyof ConvertFieldsToString<T>
+    | keyof ConvertDataSourceToType<T>
+    | keyof ConvertHrefAndToToType<T>
+  >;
 
 /**
  * 插件累加器类型
@@ -94,9 +102,10 @@ export class PluginAccumulateTypes<
    * @param plugin 插件函数或对象
    * @returns 新的插件累加器实例，包含累加后的类型
    */
-  addPlugin<const TReturn extends Record<string, any>>(plugin: {
+  addPlugin<const TReturn extends Record<string, any> = Record<string, any>>(plugin: {
     handle: (props: ImmutableMap<TAccumulatedProps>, context: ImmutableMap<TPluginContext>) => TReturn;
     name: string;
+    type?:'ide'|'basic';
     [key: string]: any;
   }): PluginAccumulateTypes<TPluginOptions, TPluginContext, TAccumulatedProps & TReturn> {
     // 存储插件，使用 const 泛型参数来自动推导字面量类型

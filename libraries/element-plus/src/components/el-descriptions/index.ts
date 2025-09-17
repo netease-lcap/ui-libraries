@@ -1,11 +1,9 @@
 import { ElDescriptions as ElDescriptionsPlus, ElDescriptionsItem as ElDescriptionsItemPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicPlugin from './plugins/basic-plugins';
-import * as itemPlugins from './plugins/item-plugins';
+import basicPlugin from './plugins/basic-plugins';
+import itemPlugins from './plugins/item-plugins';
 import './index.css';
-
-import { ElDescriptionsCell } from './cell';
 
 function ElDescriptionsRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicPlugin, plugin) : plugin;
@@ -18,5 +16,5 @@ const ElDescriptionsItem = registerComponent(ElDescriptionsItemPlus, {
   name: 'ElDescriptionsItem',
 });
 
-export { ElDescriptionsPlus, ElDescriptions, ElDescriptionsItem, ElDescriptionsRegister ,ElDescriptionsItemPlus};
+export { ElDescriptionsPlus, ElDescriptions, ElDescriptionsItem, ElDescriptionsRegister, ElDescriptionsItemPlus };
 export default ElDescriptions;
