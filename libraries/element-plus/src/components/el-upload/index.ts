@@ -1,7 +1,7 @@
 import { ElUpload as ElUploadPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicPlugin from './plugins/basic-plugins';
+import basicPlugin from './plugins/basic-plugins';
 import { withFormItem } from '@/components/el-form';
 import './index.css';
 
@@ -15,7 +15,6 @@ const ElUpload = registerComponent(ElUploadPlus, {
 });
 
 const ElFormUpload = withFormItem(ElUpload, 'el-form-upload');
-
 
 export default ElUpload;
 
