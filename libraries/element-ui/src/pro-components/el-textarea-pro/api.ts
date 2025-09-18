@@ -166,6 +166,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '是否显示输入字数统计',
+      description: '是否显示输入字数统计',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showWordLimit: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '名称',
       description: '名称，HTML 元素原生属性',
       setter: { concept: 'InputSetter' },

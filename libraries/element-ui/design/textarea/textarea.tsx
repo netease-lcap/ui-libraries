@@ -276,7 +276,7 @@ export default mixins(Vue as VueConstructor<Textarea>, classPrefixMixins).extend
           class={classes}
           ref="refTextareaElem"
         ></textarea>
-        {limitText ? (
+        {limitText && this.showWordLimit ? (
           <div
             class={[
               `${this.componentName}__info_wrapper`,

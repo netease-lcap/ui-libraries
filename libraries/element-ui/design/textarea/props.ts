@@ -25,6 +25,11 @@ export default {
   maxlength: {
     type: [Number, String] as PropType<ElTextareaProps['maxlength']>,
   },
+  /** 是否显示输入字数统计 */
+  showWordLimit: {
+    type: Boolean,
+    default: false,
+  },
   /** 名称，HTML 元素原生属性 */
   name: {
     type: String,

@@ -2,6 +2,7 @@ import Component from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
 import ExampleDemo3 from '../demos/example-demo3.vue';
+import ExampleDemo4 from '../demos/example-demo4.vue';
 
 export default {
   id: 'el-menu-examples',
@@ -43,6 +44,16 @@ export const Example3 = {
   render: () => ({
     components: {
       exampleDemo: ExampleDemo3,
+    },
+    template: '<example-demo></example-demo>',
+  }),
+};
+
+export const Example4 = {
+  name: '数据源',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo4,
     },
     template: '<example-demo></example-demo>',
   }),

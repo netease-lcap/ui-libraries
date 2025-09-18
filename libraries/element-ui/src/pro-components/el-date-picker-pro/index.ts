@@ -13,7 +13,7 @@ export const ElDatePickerPro = registerComponent(DatePicker, plugins, {
   name: TAG_NAME,
   nativeEvents: [],
   slotNames: [],
-  methodNames: [],
+  methodNames: ['focus'],
   model: {
     prop: 'value',
     event: 'update:value',

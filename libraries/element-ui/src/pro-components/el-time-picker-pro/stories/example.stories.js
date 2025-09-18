@@ -28,7 +28,19 @@ export const Default = {
       },
     },
     template:
-      '<div>{{value}}<el-time-picker-pro :value.sync="value" :use12Hours="true" :inputAlign="align" :inputAutoWidth="true" format="HH时mm分ss秒" :clearable="true" @change="handleChange" @sync:state="handleSyncState"></el-time-picker-pro></div>',
+      `<div>
+        {{value}}
+        <el-time-picker-pro 
+          :value.sync="value" 
+          :use12Hours="true" 
+          :inputAlign="align" 
+          :inputAutoWidth="true" 
+          format="HH时mm分ss秒" 
+          :clearable="true" 
+          @change="handleChange"
+          @focus="(e) => { console.log('focus', e); }"
+          @sync:state="handleSyncState"
+        ></el-time-picker-pro></div>`,
   }),
 };
 
