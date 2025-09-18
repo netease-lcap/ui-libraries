@@ -9,7 +9,7 @@ export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'chang
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useDataSourceRender: NaslComponentPluginOptions = {
-  props: ['data', 'valueField', 'shape', 'itemProps'],
+  props: ['data', 'valueField', 'shape', 'itemProps', 'direction', 'column'],
   setup({ get: propGet, useComputed }) {
     const shapeRef = useComputed('shape', (v) => (v || 'normal'));
     const options = useComputed(['data', 'shape'], (data, shape) => {
@@ -41,8 +41,23 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
 
     provide('EL_RADIO_GROUP_SHAPE', shapeRef);
 
+    // 计算布局样式
+    const layoutStyle = useComputed(['direction', 'column'], (direction, column) => {
+      const dir = direction || 'horizontal';
+      const col = column || 0;
+
+      if (dir === 'vertical') {
+        return { display: 'flex', flexDirection: 'column', gap: '8px' };
+      }
+      if (col > 0) {
+        return { display: 'grid', gridTemplateColumns: `repeat(${col}, 1fr)`, gap: '8px' };
+      }
+      return { display: 'flex', flexWrap: 'wrap', gap: '8px' };
+    });
+
     return {
       options,
+      style: layoutStyle,
       slotDefault: () => {
         const dataSource = propGet('dataSource');
         const slotDefault = propGet('slotDefault');

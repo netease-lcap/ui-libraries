@@ -9,7 +9,7 @@ export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'chang
 export { useDataSource, useInitialLoaded } from '@lcap/vue2-utils/plugins/index';
 
 export const useDataSourceRender: NaslComponentPluginOptions = {
-  props: ['data', 'valueField', 'checkAll', 'itemProps'],
+  props: ['data', 'valueField', 'checkAll', 'itemProps', 'direction', 'column'],
   setup({ get: propGet, useComputed }, { h }) {
     const options = useComputed(['data'], () => {
       const dataSource = propGet('dataSource');
@@ -47,8 +47,23 @@ export const useDataSourceRender: NaslComponentPluginOptions = {
       return [];
     });
 
+    // 计算布局样式
+    const layoutStyle = useComputed(['direction', 'column'], (direction, column) => {
+      const dir = direction || 'horizontal';
+      const col = column || 0;
+
+      if (dir === 'vertical') {
+        return { display: 'flex', flexDirection: 'column', gap: '8px' };
+      }
+      if (col > 0) {
+        return { display: 'grid', gridTemplateColumns: `repeat(${col}, 1fr)`, gap: '8px' };
+      }
+      return { display: 'flex', flexWrap: 'wrap', gap: '8px' };
+    });
+
     return {
       options,
+      style: layoutStyle,
       slotDefault: () => {
         const slotDefault = propGet('slotDefault');
         const dataSource = propGet('dataSource');

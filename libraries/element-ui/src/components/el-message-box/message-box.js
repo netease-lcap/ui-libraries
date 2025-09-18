@@ -82,7 +82,7 @@ export default {
     closeOnHashChange: {
       type: Boolean,
       default: true,
-    }
+    },
   },
   watch: {
     visible: {
@@ -106,9 +106,18 @@ export default {
     };
   },
   mounted() {
-    const { beforeClose } = this.$listeners;
-    if (beforeClose) {
-      this.beforeClose = beforeClose;
+    const handler = this.$listeners?.['before-close'] || this.$listeners?.beforeClose;
+
+    if (handler && typeof handler === 'function') {
+      this.beforeClose = (action, instance, done) => {
+        try {
+          const result = handler.call(this, action, instance, done);
+          if (result !== false) done?.();
+        } catch (error) {
+          console.warn('MessageBox beforeClose error:', error);
+          done?.();
+        }
+      };
     }
   },
   beforeDestroy() {
