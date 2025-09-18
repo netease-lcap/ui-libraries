@@ -303,13 +303,13 @@ namespace nasl.ui {
     })
     showHeader: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '可编辑表格',
-      description: '可编辑表格',
-      setter: { concept: 'SwitchSetter' },
-    })
-    editTable: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '可编辑表格',
+    //   description: '可编辑表格',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // editTable: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
