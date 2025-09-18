@@ -215,8 +215,6 @@ namespace nasl.ui {
       setter: {
         concept: 'NumberInputSetter',
       },
-      if: (_) =>
-        _.mode === 'block' || (_.mode === 'flex' && _.justify !== 'space-between' && _.justify !== 'space-around'),
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 12;
 
