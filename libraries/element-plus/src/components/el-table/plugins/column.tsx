@@ -22,6 +22,7 @@ const EditDefault = {
             rowIndex: item.$index,
             columnIndex: item.cellIndex,
             editable: editable.value,
+            isPreview: !editable.value,
           })}
           <ElIcon
             onClick={() => {
@@ -41,7 +42,8 @@ const EditDefault = {
               item: item.row,
               rowIndex: item.$index,
               columnIndex: item.cellIndex,
-              editable,
+              editable: editable.value,
+              isPreview: !editable.value,
             })
             ?.map((node) => cloneVNode(node, {
                 onValidateSuccess: () => {},

@@ -583,6 +583,7 @@ namespace nasl.ui {
       rowIndex: nasl.core.Integer;
       columnIndex: nasl.core.Integer;
       editable: nasl.core.Boolean;
+      isPreview: nasl.core.Boolean;
     }) => Array<ViewComponent>;
 
     @Slot({
