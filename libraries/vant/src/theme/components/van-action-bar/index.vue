@@ -14,3 +14,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.van-action-bar {
+  width: 100%;
+  position:inherit;
+}
+</style>

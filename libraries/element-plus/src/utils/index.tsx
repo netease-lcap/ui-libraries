@@ -72,15 +72,33 @@ declare module 'lodash' {
   }
 }
 
-export function transformKeys(obj: Record<string, any>): Record<string, any> {
-  const result = _.reduce(
-    obj,
-    (result, value, key) => {
-      const keys = _.includes(key, '_') ? key.replace('_', '.') : key;
-      _.set(result, keys, value);
-      return result;
-    },
-    {} as Record<string, any>,
-  );
-  return { el: result };
+export function transformKeys(obj: Record<string, any>, lang): Record<string, any> {
+  function recursiveTransform(inputObj: any): any {
+    // 处理数组
+    if (_.isArray(inputObj)) {
+      return inputObj.map((item) => recursiveTransform(item));
+    }
+
+    // 处理普通对象
+    if (_.isPlainObject(inputObj)) {
+      return _.reduce(
+        inputObj,
+        (result, value, key) => {
+          // 转换键名：将所有 _ 替换为 .
+          const transformedKey = key.replace(/_/g, '.');
+          // 递归处理值
+          const transformedValue = recursiveTransform(value);
+          _.set(result, transformedKey, transformedValue);
+          return result;
+        },
+        {} as Record<string, any>,
+      );
+    }
+
+    // 其他类型（字符串、数字、布尔值等）直接返回
+    return inputObj;
+  }
+
+  const result = recursiveTransform(obj);
+  return { el: result, name: _.toLower(lang) };
 }

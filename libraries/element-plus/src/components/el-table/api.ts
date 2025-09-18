@@ -303,13 +303,13 @@ namespace nasl.ui {
     })
     showHeader: nasl.core.Boolean = true;
 
-    @Prop({
-      group: '主要属性',
-      title: '可编辑表格',
-      description: '可编辑表格',
-      setter: { concept: 'SwitchSetter' },
-    })
-    editTable: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '可编辑表格',
+    //   description: '可编辑表格',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // editTable: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -583,6 +583,7 @@ namespace nasl.ui {
       rowIndex: nasl.core.Integer;
       columnIndex: nasl.core.Integer;
       editable: nasl.core.Boolean;
+      isPreview: nasl.core.Boolean;
     }) => Array<ViewComponent>;
 
     @Slot({

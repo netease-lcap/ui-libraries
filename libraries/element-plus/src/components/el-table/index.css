@@ -20,3 +20,6 @@
 .el-table-wrapper{
   width: 100%;
 }
+.el-table .el-form-item{
+  margin-bottom: 0;
+}

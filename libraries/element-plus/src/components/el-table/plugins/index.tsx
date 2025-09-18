@@ -29,7 +29,11 @@ const TableAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElTableOptions<any, any, any, any>,
   IIdePluginBase &
     TableProps<any> &
-    PaginationProps & { onBefore:(params: any) => void; onSuccess: (data: any, params: any) => void }
+    PaginationProps & {
+      onBefore:(params: any) => void;
+      onSuccess: (data: any, params: any) => void;
+      editTable: boolean;
+    }
 >();
 
 export default TableAccumulate.addPlugin({
