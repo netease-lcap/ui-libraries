@@ -83,7 +83,7 @@ export default defineComponent({
         }
       }
 
-      return <ElIconPlus>{iconComponent ? h(iconComponent) : null}</ElIconPlus>;
+      return <ElIconPlus>{iconComponent ? h(iconComponent, props) : null}</ElIconPlus>;
     }
     return () => {
       return !props.name ? null : renderChildren();
