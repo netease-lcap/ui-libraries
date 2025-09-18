@@ -128,6 +128,17 @@ namespace nasl.ui {
     })
     iconField: (item: T) => any = ((item: any) => item.icon) as any;
 
+    @Prop<ElMenuOptions<T, V>, 'toField'>({
+      group: '数据属性',
+      title: '跳转链接字段',
+      description: '集合的元素类型中，用于跳转链接的属性名称',
+      setter: {
+          concept: 'PropertySelectSetter',
+      },
+      if: _ => _.hasDataSource === true,
+    })
+    toField: (item: T) => any = ((item: any)  => item.to) as any;
+
     @Prop<ElMenuOptions<T, V>, 'propsField'>({
       group: '数据属性',
       title: '菜单项属性字段',

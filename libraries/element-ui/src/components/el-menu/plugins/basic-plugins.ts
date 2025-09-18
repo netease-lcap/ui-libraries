@@ -2,11 +2,12 @@
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import { onMounted, watch } from '@vue/composition-api';
 import { VNode } from 'vue';
+import ElIcon from '../../el-icon';
 
 export { useDataSource } from './data-source';
 
 export const useExtendsPlugin: NaslComponentPluginOptions = {
-  props: ['data', 'titleField', 'valueField', 'propsField', 'typeField', 'childrenField', 'iconField'],
+  props: ['data', 'titleField', 'valueField', 'propsField', 'typeField', 'childrenField', 'iconField', 'toField'],
   setup: (props, { h, setupContext: ctx }) => {
     const { get: propGet } = props;
     const defaultActiveRef = props.useRef('defaultActive');
@@ -43,15 +44,17 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     const renderMenuItems = (item, index) => {
       const value = item[propGet('valueField') as string || 'value'];
       const title = item[propGet('titleField') as string || 'title'] || '';
+      const icon = item[propGet('iconField') as string || 'icon'];
+      const destination = item[propGet('toField') as string || 'to'];
       return h('el-menu-item', {
         key: `menuitem-${index}-${value}`,
         attrs: {
-          index: value,
+          destination,
           ...item[propGet('propsField') as string || 'props'],
         },
       }, [
-        h('i', {
-          class: item[propGet('iconField') as string || 'icon'],
+        h(ElIcon, {
+          attrs: { name: icon },
         }),
         h('span', [title]),
       ]);
@@ -107,8 +110,8 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       }, [
         h('template', {
           slot: 'title',
-        }, [h('i', {
-          class: icon,
+        }, [h(ElIcon, {
+          attrs: { name: icon },
         }), h('span', [title])]),
         h('template', {
           slot: 'default',

@@ -73,11 +73,24 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '图标类名',
+      title: '图标',
       description: '图标类名',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+      },
     })
-    icon: nasl.core.String = '';
+    icon: nasl.core.String;
+
+    @Prop({
+      title: '图标位置',
+      description: '设置图标居左或居右显示',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左' }, { title: '右' }],
+      },
+    })
+    iconPosition: 'left' | 'right' = 'left';
 
     @Prop({
       group: '交互属性',
