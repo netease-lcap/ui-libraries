@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-upload class="upload-demo" action="/upload"
+    v-model="fileList"
       url-field="filePath" multiple :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove"
     >
       <el-button type="primary">Click to upload</el-button>
@@ -10,12 +11,14 @@
         </div>
       </template>
     </el-upload>
+    {{ fileList }}
     <!-- <el-text :text="fileList"></el-text> -->
   </div>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+
 
 import type { UploadProps, UploadUserFile } from 'element-plus'
 

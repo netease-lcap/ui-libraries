@@ -10,6 +10,7 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import idePlugin from './ide';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
+import { addClass } from '@/utils';
 
 const CheckboxAccumulate = new PluginAccumulateTypes<nasl.ui.ElCheckboxGroupOptions<any, any>, CheckboxGroupProps>();
 
@@ -108,6 +109,23 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleDirection',
+    handle: (props) => {
+      const direction = props.get('direction');
+      const className = props.get('class');
+      const column = props.get('column');
+      const style = props.get('style');
+      return {
+        class: addClass(className, { 'el-checkbox-group-vertical': direction === 'vertical' }),
+        style: {
+          ...style,
+          'grid-template-columns': column ? `repeat(${column}, 1fr)` : 'auto-fill',
+          'grid-auto-flow': column ? 'row' : 'auto',
+        },
       };
     },
   });

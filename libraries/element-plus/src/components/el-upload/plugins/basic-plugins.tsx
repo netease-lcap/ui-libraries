@@ -34,7 +34,6 @@ const getFileListByValue = (value, converter: Converter = 'simple', fileList) =>
   if (!value) {
     return [];
   }
-
   if (converter === 'simple') {
     const values = value.split(',');
     return values.map((v) => {
@@ -45,7 +44,6 @@ const getFileListByValue = (value, converter: Converter = 'simple', fileList) =>
       } as UploadFile;
     });
   }
-
   try {
     const parsedValue = JSON.parse(value || '[]');
     return Array.isArray(parsedValue) ? parsedValue : [];
@@ -201,8 +199,10 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       return {
         fileList: defaultFileList,
         onChange: (uploadFile: UploadFile, fileList: UploadFile[]) => {
+          console.log(uploadFile,fileList,'====');
           if (uploadFile.status === 'success') {
             const newValue = getValueByList(fileList, converter, urlField);
+            console.log(newValue,'====');
             _.attempt(setValue, newValue);
           }
           _.attempt(onChange, uploadFile, fileList);

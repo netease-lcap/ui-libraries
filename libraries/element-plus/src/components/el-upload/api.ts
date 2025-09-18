@@ -229,6 +229,15 @@ namespace nasl.ui {
     })
     access: 'public' | 'private';
 
+
+    @Prop({
+      group: '主要属性',
+      title: '文件大小限制',
+      description: '文件大小限制',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    limit: nasl.core.Decimal;
+
     @Prop({
       group: '主要属性',
       title: '文件有效期',
