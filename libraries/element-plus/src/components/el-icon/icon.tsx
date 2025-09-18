@@ -12,6 +12,11 @@ export const ElIconPropsDefine = {
     type: Function,
     default: () => {},
   },
+  color: {
+    type: String,
+
+    default: () => '',
+  },
   size: {
     type: [String, Number],
     default: () => '',
@@ -83,7 +88,7 @@ export default defineComponent({
         }
       }
 
-      return <ElIconPlus>{iconComponent ? h(iconComponent) : null}</ElIconPlus>;
+      return <ElIconPlus>{iconComponent ? h(iconComponent, props) : null}</ElIconPlus>;
     }
     return () => {
       return !props.name ? null : renderChildren();
