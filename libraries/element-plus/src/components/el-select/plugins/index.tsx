@@ -17,8 +17,8 @@ const SelectBasicAccumulate = new PluginAccumulateTypes<
   typeof SelectProps & IIdePluginBase
 >();
 export default SelectBasicAccumulate.addPlugin({
-  name: 'handleDataSource',
-  handle(props) {
+  name: 'handleTagName',
+  handle() {
     return {
       formTagName: 'el-form-select',
       tagName: 'el-select',

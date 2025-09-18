@@ -16,6 +16,7 @@ export {
 export {
   ElTable,
   ElTableColumn,
+  ElTableColumnDynamic,
   ElTablePlus,
   ElTableRegister,
   ElTableColumnRegister,

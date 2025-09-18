@@ -1,13 +1,15 @@
-import { ref, watch, computed } from 'vue';
+/** @jsx h */
+import { ref, watch, computed, h } from 'vue';
 import { ElPagination } from 'element-plus';
 // import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 // import zhCn from 'element-plus/es/locale/lang/zh-cn';
 // import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 // import en from 'element-plus/dist/locale/en.mjs';
-
 import _ from 'lodash';
+import { ElTable, ElTableColumn, ElTableColumnDynamic } from '../../index';
+
 // import i18n from '../../../../dist-theme/i18n.json';
-import { transformKeys } from '@/utils';
+import { transformKeys } from '../../../utils';
 
 import Component from '../index';
 
@@ -279,47 +281,60 @@ dragSort="row"
   showHeader
   size=small"
 >
-  <el-table-column prop="applicant" title="申请人" width="100" fixedPosition="left"></el-table-column>
-  <el-table-column prop="status" title="申请状态" width="150" sorter></el-table-column>
-  <el-table-column prop="channel" title="签署方式" width="200"></el-table-column>
-  <el-table-column prop="email" title="邮箱地址" width="200" ellipsis></el-table-column>
-  <el-table-column prop="createTime" title="创建时间" width="160"></el-table-column>
-  <el-table-column prop="applyTime" title="申请时间" width="160"></el-table-column>
-  <el-table-column prop="modifyTime" title="修改时间" width="160"></el-table-column>
-  <el-table-column prop="confirmTime" title="确认时间" width="160"></el-table-column>
+  <el-table-column prop="applicant" label="申请人" width="100" fixedPosition="left"></el-table-column>
+  <el-table-column prop="status" label="申请状态" width="150" sorter></el-table-column>
+  <el-table-column prop="channel" label="签署方式" width="200"></el-table-column>
+  <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
+  <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
+  <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
+  <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
+  <el-table-column prop="confirmTime" label="确认时间" width="160"></el-table-column>
 </el-table>
     `,
   }),
 };
 export const Default = {
-  name: '基础翻页',
-  render: () => ({
+  name: '动态列',
+  render: (args, { parameters }) => ({
     setup() {
-      const value = ref(2);
+      const { globalConfig } = parameters;
+      const tableData = globalConfig.asyncData();
+      const columns = async () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve([
+              {
+                prop: 'email',
+                label: '邮件',
+              },
+              {
+                prop: 'modifyTime',
+                label: '修改时间',
+              },
+            ]);
+          }, 1000);
+        });
+      };
       const object = { a: 1, b: '2', c: 3 };
-
-      _.pickBy(object, (value, key) => {
-        console.log(value, key, '`==============');
-        return _.isNumber(value);
-      });
-      return {
-        value,
+      return () => {
+        return (
+          <ElTable dataSource={tableData}>
+            <ElTableColumn prop="label" label="index" />
+            <ElTableColumnDynamic dataSource={columns}>
+              {{
+                header: (item) => {
+                  return <div>{item.item.label}</div>;
+                },
+                default: (current) => {
+                  return <div>{current.item[current.columnItem.prop]}</div>;
+                },
+              }}
+            </ElTableColumnDynamic>
+            <ElTableColumn prop="createTime" label="index" />
+          </ElTable>
+        );
       };
     },
-    template: `
-  <el-table style="--el-table-border-color: #e10910; color:red" :pagination="true" :pageSize="20" data-nodepath="a55ba3783cb146a881ae5d54e594612b" key="component-a55ba3783cb146a881ae5d54e594612b" :dataSource="[{index:0},{index:1},{index:2}]"  rowKey="index" valueField="index"  >
-      <el-table-column data-nodepath="da0514a35d184c4aa1289d08aa8269f9" data-nodepath-multiple="true" dataNodepathMultiple="ture" key="component-da0514a35d184c4aa1289d08aa8269f9"  >
-      <template #default={...argus}>
-      </template>
-      <template #header={...argus}>
-          <div data-nodepath="554d8ebb9b9940d7af8d8bd25f460bb8"  >
-            <el-text data-nodepath="9dc4874002ca4d9ab0a0b32d3411599a" text="表格列" key="component-9dc4874002ca4d9ab0a0b32d3411599a" data-editable="true"  >
-            </el-text>
-          </div>
-      </template>
-      </el-table-column>
-    </el-table>
-    `,
   }),
 };
 
@@ -423,6 +438,7 @@ export const Example3 = {
               colspan: 0,
             };
           }
+          return {};
         },
       };
     },

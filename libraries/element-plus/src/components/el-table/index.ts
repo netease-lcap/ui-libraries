@@ -5,6 +5,7 @@ import { ElFlex } from '@/components/el-flex';
 
 import basicsPlugin from './plugins/index';
 import columnPlugin from './plugins/column';
+import columnDynamicPlugin from './plugins/column-dynamic';
 import tableToolBarPlugin from './plugins/table-toolbar';
 import './index.css';
 
@@ -25,6 +26,7 @@ function ElTableToolBarRegister(BaseComponent, plugin = {}, extend = true) {
 
 const ElTable = registerComponent(ElTablePlus, { plugin: basicsPlugin, name: 'el-table' });
 const ElTableColumn = registerComponent(ElTableColumnPlus, { plugin: columnPlugin, name: 'ElTableColumn' });
+const ElTableColumnDynamic = registerComponent(ElTableColumnPlus, { plugin: columnDynamicPlugin, name: 'ElTableColumnDynamic' });
 const ElTableToolBar = registerComponent<{ columns: any; selectedColumns: any; setSelectedColumns: any }>(ElFlex, {
   plugin: tableToolBarPlugin,
   name: 'el-table-tool-bar',
@@ -32,6 +34,7 @@ const ElTableToolBar = registerComponent<{ columns: any; selectedColumns: any; s
 
 export {
   ElTableColumn,
+  ElTableColumnDynamic,
   ElTable,
   ElTablePlus,
   ElTableToolBar,
