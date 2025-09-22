@@ -237,6 +237,14 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     limit: nasl.core.Decimal;
+    
+    @Prop({
+      group: '主要属性',
+      title: '禁用',
+      description: '是否禁用上传组件',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

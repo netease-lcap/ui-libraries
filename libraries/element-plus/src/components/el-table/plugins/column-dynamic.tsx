@@ -22,14 +22,26 @@ function ColumnDynamicRender(props, { attrs, slots }) {
     />
   ));
 }
-export default ColumnDynamicPluginAccumulate.addAccumulate(columnPlugin).addPlugin({
-  name: 'handleColumnDynamic',
-  handle(props) {
-    const dataSource = props.get('dataSource');
-    const { data } = useRequestDataSource(dataSource);
-    return {
-      render: ColumnDynamicRender,
-      data,
-    };
-  },
-});
+export default ColumnDynamicPluginAccumulate.addAccumulate(columnPlugin)
+  .addPlugin({
+    name: 'handleColumnDynamic',
+    handle(props) {
+      const dataSource = props.get('dataSource');
+      const { data } = useRequestDataSource(dataSource);
+      return {
+        render: ColumnDynamicRender,
+        data,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleShowInDesigner',
+    type: 'ide',
+    handle(props) {
+      const showInDesigner = props.get('showInDesigner');
+      if (!showInDesigner) return {};
+      return {
+        data: [{}],
+      };
+    },
+  });
