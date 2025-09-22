@@ -39,17 +39,17 @@ namespace nasl.ui {
       super();
     }
 
-    // @Method({
-    //   title: '显示弹出框',
-    //   description: '显示弹出框',
-    // })
-    // show(): void {}
+    @Method({
+      title: '显示弹出框',
+      description: '显示弹出框',
+    })
+    open(): void {}
 
     @Method({
       title: '关闭弹出框',
       description: '关闭弹出框',
     })
-    hide(): void {}
+    close(): void {}
   }
 
   export class ElPopoverOptions extends ViewComponentOptions {

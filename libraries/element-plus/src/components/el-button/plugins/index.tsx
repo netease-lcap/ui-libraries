@@ -88,4 +88,15 @@ export default ButtonAccumulate.addPlugin({
         }),
       };
     },
+  })
+  .addPlugin({
+    name: 'handleThrottleTime',
+    handle: (props) => {
+      const throttleTime = props.get('throttleTime');
+      const onClick = props.get('onClick', () => {});
+      if (!throttleTime) return {};
+      return {
+        onClick: _.throttle(onClick, throttleTime),
+      };
+    },
   });

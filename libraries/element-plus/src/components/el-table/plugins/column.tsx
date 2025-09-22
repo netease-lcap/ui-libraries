@@ -1,9 +1,11 @@
 import { ref, cloneVNode } from 'vue';
 import _ from 'lodash';
 import { TableColumnCtx } from 'element-plus';
+import { inject } from '@vue/composition-api';
 import { useMemo, useCallback } from '@/plugins/hooks';
 import { ElIcon } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import { $deletePropsList } from '@/plugins/constants';
 
 const EditDefault = {
   name: 'editDefault',
@@ -73,27 +75,33 @@ export default ColumnPluginAccumulate.addPlugin({
   name: 'handleColumn',
   handle(props) {
     const slots = props.get('slots');
-    const width = props.get('width') || _.get(props.get('style'), 'width', '');
+    const widthProps = props.get('width') || _.get(props.get('style'), 'width', '');
+    const regexNumberOrPx = /^\d+$|^\d+px$/;
+    const isFixedWidth = regexNumberOrPx.test(widthProps);
+    const deletePropsList = props.get($deletePropsList).concat(isFixedWidth ? [] : 'width');
+    const width = isFixedWidth ? { width: widthProps } : { minWidth: widthProps };
     const minWidth = props.get('minWidth') || _.get(props.get('style'), 'min-width', '');
+    const widthObj = _.mergeWith(width, { minWidth }, (obj, src) => src || obj);
     const align = props.get('align') || _.get(props.get('style'), 'text-align', 'left');
     return {
       align,
-      width,
-      minWidth,
+      ...widthObj,
+      [$deletePropsList]: deletePropsList,
       slots: {
         ...slots,
         default: (item: any) => slots?.default?.({
             ...item,
-            index: item.$index,
-            item: item.row,
-            rowIndex: item.$index,
-            columnIndex: item.cellIndex,
+            index: item?.$index,
+            item: item?.row,
+            rowIndex: item?.$index,
+            columnIndex: item?.cellIndex,
           }),
       },
     } as {
       align: string;
-      width: string;
-      minWidth: string;
+      width?: string;
+      [$deletePropsList]: string[];
+      minWidth?: string;
       slots: {
         default: (item: any) => any;
         [key: string]: any;
@@ -109,6 +117,17 @@ export default ColumnPluginAccumulate.addPlugin({
       return {
         sortable,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleTypeIndex',
+    handle(props) {
+      const type = props.get('type');
+      const inject = props.get('inject');
+      const autoIndex = props.get('autoIndex');
+      const index = useCallback((index) => (inject.currentPage - 1) * inject.pageSize + index + 1, [inject]);
+      const isAutoIndex = type === 'index' && autoIndex;
+      return isAutoIndex ? { index } : {};
     },
   })
   .addPlugin({

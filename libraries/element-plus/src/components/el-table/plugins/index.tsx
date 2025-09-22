@@ -1,7 +1,7 @@
 import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-plus';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { useMemo, useRef, useCallback, useControllableValue, useState } from '@/plugins/hooks';
+import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
@@ -119,6 +119,10 @@ export default TableAccumulate.addPlugin({
           ...pageSizeProps,
           pageSizes,
         },
+        provide: {
+          currentPage,
+          pageSize,
+        },
         currentPage,
         setCurrentPage,
         pageSize,
@@ -147,9 +151,10 @@ export default TableAccumulate.addPlugin({
           total,
           onPageChange,
         },
+
         pagination,
         onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
-          _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey)) });
+          _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey as string)) });
         }),
       };
     },
@@ -238,10 +243,9 @@ export default TableAccumulate.addPlugin({
       };
       const { list: data, total } = resultData as { list: any; total: number };
       const treeData = useDataSourceToTree(data, parentField, rowKey as string);
-      const selfRef = _.assign(ref, { reload, data: treeData });
+      const selfRef = _.assign(ref, { reload, data: treeData, getData: () => data });
 
       const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
-
       return {
         ref: selfRef,
         pageProps: _.assign(pageProps, { total }),
@@ -263,7 +267,7 @@ export default TableAccumulate.addPlugin({
         ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
         tableStyle: innerStyle,
         style,
-        render: (props, { attrs, slots }) => {
+        render: useCallback((props, { attrs, slots }) => {
           return [
             <div data-nodepath={nodepath} style={{ ...props.style }} class="el-table-wrapper">
               <Component
@@ -279,7 +283,7 @@ export default TableAccumulate.addPlugin({
               )}
             </div>,
           ];
-        },
+        }, []),
       };
     },
   })
@@ -295,7 +299,7 @@ export default TableAccumulate.addPlugin({
       const tableRef = useRef({});
       const render = useCallback((props, { attrs, slots }) => {
         return (
-          <ElForm>
+          <ElForm style="width:100%">
             <Component ref={tableRef} {...props} {...attrs} v-slots={slots} />
           </ElForm>
         );
@@ -345,12 +349,83 @@ export default TableAccumulate.addPlugin({
   .addPlugin({
     name: 'handleHeight',
     handle(props) {
-      const height = props.get('height');
-      const maxHeight = props.get('maxHeight');
+      const heightProps = props.get('height');
+      const maxHeightProps = props.get('maxHeight');
+      const styleProps = props.get('style');
+      const height = heightProps || styleProps.height || undefined;
+      const maxHeight = maxHeightProps || styleProps.maxHeight || undefined;
 
       return {
-        height: (height as unknown) === '' ? undefined : height,
-        maxHeight: (maxHeight as unknown) === '' ? undefined : maxHeight,
+        height,
+        maxHeight,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleSelectedValue',
+    handle(props) {
+      const ref = props.get('ref');
+      const currentChange = props.get('onCurrentChange', () => {});
+      const rowKey = props.get('rowKey');
+      const getRowKey = _.match(rowKey)
+        .when(
+          _.isString,
+          _.constant((item) => _.get(item, rowKey as string, 'id')),
+        )
+        .when(_.isFunction, _.constant(rowKey))
+        .exhaustive();
+      const [selectedValue, setSelectedValue] = useControllableValue(props, {
+        valuePropName: 'selectedValue',
+        onValueEffect: (currentValue) => {
+          ref.store.setCurrentRowKey(String(currentValue));
+        },
+      });
+      return {
+        onCurrentChange: _.wrap(currentChange, (fn, value) => {
+          fn({ row: value });
+          setSelectedValue(getRowKey(value));
+        }),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleSelectedValues',
+    handle(props) {
+      const ref = props.get('ref');
+      const data = props.get('data');
+      const selectionChange = props.get('onSelectionChange', () => {});
+      const rowKey = props.get('rowKey');
+      const getRowKey = _.match(rowKey)
+        .when(
+          _.isString,
+          _.constant((item) => _.get(item, rowKey as string, 'id')),
+        )
+        .when(_.isFunction, _.constant(rowKey))
+        .exhaustive();
+      function getSelectedRows(data, selectedValues) {
+        return _.map(selectedValues, (rowKey) => _.find(data, (item) => getRowKey(item) === rowKey)).filter(Boolean);
+      }
+      const [selectedValues, setSelectedValues] = useControllableValue(props, {
+        valuePropName: 'selectedValues',
+        onValueEffect: (currentValue) => {
+          const selectRows = getSelectedRows(data, currentValue);
+
+          _.defer(() => {
+            ref.clearSelection();
+            return _.map(selectRows, (row) => _.attempt(ref?.toggleRowSelection, row, true));
+          }, 0);
+        },
+      });
+      useEffect(() => {
+        const selectRows = getSelectedRows(data, selectedValues);
+        _.defer(() => _.map(selectRows, (row) => _.attempt(ref?.toggleRowSelection, row, true)), 0);
+      }, [data]);
+      return {
+        onSelectionChange: _.wrap(selectionChange, (fn, value: any) => {
+          const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
+          fn({ newSelection });
+          setSelectedValues(newSelection);
+        }),
       };
     },
   });

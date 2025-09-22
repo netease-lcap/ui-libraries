@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { LinkProps } from 'element-plus';
+import { saveAs } from 'file-saver';
 import { $deletePropsList } from '@/plugins/constants';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -35,7 +36,7 @@ export default LinkBasicAccumulate.addPlugin({
         [_.matches({ target: '_blank' }), _.constant(() => {})],
         [
           _.conforms({ destination: _.isString }),
-          ({ destination, target }) => () => router.push(destination, { target }),
+          ({ destination, target }) => () => router.push(destination),
         ],
         [_.stubTrue, _.constant(() => {})],
       ]);
@@ -62,6 +63,23 @@ export default LinkBasicAccumulate.addPlugin({
         slots: _.assign({}, slots, {
           default: () => [slots.default?.(), getPropsIcon({ name: rightIcon, class: 'el-link__right-icon' })],
         }),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleDownload',
+    handle(props) {
+      const download = props.get('download');
+      const href = props.get('href');
+      const click = props.get('onClick', () => {});
+      const deletePropsList = props.get($deletePropsList).concat(['href', 'target']);
+      if (!download) return {};
+      return {
+        onClick: _.wrap(click, (fn, ...args) => {
+          _.attempt(fn, ...args);
+          saveAs(href, href);
+        }),
+        [$deletePropsList]: deletePropsList,
       };
     },
   });

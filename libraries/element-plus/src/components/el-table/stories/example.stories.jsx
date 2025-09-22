@@ -175,7 +175,8 @@ ref="mytable"
 row-key="name"
 :dataSource="tableData2"
 border
-style="width: 300px"
+style="height:500px"
+min-height="500px"
 v-model:currentPage="currentPage"
 :showTotal="true"
 @selection-change="logCellClick"
@@ -194,8 +195,8 @@ dragSort="row"
 
 
 
-    <el-table-column prop="name" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
-    <el-table-column prop="name" label="Name" type="editable" class="myclomuns" :style="{'text-align':'left'}" />
+    <el-table-column prop="name" width="30%" label="Name" class="myclomuns" :style="{'text-align':'left'}" >
+    <el-table-column-plus prop="name" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
 
 
 </el-table>
@@ -254,6 +255,7 @@ export const Example2 = {
         tableData,
         pageSize2,
         currentPage,
+        
         mytable,
         selectedRowKeys,
       };
@@ -268,6 +270,7 @@ row-key="index"
 v-model:currentPage="currentPage"
 v-model:pageSize="pageSize2"
 :showTotal="true"
+:total="total"
 :sorting="{ field: 'createTime', order: 'desc' }"
 :showJumper="true"
 :pageSizes="[10, 100, 200, 300, 400]"
@@ -423,8 +426,17 @@ export const Example3 = {
       // setTimeout(() => {
       //   console.log(selectedRowKeys,'selectedRowKeys');
       // }, 1000);
+      const currentRowKey = ref([1, 2]);
+      const tableRef = ref();
+      const data = getTestData();
+      const selectedValue = ref(1);
       return {
         testData: getTestData(),
+        getTestData,
+        data,
+        tableRef,
+        currentRowKey,
+        selectedValue,
         objectSpanMethod({ rowIndex, columnIndex }) {
           if (columnIndex === 0) {
             if (rowIndex % 2 === 0) {
@@ -440,22 +452,48 @@ export const Example3 = {
           }
           return {};
         },
+        handleCurrentChange(val) {
+          console.log(val, 'val');
+
+          selectedValue.value += 1;
+        },
+        handleCurrentChange2() {
+          // console.log(tableRef.value.context.store.setCurrentRowKey('1'),'tableRef');
+          // console.log(tableRef.value.context.store.setCurrentRowKey('1'),'tableRef');
+          // console.log(tableRef, 'object');
+          console.log(currentRowKey);
+          // currentRowKey.value = _.sample([[1], [2], [3], [4]]);
+          currentRowKey.value = [1, 2, 3, 4];
+          // tableRef.value.store.setCurrentRowKey('1');
+          // tableRef.value.
+        },
       };
     },
     template: `
     
+    <div>
+    {{currentRowKey}}
+    'value'
+    {{selectedValue}}
          <el-table
-          :data="testData"
-          :span-method="objectSpanMethod"
+          :data="data"
+          highlight-current-row
+          ref="tableRef"
+          row-key="id"
+          v-model:selectedValues="currentRowKey"
+          v-model:selectedValue="selectedValue"
           border
           style="width: 100%; margin-top: 20px"
         >
-          <el-table-column prop="id" label="ID" width="180" />
-          <el-table-column prop="name" label="片名" />
-          <el-table-column prop="release" label="发行日期" />
-          <el-table-column prop="director" label="导演" />
-          <el-table-column prop="runtime" label="时长（分）" />
+          <el-table-column-plus prop="id" label="ID" width="180" type="selection" />
+          <el-table-column-plus prop="name" label="片名" />
+          <el-table-column-plus prop="release" label="发行日期" />
+          <el-table-column-plus prop="director" label="导演" />
+          <el-table-column-plus prop="runtime" label="时长（分）" />
         </el-table>
+        <button @click="handleCurrentChange2(1)">1</button>
+        <button @click="handleCurrentChange(1)">1</button>
+    </div>
     `,
   }),
 };

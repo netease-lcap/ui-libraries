@@ -20,7 +20,7 @@ export const Example1 = {
     },
     template: `
     <div>
-      <el-link href="https://element-plus.org" target="_blank">默认链接</el-link>
+      <el-link :download="true" href="http://minio-api.codewave-test.163yun.com/lowcode-static/user/cstest/1758278217982_1dfafea5607a4aa0a2946af72422b969.png" target="_blank">默认链接</el-link>
       <el-link type="primary">主要链接</el-link>
       <el-link type="success">成功链接</el-link>
       <el-link type="warning">警告链接</el-link>

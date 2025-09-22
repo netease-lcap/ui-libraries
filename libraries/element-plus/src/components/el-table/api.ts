@@ -104,6 +104,39 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
+      title: '多选选中值',
+      description: '多选选中值',
+      setter: { concept: 'InputSetter' },
+      sync: true,
+    })
+    selectedValues: nasl.collection.List<V>;
+
+    @Prop({
+      group: '主要属性',
+      title: '是否高亮当前行',
+      description: '是否高亮当前行',
+      setter: { concept: 'SwitchSetter' },
+      onChange: [
+        {
+          clear: ['selectedValue'],
+          if: (_) => _ === false,
+        },
+      ],
+    })
+    highlightCurrentRow: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '数据属性',
+      title: '单选选中值',
+      description: '单选选中值',
+      setter: { concept: 'InputSetter' },
+      sync: true,
+      if: (_) => _.highlightCurrentRow === true,
+    })
+    selectedValue: V;
+
+    @Prop({
+      group: '数据属性',
       title: '数据源',
       description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
       docDescription:
@@ -142,29 +175,6 @@ namespace nasl.ui {
           colspan?: nasl.core.Integer;
         }
       | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
-
-    @Prop({
-      group: '主要属性',
-      title: '表格高度',
-      description:
-        '表格高度，超出后会出现滚动条。示例：100,  "30%",  "300"。值为数字类型，会自动加上单位 px。如果不是绝对固定表格高度，建议使用 `maxHeight`',
-      setter: {
-        concept: 'InputSetter',
-        autoClear: true,
-      },
-    })
-    height: nasl.core.Decimal;
-
-    @Prop({
-      group: '主要属性',
-      title: '表格最大高度',
-      description: '表格最大高度，超出后会出现滚动条。示例：100, "30%", "300"。值为数字类型，会自动加上单位 px',
-      setter: {
-        concept: 'InputSetter',
-        autoClear: true,
-      },
-    })
-    maxHeight: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',
@@ -384,6 +394,12 @@ namespace nasl.ui {
     onRowClick: (event: { row: T; index: nasl.core.Integer }) => any;
 
     @Event({
+      title: '当前选中行变化时',
+      description: '当前选中行变化时触发',
+    })
+    onCurrentChange: (event: { row: T }) => any;
+
+    @Event({
       title: '行双击时触发',
       description: '行双击时触发',
     })
@@ -513,6 +529,18 @@ namespace nasl.ui {
       },
     })
     type: 'normal' | 'selection' | 'expand' | 'index' | 'editable' = 'normal';
+
+    @Prop<ElTableColumnOptions<T, V, P, M>, 'autoIndex'>({
+      group: '数据属性',
+      title: '换页继续编号',
+      description: '换页后，继续上一页的列序号进行编号',
+      docDescription: '支持换页后，继续上一页的列序号进行编号',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => _.type === 'index',
+    })
+    autoIndex: nasl.core.Boolean = false;
 
     @Prop({
       group: '数据属性',

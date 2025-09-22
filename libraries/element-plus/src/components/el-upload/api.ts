@@ -240,6 +240,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '文件大小限制',
+      description: '文件大小限制,单位为 MB,为空则不限制',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    fileSizeLimit: nasl.core.Decimal;
+
+    @Prop({
+      group: '主要属性',
       title: '文件有效期',
       description: '是否开启文件有效期控制',
       docDescription: '支持配置文件自动清理，开启后可自定义上传后有效天数',

@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
+import { ref, Ref, watch, provide, inject, defineComponent, unref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 // import create from 'zustand-vue';
@@ -72,7 +72,7 @@ export function registerComponent<T>(Component: any, options: any): any {
       const route = useRoute?.();
       const useStore = createStore((set) => ({
         state: {
-          inject: injectRef,
+          inject: unref(injectRef),
           provide: {},
           ref: {},
           router,
@@ -111,7 +111,7 @@ export function registerComponent<T>(Component: any, options: any): any {
         const commitImmutableState = commitState;
 
         const provide = commitState.get('provide');
-        const isRenderChange = Component !== commitState.get('render');
+        const isRenderChange = Render !== commitState.get('render');
         Render = isRenderChange ? commitState.get('render') : Render;
         const keys = commitImmutableState.keySeq().toArray();
         _.forEach(keys, (key) => {

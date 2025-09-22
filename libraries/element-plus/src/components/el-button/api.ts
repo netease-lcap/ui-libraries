@@ -66,6 +66,19 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '点击防抖',
+      description: '防止重复触发，控制操作频率，如不需要，清空或输0，单位毫秒',
+      docDescription: '防止重复触发，控制操作频率，如不需要，清空或输0，单位毫秒',
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 0,
+      },
+      bindHide: true,
+    })
+    throttleTime: nasl.core.Integer = 0;
+
+    @Prop({
+      group: '主要属性',
       title: '链接按钮',
       description: '是否为链接按钮',
       setter: { concept: 'SwitchSetter' },

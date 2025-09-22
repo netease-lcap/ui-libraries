@@ -43,7 +43,14 @@ type ConvertFieldsToString<T> = {
 type ConvertDataSourceToType<T> = {
   [K in keyof T as K extends 'dataSource' ? K : never]: DataSourceType;
 };
-
+// 类型函数：将 linkType 字段转换为 DataSourceType 类型
+type ConvertLinkTypeToDownload<T> = {
+  [K in keyof T as K extends 'linkType' ? K : never]: T[K];
+} & (T extends { linkType: string }
+  ? {
+      download: boolean;
+    }
+  : object);
 type ConvertHrefAndToToType<T> = {
   [K in keyof T as K extends 'hrefAndTo' ? never : K]: T[K];
 } & (T extends { hrefAndTo: any }
@@ -66,12 +73,14 @@ export type ConvertPluginTypes<T> = {
 } & ConvertFieldsToString<T> &
   ConvertDataSourceToType<T> &
   ConvertHrefAndToToType<T> &
+  ConvertLinkTypeToDownload<T> &
   Omit<
     T,
     | keyof ExtractSlots<T>
     | keyof ConvertFieldsToString<T>
     | keyof ConvertDataSourceToType<T>
     | keyof ConvertHrefAndToToType<T>
+    | keyof ConvertLinkTypeToDownload<T>
   >;
 
 /**
@@ -105,7 +114,7 @@ export class PluginAccumulateTypes<
   addPlugin<const TReturn extends Record<string, any> = Record<string, any>>(plugin: {
     handle: (props: ImmutableMap<TAccumulatedProps>, context: ImmutableMap<TPluginContext>) => TReturn;
     name: string;
-    type?:'ide'|'basic';
+    type?: 'ide' | 'basic';
     [key: string]: any;
   }): PluginAccumulateTypes<TPluginOptions, TPluginContext, TAccumulatedProps & TReturn> {
     // 存储插件，使用 const 泛型参数来自动推导字面量类型

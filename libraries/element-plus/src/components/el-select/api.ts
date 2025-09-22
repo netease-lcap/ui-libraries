@@ -45,6 +45,11 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElSelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
     constructor(options?: Partial<ElSelectOptions<T, V, P, M, C>>) {
       super();
     }
@@ -188,6 +193,24 @@ namespace nasl.ui {
     })
     multiple: M = false as any;
 
+    @Prop<ElSelectOptions<T, V, P, M, C>, 'collapseTags'>({
+      group: '主要属性',
+      title: '是否折叠标签',
+      description: '是否折叠标签',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => !!_.multiple,
+    })
+    collapseTags: nasl.core.Boolean = false;
+
+    @Prop<ElSelectOptions<T, V, P, M, C>, 'collapseTagsTooltip'>({
+      group: '主要属性',
+      title: '是否折叠标签提示',
+      description: '是否折叠标签提示',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => !!_.collapseTags,
+    })
+    collapseTagsTooltip: nasl.core.Boolean = false;
+
 
     @Prop({
       group: '主要属性',
@@ -197,21 +220,6 @@ namespace nasl.ui {
     })
     virtualize: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Panel Bottom Content',
-    //   description: '面板内的底部内容。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // panelBottomContent: any;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Panel Top Content',
-    //   description: '面板内的顶部内容。',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // panelTopContent: any;
 
     @Prop({
       group: '主要属性',
