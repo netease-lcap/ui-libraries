@@ -600,7 +600,7 @@ namespace nasl.ui {
       parentAccept: "['el-table'].includes(target.tag)",
       slotWrapperInlineStyle: {},
       additionalAttribute: {
-        ':dataSource': '"[{}]"',
+        ':showInDesigner': '"true"',
       },
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
