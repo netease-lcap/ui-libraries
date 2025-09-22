@@ -96,6 +96,30 @@ namespace nasl.ui {
     })
     value: nasl.collection.List<V>;
 
+    @Prop({
+      group: '主要属性',
+      title: '排列方向',
+      description: '设置多选组的排列方向',
+      setter: {
+        concept: "EnumSelectSetter",
+        options: [{ title: '水平' }, { title: '垂直' }]
+      }
+    })
+    direction: 'horizontal' | 'vertical' = 'horizontal';
+
+    @Prop<ElCheckboxGroupProOptions<T, V>, 'column'>({
+      group: '主要属性',
+      title: '每行排列数',
+      description: '水平排列时每行展示的选项数量',
+      setter: {
+        concept: "NumberInputSetter",
+        precision: 0,
+        min: 1
+      },
+      if: _ => _.direction === 'horizontal'
+    })
+    column: nasl.core.Integer;
+
     @Prop<ElCheckboxGroupProOptions<T, V>, 'itemProps'>({
       group: '数据属性',
       title: '多选项属性设置',

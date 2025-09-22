@@ -43,6 +43,7 @@ export const Example1 = {
         console.log('cancel');
       },
       beforeClose(action, instance, done) {
+        console.log('before-close');
         if (action === 'confirm') {
           instance.confirmButtonLoading = true;
           instance.confirmButtonText = '执行中...';
@@ -89,7 +90,7 @@ export const Example1 = {
         :showClose="true" 
         title="提示" 
         @close="close" 
-        @beforeClose="beforeClose"
+        @before-close="beforeClose"
         @confirm="confirm" 
         @cancel="cancel">
         请输入内容
