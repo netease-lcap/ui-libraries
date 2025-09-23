@@ -351,7 +351,7 @@ namespace nasl.ui {
   > extends ViewComponent {
     constructor(
       options?: Partial<
-        ElTreeSelectOptions<T, V, P, M, C> & Omit<ElTreeSelectOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+        ElFormTreeSelectOptions<T, V, P, M, C> & Omit<ElTreeSelectOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
       >,
     ) {
       super();

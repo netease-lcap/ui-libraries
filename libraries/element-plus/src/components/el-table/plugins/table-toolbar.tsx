@@ -28,7 +28,8 @@ export default TableToolBarAccumulate.addPlugin({
                         <ElCheckboxGroup
                           onChange={(value) => {
                             attrs.setValue(value);
-                          }}>
+                          }}
+                        >
                           {_.map(props.columns, (item) => (
                             <ElCheckbox
                               label={item.label}
