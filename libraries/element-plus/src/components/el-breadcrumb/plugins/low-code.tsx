@@ -1,11 +1,10 @@
 import { ElBreadcrumbItem } from 'element-plus';
-import { $ide } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 /* 仅在 ide 环境生效的插件 */
 export default new PluginAccumulateTypes().addPlugin({
   name: 'handleAutoDesignerDemo',
-  type: $ide,
+  type: 'ide',
   handle: (props) => {
     const slots = props.get('slots');
     const auto = props.get('auto');
