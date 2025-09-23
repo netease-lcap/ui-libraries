@@ -126,7 +126,7 @@ export function handleComponentInForm(props) {
   const tagName = props.get('tagName');
   useEffect(() => {
     const inject = props.get('inject');
-    const { isInForm } = inject?.value?.[$formProvide] ?? {};
+    const { isInForm } = inject?.[$formProvide] ?? {};
     if (!nodePath) return;
     const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
     if (isInForm) {

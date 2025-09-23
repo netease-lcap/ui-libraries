@@ -5,7 +5,7 @@ import { $formProvide } from '@/components/el-form/constants';
 
 export function getIsPreview(props) {
   const inject = props.get('inject');
-  const { preview: injectPreview = false } = inject?.value?.[$formProvide] ?? {};
+  const { preview: injectPreview = false } = inject?.[$formProvide] ?? {};
   const propPreview = props.get('preview');
   const preview = useMemo(() => propPreview ?? injectPreview, [injectPreview, propPreview]);
   return preview;

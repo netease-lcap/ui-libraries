@@ -195,7 +195,7 @@ dragSort="row"
 
 
 
-    <el-table-column prop="name" width="30%" label="Name" class="myclomuns" :style="{'text-align':'left'}" >
+    <el-table-column prop="name" width="30%" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
     <el-table-column-plus prop="name" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
 
 
