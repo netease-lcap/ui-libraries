@@ -118,6 +118,12 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     loading: nasl.core.Boolean = false;
+
+    @Event({
+      title: '点击时',
+      description: '点击按钮时触发',
+    })
+    onClick: (event: MouseEvent) => any;
   }
 
   @IDEExtraInfo({
@@ -176,5 +182,11 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     badge: nasl.core.String;
+
+    @Event({
+      title: '点击时',
+      description: '点击按钮时触发',
+    })
+    onClick: (event: MouseEvent) => any;
   }
 }
