@@ -8,3 +8,4 @@ export { default as triggerEvent } from './trigger-event';
 export { default as stylePlugin } from './style-plugin';
 export { default as triggerCompositeClick, triggerNativeCompositeClick } from './composite-click';
 export { default as makeMount } from './make-mount';
+export * from './render-hook';

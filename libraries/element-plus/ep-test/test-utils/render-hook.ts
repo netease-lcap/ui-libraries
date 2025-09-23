@@ -2,8 +2,10 @@ import { createStore } from 'zustand/vanilla';
 import _ from 'lodash';
 import { vi } from 'vitest';
 import { Map as imMap } from 'immutable';
-import { fiberNode } from '../../src/plugins/hooks';
+import { fiberNode } from '@/plugins/hooks';
 import '@/utils/index';
+
+import { $deletePropsList, $provide, $tagName, $mergeRef } from '@/plugins/constants';
 
 function withResolvers() {
   let resolve!: (value: any) => void;
@@ -12,7 +14,7 @@ function withResolvers() {
   });
   return { promise, resolve };
 }
-export const createHook = (hook, props) => {
+export const renderHook = (hook, props) => {
   vi.clearAllMocks();
   vi.mock('vue', () => ({
     ref: vi.fn((val) => ({ value: val })),
@@ -34,6 +36,14 @@ export const createHook = (hook, props) => {
   const useStore = createStore((set) => ({
     state: {
       ...props,
+      [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList, $mergeRef, $tagName],
+      inject: {},
+      provide: {},
+      ref: {},
+      router: vi.fn(),
+      route: vi.fn(),
+      [$mergeRef]: vi.fn(),
+      [$tagName]: 'test',
     },
     setValue: (commit, tr) => {
       const getNewStateFn = _.cond([
@@ -45,24 +55,27 @@ export const createHook = (hook, props) => {
     },
   }));
   const { getState, subscribe } = useStore;
-  const { setValue } = getState() as any;
+  const { setValue, state } = getState() as any;
   const fiber = {
     workInProgressState: null,
     workInProgressEffect: null,
     updateQueen: new Set(),
-    getState: () => ({}),
+    getState,
     setValue,
-    storeKey: null,
+    storeKey: _.uniqueId('storeKey'),
     queen: [],
   };
   const isMount = true;
   fiberNode.setCurrentFiber(fiber, isMount);
-  const result = _.attempt(_.bind(hook, _.assign(fiber, {})), imMap(props));
-  fiberNode.setCurrentFiber(fiberNode.getCurrentFiber(), false);
-  currentValue.value = result;
-  subscribe((props: any) => {
+  const result = _.attempt(_.bind(hook.handle, _.assign(fiber, {})), imMap(_.assign(state, props)));
+  currentValue.value = result as Record<string, any>;
+  fiberNode.setCurrentFiber(fiber, false);
+  subscribe((subProps: any) => {
+    currentValue.value = _.attempt(
+      _.bind(hook.handle, _.assign(fiber, {})),
+      imMap(Object.assign(subProps.state, props)),
+    ) as any;
     resolve(true);
-    currentValue.value = _.attempt(_.bind(hook, _.assign(fiber, {})), imMap(props.state)) as any;
     const result = withResolvers();
     promise = result.promise;
     resolve = result.resolve;
