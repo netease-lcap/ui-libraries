@@ -59,7 +59,7 @@ export function registerComponent<T>(Component: any, options: any): any {
     props: Component.props,
 
     setup(props, { attrs, slots, emit, expose }) {
-      const isInDesigner = Boolean(attrs['data-nodepath']) || Boolean(_.get(window, '$env.VUE_APP_DESIGNER', false));
+      const isInDesigner = Boolean(attrs['data-nodepath']) || Boolean(_.get(window, '$uilibenv.IDE_DESIGNER', false));
       const pluginHooks = options.plugin instanceof PluginAccumulateTypes
           ? options.plugin.getPluginMethod({ isInDesigner })
           : new PluginOptions(options).getPluginMethod();
