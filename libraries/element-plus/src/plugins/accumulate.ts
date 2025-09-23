@@ -15,19 +15,13 @@ type ImmutableMap<T> = {
   [Symbol.iterator](): Iterator<[keyof T, T[keyof T]]>;
 };
 
-// 定义插件函数类型，接受ImmutableMap参数并返回普通对象（会被merge到ImmutableMap中）
-// 使用 const 泛型参数自动推导字面量类型
-type PluginFunction<TProps, TReturn> = (props: ImmutableMap<TProps>) => TReturn;
-
-// 定义插件对象类型，包含处理函数和其他元数据
-// 使用 const 泛型参数自动推导字面量类型
-type PluginObject<TProps, TReturn> = {
-  handle: (props: ImmutableMap<TProps>) => TReturn;
-  [key: string]: any; // 允许添加其他属性，如 name, version, metadata 等
-};
-
 // 定义插件类型，可以是函数或对象
-type Plugin<TProps, TReturn> = PluginFunction<TProps, TReturn> | PluginObject<TProps, TReturn>;
+type Plugin<TProps, TReturn> = {
+  handle: (props: ImmutableMap<TProps>) => TReturn;
+  name: string;
+  type?: 'ide' | 'basic';
+  [key: string]: any;
+};
 
 // 类型函数：将 slot 开头的函数转换为 slots 对象
 type ExtractSlots<T> = {
@@ -105,7 +99,7 @@ export class PluginAccumulateTypes<
   addPlugin<const TReturn extends Record<string, any> = Record<string, any>>(plugin: {
     handle: (props: ImmutableMap<TAccumulatedProps>, context: ImmutableMap<TPluginContext>) => TReturn;
     name: string;
-    type?:'ide'|'basic';
+    type?: 'ide' | 'basic';
     [key: string]: any;
   }): PluginAccumulateTypes<TPluginOptions, TPluginContext, TAccumulatedProps & TReturn> {
     // 存储插件，使用 const 泛型参数来自动推导字面量类型
@@ -127,8 +121,11 @@ export class PluginAccumulateTypes<
     return this as any;
   }
 
-  getPluginMethod() {
-    return this.Plugin;
+  getPluginMethod({ isInDesigner }: { isInDesigner: boolean }) {
+    if (isInDesigner) {
+      return this.Plugin;
+    }
+    return this.Plugin.filter((plugin) => plugin.type === 'ide');
   }
 
   getPluginMethodByName(name: string) {
