@@ -130,11 +130,11 @@ export class PluginAccumulateTypes<
     return this as any;
   }
 
-  getPluginMethod({ isInDesigner }: { isInDesigner: boolean }) {
-    if (isInDesigner) {
+  getPluginMethod(options?: { isInDesigner: boolean }) {
+    if (options?.isInDesigner) {
       return this.Plugin;
     }
-    return this.Plugin.filter((plugin) => plugin.type === 'ide');
+    return this.Plugin.filter((plugin) => plugin.type !== 'ide');
   }
 
   getPluginMethodByName(name: string) {
