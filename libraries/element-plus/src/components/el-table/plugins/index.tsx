@@ -295,7 +295,7 @@ export default TableAccumulate.addPlugin({
       const tableRef = useRef({});
       const render = useCallback((props, { attrs, slots }) => {
         return (
-          <ElForm>
+          <ElForm style={{ width: '100%' }}>
             <Component ref={tableRef} {...props} {...attrs} v-slots={slots} />
           </ElForm>
         );

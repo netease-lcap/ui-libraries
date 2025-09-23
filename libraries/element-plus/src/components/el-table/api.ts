@@ -582,7 +582,6 @@ namespace nasl.ui {
       index: nasl.core.Integer;
       rowIndex: nasl.core.Integer;
       columnIndex: nasl.core.Integer;
-      editable: nasl.core.Boolean;
       isPreview: nasl.core.Boolean;
     }) => Array<ViewComponent>;
 
