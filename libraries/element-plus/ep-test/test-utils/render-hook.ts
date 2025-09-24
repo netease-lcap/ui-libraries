@@ -2,10 +2,12 @@ import { createStore } from 'zustand/vanilla';
 import _ from 'lodash';
 import { vi } from 'vitest';
 import { Map as imMap } from 'immutable';
-import { fiberNode } from '@/plugins/hooks';
+import * as Vue from 'vue';
+
+import { fiberNode } from '../../src/plugins/hooks';
 import '@/utils/index';
 
-import { $deletePropsList, $provide, $tagName, $mergeRef } from '@/plugins/constants';
+import { $deletePropsList, $tagName, $mergeRef } from '../../src/plugins/constants';
 
 function withResolvers() {
   let resolve!: (value: any) => void;
@@ -14,20 +16,29 @@ function withResolvers() {
   });
   return { promise, resolve };
 }
-export const renderHook = (hook, props) => {
+export const renderHook = (
+  hook,
+  props,
+): { currentValue: { value: any & Record<string, any> }; waitForNextUpdate: () => Promise<void> } => {
   vi.clearAllMocks();
-  vi.mock('vue', () => ({
-    ref: vi.fn((val) => ({ value: val })),
-    onMounted: vi.fn((fn) => fn()),
-    onUnmounted: vi.fn((fn) => fn()),
-    nextTick: vi.fn((fn) => fn()),
-    getCurrentInstance: vi.fn(() => ({
-      vnode: {
-        props,
-      },
-    })),
-  }));
+  vi.mock('vue', async (importOriginal) => {
+    const actual = (await importOriginal()) as object;
+    return {
+      ...actual,
+      ref: vi.fn((value) => ({ value })),
+      watch: vi.fn(),
+      onMounted: vi.fn(),
+      onUnmounted: vi.fn(),
+      nextTick: vi.fn(() => Promise.resolve()),
+      getCurrentInstance: vi.fn(),
+    };
+  });
 
+  Vue.getCurrentInstance.mockImplementation(() => ({
+    vnode: {
+      props,
+    },
+  }));
   let { promise, resolve } = withResolvers();
   const currentValue = { value: {} };
   const waitForNextUpdate = async () => {
@@ -40,6 +51,7 @@ export const renderHook = (hook, props) => {
       inject: {},
       provide: {},
       ref: {},
+      emit: vi.fn(),
       router: vi.fn(),
       route: vi.fn(),
       [$mergeRef]: vi.fn(),
