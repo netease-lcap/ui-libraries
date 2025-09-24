@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { renderHook } from '@ep-test/test-utils';
+import { renderHook } from '@ep-test/test-utils/render-hook';
 import { $deletePropsList } from '@/plugins/constants';
 import { $PopconfirmProps } from '../constants';
 import '@/utils/index';

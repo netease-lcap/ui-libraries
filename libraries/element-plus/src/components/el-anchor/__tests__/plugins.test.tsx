@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { renderHook } from '@ep-test/test-utils';
+import { renderHook } from '@ep-test/test-utils/render-hook';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import '@/utils/index';
 import AnchorAccumulate from '../plugins/basic-plugins';
