@@ -27,7 +27,7 @@ export const renderHook = (
       ...actual,
       ref: vi.fn((value) => ({ value })),
       watch: vi.fn(),
-      onMounted: vi.fn(),
+      onMounted: vi.fn((fn) => fn()),
       onUnmounted: vi.fn(),
       nextTick: vi.fn(() => Promise.resolve()),
       getCurrentInstance: vi.fn(),
@@ -47,7 +47,7 @@ export const renderHook = (
   const useStore = createStore((set) => ({
     state: {
       ...props,
-      [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList, $mergeRef, $tagName],
+      [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $mergeRef, $tagName],
       inject: {},
       provide: {},
       ref: {},
