@@ -13,6 +13,7 @@ export interface CreateComponentOptions {
   title: string;
   type: 'pc' | 'h5' | 'both';
   overload: boolean;
+  mode?: 'plugin' | 'merge';
   baseComponentName?: string;
   fork?: boolean;
   prefix?: string;
@@ -75,7 +76,7 @@ export async function getCreateComponentOptions(rootPath: string, metaInfo: Proj
           name: 'baseComponentName',
           message: '请选择重载的基础组件',
           initial: 0,
-          choices: componentList.map((c) => ({ value: c.name, title: `${c.name}(${c.title})` })),
+          choices: componentList.filter((c) => !c.disableOverload).map((c) => ({ value: c.name, title: `${c.name}(${c.title})` })),
         },
         {
           type: 'text',
