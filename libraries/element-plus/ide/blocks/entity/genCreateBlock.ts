@@ -44,7 +44,11 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
     viewElementMainView: likeComponent.getViewElementUniqueName('el_form'),
     viewVariableEntity: likeComponent.getVariableUniqueName(firstLowerCase(entity.name)),
     viewLogicSubmit: likeComponent.getLogicUniqueName('submit'),
+    viewDirectoryEntity: null,
   };
+  if (likeComponent.getDirectoryUniqueName) {
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(firstLowerCase(entity.name));
+  }
 
   // 收集所有和本实体关联的实体
   const selectNameGroupMap = new Map();
@@ -70,7 +74,15 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
   });
 
   return `export function view() {
-    let ${nameGroup.viewVariableEntity}: ${entityFullName};
+    ${
+      nameGroup.viewDirectoryEntity
+      ? `
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableEntity}: ${entityFullName};`
+      : `let ${nameGroup.viewVariableEntity}: ${entityFullName};`
+    }
     return ${genCreateFormTemplate(entity, nameGroup, selectNameGroupMap)}
   }
     export namespace app.logics {
