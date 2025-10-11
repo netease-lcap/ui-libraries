@@ -32,6 +32,7 @@ export default ButtonAccumulate.addPlugin({
     };
   },
 })
+
   .addPlugin({
     name: 'handlePopupconfirmButton',
     handle: (props) => {

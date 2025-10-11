@@ -15,6 +15,7 @@ declare module '*.vue' {
 
 declare namespace nasl.ui {
   export interface IDEExtraInfoOptions {
+    disableOverLoad?: boolean;
     show?: boolean;
     ignore?: boolean;
     extends?: Array<string | { name: string, excludes?: string[] }>;

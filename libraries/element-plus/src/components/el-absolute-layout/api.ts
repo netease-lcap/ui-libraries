@@ -3,6 +3,7 @@
 namespace nasl.ui {
   @IDEExtraInfo({
     order: 2,
+    disableOverLoad: true,
     ideusage: {
       idetype: "board",
       automate: [
