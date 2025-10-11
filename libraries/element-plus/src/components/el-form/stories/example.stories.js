@@ -41,7 +41,7 @@ export const Example1 = {
     },
     template: `
     <el-form>
-      <el-form-input :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
+      <el-input :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
     </el-form>
 
     `,

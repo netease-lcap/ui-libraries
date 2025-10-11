@@ -55,7 +55,8 @@ const SUGGESTION_ITEM = '.el-cascader__suggestion-item';
 const SUGGESTION_PANEL = '.el-cascader__suggestion-panel';
 const DROPDOWN = '.el-cascader__dropdown';
 
-const _mount = (render: () => VNode) => mount(render, {
+const _mount = (render: () => VNode) =>
+  mount(render, {
     attachTo: document.body,
   });
 

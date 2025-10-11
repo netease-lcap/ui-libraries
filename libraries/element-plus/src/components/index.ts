@@ -13,15 +13,7 @@ export {
   ElCheckboxRegister,
   ElCheckboxGroupPlus,
 } from './el-checkbox';
-export {
-  ElTable,
-  ElTableColumn,
-  ElTableColumnDynamic,
-  ElTablePlus,
-  ElTableRegister,
-  ElTableColumnRegister,
-  ElTableToolBarRegister,
-} from './el-table';
+export * from './el-table';
 export {
   ElFormItemWrap,
   ElForm,

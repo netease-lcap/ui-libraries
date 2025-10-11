@@ -1,4 +1,4 @@
-import { UploadFile, UploadRawFile, UploadContentProps } from 'element-plus';
+import { ElMessage, UploadFile, UploadRawFile, UploadContentProps } from 'element-plus';
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
 import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
@@ -34,7 +34,6 @@ const getFileListByValue = (value, converter: Converter = 'simple', fileList) =>
   if (!value) {
     return [];
   }
-
   if (converter === 'simple') {
     const values = value.split(',');
     return values.map((v) => {
@@ -45,7 +44,6 @@ const getFileListByValue = (value, converter: Converter = 'simple', fileList) =>
       } as UploadFile;
     });
   }
-
   try {
     const parsedValue = JSON.parse(value || '[]');
     return Array.isArray(parsedValue) ? parsedValue : [];
@@ -256,19 +254,28 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handleEvent',
     handle(props) {
-      const beforeUpload = props.get('onBeforeUpload');
-      const beforeRemove = props.get('onBeforeRemove');
-
+      const beforeUpload = props.get('onBeforeUpload', () => {});
+      const beforeRemove = props.get('onBeforeRemove', () => {});
+      const fileSizeLimit = props.get('fileSizeLimit');
+      const exceed = props.get('onExceed');
+      const limit = props.get('limit');
       return {
         beforeUpload: (rawFile: UploadRawFile) => {
-          _.isFunction(beforeUpload) && _.attempt(beforeUpload, rawFile);
+          if (fileSizeLimit && rawFile.size > fileSizeLimit * 1024 * 1024) {
+            ElMessage.error(`文件大小超过 ${fileSizeLimit} MB，请删除部分文件后继续。`);
+            return false;
+          }
+          return _.attempt(beforeUpload, rawFile);
+        },
+        onExceed: (files: UploadFile[], uploadFiles: UploadFile[]) => {
+          _.attempt(exceed, files, uploadFiles);
+          ElMessage.error(`当前限制选择 ${limit} 个文件，请删除部分文件后继续。`);
         },
         beforeRemove: (uploadFile: UploadFile, uploadFiles: UploadFile[]) => {
-          _.isFunction(beforeRemove)
-            && _.attempt(beforeRemove, {
-              uploadFile,
-              uploadFiles,
-            });
+          _.attempt(beforeRemove, {
+            uploadFile,
+            uploadFiles,
+          });
         },
       };
     },

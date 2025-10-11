@@ -108,6 +108,28 @@ namespace nasl.ui {
     size: 'small' | 'default' | 'large' = 'default';
 
     @Prop({
+      group: '样式属性',
+      title: '方向',
+      description: '单选框方向',
+      setter: { concept: 'EnumSelectSetter', options: [{ title: '水平' }, { title: '垂直' }] },
+      onChange: [
+        {
+          clear: ['column'],
+        },
+      ],
+    })
+    direction: 'horizontal' | 'vertical' = 'horizontal';
+
+    @Prop<ElRadioGroupOptions<T, V>, 'column'>({
+      group: '样式属性',
+      title: '列数',
+      description: '单选框列数,为 0时不限制列数',
+      setter: { concept: 'NumberInputSetter', min: 0 },
+      if: (_) => _.direction != 'vertical',
+    })
+    column: nasl.core.Integer = 0;
+
+    @Prop({
       group: '主要属性',
       title: '类型',
       description: '单选框组类型',

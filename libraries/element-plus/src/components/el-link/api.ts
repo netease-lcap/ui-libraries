@@ -27,10 +27,29 @@ namespace nasl.ui {
       description: '链接类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '默认' }, { title: '主要' }, { title: '成功' }, { title: '警告' }, { title: '危险' }, { title: '信息' }],
+        options: [
+          { title: '默认' },
+          { title: '主要' },
+          { title: '成功' },
+          { title: '警告' },
+          { title: '危险' },
+          { title: '信息' },
+        ],
       },
     })
     type: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' = 'default';
+
+    @Prop({
+      group: '交互属性',
+      title: '链接类型',
+      docDescription: '支持页面跳转、普通链接、下载链接',
+      bindHide: true,
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '页面跳转' }, { title: '下载链接' }],
+      },
+    })
+    linkType: 'destination' | 'download' = 'destination';
 
     @Prop({
       group: '主要属性',
@@ -61,22 +80,6 @@ namespace nasl.ui {
       title: '链接地址',
     })
     hrefAndTo: nasl.core.String;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '打开方式',
-    //   description: '原生 target 属性',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [
-    //       { title: '当前窗口' },
-    //       { title: '新窗口' },
-    //       { title: '父窗口' },
-    //       { title: '顶层窗口' },
-    //     ],
-    //   },
-    // })
-    // target: '_self' | '_blank' | '_parent' | '_top' = '_self';
 
     @Prop({
       group: '主要属性',

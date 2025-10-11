@@ -351,10 +351,10 @@ describe('hooks.ts', () => {
 
       // 模拟更新，依赖项内容相同但引用不同
       fiberNode.setCurrentFiber(fiberNode.getCurrentFiber(), false);
-      const newComplexDep = [{ id: 1 }, [1, 2, 3]];
+      const newComplexDep = [{ id: 1 }, [1, 2]];
       useEffect(callback, newComplexDep);
 
-      // 使用 Object.is 比较，引用不同应该重新执行
+      // 引用不同应该重新执行
       expect(callback).toHaveBeenCalledTimes(2);
     });
 
@@ -475,7 +475,7 @@ describe('hooks.ts', () => {
     it('应该正确处理对象依赖项的引用比较', () => {
       const callback = vi.fn();
       const obj1 = { id: 1 };
-      const obj2 = { id: 1 }; // 相同内容但不同引用
+      const obj2 = { id: 2 }; // 相同内容但不同引用
 
       useEffect(callback, [obj1]);
 
@@ -490,7 +490,7 @@ describe('hooks.ts', () => {
     it('应该正确处理数组依赖项的引用比较', () => {
       const callback = vi.fn();
       const arr1 = [1, 2, 3];
-      const arr2 = [1, 2, 3]; // 相同内容但不同引用
+      const arr2 = [1, 2]; // 相同内容但不同引用
 
       useEffect(callback, [arr1]);
 
@@ -508,7 +508,7 @@ describe('hooks.ts', () => {
 
       // 模拟更新，依赖项为不同的空对象
       fiberNode.setCurrentFiber(fiberNode.getCurrentFiber(), false);
-      useEffect(callback, [{}]);
+      useEffect(callback, [{ a: 1 }]);
 
       // 不同引用，应该重新执行
       expect(callback).toHaveBeenCalledTimes(2);

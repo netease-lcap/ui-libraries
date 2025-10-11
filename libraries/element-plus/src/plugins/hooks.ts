@@ -22,6 +22,7 @@ interface Options {
   valuePropName?: string;
   trigger?: string;
   onChange?: (...args: any[]) => void;
+  onValueEffect?: (...args: any[]) => void;
 }
 interface Fiber {
   workInProgressState: Hook;
@@ -172,7 +173,7 @@ export function useEffect(callBack: (...args: any[]) => (() => void) | void, dep
   } else {
     hook = currentFiber.workInProgressEffect.next;
     currentFiber.workInProgressEffect = currentFiber.workInProgressEffect.next;
-    const isSameDep = _.every(dep, (item, index) => Object.is(item, _.get(hook, `dep.${index}`)));
+    const isSameDep = _.every(dep, (item, index) => _.isEqual(item, _.get(hook, `dep.${index}`)));
     if (!_.isEmpty(dep) && !isSameDep) {
       const result = callBack(...dep);
       hook.result = result;
@@ -260,21 +261,28 @@ export function useControllableValue<T = any>(
     valuePropName = 'modelValue',
     trigger = `onUpdate:${valuePropName}`,
     onChange: onChangeProps = () => {},
+    onValueEffect = () => {},
   } = options || {};
   const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
+  const priorValue = useRef({});
   const propsValue = props.get(valuePropName);
   const defaultValueProps = props.get(defaultValuePropName);
   const unControlledInitialValue = defaultValueProps ?? defaultValue;
   const [stateValue, setStateValue] = useState<T>(unControlledInitialValue);
   const triggerProps = props.get(trigger, () => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
-
+  useEffect(() => {
+    if (priorValue.value !== propsValue && isControlled) {
+      onValueEffect(propsValue);
+    }
+  }, [propsValue, isControlled]);
   const onChange = (...args: any[]) => {
     if (isControlled) {
       emit(trigger, ...args);
     } else {
       setStateValue(args[0] as T);
     }
+    priorValue.value = _.get(args, 0, null);
     _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);
   };

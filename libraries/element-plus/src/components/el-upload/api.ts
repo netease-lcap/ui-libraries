@@ -229,6 +229,31 @@ namespace nasl.ui {
     })
     access: 'public' | 'private';
 
+
+    @Prop({
+      group: '主要属性',
+      title: '文件大小限制',
+      description: '文件大小限制',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    limit: nasl.core.Decimal;
+    
+    @Prop({
+      group: '主要属性',
+      title: '禁用',
+      description: '是否禁用上传组件',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '文件大小限制',
+      description: '文件大小限制,单位为 MB,为空则不限制',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    fileSizeLimit: nasl.core.Decimal;
+
     @Prop({
       group: '主要属性',
       title: '文件有效期',

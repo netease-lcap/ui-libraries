@@ -34,6 +34,7 @@ const ElTableToolBar = registerComponent<{ columns: any; selectedColumns: any; s
 
 export {
   ElTableColumn,
+  ElTableColumnPlus,
   ElTableColumnDynamic,
   ElTable,
   ElTablePlus,

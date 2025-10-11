@@ -12,6 +12,11 @@ export const ElIconPropsDefine = {
     type: Function,
     default: () => {},
   },
+  color: {
+    type: String,
+
+    default: () => '',
+  },
   size: {
     type: [String, Number],
     default: () => '',

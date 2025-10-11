@@ -37,7 +37,14 @@ type ConvertFieldsToString<T> = {
 type ConvertDataSourceToType<T> = {
   [K in keyof T as K extends 'dataSource' ? K : never]: DataSourceType;
 };
-
+// 类型函数：将 linkType 字段转换为 DataSourceType 类型
+type ConvertLinkTypeToDownload<T> = {
+  [K in keyof T as K extends 'linkType' ? K : never]: T[K];
+} & (T extends { linkType: string }
+  ? {
+      download: boolean;
+    }
+  : object);
 type ConvertHrefAndToToType<T> = {
   [K in keyof T as K extends 'hrefAndTo' ? never : K]: T[K];
 } & (T extends { hrefAndTo: any }
@@ -60,12 +67,14 @@ export type ConvertPluginTypes<T> = {
 } & ConvertFieldsToString<T> &
   ConvertDataSourceToType<T> &
   ConvertHrefAndToToType<T> &
+  ConvertLinkTypeToDownload<T> &
   Omit<
     T,
     | keyof ExtractSlots<T>
     | keyof ConvertFieldsToString<T>
     | keyof ConvertDataSourceToType<T>
     | keyof ConvertHrefAndToToType<T>
+    | keyof ConvertLinkTypeToDownload<T>
   >;
 
 /**
