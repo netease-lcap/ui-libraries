@@ -147,10 +147,11 @@ async function generateElementPlusComponent(context) {
     '',
   ].join('\n');
   const BaseComponentName = `${context.naslUIConfig.name}Plus`;
-  const RegisterFunctionName = `${context.naslUIConfig.name}Register`;
+  const BasicPluginName = `${context.naslUIConfig.name}BasicsPlugin`;
+
   const componentCode = [
     'import { defineComponent, ref } from \'vue\';',
-    `import { ${BaseComponentName} as ${context.naslUIConfig.name}, ${RegisterFunctionName} as registerComponent } from '${LCAP_UI_PACKAGE_NAME}';`,
+    `import { ${BaseComponentName} as ${context.naslUIConfig.name}, ${BasicPluginName}, registerComponent } from '${LCAP_UI_PACKAGE_NAME}';`,
     '',
     `const ${context.name} = defineComponent({`,
     `  name: '${context.naslUIConfig.name}Extend',`,
@@ -174,7 +175,7 @@ async function generateElementPlusComponent(context) {
     '  },',
     '});',
     '',
-    `export default registerComponent(${context.name}, { name: '${context.tagName}' });`,
+    `export default registerComponent(${context.name}, { name: '${context.tagName}', plugin: ${BasicPluginName} });`,
   ].join('\n');
 
   const indexVuePath = path.resolve(context.componentFolderPath, 'index.vue');
