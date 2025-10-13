@@ -14,6 +14,9 @@ export interface NameGroup {
 }
 
 export const filterProperty = (key) => (property) => {
+  if (property.typeAnnotation?.typeKind === 'anonymousStructure') {
+    return false;
+  }
   if (property.display) {
     return property.display[key];
   }

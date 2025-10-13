@@ -43,10 +43,24 @@ namespace nasl.ui {
       description: '输入框类型。可选项：text/url/tel/password/search/submit/hidden',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '文本' }, { title: '链接' }, { title: '电话' }, { title: '密码' }, { title: '搜索' }, { title: '多行文本' }],
+        options: [
+          { title: '文本' },
+          { title: '链接' },
+          { title: '电话' },
+          { title: '密码' },
+          { title: '搜索' },
+          { title: '多行文本' },
+        ],
       },
+      onChange: [
+        {
+          clear: ['showWordLimit'],
+        },
+      ],
     })
-      type: 'text' | 'url' | 'tel' | 'password' | 'search' | 'textarea' = 'text';
+    type: 'text' | 'url' | 'tel' | 'password' | 'search' | 'textarea' = 'text';
+
+
 
     @Prop({
       group: '交互属性',
@@ -98,28 +112,23 @@ namespace nasl.ui {
     })
     private label: any; // 用插槽代替
 
-    // @Prop<ElInputProOptions, 'maxcharacter'>({
-    //   group: '主要属性',
-    //   title: '最多字符数',
-    //   description:
-    //     '用户最多可以输入的字符个数，一个中文汉字表示两个字符长度。`maxcharacter` 和 `maxlength` 二选一使用',
-    //   setter: {
-    //     concept: 'NumberInputSetter',
-    //     min: 0,
-    //     precision: 0,
-    //   },
-    //   if: _ => !_.maxlength
-    // })
-    // maxcharacter: nasl.core.Decimal;
 
     @Prop<ElInputOptions, 'maxlength'>({
       group: '主要属性',
       title: '最大文本长度',
       description: '用户最多可以输入的文本长度，一个中文等于一个计数长度。默认为空，不限制输入长度。',
       setter: { concept: 'NumberInputSetter', min: 0 },
-      // if: _ => !_.maxcharacter
     })
     maxlength: nasl.core.String | nasl.core.Decimal;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示字数统计',
+      description: '是否显示字数统计',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.type === 'textarea' && _.maxlength,
+    })
+    showWordLimit: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -448,7 +457,9 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormInput extends ViewComponent {
-    constructor(options?: Partial<ElFormInputOptions & ElFormItemProOptions & Omit<ElInputOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormInputOptions & ElFormItemProOptions & Omit<ElInputOptions, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }

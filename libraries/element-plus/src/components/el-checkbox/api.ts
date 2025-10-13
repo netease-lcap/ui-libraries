@@ -101,51 +101,37 @@ namespace nasl.ui {
       description: '多选框组类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认' },
-          { title: '边框' },
-          { title: '按钮' },
-        ],
+        options: [{ title: '默认' }, { title: '边框' }, { title: '按钮' }],
       },
     })
     type: 'default' | 'border' | 'button' = 'default';
 
-    // @Prop<ElCheckboxGroupOptions<T, V>, 'itemProps'>({
-    //   group: '数据属性',
-    //   title: '多选项属性设置',
-    //   description: '多选项属性设置',
-    //   setter: {
-    //     concept: 'AnonymousFunctionSetter',
-    //   },
-    //   bindOpen: true,
-    //   if: _ => !!_.dataSource,
-    // })
-    // itemProps: (current: Current<T>) => {
-    //   /**
-    //    * @title 禁用
-    //    */
-    //   disabled?: nasl.core.Boolean;
-    //   /**
-    //    * @title 只读
-    //    */
-    //   readonly?: nasl.core.Boolean;
-    //   /**
-    //    * @title 全选选项
-    //    */
-    //   checkAll?: nasl.core.Boolean;
-    // };
+  
+    @Prop({
+      group: '样式属性',
+      title: '方向',
+      description: '多选框方向',
+      setter: { concept: 'EnumSelectSetter', options: [{ title: '水平' }, { title: '垂直' }] },
+      onChange: [{ clear: ['column'] }],
+    })
+    direction: 'horizontal' | 'vertical' = 'horizontal';
 
-    // @Prop({
-    //   group: '数据属性',
-    //   title: '全选选项',
-    //   description:
-    //     '用于标识是否为「全选选项」。数据源中的数据项中，该属性为 true 时，会添加全选项',
-    //   setter: { concept: 'SwitchSetter' },
-    //   onChange: [
-    //     { clear: ['max'] }
-    //   ],
-    // })
-    // checkAll: nasl.core.Boolean = false;
+    @Prop<ElCheckboxGroupOptions<T, V>, 'column'>({
+      group: '样式属性',
+      title: '列数',
+      description: '多选框列数,为 0时不限制列数',
+      setter: { concept: 'NumberInputSetter', min: 0 },
+      if: (_) => _.direction != 'vertical',
+    })
+    column: nasl.core.Integer = 0;
+
+    @Prop({
+      group: '数据属性',
+      title: '最小选中数',
+      description: '支持最少选中的数量',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    min: nasl.core.Decimal | nasl.core.Integer;
 
     @Prop<ElCheckboxGroupOptions<T, V>, 'max'>({
       group: '数据属性',
@@ -154,8 +140,6 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     max: nasl.core.Decimal | nasl.core.Integer;
-
-
 
     // @Prop({
     //   group: '数据属性',

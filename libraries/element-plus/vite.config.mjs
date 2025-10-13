@@ -34,6 +34,7 @@ export default defineConfig(({ command }) => {
             'components/el-config-provider/index': 'src/components/el-config-provider/index',
             install: 'src/install',
             utils: 'src/utils',
+            plugins: 'src/plugins',
           },
           tsconfigPath: 'tsconfig.build.json',
         },

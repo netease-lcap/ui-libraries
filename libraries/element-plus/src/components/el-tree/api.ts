@@ -96,7 +96,13 @@ namespace nasl.ui {
   }
 
   export class ElTreeOptions<T, V, M extends nasl.core.Boolean> extends ViewComponentOptions {
-
+    @Prop({
+      group: '主要属性',
+      title: '选中值',
+      description: '选中值',
+      setter: { concept: 'InputSetter' },
+    })
+    modelValue: M extends true ? nasl.collection.List<V> : V;
 
     @Prop({
       group: '交互属性',
@@ -104,7 +110,7 @@ namespace nasl.ui {
       description: '是否显示可选框',
       setter: { concept: 'SwitchSetter' },
     })
-    checkable: M = false as M;
+    showCheckbox: M = false as M;
 
     @Prop({
       group: '主要属性',
@@ -221,14 +227,6 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '显示复选框',
-      description: '是否显示复选框',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showCheckbox: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
       title: '手风琴模式',
       description: '是否开启手风琴模式',
       setter: { concept: 'SwitchSetter' },
@@ -300,20 +298,20 @@ namespace nasl.ui {
       description: '节点点击时触发',
     })
     onNodeClick: (event: {
-        actived: nasl.core.Boolean;
-        checked: nasl.core.Boolean;
-        data: T;
-        disabled: nasl.core.Boolean;
-        expanded: nasl.core.Boolean;
-        indeterminate: nasl.core.Boolean;
-        loading: nasl.core.Boolean;
-        value: V;
-        label: nasl.core.String;
+      actived: nasl.core.Boolean;
+      checked: nasl.core.Boolean;
+      data: T;
+      disabled: nasl.core.Boolean;
+      expanded: nasl.core.Boolean;
+      indeterminate: nasl.core.Boolean;
+      loading: nasl.core.Boolean;
+      value: V;
+      label: nasl.core.String;
     }) => any;
 
     @Event({
-      title: '节点选中状态改变时',
-      description: '节点选中状态改变时触发',
+      title: '点击节点复选框之后触发',
+      description: '点击节点复选框之后触发',
     })
     onCheck: (data: T, checked: nasl.core.Boolean) => any;
 

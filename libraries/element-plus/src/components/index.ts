@@ -13,15 +13,7 @@ export {
   ElCheckboxRegister,
   ElCheckboxGroupPlus,
 } from './el-checkbox';
-export {
-  ElTable,
-  ElTableColumn,
-  ElTableColumnDynamic,
-  ElTablePlus,
-  ElTableRegister,
-  ElTableColumnRegister,
-  ElTableToolBarRegister,
-} from './el-table';
+export * from './el-table';
 export {
   ElFormItemWrap,
   ElForm,
@@ -37,7 +29,7 @@ export { ElAbsoluteLayout, ElAbsoluteLayoutRegister } from './el-absolute-layout
 export { ElRouterView, ElRouterViewRegister } from './el-router-view';
 export { ElIframe } from './el-iframe';
 export { ElLink, ElLinkPlus, ElLinkRegister } from './el-link';
-export { ElButton, ElButtonPlus, ElButtonRegister } from './el-button';
+export { ElButton, ElButtonPlus } from './el-button';
 export { ElInputNumber, ElInputNumberPlus, ElFormInputNumber, ElInputNumberRegister } from './el-input-number';
 export { ElInputTag, ElInputTagPlus, ElFormInputTag, ElInputTagRegister } from './el-input-tag';
 export { ElRate, ElRatePlus, ElFormRate, ElRateRegister } from './el-rate';

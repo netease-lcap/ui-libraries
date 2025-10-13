@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-checkbox-group :type="type" size="default">
+    <el-checkbox-group :type="type" size="default" direction="horizontal" column="2" min="2">
       <el-checkbox value="1">
         <el-text :text="activeLabel"></el-text>
       </el-checkbox>

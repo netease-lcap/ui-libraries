@@ -32,6 +32,7 @@ export default ButtonAccumulate.addPlugin({
     };
   },
 })
+
   .addPlugin({
     name: 'handlePopupconfirmButton',
     handle: (props) => {
@@ -86,6 +87,17 @@ export default ButtonAccumulate.addPlugin({
         slots: _.assign({}, slots, {
           default: () => [slots.default?.(), getPropsIcon({ name: rightIcon, class: 'el-button__right-icon' })],
         }),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleThrottleTime',
+    handle: (props) => {
+      const throttleTime = props.get('throttleTime');
+      const onClick = props.get('onClick', () => {});
+      if (!throttleTime) return {};
+      return {
+        onClick: _.throttle(onClick, throttleTime),
       };
     },
   });

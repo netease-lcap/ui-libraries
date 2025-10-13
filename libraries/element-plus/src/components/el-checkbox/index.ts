@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/index';
 import { withFormItem } from '@/components/el-form';
+import './index.css';
 
 function ElCheckboxRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;

@@ -138,4 +138,14 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
         render,
       };
     },
+  })
+  .addPlugin({
+    name: 'handleMinDate',
+    handle(props) {
+      const minDate = props.get('minDate') || '1970-01-01';
+      const maxDate = props.get('maxDate') || '2999-12-31';
+      return {
+        disabledDate: (date) => dayjs(date).isBefore(dayjs(minDate)) || dayjs(date).isAfter(dayjs(maxDate)),
+      };
+    },
   });

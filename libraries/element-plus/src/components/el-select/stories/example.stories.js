@@ -17,11 +17,12 @@ export default {
 /*  基础的、简洁的标签页。 */
 export const Example1 = {
   name: '基础用法',
-  render: () => ({
+  render: (args,{parameters}) => ({
     setup() {
+      const { globalConfig } = parameters;
       const activeName = ref('');
       const name = ref('myName');
-      const list = [1, 2, 3];
+      const list = globalConfig.asyncData();
 
       const handleClick = (tab) => {
         console.log(tab);
@@ -39,13 +40,8 @@ export const Example1 = {
       };
     },
     template: `
-    <el-select v-model="activeName" >
-      <el-option
-        v-for="item in list"
-        :key="item"
-        :label="item"
-        :value="item"
-      />
+    <el-select v-model="activeName" :dataSource="list" descriptionField="value">
+    
     </el-select>
 
     `,

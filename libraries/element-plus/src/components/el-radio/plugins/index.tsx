@@ -10,6 +10,7 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
 import { ElText } from '@/index';
+import { addClass } from '@/utils';
 
 const RadioAccumulate = new PluginAccumulateTypes<nasl.ui.ElRadioGroupOptions<any, any>, RadioGroupProps>();
 
@@ -44,13 +45,15 @@ export default RadioAccumulate.addAccumulate(idePlugin)
       const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
       const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
       const dataSourceSlots = useMemo(
-        () => (_.isNil(dataConfig)
+        () =>
+          _.isNil(dataConfig)
             ? {}
             : {
-                default: () => _.map(dataSource, (item) => (
-                  <ElRadio {...item}>{slots.item ? slots.item({ item } as any) : item.label}</ElRadio>
+                default: () =>
+                  _.map(dataSource, (item) => (
+                    <ElRadio {...item}>{slots.item ? slots.item({ item } as any) : item.label}</ElRadio>
                   )),
-              }),
+              },
         [dataSource, slots, dataConfig],
       );
 
@@ -110,6 +113,23 @@ export default RadioAccumulate.addAccumulate(idePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleDirection',
+    handle(props) {
+      const direction = props.get('direction');
+      const className = props.get('class');
+      const column = props.get('column');
+      const style = props.get('style');
+      return {
+        class: addClass(className, { 'el-radio-group-vertical': direction === 'vertical' }),
+        style: {
+          ...style,
+          'grid-template-columns': column ? `repeat(${column}, 1fr)` : 'auto-fill',
+          'grid-auto-flow': column ? 'row' : 'auto',
+        },
       };
     },
   });
