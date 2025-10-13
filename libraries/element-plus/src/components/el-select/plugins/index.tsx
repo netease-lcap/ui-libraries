@@ -39,15 +39,31 @@ export default SelectBasicAccumulate.addPlugin({
       const dataConfig = props.get('dataSource');
       const textField = props.get('textField') || 'label';
       const valueField = props.get('valueField') || 'value';
+      const descriptionField = props.get('descriptionField') || 'description';
       const slots = props.get('slots');
       const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
       const ref = props.get('ref');
       const { data, run: reload, loading } = useRequestDataSource(dataConfig);
-      const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
+      const dataSource = useHandleMapField({
+        textField,
+        valueField,
+        dataSource: useFormatDataSource(data),
+        fieldsMap: {
+          description: descriptionField,
+        },
+      });
       const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
-        : { default: () => _.map(dataSource, (item) => <ElOption {...item} />) };
+        : {
+            default: () =>
+              _.map(dataSource, (item) => (
+                <ElOption {...item}>
+                  {item.label}
+                  {item.description && <el-text style="display:block;height:14px;line-height:14px" color="secondary" text={item.description} />}
+                </ElOption>
+              )),
+          };
 
       return {
         [$deletePropsList]: deletePropsList,

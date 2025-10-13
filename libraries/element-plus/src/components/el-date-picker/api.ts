@@ -210,6 +210,25 @@ namespace nasl.ui {
       | 'monthrange'
       | 'yearrange' = 'date';
 
+    
+
+    @Prop({
+      group: '主要属性',
+      title: '最小日期',
+      description: '最小日期',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.type.includes('datetime'),
+    })
+    minDate: nasl.core.Date;
+
+    @Prop({
+      group: '主要属性',
+      title: '最大日期',
+      description: '最大日期',
+      setter: { concept: 'InputSetter' },
+    })
+    maxDate: nasl.core.Date;
+
     @Prop({
       group: '主要属性',
       title: '显示在输入框中的格式',
@@ -229,21 +248,6 @@ namespace nasl.ui {
     })
     rangeSeparator: nasl.core.String = '-';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '选择器打开时默认显示的时间',
-    //   description: '可选，选择器打开时默认显示的时间',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // defaultValue: Date | [Date, Date];
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '选中日期时的当日内具体时刻',
-    //   description: '范围选择时选中日期所使用的当日内具体时刻',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // defaultTime: Date | [Date, Date];
 
     @Prop({
       group: '主要属性',

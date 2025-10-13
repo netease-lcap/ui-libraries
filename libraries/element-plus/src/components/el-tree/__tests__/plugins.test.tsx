@@ -21,12 +21,9 @@ describe('el-tree plugins', () => {
 
       it('应该包含所有必要的插件', () => {
         const plugins = ElTreeBasicAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(2);
+        expect(plugins).toHaveLength(3);
 
-        const pluginNames = [
-          'handleDataSource',
-          'handleVirtualize',
-        ];
+        const pluginNames = ['handleDataSource', 'handleVirtualize'];
 
         pluginNames.forEach((name) => {
           const plugin = ElTreeBasicAccumulate.getPluginMethodByName(name);
@@ -79,7 +76,9 @@ describe('el-tree plugins', () => {
         const symbolKey = Object.getOwnPropertySymbols(result).find((s) => s.toString().includes('deletePropsList')) as symbol;
         expect(symbolKey).toBeDefined();
         expect(Array.isArray(result[symbolKey])).toBe(true);
-        expect(result[symbolKey]).toEqual(expect.arrayContaining(['textField', 'valueField', 'parentField', 'childrenField']));
+        expect(result[symbolKey]).toEqual(
+          expect.arrayContaining(['textField', 'valueField', 'parentField', 'childrenField']),
+        );
       });
 
       it('应该正确处理数组类型的数据源', () => {
@@ -626,7 +625,7 @@ describe('el-tree plugins', () => {
         });
 
         const plugins = combinedAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(3);
+        expect(plugins).toHaveLength(4);
 
         const handleDataSourcePlugin = combinedAccumulate.getPluginMethodByName('handleDataSource');
         const handleVirtualizePlugin = combinedAccumulate.getPluginMethodByName('handleVirtualize');

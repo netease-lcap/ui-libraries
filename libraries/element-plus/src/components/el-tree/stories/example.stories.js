@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import ElTree from '../index';
 import SingleDemo from '../demos/single.vue';
 import multipleDemo from '../demos/multiple.vue';
@@ -100,19 +101,39 @@ export const Default = {
           }, 1000);
         });
       };
+      const value = ref([]);
+      const treeRef = ref();
+      setTimeout(() => {
+        value.value = [8];
+      }, 2000);
+
       return {
+        value,
         dataSource,
         list,
+        treeRef,
+        handleNodeClick(node, data) {
+          console.log(node, 'node');
+        },
       };
     },
-    template: `<el-tree  :dataSource="[{},{},{}]">
-    <template #item={...argus}>
-        <div data-nodepath="4d225b3f1e154e828a0932788c69e36a"  >
-        <el-text>1</el-text>
-        </div>
-    </template>
+    template: `
+    <div>
+    <el-tree
+    v-model="value"
+    :showCheckbox="true"
+    ref="treeRef"
+    @node-click="handleNodeClick"
+    parentField="entity1.fid"
+    :highlight-current="true"
+    valueField="entity1.id"
+    textField="entity1.property1"
+     :dataSource="dataSource">
 
-    </el-tree>`,
+    </el-tree>
+    {{value}}
+    </div>
+    `,
   }),
 };
 
@@ -120,6 +141,7 @@ export const Single = {
   name: '单选',
   render: () => SingleDemo,
 };
+
 
 export const Multiple = {
   name: '多选',

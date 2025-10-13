@@ -6,7 +6,7 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
-import { useMemo, useCallback } from '@/plugins/hooks';
+import { useMemo, useCallback, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
@@ -26,9 +26,8 @@ export default ElTreeBasicAccumulate.addPlugin({
     const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
     const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
     const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
-    const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
+    const selfRef = useMemo(() => _.assign({}, ref, { reload, data: TreeData }), [TreeData, reload, ref]);
     const dataSourceResult = _.isEmpty(TreeData) ? {} : { data: TreeData };
-    // const slotsDefault = useCallback(({ node }) => slotsProps?.item?.({ item: node }), [slotsProps]);
     const slotItemToDefault = useMemo(() => {
       const hasItemSlot = _.isFunction(slotsProps?.item);
       return hasItemSlot ? { default: ({ node }) => slotsProps.item({ item: node } as any) } : {};
@@ -44,20 +43,51 @@ export default ElTreeBasicAccumulate.addPlugin({
       slots,
     };
   },
-}).addPlugin({
-  name: 'handleVirtualize',
-  handle(props) {
-    const virtualize = props.get('virtualize');
-    const slots = props.get('slots');
+})
+  .addPlugin({
+    name: 'handleVirtualize',
+    handle(props) {
+      const virtualize = props.get('virtualize');
+      const slots = props.get('slots');
 
-    const render = useCallback((props) => <ElTreeV2 {...props} v-slots={slots} />, [slots]);
-    const result = useMemo(() => {
-      return virtualize
-        ? {
-            render,
+      const render = useCallback((props) => <ElTreeV2 {...props} v-slots={slots} />, [slots]);
+      const result = useMemo(() => {
+        return virtualize
+          ? {
+              render,
+            }
+          : {};
+      }, [virtualize, render]);
+      return result;
+    },
+  })
+  .addPlugin({
+    name: 'handleControllableValue',
+    handle(props) {
+      const ref = props.get('ref');
+      const showCheckbox = props.get('showCheckbox');
+      const onNodeClick = props.get('onNodeClick');
+      const onCheck = props.get('onCheck');
+      const [value, setValue] = useControllableValue(props, {
+        onValueEffect: (currentValue) => {
+          const emitEvent = showCheckbox ? ref.setCheckedKeys : ref.setCurrentKey;
+          _.attempt(emitEvent, currentValue);
+        },
+      });
+
+      return {
+        onNodeClick: _.wrap(onNodeClick, (fn, ...args) => {
+          _.attempt(fn, ...args);
+          if (!showCheckbox) {
+            setValue(_.get(args, '0.value'));
           }
-        : {};
-    }, [virtualize, render]);
-    return result;
-  },
-});
+        }),
+        onCheck: _.wrap(onCheck, (fn, node, checked) => {
+          _.attempt(fn, node, checked);
+          if (showCheckbox) {
+            setValue(_.get(checked, 'checkedKeys', []));
+          }
+        }),
+      };
+    },
+  });

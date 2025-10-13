@@ -1,7 +1,6 @@
 import { ref, cloneVNode } from 'vue';
 import _ from 'lodash';
 import { TableColumnCtx } from 'element-plus';
-import { inject } from '@vue/composition-api';
 import { useMemo, useCallback } from '@/plugins/hooks';
 import { ElIcon } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';

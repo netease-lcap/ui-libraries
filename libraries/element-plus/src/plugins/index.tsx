@@ -121,7 +121,6 @@ export function registerComponent<T>(Component: any, options: any): any {
           });
         });
         componentState.value.state[$deletePropsList] = commitState.get($deletePropsList);
-
         Object.assign(exposeRef.value, ref);
         Object.assign(provideRef.value, provide);
       });

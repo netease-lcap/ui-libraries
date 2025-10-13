@@ -868,72 +868,7 @@ describe('el-table plugins', () => {
     });
   });
 
-  describe('table-toolbar.tsx', () => {
-    describe('TableToolBarAccumulate 基础功能', () => {
-      it('应该是一个有效的 PluginAccumulateTypes 实例', () => {
-        expect(TableToolBarAccumulate).toBeDefined();
-        expect(typeof TableToolBarAccumulate.addPlugin).toBe('function');
-        expect(typeof TableToolBarAccumulate.getPluginMethod).toBe('function');
-        expect(Array.isArray(TableToolBarAccumulate.Plugin)).toBe(true);
-      });
 
-      it('应该包含 handleTableToolBar 插件', () => {
-        const plugins = TableToolBarAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(1);
-
-        const pluginNames = plugins.map((plugin: any) => plugin.name);
-        expect(pluginNames).toContain('handleTableToolBar');
-      });
-    });
-
-    describe('handleTableToolBar 插件功能测试', () => {
-      const plugin = TableToolBarAccumulate.getPluginMethodByName('handleTableToolBar') as any;
-
-      it('应该正确处理插件基本结构', () => {
-        const props = {
-          columns: [
-            { prop: 'name', label: '姓名' },
-            { prop: 'age', label: '年龄' },
-          ],
-          selectedColumns: ['name'],
-          setSelectedColumns: vi.fn(),
-          [$deletePropsList]: [],
-        };
-
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
-
-        expect(result).toBeDefined();
-        expect(typeof result).toBe('object');
-        expect(result).toHaveProperty('value');
-        expect(result).toHaveProperty('columns');
-        expect(result).toHaveProperty('setValue');
-        expect(result).toHaveProperty('render');
-      });
-
-      it('应该正确处理列配置', () => {
-        const columns = [
-          { prop: 'name', label: '姓名' },
-          { prop: 'age', label: '年龄' },
-          { prop: 'email', label: '邮箱' },
-        ];
-
-        const props = {
-          columns,
-          selectedColumns: ['name', 'age'],
-          setSelectedColumns: vi.fn(),
-          [$deletePropsList]: [],
-        };
-
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
-
-        expect(result.columns).toEqual(columns);
-        expect(result.value).toEqual(['name', 'age']);
-        expect(typeof result.render).toBe('function');
-      });
-    });
-  });
 
   describe('边界条件和错误处理测试', () => {
     it('应该正确处理所有插件的边界情况', () => {

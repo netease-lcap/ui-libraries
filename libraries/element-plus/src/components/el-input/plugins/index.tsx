@@ -66,7 +66,6 @@ export default InputBasicAccumulate.addAccumulate(idePlugin)
       const ref = props.get('ref');
       const Component = props.get('render');
       const isPreview = getIsPreview(props);
-
       const previewRender = (insProps) => {
         const inIDE = !!props.get('data-nodepath');
         const previewText = inIDE || _.isEmpty(insProps.modelValue) ? '-' : insProps.modelValue;

@@ -43,7 +43,7 @@ export const Example1 = {
       }, 2000);
 
       setTimeout(() => {
-        // console.log(myref.value.myChange(), 'myref.value.ref');
+        console.log(myref.value, 'myref.value.ref');
         // console.log('activeName', yref);
         activeName.value = '123';
       }, 5000);

@@ -13,19 +13,13 @@ export function getIsPreview(props) {
 
 export function getRender(Component, previewRender, isPreview) {
   const insRef = useRef({});
-
-  const render = useCallback(
-    (insProps, { attrs, slots }) => {
-      if (isPreview && previewRender && _.isFunction(previewRender)) {
-        return previewRender(insProps, { attrs, slots });
-      }
-      return <Component ref={insRef} {...insProps} {...attrs} v-slots={slots} />;
-    },
-    [isPreview],
-  );
+  const IsPreviewRender = isPreview && _.isFunction(previewRender);
+  const render = useCallback((insProps, { attrs, slots }) => {
+    return previewRender(insProps, { attrs, slots });
+  }, []);
 
   return {
-    render,
+    render: IsPreviewRender ? render : Component,
     insRef,
   };
 }

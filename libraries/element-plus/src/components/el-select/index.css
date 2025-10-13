@@ -7,3 +7,6 @@
 .el-select {
   --el-select-width: 240px;
 }
+.el-select-dropdown__item{
+  height: auto;
+}

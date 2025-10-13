@@ -180,6 +180,7 @@ min-height="500px"
 v-model:currentPage="currentPage"
 :showTotal="true"
 @selection-change="logCellClick"
+:columnConfig="true"
 field="six.name"
 order="descending"
 :sorting="{ field: 'six.name', order: 'desc' }"
@@ -195,8 +196,14 @@ dragSort="row"
 
 
 
-    <el-table-column prop="name" width="30%" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
-    <el-table-column-plus prop="name" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
+    <el-table-column prop="name" width="30%"  class="myclomuns" :style="{'text-align':'left'}" >
+    <template #header>
+    <el-text>text-Name</el-text>
+    </template>
+    <el-text>text-Name</el-text>
+    </template>
+    </el-table-column>
+    <el-table-column-plus prop="date" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
 
 
 </el-table>

@@ -319,15 +319,13 @@ export default TableAccumulate.addPlugin({
       const Component = props.get('render');
       const tableRef = useRef({});
       const render = useCallback((props, { attrs, slots }) => {
-        const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop ? [{ ...node.props }] : []));
+        const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop
+            ? [{ ...node.props, header: node.children?.header }]
+            : []));
         const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
         return (
           <div style={{ ...props.style }} class="el-table-wrapper">
-            <ElTableToolBar
-              columns={columns}
-              selectedColumns={selectedColumns}
-              setSelectedColumns={setSelectedColumns}
-            />
+            <ElTableToolBar columns={columns} value={selectedColumns} onChange={setSelectedColumns} />
             <Component
               ref={tableRef}
               {...props}
@@ -373,7 +371,7 @@ export default TableAccumulate.addPlugin({
           _.constant((item) => _.get(item, rowKey as string, 'id')),
         )
         .when(_.isFunction, _.constant(rowKey))
-        .exhaustive();
+        .otherwise(() => _.constant(undefined));
       const [selectedValue, setSelectedValue] = useControllableValue(props, {
         valuePropName: 'selectedValue',
         onValueEffect: (currentValue) => {
