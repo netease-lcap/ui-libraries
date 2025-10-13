@@ -399,7 +399,7 @@ export default TableAccumulate.addPlugin({
           _.constant((item) => _.get(item, rowKey as string, 'id')),
         )
         .when(_.isFunction, _.constant(rowKey))
-        .exhaustive();
+        .otherwise(() => _.constant(undefined));
       function getSelectedRows(data, selectedValues) {
         return _.map(selectedValues, (rowKey) => _.find(data, (item) => getRowKey(item) === rowKey)).filter(Boolean);
       }
