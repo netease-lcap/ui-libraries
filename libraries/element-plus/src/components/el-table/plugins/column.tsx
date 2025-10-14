@@ -1,10 +1,11 @@
-import { ref, cloneVNode } from 'vue';
+import { ref, cloneVNode, nextTick } from 'vue';
 import _ from 'lodash';
 import { TableColumnCtx } from 'element-plus';
 import { useMemo, useCallback } from '@/plugins/hooks';
-import { ElIcon } from '@/index';
+import { ElIcon, ElCheckbox } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { $deletePropsList } from '@/plugins/constants';
+import { useEffect } from '../../../plugins/hooks';
 
 const EditDefault = {
   name: 'editDefault',
@@ -68,7 +69,7 @@ const EditDefault = {
 };
 const ColumnPluginAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElTableColumnOptions<any, any, any, any>,
-  TableColumnCtx<any> & { editable: boolean }
+  TableColumnCtx<any> & { editable: boolean; 'data-nodepath': string }
 >();
 export default ColumnPluginAccumulate.addPlugin({
   name: 'handleColumn',
@@ -129,6 +130,7 @@ export default ColumnPluginAccumulate.addPlugin({
       return isAutoIndex ? { index } : {};
     },
   })
+
   .addPlugin({
     name: 'handleEditable',
     handle(props) {
@@ -149,6 +151,40 @@ export default ColumnPluginAccumulate.addPlugin({
             [slots],
           ),
         },
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleNodePath',
+    type: 'ide',
+    handle(props) {
+      const className = _.uniqueId('el-table-column');
+      const nodePath = props.get('data-nodepath');
+      const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
+      useEffect(() => {
+        setTimeout(() => {
+          const node = document.querySelectorAll(`.${className}`);
+          node.forEach((item) => {
+            item.setAttribute('data-nodepath', nodePath);
+            item.setAttribute('data-nodepath-multiple', 'true');
+          });
+        }, 300);
+      }, []);
+      return {
+        className,
+        [$deletePropsList]: deletePropsList,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleSelectionAndIndex',
+    type: 'ide',
+    handle(props) {
+      const type = props.get('type');
+      const slots = props.get('slots');
+      const defaultSlot = ['selection', 'index'].includes(type) ? () => null : slots.default;
+      return {
+        slots: _.assign(slots, { default: defaultSlot }),
       };
     },
   });

@@ -5,3 +5,6 @@
 .el-radio-group-vertical {
   grid-auto-flow: row; /* 让子元素按行方向自动排列 */
 }
+.el-radio-group-vertical .el-radio {
+  margin-right: 30px;
+}

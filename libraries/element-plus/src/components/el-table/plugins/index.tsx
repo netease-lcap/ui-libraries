@@ -375,7 +375,7 @@ export default TableAccumulate.addPlugin({
       const [selectedValue, setSelectedValue] = useControllableValue(props, {
         valuePropName: 'selectedValue',
         onValueEffect: (currentValue) => {
-          ref.store.setCurrentRowKey(String(currentValue));
+          ref?.store?.setCurrentRowKey(String(currentValue));
         },
       });
       return {

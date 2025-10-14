@@ -185,7 +185,7 @@ namespace nasl.ui {
     columnConfig: nasl.core.Boolean = false;
 
     @Prop<ElTableOptions<T, V, P, M>, 'pagination'>({
-      group: '主要属性',
+      group: '数据属性',
       title: '分页',
       description: '是否显示分页',
       setter: { concept: 'SwitchSetter' },
@@ -409,7 +409,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '表格列',
-          code: `<el-table-column data-nodepath-multiple="ture">
+          code: `<el-table-column >
                     <template #header><el-text text="表格列"></el-text></template>
                     <template #default="current"></template>
                 </el-table-column>`,
@@ -433,19 +433,18 @@ namespace nasl.ui {
       parentAccept: "['el-table'].includes(target.tag)",
       forceRefresh: 'parent',
       forceUpdateWhenAttributeChange: true,
-      slotWrapperInlineStyle: {},
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
-      selector: [
-        {
-          expression: 'this',
-          cssSelector: 'td',
-        },
-        {
-          expression: 'this.getElement(el=>el.slotTarget==="header")',
-          cssSelector: 'th',
-        },
-      ],
+      // selector: [
+      //   {
+      //     expression: 'this',
+      //     cssSelector: 'td',
+      //   },
+      //   {
+      //     expression: 'this.getElement(el=>el.slotTarget==="header")',
+      //     cssSelector: 'th',
+      //   },
+      // ],
 
       disableSlotAutoFill: [
         {
@@ -453,6 +452,9 @@ namespace nasl.ui {
           expression: "this.getAttribute('type')?.value === 'selection'",
         },
       ],
+      slotWrapperInlineStyle: {
+        header: 'display: inline-block;',
+      },
       slotInlineStyle: {
         title: 'min-width: 30px',
         cell: 'min-width: 30px',
