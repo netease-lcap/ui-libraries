@@ -1,35 +1,36 @@
 import * as naslTypes from '@nasl/ast-mini';
 import {
   filterProperty,
+  firstLowerCase,
   getFirstDisplayedProperty,
   genUniqueQueryNameGroup,
   NameGroup,
-  firstLowerCase,
+  getAllEntityPromaryKeyProperty,
 } from './utils';
-import { genQueryLogic, genFormItemsTemplate } from './genCommonBlock';
+import { genQueryLogic, genFormItemsTemplate, genFormSetvalueLogic } from './genCommonBlock';
 
-function genCreateFormTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
+function genUpdateFormTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   const namespace = entity.getNamespace();
   const properties = entity.properties.filter(filterProperty('inForm'));
   nameGroup.vModelName = nameGroup.viewVariableEntity;
 
-  return `<ElForm ref="${nameGroup.viewElementMainView}">
-            ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
-            <ElButton
-              type="primary"
-              text="立即创建"
-                  onClick={
-                      function ${nameGroup.viewLogicSubmit}(event) {
-                          if ($refs.${nameGroup.viewElementMainView}.validated().valid) {
-                              ${namespace}.${entity.name}Entity.create(${nameGroup.viewVariableEntity})
-                              nasl.ui.showMessage('创建成功！')
-                          }
-                      }
-                  }></ElButton>
-        </ElForm>`;
+  return `<Form ref="${nameGroup.viewElementMainView}" submitter={false}>
+      ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
+    <Button
+        type="primary"
+        children="提交修改"
+        onClick={
+            function ${nameGroup.viewLogicSubmit}(event) {
+                if ($refs.${nameGroup.viewElementMainView}.validate()) {
+                    ${namespace}.${entity.name}Entity.update($refs.${nameGroup.viewElementMainView}.getValues())
+                    nasl.ui.showMessage('修改成功！')
+                }
+            }
+        }></Button>
+  </Form>`;
 }
 
-export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
+export function genUpdateBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
   const likeComponent = refElement?.likeComponent || refElement;
   const dataSource = entity.parentNode;
   const module = dataSource.app;
@@ -41,14 +42,24 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
   // 加到页面上的params、variables、logics等都需要唯一name
   // 页面上有ref引用的element也需要唯一name
   const nameGroup = {
-    viewElementMainView: likeComponent.getViewElementUniqueName('el_form'),
+    viewElementMainView: likeComponent.getViewElementUniqueName('form'),
     viewVariableEntity: likeComponent.getVariableUniqueName(firstLowerCase(entity.name)),
     viewLogicSubmit: likeComponent.getLogicUniqueName('submit'),
+    viewLogicLoad: likeComponent.getLogicUniqueName('load'),
     viewDirectoryEntity: null,
   };
   if (likeComponent.getDirectoryUniqueName) {
     nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(firstLowerCase(entity.name));
   }
+  const idProperties = getAllEntityPromaryKeyProperty(entity);
+  let viewParamIds: Array<{name:string, type: string}> = [];
+  viewParamIds = idProperties.map((property) => {
+    const name = idProperties.length === 1 ? 'id' : property.name;
+    return {
+      name: likeComponent.getParamUniqueName(name),
+      type: (property.typeAnnotation?.toNaturalTS && property.typeAnnotation?.toNaturalTS()) || 'Long',
+    };
+  });
 
   // 收集所有和本实体关联的实体
   const selectNameGroupMap = new Map();
@@ -60,7 +71,7 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
       if (relationEntity) {
         const displayedProperty = getFirstDisplayedProperty(relationEntity);
         if (displayedProperty) {
-          const viewElementSelect = likeComponent.getViewElementUniqueName('el_select');
+          const viewElementSelect = likeComponent.getViewElementUniqueName('select');
           const selectNameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementSelect, false, relationEntity.name);
           selectNameGroup.viewElementSelect = viewElementSelect;
           // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
@@ -73,7 +84,7 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
     }
   });
 
-  return `export function view() {
+  return `export function view(${viewParamIds.map((param) => `${param.name}: ${param.type}`).join(', ')}) {
     ${
       nameGroup.viewDirectoryEntity
       ? `
@@ -83,10 +94,19 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
       let ${nameGroup.viewVariableEntity}: ${entityFullName};`
       : `let ${nameGroup.viewVariableEntity}: ${entityFullName};`
     }
-    return ${genCreateFormTemplate(entity, nameGroup, selectNameGroupMap)}
-  }
-    export namespace app.logics {
-        ${newLogics.join('\n')}
+
+    const $lifecycles = {
+        onMounted: [
+            function ${nameGroup.viewLogicLoad}() {
+                ${nameGroup.viewVariableEntity} = ${namespace}.${entity.name}Entity.get(${viewParamIds.map((param) => param.name).join(',')});
+                ${genFormSetvalueLogic(entity, nameGroup)}
+            },     
+        ]      
     }
-    `;
+
+    return ${genUpdateFormTemplate(entity, nameGroup, selectNameGroupMap)}
+  }
+      export namespace app.logics {
+          ${newLogics.join('\n')}
+      }`;
 }
