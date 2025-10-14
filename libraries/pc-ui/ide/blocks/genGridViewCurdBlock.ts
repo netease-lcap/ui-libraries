@@ -37,6 +37,9 @@ export function genGridViewCurdBlock(entity: naslTypes.Entity, refElement: naslT
   nameGroup.lowerEntity = firstLowerCase(entity.name);
   // 当前节点的currentName
   nameGroup.currentName = getCurrentName(refElement);
+  if (likeComponent.getDirectoryUniqueName) {
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(firstLowerCase(entity.name));
+  }
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();
@@ -68,10 +71,30 @@ export function genGridViewCurdBlock(entity: naslTypes.Entity, refElement: naslT
   newLogics.push(entityLogic);
 
   return `export function view() {
-      let ${nameGroup.viewVariableEntity}: ${entityFullName};
-      let ${nameGroup.viewVariableInput}: ${entityFullName};
-      let ${nameGroup.viewVariableFilter}: ${entityFullName};
-      let ${nameGroup.viewVariableIsUpdate}: Boolean;
+      ${
+        nameGroup.viewDirectoryEntity
+        ? `
+        $Variable({
+          directory: ${nameGroup.viewDirectoryEntity},
+        })
+        let ${nameGroup.viewVariableEntity}: ${entityFullName};
+        $Variable({
+          directory: ${nameGroup.viewDirectoryEntity},
+        })
+        let ${nameGroup.viewVariableInput}: ${entityFullName};
+        $Variable({
+          directory: ${nameGroup.viewDirectoryEntity},
+        })
+        let ${nameGroup.viewVariableFilter}: ${entityFullName};
+        $Variable({
+          directory: ${nameGroup.viewDirectoryEntity},
+        })
+        let ${nameGroup.viewVariableIsUpdate}: Boolean;`
+        : `let ${nameGroup.viewVariableEntity}: ${entityFullName};
+          let ${nameGroup.viewVariableInput}: ${entityFullName};
+          let ${nameGroup.viewVariableFilter}: ${entityFullName};
+          let ${nameGroup.viewVariableIsUpdate}: Boolean;`
+      }
 
       const $lifecycles = {
           onCreated: [

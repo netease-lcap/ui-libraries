@@ -6,27 +6,27 @@ import {
   NameGroup,
   firstLowerCase,
 } from './utils';
-import { genQueryLogic, genFormItemsTemplate } from './genCommonBlock';
+import { genQueryLogic, genFormItemsTemplate, genFormSetvalueLogic } from './genCommonBlock';
 
 function genCreateFormTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
   const namespace = entity.getNamespace();
   const properties = entity.properties.filter(filterProperty('inForm'));
   nameGroup.vModelName = nameGroup.viewVariableEntity;
 
-  return `<ElForm ref="${nameGroup.viewElementMainView}">
+  return `<Form ref="${nameGroup.viewElementMainView}" submitter={false}>
             ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
-            <ElButton
+            <Button
               type="primary"
-              text="立即创建"
+              children="立即创建"
                   onClick={
                       function ${nameGroup.viewLogicSubmit}(event) {
-                          if ($refs.${nameGroup.viewElementMainView}.validated().valid) {
-                              ${namespace}.${entity.name}Entity.create(${nameGroup.viewVariableEntity})
+                          if ($refs.${nameGroup.viewElementMainView}.validate()) {
+                              ${namespace}.${entity.name}Entity.create($refs.${nameGroup.viewElementMainView}.getValues())
                               nasl.ui.showMessage('创建成功！')
                           }
                       }
-                  }></ElButton>
-        </ElForm>`;
+                  }></Button>
+        </Form>`;
 }
 
 export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
@@ -41,9 +41,10 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
   // 加到页面上的params、variables、logics等都需要唯一name
   // 页面上有ref引用的element也需要唯一name
   const nameGroup = {
-    viewElementMainView: likeComponent.getViewElementUniqueName('el_form'),
+    viewElementMainView: likeComponent.getViewElementUniqueName('form'),
     viewVariableEntity: likeComponent.getVariableUniqueName(firstLowerCase(entity.name)),
     viewLogicSubmit: likeComponent.getLogicUniqueName('submit'),
+    viewLogicLoad: likeComponent.getLogicUniqueName('load'),
     viewDirectoryEntity: null,
   };
   if (likeComponent.getDirectoryUniqueName) {
@@ -60,7 +61,7 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
       if (relationEntity) {
         const displayedProperty = getFirstDisplayedProperty(relationEntity);
         if (displayedProperty) {
-          const viewElementSelect = likeComponent.getViewElementUniqueName('el_select');
+          const viewElementSelect = likeComponent.getViewElementUniqueName('select');
           const selectNameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementSelect, false, relationEntity.name);
           selectNameGroup.viewElementSelect = viewElementSelect;
           // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
@@ -83,6 +84,15 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
       let ${nameGroup.viewVariableEntity}: ${entityFullName};`
       : `let ${nameGroup.viewVariableEntity}: ${entityFullName};`
     }
+
+    const $lifecycles = {
+        onMounted: [
+            function ${nameGroup.viewLogicLoad}() {
+              ${genFormSetvalueLogic(entity, nameGroup)}
+            },     
+        ]      
+    }
+
     return ${genCreateFormTemplate(entity, nameGroup, selectNameGroupMap)}
   }
     export namespace app.logics {
