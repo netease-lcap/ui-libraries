@@ -62,7 +62,6 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     C,
   > extends ViewComponentOptions {
-
     @Prop({
       group: '主要属性',
       title: '是否可清空',
@@ -70,7 +69,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     clearable: nasl.core.Boolean = false;
-
 
     @Prop({
       group: '主要属性',
@@ -88,7 +86,6 @@ namespace nasl.ui {
     })
     noDataText: nasl.core.String = 'No data';
 
-
     @Prop({
       group: '主要属性',
       title: '是否可搜索',
@@ -97,7 +94,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     filterable: nasl.core.Boolean = false;
-
 
     @Prop({
       group: '数据属性',
@@ -155,7 +151,15 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: M extends true ? nasl.collection.List<V> :V 
+    modelValue: M extends true ? nasl.collection.List<V> : V;
+
+    @Prop({
+      group: '数据属性',
+      title: '选中值完整数据',
+      description: '当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。',
+      docDescription: '当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。',
+    })
+    selectedValuesData: nasl.collection.List<{ label: nasl.core.String; value: V }>;
 
     @Prop({
       group: '主要属性',
@@ -183,7 +187,6 @@ namespace nasl.ui {
     })
     collapseTagsTooltip: nasl.core.Boolean = false;
 
-
     @Prop({
       group: '主要属性',
       title: '是否虚拟滚动',
@@ -192,7 +195,6 @@ namespace nasl.ui {
     })
     virtualize: nasl.core.Boolean = false;
 
-
     @Prop({
       group: '主要属性',
       title: '占位符',
@@ -200,7 +202,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     placeholder: nasl.core.String;
-
 
     @Prop({
       group: '主要属性',
@@ -212,7 +213,6 @@ namespace nasl.ui {
       },
     })
     size: 'small' | 'default' | 'large' = 'default';
-
 
     @Event({
       title: '选中值变化时',
@@ -232,8 +232,6 @@ namespace nasl.ui {
     })
     onClear: (event: any) => any;
 
-
-
     @Event({
       title: '下拉框显示或隐藏时',
       description: '下拉框显示或隐藏时触发',
@@ -245,8 +243,7 @@ namespace nasl.ui {
       description: '失去焦点时触发',
     })
     onBlur: (event: any) => any;
-    
-    
+
     @Event({
       title: '获得焦点时',
       description: '获得焦点时触发',
@@ -313,8 +310,6 @@ namespace nasl.ui {
     })
     slotDefault: () => Array<ViewComponent>;
   }
-  
-
 
   @IDEExtraInfo({
     show: true,
@@ -342,8 +337,6 @@ namespace nasl.ui {
   }
 
   export class ElOptionOptions<T, V> extends ViewComponentOptions {
-
-
     @Prop({
       group: '主要属性',
       title: '是否禁用该选项',
@@ -375,7 +368,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     label: nasl.core.String | nasl.core.Decimal;
-
 
     @Slot({
       title: '选项内容',
@@ -427,9 +419,7 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: [
-          'slotDefault',
-        ],
+        excludes: ['slotDefault'],
       },
       {
         name: 'ElSelect',

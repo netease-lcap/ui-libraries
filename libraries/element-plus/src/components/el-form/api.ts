@@ -506,6 +506,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '验证触发方式',
+      description: '验证逻辑的触发方式',
+      setter: { concept: 'EnumSelectSetter', options: [{ title: '失去焦点' }, { title: '改变' }] },
+    })
+    trigger: 'blur' | 'change' = 'blur';
+
+    @Prop({
+      group: '主要属性',
       title: '必填标记',
       description: '是否为必填项,并显示必填标记',
       setter: { concept: 'SwitchSetter' },

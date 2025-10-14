@@ -2,10 +2,11 @@ import { ElMessage, UploadFile, UploadRawFile, UploadContentProps } from 'elemen
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
 import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
-import { useRef } from '@/plugins/hooks';
+import { useRef, useControllableValue } from '@/plugins/hooks';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { $deletePropsList } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import FileTemplate from './file';
 import idePlugin from './ide';
 
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -193,8 +194,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const onChange = props.get('onChange');
       const urlField = props.get('urlField') || 'filePath';
       const converter = props.get('converter') || 'simple';
-      const value = props.get('modelValue');
-      const setValue = props.get('onUpdate:modelValue') ?? (() => {});
+      const [value, setValue] = useControllableValue(props);
       const defaultFileList = getFileListByValue(value, converter, undefined);
       return {
         fileList: defaultFileList,
@@ -205,6 +205,8 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
           }
           _.attempt(onChange, uploadFile, fileList);
         },
+        value,
+        setValue,
         onRemove: (uploadFile, fileList) => {
           const newValue = removeValueByList(fileList);
           _.attempt(setValue, newValue);
@@ -334,6 +336,45 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       return {
         triggerUploadText,
         slots: { ...slots, ...dragSlot, ...pictureCardSlot, ...uploadSlot, ...tipSlot },
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleDownload',
+    handle(props) {
+      const listType = props.get('listType');
+      const fileList = props.get('fileList');
+      const onRemove = props.get('onRemove');
+      const setValue = props.get('setValue');
+      const urlField = props.get('urlField') || 'filePath';
+      const converter = props.get('converter') || 'simple';
+      const slots = props.get('slots');
+      const fileSlot = {
+        file: ({ file, index }) => {
+          return (
+            <FileTemplate
+              file={file}
+              index={index}
+              onRemove={() => {
+                _.attempt(onRemove, file, fileList);
+                setValue(
+                  getValueByList(
+                    fileList.filter((item, i) => i !== index),
+                    converter,
+                    urlField,
+                  ),
+                );
+              }}
+              onDownload={() => {}}
+            />
+          );
+        },
+      };
+      if (listType !== 'text') {
+        return {};
+      }
+      return {
+        slots: { ...slots, ...fileSlot },
       };
     },
   })

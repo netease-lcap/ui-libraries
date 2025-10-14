@@ -56,12 +56,17 @@ export default SelectBasicAccumulate.addPlugin({
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-            default: () =>
-              _.map(dataSource, (item) => (
-                <ElOption {...item}>
-                  {item.label}
-                  {item.description && <el-text style="display:block;height:14px;line-height:14px" color="secondary" text={item.description} />}
-                </ElOption>
+            default: () => _.map(dataSource, (item) => (
+              <ElOption {...item}>
+                {item.label}
+                {item.description && (
+                <el-text
+                  style="display:block;height:14px;line-height:14px"
+                  color="secondary"
+                  text={item.description}
+                />
+                  )}
+              </ElOption>
               )),
           };
 
@@ -71,6 +76,17 @@ export default SelectBasicAccumulate.addPlugin({
         loading,
         slots: _.assign(slots, dataSourceSlots),
         data: dataSource,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handle',
+    handle(props) {
+      const selectedValuesData = props.get('selectedValuesData');
+      const data = props.get('data', []);
+      if (_.isEmpty(selectedValuesData) || _.isEmpty(data)) return {};
+      return {
+        data: _.unionBy(data, selectedValuesData, 'value'),
       };
     },
   })

@@ -17,34 +17,38 @@ export default FormItemPluginAccumulate.addPlugin({
   name: 'handleRules',
   handle(props) {
     const rulesProps = props.get('rules') ?? [];
+    const trigger = props.get('trigger') ?? 'blur';
     const isRequired = props.get('isRequired');
     const required = useMemo(
-      () => (isRequired ? { required: true, message: '表单项不得为空', trigger: 'blur' } : []),
+      () => (isRequired ? { required: true, message: '表单项不得为空', trigger } : []),
       [isRequired],
     );
     const rules = useMemo(() => {
-      const ideRules = _.map(rulesProps, (item: any) => ({
-          message: item.message,
-          required: item.required,
-          trigger: ['blur'],
-          validator: (rule, value, callback) => new Promise((resolve) => {
-              const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
-              validator
-                .validate(value)
-                .then(() => {
-                  resolve(true);
-                })
-                .catch((errorMessage) => {
-                  callback(new Error(errorMessage));
-                  resolve({
-                    result: false,
-                    message: errorMessage,
+      const ideRules = _.map(rulesProps, (item: any) => {
+          if (!item.validate) return item;
+          return {
+            message: item.message,
+            required: item.required,
+            trigger: [trigger],
+            validator: (rule, value, callback) => new Promise((resolve) => {
+                const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
+                validator
+                  .validate(value)
+                  .then(() => {
+                    resolve(true);
+                  })
+                  .catch((errorMessage) => {
+                    callback(new Error(errorMessage));
+                    resolve({
+                      result: false,
+                      message: errorMessage,
+                    });
                   });
-                });
-            }),
-        })) ?? [];
+              }),
+          };
+        }) ?? [];
       return [...ideRules, ...(Array.isArray(required) ? required : [required])];
-    }, [rulesProps]);
+    }, [rulesProps, trigger]);
     return { rules };
   },
 });
