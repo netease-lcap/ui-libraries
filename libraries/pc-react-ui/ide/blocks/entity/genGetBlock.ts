@@ -9,21 +9,18 @@ import {
 function genGetTemplate(entity: naslTypes.Entity, nameGroup: NameGroup) {
   const properties = entity.properties.filter(filterProperty('inDetail'));
 
-  return `<ElDescriptions
-    slotTitle={
-      <ElText text="基本信息"></ElText>
-    }>
+  return `<Descriptions title="基本信息">
             ${properties.map((property) => {
     const valueExpression = `${nameGroup.viewVariableEntity}.${property.name}`;
-    const detailItem = `<ElDescriptionsItem
+    const detailItem = `<DescriptionsItem
         slotLabel={
-            <ElText text="${property.label || property.name}"></ElText>
+            <Text children="${property.label || property.name}"></Text>
         }>
-        <ElText text={${valueExpression}}></ElText>
-    </ElDescriptionsItem>`;
+        <Text children={${valueExpression}}></Text>
+    </DescriptionsItem>`;
     return detailItem;
   }).join('\n')}
-    </ElDescriptions>`;
+    </Descriptions>`;
 }
 
 export function genGetBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
