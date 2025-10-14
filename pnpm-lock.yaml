@@ -1070,8 +1070,8 @@ importers:
         specifier: ^7.28.2
         version: 7.28.2
       '@lcap/extension-shared':
-        specifier: ^1.0.4-beta.1
-        version: 1.0.4-beta.1
+        specifier: ^1.0.4-beta.2
+        version: 1.0.4-beta.2
       '@lcap/extension-ui':
         specifier: ^1.1.1
         version: 1.1.1
@@ -3311,8 +3311,8 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==, tarball: https://registry.npmmirror.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz}
 
-  '@lcap/extension-shared@1.0.4-beta.1':
-    resolution: {integrity: sha512-bPL3r3JufcwzwdZRt+2P1BN2AdbOJSIPTGrk47YGPmP5LnvUdYBdPOWX+wG7f121XxMIJpmXPKa+RSgHt+/w5Q==}
+  '@lcap/extension-shared@1.0.4-beta.2':
+    resolution: {integrity: sha512-IXpq0wc1pUDs20Cc6TakRabvtzNiiunS/3YRNmVm2kzOHTDCMqDPSX+j/tycDYAijR3g97nI+WVg51GPcfvFJQ==}
 
   '@lcap/extension-ui@1.1.1':
     resolution: {integrity: sha512-DDEvrb2prdGtIitu9v1/R+O7sIvG34ZZupTsP8G9B9IfJV7RZbznZJgWkGl4nz8QXWDHyp+XzF6zZkEI47d/zQ==, tarball: https://registry.npmmirror.com/@lcap/extension-ui/-/extension-ui-1.1.1.tgz}
@@ -14372,7 +14372,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@lcap/extension-shared@1.0.4-beta.1':
+  '@lcap/extension-shared@1.0.4-beta.2':
     dependencies:
       '@babel/generator': 7.28.0
       '@babel/parser': 7.28.0

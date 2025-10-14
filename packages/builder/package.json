@@ -1,6 +1,6 @@
 {
   "name": "@lcap/builder",
-  "version": "1.6.2-beta.1",
+  "version": "1.6.2-beta.2",
   "description": "lcap builder utils",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -73,7 +73,7 @@
     "@babel/parser": "^7.28.0",
     "@babel/traverse": "^7.28.0",
     "@babel/types": "^7.28.2",
-    "@lcap/extension-shared": "^1.0.4-beta.1",
+    "@lcap/extension-shared": "^1.0.4-beta.2",
     "@lcap/extension-ui": "^1.1.1",
     "@lcap/material-parser": "^1.0.0",
     "archiver": "^7.0.1",
