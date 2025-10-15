@@ -210,8 +210,6 @@ namespace nasl.ui {
       | 'monthrange'
       | 'yearrange' = 'date';
 
-    
-
     @Prop({
       group: '主要属性',
       title: '最小日期',
@@ -247,7 +245,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     rangeSeparator: nasl.core.String = '-';
-
 
     @Prop({
       group: '主要属性',
@@ -393,19 +390,19 @@ namespace nasl.ui {
       title: '值改变时',
       description: '用户确认选定的值时触发',
     })
-    onChange: (modelValue: any) => void;
+    onChange: (modelValue: nasl.core.Date | nasl.collection.List<nasl.core.Date>) => void;
 
     @Event({
       title: '失去焦点时',
       description: '在组件 Input 失去焦点时触发',
     })
-    onBlur: (event: any) => void;
+    onBlur: (event: FocusEvent) => void;
 
     @Event({
       title: '获得焦点时',
       description: '在组件 Input 获得焦点时触发',
     })
-    onFocus: (event: any) => void;
+    onFocus: (event: FocusEvent) => void;
 
     @Event({
       title: '清空时',
@@ -417,13 +414,13 @@ namespace nasl.ui {
       title: '日历所选日期更改时',
       description: '在日历所选日期更改时触发',
     })
-    onCalendarChange: (modelValue: any) => void;
+    onCalendarChange: (modelValue: nasl.core.Date | nasl.collection.List<nasl.core.Date>) => void;
 
     @Event({
       title: '日期面板改变时',
       description: '当日期面板改变时触发',
     })
-    onPanelChange: (date: any, view?: nasl.core.String) => void;
+    onPanelChange: (date: nasl.core.Date | nasl.collection.List<nasl.core.Date>, view?: nasl.core.String) => void;
 
     @Event({
       title: '下拉列表出现/消失时',

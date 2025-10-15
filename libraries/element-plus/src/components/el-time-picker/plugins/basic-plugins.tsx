@@ -10,6 +10,7 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import idePlugin from './ide';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { $deletePropsList } from '@/plugins/constants';
+
 type GetTimeValueParams = {
   isEffectiveTime: boolean;
   isNilTime: boolean;
@@ -20,7 +21,7 @@ type GetTimeValueParams = {
 };
 
 const TimePickerBasicAccumulate = new PluginAccumulateTypes<
-  nasl.ui.ElTimePickerOptions,
+  nasl.ui.ElTimePickerOptions<any, any, any, any, any>,
   TimePickerDefaultProps & {
     'onUpdate:startValue':(value: string) => void;
     'onUpdate:endValue': (value: string) => void;
@@ -69,13 +70,7 @@ export default TimePickerBasicAccumulate.addAccumulate(idePlugin)
       };
 
       const [value, setValue] = useControllableValue(props);
-      // const getTimeValue = _.cond([
-      //   [_.matches({ isNilTime: true, isControlledTime: true }), _.constant([])],
-      //   [_.matches({ isEffectiveTime: false }), _.constant([])],
-      //   [_.matches({ isControlledTime: false }), (value: GetTimeValueParams) => value?.value],
-      //   [_.stubTrue, ({ startValue, endValue }) => [getFormatTimeValue(startValue), getFormatTimeValue(endValue)]],
-      // ]);
-      // TODO
+
       const timeValue = useMemo(
         () => _.match({ isEffectiveTime, isNilTime, isControlledTime, startValue, endValue, value })
             .when(_.matches({ isNilTime: true, isControlledTime: true }), _.constant([]))

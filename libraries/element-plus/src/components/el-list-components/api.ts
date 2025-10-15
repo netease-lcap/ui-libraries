@@ -74,6 +74,16 @@ namespace nasl.ui {
     idField: (item: T) => any;
 
     @Prop({
+      group: '数据属性',
+      title: '文本字段',
+      description: '指定显示的文本字段，当插槽为空时显示该字段的值',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    textField: (item: T) => any;
+
+    @Prop({
       group: '主要属性',
       title: '每行排列项数',
       description: '为空时默认为5',
@@ -113,6 +123,142 @@ namespace nasl.ui {
       },
     })
     equalWidth: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示分页',
+      description: '是否显示分页组件',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    showPagination: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '当前页',
+      description: '当前页码',
+      sync: true,
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 1,
+      },
+    })
+    currentPage: nasl.core.Integer = 1;
+
+    @Prop({
+      group: '主要属性',
+      title: '每页数量',
+      description: '每页显示的数据条数',
+      sync: true,
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 1,
+      },
+    })
+    pageSize: nasl.core.Integer = 10;
+
+    @Prop({
+      group: '主要属性',
+      title: '每页数量选项',
+      description: '每页显示个数选择器的选项设置',
+      setter: {
+        concept: 'InputSetter',
+      },
+    })
+    pageSizes: nasl.collection.List<nasl.core.Integer> = [10, 20, 50, 100];
+
+    @Prop({
+      group: '主要属性',
+      title: '分页布局',
+      description: '组件布局，子组件名用逗号分隔',
+      setter: {
+        concept: 'InputSetter',
+      },
+    })
+    paginationLayout: nasl.core.String = 'total, sizes, prev, pager, next, jumper';
+
+    @Prop({
+      group: '主要属性',
+      title: '分页背景色',
+      description: '是否为分页按钮添加背景色',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    paginationBackground: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '分页尺寸',
+      description: '分页组件的尺寸',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '小' }, { title: '默认' }, { title: '大' }],
+      },
+    })
+    paginationSize: 'small' | 'default' | 'large' = 'default';
+
+    @Prop({
+      group: '主要属性',
+      title: '单页隐藏',
+      description: '只有一页时是否隐藏分页器',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    hideOnSinglePage: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '选中值',
+      description: '当前选中的值',
+      sync: true,
+    })
+    modelValue: T | nasl.collection.List<T>;
+
+    @Prop({
+      group: '主要属性',
+      title: '选择模式',
+      description: '选择模式：none-不可选，single-单选，multiple-多选',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '不可选' },
+          { title: '单选' },
+          { title: '多选' },
+        ],
+      },
+    })
+    selectionMode: 'none' | 'single' | 'multiple' = 'none';
+
+    @Prop({
+      group: '主要属性',
+      title: '是否可选',
+      description: '是否可选（兼容旧版，建议使用 selectionMode）',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    selectable: nasl.core.Boolean = false;
+
+    @Event({
+      title: '页码改变时',
+      description: '当前页码改变时触发',
+    })
+    onPageChange: (event: { page: nasl.core.Integer; pageSize: nasl.core.Integer }) => any;
+
+    @Event({
+      title: '每页数量改变时',
+      description: '每页显示条数改变时触发',
+    })
+    onSizeChange: (event: { page: nasl.core.Integer; pageSize: nasl.core.Integer }) => any;
+
+    @Event({
+      title: '选中改变时',
+      description: '选中值改变时触发',
+    })
+    onSelectionChange: (event: { value: any; items: nasl.collection.List<T> }) => any;
 
     @Slot({
       title: '默认',

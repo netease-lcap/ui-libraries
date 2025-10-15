@@ -4,6 +4,7 @@
   <div>
     <el-list-components :column="4" :data-source="[1, 2, 3, 4, 5]" :row-gap="10" :column-gap="10">
       <template #default="scope">
+        {{ scope }}
         <el-button>Button</el-button>
       </template>
     </el-list-components>

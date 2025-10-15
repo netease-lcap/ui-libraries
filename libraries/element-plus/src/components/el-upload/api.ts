@@ -232,19 +232,12 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '文件大小限制',
-      description: '文件大小限制',
+      title: '文件数量限制',
+      description: '文件数量限制',
       setter: { concept: 'NumberInputSetter' },
     })
     limit: nasl.core.Decimal;
-    
-    @Prop({
-      group: '主要属性',
-      title: '禁用',
-      description: '是否禁用上传组件',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean = false;
+
 
     @Prop({
       group: '主要属性',
@@ -342,6 +335,14 @@ namespace nasl.ui {
       if: (_) => _.autoUpload !== true
     })
     showUploadButton: nasl.core.Boolean = false;
+        
+    @Prop({
+      group: '状态属性',
+      title: '禁用',
+      description: '是否禁用上传组件',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
