@@ -19,12 +19,17 @@ export default defineComponent({
     onDownload: {
       type: Function,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const isHovered = ref(false);
 
     // 下载文件方法
     const handleDownload = () => {
+
       saveAs(props.file.url, props.file.name);
     };
 
@@ -104,6 +109,9 @@ export default defineComponent({
                   color: '#409eff',
                 }}
                 onClick={(e: Event) => {
+                  if (props.disabled) {
+                    return;
+                  }
                   e.stopPropagation();
                   handleDownload();
                 }}
@@ -118,6 +126,9 @@ export default defineComponent({
                   color: '#909399',
                 }}
                 onClick={(e: Event) => {
+                  if (props.disabled) {
+                    return;
+                  }
                   e.stopPropagation();
                   props.onRemove(props.file, props.index);
                 }}

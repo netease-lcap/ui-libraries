@@ -348,6 +348,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const setValue = props.get('setValue');
       const urlField = props.get('urlField') || 'filePath';
       const converter = props.get('converter') || 'simple';
+      const disabled = props.get('disabled');
       const slots = props.get('slots');
       const fileSlot = {
         file: ({ file, index }) => {
@@ -355,6 +356,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
             <FileTemplate
               file={file}
               index={index}
+              disabled={disabled}
               onRemove={() => {
                 _.attempt(onRemove, file, fileList);
                 setValue(
