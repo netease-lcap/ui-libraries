@@ -38,7 +38,8 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 import type { UploadProps, UploadUserFile } from 'element-plus';
 
 const fileList = ref<String>(
-  'https://element-plus.org/images/element-plus-logo.svg,https://element-plus.org/images/element-plus-logo.svg',
+  `https://element-plus.org/images/element-plus-logo.svg
+  ,https://element-plus.org/images/element-plus-logo.svg`,
 );
 
 const handleRemove: UploadProps['onRemove'] = (file, uploadFiles) => {

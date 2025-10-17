@@ -28,7 +28,13 @@ namespace nasl.ui {
     description: '组件列表',
     group: 'Table',
   })
-  export class ElListComponents<T> extends ViewComponent {
+  export class ElListComponents<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponent {
     @Prop({
       title: '数据',
     })
@@ -40,12 +46,18 @@ namespace nasl.ui {
     })
     reload(): void {}
 
-    constructor(options?: Partial<ElListComponentsOptions<T>>) {
+    constructor(options?: Partial<ElListComponentsOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class ElListComponentsOptions<T> extends ViewComponentOptions {
+  export class ElListComponentsOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -96,6 +108,39 @@ namespace nasl.ui {
     column: nasl.core.Decimal | nasl.core.Integer = 5;
 
     @Prop({
+      group: '状态属性',
+      title: '是否可选择',
+      description: '是否可选择',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '不可选' }, { title: '单选' }, { title: '多选' }],
+      },
+    })
+    selection: 'none' | 'single' | 'multiple' = 'none';
+
+    @Prop({
+      group: '数据属性',
+      title: '是否范围',
+      description: '是否范围选择',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => false,
+    })
+    isRange: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '清除选中值',
+      description: '是否清除选中值',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => _.selection !== 'none',
+    })
+    clearable: nasl.core.Boolean = false;
+
+    @Prop({
       group: '样式属性',
       title: '行间距',
       description: '行间距',
@@ -126,13 +171,45 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '显示分页',
+      title: '分页',
       description: '是否显示分页组件',
       setter: {
         concept: 'SwitchSetter',
       },
     })
-    showPagination: nasl.core.Boolean = false;
+    pagination: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '总条数',
+      description: '总条数',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    total: nasl.core.Integer;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示总条数',
+      description: '是否显示总条数',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => _.pagination !== false,
+    })
+    showTotal: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示跳转输入',
+      description: '是否显示跳转输入',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => _.pagination !== false,
+    })
+    showJumper: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -143,18 +220,20 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
         min: 1,
       },
+      if: (_) => _.pagination !== false,
     })
     currentPage: nasl.core.Integer = 1;
 
     @Prop({
       group: '主要属性',
-      title: '每页数量',
-      description: '每页显示的数据条数',
+      title: '每页条数',
+      description: '每页条数',
       sync: true,
       setter: {
         concept: 'NumberInputSetter',
         min: 1,
       },
+      if: (_) => _.pagination !== false,
     })
     pageSize: nasl.core.Integer = 10;
 
@@ -165,18 +244,9 @@ namespace nasl.ui {
       setter: {
         concept: 'InputSetter',
       },
+      if: (_) => _.pagination !== false,
     })
     pageSizes: nasl.collection.List<nasl.core.Integer> = [10, 20, 50, 100];
-
-    @Prop({
-      group: '主要属性',
-      title: '分页布局',
-      description: '组件布局，子组件名用逗号分隔',
-      setter: {
-        concept: 'InputSetter',
-      },
-    })
-    paginationLayout: nasl.core.String = 'total, sizes, prev, pager, next, jumper';
 
     @Prop({
       group: '主要属性',
@@ -185,6 +255,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => _.pagination !== false,
     })
     paginationBackground: nasl.core.Boolean = true;
 
@@ -196,26 +267,18 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '默认' }, { title: '大' }],
       },
+      if: (_) => _.pagination !== false,
     })
     paginationSize: 'small' | 'default' | 'large' = 'default';
-
-    @Prop({
-      group: '主要属性',
-      title: '单页隐藏',
-      description: '只有一页时是否隐藏分页器',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    hideOnSinglePage: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
       title: '选中值',
       description: '当前选中的值',
       sync: true,
+      if: (_) => _.selection !== 'none',
     })
-    modelValue: T | nasl.collection.List<T>;
+    modelValue: M extends true ? nasl.collection.List<V> : V;
 
     @Prop({
       group: '主要属性',
@@ -223,11 +286,7 @@ namespace nasl.ui {
       description: '选择模式：none-不可选，single-单选，multiple-多选',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '不可选' },
-          { title: '单选' },
-          { title: '多选' },
-        ],
+        options: [{ title: '不可选' }, { title: '单选' }, { title: '多选' }],
       },
     })
     selectionMode: 'none' | 'single' | 'multiple' = 'none';

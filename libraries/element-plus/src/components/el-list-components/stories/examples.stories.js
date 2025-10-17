@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import Component from '../index';
 import ExamplesDemo1 from '../demos/examples/ExamplesDemo1.vue';
 import ExamplesDemo2 from '../demos/examples/ExamplesDemo2.vue';
@@ -55,5 +56,27 @@ export const Demo3 = {
       DeprecatedDemo: ExamplesDemo4,
     },
     template: '<deprecated-demo />',
+  }),
+};
+
+export const Demo4 = {
+  name: 'new',
+
+  render: () => ({
+    setup() {
+      const value = ref(1);
+      return {
+        value,
+      };
+    },
+    template: `
+    <div>
+    {{value}}
+    <el-list-components-plus v-model="value" :clearable="true" selection="multiple" :column="1" :equal-width="false" :pagination="true" :total="100" :dataSource="[1, 2, 3, 4, 5,6,7,8,9,10,11,12,13]" :row-gap="10" :column-gap="40">
+
+    </el-list-components-plus>
+    </div>
+
+    `,
   }),
 };

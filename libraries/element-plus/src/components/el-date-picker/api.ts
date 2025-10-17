@@ -14,28 +14,34 @@ namespace nasl.ui {
     description: '用于选择某一具体日期或某一段日期区间。',
     group: 'Selector',
   })
-  export class ElDatePicker extends ViewComponent {
+  export class ElDatePicker<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     @Prop({
       title: '值',
     })
-    modelValue: ElDatePickerOptions['modelValue'];
+    modelValue: ElDatePickerOptions<T, V, P, M, C>['modelValue'];
 
     @Prop({
       title: '起始值',
     })
-    startValue: ElDatePickerOptions['startValue'];
+    startValue: ElDatePickerOptions<T, V, P, M, C>['startValue'];
 
     @Prop({
       title: '结束值',
     })
-    endValue: ElDatePickerOptions['endValue'];
+    endValue: ElDatePickerOptions<T, V, P, M, C>['endValue'];
 
-    constructor(options?: Partial<ElDatePickerOptions>) {
+    constructor(options?: Partial<ElDatePickerOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class ElDatePickerOptions extends ViewComponentOptions {
+  export class ElDatePickerOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {
     // @Prop({
     //   group: '数据属性',
     //   title: '区间选择',
@@ -56,7 +62,7 @@ namespace nasl.ui {
     // })
     // range: nasl.core.Boolean = false;
 
-    @Prop<ElDatePickerOptions, 'modelValue'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'modelValue'>({
       group: '数据属性',
       title: '值',
       description: '选中值',
@@ -66,7 +72,7 @@ namespace nasl.ui {
     })
     modelValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
-    @Prop<ElDatePickerOptions, 'startValue'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'startValue'>({
       group: '数据属性',
       title: '起始值',
       description: '开始日期',
@@ -76,7 +82,7 @@ namespace nasl.ui {
     })
     startValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
 
-    @Prop<ElDatePickerOptions, 'endValue'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'endValue'>({
       group: '数据属性',
       title: '结束值',
       description: '结束日期',
@@ -137,7 +143,7 @@ namespace nasl.ui {
     })
     clearable: nasl.core.Boolean = true;
 
-    @Prop<ElDatePickerOptions, 'placeholder'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'placeholder'>({
       group: '主要属性',
       title: '占位符',
       description: '非范围选择时的占位内容',
@@ -146,7 +152,7 @@ namespace nasl.ui {
     })
     placeholder: nasl.core.String = '';
 
-    @Prop<ElDatePickerOptions, 'startPlaceholder'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'startPlaceholder'>({
       group: '主要属性',
       title: '开始日期的占位内容',
       description: '范围选择时开始日期的占位内容',
@@ -155,7 +161,7 @@ namespace nasl.ui {
     })
     startPlaceholder: nasl.core.String;
 
-    @Prop<ElDatePickerOptions, 'endPlaceholder'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'endPlaceholder'>({
       group: '主要属性',
       title: '结束日期的占位内容',
       description: '范围选择时结束日期的占位内容',
@@ -164,7 +170,16 @@ namespace nasl.ui {
     })
     endPlaceholder: nasl.core.String;
 
-    @Prop<ElDatePickerOptions, 'type'>({
+    @Prop({
+      group: '主要属性',
+      title: '区间选择',
+      description: '是否支持进行时间区间选择，关闭则为时间点选择',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => false,
+    })
+    range: M = false as any;
+
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'type'>({
       group: '主要属性',
       title: '显示类型',
       description: '显示类型',
@@ -193,6 +208,18 @@ namespace nasl.ui {
         {
           clear: ['startValue', 'endValue'],
           if: (_) => !_.includes('range'),
+        },
+        {
+          if: (_) => _.includes('range') || _.includes('s'),
+          update: {
+            range: true,
+          },
+        },
+        {
+          if: (_) => !_.includes('range') && !_.includes('s'),
+          update: {
+            range: false,
+          },
         },
       ],
     })
@@ -254,7 +281,7 @@ namespace nasl.ui {
     })
     valueFormat: nasl.core.String;
 
-    @Prop<ElDatePickerOptions, 'dateFormat'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'dateFormat'>({
       group: '主要属性',
       title: '下拉列表中显示的日期格式',
       description: '可选，时间选择器下拉列表中显示的日期格式',
@@ -263,7 +290,7 @@ namespace nasl.ui {
     })
     dateFormat: nasl.core.String;
 
-    @Prop<ElDatePickerOptions, 'timeFormat'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'timeFormat'>({
       group: '主要属性',
       title: '下拉列表中显示的时间格式',
       description: '可选，时间选择器下拉列表中显示的时间格式',
@@ -272,7 +299,7 @@ namespace nasl.ui {
     })
     timeFormat: nasl.core.String;
 
-    @Prop<ElDatePickerOptions, 'unlinkPanels'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'unlinkPanels'>({
       group: '主要属性',
       title: '取消两个日期面板之间的联动',
       description: '在范围选择器里取消两个日期面板之间的联动',
@@ -390,7 +417,7 @@ namespace nasl.ui {
       title: '值改变时',
       description: '用户确认选定的值时触发',
     })
-    onChange: (modelValue: nasl.core.Date | nasl.collection.List<nasl.core.Date>) => void;
+    onChange: (modelValue: M extends true ? nasl.collection.List<nasl.core.Date> : nasl.core.Date) => void;
 
     @Event({
       title: '失去焦点时',
@@ -457,15 +484,29 @@ namespace nasl.ui {
     description: '表单日期选择器',
     group: 'Form',
   })
-  export class ElFormDatePicker extends ViewComponent {
+  export class ElFormDatePicker<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponent {
     constructor(
       options?: Partial<
-        ElFormDatePickerOptions & ElFormItemProOptions & Omit<ElDatePickerOptions, keyof ElFormItemProOptions>
+        ElFormDatePickerOptions<T, V, P, M, C> &
+          ElFormItemProOptions &
+          Omit<ElDatePickerOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
       >,
     ) {
       super();
     }
   }
 
-  export class ElFormDatePickerOptions extends ViewComponentOptions {}
+  export class ElFormDatePickerOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {}
 }

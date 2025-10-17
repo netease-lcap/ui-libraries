@@ -4,7 +4,9 @@
 import _ from 'lodash';
 // import { watch } from 'vue';
 // import { useRequest } from 'vue-hooks-plus';
+import type { Ref, ComponentPublicInstance } from 'vue';
 import { useMemo, useState, useEffect } from '@/plugins/hooks';
+
 import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
 import { useCallback } from '../hooks';
 
@@ -67,7 +69,73 @@ interface RequestOptions {
   refreshDeps?: any[];
   [key: string]: any;
 }
+type TargetValue<T> = T | undefined | null;
+type TargetType = HTMLElement | Element | Window | Document | ComponentPublicInstance;
 
+export type BasicTarget<T extends TargetType = Element> = (() => TargetValue<T>) | TargetValue<T> | Ref<TargetValue<T>>;
+
+interface UseInfiniteScrollOptions {
+  /**
+   * specifies the parent element. If it exists, it will trigger the `loadMore` when scrolling to the bottom. Needs to work with `isNoMore` to know when there is no more data to load
+   */
+  target?: BasicTarget<Element | Document>;
+
+  /**
+   * determines if there is no more data, the input parameter is the latest merged `data`
+   * @param data TData
+   * @returns boolean
+   */
+  isNoMore?: (data?: any) => boolean;
+
+  /**
+   * The pixel threshold to the bottom for the scrolling to load
+   */
+  threshold?: number;
+
+  /**
+   * - The default is `false`. That is, the service is automatically executed during initialization.
+   * - If set to `true`, you need to manually call `run` or `runAsync` to trigger execution.
+   */
+  manual?: boolean;
+
+  /**
+   * When the content of the array changes, `reload` will be triggered
+   */
+  reloadDeps?: any[];
+
+  /**
+   * Triggered before service execution
+   * @returns void
+   */
+  onBefore?: () => void;
+
+  /**
+   * Triggered when service resolve
+   * @param data TData
+   * @returns void
+   */
+  onSuccess?: (data: any) => void;
+
+  /**
+   * Triggered when service reject
+   * @param e Error
+   * @returns void
+   */
+  onError?: (e: Error) => void;
+
+  /**
+   * Triggered when service execution is complete
+   * @param data TData
+   * @param e Error
+   * @returns void
+   */
+  onFinally?: (data?: any, e?: Error) => void;
+  currentPage: number;
+  setCurrentPage?: (currentPage: number) => void;
+  pageSize?: number;
+  setPageSize?: (pageSize: number) => void;
+  pageSizes?: number[];
+}
 interface RequestResult {
   data?: DataSourceArrayType;
   run: (...args: any[]) => void;
@@ -140,4 +208,124 @@ export function useDataSourceToTree(
     }
     return acc;
   }, []);
+}
+
+export function useInfiniteScroll(
+  dataSource: DataSourceFunctionType,
+  options: UseInfiniteScrollOptions,
+): RequestResult {
+  const {
+    target,
+    isNoMore,
+    threshold = 100,
+    manual = false,
+    reloadDeps = [],
+    currentPage,
+    setCurrentPage,
+    pageSize,
+    setPageSize,
+    pageSizes,
+    onBefore,
+    onSuccess,
+    onError,
+    onFinally,
+  } = options;
+
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<DataSourceArrayType>([]);
+  const [noMore, setNoMore] = useState(false);
+
+  // 转换 dataSource 为函数
+  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource as any), [_.cloneDeep(dataSource)]);
+
+  // 加载更多数据的函数
+  const loadMore = useCallback(async () => {
+    if (loading || noMore) return;
+
+    try {
+      onBefore?.();
+      setLoading(true);
+
+      const result = await dataSourceFn({
+        currentPage,
+        pageSize,
+      });
+
+      let newData: DataSourceArrayType = [];
+      if (Array.isArray(result)) {
+        newData = result;
+      } else if (result && typeof result === 'object' && 'list' in result) {
+        newData = (result as any).list || [];
+      }
+
+      const mergedData = [...data, ...newData];
+      setData(mergedData);
+
+      const shouldNoMore = isNoMore ? isNoMore(mergedData) : newData.length === 0;
+      setNoMore(shouldNoMore);
+
+      onSuccess?.(mergedData);
+      onFinally?.(mergedData);
+    } catch (e) {
+      onError?.(e as Error);
+      onFinally?.(undefined, e as Error);
+    } finally {
+      setLoading(false);
+    }
+  }, [loading, noMore, data, dataSourceFn, isNoMore, onBefore, onSuccess, onError, onFinally]);
+
+  // 重置并重新加载
+  const reload = useCallback(() => {
+    setData([]);
+    setNoMore(false);
+    setLoading(false);
+  }, []);
+
+  // 监听滚动事件
+  useEffect(() => {
+    if (!target || noMore) return;
+
+    const getTargetElement = (): Element | Document | null | undefined => {
+      if (!target) return null;
+      if (typeof target === 'function') return target();
+      if ('value' in target) return (target as Ref<TargetValue<Element>>).value;
+      return target as Element;
+    };
+
+    const scrollHandler = () => {
+      const element = getTargetElement() as Element;
+      if (!element) return;
+
+      const { scrollTop } = element;
+      const { scrollHeight } = element;
+      const { clientHeight } = element;
+
+      if (scrollHeight - scrollTop - clientHeight <= threshold) {
+        setCurrentPage?.(currentPage + 1);
+        loadMore();
+      }
+    };
+
+    const el = getTargetElement();
+    if (el) {
+      el.addEventListener('scroll', scrollHandler);
+      return () => {
+        el.removeEventListener('scroll', scrollHandler);
+      };
+    }
+  }, [target, threshold, loadMore, noMore]);
+
+  // 初始加载或依赖变化时重新加载
+  useEffect(() => {
+    if (!manual) {
+      reload();
+      setTimeout(() => loadMore(), 0);
+    }
+  }, [...reloadDeps]);
+
+  return {
+    data,
+    loading,
+    run: loadMore,
+  };
 }

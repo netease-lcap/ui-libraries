@@ -2,10 +2,9 @@
 
 <template>
   <div>
-    <el-list-components :column="4" :data-source="[1, 2, 3, 4, 5]" :row-gap="10" :column-gap="10">
+    <el-list-components :column="4" :equal-width="false" :data-source="Array(100).fill(0)" :row-gap="10" :column-gap="10">
       <template #default="scope">
-        {{ scope }}
-        <el-button>Button</el-button>
+        <el-button style="width:500px">{{ scope.item }}</el-button>
       </template>
     </el-list-components>
   </div>
