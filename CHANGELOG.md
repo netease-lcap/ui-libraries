@@ -4,6 +4,8 @@
 
 ### Features
 
+- feat(el-breadcrumb, el-menu, el-link, el-checkbox): 插件 router key 改造为 Symbol 避免命名冲突 ([10f104c](../../commit/10f104c))
+- feat(el-list-components, el-date-picker): enhance list components ([6676cf2](../../commit/6676cf2))
 - feat(Theme): 模板页面UI优化 ([7dbb8a0](../../commit/7dbb8a0))
 - feat(el-list-components): enhance list components with pagination and selection features; ([70e7c4c](../../commit/70e7c4c))
 - feat(el-form, el-select, el-upload): add trigger prop for validation, ([e43c0dd](../../commit/e43c0dd))
@@ -16,6 +18,10 @@
 ### Bug Fixes
 
 - fix(el-button): remote register ([a90843c](../../commit/a90843c))
+
+### Other
+
+- refactor(el-menu): 重命名api autoRouter 为 auto 增加语义性 ([7c2466d](../../commit/7c2466d))
 
 ## ElementUI
 
@@ -59,5 +65,9 @@
 
 - feat(Theme): 主题预览页面模板修改 ([18523ed](../../commit/18523ed))
 
+## Other
 
+### Other
+
+- chore(pipline): add changelog generate script ([670d6c7](../../commit/670d6c7))
 
