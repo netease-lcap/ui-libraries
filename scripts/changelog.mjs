@@ -81,7 +81,7 @@ function generateChangelog(commits, dateRange) {
 
   commits.forEach(commit => {
     // 过滤掉 merge commit
-    if (isMergeCommit(commit.message)) {
+    if (isMergeCommit(commit.message) || commit.message === 'chore: update changelog') {
       return;
     }
 
@@ -259,6 +259,12 @@ async function main() {
     fs.writeFileSync(outputPath, finalContent, 'utf-8');
 
     console.log(`✅ changelog 已生成: ${outputPath}`);
+
+    // 自动提交 changelog
+    console.log('正在提交 changelog...');
+    await git.add('CHANGELOG.md');
+    await git.commit('chore: update changelog');
+    console.log('✅ changelog 已提交');
   } catch (error) {
     console.error('❌ 生成 changelog 失败:', error);
     process.exit(1);
