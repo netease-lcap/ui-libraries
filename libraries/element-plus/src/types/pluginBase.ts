@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
 import type { RouteLocationNormalized, Router } from 'vue-router';
-import { $deletePropsList, $ide, $formTagName, $tagName } from '@/plugins/constants';
+import { $deletePropsList, $ide, $formTagName, $tagName, $route, $router } from '@/plugins/constants';
 
 type ref = {
   [key: string]: any;
@@ -33,8 +33,8 @@ export type PluginBase = {
   emit: emit;
   render: render;
   showInDesigner: boolean;
-  route: RouteLocationNormalized;
-  router: Router;
+  [$route]: RouteLocationNormalized;
+  [$router]: Router;
   style: Record<string, any>;
   class: string;
 };

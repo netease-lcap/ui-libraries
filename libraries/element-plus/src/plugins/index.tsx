@@ -11,7 +11,7 @@ import { createStore } from 'zustand/vanilla';
 import { Map as imMap, fromJS } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { $deletePropsList, $provide, $tagName, $mergeRef } from '@/plugins/constants';
+import { $deletePropsList, $provide, $tagName, $mergeRef, $router, $route } from '@/plugins/constants';
 import { scheduler } from '@/plugins/hooks';
 import '@/utils/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -76,8 +76,8 @@ export function registerComponent<T>(Component: any, options: any): any {
           inject: unref(injectRef),
           provide: {},
           ref: {},
-          router,
-          route,
+          [$router]: router,
+          [$route]: route,
           [$mergeRef]: _.mergeRef(exposeRef.value),
           [$tagName]: options.name,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList, $mergeRef, $tagName],

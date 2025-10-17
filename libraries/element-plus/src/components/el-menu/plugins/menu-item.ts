@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { MenuItemProps } from 'element-plus';
+import { $router } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import itemPlugin from './item-plugin';
 
@@ -15,15 +16,18 @@ export default MenuItemPluginAccumulate.addAccumulate(itemPlugin).addPlugin({
     const href = props.get('href');
     const target = props.get('target');
     const onClick = props.get('onClick') ?? _.noop;
-    const router = props.get('router');
+    const router = props.get($router);
     const toRouterClick = _.cond([
       [
         _.matches({ target: '_blank', isExternalLink: true }),
         (params) => () => window.open(params.externalUrl, '_blank'),
       ],
-      [_.matches({ isExternalLink: true }), (params) => () => {
-        window.location.href = params.externalUrl;
-      }],
+      [
+        _.matches({ isExternalLink: true }),
+        (params) => () => {
+          window.location.href = params.externalUrl;
+        },
+      ],
       [_.matches({ target: '_blank' }), _.constant(() => {})],
       [_.matches({ isDestination: true }), (params) => () => router.push(params.destination)],
       [_.stubTrue, _.constant(() => {})],

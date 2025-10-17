@@ -201,7 +201,7 @@ export const Example2 = {
     },
     template: `
     <div>
-      <el-checkbox-group v-model="activeName" @change="change">
+      <el-checkbox-group v-model="activeName" @change="change" direction="vertical">
         <el-checkbox label="a" value="a" ref="a" />
         <el-checkbox label="b" value="b" ref="b" />
         <el-checkbox label="c" value="c" ref="c" />

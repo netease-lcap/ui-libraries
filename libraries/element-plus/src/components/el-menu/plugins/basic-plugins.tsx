@@ -8,9 +8,10 @@ import {
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 import { useMemo, useControllableValue, useEffect } from '@/plugins/hooks';
-import { $deletePropsList } from '@/plugins/constants';
+import { $deletePropsList, $router, $route } from '@/plugins/constants';
 import { ElSubMenu, ElMenuItem } from '@/components';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
+
 import idePlugin from './ide';
 
 const MenuBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElMenuOptions<any, any>, MenuProps>();
@@ -96,14 +97,24 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handleRouter',
     handle: (props) => {
-      const router = props.get('router');
-      const route = props.get('route');
+      const router = props.get($router);
+      const route = props.get($route);
+      const autoRouter = props.get('autoRouter');
       const [active, setActive] = useControllableValue(props, {
         defaultValuePropName: 'defaultActive',
         defaultValue: route?.path,
       });
-      router?.afterEach((to) => setActive(to.path));
-      useEffect(() => setActive(route?.path), [route?.path]);
+      useEffect(() => {
+        if (autoRouter) {
+          router?.afterEach?.((to) => setActive(to.path));
+        }
+      }, []);
+      useEffect(() => {
+        if (autoRouter) {
+          setActive(route?.path);
+        }
+      }, [route?.path]);
+
       return {
         defaultActive: active,
       };

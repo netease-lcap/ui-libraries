@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { LinkProps } from 'element-plus';
 import { saveAs } from 'file-saver';
-import { $deletePropsList } from '@/plugins/constants';
+import { $deletePropsList, $router } from '@/plugins/constants';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
@@ -31,7 +31,7 @@ export default LinkBasicAccumulate.addPlugin({
       const href = props.get('href');
       const target = props.get('target');
       const onClick = props.get('onClick');
-      const router = props.get('router');
+      const router = props.get($router);
       const destinationToRouterClick = _.cond([
         [_.matches({ target: '_blank' }), _.constant(() => {})],
         [

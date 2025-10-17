@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { breadcrumbProps } from 'element-plus';
-import { useMemo, useState, useCallback } from '@/plugins/hooks';
+import { useMemo, useState, useCallback, useEffect } from '@/plugins/hooks';
+import { $router, $route } from '@/plugins/constants';
 import { ElBreadcrumbItem } from '../index';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -15,10 +16,12 @@ export default BreadcrumbAccumulate.addAccumulate(lowCodePlugin)
       const auto = props.get('auto');
       const showInDesigner = props.get('showInDesigner');
       const slots = props.get('slots');
-      const route = props.get('route');
+      const route = props.get($route);
       const [routeInfo, setRouteInfo] = useState(route);
-      const router = props.get('router');
-      router?.afterEach?.((to) => setRouteInfo(to));
+      const router = props.get($router);
+      useEffect(() => {
+        router?.afterEach?.((to) => setRouteInfo(to));
+      }, []);
 
       const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
 

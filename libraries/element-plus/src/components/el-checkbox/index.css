@@ -6,3 +6,6 @@
 .el-checkbox-group-vertical {
   grid-auto-flow: row; /* 让子元素按行方向自动排列 */
 }
+.el-checkbox-group-vertical .el-checkbox {
+  margin-right: 30px;
+}
