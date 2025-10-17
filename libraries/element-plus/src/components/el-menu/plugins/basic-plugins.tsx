@@ -99,18 +99,18 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
     handle: (props) => {
       const router = props.get($router);
       const route = props.get($route);
-      const autoRouter = props.get('autoRouter');
+      const auto = props.get('auto', true);
       const [active, setActive] = useControllableValue(props, {
         defaultValuePropName: 'defaultActive',
         defaultValue: route?.path,
       });
       useEffect(() => {
-        if (autoRouter) {
+        if (auto) {
           router?.afterEach?.((to) => setActive(to.path));
         }
       }, []);
       useEffect(() => {
-        if (autoRouter) {
+        if (auto) {
           setActive(route?.path);
         }
       }, [route?.path]);

@@ -154,7 +154,7 @@ namespace nasl.ui {
       description: '是否启用自动路由，启用后会在激活导航时以 index 作为 path 进行路由跳转',
       setter: { concept: 'SwitchSetter' },
     })
-    autoRouter: nasl.core.Boolean = true;
+    auto: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
