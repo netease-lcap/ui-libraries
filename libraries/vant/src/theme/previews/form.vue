@@ -15,12 +15,11 @@
     <!-- 表单内容 -->
     <div class="form-content">
       <!-- 基本信息卡片 -->
-      <van-cell-group class="form-card">
+      <van-cell-group inset>
         <van-field
           v-model="formData.visitorName"
           label="访客姓名"
           placeholder="请输入"
-          :border="false"
         />
         <van-field
           v-model="formData.purpose"
@@ -29,7 +28,6 @@
           readonly
           is-link
           @click="showPurposePicker = true"
-          :border="false"
         />
         <van-field
           v-model="formData.appointmentTime"
@@ -38,7 +36,6 @@
           readonly
           is-link
           @click="showTimePicker = true"
-          :border="false"
         />
         <van-field
           v-model="formData.endTime"
@@ -47,19 +44,17 @@
           readonly
           is-link
           @click="showEndTimePicker = true"
-          :border="false"
         />
         <van-field
           v-model="formData.phone"
           label="联系电话"
           placeholder="请输入"
           type="tel"
-          :border="false"
         />
       </van-cell-group>
 
       <!-- 来访理由卡片 -->
-      <van-cell-group class="form-card">
+      <van-cell-group inset>
         <van-field
           v-model="formData.reason"
           label="来访理由"
@@ -74,7 +69,7 @@
       </van-cell-group>
 
       <!-- 上传附件卡片 -->
-      <van-cell-group class="form-card">
+      <van-cell-group inset>
         <div class="upload-section">
           <div class="upload-label">上传附件</div>
           <van-uploader
@@ -92,7 +87,7 @@
       </van-cell-group>
 
       <!-- 审批人卡片 -->
-      <van-cell-group class="form-card">
+      <van-cell-group inset>
         <van-field
           v-model="formData.approver"
           label="审批人"
@@ -111,8 +106,8 @@
         type="primary"
         size="large"
         block
-        class="submit-btn"
         @click="onSubmit"
+        round
         :loading="submitting"
       >
         提交
@@ -274,14 +269,12 @@ const formatDateTime = (date) => {
 }
 
 .form-content {
-  padding: var(--van-padding-md);
-}
-
-.form-card {
-  margin-bottom: var(--van-padding-sm);
-  border-radius: var(--van-radius-lg);
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: var(--van-padding-md) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: var(--van-padding-sm);
 }
 
 .reason-field {
@@ -336,32 +329,4 @@ const formatDateTime = (date) => {
   border-top: 1px solid var(--van-border-color);
 }
 
-.submit-btn {
-  height: 44px;
-  border-radius: var(--van-radius-lg);
-  font-size: var(--van-font-size-lg);
-  font-weight: var(--van-font-bold);
-}
-
-/* 自定义字段样式 */
-:deep(.van-field__label) {
-  color: var(--van-text-color);
-  font-size: var(--van-font-size-md);
-}
-
-:deep(.van-field__control) {
-  color: var(--van-text-color);
-}
-
-:deep(.van-field__control::placeholder) {
-  color: var(--van-text-color-3);
-}
-
-:deep(.van-cell) {
-  padding: var(--van-padding-md);
-}
-
-:deep(.van-cell:not(:last-child)::after) {
-  display: none;
-}
 </style>

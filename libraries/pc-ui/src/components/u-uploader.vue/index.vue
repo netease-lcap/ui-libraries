@@ -38,12 +38,12 @@
                                 <i-ico :name="downloadIcon" icotype="only"></i-ico>
                             </a>
                         </span>
-                        <i-ico :name="removeIcon || 'remove'" v-if="!readonly && !disabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !disabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
                     </div>
                       <div v-else>
                         <div :class="$style.thumb"><img :class="$style.img" v-if="listType === 'image'" :src="getUrl(item)"></div>
                         <a :class="$style.link" :href="encodeUrl(item.url)" target="_blank" download role="download">{{ item.name || item.url }}</a>
-                        <i-ico :name="removeIcon || 'remove'" v-if="!readonly && !disabled && !isPreview" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !disabled && !isPreview" @click="remove(index)"></i-ico>
                     </div>
                     <u-linear-progress v-if="item.showProgress && !$env.VUE_APP_DESIGNER" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                 </template>
