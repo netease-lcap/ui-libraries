@@ -120,6 +120,8 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
+
+
     @Prop({
       group: '数据属性',
       title: '合并行或列的计算方法',
