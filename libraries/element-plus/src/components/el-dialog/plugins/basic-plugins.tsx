@@ -12,10 +12,13 @@ export default DialogBasicAccumulate.addPlugin({
     const [, setValue, valueProps] = useControllableValue(props);
     const ref = props.get('ref');
     const closeIcon = props.get('closeIcon');
-    const onBeforeClose = props.get('onBeforeClose');
+    const onBeforeClose = props.get('onBeforeClose', (done) => _.attempt(done));
 
     const beforeClose = useCallback(
-      onBeforeClose ? _.wrap(onBeforeClose, (fn, ...args) => _.attempt(fn, ...args)) : () => {},
+      _.wrap(onBeforeClose, (fn, done) => {
+        _.attempt(fn, done);
+        _.attempt(done as any);
+      }),
       [onBeforeClose],
     );
 
