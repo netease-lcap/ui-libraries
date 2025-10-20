@@ -109,7 +109,6 @@ export function registerComponent<T>(Component: any, options: any): any {
         const ImmutableProps = fromJS({ ...props.props });
         const commitState = scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
-        console.log(ref,'ref===');
         const commitImmutableState = commitState;
 
         const provide = commitState.get('provide');
@@ -122,7 +121,6 @@ export function registerComponent<T>(Component: any, options: any): any {
           });
         });
         componentState.value.state[$deletePropsList] = commitState.get($deletePropsList);
-        console.log(ref, 'ref====');
         Object.assign(exposeRef.value, ref);
         Object.assign(provideRef.value, provide);
       });

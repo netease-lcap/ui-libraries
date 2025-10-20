@@ -117,13 +117,9 @@ export default listComponentsBasicAccumulate
           const isSelectedValue = _.includes(_.concat([], value), val);
           const newValue = _.match({ selection, clearable, isSelectedValue })
             .when(_.matches({ selection: 'single', clearable: true, isSelectedValue: true }), () => undefined)
-            .when(_.matches({ selection: 'multiple', clearable: true, isSelectedValue: true }), () =>
-              _.without(value, val),
-            )
+            .when(_.matches({ selection: 'multiple', clearable: true, isSelectedValue: true }), () => _.without(value, val))
             .when(_.matches({ selection: 'single', isSelectedValue: false }), () => val)
-            .when(_.matches({ selection: 'multiple', isSelectedValue: false }), () =>
-              _.concat(value, val).filter(Boolean),
-            )
+            .when(_.matches({ selection: 'multiple', isSelectedValue: false }), () => _.concat(value, val).filter(Boolean))
             .otherwise(() => value);
           setValue(newValue);
         },
@@ -144,7 +140,7 @@ export default listComponentsBasicAccumulate
     handle(props) {
       const dataSource = props.get('dataSource');
       const currentPage = props.get('currentPage');
-      const pagination = props.get('pagination');
+      const pagination = props.get('pagination', 'none');
       const pageSize = props.get('pageSize');
       const pageProps = props.get('pageProps');
       const selection = props.get('selection');
@@ -155,7 +151,6 @@ export default listComponentsBasicAccumulate
       const valueField = props.get('idField') || 'value';
       const textField = props.get('textField') || 'label';
       const defaultParams = [{ currentPage, pageSize, pagination: pagination !== 'none' }];
-      console.log(loadMoreFormatResult(pagination), 'loadMoreFormatResult');
       const {
         data: resultData = { list: [], total: 0 },
         run,
@@ -163,7 +158,6 @@ export default listComponentsBasicAccumulate
       } = useRequestDataSource(dataSource, {
         defaultParams,
         formatResult: (data, resultData) => loadMoreFormatResult(pagination)(formatResult(data), resultData),
-        // _.flow([formatResult, loadMoreFormatResult(pagination)]),
       });
       const reload = (params) => {
         run({ currentPage, pageSize, pagination: pagination !== 'none', ...params });
@@ -183,7 +177,8 @@ export default listComponentsBasicAccumulate
               class={addClass('el-list-components__frag', {
                 'is-selected': _.includes(_.concat([], value), _.get(item, 'value', item)),
                 'is-selectable': selection && selection !== 'none',
-              })}>
+              })}
+            >
               {_.includes(value, _.get(item, 'value', item))}
               {_.isFunction(slots.default) ? (
                 slots.default({
@@ -255,7 +250,10 @@ export default listComponentsBasicAccumulate
       const target = props.get('target') as unknown as Ref<Element>;
       const setCurrentPage = props.get('setCurrentPage');
       const currentPage = props.get('currentPage');
+      const currentPageRef = useRef(currentPage);
+      currentPageRef.value = currentPage;
       const pagination = props.get('pagination');
+      const className = props.get('class');
       useEffect(() => {
         if (!_.isElement(target.value) || pagination !== 'autoMore') {
           return () => {};
@@ -263,7 +261,7 @@ export default listComponentsBasicAccumulate
         const scrollHandler = () => {
           const { scrollHeight, clientHeight, scrollTop } = target.value;
           if (scrollHeight - scrollTop - clientHeight <= 50) {
-            setCurrentPage?.(currentPage + 1);
+            setCurrentPage?.(currentPageRef.value + 1);
           }
         };
         target.value?.addEventListener('scroll', scrollHandler);
@@ -271,7 +269,11 @@ export default listComponentsBasicAccumulate
           target.value?.removeEventListener('scroll', scrollHandler);
         };
       }, [pagination]);
-      return {};
+      return {
+        class: addClass(className, {
+          'el-list-components-infinite-scroll': pagination === 'autoMore',
+        }),
+      };
     },
   })
   .addPlugin({
@@ -286,8 +288,7 @@ export default listComponentsBasicAccumulate
 
       // 构建样式对象，只有当 column 大于 0 时才设置 CSS 变量
       const style = useMemo(
-        () =>
-          _.assign({}, styleProps, {
+        () => _.assign({}, styleProps, {
             '--row-gap': `${rowGap || 0}px`,
             '--column-gap': `${columnGap || 0}px`,
             '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
@@ -295,8 +296,7 @@ export default listComponentsBasicAccumulate
         [styleProps, rowGap, columnGap, columnProps],
       );
       const className = useMemo(
-        () =>
-          addClass(classNameProps, {
+        () => addClass(classNameProps, {
             'el-list-components-plus': true,
             isEqualWidth: equalWidth,
           }),

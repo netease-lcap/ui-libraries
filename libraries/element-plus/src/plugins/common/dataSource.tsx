@@ -74,68 +74,6 @@ type TargetType = HTMLElement | Element | Window | Document | ComponentPublicIns
 
 export type BasicTarget<T extends TargetType = Element> = (() => TargetValue<T>) | TargetValue<T> | Ref<TargetValue<T>>;
 
-interface UseInfiniteScrollOptions {
-  /**
-   * specifies the parent element. If it exists, it will trigger the `loadMore` when scrolling to the bottom. Needs to work with `isNoMore` to know when there is no more data to load
-   */
-  target?: BasicTarget<Element | Document>;
-
-  /**
-   * determines if there is no more data, the input parameter is the latest merged `data`
-   * @param data TData
-   * @returns boolean
-   */
-  isNoMore?: (data?: any) => boolean;
-
-  /**
-   * The pixel threshold to the bottom for the scrolling to load
-   */
-  threshold?: number;
-
-  /**
-   * - The default is `false`. That is, the service is automatically executed during initialization.
-   * - If set to `true`, you need to manually call `run` or `runAsync` to trigger execution.
-   */
-  manual?: boolean;
-
-  /**
-   * When the content of the array changes, `reload` will be triggered
-   */
-  reloadDeps?: any[];
-
-  /**
-   * Triggered before service execution
-   * @returns void
-   */
-  onBefore?: () => void;
-
-  /**
-   * Triggered when service resolve
-   * @param data TData
-   * @returns void
-   */
-  onSuccess?: (data: any) => void;
-
-  /**
-   * Triggered when service reject
-   * @param e Error
-   * @returns void
-   */
-  onError?: (e: Error) => void;
-
-  /**
-   * Triggered when service execution is complete
-   * @param data TData
-   * @param e Error
-   * @returns void
-   */
-  onFinally?: (data?: any, e?: Error) => void;
-  currentPage: number;
-  setCurrentPage?: (currentPage: number) => void;
-  pageSize?: number;
-  setPageSize?: (pageSize: number) => void;
-  pageSizes?: number[];
-}
 interface RequestResult {
   data?: DataSourceArrayType;
   run: (...args: any[]) => void;
@@ -152,10 +90,7 @@ const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions 
       onBefore(...params);
       setLoading(true);
       dataSource(...params).then((data) => {
-        setResult((prev) => {
-          console.log(prev,'prev',data,'data');
-          return { data: formatResult(data, prev.data), run: fn, loading: false };
-        });
+        setResult((prev) => ({ data: formatResult(data, prev.data), run: fn, loading: false }));
         setLoading(false);
         onSuccess(data, ...params);
       });
