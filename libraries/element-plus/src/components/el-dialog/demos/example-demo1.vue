@@ -42,6 +42,6 @@ const handleClose = (done: () => void) => {
 }
 
 const handleOpen = () => {
-  console.log(dialogRef.value);
+  console.log(dialogRef.value.open());
 }
 </script>
