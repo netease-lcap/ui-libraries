@@ -72,7 +72,7 @@ export const Demo4 = {
     template: `
     <div>
     {{value}}
-    <el-list-components-plus v-model="value" :clearable="true" selection="multiple" :column="1" :equal-width="false" :pagination="true" :total="100" :dataSource="[1, 2, 3, 4, 5,6,7,8,9,10,11,12,13]" :row-gap="10" :column-gap="40">
+    <el-list-components-plus style="height: 300px;" v-model="value" :clearable="true" selection="multiple" :column="1" :equal-width="false" pagination="autoMore" :total="100" :dataSource="Array.from({length: 100}, (_, i) => i + 1)" :row-gap="10" :column-gap="40">
 
     </el-list-components-plus>
     </div>

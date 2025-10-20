@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import _ from 'lodash';
+import { type Ref } from 'vue';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-import { useControllableValue, useMemo, useCallback } from '@/plugins/hooks';
+import { useControllableValue, useMemo, useCallback, useRef, useEffect } from '@/plugins/hooks';
 import { ElPagination } from '@/index';
 import { useRequestDataSource, useHandleMapField } from '@/plugins/common/dataSource';
 import { addClass } from '@/utils';
@@ -16,6 +17,18 @@ const formatResult = _.cond([
   total: number;
   pageLocal?: boolean;
 };
+const loadMoreFormatResult = (pagination: 'autoMore' | 'page' | 'none') => {
+  return _.match(pagination)
+    .with('autoMore', () => (data, resultData) => {
+      return {
+        list: [..._.get(resultData, 'list', []), ..._.get(data, 'list', [])],
+        total: data.total,
+        pageLocal: true,
+      };
+    })
+    .with('page', () => (data) => data)
+    .otherwise(() => (data) => data);
+};
 const listComponentsBasicAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElListComponentsOptions<any, any, any, any, any>,
   object
@@ -25,15 +38,17 @@ export default listComponentsBasicAccumulate
   .addPlugin({
     name: 'handleInitRender',
     handle: (props) => {
+      const target = useRef(null);
       const render = useCallback((props, { attrs, slots }) => {
         return (
-          <div {...attrs} {...props}>
+          <div ref={target} {...attrs} {...props}>
             {slots.default?.()}
           </div>
         );
       }, []);
       return {
         render,
+        target,
       };
     },
   })
@@ -102,9 +117,13 @@ export default listComponentsBasicAccumulate
           const isSelectedValue = _.includes(_.concat([], value), val);
           const newValue = _.match({ selection, clearable, isSelectedValue })
             .when(_.matches({ selection: 'single', clearable: true, isSelectedValue: true }), () => undefined)
-            .when(_.matches({ selection: 'multiple', clearable: true, isSelectedValue: true }), () => _.without(value, val))
+            .when(_.matches({ selection: 'multiple', clearable: true, isSelectedValue: true }), () =>
+              _.without(value, val),
+            )
             .when(_.matches({ selection: 'single', isSelectedValue: false }), () => val)
-            .when(_.matches({ selection: 'multiple', isSelectedValue: false }), () => _.concat(value, val).filter(Boolean))
+            .when(_.matches({ selection: 'multiple', isSelectedValue: false }), () =>
+              _.concat(value, val).filter(Boolean),
+            )
             .otherwise(() => value);
           setValue(newValue);
         },
@@ -135,17 +154,19 @@ export default listComponentsBasicAccumulate
       const onClick = props.get('clickFn');
       const valueField = props.get('idField') || 'value';
       const textField = props.get('textField') || 'label';
-      const defaultParams = [{ currentPage, pageSize, pagination }];
+      const defaultParams = [{ currentPage, pageSize, pagination: pagination !== 'none' }];
+      console.log(loadMoreFormatResult(pagination), 'loadMoreFormatResult');
       const {
         data: resultData = { list: [], total: 0 },
         run,
         loading,
       } = useRequestDataSource(dataSource, {
         defaultParams,
-        formatResult,
+        formatResult: (data, resultData) => loadMoreFormatResult(pagination)(formatResult(data), resultData),
+        // _.flow([formatResult, loadMoreFormatResult(pagination)]),
       });
       const reload = (params) => {
-        run({ currentPage, pageSize, pagination, ...params });
+        run({ currentPage, pageSize, pagination: pagination !== 'none', ...params });
       };
       const data = useHandleMapField({
         valueField,
@@ -162,8 +183,7 @@ export default listComponentsBasicAccumulate
               class={addClass('el-list-components__frag', {
                 'is-selected': _.includes(_.concat([], value), _.get(item, 'value', item)),
                 'is-selectable': selection && selection !== 'none',
-              })}
-            >
+              })}>
               {_.includes(value, _.get(item, 'value', item))}
               {_.isFunction(slots.default) ? (
                 slots.default({
@@ -194,7 +214,6 @@ export default listComponentsBasicAccumulate
     handle(props) {
       const pagination = props.get('pagination');
       const pageProps = props.get('pageProps');
-      const total = props.get('total');
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
       const onPageChange = props.get('onPageChange', () => {});
@@ -203,7 +222,6 @@ export default listComponentsBasicAccumulate
         pageProps: {
           ...pageProps,
           layout,
-          total,
           onPageChange,
         },
         pagination,
@@ -218,7 +236,7 @@ export default listComponentsBasicAccumulate
         return (
           <div style={{ ...props.style, display: 'flex', flexDirection: 'column' }}>
             <Component {...props} {...attrs} v-slots={slots} />
-            {props.pagination && (
+            {props.pagination === 'page' && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
                 <ElPagination {...props.pageProps} total={props.pageProps.total} />
               </div>
@@ -229,6 +247,31 @@ export default listComponentsBasicAccumulate
       return {
         render,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleinfiniteScroll',
+    handle(props) {
+      const target = props.get('target') as unknown as Ref<Element>;
+      const setCurrentPage = props.get('setCurrentPage');
+      const currentPage = props.get('currentPage');
+      const pagination = props.get('pagination');
+      useEffect(() => {
+        if (!_.isElement(target.value) || pagination !== 'autoMore') {
+          return () => {};
+        }
+        const scrollHandler = () => {
+          const { scrollHeight, clientHeight, scrollTop } = target.value;
+          if (scrollHeight - scrollTop - clientHeight <= 50) {
+            setCurrentPage?.(currentPage + 1);
+          }
+        };
+        target.value?.addEventListener('scroll', scrollHandler);
+        return () => {
+          target.value?.removeEventListener('scroll', scrollHandler);
+        };
+      }, [pagination]);
+      return {};
     },
   })
   .addPlugin({
@@ -243,7 +286,8 @@ export default listComponentsBasicAccumulate
 
       // 构建样式对象，只有当 column 大于 0 时才设置 CSS 变量
       const style = useMemo(
-        () => _.assign({}, styleProps, {
+        () =>
+          _.assign({}, styleProps, {
             '--row-gap': `${rowGap || 0}px`,
             '--column-gap': `${columnGap || 0}px`,
             '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
@@ -251,13 +295,13 @@ export default listComponentsBasicAccumulate
         [styleProps, rowGap, columnGap, columnProps],
       );
       const className = useMemo(
-        () => addClass(classNameProps, {
+        () =>
+          addClass(classNameProps, {
             'el-list-components-plus': true,
             isEqualWidth: equalWidth,
           }),
         [classNameProps, equalWidth],
       );
-
       return {
         style,
         class: className,

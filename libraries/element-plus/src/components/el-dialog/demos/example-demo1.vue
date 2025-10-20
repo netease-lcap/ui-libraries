@@ -7,7 +7,6 @@
     <el-dialog
       ref="dialogRef"
       title="Tips"
-      
       width="500"
     >
       <span>This is a message</span>
@@ -29,7 +28,10 @@ import { ElMessageBox } from 'element-plus'
 
 const dialogVisible = ref(false)
 const dialogRef = ref(null)
+setTimeout(() => {
+  
 console.log(dialogRef,'dialogRef');
+}, 1000);
 
 const handleClose = (done: () => void) => {
   ElMessageBox.confirm('Are you sure to close this dialog?')

@@ -143,15 +143,20 @@ interface RequestResult {
 }
 const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions = {}): RequestResult => {
   const [resultData, setResult] = useState<RequestResult>({ run: () => {} });
+  const [loading, setLoading] = useState(false);
   const { onBefore = () => {}, onSuccess = () => {}, formatResult = (value) => value, defaultParams = [] } = options;
   const { refreshDeps = [] } = options;
   const fn = useCallback(
     (...res) => {
       const params = res.length > 0 ? res : defaultParams;
       onBefore(...params);
-      setResult({ run: fn, loading: true });
+      setLoading(true);
       dataSource(...params).then((data) => {
-        setResult({ data: formatResult(data), run: fn, loading: false });
+        setResult((prev) => {
+          console.log(prev,'prev',data,'data');
+          return { data: formatResult(data, prev.data), run: fn, loading: false };
+        });
+        setLoading(false);
         onSuccess(data, ...params);
       });
     },
@@ -159,7 +164,7 @@ const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions 
   );
   useEffect(() => fn(), [fn, ...refreshDeps]);
 
-  return resultData ?? {};
+  return { ...resultData, loading };
 };
 
 export function useRequestDataSource(dataSource: DataSourceType, options: RequestOptions = {}): RequestResult {
@@ -208,124 +213,4 @@ export function useDataSourceToTree(
     }
     return acc;
   }, []);
-}
-
-export function useInfiniteScroll(
-  dataSource: DataSourceFunctionType,
-  options: UseInfiniteScrollOptions,
-): RequestResult {
-  const {
-    target,
-    isNoMore,
-    threshold = 100,
-    manual = false,
-    reloadDeps = [],
-    currentPage,
-    setCurrentPage,
-    pageSize,
-    setPageSize,
-    pageSizes,
-    onBefore,
-    onSuccess,
-    onError,
-    onFinally,
-  } = options;
-
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<DataSourceArrayType>([]);
-  const [noMore, setNoMore] = useState(false);
-
-  // 转换 dataSource 为函数
-  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource as any), [_.cloneDeep(dataSource)]);
-
-  // 加载更多数据的函数
-  const loadMore = useCallback(async () => {
-    if (loading || noMore) return;
-
-    try {
-      onBefore?.();
-      setLoading(true);
-
-      const result = await dataSourceFn({
-        currentPage,
-        pageSize,
-      });
-
-      let newData: DataSourceArrayType = [];
-      if (Array.isArray(result)) {
-        newData = result;
-      } else if (result && typeof result === 'object' && 'list' in result) {
-        newData = (result as any).list || [];
-      }
-
-      const mergedData = [...data, ...newData];
-      setData(mergedData);
-
-      const shouldNoMore = isNoMore ? isNoMore(mergedData) : newData.length === 0;
-      setNoMore(shouldNoMore);
-
-      onSuccess?.(mergedData);
-      onFinally?.(mergedData);
-    } catch (e) {
-      onError?.(e as Error);
-      onFinally?.(undefined, e as Error);
-    } finally {
-      setLoading(false);
-    }
-  }, [loading, noMore, data, dataSourceFn, isNoMore, onBefore, onSuccess, onError, onFinally]);
-
-  // 重置并重新加载
-  const reload = useCallback(() => {
-    setData([]);
-    setNoMore(false);
-    setLoading(false);
-  }, []);
-
-  // 监听滚动事件
-  useEffect(() => {
-    if (!target || noMore) return;
-
-    const getTargetElement = (): Element | Document | null | undefined => {
-      if (!target) return null;
-      if (typeof target === 'function') return target();
-      if ('value' in target) return (target as Ref<TargetValue<Element>>).value;
-      return target as Element;
-    };
-
-    const scrollHandler = () => {
-      const element = getTargetElement() as Element;
-      if (!element) return;
-
-      const { scrollTop } = element;
-      const { scrollHeight } = element;
-      const { clientHeight } = element;
-
-      if (scrollHeight - scrollTop - clientHeight <= threshold) {
-        setCurrentPage?.(currentPage + 1);
-        loadMore();
-      }
-    };
-
-    const el = getTargetElement();
-    if (el) {
-      el.addEventListener('scroll', scrollHandler);
-      return () => {
-        el.removeEventListener('scroll', scrollHandler);
-      };
-    }
-  }, [target, threshold, loadMore, noMore]);
-
-  // 初始加载或依赖变化时重新加载
-  useEffect(() => {
-    if (!manual) {
-      reload();
-      setTimeout(() => loadMore(), 0);
-    }
-  }, [...reloadDeps]);
-
-  return {
-    data,
-    loading,
-    run: loadMore,
-  };
 }

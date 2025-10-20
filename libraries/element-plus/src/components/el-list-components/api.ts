@@ -174,20 +174,22 @@ namespace nasl.ui {
       title: '分页',
       description: '是否显示分页组件',
       setter: {
-        concept: 'SwitchSetter',
+        concept: 'EnumSelectSetter',
+        options: [{ title: '不启用' }, { title: '自动加载更多' }, { title: '分页' }],
       },
     })
-    pagination: nasl.core.Boolean = false;
+    pagination: 'none' | 'autoMore' | 'page' = 'none';
 
-    @Prop({
-      group: '主要属性',
-      title: '总条数',
-      description: '总条数',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    total: nasl.core.Integer;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '总条数',
+    //   description: '总条数',
+    //   setter: {
+    //     concept: 'NumberInputSetter',
+    //   },
+    //   if: (_) => _.pagination === 'page',
+    // })
+    // total: nasl.core.Integer;
 
     @Prop({
       group: '主要属性',
@@ -196,7 +198,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     showTotal: nasl.core.Boolean = false;
 
@@ -207,7 +209,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     showJumper: nasl.core.Boolean = false;
 
@@ -220,7 +222,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
         min: 1,
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     currentPage: nasl.core.Integer = 1;
 
@@ -233,7 +235,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
         min: 1,
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     pageSize: nasl.core.Integer = 10;
 
@@ -244,7 +246,7 @@ namespace nasl.ui {
       setter: {
         concept: 'InputSetter',
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     pageSizes: nasl.collection.List<nasl.core.Integer> = [10, 20, 50, 100];
 
@@ -255,7 +257,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     paginationBackground: nasl.core.Boolean = true;
 
@@ -267,7 +269,7 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '默认' }, { title: '大' }],
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     paginationSize: 'small' | 'default' | 'large' = 'default';
 
