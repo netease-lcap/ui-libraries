@@ -23,7 +23,7 @@ export default DialogBasicAccumulate.addPlugin({
     );
     return {
       ...valueProps,
-      ref: _.assign(ref, {
+      ref: _.assign({}, ref, {
         open: () => setValue(true),
         close: () => setValue(false),
       }),

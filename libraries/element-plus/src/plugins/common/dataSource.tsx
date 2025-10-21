@@ -90,7 +90,7 @@ const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions 
       onBefore(...params);
       setLoading(true);
       dataSource(...params).then((data) => {
-        setResult((prev) => ({ data: formatResult(data, prev.data), run: fn, loading: false }));
+        setResult((prev: any) => ({ data: formatResult(data, prev?.data), run: fn, loading: false }));
         setLoading(false);
         onSuccess(data, ...params);
       });
