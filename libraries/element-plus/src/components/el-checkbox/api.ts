@@ -65,6 +65,16 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
+    @Prop({
+      group: '数据属性',
+      title: '选中值',
+      description: '当前选中的值数组',
+      docDescription: '绑定当前选中的多选框值数组，支持双向绑定。可以获取或设置选中状态。',
+      setter: { concept: 'InputSetter' },
+      sync: true,
+    })
+    modelValue: nasl.collection.List<V>;
+
     @Prop<ElCheckboxGroupOptions<T, V>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
@@ -95,15 +105,7 @@ namespace nasl.ui {
     max: nasl.core.Decimal | nasl.core.Integer;
 
     // ========== 涉及组件的可用、不可用、加载等状态 ==========
-    @Prop({
-      group: '状态属性',
-      title: '选中值',
-      description: '当前选中的值数组',
-      docDescription: '绑定当前选中的多选框值数组，支持双向绑定。可以获取或设置选中状态。',
-      setter: { concept: 'InputSetter' },
-      sync: true,
-    })
-    modelValue: nasl.collection.List<V>;
+
 
     // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({

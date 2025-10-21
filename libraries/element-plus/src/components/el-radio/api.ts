@@ -66,6 +66,16 @@ namespace nasl.ui {
     })
     dataSchema: T;
 
+    @Prop({
+      group: '数据属性',
+      title: '选中值',
+      description: '当前选中的值',
+      docDescription: '绑定当前选中的单选框值，支持双向绑定。可以获取或设置选中状态。',
+      setter: { concept: 'InputSetter' },
+      sync: true,
+    })
+    modelValue: V;
+
     @Prop<ElRadioGroupOptions<T, V>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
@@ -89,15 +99,7 @@ namespace nasl.ui {
     textField: (item: T) => any = ((item: any) => item.text) as any;
 
     // ========== 涉及组件的可用、不可用、加载等状态 ==========
-    @Prop({
-      group: '状态属性',
-      title: '选中值',
-      description: '当前选中的值',
-      docDescription: '绑定当前选中的单选框值，支持双向绑定。可以获取或设置选中状态。',
-      setter: { concept: 'InputSetter' },
-      sync: true,
-    })
-    modelValue: V;
+
 
     @Prop({
       group: '状态属性',
