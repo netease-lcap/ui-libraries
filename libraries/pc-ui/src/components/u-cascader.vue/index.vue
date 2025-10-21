@@ -235,7 +235,7 @@ export default {
             }
             this.currentData = data;
             this.allMergeText = this.getMergeText(this.currentData);
-            this.getSubComponents();
+            this.getSubComponents(this.currentOpened);
             if (this.useArrayLikeValue) {
                 this.updateFromArrayLikeValue(this.lastRealValueArray);
                 if (!this.showFinalValue)
@@ -263,7 +263,7 @@ export default {
         this.autofocus && this.$refs.input.focus();
         this.extractCssVariables();
         // 在编辑器里不要打开
-        if (!this.$env.VUE_APP_DESIGNER && this.currentData.length) {
+        if (!this.$env.VUE_APP_DESIGNER && this.opened) {
             this.currentOpened = this.opened;
             this.toggle(this.opened);
         }
