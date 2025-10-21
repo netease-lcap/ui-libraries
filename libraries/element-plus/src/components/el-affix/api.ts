@@ -27,20 +27,12 @@ namespace nasl.ui {
   }
 
   export class ElAffixOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '偏移量',
-      description: '偏移量',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    offset: nasl.core.Integer = 0;
-
-    @Prop({
-      group: '主要属性',
-      title: '位置',
-      description: '固钉位置',
+      title: '固定位置',
+      description: '选择固钉的固定位置',
+      docDescription: '控制元素固定的位置。顶部：固定在页面顶部；底部：固定在页面底部。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '顶部' }, { title: '底部' }],
@@ -48,18 +40,23 @@ namespace nasl.ui {
     })
     position: 'top' | 'bottom' = 'top';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '指定容器',
-    //   description: '指定容器（CSS 选择器）',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // target: nasl.core.String;
-
     @Prop({
       group: '主要属性',
-      title: '展示层级',
-      description: '和原生的 CSS 的 z-index 相同，改变 z 轴的顺序',
+      title: '偏移距离',
+      description: '固定时距离边界的偏移距离',
+      docDescription: '设置元素固定时距离容器边界的偏移距离，单位为像素。',
+      setter: {
+        concept: 'NumberInputSetter',
+      },
+    })
+    offset: nasl.core.Integer = 0;
+
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
+    @Prop({
+      group: '样式属性',
+      title: '显示层级',
+      description: '固定时的z-index层级',
+      docDescription: '设置元素固定时的z-index值，控制元素的显示层级。数值越大，元素越靠前显示。',
       setter: { concept: 'NumberInputSetter' },
     })
     zIndex: nasl.core.Integer = 100;

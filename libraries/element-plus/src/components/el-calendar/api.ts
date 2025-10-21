@@ -20,11 +20,13 @@ namespace nasl.ui {
   }
 
   export class ElCalendarOptions extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
-      title: '绑定值',
+      title: '选中日期',
       sync: true,
-      description: '绑定值',
+      description: '当前选中的日期',
+      docDescription: '绑定当前选中的日期，支持双向绑定。可以是Date对象或日期字符串。',
       setter: { concept: 'InputSetter' },
     })
     value: nasl.core.Date | nasl.core.String;
@@ -32,7 +34,8 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '时间范围',
-      description: '时间范围，包括开始时间与结束时间。开始时间必须是周起始日，结束时间必须是周结束日，且时间跨度不能超过两个月',
+      description: '日历显示的时间范围',
+      docDescription: '设置日历显示的时间范围，包括开始时间与结束时间。开始时间必须是周起始日，结束时间必须是周结束日，且时间跨度不能超过两个月。',
       setter: { concept: 'InputSetter' },
     })
     range: nasl.collection.List<nasl.core.Date | nasl.core.String>;

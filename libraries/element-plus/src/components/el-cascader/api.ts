@@ -68,10 +68,12 @@ namespace nasl.ui {
     // })
     // borderless: nasl.core.Boolean = false;
 
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
-      group: '主要属性',
-      title: '是否可清空',
-      description: '是否可以清空选项',
+      group: '交互属性',
+      title: '可清空',
+      description: '是否允许清空已选择的选项',
+      docDescription: '开启后，选择器会显示清空按钮，用户可以清空已选择的选项。',
       setter: { concept: 'SwitchSetter' },
     })
     clearable: nasl.core.Boolean = false;

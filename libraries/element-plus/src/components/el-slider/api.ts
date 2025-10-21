@@ -20,18 +20,21 @@ namespace nasl.ui {
   }
 
   export class ElSliderOptions extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
       title: '绑定值',
       sync: true,
-      description: '滑块绑定值',
+      description: '滑块的当前值',
+      docDescription: '绑定滑块的当前值，支持双向绑定。可以获取或设置滑块的数值。',
     })
     modelValue: nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
       title: '最小值',
-      description: '滑块可设置的最小值',
+      description: '滑块的最小值',
+      docDescription: '设置滑块允许滑动到的最小值，滑块不能小于此值。',
       setter: { concept: 'NumberInputSetter' },
     })
     min: nasl.core.Integer;
@@ -39,47 +42,56 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '最大值',
-      description: '滑块可设置的最大值',
+      description: '滑块的最大值',
+      docDescription: '设置滑块允许滑动到的最大值，滑块不能大于此值。',
       setter: { concept: 'NumberInputSetter' },
     })
     max: nasl.core.Integer;
 
     @Prop({
-      group: '主要属性',
-      title: '禁用',
-      description: '是否禁用滑块',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
       group: '数据属性',
       title: '步长',
-      description: '滑块步长',
+      description: '滑块移动的步长',
+      docDescription: '设置滑块每次移动的步长。例如步长为5时，滑块只能停留在5的倍数位置。',
       setter: { concept: 'NumberInputSetter' },
     })
     step: nasl.core.Integer;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '显示输入框',
-      description: '是否显示输入框，仅在非范围选择时有效',
+      description: '是否显示数值输入框',
+      docDescription: '开启后，滑块右侧会显示一个数值输入框，可以直接输入数值。仅在非范围选择时有效。',
       setter: { concept: 'SwitchSetter' },
     })
     showInput: nasl.core.Boolean;
 
     @Prop({
       group: '主要属性',
-      title: '显示输入框控制按钮',
-      description: '在显示输入框的情况下，是否显示输入框的控制按钮',
+      title: '显示控制按钮',
+      description: '输入框是否显示加减按钮',
+      docDescription: '开启后，在显示输入框的情况下会显示加减控制按钮。关闭后只显示纯输入框。',
       setter: { concept: 'SwitchSetter' },
     })
     showInputControls: nasl.core.Boolean = true;
 
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
+    @Prop({
+      group: '状态属性',
+      title: '禁用状态',
+      description: '是否禁用滑块',
+      docDescription: '开启后，滑块将变为禁用状态，用户无法拖动滑块或修改数值。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean;
+
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
     @Prop({
       group: '样式属性',
-      title: '尺寸',
-      description: '滑块的尺寸，垂直模式下无效',
+      title: '滑块尺寸',
+      description: '选择滑块的尺寸大小',
+      docDescription: '控制滑块的整体尺寸。默认：标准尺寸；大：宽松型滑块；小：紧凑型滑块。垂直模式下无效。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '默认' }, { title: '大' }, { title: '小' }],
@@ -90,7 +102,8 @@ namespace nasl.ui {
     @Prop({
       group: '样式属性',
       title: '输入框尺寸',
-      description: '输入框的尺寸，如未设置则继承 size 属性的值',
+      description: '数值输入框的尺寸',
+      docDescription: '设置数值输入框的尺寸。如未设置则继承滑块尺寸属性的值。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '默认' }, { title: '大' }, { title: '小' }],

@@ -41,9 +41,24 @@ namespace nasl.ui {
   }
 
   export class ElNotificationOptions extends ViewComponentOptions {
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({
-      title: '消息类型',
-      description: '消息类型',
+      title: '显示状态',
+      description: '控制通知的显示和隐藏',
+      docDescription: '绑定通知的显示状态。true：显示通知；false：隐藏通知。支持双向绑定。',
+      group: '状态属性',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      sync: true,
+    })
+    visible: nasl.core.Boolean = false;
+
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
+    @Prop({
+      title: '通知类型',
+      description: '选择通知的类型主题',
+      docDescription: '控制通知的类型和主题色。信息：蓝色主题；成功：绿色主题；警告：橙色主题；错误：红色主题；默认：无特定主题。',
       group: "主要属性",
       setter: {
         concept: 'EnumSelectSetter',
@@ -53,19 +68,9 @@ namespace nasl.ui {
     type: 'info' | 'success' | 'warning' | 'error' | '' = '';
 
     @Prop({
-      title: '显示',
-      description: '是否显示',
-      group: '主要属性',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-      sync: true,
-    })
-    visible: nasl.core.Boolean = false;
-
-    @Prop({
-      title: '标题',
-      description: '通知标题',
+      title: '通知标题',
+      description: '通知的标题文本',
+      docDescription: '设置通知的标题文本，显示在通知顶部。',
       group: '主要属性',
       setter: {
         concept: 'InputSetter',
@@ -75,7 +80,8 @@ namespace nasl.ui {
 
     @Prop({
       title: '自定义图标',
-      description: '自定义图标。 若设置了消息类型，则自定义图标会被覆盖',
+      description: '自定义通知的图标',
+      docDescription: '设置自定义图标。若已设置消息类型，则自定义图标会被类型图标覆盖。',
       group: '主要属性',
       setter: {
         concept: 'IconSetter',

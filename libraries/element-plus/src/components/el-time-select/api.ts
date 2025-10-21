@@ -36,18 +36,22 @@ namespace nasl.ui {
   }
 
   export class ElTimeSelectOptions extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
-      title: '值',
-      description: '选择的值',
+      title: '选中时间',
+      description: '当前选中的时间值',
+      docDescription: '绑定当前选中的时间值，支持双向绑定。格式为HH:mm的时间字符串。',
       sync: true,
     })
     modelValue: nasl.core.String;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '开始时间',
-      description: '开始时间',
+      description: '可选时间段的开始时间',
+      docDescription: '设置可选时间段的开始时间，格式为HH:mm。例如：09:00表示从9点开始。',
       setter: { concept: 'InputSetter' },
     })
     start: nasl.core.String = '09:00';
@@ -55,15 +59,17 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '结束时间',
-      description: '结束时间',
+      description: '可选时间段的结束时间',
+      docDescription: '设置可选时间段的结束时间，格式为HH:mm。例如：18:00表示到18点结束。',
       setter: { concept: 'InputSetter' },
     })
     end: nasl.core.String = '18:00';
 
     @Prop({
       group: '主要属性',
-      title: '间隔时间',
-      description: '间隔时间',
+      title: '时间间隔',
+      description: '相邻时间点的间隔',
+      docDescription: '设置时间选择列表中相邻时间点的间隔，格式为HH:mm。例如：00:30表示每30分钟一个选项。',
       setter: { concept: 'InputSetter' },
     })
     step: nasl.core.String = '00:30';
@@ -71,7 +77,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '最小时间',
-      description: '最小时间，小于该时间的时间段将被禁用',
+      description: '可选的最小时间',
+      docDescription: '设置可选的最小时间，小于该时间的时间段将被禁用，格式为HH:mm。',
       setter: { concept: 'InputSetter' },
     })
     minTime: nasl.core.String;

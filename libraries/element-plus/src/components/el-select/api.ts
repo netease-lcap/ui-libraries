@@ -62,60 +62,28 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     C,
   > extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '是否可清空',
-      description: '是否可以清空选项',
-      setter: { concept: 'SwitchSetter' },
-    })
-    clearable: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '禁用组件',
-      description: '是否禁用组件',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: '无选项时显示的文字',
-      description: '无选项时显示的文字，默认是 “No data”',
-      setter: { concept: 'InputSetter' },
-    })
-    noDataText: nasl.core.String = 'No data';
-
-    @Prop({
-      group: '主要属性',
-      title: '是否可搜索',
-      description:
-        '是否可搜索，默认搜索规则不区分大小写，全文本任意位置匹配。如果默认搜索规则不符合业务需求，可以更为使用 `filter` 自定义过滤规则',
-      setter: { concept: 'SwitchSetter' },
-    })
-    filterable: nasl.core.Boolean = false;
-
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description: '设置选择器的数据来源，支持绑定集合类型变量或返回集合的逻辑',
+      docDescription: '可以绑定 List<T> 类型的变量，或者绑定返回 List<T> 类型的逻辑。当使用数据源时，选择器会根据数据动态生成选项，每个数据项对应一个选项。',
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
-      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+      description: '数据源中每个数据项的类型定义，用于类型推导和属性选择',
+      docDescription: '此属性为只读，当绑定数据源后会自动识别数据项的类型T，用于在插槽中提供类型提示和属性选择器。',
     })
     dataSchema: T;
 
     @Prop<ElSelectOptions<T, V, P, M, C>, 'textField'>({
       group: '数据属性',
       title: '文本字段',
-      description: '集合的元素类型中，用于显示文本的属性名称',
-      docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      description: '指定数据项中哪个字段作为选项的显示文本',
+      docDescription: '当使用数据源时，需要指定数据项中的哪个属性作为选项的显示文本。例如：如果数据项有name字段，则选择name作为文本字段。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -125,8 +93,8 @@ namespace nasl.ui {
     @Prop<ElSelectOptions<T, V, P, M, C>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
-      description: '集合的元素类型中，用于标识选中值的属性',
-      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
+      description: '指定数据项中哪个字段作为选项的值',
+      docDescription: '当使用数据源时，需要指定数据项中的哪个属性作为选项的值。此值用于判断哪个选项被选中，以及触发相关事件时传递的参数。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -136,8 +104,8 @@ namespace nasl.ui {
     @Prop<ElSelectOptions<T, V, P, M, C>, 'descriptionField'>({
       group: '数据属性',
       title: '描述字段',
-      description: '集合的元素类型中，用于显示描述的属性名称',
-      docDescription: '集合的元素类型中，用于显示描述的属性名称，支持自定义变更',
+      description: '指定数据项中哪个字段作为选项的描述文本',
+      docDescription: '当使用数据源时，可以指定数据项中的哪个属性作为选项的描述文本。描述文本通常显示在选项文本下方，提供额外的说明信息。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -148,31 +116,35 @@ namespace nasl.ui {
       group: '数据属性',
       sync: true,
       title: '选中值',
-      description: '选中值。支持语法糖 `v-model`。',
+      description: '当前选中的选项值，支持双向绑定',
+      docDescription: '绑定当前选中的选项值。单选模式下为单个值，多选模式下为数组。当用户选择或取消选择时，此值会自动更新。',
       setter: { concept: 'InputSetter' },
     })
     modelValue: M extends true ? nasl.collection.List<V> : V;
 
     @Prop({
       group: '数据属性',
-      title: '选中值完整数据',
-      description: '当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。',
-      docDescription: '当下拉列表是分页或加载更多时，需要使用该字段回显选择框内数据。',
+      title: '选中数据',
+      description: '当前选中选项的完整数据对象',
+      docDescription: '当下拉列表使用分页或加载更多时，需要使用此字段来回显选择框内的完整数据。包含选中选项的标签和值信息。',
     })
     selectedValuesData: nasl.collection.List<{ label: nasl.core.String; value: V }>;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '是否多选',
-      description: '是否允许多选',
+      title: '多选模式',
+      description: '是否允许多选选项',
+      docDescription: '开启后，用户可以选择多个选项。多选模式下，选中值会以数组形式存储，选择框会显示多个标签。',
       setter: { concept: 'SwitchSetter' },
     })
     multiple: M = false as any;
 
     @Prop<ElSelectOptions<T, V, P, M, C>, 'collapseTags'>({
       group: '主要属性',
-      title: '是否折叠标签',
-      description: '是否折叠标签',
+      title: '折叠标签',
+      description: '多选时是否折叠显示标签',
+      docDescription: '开启后，当选择多个选项时，会折叠显示标签，只显示部分标签和"+N"的形式。适用于选择项较多的情况。',
       setter: { concept: 'SwitchSetter' },
       if: (_) => !!_.multiple,
     })
@@ -180,8 +152,9 @@ namespace nasl.ui {
 
     @Prop<ElSelectOptions<T, V, P, M, C>, 'collapseTagsTooltip'>({
       group: '主要属性',
-      title: '是否折叠标签提示',
-      description: '是否折叠标签提示',
+      title: '折叠提示',
+      description: '折叠标签时是否显示提示信息',
+      docDescription: '开启后，当标签被折叠时，鼠标悬停在"+N"上会显示所有选中选项的提示信息。',
       setter: { concept: 'SwitchSetter' },
       if: (_) => !!_.collapseTags,
     })
@@ -189,8 +162,9 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '是否虚拟滚动',
-      description: '是否开启虚拟滚动,虚拟滚动仅支持数据源',
+      title: '虚拟滚动',
+      description: '是否开启虚拟滚动优化',
+      docDescription: '开启后，当选项数量很多时会使用虚拟滚动技术，只渲染可见区域的选项，提高性能。仅在使用数据源时有效。',
       setter: { concept: 'SwitchSetter' },
     })
     virtualize: nasl.core.Boolean = false;
@@ -198,7 +172,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '占位符',
-      description: '占位符',
+      description: '选择框为空时显示的提示文本',
+      docDescription: '设置选择框为空时显示的占位符文本，用于提示用户进行选择操作。',
       setter: { concept: 'InputSetter' },
     })
     placeholder: nasl.core.String;
@@ -206,13 +181,52 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '组件尺寸',
-      description: '组件尺寸。可选项：small/medium/large。',
+      description: '选择器组件的尺寸大小',
+      docDescription: '控制选择器组件的整体尺寸。小：紧凑型选择器；正常：标准尺寸；大：宽松型选择器。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '正常' }, { title: '大' }],
       },
     })
     size: 'small' | 'default' | 'large' = 'default';
+
+    @Prop({
+      group: '主要属性',
+      title: '无数据文本',
+      description: '没有选项时显示的文字',
+      docDescription: '当下拉列表中没有选项时显示的文字，用于提示用户当前没有可选择的选项。默认为"No data"。',
+      setter: { concept: 'InputSetter' },
+    })
+    noDataText: nasl.core.String = 'No data';
+
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
+    @Prop({
+      group: '交互属性',
+      title: '可清空',
+      description: '是否允许清空已选择的选项',
+      docDescription: '开启后，选择框会显示清空按钮，用户可以点击清空所有已选择的选项。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    clearable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '交互属性',
+      title: '可搜索',
+      description: '是否允许搜索选项',
+      docDescription: '开启后，用户可以在选择框中输入文字来搜索选项。默认搜索规则不区分大小写，支持全文本任意位置匹配。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    filterable: nasl.core.Boolean = false;
+
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
+    @Prop({
+      group: '状态属性',
+      title: '禁用状态',
+      description: '是否禁用选择器组件',
+      docDescription: '开启后，选择器将变为禁用状态，用户无法进行任何操作。禁用状态下选择器会显示为灰色。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean;
 
     @Event({
       title: '选中值变化时',

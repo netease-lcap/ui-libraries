@@ -18,7 +18,7 @@ namespace nasl.ui {
   @Component({
     title: '滚动条',
     icon: 'Scrollbar',
-    description: '用于替换浏览器原生滚动条',
+    description: '用于替换浏览器原生滚动条，提供更美观的滚动体验',
     group: 'Navigation',
   })
   export class ElScrollbar extends ViewComponent {

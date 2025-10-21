@@ -62,10 +62,12 @@ namespace nasl.ui {
     // })
     // range: nasl.core.Boolean = false;
 
+    // ========== 数据来源相关属性 ==========
     @Prop<ElDatePickerOptions<T, V, P, M, C>, 'modelValue'>({
       group: '数据属性',
-      title: '值',
-      description: '选中值',
+      title: '选中值',
+      description: '当前选中的日期值',
+      docDescription: '绑定当前选中的日期值，支持双向绑定。仅在非区间选择模式下有效。',
       setter: { concept: 'InputSetter' },
       if: (_) => !_.type.includes('range'),
       sync: true,
@@ -75,7 +77,8 @@ namespace nasl.ui {
     @Prop<ElDatePickerOptions<T, V, P, M, C>, 'startValue'>({
       group: '数据属性',
       title: '起始值',
-      description: '开始日期',
+      description: '区间选择的开始日期',
+      docDescription: '绑定日期区间的开始日期值，支持双向绑定。仅在区间选择模式下有效。',
       setter: { concept: 'InputSetter' },
       if: (_) => _.type.includes('range'),
       sync: true,

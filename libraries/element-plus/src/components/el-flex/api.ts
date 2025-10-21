@@ -52,10 +52,12 @@ namespace nasl.ui {
   }
 
   export class ElFlexOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop<ElFlexOptions, 'mode'>({
-      group: '样式属性',
+      group: '主要属性',
       title: '布局模式',
-      description: '设置布局模式',
+      description: '选择容器的布局模式',
+      docDescription: '控制容器的布局模式。块级：块级布局；弹性：弹性布局；表单弹性：表单专用弹性布局。',
       bindHide: true,
       tabKind: 'style',
       setter: {
