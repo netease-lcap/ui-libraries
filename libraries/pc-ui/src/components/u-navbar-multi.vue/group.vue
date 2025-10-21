@@ -276,7 +276,7 @@ export default {
     bottom:0;
     width:100%;
     height:var(--navbar-item-line-height);
-    background-color:currentColor;
+    background-color: var(--navbar-item-line-background);
     left:50%;
     transform:translate(-50%);
 }
