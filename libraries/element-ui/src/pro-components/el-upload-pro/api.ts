@@ -22,7 +22,7 @@ namespace nasl.ui {
       lastModified?: nasl.core.Integer;
       name?: nasl.core.String;
       percent?: nasl.core.Decimal;
-      raw?: File;
+      raw?: nasl.io.File;
       size?: nasl.core.Integer;
       status?: 'success' | 'fail' | 'progress' | 'waiting';
       type?: nasl.core.String;
@@ -358,7 +358,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -458,7 +458,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -469,7 +469,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -481,7 +481,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -499,7 +499,7 @@ namespace nasl.ui {
       lastModified?: nasl.core.Integer;
       name?: nasl.core.String;
       percent?: nasl.core.Decimal;
-      raw?: File;
+      raw?: nasl.io.File;
       size?: nasl.core.Integer;
       status?: 'success' | 'fail' | 'progress' | 'waiting';
       type?: nasl.core.String;
@@ -517,7 +517,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -528,7 +528,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -540,7 +540,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -559,7 +559,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -578,7 +578,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -589,7 +589,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -607,7 +607,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -627,7 +627,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -658,7 +658,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -677,7 +677,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;

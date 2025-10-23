@@ -422,7 +422,7 @@ namespace nasl.ui {
             },
             bindOpen: true,
         })
-        checkFile: (file: File) => nasl.core.String;
+        checkFile: (file: nasl.io.File) => nasl.core.String;
 
         @Prop({
             group: '主要属性',
@@ -599,7 +599,7 @@ namespace nasl.ui {
             description: '上传前触发',
         })
         onBeforeUpload: (event: {
-            file: File;
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -614,7 +614,7 @@ namespace nasl.ui {
               size: nasl.core.Integer;
               type: nasl.core.String;
             };
-            file: File;
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -641,7 +641,7 @@ namespace nasl.ui {
             size: nasl.core.Decimal | nasl.core.Integer;
             message: nasl.core.String;
             name: nasl.core.String;
-            file: File;
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -656,7 +656,7 @@ namespace nasl.ui {
               size: nasl.core.Integer;
               type: nasl.core.String;
             };
-            file: File;
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -671,7 +671,7 @@ namespace nasl.ui {
               size: nasl.core.Integer;
               type: nasl.core.String;
             };
-            file: File;
+            file: nasl.io.File;
         }) => any;
 
         @Event({
