@@ -1,6 +1,5 @@
 import _ from 'lodash';
-import { defineComponent } from 'vue';
-import ElListComponents from './index.vue';
+import basicElListComponents from './index.vue';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/index.tsx';
 import './index.less';
@@ -10,7 +9,7 @@ function ElListComponentsRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-const ElListComponentsPlus = registerComponent(ElListComponents, { plugin: basicsPlugin });
+const ElListComponents = registerComponent(basicElListComponents, { plugin: basicsPlugin });
 
-export { ElListComponentsRegister, ElListComponents, ElListComponentsPlus };
+export { ElListComponentsRegister, ElListComponents };
 export default ElListComponents;

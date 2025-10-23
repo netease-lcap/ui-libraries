@@ -58,11 +58,12 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     C,
   > extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
-      docDescription: '组件的数据源，配置内容为数据集对象或者返回数据集的逻辑。',
+      description: '设置组件列表的数据来源，支持绑定集合类型变量或返回集合的逻辑',
+      docDescription: '可以绑定 List<T> 类型的变量，或者绑定返回 List<T> 类型的逻辑。当使用数据源时，组件列表会根据数据动态生成，每个数据项对应一个列表项。',
       bindOpen: true,
     })
     dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
@@ -70,15 +71,16 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据类型',
-      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: 'IDE 根据配置的数据源动态计算返回内容的数据结构，用于动态配置项 current.item 的类型说明。',
+      description: '数据源中每个数据项的类型定义，用于类型推导和属性选择',
+      docDescription: '此属性为只读，当绑定数据源后会自动识别数据项的类型T，用于在插槽中提供类型提示和属性选择器。',
     })
     dataSchema: T;
 
     @Prop({
       group: '数据属性',
-      title: '唯一字段',
-      description: '唯一字段，默认使用数据 index 作为唯一字段',
+      title: '唯一标识',
+      description: '指定数据项中哪个字段作为列表项的唯一标识',
+      docDescription: '当使用数据源时，需要指定数据项中的哪个属性作为列表项的唯一标识。此值用于列表项的渲染和更新优化。默认为数据的索引值。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -88,18 +90,20 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '文本字段',
-      description: '指定显示的文本字段，当插槽为空时显示该字段的值',
+      description: '指定数据项中哪个字段作为列表项的显示文本',
+      docDescription: '当插槽为空时，会显示此字段的值作为列表项的内容。例如：如果数据项有name字段，则选择name作为文本字段。',
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
     textField: (item: T) => any;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '每行排列项数',
-      description: '为空时默认为5',
-      docDescription: '支持定义每一行排列的项数，为空时会自适应宽度并自动换行。',
+      title: '列数',
+      description: '设置每行显示的组件数量',
+      docDescription: '控制每行排列的组件数量。设置为具体数字时，组件会按指定数量排列；为空时会根据容器宽度自适应排列并自动换行。默认值为5。',
       setter: {
         concept: 'NumberInputSetter',
         min: 1,
@@ -108,143 +112,90 @@ namespace nasl.ui {
     column: nasl.core.Decimal | nasl.core.Integer = 5;
 
     @Prop({
-      group: '状态属性',
-      title: '是否可选择',
-      description: '是否可选择',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '不可选' }, { title: '单选' }, { title: '多选' }],
-      },
-    })
-    selection: 'none' | 'single' | 'multiple' = 'none';
-
-    @Prop({
-      group: '数据属性',
-      title: '是否范围',
-      description: '是否范围选择',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-      if: (_) => false,
-    })
-    isRange: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '状态属性',
-      title: '清除选中值',
-      description: '是否清除选中值',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-      if: (_) => _.selection !== 'none',
-    })
-    clearable: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '样式属性',
-      title: '行间距',
-      description: '行间距',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    rowGap: nasl.core.Decimal | nasl.core.Integer = 0;
-
-    @Prop({
-      group: '样式属性',
-      title: '列间距',
-      description: '列间距',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    columnGap: nasl.core.Decimal | nasl.core.Integer = 0;
-
-    @Prop({
-      group: '样式属性',
+      group: '主要属性',
       title: '均分宽度',
-      description: '设置是否均分宽度',
-      docDescription: `支持根据组件列表所占宽度自动均匀排布各项。
-- 开启：默认根据组件列表宽度自动计算每一项内容宽度，宽度为 100% / 每行项数。
-- 关闭：每一项内容自适应宽度。`,
+      description: '是否让每个组件平均分配宽度',
+      docDescription: '开启后，每个组件会平均分配容器宽度，宽度计算公式为：容器宽度 / 每行列数。关闭后，每个组件根据内容自适应宽度。',
       setter: {
         concept: 'SwitchSetter',
       },
     })
     equalWidth: nasl.core.Boolean = true;
 
+    // 分页相关（联动属性组）
     @Prop({
       group: '主要属性',
-      title: '分页',
-      description: '是否显示分页组件',
+      title: '分页模式',
+      description: '选择分页的显示模式',
+      docDescription: '控制分页的显示方式。不启用：不显示分页；自动加载更多：滚动到底部时自动加载；分页：显示分页组件。',
       setter: {
-        concept: 'SwitchSetter',
+        concept: 'EnumSelectSetter',
+        options: [{ title: '不启用' }, { title: '自动加载更多' }, { title: '分页' }],
       },
     })
-    pagination: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '总条数',
-      description: '总条数',
-      setter: {
-        concept: 'NumberInputSetter',
-      },
-    })
-    total: nasl.core.Integer;
+    pagination: 'none' | 'autoMore' | 'page' = 'none';
 
     @Prop({
       group: '主要属性',
       title: '显示总条数',
-      description: '是否显示总条数',
+      description: '是否在分页组件中显示总条数',
+      docDescription: '开启后，分页组件会显示数据的总条数信息，格式为"共 X 条"。',
       setter: {
         concept: 'SwitchSetter',
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     showTotal: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
-      title: '显示跳转输入',
-      description: '是否显示跳转输入',
+      title: '显示跳转',
+      description: '是否显示页码跳转输入框',
+      docDescription: '开启后，分页组件会显示一个输入框，用户可以输入页码直接跳转到指定页面。',
       setter: {
         concept: 'SwitchSetter',
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     showJumper: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
       title: '当前页',
-      description: '当前页码',
+      description: '当前显示的页码',
+      docDescription: '设置当前激活的页码，从1开始计数。用户切换页面时此值会自动更新。',
       sync: true,
       setter: {
         concept: 'NumberInputSetter',
         min: 1,
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     currentPage: nasl.core.Integer = 1;
 
     @Prop({
       group: '主要属性',
       title: '每页条数',
-      description: '每页条数',
+      description: '每页显示的数据条数',
+      docDescription: '设置每页显示多少条数据。用户可以通过分页组件的下拉选择器修改此值。',
       sync: true,
       setter: {
         concept: 'NumberInputSetter',
         min: 1,
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     pageSize: nasl.core.Integer = 10;
 
     @Prop({
       group: '主要属性',
       title: '每页数量选项',
-      description: '每页显示个数选择器的选项设置',
+      description: '每页条数选择器的可选值',
+      docDescription: '设置每页条数选择器中显示的选项，用户可以从这些选项中选择每页显示的数据条数。',
       setter: {
         concept: 'InputSetter',
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     pageSizes: nasl.collection.List<nasl.core.Integer> = [10, 20, 50, 100];
 
@@ -252,38 +203,34 @@ namespace nasl.ui {
       group: '主要属性',
       title: '分页背景色',
       description: '是否为分页按钮添加背景色',
+      docDescription: '开启后，分页按钮会显示背景色，提供更好的视觉反馈。关闭后，分页按钮为透明背景。',
       setter: {
         concept: 'SwitchSetter',
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     paginationBackground: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
       title: '分页尺寸',
-      description: '分页组件的尺寸',
+      description: '分页组件的尺寸大小',
+      docDescription: '控制分页组件的整体尺寸。小：紧凑型分页；默认：标准尺寸；大：宽松型分页。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '小' }, { title: '默认' }, { title: '大' }],
       },
-      if: (_) => _.pagination !== false,
+      if: (_) => _.pagination === 'page',
     })
     paginationSize: 'small' | 'default' | 'large' = 'default';
 
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
+    // 选择相关（联动属性组）
     @Prop({
-      group: '主要属性',
-      title: '选中值',
-      description: '当前选中的值',
-      sync: true,
-      if: (_) => _.selection !== 'none',
-    })
-    modelValue: M extends true ? nasl.collection.List<V> : V;
-
-    @Prop({
-      group: '主要属性',
+      group: '交互属性',
       title: '选择模式',
-      description: '选择模式：none-不可选，single-单选，multiple-多选',
+      description: '设置列表项的选择模式',
+      docDescription: '控制用户是否可以选择列表项以及选择的方式。不可选：用户无法选择；单选：只能选择一个；多选：可以选择多个。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '不可选' }, { title: '单选' }, { title: '多选' }],
@@ -292,14 +239,69 @@ namespace nasl.ui {
     selectionMode: 'none' | 'single' | 'multiple' = 'none';
 
     @Prop({
-      group: '主要属性',
+      group: '交互属性',
+      title: '可清除',
+      description: '是否允许清除已选中的项',
+      docDescription: '开启后，用户可以通过点击清除按钮或按ESC键来清除所有已选中的项。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => _.selectionMode !== 'none',
+    })
+    clearable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '交互属性',
       title: '是否可选',
-      description: '是否可选（兼容旧版，建议使用 selectionMode）',
+      description: '是否允许选择列表项（兼容旧版）',
+      docDescription: '兼容旧版本的属性，建议使用选择模式属性。开启后允许选择列表项。',
       setter: {
         concept: 'SwitchSetter',
       },
     })
     selectable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '交互属性',
+      title: '是否范围',
+      description: '是否支持范围选择',
+      docDescription: '开启后，用户可以选择一个范围内的连续项。此功能目前暂未实现。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => false,
+    })
+    isRange: nasl.core.Boolean = false;
+
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
+    @Prop({
+      group: '状态属性',
+      title: '选中值',
+      description: '当前选中的列表项值',
+      docDescription: '绑定当前选中的列表项值。单选模式下为单个值，多选模式下为数组。当用户选择或取消选择时，此值会自动更新。',
+      sync: true,
+      if: (_) => _.selectionMode !== 'none',
+    })
+    modelValue: M extends true ? nasl.collection.List<V> : V;
+
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
+    @Prop({
+      group: '样式属性',
+      title: '行间距',
+      description: '设置组件行与行之间的间距',
+      docDescription: '控制垂直方向上相邻两行组件之间的距离。数值越大，行间距越大。单位为像素(px)。',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    rowGap: nasl.core.Decimal | nasl.core.Integer = 0;
+
+    @Prop({
+      group: '样式属性',
+      title: '列间距',
+      description: '设置组件列与列之间的间距',
+      docDescription: '控制水平方向上相邻两列组件之间的距离。数值越大，列间距越大。单位为像素(px)。',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    columnGap: nasl.core.Decimal | nasl.core.Integer = 0;
 
     @Event({
       title: '页码改变时',

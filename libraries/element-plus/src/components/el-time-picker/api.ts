@@ -66,10 +66,12 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     C,
   > extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
-      group: '数据属性',
+      group: '主要属性',
       title: '区间选择',
-      description: '是否支持进行时间区间选择，关闭则为时间点选择',
+      description: '是否启用时间区间选择',
+      docDescription: '开启后，支持选择时间区间（开始时间和结束时间）。关闭后，只能选择单个时间点。',
       setter: {
         concept: 'SwitchSetter',
       },

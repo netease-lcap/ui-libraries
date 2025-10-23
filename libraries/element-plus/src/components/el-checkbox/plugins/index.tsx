@@ -73,13 +73,17 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
         [
           _.matches('button'),
           _.constant(
-            _.map(slots.default?.(), (node: any) => <ElCheckboxButton {...node.props} v-slots={node.children} />),
+            _.map(slots.default?.(), (node: any) => (
+              <ElCheckboxButton {..._.omit(node.props, 'ref')} v-slots={node.children} />
+            )),
           ),
         ],
         [
           _.matches('border'),
           _.constant(
-            _.map(slots.default?.(), (node: any) => <ElCheckbox {...node.props} v-slots={node.children} border />),
+            _.map(slots.default?.(), (node: any) => (
+              <ElCheckbox {..._.omit(node.props, 'ref')} v-slots={node.children} border />
+            )),
           ),
         ],
         [_.stubTrue, slots.default],

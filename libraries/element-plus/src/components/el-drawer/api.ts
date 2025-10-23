@@ -51,28 +51,32 @@ namespace nasl.ui {
   }
 
   export class ElDrawerOptions extends ViewComponentOptions {
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({
       group: '状态属性',
       sync: true,
-      title: '显示',
-      description: '是否显示 Drawer',
+      title: '显示状态',
+      description: '控制抽屉的显示和隐藏',
+      docDescription: '绑定抽屉的显示状态。true：显示抽屉；false：隐藏抽屉。支持双向绑定，可以通过程序控制抽屉的开关。',
       setter: { concept: 'SwitchSetter' },
     })
     modelValue: nasl.core.Boolean = false;
 
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
-      group: '主要属性',
-      title: 'Drawer 自身是否插入至 body 元素上',
-      description:
-        'Drawer 自身是否插入至 body 元素上。嵌套的 Drawer 必须指定该属性并赋值为 true',
+      group: '交互属性',
+      title: '插入到body',
+      description: '是否将抽屉插入到body元素',
+      docDescription: '开启后，抽屉会被插入到body元素上，避免被父元素的样式影响。嵌套抽屉必须开启此选项。',
       setter: { concept: 'SwitchSetter' },
     })
     appendToBody: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '是否滚动锁定',
-      description: '是否在 Drawer 出现时将 body 滚动锁定',
+      group: '交互属性',
+      title: '滚动锁定',
+      description: '是否在抽屉显示时锁定页面滚动',
+      docDescription: '开启后，当抽屉显示时会锁定背景页面的滚动，防止用户滚动背景内容。',
       setter: { concept: 'SwitchSetter' },
     })
     lockScroll: nasl.core.Boolean = true;

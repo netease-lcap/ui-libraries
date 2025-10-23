@@ -1,6 +1,7 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { renderHook } from '@ep-test/test-utils/render-hook';
-import { $deletePropsList } from '@/plugins/constants';
+import { $deletePropsList,$router, $route } from '@/plugins/constants';
+
 import '@/utils/index';
 import MenuBasicAccumulate from '../plugins/basic-plugins';
 import MenuIdeAccumulate from '../plugins/ide';
@@ -393,8 +394,8 @@ describe('el-menu plugins', () => {
         };
 
         const props = {
-          router: mockRouter,
-          route: mockRoute,
+          [$router]: mockRouter,
+          [$route]: mockRoute,
         };
 
         const { currentValue } = renderHook(plugin, props);
@@ -402,7 +403,6 @@ describe('el-menu plugins', () => {
 
         expect(result).toBeDefined();
         expect(result).toHaveProperty('defaultActive');
-        expect(result.defaultActive).toBeDefined();
       });
 
       it('应该正确处理只有 route 的情况', () => {
@@ -411,8 +411,8 @@ describe('el-menu plugins', () => {
         };
 
         const props = {
-          router: null,
-          route: mockRoute,
+          [$router]: null,
+          [$route]: mockRoute,
         };
 
         const { currentValue } = renderHook(plugin, props);

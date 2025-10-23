@@ -75,13 +75,15 @@ export default RadioAccumulate.addAccumulate(idePlugin)
         [
           _.matches('button'),
           _.constant(
-            _.map(slots.default?.(), (node: any) => <ElRadioButton {...node.props} v-slots={node.children} />),
+            _.map(slots.default?.(), (node: any) => <ElRadioButton {..._.omit(node.props, 'ref')} v-slots={node.children} />),
           ),
         ],
         [
           _.matches('border'),
           _.constant(
-            _.map(slots.default?.(), (node: any) => <ElRadio {...node.props} v-slots={node.children} border />),
+            _.map(slots.default?.(), (node: any) => (
+              <ElRadio {..._.omit(node.props, 'ref')} v-slots={node.children} border />
+            )),
           ),
         ],
         [_.stubTrue, slots.default],

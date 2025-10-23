@@ -26,17 +26,20 @@ namespace nasl.ui {
   }
 
   export class ElBreadcrumbOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '分隔符',
-      description: '分隔符',
+      description: '面包屑项之间的分隔符',
+      docDescription: '设置面包屑项之间的分隔符文本。默认为"/"，可以自定义为其他符号如">"、"-"等。',
       setter: { concept: 'InputSetter' },
     })
     separator: nasl.core.String = '/';
 
     @Prop({
       title: '分隔符图标',
-      description: '分隔符图标',
+      description: '使用图标作为分隔符',
+      docDescription: '设置使用图标作为分隔符，优先级高于文本分隔符。可以从图标库中选择合适的图标。',
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
@@ -48,7 +51,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '自动生成',
-      description: '自动生成',
+      description: '是否自动生成面包屑',
+      docDescription: '开启后，会根据当前路由自动生成面包屑导航。关闭后，需要手动添加面包屑项。',
       setter: { concept: 'SwitchSetter' },
     })
     auto: nasl.core.Boolean = false;

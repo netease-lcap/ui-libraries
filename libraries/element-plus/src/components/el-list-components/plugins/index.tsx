@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import _ from 'lodash';
+import { type Ref } from 'vue';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-import { useControllableValue, useMemo, useCallback } from '@/plugins/hooks';
+import { useControllableValue, useMemo, useCallback, useRef, useEffect } from '@/plugins/hooks';
 import { ElPagination } from '@/index';
 import { useRequestDataSource, useHandleMapField } from '@/plugins/common/dataSource';
 import { addClass } from '@/utils';
@@ -16,6 +17,18 @@ const formatResult = _.cond([
   total: number;
   pageLocal?: boolean;
 };
+const loadMoreFormatResult = (pagination: 'autoMore' | 'page' | 'none') => {
+  return _.match(pagination)
+    .with('autoMore', () => (data, resultData) => {
+      return {
+        list: [..._.get(resultData, 'list', []), ..._.get(data, 'list', [])],
+        total: data.total,
+        pageLocal: true,
+      };
+    })
+    .with('page', () => (data) => data)
+    .otherwise(() => (data) => data);
+};
 const listComponentsBasicAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElListComponentsOptions<any, any, any, any, any>,
   object
@@ -25,15 +38,17 @@ export default listComponentsBasicAccumulate
   .addPlugin({
     name: 'handleInitRender',
     handle: (props) => {
+      const target = useRef(null);
       const render = useCallback((props, { attrs, slots }) => {
         return (
-          <div {...attrs} {...props}>
+          <div ref={target} {...attrs} {...props}>
             {slots.default?.()}
           </div>
         );
       }, []);
       return {
         render,
+        target,
       };
     },
   })
@@ -125,7 +140,7 @@ export default listComponentsBasicAccumulate
     handle(props) {
       const dataSource = props.get('dataSource');
       const currentPage = props.get('currentPage');
-      const pagination = props.get('pagination');
+      const pagination = props.get('pagination', 'none');
       const pageSize = props.get('pageSize');
       const pageProps = props.get('pageProps');
       const selection = props.get('selection');
@@ -135,17 +150,17 @@ export default listComponentsBasicAccumulate
       const onClick = props.get('clickFn');
       const valueField = props.get('idField') || 'value';
       const textField = props.get('textField') || 'label';
-      const defaultParams = [{ currentPage, pageSize, pagination }];
+      const defaultParams = [{ currentPage, pageSize, pagination: pagination !== 'none' }];
       const {
         data: resultData = { list: [], total: 0 },
         run,
         loading,
       } = useRequestDataSource(dataSource, {
         defaultParams,
-        formatResult,
+        formatResult: (data, resultData) => loadMoreFormatResult(pagination)(formatResult(data), resultData),
       });
       const reload = (params) => {
-        run({ currentPage, pageSize, pagination, ...params });
+        run({ currentPage, pageSize, pagination: pagination !== 'none', ...params });
       };
       const data = useHandleMapField({
         valueField,
@@ -194,7 +209,6 @@ export default listComponentsBasicAccumulate
     handle(props) {
       const pagination = props.get('pagination');
       const pageProps = props.get('pageProps');
-      const total = props.get('total');
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
       const onPageChange = props.get('onPageChange', () => {});
@@ -203,7 +217,6 @@ export default listComponentsBasicAccumulate
         pageProps: {
           ...pageProps,
           layout,
-          total,
           onPageChange,
         },
         pagination,
@@ -218,7 +231,7 @@ export default listComponentsBasicAccumulate
         return (
           <div style={{ ...props.style, display: 'flex', flexDirection: 'column' }}>
             <Component {...props} {...attrs} v-slots={slots} />
-            {props.pagination && (
+            {props.pagination === 'page' && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
                 <ElPagination {...props.pageProps} total={props.pageProps.total} />
               </div>
@@ -228,6 +241,38 @@ export default listComponentsBasicAccumulate
       }, []);
       return {
         render,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleinfiniteScroll',
+    handle(props) {
+      const target = props.get('target') as unknown as Ref<Element>;
+      const setCurrentPage = props.get('setCurrentPage');
+      const currentPage = props.get('currentPage');
+      const currentPageRef = useRef(currentPage);
+      currentPageRef.value = currentPage;
+      const pagination = props.get('pagination');
+      const className = props.get('class');
+      useEffect(() => {
+        if (!_.isElement(target.value) || pagination !== 'autoMore') {
+          return () => {};
+        }
+        const scrollHandler = () => {
+          const { scrollHeight, clientHeight, scrollTop } = target.value;
+          if (scrollHeight - scrollTop - clientHeight <= 50) {
+            setCurrentPage?.(currentPageRef.value + 1);
+          }
+        };
+        target.value?.addEventListener('scroll', scrollHandler);
+        return () => {
+          target.value?.removeEventListener('scroll', scrollHandler);
+        };
+      }, [pagination]);
+      return {
+        class: addClass(className, {
+          'el-list-components-infinite-scroll': pagination === 'autoMore',
+        }),
       };
     },
   })
@@ -257,7 +302,6 @@ export default listComponentsBasicAccumulate
           }),
         [classNameProps, equalWidth],
       );
-
       return {
         style,
         class: className,

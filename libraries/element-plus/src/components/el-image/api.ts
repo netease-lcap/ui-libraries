@@ -28,18 +28,40 @@ namespace nasl.ui {
   }
 
   export class ElImageOptions extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '图片地址',
-      description: '图片源，同原生',
+      description: '图片的URL地址',
+      docDescription: '设置要显示的图片URL地址，支持相对路径和绝对路径。',
       setter: { concept: 'ImageSetter' },
     })
     src: nasl.core.String = '';
 
     @Prop({
+      group: '数据属性',
+      title: '预览列表',
+      description: '预览图片的URL列表',
+      docDescription: '设置开启图片预览功能后的预览图片URL列表，多个URL用逗号分隔。',
+      setter: { concept: 'InputSetter', autoClear: true },
+    })
+    previewSrcList: nasl.core.String = '';
+
+    @Prop({
+      group: '数据属性',
+      title: '初始索引',
+      description: '预览时的初始图片索引',
+      docDescription: '设置打开预览时显示的初始图片索引值，从0开始计数。',
+      setter: { concept: 'NumberInputSetter', min: 0 },
+    })
+    initialIndex: nasl.core.String | nasl.core.Decimal;
+
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
+    @Prop({
       group: '主要属性',
-      title: '如何适应容器框的fit选项',
-      description: '确定图片如何适应容器框，同原生 [object-fit]',
+      title: '适应方式',
+      description: '图片适应容器的方式',
+      docDescription: '控制图片如何适应容器。拉伸：拉伸填满；适应：保持比例适应；填充：保持比例填充；原尺寸：原始大小；适应（小图）：小于容器时原尺寸。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -54,26 +76,12 @@ namespace nasl.ui {
     })
     fit: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down' | '' = '';
 
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
-      group: '主要属性',
-      title: '图片预览的初始图片Index值',
-      description: '图片预览初始图片index',
-      setter: { concept: 'NumberInputSetter', min: 0 },
-    })
-    initialIndex: nasl.core.String | nasl.core.Decimal;
-
-    @Prop({
-      group: '主要属性',
-      title: '开启图片预览功能',
-      description: '开启图片预览功能,用逗号分隔',
-      setter: { concept: 'InputSetter', autoClear: true },
-    })
-    previewSrcList: nasl.core.String = '';
-
-    @Prop({
-      group: '主要属性',
-      title: '点击遮罩关闭预览 ',
-      description: '控制点击遮罩层是否关闭预览弹窗',
+      group: '交互属性',
+      title: '点击遮罩关闭',
+      description: '点击遮罩层是否关闭预览',
+      docDescription: '开启后，用户可以点击背景遮罩层来关闭图片预览。',
       setter: { concept: 'SwitchSetter' },
     })
     hideOnClickModal: nasl.core.Boolean = false;

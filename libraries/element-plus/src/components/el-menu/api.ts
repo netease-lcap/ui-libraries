@@ -73,10 +73,57 @@ namespace nasl.ui {
   }
 
   export class ElMenuOptions<T, V> extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
+    @Prop({
+      group: '数据属性',
+      title: '数据源',
+      description: '菜单的数据来源',
+      docDescription: '设置菜单的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      designerValue: [{}, {}, {}],
+    })
+    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+
+    @Prop({
+      group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构类型',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示说明。',
+    })
+    dataSchema: T;
+
+    @Prop({
+      group: '数据属性',
+      title: '值字段',
+      description: '用于标识菜单项的唯一值字段',
+      docDescription: '集合的元素类型中，用于标识菜单项唯一值的属性名称，支持自定义变更。',
+      setter: { concept: 'PropertySelectSetter' },
+    })
+    valueField: (item: T) => V;
+
+    @Prop({
+      group: '数据属性',
+      title: '文本字段',
+      description: '用于显示菜单项文本的字段',
+      docDescription: '集合的元素类型中，用于显示菜单项文本的属性名称，支持自定义变更。',
+      setter: { concept: 'PropertySelectSetter' },
+    })
+    textField: (item: T) => any;
+
+    @Prop({
+      group: '数据属性',
+      title: '父级字段',
+      description: '用于标识父级菜单项的字段',
+      docDescription: '如果数据源是平铺结构，需要指定父级字段来构建树形菜单结构。',
+      setter: { concept: 'PropertySelectSetter' },
+    })
+    parentField: (item: T) => V;
+
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop<ElMenuOptions<T, V>, 'mode'>({
       group: '主要属性',
-      title: '模式',
-      description: '模式',
+      title: '菜单模式',
+      description: '选择菜单的布局模式',
+      docDescription: '控制菜单的布局方向。水平：菜单项水平排列，适用于顶部导航；垂直：菜单项垂直排列，适用于侧边导航。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '水平' }, { title: '垂直' }],
@@ -90,51 +137,11 @@ namespace nasl.ui {
     })
     mode: 'horizontal' | 'vertical' = 'vertical';
 
-    @Prop({
-      group: '数据属性',
-      title: '数据源',
-      description: '树数据',
-      designerValue: [{}, {}, {}],
-    })
-    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
-
-    @Prop({
-      group: '数据属性',
-      title: '数据类型',
-      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
-    })
-    dataSchema: T;
-
-    @Prop({
-      group: '数据属性',
-      title: '值字段',
-      description: '值字段',
-      setter: { concept: 'PropertySelectSetter' },
-    })
-    valueField: (item: T) => V;
-
-    @Prop({
-      group: '数据属性',
-      title: '父级值字段',
-      description: '如果数据源是平铺结构，需要指定父级字段',
-      docDescription: '集合的元素类型中，用于标识父级字段的属性，支持自定义变更',
-      setter: { concept: 'PropertySelectSetter' },
-    })
-    parentField: (item: T) => V;
-
-    @Prop({
-      group: '数据属性',
-      title: '文本字段',
-      description: '集合的元素类型中，用于显示文本的属性名称',
-      setter: { concept: 'PropertySelectSetter' },
-    })
-    textField: (item: T) => any;
-
     @Prop<ElMenuOptions<T, V>, 'collapse'>({
       group: '主要属性',
       title: '折叠状态',
-      description: '是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）',
+      description: '是否折叠收起菜单',
+      docDescription: '开启后，菜单会折叠收起，只显示图标。仅在垂直模式下可用，适用于侧边栏导航。',
       setter: { concept: 'SwitchSetter' },
       if: (_) => _.mode === 'vertical',
     })
@@ -142,48 +149,45 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '是否使用 vue-router 的模式',
-      description: '是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转',
+      title: '折叠动画',
+      description: '是否开启折叠展开动画',
+      docDescription: '开启后，菜单折叠和展开时会显示平滑的动画效果，提升用户体验。',
       setter: { concept: 'SwitchSetter' },
     })
-    router: nasl.core.Boolean = false;
-    
-    @Prop({
-      group: '主要属性',
-      title: '自动路由',
-      description: '是否启用自动路由，启用后会在激活导航时以 index 作为 path 进行路由跳转',
-      setter: { concept: 'SwitchSetter' },
-    })
-    auto: nasl.core.Boolean = true;
+    collapseTransition: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
-      title: '当前激活菜单的标识',
-      description: '当前激活菜单的 标识',
+      title: '激活菜单',
+      description: '当前激活的菜单项标识',
+      docDescription: '设置当前激活的菜单项标识，用于高亮显示当前选中的菜单项。',
       setter: { concept: 'InputSetter', autoClear: true },
     })
     defaultActive: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: '当前打开的子菜单的标识的数组',
-      description: '当前打开的子菜单的标识的数组',
+      title: '默认展开',
+      description: '默认展开的子菜单标识数组',
+      docDescription: '设置默认展开的子菜单标识数组，用于控制哪些子菜单在初始化时处于展开状态。',
       setter: { concept: 'InputSetter' },
     })
     defaultOpeneds: nasl.collection.List<nasl.core.String>;
 
     @Prop({
       group: '主要属性',
-      title: '是否只保持一个子菜单的展开',
-      description: '是否只保持一个子菜单的展开',
+      title: '唯一展开',
+      description: '是否只保持一个子菜单展开',
+      docDescription: '开启后，同时只能有一个子菜单处于展开状态，展开新的子菜单时会自动收起其他已展开的子菜单。',
       setter: { concept: 'SwitchSetter' },
     })
     uniqueOpened: nasl.core.Boolean = false;
 
     @Prop<ElMenuOptions<T, V>, 'menuTrigger'>({
       group: '主要属性',
-      title: '子菜单打开的触发方式',
-      description: '子菜单打开的触发方式(只在 mode 为 horizontal 时有效)',
+      title: '触发方式',
+      description: '子菜单展开的触发方式',
+      docDescription: '控制子菜单展开的触发方式。鼠标悬停：鼠标悬停时展开；鼠标点击：鼠标点击时展开。仅在水平模式下有效。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '鼠标悬停时' }, { title: '鼠标点击时' }],
@@ -192,13 +196,24 @@ namespace nasl.ui {
     })
     menuTrigger: 'hover' | 'click' = 'hover';
 
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
-      group: '主要属性',
-      title: '是否开启折叠动画',
-      description: '是否开启折叠动画',
+      group: '交互属性',
+      title: '路由模式',
+      description: '是否启用路由模式',
+      docDescription: '开启后，菜单会使用vue-router模式，激活菜单时会以index作为path进行路由跳转。',
       setter: { concept: 'SwitchSetter' },
     })
-    collapseTransition: nasl.core.Boolean = true;
+    router: nasl.core.Boolean = false;
+    
+    @Prop({
+      group: '交互属性',
+      title: '自动路由',
+      description: '是否启用自动路由跳转',
+      docDescription: '开启后，激活菜单时会自动进行路由跳转，无需手动处理路由逻辑。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    auto: nasl.core.Boolean = true;
 
     @Event({
       title: '菜单激活时',

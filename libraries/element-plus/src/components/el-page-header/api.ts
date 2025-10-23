@@ -34,26 +34,30 @@ namespace nasl.ui {
   }
 
   export class ElPageHeaderOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '展示面包屑页头区域',
-      description: '您可以通过添加插槽 breadcrumb 来设置面包屑路由导航',
+      title: '显示面包屑',
+      description: '是否显示面包屑导航区域',
+      docDescription: '开启后，页头顶部会显示面包屑导航区域。可以通过插槽自定义面包屑内容。',
       setter: { concept: 'SwitchSetter' },
     })
     showBreadcrumb: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
-      title: '展示额外操作区域',
-      description: '头部可能会变得很复杂，您可以在头部添加更多的区块，以允许丰富的交互。',
+      title: '显示操作区',
+      description: '是否显示额外操作区域',
+      docDescription: '开启后，页头右侧会显示额外操作区域，可以添加按钮等交互元素。',
       setter: { concept: 'SwitchSetter' },
     })
     showExtra: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
-      title: '展示主要内容区域',
-      description: '让页头显示一些协同响应内容',
+      title: '显示内容区',
+      description: '是否显示主要内容区域',
+      docDescription: '开启后，页头下方会显示主要内容区域，用于展示协同响应的内容。',
       setter: { concept: 'SwitchSetter' },
     })
     showMainContent: nasl.core.Boolean = false;

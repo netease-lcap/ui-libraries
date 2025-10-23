@@ -21,10 +21,20 @@ namespace nasl.ui {
   }
 
   export class ElLinkOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '类型',
-      description: '链接类型',
+      title: '链接文本',
+      description: '链接显示的文本内容',
+      docDescription: '设置链接显示的文本内容，用于向用户说明链接的目标。',
+    })
+    text: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '链接类型',
+      description: '选择链接的视觉类型',
+      docDescription: '控制链接的视觉样式和主题色。默认：标准链接；主要：强调链接；成功：绿色主题；警告：橙色主题；危险：红色主题；信息：蓝色主题。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -39,10 +49,12 @@ namespace nasl.ui {
     })
     type: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' = 'default';
 
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
       group: '交互属性',
-      title: '链接类型',
-      docDescription: '支持页面跳转、普通链接、下载链接',
+      title: '跳转类型',
+      description: '选择链接的跳转类型',
+      docDescription: '控制链接的跳转方式。页面跳转：跳转到指定页面；下载链接：触发文件下载。',
       bindHide: true,
       setter: {
         concept: 'EnumSelectSetter',
@@ -51,29 +63,25 @@ namespace nasl.ui {
     })
     linkType: 'destination' | 'download' = 'destination';
 
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({
-      group: '主要属性',
-      title: '文本',
-      description: '显示文本内容',
-      docDescription: '显示的文本内容',
-    })
-    text: nasl.core.String;
-
-    @Prop({
-      group: '样式属性',
-      title: '下划线',
-      description: '是否有下划线',
-      setter: { concept: 'SwitchSetter' },
-    })
-    underline: nasl.core.Boolean = true;
-
-    @Prop({
-      group: '主要属性',
-      title: '禁用',
-      description: '是否禁用状态',
+      group: '状态属性',
+      title: '禁用状态',
+      description: '是否禁用链接',
+      docDescription: '开启后，链接将变为禁用状态，用户无法点击。禁用状态下链接会显示为灰色。',
       setter: { concept: 'SwitchSetter' },
     })
     disabled: nasl.core.Boolean = false;
+
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
+    @Prop({
+      group: '样式属性',
+      title: '显示下划线',
+      description: '是否显示文本下划线',
+      docDescription: '开启后，链接文本下方会显示下划线。关闭后不显示下划线，更简洁。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    underline: nasl.core.Boolean = true;
 
     @Prop({
       group: '交互属性',

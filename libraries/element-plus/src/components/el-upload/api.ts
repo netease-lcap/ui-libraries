@@ -72,46 +72,26 @@ namespace nasl.ui {
   }
 
   export class ElUploadOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '接受上传的文件类型',
-      description: '接受上传的文件类型',
-      setter: { concept: 'InputSetter' },
-    })
-    accept: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '上传地址',
-      description: '请求URL',
-      setter: { concept: 'InputSetter' },
-    })
-    action: nasl.core.String = '/upload';
-
-
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
-      title: '值',
-      description: '当前文件列表',
+      title: '文件列表',
+      description: '当前上传的文件列表',
+      docDescription: '绑定当前上传的文件列表，支持双向绑定。可以获取已上传文件的详细信息。',
       sync: true,
-      docDescription: '当前的文件列表',
     })
     modelValue: nasl.core.String;
 
     @Prop({
       group: '数据属性',
-      title: '转换器',
-      description:
-        '将选中的值以选择的符号作为连接符，转为字符串格式；选择“json”则转为JSON字符串格式。',
+      title: '数据转换',
+      description: '文件列表的数据转换格式',
+      docDescription: '控制文件列表的数据格式。JSON：转换为JSON字符串格式；URL字符串：转换为URL字符串格式。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          {
-            title: 'JSON',
-          },
-          {
-            title: 'URL字符串',
-          },
+          { title: 'JSON' },
+          { title: 'URL字符串' },
         ],
       },
     })
@@ -119,34 +99,26 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: 'URL 字段',
-      description: '请求返回的 URL 字段名',
-      docDescription: '请求返回的URL字段名',
+      title: 'URL字段',
+      description: '服务器返回的URL字段名',
+      docDescription: '设置服务器返回的URL字段名，用于从响应中提取文件访问地址。',
     })
     urlField: nasl.core.String = 'filePath';
 
-
     @Prop({
       group: '数据属性',
-      title: '上传的文件字段',
-      description: '上传的文件字段名，后端需要这个字段获取',
+      title: '文件字段名',
+      description: '上传时的文件字段名',
+      docDescription: '设置上传时的文件字段名，后端需要通过此字段名获取上传的文件。',
       setter: { concept: 'InputSetter' },
     })
     name: nasl.core.String = 'file';
 
     @Prop({
-      group: '主要属性',
-      title: '请求头',
-      description: '设置上传的请求头部',
-      setter: { concept: 'InputSetter' },
-    })
-    headers: object;
-
-    @Prop({
       group: '数据属性',
-      title: 'HTTP 请求类型',
-      description:
-        'HTTP 请求类型。可选项：POST/GET/PUT/OPTIONS/PATCH',
+      title: '请求方法',
+      description: 'HTTP请求方法',
+      docDescription: '设置上传请求的HTTP方法。POST：标准上传方法；GET：获取文件；PUT：更新文件；OPTIONS：预检请求；PATCH：部分更新。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -171,57 +143,74 @@ namespace nasl.ui {
       | 'patch' = 'POST';
 
     @Prop({
-      group: '主要属性',
-      title: '启用压缩',
-      description:
-        '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
-      docDescription:
-        '启用压缩后上传的文件按压缩规则进行压缩后上传，压缩规则可在自定义配置参数管理',
-      setter: {
-        concept: 'SwitchSetter',
-      },
+      group: '数据属性',
+      title: '携带Cookie',
+      description: '上传请求时是否携带Cookie',
+      docDescription: '开启后，上传请求会携带浏览器的Cookie信息，用于身份验证等场景。',
+      setter: { concept: 'SwitchSetter' },
     })
-    lcapIsCompress: nasl.core.Boolean;
+    withCredentials: nasl.core.Boolean = false;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '源地址访问',
-      description: '开启后支持通过文件存储源地址访问文件',
-      docDescription: '开启后支持通过文件存储源地址访问文件',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    viaOriginURL: nasl.core.Boolean;
-
-    @Prop({
-      group: '主要属性',
-      title: '上传时附带的额外参数',
-      description: '上传时附带的额外参数{key:value}',
+      title: '上传地址',
+      description: '文件上传的服务器地址',
+      docDescription: '设置文件上传的服务器地址URL，支持相对路径和绝对路径。',
       setter: { concept: 'InputSetter' },
     })
-    data: nasl.core.String;
+    action: nasl.core.String = '/upload';
 
     @Prop({
       group: '主要属性',
-      title: '是否支持多选文件',
-      description: '是否支持多选文件',
+      title: '文件类型',
+      description: '允许上传的文件类型',
+      docDescription: '设置允许上传的文件类型，支持MIME类型和文件扩展名。例如：image/*、.jpg,.png等。',
+      setter: { concept: 'InputSetter' },
+    })
+    accept: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '多选文件',
+      description: '是否支持同时选择多个文件',
+      docDescription: '开启后，用户可以同时选择多个文件进行上传。关闭后，每次只能选择一个文件。',
       setter: { concept: 'SwitchSetter' },
     })
     multiple: nasl.core.Boolean = false;
 
     @Prop({
-      group: '数据属性',
-      title: '是否携带Cookie',
-      description: '上传请求时是否携带 cookie',
+      group: '主要属性',
+      title: '拖拽上传',
+      description: '是否启用拖拽上传功能',
+      docDescription: '开启后，用户可以通过拖拽文件到上传区域来上传文件，提供更便捷的操作方式。',
       setter: { concept: 'SwitchSetter' },
     })
-    withCredentials: nasl.core.Boolean = false;
+    drag: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示文件列表',
+      description: '是否显示已上传的文件列表',
+      docDescription: '开启后，会显示已上传文件的列表，包括文件名、大小、状态等信息。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showFileList: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示提示',
+      description: '是否显示上传提示信息',
+      docDescription: '开启后，会显示上传相关的提示信息，帮助用户了解上传规则和操作方式。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    hasTip: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
       title: '文件访问策略',
-      docDescription: '支持任何人可访问和用户登录后可访问两种方式',
+      description: '设置文件的访问权限',
+      docDescription: '控制上传文件的访问权限。任何人可访问：文件公开访问；用户登录后可访问：需要登录才能访问。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '任何人可访问' }, { title: '用户登录后可访问' }],
@@ -229,41 +218,63 @@ namespace nasl.ui {
     })
     access: 'public' | 'private';
 
-
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
-      group: '主要属性',
-      title: '文件数量限制',
-      description: '文件数量限制',
-      setter: { concept: 'NumberInputSetter' },
+      group: '交互属性',
+      title: '请求头',
+      description: '上传请求的头部信息',
+      docDescription: '设置上传请求的HTTP头部信息，用于传递认证信息、自定义参数等。',
+      setter: { concept: 'InputSetter' },
     })
-    limit: nasl.core.Decimal;
-
+    headers: object;
 
     @Prop({
-      group: '主要属性',
-      title: '文件大小限制',
-      description: '文件大小限制,单位为 MB,为空则不限制',
-      setter: { concept: 'NumberInputSetter' },
+      group: '交互属性',
+      title: '额外参数',
+      description: '上传时附带的额外参数',
+      docDescription: '设置上传时附带的额外参数，以key:value格式传递，用于向服务器发送自定义数据。',
+      setter: { concept: 'InputSetter' },
     })
-    fileSizeLimit: nasl.core.Decimal;
+    data: nasl.core.String;
 
     @Prop({
-      group: '主要属性',
+      group: '交互属性',
+      title: '文件压缩',
+      description: '是否启用文件压缩上传',
+      docDescription: '开启后，上传的文件会按照配置的压缩规则进行压缩后再上传，可以节省存储空间和传输时间。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    lcapIsCompress: nasl.core.Boolean;
+
+    @Prop({
+      group: '交互属性',
+      title: '源地址访问',
+      description: '是否支持通过源地址访问文件',
+      docDescription: '开启后，支持通过文件存储的源地址直接访问文件，提供更灵活的文件访问方式。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    viaOriginURL: nasl.core.Boolean;
+
+    @Prop({
+      group: '交互属性',
       title: '文件有效期',
-      description: '是否开启文件有效期控制',
-      docDescription: '支持配置文件自动清理，开启后可自定义上传后有效天数',
+      description: '是否启用文件有效期控制',
+      docDescription: '开启后，可以设置文件的有效期，过期文件会自动清理，节省存储空间。',
       setter: {
         concept: 'SwitchSetter',
       },
     })
     ttl: nasl.core.Boolean;
 
-
     @Prop<ElUploadOptions, 'ttlValue'>({
-      group: '主要属性',
-      title: '上传后有效天数',
+      group: '交互属性',
+      title: '有效期天数',
       description: '文件上传后的有效期天数',
-      docDescription: '开启文件有效期开关后显示，可配置文件自动清理的时间',
+      docDescription: '设置文件上传后的有效期天数，超过此时间文件会被自动清理。仅在开启文件有效期时有效。',
       setter: {
         concept: 'NumberInputSetter',
       },
@@ -271,29 +282,24 @@ namespace nasl.ui {
     })
     ttlValue: nasl.core.Decimal;
 
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
     @Prop({
-      group: '主要属性',
-      title: '是否启用拖拽上传',
-      description: '是否启用拖拽上传',
-      setter: { concept: 'SwitchSetter' },
+      group: '样式属性',
+      title: '文件数量限制',
+      description: '限制上传文件的最大数量',
+      docDescription: '设置允许上传文件的最大数量，超过此数量时会阻止继续上传。',
+      setter: { concept: 'NumberInputSetter' },
     })
-    drag: nasl.core.Boolean = false;
+    limit: nasl.core.Decimal;
 
     @Prop({
-      group: '主要属性',
-      title: '是否显示上传提示',
-      description: '是否显示上传提示',
-      setter: { concept: 'SwitchSetter' },
+      group: '样式属性',
+      title: '文件大小限制',
+      description: '限制单个文件的最大大小',
+      docDescription: '设置单个文件的最大大小限制，单位为MB。超过此大小的文件会被拒绝上传。',
+      setter: { concept: 'NumberInputSetter' },
     })
-    hasTip: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '是否显示已上传文件列表',
-      description: '是否显示已上传文件列表',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showFileList: nasl.core.Boolean = true;
+    fileSizeLimit: nasl.core.Decimal;
 
     @Prop({
       group: '主要属性',

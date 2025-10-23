@@ -2,7 +2,11 @@
   /* 基础布局：所有元素横向排列 */
   display: flex;
   flex-wrap: wrap;
+  overflow: auto;
   gap: var(--row-gap, 0) var(--column-gap, 0);
+  .el-list-components-infinite-scroll {
+    height: 200px;
+  }
   .el-list-components__frag {
     min-width: calc((100% / var(--el-list-components-column)) - var(--column-gap, 0));
     width: auto;

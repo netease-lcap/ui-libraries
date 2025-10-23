@@ -113,7 +113,7 @@ export { ElDivider, ElDividerRegister, ElDividerPlus } from './el-divider';
 export { ElTimeline, ElTimelineItem, ElTimelineRegister, ElTimelineItemRegister, ElTimelinePlus } from './el-timeline';
 export { ElWatermark, ElWatermarkRegister, ElWatermarkPlus } from './el-watermark';
 export { ElMultiLayout, ElMultiLayoutItem, ElMultiLayoutRegister } from './el-multi-layout';
-export { ElListComponents, ElListComponentsRegister , ElListComponentsPlus} from './el-list-components';
+export { ElListComponents, ElListComponentsRegister } from './el-list-components';
 // import elementPlus from 'element-plus';
 // export { elementPlus };
 
