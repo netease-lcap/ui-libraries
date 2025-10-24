@@ -49,7 +49,7 @@ export function genCreateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
     viewDirectoryEntity: null,
   };
   if (likeComponent.getDirectoryUniqueName) {
-    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(firstLowerCase(entity.name));
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(entity.name?.toLowerCase());
   }
 
   // 收集所有和本实体关联的实体
