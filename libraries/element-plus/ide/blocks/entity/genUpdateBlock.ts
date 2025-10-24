@@ -49,7 +49,7 @@ export function genUpdateBlock(entity: naslTypes.Entity, refElement: naslTypes.V
     viewDirectoryEntity: null,
   };
   if (likeComponent.getDirectoryUniqueName) {
-    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(firstLowerCase(entity.name));
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(entity.name?.toLowerCase());
   }
   const idProperties = getAllEntityPromaryKeyProperty(entity);
   let viewParamIds: Array<{name:string, type: string}> = [];

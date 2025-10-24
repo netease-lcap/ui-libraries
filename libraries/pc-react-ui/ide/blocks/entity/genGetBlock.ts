@@ -36,7 +36,7 @@ export function genGetBlock(entity: naslTypes.Entity, refElement: naslTypes.View
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
   nameGroup.viewLogicLoad = likeComponent.getLogicUniqueName('load');
   if (likeComponent.getDirectoryUniqueName) {
-    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(firstLowerCase(entity.name));
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(entity.name?.toLowerCase());
   }
   const idProperties = getAllEntityPromaryKeyProperty(entity);
   let viewParamIds: Array<{name:string, type: string}> = [];
