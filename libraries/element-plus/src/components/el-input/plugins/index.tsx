@@ -56,7 +56,7 @@ export default InputBasicAccumulate.addAccumulate(idePlugin)
       const prepend = showPrepend ? { prepend: prependSlot() } : { prepend: undefined };
 
       return {
-        slots: _.assign(slots, append, prepend),
+        slots: _.assign({}, slots, append, prepend),
       };
     },
   })

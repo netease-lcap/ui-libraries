@@ -299,7 +299,7 @@ export function useControllableValue<T = any>(
   ];
 }
 
-const hookObject = {
+const hookMap = {
   useState,
   useRef,
   useEffect,
@@ -325,7 +325,7 @@ export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap)
         }
       : fiberMap.get(handleFn);
     fiberNode.setCurrentFiber(fiber, isMount);
-    const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookObject)), ImmutableState, ImmutableProps);
+    const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookMap)), ImmutableState, ImmutableProps);
     fiberMap.set(handleFn, fiber);
     return ImmutableState.merge(result);
   }, ImmutableState);

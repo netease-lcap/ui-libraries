@@ -2,7 +2,7 @@
 <template>
     <div>
       <div class="block">
-        <el-radio-group direction="vertical" :value.sync="checkedValue" @change="onChange">
+        <el-radio-group direction="vertical"  :value.sync="checkedValue" @change="onChange">
             <el-radio border value="1" allow-uncheck>选项一</el-radio>
             <el-radio border value="2">选项二</el-radio>
             <el-radio border value="3">选项三</el-radio>

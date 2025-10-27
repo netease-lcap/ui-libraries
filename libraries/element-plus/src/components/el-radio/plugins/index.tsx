@@ -45,15 +45,13 @@ export default RadioAccumulate.addAccumulate(idePlugin)
       const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
       const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
       const dataSourceSlots = useMemo(
-        () =>
-          _.isNil(dataConfig)
+        () => (_.isNil(dataConfig)
             ? {}
             : {
-                default: () =>
-                  _.map(dataSource, (item) => (
-                    <ElRadio {...item}>{slots.item ? slots.item({ item } as any) : item.label}</ElRadio>
+                default: () => _.map(dataSource, (item) => (
+                  <ElRadio {...item}>{slots.item ? slots.item({ item } as any) : item.label}</ElRadio>
                   )),
-              },
+              }),
         [dataSource, slots, dataConfig],
       );
 
@@ -75,7 +73,9 @@ export default RadioAccumulate.addAccumulate(idePlugin)
         [
           _.matches('button'),
           _.constant(
-            _.map(slots.default?.(), (node: any) => <ElRadioButton {..._.omit(node.props, 'ref')} v-slots={node.children} />),
+            _.map(slots.default?.(), (node: any) => (
+              <ElRadioButton {..._.omit(node.props, 'ref')} v-slots={node.children} />
+            )),
           ),
         ],
         [

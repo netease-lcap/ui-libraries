@@ -36,7 +36,7 @@ export function useHandleMapField(filedInfo: {
           _.isUndefined,
         ),
       })),
-    [label, value, textField, valueField, dataSource],
+    [label, value, textField, valueField, dataSource, fieldsMap],
   );
 }
 

@@ -89,7 +89,7 @@ const getValueByList = (fileList: UploadFile[], converter: Converter, urlField: 
 };
 const getLcapTtl = _.cond([
   [_.conforms({ ttl: isNil, ttlValue: isNil }), () => ({})],
-  [_.conforms({ ttl: isNil, ttlValue: !isNil }), ({ ttlValue }) => ({ 'lcap-ttl': ttlValue })],
+  [_.conforms({ ttl: isNil, ttlValue: _.isNumber }), ({ ttlValue }) => ({ 'lcap-ttl': ttlValue })],
   [_.stubTrue, ({ ttl, ttlValue }) => ({ 'lcap-ttl': ttl ? ttlValue : -1 })],
 ]);
 export function removeValueByList(list: UploadFile[]) {

@@ -12,7 +12,7 @@ export default TagBasicAccumulate.addPlugin({
     const slots = props.get('slots');
     const deletePropsList = props.get($deletePropsList).concat(['text']);
     return {
-      slots: _.defaults(slots, {
+      slots: _.defaults({}, slots, {
         default: () => text,
       }),
       [$deletePropsList]: deletePropsList,
