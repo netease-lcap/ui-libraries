@@ -103,7 +103,7 @@ export default listComponentsBasicAccumulate
   .addPlugin({
     name: 'handleSelect',
     handle(props) {
-      const selection = props.get('selection');
+      const selection = props.get('selectionMode');
       const [value, setValue, valueProps] = useControllableValue(props);
       const classProps = props.get('class');
       const clearable = props.get('clearable');
@@ -143,7 +143,7 @@ export default listComponentsBasicAccumulate
       const pagination = props.get('pagination', 'none');
       const pageSize = props.get('pageSize');
       const pageProps = props.get('pageProps');
-      const selection = props.get('selection');
+      const selection = props.get('selectionMode');
       const ref = props.get('ref');
       const slots = props.get('slots');
       const value = props.get('value');

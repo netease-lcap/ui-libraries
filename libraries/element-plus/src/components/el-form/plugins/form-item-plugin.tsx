@@ -25,7 +25,7 @@ export default FormItemPluginAccumulate.addPlugin({
     );
     const rules = useMemo(() => {
       const ideRules = _.map(rulesProps, (item: any) => {
-          if (!item.validate) {
+          if (_.isFunction(item?.validate)) {
             if (_.isArray(item.trigger)) {
               return item;
             }
