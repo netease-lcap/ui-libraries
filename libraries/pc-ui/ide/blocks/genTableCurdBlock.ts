@@ -35,7 +35,7 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
   nameGroup.viewVariableFilter = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('filter'), nameGroup.viewVariableEntity);
   nameGroup.viewVariableIsUpdate = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('isUpdate'), nameGroup.viewVariableEntity);
   if (likeComponent.getDirectoryUniqueName) {
-    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(firstLowerCase(entity.name));
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(entity.name?.toLowerCase());
   }
   // 当前节点的currentName
   nameGroup.currentName = getCurrentName(refElement);

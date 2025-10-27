@@ -369,7 +369,7 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
   // 当前节点的currentName
   nameGroup.currentName = getCurrentName(refElement);
   if (likeComponent.getDirectoryUniqueName) {
-    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(firstLowerCase(entity.name));
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(entity.name?.toLowerCase());
   }
 
   // 收集所有和本实体关联的实体
