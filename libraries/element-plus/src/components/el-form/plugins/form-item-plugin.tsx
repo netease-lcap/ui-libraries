@@ -31,7 +31,7 @@ export default FormItemPluginAccumulate.addPlugin({
             }
             return {
               ...item,
-              trigger: trigger.split(','),
+              trigger: _.isString(item.trigger) ? item.trigger.split(',') : [trigger],
             };
           }
           return {
