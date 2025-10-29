@@ -4,42 +4,6 @@ import DialogBasicAccumulate from '../plugins/basic-plugins';
 import { $deletePropsList } from '@/plugins/constants';
 
 // Mock lodash
-vi.mock('lodash', () => ({
-  default: {
-    wrap: vi.fn(
-      (fn, wrapper) =>
-        (...args) =>
-          wrapper(fn, ...args),
-    ),
-    attempt: vi.fn((fn, ...args) => {
-      try {
-        return fn(...args);
-      } catch (error) {
-        return error;
-      }
-    }),
-    assign: vi.fn((target, ...sources) => Object.assign(target, ...sources)),
-    cond: vi.fn((conditions) => (value) => {
-      for (const [predicate, transform] of conditions) {
-        if (predicate(value)) {
-          return transform(value);
-        }
-      }
-      return value;
-    }),
-    isObject: vi.fn((value) => typeof value === 'object' && value !== null),
-    stubTrue: vi.fn(() => true),
-    isArray: vi.fn((value) => Array.isArray(value)),
-    mixin: vi.fn((obj) => {
-      const _ = {};
-      Object.assign(_, obj);
-      return _;
-    }),
-    bind: vi.fn((fn, context) => fn.bind(context)),
-    uniqueId: vi.fn((prefix) => `${prefix}123`),
-  },
-}));
-
 // Mock getPropsIcon
 vi.mock('@/plugins/common/icon', () => ({
   getPropsIcon: vi.fn(({ name }) => ({ iconName: name, iconType: 'icon' })),

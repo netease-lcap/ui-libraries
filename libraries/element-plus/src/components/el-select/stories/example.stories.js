@@ -160,6 +160,7 @@ export const Example3 = {
     template: `
     <el-select 
       data-nodepath="08aee5f1fb524428a44a7a0ccb7861bf" 
+      ref="add"
       data-enable-events="click" 
       noDataText="没有数据"
       key="component-08aee5f1fb524428a44a7a0ccb7861bf" 

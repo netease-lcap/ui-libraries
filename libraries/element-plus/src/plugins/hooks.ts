@@ -316,7 +316,7 @@ export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap)
   const updateQueen = fiberMap.get('updateQueen');
   const getState = fiberMap.get('getState');
   const { setValue } = getState() as any;
-  if (ImmutableState.get('data-ref-id') === compDebugId) {
+  if (ImmutableState?.get?.('data-ref-id') === compDebugId) {
     console.group('scheduler');
   }
   return pluginHooks?.reduce((ImmutableState, pluginHook) => {

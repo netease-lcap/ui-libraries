@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { merge } from 'lodash-unified';
 
 export const componentLog = (compDebugId: string | null, pluginHook: any, immutableState: any, result: any) => {
   if (!_.isString(compDebugId)) {
@@ -10,9 +9,9 @@ export const componentLog = (compDebugId: string | null, pluginHook: any, immuta
   }
   const name = _.isFunction(pluginHook) ? _.get(pluginHook, 'fnName') : _.get(pluginHook, 'name');
   console.groupCollapsed(name);
-  console.log('params', immutableState.toJS());
+  console.log('params', immutableState.delete('ref').toJS());
   console.log('result', result);
-  console.log('nextParams',immutableState.merge(result).toJS());
+  console.log('nextParams', immutableState.merge(result).delete('ref').toJS());
   console.groupEnd();
   return null;
 };
