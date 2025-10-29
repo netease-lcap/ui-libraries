@@ -40,7 +40,7 @@ export const Example1 = {
       };
     },
     template: `
-    <el-select v-model="activeName" :dataSource="list" descriptionField="value">
+    <el-select ref="add" v-model="activeName" :dataSource="list" descriptionField="value">
     
     </el-select>
 

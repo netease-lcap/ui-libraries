@@ -270,7 +270,7 @@ export const Example2 = {
     template: `
     
 <el-table
-ref="mytable"
+:ref="'affddd'"
 row-key="index"
 :dataSource="tableData"
 :pagination="true"

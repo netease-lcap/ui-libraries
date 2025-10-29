@@ -1,4 +1,5 @@
 import { PluginBase, DataSourceType } from '@/types';
+import _ from 'lodash';
 /**
  * 插件类型定义
  * 支持两种形式的插件：函数形式和对象形式
@@ -112,6 +113,7 @@ export class PluginAccumulateTypes<
     [key: string]: any;
   }): PluginAccumulateTypes<TPluginOptions, TPluginContext, TAccumulatedProps & TReturn> {
     // 存储插件，使用 const 泛型参数来自动推导字面量类型
+    _.set(plugin, 'handle.fnName', plugin.name);
     this.Plugin.push(plugin as any);
     return this as any;
   }

@@ -80,7 +80,7 @@ export default SelectBasicAccumulate.addPlugin({
     },
   })
   .addPlugin({
-    name: 'handle',
+    name: 'handleValueNotInData',
     handle(props) {
       const selectedValuesData = props.get('selectedValuesData');
       const data = props.get('data', []);

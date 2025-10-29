@@ -26,7 +26,7 @@ export {
 } from './el-form';
 // export { ElPagination } from 'element-plus';
 export { ElAbsoluteLayout, ElAbsoluteLayoutRegister } from './el-absolute-layout';
-export { ElRouterView, ElRouterViewRegister } from './el-router-view';
+export { ElRouterView } from './el-router-view';
 export { ElIframe } from './el-iframe';
 export { ElLink, ElLinkPlus, ElLinkRegister } from './el-link';
 export { ElButton, ElButtonPlus } from './el-button';

@@ -1,6 +1,11 @@
 import _ from 'lodash';
 import { onMounted, onUnmounted, ref, getCurrentInstance, type Ref } from 'vue';
 import { PluginBase } from '@/types';
+import { componentLog } from '@/utils/curry';
+
+const searchParamsStr = window.location.search; // 结果："?name=Alice&age=25&hobby=reading&hobby=hiking"
+const params = new URLSearchParams(searchParamsStr);
+const compDebugId = params.get('compDebugId'); // 单值参数："Alice"
 
 interface Hook {
   next: Hook;
@@ -103,7 +108,7 @@ export function useState<T = any>(initialstate?: T): [T, (value: T | ((prevState
   }
   const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
   const localSetValue = (value: T | ((prevState: T) => T)) => {
-  const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
+    const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
     hook.isSetValue = true;
     // TODO 判断是否相等
     // if (_.isEqual(value, state)) {
@@ -269,7 +274,7 @@ export function useControllableValue<T = any>(
   const defaultValueProps = props.get(defaultValuePropName);
   const unControlledInitialValue = defaultValueProps ?? defaultValue;
   const [stateValue, setStateValue] = useState<T>(unControlledInitialValue);
-  const triggerProps = props.get(trigger, () => {});
+  const triggerProps = props.get(trigger) || (() => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
   useEffect(() => {
     if (priorValue.value !== propsValue && isControlled) {
@@ -306,10 +311,14 @@ const hookMap = {
   useMemo,
   useCallback,
 };
+
 export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap) {
   const updateQueen = fiberMap.get('updateQueen');
   const getState = fiberMap.get('getState');
   const { setValue } = getState() as any;
+  if (ImmutableState.get('data-ref-id') === compDebugId) {
+    console.group('scheduler');
+  }
   return pluginHooks?.reduce((ImmutableState, pluginHook) => {
     const handleFn = _.isFunction(pluginHook) ? pluginHook : pluginHook.handle;
     const isMount = !fiberMap.has(handleFn);
@@ -327,6 +336,7 @@ export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap)
     fiberNode.setCurrentFiber(fiber, isMount);
     const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookMap)), ImmutableState, ImmutableProps);
     fiberMap.set(handleFn, fiber);
+    componentLog(compDebugId, handleFn, ImmutableState, result);
     return ImmutableState.merge(result);
   }, ImmutableState);
 }
