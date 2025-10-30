@@ -233,6 +233,17 @@ namespace nasl.ui {
         fileSize: nasl.core.Boolean = true;
 
         @Prop({
+          group: '高级属性',
+          title: '禁用文件上传',
+          description: '开启后，选择文件后将不会上传文件, 仅触发选择文件事件',
+          docDescription: '开启后，选择文件后将不会上传文件, 仅触发选择文件事件',
+          setter: {
+            concept: 'SwitchSetter',
+          },
+        })
+        disableUpload: nasl.core.Boolean = false;
+
+        @Prop({
             group: '高级属性',
             title: '请求 headers',
             docDescription: '请求头',
@@ -411,7 +422,7 @@ namespace nasl.ui {
             },
             bindOpen: true,
         })
-        checkFile: (file: File) => nasl.core.String;
+        checkFile: (file: nasl.io.File) => nasl.core.String;
 
         @Prop({
             group: '主要属性',
@@ -576,11 +587,19 @@ namespace nasl.ui {
         preview: nasl.core.Boolean = false;
 
         @Event({
+          title: '选择文件时',
+          description: '选择文件时触发'
+        })
+        onSelectFiles: (event: {
+            files: nasl.collection.List<nasl.io.File>;
+        }) => any;
+
+        @Event({
             title: '上传前',
             description: '上传前触发',
         })
         onBeforeUpload: (event: {
-            file: nasl.core.String;
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -588,8 +607,14 @@ namespace nasl.ui {
             description: '发送进度改变时触发，在上传进度条时使用',
         })
         onProgress: (event: {
-            item: File;
-            file: nasl.core.String;
+            item: {
+              status: nasl.core.String;
+              url: nasl.core.String;
+              name: nasl.core.String;
+              size: nasl.core.Integer;
+              type: nasl.core.String;
+            };
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -597,7 +622,7 @@ namespace nasl.ui {
             description: '文件数量超额时触发',
         })
         onCountExceed: (event: {
-            files: nasl.collection.List<File>;
+            files: nasl.collection.List<nasl.io.File>;
             value: {
                 url: nasl.core.String;
                 name: nasl.core.String;
@@ -616,7 +641,7 @@ namespace nasl.ui {
             size: nasl.core.Decimal | nasl.core.Integer;
             message: nasl.core.String;
             name: nasl.core.String;
-            file: File;
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -624,8 +649,14 @@ namespace nasl.ui {
             description: '上传成功时触发',
         })
         onSuccess: (event: {
-            item: File;
-            file: nasl.core.String;
+            item: {
+              status: nasl.core.String;
+              url: nasl.core.String;
+              name: nasl.core.String;
+              size: nasl.core.Integer;
+              type: nasl.core.String;
+            };
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -633,8 +664,14 @@ namespace nasl.ui {
             description: '上传报错时触发',
         })
         onError: (event: {
-            item: File;
-            file: nasl.core.String;
+            item: {
+              status: nasl.core.String;
+              url: nasl.core.String;
+              name: nasl.core.String;
+              size: nasl.core.Integer;
+              type: nasl.core.String;
+            };
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -646,7 +683,13 @@ namespace nasl.ui {
                 url: nasl.core.String;
                 name: nasl.core.String;
             },
-            item: File,
+            item: {
+              status: nasl.core.String;
+              url: nasl.core.String;
+              name: nasl.core.String;
+              size: nasl.core.Integer;
+              type: nasl.core.String;
+            },
             index: nasl.core.Integer;
         }) => any;
 

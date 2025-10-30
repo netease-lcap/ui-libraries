@@ -156,6 +156,7 @@ export default {
         listType: { type: String, default: 'text' },
         urlField: { type: String, default: 'url' },
         autoUpload: { type: Boolean, default: true },
+        disableUpload: { type: Boolean, default: false }, // 禁用文件上传
         draggable: { type: Boolean, default: false },
         pastable: { type: Boolean, default: false },
         showFileList: { type: Boolean, default: true },
@@ -455,7 +456,11 @@ export default {
                 }];
             }
 
-            if (!files)
+            this.$emit('select-files', {
+              files,
+            });
+
+            if (!files || this.disableUpload)
                 return;
             // 处理开启图片编辑器
             if (this.openCropper) {
