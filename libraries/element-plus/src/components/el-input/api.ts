@@ -278,19 +278,19 @@ namespace nasl.ui {
       title: '键盘按下时',
       description: '键盘按下时触发',
     })
-    onKeydown: (event: any) => any;
+    onKeydown: (event: KeyboardEvent) => any;
 
     @Event({
       title: '按下字符键时',
       description: '按下字符键时触发（keydown -> keypress -> keyup）',
     })
-    onKeypress: (event: any) => any;
+    onKeypress: (event: KeyboardEvent) => any;
 
     @Event({
       title: '键盘释放时',
       description: '释放键盘时触发',
     })
-    onKeyup: (event: any) => any;
+    onKeyup: (event: KeyboardEvent) => any;
 
     @Event({
       title: '鼠标移入时',

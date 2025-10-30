@@ -40,7 +40,7 @@ export function withFormItem(Component, name) {
       const provide = inject($provide) as Ref<FormItemProvide>;
       const {
         isInForm,
-        setValue,
+        setValue = () => {},
         value = valueRef,
         setFormitem,
         deleteFormitem,
