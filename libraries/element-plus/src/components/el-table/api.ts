@@ -412,6 +412,12 @@ namespace nasl.ui {
     })
     onScroll: (event: any) => any;
 
+    @Event({
+      title: '数据加载成功时触发',
+      description: '数据加载成功时触发',
+    })
+    onSuccess: () => any;
+
     @Slot({
       title: '表格列',
       description: '表格列',
@@ -444,16 +450,6 @@ namespace nasl.ui {
       forceUpdateWhenAttributeChange: true,
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
-      // selector: [
-      //   {
-      //     expression: 'this',
-      //     cssSelector: 'td',
-      //   },
-      //   {
-      //     expression: 'this.getElement(el=>el.slotTarget==="header")',
-      //     cssSelector: 'th',
-      //   },
-      // ],
 
       disableSlotAutoFill: [
         {

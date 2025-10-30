@@ -31,7 +31,6 @@ const TableAccumulate = new PluginAccumulateTypes<
     TableProps<any> &
     PaginationProps & {
       onBefore:(params: any) => void;
-      onSuccess: (data: any, params: any) => void;
       editTable: boolean;
     }
 >();

@@ -8,10 +8,7 @@ namespace nasl.ui {
       additionalAttribute: {
         autofocus: '"false"',
       },
-      // selector: {
-      //   expression: 'this',
-      //   cssSelector: '.el-input',
-      // },
+
       forceUpdateWhenAttributeChange: 'preview',
     },
   })
@@ -53,7 +50,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '输入类型',
       description: '选择输入框的类型和用途',
-      docDescription: '控制输入框的类型和用途。文本：普通文本输入；链接：URL输入；电话：电话号码输入；密码：密码输入；搜索：搜索框；多行文本：文本域。',
+      docDescription:
+        '控制输入框的类型和用途。文本：普通文本输入；链接：URL输入；电话：电话号码输入；密码：密码输入；搜索：搜索框；多行文本：文本域。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -75,6 +73,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '显示密码',
+      description: '是否显示密码',
+      docDescription: '开启后，输入框会显示密码',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.type === 'password',
+    })
+    showPassword: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '占位符',
       description: '输入框为空时显示的提示文本',
       docDescription: '设置输入框为空时显示的占位符文本，用于提示用户应该输入什么内容。',
@@ -86,7 +94,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '前缀图标',
       description: '输入框左侧显示的图标',
-      docDescription: '设置输入框左侧显示的图标，用于增强视觉识别或表示输入内容类型。支持从图标库中选择或使用自定义图标。',
+      docDescription:
+        '设置输入框左侧显示的图标，用于增强视觉识别或表示输入内容类型。支持从图标库中选择或使用自定义图标。',
       setter: {
         concept: 'IconSetter',
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
