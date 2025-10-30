@@ -591,7 +591,7 @@ namespace nasl.ui {
           description: '选择文件时触发'
         })
         onSelectFiles: (event: {
-            files: nasl.collection.List<File>;
+            files: nasl.collection.List<nasl.io.File>;
         }) => any;
 
         @Event({
@@ -622,7 +622,7 @@ namespace nasl.ui {
             description: '文件数量超额时触发',
         })
         onCountExceed: (event: {
-            files: nasl.collection.List<File>;
+            files: nasl.collection.List<nasl.io.File>;
             value: {
                 url: nasl.core.String;
                 name: nasl.core.String;
