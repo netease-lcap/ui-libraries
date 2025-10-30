@@ -126,7 +126,7 @@ export default RadioAccumulate.addAccumulate(idePlugin)
       const column = props.get('column');
       const style = props.get('style');
       return {
-        class: addClass(className, { 'el-radio-group-vertical': direction === 'vertical' }),
+        class: addClass(className, { 'el-radio-group-vertical': direction === 'vertical', 'cw-radio-group': true }),
         style: {
           ...style,
           'grid-template-columns': column ? `repeat(${column}, 1fr)` : 'auto-fill',

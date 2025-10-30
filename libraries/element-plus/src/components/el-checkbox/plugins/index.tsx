@@ -124,7 +124,10 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
       const column = props.get('column');
       const style = props.get('style');
       return {
-        class: addClass(className, { 'el-checkbox-group-vertical': direction === 'vertical' }),
+        class: addClass(className, {
+          'el-checkbox-group-vertical': direction === 'vertical',
+          'cw-checkbox-group': true,
+        }),
         style: {
           ...style,
           'grid-template-columns': column ? `repeat(${column}, 1fr)` : 'auto-fill',
