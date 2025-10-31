@@ -290,8 +290,9 @@ export default {
         itemVMs: {
             override: true,
             handler(itemVMs, oldVMs) {
-                if (this.data || this.dataSource)
-                    return;
+                // bug-3247506370986752: 数据列表组件，数据源为逻辑时，刷新数据列表，选中状态丢失
+                // if (this.data || this.dataSource)
+                //     return;
                 MComplex.watch.itemVMs.handler.call(this, itemVMs, oldVMs);
             },
         },
