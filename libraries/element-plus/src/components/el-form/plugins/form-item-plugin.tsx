@@ -25,21 +25,13 @@ export default FormItemPluginAccumulate.addPlugin({
     );
     const rules = useMemo(() => {
       const ideRules = _.map(rulesProps, (item: any) => {
-          if (_.isFunction(item?.validate)) {
-            if (_.isArray(item.trigger)) {
-              return item;
-            }
-            return {
-              ...item,
-              trigger: _.isString(item.trigger) ? item.trigger.split(',') : [trigger],
-            };
-          }
+          if (!item.validate) return item;
+          const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
           return {
             message: item.message,
             required: item.required,
-            trigger: [trigger],
+            trigger: _.isString(item.trigger) ? item.trigger.split('+') : [trigger],
             validator: (rule, value, callback) => new Promise((resolve) => {
-                const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
                 validator
                   .validate(value)
                   .then(() => {
