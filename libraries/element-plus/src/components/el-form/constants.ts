@@ -15,5 +15,6 @@ export const $formItemProps = [
   'validateStatus',
   'data-nodepath',
   'data-enable-events',
+  'trigger',
   'style',
 ];

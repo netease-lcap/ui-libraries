@@ -1386,20 +1386,20 @@ describe('el-select 插件集成测试', () => {
     });
   });
 
-  // describe('第九部分：边界和异常测试', () => {
-  //   it('边界测试：所有 props 为空对象', async () => {
-  //     const plugins = SelectBasicAccumulate.getPluginMethod({ isInDesigner: false });
-  //     const props = {
-  //       slots: {},
-  //       ref: {},
-  //       [$deletePropsList]: [],
-  //     };
+  describe('第九部分：边界和异常测试', () => {
+    it('边界测试：所有 props 为空对象', async () => {
+      const plugins = SelectBasicAccumulate.getPluginMethod({ isInDesigner: false });
+      const props = {
+        slots: {},
+        ref: {},
+        [$deletePropsList]: [],
+      };
 
-  //     expect(async () => {
-  //       const { currentValue } = await renderHooks(plugins, props);
-  //       expect(currentValue.value).toBeDefined();
-  //     }).not.toThrow();
-  //   });
+      // expect(async () => {
+        const { currentValue } = await renderHooks(plugins, props);
+        expect(currentValue.value).toBeDefined();
+      // }).not.toThrow();
+    });
 
   //   it('边界测试：props 只包含必需字段', async () => {
   //     const plugins = SelectBasicAccumulate.getPluginMethod({ isInDesigner: false });
@@ -1537,7 +1537,7 @@ describe('el-select 插件集成测试', () => {
   //   //   expect(result.data).toBeDefined();
   //   //   expect(result.previewText).toBe('Émojis 🎉');
   //   // });
-  // });
+  });
 
   // describe('第十部分：完整流程集成测试', () => {
     // it('完整流程：静态数据 → 选择值 → 预览', async () => {
