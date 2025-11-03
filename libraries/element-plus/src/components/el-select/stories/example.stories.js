@@ -17,7 +17,7 @@ export default {
 /*  基础的、简洁的标签页。 */
 export const Example1 = {
   name: '基础用法',
-  render: (args,{parameters}) => ({
+  render: (args, { parameters }) => ({
     setup() {
       const { globalConfig } = parameters;
       const activeName = ref('');
@@ -29,7 +29,7 @@ export const Example1 = {
       };
       setTimeout(() => {
         // name.value = 'newName';
-        // activeName.value = 'second';
+        activeName.value = '电子签署';
       }, 3000);
 
       return {

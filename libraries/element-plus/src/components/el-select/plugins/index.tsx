@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
 import { ElSelectV2, SelectProps } from 'element-plus';
+import { CSSProperties } from 'vue';
 import { useMemo, useCallback } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
@@ -61,7 +62,7 @@ export default SelectBasicAccumulate.addPlugin({
                 {item.label}
                 {item.description && (
                 <el-text
-                  style="display:block;height:14px;line-height:14px"
+                  style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
                   color="secondary"
                   text={item.description}
                 />

@@ -310,7 +310,7 @@ describe('el-switch 插件集成测试', () => {
     it('边界测试：null 和 undefined', async () => {
       const testCases = [null, undefined];
 
-      testCases.forEach((value) => {
+      testCases.forEach(async (value) => {
         const plugins = SwitchAccumulate.getPluginMethod({ isInDesigner: false });
         const props = {
           modelValue: value,
