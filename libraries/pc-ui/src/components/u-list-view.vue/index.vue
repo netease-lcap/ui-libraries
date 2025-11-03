@@ -427,8 +427,13 @@ export default {
                     self.$emitSyncParams(params);
                     const result = dataSource(params);
                     if (result instanceof Promise)
-                        return result.catch(
-                            () => (this.currentLoading = false),
+                        return result
+                        .then((res) => {
+                            self.currentLoading = false;
+                            return res;
+                        })
+                        .catch(
+                            () => (self.currentLoading = false),
                         );
                     else if (result instanceof Array)
                         return Promise.resolve(result);

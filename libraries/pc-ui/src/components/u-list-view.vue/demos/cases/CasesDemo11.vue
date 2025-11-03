@@ -1,20 +1,37 @@
 <!-- loading -->
 <template>
-    <u-grid-layout>
-        <u-grid-layout-row :repeat="3">
-            <u-grid-layout-column>
-                <u-button @click="load()">加载</u-button>
-            </u-grid-layout-column>
-        </u-grid-layout-row>
-        <u-grid-layout-row :repeat="3">
-            <u-grid-layout-column>
-                <u-list-view v-model="value" :data-source="list" :loading="loading"></u-list-view>
-            </u-grid-layout-column>
-            <u-grid-layout-column :span="2">
-                <div :class="$style.result">选择的语言为：{{ value }}</div>
-            </u-grid-layout-column>
-        </u-grid-layout-row>
-    </u-grid-layout>
+    <div>
+        <u-grid-layout>
+            <u-grid-layout-row :repeat="3">
+                <u-grid-layout-column>
+                    <u-button @click="load()">加载</u-button>
+                </u-grid-layout-column>
+            </u-grid-layout-row>
+            <u-grid-layout-row :repeat="3">
+                <u-grid-layout-column>
+                    <u-list-view v-model="value" :data-source="list" :loading="loading"></u-list-view>
+                </u-grid-layout-column>
+                <u-grid-layout-column :span="2">
+                    <div :class="$style.result">选择的语言为：{{ value }}</div>
+                </u-grid-layout-column>
+            </u-grid-layout-row>
+        </u-grid-layout>
+        <u-grid-layout style="margin-top: 10px">
+            <u-grid-layout-row :repeat="3">
+                <u-grid-layout-column>
+                    <u-button @click="onReload">调用reload加载</u-button>
+                </u-grid-layout-column>
+            </u-grid-layout-row>
+            <u-grid-layout-row :repeat="3">
+                <u-grid-layout-column>
+                    <u-list-view v-model="value" :data-source="load1" ref="listView"></u-list-view>
+                </u-grid-layout-column>
+                <u-grid-layout-column :span="2">
+                    <div :class="$style.result">选择的语言为：{{ value }}</div>
+                </u-grid-layout-column>
+            </u-grid-layout-row>
+        </u-grid-layout>
+    </div>
 </template>
 <script>
 // 模拟后端请求
@@ -95,6 +112,14 @@ export default {
                 this.list = list;
             });
         },
+        load1() {
+            return mockService.load().then((list) => {
+                return list;
+            });
+        },
+        onReload() {
+            this.$refs.listView.reload();
+        }
     }
 };
 </script>
