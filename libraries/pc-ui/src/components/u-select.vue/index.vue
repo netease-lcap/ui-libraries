@@ -216,7 +216,7 @@
             <component
               :is="ChildComponent"
               v-for="(item, index) in currentData"
-              v-if="item !== undefined || item !== null"
+              v-if="item !== undefined && item !== null"
               :key="
                 filterable
                   ? $at2(item, valueField) + '_' + index
