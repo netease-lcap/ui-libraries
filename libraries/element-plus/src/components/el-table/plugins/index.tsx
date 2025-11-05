@@ -241,7 +241,10 @@ export default TableAccumulate.addPlugin({
         run({ currentPage, pageSize, order, sort, pagination, ...params });
       };
       const { list: data, total } = resultData as { list: any; total: number };
-      const treeData = useMemo(() => useDataSourceToTree(data, parentField, rowKey as string), [data, parentField, rowKey]);
+      const treeData = useMemo(
+        () => useDataSourceToTree(data, parentField, rowKey as string),
+        [data, parentField, rowKey],
+      );
       const selfRef = _.assign(ref, { reload, data: treeData, getData: () => data });
 
       const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
@@ -418,7 +421,7 @@ export default TableAccumulate.addPlugin({
         _.defer(() => _.map(selectRows, (row) => _.attempt(ref?.toggleRowSelection, row, true)), 0);
       }, [data]);
       return {
-        onSelectionChange: (value) => {
+        onSelect: (value) => {
           const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
           _.attempt(selectionChange, { newSelection });
           setSelectedValues(newSelection);
