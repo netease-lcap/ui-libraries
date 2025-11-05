@@ -241,7 +241,7 @@ export default TableAccumulate.addPlugin({
         run({ currentPage, pageSize, order, sort, pagination, ...params });
       };
       const { list: data, total } = resultData as { list: any; total: number };
-      const treeData = useDataSourceToTree(data, parentField, rowKey as string);
+      const treeData = useMemo(() => useDataSourceToTree(data, parentField, rowKey as string), [data, parentField, rowKey]);
       const selfRef = _.assign(ref, { reload, data: treeData, getData: () => data });
 
       const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
