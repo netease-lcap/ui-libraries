@@ -299,8 +299,9 @@ export default listComponentsBasicAccumulate
         () => addClass(classNameProps, {
             'el-list-components-plus': true,
             isEqualWidth: equalWidth,
+            isColumn: columnProps > 0,
           }),
-        [classNameProps, equalWidth],
+        [classNameProps, equalWidth, columnProps],
       );
       return {
         style,
