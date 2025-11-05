@@ -80,3 +80,17 @@ export default InputBasicAccumulate.addAccumulate(idePlugin)
       };
     },
   });
+// .addPlugin({
+//   name: 'handleOnChange',
+//   handle(props) {
+//     const dataRef = props.get('data-ref-id');
+//     const setValue = props.get('setValue');
+//     console.log(props.toJS(), 'props');
+//     useEffect(() => {
+//       setTimeout(() => {
+//         setValue('1234');
+//       }, 5000);
+//     }, []);
+//     return {};
+//   },
+// });

@@ -37,6 +37,7 @@ export type PluginBase = {
   [$router]: Router;
   style: Record<string, any>;
   class: string;
+  ['data-ref-id']: string;
 };
 
 export type GetOptionsType<T> = T extends { new (options?: infer O): any } ? O : never;

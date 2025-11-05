@@ -43,13 +43,13 @@ namespace nasl.ui {
       title: '显示弹出框',
       description: '显示弹出框',
     })
-    open(): void {}
+    show(): void {}
 
     @Method({
       title: '关闭弹出框',
       description: '关闭弹出框',
     })
-    close(): void {}
+    hide(): void {}
   }
 
   export class ElPopoverOptions extends ViewComponentOptions {

@@ -8,6 +8,7 @@ export function handleControllableValue(props: any) {
     ref: Object.assign(ref, {
       resetField: () => setValue(undefined),
     }),
+    setValue,
   };
 }
 
