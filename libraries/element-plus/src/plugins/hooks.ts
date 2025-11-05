@@ -279,6 +279,7 @@ export function useControllableValue<T = any>(
   useEffect(() => {
     if (priorValue.value !== propsValue && isControlled) {
       onValueEffect(propsValue);
+      priorValue.value = propsValue;
     }
   }, [propsValue, isControlled]);
   const onChange = (...args: any[]) => {

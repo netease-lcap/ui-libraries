@@ -262,7 +262,7 @@ export const Example2 = {
         tableData,
         pageSize2,
         currentPage,
-        
+
         mytable,
         selectedRowKeys,
       };
@@ -394,12 +394,18 @@ export const Example3 = {
         return [
           {
             id: 1,
+            hd: {
+              id: 1,
+            },
             name: 'Toy Story',
             release: '1995-11-22',
             director: 'John Lasseter',
             runtime: 80,
           },
           {
+            hd: {
+              id: 2,
+            },
             id: 2,
             name: "A Bug's Life",
             release: '1998-11-25',
@@ -407,6 +413,9 @@ export const Example3 = {
             runtime: 95,
           },
           {
+            hd: {
+              id: 3,
+            },
             id: 3,
             name: 'Toy Story 2',
             release: '1999-11-24',
@@ -415,12 +424,18 @@ export const Example3 = {
           },
           {
             id: 4,
+            hd: {
+              id: 4,
+            },
             name: 'Monsters, Inc.',
             release: '2001-11-2',
             director: 'Peter Docter',
             runtime: 92,
           },
           {
+            hd: {
+              id: 5,
+            },
             id: 5,
             name: 'Finding Nemo',
             release: '2003-5-30',
@@ -430,11 +445,13 @@ export const Example3 = {
         ];
       }
 
-      // setTimeout(() => {
-      //   console.log(selectedRowKeys,'selectedRowKeys');
-      // }, 1000);
       const currentRowKey = ref([1, 2]);
       const tableRef = ref();
+      setTimeout(() => {
+        currentRowKey.value = [1, 2, 3, 4];
+        // tableRef.value.reload();
+        console.log(123);
+      }, 3000);
       const data = getTestData();
       const selectedValue = ref(1);
       return {
@@ -483,12 +500,10 @@ export const Example3 = {
     'value'
     {{selectedValue}}
          <el-table
-          :data="data"
-          highlight-current-row
+          :dataSource="getTestData"
           ref="tableRef"
-          row-key="id"
+          row-key="hd.id"
           v-model:selectedValues="currentRowKey"
-          v-model:selectedValue="selectedValue"
           border
           style="width: 100%; margin-top: 20px"
         >

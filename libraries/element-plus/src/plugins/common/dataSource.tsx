@@ -137,15 +137,21 @@ export function useDataSourceToTree(
   valueField: string = 'value',
 ): TreeNode[] {
   if (_.isNil(parentField)) return dataSource;
-  const map = new Map<string, TreeNode>(dataSource.map((item) => [_.get(item, valueField, item), item]));
-  return dataSource.reduce((acc: TreeNode[], item) => {
-    const parent = map.get(_.get(item, parentField));
-    const value = map.get(_.get(item, valueField, item));
-    if (parent && value) {
-      parent.children = _.isArray(parent.children) ? parent.children.concat(value) : [value];
-    } else if (value) {
-      acc.push(value);
-    }
-    return acc;
-  }, []);
+  const map = useMemo(
+    () => new Map<string, TreeNode>(dataSource.map((item) => [_.get(item, valueField, item), item])),
+    [dataSource, valueField],
+  );
+  return useMemo(
+    () => dataSource.reduce((acc: TreeNode[], item) => {
+        const parent = map.get(_.get(item, parentField));
+        const value = map.get(_.get(item, valueField, item));
+        if (parent && value) {
+          parent.children = _.isArray(parent.children) ? parent.children.concat(value) : [value];
+        } else if (value) {
+          acc.push(value);
+        }
+        return acc;
+      }, []),
+    [dataSource, parentField, valueField],
+  );
 }

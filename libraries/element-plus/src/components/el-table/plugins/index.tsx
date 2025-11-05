@@ -408,7 +408,7 @@ export default TableAccumulate.addPlugin({
           const selectRows = getSelectedRows(data, currentValue);
 
           _.defer(() => {
-            ref.clearSelection();
+            ref?.clearSelection?.();
             return _.map(selectRows, (row) => _.attempt(ref?.toggleRowSelection, row, true));
           }, 0);
         },
@@ -418,11 +418,20 @@ export default TableAccumulate.addPlugin({
         _.defer(() => _.map(selectRows, (row) => _.attempt(ref?.toggleRowSelection, row, true)), 0);
       }, [data]);
       return {
-        onSelectionChange: _.wrap(selectionChange, (fn, value: any) => {
+        onSelectionChange: (value) => {
           const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
-          fn({ newSelection });
+          _.attempt(selectionChange, { newSelection });
           setSelectedValues(newSelection);
-        }),
+        },
+        // onSelectionChange: useCallback(
+        //   _.wrap(selectionChange, (fn, value: any) => {
+        //     const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
+        //     console.log(newSelection, 'value', '==', value);
+        //     fn({ newSelection });
+        //     setSelectedValues(newSelection);
+        //   }),
+        //   [],
+        // ),
       };
     },
   });
