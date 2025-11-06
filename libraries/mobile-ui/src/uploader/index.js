@@ -176,9 +176,36 @@ export default createComponent({
       else if (this.converter === 'simple')
         try {
           if (!value) return [];
-          return value
-            .split(',')
-            .map((x) => ({ url: x, name: this.handleFileName(x) }));
+
+          const values = value.split(',');
+          let currentValue = this.currentValue ? [...this.currentValue] : [];
+
+          for (let i = 0; i < currentValue.length; i++) {
+            if (values.length === 0) {
+              currentValue = currentValue.filter((item, index) => index < i || item.status === 'uploading' || item.status === 'failed');
+              break;
+            }
+
+            const item = currentValue[i];
+            if (item.status === 'uploading' || item.status === 'failed') {
+              continue;
+            }
+
+            const url = values.shift();
+            item.url = url;
+            item.name = this.handleFileName(url);
+            item.status = 'success';
+          }
+
+          if (values.length > 0) {
+            currentValue = currentValue.concat(values.map((url) => ({
+              url,
+              name: this.handleFileName(url),
+              status: 'success',
+            })));
+          }
+
+          return currentValue;
         } catch (err) {
           return [];
         }
@@ -197,7 +224,9 @@ export default createComponent({
       return value;
     },
     simpleConvert(value) {
-      return value.map((x) => x.url).join(',');
+      return value
+        .filter((x) => x.status !== 'uploading' && x.status !== 'failed')
+        .map((x) => (x.url || '')).join(',');
     },
     getDetail(index = this.currentValue.length) {
       return {
