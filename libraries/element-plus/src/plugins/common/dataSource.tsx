@@ -90,7 +90,7 @@ const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions 
       onBefore(...params);
       setLoading(true);
       dataSource(...params).then((data) => {
-        setResult((prev: any) => ({ data: formatResult(data, prev?.data), run: fn, loading: false }));
+        setResult((prev: any) => ({ data: formatResult(_.clone(data), prev?.data), run: fn, loading: false }));
         setLoading(false);
         onSuccess(data, ...params);
       });
@@ -136,7 +136,7 @@ export function useDataSourceToTree(
   parentField: string = 'parent',
   valueField: string = 'value',
 ): TreeNode[] {
-  if (_.isNil(parentField)) return dataSource;
+  if (parentField) return dataSource;
   const map = new Map<string, TreeNode>(dataSource.map((item) => [_.get(item, valueField, item), item]));
   return dataSource.reduce((acc: TreeNode[], item) => {
     const parent = map.get(_.get(item, parentField));

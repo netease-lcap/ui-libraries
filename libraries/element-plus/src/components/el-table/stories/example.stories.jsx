@@ -146,9 +146,13 @@ export const Example1 = {
         console.log(el, 'log');
       });
       setTimeout(() => {
-        width.value = '1000px';
-        console.log(mytable, 'mytable');
-        console.log('object');
+        console.log('table data change');
+        tableData2.value.push({
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        });
+        console.log(tableData2,'tableData2');
       }, 1000);
       const logCellClick = (...el) => {
         console.log(tableData2.value, 'logCellClick');
@@ -180,17 +184,13 @@ min-height="500px"
 v-model:currentPage="currentPage"
 :showTotal="true"
 @selection-change="logCellClick"
-:columnConfig="true"
 field="six.name"
 order="descending"
 :sorting="{ field: 'six.name', order: 'desc' }"
 :showJumper="true"
 pageSizes="[5,10,20,50]"
 :defaultPageSize="10"
-v-model:selectedRowKeys="selectedRowKeys"
-dragSort="row"
 :pagination="false"
-:selection="true"
 :stripe="true"
 >
 
