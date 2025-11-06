@@ -49,7 +49,7 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
             ? {}
             : {
                 default: () => _.map(dataSource, (item) => (
-                  <ElCheckbox {...item}>{slots.item ? slots.item({ item } as any) : item.label}</ElCheckbox>
+                  <ElCheckbox {...item}>{slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.label}</ElCheckbox>
                   )),
               }),
         [dataSource, slots, dataConfig],

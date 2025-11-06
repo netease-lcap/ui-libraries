@@ -182,7 +182,7 @@ export default listComponentsBasicAccumulate
               {_.includes(value, _.get(item, 'value', item))}
               {_.isFunction(slots.default) ? (
                 slots.default({
-                  item,
+                  item: item?.itemSource ?? item,
                   index,
                   selected: _.includes(_.concat([], value), _.get(item, 'value', item)),
                 } as any)

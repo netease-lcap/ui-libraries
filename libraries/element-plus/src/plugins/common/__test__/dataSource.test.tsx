@@ -96,14 +96,17 @@ describe('dataSource.tsx', () => {
         {
           label: 'apple',
           value: 'apple',
+          itemSource: 'apple',
         },
         {
           label: 'banana',
           value: 'banana',
+          itemSource: 'banana',
         },
         {
           label: 'orange',
           value: 'orange',
+          itemSource: 'orange',
         },
       ]);
     });

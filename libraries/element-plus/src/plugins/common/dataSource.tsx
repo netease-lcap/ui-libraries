@@ -35,6 +35,7 @@ export function useHandleMapField(filedInfo: {
           _.mapValues(fieldsMap, (path) => _.get(item, path, undefined)),
           _.isUndefined,
         ),
+        itemSource: _.isString(item) ? item : undefined,
       })),
     [label, value, textField, valueField, dataSource, fieldsMap],
   );
