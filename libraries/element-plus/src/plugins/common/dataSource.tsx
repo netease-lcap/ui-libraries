@@ -133,10 +133,10 @@ export interface TreeNode {
 
 export function useDataSourceToTree(
   dataSource: DataSourceArrayType,
-  parentField: string = 'parent',
+  parentField: string,
   valueField: string = 'value',
 ): TreeNode[] {
-  if (parentField) return dataSource;
+  if (!parentField) return dataSource;
   const map = new Map<string, TreeNode>(dataSource.map((item) => [_.get(item, valueField, item), item]));
   return dataSource.reduce((acc: TreeNode[], item) => {
     const parent = map.get(_.get(item, parentField));

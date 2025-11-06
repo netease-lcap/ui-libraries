@@ -2,6 +2,7 @@ import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { renderHook } from '@ep-test/test-utils/render-hook';
 import '@/utils/index';
 import PopoverBasicAccumulate from '../plugins/basic-plugins';
+import { Hide } from '@element-plus/icons-vue';
 
 describe('el-popover plugins', () => {
   beforeEach(() => {
@@ -50,8 +51,8 @@ describe('el-popover plugins', () => {
         expect(result).toHaveProperty('popperClass');
         expect(result).toHaveProperty('ref');
         expect(typeof result.ref).toBe('object');
-        expect(typeof result.ref.open).toBe('function');
-        expect(typeof result.ref.close).toBe('function');
+        expect(typeof result.ref.show).toBe('function');
+        expect(typeof result.ref.hide).toBe('function');
       });
 
       it('应该正确合并 popperClass 和 class', () => {
@@ -169,16 +170,16 @@ describe('el-popover plugins', () => {
         const result = currentValue.value;
 
         expect(result.ref).toBeDefined();
-        expect(typeof result.ref.open).toBe('function');
-        expect(typeof result.ref.close).toBe('function');
+        expect(typeof result.ref.show).toBe('function');
+        expect(typeof result.ref.hide).toBe('function');
 
         // 测试 ref 方法不会抛出错误
         expect(() => {
-          result.ref.open();
+          result.ref.show();
         }).not.toThrow();
 
         expect(() => {
-          result.ref.close();
+          result.ref.hide();
         }).not.toThrow();
       });
 
@@ -255,8 +256,8 @@ describe('el-popover plugins', () => {
         expect(result).toBeDefined();
         expect(result.popperClass).toBe('complex-popper-class complex-class');
         expect(result.ref).toBeDefined();
-        expect(typeof result.ref.open).toBe('function');
-        expect(typeof result.ref.close).toBe('function');
+        expect(typeof result.ref.show).toBe('function');
+        expect(typeof result.ref.hide).toBe('function');
       });
 
       it('应该正确处理 ref 方法的调用', () => {
@@ -270,8 +271,8 @@ describe('el-popover plugins', () => {
         const result = currentValue.value;
 
         // 验证 ref 方法可以被调用
-        const openSpy = vi.fn(result.ref.open);
-        const closeSpy = vi.fn(result.ref.close);
+        const openSpy = vi.fn(result.ref.show);
+        const closeSpy = vi.fn(result.ref.hide);
 
         expect(() => {
           openSpy();

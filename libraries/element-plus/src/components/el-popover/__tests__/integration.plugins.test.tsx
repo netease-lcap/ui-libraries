@@ -91,10 +91,10 @@ describe('el-popover 插件集成测试', () => {
 
       const { currentValue } = await renderHooks(plugins, props);
 
-      expect(currentValue.value.ref.open).toBeDefined();
-      expect(typeof currentValue.value.ref.open).toBe('function');
+      expect(currentValue.value.ref.show).toBeDefined();
+      expect(typeof currentValue.value.ref.show).toBe('function');
 
-      currentValue.value.ref.open();
+      currentValue.value.ref.show();
       expect(onUpdate).toHaveBeenCalledWith(true);
     });
 
@@ -108,10 +108,10 @@ describe('el-popover 插件集成测试', () => {
 
       const { currentValue } = await renderHooks(plugins, props);
 
-      expect(currentValue.value.ref.close).toBeDefined();
-      expect(typeof currentValue.value.ref.close).toBe('function');
+      expect(currentValue.value.ref.hide).toBeDefined();
+      expect(typeof currentValue.value.ref.hide).toBe('function');
 
-      currentValue.value.ref.close();
+      currentValue.value.ref.hide();
       expect(onUpdate).toHaveBeenCalledWith(false);
     });
 
@@ -124,8 +124,8 @@ describe('el-popover 插件集成测试', () => {
       const { currentValue } = await renderHooks(plugins, props);
 
       // 不应该抛出错误
-      expect(() => currentValue.value.ref.open()).not.toThrow();
-      expect(() => currentValue.value.ref.close()).not.toThrow();
+      expect(() => currentValue.value.ref.show()).not.toThrow();
+      expect(() => currentValue.value.ref.hide()).not.toThrow();
     });
   });
 
@@ -195,8 +195,8 @@ describe('el-popover 插件集成测试', () => {
 
       expect(currentValue.value.popperClass).toBe('popper-class custom-class');
       expect(currentValue.value.visible).toBe(false);
-      expect(currentValue.value.ref.open).toBeDefined();
-      expect(currentValue.value.ref.close).toBeDefined();
+      expect(currentValue.value.ref.show).toBeDefined();
+      expect(currentValue.value.ref.hide).toBeDefined();
     });
 
     it('应该支持完整的显示-隐藏流程', async () => {
@@ -214,11 +214,11 @@ describe('el-popover 插件集成测试', () => {
       expect(currentValue.value.visible).toBe(false);
 
       // 打开
-      currentValue.value.ref.open();
+      currentValue.value.ref.show();
       expect(onUpdate).toHaveBeenCalledWith(true);
 
       // 关闭
-      currentValue.value.ref.close();
+      currentValue.value.ref.hide();
       expect(onUpdate).toHaveBeenCalledWith(false);
     });
 
@@ -232,16 +232,16 @@ describe('el-popover 插件集成测试', () => {
 
       const { currentValue } = await renderHooks(plugins, props);
 
-      currentValue.value.ref.open();
+      currentValue.value.ref.show();
       expect(onUpdate).toHaveBeenNthCalledWith(1, true);
 
-      currentValue.value.ref.close();
+      currentValue.value.ref.hide();
       expect(onUpdate).toHaveBeenNthCalledWith(2, false);
 
-      currentValue.value.ref.open();
+      currentValue.value.ref.show();
       expect(onUpdate).toHaveBeenNthCalledWith(3, true);
 
-      currentValue.value.ref.close();
+      currentValue.value.ref.hide();
       expect(onUpdate).toHaveBeenNthCalledWith(4, false);
     });
   });

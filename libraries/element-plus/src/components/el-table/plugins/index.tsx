@@ -393,7 +393,7 @@ export default TableAccumulate.addPlugin({
     handle(props) {
       const ref = props.get('ref');
       const data = props.get('data');
-      const selectionChange = props.get('onSelectionChange', () => {});
+      const selectionChange = props.get('onSelect', () => {});
       const rowKey = props.get('rowKey');
       const getRowKey = _.match(rowKey)
         .when(
@@ -421,9 +421,9 @@ export default TableAccumulate.addPlugin({
         _.defer(() => _.map(selectRows, (row) => _.attempt(ref?.toggleRowSelection, row, true)), 0);
       }, [data]);
       return {
-        onSelect: (value) => {
+        onSelect: (value, ...arg) => {
           const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
-          _.attempt(selectionChange, { newSelection });
+          _.attempt(selectionChange, { newSelection, items: value }, ...arg);
           setSelectedValues(newSelection);
         },
         // onSelectionChange: useCallback(
