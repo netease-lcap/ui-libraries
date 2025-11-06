@@ -481,6 +481,7 @@ describe('Table.vue', () => {
 
         methods: {
           handleEvent(...args) {
+            console.log(args,'==');
             this.result = args;
           },
         },

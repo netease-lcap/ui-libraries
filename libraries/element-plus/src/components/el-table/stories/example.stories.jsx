@@ -147,11 +147,7 @@ export const Example1 = {
       });
       setTimeout(() => {
         console.log('table data change');
-        tableData2.value.push({
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        });
+        tableData2.value.splice(0, 1);
         console.log(tableData2,'tableData2');
       }, 1000);
       const logCellClick = (...el) => {
@@ -196,10 +192,8 @@ pageSizes="[5,10,20,50]"
 
 
 
-    <el-table-column prop="name" width="30%"  class="myclomuns" :style="{'text-align':'left'}" >
+    <el-table-column prop="name" width="30%" type="selection"  class="myclomuns" :style="{'text-align':'left'}" >
     <template #header>
-    <el-text>text-Name</el-text>
-    </template>
     <el-text>text-Name</el-text>
     </template>
     </el-table-column>
