@@ -423,7 +423,7 @@ export default TableAccumulate.addPlugin({
       return {
         onSelect: (value, ...arg) => {
           const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
-          _.attempt(selectionChange, value, ...arg);
+          _.attempt(selectionChange, { newSelection, items: value }, ...arg);
           setSelectedValues(newSelection);
         },
         // onSelectionChange: useCallback(

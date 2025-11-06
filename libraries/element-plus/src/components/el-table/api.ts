@@ -379,7 +379,7 @@ namespace nasl.ui {
       title: '选中行变化时',
       description: '选中行变化时触发',
     })
-    onSelect: (event: nasl.collection.List<T>) => any;
+    onSelect: (event: { newSelection: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
 
     @Event({
       title: '分页发生变化时触发',
