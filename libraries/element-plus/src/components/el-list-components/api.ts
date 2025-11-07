@@ -10,6 +10,7 @@ namespace nasl.ui {
         ':model': '"[{}, {}, {}]"',
       },
       childAccept: false,
+      forceUpdateWhenAttributeChange: true,
       useTemplateInDefaultSlot: true,
       style: [
         {
