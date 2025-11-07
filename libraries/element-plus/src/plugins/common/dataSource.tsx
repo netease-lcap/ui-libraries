@@ -5,7 +5,7 @@ import _ from 'lodash';
 // import { watch } from 'vue';
 // import { useRequest } from 'vue-hooks-plus';
 import type { Ref, ComponentPublicInstance } from 'vue';
-import { useMemo, useState, useEffect } from '@/plugins/hooks';
+import { useMemo, useState, useEffect, useRef } from '@/plugins/hooks';
 
 import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
 import { useCallback } from '../hooks';
@@ -68,6 +68,7 @@ const handleDataSouceToFn = _.cond([
 ]);
 interface RequestOptions {
   refreshDeps?: any[];
+  manual?: boolean;
   [key: string]: any;
 }
 type TargetValue<T> = T | undefined | null;
@@ -81,26 +82,30 @@ interface RequestResult {
   loading?: boolean;
 }
 const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions = {}): RequestResult => {
-  const [resultData, setResult] = useState<RequestResult>({ run: () => {} });
+  const [resultData, setResult] = useState<RequestResult>({ data: [] });
   const [loading, setLoading] = useState(false);
+  const run = useRef<(...args: any[]) => void>(() => {}, false);
   const { onBefore = () => {}, onSuccess = () => {}, formatResult = (value) => value, defaultParams = [] } = options;
-  const { refreshDeps = [] } = options;
+  const { refreshDeps = [], manual = false } = options;
   const fn = useCallback(
     (...res) => {
       const params = res.length > 0 ? res : defaultParams;
       onBefore(...params);
       setLoading(true);
       dataSource(...params).then((data) => {
-        setResult((prev: any) => ({ data: formatResult(_.clone(data), prev?.data), run: fn, loading: false }));
+        setResult((prev: any) => ({ data: formatResult(_.clone(data), prev?.data) }));
         setLoading(false);
         onSuccess(data, ...params);
       });
     },
     [dataSource, ...refreshDeps],
   );
-  useEffect(() => fn(), [fn, ...refreshDeps]);
+  run.value = fn;
+  useEffect(() => {
+    if (!manual) fn();
+  }, [fn, ...refreshDeps]);
 
-  return { ...resultData, loading };
+  return { ...resultData, loading, run: run.value };
 };
 
 export function useRequestDataSource(dataSource: DataSourceType, options: RequestOptions = {}): RequestResult {
