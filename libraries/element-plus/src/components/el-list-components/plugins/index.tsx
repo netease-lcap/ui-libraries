@@ -46,8 +46,10 @@ export default listComponentsBasicAccumulate
       const render = useCallback(
         (props, { attrs, slots }) => {
           return formMode ? (
-            <el-form {...attrs} {...props} model={model.value}>
-              <div ref={target}>{slots.default?.()}</div>
+            <el-form style={{ width: '100%' }} model={model.value}>
+              <div ref={target} {...attrs} {...props}>
+                {slots.default?.()}
+              </div>
             </el-form>
           ) : (
             <div ref={target} {...attrs} {...props}>
@@ -57,6 +59,7 @@ export default listComponentsBasicAccumulate
         },
         [formMode],
       );
+      render.inheritAttrs = false;
       return {
         render,
         model,
