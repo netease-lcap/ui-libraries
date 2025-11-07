@@ -96,9 +96,9 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '模型',
-      description: '组件列表的数据模型',
-      docDescription: '组件列表的数据模型，用于存储组件列表的数据。',
+      title: '表单值',
+      description: '组件列表的表单值',
+      docDescription: '组件列表的表单值，用于存储组件列表的表单值。',
       setter: {
         concept: 'PropertySelectSetter',
       },
