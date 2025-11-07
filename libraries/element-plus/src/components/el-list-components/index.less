@@ -9,6 +9,7 @@
   }
   .el-list-components__frag {
     min-width: calc((100% / var(--el-list-components-column)) - var(--column-gap, 0));
+    
     width: auto;
     flex: 0 0 auto;
     overflow: visible;
@@ -38,7 +39,7 @@
       min-width: 0;
       max-width: 100%;
       /* 子元素宽度由内容决定，不拉伸 */
-      width: fit-content;
+      width: 100%;
       /* 不拉伸子元素内容 */
       justify-self: start;
       /* 防止内部内容溢出 */

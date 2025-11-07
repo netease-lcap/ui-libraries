@@ -41,7 +41,9 @@ export default listComponentsBasicAccumulate
     handle: (props) => {
       const target = useRef(null);
       const model = useRef(props.get('model'));
-      const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
+      const deletePropsList = props
+        .get($deletePropsList)
+        .concat($dataSourceDeleteField, 'setValue', 'clickFn', 'setCurrentPage', 'setPageSize', 'pageProps');
       const formMode = props.get('formMode');
       const render = useCallback(
         (props, { attrs, slots }) => {
