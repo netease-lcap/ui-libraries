@@ -6,6 +6,7 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { useControllableValue, useMemo, useCallback, useRef, useEffect } from '@/plugins/hooks';
 import { ElPagination } from '@/index';
 import { useRequestDataSource, useHandleMapField } from '@/plugins/common/dataSource';
+import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { addClass } from '@/utils';
 
 const formatResult = _.cond([
@@ -39,16 +40,28 @@ export default listComponentsBasicAccumulate
     name: 'handleInitRender',
     handle: (props) => {
       const target = useRef(null);
-      const render = useCallback((props, { attrs, slots }) => {
-        return (
-          <div ref={target} {...attrs} {...props}>
-            {slots.default?.()}
-          </div>
-        );
-      }, []);
+      const model = useRef(props.get('model'));
+      const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
+      const formMode = props.get('formMode');
+      const render = useCallback(
+        (props, { attrs, slots }) => {
+          return formMode ? (
+            <el-form {...attrs} {...props} model={model.value}>
+              <div ref={target}>{slots.default?.()}</div>
+            </el-form>
+          ) : (
+            <div ref={target} {...attrs} {...props}>
+              {slots.default?.()}
+            </div>
+          );
+        },
+        [formMode],
+      );
       return {
         render,
+        model,
         target,
+        [$deletePropsList]: deletePropsList,
       };
     },
   })
@@ -139,6 +152,8 @@ export default listComponentsBasicAccumulate
     name: 'handleDataSource',
     handle(props) {
       const dataSource = props.get('dataSource');
+      const model = props.get('model');
+      const formMode = props.get('formMode');
       const currentPage = props.get('currentPage');
       const pagination = props.get('pagination', 'none');
       const pageSize = props.get('pageSize');
@@ -167,10 +182,10 @@ export default listComponentsBasicAccumulate
         textField,
         dataSource: resultData.list as any,
       });
-
+      const dataList = formMode ? model.value : data;
       const selfRef = _.assign(ref, { reload, data, getData: () => data });
       const defaultSlots = useCallback(() => {
-        return _.map(data, (item, index) => {
+        return _.map(dataList, (item, index) => {
           return (
             <div
               onClick={() => onClick(_.get(item, 'value', item))}
@@ -179,7 +194,7 @@ export default listComponentsBasicAccumulate
                 'is-selectable': selection && selection !== 'none',
               })}
             >
-              {_.includes(value, _.get(item, 'value', item))}
+              {/* {_.includes(value, _.get(item, 'value', item))} */}
               {_.isFunction(slots.default) ? (
                 slots.default({
                   item: item?.itemSource ?? item,

@@ -1,0 +1,25 @@
+{
+  "name": "@lcap/ui-libraries-mcp",
+  "version": "0.0.2",
+  "description": "组件 mcp",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "mitt": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.20"
+  }
+}

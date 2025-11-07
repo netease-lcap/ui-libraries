@@ -61,10 +61,26 @@ namespace nasl.ui {
     // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
+      title: '表单模式',
+      description: '是否以表单模式显示',
+      docDescription: '开启后，组件列表会以表单模式显示，每个列表项会显示在一个表单项中。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      onChange: [
+        { clear: ['dataSource', 'dataSchema', 'model', 'idField', 'textField', 'pagination', 'selectionMode'] },
+      ],
+    })
+    formMode: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '数据属性',
       title: '数据源',
       description: '设置组件列表的数据来源，支持绑定集合类型变量或返回集合的逻辑',
-      docDescription: '可以绑定 List<T> 类型的变量，或者绑定返回 List<T> 类型的逻辑。当使用数据源时，组件列表会根据数据动态生成，每个数据项对应一个列表项。',
+      docDescription:
+        '可以绑定 List<T> 类型的变量，或者绑定返回 List<T> 类型的逻辑。当使用数据源时，组件列表会根据数据动态生成，每个数据项对应一个列表项。',
       bindOpen: true,
+      if: (_) => !_.formMode,
     })
     dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
@@ -73,17 +89,32 @@ namespace nasl.ui {
       title: '数据类型',
       description: '数据源中每个数据项的类型定义，用于类型推导和属性选择',
       docDescription: '此属性为只读，当绑定数据源后会自动识别数据项的类型T，用于在插槽中提供类型提示和属性选择器。',
+      if: (_) => !_.formMode,
     })
     dataSchema: T;
 
     @Prop({
       group: '数据属性',
-      title: '唯一标识',
-      description: '指定数据项中哪个字段作为列表项的唯一标识',
-      docDescription: '当使用数据源时，需要指定数据项中的哪个属性作为列表项的唯一标识。此值用于列表项的渲染和更新优化。默认为数据的索引值。',
+      title: '模型',
+      description: '组件列表的数据模型',
+      docDescription: '组件列表的数据模型，用于存储组件列表的数据。',
       setter: {
         concept: 'PropertySelectSetter',
       },
+      if: (_) => _.formMode,
+    })
+    model: nasl.collection.List<T>;
+
+    @Prop({
+      group: '数据属性',
+      title: '唯一标识',
+      description: '指定数据项中哪个字段作为列表项的唯一标识',
+      docDescription:
+        '当使用数据源时，需要指定数据项中的哪个属性作为列表项的唯一标识。此值用于列表项的渲染和更新优化。默认为数据的索引值。',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+      if: (_) => !_.formMode,
     })
     idField: (item: T) => any;
 
@@ -91,10 +122,12 @@ namespace nasl.ui {
       group: '数据属性',
       title: '文本字段',
       description: '指定数据项中哪个字段作为列表项的显示文本',
-      docDescription: '当插槽为空时，会显示此字段的值作为列表项的内容。例如：如果数据项有name字段，则选择name作为文本字段。',
+      docDescription:
+        '当插槽为空时，会显示此字段的值作为列表项的内容。例如：如果数据项有name字段，则选择name作为文本字段。',
       setter: {
         concept: 'PropertySelectSetter',
       },
+      if: (_) => !_.formMode,
     })
     textField: (item: T) => any;
 
@@ -103,7 +136,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '列数',
       description: '设置每行显示的组件数量',
-      docDescription: '控制每行排列的组件数量。设置为具体数字时，组件会按指定数量排列；为空时会根据容器宽度自适应排列并自动换行。默认值为5。',
+      docDescription:
+        '控制每行排列的组件数量。设置为具体数字时，组件会按指定数量排列；为空时会根据容器宽度自适应排列并自动换行。默认值为5。',
       setter: {
         concept: 'NumberInputSetter',
         min: 1,
@@ -115,7 +149,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '均分宽度',
       description: '是否让每个组件平均分配宽度',
-      docDescription: '开启后，每个组件会平均分配容器宽度，宽度计算公式为：容器宽度 / 每行列数。关闭后，每个组件根据内容自适应宽度。',
+      docDescription:
+        '开启后，每个组件会平均分配容器宽度，宽度计算公式为：容器宽度 / 每行列数。关闭后，每个组件根据内容自适应宽度。',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -127,11 +162,13 @@ namespace nasl.ui {
       group: '主要属性',
       title: '分页模式',
       description: '选择分页的显示模式',
-      docDescription: '控制分页的显示方式。不启用：不显示分页；自动加载更多：滚动到底部时自动加载；分页：显示分页组件。',
+      docDescription:
+        '控制分页的显示方式。不启用：不显示分页；自动加载更多：滚动到底部时自动加载；分页：显示分页组件。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '不启用' }, { title: '自动加载更多' }, { title: '分页' }],
       },
+      if: (_) => !_.formMode,
     })
     pagination: 'none' | 'autoMore' | 'page' = 'none';
 
@@ -230,11 +267,13 @@ namespace nasl.ui {
       group: '交互属性',
       title: '选择模式',
       description: '设置列表项的选择模式',
-      docDescription: '控制用户是否可以选择列表项以及选择的方式。不可选：用户无法选择；单选：只能选择一个；多选：可以选择多个。',
+      docDescription:
+        '控制用户是否可以选择列表项以及选择的方式。不可选：用户无法选择；单选：只能选择一个；多选：可以选择多个。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '不可选' }, { title: '单选' }, { title: '多选' }],
       },
+      if: (_) => !_.formMode,
     })
     selectionMode: 'none' | 'single' | 'multiple' = 'none';
 
@@ -249,17 +288,6 @@ namespace nasl.ui {
       if: (_) => _.selectionMode !== 'none',
     })
     clearable: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '交互属性',
-      title: '是否可选',
-      description: '是否允许选择列表项（兼容旧版）',
-      docDescription: '兼容旧版本的属性，建议使用选择模式属性。开启后允许选择列表项。',
-      setter: {
-        concept: 'SwitchSetter',
-      },
-    })
-    selectable: nasl.core.Boolean = false;
 
     @Prop({
       group: '交互属性',
@@ -278,7 +306,8 @@ namespace nasl.ui {
       group: '状态属性',
       title: '选中值',
       description: '当前选中的列表项值',
-      docDescription: '绑定当前选中的列表项值。单选模式下为单个值，多选模式下为数组。当用户选择或取消选择时，此值会自动更新。',
+      docDescription:
+        '绑定当前选中的列表项值。单选模式下为单个值，多选模式下为数组。当用户选择或取消选择时，此值会自动更新。',
       sync: true,
       if: (_) => _.selectionMode !== 'none',
     })
