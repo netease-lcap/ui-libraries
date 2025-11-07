@@ -7,6 +7,7 @@ namespace nasl.ui {
       idetype: 'container',
       additionalAttribute: {
         ':dataSource': '"[{}, {}, {}]"',
+        ':model': '"[{}, {}, {}]"',
       },
       childAccept: false,
       useTemplateInDefaultSlot: true,
