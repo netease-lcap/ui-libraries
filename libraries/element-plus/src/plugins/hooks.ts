@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { onMounted, onUnmounted, ref, getCurrentInstance, type Ref } from 'vue';
 import { PluginBase } from '@/types';
 import { componentLog } from '@/utils/curry';
+import { RenderFunctionWithInheritAttrs } from '@/types/pluginBase';
 
 const searchParamsStr = window.location.search; // 结果："?name=Alice&age=25&hobby=reading&hobby=hiking"
 const params = new URLSearchParams(searchParamsStr);
@@ -243,6 +244,15 @@ export function useCallback<T extends(...args: any[]) => any>(callBack: T, dep: 
     }
   }
   return hook.callBack;
+}
+export function useRender(
+  callBack: (props: any, { attrs, slots }: { attrs: any; slots: any }) => any,
+  dep: any[],
+  inheritAttrs: boolean = false,
+): RenderFunctionWithInheritAttrs {
+  const render = useCallback(callBack, dep) as RenderFunctionWithInheritAttrs;
+  render.inheritAttrs = inheritAttrs;
+  return render;
 }
 
 export function useControllableValue<T = any>(

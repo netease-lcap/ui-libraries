@@ -1,19 +1,14 @@
 // export * from './button';
 import _ from 'lodash';
 import { ElPopconfirm, buttonProps } from 'element-plus';
-import { VNode } from 'vue';
 
 import { $deletePropsList } from '@/plugins/constants';
 import { $PopconfirmProps } from '../constants';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { useCallback } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import { useRender } from '../../../plugins/hooks';
 // export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
-
-// 定义带有 inheritAttrs 属性的渲染函数类型
-type RenderFunctionWithInheritAttrs = ((selfProps: any, context: { attrs: any }) => VNode) & {
-  inheritAttrs?: boolean;
-};
 
 const ButtonAccumulate = new PluginAccumulateTypes<nasl.ui.ElButtonOptions, typeof buttonProps>();
 
@@ -54,7 +49,7 @@ export default ButtonAccumulate.addPlugin({
         [slots],
       );
 
-      const render = useCallback((selfProps, { attrs }) => {
+      const render = useRender((selfProps, { attrs }) => {
         return (
           <ElPopconfirm
             {..._.pick(selfProps, $PopconfirmProps)}
@@ -69,9 +64,8 @@ export default ButtonAccumulate.addPlugin({
             }}
           </ElPopconfirm>
         );
-      }, []) as RenderFunctionWithInheritAttrs;
+      }, []);
 
-      render.inheritAttrs = false;
       const result = isPopConfirm ? { render } : {};
 
       return result;

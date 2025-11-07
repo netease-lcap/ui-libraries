@@ -3,7 +3,7 @@
 import _ from 'lodash';
 import { type Ref } from 'vue';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-import { useControllableValue, useMemo, useCallback, useRef, useEffect } from '@/plugins/hooks';
+import { useControllableValue, useMemo, useCallback, useRef, useEffect,useRender } from '@/plugins/hooks';
 import { ElPagination } from '@/index';
 import { useRequestDataSource, useHandleMapField } from '@/plugins/common/dataSource';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
@@ -43,9 +43,17 @@ export default listComponentsBasicAccumulate
       const model = useRef(props.get('model'));
       const deletePropsList = props
         .get($deletePropsList)
-        .concat($dataSourceDeleteField, 'setValue', 'clickFn', 'setCurrentPage', 'setPageSize', 'pageProps');
+        .concat(
+          $dataSourceDeleteField,
+          'setValue',
+          'clickFn',
+          'setCurrentPage',
+          'setPageSize',
+          'pageProps',
+          'target',
+        );
       const formMode = props.get('formMode');
-      const render = useCallback(
+      const render = useRender(
         (props, { attrs, slots }) => {
           return formMode ? (
             <el-form style={{ width: '100%' }} model={model.value}>
@@ -61,7 +69,6 @@ export default listComponentsBasicAccumulate
         },
         [formMode],
       );
-      render.inheritAttrs = false;
       return {
         render,
         model,

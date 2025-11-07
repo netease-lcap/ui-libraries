@@ -1,7 +1,7 @@
 import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-plus';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect } from '@/plugins/hooks';
+import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect, useRender } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
@@ -139,9 +139,9 @@ export default TableAccumulate.addPlugin({
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
       const onPageChange = props.get('onPageChange', () => {});
-      const onSelectionChange = props.get('onSelectionChange', () => {});
+      // const onSelectionChange = props.get('onSelectionChange', () => {});
       const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
-      const rowKey = props.get('rowKey');
+      // const rowKey = props.get('rowKey');
 
       return {
         pageProps: {
@@ -152,9 +152,9 @@ export default TableAccumulate.addPlugin({
         },
 
         pagination,
-        onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
-          _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey as string)) });
-        }),
+        // onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
+        //   _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey as string)) });
+        // }),
       };
     },
   })
@@ -299,14 +299,13 @@ export default TableAccumulate.addPlugin({
       const ref = props.get('ref');
       const Component = props.get('render');
       const tableRef = useRef({});
-      const render = useCallback((props, { attrs, slots }) => {
+      const render = useRender((props, { attrs, slots }) => {
         return (
           <ElForm style={{ width: '100%' }}>
             <Component ref={tableRef} {...props} {...attrs} v-slots={slots} />
           </ElForm>
         );
-      }, []) as RenderFunctionWithInheritAttrs;
-      render.inheritAttrs = false;
+      }, []);
       return {
         ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
         render,
@@ -320,7 +319,7 @@ export default TableAccumulate.addPlugin({
       if (!columnConfig) return {};
       const Component = props.get('render');
       const tableRef = useRef({});
-      const render = useCallback((props, { attrs, slots }) => {
+      const render = useRender((props, { attrs, slots }) => {
         const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop
             ? [{ ...node.props, header: node.children?.header }]
             : []));
@@ -339,8 +338,7 @@ export default TableAccumulate.addPlugin({
             />
           </div>
         );
-      }, []) as RenderFunctionWithInheritAttrs;
-      render.inheritAttrs = false;
+      }, []);
       return {
         render,
       };
