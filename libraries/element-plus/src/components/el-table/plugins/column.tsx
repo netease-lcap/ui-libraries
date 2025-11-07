@@ -1,11 +1,10 @@
 import { ref, cloneVNode, nextTick } from 'vue';
 import _ from 'lodash';
 import { TableColumnCtx } from 'element-plus';
-import { useMemo, useCallback } from '@/plugins/hooks';
+import { useMemo, useCallback, useEffect } from '@/plugins/hooks';
 import { ElIcon, ElCheckbox } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { $deletePropsList } from '@/plugins/constants';
-import { useEffect } from '../../../plugins/hooks';
 
 const EditDefault = {
   name: 'editDefault',

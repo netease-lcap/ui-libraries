@@ -426,15 +426,6 @@ export default TableAccumulate.addPlugin({
           _.attempt(selectionChange, { newSelection, items: value }, ...arg);
           setSelectedValues(newSelection);
         },
-        // onSelectionChange: useCallback(
-        //   _.wrap(selectionChange, (fn, value: any) => {
-        //     const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
-        //     console.log(newSelection, 'value', '==', value);
-        //     fn({ newSelection });
-        //     setSelectedValues(newSelection);
-        //   }),
-        //   [],
-        // ),
       };
     },
   });
