@@ -1,7 +1,7 @@
 import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-plus';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-// import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect, useRender } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
@@ -32,6 +32,7 @@ const TableAccumulate = new PluginAccumulateTypes<
     TableProps<any> &
     PaginationProps & {
       onBefore:(params: any) => void;
+      onSelectAll: (selection: any[]) => any;
       editTable: boolean;
     }
 >();
@@ -396,6 +397,7 @@ export default TableAccumulate.addPlugin({
       const ref = props.get('ref');
       const data = props.get('data');
       const selectionChange = props.get('onSelect', () => {});
+      const selectAllChange = props.get('onSelectAll', () => {});
       const rowKey = props.get('rowKey');
       const getRowKey = _.match(rowKey)
         .when(
@@ -428,22 +430,25 @@ export default TableAccumulate.addPlugin({
           _.attempt(selectionChange, { newSelection, items: value }, ...arg);
           setSelectedValues(newSelection);
         },
+        onSelectAll: (value) => {
+          const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
+          _.attempt(selectAllChange, { newSelection, items: value });
+          setSelectedValues(newSelection);
+        },
       };
     },
+  })
+  .addPlugin({
+    name: 'handleClickMcp',
+    handle: (props) => {
+      const refId = props.get('data-ref-id');
+      const reload = props.get('reload', () => {});
+      useEffect(() => {
+        _.attempt(subscribe, 'el_table__reload', refId, (...args) => {
+          _.attempt(reload, ...(args as [any, any]));
+        });
+        return () => _.attempt(unsubscribe, 'el_table__reload', refId);
+      }, []);
+      return {};
+    },
   });
-// .addPlugin({
-//   name: 'handleClickMcp',
-//   handle: (props) => {
-//     const refId = props.get('data-ref-id');
-//     const reload = props.get('reload', () => {});
-//     useEffect(() => {
-//       subscribe('el_table', refId, {
-//         reload,
-//       });
-//       return () => {
-//         unsubscribe('el_table__reload', refId);
-//       };
-//     }, []);
-//     return {};
-//   },
-// });

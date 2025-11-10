@@ -1,7 +1,7 @@
 // export * from './button';
 import _ from 'lodash';
 import { ElPopconfirm, buttonProps } from 'element-plus';
-// import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { $deletePropsList } from '@/plugins/constants';
 import { $PopconfirmProps } from '../constants';
 import { getPropsIcon } from '@/plugins/common/icon';
@@ -91,20 +91,16 @@ export default ButtonAccumulate.addPlugin({
         onClick: _.throttle(onClick, throttleTime),
       };
     },
+  })
+  .addPlugin({
+    name: 'handleClickMcp',
+    handle: (props) => {
+      const onClick = props.get('onClick', () => {});
+      const refId = props.get('data-ref-id');
+      useEffect(() => {
+        _.attempt(subscribe, 'el_button__click', refId, onClick);
+        return () => _.attempt(unsubscribe, 'el_button__click', refId);
+      }, [refId]);
+      return {};
+    },
   });
-// .addPlugin({
-//   name: 'handleClickMcp',
-//   handle: (props) => {
-//     const onClick = props.get('onClick', () => {});
-//     const refId = props.get('data-ref-id');
-//     useEffect(() => {
-//       subscribe('el_button', refId, {
-//         click: onClick,
-//       });
-//       return () => {
-//         unsubscribe('el_button__click', refId);
-//       };
-//     }, [refId]);
-//     return {};
-//   },
-// });

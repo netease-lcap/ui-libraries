@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
 import { FormProps } from 'element-plus';
-// import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { $formProvide } from '@/components/el-form/constants';
 import { useRef, useEffect } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -52,24 +52,21 @@ export default FormBasicAccumulate.addPlugin({
       }),
     };
   },
+}).addPlugin({
+  name: 'handleMcp',
+  handle: (props) => {
+    const refId = props.get('data-ref-id');
+    const ref = props.get('ref');
+    useEffect(() => {
+      _.attempt(subscribe, 'el_form__validate', refId, () => ref.validated());
+      _.attempt(subscribe, 'el_form__clearValidate', refId, () => {
+        ref.clearValidate();
+      });
+      return () => {
+        _.attempt(unsubscribe, 'el_form__validate', refId);
+        _.attempt(unsubscribe, 'el_form__clearValidate', refId);
+      };
+    }, [refId]);
+    return {};
+  },
 });
-// .addPlugin({
-//   name: 'handleMcp',
-//   handle: (props) => {
-//     const refId = props.get('data-ref-id');
-//     const ref = props.get('ref');
-//     useEffect(() => {
-//       subscribe('el_form', refId, {
-//         validate: ref.validated,
-//         clearValidate: () => {
-//           ref.clearValidate();
-//         },
-//       });
-//       return () => {
-//         unsubscribe('el_form__validate', refId);
-//         unsubscribe('el_form__clearValidate', refId);
-//       };
-//     }, [refId]);
-//     return {};
-//   },
-// });

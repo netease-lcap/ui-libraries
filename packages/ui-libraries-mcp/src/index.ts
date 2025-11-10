@@ -35,16 +35,12 @@ interface ComponentToolConfig {
 
 const eventBus = mitt();
 
-export const subscribe = (component: string, refId: string, config: Record<string, (...args: any[]) => void>) => {
-  Object.keys(config).forEach((key: string) => {
-    eventBus.on(`${component}---${key}--${refId}`, (...arg: any[]) => {
-      config[key](...arg);
-    });
-  });
+export const subscribe = (component: string, refId: string, handler: (...args: any[]) => void) => {
+  eventBus.on(`${component}___${refId}`, handler);
 };
 
 export const unsubscribe = (component: string, refId: string) => {
-  eventBus.off(`${component}-${refId}`);
+  eventBus.off(`${component}___${refId}`);
 };
 
 function init() {
@@ -57,7 +53,7 @@ function init() {
       return toolList.map((tool) => ({
         ...tool,
         handler(refId: string, ...arg: []) {
-          eventBus.emit(`${tool.name}-${refId}`, ...arg);
+          eventBus.emit(`${tool.name}___${refId}`, ...arg);
         },
       }));
     },
