@@ -239,9 +239,21 @@ namespace nasl.ui {
 
     // ========== 状态属性 ==========
     // 选中状态相关（联动属性组）
+
     @Prop({
       group: '状态属性',
-      title: '是否高亮当前行',
+      title: '初始即加载',
+      description: '设置初始时是否立即加载',
+      docDescription: '是否在表格出现时立即加载数据，默认开启。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    initialLoad: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '状态属性',
+      title: '单选行',
       description: '是否高亮当前行',
       setter: { concept: 'SwitchSetter' },
       onChange: [

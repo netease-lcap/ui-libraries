@@ -1,14 +1,12 @@
 // export * from './button';
 import _ from 'lodash';
 import { ElPopconfirm, buttonProps } from 'element-plus';
-
+// import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { $deletePropsList } from '@/plugins/constants';
 import { $PopconfirmProps } from '../constants';
 import { getPropsIcon } from '@/plugins/common/icon';
-import { useCallback } from '@/plugins/hooks';
+import { useCallback, useRender, useEffect } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-import { useRender } from '../../../plugins/hooks';
-// export { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 const ButtonAccumulate = new PluginAccumulateTypes<nasl.ui.ElButtonOptions, typeof buttonProps>();
 
@@ -27,7 +25,6 @@ export default ButtonAccumulate.addPlugin({
     };
   },
 })
-
   .addPlugin({
     name: 'handlePopupconfirmButton',
     handle: (props) => {
@@ -95,3 +92,19 @@ export default ButtonAccumulate.addPlugin({
       };
     },
   });
+// .addPlugin({
+//   name: 'handleClickMcp',
+//   handle: (props) => {
+//     const onClick = props.get('onClick', () => {});
+//     const refId = props.get('data-ref-id');
+//     useEffect(() => {
+//       subscribe('el_button', refId, {
+//         click: onClick,
+//       });
+//       return () => {
+//         unsubscribe('el_button__click', refId);
+//       };
+//     }, [refId]);
+//     return {};
+//   },
+// });

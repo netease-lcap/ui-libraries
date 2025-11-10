@@ -1,6 +1,7 @@
 import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-plus';
 import _ from 'lodash';
 import fp from 'lodash/fp';
+// import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect, useRender } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
@@ -8,7 +9,7 @@ import { categoryStyles } from '@/utils';
 import { ElTableToolBar } from '@/components/el-table';
 import { ElForm } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-import { IIdePluginBase, RenderFunctionWithInheritAttrs } from '@/types/pluginBase';
+import { IIdePluginBase } from '@/types/pluginBase';
 
 const orderMap = {
   descending: 'desc',
@@ -224,6 +225,7 @@ export default TableAccumulate.addPlugin({
       const onBefore = props.get('onBefore', () => {});
       const onSuccess = props.get('onSuccess', () => {});
       const ref = props.get('ref');
+      const initialLoad = props.get('initialLoad', true);
       const defaultParams = [{ currentPage, pageSize, order, sort, pagination }];
       const rowKey = props.get('rowKey');
       const parentField = props.get('parentField');
@@ -234,6 +236,7 @@ export default TableAccumulate.addPlugin({
       } = useRequestDataSource(dataSource, {
         onBefore: (params) => _.attempt(onBefore, params),
         onSuccess: (data, params) => _.attempt(onSuccess, data, params),
+        manual: !initialLoad,
         defaultParams,
         formatResult,
       });
@@ -251,6 +254,7 @@ export default TableAccumulate.addPlugin({
       return {
         ref: selfRef,
         pageProps: _.assign(pageProps, { total }),
+        reload,
         loading,
         ...dataSourceResult,
       };
@@ -427,3 +431,19 @@ export default TableAccumulate.addPlugin({
       };
     },
   });
+// .addPlugin({
+//   name: 'handleClickMcp',
+//   handle: (props) => {
+//     const refId = props.get('data-ref-id');
+//     const reload = props.get('reload', () => {});
+//     useEffect(() => {
+//       subscribe('el_table', refId, {
+//         reload,
+//       });
+//       return () => {
+//         unsubscribe('el_table__reload', refId);
+//       };
+//     }, []);
+//     return {};
+//   },
+// });

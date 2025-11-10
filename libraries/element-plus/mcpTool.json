@@ -3,7 +3,7 @@
   "id": 1,
   "tools": [
     {
-      "name": "el_button_click",
+      "name": "el_button__click",
       "title": "按钮点击",
       "description": "触发按钮点击",
       "inputSchema": {
@@ -68,7 +68,7 @@
       "_meta": null
     },
     {
-      "name": "el_form_validate",
+      "name": "el_form__validate",
       "title": "表单校验",
       "description": "对表单进行校验，支持全表单校验或者单个表单项校验",
       "inputSchema": {
@@ -155,7 +155,7 @@
       "_meta": null
     },
     {
-      "name": "el_table_reload",
+      "name": "el_table__reload",
       "title": "表格重新加载",
       "description": "重新加载表格内容，支持指定分页数",
       "inputSchema": {

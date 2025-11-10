@@ -868,8 +868,6 @@ describe('el-table plugins', () => {
     });
   });
 
-
-
   describe('边界条件和错误处理测试', () => {
     it('应该正确处理所有插件的边界情况', () => {
       const testCases = [

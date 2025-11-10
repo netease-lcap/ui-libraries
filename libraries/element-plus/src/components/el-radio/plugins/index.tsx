@@ -49,7 +49,9 @@ export default RadioAccumulate.addAccumulate(idePlugin)
             ? {}
             : {
                 default: () => _.map(dataSource, (item) => (
-                  <ElRadio {...item}>{slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.label}</ElRadio>
+                  <ElRadio {...item}>
+                    {slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.label}
+                  </ElRadio>
                   )),
               }),
         [dataSource, slots, dataConfig],
