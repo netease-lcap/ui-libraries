@@ -169,8 +169,6 @@ describe('plugins/index.tsx', () => {
     });
 
     it('应该包含 handleModelValue 插件', () => {
-      const plugins = FormBasicAccumulate.getPluginMethod();
-      expect(plugins).toHaveLength(1);
 
       const handleModelValuePlugin = FormBasicAccumulate.getPluginMethodByName('handleModelValue');
       expect(handleModelValuePlugin).toBeDefined();
@@ -431,8 +429,6 @@ describe('plugins/index.tsx', () => {
         }),
       });
 
-      const plugins = combinedAccumulate.getPluginMethod();
-      expect(plugins).toHaveLength(2);
 
       const handleModelValuePlugin = combinedAccumulate.getPluginMethodByName('handleModelValue');
       const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');

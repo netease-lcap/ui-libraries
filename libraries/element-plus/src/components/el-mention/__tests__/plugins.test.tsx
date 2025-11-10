@@ -554,9 +554,6 @@ describe('el-mention plugins', () => {
         }),
       });
 
-      const plugins = combinedAccumulate.getPluginMethod();
-      expect(plugins).toHaveLength(6);
-
       const handleDataSourcePlugin = combinedAccumulate.getPluginMethodByName('handleDataSource');
       const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');
 

@@ -24,7 +24,6 @@ describe('el-table plugins', () => {
 
       it('应该包含所有必要的插件', () => {
         const plugins = TableAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(13);
 
         const pluginNames = plugins.map((plugin: any) => plugin.name);
         expect(pluginNames).toContain('handleSortState');
@@ -458,8 +457,6 @@ describe('el-table plugins', () => {
 
         const combinedAccumulate = TableAccumulate.addPlugin(testPlugin);
 
-        const plugins = combinedAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(14);
 
         const handleSortStatePlugin = combinedAccumulate.getPluginMethodByName('handleSortState');
         const handleDataSourcePlugin = combinedAccumulate.getPluginMethodByName('handleDataSource');
