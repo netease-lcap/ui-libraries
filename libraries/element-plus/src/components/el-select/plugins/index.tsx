@@ -2,7 +2,9 @@
 import _ from 'lodash';
 import { ElSelectV2, SelectProps } from 'element-plus';
 import { CSSProperties } from 'vue';
-import { useMemo, useCallback } from '@/plugins/hooks';
+
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
+import { useMemo, useCallback, useEffect } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { ElOption } from '../index';
@@ -137,5 +139,17 @@ export default SelectBasicAccumulate.addPlugin({
         render,
         previewText,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleMcp',
+    handle(props) {
+      const refId = props.get('data-ref-id');
+      const setValue = props.get('setValue');
+      useEffect(() => {
+        _.attempt(subscribe, 'el_select__change', refId, (value) => _.attempt(setValue, value));
+        return () => _.attempt(unsubscribe, 'el_select__change', refId);
+      }, []);
+      return {};
     },
   });

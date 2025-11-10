@@ -1,9 +1,11 @@
 /* 组件功能扩展插件 */
 import _ from 'lodash';
 import { MentionProps } from 'element-plus';
+
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useMemo } from '@/plugins/hooks';
+import { useMemo, useEffect } from '@/plugins/hooks';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { ElPreview } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -69,5 +71,17 @@ export default MentionBasicAccumulate.addAccumulate(IdePlugin)
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleMcp',
+    handle(props) {
+      const refId = props.get('data-ref-id');
+      const setValue = props.get('setValue');
+      useEffect(() => {
+        _.attempt(subscribe, 'el_mention__change', refId, (value) => _.attempt(setValue, value));
+        return () => _.attempt(unsubscribe, 'el_mention__change', refId);
+      }, []);
+      return {};
     },
   });

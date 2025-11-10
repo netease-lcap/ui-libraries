@@ -66,7 +66,7 @@ export default FormBasicAccumulate.addPlugin({
         _.attempt(unsubscribe, 'el_form__validate', refId);
         _.attempt(unsubscribe, 'el_form__clearValidate', refId);
       };
-    }, [refId]);
+    }, []);
     return {};
   },
 });

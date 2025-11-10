@@ -34,40 +34,6 @@
       "_meta": null
     },
     {
-      "name": "el_form_set_value",
-      "title": "修改表单项的值",
-      "description": "直接修改表单项的值，支持单独修改某个或者批量修改多个表单项",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "refId": {
-            "type": "string",
-            "description": "表单组件的引用ID"
-          },
-          "value": {
-            "description": "单个字段的值（当只修改单个字段时使用）"
-          }
-        },
-        "required": ["refId"],
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
-      },
-      "outputSchema": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "description": "操作是否成功"
-          }
-        },
-        "required": ["success"],
-        "additionalProperties": false,
-        "$schema": "http://json-schema.org/draft-07/schema#"
-      },
-      "annotations": null,
-      "_meta": null
-    },
-    {
       "name": "el_form__validate",
       "title": "表单校验",
       "description": "对表单进行校验，支持全表单校验或者单个表单项校验",
@@ -120,7 +86,7 @@
       "_meta": null
     },
     {
-      "name": "el_form_clear_validate",
+      "name": "el_form__clearValidate",
       "title": "移除表单的校验结果",
       "description": "移除整个表单的校验结果或移除表单项的校验结果",
       "inputSchema": {
@@ -171,6 +137,108 @@
           }
         },
         "required": ["refId"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "操作是否成功"
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    },
+    {
+      "name": "el_input__change",
+      "title": "输入框值变更",
+      "description": "触发输入框的值变化，用于为输入框设置新的内容",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "输入框组件的引用ID"
+          },
+          "value": {
+            "description": "变更后的输入框值"
+          }
+        },
+        "required": ["refId", "value"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "操作是否成功"
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    },
+    {
+      "name": "el_mention__change",
+      "title": "提及输入值变更",
+      "description": "触发提及组件的值变化，用于更新提及输入框内容",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "提及组件的引用ID"
+          },
+          "value": {
+            "description": "变更后的提及内容"
+          }
+        },
+        "required": ["refId", "value"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "操作是否成功"
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    },
+    {
+      "name": "el_select__change",
+      "title": "选择器值变更",
+      "description": "触发下拉选择器的值变化，用于更新选择结果",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "选择器组件的引用ID"
+          },
+          "value": {
+            "description": "变更后的选中值，支持字符串或数组"
+          }
+        },
+        "required": ["refId", "value"],
         "additionalProperties": false,
         "$schema": "http://json-schema.org/draft-07/schema#"
       },
