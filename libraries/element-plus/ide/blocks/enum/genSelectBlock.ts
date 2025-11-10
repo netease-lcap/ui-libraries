@@ -10,7 +10,7 @@ export function genSelectBlock(enumNode: naslTypes.Enum, refElement: naslTypes.V
       clearable={true}
       placeholder="请选择${label}"
       textField="text"
-      valueField="value"
+      valueField="item"
       dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}>
   </ElSelect>
   }`;
