@@ -575,7 +575,7 @@ describe('el-table 插件集成测试', () => {
 
       await waitForNextUpdate();
 
-      expect(currentValue.value.onSelectionChange).toBeDefined();
+      expect(currentValue.value.onSelect).toBeDefined();
     });
   });
 
@@ -944,7 +944,7 @@ describe('el-table 插件集成测试', () => {
       expect(currentValue.value.data).toBeDefined();
       expect(currentValue.value.pageProps.total).toBe(100);
       expect(currentValue.value.sort).toBe('age');
-      expect(currentValue.value.onSelectionChange).toBeDefined();
+      expect(currentValue.value.onSelect).toBeDefined();
     });
 
     it('完整流程：树形数据 + 分页 + 粘性定位 + 高度限制', async () => {

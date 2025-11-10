@@ -1,14 +1,9 @@
 /** @jsx h */
-import { ref, watch, computed, h } from 'vue';
+import { ref, watch, computed, h, getCurrentInstance } from 'vue';
 import { ElPagination } from 'element-plus';
-// import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
-// import zhCn from 'element-plus/es/locale/lang/zh-cn';
-// import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
-// import en from 'element-plus/dist/locale/en.mjs';
 import _ from 'lodash';
 import { ElTable, ElTableColumn, ElTableColumnDynamic } from '../../index';
 
-// import i18n from '../../../../dist-theme/i18n.json';
 import { transformKeys } from '../../../utils';
 
 import Component from '../index';
@@ -148,7 +143,7 @@ export const Example1 = {
       setTimeout(() => {
         console.log('table data change');
         tableData2.value.splice(0, 1);
-        console.log(tableData2,'tableData2');
+        console.log(tableData2, 'tableData2');
       }, 1000);
       const logCellClick = (...el) => {
         console.log(tableData2.value, 'logCellClick');
@@ -384,60 +379,6 @@ export const Example3 = {
       watch(selectedRowKeys, (el) => {
         console.log(el, 'log');
       });
-      function getTestData() {
-        return [
-          {
-            id: 1,
-            hd: {
-              id: 1,
-            },
-            name: 'Toy Story',
-            release: '1995-11-22',
-            director: 'John Lasseter',
-            runtime: 80,
-          },
-          {
-            hd: {
-              id: 2,
-            },
-            id: 2,
-            name: "A Bug's Life",
-            release: '1998-11-25',
-            director: 'John Lasseter',
-            runtime: 95,
-          },
-          {
-            hd: {
-              id: 3,
-            },
-            id: 3,
-            name: 'Toy Story 2',
-            release: '1999-11-24',
-            director: 'John Lasseter',
-            runtime: 92,
-          },
-          {
-            id: 4,
-            hd: {
-              id: 4,
-            },
-            name: 'Monsters, Inc.',
-            release: '2001-11-2',
-            director: 'Peter Docter',
-            runtime: 92,
-          },
-          {
-            hd: {
-              id: 5,
-            },
-            id: 5,
-            name: 'Finding Nemo',
-            release: '2003-5-30',
-            director: 'Andrew Stanton',
-            runtime: 100,
-          },
-        ];
-      }
 
       const currentRowKey = ref([1, 2]);
       const tableRef = ref();
@@ -511,5 +452,113 @@ export const Example3 = {
         <button @click="handleCurrentChange(1)">1</button>
     </div>
     `,
+  }),
+};
+
+export const Example4 = {
+  name: '示例4',
+  render: () => ({
+    data() {
+      function getTestData() {
+        return [
+          {
+            id: 1,
+            hd: {
+              id: 1,
+            },
+            name: 'Toy Story',
+            release: '1995-11-22',
+            director: 'John Lasseter',
+            runtime: 80,
+          },
+          {
+            hd: {
+              id: 2,
+            },
+            id: 2,
+            name: "A Bug's Life",
+            release: '1998-11-25',
+            director: 'John Lasseter',
+            runtime: 95,
+          },
+          {
+            hd: {
+              id: 3,
+            },
+            id: 3,
+            name: 'Toy Story 2',
+            release: '1999-11-24',
+            director: 'John Lasseter',
+            runtime: 92,
+          },
+          {
+            id: 4,
+            hd: {
+              id: 4,
+            },
+            name: 'Monsters, Inc.',
+            release: '2001-11-2',
+            director: 'Peter Docter',
+            runtime: 92,
+          },
+          {
+            hd: {
+              id: 5,
+            },
+            id: 5,
+            name: 'Finding Nemo',
+            release: '2003-5-30',
+            director: 'Andrew Stanton',
+            runtime: 100,
+          },
+        ];
+      }
+      const treeProps = {
+        children: 'childrenTest',
+        checkStrictly: false,
+      };
+      const testData = getTestData();
+      testData[1].childrenTest = [
+        {
+          id: 21,
+          name: "A Bug's Life copy 1",
+          release: '1998-11-25-1',
+          director: 'John Lasseter',
+          runtime: 95,
+        },
+        {
+          id: 22,
+          name: "A Bug's Life copy 2",
+          release: '1998-11-25-2',
+          director: 'John Lasseter',
+          runtime: 95,
+        },
+      ];
+      // setTimeout(() => {
+      //   const a = getCurrentInstance();
+      //   console.log(a, 'current');
+      // }, 3000);
+      return {
+        treeProps,
+        testData,
+        selected: [],
+      };
+    },
+
+    methods: {
+      change(rows) {
+        this.selected = rows;
+        console.log(this, 'current');
+      },
+    },
+    template: `
+    <el-table :data="testData" :tree-props="treeProps" row-key="id" @selection-change="change">
+              <el-table-column type="selection" />
+              <el-table-column prop="name" label="name" />
+              <el-table-column prop="release" label="release" />
+              <el-table-column prop="director" label="director" />
+              <el-table-column prop="runtime" label="runtime" />
+            </el-table>
+`,
   }),
 };

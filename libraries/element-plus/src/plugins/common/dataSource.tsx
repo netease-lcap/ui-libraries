@@ -82,7 +82,7 @@ interface RequestResult {
   loading?: boolean;
 }
 const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions = {}): RequestResult => {
-  const [resultData, setResult] = useState<RequestResult>({ data: [] });
+  const [resultData, setResult] = useState({});
   const [loading, setLoading] = useState(false);
   const run = useRef<(...args: any[]) => void>(() => {}, false);
   const { onBefore = () => {}, onSuccess = () => {}, formatResult = (value) => value, defaultParams = [] } = options;
