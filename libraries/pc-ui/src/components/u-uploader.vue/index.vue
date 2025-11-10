@@ -457,7 +457,7 @@ export default {
             }
 
             this.$emit('select-files', {
-              files,
+              files: files ? Array.from(files) : [],
             });
 
             if (!files || this.disableUpload)
