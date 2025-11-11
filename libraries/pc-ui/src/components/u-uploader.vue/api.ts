@@ -607,13 +607,7 @@ namespace nasl.ui {
             description: '发送进度改变时触发，在上传进度条时使用',
         })
         onProgress: (event: {
-            item: {
-              status: nasl.core.String;
-              url: nasl.core.String;
-              name: nasl.core.String;
-              size: nasl.core.Integer;
-              type: nasl.core.String;
-            };
+            item: nasl.io.FileInfo;
             file: nasl.io.File;
         }) => any;
 
@@ -649,13 +643,7 @@ namespace nasl.ui {
             description: '上传成功时触发',
         })
         onSuccess: (event: {
-            item: {
-              status: nasl.core.String;
-              url: nasl.core.String;
-              name: nasl.core.String;
-              size: nasl.core.Integer;
-              type: nasl.core.String;
-            };
+            item: nasl.io.FileInfo;
             file: nasl.io.File;
         }) => any;
 
@@ -664,13 +652,7 @@ namespace nasl.ui {
             description: '上传报错时触发',
         })
         onError: (event: {
-            item: {
-              status: nasl.core.String;
-              url: nasl.core.String;
-              name: nasl.core.String;
-              size: nasl.core.Integer;
-              type: nasl.core.String;
-            };
+            item: nasl.io.FileInfo;
             file: nasl.io.File;
         }) => any;
 
@@ -683,13 +665,7 @@ namespace nasl.ui {
                 url: nasl.core.String;
                 name: nasl.core.String;
             },
-            item: {
-              status: nasl.core.String;
-              url: nasl.core.String;
-              name: nasl.core.String;
-              size: nasl.core.Integer;
-              type: nasl.core.String;
-            },
+            item: nasl.io.FileInfo,
             index: nasl.core.Integer;
         }) => any;
 
