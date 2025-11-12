@@ -5,7 +5,7 @@
             <u-button @click="changeData">changeData</u-button>
             <u-button @click="exportExcel">导出 Excel</u-button>
         </u-linear-layout>
-        <u-table-view ref="tableView" striped :data="data" pageable :page-size="10" footerCalcShow :footerCalcFormater="footerCalcFormater">
+        <u-table-view ref="tableView" striped :data="data" pageable :page-size="10" footerCalcShow :footerCalcFormater="footerCalcFormater" line>
             <u-table-view-column title="用户名" field="name" width="15%"></u-table-view-column>
             <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
             <u-table-view-column title="地址" field="address"></u-table-view-column>
@@ -46,8 +46,8 @@ export default {
             });
         },
         exportExcel() {
-            // this.$refs.tableView.exportExcel('', '', '', '', '', ['地址', '最近登录时间'], false);
-            this.$refs.tableView.exportExcel();
+            this.$refs.tableView.exportExcel('', '', '', '', '', [], true);
+            // this.$refs.tableView.exportExcel();
         },
         footerCalcFormater(item) {
             if (item.value) {
