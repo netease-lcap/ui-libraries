@@ -589,6 +589,7 @@ td[sub-form-drop-column]::after {
 .footer-calc {
     overflow: hidden;
     margin-top: -1px;
+    position: relative;
 }
 
 .footer-calc .cell {
@@ -599,34 +600,41 @@ td[sub-form-drop-column]::after {
     border-top: 1px solid var(--table-view-border-color);
 }
 
-.root[line]::before, .root[line]::after,
-.root[line] .table::before, .root[line] .table::after {
+.root[line] .table::before, .root[line] .table::after,
+.root[line] .footer-calc::before, .root[line] .footer-calc::after,
+.root[line] .scrollcview::after {
     content: "";
     position: absolute;
     background-color: var(--table-view-border-color);
     z-index: calc(var(--table-view-column-sticky-zindex) + 2);
 }
-.root[line]::before {
+.root[line] .table::before {
     top: -1px;
     left: 0;
     width: 1px;
     height: 100%;
 }
-.root[line]::after {
+.root[line] .table::after {
     top: -1px;
     right: 0;
     width: 1px;
     height: 100%; 
 }
-.root[line] .table::before {
+.root[line] .footer-calc::before {
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+}
+.root[line] .footer-calc::after {
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+}
+.root[line] .scrollcview::after {
     left: 0;
     bottom: 0;
-    height: 1px;
-    width: 100%;
-}
-.root[line] .table::after {
-    left: 0;
-    top: 0;
     width: 100%;
     height: 1px;
 }
@@ -634,5 +642,6 @@ td[sub-form-drop-column]::after {
     border-bottom: 1px solid var(--table-view-border-color);
     border-right: 1px solid var(--table-view-border-color);
 }
-
-
+.root[line] .table {
+    border-top: 1px solid var(--table-view-border-color);
+}
