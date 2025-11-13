@@ -457,7 +457,6 @@ describe('el-table plugins', () => {
 
         const combinedAccumulate = TableAccumulate.addPlugin(testPlugin);
 
-
         const handleSortStatePlugin = combinedAccumulate.getPluginMethodByName('handleSortState');
         const handleDataSourcePlugin = combinedAccumulate.getPluginMethodByName('handleDataSource');
         const testPluginResult = combinedAccumulate.getPluginMethodByName('testPlugin');
