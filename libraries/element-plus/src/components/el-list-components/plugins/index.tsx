@@ -260,7 +260,7 @@ export default listComponentsBasicAccumulate
             <Component {...props} {...attrs} v-slots={slots} />
             {props.pagination === 'page' && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                <ElPagination {...props.pageProps} total={props.pageProps.total} />
+                <ElPagination {...props.pageProps} total={props?.pageProps?.total} />
               </div>
             )}
           </div>
