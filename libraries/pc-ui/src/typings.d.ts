@@ -4,4 +4,12 @@ declare namespace nasl.io {
     size: number;
     type: string;
   }
+
+  export interface FileInfo {
+    status: string;
+    url: string;
+    name: string;
+    size: number;
+    type: string;
+  }
 }
