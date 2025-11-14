@@ -50,6 +50,12 @@ namespace nasl.ui {
       description: '清除缓存，重新加载',
     })
     reload(): void {}
+
+    @Prop({
+      title: '过滤文本',
+    })
+    filterText: nasl.core.String;
+
     constructor(options?: Partial<ElSelectOptions<T, V, P, M, C>>) {
       super();
     }
@@ -67,7 +73,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '数据源',
       description: '设置选择器的数据来源，支持绑定集合类型变量或返回集合的逻辑',
-      docDescription: '可以绑定 List<T> 类型的变量，或者绑定返回 List<T> 类型的逻辑。当使用数据源时，选择器会根据数据动态生成选项，每个数据项对应一个选项。',
+      docDescription:
+        '可以绑定 List<T> 类型的变量，或者绑定返回 List<T> 类型的逻辑。当使用数据源时，选择器会根据数据动态生成选项，每个数据项对应一个选项。',
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
@@ -83,7 +90,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '文本字段',
       description: '指定数据项中哪个字段作为选项的显示文本',
-      docDescription: '当使用数据源时，需要指定数据项中的哪个属性作为选项的显示文本。例如：如果数据项有name字段，则选择name作为文本字段。',
+      docDescription:
+        '当使用数据源时，需要指定数据项中的哪个属性作为选项的显示文本。例如：如果数据项有name字段，则选择name作为文本字段。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -94,7 +102,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '值字段',
       description: '指定数据项中哪个字段作为选项的值',
-      docDescription: '当使用数据源时，需要指定数据项中的哪个属性作为选项的值。此值用于判断哪个选项被选中，以及触发相关事件时传递的参数。',
+      docDescription:
+        '当使用数据源时，需要指定数据项中的哪个属性作为选项的值。此值用于判断哪个选项被选中，以及触发相关事件时传递的参数。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -105,7 +114,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '描述字段',
       description: '指定数据项中哪个字段作为选项的描述文本',
-      docDescription: '当使用数据源时，可以指定数据项中的哪个属性作为选项的描述文本。描述文本通常显示在选项文本下方，提供额外的说明信息。',
+      docDescription:
+        '当使用数据源时，可以指定数据项中的哪个属性作为选项的描述文本。描述文本通常显示在选项文本下方，提供额外的说明信息。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -117,7 +127,8 @@ namespace nasl.ui {
       sync: true,
       title: '选中值',
       description: '当前选中的选项值，支持双向绑定',
-      docDescription: '绑定当前选中的选项值。单选模式下为单个值，多选模式下为数组。当用户选择或取消选择时，此值会自动更新。',
+      docDescription:
+        '绑定当前选中的选项值。单选模式下为单个值，多选模式下为数组。当用户选择或取消选择时，此值会自动更新。',
       setter: { concept: 'InputSetter' },
     })
     modelValue: M extends true ? nasl.collection.List<V> : V;
@@ -126,7 +137,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '选中数据',
       description: '当前选中选项的完整数据对象',
-      docDescription: '当下拉列表使用分页或加载更多时，需要使用此字段来回显选择框内的完整数据。包含选中选项的标签和值信息。',
+      docDescription:
+        '当下拉列表使用分页或加载更多时，需要使用此字段来回显选择框内的完整数据。包含选中选项的标签和值信息。',
     })
     selectedValuesData: nasl.collection.List<{ label: nasl.core.String; value: V }>;
 
@@ -164,7 +176,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '虚拟滚动',
       description: '是否开启虚拟滚动优化',
-      docDescription: '开启后，当选项数量很多时会使用虚拟滚动技术，只渲染可见区域的选项，提高性能。仅在使用数据源时有效。',
+      docDescription:
+        '开启后，当选项数量很多时会使用虚拟滚动技术，只渲染可见区域的选项，提高性能。仅在使用数据源时有效。',
       setter: { concept: 'SwitchSetter' },
     })
     virtualize: nasl.core.Boolean = false;
@@ -213,10 +226,20 @@ namespace nasl.ui {
       group: '交互属性',
       title: '可搜索',
       description: '是否允许搜索选项',
-      docDescription: '开启后，用户可以在选择框中输入文字来搜索选项。默认搜索规则不区分大小写，支持全文本任意位置匹配。',
+      docDescription:
+        '开启后，用户可以在选择框中输入文字来搜索选项。默认搜索规则不区分大小写，支持全文本任意位置匹配。',
       setter: { concept: 'SwitchSetter' },
     })
     filterable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '交互属性',
+      title: '远程搜索',
+      description: '是否开启远程搜索',
+      docDescription: '开启后，组件不会过滤选项，而是改变当前组件.filterText属性，用户自行实现搜索逻辑。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    remote: nasl.core.Boolean = false;
 
     // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({

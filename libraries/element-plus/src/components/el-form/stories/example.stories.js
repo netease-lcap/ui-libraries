@@ -45,7 +45,7 @@ export const Example1 = {
     <div>
     {{model}}
     <el-form :model="model">
-      <el-form-input  label="input21" :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
+      <el-form-input style="border: 1px solid red;"  label="input21" :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
     </el-form>
     </div>
 

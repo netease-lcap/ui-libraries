@@ -152,4 +152,22 @@ export default SelectBasicAccumulate.addPlugin({
       }, []);
       return {};
     },
+  })
+  .addPlugin({
+    name: 'handleRemote',
+    handle(props) {
+      const remote = props.get('remote');
+      if (!remote) return {};
+      const emit = props.get('emit');
+      const remoteMethodProps = props.get('remoteMethod');
+      const ref = props.get('ref');
+      const remoteMethod = _.wrap(remoteMethodProps, (fn, query: string) => {
+        emit('sync:state', 'filterText', query);
+        _.attempt(ref?.reload);
+        _.attempt(fn, query);
+      });
+      return {
+        remoteMethod,
+      };
+    },
   });
