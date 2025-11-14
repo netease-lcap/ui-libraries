@@ -45,7 +45,10 @@ export function handleDataSource(props) {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
     loading,
-    slots,
+    slots: {
+      ...slots,
+      'columns-top': <div>1234</div>,
+    },
     columns: TreeData,
     formTagName: 'van-form-picker',
     tagName: 'van-picker',
@@ -103,7 +106,7 @@ export function handlewFieldState(props) {
 export function handleFieldRender(props) {
   const Component = props.get('render');
   const render = useCallback(
-    (props) => {
+    (props,{slots}) => {
       const { setShow, show, value, setValue, fieldValue, clearable, mergeRef, ...componentProps } = props;
       const rightIcon = clearable ? 'clear' : '';
       const { outerProps, innerProps } = categoryProps(componentProps);
@@ -141,6 +144,7 @@ export function handleFieldRender(props) {
               'expose',
               'show',
             ])}
+            v-slots={slots}
             modelValue={value}
             ref={mergeRef}
           />

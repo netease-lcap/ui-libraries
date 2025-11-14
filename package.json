@@ -79,6 +79,7 @@
     "lint-staged": "^15.2.0",
     "minimist": "^1.2.8",
     "simple-git": "^3.28.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.9.3"
   }
 }
+

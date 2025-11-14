@@ -1,6 +1,9 @@
 import _ from 'lodash';
 import dayjs from 'dayjs';
 import { match } from 'ts-pattern';
+import mcpJson from '@/mcpTool.json';
+
+export const mcpToolJson = mcpJson;
 
 export * from './dom';
 export * from './curry';
