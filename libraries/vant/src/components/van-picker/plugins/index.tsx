@@ -47,7 +47,7 @@ export function handleDataSource(props) {
     loading,
     slots: {
       ...slots,
-      'columns-top': <div>1234</div>,
+      // 'columns-top': <div>1234</div>,
     },
     columns: TreeData,
     formTagName: 'van-form-picker',
