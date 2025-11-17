@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { getHashDigest } from 'loader-utils';
+import dayjs from 'dayjs';
 import type { LcapBuildOptions } from '../types';
 
 const getManifest = (type, outDir, modulesOutDir = 'es') => {
@@ -78,6 +79,7 @@ export default async function genManifestConfig(options: LcapBuildOptions) {
 
   manifest.package.push('zip.tgz');
   manifest.hashMap = await genFilesHashMap(options.rootPath, hashFiles);
+  manifest.hashMap['zip.tgz'] = dayjs().format('YYYYMMDDHHmmssSSS');
 
   return manifest;
 }
