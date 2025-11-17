@@ -1,5 +1,5 @@
 <template>
-<div v-if="$env.VUE_APP_DESIGNER" :class="$style.root" ref="root" :border="border">
+<div v-if="$env.VUE_APP_DESIGNER" :class="$style.root" ref="root" :border="border" :line="line">
     <div v-if="title" :class="$style.title" ref="title" :style="{ textAlign: titleAlignment }" vusion-slot-name="title" vusion-slot-name-edit="title">
         <slot name="title">{{ title }}</slot>
     </div>
@@ -118,7 +118,7 @@
         <div :class="$style.trdragGhost" ref="trDragGhost"></div>
     </div>
 </div>
-<div v-else :class="$style.root" ref="root" :border="border"
+<div v-else :class="$style.root" ref="root" :border="border" :line="line"
     @dragend="onDragEnd($event)"
     @drop="onDrop($event)"
     @dragover="onRootDragover($event)"
@@ -1596,22 +1596,15 @@ export default {
                     colItem.rect.width = +colItem.rect.width / colspan;
                     colItem.rect.height = +colItem.rect.height / rowspan;
                 }
-                for (let i = item.col + 1; i < item.col + colspan; i++) {
-                    if (!res[item.row][i]) {
-                        res[item.row][i] = {
-                            t: 's',
-                            v: '', // 必须设置，单设置s没有效果
-                            s: colItem.s,
-                        };
-                    }
-                }
-                for (let i = item.row + 1; i < item.row + rowspan; i++) {
-                    if (!res[i][item.col]) {
-                        res[i][item.col] = {
-                            t: 's',
-                            v: '',
-                            s: colItem.s,
-                        };
+                for (let i = item.row; i < item.row + rowspan; i++) {
+                    for (let j = item.col; j < item.col + colspan; j++) {
+                         if (!res[i][j]) {
+                            res[i][j] = {
+                                t: 's',
+                                v: '', // 必须设置，单设置s没有效果
+                                s: colItem.s,
+                            };
+                         }
                     }
                 }
             });
