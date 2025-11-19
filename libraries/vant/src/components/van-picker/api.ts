@@ -28,6 +28,18 @@ namespace nasl.ui {
     })
     reload(): void {}
 
+    @Method({
+      title: '显示',
+      description: '显示选择器',
+    })
+    show(): void {}
+
+    @Method({
+      title: '关闭',
+      description: '关闭选择器',
+    })
+    close(): void {}
+
     @Prop({
       title: '过滤文本',
     })

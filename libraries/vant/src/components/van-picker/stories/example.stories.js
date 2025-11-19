@@ -16,6 +16,7 @@ export const Default = {
     props: Object.keys(argTypes),
     setup() {
       const value = ref();
+      const myref = ref();
       const pickerRef = ref(null);
       setTimeout(() => {
         console.log(pickerRef, '==pickerRef');
@@ -128,7 +129,7 @@ export const Default = {
       };
     },
     template: `
-      <van-form-picker 
+      <van-picker 
       :filterable="true"
       :remote="true"
         v-model="value"

@@ -44,7 +44,6 @@ export function handleDataSource(props) {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
     loading,
-
     columns: TreeData,
     formTagName: 'van-form-picker',
     tagName: 'van-picker',
@@ -79,14 +78,13 @@ handleSearchRender.order = 5;
 export function handlewFieldState(props) {
   const columns = props.get('columns');
   const mergeRef = props.get($mergeRef);
+  const refProps = props.get('ref');
   const onCancelProps = props.get('onCancel', () => {});
   const onConfirmProps = props.get('onConfirm', () => {});
 
   const value = props.get('modelValue');
   const setValue = props.get('onUpdate:modelValue');
-  // const [value, setValue] = useControllableValue(props, {
-  //   defaultValue: [],
-  // });
+
   const fieldValue = useMemo(() => {
     const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item)?.text);
     return _.join(selected, ',');
@@ -96,6 +94,13 @@ export function handlewFieldState(props) {
     valuePropName: 'show',
     trigger: 'onUpdate:show',
   });
+  const ref = useMemo(
+    () => _.assign(refProps, {
+        show: () => setShow(true),
+        close: () => setShow(false),
+      }),
+    [setShow, refProps],
+  );
   const onCancel = useCallback(
     _.wrap(onCancelProps, (fn, ...args) => {
       _.attempt(fn, ...args);
@@ -113,6 +118,7 @@ export function handlewFieldState(props) {
   );
 
   return {
+    ref,
     mergeRef,
     show,
     setShow,
