@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { onMounted, onUnmounted, ref, getCurrentInstance, unref } from 'vue';
+import { onMounted, onUnmounted, ref, Ref, getCurrentInstance, unref, ComponentInternalInstance } from 'vue';
 import { PluginBase } from '@/types';
 
 interface Hook {
@@ -119,7 +119,7 @@ export function useState(initialstate?) {
   };
   return [getStateValue(state), localSetValue];
 }
-export function useRef(initialstate) {
+export function useRef<T>(initialstate: T): Ref<T> {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook;
@@ -177,7 +177,7 @@ export function useEffect(callBack, dep) {
   return null;
 }
 
-export function useMemo(callBack, dep) {
+export function useMemo<T>(callBack: () => T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook;
@@ -205,7 +205,7 @@ export function useMemo(callBack, dep) {
   }
   return hook.result;
 }
-export function useCallback(callBack, dep) {
+export function useCallback<T>(callBack: T, dep) {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook;
@@ -237,7 +237,7 @@ export function useCallback(callBack, dep) {
 export function useControllableValue(props: any, options: Options = {}) {
   const instance = useMemo(() => getCurrentInstance(), []);
 
-  const { vnode } = instance;
+  const { vnode } = instance as ComponentInternalInstance;
   const emit = props.get('emit');
   const vProps = vnode.props || {};
   const {

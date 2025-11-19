@@ -129,6 +129,8 @@ export const Default = {
     },
     template: `
       <van-form-picker 
+      :filterable="true"
+      :remote="true"
         v-model="value"
         textField="tree.treename222"
         valueField="tree.id"

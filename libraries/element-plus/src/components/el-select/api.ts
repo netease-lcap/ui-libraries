@@ -232,12 +232,13 @@ namespace nasl.ui {
     })
     filterable: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElSelectOptions<T, V, P, M, C>, 'remote'>({
       group: '交互属性',
       title: '远程搜索',
       description: '是否开启远程搜索',
       docDescription: '开启后，组件不会过滤选项，而是改变当前组件.filterText属性，用户自行实现搜索逻辑。',
       setter: { concept: 'SwitchSetter' },
+      if: (_) => !!_.filterable,
     })
     remote: nasl.core.Boolean = false;
 

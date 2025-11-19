@@ -11,19 +11,22 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
   "exclude": [
-    "**/templates/*",
-    "**/node_modules/*",
-    "**/dist/*",
-    "node_modules/*",
-    "**/storybook-static/*",
-    "libraries/**/node_modules/*",
-    "libraries/**/dist-theme/*",
-    "libraries/**/design/*",
-    "packages/**/node_modules/*",
-    "packages/**/dist/*",
-    "setters/node_modules/*",
+    "**/node_modules",
+    "**/dist",
+    "**/dist-theme",
+    "**/es",
+    "**/coverage",
+    "**/storybook-static",
+    "**/templates",
+    "**/.git",
+    "**/*.tgz",
+    "libraries/**/design",
+    "libraries/**/cloudui",
+    "packages/**/lib",
+    "packages/**/input"
   ]
 }

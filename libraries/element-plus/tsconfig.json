@@ -31,6 +31,19 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "ide/**/*.ts"],
-  "references": [],
-  "exclude": ["node_modules", "dist", "es", "dist-theme", ]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "es",
+    "dist-theme",
+    "coverage",
+    "**/node_modules",
+    "**/dist",
+    "**/es",
+    "**/dist-theme",
+    "**/coverage",
+    "**/storybook-static",
+    "ep-test"
+  ],
+  "references": []
 }

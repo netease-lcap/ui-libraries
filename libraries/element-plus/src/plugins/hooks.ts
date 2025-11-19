@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { onMounted, onUnmounted, ref, getCurrentInstance, type Ref } from 'vue';
-import { PluginBase } from '@/types';
+import { PluginBase, RenderFunctionWithInheritAttrs } from '@/types';
 import { componentLog } from '@/utils/curry';
-import { RenderFunctionWithInheritAttrs } from '@/types/pluginBase';
+// import { RenderFunctionWithInheritAttrs } from '@/types/pluginBase';
 
 const searchParamsStr = window.location.search; // 结果："?name=Alice&age=25&hobby=reading&hobby=hiking"
 const params = new URLSearchParams(searchParamsStr);

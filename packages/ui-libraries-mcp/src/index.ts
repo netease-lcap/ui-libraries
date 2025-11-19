@@ -44,10 +44,10 @@ export const unsubscribe = (component: string, refId: string) => {
 };
 
 function init() {
-  const toolList: ComponentToolConfig[] = [];
+  let toolList: ComponentToolConfig[] = [];
   return {
     registerTool(tool: ComponentToolConfig) {
-      toolList.push(tool);
+      toolList = toolList.concat(tool);
     },
     getComponentTools() {
       return toolList.map((tool) => ({

@@ -14,5 +14,11 @@
     "skipLibCheck": true,
     "baseUrl": "."
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "**/node_modules",
+    "**/lib"
+  ]
 }
