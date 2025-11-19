@@ -16,4 +16,22 @@ export default PaginationBasicAccumulate.addPlugin({
       pageSizes,
     };
   },
-});
+})
+  .addPlugin({
+    name: 'handleOnChange',
+    handle(props) {
+      const onChange = props.get('onChange');
+      return {
+        onChange: (currentPage: number, pageSize: number) => onChange({ currentPage, pageSize }),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleTotal',
+    type: 'ide',
+    handle(props) {
+      return {
+        total: 50,
+      };
+    },
+  });

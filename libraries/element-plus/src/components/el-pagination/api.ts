@@ -157,7 +157,6 @@ namespace nasl.ui {
     })
     private defaultPageSize: nasl.core.Decimal = 10;
 
-
     @Prop({
       group: '主要属性',
       title: '是否在单页时隐藏',
@@ -180,24 +179,22 @@ namespace nasl.ui {
     })
     onCurrentChange: (event: nasl.core.Integer) => any;
 
-
     @Event({
       title: '改变时',
       description: '当前页或分页大小发生变化时触发。',
     })
-    onChange: (event: any) => any;
+    onChange: (event: { currentPage: nasl.core.Integer; pageSize: nasl.core.Integer }) => any;
 
     @Event({
       title: '上一页点击时',
       description: '上一页点击时触发',
     })
-    onPrevClick: (event: any) => any;
+    onPrevClick: () => any;
 
     @Event({
       title: '下一页点击时',
       description: '下一页点击时触发',
     })
-    onNextClick: (event: any) => any;
-
+    onNextClick: () => any;
   }
 }
