@@ -1076,8 +1076,8 @@ importers:
         specifier: ^7.28.2
         version: 7.28.2
       '@lcap/extension-shared':
-        specifier: ^1.0.4-beta.2
-        version: 1.0.4-beta.2
+        specifier: ^1.0.4
+        version: 1.0.4
       '@lcap/extension-ui':
         specifier: ^1.1.1
         version: 1.1.1
@@ -3350,8 +3350,8 @@ packages:
   '@kwsites/promise-deferred@1.1.1':
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
 
-  '@lcap/extension-shared@1.0.4-beta.2':
-    resolution: {integrity: sha512-IXpq0wc1pUDs20Cc6TakRabvtzNiiunS/3YRNmVm2kzOHTDCMqDPSX+j/tycDYAijR3g97nI+WVg51GPcfvFJQ==}
+  '@lcap/extension-shared@1.0.4':
+    resolution: {integrity: sha512-1PTvZGi38wEr7dOn102td4uO+nJ6oAhL9CajH2fWjbhWNpBhbTgAqPYYIuezn8DfW0Vi8eLjB2i6mT1lHxbUSQ==}
 
   '@lcap/extension-ui@1.1.1':
     resolution: {integrity: sha512-DDEvrb2prdGtIitu9v1/R+O7sIvG34ZZupTsP8G9B9IfJV7RZbznZJgWkGl4nz8QXWDHyp+XzF6zZkEI47d/zQ==}
@@ -14594,7 +14594,7 @@ snapshots:
 
   '@kwsites/promise-deferred@1.1.1': {}
 
-  '@lcap/extension-shared@1.0.4-beta.2':
+  '@lcap/extension-shared@1.0.4':
     dependencies:
       '@babel/generator': 7.28.0
       '@babel/parser': 7.28.0
