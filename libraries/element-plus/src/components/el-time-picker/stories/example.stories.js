@@ -25,12 +25,16 @@ export const Default = {
         console.log(event);
       };
       const value = ref();
+      const change = (event) => {
+        console.log(event);
+      };
       return {
         clear,
         value,
+        change,
       };
     },
-    template: '<el-time-picker v-model="value"  placeholder="请选择时间" :clearable="true" @clear="clear($event)"></el-time-picker>',
+    template: '<el-time-picker isRange @change="change" v-model="value"  placeholder="请选择时间" :clearable="true" @clear="clear($event)"></el-time-picker>',
   }),
 };
 

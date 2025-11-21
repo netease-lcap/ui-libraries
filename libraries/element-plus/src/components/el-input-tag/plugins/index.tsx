@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import { InputTagProps } from 'element-plus';
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { ElPreview } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import idePlugin from './ide';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
+import { useEffect } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 
 const InputTagBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElInputTagOptions, InputTagProps>();
@@ -49,5 +51,17 @@ export default InputTagBasicAccumulate.addAccumulate(idePlugin)
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleMcp',
+    handle(props) {
+      const refId = props.get('data-ref-id');
+      const setValue = props.get('setValue');
+      useEffect(() => {
+        _.attempt(subscribe, 'el_input-tag__change', refId, (...args) => _.attempt(setValue, ...args));
+        return () => _.attempt(unsubscribe, 'el_input-tag__change', refId);
+      }, []);
+      return {};
     },
   });

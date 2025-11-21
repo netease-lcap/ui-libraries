@@ -42,11 +42,12 @@ namespace nasl.ui {
   }
 
   export class ElTimelineOptions<T, V> extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description: '时间线的数据来源',
+      docDescription: '设置时间线的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       designerValue: [{}, {}, {}],
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
@@ -54,16 +55,16 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据类型',
-      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+      description: '数据源返回的数据结构类型',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示说明。',
     })
     dataSchema: T;
 
     @Prop<ElTimelineOptions<T, V>, 'timestampField'>({
       group: '数据属性',
       title: '时间戳字段',
-      description: '集合的元素类型中，用于标识时间戳的属性，string类型',
-      docDescription: '集合的元素类型中，用于标识时间戳的属性，支持自定义变更',
+      description: '用于显示时间戳的字段',
+      docDescription: '集合的元素类型中，用于标识时间戳的属性名称，支持自定义变更。字段类型应为string。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -72,9 +73,9 @@ namespace nasl.ui {
 
     @Prop<ElTimelineOptions<T, V>, 'hideTimestampField'>({
       group: '数据属性',
-      title: '隐藏时间戳字段',
-      description: '集合的元素类型中，用于标识是否隐藏时间戳的属性，boolean类型，默认为 false`,',
-      docDescription: '集合的元素类型中，用于标识是否隐藏时间戳的属性，支持自定义变更',
+      title: '隐藏时间戳',
+      description: '用于控制是否隐藏时间戳的字段',
+      docDescription: '集合的元素类型中，用于标识是否隐藏时间戳的属性名称，支持自定义变更。字段类型应为boolean，默认为false。',
       setter: {
         concept: 'PropertySelectSetter',
       },

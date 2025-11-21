@@ -19,5 +19,18 @@
     "emitDecoratorMetadata": true
   },
   "include": ["types/**/*", "src/**/*", "src-vusion/**/*"],
-  "exclude": ["**/*.spec.ts", "**/*.spec.js", "node_modules", "dist-theme", "cloudui"]
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.spec.js",
+    "node_modules",
+    "dist-theme",
+    "cloudui",
+    "**/node_modules",
+    "**/dist",
+    "**/dist-theme",
+    "**/coverage",
+    "**/storybook-static",
+    "coverage",
+    "test"
+  ]
 }

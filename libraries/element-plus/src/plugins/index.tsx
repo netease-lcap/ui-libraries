@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, defineComponent, unref } from 'vue';
+import { ref, Ref, watch, provide, inject, defineComponent, unref, getCurrentInstance } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 // import create from 'zustand-vue';
@@ -11,7 +11,7 @@ import { createStore } from 'zustand/vanilla';
 import { Map as imMap, fromJS } from 'immutable';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { $deletePropsList, $provide, $tagName, $mergeRef } from '@/plugins/constants';
+import { $deletePropsList, $provide, $tagName, $mergeRef, $router, $route } from '@/plugins/constants';
 import { scheduler } from '@/plugins/hooks';
 import '@/utils/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -71,13 +71,17 @@ export function registerComponent<T>(Component: any, options: any): any {
       Object.assign(provideRef.value, (injectRef as any)?.value || {});
       const router = useRouter?.();
       const route = useRoute?.();
+      const currentRefId = _.get(getCurrentInstance(), 'vnode.ref.r');
+      const uniqueId = _.isObject(currentRefId) ? _.uniqueId(options.name) : currentRefId;
       const useStore = createStore((set) => ({
         state: {
           inject: unref(injectRef),
           provide: {},
           ref: {},
-          router,
-          route,
+          [$router]: router,
+          [$route]: route,
+          'data-ref-id': uniqueId,
+          'data-tag-name': options.name,
           [$mergeRef]: _.mergeRef(exposeRef.value),
           [$tagName]: options.name,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList, $mergeRef, $tagName],

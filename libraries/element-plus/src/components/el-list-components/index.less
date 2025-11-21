@@ -1,0 +1,49 @@
+.el-list-components-plus {
+  /* 基础布局：所有元素横向排列 */
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  gap: var(--row-gap, 0) var(--column-gap, 0);
+  .el-list-components-infinite-scroll {
+    height: 200px;
+  }
+  .el-list-components__frag {
+    min-width: calc((100% / var(--el-list-components-column)) - var(--column-gap, 0));
+    
+    width: auto;
+    flex: 0 0 auto;
+    overflow: visible;
+    justify-self: start;
+    box-sizing: border-box;
+    &.is-selected.is-selectable {
+      .el-list-components__default-text {
+        background-color: rgba(198, 226, 255, 0.9) !important;
+      }
+    }
+  }
+
+  .el-list-components__default-text {
+    padding: 12px;
+    text-align: center;
+    color: #303133;
+    font-size: 14px;
+  }
+  /* 情况1：有 isColumn 和 isEqualWidth - 固定列数，宽度等分，自动换行，不拉伸子元素 */
+  &.isColumn.isEqualWidth {
+    display: grid;
+    grid-template-columns: repeat(var(--el-list-components-column), minmax(0, 1fr));
+    gap: var(--row-gap, 0) var(--column-gap, 0);
+
+    .el-list-components__frag {
+      /* 强制限制宽度，防止内容撑开父容器 */
+      min-width: 0;
+      max-width: 100%;
+      /* 子元素宽度由内容决定，不拉伸 */
+      width: 100%;
+      /* 不拉伸子元素内容 */
+      justify-self: start;
+      /* 防止内部内容溢出 */
+      overflow: visible;
+    }
+  }
+}

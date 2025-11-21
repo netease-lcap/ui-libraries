@@ -43,20 +43,33 @@ namespace nasl.ui {
       title: '显示弹出框',
       description: '显示弹出框',
     })
-    open(): void {}
+    show(): void {}
 
     @Method({
       title: '关闭弹出框',
       description: '关闭弹出框',
     })
-    close(): void {}
+    hide(): void {}
   }
 
   export class ElPopoverOptions extends ViewComponentOptions {
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
+    @Prop({
+      group: '状态属性',
+      sync: true,
+      title: '显示状态',
+      description: '控制弹出框的显示和隐藏',
+      docDescription: '绑定弹出框的显示状态。true：显示弹出框；false：隐藏弹出框。支持双向绑定。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    visible: nasl.core.Boolean | null = null;
+
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '触发方式',
-      description: '触发方式',
+      description: '弹出框的触发方式',
+      docDescription: '设置弹出框的触发方式。点击：点击触发；聚焦：获得焦点时触发；悬浮：鼠标悬停触发；右键点击：右键菜单触发。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -68,15 +81,6 @@ namespace nasl.ui {
       },
     })
     trigger: 'click' | 'focus' | 'hover' | 'contextmenu' = 'hover';
-
-    @Prop({
-      group: '主要属性',
-      sync: true,
-      title: 'Popover 是否显示',
-      description: 'Popover 是否显示',
-      setter: { concept: 'SwitchSetter' },
-    })
-    visible: nasl.core.Boolean | null = null;
 
     @Prop({
       group: '主要属性',

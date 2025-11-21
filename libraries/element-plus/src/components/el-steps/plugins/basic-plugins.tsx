@@ -43,8 +43,8 @@ export default StepsAccumulate.addPlugin({
                 {...item}
                 v-slots={{
                     // 把从el-tabs中收集到的slots数据传递给el-tab-pane的插槽
-                    title: () => slotsProps?.title?.({ item } as any),
-                    description: () => slotsProps?.description?.({ item } as any),
+                    title: () => slotsProps?.title?.({ item: item?.itemSource ?? item } as any),
+                    description: () => slotsProps?.description?.({ item: item?.itemSource ?? item } as any),
                   }}
               />
               )),

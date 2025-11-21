@@ -4,37 +4,6 @@ import DrawerBasicAccumulate from '../plugins/index';
 import { $deletePropsList } from '@/plugins/constants';
 
 // Mock lodash
-vi.mock('lodash', () => ({
-  default: {
-    wrap: vi.fn((fn, wrapper) => (...args) => wrapper(fn, ...args)),
-    attempt: vi.fn((fn, ...args) => {
-      try {
-        return fn(...args);
-      } catch (error) {
-        return error;
-      }
-    }),
-    assign: vi.fn((target, ...sources) => Object.assign(target, ...sources)),
-    cond: vi.fn((conditions) => (value) => {
-      for (const [predicate, transform] of conditions) {
-        if (predicate(value)) {
-          return transform(value);
-        }
-      }
-      return value;
-    }),
-    isObject: vi.fn((value) => typeof value === 'object' && value !== null),
-    stubTrue: vi.fn(() => true),
-    isArray: vi.fn((value) => Array.isArray(value)),
-    mixin: vi.fn((obj) => {
-      const _ = {};
-      Object.assign(_, obj);
-      return _;
-    }),
-    bind: vi.fn((fn, context) => fn.bind(context)),
-    uniqueId: vi.fn((prefix) => `${prefix}123`),
-  },
-}));
 
 describe('plugins/index.ts', () => {
   beforeEach(() => {
@@ -382,7 +351,7 @@ describe('边界情况和错误处理测试', () => {
     const plugin = DrawerBasicAccumulate.getPluginMethodByName('handleDrawerRef') as any;
 
     const asyncCallback = vi.fn(async (done) => {
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
       done();
     });
 

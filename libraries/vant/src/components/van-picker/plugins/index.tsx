@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Field, Popup } from 'vant';
+import { Field, Popup, Search } from 'vant';
 import { useMemo, useCallback, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField, $mergeRef } from '@/plugins/constants';
 import { categoryProps } from '@/utils/dom';
@@ -29,7 +29,6 @@ export function handleDataSource(props) {
   const textField = props.get('textField') || 'text';
   const valueField = props.get('valueField');
   const parentField = props.get('parentField');
-  const slots = props.get('slots');
 
   const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
   const ref = props.get('ref');
@@ -45,24 +44,47 @@ export function handleDataSource(props) {
     [$deletePropsList]: deletePropsList,
     ref: selfRef,
     loading,
-    slots,
     columns: TreeData,
     formTagName: 'van-form-picker',
     tagName: 'van-picker',
   };
 }
 
+export function handleSearchRender(props) {
+  const [searchValue, setSearchValue] = useControllableValue(props, {
+    defaultValue: '',
+    valuePropName: 'searchValue',
+    trigger: 'onUpdate:searchValue',
+    onChange: (searchValue) => {
+      props.get('emit')('sync:state', 'filterText', searchValue);
+    },
+  });
+  const columns = props.get('columns');
+  const filterable = props.get('filterable');
+  const remote = props.get('remote');
+  const searchColumns = useMemo(() => {
+    if (remote || !filterable) return columns;
+    return columns.filter((item) => item.text.toLowerCase().includes(searchValue.toLowerCase()));
+  }, [columns, searchValue, remote, filterable]);
+
+  return {
+    columns: searchColumns,
+    searchValue,
+    setSearchValue,
+  };
+}
+handleSearchRender.order = 5;
+
 export function handlewFieldState(props) {
   const columns = props.get('columns');
   const mergeRef = props.get($mergeRef);
+  const refProps = props.get('ref');
   const onCancelProps = props.get('onCancel', () => {});
   const onConfirmProps = props.get('onConfirm', () => {});
 
   const value = props.get('modelValue');
   const setValue = props.get('onUpdate:modelValue');
-  // const [value, setValue] = useControllableValue(props, {
-  //   defaultValue: [],
-  // });
+
   const fieldValue = useMemo(() => {
     const selected = _.map(value, (item) => _.find(columns, (columnsItem) => columnsItem.value === item)?.text);
     return _.join(selected, ',');
@@ -72,6 +94,13 @@ export function handlewFieldState(props) {
     valuePropName: 'show',
     trigger: 'onUpdate:show',
   });
+  const ref = useMemo(
+    () => _.assign(refProps, {
+        show: () => setShow(true),
+        close: () => setShow(false),
+      }),
+    [setShow, refProps],
+  );
   const onCancel = useCallback(
     _.wrap(onCancelProps, (fn, ...args) => {
       _.attempt(fn, ...args);
@@ -89,6 +118,7 @@ export function handlewFieldState(props) {
   );
 
   return {
+    ref,
     mergeRef,
     show,
     setShow,
@@ -103,8 +133,20 @@ export function handlewFieldState(props) {
 export function handleFieldRender(props) {
   const Component = props.get('render');
   const render = useCallback(
-    (props) => {
-      const { setShow, show, value, setValue, fieldValue, clearable, mergeRef, ...componentProps } = props;
+    (props, { slots }) => {
+      const {
+        setShow,
+        show,
+        value,
+        setValue,
+        fieldValue,
+        clearable,
+        mergeRef,
+        searchValue,
+        setSearchValue,
+        filterable,
+        ...componentProps
+      } = props;
       const rightIcon = clearable ? 'clear' : '';
       const { outerProps, innerProps } = categoryProps(componentProps);
 
@@ -124,11 +166,15 @@ export function handleFieldRender(props) {
         />,
         <Popup
           show={show}
-          onClose={() => setShow(false)}
+          onClose={() => {
+            setSearchValue('');
+            setShow(false);
+          }}
           lazy-render={false}
           round
           position="bottom"
-          {..._.omit(innerProps, 'columns', 'expose', 'onConfirm')}>
+          {..._.omit(innerProps, 'columns', 'expose', 'onConfirm')}
+        >
           <Component
             {..._.omit(props, [
               'value',
@@ -141,6 +187,12 @@ export function handleFieldRender(props) {
               'expose',
               'show',
             ])}
+            v-slots={{
+              ...slots,
+              'columns-top': filterable ? (
+                <Search modelValue={searchValue} onUpdate:modelValue={setSearchValue} />
+              ) : null,
+            }}
             modelValue={value}
             ref={mergeRef}
           />

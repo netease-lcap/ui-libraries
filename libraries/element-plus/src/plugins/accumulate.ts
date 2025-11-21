@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { PluginBase, DataSourceType } from '@/types';
 /**
  * 插件类型定义
@@ -19,7 +20,7 @@ type ImmutableMap<T> = {
 type Plugin<TProps, TReturn> = {
   handle: (props: ImmutableMap<TProps>) => TReturn;
   name: string;
-  type?: 'ide' | 'basic';
+  type?: 'ide' | 'basic' | 'note';
   [key: string]: any;
 };
 
@@ -108,10 +109,11 @@ export class PluginAccumulateTypes<
   addPlugin<const TReturn extends Record<string, any> = Record<string, any>>(plugin: {
     handle: (props: ImmutableMap<TAccumulatedProps>, context: ImmutableMap<TPluginContext>) => TReturn;
     name: string;
-    type?: 'ide' | 'basic';
+    type?: 'ide' | 'basic' | 'note';
     [key: string]: any;
   }): PluginAccumulateTypes<TPluginOptions, TPluginContext, TAccumulatedProps & TReturn> {
     // 存储插件，使用 const 泛型参数来自动推导字面量类型
+    _.set(plugin, 'handle.fnName', plugin.name);
     this.Plugin.push(plugin as any);
     return this as any;
   }
@@ -132,9 +134,9 @@ export class PluginAccumulateTypes<
 
   getPluginMethod(options?: { isInDesigner: boolean }) {
     if (options?.isInDesigner) {
-      return this.Plugin;
+      return this.Plugin.filter((plugin) => plugin.type !== 'note');
     }
-    return this.Plugin.filter((plugin) => plugin.type !== 'ide');
+    return this.Plugin.filter((plugin) => plugin.type !== 'ide' && plugin.type !== 'note');
   }
 
   getPluginMethodByName(name: string) {

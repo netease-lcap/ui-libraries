@@ -20,45 +20,52 @@ namespace nasl.ui {
   }
 
   export class ElWatermarkOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '宽度',
-      description: '水印的宽度， content 的默认值是它自己的宽度',
+      title: '水印图片',
+      description: '水印的图片地址',
+      docDescription: '设置水印的图片地址，建议使用2x或3x高清图像以获得更好的显示效果。',
+      setter: { concept: 'InputSetter' },
+    })
+    image: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '旋转角度',
+      description: '水印的旋转角度',
+      docDescription: '设置水印的旋转角度，单位为度(°)。默认为-22度，呈倾斜状态。',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    rotate: nasl.core.Integer = -22;
+
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
+    @Prop({
+      group: '样式属性',
+      title: '水印宽度',
+      description: '水印的宽度',
+      docDescription: '设置水印的宽度，单位为像素。对于文字水印，默认值是内容自身的宽度。',
       setter: { concept: 'NumberInputSetter' },
     })
     width: nasl.core.Integer = 120;
 
     @Prop({
-      group: '主要属性',
-      title: '高度',
-      description: '水印的高度， content 的默认值是它自己的高度',
+      group: '样式属性',
+      title: '水印高度',
+      description: '水印的高度',
+      docDescription: '设置水印的高度，单位为像素。对于文字水印，默认值是内容自身的高度。',
       setter: { concept: 'NumberInputSetter' },
     })
     height: nasl.core.Integer = 64;
-
-    @Prop({
-      group: '主要属性',
-      title: '旋转角度',
-      description: '水印的旋转角度, 单位 °',
-      setter: { concept: 'NumberInputSetter' },
-    })
-    rotate: nasl.core.Integer = -22;
     
     @Prop({
-      group: '主要属性',
-      title: 'zIndex值',
-      description: '水印元素的z-index值',
+      group: '样式属性',
+      title: '显示层级',
+      description: '水印的z-index层级',
+      docDescription: '设置水印的z-index值，控制水印的显示层级。数值越大，水印越靠前显示。',
       setter: { concept: 'NumberInputSetter' },
     })
     zIndex: nasl.core.Integer = 9;
-    
-    @Prop({
-      group: '主要属性',
-      title: '图片',
-      description: '水印图片，建议使用 2x 或 3x 图像',
-      setter: { concept: 'InputSetter' },
-    })
-    image: nasl.core.String;
     
     @Prop({
       group: '主要属性',

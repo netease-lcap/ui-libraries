@@ -25,11 +25,13 @@ namespace nasl.ui {
   }
 
   export class ElProgressOptions extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       sync: true,
-      title: '百分比',
-      description: '**百分比（必填）**',
+      title: '进度百分比',
+      description: '当前的进度百分比值',
+      docDescription: '设置进度条的百分比值，范围为0-100。支持双向绑定，可以动态更新进度。',
       setter: {
         concept: 'NumberInputSetter',
         min: 0,
@@ -38,10 +40,12 @@ namespace nasl.ui {
     })
     percentage: nasl.core.Decimal = 0;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '进度条类型',
-      description: '进度条类型',
+      description: '选择进度条的显示类型',
+      docDescription: '控制进度条的显示类型。线性：水平进度条；环形：圆环进度条；仪表盘形：仪表盘样式进度条。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -65,18 +69,21 @@ namespace nasl.ui {
     strokeWidth: nasl.core.Decimal = 6;
     
     @Prop<ElProgressOptions, 'textInside'>({
-      group: '样式属性',
-      title: '文字内置在进度条内',
-      description: '进度条显示文字内置在进度条内（只在 type=line 时可用），文字展示不全时需调整进度条宽度属性',
+      group: '主要属性',
+      title: '内置文字',
+      description: '文字是否显示在进度条内',
+      docDescription: '开启后，进度百分比文字会显示在进度条内部。仅在线性类型时可用，文字显示不全时需调整进度条宽度。',
       setter: { concept: 'SwitchSetter' },
       if: _ => _.type === 'line',
     })
     textInside: nasl.core.Boolean = false;
 
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({
       group: '状态属性',
-      title: '进度条当前状态',
-      description: '进度条当前状态',
+      title: '进度状态',
+      description: '进度条的当前状态',
+      docDescription: '设置进度条的状态主题。成功：绿色主题；异常：红色主题；警告：橙色主题；默认：蓝色主题。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [

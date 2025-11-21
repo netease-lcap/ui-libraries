@@ -1,14 +1,15 @@
 import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-plus';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect } from '@/plugins/hooks';
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
+import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect, useRender } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
 import { ElTableToolBar } from '@/components/el-table';
 import { ElForm } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-import { IIdePluginBase, RenderFunctionWithInheritAttrs } from '@/types/pluginBase';
+import { IIdePluginBase } from '@/types/pluginBase';
 
 const orderMap = {
   descending: 'desc',
@@ -31,7 +32,7 @@ const TableAccumulate = new PluginAccumulateTypes<
     TableProps<any> &
     PaginationProps & {
       onBefore:(params: any) => void;
-      onSuccess: (data: any, params: any) => void;
+      onSelectAll: (selection: any[]) => any;
       editTable: boolean;
     }
 >();
@@ -140,9 +141,9 @@ export default TableAccumulate.addPlugin({
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
       const onPageChange = props.get('onPageChange', () => {});
-      const onSelectionChange = props.get('onSelectionChange', () => {});
+      // const onSelectionChange = props.get('onSelectionChange', () => {});
       const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
-      const rowKey = props.get('rowKey');
+      // const rowKey = props.get('rowKey');
 
       return {
         pageProps: {
@@ -153,9 +154,9 @@ export default TableAccumulate.addPlugin({
         },
 
         pagination,
-        onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
-          _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey as string)) });
-        }),
+        // onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
+        //   _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey as string)) });
+        // }),
       };
     },
   })
@@ -225,6 +226,7 @@ export default TableAccumulate.addPlugin({
       const onBefore = props.get('onBefore', () => {});
       const onSuccess = props.get('onSuccess', () => {});
       const ref = props.get('ref');
+      const initialLoad = props.get('initialLoad', true);
       const defaultParams = [{ currentPage, pageSize, order, sort, pagination }];
       const rowKey = props.get('rowKey');
       const parentField = props.get('parentField');
@@ -235,6 +237,7 @@ export default TableAccumulate.addPlugin({
       } = useRequestDataSource(dataSource, {
         onBefore: (params) => _.attempt(onBefore, params),
         onSuccess: (data, params) => _.attempt(onSuccess, data, params),
+        manual: !initialLoad,
         defaultParams,
         formatResult,
       });
@@ -242,13 +245,17 @@ export default TableAccumulate.addPlugin({
         run({ currentPage, pageSize, order, sort, pagination, ...params });
       };
       const { list: data, total } = resultData as { list: any; total: number };
-      const treeData = useDataSourceToTree(data, parentField, rowKey as string);
+      const treeData = useMemo(
+        () => useDataSourceToTree(data, parentField, rowKey as string),
+        [data, parentField, rowKey],
+      );
       const selfRef = _.assign(ref, { reload, data: treeData, getData: () => data });
 
       const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
       return {
         ref: selfRef,
         pageProps: _.assign(pageProps, { total }),
+        reload,
         loading,
         ...dataSourceResult,
       };
@@ -278,7 +285,7 @@ export default TableAccumulate.addPlugin({
               />
               {props.pagination && (
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                  <ElPagination {...props.pageProps} total={props.pageProps.total} />
+                  <ElPagination {...props.pageProps} total={props?.pageProps?.total} />
                 </div>
               )}
             </div>,
@@ -297,14 +304,13 @@ export default TableAccumulate.addPlugin({
       const ref = props.get('ref');
       const Component = props.get('render');
       const tableRef = useRef({});
-      const render = useCallback((props, { attrs, slots }) => {
+      const render = useRender((props, { attrs, slots }) => {
         return (
           <ElForm style={{ width: '100%' }}>
             <Component ref={tableRef} {...props} {...attrs} v-slots={slots} />
           </ElForm>
         );
-      }, []) as RenderFunctionWithInheritAttrs;
-      render.inheritAttrs = false;
+      }, []);
       return {
         ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
         render,
@@ -318,7 +324,7 @@ export default TableAccumulate.addPlugin({
       if (!columnConfig) return {};
       const Component = props.get('render');
       const tableRef = useRef({});
-      const render = useCallback((props, { attrs, slots }) => {
+      const render = useRender((props, { attrs, slots }) => {
         const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop
             ? [{ ...node.props, header: node.children?.header }]
             : []));
@@ -337,8 +343,7 @@ export default TableAccumulate.addPlugin({
             />
           </div>
         );
-      }, []) as RenderFunctionWithInheritAttrs;
-      render.inheritAttrs = false;
+      }, []);
       return {
         render,
       };
@@ -375,7 +380,7 @@ export default TableAccumulate.addPlugin({
       const [selectedValue, setSelectedValue] = useControllableValue(props, {
         valuePropName: 'selectedValue',
         onValueEffect: (currentValue) => {
-          ref.store.setCurrentRowKey(String(currentValue));
+          ref?.store?.setCurrentRowKey(String(currentValue));
         },
       });
       return {
@@ -391,7 +396,8 @@ export default TableAccumulate.addPlugin({
     handle(props) {
       const ref = props.get('ref');
       const data = props.get('data');
-      const selectionChange = props.get('onSelectionChange', () => {});
+      const selectionChange = props.get('onSelect', () => {});
+      const selectAllChange = props.get('onSelectAll', () => {});
       const rowKey = props.get('rowKey');
       const getRowKey = _.match(rowKey)
         .when(
@@ -399,7 +405,7 @@ export default TableAccumulate.addPlugin({
           _.constant((item) => _.get(item, rowKey as string, 'id')),
         )
         .when(_.isFunction, _.constant(rowKey))
-        .exhaustive();
+        .otherwise(() => _.constant(undefined));
       function getSelectedRows(data, selectedValues) {
         return _.map(selectedValues, (rowKey) => _.find(data, (item) => getRowKey(item) === rowKey)).filter(Boolean);
       }
@@ -409,7 +415,7 @@ export default TableAccumulate.addPlugin({
           const selectRows = getSelectedRows(data, currentValue);
 
           _.defer(() => {
-            ref.clearSelection();
+            ref?.clearSelection?.();
             return _.map(selectRows, (row) => _.attempt(ref?.toggleRowSelection, row, true));
           }, 0);
         },
@@ -419,11 +425,30 @@ export default TableAccumulate.addPlugin({
         _.defer(() => _.map(selectRows, (row) => _.attempt(ref?.toggleRowSelection, row, true)), 0);
       }, [data]);
       return {
-        onSelectionChange: _.wrap(selectionChange, (fn, value: any) => {
+        onSelect: (value, ...arg) => {
           const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
-          fn({ newSelection });
+          _.attempt(selectionChange, { newSelection, items: value }, ...arg);
           setSelectedValues(newSelection);
-        }),
+        },
+        onSelectAll: (value) => {
+          const newSelection = _.map(value, (item) => _.get(item, rowKey as string));
+          _.attempt(selectAllChange, { newSelection, items: value });
+          setSelectedValues(newSelection);
+        },
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleClickMcp',
+    handle: (props) => {
+      const refId = props.get('data-ref-id');
+      const reload = props.get('reload', () => {});
+      useEffect(() => {
+        _.attempt(subscribe, 'el_table__reload', refId, (...args) => {
+          _.attempt(reload, ...(args as [any, any]));
+        });
+        return () => _.attempt(unsubscribe, 'el_table__reload', refId);
+      }, []);
+      return {};
     },
   });

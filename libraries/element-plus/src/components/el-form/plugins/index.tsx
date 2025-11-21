@@ -1,8 +1,9 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
 import { FormProps } from 'element-plus';
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { $formProvide } from '@/components/el-form/constants';
-import { useRef } from '@/plugins/hooks';
+import { useRef, useEffect } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 const FormBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElFormOptions, FormProps>();
@@ -50,5 +51,22 @@ export default FormBasicAccumulate.addPlugin({
         },
       }),
     };
+  },
+}).addPlugin({
+  name: 'handleMcp',
+  handle: (props) => {
+    const refId = props.get('data-ref-id');
+    const ref = props.get('ref');
+    useEffect(() => {
+      _.attempt(subscribe, 'el_form__validate', refId, () => ref.validated());
+      _.attempt(subscribe, 'el_form__clearValidate', refId, () => {
+        ref.clearValidate();
+      });
+      return () => {
+        _.attempt(unsubscribe, 'el_form__validate', refId);
+        _.attempt(unsubscribe, 'el_form__clearValidate', refId);
+      };
+    }, []);
+    return {};
   },
 });

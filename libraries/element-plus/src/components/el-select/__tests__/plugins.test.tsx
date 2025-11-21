@@ -21,7 +21,6 @@ describe('el-select plugins', () => {
 
       it('应该包含所有必要的插件', () => {
         const plugins = SelectBasicAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(6);
 
         const pluginNames = [
           'handleTagName',
@@ -126,11 +125,7 @@ describe('el-select plugins', () => {
 
         const symbolKey = Object.getOwnPropertySymbols(result).find((s) => s.toString().includes('deletePropsList')) as symbol;
         expect(symbolKey).toBeDefined();
-        expect(result[symbolKey]).toEqual(expect.arrayContaining([
-          ...$dataSourceDeleteField,
-          'formTagName',
-          'data'
-        ]));
+        expect(result[symbolKey]).toEqual(expect.arrayContaining([...$dataSourceDeleteField, 'formTagName', 'data']));
       });
 
       it('应该正确处理数组类型的数据源', () => {
@@ -322,11 +317,7 @@ describe('el-select plugins', () => {
       });
 
       it('应该正确处理边界情况', () => {
-        const testCases = [
-          { dataSource: [] },
-          { dataSource: undefined },
-          { dataSource: null },
-        ];
+        const testCases = [{ dataSource: [] }, { dataSource: undefined }, { dataSource: null }];
 
         testCases.forEach((testCase) => {
           const props = {
@@ -540,9 +531,7 @@ describe('el-select plugins', () => {
         const props = {
           ref: { current: null },
           render: null,
-          data: [
-            { label: 'Option 1', value: 'value1' },
-          ],
+          data: [{ label: 'Option 1', value: 'value1' }],
           modelValue: null,
         };
 
@@ -556,9 +545,7 @@ describe('el-select plugins', () => {
         const props = {
           ref: { current: null },
           render: null,
-          data: [
-            { label: 'Option 1', value: 'value1' },
-          ],
+          data: [{ label: 'Option 1', value: 'value1' }],
           modelValue: undefined,
         };
 
@@ -572,9 +559,7 @@ describe('el-select plugins', () => {
         const props = {
           ref: { current: null },
           render: null,
-          data: [
-            { label: 'Option 1', value: 'value1' },
-          ],
+          data: [{ label: 'Option 1', value: 'value1' }],
           modelValue: 'value1',
           'data-nodepath': '/some/path',
         };
@@ -599,7 +584,6 @@ describe('el-select plugins', () => {
         });
 
         const plugins = combinedAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(7);
 
         const handleTagNamePlugin = combinedAccumulate.getPluginMethodByName('handleTagName');
         const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');

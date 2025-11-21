@@ -33,6 +33,19 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "ide/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "dist-theme",
+    "es",
+    "coverage",
+    "**/node_modules",
+    "**/dist",
+    "**/dist-theme",
+    "**/es",
+    "**/storybook-static",
+    "design"
+  ],
   "references": [
   ]
 }

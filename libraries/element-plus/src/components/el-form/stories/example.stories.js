@@ -31,18 +31,23 @@ export const Example1 = {
       //   name.value = 'newName';
       //   activeName.value = 'second';
       // }, 3000);
+      const model = ref({});
 
       return {
         name,
         activeName,
         list,
         handleClick,
+        model,
       };
     },
     template: `
-    <el-form>
-      <el-input :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
+    <div>
+    {{model}}
+    <el-form :model="model">
+      <el-form-input style="border: 1px solid red;"  label="input21" :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
     </el-form>
+    </div>
 
     `,
   }),

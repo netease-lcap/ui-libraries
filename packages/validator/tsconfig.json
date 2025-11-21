@@ -13,7 +13,7 @@
     ],
     "rootDir": "src",
     "sourceMap": false,
-    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
     "pretty": true,
     "downlevelIteration": true,
     "declaration": true,
@@ -21,4 +21,10 @@
     "baseUrl": "."
   },
   "include": ["src/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/node_modules",
+    "**/dist"
+  ]
 }

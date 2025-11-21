@@ -39,8 +39,8 @@ export default TabsAccumulate.addPlugin({
                 <ElTabPane
                   {...item}
                   v-slots={{
-                      label: () => slots?.label?.({ item } as any),
-                      default: () => slots?.content?.({ item } as any),
+                      label: () => slots?.label?.({ item: item?.itemSource ?? item } as any),
+                      default: () => slots?.content?.({ item: item?.itemSource ?? item } as any),
                     }}
                 />
                 )),

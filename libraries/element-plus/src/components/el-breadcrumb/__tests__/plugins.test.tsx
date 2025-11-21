@@ -1,5 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { renderHook } from '@ep-test/test-utils/render-hook';
+import { $route, $router } from '@/plugins/constants';
 import '@/utils/index';
 import BreadcrumbAccumulate from '../plugins/basic-plugins';
 import BreadcrumbItemAccumulate from '../plugins/item-plugins';
@@ -315,15 +316,15 @@ describe('basic-plugins.tsx', () => {
         auto: true,
         showInDesigner: false,
         slots: {},
-        route: null,
-        router: mockRouter,
+        [$route]: null,
+        [$router]: mockRouter,
       };
 
       const { currentValue } = renderHook(plugin, props);
       const result = currentValue.value;
 
       // 验证 router.afterEach 被调用
-      expect(mockRouter.afterEach).toHaveBeenCalled();
+      expect(mockRouter.afterEach).toHaveBeenCalledOnce();
       expect(typeof mockRouter.afterEach.mock.calls[0][0]).toBe('function');
     });
 

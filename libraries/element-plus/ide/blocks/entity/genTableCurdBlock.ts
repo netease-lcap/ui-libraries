@@ -38,6 +38,9 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
   nameGroup.viewLogicModalClose = likeComponent.getLogicUniqueName('modalClose');
   // 当前节点的currentName
   nameGroup.currentName = getCurrentName(refElement);
+  if (likeComponent.getDirectoryUniqueName) {
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(entity.name?.toLowerCase());
+  }
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();
@@ -69,10 +72,30 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
   newLogics.push(entityLogic);
 
   return `export function view() {
-    let ${nameGroup.viewVariableEntity}: ${entityFullName};
-    let ${nameGroup.viewVariableInput}: ${entityFullName};
-    let ${nameGroup.viewVariableFilter}: ${entityFullName};
-    let ${nameGroup.viewVariableIsUpdate}: Boolean;
+    ${
+      nameGroup.viewDirectoryEntity
+      ? `
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableEntity}: ${entityFullName};
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableInput}: ${entityFullName};
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableFilter}: ${entityFullName};
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableIsUpdate}: Boolean;`
+      : `let ${nameGroup.viewVariableEntity}: ${entityFullName};
+        let ${nameGroup.viewVariableInput}: ${entityFullName};
+        let ${nameGroup.viewVariableFilter}: ${entityFullName};
+        let ${nameGroup.viewVariableIsUpdate}: Boolean;`
+    }
 
     const $lifecycles = {
         onCreated: [

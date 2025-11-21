@@ -30,35 +30,24 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     C,
   > extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '禁用组件',
-      description: '是否禁用组件',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否可搜索',
-      description:
-        '是否可搜索，默认搜索规则不区分大小写，全文本任意位置匹配。如果默认搜索规则不符合业务需求，可以更为使用 `filter` 自定义过滤规则',
-      setter: { concept: 'SwitchSetter' },
-    })
-    filterable: nasl.core.Boolean = false;
+
+
 
     @Prop({
       group: '主要属性',
       title: '占位符',
-      description: '占位符',
+      description: '输入框为空时的提示文本',
+      docDescription: '设置输入框为空时显示的占位符文本，用于提示用户应该选择什么内容。',
       setter: { concept: 'InputSetter' },
     })
     placeholder: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: '为空的内容',
-      description: '当下拉列表为空时显示的内容。',
+      title: '无数据文本',
+      description: '树为空时显示的文本',
+      docDescription: '当树形选择器没有数据时显示的提示文本。',
       setter: { concept: 'InputSetter' },
     })
     noDataText: any;
@@ -204,6 +193,15 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '是否可搜索',
+      description:
+        '是否可搜索，默认搜索规则不区分大小写，全文本任意位置匹配。如果默认搜索规则不符合业务需求，可以更为使用 `filter` 自定义过滤规则',
+      setter: { concept: 'SwitchSetter' },
+    })
+    filterable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '手风琴模式',
       description: '是否开启手风琴模式',
       setter: { concept: 'SwitchSetter' },
@@ -270,6 +268,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     preview: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '禁用组件',
+      description: '是否禁用组件',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean;
 
     @Event({
       title: '复选框被点击的时',

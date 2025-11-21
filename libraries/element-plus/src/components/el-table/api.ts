@@ -94,47 +94,7 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
   > extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '是否显示表格边框',
-      description: '是否显示表格边框',
-      setter: { concept: 'SwitchSetter' },
-    })
-    border: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '数据属性',
-      title: '多选选中值',
-      description: '多选选中值',
-      setter: { concept: 'InputSetter' },
-      sync: true,
-    })
-    selectedValues: nasl.collection.List<V>;
-
-    @Prop({
-      group: '主要属性',
-      title: '是否高亮当前行',
-      description: '是否高亮当前行',
-      setter: { concept: 'SwitchSetter' },
-      onChange: [
-        {
-          clear: ['selectedValue'],
-          if: (_) => _ === false,
-        },
-      ],
-    })
-    highlightCurrentRow: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '数据属性',
-      title: '单选选中值',
-      description: '单选选中值',
-      setter: { concept: 'InputSetter' },
-      sync: true,
-      if: (_) => _.highlightCurrentRow === true,
-    })
-    selectedValue: V;
-
+    // ========== 数据属性 ==========
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -155,37 +115,18 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '合并行或列的计算方法',
-      description: '合并行或列的计算方法',
-      docDescription: '合并行或列的计算方法',
-      bindOpen: true,
+      title: '唯一标识',
+      description:
+        '必需。唯一标识一行数据的字段名，来源于 `data` 中的字段。如果是字段嵌套多层，可以设置形如 `item.a.id` 的方法',
       setter: {
-        concept: 'AnonymousFunctionSetter',
+        concept: 'PropertySelectSetter',
       },
     })
-    spanMethod: (item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) =>
-      | {
-          /**
-           * @title 合并行数
-           */
-          rowspan?: nasl.core.Integer;
-          /**
-           * @title 合并列数
-           */
-          colspan?: nasl.core.Integer;
-        }
-      | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
+    rowKey: (item: T) => V;
 
-    @Prop({
-      group: '主要属性',
-      title: '列配置',
-      description: '列配置',
-      setter: { concept: 'SwitchSetter' },
-    })
-    columnConfig: nasl.core.Boolean = false;
-
+    // 分页相关（联动属性组）
     @Prop<ElTableOptions<T, V, P, M>, 'pagination'>({
-      group: '主要属性',
+      group: '数据属性',
       title: '分页',
       description: '是否显示分页',
       setter: { concept: 'SwitchSetter' },
@@ -262,6 +203,7 @@ namespace nasl.ui {
     })
     showJumper: nasl.core.Boolean = false;
 
+    // 排序相关
     @Prop({
       group: '数据属性',
       title: '初始化排序字段',
@@ -284,6 +226,7 @@ namespace nasl.ui {
     })
     defaultOrder: 'ascending' | 'descending' | null;
 
+    // 树形数据
     @Prop<ElTableOptions<T, V, P, M>, 'parentField'>({
       group: '数据属性',
       title: '父级值字段',
@@ -294,27 +237,56 @@ namespace nasl.ui {
     })
     parentField: (item: T) => V;
 
+    // ========== 状态属性 ==========
+    // 选中状态相关（联动属性组）
+
     @Prop({
-      group: '数据属性',
-      title: '唯一标识',
-      description:
-        '必需。唯一标识一行数据的字段名，来源于 `data` 中的字段。如果是字段嵌套多层，可以设置形如 `item.a.id` 的方法',
+      group: '状态属性',
+      title: '初始即加载',
+      description: '设置初始时是否立即加载',
+      docDescription: '是否在表格出现时立即加载数据，默认开启。',
       setter: {
-        concept: 'PropertySelectSetter',
+        concept: 'SwitchSetter',
       },
     })
-    rowKey: (item: T) => V;
+    initialLoad: nasl.core.Boolean = true;
 
     @Prop({
-      group: '主要属性',
-      title: '是否显示表头',
-      description: '是否显示表头',
+      group: '状态属性',
+      title: '单选行',
+      description: '是否高亮当前行',
       setter: { concept: 'SwitchSetter' },
+      onChange: [
+        {
+          clear: ['selectedValue'],
+          if: (_) => _ === false,
+        },
+      ],
     })
-    showHeader: nasl.core.Boolean = true;
+    highlightCurrentRow: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
+      group: '状态属性',
+      title: '单选选中值',
+      description: '单选选中值',
+      setter: { concept: 'InputSetter' },
+      sync: true,
+      if: (_) => _.highlightCurrentRow === true,
+    })
+    selectedValue: V;
+
+    @Prop({
+      group: '状态属性',
+      title: '多选选中值',
+      description: '多选选中值',
+      setter: { concept: 'InputSetter' },
+      sync: true,
+    })
+    selectedValues: nasl.collection.List<V>;
+
+    // ========== 样式属性 ==========
+    @Prop({
+      group: '样式属性',
       title: '表格尺寸',
       description: '表格尺寸',
       setter: {
@@ -325,7 +297,15 @@ namespace nasl.ui {
     size: 'small' | 'default' | 'large' = 'default';
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
+      title: '是否显示表格边框',
+      description: '是否显示表格边框',
+      setter: { concept: 'SwitchSetter' },
+    })
+    border: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '样式属性',
       title: '是否显示斑马纹',
       description: '是否显示斑马纹',
       setter: { concept: 'SwitchSetter' },
@@ -333,24 +313,15 @@ namespace nasl.ui {
     stripe: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '是否表头吸顶',
-      description: '是否表头吸顶',
+      group: '样式属性',
+      title: '是否显示表头',
+      description: '是否显示表头',
       setter: { concept: 'SwitchSetter' },
     })
-    sticky: nasl.core.Boolean = false;
-
-    @Prop<ElTableOptions<T, V, P, M>, 'stickyOffset'>({
-      group: '主要属性',
-      title: '表头吸顶偏移量',
-      description: '表头吸顶偏移量',
-      setter: { concept: 'NumberInputSetter' },
-      if: (_) => _.sticky === true,
-    })
-    stickyOffset: nasl.core.Integer = 8;
+    showHeader: nasl.core.Boolean = true;
 
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '表格布局方式',
       description: '表格布局方式，`<table>` 元素原生属性。',
       setter: {
@@ -359,6 +330,56 @@ namespace nasl.ui {
       },
     })
     tableLayout: 'auto' | 'fixed' = 'fixed';
+
+    // 吸顶相关（联动属性组）
+    @Prop({
+      group: '样式属性',
+      title: '是否表头吸顶',
+      description: '是否表头吸顶',
+      setter: { concept: 'SwitchSetter' },
+    })
+    sticky: nasl.core.Boolean = false;
+
+    @Prop<ElTableOptions<T, V, P, M>, 'stickyOffset'>({
+      group: '样式属性',
+      title: '表头吸顶偏移量',
+      description: '表头吸顶偏移量',
+      setter: { concept: 'NumberInputSetter' },
+      if: (_) => _.sticky === true,
+    })
+    stickyOffset: nasl.core.Integer = 8;
+
+    // ========== 高级属性 ==========
+    @Prop({
+      group: '高级属性',
+      title: '列配置',
+      description: '列配置',
+      setter: { concept: 'SwitchSetter' },
+    })
+    columnConfig: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '高级属性',
+      title: '合并行或列的计算方法',
+      description: '合并行或列的计算方法',
+      docDescription: '合并行或列的计算方法',
+      bindOpen: true,
+      setter: {
+        concept: 'AnonymousFunctionSetter',
+      },
+    })
+    spanMethod: (item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) =>
+      | {
+          /**
+           * @title 合并行数
+           */
+          rowspan?: nasl.core.Integer;
+          /**
+           * @title 合并列数
+           */
+          colspan?: nasl.core.Integer;
+        }
+      | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
 
     @Event({
       title: '单元格点击时',
@@ -370,7 +391,7 @@ namespace nasl.ui {
       title: '选中行变化时',
       description: '选中行变化时触发',
     })
-    onSelectionChange: (event: { newSelection: nasl.collection.List<V> }) => any;
+    onSelect: (event: { newSelection: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
 
     @Event({
       title: '分页发生变化时触发',
@@ -403,13 +424,19 @@ namespace nasl.ui {
     })
     onScroll: (event: any) => any;
 
+    @Event({
+      title: '数据加载成功时触发',
+      description: '数据加载成功时触发',
+    })
+    onSuccess: () => any;
+
     @Slot({
       title: '表格列',
       description: '表格列',
       snippets: [
         {
           title: '表格列',
-          code: `<el-table-column data-nodepath-multiple="ture">
+          code: `<el-table-column >
                     <template #header><el-text text="表格列"></el-text></template>
                     <template #default="current"></template>
                 </el-table-column>`,
@@ -431,19 +458,10 @@ namespace nasl.ui {
       idetype: 'container',
       structured: { slot: 'default', empty: true },
       parentAccept: "['el-table'].includes(target.tag)",
-      slotWrapperInlineStyle: {},
+      forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: true,
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
-      selector: [
-        {
-          expression: 'this',
-          cssSelector: 'td',
-        },
-        {
-          expression: 'this.getElement(el=>el.slotTarget==="header")',
-          cssSelector: 'th',
-        },
-      ],
 
       disableSlotAutoFill: [
         {
@@ -451,6 +469,9 @@ namespace nasl.ui {
           expression: "this.getAttribute('type')?.value === 'selection'",
         },
       ],
+      slotWrapperInlineStyle: {
+        header: 'display: inline-block;',
+      },
       slotInlineStyle: {
         title: 'min-width: 30px',
         cell: 'min-width: 30px',
@@ -473,37 +494,8 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
   > extends ViewComponentOptions {
-    @Prop({
-      group: '数据属性',
-      title: '列字段',
-      description: 'data 项中的字段',
-      docDescription: '数据项中对应的字段名，如createdTime',
-      setter: {
-        concept: 'PropertySelectSetter',
-      },
-    })
-    prop: (item: T) => any;
-
-    @Prop({
-      group: '数据属性',
-      title: '排序',
-      description: '设置该列是否可以排序',
-      docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '不排序' }, { title: '后端排序' }],
-      },
-    })
-    sortable: 'none' | 'custom' = 'none';
-
-    @Prop<ElTableColumnOptions<T, V, P, M>, 'resizable'>({
-      group: '样式属性',
-      title: '是否允许调整列宽',
-      description: '是否允许调整列宽,需要打开表格的边框属性',
-      setter: { concept: 'SwitchSetter' },
-    })
-    resizable: nasl.core.Boolean = true;
-
+    // ========== 数据属性 ==========
+    // 列类型相关（联动属性组）
     @Prop<ElTableColumnOptions<T, V, P, M>, 'type'>({
       group: '数据属性',
       title: '列类型',
@@ -543,7 +535,32 @@ namespace nasl.ui {
     label: nasl.core.String;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
+      title: '列字段',
+      description: 'data 项中的字段',
+      docDescription: '数据项中对应的字段名，如createdTime',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+    })
+    prop: (item: T) => any;
+
+    @Prop({
+      group: '数据属性',
+      title: '排序',
+      description: '设置该列是否可以排序',
+      docDescription: '开启后该列可排序，可设置默认顺序，升序或倒序',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '不排序' }, { title: '后端排序' }],
+      },
+    })
+    sortable: 'none' | 'custom' = 'none';
+
+    // ========== 样式属性 ==========
+    // 固定列相关（联动属性组）
+    @Prop({
+      group: '样式属性',
       title: '固定列',
       description:
         '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
@@ -566,8 +583,8 @@ namespace nasl.ui {
     isFixed: nasl.core.Boolean = false;
 
     @Prop<ElTableColumnOptions<T, V, P, M>, 'fixed'>({
-      group: '主要属性',
-      title: '固定列',
+      group: '样式属性',
+      title: '固定列位置',
       description:
         '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
       setter: {
@@ -577,6 +594,14 @@ namespace nasl.ui {
       if: (_) => _.isFixed === true,
     })
     fixed: 'left' | 'right';
+
+    @Prop<ElTableColumnOptions<T, V, P, M>, 'resizable'>({
+      group: '样式属性',
+      title: '是否允许调整列宽',
+      description: '是否允许调整列宽,需要打开表格的边框属性',
+      setter: { concept: 'SwitchSetter' },
+    })
+    resizable: nasl.core.Boolean = true;
 
     @Event({
       title: '编辑列变化时',
@@ -669,6 +694,7 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     T1,
   > extends ViewComponentOptions {
+    // ========== 数据属性 ==========
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -715,16 +741,10 @@ namespace nasl.ui {
     })
     sortable: 'none' | 'custom' = 'none';
 
-    @Prop<ElTableColumnDynamicOptions<T, V, P, M, T1>, 'resizable'>({
-      group: '样式属性',
-      title: '是否允许调整列宽',
-      description: '是否允许调整列宽,需要打开表格的边框属性',
-      setter: { concept: 'SwitchSetter' },
-    })
-    resizable: nasl.core.Boolean = true;
-
+    // ========== 样式属性 ==========
+    // 固定列相关（联动属性组）
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '固定列',
       description:
         '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
@@ -747,8 +767,8 @@ namespace nasl.ui {
     isFixed: nasl.core.Boolean = false;
 
     @Prop<ElTableColumnDynamicOptions<T, V, P, M, T1>, 'fixed'>({
-      group: '主要属性',
-      title: '固定列',
+      group: '样式属性',
+      title: '固定列位置',
       description:
         '该列是否固定。左侧固定列需要从第一列到当前固定列之间的列都是固定列。右侧固定列需要最后一列到当前固定列之间的列都是固定列。',
       setter: {
@@ -758,6 +778,14 @@ namespace nasl.ui {
       if: (_) => _.isFixed === true,
     })
     fixed: 'left' | 'right';
+
+    @Prop<ElTableColumnDynamicOptions<T, V, P, M, T1>, 'resizable'>({
+      group: '样式属性',
+      title: '是否允许调整列宽',
+      description: '是否允许调整列宽,需要打开表格的边框属性',
+      setter: { concept: 'SwitchSetter' },
+    })
+    resizable: nasl.core.Boolean = true;
 
     @Slot({
       title: '单元格',

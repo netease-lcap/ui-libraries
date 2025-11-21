@@ -6,12 +6,23 @@ import * as Components from './components';
 
 // console.log(provideGlobalConfig, 'provideGlobalConfig');
 
-export const install: Plugin = (app) => {
+/**
+ * Setup Element Plus app configuration
+ * without registering components.
+ * @param app
+ */
+export const setupAppConfiguration: Plugin = (app) => {
   app.use(ElementPlus, {
     locale: zhCn,
   });
+
+  app.config.globalProperties.$message = ElMessage;
+};
+
+export const install: Plugin = (app) => {
+  setupAppConfiguration(app);
+
   Object.keys(Components).forEach((name) => {
     app.component(name, Components[name]);
   });
-  app.config.globalProperties.$message = ElMessage;
 };

@@ -1,0 +1,35 @@
+{
+  "name": "@lcap/ui-libraries-mcp",
+  "version": "0.0.5",
+  "description": "组件 mcp",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "mitt": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.20",
+    "typescript": "^5.9.3",
+    "vite": "^6.0.1",
+    "vite-plugin-dts": "^4.3.0"
+  }
+}

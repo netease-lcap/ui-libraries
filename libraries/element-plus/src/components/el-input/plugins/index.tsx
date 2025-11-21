@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import { InputProps } from 'element-plus';
+
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { ElPreview } from '@/index';
@@ -8,6 +10,7 @@ import idePlugin from './ide';
 import { $deletePropsList } from '@/plugins/constants';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
+import { useEffect } from '../../../plugins/hooks';
 
 const InputBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElInputOptions, InputProps>();
 
@@ -56,7 +59,7 @@ export default InputBasicAccumulate.addAccumulate(idePlugin)
       const prepend = showPrepend ? { prepend: prependSlot() } : { prepend: undefined };
 
       return {
-        slots: _.assign(slots, append, prepend),
+        slots: _.assign({}, slots, append, prepend),
       };
     },
   })
@@ -78,5 +81,17 @@ export default InputBasicAccumulate.addAccumulate(idePlugin)
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleMcp',
+    handle(props) {
+      const setValue = props.get('setValue');
+      const refId = props.get('data-ref-id');
+      useEffect(() => {
+        _.attempt(subscribe, 'el_input__change', refId, (value) => _.attempt(setValue, value));
+        return () => _.attempt(unsubscribe, 'el_input__change', refId);
+      }, []);
+      return {};
     },
   });

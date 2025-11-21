@@ -38,12 +38,12 @@
                                 <i-ico :name="downloadIcon" icotype="only"></i-ico>
                             </a>
                         </span>
-                        <i-ico :name="removeIcon || 'remove'" v-if="!readonly && !disabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !disabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
                     </div>
                       <div v-else>
                         <div :class="$style.thumb"><img :class="$style.img" v-if="listType === 'image'" :src="getUrl(item)"></div>
                         <a :class="$style.link" :href="encodeUrl(item.url)" target="_blank" download role="download">{{ item.name || item.url }}</a>
-                        <i-ico :name="removeIcon || 'remove'" v-if="!readonly && !disabled && !isPreview" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !disabled && !isPreview" @click="remove(index)"></i-ico>
                     </div>
                     <u-linear-progress v-if="item.showProgress && !$env.VUE_APP_DESIGNER" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                 </template>
@@ -156,6 +156,7 @@ export default {
         listType: { type: String, default: 'text' },
         urlField: { type: String, default: 'url' },
         autoUpload: { type: Boolean, default: true },
+        disableUpload: { type: Boolean, default: false }, // 禁用文件上传
         draggable: { type: Boolean, default: false },
         pastable: { type: Boolean, default: false },
         showFileList: { type: Boolean, default: true },
@@ -455,7 +456,11 @@ export default {
                 }];
             }
 
-            if (!files)
+            this.$emit('select-files', {
+              files: files ? Array.from(files) : [],
+            });
+
+            if (!files || this.disableUpload)
                 return;
             // 处理开启图片编辑器
             if (this.openCropper) {

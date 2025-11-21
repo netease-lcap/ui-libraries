@@ -43,7 +43,7 @@ export default ElTimelineBasicAccumulate.addPlugin({
                 <el-timeline-item
                   {...item}
                   v-slots={{
-                      default: () => slots.content?.({ item } as any),
+                      default: () => slots.content?.({ item: item?.itemSource ?? item } as any),
                     }}
                 />
                 )),

@@ -559,4 +559,11 @@
    * @type color
    */
   --el-svg-monochrome-grey: var(--el-border-color);
+
+
+  /**
+   * @title Logo 颜色
+   * @type color
+   */
+  --el-logo-color: var(--el-color-primary);
 }

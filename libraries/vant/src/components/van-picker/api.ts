@@ -22,6 +22,28 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class VanPicker<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    @Method({
+      title: '重新加载',
+      description: '清除缓存，重新加载',
+    })
+    reload(): void {}
+
+    @Method({
+      title: '显示',
+      description: '显示选择器',
+    })
+    show(): void {}
+
+    @Method({
+      title: '关闭',
+      description: '关闭选择器',
+    })
+    close(): void {}
+
+    @Prop({
+      title: '过滤文本',
+    })
+    filterText: nasl.core.String;
     constructor(options?: Partial<VanPickerOptions<T, V, P, M, C>>) {
       super();
     }
@@ -170,6 +192,26 @@ namespace nasl.ui {
     })
     visibleOptionNum: nasl.core.Integer = 6;
 
+    @Prop({
+      group: '交互属性',
+      title: '可搜索',
+      description: '是否允许搜索选项',
+      docDescription:
+        '开启后，用户可以在选择框中输入文字来搜索选项。默认搜索规则不区分大小写，支持全文本任意位置匹配。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    filterable: nasl.core.Boolean = false;
+
+    @Prop<VanPickerOptions<T, V, P, M, C>, 'remote'>({
+      group: '交互属性',
+      title: '远程搜索',
+      description: '是否开启远程搜索',
+      docDescription: '开启后，组件不会过滤选项，而是改变当前组件.filterText属性，用户自行实现搜索逻辑。',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => !!_.filterable,
+    })
+    remote: nasl.core.Boolean = false;
+
     @Event({
       title: '选中值变化时',
       description: '选中值变化时触发',
@@ -204,7 +246,7 @@ namespace nasl.ui {
         label: true,
       },
     },
-    extends:[
+    extends: [
       {
         name: 'VanFormItem',
       },

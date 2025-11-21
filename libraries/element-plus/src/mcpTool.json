@@ -1,0 +1,261 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "tools": [
+    {
+      "name": "el_button__click",
+      "title": "按钮点击",
+      "description": "触发按钮点击",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "按钮组件的引用ID"
+          }
+        },
+        "required": ["refId"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "操作是否成功"
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    },
+    {
+      "name": "el_form__validate",
+      "title": "表单校验",
+      "description": "对表单进行校验，支持全表单校验或者单个表单项校验",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "表单组件的引用ID"
+          },
+          "fieldName": {
+            "type": "string",
+            "description": "表单项字段名称（可选，不传则校验整个表单）"
+          }
+        },
+        "required": ["refId"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "description": "校验是否通过"
+          },
+          "errors": {
+            "type": "array",
+            "description": "校验错误信息列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "description": "字段名称"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "错误信息"
+                }
+              }
+            }
+          }
+        },
+        "required": ["valid"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    },
+    {
+      "name": "el_form__clearValidate",
+      "title": "移除表单的校验结果",
+      "description": "移除整个表单的校验结果或移除表单项的校验结果",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "表单组件的引用ID"
+          },
+          "fieldName": {
+            "type": "string",
+            "description": "表单项字段名称（可选，不传则清除整个表单的校验结果）"
+          }
+        },
+        "required": ["refId"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "操作是否成功"
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    },
+    {
+      "name": "el_table__reload",
+      "title": "表格重新加载",
+      "description": "重新加载表格内容，支持指定分页数",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "表格组件的引用ID"
+          },
+          "page": {
+            "type": "number",
+            "description": "分页页码（可选，不传则保持当前页）"
+          }
+        },
+        "required": ["refId"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "操作是否成功"
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    },
+    {
+      "name": "el_input__change",
+      "title": "输入框值变更",
+      "description": "触发输入框的值变化，用于为输入框设置新的内容",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "输入框组件的引用ID"
+          },
+          "value": {
+            "description": "变更后的输入框值"
+          }
+        },
+        "required": ["refId", "value"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "操作是否成功"
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    },
+    {
+      "name": "el_mention__change",
+      "title": "提及输入值变更",
+      "description": "触发提及组件的值变化，用于更新提及输入框内容",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "提及组件的引用ID"
+          },
+          "value": {
+            "description": "变更后的提及内容"
+          }
+        },
+        "required": ["refId", "value"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "操作是否成功"
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    },
+    {
+      "name": "el_select__change",
+      "title": "选择器值变更",
+      "description": "触发下拉选择器的值变化，用于更新选择结果",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "refId": {
+            "type": "string",
+            "description": "选择器组件的引用ID"
+          },
+          "value": {
+            "description": "变更后的选中值，支持字符串或数组"
+          }
+        },
+        "required": ["refId", "value"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "操作是否成功"
+          }
+        },
+        "required": ["success"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": null,
+      "_meta": null
+    }
+  ]
+}

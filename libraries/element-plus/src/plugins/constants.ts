@@ -8,6 +8,8 @@ export const $inject = Symbol('inject');
 export const $formTagName = Symbol('formTagName');
 export const $tagName = Symbol('tagName');
 export const $mergeRef = Symbol('mergeRef');
+export const $router = Symbol('router');
+export const $route = Symbol('route');
 
 export const $dataSourceDeleteField = ['dataSource', 'textField', 'valueField', 'parentField', 'childrenField'] as const;
 

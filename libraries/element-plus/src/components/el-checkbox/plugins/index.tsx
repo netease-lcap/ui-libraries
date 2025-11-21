@@ -49,7 +49,7 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
             ? {}
             : {
                 default: () => _.map(dataSource, (item) => (
-                  <ElCheckbox {...item}>{slots.item ? slots.item({ item } as any) : item.label}</ElCheckbox>
+                  <ElCheckbox {...item}>{slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.label}</ElCheckbox>
                   )),
               }),
         [dataSource, slots, dataConfig],
@@ -73,13 +73,17 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
         [
           _.matches('button'),
           _.constant(
-            _.map(slots.default?.(), (node: any) => <ElCheckboxButton {...node.props} v-slots={node.children} />),
+            _.map(slots.default?.(), (node: any) => (
+              <ElCheckboxButton {..._.omit(node.props, 'ref')} v-slots={node.children} />
+            )),
           ),
         ],
         [
           _.matches('border'),
           _.constant(
-            _.map(slots.default?.(), (node: any) => <ElCheckbox {...node.props} v-slots={node.children} border />),
+            _.map(slots.default?.(), (node: any) => (
+              <ElCheckbox {..._.omit(node.props, 'ref')} v-slots={node.children} border />
+            )),
           ),
         ],
         [_.stubTrue, slots.default],
@@ -120,7 +124,10 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
       const column = props.get('column');
       const style = props.get('style');
       return {
-        class: addClass(className, { 'el-checkbox-group-vertical': direction === 'vertical' }),
+        class: addClass(className, {
+          'el-checkbox-group-vertical': direction === 'vertical',
+          'cw-checkbox-group': true,
+        }),
         style: {
           ...style,
           'grid-template-columns': column ? `repeat(${column}, 1fr)` : 'auto-fill',

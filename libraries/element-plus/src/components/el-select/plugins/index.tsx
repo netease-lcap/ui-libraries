@@ -1,7 +1,10 @@
 /* eslint-disable no-shadow */
 import _ from 'lodash';
 import { ElSelectV2, SelectProps } from 'element-plus';
-import { useMemo, useCallback } from '@/plugins/hooks';
+import { CSSProperties } from 'vue';
+
+import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
+import { useMemo, useCallback, useEffect } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { ElOption } from '../index';
@@ -56,12 +59,17 @@ export default SelectBasicAccumulate.addPlugin({
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-            default: () =>
-              _.map(dataSource, (item) => (
-                <ElOption {...item}>
-                  {item.label}
-                  {item.description && <el-text style="display:block;height:14px;line-height:14px" color="secondary" text={item.description} />}
-                </ElOption>
+            default: () => _.map(dataSource, (item) => (
+              <ElOption {...item}>
+                {item.label}
+                {item.description && (
+                <el-text
+                  style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
+                  color="secondary"
+                  text={item.description}
+                />
+                  )}
+              </ElOption>
               )),
           };
 
@@ -71,6 +79,17 @@ export default SelectBasicAccumulate.addPlugin({
         loading,
         slots: _.assign(slots, dataSourceSlots),
         data: dataSource,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleValueNotInData',
+    handle(props) {
+      const selectedValuesData = props.get('selectedValuesData');
+      const data = props.get('data', []);
+      if (_.isEmpty(selectedValuesData) || _.isEmpty(data)) return {};
+      return {
+        data: _.unionBy(data, selectedValuesData, 'value'),
       };
     },
   })
@@ -119,6 +138,36 @@ export default SelectBasicAccumulate.addPlugin({
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
         previewText,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleMcp',
+    handle(props) {
+      const refId = props.get('data-ref-id');
+      const setValue = props.get('setValue');
+      useEffect(() => {
+        _.attempt(subscribe, 'el_select__change', refId, (value) => _.attempt(setValue, value));
+        return () => _.attempt(unsubscribe, 'el_select__change', refId);
+      }, []);
+      return {};
+    },
+  })
+  .addPlugin({
+    name: 'handleRemote',
+    handle(props) {
+      const remote = props.get('remote');
+      if (!remote) return {};
+      const emit = props.get('emit');
+      const remoteMethodProps = props.get('remoteMethod');
+      const ref = props.get('ref');
+      const remoteMethod = _.wrap(remoteMethodProps, (fn, query: string) => {
+        emit('sync:state', 'filterText', query);
+        _.attempt(ref?.reload);
+        _.attempt(fn, query);
+      });
+      return {
+        remoteMethod,
       };
     },
   });

@@ -9,7 +9,7 @@ export const VanSidebar = registerComponent(Sidebar, {
   name: 'van-sidebar',
 });
 
-export const VanSidebarItem = SidebarItem;
+export const VanSidebarItem: typeof SidebarItem = SidebarItem;
 // registerComponent(SidebarItem, {
 //   plugin: plugins,
 //   name: 'van-sidebar-item',

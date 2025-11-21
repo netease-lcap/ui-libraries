@@ -481,6 +481,7 @@ describe('Table.vue', () => {
 
         methods: {
           handleEvent(...args) {
+            console.log(args, '==');
             this.result = args;
           },
         },
@@ -590,20 +591,19 @@ describe('Table.vue', () => {
         const cellStyle = getComputedStyle(secondRowFirstCell.element);
 
         // 验证单元格是否被隐藏（display: none）或者有特殊的合并样式
-        const isHidden = cellStyle.display === 'none'
-                        || secondRowFirstCell.element.style.display === 'none'
-                        || secondRowFirstCell.element.hasAttribute('hidden')
-                        || cellStyle.visibility === 'hidden';
+        const isHidden =
+          cellStyle.display === 'none' ||
+          secondRowFirstCell.element.style.display === 'none' ||
+          secondRowFirstCell.element.hasAttribute('hidden') ||
+          cellStyle.visibility === 'hidden';
 
         if (!isHidden) {
           // 如果第二行第一个单元格没有被隐藏，检查它是否有特殊的合并属性
-          const hasSpanAttribute = secondRowFirstCell.element.hasAttribute('rowspan')
-                                  || secondRowFirstCell.element.hasAttribute('colspan');
+          const hasSpanAttribute =
+            secondRowFirstCell.element.hasAttribute('rowspan') || secondRowFirstCell.element.hasAttribute('colspan');
 
           // 在某些实现中，被合并的单元格可能不会被隐藏，而是设置为0宽度/高度
-          const hasZeroSize = cellStyle.width === '0px'
-                             || cellStyle.height === '0px'
-                             || cellStyle.maxWidth === '0px';
+          const hasZeroSize = cellStyle.width === '0px' || cellStyle.height === '0px' || cellStyle.maxWidth === '0px';
 
           expect(hasSpanAttribute || hasZeroSize).toBe(true);
         }
@@ -620,12 +620,8 @@ describe('Table.vue', () => {
 
       // 验证spanMethod返回了正确的合并配置
       const callArgs = spanMethodSpy.mock.calls;
-      const firstCellCall = callArgs.find((call) => (
-        call[0].rowIndex === 0 && call[0].columnIndex === 0
-      ));
-      const secondCellCall = callArgs.find((call) => (
-        call[0].rowIndex === 1 && call[0].columnIndex === 0
-      ));
+      const firstCellCall = callArgs.find((call) => call[0].rowIndex === 0 && call[0].columnIndex === 0);
+      const secondCellCall = callArgs.find((call) => call[0].rowIndex === 1 && call[0].columnIndex === 0);
 
       if (firstCellCall) {
         const firstCellResult = wrapper.vm.objectSpanMethod(firstCellCall[0]);
@@ -905,7 +901,7 @@ describe('Table.vue', () => {
       const wrapper = createTable('selection-change');
       const { vm } = wrapper;
       await doubleWait();
-      
+
       const tableRef = wrapper.findComponent({ name: 'ElTable' });
       if (!tableRef.exists()) {
         console.warn('ElTable component not found, skipping method test');
@@ -914,7 +910,10 @@ describe('Table.vue', () => {
       }
 
       const tableComponent = tableRef.vm;
-      if (typeof tableComponent.toggleRowSelection === 'function' && typeof tableComponent.clearSelection === 'function') {
+      if (
+        typeof tableComponent.toggleRowSelection === 'function' &&
+        typeof tableComponent.clearSelection === 'function'
+      ) {
         tableComponent.toggleRowSelection(vm.testData[0]);
         await doubleWait();
         expect(vm.selection.length).toEqual(1);
@@ -965,7 +964,7 @@ describe('Table.vue', () => {
 
       const { vm } = wrapper;
       await doubleWait();
-      
+
       const tableRef = wrapper.findComponent({ name: 'ElTable' });
       if (!tableRef.exists()) {
         console.warn('ElTable component not found, skipping method test');
@@ -974,7 +973,10 @@ describe('Table.vue', () => {
       }
 
       const tableComponent = tableRef.vm;
-      if (typeof tableComponent.toggleAllSelection === 'function' && typeof tableComponent.clearSelection === 'function') {
+      if (
+        typeof tableComponent.toggleAllSelection === 'function' &&
+        typeof tableComponent.clearSelection === 'function'
+      ) {
         tableComponent.toggleAllSelection();
         await doubleWait();
         const oldSelection = vm.selection;
@@ -1058,33 +1060,36 @@ describe('Table.vue', () => {
         },
       });
       await doubleWait();
-       assertSortIconCount(wrapper.element, 'sorting icon is not empty after mount', 0);
-       // manual click first column header
-       const elm = wrapper.find('.caret-wrapper');
-       if (elm.exists()) {
-         await elm.trigger('click');
-         await doubleWait();
-         assertSortIconCount(wrapper.element, 'sorting icon is not one after click header');
-       } else {
-         console.warn('.caret-wrapper not found, trying alternative selectors');
-         const sortIcon = wrapper.find('.el-table__column-sorter') || wrapper.find('.el-icon-caret-up') || wrapper.find('[role="button"]');
-         if (sortIcon.exists()) {
-           await sortIcon.trigger('click');
-           await doubleWait();
-         }
-               }
+      assertSortIconCount(wrapper.element, 'sorting icon is not empty after mount', 0);
+      // manual click first column header
+      const elm = wrapper.find('.caret-wrapper');
+      if (elm.exists()) {
+        await elm.trigger('click');
+        await doubleWait();
+        assertSortIconCount(wrapper.element, 'sorting icon is not one after click header');
+      } else {
+        console.warn('.caret-wrapper not found, trying alternative selectors');
+        const sortIcon =
+          wrapper.find('.el-table__column-sorter') ||
+          wrapper.find('.el-icon-caret-up') ||
+          wrapper.find('[role="button"]');
+        if (sortIcon.exists()) {
+          await sortIcon.trigger('click');
+          await doubleWait();
+        }
+      }
 
-        const tableRef = wrapper.findComponent({ name: 'ElTable' });
-       if (tableRef.exists() && typeof tableRef.vm.sort === 'function') {
-         tableRef.vm.sort('director', 'descending');
-         await doubleWait();
-         assertSortIconCount(wrapper.element, 'sorting icon is not one after call sort');
-         tableRef.vm.sort('director', 'ascending');
-         await doubleWait();
-         assertSortIconCount(wrapper.element, 'sorting icon is not one after sort same column');
-       } else {
-         console.warn('Table sort method not available');
-       }
+      const tableRef = wrapper.findComponent({ name: 'ElTable' });
+      if (tableRef.exists() && typeof tableRef.vm.sort === 'function') {
+        tableRef.vm.sort('director', 'descending');
+        await doubleWait();
+        assertSortIconCount(wrapper.element, 'sorting icon is not one after call sort');
+        tableRef.vm.sort('director', 'ascending');
+        await doubleWait();
+        assertSortIconCount(wrapper.element, 'sorting icon is not one after sort same column');
+      } else {
+        console.warn('Table sort method not available');
+      }
       wrapper.unmount();
     });
 
@@ -1111,41 +1116,42 @@ describe('Table.vue', () => {
           handleSortChange,
         },
       });
-             await doubleWait();
-       let elm = wrapper.find('.caret-wrapper');
+      await doubleWait();
+      let elm = wrapper.find('.caret-wrapper');
 
-       // 如果找不到 .caret-wrapper，尝试其他选择器
-       if (!elm.exists()) {
-         elm = wrapper.find('.el-table__column-sorter')
-               || wrapper.find('.el-icon-caret-up')
-               || wrapper.find('[role="button"]')
-               || wrapper.find('th[sortable]')
-               || wrapper.find('.el-table__header .cell');
-       }
-       if (elm.exists()) {
-         await elm.trigger('click');
-         expect(handleSortChange).toHaveBeenLastCalledWith({
-           column: expect.any(Object),
-           prop: 'runtime',
-           order: 'ascending',
-         });
+      // 如果找不到 .caret-wrapper，尝试其他选择器
+      if (!elm.exists()) {
+        elm =
+          wrapper.find('.el-table__column-sorter') ||
+          wrapper.find('.el-icon-caret-up') ||
+          wrapper.find('[role="button"]') ||
+          wrapper.find('th[sortable]') ||
+          wrapper.find('.el-table__header .cell');
+      }
+      if (elm.exists()) {
+        await elm.trigger('click');
+        expect(handleSortChange).toHaveBeenLastCalledWith({
+          column: expect.any(Object),
+          prop: 'runtime',
+          order: 'ascending',
+        });
 
-         await elm.trigger('click');
-         expect(handleSortChange).toHaveBeenLastCalledWith({
-           column: expect.any(Object),
-           prop: 'runtime',
-           order: 'descending',
-         });
+        await elm.trigger('click');
+        expect(handleSortChange).toHaveBeenLastCalledWith({
+          column: expect.any(Object),
+          prop: 'runtime',
+          order: 'descending',
+        });
 
-         await elm.trigger('click');
-         expect(handleSortChange).toHaveBeenLastCalledWith({
-           column: expect.any(Object),
-           prop: 'runtime',
-           order: null,
-         });
-       } else {
-         console.warn('No sortable element found, skipping sort-change event test');
-       }
+        await elm.trigger('click');
+        expect(handleSortChange).toHaveBeenLastCalledWith({
+          column: expect.any(Object),
+          prop: 'runtime',
+          order: null,
+        });
+      } else {
+        console.warn('No sortable element found, skipping sort-change event test');
+      }
     });
 
     it('setCurrentRow', async () => {
@@ -1253,25 +1259,25 @@ describe('Table.vue', () => {
         };
       },
     });
-         await doubleWait();
-     const tr = wrapper.find('.el-table__body-wrapper tbody tr');
-     if (tr.exists()) {
-       await tr.trigger('mouseenter');
-       await doubleWait();
-       await rAF();
-       await doubleWait();
-       // 检查是否有hover效果，如果没有则跳过
-       if (tr.classes().includes('hover-row')) {
-         expect(tr.classes()).toContain('hover-row');
-         await tr.trigger('mouseleave');
-         await doubleWait();
-         await rAF();
-         await doubleWait();
-         expect(tr.classes()).not.toContain('hover-row');
-       } else {
-         console.warn('hover-row class not applied, skipping hover test');
-       }
-     }
+    await doubleWait();
+    const tr = wrapper.find('.el-table__body-wrapper tbody tr');
+    if (tr.exists()) {
+      await tr.trigger('mouseenter');
+      await doubleWait();
+      await rAF();
+      await doubleWait();
+      // 检查是否有hover效果，如果没有则跳过
+      if (tr.classes().includes('hover-row')) {
+        expect(tr.classes()).toContain('hover-row');
+        await tr.trigger('mouseleave');
+        await doubleWait();
+        await rAF();
+        await doubleWait();
+        expect(tr.classes()).not.toContain('hover-row');
+      } else {
+        console.warn('hover-row class not applied, skipping hover test');
+      }
+    }
     wrapper.unmount();
   });
 
@@ -2001,7 +2007,7 @@ describe('Table.vue', () => {
               // 验证现在第一列是否是release数据
               const firstCellText = firstCellSpanAfterHide.text();
               const testData = getTestData();
-              const isReleaseData = testData.some(item => firstCellText.includes(item.release));
+              const isReleaseData = testData.some((item) => firstCellText.includes(item.release));
               expect(isReleaseData).toBeTruthy();
             } else {
               expect(hasReleaseClass).toBeTruthy();
@@ -2058,28 +2064,19 @@ describe('Table.vue', () => {
         methods: {
           change(rows) {
             this.selected = rows;
+            console.log(this, 'this');
           },
         },
       });
       await doubleWait();
       const checkboxes = wrapper.findAll('.el-checkbox');
-      if (checkboxes.length > 2) {
-        await checkboxes[2].trigger('click');
-        await doubleWait();
-        // 树形选择可能因为测试环境的限制而不工作，我们验证checkbox存在并能点击
-        const selectedLength = wrapper.vm.selected?.length || 0;
-        // 至少验证事件处理器被设置了
-        expect(typeof wrapper.vm.change).toBe('function');
-        // 如果确实有选择，验证数量；否则只验证功能存在
-        if (selectedLength > 0) {
-          expect(selectedLength).toBeGreaterThanOrEqual(1);
-        }
-      }
+      await checkboxes[2].trigger('click');
+      await doubleWait();
 
-      // 只有在有足够复选框的情况下才继续测试
-      if (checkboxes.length <= 2) {
-        return;
-      }
+      expect(wrapper.vm.selected?.length).toEqual(3);
+      // 树形选择可能因为测试环境的限制而不工作，我们验证checkbox存在并能点击
+      // 至少验证事件处理器被设置了
+      expect(typeof wrapper.vm.change).toBe('function');
 
       await checkboxes[2].trigger('click');
       await doubleWait();
@@ -2090,35 +2087,30 @@ describe('Table.vue', () => {
       await checkboxes[2].trigger('click');
       await doubleWait();
       // 由于测试环境的限制，tree selection可能不工作，我们只验证功能存在
-      const selectedLength = wrapper.vm.selected?.length || 0;
-      expect(selectedLength).toBeGreaterThanOrEqual(0);
-      const checkbox2Classes = checkboxes[2].classes();
-      // 在测试环境中，checkbox状态可能不会立即更新
-      // 我们只验证checkbox存在并且可以点击
-      expect(checkbox2Classes.length).toBeGreaterThanOrEqual(0);
+      const selectedLength = wrapper.vm.selected?.length;
+      expect(selectedLength).toEqual(1);
 
-      if (checkboxes.length > 3) {
-        await checkboxes[3].trigger('click');
-        await doubleWait();
-        // expect(wrapper.vm.selected?.length || 0).toEqual(2);
-        // expect(checkboxes[3].classes().includes('is-checked')).toBe(true);
-      }
+      // wrapper.vm.treeProps.checkStrictly = false;
 
-      wrapper.vm.treeProps.checkStrictly = false;
-      await checkboxes[0].trigger('click');
-      await checkboxes[0].trigger('click');
-      await doubleWait();
-      expect(wrapper.vm.selected?.length || 0).toEqual(0);
-      await checkboxes[0].trigger('click');
-      await doubleWait();
-      if (checkboxes.length > 3) {
-        await checkboxes[3].trigger('click');
-        await doubleWait();
-      }
-      await checkboxes[0].trigger('click');
-      await doubleWait();
-      // 由于tree selection的复杂性，这里只验证selection事件有触发
-      expect(wrapper.vm.selected?.length || 0).toBeGreaterThanOrEqual(0);
+      // const checkboxes2 = wrapper.findAll('.el-checkbox');
+      // // await checkboxes2[0].trigger('click');
+      // // await doubleWait();
+      // // await doubleWait();
+      // //
+      // // await doubleWait();
+      // // await checkboxes2[0].trigger('click');
+      // // await doubleWait();
+      // // expect(wrapper.vm.selected?.length || 0).toEqual(0);
+      // await checkboxes2[0].trigger('click');
+      // await doubleWait();
+      // if (checkboxes.length > 3) {
+      //   await checkboxes2[3].trigger('click');
+      //   await doubleWait();
+      // }
+      // await checkboxes2[0].trigger('click');
+      // await doubleWait();
+      // // 由于tree selection的复杂性，这里只验证selection事件有触发
+      // expect(wrapper.vm.selected?.length || 0).toBeGreaterThanOrEqual(0);
     });
   });
 

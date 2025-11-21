@@ -20,10 +20,12 @@ namespace nasl.ui {
   }
 
   export class ElIconOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '图标',
-      docDescription: '支持从图标库选择图标或上传自定义图标。',
+      title: '图标名称',
+      description: '选择要显示的图标',
+      docDescription: '设置要显示的图标。支持从图标库中选择预设图标或上传自定义图标。',
       setter: {
         concept: 'IconSetter',
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',

@@ -1,13 +1,12 @@
 {
   "name": "lcap-ui-monorepo",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "private": true,
   "description": "Codewave Low Code AI Platform UI Components",
   "main": "index.js",
   "scripts": {
     "commit": "cz",
     "postinstall": "husky install && pnpm --filter \"./packages/*\" build",
-    "version-packages": "changeset version",
     "start": "pnpm dev:pc-ui",
     "dev:pc-ui": "pnpm --filter \"./libraries/pc-ui\" dev",
     "dev:element-ui": "pnpm --filter \"./libraries/element-ui\" dev",
@@ -17,7 +16,7 @@
     "deploy": "pnpm --filter \"./libraries/*\" deploy:one",
     "test": "pnpm --filter \"./libraries/*\" test",
     "lint": "eslint --fix",
-    "changeset": "changeset",
+    "changelog": "node scripts/changelog.mjs",
     "coverage": "pnpm --dir ./libraries/* test:coverage"
   },
   "keywords": [
@@ -79,6 +78,8 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "minimist": "^1.2.8",
-    "typescript": "^5.3.3"
+    "simple-git": "^3.28.0",
+    "typescript": "^5.9.3"
   }
 }
+

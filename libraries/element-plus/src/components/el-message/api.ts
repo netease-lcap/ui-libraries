@@ -45,10 +45,12 @@ namespace nasl.ui {
   }
 
   export class ElMessageOptions extends ViewComponentOptions {
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({
-      title: '显示',
-      description: '是否显示',
-      group: '主要属性',
+      title: '显示状态',
+      description: '控制消息的显示和隐藏',
+      docDescription: '绑定消息的显示状态。true：显示消息；false：隐藏消息。支持双向绑定。',
+      group: '状态属性',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -56,9 +58,11 @@ namespace nasl.ui {
     })
     visible: nasl.core.Boolean = false;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       title: '消息类型',
-      description: '消息类型',
+      description: '选择消息的类型主题',
+      docDescription: '控制消息的类型和主题色。信息：蓝色主题；成功：绿色主题；警告：橙色主题；错误：红色主题。',
       group: '主要属性',
       setter: {
         concept: 'EnumSelectSetter',
@@ -68,8 +72,9 @@ namespace nasl.ui {
     type: 'info' | 'success' | 'warning' | 'error' = 'info';
 
     @Prop({
-      title: '纯色',
-      description: '是否纯色',
+      title: '纯色背景',
+      description: '是否使用纯色背景',
+      docDescription: '开启后，消息会使用纯色背景，视觉效果更突出。',
       group: '主要属性',
       setter: {
         concept: 'SwitchSetter',

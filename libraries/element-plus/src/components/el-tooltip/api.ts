@@ -25,6 +25,7 @@ namespace nasl.ui {
   }
 
   export class ElTooltipOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '主题',
@@ -44,18 +45,11 @@ namespace nasl.ui {
     })
     content: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '原始HTML',
-    //   description: '内容是否为HTML字符串',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // rawContent: nasl.core.Boolean = false;
-
     @Prop({
       group: '主要属性',
-      title: '位置',
-      description: '出现位置',
+      title: '显示位置',
+      description: '提示框的出现位置',
+      docDescription: '设置提示框相对于触发元素的显示位置。可以选择上、下、左、右及其组合方向。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [

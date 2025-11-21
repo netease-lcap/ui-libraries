@@ -103,10 +103,10 @@ export default DropdownBasicAccumulate.addPlugin({
       }
       return slots.dropdown?.();
     }, [dataConfig, dataSource, slots.items, slots.dropdown]);
-    const slotDropdown = useMemo(
-      () => condSlotRender({ dataConfig, dataSource, slotsItems: slots.items, slotsDropdown: slots.dropdown }),
-      [condSlotRender, dataConfig, dataSource, slots],
-    );
+    // const slotDropdown = useMemo(
+    //   () => condSlotRender({ dataConfig, dataSource, slotsItems: slots.items, slotsDropdown: slots.dropdown }),
+    //   [condSlotRender, dataConfig, dataSource, slots],
+    // );
 
     return {
       [$deletePropsList]: deletePropsList,

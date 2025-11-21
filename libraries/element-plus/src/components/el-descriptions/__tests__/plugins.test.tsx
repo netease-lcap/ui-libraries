@@ -22,52 +22,6 @@ vi.mock('element-plus', () => ({
 }));
 
 // Mock lodash
-vi.mock('lodash', () => ({
-  default: {
-    uniqueId: vi.fn((prefix) => `${prefix}123`),
-    map: vi.fn((array, fn) => array.map(fn)),
-    get: vi.fn((obj, path, defaultValue) => obj?.[path] || defaultValue),
-    omit: vi.fn((obj, keys) => {
-      const result = { ...obj };
-      keys.forEach(key => delete result[key]);
-      return result;
-    }),
-    assign: vi.fn((target, ...sources) => Object.assign(target, ...sources)),
-    forEach: vi.fn((collection, iteratee) => {
-      if (Array.isArray(collection)) {
-        collection.forEach(iteratee);
-      } else if (typeof collection === 'object') {
-        Object.keys(collection).forEach(key => iteratee(collection[key], key));
-      }
-    }),
-    keys: vi.fn((obj) => Object.keys(obj)),
-    cond: vi.fn((conditions) => (value) => {
-      for (const [predicate, transform] of conditions) {
-        if (predicate(value)) {
-          return transform(value);
-        }
-      }
-      return value;
-    }),
-    isObject: vi.fn((value) => typeof value === 'object' && value !== null),
-    stubTrue: vi.fn(() => true),
-    wrap: vi.fn((fn, wrapper) => (...args) => wrapper(fn, ...args)),
-    attempt: vi.fn((fn, ...args) => {
-      try {
-        return fn(...args);
-      } catch (error) {
-        return error;
-      }
-    }),
-    isArray: vi.fn((value) => Array.isArray(value)),
-    mixin: vi.fn((obj) => {
-      const _ = {};
-      Object.assign(_, obj);
-      return _;
-    }),
-    bind: vi.fn((fn, context) => fn.bind(context)),
-  },
-}));
 
 describe('plugins/basic-plugins.tsx', () => {
   beforeEach(() => {
@@ -207,13 +161,13 @@ describe('plugins/basic-plugins.tsx', () => {
 
     it('应该正确处理复杂的 VNode 结构', () => {
       const mockVNode = {
-        props: { 
-          label: 'Test Label', 
+        props: {
+          label: 'Test Label',
           class: 'test-class',
           labelClassName: 'label-class',
         },
-        children: { 
-          default: 'Test Content', 
+        children: {
+          default: 'Test Content',
           other: 'Other Content',
           extra: 'Extra Content',
         },
@@ -548,10 +502,12 @@ describe('边界情况和错误处理测试', () => {
 
     const { currentValue } = renderHook(plugin, {
       slots: {
-        default: () => [{
-          props: null,
-          children: { default: 'Test Content' },
-        }],
+        default: () => [
+          {
+            props: null,
+            children: { default: 'Test Content' },
+          },
+        ],
       },
     });
 
@@ -566,10 +522,12 @@ describe('边界情况和错误处理测试', () => {
 
     const { currentValue } = renderHook(plugin, {
       slots: {
-        default: () => [{
-          props: { label: 'Test Label' },
-          children: null,
-        }],
+        default: () => [
+          {
+            props: { label: 'Test Label' },
+            children: null,
+          },
+        ],
       },
     });
 
@@ -587,7 +545,7 @@ describe('边界情况和错误处理测试', () => {
       style: {
         '--custom-property': 'value',
         'background-color': 'rgba(255, 0, 0, 0.5)',
-        'transform': 'translateX(10px)',
+        transform: 'translateX(10px)',
       },
     });
 

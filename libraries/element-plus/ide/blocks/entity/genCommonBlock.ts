@@ -279,7 +279,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
                 clearable={true}
                 placeholder="请选择${label}"
                 textField="text"
-                valueField="value"
+                valueField="item"
                 dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}
                 modelValue={$sync(${vModel})}>
             </ElFormSelect>`;

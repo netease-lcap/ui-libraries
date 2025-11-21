@@ -35,7 +35,7 @@ export default AnchorAccumulate.addPlugin({
                 {...item}
                 href={_.get(item, hrefField, '')}
                 v-slots={{
-                    default: () => slots.content?.({ item } as any),
+                    default: () => slots.content?.({ item: item?.itemSource ?? item } as any),
                   }}
               />
               )),

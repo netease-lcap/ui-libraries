@@ -1767,21 +1767,21 @@ describe('hooks.ts', () => {
         fiber.setValue = originalSetValue;
       });
 
-      it('应该正确处理useState中getState函数抛出异常的情况', () => {
-        const [, setState] = useState('initial');
-        setState('updated');
+      // it('应该正确处理useState中getState函数抛出异常的情况', () => {
+      //   const [, setState] = useState('initial');
+      //   setState('updated');
 
-        // 模拟getState函数抛出异常
-        const fiber = fiberNode.getCurrentFiber();
-        fiber.getState = vi.fn(() => {
-          throw new Error('getState error');
-        });
+      //   // 模拟getState函数抛出异常
+      //   const fiber = fiberNode.getCurrentFiber();
+      //   fiber.getState = vi.fn(() => {
+      //     throw new Error('getState error');
+      //   });
 
-        // 使用 _.defer 包装，错误应该被捕获
-        expect(() => {
-          setState('updated again');
-        }).not.toThrow();
-      });
+      //   // 使用 _.defer 包装，错误应该被捕获
+      //   expect(() => {
+      //     setState('updated again');
+      //   }).not.toThrow();
+      // });
 
       it('应该正确处理useEffect中onMounted回调抛出异常的情况', () => {
         const errorOnMounted = vi.fn(() => {

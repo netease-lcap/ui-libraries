@@ -16,8 +16,8 @@ export default PopoverBasicAccumulate.addPlugin({
       popperClass: `${popperClassProp} ${setClass}`,
       ...valueProps,
       ref: {
-        open: () => setVisible(true),
-        close: () => setVisible(false),
+        show: () => setVisible(true),
+        hide: () => setVisible(false),
       },
     };
   },

@@ -1,8 +1,11 @@
-.el-checkbox-group {
+.cw-checkbox-group {
   display: inline-grid; /* 使用 inline-grid 让容器宽度适应内容 */
   grid-auto-flow: column; /* 让子元素按列方向自动排列 */
 }
 
 .el-checkbox-group-vertical {
   grid-auto-flow: row; /* 让子元素按行方向自动排列 */
+}
+.el-checkbox-group-vertical .el-checkbox {
+  margin-right: 30px;
 }

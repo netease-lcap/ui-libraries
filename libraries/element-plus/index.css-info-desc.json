@@ -4518,6 +4518,10 @@
     ".el-link>.el-icon:hover,.el-link>.el-icon._hover": ""
   },
   "ElListComponents": {
+    ".el-list-components__default-text": "",
+    ".el-list-components__default-text:active,.el-list-components__default-text._active": "",
+    ".el-list-components__default-text:focus,.el-list-components__default-text._focus": "",
+    ".el-list-components__default-text:hover,.el-list-components__default-text._hover": "",
     ".el-list-components__frag": "",
     ".el-list-components__frag:active,.el-list-components__frag._active": "",
     ".el-list-components__frag:focus,.el-list-components__frag._focus": "",
@@ -4526,7 +4530,14 @@
     ".el-list-components__item:active,.el-list-components__item._active": "",
     ".el-list-components__item:focus,.el-list-components__item._focus": "",
     ".el-list-components__item:hover,.el-list-components__item._hover": "",
-    ".el-list-components__item:not(:last-child)": ""
+    ".el-list-components__item.is-selectable": "",
+    ".el-list-components__item.is-selectable:hover,.el-list-components__item.is-selectable._hover": "",
+    ".el-list-components__item.is-selected": "",
+    ".el-list-components__item.is-selected:hover,.el-list-components__item.is-selected._hover": "",
+    ".el-list-components__pagination": "",
+    ".el-list-components__pagination:active,.el-list-components__pagination._active": "",
+    ".el-list-components__pagination:focus,.el-list-components__pagination._focus": "",
+    ".el-list-components__pagination:hover,.el-list-components__pagination._hover": ""
   },
   "ElMention": {
     ".el-mention": "提及",
@@ -6692,11 +6703,11 @@
     ".el-table-column--selection .cell:active,.el-table-column--selection .cell._active": "选择列单元格:鼠标按下",
     ".el-table-column--selection .cell:focus,.el-table-column--selection .cell._focus": "选择列单元格:获得焦点",
     ".el-table-column--selection .cell:hover,.el-table-column--selection .cell._hover": "选择列单元格:鼠标移入",
-    ".el-table-column--selection .empty-slot": "选择列空单元格",
-    ".el-table-column--selection .empty-slot:active,.el-table-column--selection .empty-slot._active": "选择列空单元格:鼠标按下",
-    ".el-table-column--selection .empty-slot:focus,.el-table-column--selection .empty-slot._focus": "选择列空单元格:获得焦点",
-    ".el-table-column--selection .empty-slot:hover,.el-table-column--selection .empty-slot._hover": "选择列空单元格:鼠标移入",
-    ".el-table-column--selection .empty-slot.empty-slot.empty-slot": "选择列空单元格:空单元格"
+    ".el-table-column--selection .empty-slot": "",
+    ".el-table-column--selection .empty-slot:active,.el-table-column--selection .empty-slot._active": "",
+    ".el-table-column--selection .empty-slot:focus,.el-table-column--selection .empty-slot._focus": "",
+    ".el-table-column--selection .empty-slot:hover,.el-table-column--selection .empty-slot._hover": "",
+    ".el-table-column--selection .empty-slot.empty-slot.empty-slot": ""
   },
   "ElTabPane": {
     ".el-tab-pane": "标签页面板",

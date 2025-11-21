@@ -4,7 +4,9 @@
 import _ from 'lodash';
 // import { watch } from 'vue';
 // import { useRequest } from 'vue-hooks-plus';
-import { useMemo, useState, useEffect } from '@/plugins/hooks';
+import type { Ref, ComponentPublicInstance } from 'vue';
+import { useMemo, useState, useEffect, useRef } from '@/plugins/hooks';
+
 import { DataSourceType, DataSourceArrayType, DataSourceFunctionType } from '@/types';
 import { useCallback } from '../hooks';
 
@@ -33,8 +35,9 @@ export function useHandleMapField(filedInfo: {
           _.mapValues(fieldsMap, (path) => _.get(item, path, undefined)),
           _.isUndefined,
         ),
+        itemSource: _.isString(item) ? item : undefined,
       })),
-    [label, value, textField, valueField, dataSource],
+    [label, value, textField, valueField, dataSource, fieldsMap],
   );
 }
 
@@ -65,8 +68,13 @@ const handleDataSouceToFn = _.cond([
 ]);
 interface RequestOptions {
   refreshDeps?: any[];
+  manual?: boolean;
   [key: string]: any;
 }
+type TargetValue<T> = T | undefined | null;
+type TargetType = HTMLElement | Element | Window | Document | ComponentPublicInstance;
+
+export type BasicTarget<T extends TargetType = Element> = (() => TargetValue<T>) | TargetValue<T> | Ref<TargetValue<T>>;
 
 interface RequestResult {
   data?: DataSourceArrayType;
@@ -74,24 +82,30 @@ interface RequestResult {
   loading?: boolean;
 }
 const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions = {}): RequestResult => {
-  const [resultData, setResult] = useState<RequestResult>({ run: () => {} });
+  const [resultData, setResult] = useState({});
+  const [loading, setLoading] = useState(false);
+  const run = useRef<(...args: any[]) => void>(() => {}, false);
   const { onBefore = () => {}, onSuccess = () => {}, formatResult = (value) => value, defaultParams = [] } = options;
-  const { refreshDeps = [] } = options;
+  const { refreshDeps = [], manual = false } = options;
   const fn = useCallback(
     (...res) => {
       const params = res.length > 0 ? res : defaultParams;
       onBefore(...params);
-      setResult({ run: fn, loading: true });
+      setLoading(true);
       dataSource(...params).then((data) => {
-        setResult({ data: formatResult(data), run: fn, loading: false });
+        setResult((prev: any) => ({ data: formatResult(_.clone(data), prev?.data) }));
+        setLoading(false);
         onSuccess(data, ...params);
       });
     },
     [dataSource, ...refreshDeps],
   );
-  useEffect(() => fn(), [fn, ...refreshDeps]);
+  run.value = fn;
+  useEffect(() => {
+    if (!manual) fn();
+  }, [fn, ...refreshDeps]);
 
-  return resultData ?? {};
+  return { ...resultData, loading, run: run.value };
 };
 
 export function useRequestDataSource(dataSource: DataSourceType, options: RequestOptions = {}): RequestResult {
@@ -125,10 +139,10 @@ export interface TreeNode {
 
 export function useDataSourceToTree(
   dataSource: DataSourceArrayType,
-  parentField: string = 'parent',
+  parentField: string,
   valueField: string = 'value',
 ): TreeNode[] {
-  if (_.isNil(parentField)) return dataSource;
+  if (!parentField) return dataSource;
   const map = new Map<string, TreeNode>(dataSource.map((item) => [_.get(item, valueField, item), item]));
   return dataSource.reduce((acc: TreeNode[], item) => {
     const parent = map.get(_.get(item, parentField));

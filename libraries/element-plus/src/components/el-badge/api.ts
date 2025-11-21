@@ -19,42 +19,31 @@ namespace nasl.ui {
     }
   }
   export class ElBadgeOptions extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '显示值',
-      description: '显示值',
+      description: '徽章显示的内容',
+      docDescription: '设置徽章显示的值，可以是数字或文本。通常用于显示未读数量或状态。',
       setter: { concept: 'InputSetter' },
     })
     value: any;
 
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '最大值',
-      description: "最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型",
+      description: '数值的最大显示值',
+      docDescription: '设置徽章数值的最大显示值，超过此值会显示"{max}+"。例如max为99时，100会显示为"99+"。',
       setter: { concept: 'NumberInputSetter' },
     })
     max: nasl.core.Decimal;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '小圆点',
-      description: '小圆点',
-      setter: { concept: 'SwitchSetter' },
-    })
-    isDot: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '隐藏',
-      description: '隐藏 badge',
-      setter: { concept: 'SwitchSetter' },
-    })
-    hidden: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '主要属性',
-      title: '类型',
-      description: '类型',
+      title: '徽章类型',
+      description: '选择徽章的类型主题',
+      docDescription: '控制徽章的视觉样式和主题色。主要：蓝色主题；成功：绿色主题；警告：橙色主题；危险：红色主题；信息：灰色主题。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '主要' }, { title: '成功' }, { title: '警告' }, { title: '危险' }, { title: '信息' }],
@@ -64,16 +53,37 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '值为零时是否显示',
-      description: '值为零时是否显示 Badge',
+      title: '小圆点',
+      description: '是否显示为小圆点',
+      docDescription: '开启后，徽章会显示为小圆点而不是数字，适用于只需要标记状态的场景。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isDot: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '显示为零',
+      description: '值为零时是否显示徽章',
+      docDescription: '开启后，即使徽章值为0也会显示。关闭后，值为0时会隐藏徽章。',
       setter: { concept: 'SwitchSetter' },
     })
     showZero: nasl.core.Boolean = true;
 
     @Prop({
+      group: '主要属性',
+      title: '隐藏徽章',
+      description: '是否隐藏徽章',
+      docDescription: '开启后，徽章会被隐藏不显示。可以通过程序控制徽章的显示和隐藏。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    hidden: nasl.core.Boolean = false;
+
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
+    @Prop({
       group: '样式属性',
-      title: '背景色',
-      description: '背景色',
+      title: '背景颜色',
+      description: '自定义徽章的背景颜色',
+      docDescription: '设置徽章的自定义背景颜色，会覆盖默认的主题色。',
       setter: { concept: 'InputSetter' },
     })
     color: nasl.core.String = '';

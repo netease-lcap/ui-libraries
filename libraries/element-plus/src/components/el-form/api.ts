@@ -43,43 +43,12 @@ namespace nasl.ui {
   }
 
   export class ElFormOptions extends ViewComponentOptions {
-    @Prop({
-      group: '状态属性',
-      title: '禁用',
-      description: '是否禁用整个表单',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean;
-
-    @Prop({
-      group: '状态属性',
-      title: '预览',
-      description: '是否预览',
-      setter: { concept: 'SwitchSetter' },
-    })
-    preview: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '布局模式',
-    //   description: '布局模式，可选线性布局/栅格布局',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [{ title: '线性布局' }, { title: '栅格布局' }],
-    //   }
-    // })
-    // layoutMode: 'linear' | 'grid' = 'linear';
-
-    // @Prop<ElFormOptions, 'layout'>({
-    //   group: '主要属性',
-    //   title: '表单布局',
-    //   description:
-    //     '表单布局，有两种方式：纵向布局 和 行内布局。可选项：vertical/inline',
-
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '标签布局',
-      description: '表单字段标签对齐方式：左对齐、右对齐、顶部对齐',
+      description: '选择表单标签的对齐方式',
+      docDescription: '控制表单字段标签的对齐方式。左对齐：标签在左侧；右对齐：标签在右侧；顶部对齐：标签在字段上方。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '左对齐' }, { title: '右对齐' }, { title: '顶部对齐' }],
@@ -87,10 +56,105 @@ namespace nasl.ui {
     })
     labelPosition: 'left' | 'right' | 'top' = 'right';
 
+    @Prop({
+      group: '主要属性',
+      title: '行内布局',
+      description: '是否使用行内布局模式',
+      docDescription: '开启后，表单字段会水平排列在同一行，适用于字段较少的表单。关闭后使用垂直布局，字段会垂直排列。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    inline: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '隐藏必填标记',
+      description: '是否隐藏必填字段的星号标记',
+      docDescription: '开启后，必填字段不会显示红色星号(*)标记。关闭后，必填字段会显示星号标记提醒用户。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    hideRequiredAsterisk: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '星号位置',
+      description: '必填标记星号的位置',
+      docDescription: '控制必填字段星号标记的位置。左：星号在标签左侧；右：星号在标签右侧。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左' }, { title: '右' }],
+      },
+    })
+    requireAsteriskPosition: 'left' | 'right' = 'left';
+
+    @Prop({
+      group: '主要属性',
+      title: '显示错误信息',
+      description: '是否显示表单验证错误信息',
+      docDescription: '开启后，当表单验证失败时会显示错误提示信息。关闭后，即使验证失败也不会显示错误信息。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showMessage: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '行内错误信息',
+      description: '是否在字段右侧显示错误信息',
+      docDescription: '开启后，错误信息会显示在字段的右侧。关闭后，错误信息会显示在字段的下方。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    inlineMessage: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '自动滚动',
+      description: '验证失败时是否自动滚动到错误字段',
+      docDescription: '开启后，当表单验证失败时会自动滚动到第一个有错误的字段，方便用户快速定位问题。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    scrollToError: nasl.core.Boolean = false;
+
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
+    @Prop({
+      group: '状态属性',
+      title: '禁用状态',
+      description: '是否禁用整个表单',
+      docDescription: '开启后，整个表单将变为禁用状态，所有表单字段都无法操作。适用于只读展示场景。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览模式',
+      description: '是否启用预览模式',
+      docDescription: '开启后，表单会以预览模式显示，通常用于只读展示场景。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
+    @Prop({
+      group: '样式属性',
+      title: '表单尺寸',
+      description: '选择表单的整体尺寸',
+      docDescription: '控制表单的整体尺寸，影响所有表单字段的大小。小：紧凑型表单；中：标准尺寸；大：宽松型表单；默认：使用系统默认尺寸。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '小' },
+          { title: '中' },
+          { title: '大' },
+          { title: '默认' },
+        ],
+      },
+    })
+    size: 'small' | 'medium' | 'large' | '' = '';
+
     @Prop<ElFormOptions, 'labelWidth'>({
       group: '样式属性',
-      title: '自定义标签宽度',
-      description: '可以整体设置label标签宽度',
+      title: '标签宽度',
+      description: '设置表单标签的宽度',
+      docDescription: '统一设置所有表单字段标签的宽度。可以设置为具体数值(如"100px")或百分比(如"20%")。',
       setter: {
         concept: 'InputSetter',
       },
@@ -144,75 +208,75 @@ namespace nasl.ui {
     // })
     // gutter: nasl.core.String;
 
-    @Prop({
-      group: '主要属性',
-      title: '隐藏必填标记',
-      description: '是否隐藏必填标记（*），默认显示',
-      setter: { concept: 'SwitchSetter' },
-    })
-    hideRequiredAsterisk: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '隐藏必填标记',
+    //   description: '是否隐藏必填标记（*），默认显示',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // hideRequiredAsterisk: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '星号的位置',
-      description: '星号的位置',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '左' }, { title: '右' }],
-      },
-    })
-    requireAsteriskPosition: 'left' | 'right' = 'left';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '星号的位置',
+    //   description: '星号的位置',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [{ title: '左' }, { title: '右' }],
+    //   },
+    // })
+    // requireAsteriskPosition: 'left' | 'right' = 'left';
 
-    @Prop({
-      group: '主要属性',
-      title: '显示错误信息',
-      description: '是否显示错误信息，默认显示',
-      setter: { concept: 'SwitchSetter' },
-    })
-    showMessage: nasl.core.Boolean = true;
-
-
-
-    @Prop({
-      group: '主要属性',
-      title: '行内错误信息',
-      description: '是否显示行内错误信息',
-      setter: { concept: 'SwitchSetter' },
-    })
-    inlineMessage: nasl.core.Boolean = false;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '显示错误信息',
+    //   description: '是否显示错误信息，默认显示',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // showMessage: nasl.core.Boolean = true;
 
 
-    @Prop({
-      group: '主要属性',
-      title: '自动滚动到错误信息',
-      description: '是否自动滚动到错误信息',
-      setter: { concept: 'SwitchSetter' },
-    })
-    scrollToError: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '样式属性',
-      title: '表单尺寸',
-      description: '可以整体设置表单尺寸',
-      setter: {
-        concept: 'EnumSelectSetter',
-        options: [
-          { title: '小' },
-          { title: '中' },
-          { title: '大' },
-          { title: '默认' },
-        ],
-      },
-    })
-    size: 'small' | 'medium' | 'large' | '' = '';
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '行内错误信息',
+    //   description: '是否显示行内错误信息',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // inlineMessage: nasl.core.Boolean = false;
 
-    @Prop({
-      group: '主要属性',
-      title: '行内布局',
-      description: '是否行内布局',
-      setter: { concept: 'SwitchSetter' },
-    })
-    inline: nasl.core.Boolean = false;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '自动滚动到错误信息',
+    //   description: '是否自动滚动到错误信息',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // scrollToError: nasl.core.Boolean = false;
+
+    // @Prop({
+    //   group: '样式属性',
+    //   title: '表单尺寸',
+    //   description: '可以整体设置表单尺寸',
+    //   setter: {
+    //     concept: 'EnumSelectSetter',
+    //     options: [
+    //       { title: '小' },
+    //       { title: '中' },
+    //       { title: '大' },
+    //       { title: '默认' },
+    //     ],
+    //   },
+    // })
+    // size: 'small' | 'medium' | 'large' | '' = '';
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '行内布局',
+    //   description: '是否行内布局',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // inline: nasl.core.Boolean = false;
     // @Prop({
     //   group: '主要属性',
     //   title: '冒号',
@@ -503,6 +567,14 @@ namespace nasl.ui {
       bindHide: true,
     })
     rules: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '验证触发方式',
+      description: '验证逻辑的触发方式',
+      setter: { concept: 'EnumSelectSetter', options: [{ title: '失去焦点' }, { title: '改变' }] },
+    })
+    trigger: 'blur' | 'change' = 'blur';
 
     @Prop({
       group: '主要属性',

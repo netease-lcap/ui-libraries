@@ -8,6 +8,7 @@
 
 <script>
 import _ from 'lodash';
+import { ElTooltip } from 'element-plus';
 export default {
   name: 'el-preview',
   props: {

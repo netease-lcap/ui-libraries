@@ -20,10 +20,12 @@ namespace nasl.ui {
   }
 
   export class ElCardOptions extends ViewComponentOptions {
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
     @Prop({
-      group: '主要属性',
-      title: '阴影显示时机',
-      description: '设置阴影显示时机',
+      group: '样式属性',
+      title: '阴影显示',
+      description: '设置卡片阴影的显示时机',
+      docDescription: '控制卡片阴影的显示时机。总是显示：始终显示阴影；悬浮显示：鼠标悬停时显示；从不显示：不显示阴影。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '总是显示' }, { title: '悬浮显示' }, { title: '从不显示' }],

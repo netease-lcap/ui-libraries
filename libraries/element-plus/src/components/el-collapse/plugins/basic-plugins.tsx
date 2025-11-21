@@ -37,9 +37,9 @@ export default CollapseAccumulate.addPlugin({
                 <ElCollapseItem
                   {...item}
                   v-slots={{
-                      title: ({ isActive }) => slots.title?.({ item, isActive } as any),
+                      title: ({ isActive }) => slots.title?.({ item: item?.itemSource ?? item, isActive } as any),
                       icon: ({ isActive }) => slots.icon?.(isActive),
-                      default: () => slots.content?.({ item } as any),
+                      default: () => slots.content?.({ item: item?.itemSource ?? item } as any),
                     }}
                 />
                 )),

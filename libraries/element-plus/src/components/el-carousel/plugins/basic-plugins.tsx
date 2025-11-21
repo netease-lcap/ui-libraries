@@ -36,7 +36,7 @@ export default CarouselAccumulate.addPlugin({
                 <ElCarouselItem
                   {...item}
                   v-slots={{
-                      default: () => slots.content?.({ item } as any),
+                      default: () => slots.content?.({ item: item?.itemSource ?? item } as any),
                     }}
                 />
                 )),

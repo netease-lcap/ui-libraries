@@ -15,8 +15,8 @@ export function setElStyle(style: Record<string, any>, el: HTMLElement) {
 export function categoryStyles(style: Record<string, string> = {}) {
   return Object.entries(style).reduce(
     (acc, [key, value]) => {
-      const styleKey = $rootStyle.includes(key) ? 'style' : 'innerStyle';
-      if ($bothStyle.includes(key)) {
+      const styleKey = $rootStyle.includes(key as any) ? 'style' : 'innerStyle';
+      if ($bothStyle.includes(key as any)) {
         acc.style[key] = value;
         acc.innerStyle[key] = value;
         return acc;

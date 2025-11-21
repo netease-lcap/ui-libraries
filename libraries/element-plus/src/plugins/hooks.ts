@@ -1,6 +1,12 @@
 import _ from 'lodash';
 import { onMounted, onUnmounted, ref, getCurrentInstance, type Ref } from 'vue';
-import { PluginBase } from '@/types';
+import { PluginBase, RenderFunctionWithInheritAttrs } from '@/types';
+import { componentLog } from '@/utils/curry';
+// import { RenderFunctionWithInheritAttrs } from '@/types/pluginBase';
+
+const searchParamsStr = window.location.search; // 结果："?name=Alice&age=25&hobby=reading&hobby=hiking"
+const params = new URLSearchParams(searchParamsStr);
+const compDebugId = params.get('compDebugId'); // 单值参数："Alice"
 
 interface Hook {
   next: Hook;
@@ -103,7 +109,7 @@ export function useState<T = any>(initialstate?: T): [T, (value: T | ((prevState
   }
   const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
   const localSetValue = (value: T | ((prevState: T) => T)) => {
-    // const state = currentFiber.getState().state[hook?.storeKey];
+    const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
     hook.isSetValue = true;
     // TODO 判断是否相等
     // if (_.isEqual(value, state)) {
@@ -122,7 +128,7 @@ export function useState<T = any>(initialstate?: T): [T, (value: T | ((prevState
   };
   return [getStateValue(state), localSetValue];
 }
-export function useRef<T = any>(initialstate: T): Ref<T> {
+export function useRef<T = any>(initialstate: T, isRef: boolean = true): Ref<T> {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook: Hook;
@@ -130,7 +136,7 @@ export function useRef<T = any>(initialstate: T): Ref<T> {
     hook = {
       next: null as any,
       storeKey: Symbol('storeKey'),
-      value: ref(initialstate),
+      value: isRef ? ref(initialstate) : { value: initialstate },
     };
     hook.next = hook;
     if (currentFiber.workInProgressState) {
@@ -239,6 +245,15 @@ export function useCallback<T extends(...args: any[]) => any>(callBack: T, dep: 
   }
   return hook.callBack;
 }
+export function useRender(
+  callBack: (props: any, { attrs, slots }: { attrs: any; slots: any }) => any,
+  dep: any[],
+  inheritAttrs: boolean = false,
+): RenderFunctionWithInheritAttrs {
+  const render = useCallback(callBack, dep) as RenderFunctionWithInheritAttrs;
+  render.inheritAttrs = inheritAttrs;
+  return render;
+}
 
 export function useControllableValue<T = any>(
   props: any,
@@ -269,11 +284,12 @@ export function useControllableValue<T = any>(
   const defaultValueProps = props.get(defaultValuePropName);
   const unControlledInitialValue = defaultValueProps ?? defaultValue;
   const [stateValue, setStateValue] = useState<T>(unControlledInitialValue);
-  const triggerProps = props.get(trigger, () => {});
+  const triggerProps = props.get(trigger) || (() => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
   useEffect(() => {
     if (priorValue.value !== propsValue && isControlled) {
       onValueEffect(propsValue);
+      priorValue.value = propsValue;
     }
   }, [propsValue, isControlled]);
   const onChange = (...args: any[]) => {
@@ -299,17 +315,21 @@ export function useControllableValue<T = any>(
   ];
 }
 
-const hookObject = {
+const hookMap = {
   useState,
   useRef,
   useEffect,
   useMemo,
   useCallback,
 };
+
 export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap) {
   const updateQueen = fiberMap.get('updateQueen');
   const getState = fiberMap.get('getState');
   const { setValue } = getState() as any;
+  if (ImmutableState?.get?.('data-ref-id') === compDebugId) {
+    console.group('scheduler');
+  }
   return pluginHooks?.reduce((ImmutableState, pluginHook) => {
     const handleFn = _.isFunction(pluginHook) ? pluginHook : pluginHook.handle;
     const isMount = !fiberMap.has(handleFn);
@@ -325,8 +345,9 @@ export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap)
         }
       : fiberMap.get(handleFn);
     fiberNode.setCurrentFiber(fiber, isMount);
-    const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookObject)), ImmutableState, ImmutableProps);
+    const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookMap)), ImmutableState, ImmutableProps);
     fiberMap.set(handleFn, fiber);
+    componentLog(compDebugId, handleFn, ImmutableState, result);
     return ImmutableState.merge(result);
   }, ImmutableState);
 }
