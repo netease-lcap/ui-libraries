@@ -6,6 +6,7 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
+import { useEffect } from '@/plugins/hooks';
 import idePlugin from './ide';
 import { $deletePropsList } from '@/plugins/constants';
 
@@ -50,6 +51,20 @@ export default SwitchAccumulate.addAccumulate(idePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+        preview: isPreview,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      const emit = props.get('emit');
+      const disabled = props.get('disabled');
+      const preview = props.get('preview');
+      useEffect(() => {
+        emit('sync:state', 'disabled', disabled);
+        emit('sync:state', 'preview', preview);
+      }, [disabled, preview]);
+      return {};
     },
   });

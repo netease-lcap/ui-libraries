@@ -20,6 +20,10 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class ElButton extends ViewComponent {
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
     constructor(options?: Partial<ElButtonOptions>) {
       super();
     }
@@ -40,10 +44,18 @@ namespace nasl.ui {
       group: '主要属性',
       title: '按钮类型',
       description: '选择按钮的视觉类型和主题色',
-      docDescription: '控制按钮的视觉样式和主题色。默认：标准按钮；主要：强调按钮；成功：绿色主题；信息：蓝色主题；警告：橙色主题；危险：红色主题。',
+      docDescription:
+        '控制按钮的视觉样式和主题色。默认：标准按钮；主要：强调按钮；成功：绿色主题；信息：蓝色主题；警告：橙色主题；危险：红色主题。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '默认' }, { title: '主要' }, { title: '成功' }, { title: '信息' }, { title: '警告' }, { title: '危险' }],
+        options: [
+          { title: '默认' },
+          { title: '主要' },
+          { title: '成功' },
+          { title: '信息' },
+          { title: '警告' },
+          { title: '危险' },
+        ],
       },
     })
     type: '' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
@@ -52,7 +64,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '朴素样式',
       description: '是否使用朴素按钮样式',
-      docDescription: '开启后，按钮会使用朴素样式，背景透明，边框和文字使用主题色。适用于需要强调但不想过于突出的场景。',
+      docDescription:
+        '开启后，按钮会使用朴素样式，背景透明，边框和文字使用主题色。适用于需要强调但不想过于突出的场景。',
       setter: { concept: 'SwitchSetter' },
     })
     plain: nasl.core.Boolean = false;
@@ -98,7 +111,8 @@ namespace nasl.ui {
       group: '交互属性',
       title: '防抖时间',
       description: '设置点击防抖时间，防止重复触发',
-      docDescription: '设置按钮点击的防抖时间，单位毫秒。在指定时间内多次点击只会触发一次事件，防止用户误操作或重复提交。设置为0或空值则不启用防抖。',
+      docDescription:
+        '设置按钮点击的防抖时间，单位毫秒。在指定时间内多次点击只会触发一次事件，防止用户误操作或重复提交。设置为0或空值则不启用防抖。',
       setter: {
         concept: 'NumberInputSetter',
         min: 0,

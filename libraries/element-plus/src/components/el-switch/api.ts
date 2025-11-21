@@ -15,6 +15,24 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElSwitch extends ViewComponent {
+    @Prop({
+      title: '绑定值',
+      description: '开关的绑定值',
+    })
+    modelValue: nasl.core.Boolean | nasl.core.String | nasl.core.Integer;
+
+    @Prop({
+      title: '激活值',
+      description: '开关打开时的值',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+      description: '预览',
+    })
+    preview: nasl.core.Boolean;
+
     constructor(options?: Partial<ElSwitchOptions>) {
       super();
     }

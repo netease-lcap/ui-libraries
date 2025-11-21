@@ -298,6 +298,7 @@ export function useControllableValue<T = any>(
     } else {
       setStateValue(args[0] as T);
     }
+    emit('sync:state', valuePropName, ...args);
     priorValue.value = _.get(args, 0, null);
     _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);

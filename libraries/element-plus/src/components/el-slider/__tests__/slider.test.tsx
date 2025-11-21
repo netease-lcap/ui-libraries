@@ -161,7 +161,7 @@ describe('Slider', () => {
       const value = ref(0);
       const wrapper = mount(
         () => (
-          <div style="width: 200px;">
+          <div style={{ width: '200px' }}>
             <Slider v-model={value.value} vertical />
           </div>
         ),

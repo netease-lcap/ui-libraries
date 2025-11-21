@@ -103,4 +103,15 @@ export default ButtonAccumulate.addPlugin({
       }, [refId]);
       return {};
     },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle: (props) => {
+      const emit = props.get('emit');
+      const disabled = props.get('disabled');
+      useEffect(() => {
+        emit('sync:state', 'disabled', disabled);
+      }, [disabled]);
+      return {};
+    },
   });

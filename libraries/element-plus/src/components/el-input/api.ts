@@ -19,6 +19,43 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElInput extends ViewComponent {
+    @Prop({
+      title: '输入值',
+    })
+    modelValue: nasl.core.String;
+
+    @Prop({
+      title: '禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+    })
+    preview: nasl.core.Boolean;
+
+    @Method({
+      title: 'undefined',
+      description: '让输入框获取焦点。',
+    })
+    focus(): void {}
+
+    @Method({
+      title: 'undefined',
+      description: '让输入框失去焦点。',
+    })
+    blur(): void {}
+
+    @Method({
+      title: 'undefined',
+      description: '清空输入框。',
+    })
+    clear(): void {}
     constructor(options?: Partial<ElInputOptions>) {
       super();
     }

@@ -44,6 +44,7 @@ export const Example1 = {
 
       setTimeout(() => {
         console.log(myref.value, 'myref.value.ref');
+        myref.value.clear();
         // console.log('activeName', yref);
         activeName.value = '123';
       }, 5000);
@@ -59,12 +60,12 @@ export const Example1 = {
     },
     template: `
     <div>
- 
-      <el-input  ref="myref" data-nodepath="1234"  >
+    {{name}}
+      <el-input v-model="name"  ref="myref" data-nodepath="1234"  >
 
       </el-input>
       <br/>
-            <el-input type="textarea"  ref="myref" data-nodepath="1234"  >
+            <el-input type="textarea" data-nodepath="1234"  >
       <template #append>  </template>
         <template #prepend>  </template>
       </el-input

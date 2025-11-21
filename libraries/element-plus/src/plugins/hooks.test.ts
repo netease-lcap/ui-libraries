@@ -642,7 +642,7 @@ describe('hooks.ts', () => {
       expect(value).toBe('uncontrolled');
 
       onChange('new value');
-      expect(props.get('emit')).not.toHaveBeenCalled();
+      expect(props.get('emit')).toBeCalled();
     });
 
     it('应该处理受控模式', () => {

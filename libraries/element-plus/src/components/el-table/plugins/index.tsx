@@ -46,22 +46,13 @@ export default TableAccumulate.addPlugin({
       defaultValuePropName: 'defaultField',
       defaultValue: '',
       valuePropName: 'field',
-      onChange: (sort) => {
-        emit('sync:state', 'sort', sort);
-      },
     });
     const [order, setOrder] = useControllableValue(props, {
       defaultValuePropName: 'defaultOrder',
       defaultValue: '',
       valuePropName: 'order',
-      onChange: (order) => {
-        emit('sync:state', 'order', orderMap[order]);
-      },
     });
-    useMemo(() => {
-      emit('sync:state', 'sort', sort);
-      emit('sync:state', 'order', orderMap[order]);
-    }, []);
+
     return {
       [$deletePropsList]: deletePropsList,
       sort,
@@ -78,7 +69,6 @@ export default TableAccumulate.addPlugin({
   .addPlugin({
     name: 'handlePageState',
     handle(props) {
-      const emit = props.get('emit');
       const ref = props.get('ref');
       const deletePropsList = props
         .get($deletePropsList)
@@ -88,7 +78,6 @@ export default TableAccumulate.addPlugin({
         defaultValue: 1,
         valuePropName: 'currentPage',
         onChange: (currentPage, pageSize = {}) => {
-          emit('sync:state', 'currentPage', currentPage);
           _.attempt(ref?.reload, { currentPage, ...pageSize });
         },
       });
@@ -97,7 +86,6 @@ export default TableAccumulate.addPlugin({
         defaultValue: 10,
         valuePropName: 'pageSize',
         onChange: (pageSize) => {
-          emit('sync:state', 'pageSize', pageSize);
           setCurrentPage(1, { pageSize });
         },
       });
@@ -106,12 +94,6 @@ export default TableAccumulate.addPlugin({
         const jsonPageSizes = _.isString(pageSizesProps) ? _.attempt(JSON.parse, pageSizesProps) : pageSizesProps;
         return _.isArray(jsonPageSizes) ? jsonPageSizes : [10, 20, 50];
       }, [pageSizesProps]);
-
-      useMemo(() => {
-        emit('sync:state', 'currentPage', currentPage);
-        emit('sync:state', 'pageSize', pageSize);
-        return null;
-      }, []);
 
       return {
         [$deletePropsList]: deletePropsList,
@@ -368,6 +350,7 @@ export default TableAccumulate.addPlugin({
     name: 'handleSelectedValue',
     handle(props) {
       const ref = props.get('ref');
+      const emit = props.get('emit');
       const currentChange = props.get('onCurrentChange', () => {});
       const rowKey = props.get('rowKey');
       const getRowKey = _.match(rowKey)
@@ -381,6 +364,10 @@ export default TableAccumulate.addPlugin({
         valuePropName: 'selectedValue',
         onValueEffect: (currentValue) => {
           ref?.store?.setCurrentRowKey(String(currentValue));
+          emit('sync:state', 'selectedValue', currentValue);
+        },
+        onChange: (currentValue) => {
+          emit('sync:state', 'selectedValue', currentValue);
         },
       });
       return {
@@ -396,6 +383,7 @@ export default TableAccumulate.addPlugin({
     handle(props) {
       const ref = props.get('ref');
       const data = props.get('data');
+      const emit = props.get('emit');
       const selectionChange = props.get('onSelect', () => {});
       const selectAllChange = props.get('onSelectAll', () => {});
       const rowKey = props.get('rowKey');
@@ -413,11 +401,14 @@ export default TableAccumulate.addPlugin({
         valuePropName: 'selectedValues',
         onValueEffect: (currentValue) => {
           const selectRows = getSelectedRows(data, currentValue);
-
+          emit('sync:state', 'selectedValues', currentValue);
           _.defer(() => {
             ref?.clearSelection?.();
             return _.map(selectRows, (row) => _.attempt(ref?.toggleRowSelection, row, true));
           }, 0);
+        },
+        onChange: (currentValue) => {
+          emit('sync:state', 'selectedValues', currentValue);
         },
       });
       useEffect(() => {
@@ -436,6 +427,26 @@ export default TableAccumulate.addPlugin({
           setSelectedValues(newSelection);
         },
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      const emit = props.get('emit');
+      const data = props.get('data');
+      const currentPage = props.get('currentPage');
+      const pageSize = props.get('pageSize');
+      const order = props.get('order');
+      const sort = props.get('sort');
+      const pageProps = props.get('pageProps');
+      useEffect(() => {
+        emit('sync:state', 'data', data);
+        emit('sync:state', 'currentPage', currentPage);
+        emit('sync:state', 'pageSize', pageSize);
+        emit('sync:state', 'sort', sort);
+        emit('sync:state', 'order', orderMap[order]);
+        emit('sync:state', 'total', pageProps.total);
+      }, [data, currentPage, pageSize, order, sort, pageProps.total]);
     },
   })
   .addPlugin({

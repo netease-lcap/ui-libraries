@@ -9,6 +9,7 @@ export function handleControllableValue(props: any) {
     ...valueProps,
     ref: Object.assign(ref, {
       resetField: () => setValue(undefined),
+      // clear: () => setValue(null),
     }),
     setValue,
     [$deletePropsList]: deletePropsList,

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { PaginationProps } from 'element-plus';
-import { useMemo } from '@/plugins/hooks';
+import { useEffect, useMemo } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 const PaginationBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElPaginationOptions, PaginationProps>();
@@ -33,5 +33,21 @@ export default PaginationBasicAccumulate.addPlugin({
       return {
         total: 50,
       };
+    },
+  }).addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      const emit = props.get('emit');
+      const total = props.get('total');
+      const pageSize = props.get('pageSize');
+      const currentPage = props.get('currentPage');
+      const disabled = props.get('disabled');
+      useEffect(() => {
+        emit('sync:state', 'total', total);
+        emit('sync:state', 'pageSize', pageSize);
+        emit('sync:state', 'currentPage', currentPage);
+        emit('sync:state', 'disabled', disabled);
+      }, [total, pageSize, currentPage, disabled]);
+      return {};
     },
   });

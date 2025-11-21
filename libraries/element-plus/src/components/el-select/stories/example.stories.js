@@ -22,6 +22,7 @@ export const Example1 = {
       const { globalConfig } = parameters;
       const activeName = ref('');
       const name = ref('myName');
+      const add=ref()
       const list = globalConfig.asyncData();
 
       const handleClick = (tab) => {
@@ -30,10 +31,13 @@ export const Example1 = {
       setTimeout(() => {
         // name.value = 'newName';
         activeName.value = '电子签署';
+        console.log(add.value.toggleMenu(), 'add');
+        console.log(add.value, 'add');
       }, 3000);
 
       return {
         name,
+        add,
         activeName,
         list,
         handleClick,

@@ -25,6 +25,12 @@ namespace nasl.ui {
       super();
     }
 
+    @Prop({
+      title: '显示状态',
+      description: '控制抽屉的显示和隐藏',
+    })
+    modelValue: nasl.core.Boolean;
+
     @Method({
       title: '显示弹框',
       description: '显示弹框',
@@ -113,7 +119,6 @@ namespace nasl.ui {
     })
     openDelay: nasl.core.Decimal = 0;
 
-
     @Prop({
       group: '主要属性',
       title: '关闭延时',
@@ -161,12 +166,7 @@ namespace nasl.ui {
       description: 'Drawer 打开的方向',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '从右往左开' },
-          { title: '从左往右开' },
-          { title: '从上往下开' },
-          { title: '从下往上开' },
-        ],
+        options: [{ title: '从右往左开' }, { title: '从左往右开' }, { title: '从上往下开' }, { title: '从下往上开' }],
       },
     })
     direction: 'rtl' | 'ltr' | 'ttb' | 'btt' = 'rtl';
@@ -191,8 +191,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '控制是否显示 header 栏',
-      description:
-        '控制是否显示 header 栏, 默认为 true, 当此项为 false 时, title attribute 和 title slot 均不生效',
+      description: '控制是否显示 header 栏, 默认为 true, 当此项为 false 时, title attribute 和 title slot 均不生效',
       setter: { concept: 'SwitchSetter' },
     })
     withHeader: nasl.core.Boolean = true;

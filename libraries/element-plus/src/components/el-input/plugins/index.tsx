@@ -80,7 +80,23 @@ export default InputBasicAccumulate.addAccumulate(idePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+        preview: isPreview,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle: (props) => {
+      const emit = props.get('emit');
+      const disabled = props.get('disabled');
+      const preview = props.get('preview');
+      const readonly = props.get('readonly');
+      useEffect(() => {
+        emit('sync:state', 'disabled', disabled);
+        emit('sync:state', 'preview', preview);
+        emit('sync:state', 'readonly', readonly);
+      }, [disabled, preview, readonly]);
+      return {};
     },
   })
   .addPlugin({
