@@ -5,6 +5,9 @@ namespace nasl.ui {
     order: 9,
     ideusage: {
       idetype: 'container',
+      additionalAttribute: {
+        total: '50',
+      },
     },
   })
   @Component({
@@ -14,6 +17,29 @@ namespace nasl.ui {
     group: 'Navigation',
   })
   export class ElPagination extends ViewComponent {
+    @Prop({
+      title: '总条目数',
+      description: '数据的总条目数',
+    })
+    total: nasl.core.Integer;
+
+    @Prop({
+      title: '每页条数',
+      description: '每页显示的条目数',
+    })
+    pageSize: nasl.core.Integer;
+
+    @Prop({
+      title: '当前页码',
+      description: '当前显示的页码',
+    })
+    currentPage: nasl.core.Integer;
+
+    @Prop({
+      title: '禁用',
+      description: '是否禁用分页组件',
+    })
+    disabled: nasl.core.Boolean;
     constructor(options?: Partial<ElPaginationOptions>) {
       super();
     }

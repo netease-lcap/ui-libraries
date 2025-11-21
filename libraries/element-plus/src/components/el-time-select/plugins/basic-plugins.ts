@@ -2,6 +2,7 @@ import { TimeSelectProps } from 'element-plus';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
+import { $deletePropsList } from '@/plugins/constants';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
 

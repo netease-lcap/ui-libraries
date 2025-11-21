@@ -22,7 +22,7 @@ describe('el-switch plugins', () => {
 
       it('应该包含所有必要的插件', () => {
         const plugins = SwitchAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(4);
+        expect(plugins).toHaveLength(5);
 
         const pluginNames = [
           'handleTagName',
@@ -199,7 +199,7 @@ describe('el-switch plugins', () => {
         });
 
         const plugins = combinedAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(5);
+        expect(plugins).toHaveLength(6);
 
         const handleTagNamePlugin = combinedAccumulate.getPluginMethodByName('handleTagName');
         const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');

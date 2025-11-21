@@ -130,6 +130,7 @@ export const Default = {
     },
     template: `
       <van-picker 
+      ref="myref"
       :filterable="true"
       :remote="true"
         v-model="value"

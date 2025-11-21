@@ -8,11 +8,10 @@ namespace nasl.ui {
       structured: true,
       childAccept: "target.tag === 'el-tab-pane'",
       dataSource: {
-        dismiss:
-          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
         loopRule: 'nth-last-child(-n+2)',
-        loopElem: ".el-tabs__nav > .el-tabs__item",
+        loopElem: '.el-tabs__nav > .el-tabs__item',
         propertyName: ':dataSource',
         displayData: "\"[{label: '0', value: '0'},{label:'1', value: '1'}, {label:'2', value: '2'}]\"",
       },
@@ -24,9 +23,9 @@ namespace nasl.ui {
         content: "!!this.getAttribute('dataSource')",
       },
       additionalAttribute: {
-        "active": "0",
+        active: '0',
       },
-    }
+    },
   })
   @Component({
     title: '选项卡',
@@ -39,8 +38,12 @@ namespace nasl.ui {
       title: '重新加载',
       description: '清除缓存，重新加载',
     })
-    reload(): void { }
+    reload(): void {}
 
+    @Prop({
+      title: '值',
+    })
+    modelValue: V;
     constructor(options?: Partial<ElTabsOptions<T, V>>) {
       super();
     }
@@ -50,22 +53,17 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description:
-        '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription:
-        '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
     })
-    dataSource:
-      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
-      | nasl.collection.List<T>;
+    dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription:
-        '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
     })
     dataSchema: T;
 
@@ -73,14 +71,12 @@ namespace nasl.ui {
       group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
-      docDescription:
-        '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
-    titleField: (item: T) => nasl.core.String = ((item: any) =>
-      item.title) as any;
+    titleField: (item: T) => nasl.core.String = ((item: any) => item.title) as any;
 
     @Prop<ElTabsOptions<T, V>, 'valueField'>({
       group: '数据属性',
@@ -118,18 +114,13 @@ namespace nasl.ui {
     })
     modelValue: nasl.core.String;
 
-
     @Prop({
       group: '主要属性',
       title: '风格样式',
       description: '风格样式',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '默认样式' },
-          { title: '卡片风格标签页' },
-          { title: '带边框的卡片风格标签页' },
-        ],
+        options: [{ title: '默认样式' }, { title: '卡片风格标签页' }, { title: '带边框的卡片风格标签页' }],
       },
     })
     type: '' | 'card' | 'border-card' = '';
@@ -176,12 +167,7 @@ namespace nasl.ui {
       description: '选项卡所在位置',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '上' },
-          { title: '右' },
-          { title: '下' },
-          { title: '左' },
-        ],
+        options: [{ title: '上' }, { title: '右' }, { title: '下' }, { title: '左' }],
       },
     })
     tabPosition: 'top' | 'right' | 'bottom' | 'left' = 'top';
@@ -202,10 +188,7 @@ namespace nasl.ui {
         concept: 'AnonymousFunctionSetter',
       },
     })
-    beforeLeave: (
-      activeName: nasl.core.String,
-      oldActiveName: nasl.core.String,
-    ) => nasl.core.Boolean;
+    beforeLeave: (activeName: nasl.core.String, oldActiveName: nasl.core.String) => nasl.core.Boolean;
 
     // @Event({
     //   title: '改变时',
@@ -246,10 +229,7 @@ namespace nasl.ui {
       title: '点击新增按钮或关闭',
       description: '点击 tabs 的新增按钮或 tab 被关闭后触发',
     })
-    onEdit: (event: {
-      value: nasl.core.String;
-      action: 'add' | 'remove';
-    }) => void;
+    onEdit: (event: { value: nasl.core.String; action: 'add' | 'remove' }) => void;
 
     @Slot({
       title: '标签页',

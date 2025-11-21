@@ -21,6 +21,12 @@ namespace nasl.ui {
     group: 'Feedback',
   })
   export class ElDialog extends ViewComponent {
+    @Prop({
+      title: '显示状态',
+      description: '控制对话框的显示和隐藏',
+    })
+    modelValue: nasl.core.Boolean;
+
     @Method({
       title: '显示弹框',
       description: '显示弹框',
@@ -57,7 +63,8 @@ namespace nasl.ui {
       sync: true,
       title: '显示状态',
       description: '控制对话框的显示和隐藏',
-      docDescription: '绑定对话框的显示状态。true：显示对话框；false：隐藏对话框。支持双向绑定，可以通过程序控制对话框的开关。',
+      docDescription:
+        '绑定对话框的显示状态。true：显示对话框；false：隐藏对话框。支持双向绑定，可以通过程序控制对话框的开关。',
       setter: { concept: 'SwitchSetter' },
     })
     modelValue: nasl.core.Boolean = false;

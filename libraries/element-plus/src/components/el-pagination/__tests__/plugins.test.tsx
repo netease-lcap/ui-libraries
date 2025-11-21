@@ -20,7 +20,7 @@ describe('el-pagination plugins', () => {
 
       it('应该包含 handlePageSizes 插件', () => {
         const plugins = PaginationBasicAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(1);
+        expect(plugins).toHaveLength(3);
 
         const handlePageSizesPlugin = PaginationBasicAccumulate.getPluginMethodByName('handlePageSizes');
         expect(handlePageSizesPlugin).toBeDefined();
@@ -246,7 +246,7 @@ describe('el-pagination plugins', () => {
         });
 
         const plugins = combinedAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(2);
+        expect(plugins).toHaveLength(4);
 
         const handlePageSizesPlugin = combinedAccumulate.getPluginMethodByName('handlePageSizes');
         const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');

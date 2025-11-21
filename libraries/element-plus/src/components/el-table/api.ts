@@ -77,6 +77,18 @@ namespace nasl.ui {
     })
     sort: nasl.core.String;
 
+    @Prop({
+      title: '单选选中值',
+      description: '单选选中值',
+    })
+    selectedValue: V;
+
+    @Prop({
+      title: '多选选中值',
+      description: '多选选中值',
+    })
+    selectedValues: nasl.collection.List<V>;
+
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',

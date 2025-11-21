@@ -59,17 +59,18 @@ export default SelectBasicAccumulate.addPlugin({
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-            default: () => _.map(dataSource, (item) => (
-              <ElOption {...item}>
-                {item.label}
-                {item.description && (
-                <el-text
-                  style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
-                  color="secondary"
-                  text={item.description}
-                />
+            default: () =>
+              _.map(dataSource, (item) => (
+                <ElOption {...item}>
+                  {item.label}
+                  {item.description && (
+                    <el-text
+                      style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
+                      color="secondary"
+                      text={item.description}
+                    />
                   )}
-              </ElOption>
+                </ElOption>
               )),
           };
 
@@ -137,6 +138,7 @@ export default SelectBasicAccumulate.addPlugin({
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+        preview: isPreview,
         previewText,
       };
     },
@@ -169,5 +171,21 @@ export default SelectBasicAccumulate.addPlugin({
       return {
         remoteMethod,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      const emit = props.get('emit');
+      const data = props.get('data');
+      const disabled = props.get('disabled');
+      const preview = props.get('preview');
+      useEffect(() => {
+        emit('sync:state', 'data', data);
+        emit('sync:state', 'total', data.length);
+        emit('sync:state', 'disabled', disabled);
+        emit('sync:state', 'preview', preview);
+      }, [data, disabled, preview]);
+      return {};
     },
   });

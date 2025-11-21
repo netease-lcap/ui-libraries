@@ -45,16 +45,37 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElSelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    @Prop({
+      title: '数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '数据总数',
+    })
+    total: nasl.core.Integer;
+
+    @Prop({
+      title: '选中值',
+    })
+    modelValue: M extends true ? nasl.collection.List<V> : V;
+
+    @Prop({
+      title: '过滤文本',
+    })
+    filterText: nasl.core.String;
+
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',
     })
     reload(): void {}
 
-    @Prop({
-      title: '过滤文本',
+    @Method({
+      title: '切换弹出/关闭状态',
+      description: '切换弹出/关闭状态',
     })
-    filterText: nasl.core.String;
+    toggleMenu(): void {}
 
     constructor(options?: Partial<ElSelectOptions<T, V, P, M, C>>) {
       super();

@@ -7,6 +7,7 @@ import idePlugin from './ide';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
 import { $deletePropsList } from '@/plugins/constants';
+
 const SliderAccumulate = new PluginAccumulateTypes<nasl.ui.ElSliderOptions, SliderProps>();
 export default SliderAccumulate.addAccumulate(idePlugin)
   .addPlugin({
