@@ -1,7 +1,7 @@
 /* 组件功能扩展插件 */
 import _ from 'lodash';
 import { ProgressProps } from 'element-plus';
-import { useCallback } from '@/plugins/hooks';
+import { useCallback, useSyncState } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 const ProgressBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElProgressOptions, ProgressProps>();
@@ -17,5 +17,11 @@ export default ProgressBasicAccumulate.addPlugin({
     return {
       format,
     };
+  },
+}).addPlugin({
+  name: 'handleSyncState',
+  handle(props) {
+    useSyncState(props, 'percentage');
+    return {};
   },
 });

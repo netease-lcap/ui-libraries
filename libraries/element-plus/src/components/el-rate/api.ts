@@ -15,6 +15,24 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElRate extends ViewComponent {
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean;
+    @Prop({
+      title: '禁用状态',
+      description: '是否禁用评分功能',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      group: '数据属性',
+      title: '评分值',
+      description: '当前的评分值',
+    })
+    modelValue: nasl.core.Decimal;
+
     constructor(options?: Partial<ElRateOptions>) {
       super();
     }
@@ -105,8 +123,6 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     highColor: nasl.core.String = '#F7BA2A';
-
-
 
     // @Prop({
     //   group: '主要属性',
@@ -210,11 +226,7 @@ namespace nasl.ui {
       description: '组件尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '大' },
-          { title: '默认' },
-          { title: '小' },
-        ],
+        options: [{ title: '大' }, { title: '默认' }, { title: '小' }],
       },
     })
     size: 'large' | 'default' | 'small';
@@ -246,7 +258,9 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormRate extends ViewComponent {
-    constructor(options?: Partial<ElFormRateOptions & ElFormItemProOptions & Omit<ElRateOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormRateOptions & ElFormItemProOptions & Omit<ElRateOptions, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }

@@ -30,10 +30,17 @@ namespace nasl.ui {
       super();
     }
 
-    // @Prop({
-    //   title: '选中值',
-    // })
-    // value: ElTreeOptions<T, V, M>['value'];
+    @Prop({
+      title: '数据',
+      description: '树形结构的数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '选中值',
+      description: '当前选中的树节点值',
+    })
+    modelValue: M extends true ? nasl.collection.List<V> : V;
 
     @Method({
       title: '重新加载',

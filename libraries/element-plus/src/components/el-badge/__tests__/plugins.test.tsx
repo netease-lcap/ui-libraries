@@ -19,7 +19,7 @@ describe('basic-plugins.ts', () => {
 
     it('应该包含 handleLeftOffset 插件', () => {
       const plugins = BadgeAccumulate.getPluginMethod();
-      expect(plugins).toHaveLength(1);
+      expect(plugins).toHaveLength(2);
 
       const handleLeftOffsetPlugin = BadgeAccumulate.getPluginMethodByName('handleLeftOffset');
       expect(handleLeftOffsetPlugin).toBeDefined();
@@ -268,7 +268,7 @@ describe('basic-plugins.ts', () => {
       });
 
       const plugins = combinedAccumulate.getPluginMethod();
-      expect(plugins).toHaveLength(2);
+      expect(plugins).toHaveLength(3);
 
       const handleLeftOffsetPlugin = combinedAccumulate.getPluginMethodByName('handleLeftOffset');
       const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');

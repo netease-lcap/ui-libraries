@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { TransferProps } from 'element-plus';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useMemo } from '@/plugins/hooks';
+import { useMemo, useSyncState } from '@/plugins/hooks';
 import { getIsPreview, getRender, getListPreviewText } from '@/plugins/common/preview';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -102,6 +102,14 @@ export default ElTransferBasicAccumulate.addAccumulate(IdePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+        preview: isPreview,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      useSyncState(props, 'preview');
+      return {};
     },
   });

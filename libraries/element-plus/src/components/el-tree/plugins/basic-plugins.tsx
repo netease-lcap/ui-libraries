@@ -19,6 +19,7 @@ export default ElTreeBasicAccumulate.addPlugin({
     const valueField = props.get('valueField', 'value');
     const parentField = props.get('parentField');
     const slotsProps = props.get('slots');
+    const emit = props.get('emit');
     const deletePropsList = props
       .get($deletePropsList)
       .concat(['textField', 'valueField', 'parentField', 'childrenField']);
@@ -26,6 +27,7 @@ export default ElTreeBasicAccumulate.addPlugin({
     const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
     const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
     const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
+    emit('sync:state', 'data', TreeData);
     const selfRef = useMemo(() => _.assign({}, ref, { reload, data: TreeData }), [TreeData, reload, ref]);
     const dataSourceResult = _.isEmpty(TreeData) ? {} : { data: TreeData };
     const slotItemToDefault = useMemo(() => {

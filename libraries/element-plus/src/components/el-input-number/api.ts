@@ -14,6 +14,28 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElInputNumber extends ViewComponent {
+    @Prop({
+      title: '输入值',
+    })
+    modelValue: nasl.core.Decimal;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean ;
+
+    @Prop({
+      title: '禁用状态',
+      description: '是否禁用数字输入框',
+    })
+    disabled: nasl.core.Boolean ;
+
+    @Prop({
+      title: '只读状态',
+      description: '是否设置为只读状态',
+    })
+    readonly: nasl.core.Boolean ;
     constructor(options?: Partial<ElInputNumberOptions>) {
       super();
     }
@@ -206,7 +228,11 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormInputNumber extends ViewComponent {
-    constructor(options?: Partial<ElFormInputNumberOptions & ElFormItemProOptions & Omit<ElInputNumberOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<
+        ElFormInputNumberOptions & ElFormItemProOptions & Omit<ElInputNumberOptions, keyof ElFormItemProOptions>
+      >,
+    ) {
       super();
     }
   }

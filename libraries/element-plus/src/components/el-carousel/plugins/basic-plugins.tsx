@@ -13,6 +13,7 @@ export default CarouselAccumulate.addPlugin({
   name: 'handleDataSource',
   handle: (props) => {
     const dataConfig = props.get('dataSource');
+    const emit = props.get('emit');
     const nameField = props.get('nameField') || 'name';
     const labelField = props.get('labelField') || 'label';
     const slots = props.get('slots');
@@ -26,6 +27,8 @@ export default CarouselAccumulate.addPlugin({
         label: labelField,
       },
     });
+    emit('sync:state', 'data', dataSource);
+
     const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 
     const dataSourceSlots = useMemo(

@@ -59,18 +59,17 @@ export default SelectBasicAccumulate.addPlugin({
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-            default: () =>
-              _.map(dataSource, (item) => (
-                <ElOption {...item}>
-                  {item.label}
-                  {item.description && (
-                    <el-text
-                      style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
-                      color="secondary"
-                      text={item.description}
-                    />
+            default: () => _.map(dataSource, (item) => (
+              <ElOption {...item}>
+                {item.label}
+                {item.description && (
+                <el-text
+                  style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
+                  color="secondary"
+                  text={item.description}
+                />
                   )}
-                </ElOption>
+              </ElOption>
               )),
           };
 

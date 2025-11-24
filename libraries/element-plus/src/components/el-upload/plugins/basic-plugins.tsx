@@ -2,7 +2,7 @@ import { ElMessage, UploadFile, UploadRawFile, UploadContentProps } from 'elemen
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
 import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
-import { useRef, useControllableValue } from '@/plugins/hooks';
+import { useRef, useControllableValue, useSyncState } from '@/plugins/hooks';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { $deletePropsList } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -402,5 +402,13 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      useSyncState(props, 'disabled');
+      useSyncState(props, 'preview');
+      return {};
     },
   });

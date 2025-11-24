@@ -14,6 +14,11 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class ElBadge extends ViewComponent {
+    @Prop({
+      title: '值',
+      description: '徽章显示的值',
+    })
+    value: any;
     constructor(options?: Partial<ElBadgeOptions>) {
       super();
     }

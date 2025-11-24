@@ -30,6 +30,24 @@ namespace nasl.ui {
     })
     endValue: ElDatePickerOptions<T, V, P, M, C>['endValue'];
 
+    @Prop({
+      title: '只读',
+      description: '只读状态',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '禁用',
+      description: '是否禁用按钮',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean;
+
     constructor(options?: Partial<ElDatePickerOptions<T, V, P, M, C>>) {
       super();
     }

@@ -11,6 +11,7 @@ export default ElTimelineBasicAccumulate.addPlugin({
   name: 'handleDataSource',
   handle(props) {
     const dataConfig = props.get('dataSource');
+    const emit = props.get('emit');
 
     // 批量获取所有需要的字段
     const fields = [
@@ -33,6 +34,7 @@ export default ElTimelineBasicAccumulate.addPlugin({
       dataSource: useFormatDataSource(data),
       fieldsMap: _.fromPairs(_.map(fields, (key) => [[key], props.get(key) as string])),
     });
+    emit('sync:state', 'data', dataSource);
     const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
 
     const dataSourceSlots = useMemo(

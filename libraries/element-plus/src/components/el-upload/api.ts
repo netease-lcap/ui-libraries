@@ -26,6 +26,18 @@ namespace nasl.ui {
       super();
     }
 
+    @Prop({
+      title: '禁用',
+      description: '是否禁用上传组件',
+    })
+    disabled: nasl.core.Boolean ;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean ;
+
     @Method({
       title: '触发选择文件',
       description: '组件实例方法，打开文件选择器',

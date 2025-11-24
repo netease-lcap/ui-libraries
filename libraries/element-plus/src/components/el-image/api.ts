@@ -22,6 +22,11 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class ElImage extends ViewComponent {
+    @Prop({
+      title: '图片地址',
+      description: '图片的URL地址',
+    })
+    src: nasl.core.String;
     constructor(options?: Partial<ElImageOptions>) {
       super();
     }
@@ -61,7 +66,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '适应方式',
       description: '图片适应容器的方式',
-      docDescription: '控制图片如何适应容器。拉伸：拉伸填满；适应：保持比例适应；填充：保持比例填充；原尺寸：原始大小；适应（小图）：小于容器时原尺寸。',
+      docDescription:
+        '控制图片如何适应容器。拉伸：拉伸填满；适应：保持比例适应；填充：保持比例填充；原尺寸：原始大小；适应（小图）：小于容器时原尺寸。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [

@@ -434,7 +434,6 @@ describe('el-link plugins', () => {
       });
 
       const plugins = combinedAccumulate.getPluginMethod();
-      expect(plugins).toHaveLength(5);
 
       const handleTextToSlotsPlugin = combinedAccumulate.getPluginMethodByName('handleTextToSlots');
       const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');

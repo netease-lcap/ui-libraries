@@ -30,6 +30,24 @@ namespace nasl.ui {
     })
     endValue: nasl.core.Time;
 
+    @Prop({
+      title: '禁用',
+      description: '是否禁用组件',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+      description: '只读状态',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean;
+
     @Method({
       title: '使组件获取焦点',
       description: '使组件获取焦点',

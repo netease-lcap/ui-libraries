@@ -35,6 +35,33 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElCheckboxGroup<T, V> extends ViewComponent {
+    @Prop({
+      title: '数据',
+      description: '多选框组的数据',
+      setter: { concept: 'InputSetter' },
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '禁用',
+      description: '是否禁用组件',
+    })
+    disabled: nasl.core.Boolean;
+
+
+    @Prop({
+      title: '选中值',
+      description: '当前选中的值数组',
+    })
+    modelValue: nasl.collection.List<V>;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean = false;
+
+
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',

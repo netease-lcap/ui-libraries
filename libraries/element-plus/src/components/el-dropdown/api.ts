@@ -49,6 +49,18 @@ namespace nasl.ui {
     group: 'Navigation',
   })
   export class ElDropdown<T, V> extends ViewComponent {
+    @Prop({
+      title: '是否禁用',
+      description: '是否禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '数据',
+      description: '下拉菜单的数据',
+    })
+    data: nasl.collection.List<T>;
+
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',
@@ -99,7 +111,7 @@ namespace nasl.ui {
       },
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
-    
+
     @Prop({
       group: '数据属性',
       title: '禁用字段',
@@ -109,8 +121,8 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    disabledField: (item: T) => nasl.core.Boolean = ((item: any) => item.disabled);
-    
+    disabledField: (item: T) => nasl.core.Boolean = (item: any) => item.disabled;
+
     @Prop({
       group: '数据属性',
       title: '分隔字段',
@@ -120,7 +132,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    dividedField: (item: T) => nasl.core.Boolean = ((item: any) => item.divided);
+    dividedField: (item: T) => nasl.core.Boolean = (item: any) => item.divided;
 
     // @Prop({
     //   group: '数据属性',

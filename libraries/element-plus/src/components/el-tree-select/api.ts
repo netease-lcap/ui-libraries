@@ -18,6 +18,33 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElTreeSelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    @Prop({
+      title: '数据',
+      description: '树形结构的数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '选中值',
+      description: '当前选中的树节点值',
+    })
+    modelValue: M extends true ? nasl.collection.List<V> : V;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '禁用组件',
+      description: '是否禁用组件',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean;
     constructor(options?: Partial<ElTreeSelectOptions<T, V, P, M, C>>) {
       super();
     }

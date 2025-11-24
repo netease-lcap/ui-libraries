@@ -36,6 +36,13 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class ElCarousel<T> extends ViewComponent {
+    @Prop({
+      title: '数据',
+      description: '走马灯的数据',
+      setter: { concept: 'InputSetter' },
+    })
+    data: nasl.collection.List<T>;
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',

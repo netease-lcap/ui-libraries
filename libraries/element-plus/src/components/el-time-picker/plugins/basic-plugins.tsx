@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import dayjs from 'dayjs';
 import { TimePickerDefaultProps } from 'element-plus';
-import { useMemo, useControllableValue } from '@/plugins/hooks';
+import { useMemo, useControllableValue, useSyncState } from '@/plugins/hooks';
 import { getNaslTimeValue, getFormatTimeValue, isValidStringTime } from './utils';
 import { getIsPreview, getRender, getFormatDateOrTime } from '@/plugins/common/preview';
 import { getPropsIcon } from '@/plugins/common/icon';
@@ -163,6 +163,16 @@ export default TimePickerBasicAccumulate.addAccumulate(idePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+        preview: isPreview,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      useSyncState(props, 'disabled');
+      useSyncState(props, 'preview');
+      useSyncState(props, 'readonly');
+      return {};
     },
   });

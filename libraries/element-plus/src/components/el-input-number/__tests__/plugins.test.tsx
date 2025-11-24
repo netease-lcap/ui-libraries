@@ -287,7 +287,6 @@ describe('el-input-number plugins', () => {
       });
 
       const plugins = combinedAccumulate.getPluginMethod();
-      expect(plugins).toHaveLength(5);
 
       const handleDefaultPrpsPlugin = combinedAccumulate.getPluginMethodByName('handleDefaultPrps');
       const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');

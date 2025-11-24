@@ -254,6 +254,14 @@ export function useRender(
   render.inheritAttrs = inheritAttrs;
   return render;
 }
+export function useSyncState(props: any, name: string) {
+  const emit = props.get('emit');
+  const value = props.get(name);
+  useEffect(() => {
+    emit('sync:state', name, value);
+  }, [value]);
+  return value;
+}
 
 export function useControllableValue<T = any>(
   props: any,

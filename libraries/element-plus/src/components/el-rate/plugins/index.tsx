@@ -4,7 +4,7 @@ import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import idePlugin from './ide';
 import { ElText } from '@/index';
-
+import { useSyncState } from '@/plugins/hooks';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
 import { $deletePropsList } from '@/plugins/constants';
@@ -60,7 +60,16 @@ export default RateAccumulate.addAccumulate(idePlugin)
         ? {
             ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
             render,
+            preview: isPreview,
           }
         : {};
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      useSyncState(props, 'preview');
+      useSyncState(props, 'disabled');
+      return {};
     },
   });

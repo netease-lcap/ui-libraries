@@ -35,7 +35,25 @@ namespace nasl.ui {
     @Prop({
       title: '选中值',
     })
-    value: V;
+    modelValue: V;
+
+    @Prop({
+      title: '禁用',
+      description: '是否禁用组件',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '数据',
+      description: '单选框组的数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean = false;
 
     @Method({
       title: '重新加载',

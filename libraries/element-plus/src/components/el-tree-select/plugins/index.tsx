@@ -45,6 +45,7 @@ export default TreeSelectBasicAccumulate.addAccumulate(idePlugin)
       const textField = props.get('textField', 'label');
       const valueField = props.get('valueField', 'value');
       const parentField = props.get('parentField');
+      const emit = props.get('emit');
       const deletePropsList = props
         .get($deletePropsList)
         .concat(['data-nodepath', 'textField', 'valueField', 'parentField', 'childrenField']);
@@ -52,6 +53,7 @@ export default TreeSelectBasicAccumulate.addAccumulate(idePlugin)
       const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
       const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
       const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
+      emit('sync:state', 'data', TreeData);
       const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
       const dataSourceResult = _.isEmpty(TreeData) ? {} : { data: TreeData };
 
@@ -88,6 +90,18 @@ export default TreeSelectBasicAccumulate.addAccumulate(idePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+        preview: isPreview,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      const emit = props.get('emit');
+      const disabled = props.get('disabled');
+      const preview = props.get('preview');
+      emit('sync:state', 'disabled', disabled);
+      emit('sync:state', 'preview', preview);
+      return {};
     },
   });

@@ -40,7 +40,14 @@ namespace nasl.ui {
       title: '绑定值',
       description: '当前选中的值，即目标列表的数据',
     })
-    value: nasl.collection.List<V>;
+    modelValue: nasl.collection.List<V>;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean ;
+
 
     @Method({
       title: '重新加载',

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { BadgeInstance } from 'element-plus';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import { useSyncState } from '@/plugins/hooks';
 
 const BadgeAccumulate = new PluginAccumulateTypes<nasl.ui.ElBadgeOptions, BadgeInstance['$props']>();
 
@@ -14,5 +15,11 @@ export default BadgeAccumulate.addPlugin({
     return {
       offset,
     };
+  },
+}).addPlugin({
+  name: 'handleSyncState',
+  handle: (props) => {
+    useSyncState(props, 'value');
+    return {};
   },
 });

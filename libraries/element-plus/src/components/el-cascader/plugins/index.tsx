@@ -54,7 +54,19 @@ export default CascaderAccumulate.addAccumulate(idePlugin)
       const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
       const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
       const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
-      const selfRef = useMemo(() => _.assign(ref, { reload, data: TreeData }), [TreeData, reload, ref]);
+      const selfRef = useMemo(
+        () => _.assign(ref, {
+            reload,
+            data: TreeData,
+            open: () => {
+              _.attempt(ref?.togglePopperVisible, true);
+            },
+            close: () => {
+              _.attempt(ref?.togglePopperVisible, false);
+            },
+          }),
+        [TreeData, reload, ref],
+      );
       const dataSourceResult = _.isEmpty(TreeData) ? {} : { options: TreeData };
 
       return {
@@ -62,6 +74,24 @@ export default CascaderAccumulate.addAccumulate(idePlugin)
         ref: selfRef,
         loading,
         ...dataSourceResult,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleRemote',
+    handle(props) {
+      const remote = props.get('remote');
+      if (!remote) return {};
+      const emit = props.get('emit');
+      const remoteMethodProps = props.get('filterMethod');
+      const ref = props.get('ref');
+      const remoteMethod = _.wrap(remoteMethodProps, (fn, node: any, query: string) => {
+        emit('sync:state', 'filterText', query);
+        _.attempt(ref?.reload);
+        return _.isFunction(fn) ? fn(node, query) : true;
+      });
+      return {
+        remoteMethod,
       };
     },
   })

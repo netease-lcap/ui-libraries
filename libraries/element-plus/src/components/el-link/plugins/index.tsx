@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver';
 import { $deletePropsList, $router } from '@/plugins/constants';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import { useSyncState } from '@/plugins/hooks';
 
 const LinkBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElLinkOptions, LinkProps>();
 
@@ -81,5 +82,12 @@ export default LinkBasicAccumulate.addPlugin({
         }),
         [$deletePropsList]: deletePropsList,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      useSyncState(props, 'disabled');
+      return {};
     },
   });

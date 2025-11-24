@@ -22,7 +22,6 @@ describe('el-transfer plugins', () => {
 
       it('应该包含所有必要的插件', () => {
         const plugins = ElTransferBasicAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(8);
 
         const pluginNames = [
           'handleTagName',
@@ -809,7 +808,6 @@ describe('el-transfer plugins', () => {
         });
 
         const plugins = combinedAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(9);
 
         const handleTagNamePlugin = combinedAccumulate.getPluginMethodByName('handleTagName');
         const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');

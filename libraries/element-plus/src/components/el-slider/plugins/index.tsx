@@ -7,6 +7,7 @@ import idePlugin from './ide';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
 import { $deletePropsList } from '@/plugins/constants';
+import { useSyncState } from '@/plugins/hooks';
 
 const SliderAccumulate = new PluginAccumulateTypes<nasl.ui.ElSliderOptions, SliderProps>();
 export default SliderAccumulate.addAccumulate(idePlugin)
@@ -54,6 +55,15 @@ export default SliderAccumulate.addAccumulate(idePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+        preview: isPreview,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      useSyncState(props, 'disabled');
+      useSyncState(props, 'preview');
+      return {};
     },
   });

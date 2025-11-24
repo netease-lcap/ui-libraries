@@ -15,6 +15,13 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class ElLink extends ViewComponent {
+    @Prop({
+      title: '禁用状态',
+      description: '是否禁用链接',
+      docDescription: '开启后，链接将变为禁用状态，用户无法点击。禁用状态下链接会显示为灰色。',
+    })
+    disabled: nasl.core.Boolean;
+
     constructor(options?: Partial<ElLinkOptions>) {
       super();
     }
@@ -34,7 +41,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '链接类型',
       description: '选择链接的视觉类型',
-      docDescription: '控制链接的视觉样式和主题色。默认：标准链接；主要：强调链接；成功：绿色主题；警告：橙色主题；危险：红色主题；信息：蓝色主题。',
+      docDescription:
+        '控制链接的视觉样式和主题色。默认：标准链接；主要：强调链接；成功：绿色主题；警告：橙色主题；危险：红色主题；信息：蓝色主题。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [

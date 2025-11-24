@@ -71,7 +71,8 @@ export const Example2 = {
           }, 3000);
         });
       };
-      const dataSource = () => new Promise((res) => {
+      const dataSource = () =>
+        new Promise((res) => {
           setTimeout(() => {
             res([
               {
@@ -174,7 +175,11 @@ export const Example2 = {
       }, 3000);
       const refs = ref({});
       setTimeout(() => {
+        console.log(refs.value.togglePopperVisible(true));
         console.log(refs, 'ss');
+        setTimeout(() => {
+          console.log(refs.value.togglePopperVisible(false));
+        }, 1000);
       }, 1000);
 
       return {

@@ -30,6 +30,12 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class ElTimeline<T, V> extends ViewComponent {
+    @Prop({
+      title: '数据',
+      description: '时间线的数据',
+    })
+    data: nasl.collection.List<T>;
+
     @Method({
       title: 'undefined',
       description: '清除缓存，重新加载',
@@ -75,7 +81,8 @@ namespace nasl.ui {
       group: '数据属性',
       title: '隐藏时间戳',
       description: '用于控制是否隐藏时间戳的字段',
-      docDescription: '集合的元素类型中，用于标识是否隐藏时间戳的属性名称，支持自定义变更。字段类型应为boolean，默认为false。',
+      docDescription:
+        '集合的元素类型中，用于标识是否隐藏时间戳的属性名称，支持自定义变更。字段类型应为boolean，默认为false。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -120,7 +127,7 @@ namespace nasl.ui {
       title: '节点颜色字段',
       description: `集合的元素类型中，用于标识节点颜色的属性, 'hsl' | 'hsv' | 'hex' | 'rgb'`,
       docDescription: '集合的元素类型中，用于标识节点颜色的属性，支持自定义变更',
-      
+
       setter: {
         concept: 'PropertySelectSetter',
       },

@@ -14,6 +14,24 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElSlider extends ViewComponent {
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean;
+
+    @Prop({
+      title: '禁用状态',
+      description: '是否禁用滑块',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '绑定值',
+      description: '滑块的当前值',
+      docDescription: '绑定滑块的当前值，支持双向绑定。可以获取或设置滑块的数值。',
+    })
+    modelValue: nasl.core.Integer;
     constructor(options?: Partial<ElSliderOptions>) {
       super();
     }
@@ -227,7 +245,9 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormSlider extends ViewComponent {
-    constructor(options?: Partial<ElFormSliderOptions & ElFormItemProOptions & Omit<ElSliderOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormSliderOptions & ElFormItemProOptions & Omit<ElSliderOptions, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }

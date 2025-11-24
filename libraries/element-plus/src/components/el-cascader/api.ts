@@ -32,6 +32,48 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElCascader<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    @Prop({
+      title: '禁用组件',
+      description: '是否禁用组件',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '过滤文本',
+      description: '过滤文本',
+    })
+    filterText: nasl.core.String;
+
+    @Prop({
+      title: '数据',
+      description: '级联选择器的数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Method({
+      title: '重新加载',
+      description: '重新加载',
+    })
+    reload(): void {}
+
+    @Method({
+      title: '打开',
+      description: '打开',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭',
+      description: '关闭',
+    })
+    close(): void {}
+
+    @Method({
+      title: '重置字段',
+      description: '重置字段',
+    })
+    resetField(): void {}
+
     constructor(options?: Partial<ElCascaderOptions<T, V, P, M, C>>) {
       super();
     }
@@ -78,14 +120,6 @@ namespace nasl.ui {
     })
     clearable: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '允许用户创建新条目',
-    //   description: '是否允许用户创建新条目，需配合 filterable 使用',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // creatable: nasl.core.Boolean = false;
-
     @Prop({
       group: '主要属性',
       title: '禁用组件',
@@ -111,6 +145,16 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     filterable: nasl.core.Boolean = false;
+
+    @Prop<ElCascaderOptions<T, V, P, M, C>, 'remote'>({
+      group: '交互属性',
+      title: '远程搜索',
+      description: '是否开启远程搜索',
+      docDescription: '开启后，组件不会过滤选项，而是改变当前组件.filterText属性，用户自行实现搜索逻辑。',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => !!_.filterable,
+    })
+    remote: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',

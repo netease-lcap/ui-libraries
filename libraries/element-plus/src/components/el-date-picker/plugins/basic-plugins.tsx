@@ -3,7 +3,7 @@ import _ from 'lodash';
 import dayjs from 'dayjs';
 import { DatePickerProps } from 'element-plus';
 import { $deletePropsList } from '@/plugins/constants';
-import { useControllableValue, useMemo } from '@/plugins/hooks';
+import { useControllableValue, useMemo, useSyncState } from '@/plugins/hooks';
 import { getIsPreview, getRender, getFormatDateOrTime } from '@/plugins/common/preview';
 import { ElText } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -12,9 +12,12 @@ import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleIcon } from '@/plugins/common/icon';
 
 const DatePickerBasicAccumulate = new PluginAccumulateTypes<
-  nasl.ui.ElDatePickerOptions,
-  DatePickerProps & {
+  nasl.ui.ElDatePickerOptions<any, any, any, any, any> & {
     'onUpdate:startValue':(value: string) => void;
+    'onUpdate:endValue': (value: string) => void;
+  },
+  DatePickerProps & {
+    'onUpdate:startValue': (value: string) => void;
     'onUpdate:endValue': (value: string) => void;
   }
 >();
@@ -136,6 +139,7 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+        preview: isPreview,
       };
     },
   })
@@ -147,5 +151,14 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       return {
         disabledDate: (date) => dayjs(date).isBefore(dayjs(minDate)) || dayjs(date).isAfter(dayjs(maxDate)),
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      useSyncState(props, 'disabled');
+      useSyncState(props, 'preview');
+      useSyncState(props, 'readonly');
+      return {};
     },
   });

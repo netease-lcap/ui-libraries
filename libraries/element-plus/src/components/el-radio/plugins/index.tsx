@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { ElRadio, ElRadioButton, RadioGroupProps } from 'element-plus';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
-import { useMemo, useCallback } from '@/plugins/hooks';
+import { useMemo, useCallback, useSyncState } from '@/plugins/hooks';
 import { getIsPreview, getRender, getListPreviewText } from '@/plugins/common/preview';
 import idePlugin from './ide';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -117,6 +117,7 @@ export default RadioAccumulate.addAccumulate(idePlugin)
       return {
         ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
         render,
+        preview: isPreview,
       };
     },
   })
@@ -135,5 +136,16 @@ export default RadioAccumulate.addAccumulate(idePlugin)
           'grid-auto-flow': column ? 'row' : 'auto',
         },
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      const emit = props.get('emit');
+      const data = props.get('data');
+      emit('sync:state', 'data', data);
+      useSyncState(props, 'disabled');
+      useSyncState(props, 'preview');
+      return {};
     },
   });

@@ -14,6 +14,9 @@ export const handleDateRange = (props) => {
 
 export const handleSwitchChange = (props) => {
   const onSwitch = props.get('onSwitchChange');
+  const src = props.get('src');
+  const emit = props.get('emit');
+  emit('sync:state', 'src', src);
   return {
     onSwitch,
   };
