@@ -223,6 +223,12 @@ namespace nasl.ui {
       trigger: 'clear' | 'check' | 'default';
     }) => any;
 
+    @Event({
+      title: '取消时',
+      description: '取消时触发',
+    })
+    onConfirm: (event: { selectedValues: nasl.collection.List<V> }) => any;
+
     @Slot({
       title: '标题',
       description: '自定义标题内容',
