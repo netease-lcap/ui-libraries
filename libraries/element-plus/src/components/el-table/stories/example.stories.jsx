@@ -167,7 +167,7 @@ export const Example1 = {
     <el-flex style="border: 1px solid red;">
 <el-table
 ref="mytable"
-row-key="name"
+row-key="date"
 :dataSource="tableData2"
 border
 style="height:500px"
@@ -187,7 +187,7 @@ pageSizes="[5,10,20,50]"
 
 
 
-    <el-table-column prop="name" width="30%" type="selection"  class="myclomuns" :style="{'text-align':'left'}" >
+    <el-table-column prop="name" width="30%" type="expand"  class="myclomuns" :style="{'text-align':'left'}" >
     <template #header>
     <el-text>text-Name</el-text>
     </template>

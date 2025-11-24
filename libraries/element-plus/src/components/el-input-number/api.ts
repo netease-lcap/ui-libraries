@@ -189,6 +189,22 @@ namespace nasl.ui {
     })
     validateEvent: nasl.core.Boolean = true;
 
+    @Prop({
+      group: '主要属性',
+      title: '前缀单位',
+      description: '输入框左侧显示的单位，如：元、%等',
+      setter: { concept: 'InputSetter' },
+    })
+    prefix: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '后缀单位',
+      description: '输入框右侧显示的单位，如：元、%等',
+      setter: { concept: 'InputSetter' },
+    })
+    suffix: nasl.core.String;
+
     @Event({
       title: '值改变时',
       description: '绑定值被改变时触发',

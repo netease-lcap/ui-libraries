@@ -233,6 +233,15 @@ namespace nasl.ui {
     })
     noDataText: nasl.core.String = 'No data';
 
+    @Prop({
+      group: '主要属性',
+      title: '后缀图标',
+      description: '选择框右侧显示的图标',
+      docDescription: '设置选择框右侧显示的图标，通常用于表示操作或状态。支持从图标库中选择或使用自定义图标。',
+      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+    })
+    suffixIcon: nasl.core.String;
+
     // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
       group: '交互属性',
@@ -290,6 +299,24 @@ namespace nasl.ui {
       description: '清空时触发',
     })
     onClear: (event: any) => any;
+
+    @Event({
+      title: '搜索前',
+      description: '可搜索输入框，在输入搜索文字时',
+    })
+    onBeforeFilter: (event: { filterText: nasl.core.String }) => any;
+
+    @Event({
+      title: '数据加载前触发',
+      description: '数据加载前触发',
+    })
+    onBefore: () => any;
+
+    @Event({
+      title: '数据加载前触发',
+      description: '数据加载前触发',
+    })
+    onSuccess: () => any;
 
     @Event({
       title: '下拉框显示或隐藏时',

@@ -482,6 +482,9 @@ export default TableAccumulate.addPlugin({
       return {
         getFields,
         onHeaderDragend,
+        onExpandChange(...arg) {
+          console.log(arg, 'onExpandChange');
+        },
         ref,
       };
     },

@@ -2,8 +2,8 @@
 import _ from 'lodash';
 import { ElSelectV2, SelectProps } from 'element-plus';
 import { CSSProperties } from 'vue';
-
 import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
+import { getPropsIcon } from '@/plugins/common/icon';
 import { useMemo, useCallback, useEffect } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
@@ -44,9 +44,16 @@ export default SelectBasicAccumulate.addPlugin({
       const valueField = props.get('valueField') || 'value';
       const descriptionField = props.get('descriptionField') || 'description';
       const slots = props.get('slots');
+      const onSuccess = props.get('onSuccess', () => {});
       const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
       const ref = props.get('ref');
-      const { data, run: reload, loading } = useRequestDataSource(dataConfig);
+      const {
+        data,
+        run: reload,
+        loading,
+      } = useRequestDataSource(dataConfig, {
+        onSuccess,
+      });
       const dataSource = useHandleMapField({
         textField,
         valueField,
@@ -59,17 +66,18 @@ export default SelectBasicAccumulate.addPlugin({
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-            default: () => _.map(dataSource, (item) => (
-              <ElOption {...item}>
-                {item.label}
-                {item.description && (
-                <el-text
-                  style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
-                  color="secondary"
-                  text={item.description}
-                />
+            default: () =>
+              _.map(dataSource, (item) => (
+                <ElOption {...item}>
+                  {item.label}
+                  {item.description && (
+                    <el-text
+                      style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
+                      color="secondary"
+                      text={item.description}
+                    />
                   )}
-              </ElOption>
+                </ElOption>
               )),
           };
 
@@ -161,9 +169,11 @@ export default SelectBasicAccumulate.addPlugin({
       if (!remote) return {};
       const emit = props.get('emit');
       const remoteMethodProps = props.get('remoteMethod');
+      const onBeforeFilter = props.get('onBeforeFilter', () => {});
       const ref = props.get('ref');
       const remoteMethod = _.wrap(remoteMethodProps, (fn, query: string) => {
         emit('sync:state', 'filterText', query);
+        _.attempt(onBeforeFilter, { filterText: query });
         _.attempt(ref?.reload);
         _.attempt(fn, query);
       });
@@ -186,5 +196,14 @@ export default SelectBasicAccumulate.addPlugin({
         emit('sync:state', 'preview', preview);
       }, [data, disabled, preview]);
       return {};
+    },
+  })
+  .addPlugin({
+    name: 'handleIcon',
+    handle(props) {
+      const suffixIcon = props.get('suffixIcon');
+      return {
+        suffixIcon: getPropsIcon({ name: suffixIcon }),
+      };
     },
   });

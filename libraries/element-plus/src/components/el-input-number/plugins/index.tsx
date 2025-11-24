@@ -53,6 +53,20 @@ export default InputNumberBasicAccumulate.addAccumulate(idePlugin)
     },
   })
   .addPlugin({
+    name: 'handlePrefixAndSuffix',
+    handle(props) {
+      const slots = props.get('slots');
+      const prefix = props.get('prefix');
+      const suffix = props.get('suffix');
+      return {
+        slots: _.assign({}, slots, {
+          prefix: () => [prefix],
+          suffix: () => [suffix],
+        }),
+      };
+    },
+  })
+  .addPlugin({
     name: 'handleSyncState',
     handle(props) {
       useSyncState(props, 'disabled');
