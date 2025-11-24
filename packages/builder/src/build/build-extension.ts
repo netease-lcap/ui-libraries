@@ -62,6 +62,7 @@ async function zipExtension(root: string, destDir: string, modulesOutDir: string
     'Plugin-Version': '1.0.0',
     'Library-Type': 'Frontend',
     'Metadata-File': 'nasl.extension.json',
+    Source: 'source.zip',
     Tag: pkg.keywords.filter((v) => ['Lcap', 'library'].indexOf(v) === -1).join(','),
   };
 
