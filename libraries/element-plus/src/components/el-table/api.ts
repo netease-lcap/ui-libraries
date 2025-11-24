@@ -90,10 +90,30 @@ namespace nasl.ui {
     selectedValues: nasl.collection.List<V>;
 
     @Method({
-      title: '重新加载',
-      description: '清除缓存，重新加载',
+      title: '保持页码，重新加载',
+      description: '保持页码，重新加载',
     })
     reload(): void {}
+
+    @Method({
+      title: '带页码刷新',
+      description: '保持页码，重新加载',
+    })
+    loadTo(
+      @Param({
+        title: '分页页数',
+        description: '要刷新的页数',
+      })
+      page?: nasl.core.Integer,
+    ): void {}
+
+    @Method({
+      title: 'undefined',
+      description: '获取所有表格列的 field',
+    })
+    getFields(): nasl.core.String {
+      return '';
+    }
 
     constructor(options?: Partial<ElTableOptions<T, V, P, M>>) {
       super();
@@ -437,10 +457,28 @@ namespace nasl.ui {
     onScroll: (event: any) => any;
 
     @Event({
+      title: '数据加载前触发',
+      description: '数据加载前触发',
+    })
+    onBefore: () => any;
+
+    @Event({
       title: '数据加载成功时触发',
       description: '数据加载成功时触发',
     })
     onSuccess: () => any;
+
+    @Event({
+      title: '排序后',
+      description: '排序后触发',
+    })
+    onSort: (event: { field: nasl.core.String; order: nasl.core.String }) => any;
+
+    @Event({
+      title: '表头拖拽结束时触发',
+      description: '表头拖拽结束时触发',
+    })
+    onHeaderDragend: (event: { newWidth: number; oldWidth: number; field: nasl.core.String }) => any;
 
     @Slot({
       title: '表格列',

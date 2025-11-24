@@ -8,11 +8,10 @@ namespace nasl.ui {
       structured: true,
       childAccept: "target.tag === 'el-step'",
       dataSource: {
-        dismiss:
-          "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
         loopRule: 'nth-child(n+2)',
-        loopElem: ".el-step",
+        loopElem: '.el-step',
         emptySlot: {
           display: 'large',
           condition: "!this.getAttribute('dataSource')",
@@ -60,9 +59,7 @@ namespace nasl.ui {
       docDescription: '设置步骤条的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       designerValue: [{}, {}, {}],
     })
-    dataSource:
-      | { list: nasl.collection.List<T>; total: nasl.core.Integer }
-      | nasl.collection.List<T>;
+    dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
@@ -120,8 +117,7 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '当前步骤',
-      description:
-        '设置当前激活步骤, 可设置步骤排序下标，如：0 也可以设置步骤别名',
+      description: '设置当前激活步骤, 可设置步骤排序下标，如：0 也可以设置步骤别名',
       setter: { concept: 'NumberInputSetter' },
       sync: true,
     })
@@ -133,13 +129,7 @@ namespace nasl.ui {
       description: '设置当前步骤的状态',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '等待' },
-          { title: '进行中' },
-          { title: '完成' },
-          { title: '错误' },
-          { title: '成功' },
-        ],
+        options: [{ title: '等待' }, { title: '进行中' }, { title: '完成' }, { title: '错误' }, { title: '成功' }],
       },
     })
     processStatus: 'wait' | 'process' | 'finish' | 'error' | 'success' = 'process';
@@ -150,17 +140,10 @@ namespace nasl.ui {
       description: '设置结束步骤的状态',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '等待' },
-          { title: '进行中' },
-          { title: '完成' },
-          { title: '错误' },
-          { title: '成功' },
-        ],
+        options: [{ title: '等待' }, { title: '进行中' }, { title: '完成' }, { title: '错误' }, { title: '成功' }],
       },
     })
-    finishStatus: 'wait' | 'process' | 'finish' | 'error' | 'success' =
-      'finish';
+    finishStatus: 'wait' | 'process' | 'finish' | 'error' | 'success' = 'finish';
 
     @Prop({
       group: '样式属性',
@@ -169,7 +152,7 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     space: nasl.core.Decimal | nasl.core.String;
-    
+
     @Prop({
       group: '样式属性',
       title: '居中对齐',
@@ -257,17 +240,10 @@ namespace nasl.ui {
       description: '设置当前步骤的状态，不设置则根据步骤条确定状态',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '步骤条状态' },
-          { title: '等待' },
-          { title: '进行中' },
-          { title: '完成' },
-          { title: '错误' },
-          { title: '成功' },
-        ],
+        options: [{ title: '等待' }, { title: '进行中' }, { title: '完成' }, { title: '错误' }, { title: '成功' }],
       },
     })
-    status: '' | 'wait' | 'process' | 'finish' | 'error' | 'success' = '';
+    status: 'wait' | 'process' | 'finish' | 'error' | 'success';
 
     @Slot({
       title: '步骤标题',

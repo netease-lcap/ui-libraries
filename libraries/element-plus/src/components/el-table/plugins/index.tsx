@@ -2,6 +2,7 @@ import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-pl
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
+import { VNode } from 'vue';
 import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect, useRender } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
@@ -123,10 +124,7 @@ export default TableAccumulate.addPlugin({
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
       const onPageChange = props.get('onPageChange', () => {});
-      // const onSelectionChange = props.get('onSelectionChange', () => {});
       const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
-      // const rowKey = props.get('rowKey');
-
       return {
         pageProps: {
           ...pageProps,
@@ -134,11 +132,7 @@ export default TableAccumulate.addPlugin({
           total,
           onPageChange,
         },
-
         pagination,
-        // onSelectionChange: _.wrap(onSelectionChange, (fn, value: any) => {
-        //   _.attempt(fn, { newSelection: _.map(value, (item) => _.get(item, rowKey as string)) });
-        // }),
       };
     },
   })
@@ -167,14 +161,17 @@ export default TableAccumulate.addPlugin({
       const pagination = props.get('pagination');
       const setSort = props.get('setSort');
       const setOrder = props.get('setOrder');
+      const onSort = props.get('onSort', () => {});
       const onSortChange = useCallback(
         ({ prop, order }) => {
           setSort(prop);
           setOrder(order);
           _.attempt(ref?.reload, { sort: prop, order, pagination });
+          _.attempt(onSort, { field: prop, order });
         },
         [ref, emit, pagination],
       );
+
       return {
         onSortChange,
       };
@@ -231,7 +228,8 @@ export default TableAccumulate.addPlugin({
         () => useDataSourceToTree(data, parentField, rowKey as string),
         [data, parentField, rowKey],
       );
-      const selfRef = _.assign(ref, { reload, data: treeData, getData: () => data });
+      const loadTo = useCallback((page) => reload({ currentPage: page }), [reload]);
+      const selfRef = _.assign(ref, { reload, loadTo, data: treeData, getData: () => data });
 
       const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
       return {
@@ -447,6 +445,7 @@ export default TableAccumulate.addPlugin({
         emit('sync:state', 'order', orderMap[order]);
         emit('sync:state', 'total', pageProps.total);
       }, [data, currentPage, pageSize, order, sort, pageProps.total]);
+      return {};
     },
   })
   .addPlugin({
@@ -461,5 +460,29 @@ export default TableAccumulate.addPlugin({
         return () => _.attempt(unsubscribe, 'el_table__reload', refId);
       }, []);
       return {};
+    },
+  })
+  .addPlugin({
+    name: 'handleEvent',
+    handle(props) {
+      const refProps = props.get('ref');
+      const slots = props.get('slots');
+      const onHeaderDragenaProps = props.get('onHeaderDragend', () => {});
+
+      const onHeaderDragend = useCallback(
+        _.wrap(onHeaderDragenaProps, (fn, newWidth, oldWidth, TableColumnCtx) => {
+          _.attempt(fn, { newWidth, oldWidth, field: _.get(TableColumnCtx, 'property') });
+        }),
+        [onHeaderDragenaProps],
+      );
+      const getFields = useCallback(() => {
+        return _.flatMap(slots.default(), (node: VNode) => (_.get(node, 'type.name') === 'ElTableColumn' && node.props?.prop ? [node.props.prop] : []));
+      }, [slots]);
+      const ref = _.assign(refProps, { getFields: () => _.join(getFields(), ',') });
+      return {
+        getFields,
+        onHeaderDragend,
+        ref,
+      };
     },
   });
