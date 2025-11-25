@@ -24,7 +24,7 @@ export function handleDataSource(props) {
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
     : {
-        default: () => _.map(dataSource, (item) => <VantRadio {...item}>{item.text}</VantRadio>),
+        default: () => _.map(dataSource, (item) => <VantRadio {...item}>{slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.text}</VantRadio>),
       };
 
   return {

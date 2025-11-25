@@ -140,6 +140,12 @@ namespace nasl.ui {
       ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '单选项内容',
+      description: '单选项内容',
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({

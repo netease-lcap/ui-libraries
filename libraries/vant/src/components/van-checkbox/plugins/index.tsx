@@ -26,7 +26,7 @@ export function handleDataSource(props) {
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
     : {
-        default: () => _.map(dataSource, (item) => <VantCheckbox {...item}>{item.test}</VantCheckbox>),
+        default: () => _.map(dataSource, (item) => <VantCheckbox {...item}>{slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.text}</VantCheckbox>),
       };
 
   return {
