@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { InputTagProps } from 'element-plus';
-import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { ElPreview } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -59,8 +58,14 @@ export default InputTagBasicAccumulate.addAccumulate(idePlugin)
       const refId = props.get('data-ref-id');
       const setValue = props.get('setValue');
       useEffect(() => {
-        _.attempt(subscribe, 'el_input-tag__change', refId, (...args) => _.attempt(setValue, ...args));
-        return () => _.attempt(unsubscribe, 'el_input-tag__change', refId);
+        if (window?.UiLibrariesMcp?.subscribe) {
+          window.UiLibrariesMcp.subscribe('el_input-tag__change', refId, (...args) => _.attempt(setValue, ...args));
+        }
+        return () => {
+          if (window?.UiLibrariesMcp?.unsubscribe) {
+            window.UiLibrariesMcp.unsubscribe('el_input-tag__change', refId);
+          }
+        };
       }, []);
       return {};
     },

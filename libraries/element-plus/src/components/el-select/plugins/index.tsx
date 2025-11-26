@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import { ElSelectV2, SelectProps } from 'element-plus';
 import { CSSProperties } from 'vue';
-import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { useMemo, useCallback, useEffect } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
@@ -187,8 +186,14 @@ export default SelectBasicAccumulate.addPlugin({
       const refId = props.get('data-ref-id');
       const setValue = props.get('setValue');
       useEffect(() => {
-        _.attempt(subscribe, 'el_select__change', refId, (value) => _.attempt(setValue, value));
-        return () => _.attempt(unsubscribe, 'el_select__change', refId);
+        if (window?.UiLibrariesMcp?.subscribe) {
+          window.UiLibrariesMcp.subscribe('el_select__change', refId, (value) => _.attempt(setValue, value));
+        }
+        return () => {
+          if (window?.UiLibrariesMcp?.unsubscribe) {
+            window.UiLibrariesMcp.unsubscribe('el_select__change', refId);
+          }
+        };
       }, []);
       return {};
     },

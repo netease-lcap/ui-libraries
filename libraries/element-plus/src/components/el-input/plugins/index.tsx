@@ -1,7 +1,5 @@
 import _ from 'lodash';
 import { InputProps } from 'element-plus';
-
-import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { ElPreview } from '@/index';
@@ -105,8 +103,14 @@ export default InputBasicAccumulate.addAccumulate(idePlugin)
       const setValue = props.get('setValue');
       const refId = props.get('data-ref-id');
       useEffect(() => {
-        _.attempt(subscribe, 'el_input__change', refId, (value) => _.attempt(setValue, value));
-        return () => _.attempt(unsubscribe, 'el_input__change', refId);
+        if (window?.UiLibrariesMcp?.subscribe) {
+          window.UiLibrariesMcp.subscribe('el_input__change', refId, (value) => _.attempt(setValue, value));
+        }
+        return () => {
+          if (window?.UiLibrariesMcp?.unsubscribe) {
+            window.UiLibrariesMcp.unsubscribe('el_input__change', refId);
+          }
+        };
       }, []);
       return {};
     },

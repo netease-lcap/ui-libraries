@@ -1,7 +1,6 @@
 import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-plus';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { VNode } from 'vue';
 import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect, useRender } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
@@ -454,10 +453,16 @@ export default TableAccumulate.addPlugin({
       const refId = props.get('data-ref-id');
       const reload = props.get('reload', () => {});
       useEffect(() => {
-        _.attempt(subscribe, 'el_table__reload', refId, (...args) => {
-          _.attempt(reload, ...(args as [any, any]));
-        });
-        return () => _.attempt(unsubscribe, 'el_table__reload', refId);
+        if (window?.UiLibrariesMcp?.subscribe) {
+          window.UiLibrariesMcp.subscribe('el_table__reload', refId, (...args) => {
+            _.attempt(reload, ...(args as [any, any]));
+          });
+        }
+        return () => {
+          if (window?.UiLibrariesMcp?.unsubscribe) {
+            window.UiLibrariesMcp.unsubscribe('el_table__reload', refId);
+          }
+        };
       }, []);
       return {};
     },
