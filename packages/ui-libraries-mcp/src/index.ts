@@ -57,23 +57,3 @@ export function getComponentTools() {
     },
   }));
 }
-
-declare global {
-  interface Window {
-    UiLibrariesMcp: {
-      subscribe: typeof subscribe;
-      unsubscribe: typeof unsubscribe;
-      registerTool: typeof registerTool;
-      getComponentTools: typeof getComponentTools;
-    };
-  }
-}
-
-if (typeof window !== 'undefined') {
-  window.UiLibrariesMcp = {
-    subscribe,
-    unsubscribe,
-    registerTool,
-    getComponentTools,
-  };
-}
