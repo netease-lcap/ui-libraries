@@ -1,5 +1,8 @@
 import { defineComponent, ref, watch } from 'vue';
 import { Loading as VantLoading, Icon } from 'vant';
+import { createNamespace } from 'vant/es/utils';
+
+const [name, bem] = createNamespace('loading');
 
 export default defineComponent({
   name: 'VanLoading',
@@ -60,7 +63,7 @@ export default defineComponent({
       hide,
     });
     return () => (
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative' }} class={bem('root')}>
         {slots.default?.()}
         <VantLoading
           v-show={isLoading.value}

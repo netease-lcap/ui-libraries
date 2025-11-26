@@ -8,13 +8,13 @@ namespace nasl.ui {
       structured: true,
       childAccept: 'target.tag === "van-cell"',
       selector: [
-        {
-          expression: "this.getElement(el => el.slotTarget === 'title')",
-          cssSelector: '.van-cell-group__title',
-        },
+        // {
+        //   expression: "this.getElement(el => el.slotTarget === 'title')",
+        //   cssSelector: '.van-cell-group__title',
+        // },
         {
           expression: "this",
-          cssSelector: '.van-cell-group',
+          cssSelector: '.van-cell-group__wrapper',
         },
       ],
     }

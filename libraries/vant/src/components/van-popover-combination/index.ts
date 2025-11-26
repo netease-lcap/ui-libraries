@@ -2,6 +2,7 @@ import { Popover as VantPopoverCombination } from 'vant';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins/index';
+import './index.css';
 
 function VanPopoverCombinationRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicPlugin, plugin) : plugin;
