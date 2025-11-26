@@ -10,15 +10,10 @@ export default defineConfig({
     lib: {
       entry,
       name: 'UiLibrariesMcp',
-      formats: ['es', 'cjs'],
-      fileName: (format) => (format === 'es' ? 'index.mjs' : 'index.cjs'),
+      formats: ['umd'],
+      fileName: () => 'index.js',
     },
-    rollupOptions: {
-      output: {
-        exports: 'named',
-      },
-    },
-    target: 'es2019',
+    target: 'es2015',
     outDir: 'dist',
     emptyOutDir: true,
     sourcemap: true,
@@ -27,7 +22,7 @@ export default defineConfig({
     dts({
       entryRoot: path.resolve(rootDir, 'src'),
       tsconfigPath: path.resolve(rootDir, 'tsconfig.json'),
-      outputDir: path.resolve(rootDir, 'dist'),
+      outDir: path.resolve(rootDir, 'dist'),
       insertTypesEntry: true,
     }),
   ],
