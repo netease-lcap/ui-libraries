@@ -43,20 +43,37 @@ export const unsubscribe = (component: string, refId: string) => {
   eventBus.off(`${component}___${refId}`);
 };
 
-function init() {
-  let toolList: ComponentToolConfig[] = [];
-  return {
-    registerTool(tool: ComponentToolConfig) {
-      toolList = toolList.concat(tool);
+let toolList: ComponentToolConfig[] = [];
+
+export function registerTool(tool: ComponentToolConfig) {
+  toolList = toolList.concat(tool);
+}
+
+export function getComponentTools() {
+  return toolList.map((tool) => ({
+    ...tool,
+    handler(refId: string, ...arg: []) {
+      eventBus.emit(`${tool.name}___${refId}`, ...arg);
     },
-    getComponentTools() {
-      return toolList.map((tool) => ({
-        ...tool,
-        handler(refId: string, ...arg: []) {
-          eventBus.emit(`${tool.name}___${refId}`, ...arg);
-        },
-      }));
-    },
+  }));
+}
+
+declare global {
+  interface Window {
+    UiLibrariesMcp: {
+      subscribe: typeof subscribe;
+      unsubscribe: typeof unsubscribe;
+      registerTool: typeof registerTool;
+      getComponentTools: typeof getComponentTools;
+    };
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.UiLibrariesMcp = {
+    subscribe,
+    unsubscribe,
+    registerTool,
+    getComponentTools,
   };
 }
-export default init();

@@ -14,7 +14,6 @@ export default defineConfig({
       fileName: (format) => (format === 'es' ? 'index.mjs' : 'index.cjs'),
     },
     rollupOptions: {
-      external: ['mitt'],
       output: {
         exports: 'named',
       },
