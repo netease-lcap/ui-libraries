@@ -166,7 +166,14 @@ namespace nasl.ui {
       title: '折叠面板项标题',
       description: '折叠面板项标题',
     })
-    slotTitle: (current: Current<T> & { isActive: nasl.core.Boolean }) => Array<ViewComponent>;
+    slotTitle: (current: {
+      item: T;
+      index: nasl.core.Integer;
+      rowIndex: nasl.core.Integer;
+      columnIndex: nasl.core.Integer;
+      value: nasl.core.String;
+      isActive: nasl.core.Boolean;
+    }) => Array<ViewComponent>;
 
     @Slot({
       title: '图标内容',
