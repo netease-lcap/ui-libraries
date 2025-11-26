@@ -27,7 +27,7 @@ export const Example1 = {
     },
     template: `
     <div>
-      <el-input-number suffix="￥" v-model="num" readonly :onFocus="handleChange"  />
+      <el-input-number suffix="￥" v-model="num"  :onFocus="handleChange"  />
     </div>
     `,
   }),

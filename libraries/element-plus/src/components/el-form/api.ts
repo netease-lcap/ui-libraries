@@ -570,6 +570,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '忽略验证规则',
+      description: '忽略验证规则。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    ignoreRules: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '验证触发方式',
       description: '验证逻辑的触发方式',
       setter: { concept: 'EnumSelectSetter', options: [{ title: '失去焦点' }, { title: '改变' }] },

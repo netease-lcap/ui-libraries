@@ -19,6 +19,7 @@ export default FormItemPluginAccumulate.addPlugin({
   handle(props) {
     const rulesProps = props.get('rules') ?? [];
     const trigger = props.get('trigger') ?? 'blur';
+    const ignoreRules = props.get('ignoreRules') ?? false;
     const isRequired = props.get('isRequired');
     const required = useMemo(
       () => (isRequired ? { required: true, message: '表单项不得为空', trigger } : []),
@@ -26,6 +27,7 @@ export default FormItemPluginAccumulate.addPlugin({
     );
 
     const rules = useMemo(() => {
+      if (ignoreRules) return [];
       const ideRules = _.map(rulesProps, (item: any) => {
           if (!item.validate) return item;
 
@@ -63,7 +65,7 @@ export default FormItemPluginAccumulate.addPlugin({
           };
         }) ?? [];
       return [...ideRules, ...(Array.isArray(required) ? required : [required])];
-    }, [rulesProps, trigger]);
+    }, [rulesProps, trigger, ignoreRules]);
     return { rules };
   },
 });

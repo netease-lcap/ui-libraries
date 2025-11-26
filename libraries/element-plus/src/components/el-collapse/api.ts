@@ -229,12 +229,12 @@ namespace nasl.ui {
       title: '标题',
       description: 'Collapse Item标题',
     })
-    slotTitle: ({ isActive }: { isActive: nasl.core.Boolean }) => Array<ViewComponent>;
+    slotTitle: (event: { isActive: nasl.core.Boolean }) => Array<ViewComponent>;
 
     @Slot({
       title: '图标内容',
       description: '图标内容',
     })
-    slotIcon: ({ isActive }: { isActive: nasl.core.Boolean }) => Array<ViewComponent>;
+    slotIcon: (event: { isActive: nasl.core.Boolean }) => Array<ViewComponent>;
   }
 }

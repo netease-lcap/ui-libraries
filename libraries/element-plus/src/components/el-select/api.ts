@@ -156,10 +156,10 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
-      title: '选中数据',
-      description: '当前选中选项的完整数据对象',
+      title: '选中值完整数据',
+      description: '当前选中值的不在数据源中时，需要使用该字段回显选择框内数据。完整数据对象',
       docDescription:
-        '当下拉列表使用分页或加载更多时，需要使用此字段来回显选择框内的完整数据。包含选中选项的标签和值信息。',
+        '当前选中值的不在数据源中时，需要使用此字段来回显选择框内的完整数据。包含选中选项的标签和值信息。',
     })
     selectedValuesData: nasl.collection.List<{ label: nasl.core.String; value: V }>;
 
@@ -172,6 +172,15 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     multiple: M = false as any;
+
+    @Prop({
+      group: '主要属性',
+      title: '最大选中数',
+      description: '最大选中数',
+      setter: { concept: 'NumberInputSetter' },
+      if: (_) => !!_.multiple,
+    })
+    maxCount: nasl.core.Integer = 0;
 
     @Prop<ElSelectOptions<T, V, P, M, C>, 'collapseTags'>({
       group: '主要属性',

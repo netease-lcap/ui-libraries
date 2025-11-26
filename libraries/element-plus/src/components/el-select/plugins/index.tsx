@@ -43,7 +43,6 @@ export default SelectBasicAccumulate.addPlugin({
       const textField = props.get('textField') || 'label';
       const valueField = props.get('valueField') || 'value';
       const descriptionField = props.get('descriptionField') || 'description';
-      const slots = props.get('slots');
       const onSuccess = props.get('onSuccess', () => {});
       const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
       const ref = props.get('ref');
@@ -63,30 +62,62 @@ export default SelectBasicAccumulate.addPlugin({
         },
       });
       const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
-      const dataSourceSlots = _.isNil(dataConfig)
-        ? {}
-        : {
-            default: () =>
-              _.map(dataSource, (item) => (
-                <ElOption {...item}>
-                  {item.label}
-                  {item.description && (
-                    <el-text
-                      style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
-                      color="secondary"
-                      text={item.description}
-                    />
-                  )}
-                </ElOption>
-              )),
-          };
 
       return {
         [$deletePropsList]: deletePropsList,
         ref: selfRef,
         loading,
-        slots: _.assign(slots, dataSourceSlots),
         data: dataSource,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleMaxCount',
+    handle(props) {
+      const maxCount = props.get('maxCount');
+      const multiple = props.get('multiple');
+      const modelValue = props.get('modelValue');
+      const dataProps = props.get('data');
+      const isDataProps = multiple && maxCount > 0 && !_.isEmpty(dataProps) && _.isArray(modelValue) && modelValue.length > maxCount;
+      const data = useMemo(
+        () => (isDataProps
+            ? _.map(dataProps, (item) => ({
+                ...item,
+                disabled: !_.includes(modelValue, item.value),
+              }))
+            : _.map(dataProps, (item) => _.assign(item, { disabled: false }))),
+        [isDataProps, dataProps],
+      );
+      return {
+        maxCount,
+        data,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleSlotRender',
+    handle(props) {
+      const dataConfig = props.get('dataSource');
+      const slots = props.get('slots');
+      const data = props.get('data');
+      const dataSourceSlots = _.isNil(dataConfig)
+        ? {}
+        : {
+            default: () => _.map(data, (item) => (
+              <ElOption {...item}>
+                {item.label}
+                {item.description && (
+                <el-text
+                  style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
+                  color="secondary"
+                  text={item.description}
+                />
+                  )}
+              </ElOption>
+              )),
+          };
+      return {
+        slots: _.assign(slots, dataSourceSlots),
       };
     },
   })

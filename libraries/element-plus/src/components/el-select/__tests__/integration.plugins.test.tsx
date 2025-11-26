@@ -162,7 +162,7 @@ describe('el-select 插件集成测试', () => {
 
       expect(result.data).toBeDefined();
       expect(Array.isArray(result.data)).toBe(true);
-      expect(result.data.length).toBeGreaterThan(0);
+      expect(result.data.length).toBe(3);
       expect(result.loading).toBeDefined();
     });
 

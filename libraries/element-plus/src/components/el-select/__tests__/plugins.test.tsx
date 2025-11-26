@@ -106,7 +106,6 @@ describe('el-select plugins', () => {
         expect(result).toBeDefined();
         expect(result).toHaveProperty('ref');
         expect(result).toHaveProperty('loading');
-        expect(result).toHaveProperty('slots');
         expect(result).toHaveProperty('data');
       });
 
@@ -150,7 +149,6 @@ describe('el-select plugins', () => {
         expect(result).toHaveProperty('ref');
         expect(result).toHaveProperty('loading');
         expect(result).toHaveProperty('data');
-        expect(result).toHaveProperty('slots');
         expect(typeof result.ref).toBe('object');
       });
 
@@ -175,46 +173,6 @@ describe('el-select plugins', () => {
         expect(result).toBeDefined();
         expect(result).toHaveProperty('data');
         expect(result.data).toBeDefined();
-      });
-
-      it('应该正确处理空数据源时的 slots', () => {
-        const props = {
-          dataSource: null,
-          textField: 'label',
-          valueField: 'value',
-          slots: { existing: vi.fn() },
-          [$deletePropsList]: [],
-          ref: { current: null },
-        };
-
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
-
-        expect(result.slots).toBeDefined();
-        expect(result.slots).toHaveProperty('existing');
-        expect(typeof result.slots.default).not.toBe('function');
-      });
-
-      it('应该正确处理有数据源时的 slots', () => {
-        const dataSource = [{ label: 'Option 1', value: '1' }];
-
-        const props = {
-          dataSource,
-          textField: 'label',
-          valueField: 'value',
-          slots: {
-            existing: vi.fn(),
-          },
-          [$deletePropsList]: [],
-          ref: { current: null },
-        };
-
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
-
-        expect(result.slots).toBeDefined();
-        expect(result.slots).toHaveProperty('existing');
-        expect(typeof result.slots).toBe('object');
       });
 
       it('应该正确设置 ref 对象', () => {
@@ -259,7 +217,6 @@ describe('el-select plugins', () => {
         expect(currentValue.value).toHaveProperty('data');
         expect(currentValue.value).toHaveProperty('loading');
         expect(currentValue.value).toHaveProperty('ref');
-        expect(currentValue.value).toHaveProperty('slots');
 
         expect(dataSourceFn).toHaveBeenCalled();
 
@@ -312,7 +269,6 @@ describe('el-select plugins', () => {
           expect(result).toHaveProperty('data');
           expect(result).toHaveProperty('loading');
           expect(result).toHaveProperty('ref');
-          expect(result).toHaveProperty('slots');
         }).not.toThrow();
       });
 

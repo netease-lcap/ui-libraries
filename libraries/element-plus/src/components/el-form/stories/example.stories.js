@@ -58,9 +58,10 @@ export const Example2 = {
   render: () => ({
     setup() {
       const activeName = ref();
-      const inputName = ref('2');
+      const inputName = ref('');
       const formData = ref({ input: '', select: '' });
       const formRef = ref();
+      const ignoreRules = ref(false);
       // const list = ref([{ value: 1 }, { value: 2 }, { value: 3 }]);
       // const list = ref([1, 2, 3]);
       const list = async () => {
@@ -104,9 +105,12 @@ export const Example2 = {
       });
       const handleClick = async (tab) => {
         // console.log('====', formData, tab);
-        tab.resetForm();
+        tab.validated();
         // console.log(tab, 'tab', tab.validated());
         // console.log(model, 'model');
+      };
+      const handleIgnoreRules = () => {
+        ignoreRules.value = !ignoreRules.value;
       };
       watch(
         model,
@@ -131,15 +135,17 @@ export const Example2 = {
         log,
         formRef,
         rules,
+        ignoreRules,
+        handleIgnoreRules
       };
     },
     template: `
     <div>
     <el-form :model="model" ref="formRef" :inline="true">
     {{inputName}}
-    <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
-    <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
+    <el-form-input  :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
+    <el-form-mention :rules="rules" :ignoreRules="ignoreRules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
+    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input2221"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
     <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
     <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
     <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
@@ -147,18 +153,10 @@ export const Example2 = {
     <el-button @click="handleClick(formRef)" >Submit</el-button>
 
     <a @click="handleClick(formRef)" >Submit</a>
-    <a @click="handleClick(formRef)" >Submit2</a>
+    <el-button @click="handleIgnoreRules()" >Submit2</el-button>
+    {{ignoreRules}}
     </el-form>
 
-    <el-form :model="model" ref="formRef" >
-    {{inputName}}
-    <el-form-input :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
-    <el-form-mention :rules="rules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
-    <el-form-select :rules="rules" clearable  v-model="inputName"  label="input21"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />
-    <el-button @click="handleClick(formRef)" >Submit</el-button>
-
-    <a @click="handleClick(formRef)" >Submit</a>
-    <a @click="handleClick(formRef)" >Submit2</a>
     </el-form>
 
     </div>
