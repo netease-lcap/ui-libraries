@@ -293,7 +293,7 @@ export default defineConfig(({ command }) => {
             'vue-i18n': 'VueI18n',
             vuex: 'Vuex',
             pinia: 'Pinia',
-            '@lcap/ui-libraries-mcp': 'UiLibrariesMcp'
+            '@lcap/ui-libraries-mcp': 'UiLibrariesMcp',
           },
         },
       },

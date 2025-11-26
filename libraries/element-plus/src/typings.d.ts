@@ -29,3 +29,16 @@ declare namespace nasl.ui {
 
   export function IDEExtraInfo(options?: IDEExtraInfoOptions): (target: any) => void;
 }
+
+declare global {
+  interface Window {
+    UiLibrariesMcp?: {
+      subscribe: (component: string, refId: string, handler: (...args: any[]) => void) => void;
+      unsubscribe: (component: string, refId: string) => void;
+      registerTool: (tool: any) => void;
+      getComponentTools: () => any[];
+    };
+  }
+}
+
+export {};

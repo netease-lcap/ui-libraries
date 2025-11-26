@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import { MentionProps } from 'element-plus';
 
-import { subscribe, unsubscribe } from '@lcap/ui-libraries-mcp';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo, useEffect } from '@/plugins/hooks';
@@ -79,8 +78,14 @@ export default MentionBasicAccumulate.addAccumulate(IdePlugin)
       const refId = props.get('data-ref-id');
       const setValue = props.get('setValue');
       useEffect(() => {
-        _.attempt(subscribe, 'el_mention__change', refId, (value) => _.attempt(setValue, value));
-        return () => _.attempt(unsubscribe, 'el_mention__change', refId);
+        if (window?.UiLibrariesMcp?.subscribe) {
+          window.UiLibrariesMcp.subscribe('el_mention__change', refId, (value) => _.attempt(setValue, value));
+        }
+        return () => {
+          if (window?.UiLibrariesMcp?.unsubscribe) {
+            window.UiLibrariesMcp.unsubscribe('el_mention__change', refId);
+          }
+        };
       }, []);
       return {};
     },
