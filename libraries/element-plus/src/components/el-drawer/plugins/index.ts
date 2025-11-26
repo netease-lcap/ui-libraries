@@ -5,6 +5,7 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 const DrawerBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElDrawerOptions, DrawerProps>();
 
+
 export default DrawerBasicAccumulate.addPlugin({
   name: 'handleDrawerRef',
   handle: (props) => {
