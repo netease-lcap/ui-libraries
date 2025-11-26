@@ -43,20 +43,17 @@ export const unsubscribe = (component: string, refId: string) => {
   eventBus.off(`${component}___${refId}`);
 };
 
-function init() {
-  let toolList: ComponentToolConfig[] = [];
-  return {
-    registerTool(tool: ComponentToolConfig) {
-      toolList = toolList.concat(tool);
-    },
-    getComponentTools() {
-      return toolList.map((tool) => ({
-        ...tool,
-        handler(refId: string, ...arg: []) {
-          eventBus.emit(`${tool.name}___${refId}`, ...arg);
-        },
-      }));
-    },
-  };
+let toolList: ComponentToolConfig[] = [];
+
+export function registerTool(tool: ComponentToolConfig) {
+  toolList = toolList.concat(tool);
 }
-export default init();
+
+export function getComponentTools() {
+  return toolList.map((tool) => ({
+    ...tool,
+    handler(refId: string, ...arg: []) {
+      eventBus.emit(`${tool.name}___${refId}`, ...arg);
+    },
+  }));
+}
