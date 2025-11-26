@@ -21,7 +21,7 @@ namespace nasl.ui {
         },
         {
           expression: "this.getElement(el => el.slotTarget === 'reference')",
-          cssSelector: '.van-popover__wrapper',
+          cssSelector: '.van-popover__reference',
         },
       ],
       forceUpdateWhenAttributeChange: true,

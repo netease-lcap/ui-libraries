@@ -113,7 +113,7 @@ export function handlewFieldState(props) {
 export function handleFieldRender(props) {
   const Component = props.get('render');
   const render = useCallback(
-    (props) => {
+    (props, { attrs }) => {
       const { setShow, show, value, setValue, fieldValue, clearable, mergeRef, ...componentProps } = props;
       const { outerProps, innerProps } = categoryProps(componentProps);
       const rightIcon = clearable ? 'clear' : '';
@@ -129,6 +129,7 @@ export function handleFieldRender(props) {
             e.stopPropagation();
             setValue([]);
           }}
+          {..._.pick(attrs, ['class'])}
         />,
         <Popup
           show={show}

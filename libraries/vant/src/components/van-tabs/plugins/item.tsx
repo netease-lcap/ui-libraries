@@ -13,3 +13,12 @@ export default function handleDestination(props: any) {
     to: toSelf,
   };
 }
+
+export function handleTitleClass(props: any) {
+  const tabClass = props.get('class');
+  const tabClassList = tabClass?.split(' ') || [];
+  const tabCssRuleClass = tabClassList.find((item: string) => item?.startsWith('cw-css-rule'));
+  return {
+    titleClass: tabCssRuleClass,
+  };
+}

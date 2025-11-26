@@ -133,7 +133,7 @@ export function handlewFieldState(props) {
 export function handleFieldRender(props) {
   const Component = props.get('render');
   const render = useCallback(
-    (props, { slots }) => {
+    (props, { attrs, slots }) => {
       const {
         setShow,
         show,
@@ -163,6 +163,7 @@ export function handleFieldRender(props) {
             e.stopPropagation();
             setValue([]);
           }}
+          {..._.pick(attrs, ['class'])}
         />,
         <Popup
           show={show}
