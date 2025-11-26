@@ -172,7 +172,7 @@ namespace nasl.ui {
       title: '图标内容',
       description: '图标内容',
     })
-    slotIcon: (isActive: nasl.core.Boolean) => Array<ViewComponent>;
+    slotIcon: (current: nasl.core.Boolean) => Array<ViewComponent>;
 
     @Slot({
       title: '折叠面板项内容',
