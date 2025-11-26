@@ -285,7 +285,7 @@ export default defineConfig(({ command }) => {
         cssFileName: 'index',
       },
       rollupOptions: {
-        external: ['vue', 'vue-i18n', 'vuex', 'pinia', 'vue-router'],
+        external: ['vue', 'vue-i18n', 'vuex', 'pinia', 'vue-router', '@lcap/ui-libraries-mcp'],
         output: {
           globals: {
             vue: 'Vue',
@@ -293,6 +293,7 @@ export default defineConfig(({ command }) => {
             'vue-i18n': 'VueI18n',
             vuex: 'Vuex',
             pinia: 'Pinia',
+            '@lcap/ui-libraries-mcp': 'UiLibrariesMcp'
           },
         },
       },
