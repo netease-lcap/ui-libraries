@@ -18,27 +18,14 @@ declare namespace nasl.ui {
     disableOverLoad?: boolean;
     show?: boolean;
     ignore?: boolean;
-    extends?: Array<string | { name: string, excludes?: string[] }>;
+    extends?: Array<string | { name: string; excludes?: string[] }>;
     order?: number;
     ideusage?: {
-      order?: number; /* 组件排序，默认 6 */
+      order?: number /* 组件排序，默认 6 */;
       idetype?: 'element' | 'modal' | 'popover' | 'container' | string;
       [key: string]: any;
-    }
+    };
   }
 
   export function IDEExtraInfo(options?: IDEExtraInfoOptions): (target: any) => void;
 }
-
-declare global {
-  interface Window {
-    UiLibrariesMcp?: {
-      subscribe: (component: string, refId: string, handler: (...args: any[]) => void) => void;
-      unsubscribe: (component: string, refId: string) => void;
-      registerTool: (tool: any) => void;
-      getComponentTools: () => any[];
-    };
-  }
-}
-
-export {};
