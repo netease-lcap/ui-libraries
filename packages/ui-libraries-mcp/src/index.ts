@@ -1,4 +1,5 @@
 import mitt from 'mitt';
+import { libraryName } from './const';
 
 // 定义工具参数类型
 interface InputArgs {
@@ -57,3 +58,16 @@ export function getComponentTools() {
     },
   }));
 }
+
+declare global {
+  interface Window {
+    [key: string]: any;
+  }
+}
+
+window[libraryName] = {
+  subscribe,
+  unsubscribe,
+  registerTool,
+  getComponentTools,
+};
