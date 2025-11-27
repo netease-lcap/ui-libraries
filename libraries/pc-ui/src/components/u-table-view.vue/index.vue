@@ -1429,13 +1429,13 @@ export default {
                 // console.timeEnd('生成文件');
             } catch (err) {
                 console.error(err);
+            } finally {
+                await new Promise((res) => {
+                    setTimeout(res);
+                });
+                document.removeEventListener('click', fn, true);
+                document.removeEventListener('keydown', fn, true);
             }
-
-            await new Promise((res) => {
-                setTimeout(res);
-            });
-            document.removeEventListener('click', fn, true);
-            document.removeEventListener('keydown', fn, true);
         },
         async getRenderResult(arr = [], excludeColumns = [], hasHeader = true, includeStyles = false) {
             let mergesMap = [];
