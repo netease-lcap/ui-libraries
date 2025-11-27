@@ -51,7 +51,7 @@ export function registerTool(tool: ComponentToolConfig) {
 
 export function getComponentTools() {
   return toolList.map((tool) => ({
-    ...tool,
+    config: tool,
     handler(refId: string, ...arg: []) {
       eventBus.emit(`${tool.name}___${refId}`, ...arg);
     },
