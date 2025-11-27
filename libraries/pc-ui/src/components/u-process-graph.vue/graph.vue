@@ -52,7 +52,7 @@ const adapter = {
                 return;
             }
             let { offsetX, offsetY, deltaX, deltaY } = event
-            if(event.ctrlKey) { 
+            if(event.ctrlKey) {
                 deltaY = -deltaY;
                 jflow.zoomHandler(offsetX, offsetY, deltaX, deltaY, event);
             } else if(event.shiftKey) {
@@ -117,6 +117,7 @@ export default {
                 }
             },
             currentZoom: 1,
+            jflowRenderHandler: null, // 保存 jflow 事件监听器引用
         }
     },
     watch: {
@@ -132,14 +133,36 @@ export default {
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.debouncedResize);
+        // 清理 jflow 事件监听器
+        if (this.jflowRenderHandler && this.$refs.jflow) {
+            try {
+                const jflow = this.$refs.jflow.getInstance();
+                if (jflow && jflow.removeEventListener) {
+                    jflow.removeEventListener('afterJflowRender', this.jflowRenderHandler);
+                }
+            } catch (e) {
+                // 忽略错误，确保清理流程继续
+            }
+            this.jflowRenderHandler = null;
+        }
     },
     methods: {
         initiialize() {
             const jflow = this.$refs.jflow.getInstance();
-            jflow.addEventListener('afterJflowRender', (event) => {
+            // 如果已有监听器，先移除旧的
+            if (this.jflowRenderHandler) {
+                try {
+                    jflow.removeEventListener('afterJflowRender', this.jflowRenderHandler);
+                } catch (e) {
+                    // 忽略错误
+                }
+            }
+            // 创建新的监听器并保存引用
+            this.jflowRenderHandler = (event) => {
                 const ctx = event.detail.ctx;
                 renderLegend(jflow, ctx);
-            });
+            };
+            jflow.addEventListener('afterJflowRender', this.jflowRenderHandler);
             this.renderJFlow();
             this.syncZoom();
         },
@@ -242,7 +265,7 @@ export default {
                 detail: {
                     deltaX: 0, deltaY: 0
                 }
-           }));  
+           }));
         },
         syncZoom() {
             const jflowInstance = this.getJFlowInstance();

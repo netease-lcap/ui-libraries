@@ -296,7 +296,10 @@ export default {
     created() {
         this.renderSelectedVm();
     },
-
+    beforeDestroy() {
+        // 清理定时器
+        this.clearExpanderTimer();
+    },
     methods: {
         select() {
             if (this.currentDisabled || this.currentReadOnly)
@@ -645,22 +648,24 @@ export default {
                         this.expanderTimer = setInterval(() => {
                             this.currentExpanded = !this.currentExpanded;
                             if (!(Math.abs(this.startPosition.x - e.x) <= 5 && Math.abs(this.startPosition.y - e.y) <= 5)) {
-                                clearTimeout(this.expanderTimer);
+                                clearInterval(this.expanderTimer);
                                 this.expanderTimer = null;
                             }
                         }, 1500);
                     }
                     this.expanderDragover = true;
                 } else {
-                    clearTimeout(this.expanderTimer);
+                    clearInterval(this.expanderTimer);
                     this.expanderTimer = null;
                     this.expanderDragover = false;
                 }
             }
         },
         clearExpanderTimer() {
-            clearTimeout(this.expanderTimer);
-            this.expanderTimer = null;
+            if (this.expanderTimer) {
+                clearInterval(this.expanderTimer);
+                this.expanderTimer = null;
+            }
             this.expanderDragover = false;
         },
     },
