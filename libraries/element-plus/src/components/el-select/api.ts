@@ -296,12 +296,7 @@ namespace nasl.ui {
       description:
         '选中值变化时触发。`context.trigger` 表示触发变化的来源；`context.selectedOptions` 表示选中值的完整对象，数组长度一定和 `value` 相同；`context.option` 表示当前操作的选项，不一定存在。',
     })
-    onChange: (event: {
-      value: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
-      option: T;
-      selectedOptions: T[];
-      trigger: 'clear' | 'tag-remove' | 'backspace' | 'check' | 'uncheck' | 'default';
-    }) => any;
+    onChange: (event: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V) => any;
 
     @Event({
       title: '清空时',
