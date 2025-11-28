@@ -224,8 +224,8 @@ namespace nasl.ui {
     }) => any;
 
     @Event({
-      title: '取消时',
-      description: '取消时触发',
+      title: '确认时',
+      description: '确认时触发',
     })
     onConfirm: (event: { selectedValues: nasl.collection.List<V> }) => any;
 
