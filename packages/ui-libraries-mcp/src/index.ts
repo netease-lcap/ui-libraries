@@ -15,12 +15,12 @@ interface OutputArgs {
   [key: string]: any;
 }
 
-interface ToolAnnotations {
-  audience?: string[];
-  destructive?: boolean;
-  idempotent?: boolean;
-  [key: string]: any;
-}
+// interface ToolAnnotations {
+//   audience?: string;
+//   destructive?: boolean;
+//   idempotent?: boolean;
+//   [key: string]: any;
+// }
 
 // 定义组件工具配置类型
 interface ComponentToolConfig {
@@ -29,7 +29,7 @@ interface ComponentToolConfig {
   description?: string;
   inputSchema?: InputArgs;
   outputSchema?: OutputArgs;
-  annotations?: ToolAnnotations;
+  annotations?: any;
   _meta?: Record<string, unknown>;
   handler?(refId: string, ...arg: any[]): void;
 }
