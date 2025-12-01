@@ -518,6 +518,7 @@ export default {
             getTableContentElem: this.getTableContentElem,
             filterMultiple: this.filterMultiple,
             filterMax: this.filterMax,
+            setTableWidth: this.setTableWidth,
         };
     },
     computed: {
@@ -3059,8 +3060,17 @@ export default {
             }
         },
         onResizerDragEnd($event) {
-            this.reHandleResize();
+            this.setTableWidth();
             this.$emit('resize', $event);
+        },
+        setTableWidth() {
+            let tableWidth = this.visibleColumnVMs.reduce((prev, columnVM) => {
+                return prev + parseFloat(columnVM.computedWidth);
+            }, 0);
+            this.tableWidth = tableWidth;
+            this.$nextTick(() => {
+                this.$refs.tableRender && this.$refs.tableRender.getRefs().scrollView && this.$refs.tableRender.getRefs().scrollView.handleResize();
+            });
         },
         // for 外部调用
         resetEdit(item) {

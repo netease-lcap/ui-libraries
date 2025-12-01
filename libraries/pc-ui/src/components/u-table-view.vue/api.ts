@@ -665,7 +665,7 @@ namespace nasl.ui {
       })
       resizable: nasl.core.Boolean = false;
 
-      @Prop({
+      @Prop<UTableViewOptions<T, V, P, M>, 'resizeRemaining'>({
           group: '交互属性',
           title: '调整列宽效果',
           description: '设置调整列宽时如何处理剩余大小',
@@ -674,8 +674,20 @@ namespace nasl.ui {
               concept: 'EnumSelectSetter',
               options: [{ title: '保持总宽不变，优先后一列弥补宽度' }, { title: '保持总宽不变，后面所有列平均弥补宽度' }, { title: '不做任何处理，表格宽度变化' }],
           },
+          if: _ => _.resizable === true,
       })
       resizeRemaining: 'sequence' | 'average' | 'none' = 'average';
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'minColumnWidth'>({
+          group: '交互属性',
+          title: '调整列宽列最小宽度',
+          description: '调整列宽时，列的最小宽度。达到该宽度时不会再继续变小',
+          setter: {
+              concept: 'NumberInputSetter',
+          },
+         if: _ => _.resizable === true,
+      })
+      minColumnWidth: nasl.core.Decimal | nasl.core.Integer = 44;
 
       @Prop({
           group: '交互属性',

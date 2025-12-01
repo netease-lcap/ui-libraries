@@ -321,6 +321,7 @@ export default {
         'isDragging',
         'getItemRowSpan',
         'getItemColSpan',
+        'setTableWidth',
     ],
     provide() {
         return {
@@ -628,6 +629,9 @@ export default {
                 columnVM.currentWidth = columnVM.computedWidth -= remainingWidth;
             }
             $event.transferEl.style.left = '';
+            if (this.resizeRemaining === 'none') {
+                this.setTableWidth();
+            }
         },
         onResizerDragEnd($event, columnVM, index) {
             this.$emit('resize', {
