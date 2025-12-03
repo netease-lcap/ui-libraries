@@ -397,8 +397,8 @@ content: "\e665";
 }
 
 .cell[disabled] {
-    color: var(--text-color-disabled);
-    background-color: var(--table-view-expander-background-disabled);
+    color: var(--table-view-td-color-disabled);
+    background-color: var(--table-view-td-background-color-disabled) !important;
 }
 .dragHandler {
     cursor: var(--table-view-drag-cursor);

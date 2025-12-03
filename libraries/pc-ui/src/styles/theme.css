@@ -885,6 +885,8 @@
     --table-view-column-sticky-zindex: 99; /* @desc 表格固定列zIndex,如 1 */ /* @excludeElTags td,th */
     --table-view-footer-calc-background: #f7f8fa; /* @type color */ /* @group 内容区 */ /* @prefix table-view */ /* @desc 表格合计行背景色,如 #22325 */ /* @excludeElTags th */
     --table-view-resizer-border-color: var(--table-view-border-color); /* @type color */ /* @group 表头 */ /* @prefix table-view */ /* @desc 表格内容区边框颜色,如 #223325 */ /* @excludeElTags td */
+    --table-view-td-color-disabled: var(--text-color-disabled); /* @type color */ /* @group 内容区 */ /* @prefix table-view */ /* @desc 表格列内容区字体颜色（禁用状态）,如 #223325 */ /* @excludeElTags th */
+    --table-view-td-background-color-disabled: #f5f5f5; /* @type color */ /* @group 内容区 */ /* @prefix table-view */ /* @desc 表格列内容区背景色（禁用状态）,如 #223325 */ /* @excludeElTags th */
 
     --table-view-head-background: #f7f8fa; /* @hidden */
     --table-view-head-title-sortable-hover: #eef2f8; /* @hidden */
