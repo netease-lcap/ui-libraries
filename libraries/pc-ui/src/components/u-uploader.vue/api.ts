@@ -422,7 +422,7 @@ namespace nasl.ui {
             },
             bindOpen: true,
         })
-        checkFile: (file: nasl.io.File) => nasl.core.String;
+        checkFile: (fileInfo: nasl.io.FileInfo) => nasl.core.String;
 
         @Prop({
             group: '主要属性',
