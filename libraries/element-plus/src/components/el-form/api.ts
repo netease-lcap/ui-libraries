@@ -5,6 +5,9 @@ namespace nasl.ui {
     order: 1,
     ideusage: {
       idetype: 'container',
+      baseInfo: {
+        title: "(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix')) ? '流程表单' : '表单' ",
+      },
       // structured: true,
     },
   })
