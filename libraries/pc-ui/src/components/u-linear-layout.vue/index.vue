@@ -1,7 +1,7 @@
 <script>
 import SEmpty from '../s-empty.vue';
 import ULoading from '../u-loading.vue';
-import { throttle } from '../../utils/throttle';
+import throttle from 'lodash/throttle';
 import Gap from '../../mixins/gap';
 
 export default {
