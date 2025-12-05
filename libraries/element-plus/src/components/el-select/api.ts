@@ -143,6 +143,19 @@ namespace nasl.ui {
     })
     descriptionField: (item: T) => any = ((item: any) => item.description) as any;
 
+    @Prop<ElSelectOptions<T, V, P, M, C>, 'optionSlot'>({
+      group: '数据属性',
+      title: '选项插槽',
+      description: '自定义选项内容',
+      docDescription: '自定义选项内容',
+      bindHide: true,
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => !!_.dataSource,
+    })
+    optionSlot: nasl.core.Boolean = false;
+
     @Prop({
       group: '数据属性',
       sync: true,
@@ -293,8 +306,7 @@ namespace nasl.ui {
 
     @Event({
       title: '选中值变化时',
-      description:
-        '选中值变化时触发。',
+      description: '选中值变化时触发。',
     })
     onChange: (event: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V) => any;
 
@@ -339,6 +351,12 @@ namespace nasl.ui {
       description: '获得焦点时触发',
     })
     onFocus: (event: any) => any;
+
+    @Slot({
+      title: '单选项内容',
+      description: '单选项内容',
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
 
     @Slot({
       title: 'Default',

@@ -141,7 +141,11 @@ export const Default = {
         :dataSource="columns"
         @change="handleChange"
         @clear="handleClear"
-      />
+      >
+      <template #item="{ item, index }">
+        <div>{{ item.text }}1234</div>
+      </template>
+      </van-picker>
     `,
   }),
   args: {

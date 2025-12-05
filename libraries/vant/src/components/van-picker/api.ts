@@ -103,6 +103,18 @@ namespace nasl.ui {
     })
     parentField: (item: T) => V = ((item: any) => item.parent) as any;
 
+
+    @Prop<VanPickerOptions<T, V, P, M, C>, 'optionSlot'>({
+      group: '数据属性',
+      title: '动态选项插槽',
+      description: '自定义选项内容',
+      docDescription: '自定义选项内容',
+      setter: { concept: 'SwitchSetter' },
+      bindHide: true,
+      if: (_) => !!_.dataSource,
+    })
+    optionSlot: nasl.core.Boolean = false;
+
     @Prop({
       group: '数据属性',
       sync: true,
@@ -234,6 +246,12 @@ namespace nasl.ui {
       description: '自定义标题内容',
     })
     slotTitle: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '选项',
+      description: '自定义选项内容',
+    })
+    slotItem: (current: Current<T>) => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({

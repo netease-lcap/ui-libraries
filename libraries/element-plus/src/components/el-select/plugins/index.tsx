@@ -99,12 +99,13 @@ export default SelectBasicAccumulate.addPlugin({
       const dataConfig = props.get('dataSource');
       const slots = props.get('slots');
       const data = props.get('data');
+      const optionSlot = props.get('optionSlot');
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-            default: () => _.map(data, (item) => (
+            default: () => _.map(data, (item, index) => (
               <ElOption {...item}>
-                {item.label}
+                {optionSlot ? slots.item({ index, item: item?.itemSource ?? item } as any) : item.label}
                 {item.description && (
                 <el-text
                   style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}

@@ -145,10 +145,12 @@ export function handleFieldRender(props) {
         searchValue,
         setSearchValue,
         filterable,
+        optionSlot,
         ...componentProps
       } = props;
       const rightIcon = clearable ? 'clear' : '';
       const { outerProps, innerProps } = categoryProps(componentProps);
+      console.log(slots,'==slots');
 
       return [
         <Field
@@ -190,6 +192,11 @@ export function handleFieldRender(props) {
             ])}
             v-slots={{
               ...slots,
+              ...(optionSlot
+                ? {
+                    option: (item, index) => slots.item?.({ item, index }),
+                  }
+                : {}),
               'columns-top': filterable ? (
                 <Search modelValue={searchValue} onUpdate:modelValue={setSearchValue} />
               ) : null,
