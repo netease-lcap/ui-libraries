@@ -105,7 +105,7 @@ export default SelectBasicAccumulate.addPlugin({
         : {
             default: () => _.map(data, (item, index) => (
               <ElOption {...item}>
-                {optionSlot ? slots.item({ index, item: item?.itemSource ?? item } as any) : item.label}
+                {optionSlot ? slots?.item?.({ index, item: item?.itemSource ?? item } as any) : item.label}
                 {item.description && (
                 <el-text
                   style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
