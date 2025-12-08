@@ -110,8 +110,8 @@ export function handlewFieldState(props) {
   );
   const onConfirm = useCallback(
     _.wrap(onConfirmProps, (fn, { selectedValues, selectedOptions, ...args }: { [x: string]: any }) => {
-      _.attempt(fn, { selectedValues, selectedOptions, ...args });
       setValue(selectedValues);
+      _.attempt(fn, { selectedValues, selectedOptions, ...args });
       setShow(false);
     }),
     [onConfirmProps],
@@ -150,7 +150,6 @@ export function handleFieldRender(props) {
       } = props;
       const rightIcon = clearable ? 'clear' : '';
       const { outerProps, innerProps } = categoryProps(componentProps);
-      console.log(slots,'==slots');
 
       return [
         <Field
