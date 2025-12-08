@@ -117,7 +117,7 @@ export default SelectBasicAccumulate.addPlugin({
               )),
           };
       return {
-        slots: _.assign(slots, dataSourceSlots),
+        slots: _.assign({}, slots, dataSourceSlots),
       };
     },
   })
