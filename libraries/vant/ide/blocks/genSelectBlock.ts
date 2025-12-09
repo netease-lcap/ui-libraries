@@ -19,10 +19,7 @@ function genSelectTemplate(entity: naslTypes.Entity, nameGroup: NameGroup) {
       textField="${nameGroup.lowerEntity}.${property.name}"
       valueField="${nameGroup.lowerEntity}.${getEntityPromaryKeyProperty(entity)}"
       slotTitle={
-        <VanText text="${label}"></VanText>
-      }
-      slot-pannel-title={
-        <VanText text="请选择"></VanText>
+        <VanText text="请选择${label}"></VanText>
       }>
     </VanPicker>`;
 }

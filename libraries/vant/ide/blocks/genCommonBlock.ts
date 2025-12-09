@@ -208,22 +208,31 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
     return `<VanFormSwitch modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}></VanFormSwitch>`;
   } if (propertyTypeName === 'Integer' || propertyTypeName === 'Long') {
     return `<VanFormStepperNumber modelValue={$sync(${vModel})} placeholder="请输入${property.label || property.name
-    }" showPlus={false} showMinus={false} ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
+    }" ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
   } if (propertyTypeName === 'Double') {
     return `<VanFormStepperNumber modelValue={$sync(${vModel})} placeholder="请输入${property.label || property.name
-    }" showPlus={false} showMinus={false} ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
+    }" ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
   } if (propertyTypeName === 'Decimal') {
     return `<VanFormStepperNumber modelValue={$sync(${vModel})} placeholder="请输入${property.label || property.name
-    }" showPlus={false} showMinus={false} ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
+    }" ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
   } if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
     return `<VanFormField type="textarea" modelValue={$sync(${vModel})} placeholder="请输入${property.label || property.name
     }" ${formItemAttrs.join(' ')}></VanFormField>`;
   } if (propertyTypeName === 'Date') {
-    return `<VanFormCalendar modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}></VanFormCalendar>`;
+    return `<VanFormCalendar modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}
+      slot-title={
+        <VanText text="请选择${property.label || property.name}"></VanText>
+      }></VanFormCalendar>`;
   } if (propertyTypeName === 'Time') {
-    return `<VanFormTimePicker type="time" modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}></VanFormTimePicker>`;
+    return `<VanFormTimePicker type="time" modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}
+      slot-title={
+        <VanText text="请选择${property.label || property.name}"></VanText>
+      }></VanFormTimePicker>`;
   } if (propertyTypeName === 'DateTime') {
-    return `<VanFormDatePicker type="datetime" modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}></VanFormDatePicker>`;
+    return `<VanFormDatePicker type="datetime" modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}
+      slot-title={
+        <VanText text="请选择${property.label || property.name}"></VanText>
+      }></VanFormDatePicker>`;
   }
   const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
   const type = namespaceArr.pop();
@@ -233,6 +242,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
             placeholder="请选择${label}"
             modelValue={$sync(${vModel})}
             dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}
+            valueField="item"
             slot-title={
               <VanText text="请选择${label}"></VanText>
             }>
