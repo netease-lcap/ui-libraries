@@ -157,7 +157,7 @@ export default ColumnPluginAccumulate.addPlugin({
     name: 'handleNodePath',
     type: 'ide',
     handle(props) {
-      const className = _.uniqueId('el-table-column');
+      const className = useMemo(() => _.uniqueId('el-table-column'), []);
       const nodePath = props.get('data-nodepath');
       const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
       useEffect(() => {
