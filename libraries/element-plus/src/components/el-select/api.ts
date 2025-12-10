@@ -186,14 +186,14 @@ namespace nasl.ui {
     })
     multiple: M = false as any;
 
-    @Prop({
-      group: '主要属性',
-      title: '最大选中数',
-      description: '最大选中数',
-      setter: { concept: 'NumberInputSetter' },
-      if: (_) => !!_.multiple,
-    })
-    maxCount: nasl.core.Integer = 0;
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '最大选中数',
+    //   description: '最大选中数',
+    //   setter: { concept: 'NumberInputSetter' },
+    //   if: (_) => !!_.multiple,
+    // })
+    // maxCount: nasl.core.Integer = 0;
 
     @Prop<ElSelectOptions<T, V, P, M, C>, 'collapseTags'>({
       group: '主要属性',

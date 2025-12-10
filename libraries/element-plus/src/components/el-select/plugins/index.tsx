@@ -70,29 +70,29 @@ export default SelectBasicAccumulate.addPlugin({
       };
     },
   })
-  .addPlugin({
-    name: 'handleMaxCount',
-    handle(props) {
-      const maxCount = props.get('maxCount');
-      const multiple = props.get('multiple');
-      const modelValue = props.get('modelValue');
-      const dataProps = props.get('data');
-      const isDataProps = multiple && maxCount > 0 && !_.isEmpty(dataProps) && _.isArray(modelValue) && modelValue.length > maxCount;
-      const data = useMemo(
-        () => (isDataProps
-            ? _.map(dataProps, (item) => ({
-                ...item,
-                disabled: !_.includes(modelValue, item.value),
-              }))
-            : _.map(dataProps, (item) => _.assign(item, { disabled: false }))),
-        [isDataProps, dataProps],
-      );
-      return {
-        maxCount,
-        data,
-      };
-    },
-  })
+  // .addPlugin({
+  //   name: 'handleMaxCount',
+  //   handle(props) {
+  //     const maxCount = props.get('maxCount');
+  //     const multiple = props.get('multiple');
+  //     const modelValue = props.get('modelValue');
+  //     const dataProps = props.get('data');
+  //     const isDataProps = multiple && maxCount > 0 && !_.isEmpty(dataProps) && _.isArray(modelValue) && modelValue.length > maxCount;
+  //     const data = useMemo(
+  //       () => (isDataProps
+  //           ? _.map(dataProps, (item) => ({
+  //               ...item,
+  //               disabled: !_.includes(modelValue, item.value),
+  //             }))
+  //           : _.map(dataProps, (item) => _.assign(item, { disabled: false }))),
+  //       [isDataProps, dataProps],
+  //     );
+  //     return {
+  //       maxCount,
+  //       data,
+  //     };
+  //   },
+  // })
   .addPlugin({
     name: 'handleSlotRender',
     handle(props) {
