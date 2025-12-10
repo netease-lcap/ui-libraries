@@ -80,6 +80,9 @@ namespace nasl.ui {
       description: '菜单的数据来源',
       docDescription: '设置菜单的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       designerValue: [{}, {}, {}],
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 

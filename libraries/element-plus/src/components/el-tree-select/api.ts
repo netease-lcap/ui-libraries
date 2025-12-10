@@ -124,7 +124,9 @@ namespace nasl.ui {
       title: '数据源',
       description: '树数据',
       designerValue: [{}, {}, {}],
-      bindOpen: true,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 

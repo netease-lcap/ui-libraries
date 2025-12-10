@@ -80,7 +80,9 @@ namespace nasl.ui {
             description: '支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑。',
             docDescription: '- 支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑。',
             isDataSource: true,
-            bindOpen: true,
+            setter: {
+                concept: 'DataSourceSetter',
+            },
         })
         data: nasl.collection.List<T>;
 

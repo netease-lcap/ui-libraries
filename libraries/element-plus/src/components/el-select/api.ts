@@ -96,6 +96,9 @@ namespace nasl.ui {
       description: '设置选择器的数据来源，支持绑定集合类型变量或返回集合的逻辑',
       docDescription:
         '可以绑定 List<T> 类型的变量，或者绑定返回 List<T> 类型的逻辑。当使用数据源时，选择器会根据数据动态生成选项，每个数据项对应一个选项。',
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
