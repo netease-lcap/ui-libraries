@@ -15,19 +15,23 @@ function genCreateFormTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, s
 
   return `<VanForm ref="${nameGroup.viewElementMainView}">
     ${genFormItemsTemplate(entity, properties, nameGroup, selectNameGroupMap)}
-    <VanButton
-      round={true}
-      block={true}
-      type="primary"
-      text="立即创建"
-      onClick={
-          function ${nameGroup.viewLogicSubmit}(event) {
-              if ($refs.${nameGroup.viewElementMainView}.validated().valid) {
-                  ${namespace}.${entity.name}Entity.create(${nameGroup.viewVariableEntity})
-                  nasl.ui.showMessage('创建成功！')
+    <VanFlex style="padding: 10px 16px 0 16px;"
+      slotDefault={
+        <VanButton
+          block={true}
+          type="primary"
+          text="立即创建"
+          onClick={
+              function ${nameGroup.viewLogicSubmit}(event) {
+                  if ($refs.${nameGroup.viewElementMainView}.validated().valid) {
+                      ${namespace}.${entity.name}Entity.create(${nameGroup.viewVariableEntity})
+                      nasl.ui.showMessage('创建成功！')
+                  }
               }
-          }
-      }></VanButton>
+          }></VanButton>
+      }>
+    </VanFlex>
+    
   </VanForm>`;
 }
 

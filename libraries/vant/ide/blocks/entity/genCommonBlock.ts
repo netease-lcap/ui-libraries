@@ -191,16 +191,17 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         const key = [property.name, relationEntity.name].join('-');
         const selectNameGroup = selectNameGroupMap.get(key);
         const dataSourceValue = `app.logics.${selectNameGroup.logic}()`;
-        return `<VanPicker
+        return `<VanFormPicker
+            ${formItemAttrs.join(' ')}
             placeholder="请选择${label}"
             modelValue={$sync(${vModel})}
             dataSource={${dataSourceValue}}
             textField="${lowerEntityName}.${displayedProperty.name}"
             valueField="${lowerEntityName}.${relationProperty.name}"
-            slot-title={
+            slotTitle={
               <VanText text="请选择${label}"></VanText>
             }>
-          </VanPicker>`;
+          </VanFormPicker>`;
       } return '';
     } return '';
   }
@@ -211,26 +212,26 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
     }" ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
   } if (propertyTypeName === 'Double') {
     return `<VanFormStepperNumber modelValue={$sync(${vModel})} placeholder="请输入${property.label || property.name
-    }" ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
+    }" decimalLength={2} ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
   } if (propertyTypeName === 'Decimal') {
     return `<VanFormStepperNumber modelValue={$sync(${vModel})} placeholder="请输入${property.label || property.name
-    }" ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
+    }" decimalLength={2} ${formItemAttrs.join(' ')}></VanFormStepperNumber>`;
   } if (propertyTypeName === 'String' && propertyTypeMaxLength > 256) {
     return `<VanFormField type="textarea" modelValue={$sync(${vModel})} placeholder="请输入${property.label || property.name
     }" ${formItemAttrs.join(' ')}></VanFormField>`;
   } if (propertyTypeName === 'Date') {
-    return `<VanFormCalendar modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}
-      slot-title={
+    return `<VanFormDatePicker modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}
+      slotTitle={
         <VanText text="请选择${property.label || property.name}"></VanText>
-      }></VanFormCalendar>`;
+      }></VanFormDatePicker>`;
   } if (propertyTypeName === 'Time') {
     return `<VanFormTimePicker type="time" modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}
-      slot-title={
+      slotTitle={
         <VanText text="请选择${property.label || property.name}"></VanText>
       }></VanFormTimePicker>`;
   } if (propertyTypeName === 'DateTime') {
-    return `<VanFormDatePicker type="datetime" modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}
-      slot-title={
+    return `<VanFormDatePicker type="datetime" showFormatter="YYYY-MM-DD HH:mm:ss" converter="json" modelValue={$sync(${vModel})} ${formItemAttrs.join(' ')}
+      slotTitle={
         <VanText text="请选择${property.label || property.name}"></VanText>
       }></VanFormDatePicker>`;
   }
@@ -238,15 +239,16 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
-    return `<VanPicker
+    return `<VanFormPicker
+            ${formItemAttrs.join(' ')}
             placeholder="请选择${label}"
             modelValue={$sync(${vModel})}
             dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}
             valueField="item"
-            slot-title={
+            slotTitle={
               <VanText text="请选择${label}"></VanText>
             }>
-          </VanPicker>`;
+          </VanFormPicker>`;
   }
   return `<VanFormField modelValue={$sync(${vModel})} placeholder="请输入${property.label || property.name
   }" ${formItemAttrs.join(' ')}></VanFormField>`;
@@ -321,7 +323,6 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
     }
     if (required) rules.push('nasl.validation.required()');
     const formItemAttrs: string[] = [
-      'layout="center"',
       `slotLabel={<VanText text="${label}"></VanText>}`,
     ];
     if (required) {

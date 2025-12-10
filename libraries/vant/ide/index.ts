@@ -1,8 +1,9 @@
 import themeGlobal from '../src/theme/ide';
-import genBlocks from './blocks/index';
+import genEntityBlocks from './blocks/entity/index';
+import genEnumBlocks from './blocks/enum/index';
 
 export const theme = {
   global: themeGlobal,
 };
 
-export const blocks = genBlocks;
+export const blocks = [...genEntityBlocks, ...genEnumBlocks];
