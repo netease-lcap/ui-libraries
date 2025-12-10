@@ -16,7 +16,7 @@ export default LinkBasicAccumulate.addPlugin({
     const deletePropsList = props.get($deletePropsList).concat('text');
     const icon = props.get('icon');
     return {
-      slots: _.defaults(slots, {
+      slots: _.assign({}, slots, {
         default: () => text,
       }),
       [$deletePropsList]: deletePropsList,
