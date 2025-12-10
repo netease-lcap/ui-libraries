@@ -592,7 +592,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '必填标记',
-      description: '是否为必填项,并显示必填标记',
+      description: '是否为必填项，如不设置，则会根据校验规则确认',
       setter: { concept: 'SwitchSetter' },
     })
     isRequired: nasl.core.Boolean = false;
