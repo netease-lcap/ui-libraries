@@ -82,8 +82,10 @@ namespace nasl.ui {
       description: '设置组件列表的数据来源，支持绑定集合类型变量或返回集合的逻辑',
       docDescription:
         '可以绑定 List<T> 类型的变量，或者绑定返回 List<T> 类型的逻辑。当使用数据源时，组件列表会根据数据动态生成，每个数据项对应一个列表项。',
-      bindOpen: true,
       if: (_) => !_.formMode,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 

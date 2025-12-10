@@ -39,7 +39,9 @@ namespace nasl.ui {
     @Prop({
       title: '数据',
       description: '走马灯的数据',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     data: nasl.collection.List<T>;
 
@@ -86,6 +88,9 @@ namespace nasl.ui {
       description: '走马灯的数据来源',
       docDescription: '设置走马灯的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       designerValue: [{}],
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
