@@ -490,7 +490,7 @@ export default TableAccumulate.addPlugin({
         onHeaderDragend,
         onRowClick: useCallback(
           (row) => {
-            _.attempt(onRowClickProps, row);
+            _.attempt(onRowClickProps, { row });
           },
           [onRowClickProps],
         ),
