@@ -436,7 +436,7 @@ namespace nasl.ui {
       title: '行点击时触发',
       description: '行点击时触发',
     })
-    onRowClick: (event: { row: T; index: nasl.core.Integer }) => any;
+    onRowClick: (event: { row: T }) => any;
 
     @Event({
       title: '当前选中行变化时',

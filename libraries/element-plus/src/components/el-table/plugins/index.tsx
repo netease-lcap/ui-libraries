@@ -473,6 +473,7 @@ export default TableAccumulate.addPlugin({
       const refProps = props.get('ref');
       const slots = props.get('slots');
       const onHeaderDragenaProps = props.get('onHeaderDragend', () => {});
+      const onRowClickProps = props.get('onRowClick', () => {});
 
       const onHeaderDragend = useCallback(
         _.wrap(onHeaderDragenaProps, (fn, newWidth, oldWidth, TableColumnCtx) => {
@@ -487,9 +488,12 @@ export default TableAccumulate.addPlugin({
       return {
         getFields,
         onHeaderDragend,
-        // onExpandChange(...arg) {
-        //   console.log(arg, 'onExpandChange');
-        // },
+        onRowClick: useCallback(
+          (row) => {
+            _.attempt(onRowClickProps, row);
+          },
+          [onRowClickProps],
+        ),
         ref,
       };
     },
