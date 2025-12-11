@@ -167,6 +167,7 @@
             "description": "输入框组件的引用ID"
           },
           "value": {
+            "type": "string",
             "description": "变更后的输入框值"
           }
         },
@@ -201,6 +202,7 @@
             "description": "提及组件的引用ID"
           },
           "value": {
+            "type": "string",
             "description": "变更后的提及内容"
           }
         },
@@ -235,6 +237,7 @@
             "description": "选择器组件的引用ID"
           },
           "value": {
+            "type": "string",
             "description": "变更后的选中值，支持字符串或数组"
           }
         },

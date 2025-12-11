@@ -81,7 +81,7 @@ export function registerComponent<T>(Component: any, options: any): any {
           [$router]: router,
           [$route]: route,
           'data-ref-id': uniqueId,
-          'data-component-tag-name': options.name,
+          'data-component-name': options.name,
           [$mergeRef]: _.mergeRef(exposeRef.value),
           [$tagName]: options.name,
           [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList, $mergeRef, $tagName],
