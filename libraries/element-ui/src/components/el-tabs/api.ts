@@ -13,7 +13,7 @@ namespace nasl.ui {
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
         loopRule: 'nth-child(n+3)',
-        loopElem: ".el-tabs__nav > .el-tabs__item",
+        loopElem: "> .el-tabs__nav > .el-tabs__item",
         emptySlot: {
           display: 'large',
           condition: "!this.getAttribute('dataSource')",
