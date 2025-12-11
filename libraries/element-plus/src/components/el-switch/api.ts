@@ -191,11 +191,12 @@ namespace nasl.ui {
     },
     extends: [
       {
-        name: 'ElSwitch',
-      },
-      {
         name: 'ElFormItemPro',
       },
+      {
+        name: 'ElSwitch',
+      },
+  
     ],
   })
   @Component({

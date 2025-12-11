@@ -94,6 +94,17 @@ export default SelectBasicAccumulate.addPlugin({
   //   },
   // })
   .addPlugin({
+    name: 'handleValueNotInData',
+    handle(props) {
+      const selectedValuesData = props.get('selectedValuesData');
+      const data = props.get('data', []);
+      if (_.isEmpty(selectedValuesData) || _.isEmpty(data)) return {};
+      return {
+        data: _.unionBy(data, selectedValuesData, 'value'),
+      };
+    },
+  })
+  .addPlugin({
     name: 'handleSlotRender',
     handle(props) {
       const dataConfig = props.get('dataSource');
@@ -121,17 +132,7 @@ export default SelectBasicAccumulate.addPlugin({
       };
     },
   })
-  .addPlugin({
-    name: 'handleValueNotInData',
-    handle(props) {
-      const selectedValuesData = props.get('selectedValuesData');
-      const data = props.get('data', []);
-      if (_.isEmpty(selectedValuesData) || _.isEmpty(data)) return {};
-      return {
-        data: _.unionBy(data, selectedValuesData, 'value'),
-      };
-    },
-  })
+
   .addPlugin({
     name: 'handleVirtualize',
     handle(props) {
