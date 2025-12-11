@@ -31,7 +31,7 @@ const EditDefault = {
             }}
             size={18}
             name="Edit"
-            style={{ marginLeft: '10px' }}
+            style={{ marginLeft: '10px', marginBottom: '18px' }}
           />
         </div>
       ) : (
@@ -52,6 +52,8 @@ const EditDefault = {
               }))}
           <ElIcon
             onClick={() => {
+              console.log(formItemRef?.value, 'formItemRef');
+              debugger;
               formItemRef?.value?.validate?.()?.then(() => {
                 editable.value = false;
                 _.attempt(editChange, item);
@@ -59,7 +61,7 @@ const EditDefault = {
             }}
             size={18}
             name="DocumentAdd"
-            style={{ marginLeft: '10px' }}
+            style={{ marginLeft: '10px', marginBottom: '18px' }}
           />
         </div>
       );
