@@ -4,12 +4,14 @@ import { genGetBlock } from './genGetBlock';
 import { genCreateBlock } from './genCreateBlock';
 import { genUpdateBlock } from './genUpdateBlock';
 import { genSelectBlock } from './genSelectBlock';
+import { genTableEditBlock } from './genTableEditBlock';
 import curdsvg from './assets/curd.svg';
 import tablesvg from './assets/table.svg';
 import detailsvg from './assets/detail.svg';
 import createsvg from './assets/create.svg';
 import selectsvg from './assets/select.svg';
 import updatesvg from './assets/update.svg';
+import edittablesvg from './assets/editTable.svg';
 
 export default [
   {
@@ -41,5 +43,10 @@ export default [
     title: '选择器',
     image: selectsvg,
     genBlock: (naslNode, refElement) => genSelectBlock(naslNode, refElement),
+  },
+  {
+    title: '列表（编辑）',
+    image: edittablesvg,
+    genBlock: (naslNode, refElement) => genTableEditBlock(naslNode, refElement),
   },
 ];
