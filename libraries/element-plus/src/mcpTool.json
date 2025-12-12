@@ -30,8 +30,7 @@
         "additionalProperties": false,
         "$schema": "http://json-schema.org/draft-07/schema#"
       },
-      "annotations": null,
-      "_meta": null
+      "annotations": null
     },
     {
       "name": "el_form__validate",
@@ -82,8 +81,7 @@
         "additionalProperties": false,
         "$schema": "http://json-schema.org/draft-07/schema#"
       },
-      "annotations": null,
-      "_meta": null
+      "annotations": null
     },
     {
       "name": "el_form__clearValidate",
@@ -117,8 +115,7 @@
         "additionalProperties": false,
         "$schema": "http://json-schema.org/draft-07/schema#"
       },
-      "annotations": null,
-      "_meta": null
+      "annotations": null
     },
     {
       "name": "el_table__reload",
@@ -152,8 +149,7 @@
         "additionalProperties": false,
         "$schema": "http://json-schema.org/draft-07/schema#"
       },
-      "annotations": null,
-      "_meta": null
+      "annotations": null
     },
     {
       "name": "el_input__change",
@@ -187,8 +183,7 @@
         "additionalProperties": false,
         "$schema": "http://json-schema.org/draft-07/schema#"
       },
-      "annotations": null,
-      "_meta": null
+      "annotations": null
     },
     {
       "name": "el_mention__change",
@@ -222,8 +217,7 @@
         "additionalProperties": false,
         "$schema": "http://json-schema.org/draft-07/schema#"
       },
-      "annotations": null,
-      "_meta": null
+      "annotations": null
     },
     {
       "name": "el_select__change",
@@ -257,8 +251,7 @@
         "additionalProperties": false,
         "$schema": "http://json-schema.org/draft-07/schema#"
       },
-      "annotations": null,
-      "_meta": null
+      "annotations": null
     }
   ]
 }

@@ -20,6 +20,17 @@ export default {
     if (this.$vnode) {
       this.refName = this.$vnode && this.$vnode.data && this.$vnode.data.ref;
     }
+    const { hash } = location;
+    const id = this.label || this.refName;
+    console.log(id, hash,'nodehas');
+    if (hash && id && hash === `#${id}`) {
+      setTimeout(() => {
+        const node = document.querySelector(hash);
+        if (node) {
+          node.scrollIntoView();
+        }
+      }, 100);
+    }
   },
 };
 </script>
