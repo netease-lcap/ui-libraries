@@ -13,6 +13,7 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
 import { IIdePluginBase } from '@/types';
+import { addClass } from '@/utils';
 
 const SelectBasicAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElSelectOptions<any, any, any, any, any>,
@@ -155,31 +156,35 @@ export default SelectBasicAccumulate.addPlugin({
   .addPlugin({
     name: 'handlePreview',
     handle(props) {
-      const ref = props.get('ref');
-      const Component = props.get('render');
+      // const ref = props.get('ref');
+      // const Component = props.get('render');
       const isPreview = getIsPreview(props);
-      const data = props.get('data');
-      const modelValue = props.get('modelValue');
-      const valueList = _.isArray(modelValue) ? modelValue : [modelValue];
-      const previewText = _.join(
-        _.map(valueList, (item) => _.get(_.find(data, { value: item }), 'label', '')),
-        ',',
-      );
+      const className = props.get('class');
+      // const data = props.get('data');
+      // const modelValue = props.get('modelValue');
+      // const valueList = _.isArray(modelValue) ? modelValue : [modelValue];
+      // const previewText = _.join(
+      //   _.map(valueList, (item) => _.get(_.find(data, { value: item }), 'label', '')),
+      //   ',',
+      // );
 
-      const previewRender = (insProps) => {
-        const inIDE = !!props.get('data-nodepath');
-        const previewText = inIDE || _.isEmpty(insProps.previewText) ? '-' : insProps.previewText;
-        return <ElPreview text={previewText} />;
-      };
+      // const previewRender = (insProps) => {
+      //   const inIDE = !!props.get('data-nodepath');
+      //   const previewText = inIDE || _.isEmpty(insProps.previewText) ? '-' : insProps.previewText;
+      //   return <ElPreview text={previewText} />;
+      // };
 
-      const { render, insRef } = getRender(Component, previewRender, isPreview);
+      // const { render, insRef } = getRender(Component, previewRender, isPreview);
 
-      return {
-        ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
-        render,
-        preview: isPreview,
-        previewText,
-      };
+      return isPreview
+        ? {
+            class: addClass(className, {
+              'el-select-preview': !!isPreview,
+            }),
+            disabled: !!isPreview,
+            preview: !!isPreview,
+          }
+        : {};
     },
   })
   .addPlugin({
