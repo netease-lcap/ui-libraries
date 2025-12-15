@@ -304,6 +304,14 @@ namespace nasl.ui {
     })
     disabled: nasl.core.Boolean;
 
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
     @Event({
       title: '选中值变化时',
       description: '选中值变化时触发。',
