@@ -27,6 +27,10 @@ function genEditChangeFunction(property: naslTypes.EntityProperty, nameGroup: Na
   }`;
 }
 
+function genEditChangeFunctionRef(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
+  return `elements.${nameGroup.viewElementTableColumn}.bindEvents.edit-change.logics.${nameGroup.viewLogicEditChange}`;
+}
+
 function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>, formItemAttrs: Array<string> = []) {
   if (property.readonly) {
     return genTextTemplate(property, nameGroup);
@@ -37,8 +41,21 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
   return genPropertyEditableTemplate(entity, property, nameGroup, selectNameGroupMap, formItemAttrs, vModel);
 }
 
-function genTableEditColumnTemplate(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>) {
+function genTableEditColumnTemplate(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>, options: any = {
+  isBindEventLogicRef: false,
+}) {
   const canEditable = (property1) => !property1.readonly;
+  const isFirstCanEditable = (property1) => {
+    const properties = entity.properties.filter(filterProperty('inTable'));
+    for (let i = 0; i < properties.length; i += 1) {
+      const prop = properties[i];
+      if (canEditable(prop)) {
+        return prop.name === property1.name;
+      }
+    }
+    return false;
+  };
+  const isBindEventLogicRef = options.isBindEventLogicRef || !isFirstCanEditable(property);
   const { lowerEntityName, title } = genColumnMeta(property, nameGroup);
   const required = !!property.required;
   const rules: Array<string> = [];
@@ -70,14 +87,17 @@ function genTableEditColumnTemplate(entity: naslTypes.Entity, property: naslType
   return `<ElTableColumn
       prop="${lowerEntityName}.${property.name}"
       ${canEditable(property) ? 'type="editable" style="width: 300px"' : ''}
+      ${isFirstCanEditable(property) ? `ref="${nameGroup.viewElementTableColumn}"` : ''}
       slotHeader={
         <ElText text="${title}"></ElText>
       }
       slotDefault={
         (current) => <>${genEditComponent(entity, property, nameGroup, selectNameGroupMap, formItemAttrs)}</>
       }
-      onEditChange={
-        ${genEditChangeFunction(property, nameGroup)}
+      ${
+        canEditable(property) ? `onEditChange={
+          ${isBindEventLogicRef ? genEditChangeFunctionRef(property, nameGroup) : genEditChangeFunction(property, nameGroup)}
+        }` : ''
       }
     >
   </ElTableColumn>`;
@@ -183,6 +203,7 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
     nameGroup.viewLogicModalOpened = likeComponent.getLogicUniqueName('modalOpened');
     nameGroup.viewLogicModalClose = likeComponent.getLogicUniqueName('modalClose');
     nameGroup.viewLogicEditChange = likeComponent.getLogicUniqueName('editchange');
+    nameGroup.viewElementTableColumn = likeComponent.getViewElementUniqueName('el_table_column');
 
     // 当前节点的currentName
     nameGroup.currentName = getCurrentName(refElement);
