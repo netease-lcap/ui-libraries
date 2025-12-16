@@ -13,6 +13,17 @@ import selectsvg from './assets/select.svg';
 import updatesvg from './assets/update.svg';
 import edittablesvg from './assets/editTable.svg';
 
+import { genTableColumnEditBlock } from './genTableColumnEditBlock';
+
+const columnBlocks = [
+  {
+    concept: 'ViewElement',
+    tag: 'el-table-column',
+    type: 'editable',
+    genBlock: (naslNode, propertyNaslNode, refElement, options) => genTableColumnEditBlock(naslNode, propertyNaslNode, refElement, options),
+  },
+];
+
 export default [
   {
     title: '列表（全）',
@@ -49,4 +60,5 @@ export default [
     image: edittablesvg,
     genBlock: (naslNode, refElement) => genTableEditBlock(naslNode, refElement),
   },
+  ...columnBlocks,
 ];
