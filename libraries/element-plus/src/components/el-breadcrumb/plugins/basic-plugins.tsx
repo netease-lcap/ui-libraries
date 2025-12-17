@@ -76,8 +76,11 @@ export default BreadcrumbAccumulate.addAccumulate(lowCodePlugin)
     name: 'handleSeparatorIcon',
     handle: (props) => {
       const separatorIcon = props.get('separatorIcon');
-      return {
-        separatorIcon: getPropsIcon({ name: separatorIcon }),
-      };
+
+      return separatorIcon
+        ? {
+            separatorIcon: getPropsIcon({ name: separatorIcon }),
+          }
+        : {};
     },
   });

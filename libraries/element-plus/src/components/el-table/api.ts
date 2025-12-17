@@ -512,7 +512,7 @@ namespace nasl.ui {
       forceUpdateWhenAttributeChange: true,
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
-
+      childAccept:false,
       disableSlotAutoFill: [
         {
           slot: 'default',

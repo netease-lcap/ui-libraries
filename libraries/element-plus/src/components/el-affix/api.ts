@@ -8,7 +8,7 @@ namespace nasl.ui {
       style: [
         {
           selector: '.el-affix',
-          declaration: 'min-height: 32px !important; width: 100% !important;',
+          declaration: 'min-height: 32px; width: 100% ',
           append: true,
         },
       ],
