@@ -7,7 +7,7 @@ import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
 import { ElTableToolBar } from '@/components/el-table';
-import { ElForm } from '@/index';
+import { ElForm, ElLoading } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { IIdePluginBase } from '@/types/pluginBase';
 
@@ -261,6 +261,7 @@ export default TableAccumulate.addPlugin({
                 {..._.omit({ ...props, ...attrs }, ['style', 'data-nodepath'])}
                 style={attrs.tableStyle}
                 v-slots={slots}
+                v-loading={props.loading}
               />
               {props.pagination && (
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>

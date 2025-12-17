@@ -1,5 +1,5 @@
 import { type Plugin } from 'vue';
-import ElementPlus, { ElMessage } from 'element-plus';
+import ElementPlus, { ElMessage, vLoading } from 'element-plus';
 
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 import * as Components from './components';
@@ -15,6 +15,7 @@ export const setupAppConfiguration: Plugin = (app) => {
   app.use(ElementPlus, {
     locale: zhCn,
   });
+  app.directive('loading', vLoading);
 
   app.config.globalProperties.$message = ElMessage;
 };

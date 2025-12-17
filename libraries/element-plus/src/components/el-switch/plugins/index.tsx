@@ -40,9 +40,11 @@ export default SwitchAccumulate.addAccumulate(idePlugin)
 
       const previewRender = (insProps) => {
         const inIDE = !!props.get('data-nodepath');
+        const activeText = props.get('activeText') ?? '已开启';
+        const inactiveText = props.get('inactiveText') ?? '已关闭';
         let previewText = '-';
         if (!inIDE) {
-          previewText = insProps.modelValue ? '已开启' : '已关闭';
+          previewText = insProps.modelValue ? activeText : inactiveText;
         }
         return <ElText text={previewText} />;
       };

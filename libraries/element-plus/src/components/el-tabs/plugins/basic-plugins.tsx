@@ -65,10 +65,13 @@ export default TabsAccumulate.addPlugin({
   handle(props) {
     const addIcon = props.get('addIcon');
     const slots = props.get('slots');
-
+    const onEdit = props.get('onEdit', () => {});
     return {
       slots: _.assign(slots, {
         'add-icon': () => getPropsIcon({ name: addIcon }),
+      }),
+      onEdit: _.wrap(onEdit, (fn, paneName, action) => {
+        _.attempt(fn, { value: paneName, action });
       }),
     };
   },

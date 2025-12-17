@@ -106,7 +106,11 @@ export const Example1 = {
           },
         ];
         // return arr
-        return { list: arr, total: arr.length };
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve({ list: arr, total: arr.length });
+          }, 1000);
+        });
       };
       const tableData2 = ref([
         {
@@ -168,7 +172,7 @@ export const Example1 = {
 <el-table
 ref="mytable"
 row-key="date"
-:dataSource="tableData2"
+:dataSource="tableData"
 border
 style="height:500px"
 min-height="500px"

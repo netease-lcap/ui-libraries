@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 2,
     ideusage: {
       idetype: 'container',
+      structured: false,
       dataSource: {
         dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
         display: 3,
