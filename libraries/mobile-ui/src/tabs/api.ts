@@ -93,6 +93,15 @@ namespace nasl.ui {
       settable: true,
     })
     disabled: nasl.core.Boolean = false;
+    @Prop({
+      group: '主要属性',
+      title: '懒渲染',
+      description: '是否在切换标签时才渲染标签内容',
+      setter: {
+        concept: "SwitchSetter"
+      }
+    })
+    lazyRender: nasl.core.Boolean = true;
     @Event({
       title: '点击标签',
       description: '点击标签时触发'
