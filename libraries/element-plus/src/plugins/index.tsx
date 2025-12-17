@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, defineComponent, unref, getCurrentInstance } from 'vue';
+import { ref, Ref, watch, provide, inject, defineComponent, unref, getCurrentInstance, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 // import create from 'zustand-vue';
@@ -108,7 +108,9 @@ export function registerComponent<T>(Component: any, options: any): any {
         ['getState', getState],
       ]);
       const { setValue } = getState() as any;
-      subscribe((props: any) => {
+
+      // 保存取消订阅函数，用于组件卸载时清理
+      const unsubscribe = subscribe((props: any) => {
         const ImmutableState = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
         const ImmutableProps = fromJS({ ...props.props });
         const commitState = scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap);
@@ -146,6 +148,81 @@ export function registerComponent<T>(Component: any, options: any): any {
 
       watch(injectRef, (value) => _.defaults(provideRef.value, value), { immediate: true });
       expose(exposeRef.value);
+
+      // 组件卸载时清理资源，防止内存泄露
+      onBeforeUnmount(() => {
+        // 1. 取消 zustand store 订阅
+        unsubscribe?.();
+
+        // 2. 清理 fiberMap 中的 Fiber 对象和 Hook 链表
+        const updateQueen = fiberMap.get('updateQueen');
+        if (updateQueen instanceof Set) {
+          updateQueen.clear();
+        }
+
+        // 遍历 fiberMap，清理每个 fiber 中的 Hook 链表
+        fiberMap.forEach((value, key) => {
+          if (key !== 'updateQueen' && key !== 'getState' && typeof value === 'object') {
+            const fiber = value;
+
+            // 清理 workInProgressState Hook 链表
+            if (fiber.workInProgressState) {
+              let current = fiber.workInProgressState;
+              const visited = new Set();
+              // 断开循环链表
+              while (current && !visited.has(current)) {
+                visited.add(current);
+                const { next } = current;
+                current.next = null;
+                current.storeKey = null;
+                current.value = null;
+                current = next;
+              }
+              fiber.workInProgressState = null;
+            }
+
+            // 清理 workInProgressEffect Hook 链表
+            if (fiber.workInProgressEffect) {
+              let current = fiber.workInProgressEffect;
+              const visited = new Set();
+              // 断开循环链表
+              while (current && !visited.has(current)) {
+                visited.add(current);
+                const { next } = current;
+                current.next = null;
+                current.dep = null;
+                current.result = null;
+                current.callBack = null;
+                current = next;
+              }
+              fiber.workInProgressEffect = null;
+            }
+
+            // 清理 fiber 对象的其他引用
+            fiber.updateQueen = null;
+            fiber.getState = null;
+            fiber.setValue = null;
+            fiber.queen = null;
+          }
+        });
+
+        fiberMap.clear();
+
+        // 3. 清理 exposeRef 中的引用
+        if (exposeRef.value && typeof exposeRef.value === 'object') {
+          Object.keys(exposeRef.value).forEach((key) => {
+            delete exposeRef.value[key];
+          });
+        }
+
+        // 4. 清理 componentState
+        if (componentState.value?.state) {
+          componentState.value.state = {};
+        }
+
+        // 5. 清理 Render 引用
+        Render = null;
+      });
 
       provide($provide, provideRef);
       return () => {
