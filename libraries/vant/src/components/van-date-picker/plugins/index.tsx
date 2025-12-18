@@ -161,7 +161,12 @@ export function handleModelValue(props: any) {
   const advancedFormatEnable = props.get('advancedFormatEnable');
   const advancedFormatValue = props.get('advancedFormatValue');
   const formatValue = useMemo(() => {
-    return getFormatValue([[currentValue, currentTimeValue]], { unit, showFormatter, advancedFormatEnable, advancedFormatValue });
+    return getFormatValue([[currentValue, currentTimeValue]], {
+      unit,
+      showFormatter,
+      advancedFormatEnable,
+      advancedFormatValue,
+    });
   }, [currentValue, unit, showFormatter, advancedFormatEnable, advancedFormatValue]);
   const isRange = props.get('isRange');
   if (isRange) {
@@ -210,7 +215,7 @@ export function handleRangeModelValue(props: any) {
   if (!isRange) {
     return {};
   }
-  //TODO 开始值：用于改变时暂存数据
+  // TODO 开始值：用于改变时暂存数据
   const currentStartValueRef = ref(currentStartValue);
   const currentStartTimeValueRef = ref(currentStartTimeValue);
   // 结束值：用于改变时暂存数据
@@ -243,7 +248,16 @@ export function handleRangeModelValue(props: any) {
       ],
       { unit, showFormatter, advancedFormatEnable, advancedFormatValue },
     );
-  }, [currentStartValue, currentStartTimeValue, currentEndValue, currentEndTimeValue, unit, showFormatter, advancedFormatEnable, advancedFormatValue]);
+  }, [
+    currentStartValue,
+    currentStartTimeValue,
+    currentEndValue,
+    currentEndTimeValue,
+    unit,
+    showFormatter,
+    advancedFormatEnable,
+    advancedFormatValue,
+  ]);
   return {
     startValue: currentStartValue,
     setStartValue,
@@ -368,10 +382,14 @@ function renderRangeContent(options: any) {
     endDateTabTitle,
   } = props;
   const { minDate, maxDate, type, timeColumnsType } = props;
-  const startDateMaxDate = getMaxMinDates(getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate), minDate)
-    .maxDateValue;
-  const endDateMinDate = getMaxMinDates(maxDate, getRangeMinDate(currentStartValueRef, currentStartTimeValueRef, minDate))
-    .minDateValue;
+  const startDateMaxDate = getMaxMinDates(
+    getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate),
+    minDate,
+  ).maxDateValue;
+  const endDateMinDate = getMaxMinDates(
+    maxDate,
+    getRangeMinDate(currentStartValueRef, currentStartTimeValueRef, minDate),
+  ).minDateValue;
   const startTimeMaxTime = getTimeBoundary(
     currentStartValueRef,
     getRangeMaxDate(currentEndValueRef, currentEndTimeValueRef, maxDate),
@@ -384,12 +402,9 @@ function renderRangeContent(options: any) {
     maxDate,
     getRangeMinDate(currentStartValueRef, currentStartTimeValueRef, minDate),
   ).minTime;
-  const tabsData = useMemo(() => {
-    if (type === 'date') {
-      return [props.startDateTabTitle, props.endDateTabTitle];
-    }
-    return [props.startDateTabTitle, props.startTimeTabTitle, props.endDateTabTitle, props.endTimeTabTitle];
-  }, [type, startDateTabTitle, endDateTabTitle, startDateTabTitle, startTimeTabTitle, endDateTabTitle, endTimeTabTitle]);
+  const tabsData = type === 'date'
+      ? [props.startDateTabTitle, props.endDateTabTitle]
+      : [props.startDateTabTitle, props.startTimeTabTitle, props.endDateTabTitle, props.endTimeTabTitle];
   const startDateComponentRef = ref(null);
   const endDateComponentRef = ref(null);
   const startTimeComponentRef = ref(null);
@@ -400,7 +415,8 @@ function renderRangeContent(options: any) {
       v-slots={{ ...options.slots }}
       tabs={tabsData}
       onCancel={props.onCancel}
-      onConfirm={props.onConfirm}>
+      onConfirm={props.onConfirm}
+    >
       <DatePicker
         {..._.pick(props, Object.keys(datePickerProps))}
         ref={startDateComponentRef}
@@ -479,8 +495,7 @@ function renderRangeContent(options: any) {
  */
 function renderBasicContent(options: any) {
   const { props } = options;
-  const { modelValue, modelTimeValue, type, timeColumnsType, minDate, maxDate, onSetCurrentValue, currentValueRef } =
-    props;
+  const { modelValue, modelTimeValue, type, timeColumnsType, minDate, maxDate, onSetCurrentValue, currentValueRef } = props;
   const renderDatePicker = () => {
     return (
       <DatePicker
@@ -504,7 +519,8 @@ function renderBasicContent(options: any) {
         v-slots={{ ...options.slots }}
         tabs={[props.datetimeDateTabTitle, props.datetimeTimeTabTitle]}
         onCancel={props.onCancel}
-        onConfirm={props.onConfirm}>
+        onConfirm={props.onConfirm}
+      >
         <DatePicker
           key="basic"
           {..._.pick(props, Object.keys(datePickerProps))}
@@ -540,74 +556,82 @@ function renderBasicContent(options: any) {
  */
 export function handleBasicRender(props: any) {
   const setPopupShow = props.get('setPopupShow');
-  const render = useCallback(
-    (props, { attrs, slots }) => {
-      const { formatValue, isRange, placeholder, inputAlign, closeOnClickOverlay, inLink, readonly, disabled, popupShow } = props;
-      const { outerProps, innerProps } = categoryProps(props);
-      const onFieldClick = () => {
-        if (disabled || readonly) {
-          return;
+  const render = useCallback((props, { attrs, slots }) => {
+    const {
+      formatValue,
+      isRange,
+      placeholder,
+      inputAlign,
+      closeOnClickOverlay,
+      inLink,
+      readonly,
+      disabled,
+      popupShow,
+    } = props;
+    const { outerProps, innerProps } = categoryProps(props);
+    const onFieldClick = () => {
+      if (disabled || readonly) {
+        return;
+      }
+      setPopupShow(true);
+    };
+    const inputSlot = () => {
+      if (!formatValue) {
+        if (placeholder) {
+          return <div class={bem('placeholder')}>{placeholder}</div>;
         }
-        setPopupShow(true);
-      };
-      const inputSlot = () => {
-        if (!formatValue) {
-          if (placeholder) {
-            return <div class={bem('placeholder')}>{placeholder}</div>;
-          }
-          return null;
-        }
-        if (isRange) {
-          return (
-            <div class={bem('rangevalue')}>
-              <div class={bem('startvalue')}>{formatValue[0]}</div>
-              <div class={bem('separator')}>-</div>
-              <div class={bem('endvalue')}>{formatValue[1]}</div>
-            </div>
-          );
-        }
-        return <div class={bem('value')}>{formatValue[0]}</div>;
-      };
-      return (
-        <div {..._.pick(attrs, ['class', 'style'])} {...outerProps} class={bem('root')}>
-          <Field
-            readonly
-            disabled={disabled}
-            class={[bem('field'), readonly && bem('readonly')]}
-            v-slots={{ label: slots.label, input: inputSlot }}
-            onClick={onFieldClick}
-            modelValue={formatValue}
-            inputAlign={inputAlign}
-            isLink={inLink}
-          />
-          <Popup
-            show={popupShow}
-            onClose={() => setPopupShow(false)}
-            position="bottom"
-            round
-            lazy-render={false}
-            closeOnClickOverlay={closeOnClickOverlay}
-            {..._.pick(attrs, ['class', 'style'])}
-            {...innerProps}>
-            <div class={bem('content-wrapper')}>
-              {isRange === true
-                ? renderRangeContent({
-                    props,
-                    attrs,
-                    slots,
-                  })
-                : renderBasicContent({
-                    props,
-                    attrs,
-                    slots,
-                  })}
-            </div>
-          </Popup>
-        </div>
-      );
-    },
-    [],
-  );
+        return null;
+      }
+      if (isRange) {
+        return (
+          <div class={bem('rangevalue')}>
+            <div class={bem('startvalue')}>{formatValue[0]}</div>
+            <div class={bem('separator')}>-</div>
+            <div class={bem('endvalue')}>{formatValue[1]}</div>
+          </div>
+        );
+      }
+      return <div class={bem('value')}>{formatValue[0]}</div>;
+    };
+    return (
+      <div {..._.pick(attrs, ['class', 'style'])} {...outerProps} class={bem('root')}>
+        <Field
+          readonly
+          disabled={disabled}
+          class={[bem('field'), readonly && bem('readonly')]}
+          v-slots={{ label: slots.label, input: inputSlot }}
+          onClick={onFieldClick}
+          modelValue={formatValue}
+          inputAlign={inputAlign}
+          isLink={inLink}
+        />
+        <Popup
+          show={popupShow}
+          onClose={() => setPopupShow(false)}
+          position="bottom"
+          round
+          lazy-render={false}
+          closeOnClickOverlay={closeOnClickOverlay}
+          {..._.pick(attrs, ['class', 'style'])}
+          {...innerProps}
+        >
+          <div class={bem('content-wrapper')}>
+            {isRange === true
+              ? renderRangeContent({
+                  props,
+                  attrs,
+                  slots,
+                })
+              : renderBasicContent({
+                  props,
+                  attrs,
+                  slots,
+                })}
+          </div>
+        </Popup>
+      </div>
+    );
+  }, []);
 
   return { render };
 }
