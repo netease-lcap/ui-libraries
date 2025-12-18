@@ -326,7 +326,7 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
       `slotLabel={<VanText text="${label}"></VanText>}`,
     ];
     if (required) {
-      formItemAttrs.push('isRequired={true}');
+      formItemAttrs.push('required={true}');
     }
 
     if (rules.length > 0) {
