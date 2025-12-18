@@ -118,7 +118,7 @@ export function useState<T = any>(initialstate?: T): [T, (value: T | ((prevState
     const getValue = _.isFunction(value) ? value(getStateValue(state)) : value;
     currentFiber.updateQueen.add({ [hook.storeKey]: getValue });
     _.defer(() => {
-      if (currentFiber.updateQueen.size) {
+      if (currentFiber?.updateQueen?.size) {
         const deleteQueue = Array.from(currentFiber.updateQueen);
         const comit = Array.from(currentFiber.updateQueen).reduce((pre, cur) => ({ ...pre, ...cur }), {});
         currentFiber.setValue(comit);

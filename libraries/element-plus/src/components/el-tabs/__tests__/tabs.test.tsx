@@ -202,7 +202,13 @@ describe('Tabs.vue', () => {
       },
     ]);
     const tabIndex = ref(3);
-    const handleTabsEdit = (targetName: TabPaneName | undefined, action: 'remove' | 'add') => {
+    const handleTabsEdit = ({
+      value: targetName,
+      action,
+    }: {
+      value: TabPaneName | undefined;
+      action: 'remove' | 'add';
+    }) => {
       if (action === 'add') {
         const newTabName = `${++tabIndex.value}`;
         editableTabs.value.push({

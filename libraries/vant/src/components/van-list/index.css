@@ -1,3 +1,6 @@
 .van-list {
   overflow: auto;
+  color: var(--van-list-text-color,#333);
+  font-size: var(--van-list-text-font-size,14px);
+  line-height: var(--van-list-text-line-height);
 }

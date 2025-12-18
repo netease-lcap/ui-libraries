@@ -143,7 +143,7 @@ namespace nasl.ui {
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
     })
-    prefixIconName: nasl.core.String;
+    prefixIconName: nasl.core.String='Clock';
 
     // @Prop({
     //   title: '清除图标',

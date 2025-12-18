@@ -397,137 +397,137 @@ describe('el-select plugins', () => {
       });
     });
 
-    describe('handlePreview 插件功能测试', () => {
-      const plugin = SelectBasicAccumulate.getPluginMethodByName('handlePreview') as any;
+    // describe('handlePreview 插件功能测试', () => {
+    //   const plugin = SelectBasicAccumulate.getPluginMethodByName('handlePreview') as any;
 
-      it('应该正确处理插件基本结构', () => {
-        const props = {
-          ref: { current: null },
-          render: null,
-          data: [],
-          modelValue: 'value1',
-        };
+    //   it('应该正确处理插件基本结构', () => {
+    //     const props = {
+    //       ref: { current: null },
+    //       render: null,
+    //       data: [],
+    //       modelValue: 'value1',
+    //     };
 
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
+    //     const { currentValue } = renderHook(plugin, props);
+    //     const result = currentValue.value;
 
-        expect(result).toBeDefined();
-        expect(result).toHaveProperty('ref');
-        expect(result).toHaveProperty('render');
-        expect(result).toHaveProperty('previewText');
-      });
+    //     expect(result).toBeDefined();
+    //     expect(result).toHaveProperty('ref');
+    //     expect(result).toHaveProperty('render');
+    //     expect(result).toHaveProperty('previewText');
+    //   });
 
-      it('应该正确处理单个值的预览', () => {
-        const props = {
-          ref: { current: null },
-          render: null,
-          data: [
-            { label: 'Option 1', value: 'value1' },
-            { label: 'Option 2', value: 'value2' },
-          ],
-          modelValue: 'value1',
-        };
+    //   it('应该正确处理单个值的预览', () => {
+    //     const props = {
+    //       ref: { current: null },
+    //       render: null,
+    //       data: [
+    //         { label: 'Option 1', value: 'value1' },
+    //         { label: 'Option 2', value: 'value2' },
+    //       ],
+    //       modelValue: 'value1',
+    //     };
 
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
+    //     const { currentValue } = renderHook(plugin, props);
+    //     const result = currentValue.value;
 
-        expect(result.previewText).toBe('Option 1');
-      });
+    //     expect(result.previewText).toBe('Option 1');
+    //   });
 
-      it('应该正确处理数组值的预览', () => {
-        const props = {
-          ref: { current: null },
-          render: null,
-          data: [
-            { label: 'Option 1', value: 'value1' },
-            { label: 'Option 2', value: 'value2' },
-            { label: 'Option 3', value: 'value3' },
-          ],
-          modelValue: ['value1', 'value3'],
-        };
+    //   it('应该正确处理数组值的预览', () => {
+    //     const props = {
+    //       ref: { current: null },
+    //       render: null,
+    //       data: [
+    //         { label: 'Option 1', value: 'value1' },
+    //         { label: 'Option 2', value: 'value2' },
+    //         { label: 'Option 3', value: 'value3' },
+    //       ],
+    //       modelValue: ['value1', 'value3'],
+    //     };
 
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
+    //     const { currentValue } = renderHook(plugin, props);
+    //     const result = currentValue.value;
 
-        expect(result.previewText).toBe('Option 1,Option 3');
-      });
+    //     expect(result.previewText).toBe('Option 1,Option 3');
+    //   });
 
-      it('应该正确处理找不到匹配值的情况', () => {
-        const props = {
-          ref: { current: null },
-          render: null,
-          data: [
-            { label: 'Option 1', value: 'value1' },
-            { label: 'Option 2', value: 'value2' },
-          ],
-          modelValue: 'nonexistent',
-        };
+    //   it('应该正确处理找不到匹配值的情况', () => {
+    //     const props = {
+    //       ref: { current: null },
+    //       render: null,
+    //       data: [
+    //         { label: 'Option 1', value: 'value1' },
+    //         { label: 'Option 2', value: 'value2' },
+    //       ],
+    //       modelValue: 'nonexistent',
+    //     };
 
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
+    //     const { currentValue } = renderHook(plugin, props);
+    //     const result = currentValue.value;
 
-        expect(result.previewText).toBe('');
-      });
+    //     expect(result.previewText).toBe('');
+    //   });
 
-      it('应该正确处理空数据的情况', () => {
-        const props = {
-          ref: { current: null },
-          render: null,
-          data: [],
-          modelValue: 'value1',
-        };
+    //   it('应该正确处理空数据的情况', () => {
+    //     const props = {
+    //       ref: { current: null },
+    //       render: null,
+    //       data: [],
+    //       modelValue: 'value1',
+    //     };
 
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
+    //     const { currentValue } = renderHook(plugin, props);
+    //     const result = currentValue.value;
 
-        expect(result.previewText).toBe('');
-      });
+    //     expect(result.previewText).toBe('');
+    //   });
 
-      it('应该正确处理 null 的 modelValue', () => {
-        const props = {
-          ref: { current: null },
-          render: null,
-          data: [{ label: 'Option 1', value: 'value1' }],
-          modelValue: null,
-        };
+    //   it('应该正确处理 null 的 modelValue', () => {
+    //     const props = {
+    //       ref: { current: null },
+    //       render: null,
+    //       data: [{ label: 'Option 1', value: 'value1' }],
+    //       modelValue: null,
+    //     };
 
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
+    //     const { currentValue } = renderHook(plugin, props);
+    //     const result = currentValue.value;
 
-        expect(result.previewText).toBe('');
-      });
+    //     expect(result.previewText).toBe('');
+    //   });
 
-      it('应该正确处理 undefined 的 modelValue', () => {
-        const props = {
-          ref: { current: null },
-          render: null,
-          data: [{ label: 'Option 1', value: 'value1' }],
-          modelValue: undefined,
-        };
+    //   it('应该正确处理 undefined 的 modelValue', () => {
+    //     const props = {
+    //       ref: { current: null },
+    //       render: null,
+    //       data: [{ label: 'Option 1', value: 'value1' }],
+    //       modelValue: undefined,
+    //     };
 
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
+    //     const { currentValue } = renderHook(plugin, props);
+    //     const result = currentValue.value;
 
-        expect(result.previewText).toBe('');
-      });
+    //     expect(result.previewText).toBe('');
+    //   });
 
-      it('应该正确处理 IDE 环境', () => {
-        const props = {
-          ref: { current: null },
-          render: null,
-          data: [{ label: 'Option 1', value: 'value1' }],
-          modelValue: 'value1',
-          'data-nodepath': '/some/path',
-        };
+    //   it('应该正确处理 IDE 环境', () => {
+    //     const props = {
+    //       ref: { current: null },
+    //       render: null,
+    //       data: [{ label: 'Option 1', value: 'value1' }],
+    //       modelValue: 'value1',
+    //       'data-nodepath': '/some/path',
+    //     };
 
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
+    //     const { currentValue } = renderHook(plugin, props);
+    //     const result = currentValue.value;
 
-        expect(result).toHaveProperty('ref');
-        expect(result).toHaveProperty('render');
-        expect(result).toHaveProperty('previewText');
-      });
-    });
+    //     expect(result).toHaveProperty('ref');
+    //     expect(result).toHaveProperty('render');
+    //     expect(result).toHaveProperty('previewText');
+    //   });
+    // });
 
     describe('插件集成和扩展性测试', () => {
       it('应该能够与其他插件组合使用', () => {

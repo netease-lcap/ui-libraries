@@ -260,6 +260,7 @@ namespace nasl.ui {
       title: '箭头控制',
       description: '是否使用箭头控制时间',
       setter: { concept: 'SwitchSetter' },
+      bindHide: true,
     })
     arrowControl: nasl.core.Boolean = false;
 
@@ -284,6 +285,17 @@ namespace nasl.ui {
       },
     })
     prefixIconName: nasl.core.String = 'Clock';
+
+    @Prop({
+      title: '清除图标',
+      description: '清除图标',
+      group: '主要属性',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+      },
+    })
+    clearIconName: nasl.core.String = 'CircleClose';
 
     @Prop({
       group: '样式属性',

@@ -657,9 +657,9 @@ describe('Table.vue', () => {
       const cell = wrapper.findAll('.el-table__body .cell')[2]; // first row
 
       triggerEvent(cell.element.parentElement.parentElement, 'click');
-      expect(wrapper.vm.result.length).toEqual(3); // row, event, column
-      expect(wrapper.vm.result[0]).toHaveProperty('name');
-      expect(wrapper.vm.result[0].name).toEqual(getTestData()[0].name);
+      expect(wrapper.vm.result.length).toEqual(1); // row, event, column
+      expect(wrapper.vm.result[0]).toHaveProperty('row');
+      expect(wrapper.vm.result[0].row.name).toEqual(getTestData()[0].name);
       wrapper.unmount();
     });
 

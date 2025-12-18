@@ -137,9 +137,11 @@ export default TimePickerBasicAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handleIcon',
     handle(props) {
+      const clearIconName = props.get('clearIconName');
       const prefixIconName = props.get('prefixIconName');
       return {
-        clearIcon: getPropsIcon({ name: prefixIconName }),
+        clearIcon: getPropsIcon({ name: clearIconName }),
+        prefixIcon: getPropsIcon({ name: prefixIconName }),
       };
     },
   })
