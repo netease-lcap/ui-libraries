@@ -368,6 +368,12 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
       formItemAttrs.push(`rules={[${rules.join(',')}]}`);
     }
 
+    if (property.typeAnnotation
+      && property.typeAnnotation.typeName === 'Decimal'
+      && property.typeAnnotation.ruleMap && property.typeAnnotation.ruleMap.scale !== undefined) {
+      formItemAttrs.push(`precision={${property.typeAnnotation.ruleMap.scale}}`);
+    }
+
     return genPropertyEditableTemplate(entity, property, nameGroup, selectNameGroupMap, formItemAttrs);
   }).join('\n')}`;
 }

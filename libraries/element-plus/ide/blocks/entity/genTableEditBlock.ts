@@ -19,6 +19,15 @@ import {
   genTextTemplate,
 } from './genCommonBlock';
 
+function canEditable(property: naslTypes.EntityProperty) {
+  const namespaceType = property?.typeAnnotation?.typeNamespace?.split('.').pop();
+  const isComplexType = (
+    ['Map', 'List'].includes(property?.typeAnnotation?.typeName) ||
+    (property?.typeAnnotation?.typeKind === 'reference' && ['entities', 'structures'].includes(namespaceType))
+  );
+  return !property.readonly && !isComplexType;
+}
+
 function genEditChangeFunction(property: naslTypes.EntityProperty, nameGroup: NameGroup) {
   const { entity } = property;
   const lowerEntityName = firstLowerCase(entity.name);
@@ -32,7 +41,7 @@ function genEditChangeFunctionRef(property: naslTypes.EntityProperty, nameGroup:
 }
 
 function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>, formItemAttrs: Array<string> = []) {
-  if (property.readonly) {
+  if (!canEditable(property)) {
     return genTextTemplate(property, nameGroup);
   }
   const lowerEntityName = firstLowerCase(entity.name);
@@ -44,7 +53,6 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
 function genTableEditColumnTemplate(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>, options: any = {
   isBindEventLogicRef: false,
 }) {
-  const canEditable = (property1) => !property1.readonly;
   const isFirstCanEditable = (property1) => {
     const properties = entity.properties.filter(filterProperty('inTable'));
     for (let i = 0; i < properties.length; i += 1) {
@@ -72,6 +80,7 @@ function genTableEditColumnTemplate(entity: naslTypes.Entity, property: naslType
     });
   }
   if (required) rules.push('nasl.validation.required()');
+
   const formItemAttrs: string[] = [];
 
   if (required) {
@@ -83,6 +92,12 @@ function genTableEditColumnTemplate(entity: naslTypes.Entity, property: naslType
   }
   const currentName = nameGroup.currentName || 'current';
   formItemAttrs.push(`preview={${currentName}.isPreview}`);
+
+  if (property.typeAnnotation
+    && property.typeAnnotation.typeName === 'Decimal'
+    && property.typeAnnotation.ruleMap && property.typeAnnotation.ruleMap.scale !== undefined) {
+    formItemAttrs.push(`precision={${property.typeAnnotation.ruleMap.scale}}`);
+  }
 
   return `<ElTableColumn
       prop="${lowerEntityName}.${property.name}"
