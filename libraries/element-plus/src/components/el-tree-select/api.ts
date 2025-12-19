@@ -189,7 +189,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '点击节点支持展开收起',
-      description: '是否支持点击节点也能展开收起',
+      description: '是否在点击节点的时候选中节点，默认值为 false，即只有在点击复选框时才会选中节点。',
       setter: { concept: 'SwitchSetter' },
     })
     expandOnClickNode: nasl.core.Boolean = true;

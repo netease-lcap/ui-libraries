@@ -461,8 +461,10 @@ export const Example3 = {
 
 export const Example4 = {
   name: '示例4',
-  render: () => ({
+  render: (args, { parameters }) => ({
     data() {
+      const { globalConfig } = parameters;
+      const tableData = globalConfig.asyncData();
       function getTestData() {
         return [
           {
@@ -538,13 +540,11 @@ export const Example4 = {
           runtime: 95,
         },
       ];
-      // setTimeout(() => {
-      //   const a = getCurrentInstance();
-      //   console.log(a, 'current');
-      // }, 3000);
+
       return {
         treeProps,
         testData,
+        tableData,
         selected: [],
       };
     },
@@ -561,7 +561,18 @@ export const Example4 = {
               <el-table-column prop="name" label="name" />
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />
-              <el-table-column prop="runtime" label="runtime" />
+              <el-table-column type="editable" prop="runtime" label="runtime" >
+                <template #default="{ row }">
+                    <el-form-select  v-model:modelValue="row.runtime" :rules="[]" :preview="(row || {}).isPreview" v-dependencies.reload="[]" :dataSource="tableData" textField="" valueField="" descriptionField="">
+                    <el-option :value="true" label="是" title="">
+                        <el-text : text="是"></el-text>
+                    </el-option>
+                    <el-option :value="false" label="否">
+                        <el-text :text="否"></el-text>
+                    </el-option>
+                    </el-form-select>
+                </template>
+              </el-table-column>
             </el-table>
 `,
   }),

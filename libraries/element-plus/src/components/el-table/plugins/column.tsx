@@ -11,13 +11,14 @@ const EditDefault = {
   inheritAttrs: false,
   setup(props, { attrs, emit, expose }) {
     const { item, slots, editChange = () => {}, setValue } = attrs;
+
     const editable = ref(false);
     const formItemRef = ref({});
     return () => {
       return !editable.value ? (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           {slots.default?.({
-            ...item,
+            row: item.row,
             index: item.$index,
             item: item.row,
             rowIndex: item.$index,
@@ -36,9 +37,9 @@ const EditDefault = {
         </div>
       ) : (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          {slots
-            .default?.({
-              ...item,
+          {
+            slots.default?.({
+              row: item.row,
               index: item.$index,
               item: item.row,
               rowIndex: item.$index,
@@ -49,11 +50,11 @@ const EditDefault = {
             ?.map((node) => cloneVNode(node, {
                 onValidateSuccess: () => {},
                 ref: formItemRef,
-              }))}
+              }))
+          }
           <ElIcon
             onClick={() => {
               console.log(formItemRef?.value, 'formItemRef');
-              debugger;
               formItemRef?.value?.validate?.()?.then(() => {
                 editable.value = false;
                 _.attempt(editChange, item);
