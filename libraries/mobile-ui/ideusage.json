@@ -793,6 +793,12 @@
         }
     },
     {
+      "name": "VanValidator",
+      "ideusage": {
+          "idetype": "container"
+      }
+    },
+    {
         "name": "VanFieldinput",
         "ideusage": {
             "idetype": "element",
