@@ -53,8 +53,26 @@ export function registerTool(tool: ComponentToolConfig) {
 export function getComponentTools() {
   return toolList.map((tool) => ({
     config: tool,
-    handler(refId: string, ...arg: []) {
+    async handler(refId: string, ...arg: []) {
       eventBus.emit(`${tool.name}___${refId}`, ...arg);
+      return Promise.race([
+        new Promise((resolve, reject) => {
+          eventBus.on(`${tool.name}___${refId}_result`, (success: boolean, ...result: any[]) => {
+            eventBus.off(`${tool.name}___${refId}_result`);
+            if (success) {
+              resolve(...result);
+            } else {
+              reject(result[0]);
+            }
+          });
+        }),
+        new Promise((resolve) => {
+          setTimeout(() => {
+            eventBus.off(`${tool.name}___${refId}_result`);
+            resolve(true);
+          }, 1500);
+        }),
+      ]);
     },
   }));
 }
