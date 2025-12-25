@@ -11,4 +11,5 @@ function ElDrawerRegister(BaseComponent, plugin = {}, extend = true) {
 const ElDrawer = registerComponent(ElDrawerPlus, { plugin: basicsPlugin, name: 'el-drawer' });
 
 export { ElDrawerPlus, ElDrawer, ElDrawerRegister };
+export const ElDrawerBasicsPlugin = basicsPlugin;
 export default ElDrawer;

@@ -19,4 +19,6 @@ const ElCollapse = registerComponent(ElCollapsePlus, { plugin: basicsPlugin });
 const ElCollapseItem = registerComponent(ElCollapseItemPlus, { plugin: itemPlugins });
 
 export { ElCollapsePlus, ElCollapseItemPlus, ElCollapse, ElCollapseItem, ElCollapseRegister, ElCollapseItemRegister };
+export const ElCollapseBasicsPlugin = basicsPlugin;
+export const ElCollapseItemBasicsPlugin = itemPlugins;
 export default ElCollapse;

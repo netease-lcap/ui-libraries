@@ -20,3 +20,5 @@ const ElImageViewer = registerComponent(ElImageViewerPlus, { plugin: previewPlug
 export default ElImage;
 
 export { ElImagePlus, ElImageViewerPlus, ElImage, ElImageViewer, ElImageRegister, ElImageViewerRegister };
+export const ElImageBasicsPlugin = basicPlugin;
+export const ElImageViewerBasicsPlugin = previewPlugin;

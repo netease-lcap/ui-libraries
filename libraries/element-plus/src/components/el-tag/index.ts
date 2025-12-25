@@ -17,4 +17,5 @@ const ElTag = registerComponent(ElTagPlus, { plugin: basicsPlugin, name: 'el-tag
 const ElCheckTag = registerComponent(ElCheckTagPlus, { plugin: basicsPlugin, name: 'el-check-tag' });
 
 export { ElTagPlus, ElCheckTagPlus, ElTag, ElCheckTag, ElTagRegister, ElCheckTagRegister };
+export const ElTagBasicsPlugin = basicsPlugin;
 export default ElTag;

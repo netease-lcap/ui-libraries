@@ -18,4 +18,6 @@ const ElTimeline = registerComponent(ElTimelinePlus, { plugin: basicsPlugin, nam
 const ElTimelineItem = registerComponent(ElTimelineItemPlus, { plugin: itemPlugins, name: 'el-timeline-item' });
 
 export { ElTimelinePlus, ElTimelineItemPlus, ElTimeline, ElTimelineItem, ElTimelineRegister, ElTimelineItemRegister };
+export const ElTimelineBasicsPlugin = basicsPlugin;
+export const ElTimelineItemBasicsPlugin = itemPlugins;
 export default ElTimeline;

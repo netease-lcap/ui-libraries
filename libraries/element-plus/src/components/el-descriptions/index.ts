@@ -17,4 +17,6 @@ const ElDescriptionsItem = registerComponent(ElDescriptionsItemPlus, {
 });
 
 export { ElDescriptionsPlus, ElDescriptions, ElDescriptionsItem, ElDescriptionsRegister, ElDescriptionsItemPlus };
+export const ElDescriptionsBasicsPlugin = basicPlugin;
+export const ElDescriptionsItemBasicsPlugin = itemPlugins;
 export default ElDescriptions;

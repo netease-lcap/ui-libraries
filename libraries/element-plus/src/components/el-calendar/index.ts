@@ -11,4 +11,5 @@ function ElCalendarRegister(BaseComponent, plugin = {}, extend = true) {
 
 const ElCalendar = registerComponent(ElCalendarPlus, { plugin: basicsPlugin, name: 'el-calendar' });
 export { ElCalendarPlus, ElCalendar, ElCalendarRegister };
+export const ElCalendarBasicsPlugin = basicsPlugin;
 export default ElCalendar;

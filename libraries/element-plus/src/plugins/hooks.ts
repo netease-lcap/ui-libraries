@@ -109,14 +109,15 @@ export function useState<T = any>(initialstate?: T): [T, (value: T | ((prevState
   }
   const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
   const localSetValue = (value: T | ((prevState: T) => T)) => {
-    const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
+    if (!currentFiber) return;
+    const state = hook?.isSetValue ? currentFiber?.getState?.()?.state?.[hook?.storeKey] : initialstate;
     hook.isSetValue = true;
     // TODO 判断是否相等
     // if (_.isEqual(value, state)) {
     //   return;
     // }
     const getValue = _.isFunction(value) ? value(getStateValue(state)) : value;
-    currentFiber.updateQueen.add({ [hook.storeKey]: getValue });
+    currentFiber?.updateQueen?.add({ [hook.storeKey]: getValue });
     _.defer(() => {
       if (currentFiber?.updateQueen?.size) {
         const deleteQueue = Array.from(currentFiber.updateQueen);

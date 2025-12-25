@@ -48,4 +48,8 @@ export {
   ElMenuItemGroupRegister,
   ElSubMenuRegister,
 };
+export const ElMenuBasicsPlugin = basicPlugin;
+export const ElMenuItemBasicsPlugin = menuItemPlugin;
+export const ElMenuItemGroupBasicsPlugin = itemPlugin;
+export const ElSubMenuBasicsPlugin = itemPlugin;
 export default ElMenu;

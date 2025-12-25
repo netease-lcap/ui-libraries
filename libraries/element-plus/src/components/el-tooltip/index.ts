@@ -10,4 +10,5 @@ function ElTooltipRegister(BaseComponent, plugin = {}, extend = true) {
 
 const ElTooltip = registerComponent(ElTooltipPlus, { plugin: basicsPlugin, name: 'el-tooltip' });
 export { ElTooltipPlus, ElTooltip, ElTooltipRegister };
+export const ElTooltipBasicsPlugin = basicsPlugin;
 export default ElTooltip;

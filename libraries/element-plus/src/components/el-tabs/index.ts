@@ -10,4 +10,5 @@ function ElTabsRegister(BaseComponent, plugin = {}, extend = true) {
 
 const ElTabs = registerComponent(ElTabsPlus, { plugin: basicsPlugin });
 export { ElTabsPlus, ElTabs, ElTabPane, ElTabsRegister };
+export const ElTabsBasicsPlugin = basicsPlugin;
 export default ElTabs;

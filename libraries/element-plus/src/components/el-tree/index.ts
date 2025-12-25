@@ -11,4 +11,5 @@ function ElTreeRegister(BaseComponent, plugin = {}, extend = true) {
 const ElTree = registerComponent(ElTreePlus, { plugin: basicsPlugin, name: 'el-tree' });
 
 export { ElTreePlus, ElTree, ElTreeRegister };
+export const ElTreeBasicsPlugin = basicsPlugin;
 export default ElTree;

@@ -14,4 +14,5 @@ const ElSwitch = registerComponent(ElSwitchPlus, { plugin: basicsPlugin, name: '
 const ElFormSwitch = withFormItem(ElSwitch, 'el-form-switch');
 
 export { ElSwitchPlus, ElSwitch, ElFormSwitch, ElSwitchRegister };
+export const ElSwitchBasicsPlugin = basicsPlugin;
 export default ElSwitch;

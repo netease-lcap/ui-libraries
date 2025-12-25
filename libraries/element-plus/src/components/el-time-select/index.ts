@@ -15,3 +15,4 @@ const ElFormTimeSelect = withFormItem(ElTimeSelect, 'el-form-time-select');
 export default ElTimeSelect;
 
 export { ElTimeSelectPlus, ElTimeSelect, ElFormTimeSelect, ElTimeSelectRegister };
+export const ElTimeSelectBasicsPlugin = basicPlugin;

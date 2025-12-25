@@ -13,3 +13,4 @@ const ElScrollbar = registerComponent(ElScrollbarPlus, { plugin: basicPlugin, na
 export default ElScrollbar;
 
 export { ElScrollbarPlus, ElScrollbar, ElScrollbarRegister };
+export const ElScrollbarBasicsPlugin = basicPlugin;

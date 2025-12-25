@@ -14,4 +14,5 @@ const ElInput = registerComponent(ElInputPlus, { plugin: basicsPlugin, name: 'el
 const ElFormInput = withFormItem(ElInput, 'el-form-input');
 
 export { ElInputPlus, ElInput, ElFormInput, ElInputRegister };
+export const ElInputBasicsPlugin = basicsPlugin;
 export default ElInput;

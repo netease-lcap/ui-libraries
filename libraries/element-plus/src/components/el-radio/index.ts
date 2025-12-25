@@ -14,4 +14,5 @@ const ElRadioGroup = registerComponent(ElRadioGroupPlus, { plugin: basicsPlugin,
 const ElFormRadioGroup = withFormItem(ElRadioGroup, 'el-form-radio-group');
 
 export { ElRadio, ElRadioGroupPlus, ElRadioGroup, ElFormRadioGroup, ElRadioGroupRegister, ElRadioButtonPlus };
+export const ElRadioBasicsPlugin = basicsPlugin;
 export default ElRadioGroup;

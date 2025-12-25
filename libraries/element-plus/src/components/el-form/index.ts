@@ -32,4 +32,6 @@ export {
   ElFormItemPro,
   ElFormPlus,
 };
+export const ElFormBasicsPlugin = basicsPlugin;
+export const ElFormItemBasicsPlugin = formItemPlugin;
 export default ElForm;

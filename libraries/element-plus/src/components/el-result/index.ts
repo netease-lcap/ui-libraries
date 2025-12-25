@@ -11,4 +11,5 @@ function ElResultRegister(BaseComponent, plugin = {}, extend = true) {
 const ElResult = registerComponent(ElResultPlus, { plugin: basicsPlugin, name: 'el-result' });
 
 export { ElResultPlus, ElResult, ElResultRegister };
+export const ElResultBasicsPlugin = basicsPlugin;
 export default ElResult;

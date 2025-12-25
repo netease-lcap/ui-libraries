@@ -35,4 +35,7 @@ export {
   ElTableRegister,
   ElTableColumnRegister,
 };
+export const ElTableBasicsPlugin = basicsPlugin;
+export const ElTableColumnBasicsPlugin = columnPlugin;
+export const ElTableColumnDynamicBasicsPlugin = columnDynamicPlugin;
 export default ElTable;

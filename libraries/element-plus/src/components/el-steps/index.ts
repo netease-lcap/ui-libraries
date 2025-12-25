@@ -18,4 +18,6 @@ const ElSteps = registerComponent(ElStepsPlus, { plugin: basicsPlugin, name: 'el
 const ElStep = registerComponent(ElStepPlus, { plugin: itemPlugin, name: 'el-step' });
 
 export { ElStepsPlus, ElStepPlus, ElSteps, ElStep, ElStepsRegister, ElStepRegister };
+export const ElStepsBasicsPlugin = basicsPlugin;
+export const ElStepBasicsPlugin = itemPlugin;
 export default ElSteps;

@@ -12,4 +12,5 @@ function ElListComponentsRegister(BaseComponent, plugin = {}, extend = true) {
 const ElListComponents = registerComponent(basicElListComponents, { plugin: basicsPlugin });
 
 export { ElListComponentsRegister, ElListComponents };
+export const ElListComponentsBasicsPlugin = basicsPlugin;
 export default ElListComponents;

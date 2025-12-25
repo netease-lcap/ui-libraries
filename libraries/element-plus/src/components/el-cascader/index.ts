@@ -14,4 +14,5 @@ const ElCascader = registerComponent(ElCascaderPlus, { plugin: basicsPlugin, nam
 const ElFormCascader = withFormItem(ElCascader, 'el-form-cascader');
 
 export { ElCascaderPlus, ElCascader, ElFormCascader, ElCascaderRegister };
+export const ElCascaderBasicsPlugin = basicsPlugin;
 export default ElCascader;

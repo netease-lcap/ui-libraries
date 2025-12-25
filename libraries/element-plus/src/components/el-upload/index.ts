@@ -19,3 +19,4 @@ const ElFormUpload = withFormItem(ElUpload, 'el-form-upload');
 export default ElUpload;
 
 export { ElUploadPlus, ElUpload, ElFormUpload, ElUploadRegister };
+export const ElUploadBasicsPlugin = basicPlugin;

@@ -14,4 +14,5 @@ const ElSlider = registerComponent(ElSliderPlus, { plugin: basicsPlugin, name: '
 const ElFormSlider = withFormItem(ElSlider, 'el-form-slider');
 
 export { ElSliderPlus, ElSlider, ElFormSlider, ElSliderRegister };
+export const ElSliderBasicsPlugin = basicsPlugin;
 export default ElSlider;

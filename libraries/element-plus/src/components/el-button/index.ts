@@ -6,5 +6,6 @@ import './index.css';
 
 const ElButton = registerComponent(ElButtonPlus, { plugin: basicsPlugin, name: 'el-button' });
 export { ElButtonPlus, ElButton, ElButtonGroup, basicsPlugin };
+export const ElButtonBasicsPlugin = basicsPlugin;
 
 export default ElButton;

@@ -12,4 +12,5 @@ function ElPageHeaderRegister(BaseComponent, plugin = {}, extend = true) {
 const ElPageHeader = registerComponent(ElPageHeaderPlus, { plugin: basicsPlugin, name: 'el-page-header' });
 
 export { ElPageHeaderPlus, ElPageHeader, ElPageHeaderRegister };
+export const ElPageHeaderBasicsPlugin = basicsPlugin;
 export default ElPageHeader;

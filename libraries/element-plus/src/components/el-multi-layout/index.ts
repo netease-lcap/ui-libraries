@@ -18,4 +18,6 @@ const ElMultiLayoutItem = registerComponent(ElMultiLayoutItemPlus, {
 });
 
 export { ElMultiLayoutRegister, ElMultiLayout, ElMultiLayoutItem };
+export const ElMultiLayoutBasicsPlugin = basicsPlugin;
+export const ElMultiLayoutItemBasicsPlugin = itemPlugins;
 export default ElMultiLayout;

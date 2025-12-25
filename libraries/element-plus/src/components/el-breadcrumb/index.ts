@@ -31,4 +31,6 @@ export {
   ElBreadcrumbItemRegister,
   ElBreadcrumbItemPlus,
 };
+export const ElBreadcrumbBasicsPlugin = basicsPlugin;
+export const ElBreadcrumbItemBasicsPlugin = itemPlugins;
 export default ElBreadcrumb;

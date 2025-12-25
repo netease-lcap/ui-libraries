@@ -18,4 +18,6 @@ const ElCarousel = registerComponent(ElCarouselPlus, { plugin: basicsPlugin, nam
 const ElCarouselItem = registerComponent(ElCarouselItemPlus, { plugin: itemPlugins });
 
 export { ElCarouselPlus, ElCarouselItemPlus, ElCarousel, ElCarouselItem, ElCarouselRegister, ElCarouselItemRegister };
+export const ElCarouselBasicsPlugin = basicsPlugin;
+export const ElCarouselItemBasicsPlugin = itemPlugins;
 export default ElCarousel;

@@ -14,4 +14,5 @@ const ElInputTag = registerComponent(ElInputTagPlus, { plugin: basicsPlugin, nam
 const ElFormInputTag = withFormItem(ElInputTag, 'el-form-input-tag');
 
 export { ElInputTagPlus, ElInputTag, ElFormInputTag, ElInputTagRegister };
+export const ElInputTagBasicsPlugin = basicsPlugin;
 export default ElInputTag;

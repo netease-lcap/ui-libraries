@@ -11,4 +11,5 @@ function ElBadgeRegister(BaseComponent, plugin = {}, extend = true) {
 const ElBadge = registerComponent(ElBadgePlus, { plugin: basicsPlugin, name: 'el-badge' });
 
 export { ElBadgePlus, ElBadge, ElBadgeRegister };
+export const ElBadgeBasicsPlugin = basicsPlugin;
 export default ElBadge;

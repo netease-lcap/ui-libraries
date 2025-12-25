@@ -33,5 +33,6 @@ export {
   ElDropdownRegister,
   ElDropdownItemRegister,
 };
-
+export const ElDropdownBasicsPlugin = basicsPlugin;
+export const ElDropdownItemBasicsPlugin = itemPlugins;
 export default ElDropdown;

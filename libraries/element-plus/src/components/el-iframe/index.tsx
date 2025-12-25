@@ -15,4 +15,5 @@ function Iframe(props, { slots }) {
 
 export const ElIframe = registerComponent(Iframe, plugins);
 
+export const ElIframeBasicsPlugin = plugins;
 export default ElIframe;

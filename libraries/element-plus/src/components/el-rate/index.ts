@@ -14,4 +14,5 @@ const ElRate = registerComponent(ElRatePlus, { plugin: basicsPlugin, name: 'el-r
 const ElFormRate = withFormItem(ElRate, 'el-form-rate');
 
 export { ElRatePlus, ElRate, ElFormRate, ElRateRegister };
+export const ElRateBasicsPlugin = basicsPlugin;
 export default ElRate;

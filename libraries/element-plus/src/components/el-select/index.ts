@@ -18,5 +18,6 @@ const ElSelect = registerComponent(ElSelectPlus, {
 const ElFormSelect = withFormItem(ElSelect, 'el-form-select');
 
 export { ElSelect, ElOption, ElOptionGroup, ElFormSelect, ElSelectRegister, ElSelectPlus };
+export const ElSelectBasicsPlugin = basicsPlugin;
 export type { ISelectProps };
 export default ElSelect;
