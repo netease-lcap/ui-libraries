@@ -4,7 +4,6 @@ import path from 'path';
 import { createVuePlugin as vue2 } from '@lcap/vite-plugin-vue2';
 import { createGenScopedName, lcapPlugin } from '@lcap/builder';
 import autoprefixer from 'autoprefixer';
-import { visualizer } from 'rollup-plugin-visualizer';
 
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
@@ -184,15 +183,7 @@ export default defineConfig(({ command }) => {
           },
         },
       }),
-      // 构建分析插件 - 仅在构建时启用
-      command === 'build' && visualizer({
-        filename: 'dist-theme/stats.html',
-        open: false,
-        gzipSize: true,
-        brotliSize: true,
-        template: 'treemap', // 'treemap' | 'sunburst' | 'network'
-      }),
-    ].filter(Boolean),
+    ],
     resolve: {
       extensions: ['.js', '.ts', '.tsx', '.jsx', '.vue', '.mjs', '.cjs', '.json'],
       alias: {
