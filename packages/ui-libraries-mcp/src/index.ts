@@ -57,7 +57,7 @@ export function getComponentTools() {
       eventBus.emit(`${tool.name}___${refId}`, ...arg);
       return Promise.race([
         new Promise((resolve, reject) => {
-          eventBus.on(`${tool.name}___${refId}_result`, (success: boolean, ...result: any[]) => {
+          eventBus.on(`${tool.name}___${refId}_result`, (success: boolean, ...result: any) => {
             eventBus.off(`${tool.name}___${refId}_result`);
             if (success) {
               resolve(...result);
