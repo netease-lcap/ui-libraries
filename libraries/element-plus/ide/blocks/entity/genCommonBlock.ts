@@ -175,9 +175,9 @@ export function genTextTemplate(property: naslTypes.EntityProperty, nameGroup: N
  * @param {*} selectNameGroupMap
  * @returns
  */
-export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>, formItemAttrs: string[]) {
+export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: naslTypes.EntityProperty, nameGroup: NameGroup, selectNameGroupMap: Map<string, NameGroup>, formItemAttrs: string[], vModelAttr?: string) {
   const dataSource = entity.parentNode;
-  const vModel = `${nameGroup.vModelName}.${property.name}`;
+  const vModel = vModelAttr || `${nameGroup.vModelName}.${property.name}`;
   const label = (property.label || property.name).replace(/"/g, '&quot;');
   const { typeAnnotation } = property || {};
   const { typeNamespace: propertyTypeNamespace } = typeAnnotation || {};
@@ -291,7 +291,7 @@ type MinMaxString = `${'min' | 'max'}(${string})`;
 /**
  * 类型守卫函数，判断字符串是否符合min/max格式
  */
-function isMinMaxString(str: string): str is MinMaxString {
+export function isMinMaxString(str: string): str is MinMaxString {
   return /^(min|max)\([-+]?\d+\)$/.test(str);
 }
 
@@ -300,7 +300,7 @@ function isMinMaxString(str: string): str is MinMaxString {
  * @param str - 格式为 "min(数字)" 或 "max(数字)" 的字符串
  * @returns 处理后的安全整数
  */
-function parseSafeNumberRule(str: string): string {
+export function parseSafeNumberRule(str: string): string {
   const match = str.match(/^(min|max)\(([-+]?\d+)\)$/);
   if (!match) {
     return str;
@@ -366,6 +366,12 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
 
     if (rules.length > 0) {
       formItemAttrs.push(`rules={[${rules.join(',')}]}`);
+    }
+
+    if (property.typeAnnotation
+      && property.typeAnnotation.typeName === 'Decimal'
+      && property.typeAnnotation.ruleMap && property.typeAnnotation.ruleMap.scale !== undefined) {
+      formItemAttrs.push(`precision={${property.typeAnnotation.ruleMap.scale}}`);
     }
 
     return genPropertyEditableTemplate(entity, property, nameGroup, selectNameGroupMap, formItemAttrs);
