@@ -192,6 +192,15 @@ namespace nasl.ui {
     })
     rules: nasl.core.String;
     @Prop({
+      group: '主要属性',
+      title: '忽略验证',
+      description: '是否忽略验证',
+      setter: {
+        concept: "SwitchSetter"
+      }
+    })
+    ignoreValidation: nasl.core.Boolean = false;
+    @Prop({
       group: '样式属性',
       title: '显示底边框',
       description: '是否显示底边框',

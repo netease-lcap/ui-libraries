@@ -1,0 +1,24 @@
+@import '../style/var';
+
+.van-validator {
+  display: inline-block;
+
+  &__body {
+    display: flex;
+    align-items: center;
+  }
+
+  &__error-message {
+    color: @field-error-message-color;
+    font-size: @field-error-message-font-size;
+    text-align: left;
+
+    &--center {
+      text-align: center;
+    }
+
+    &--right {
+      text-align: right;
+    }
+  }
+}
