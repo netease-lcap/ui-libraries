@@ -111,7 +111,7 @@
                 :expand-trigger="!checkable ? 'click-expander': expandTrigger"
                 :initial-load="initialLoad"
                 :readonly="readonly"
-                :disabled="disabled"
+                :disabled="computedDisabled"
                 :expander-width="expanderWidth"
                 :filterable="filterable"
                 :filter-text="filterText"
@@ -153,6 +153,9 @@ import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-tree-select-new',
+    inject: {
+        formVM: { default: null },
+    },
     childName: 'u-tree-view-node-new',
     components: { SEmpty },
     mixins: [
@@ -163,7 +166,7 @@ export default {
         readonly: 'readonly',
         preview: 'isPreview',
         opened: 'popperOpened',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       }),
     ],
     props: {
@@ -245,8 +248,11 @@ export default {
         };
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         currentDisabled() {
-            if (this.disabled)
+            if (this.computedDisabled)
                 return true;
             else if (this.emptyDisabled)
                 return this.currentData ? !this.currentData.length : !this.itemVMs.length;

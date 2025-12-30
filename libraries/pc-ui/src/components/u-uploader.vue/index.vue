@@ -1,13 +1,13 @@
 <template>
 <div :class="$style.root">
     <div v-if="draggable && !isPreview && (!readonly || $env.VUE_APP_DESIGNER)" :class="[$style.draggable, { [$style.useIcon]: !!uploadIcon }]" :dragover="dragover" @click="select()"
-        :tabindex="readonly || disabled ? '' : 0"
+        :tabindex="readonly || computedDisabled ? '' : 0"
         @drop.prevent="onDrop"
         @paste="onPaste"
         @dragover.prevent="dragover = true"
         @dragleave.prevent="dragover = false">
         <i-ico :name="uploadIcon" v-if="uploadIcon" notext :class="$style.uploadIcon"></i-ico>
-        <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
+        <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="computedDisabled" @click.stop @change="onChange">
         <div>
             <div v-if="dragDescription" vusion-slot-name="dragDescription" :class="$style.dragDescription"><slot name="dragDescription">{{ dragDescription }}</slot></div>
             <slot></slot>
@@ -16,7 +16,7 @@
     <div v-else-if="listType !== 'card' && !isPreview && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.select" @click="select()"
         vusion-slot-name="default"
         :vusion-empty-background="$env.VUE_APP_DESIGNER && !$slots.default ? 'add-any' : false">
-        <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
+        <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="computedDisabled" @click.stop @change="onChange">
         <slot></slot>
     </div>
     <template v-if="listType !== 'card' || (uploadEnable && draggable && !readonly) ">
@@ -38,12 +38,12 @@
                                 <i-ico :name="downloadIcon" icotype="only"></i-ico>
                             </a>
                         </span>
-                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !disabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !computedDisabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
                     </div>
                       <div v-else>
                         <div :class="$style.thumb"><img :class="$style.img" v-if="listType === 'image'" :src="getUrl(item)"></div>
                         <a :class="$style.link" :href="encodeUrl(item.url)" target="_blank" download role="download">{{ item.name || item.url }}</a>
-                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !disabled && !isPreview" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !computedDisabled && !isPreview" @click="remove(index)"></i-ico>
                     </div>
                     <u-linear-progress v-if="item.showProgress && !$env.VUE_APP_DESIGNER" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                 </template>
@@ -55,7 +55,7 @@
                 <div :class="$style.mask" :multiple="multiple || readonly" :show-progress="item.showProgress">
                     <u-linear-progress v-if="item.showProgress" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                     <div :class="$style.buttons">
-                        <span v-if="!readonly && !disabled && !isPreview" :class="[$style.button, { [$style.useIcon]: !!removeIcon }]" role="remove" @click.stop="remove(index)">
+                        <span v-if="!readonly && !computedDisabled && !isPreview" :class="[$style.button, { [$style.useIcon]: !!removeIcon }]" role="remove" @click.stop="remove(index)">
                           <i-ico :name="removeIcon" v-if="removeIcon" notext :class="$style.icon"></i-ico>
                         </span>
                         <span :class="[$style.button, { [$style.useIcon]: !!previewIcon }]" role="preview" @click.stop="onPreview(item, index)">
@@ -73,7 +73,7 @@
             <div :class="$style.cardwrap" v-if="uploadEnable && !draggable && (!readonly || $env.VUE_APP_DESIGNER)">
                 <div :class="[$style.card, { [$style.useIcon]: !!addIcon }]" role="select" @click="select()">
                     <i-ico :name="addIcon" v-if="addIcon" notext :class="$style.addIcon"></i-ico>
-                    <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
+                    <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="computedDisabled" @click.stop @change="onChange">
                 </div>
                 <div v-if="description" :class="$style.description">{{ description }}</div>
                 <f-scroll-view trigger="hover" v-if="showErrorMessage && errorMessage.length">
@@ -124,6 +124,9 @@ const SIZE_UNITS = {
 
 export default {
     name: 'u-uploader',
+    inject: {
+        formVM: { default: null },
+    },
     components: { cropper, UPreview },
     mixins: [
       MField,
@@ -135,7 +138,7 @@ export default {
         },
         readonly: 'readonly',
         preview: 'isPreview',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
         url: 'url',
       }),
     ],
@@ -225,6 +228,9 @@ export default {
         };
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         uploadEnable() {
             return (this.multiple ? this.currentValue.length < this.limit : this.currentValue.length === 0) && !this.isPreview;
         },
@@ -436,7 +442,7 @@ export default {
           return IMAGE_REGEXP.test(url) ? url : FileImg;
         },
         select() {
-            if (this.readonly || this.disabled || this.sending || this.$env.VUE_APP_DESIGNER || !this.$refs.file) {
+            if (this.readonly || this.computedDisabled || this.sending || this.$env.VUE_APP_DESIGNER || !this.$refs.file) {
               return;
             }
 
@@ -781,7 +787,7 @@ export default {
         },
         onDrop(e) {
             this.dragover = false;
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
 
             if (this.openCropper) {
@@ -809,7 +815,7 @@ export default {
             this.uploadFiles(e.dataTransfer.files);
         },
         onPaste(e) {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             if (this.pastable)
                 this.uploadFiles(e.clipboardData.files);

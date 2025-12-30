@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root" :readonly="readonly" :readonly-mode="readonlyMode" :disabled="disabled">
+<div :class="$style.root" :readonly="readonly" :readonly-mode="readonlyMode" :disabled="computedDisabled">
     <u-loading v-if="loading" size="small" :icon="loadingIcon"></u-loading>
     <template v-else-if="currentDataSource">
         <u-tree-view-node-new
@@ -46,6 +46,9 @@ import UTreeViewNodeNew from '../u-tree-view-new.vue/node.vue';
 
 export default {
     name: 'u-tree-view-new',
+    inject: {
+        formVM: { default: null },
+    },
     nodeName: 'u-tree-view-node-new',
     components: { UTreeViewNodeNew },
     mixins: [
@@ -65,7 +68,7 @@ export default {
 
           return actualValue;
         },
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
         readonly: 'readonly',
       })
     ],
@@ -122,6 +125,9 @@ export default {
         };
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         scopeItem() {
             return `{ scope.item.${this.textField} }`;
         },
@@ -381,7 +387,7 @@ export default {
           this.onCheck(nodeVM, checked, oldChecked);
         },
         select(nodeVM) {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             const oldValue = this.value;
             const oldVM = this.selectedVM;

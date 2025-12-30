@@ -310,6 +310,9 @@ import i18nMixin from '../../mixins/i18n';
 
 export default {
     name: 'u-select',
+    inject: {
+        formVM: { default: null },
+    },
     component: {
         'u-select-item-all-check': AllCheck,
     },
@@ -418,7 +421,7 @@ export default {
   computed: {
     currentDisabled() {
       if (this.isPreview) return false;
-      if (this.disabled) return true;
+      if (this.disabled || (this.formVM && this.formVM.disabled)) return true;
       else if (this.emptyDisabled)
         return this.currentData
           ? !this.currentData.length

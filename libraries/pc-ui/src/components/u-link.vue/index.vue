@@ -24,9 +24,12 @@ import encodeUrl from '../../utils/encodeUrl';
 
 export default {
     name: 'u-link',
+    inject: {
+        formVM: { default: null },
+    },
     mixins: [
       sync({
-        disabled: 'currentDisabled',
+        disabled: 'computedDisabled',
       }),
     ],
     components: {
@@ -90,8 +93,11 @@ export default {
             delete listeners.click;
             return listeners;
         },
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled) || this.loading;
+        },
         currentDisabled() {
-            return this.disabled || this.loading;
+            return this.computedDisabled;
         },
         currentDownload() {
             if (this.download && this.href) {
