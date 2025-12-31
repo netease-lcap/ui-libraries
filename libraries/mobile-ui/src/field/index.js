@@ -27,6 +27,37 @@ import VusionValidator from '@lcap/validator';
 const [createComponent, bem, t] = createNamespace('field');
 const comSet = new Set(['van-fieldinput','van-fieldtextarea','van-fieldnumber']);
 
+function traverseSetDisabled(vnodes) {
+  vnodes.forEach((vnode) => {
+    if (vnode.componentOptions && [
+      'van-fieldinput',
+      'van-fieldtextarea',
+      'van-fieldnumber',
+      'van-stepper-new',
+      'van-slider',
+      'van-rate',
+      'van-pickerson',
+      'van-area',
+      'van-cascader',
+      'van-datetime-picker',
+      'van-calendar',
+      'van-radio-group',
+      'van-checkbox-group',
+      'van-uploader',
+    ].includes(vnode.componentOptions.tag)) {
+      vnode.componentOptions.propsData.disabled = true;
+    }
+
+    if (vnode.componentOptions && vnode.componentOptions.children) {
+      traverseSetDisabled(vnode.componentOptions.children);
+    }
+
+    if (vnode.children) {
+      traverseSetDisabled(vnode.children);
+    }
+  });
+}
+
 export default createComponent({
   inheritAttrs: false,
   mixins: [
@@ -587,6 +618,12 @@ export default createComponent({
       const ifDesigner = this.$env && this.$env.VUE_APP_DESIGNER;
       if (inputSlot) {
         const ifInput = comSet.has(inputSlot[0]?.componentOptions?.tag);
+
+        // 禁用时，设置输入框禁用
+        if (disabled && inputSlot && inputSlot.length > 0) {
+          traverseSetDisabled(inputSlot);
+        }
+
         return ifInput ? (
           inputSlot
         ) : (
