@@ -82,6 +82,22 @@ namespace nasl.ui {
         })
         display: 'inline' | 'block' = 'inline';
 
+        @Prop<ULinkOptions, 'overflow'>({
+            group: '主要属性',
+            title: '隐藏过长文本',
+            description: '文本过长时省略显示',
+            docDescription: '文本过长的处理方式，支持默认不处理、多余的文本省略、强制换行且英文自动添加换行符、始终不换行共四种隐藏处理方式，缺省情况为默认不处理',
+            setter: {
+                concept: 'EnumSelectSetter',
+                options: [{ title: '默认不处理' }, { title: '多余的文本省略' }, { title: '换行且强制截断单词和数字' }, { title: '换行但保持单词和数字的完整性' }, { title: '始终不换行' }],
+            },
+            onChange: [{
+              update: { display: 'block' },
+              if: (value) => value === 'ellipsis',
+            }]
+        })
+        overflow: 'normal' | 'ellipsis' | 'breakall' | 'break' | 'nowrap' = 'normal';
+
         @Prop({
             group: '交互属性',
             title: '链接类型',

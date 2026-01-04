@@ -6,6 +6,7 @@
     :download="currentDownload"
     :loading="loading || $attrs.loading"
     :hoverType="hoverType"
+    :overflow="!overflow || overflow === 'normal' ? undefined : overflow"
     @click="onClick" v-on="listeners">
     <i-ico v-if="icon && iconPosition=== 'left'" :name="icon" notext></i-ico>
     <template v-if="icon && $env.VUE_APP_DESIGNER"><span><slot>{{ text }}</slot></span></template>
@@ -47,6 +48,7 @@ export default {
         decoration: { type: Boolean, default: true },
         download: { type: Boolean, default: false },
         throttleTime: { type: Number, default: 0 },
+        overflow: { type: String, default: 'normal' },
         destination: String,
         hoverType: { type: String, default: 'underline' },
         link: [String, Function],
@@ -307,5 +309,28 @@ content: "\e66b";
 .root:lang(en) {
     display: inline-block;
     max-width: 100%;
+}
+
+.root[overflow="ellipsis"] {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.root[overflow="breakall"] {
+    word-break: break-all;
+    white-space: normal;
+}
+
+.root[overflow="break"] {
+    word-wrap: break-word;
+    hyphens: auto;
+    white-space: normal;
+    max-width: 100%;
+}
+
+.root[overflow="nowrap"] {
+    white-space: nowrap;
 }
 </style>
