@@ -6,6 +6,7 @@
     :download="currentDownload"
     :loading="loading || $attrs.loading"
     :hoverType="hoverType"
+    :overflow="!overflow || overflow === 'normal' ? undefined : overflow"
     @click="onClick" v-on="listeners">
     <i-ico v-if="icon" :name="icon" :class="$style.btnicon" notext></i-ico>
     <template v-if="!$slots.default">
@@ -26,6 +27,9 @@ export default {
         disabled: 'currentDisabled',
       }),
     ],
+    props: {
+      overflow: { type: String, default: 'normal' },
+    },
     components: {
       IIco
     },
@@ -141,6 +145,29 @@ export default {
 .root:lang(en) {
   display: inline-block;
   max-width: 100%;
+}
+
+.root[overflow="ellipsis"] {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.root[overflow="breakall"] {
+    word-break: break-all;
+    white-space: normal;
+}
+
+.root[overflow="break"] {
+    word-wrap: break-word;
+    hyphens: auto;
+    white-space: normal;
+    max-width: 100%;
+}
+
+.root[overflow="nowrap"] {
+    white-space: nowrap;
 }
 </style>
 
