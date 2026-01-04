@@ -237,6 +237,12 @@ namespace nasl.ui {
           },
         },
         {
+          update: {
+            valueFormat: 'YYYY-MM-DD',
+          },
+          if: (_) => _ === 'date',
+        },
+        {
           if: (_) => !_.includes('range') && !_.includes('s'),
           update: {
             range: false,
@@ -300,7 +306,7 @@ namespace nasl.ui {
       description: '可选，绑定值的格式，例如：YYYY-MM-DD。 不指定则绑定值为 Date 对象',
       setter: { concept: 'InputSetter' },
     })
-    valueFormat: nasl.core.String='YYYY-MM-DD';
+    valueFormat: nasl.core.String;
 
     @Prop<ElDatePickerOptions<T, V, P, M, C>, 'dateFormat'>({
       group: '主要属性',

@@ -6,21 +6,20 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       baseInfo: {
-        title: "(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix')) ? '流程表单' : '表单' ",
+        title:
+          "(this.getAttribute('id')?.value === 'dynamicRenderContainer' && this.getAttribute('processPrefix')) ? '流程表单' : '表单' ",
       },
+
       // structured: true,
     },
   })
   @Component({
     title: '表单',
     icon: 'form',
-    description:
-      '用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。',
+    description: '用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。',
     group: 'Form',
   })
   export class ElForm extends ViewComponent {
-
-
     @Method({
       title: '重置表单',
       description:
@@ -28,13 +27,11 @@ namespace nasl.ui {
     })
     resetForm(): void {}
 
-    
-
     @Method({
       title: '校验函数',
       description: '校验函数，包含错误文本提示等功能',
     })
-    validated	(): {
+    validated(): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;
@@ -140,15 +137,11 @@ namespace nasl.ui {
       group: '样式属性',
       title: '表单尺寸',
       description: '选择表单的整体尺寸',
-      docDescription: '控制表单的整体尺寸，影响所有表单字段的大小。小：紧凑型表单；中：标准尺寸；大：宽松型表单；默认：使用系统默认尺寸。',
+      docDescription:
+        '控制表单的整体尺寸，影响所有表单字段的大小。小：紧凑型表单；中：标准尺寸；大：宽松型表单；默认：使用系统默认尺寸。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '小' },
-          { title: '中' },
-          { title: '大' },
-          { title: '默认' },
-        ],
+        options: [{ title: '小' }, { title: '中' }, { title: '大' }, { title: '默认' }],
       },
     })
     size: 'small' | 'medium' | 'large' | '' = '';
@@ -238,8 +231,6 @@ namespace nasl.ui {
     // })
     // showMessage: nasl.core.Boolean = true;
 
-
-
     // @Prop({
     //   group: '主要属性',
     //   title: '行内错误信息',
@@ -247,7 +238,6 @@ namespace nasl.ui {
     //   setter: { concept: 'SwitchSetter' },
     // })
     // inlineMessage: nasl.core.Boolean = false;
-
 
     // @Prop({
     //   group: '主要属性',
@@ -561,7 +551,6 @@ namespace nasl.ui {
     })
     labelWidth: nasl.core.String | nasl.core.Decimal;
 
-
     @Prop({
       group: '主要属性',
       title: '验证规则',
@@ -596,7 +585,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     isRequired: nasl.core.Boolean = false;
-
 
     @Slot({
       title: '标签',

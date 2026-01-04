@@ -243,31 +243,31 @@ namespace nasl.ui {
     })
     onRightCheckChange: (event: nasl.collection.List<V>) => any;
 
-    @Event({
-      title: '滚动时',
-      description: '列表滚动时触发，bottomDistance 表示元素滚动到底部的距离。',
-    })
-    onScroll: (event: {
-      bottomDistance: nasl.core.Integer;
-      type: 'source' | 'target';
-      e: {
-        altKey: nasl.core.Boolean;
-        button: nasl.core.Integer;
-        clientX: nasl.core.Integer;
-        clientY: nasl.core.Integer;
-        ctrlKey: nasl.core.Boolean;
-        metaKey: nasl.core.Boolean;
-        movementX: nasl.core.Integer;
-        movementY: nasl.core.Integer;
-        offsetX: nasl.core.Integer;
-        offsetY: nasl.core.Integer;
-        pageX: nasl.core.Integer;
-        pageY: nasl.core.Integer;
-        screenX: nasl.core.Integer;
-        screenY: nasl.core.Integer;
-        which: nasl.core.Integer;
-      };
-    }) => any;
+    // @Event({
+    //   title: '滚动时',
+    //   description: '列表滚动时触发，bottomDistance 表示元素滚动到底部的距离。',
+    // })
+    // onScroll: (event: {
+    //   bottomDistance: nasl.core.Integer;
+    //   type: 'source' | 'target';
+    //   e: {
+    //     altKey: nasl.core.Boolean;
+    //     button: nasl.core.Integer;
+    //     clientX: nasl.core.Integer;
+    //     clientY: nasl.core.Integer;
+    //     ctrlKey: nasl.core.Boolean;
+    //     metaKey: nasl.core.Boolean;
+    //     movementX: nasl.core.Integer;
+    //     movementY: nasl.core.Integer;
+    //     offsetX: nasl.core.Integer;
+    //     offsetY: nasl.core.Integer;
+    //     pageX: nasl.core.Integer;
+    //     pageY: nasl.core.Integer;
+    //     screenX: nasl.core.Integer;
+    //     screenY: nasl.core.Integer;
+    //     which: nasl.core.Integer;
+    //   };
+    // }) => any;
 
     @Slot({
       title: '来源底部内容',

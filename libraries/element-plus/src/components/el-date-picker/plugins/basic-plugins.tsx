@@ -44,7 +44,7 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const type = props.get('type') ?? 'date';
       const isRange = type.includes('range');
       const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-      const valueFormat = props.get('valueFormat') ?? 'YYYY-MM-DD';
+      const valueFormat = props.get('valueFormat') ?? type === 'date' ? 'YYYY-MM-DD' : undefined;
       return {
         range: isRange,
         [$deletePropsList]: deletePropsList,
