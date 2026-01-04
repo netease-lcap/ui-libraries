@@ -6,13 +6,13 @@
         @keydown.right.prevent="horizontalShift(+1)"
         @keydown.esc.stop="close()"
         @keydown.enter="$refs.popper.currentOpened ? onEnter() : open()"
-        :disabled="disabled"
+        :disabled="computedDisabled"
         :readonly="readonly"
         :preview="isPreview">
         <span v-if="isPreview">{{ currentValue || '--' }}</span>
         <u-input v-if="!isPreview" :class="$style.input" :opened="currentOpened"
             :placeholder="placeholder" :readonly="!filterable || readonly"
-            :value="currentValue" :disabled="disabled"
+            :value="currentValue" :disabled="computedDisabled"
             @focus="focus" @blur="blur"
             @input="onInput"
             @clear="clear"
@@ -20,7 +20,7 @@
             :color="formItemVM && formItemVM.color"
             :autofocus="autofocus"
             ref="input">
-            <m-popper v-if="!disabled && !readonly && !isPreview" :class="$style.popperShape" ref="popper"
+            <m-popper v-if="!computedDisabled && !readonly && !isPreview" :class="$style.popperShape" ref="popper"
                 @mousedown.stop.prevent
                 @open="getSubComponents(true)" @close="resetInput">
                 <div v-if="loading" :class="$style.loading"><u-loading></u-loading></div>
@@ -47,7 +47,7 @@
                 </template>
             </m-popper>
         </u-input>
-        <span v-show="clearable && currentValue && !disabled && !readonly && !isPreview" :class="[$style.clearable, {[$style.useIcon]: !!clearIcon}]" @click="clear" @mousedown.prevent>
+        <span v-show="clearable && currentValue && !computedDisabled && !readonly && !isPreview" :class="[$style.clearable, {[$style.useIcon]: !!clearIcon}]" @click="clear" @mousedown.prevent>
           <i-ico :name="clearIcon" v-if="clearIcon" notext :class="$style.icon"></i-ico>
         </span>
         <i-ico :name="suffixIcon" notext :class="$style.icon" v-if="suffixIcon && !isPreview"></i-ico>
@@ -65,6 +65,9 @@ import treeDataSource from '../../mixins/tree.datasource';
 
 export default {
     name: 'u-cascader',
+    inject: {
+        formVM: { default: null },
+    },
     components: { UCascaderItem, UInput },
     mixins: [
       MField,
@@ -89,7 +92,7 @@ export default {
         readonly: 'readonly',
         preview: 'isPreview',
         opened: 'currentOpened',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       }),
     ],
     props: {
@@ -160,6 +163,9 @@ export default {
         };
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         dynamicStyle() {
             if (this.filterHightlighterColor) {
                 return {
@@ -540,7 +546,7 @@ export default {
             this.$refs.popper && this.$refs.popper.toggle(opened);
         },
         clear(...args) {
-            if (this.readonly || this.disabled || this.isPreview) {
+            if (this.readonly || this.computedDisabled || this.isPreview) {
                 return;
             }
             this.currentValue = this.handleEmptyValue('');

@@ -70,6 +70,18 @@ namespace nasl.ui {
       }
     })
     private inputAlign: 'left' | 'center' | 'right' = 'left';
+
+    @Prop({
+      group: '状态属性',
+      title: '禁用',
+      description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
+      setter: {
+        concept: "SwitchSetter"
+      },
+      settable: true,
+    })
+    disabled: nasl.core.Boolean = false;
+
     @Event({
       title: '验证通过',
       description: '提交表单且验证通过后触发'
@@ -209,6 +221,7 @@ namespace nasl.ui {
       }
     })
     border: nasl.core.Boolean = true;
+
     @Slot({
       title: '组件插槽',
       description: '插入自定义输入框'

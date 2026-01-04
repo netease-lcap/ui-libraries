@@ -1,5 +1,5 @@
 <template>
-<div 
+<div
     :class="$style.root"
     :style="getStyle()"
     :direction="direction"
@@ -42,6 +42,9 @@ import UPreview from '../u-text.vue/preview.vue';
 
 export default {
     name: 'u-radios',
+    inject: {
+        formVM: { default: null },
+    },
     childName: 'u-radio',
     components: {
         URadio,
@@ -61,7 +64,7 @@ export default {
         },
         readonly: 'readonly',
         preview: 'isPreview',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       }),
     ],
     props: {
@@ -79,6 +82,11 @@ export default {
             currentText: null,
             isSetColumn: false
         };
+    },
+    computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
     },
     watch: {
         value(value, oldValue) {
@@ -118,7 +126,7 @@ export default {
                 );
         },
         select(itemVM) {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             const oldValue = this.value;
             let cancel = false;
@@ -157,8 +165,8 @@ export default {
                     display: 'grid',
                     gridTemplateColumns: `repeat(${this.column}, calc(100% / ${this.column}))`
                 }
-            } 
-            
+            }
+
             this.isSetColumn = isSetColumn
             return styles
         },

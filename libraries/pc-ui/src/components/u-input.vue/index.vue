@@ -1,11 +1,11 @@
 <template>
-<div v-if="!isPreview" :class="$style.root" :readonly="readonly" :disabled="disabled" :color="currentColor || formItemVM && formItemVM.color"
+<div v-if="!isPreview" :class="$style.root" :readonly="readonly" :disabled="computedDisabled" :color="currentColor || formItemVM && formItemVM.color"
     :focus="focused" :clearable="clearable && currentValue" :prefix="prefix || false" :suffix="suffix || false"
     :show-password="showPassword" :password="password"
     @click.self="!focused && focus()">
     <span :class="$style.baseline">b</span><!-- 用于基线对齐 -->
     <span :class="$style.placeholder" v-show="placeholder">{{ valueEmpty ? placeholder : '' }}</span><!-- 兼容 IE9 -->
-    <span v-if="prefix || $slots.prefix" :class="$style.prefix" @click="!disabled && $emit('click-prefix', $event, this)" :name="prefix">
+    <span v-if="prefix || $slots.prefix" :class="$style.prefix" @click="!computedDisabled && $emit('click-prefix', $event, this)" :name="prefix">
         <slot name="prefix">
             <i-ico
                 v-if="prefix !== 'If'"
@@ -17,20 +17,20 @@
     </span>
     <!-- <i-ico v-else-if="prefix" notext :name="prefix" :class="$style.prefix" @click="$emit('click-prefix', $event, this)"></i-ico> -->
     <input ref="input" :class="$style.input" v-bind="$attrs" :type="curType" :value="currentValue"
-        v-focus="autofocus" :readonly="readonly" :disabled="disabled"
+        v-focus="autofocus" :readonly="readonly" :disabled="computedDisabled"
         @input="onInput" @focus="onFocus" @blur="onBlur"
         @keypress="onKeypress" @keydown="onKeydown" @keyup="onKeyup"
         v-on="listeners"
         @compositionstart="onCompositionStart"
         @compositionend="onCompositionEnd"
         @keydown.enter="onEnter"
-        :title="!showTitle || (!valueEmpty && !disabled) ? null : ($attrs.title || placeholder)">
+        :title="!showTitle || (!valueEmpty && !computedDisabled) ? null : ($attrs.title || placeholder)">
     <slot></slot>
     <span :class="$style.suffix" v-if="password || suffix || clearable">
         <span :class="[$style.password, { [$style.useIcon]: !!passwordIcon }]" v-if="password" @click.stop="togglePassword">
           <i-ico v-if="passwordIcon" :name="passwordIcon"></i-ico>
         </span>
-        <span v-if="suffix" @click="!disabled && $emit('click-suffix', $event, this)">
+        <span v-if="suffix" @click="!computedDisabled && $emit('click-suffix', $event, this)">
             <slot name="suffix">
                 <i-ico
                     :name="suffix"
@@ -65,6 +65,9 @@ export default {
         // IIco,
         UPreview
     },
+    inject: {
+        formVM: { default: null },
+    },
     directives: { focus },
     mixins: [
       MField,
@@ -73,7 +76,7 @@ export default {
         value: 'currentValue',
         readonly: 'readonly',
         preview: 'isPreview',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       }),
     ],
     props: {
@@ -138,8 +141,11 @@ export default {
             }
             return currentValue === undefined || currentValue === '' || currentValue === null;
         },
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         showClear() {
-          return this.clearable && !this.valueEmpty && !this.readonly && !this.disabled;
+          return this.clearable && !this.valueEmpty && !this.readonly && !this.computedDisabled;
         },
         passwordIcon() {
           return this.showPassword ? this.visibleIcon : this.invisibleIcon;
@@ -254,7 +260,7 @@ export default {
             this.$refs.input && this.$refs.input.blur();
         },
         clear() {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             const $event = { oldValue: this.currentValue, value: this.handleEmptyValue('') };
             if (this.$emitPrevent('before-clear', $event, this))
@@ -268,7 +274,7 @@ export default {
             this.$emit('clear', $event, this);
         },
         togglePassword() {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             const showPassword = this.curType === 'text';
             this.showPassword = !showPassword;

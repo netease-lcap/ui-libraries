@@ -1,6 +1,6 @@
 <template>
     <u-input v-if="!isPreview" ref="input" :class="$style.root" :button-display="buttonDisplay" :value="formattedValue"
-        :readonly="readonly" :disabled="disabled" :clearable="clearable"
+        :readonly="readonly" :disabled="computedDisabled" :clearable="clearable"
         @keydown.native.up.prevent="increase" @keydown.native.down.prevent="decrease" @keydown.native.enter="onEnter"
         @input="onInput" @focus="onFocus" @blur="onBlur" v-bind="$attrs" v-on="listeners" v-click-outside="handleClickOutside"
         :hide-buttons="hideButtons" :color="formItemVM && formItemVM.color" :prefix="!!showPrefix" :suffix="!!showSuffix" :clear-icon="clearIcon">
@@ -36,6 +36,9 @@ const isNil = (value) => (typeof value === 'string' && value.trim() === '') || v
 
 export default {
     name: 'u-number-input',
+    inject: {
+        formVM: { default: null },
+    },
     components: {
         UInput,
         UPreview,
@@ -49,7 +52,7 @@ export default {
         formattedValue: 'formattedValue',
         readonly: 'readonly',
         preview: 'isPreview',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       })
     ],
     props: {
@@ -182,6 +185,9 @@ export default {
         return data;
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         listeners() {
             const listeners = Object.assign({}, this.$listeners);
             ['input', 'change', 'focus', 'blur', 'update:value', 'sync:value'].forEach((prop) => {
@@ -354,7 +360,7 @@ export default {
          * @param {*} value 输入值
          */
         input(value) {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             value = this.fix(value);
             const oldValue = this.currentValue;
@@ -410,7 +416,7 @@ export default {
             this.preventBlur = true;
         },
         onInput(rawValue) {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             const parsedValue = isNil(rawValue) ? '' : this.currentFormatter.parse(rawValue); // 根据输入调整 fix 精度
             const currentPrecision = (this.currentPrecision = this.getCurrentPrecision(parsedValue));
