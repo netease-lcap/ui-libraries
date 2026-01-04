@@ -3,7 +3,7 @@
 import _ from 'lodash';
 import { type Ref } from 'vue';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-import { useControllableValue, useMemo, useCallback, useRef, useEffect,useRender } from '@/plugins/hooks';
+import { useControllableValue, useMemo, useCallback, useRef, useEffect, useRender } from '@/plugins/hooks';
 import { ElPagination } from '@/index';
 import { useRequestDataSource, useHandleMapField } from '@/plugins/common/dataSource';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
@@ -43,15 +43,7 @@ export default listComponentsBasicAccumulate
       const model = useRef(props.get('model'));
       const deletePropsList = props
         .get($deletePropsList)
-        .concat(
-          $dataSourceDeleteField,
-          'setValue',
-          'clickFn',
-          'setCurrentPage',
-          'setPageSize',
-          'pageProps',
-          'target',
-        );
+        .concat($dataSourceDeleteField, 'setValue', 'clickFn', 'setCurrentPage', 'setPageSize', 'target');
       const formMode = props.get('formMode');
       const render = useRender(
         (props, { attrs, slots }) => {
@@ -221,7 +213,7 @@ export default listComponentsBasicAccumulate
             </div>
           );
         });
-      }, [data, slots.default, value, selection]);
+      }, [dataList, slots.default, value, selection]);
       return {
         dataSource,
         ref: selfRef,

@@ -51,6 +51,9 @@ export default TableAccumulate.addPlugin({
       defaultValuePropName: 'defaultOrder',
       defaultValue: '',
       valuePropName: 'order',
+      onChange: (order) => {
+        emit('sync:state', 'order', orderMap[order]);
+      },
     });
 
     return {
