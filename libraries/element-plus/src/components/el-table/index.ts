@@ -6,6 +6,7 @@ import basicsPlugin from './plugins/index';
 import columnPlugin from './plugins/column';
 import columnDynamicPlugin from './plugins/column-dynamic';
 import { ElTableToolBar } from './plugins/table-toolbar';
+import { $deletePropsList } from '@/plugins/constants';
 import './index.css';
 
 function ElTableRegister(BaseComponent, plugin = {}, extend = true) {

@@ -698,16 +698,16 @@ namespace nasl.ui {
       },
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
-      selector: [
-        {
-          expression: 'this',
-          cssSelector: 'td',
-        },
-        {
-          expression: 'this.getElement(el=>el.slotTarget==="header")',
-          cssSelector: 'th',
-        },
-      ],
+      // selector: [
+      //   {
+      //     expression: 'this',
+      //     cssSelector: 'td',
+      //   },
+      //   {
+      //     expression: 'this.getElement(el=>el.slotTarget==="header")',
+      //     cssSelector: 'th',
+      //   },
+      // ],
 
       disableSlotAutoFill: [
         {
