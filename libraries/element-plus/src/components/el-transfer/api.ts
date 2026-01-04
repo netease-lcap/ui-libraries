@@ -6,7 +6,8 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       displaySlotConditions: {
-        option: "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
+        option:
+          "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",
@@ -46,8 +47,7 @@ namespace nasl.ui {
       title: '预览',
       description: '是否预览',
     })
-    preview: nasl.core.Boolean ;
-
+    preview: nasl.core.Boolean;
 
     @Method({
       title: '重新加载',
@@ -229,7 +229,11 @@ namespace nasl.ui {
       title: '改变后',
       description: '右侧列表元素变化时触发，当前值和发生移动的值以及移动方向',
     })
-    onChange: (event: { value: nasl.collection.List<V>; movedValue: nasl.collection.List<V>; type: 'source' | 'target' }) => any;
+    onChange: (event: {
+      value: nasl.collection.List<V>;
+      movedValue: nasl.collection.List<V>;
+      type: 'source' | 'target';
+    }) => any;
 
     @Event({
       title: '左侧选中变化',
@@ -287,7 +291,8 @@ namespace nasl.ui {
       idetype: 'container',
       bindStyleSelector: '.__cw-form-compose-input',
       displaySlotConditions: {
-        option: "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
+        option:
+          "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",
@@ -300,6 +305,11 @@ namespace nasl.ui {
       additionalAttribute: {
         valueField: '"value"',
         textField: '"label"',
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
       },
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
@@ -315,7 +325,14 @@ namespace nasl.ui {
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: ['slotDefault', 'useRangeValue', 'startFieldName', 'endFieldName', 'startInitialValue', 'endInitialValue'],
+        excludes: [
+          'slotDefault',
+          'useRangeValue',
+          'startFieldName',
+          'endFieldName',
+          'startInitialValue',
+          'endInitialValue',
+        ],
       },
       {
         name: 'ElTransfer',
@@ -329,7 +346,9 @@ namespace nasl.ui {
   })
   export class ElFormTransfer<T, V> extends ViewComponent {
     constructor(
-      options?: Partial<ElFormTransferOptions<T, V> & ElFormItemProOptions & Omit<ElTransferOptions<T, V>, keyof ElFormItemProOptions>>,
+      options?: Partial<
+        ElFormTransferOptions<T, V> & ElFormItemProOptions & Omit<ElTransferOptions<T, V>, keyof ElFormItemProOptions>
+      >,
     ) {
       super();
     }

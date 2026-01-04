@@ -215,6 +215,13 @@ namespace nasl.ui {
       //   prefixIconName: '"Clock"',
       //   clearIconName: '"CircleClose"',
       // },
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
     },
     extends: [
       {

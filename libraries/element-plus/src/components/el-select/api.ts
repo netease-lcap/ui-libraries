@@ -262,7 +262,7 @@ namespace nasl.ui {
       docDescription: '设置选择框右侧显示的图标，通常用于表示操作或状态。支持从图标库中选择或使用自定义图标。',
       setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
     })
-    suffixIcon: nasl.core.String='ArrowDown'
+    suffixIcon: nasl.core.String = 'ArrowDown';
 
     // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
@@ -519,6 +519,11 @@ namespace nasl.ui {
         valueField: '"value"',
         textField: '"text"',
         '@blur': '"($event)=>{throw\'stop blur!\'}"',
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",

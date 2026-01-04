@@ -431,6 +431,13 @@ namespace nasl.ui {
       translateBindingProperty: ["hasTip"],
       forceRefresh: 'parent',
       forceUpdateWhenAttributeChange: true,
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
       disableSlotAutoFill: [
         {
           slot: 'tip',

@@ -360,6 +360,13 @@ namespace nasl.ui {
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
       forceUpdateWhenAttributeChange: true,
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
     },
     extends: [
       {

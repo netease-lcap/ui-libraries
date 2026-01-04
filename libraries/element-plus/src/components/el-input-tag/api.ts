@@ -45,7 +45,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '标签类型',
       description: '选择标签的类型主题',
-      docDescription: '控制标签的视觉样式和主题色。默认：标准样式；成功：绿色主题；信息：蓝色主题；警告：橙色主题；危险：红色主题。',
+      docDescription:
+        '控制标签的视觉样式和主题色。默认：标准样式；成功：绿色主题；信息：蓝色主题；警告：橙色主题；危险：红色主题。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '默认' }, { title: '成功' }, { title: '信息' }, { title: '警告' }, { title: '危险' }],
@@ -238,6 +239,13 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
     },
     extends: [
       {
@@ -254,7 +262,11 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormInputTag extends ViewComponent {
-    constructor(options?: Partial<ElFormInputTagOptions & ElFormItemProOptions & Omit<ElInputTagOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<
+        ElFormInputTagOptions & ElFormItemProOptions & Omit<ElInputTagOptions, keyof ElFormItemProOptions>
+      >,
+    ) {
       super();
     }
   }

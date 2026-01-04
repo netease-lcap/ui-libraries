@@ -342,6 +342,13 @@ namespace nasl.ui {
           default: 'display: inline-block;',
         },
       },
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
       ignoreProperty: ['rules'],
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',

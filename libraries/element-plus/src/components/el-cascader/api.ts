@@ -687,6 +687,11 @@ namespace nasl.ui {
       additionalAttribute: {
         valueField: '"value"',
         textField: '"text"',
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",
