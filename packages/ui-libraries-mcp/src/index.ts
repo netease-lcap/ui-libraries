@@ -67,10 +67,13 @@ export function getComponentTools() {
           });
         }),
         new Promise((resolve) => {
+          eventBus.off(`${tool.name}___${refId}_result`);
           setTimeout(() => {
-            eventBus.off(`${tool.name}___${refId}_result`);
-            resolve(true);
-          }, 1500);
+            resolve({
+              type: 'success',
+              text: '操作成功',
+            });
+          }, 250);
         }),
       ]);
     },
