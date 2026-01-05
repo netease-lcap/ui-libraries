@@ -83,6 +83,9 @@ namespace nasl.ui {
       description: '原数据列表',
       sync: true,
       docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     source: nasl.collection.List<T>;
 
@@ -92,6 +95,9 @@ namespace nasl.ui {
       description: '目标数据列表',
       sync: true,
       docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     target: nasl.collection.List<T>;
 

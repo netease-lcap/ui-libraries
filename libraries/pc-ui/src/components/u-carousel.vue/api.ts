@@ -48,7 +48,9 @@ namespace nasl.ui {
             title: '数据源',
             description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
             designerValue: [{}],
-            bindOpen: true,
+            setter: {
+                concept: 'DataSourceSetter',
+            },
         })
         dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 

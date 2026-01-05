@@ -58,6 +58,9 @@ namespace nasl.ui {
       description: '步骤条的数据来源',
       docDescription: '设置步骤条的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       designerValue: [{}, {}, {}],
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
