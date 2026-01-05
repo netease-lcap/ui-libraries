@@ -787,6 +787,7 @@ export default createComponent({
             e,
             file: file.file,
             item: file,
+            rawFile: file.file,
           });
         },
         onProgress: (e) => {
@@ -802,6 +803,7 @@ export default createComponent({
               file: file.file,
               item: file,
               xhr,
+              rawFile: file.file,
             },
             this,
           );
@@ -838,6 +840,7 @@ export default createComponent({
               file: file.file,
               item: file,
               xhr,
+              rawFile: file.file,
             },
             this,
           );
@@ -856,6 +859,7 @@ export default createComponent({
               file: file.file,
               item: file,
               xhr,
+              rawFile: file.file,
             },
             this,
           );
