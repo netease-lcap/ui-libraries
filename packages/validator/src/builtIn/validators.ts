@@ -25,6 +25,7 @@ export const validators = {
   max: maxImpl,
   range: rangeImplement,
   pattern,
+  regex,
   is: (value: any, arg: any): boolean => value === arg,
   isNot: (value: any, arg: any): boolean => value !== arg,
   equals: (value: any, arg: any): boolean => isEqual(value, arg),
@@ -291,6 +292,24 @@ function pattern(
     flags += 'i';
   }
   return new RegExp(regExp.source, flags).test(value);
+}
+
+function regex(
+  value: any,
+  reg: {
+    pattern: string;
+    flags?: string;
+  },
+): boolean {
+  if (value === null || value === undefined) {
+    return false;
+  }
+
+  try {
+    return new RegExp(reg.pattern, reg.flags).test(value);
+  } catch (error) {
+    return false;
+  }
 }
 
 export default validators;
