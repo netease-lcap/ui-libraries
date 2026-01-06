@@ -12,6 +12,12 @@ function ElUploadRegister(BaseComponent, plugin = {}, extend = true) {
 
 const ElUpload = registerComponent(ElUploadPlus, {
   plugin: basicPlugin,
+  props: {
+    action: {
+      type: String,
+      default: '/upload',
+    },
+  },
 });
 
 const ElFormUpload = withFormItem(ElUpload, 'el-form-upload');
