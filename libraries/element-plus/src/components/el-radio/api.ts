@@ -73,6 +73,9 @@ namespace nasl.ui {
       title: '数据源',
       description: '单选框组的数据来源',
       docDescription: '设置单选框组的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: nasl.collection.List<T> | nasl.collection.List<T>;
 

@@ -330,7 +330,11 @@ namespace nasl.ui {
       description: '上传开始时触发'
     })
     onStart: (event: {
-      file: nasl.io.File;
+      file: {
+        name: nasl.core.String;
+        size: nasl.core.Integer;
+        type: nasl.core.String;
+      };
       item: {
         message: nasl.core.String;
         name: nasl.core.String;
@@ -340,13 +344,18 @@ namespace nasl.ui {
         uid: nasl.core.Integer;
         url: nasl.core.String;
       };
+      rawFile: nasl.io.File;
     }) => void;
     @Event({
       title: '上传中',
       description: '上传中进度'
     })
     onProgress: (event: {
-      file: nasl.io.File;
+      file: {
+        name: nasl.core.String;
+        size: nasl.core.Integer;
+        type: nasl.core.String;
+      };
       item: {
         message: nasl.core.String;
         name: nasl.core.String;
@@ -362,13 +371,18 @@ namespace nasl.ui {
           success: nasl.core.Boolean;
         };
       };
+      rawFile: nasl.io.File;
     }) => void;
     @Event({
       title: '上传成功时',
       description: '上传成功时触发'
     })
     onSuccess: (event: {
-      file: nasl.io.File;
+      file: {
+        name: nasl.core.String;
+        size: nasl.core.Integer;
+        type: nasl.core.String;
+      };
       item: {
         message: nasl.core.String;
         name: nasl.core.String;
@@ -384,13 +398,18 @@ namespace nasl.ui {
           success: nasl.core.Boolean;
         };
       };
+      rawFile: nasl.io.File;
     }) => void;
     @Event({
       title: '上传错误时',
       description: '上传报错时触发'
     })
     onError: (event: {
-      file: nasl.io.File;
+      file: {
+        name: nasl.core.String;
+        size: nasl.core.Integer;
+        type: nasl.core.String;
+      };
       item: {
         message: nasl.core.String;
         name: nasl.core.String;
@@ -406,6 +425,7 @@ namespace nasl.ui {
           success: nasl.core.Boolean;
         };
       };
+      rawFile: nasl.io.File;
     }) => void;
     @Slot({
       title: '配置文件上传图标'
