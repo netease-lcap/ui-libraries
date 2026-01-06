@@ -2,8 +2,9 @@
 import _ from 'lodash';
 import { FormProps } from 'element-plus';
 import { $formProvide } from '@/components/el-form/constants';
-import { useRef, useEffect } from '@/plugins/hooks';
+import { useRef, useEffect, useCallback } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
+// import { useCallback } from '../../../plugins/hooks';
 
 const FormBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElFormOptions, FormProps>();
 
@@ -11,6 +12,7 @@ export default FormBasicAccumulate.addPlugin({
   name: 'handleModelValue',
   handle(props) {
     const modelValue = props.get('model') ?? {};
+    const onValidate = props.get('onValidate', () => {});
     const model = useRef(modelValue);
     const provide = props.get('provide');
     const ref = props.get('ref');
@@ -49,6 +51,12 @@ export default FormBasicAccumulate.addPlugin({
           _.values(formItemList.value).forEach((item: any) => _.attempt(item.resetField));
         },
       }),
+      onValidate: useCallback(
+        (prop, isValid, message) => {
+          _.attempt(onValidate, { prop, isValid, message });
+        },
+        [onValidate],
+      ),
     };
   },
 }).addPlugin({

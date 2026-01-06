@@ -23,7 +23,7 @@ export default {
 export const Default = {
   name: '菜单栏',
   render: () => ({
-    template: `<el-menu :ellipsis="false" background-color="#545c64" text-color="#fff" style="color: #fff; padding: 0 20px;" active-text-color="#ffd04b" mode="horizontal" defaultActive="menu1">
+    template: `<el-menu :ellipsis="false" style="color:'#fff'; padding: 0 20px;background-color: #545c64;" active-text-color="#ffd04b" mode="horizontal" defaultActive="menu1">
       <template #left>
         <el-flex mode="flex" :gutter="12" alignment="center" style="min-width: 160px; margin-right: 12px;height: 100%;">
           <el-image fit="cover" src="/assets/lcap-logo-light.svg" style="width: 28px; height: 28px;"></el-image>

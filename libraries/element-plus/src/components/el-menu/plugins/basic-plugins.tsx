@@ -99,6 +99,7 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
     handle: (props) => {
       const router = props.get($router);
       const route = props.get($route);
+      const style = props.get('style', {});
       const auto = props.get('auto', true);
       const [active, setActive] = useControllableValue(props, {
         defaultValuePropName: 'defaultActive',
@@ -117,6 +118,10 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
 
       return {
         defaultActive: active,
+        style: {
+          ...style,
+          ...(style?.color ? { '--el-menu-text-color': style?.color } : {}),
+        },
       };
     },
   });

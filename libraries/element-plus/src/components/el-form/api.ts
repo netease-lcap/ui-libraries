@@ -341,11 +341,11 @@ namespace nasl.ui {
     // })
     // onSubmit: (event: { valid: nasl.core.Boolean; firstError: nasl.core.String }) => any;
 
-    // @Event({
-    //   title: '校验结束后',
-    //   description: '校验结束后触发',
-    // })
-    // onValidate: (event: { isValid: nasl.core.Boolean; firstError: nasl.core.String }) => any;
+    @Event({
+      title: '表单项校验后',
+      description: '任一表单项被校验后触发',
+    })
+    onValidate: (event: { prop: nasl.core.String; isValid: nasl.core.Boolean; message: nasl.core.String }) => any;
 
     @Slot({
       title: '表单内容',

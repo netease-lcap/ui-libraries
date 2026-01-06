@@ -137,6 +137,16 @@ namespace nasl.ui {
     })
     mode: 'horizontal' | 'vertical' = 'vertical';
 
+    @Prop({
+      group: '样式属性',
+      title: '启用菜单项省略',
+      description: '是否省略多余的子项（仅在横向模式生效）',
+      docDescription: '开启后，菜单项会自动省略，只显示图标。',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => _.mode === 'horizontal',
+    })
+    ellipsis: nasl.core.Boolean = false;
+
     @Prop<ElMenuOptions<T, V>, 'collapse'>({
       group: '主要属性',
       title: '折叠状态',
@@ -214,6 +224,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     auto: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '样式属性',
+      title: '当前激活菜单的文字颜色',
+      description: '当前激活菜单的文字颜色（仅支持 hex 格式）',
+      setter: { concept: 'InputSetter' },
+    })
+    activeTextColor: nasl.core.String = '#409EFF';
 
     @Event({
       title: '菜单激活时',
