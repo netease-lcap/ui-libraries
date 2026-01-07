@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     onChange(value) {
+      console.log(this.value,typeof this.value);
       console.log('change', value);
     },
     calendarChange(value) {
