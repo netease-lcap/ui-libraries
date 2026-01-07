@@ -123,11 +123,8 @@
           </span>
           <span
             :class="$style.tag"
-            v-if="
-              selectedVMs.length - collapseCounter >= 1 &&
-              selectedVMs.length !== 1
-            "
-            :style="{ 'padding-right': '6px' }">
+            v-if="selectedVMs.length - collapseCounter >= 1"
+            :style="{ 'padding-right': '6px', maxWidth: '100%' }">
             <span :class="$style['tag-text']"
               >+{{ selectedVMs.length - collapseCounter }}...</span
             >
