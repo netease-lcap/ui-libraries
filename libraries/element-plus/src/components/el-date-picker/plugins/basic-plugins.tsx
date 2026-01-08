@@ -68,8 +68,8 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const isRange = props.get('range');
       const startValue = props.get('startValue') as string;
       const endValue = props.get('endValue') as string;
-      const setStartValue = props.get('onUpdate:startValue') ?? (() => {});
-      const setEndValue = props.get('onUpdate:endValue') ?? (() => {});
+      const setStartValue = props.get('onUpdate:startValue') ?? (() => { });
+      const setEndValue = props.get('onUpdate:endValue') ?? (() => { });
       const isControlledTime = props.has('startValue') && props.has('endValue');
       const [value, setValue] = useControllableValue(props);
       const isEffectiveTime = isControlledTime
@@ -88,13 +88,13 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
 
       const timeValue = useMemo(
         () => getTimeValue({
-            isEffectiveTime,
-            isNilTime,
-            isControlledTime,
-            startValue,
-            endValue,
-            value,
-          }),
+          isEffectiveTime,
+          isNilTime,
+          isControlledTime,
+          startValue,
+          endValue,
+          value,
+        }),
         [isEffectiveTime, isNilTime, isControlledTime, startValue, endValue, value],
       );
       const rangeResult = {
@@ -112,10 +112,12 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
     handle(props) {
       const isRange = props.get('range');
       const [value, setValue] = useControllableValue(props);
+      const modelValue = (_.isNil(value) || _.isEmpty(value)) ? value : dayjs(value).toJSON();
       const result = {
-        modelValue: value,
-        'onUpdate:modelValue': _.wrap(setValue, (fn, time: Date | Array<Date> | null) => {
-          _.attempt(fn, time);
+        modelValue,
+        'onUpdate:modelValue': _.wrap(setValue, (fn, time: Date | null) => {
+          const modelValue = (_.isNil(time) || _.isEmpty(time)) ? time : dayjs(time).toJSON();
+          _.attempt(fn, modelValue);
         }),
       };
       return isRange ? {} : result;
