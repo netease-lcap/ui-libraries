@@ -113,7 +113,6 @@ export function registerComponent<T>(Component: any, options: any): any {
       const unsubscribe = subscribe((props: any) => {
         const ImmutableState = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
         const ImmutableProps = fromJS({ ...props.props });
-        console.log(ImmutableState.toJS(), '===');
         const commitState = scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
         const commitImmutableState = commitState;
@@ -135,7 +134,6 @@ export function registerComponent<T>(Component: any, options: any): any {
       watch(
         () => [props, attrs, slots, emit],
         ([props, attrs, slots, emit]) => {
-          console.log(props, attrs, '===');
           setValue(() => ({
             props: {
               ...props,
