@@ -1,18 +1,19 @@
 <template>
   <span class="root">
     <el-tooltip :content="text" v-bind="tooltipProps" :disabled="!showTooltip || !isOverflow">
-      <el-text ref="elTextRef" class="previewText" :text="text"></el-text>
+      <el-text ref="elTextRef" class="previewText">{{ text }}</el-text>
     </el-tooltip>
   </span>
 </template>
 
 <script>
 import _ from 'lodash';
-import { ElTooltip } from 'element-plus';
+import { ElTooltip, ElText } from 'element-plus';
 export default {
   name: 'el-preview',
   components: {
     ElTooltip,
+    ElText,
   },
   props: {
     text: {
