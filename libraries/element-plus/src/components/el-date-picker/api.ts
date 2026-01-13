@@ -251,18 +251,18 @@ namespace nasl.ui {
       ],
     })
     type:
-      | 'year'
-      | 'years'
-      | 'month'
-      | 'months'
       | 'date'
-      | 'dates'
-      | 'datetime'
-      | 'week'
-      | 'datetimerange'
       | 'daterange'
+      | 'datetime'
+      | 'datetimerange'
+      | 'year'
+      | 'yearrange'
+      | 'month'
       | 'monthrange'
-      | 'yearrange' = 'date';
+      | 'week'
+      | 'dates'
+      | 'months'
+      | 'years' = 'date';
 
     @Prop({
       group: '主要属性',
@@ -302,9 +302,24 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '值类型转化',
+      description: '',
+      setter: { concept: 'EnumSelectSetter' },
+      options: [{ title: 'auto' }, { title: 'string' }, { title: 'Integer' }],
+      onChange: [
+        {
+          clear: ['valueFormat'],
+        },
+      ],
+    })
+    converter: 'auto' | 'string' | 'Integer' = 'auto';
+
+    @Prop({
+      group: '主要属性',
       title: '绑定值的格式',
       description: '可选，绑定值的格式，例如：YYYY-MM-DD。 不指定则绑定值为 Date 对象',
       setter: { concept: 'InputSetter' },
+      if: (_) => _.converter === 'string',
     })
     valueFormat: nasl.core.String;
 

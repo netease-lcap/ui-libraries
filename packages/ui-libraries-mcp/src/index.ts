@@ -53,9 +53,9 @@ export function registerTool(tool: ComponentToolConfig) {
 export function getComponentTools() {
   return toolList.map((tool) => ({
     config: tool,
-    async handler(refId: string, ...arg: []) {
-      eventBus.emit(`${tool.name}___${refId}`, ...arg);
-      return Promise.race([
+    async handler({ refId, ...arg }) {
+      eventBus.emit(`${tool.name}___${refId}`, ...Object.values(arg));
+      const result = await Promise.race([
         new Promise((resolve, reject) => {
           eventBus.on(`${tool.name}___${refId}_result`, (success: boolean, ...result: any) => {
             eventBus.off(`${tool.name}___${refId}_result`);
@@ -76,6 +76,13 @@ export function getComponentTools() {
           }, 250);
         }),
       ]);
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result) }],
+        structuredContent: {
+          // success: true,
+          ...result,
+        },
+      };
     },
   }));
 }
