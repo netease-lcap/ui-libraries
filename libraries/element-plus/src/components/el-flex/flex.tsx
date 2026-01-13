@@ -11,7 +11,6 @@ export default defineComponent({
     const getChildSlots = useChildSlots();
     const formContext = inject(formContextKey);
 
-
     const style = computed(() => {
       return ['flex', 'form-flex'].includes(props.mode ?? '')
         ? {
@@ -29,24 +28,30 @@ export default defineComponent({
     function renderChildren() {
       const children: any[] = getChildSlots();
 
-      if (['flex', 'form-flex'].includes(props.mode ?? '')) {
-        return children;
-      }
+      // if (['flex', 'form-flex'].includes(props.mode ?? '')) {
+      return children;
+      // }
 
-      return children
-        .filter((child) => (isVNode(child) ? child.type !== Comment : true))
-        .map((child) => {
-          return cloneVNode(child, {
-            style: {
-              [props.direction === 'horizontal' ? 'marginRight' : 'marginBottom']: `${props.gutter}px`,
-            },
-          });
-        });
+      // return children
+      //   .filter((child) => (isVNode(child) ? child.type !== Comment : true))
+      //   .map((child) => {
+      //     return cloneVNode(child, {
+      //       style: {
+      //         [props.direction === 'horizontal' ? 'marginRight' : 'marginBottom']: `${props.gutter}px`,
+      //       },
+      //     });
+      //   });
     }
 
     return () => {
       return (
-        <div style={style.value as any} class={[props.mode === 'flex' ? 'el-flex' : 'el-flex--block', props.mode === 'form-flex' ? 'el-form-flex' : '']}>
+        <div
+          style={style.value as any}
+          class={[
+            props.mode === 'flex' ? 'el-flex' : 'el-flex--block',
+            props.mode === 'form-flex' ? 'el-form-flex' : '',
+          ]}
+        >
           {renderChildren()}
         </div>
       );

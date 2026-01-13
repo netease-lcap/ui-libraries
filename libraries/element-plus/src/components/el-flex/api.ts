@@ -217,6 +217,7 @@ namespace nasl.ui {
       setter: {
         concept: 'NumberInputSetter',
       },
+      if: (_) => _.mode === 'flex',
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 12;
 
