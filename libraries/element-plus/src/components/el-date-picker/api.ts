@@ -300,12 +300,14 @@ namespace nasl.ui {
     })
     rangeSeparator: nasl.core.String = '-';
 
-    @Prop({
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'converter'>({
       group: '主要属性',
       title: '值类型转化',
-      description: '',
-      setter: { concept: 'EnumSelectSetter' },
-      options: [{ title: 'auto' }, { title: 'string' }, { title: 'Integer' }],
+      description: '值类型转化',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '自动' }, { title: '自定义' }, { title: '时间戳' }],
+      },
       onChange: [
         {
           clear: ['valueFormat'],
