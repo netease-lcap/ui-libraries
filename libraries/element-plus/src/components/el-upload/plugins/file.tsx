@@ -23,6 +23,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    deleteIcon: {
+      type: String,
+      default: 'close',
+    },
   },
   setup(props) {
     const isHovered = ref(false);
@@ -118,7 +122,7 @@ export default defineComponent({
               />
               {/* 删除按钮 */}
               <ElIcon
-                name="Close"
+                name={props.deleteIcon}
                 style={{
                   fontSize: '16px',
                   marginRight: '4px',

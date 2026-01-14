@@ -40,9 +40,23 @@ export default InputBasicAccumulate.addAccumulate(idePlugin)
     handle: (props) => {
       const suffixIcon = props.get('suffixIcon');
       const prefixIcon = props.get('prefixIcon');
+      const onSuffixClick = props.get('onSuffixClick', () => {});
+      const onPrefixClick = props.get('onPrefixClick', () => {});
       return {
-        suffixIcon: getPropsIcon({ name: suffixIcon }),
-        prefixIcon: getPropsIcon({ name: prefixIcon }),
+        suffixIcon: getPropsIcon({
+          name: suffixIcon,
+          onClick: (e: Event) => {
+            e.stopPropagation();
+            _.attempt(onSuffixClick, e);
+          },
+        }),
+        prefixIcon: getPropsIcon({
+          name: prefixIcon,
+          onClick: (e: Event) => {
+            e.stopPropagation();
+            _.attempt(onPrefixClick, e);
+          },
+        }),
       };
     },
   })

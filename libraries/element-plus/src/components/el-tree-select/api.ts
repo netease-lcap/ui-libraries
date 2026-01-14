@@ -330,6 +330,19 @@ namespace nasl.ui {
       };
     }) => any;
 
+
+    @Event({
+      title: '数据加载成功时触发',
+      description: '数据加载成功时触发',
+    })
+    onSuccess: () => any;
+
+    @Event({
+      title: '清空时触发',
+      description: '清空时触发',
+    })
+    onClear: () => any;
+
     @Event({
       title: '节点选中状态改变时',
       description: '节点选中状态改变时触发',

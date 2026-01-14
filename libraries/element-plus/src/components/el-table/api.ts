@@ -460,6 +460,18 @@ namespace nasl.ui {
     onScroll: (event: any) => any;
 
     @Event({
+      title: '展开树形行后',
+      description: '展开行后触发',
+    })
+    onToggleTreeExpanded: (event: { item: T }) => any;
+
+    @Event({
+      title: '展开行变化',
+      description: '展开行变化',
+    })
+    onToggleExpanded: (event: { item: T }) => any;
+
+    @Event({
       title: '数据加载前触发',
       description: '数据加载前触发',
     })
@@ -515,7 +527,7 @@ namespace nasl.ui {
       forceUpdateWhenAttributeChange: true,
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
-      childAccept:false,
+      childAccept: false,
       disableSlotAutoFill: [
         {
           slot: 'default',

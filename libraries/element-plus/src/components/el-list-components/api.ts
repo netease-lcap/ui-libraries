@@ -43,6 +43,20 @@ namespace nasl.ui {
     })
     data: nasl.collection.List<T>;
 
+
+
+    @Method({
+      title: '带页码刷新',
+      description: '保持页码，重新加载',
+    })
+    loadTo(
+      @Param({
+          title: '页数',
+          description: '要刷新的页数',
+      })
+      page?: nasl.core.Integer,
+    ): void {}
+
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',
@@ -348,6 +362,19 @@ namespace nasl.ui {
       description: '每页显示条数改变时触发',
     })
     onSizeChange: (event: { page: nasl.core.Integer; pageSize: nasl.core.Integer }) => any;
+
+    @Event({
+      title: '数据加载前触发',
+      description: '数据加载前触发',
+    })
+    onBefore: () => any;
+
+    @Event({
+      title: '数据加载成功时触发',
+      description: '数据加载成功时触发',
+    })
+    onSuccess: () => any;
+
 
     @Event({
       title: '选中改变时',

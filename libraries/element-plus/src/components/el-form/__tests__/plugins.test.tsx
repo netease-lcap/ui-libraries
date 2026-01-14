@@ -5,97 +5,8 @@ import { $formProvide } from '@/components/el-form/constants';
 import FormBasicAccumulate from '../plugins/index';
 import FormItemPluginAccumulate from '../plugins/form-item-plugin';
 import { handleComponentInForm } from '../plugins/form-item';
+import { useControllableValue, useEffect, useMemo, useRef, useCallback } from '@/plugins/hooks';
 
-// // Mock lodash
-// vi.mock('lodash', () => ({
-//   default: {
-//     uniqueId: vi.fn((prefix) => `${prefix}123`),
-//     assign: vi.fn((target, ...sources) => Object.assign(target, ...sources)),
-//     cond: vi.fn((conditions) => (value) => {
-//       for (const [predicate, transform] of conditions) {
-//         if (predicate(value)) {
-//           return transform(value);
-//         }
-//       }
-//       return value;
-//     }),
-//     conforms: vi.fn((predicates) => (value) => {
-//       for (const [key, predicate] of Object.entries(predicates)) {
-//         if (!predicate(value[key])) {
-//           return false;
-//         }
-//       }
-//       return true;
-//     }),
-//     stubTrue: vi.fn(() => true),
-//     isObject: vi.fn((value) => typeof value === 'object' && value !== null),
-//     isArray: vi.fn((value) => Array.isArray(value)),
-//     mixin: vi.fn((obj) => {
-//       const _ = {};
-//       Object.assign(_, obj);
-//       return _;
-//     }),
-//     bind: vi.fn((fn, context) => fn.bind(context)),
-//     map: vi.fn((array, iteratee) => array.map(iteratee)),
-//     get: vi.fn((object, path, defaultValue) => {
-//       const keys = path.split('.');
-//       let result = object;
-//       for (const key of keys) {
-//         if (result && typeof result === 'object' && key in result) {
-//           result = result[key];
-//         } else {
-//           return defaultValue;
-//         }
-//       }
-//       return result;
-//     }),
-//     omit: vi.fn((object, keys) => {
-//       const result = { ...object };
-//       keys.forEach(key => delete result[key]);
-//       return result;
-//     }),
-//     forEach: vi.fn((collection, iteratee) => {
-//       if (Array.isArray(collection)) {
-//         collection.forEach(iteratee);
-//       } else if (collection && typeof collection === 'object') {
-//         Object.entries(collection).forEach(([key, value]) => iteratee(value, key));
-//       }
-//     }),
-//     keys: vi.fn((object) => Object.keys(object)),
-//     wrap: vi.fn((fn, wrapper) => (...args) => wrapper(fn, ...args)),
-//     attempt: vi.fn((fn, ...args) => {
-//       try {
-//         return fn(...args);
-//       } catch (error) {
-//         return error;
-//       }
-//     }),
-//     has: vi.fn((object, path) => {
-//       const keys = path.split('.');
-//       let result = object;
-//       for (const key of keys) {
-//         if (result && typeof result === 'object' && key in result) {
-//           result = result[key];
-//         } else {
-//           return false;
-//         }
-//       }
-//       return true;
-//     }),
-//     pick: vi.fn((object, keys) => {
-//       const result = {};
-//       keys.forEach(key => {
-//         if (key in object) {
-//           result[key] = object[key];
-//         }
-//       });
-//       return result;
-//     }),
-//     values: vi.fn((object) => Object.values(object)),
-//   },
-// }));
-
-// Mock validator
 vi.mock('@lcap/validator', () => ({
   default: vi.fn().mockImplementation(() => ({
     validate: vi.fn().mockResolvedValue(true),
@@ -132,14 +43,15 @@ vi.mock('@/utils', () => ({
 }));
 
 // Mock plugins
-vi.mock('@/plugins/hooks', () => ({
-  useRef: vi.fn((value) => ({ value })),
-  useMemo: vi.fn((fn) => fn()),
-  useEffect: vi.fn(),
-  fiberNode: {
-    setCurrentFiber: vi.fn(),
-  },
-}));
+// vi.mock('@/plugins/hooks', () => ({
+//   useRef: vi.fn((value) => ({ value })),
+//   useMemo: vi.fn((fn) => fn()),
+
+//   useEffect: vi.fn(),
+//   fiberNode: {
+//     setCurrentFiber: vi.fn(),
+//   },
+// }));
 
 // Mock constants
 vi.mock('@/components/el-form/constants', () => ({
@@ -169,7 +81,6 @@ describe('plugins/index.tsx', () => {
     });
 
     it('应该包含 handleModelValue 插件', () => {
-
       const handleModelValuePlugin = FormBasicAccumulate.getPluginMethodByName('handleModelValue');
       expect(handleModelValuePlugin).toBeDefined();
       if (handleModelValuePlugin) {
@@ -429,7 +340,6 @@ describe('plugins/index.tsx', () => {
         }),
       });
 
-
       const handleModelValuePlugin = combinedAccumulate.getPluginMethodByName('handleModelValue');
       const testPlugin = combinedAccumulate.getPluginMethodByName('testPlugin');
 
@@ -686,12 +596,12 @@ describe('plugins/form-item.tsx', () => {
           if (key === 'formTagName') return 'el-form-input';
           if (key === 'tagName') return 'el-input';
           if (key === 'inject') {
- return {
+            return {
               [$formProvide]: {
                 isInForm: true,
               },
             };
-}
+          }
           return undefined;
         }),
       };
@@ -717,12 +627,12 @@ describe('plugins/form-item.tsx', () => {
           if (key === 'formTagName') return 'el-form-input';
           if (key === 'tagName') return 'el-input';
           if (key === 'inject') {
- return {
+            return {
               [$formProvide]: {
                 isInForm: true,
               },
             };
-}
+          }
           return undefined;
         }),
       };
@@ -747,12 +657,12 @@ describe('plugins/form-item.tsx', () => {
           if (key === 'formTagName') return 'el-form-input';
           if (key === 'tagName') return 'el-input';
           if (key === 'inject') {
- return {
+            return {
               [$formProvide]: {
                 isInForm: false,
               },
             };
-}
+          }
           return undefined;
         }),
       };
@@ -777,12 +687,12 @@ describe('plugins/form-item.tsx', () => {
           if (key === 'formTagName') return 'el-form-input';
           if (key === 'tagName') return 'el-input';
           if (key === 'inject') {
- return {
+            return {
               [$formProvide]: {
                 isInForm: true,
               },
             };
-}
+          }
           return undefined;
         }),
       };
@@ -832,7 +742,7 @@ describe('plugins/form-item.tsx', () => {
           if (key === 'formTagName') return 'el-form-complex-input';
           if (key === 'tagName') return 'el-complex-input';
           if (key === 'inject') {
- return {
+            return {
               [$formProvide]: {
                 isInForm: true,
                 value: { test: 'value' },
@@ -842,7 +752,7 @@ describe('plugins/form-item.tsx', () => {
                 preview: false,
               },
             };
-}
+          }
           return undefined;
         }),
       };
@@ -891,12 +801,12 @@ describe('plugins/form-item.tsx', () => {
             if (key === 'formTagName') return 'el-form-input';
             if (key === 'tagName') return 'el-input';
             if (key === 'inject') {
- return {
+              return {
                 [$formProvide]: {
                   isInForm: true,
                 },
               };
-}
+            }
             return undefined;
           }),
         };

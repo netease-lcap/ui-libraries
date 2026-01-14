@@ -29,6 +29,8 @@ interface Options {
   trigger?: string;
   onChange?: (...args: any[]) => void;
   onValueEffect?: (...args: any[]) => void;
+  beforeChange?: (...args: any[]) => boolean;
+  afterChange?: (...args: any[]) => void;
 }
 interface Fiber {
   workInProgressState: Hook;
@@ -217,7 +219,7 @@ export function useMemo<T>(callBack: () => T, dep: any[]): T {
   }
   return hook.result;
 }
-export function useCallback<T extends(...args: any[]) => any>(callBack: T, dep: any[]): T {
+export function useCallback<T extends (...args: any[]) => any>(callBack: T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook: EffectHook;
@@ -302,6 +304,9 @@ export function useControllableValue<T = any>(
     }
   }, [propsValue, isControlled]);
   const onChange = (...args: any[]) => {
+    if (_.isFunction(options?.beforeChange) && !options?.beforeChange?.(...args)) {
+      return;
+    }
     if (isControlled) {
       emit(trigger, ...args);
     } else {
@@ -311,6 +316,7 @@ export function useControllableValue<T = any>(
     priorValue.value = _.get(args, 0, null);
     _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);
+    options?.afterChange?.(...args);
   };
   const value = isControlled ? propsValue : stateValue;
 

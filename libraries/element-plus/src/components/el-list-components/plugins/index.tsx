@@ -160,6 +160,9 @@ export default listComponentsBasicAccumulate
       const formMode = props.get('formMode');
       const currentPage = props.get('currentPage');
       const pagination = props.get('pagination', 'none');
+
+      const onBefore = props.get('onBefore', () => {});
+      const onSuccess = props.get('onSuccess', () => {});
       const pageSize = props.get('pageSize');
       const pageProps = props.get('pageProps');
       const selection = props.get('selectionMode');
@@ -176,6 +179,8 @@ export default listComponentsBasicAccumulate
         loading,
       } = useRequestDataSource(dataSource, {
         defaultParams,
+        onBefore: (params) => _.attempt(onBefore, params),
+        onSuccess: (data, params) => _.attempt(onSuccess, data, params),
         formatResult: (data, resultData) => loadMoreFormatResult(pagination)(formatResult(data), resultData),
       });
       const reload = (params) => {
@@ -187,7 +192,9 @@ export default listComponentsBasicAccumulate
         dataSource: resultData.list as any,
       });
       const dataList = formMode ? model.value : data;
-      const selfRef = _.assign(ref, { reload, data, getData: () => data });
+
+      const loadTo = useCallback((page) => reload({ currentPage: page }), [reload]);
+      const selfRef = _.assign(ref, { reload, loadTo, data, getData: () => data });
       const defaultSlots = useCallback(() => {
         return _.map(dataList, (item, index) => {
           return (
@@ -198,7 +205,6 @@ export default listComponentsBasicAccumulate
                 'is-selectable': selection && selection !== 'none',
               })}
             >
-              {/* {_.includes(value, _.get(item, 'value', item))} */}
               {_.isFunction(slots.default) ? (
                 slots.default({
                   item: item?.itemSource ?? item,

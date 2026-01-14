@@ -282,6 +282,18 @@ namespace nasl.ui {
     onClear: (event: any) => any;
 
     @Event({
+      title: '后缀图标点击时',
+      description: '后缀图标点击时触发',
+    })
+    onSuffixClick: (event: any) => any;
+
+    @Event({
+      title: '前缀图标点击时',
+      description: '前缀图标点击时触发',
+    })
+    onPrefixClick: (event: any) => any;
+
+    @Event({
       title: '点击时',
       description: '点击组件时触发',
     })

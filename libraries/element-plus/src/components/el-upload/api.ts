@@ -10,7 +10,7 @@ namespace nasl.ui {
         {
           slot: 'tip',
           expression: "!this.getAttribute('hasTip')?.value",
-        }
+        },
       ],
       forceUpdateWhenAttributeChange: 'preview',
     },
@@ -30,13 +30,13 @@ namespace nasl.ui {
       title: '禁用',
       description: '是否禁用上传组件',
     })
-    disabled: nasl.core.Boolean ;
+    disabled: nasl.core.Boolean;
 
     @Prop({
       title: '预览',
       description: '是否预览',
     })
-    preview: nasl.core.Boolean ;
+    preview: nasl.core.Boolean;
 
     @Method({
       title: '触发选择文件',
@@ -101,10 +101,7 @@ namespace nasl.ui {
       docDescription: '控制文件列表的数据格式。JSON：转换为JSON字符串格式；URL字符串：转换为URL字符串格式。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: 'JSON' },
-          { title: 'URL字符串' },
-        ],
+        options: [{ title: 'JSON' }, { title: 'URL字符串' }],
       },
     })
     converter: 'json' | 'simple' = 'simple';
@@ -130,29 +127,14 @@ namespace nasl.ui {
       group: '数据属性',
       title: '请求方法',
       description: 'HTTP请求方法',
-      docDescription: '设置上传请求的HTTP方法。POST：标准上传方法；GET：获取文件；PUT：更新文件；OPTIONS：预检请求；PATCH：部分更新。',
+      docDescription:
+        '设置上传请求的HTTP方法。POST：标准上传方法；GET：获取文件；PUT：更新文件；OPTIONS：预检请求；PATCH：部分更新。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: 'POST' },
-          { title: 'GET' },
-          { title: 'PUT' },
-          { title: 'OPTIONS' },
-          { title: 'PATCH' }
-        ],
+        options: [{ title: 'POST' }, { title: 'GET' }, { title: 'PUT' }, { title: 'OPTIONS' }, { title: 'PATCH' }],
       },
     })
-    method:
-      | 'POST'
-      | 'GET'
-      | 'PUT'
-      | 'OPTIONS'
-      | 'PATCH'
-      | 'post'
-      | 'get'
-      | 'put'
-      | 'options'
-      | 'patch' = 'POST';
+    method: 'POST' | 'GET' | 'PUT' | 'OPTIONS' | 'PATCH' | 'post' | 'get' | 'put' | 'options' | 'patch' = 'POST';
 
     @Prop({
       group: '数据属性',
@@ -295,6 +277,15 @@ namespace nasl.ui {
     ttlValue: nasl.core.Decimal;
 
     // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
+
+    @Prop({
+      group: '交互属性',
+      title: '删除图标',
+      description: '自定义删除图标',
+      setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
+    })
+    deleteIcon: nasl.core.String='Close';
+
     @Prop({
       group: '样式属性',
       title: '文件数量限制',
@@ -319,14 +310,22 @@ namespace nasl.ui {
       description: '文件列表类型',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '文本' },
-          { title: '图片' },
-          { title: '图片卡片' },
-        ],
+        options: [{ title: '文本' }, { title: '图片' }, { title: '图片卡片' }],
       },
     })
     listType: 'text' | 'picture' | 'picture-card' = 'text';
+
+    @Prop({
+      group: '主要属性',
+      title: '文件校验',
+      description: '文件校验函数，可自定义校验规则，如文件名称包含特殊字符等，返回string类型的出错信息',
+      docDescription: '文件校验函数，可自定义校验规则，如文件名称包含特殊字符等，返回string类型的出错信息',
+      setter: {
+        concept: 'AnonymousFunctionSetter',
+      },
+      bindOpen: true,
+    })
+    checkFile: (fileInfo: nasl.io.FileInfo) => nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -341,7 +340,7 @@ namespace nasl.ui {
       title: '上传按钮文本',
       description: '上传按钮文本',
       setter: { concept: 'InputSetter' },
-      if: (_) => _.autoUpload !== true
+      if: (_) => _.autoUpload !== true,
     })
     triggerUploadText: nasl.core.String = '上传到服务器';
 
@@ -350,10 +349,10 @@ namespace nasl.ui {
       title: '是否显示上传按钮',
       description: '是否显示上传按钮',
       setter: { concept: 'SwitchSetter' },
-      if: (_) => _.autoUpload !== true
+      if: (_) => _.autoUpload !== true,
     })
     showUploadButton: nasl.core.Boolean = false;
-        
+
     @Prop({
       group: '状态属性',
       title: '禁用',
@@ -428,7 +427,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      translateBindingProperty: ["hasTip"],
+      translateBindingProperty: ['hasTip'],
       forceRefresh: 'parent',
       forceUpdateWhenAttributeChange: true,
       additionalAttribute: {
@@ -442,18 +441,16 @@ namespace nasl.ui {
         {
           slot: 'tip',
           expression: "!this.getAttribute('hasTip')?.value",
-        }
+        },
       ],
     },
     extends: [
       {
-        name: 'ElUpload'
+        name: 'ElUpload',
       },
       {
         name: 'ElFormItemPro',
-        excludes: [
-          'slotDefault',
-        ],
+        excludes: ['slotDefault'],
       },
     ],
   })
@@ -463,7 +460,9 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormUpload extends ViewComponent {
-    constructor(options?: Partial<ElFormUploadOptions & ElFormItemProOptions & Omit<ElUploadOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormUploadOptions & ElFormItemProOptions & Omit<ElUploadOptions, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }

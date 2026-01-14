@@ -46,11 +46,18 @@ export default TreeSelectBasicAccumulate.addAccumulate(idePlugin)
       const valueField = props.get('valueField', 'value');
       const parentField = props.get('parentField');
       const emit = props.get('emit');
+      const onSuccess = props.get('onSuccess', () => {});
       const deletePropsList = props
         .get($deletePropsList)
         .concat(['data-nodepath', 'textField', 'valueField', 'parentField', 'childrenField']);
       const ref = props.get('ref');
-      const { data, run: reload, loading } = useRequestDataSource(dataConfig, {});
+      const {
+        data,
+        run: reload,
+        loading,
+      } = useRequestDataSource(dataConfig, {
+        onSuccess: (data, params) => _.attempt(onSuccess, data, params),
+      });
       const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
       const TreeData = useMemo(() => useDataSourceToTree(dataSource, parentField, valueField), [dataSource]);
       emit('sync:state', 'data', TreeData);

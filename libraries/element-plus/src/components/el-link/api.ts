@@ -266,5 +266,30 @@ namespace nasl.ui {
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
     }) => any;
+
+    @Event({
+      title: '失焦时',
+      description: '失焦时触发',
+    })
+    onBlur: (event: any) => any;
+    @Event({
+      title: '切换路由前',
+      description: '使用 router 相关属性切换路由前触发',
+  })
+  onBeforeNavigate: (event: {
+      to: nasl.core.String;
+      replace: nasl.core.Boolean;
+      append: nasl.core.Boolean;
+  }) => any;
+
+  @Event({
+      title: '切换路由后',
+      description: '使用 router 相关属性切换路由后触发',
+  })
+  onNavigate: (event: {
+      to: nasl.core.String;
+      replace: nasl.core.Boolean;
+      append: nasl.core.Boolean;
+  }) => any;
   }
 }

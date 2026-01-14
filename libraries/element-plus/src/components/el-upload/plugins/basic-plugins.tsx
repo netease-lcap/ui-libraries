@@ -98,7 +98,7 @@ export function removeValueByList(list: UploadFile[]) {
 const UploadBasicAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElUploadOptions,
   UploadContentProps & {
-    'onUpdate:modelValue':(value: string) => void;
+    'onUpdate:modelValue': (value: string) => void;
     'onUpdate:fileList': (value: UploadFile[]) => void;
     'onUpdate:onRemove': (value: (uploadFile: UploadFile, fileList: UploadFile[]) => void) => void;
     'onUpdate:onChange': (value: (uploadFile: UploadFile, fileList: UploadFile[]) => void) => void;
@@ -130,7 +130,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const updateRef = useRef<any>({});
       const onPreview = props.get('onPreview');
       const imageRef = useRef<{ dialogImageUrl?: string }>({});
-      const dialogRef = useRef<{ open?:() => void }>({});
+      const dialogRef = useRef<{ open?: () => void }>({});
       const urlField = props.get('url-field') || 'filePath';
       if (listType !== 'picture-card') {
         return {};
@@ -259,10 +259,16 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const beforeUpload = props.get('onBeforeUpload', () => {});
       const beforeRemove = props.get('onBeforeRemove', () => {});
       const fileSizeLimit = props.get('fileSizeLimit');
+      const checkFile = props.get('checkFile', () => {});
       const exceed = props.get('onExceed');
       const limit = props.get('limit');
       return {
         beforeUpload: (rawFile: UploadRawFile) => {
+          const checkFileResult = _.attempt(checkFile, rawFile as any);
+          if (checkFileResult) {
+            ElMessage.error(checkFileResult);
+            return false;
+          }
           if (fileSizeLimit && rawFile.size > fileSizeLimit * 1024 * 1024) {
             ElMessage.error(`文件大小超过 ${fileSizeLimit} MB，请删除部分文件后继续。`);
             return false;
@@ -308,7 +314,8 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
           }
         : {};
 
-      const pictureCardSlot = listType === 'picture-card'
+      const pictureCardSlot =
+        listType === 'picture-card'
           ? {
               trigger: (
                 <ElFlex direction="column" alignment="center">
@@ -318,7 +325,8 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
             }
           : {};
 
-      const uploadSlot = !autoUpload && showUploadButton
+      const uploadSlot =
+        !autoUpload && showUploadButton
           ? {
               default: (
                 <ElButton
@@ -348,6 +356,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const setValue = props.get('setValue');
       const urlField = props.get('urlField') || 'filePath';
       const converter = props.get('converter') || 'simple';
+      const deleteIcon = props.get('deleteIcon') ?? 'close';
       const disabled = props.get('disabled');
       const slots = props.get('slots');
       const fileSlot = {
@@ -357,6 +366,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
               file={file}
               index={index}
               disabled={disabled}
+              deleteIcon={deleteIcon}
               onRemove={() => {
                 _.attempt(onRemove, file, fileList);
                 setValue(

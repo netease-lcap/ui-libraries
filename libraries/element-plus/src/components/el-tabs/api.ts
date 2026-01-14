@@ -92,6 +92,17 @@ namespace nasl.ui {
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
 
+    @Prop({
+      group: '数据属性',
+      title: '使用路由',
+      description: '开启后，选项卡可设置跳转页面',
+      docDescription: '开启后，选项卡可设置跳转页面',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    router: nasl.core.Boolean = false;
+
     @Prop<ElTabsOptions<T, V>, 'tabPaneProps'>({
       group: '数据属性',
       title: '标签页属性设置',
@@ -233,6 +244,30 @@ namespace nasl.ui {
       description: '点击 tabs 的新增按钮或 tab 被关闭后触发',
     })
     onEdit: (event: { value: nasl.core.String; action: 'add' | 'remove' }) => void;
+
+    @Event({
+      title: '数据加载前触发',
+      description: '数据加载前触发',
+    })
+    onBefore: () => any;
+
+    @Event({
+      title: '数据改变前触发',
+      description: '数据加载前触发',
+    })
+    onBeforeChange: (event: { value: V }) => nasl.core.Boolean;
+
+    @Event({
+      title: '数据改变后触发',
+      description: '数据改变后触发',
+    })
+    onAfterChange: (event: { value: V }) => void;
+
+    @Event({
+      title: '数据加载成功时触发',
+      description: '数据加载成功时触发',
+    })
+    onSuccess: () => any;
 
     @Slot({
       title: '标签页',

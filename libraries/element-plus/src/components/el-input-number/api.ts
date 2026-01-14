@@ -132,6 +132,15 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '可清空',
+      description: '是否允许清空输入内容',
+      docDescription: '开启后，当输入框有内容时会显示清空按钮，用户可以点击清空所有输入内容。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    clearable: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '控制按钮',
       description: '是否使用控制按钮',
       setter: { concept: 'SwitchSetter' },

@@ -486,6 +486,20 @@ export const Example4 = {
             release: '1998-11-25',
             director: 'John Lasseter',
             runtime: 95,
+            children: [
+              {
+                id: 31,
+                date: '2016-05-01',
+                name: 'wangxiaohu',
+                address: 'No. 189, Grove St, Los Angeles',
+              },
+              {
+                id: 32,
+                date: '2016-05-01',
+                name: 'wangxiaohu',
+                address: 'No. 189, Grove St, Los Angeles',
+              },
+            ],
           },
           {
             hd: {
@@ -550,29 +564,18 @@ export const Example4 = {
     },
 
     methods: {
-      change(rows) {
-        this.selected = rows;
-        console.log(this, 'current');
+      change(...rows) {
+        // this.selected = rows;
+        console.log(rows);
       },
     },
     template: `
-    <el-table :data="testData" :tree-props="treeProps" row-key="id" @selection-change="change">
+    <el-table :data="testData" :tree-props="treeProps" row-key="id" @expand-change="change">
               <el-table-column type="selection" />
               <el-table-column prop="name" label="name" />
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />
-              <el-table-column type="editable" prop="runtime" label="runtime" >
-                <template #default="{ row }">
-                    <el-form-select  v-model:modelValue="row.runtime" :rules="[]" :preview="(row || {}).isPreview" v-dependencies.reload="[]" :dataSource="tableData" textField="" valueField="" descriptionField="">
-                    <el-option :value="true" label="是" title="">
-                        <el-text : text="是"></el-text>
-                    </el-option>
-                    <el-option :value="false" label="否">
-                        <el-text :text="否"></el-text>
-                    </el-option>
-                    </el-form-select>
-                </template>
-              </el-table-column>
+ 
             </el-table>
 `,
   }),

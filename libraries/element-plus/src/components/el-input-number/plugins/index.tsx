@@ -8,6 +8,7 @@ import { useSyncState } from '@/plugins/hooks';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
 import { $deletePropsList } from '@/plugins/constants';
+import { getPropsIcon } from '@/plugins/common/icon';
 
 const InputNumberBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElInputNumberOptions, InputNumberProps>();
 
@@ -62,6 +63,20 @@ export default InputNumberBasicAccumulate.addAccumulate(idePlugin)
         slots: _.assign({}, slots, {
           prefix: () => [prefix],
           suffix: () => [suffix],
+        }),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleClearable',
+    handle(props) {
+      const setValue = props.get('setValue');
+      const slots = props.get('slots');
+      const clearable = props.get('clearable');
+      const clearableSlot = clearable ? getPropsIcon({ name: 'CircleClose', onClick: () => setValue(null) }) : slots?.prefix;
+      return {
+        slots: _.assign({}, slots, {
+          suffix: clearableSlot,
         }),
       };
     },

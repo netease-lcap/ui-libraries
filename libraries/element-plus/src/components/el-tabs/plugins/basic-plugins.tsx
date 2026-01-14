@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import { ElTabPane, TabsProps } from 'element-plus';
 import { useControllableValue, useMemo } from '@/plugins/hooks';
-import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
+import { $router, $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -18,9 +18,19 @@ export default TabsAccumulate.addPlugin({
     const slots = props.get('slots');
     const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField);
     const ref = props.get('ref');
+
+    const onBefore = props.get('onBefore', () => {});
+    const onSuccess = props.get('onSuccess', () => {});
     const onTabClick = props.get('onTabClick') ?? (() => {});
 
-    const { data, run: reload, loading } = useRequestDataSource(dataConfig);
+    const {
+      data,
+      run: reload,
+      loading,
+    } = useRequestDataSource(dataConfig, {
+      onBefore: (params) => _.attempt(onBefore, params),
+      onSuccess: (data, params) => _.attempt(onSuccess, data, params),
+    });
     const dataSource = useHandleMapField({
       textField,
       valueField,
@@ -60,19 +70,42 @@ export default TabsAccumulate.addPlugin({
       }),
     };
   },
-}).addPlugin({
-  name: 'handleAddIcon',
-  handle(props) {
-    const addIcon = props.get('addIcon');
-    const slots = props.get('slots');
-    const onEdit = props.get('onEdit', () => {});
-    return {
-      slots: _.assign(slots, {
-        'add-icon': () => getPropsIcon({ name: addIcon }),
-      }),
-      onEdit: _.wrap(onEdit, (fn, paneName, action) => {
-        _.attempt(fn, { value: paneName, action });
-      }),
-    };
-  },
-});
+})
+  .addPlugin({
+    name: 'handleValue',
+    handle(props) {
+      const beforeChange = props.get('onBeforeChange', () => true);
+      const afterChange = props.get('onAfterChange', () => {});
+      const routerMeta = props.get($router);
+      const router = props.get('router');
+      const [value, setValue, valueProps] = useControllableValue(props, {
+        beforeChange,
+        afterChange,
+        onChange: (value) => {
+          if (router) {
+            routerMeta.push(value);
+          }
+        },
+      });
+      console.log(valueProps,'==');
+      return {
+        ...valueProps,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleAddIcon',
+    handle(props) {
+      const addIcon = props.get('addIcon');
+      const slots = props.get('slots');
+      const onEdit = props.get('onEdit', () => {});
+      return {
+        slots: _.assign(slots, {
+          'add-icon': () => getPropsIcon({ name: addIcon }),
+        }),
+        onEdit: _.wrap(onEdit, (fn, paneName, action) => {
+          _.attempt(fn, { value: paneName, action });
+        }),
+      };
+    },
+  });

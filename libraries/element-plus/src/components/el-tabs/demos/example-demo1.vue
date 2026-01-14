@@ -5,12 +5,13 @@
     <el-tab-pane label="Role" name="third">Role</el-tab-pane>
     <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
   </el-tabs>
+  {{ activeName }}
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
 
-const activeName = ref('first')
+const activeName = ref('second')
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)

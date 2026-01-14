@@ -33,6 +33,7 @@ const TableAccumulate = new PluginAccumulateTypes<
     PaginationProps & {
       onBefore:(params: any) => void;
       onSelectAll: (selection: any[]) => any;
+      onExpandChange:(row: any, expanded: boolean) => void;
       editTable: boolean;
     }
 >();
@@ -500,6 +501,30 @@ export default TableAccumulate.addPlugin({
           [onRowClickProps],
         ),
         ref,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleToggleExpanded',
+    handle(props) {
+      const onToggleExpanded = props.get('onToggleExpanded', () => {});
+      const onToggleTreeExpanded = props.get('onToggleTreeExpanded', () => {});
+      const onExpandChange = props.get('onExpandChange', () => {});
+      return {
+        onExpandChange: useCallback(
+          (row, expanded) => {
+            _.attempt(onExpandChange, row, expanded);
+            const isTreeExpanded = _.isBoolean(expanded) && expanded;
+            const isExpandRow = _.isArray(expanded);
+            if (isTreeExpanded) {
+              _.attempt(onToggleTreeExpanded, { item: row });
+            }
+            if (isExpandRow) {
+              _.attempt(onToggleExpanded, { item: row, expanded });
+            }
+          },
+          [onToggleExpanded, onToggleTreeExpanded],
+        ),
       };
     },
   });

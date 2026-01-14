@@ -46,6 +46,7 @@ export default SelectBasicAccumulate.addPlugin({
       const onSuccess = props.get('onSuccess', () => {});
       const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
       const ref = props.get('ref');
+
       const {
         data,
         run: reload,
@@ -71,29 +72,6 @@ export default SelectBasicAccumulate.addPlugin({
       };
     },
   })
-  // .addPlugin({
-  //   name: 'handleMaxCount',
-  //   handle(props) {
-  //     const maxCount = props.get('maxCount');
-  //     const multiple = props.get('multiple');
-  //     const modelValue = props.get('modelValue');
-  //     const dataProps = props.get('data');
-  //     const isDataProps = multiple && maxCount > 0 && !_.isEmpty(dataProps) && _.isArray(modelValue) && modelValue.length > maxCount;
-  //     const data = useMemo(
-  //       () => (isDataProps
-  //           ? _.map(dataProps, (item) => ({
-  //               ...item,
-  //               disabled: !_.includes(modelValue, item.value),
-  //             }))
-  //           : _.map(dataProps, (item) => _.assign(item, { disabled: false }))),
-  //       [isDataProps, dataProps],
-  //     );
-  //     return {
-  //       maxCount,
-  //       data,
-  //     };
-  //   },
-  // })
   .addPlugin({
     name: 'handleValueNotInData',
     handle(props) {
@@ -115,17 +93,18 @@ export default SelectBasicAccumulate.addPlugin({
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-            default: () => _.map(data, (item, index) => (
-              <ElOption {...item}>
-                {optionSlot ? slots?.item?.({ index, item: item?.itemSource ?? item } as any) : item.label}
-                {item.description && (
-                <el-text
-                  style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
-                  color="secondary"
-                  text={item.description}
-                />
+            default: () =>
+              _.map(data, (item, index) => (
+                <ElOption {...item}>
+                  {optionSlot ? slots?.item?.({ index, item: item?.itemSource ?? item } as any) : item.label}
+                  {item.description && (
+                    <el-text
+                      style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
+                      color="secondary"
+                      text={item.description}
+                    />
                   )}
-              </ElOption>
+                </ElOption>
               )),
           };
       return {
@@ -156,25 +135,8 @@ export default SelectBasicAccumulate.addPlugin({
   .addPlugin({
     name: 'handlePreview',
     handle(props) {
-      // const ref = props.get('ref');
-      // const Component = props.get('render');
       const isPreview = getIsPreview(props);
       const className = props.get('class');
-      // const data = props.get('data');
-      // const modelValue = props.get('modelValue');
-      // const valueList = _.isArray(modelValue) ? modelValue : [modelValue];
-      // const previewText = _.join(
-      //   _.map(valueList, (item) => _.get(_.find(data, { value: item }), 'label', '')),
-      //   ',',
-      // );
-
-      // const previewRender = (insProps) => {
-      //   const inIDE = !!props.get('data-nodepath');
-      //   const previewText = inIDE || _.isEmpty(insProps.previewText) ? '-' : insProps.previewText;
-      //   return <ElPreview text={previewText} />;
-      // };
-
-      // const { render, insRef } = getRender(Component, previewRender, isPreview);
 
       return isPreview
         ? {
@@ -245,8 +207,25 @@ export default SelectBasicAccumulate.addPlugin({
     name: 'handleIcon',
     handle(props) {
       const suffixIcon = props.get('suffixIcon');
+      const onClickSuffix = props.get('onClickSuffix', () => {});
       return {
-        suffixIcon: getPropsIcon({ name: suffixIcon }),
+        suffixIcon: getPropsIcon({
+          name: suffixIcon,
+          onClick: (e: Event) => {
+            e.stopPropagation();
+            _.attempt(onClickSuffix, e);
+          },
+        }),
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleAutoFocus',
+    handle(props) {
+      const ref = props.get('ref');
+      useEffect(() => {
+        ref.focus();
+      }, []);
+      return {};
     },
   });

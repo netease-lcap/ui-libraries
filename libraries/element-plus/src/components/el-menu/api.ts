@@ -39,6 +39,11 @@ namespace nasl.ui {
     group: 'Navigation',
   })
   export class ElMenu<T, V> extends ViewComponent {
+    @Prop({
+      title: '折叠状态',
+    })
+    collapse: nasl.core.Boolean = false;
+
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',

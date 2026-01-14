@@ -222,6 +222,8 @@ export const Example1 = {
         textField="lCAPDepartment.name"
         parentField="lCAPDepartment.parentDeptId"
         :dataSource="state.data"
+        clearable
+        @clear="console.log('clear')"
         
         placeholder="请选择"
         style="width: 240px"
