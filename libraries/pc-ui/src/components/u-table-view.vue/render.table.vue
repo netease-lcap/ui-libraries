@@ -377,7 +377,7 @@ export default {
           return this.valueField && this.$at(item, this.valueField) ? this.$at(item, this.valueField) : rowIndex;
         },
         number2Pixel(value) {
-            return isNumber(value) ? value + 'px' : '';
+            return isNumber(value) ? value + 'px' : value;
         },
         getStyle(type, columnVM, currentData) {
             const style = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.style);

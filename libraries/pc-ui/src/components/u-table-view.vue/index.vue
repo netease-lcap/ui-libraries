@@ -960,6 +960,19 @@ export default {
             } else
                 return dataSource;
         },
+        getWidthHeightWithoutPadding(el) {
+            const style = window.getComputedStyle(el);
+            const paddingTop = parseFloat(style.paddingTop) || 0;
+            const paddingBottom = parseFloat(style.paddingBottom) || 0;
+            const paddingLeft = parseFloat(style.paddingLeft) || 0;
+            const paddingRight = parseFloat(style.paddingRight) || 0;
+            const heightWithoutPadding = el.clientHeight - paddingTop - paddingBottom;
+            const widthWithoutPadding = el.clientWidth - paddingLeft - paddingRight;
+            return {
+                heightWithoutPadding,
+                widthWithoutPadding,
+            }
+        },
 
         handleResize(reComputedWidth = true) {
             if (this.resizeBodyHeight) {
@@ -1129,7 +1142,7 @@ export default {
                  */
                 if ((this.$el.style.height !== '' && this.$el.style.height !== 'auto')
                     || (this.$el.style.maxHeight !== '' && this.$el.style.maxHeight !== 'auto')) {
-                    const rootHeight = this.$el.offsetHeight;
+                    const rootHeight = this.$el.clientHeight;
                     if (rootHeight) {
                         // 如果使用 v-show 隐藏了，无法计算
                         const titleHeight = this.$refs.title ? this.$refs.title.offsetHeight : 0;
@@ -1137,7 +1150,14 @@ export default {
                         const headHeight = headEl ? headEl.offsetHeight : 0;
                         const paginationHeight = this.getPaginationHeight();
                         const footerHeight = this.$refs.footerRender ? this.$refs.footerRender.$el.offsetHeight : 0;
-                        this.bodyHeight = rootHeight - titleHeight - headHeight - paginationHeight - footerHeight;
+                        // 3280804555226368: 去掉padding高度，100%高度处理避免高度一直增长
+                        const heightWithoutPadding = this.getWidthHeightWithoutPadding(this.$el).heightWithoutPadding;
+                        const othersHeight = titleHeight + headHeight + paginationHeight + footerHeight;
+                        if (this.$el.style.height === '100%') {
+                            this.bodyHeight = `calc(100% - ${othersHeight}px)`
+                        } else {
+                            this.bodyHeight = heightWithoutPadding - othersHeight;
+                        }
                     }
                 } else {
                     this.bodyHeight = undefined;
@@ -1147,7 +1167,13 @@ export default {
                 if (this.$el.style.height !== '' && this.$el.style.height !== 'auto') {
                     const paginationHeight = this.getPaginationHeight();
                     const footerHeight = this.$refs.footerRender ? this.$refs.footerRender.$el.offsetHeight : 0;
-                    this.tableHeight = this.$el.offsetHeight - paginationHeight - footerHeight;
+                    const heightWithoutPadding = this.getWidthHeightWithoutPadding(this.$el).heightWithoutPadding;
+                    const othersHeight = paginationHeight + footerHeight;
+                    if (this.$el.style.height === '100%') {
+                        this.tableHeight = `calc(100% - ${othersHeight}px)`
+                    } else {
+                        this.tableHeight = heightWithoutPadding - othersHeight;
+                    }
                 } else {
                     this.tableHeight = undefined;
                 }
