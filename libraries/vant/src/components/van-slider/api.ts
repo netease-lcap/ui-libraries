@@ -124,6 +124,14 @@ namespace nasl.ui {
     readonly: nasl.core.Boolean = false;
 
     @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
+    @Prop({
       group: '主要属性',
       title: '反向',
       description: '是否反向',

@@ -15,6 +15,7 @@ import {
   getValidUnit,
 } from './utils-format';
 import { categoryProps } from '@/utils/dom';
+import preview from '../../../../../element-plus/.storybook/preview';
 
 export { handleControllableValue } from '@/plugins/common/index';
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
@@ -567,10 +568,11 @@ export function handleBasicRender(props: any) {
       readonly,
       disabled,
       popupShow,
+      preview,
     } = props;
     const { outerProps, innerProps } = categoryProps(props);
     const onFieldClick = () => {
-      if (disabled || readonly) {
+      if (disabled || readonly || preview) {
         return;
       }
       setPopupShow(true);

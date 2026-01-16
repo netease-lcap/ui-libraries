@@ -2,6 +2,7 @@ import { Checkbox as VanCheckboxOrigin, CheckboxGroup as VanCheckboxGroupOrigin 
 import { registerComponent } from '@/plugins';
 import * as plugins from './plugins';
 import { withFormItem } from '@/components/van-form/plugins/form-item';
+import './index.less';
 
 export const VanCheckbox = VanCheckboxOrigin;
 // registerComponent(VanCheckboxOrigin, {

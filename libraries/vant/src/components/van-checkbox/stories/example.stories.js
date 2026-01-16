@@ -105,17 +105,7 @@ export const Default = {
           :dataSource="dataSource"
         </van-checkbox-group>
         <van-form>
-        <van-form-checkbox-group 
-          v-bind="args"
-          textField="liu_form.property1"
-          valueField="liu_form.id"
-          :dataSource="dataSource"
-          @change="handleChange"
-          @click="handleClick">
-          <template #label>
-          <span>12</span>
-          </template>
-        </van-form-checkbox-group>
+
         </van-form>
         <p style="margin-top: 10px;">当前状态: {{ checked ? '选中' : '未选中' }}</p>
       </div>

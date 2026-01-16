@@ -16,7 +16,7 @@ export const Default = {
     setup() {
       return {
         args,
-        value: 1,
+        value: 3,
         handleChange(value) {
           console.log('步进器值改变:', value);
         },
@@ -24,7 +24,7 @@ export const Default = {
     },
     template: `
       <div style="padding: 20px;">
-        <van-stepper-number v-model="value" v-bind="args" @change="handleChange"></van-stepper-number>
+        <van-stepper-number :preview="true" v-model="value" v-bind="args" @change="handleChange"></van-stepper-number>
         <p style="margin-top: 10px;">当前值: {{ value }}</p>
       </div>
     `,

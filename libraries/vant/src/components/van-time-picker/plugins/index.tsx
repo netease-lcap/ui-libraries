@@ -262,7 +262,8 @@ function renderRangeContent(options: any) {
       v-slots={{ ...options.slots }}
       tabs={[props.startTimeTabTitle, props.endTimeTabTitle]}
       onCancel={props.onCancel}
-      onConfirm={props.onConfirm}>
+      onConfirm={props.onConfirm}
+    >
       <TimePicker
         {..._.pick(props, Object.keys(timePickerProps))}
         showToolbar={false}
@@ -327,11 +328,12 @@ export function handleBasicRender(props: any) {
       inLink,
       readonly,
       disabled,
+      preview,
       popupShow,
     } = props;
     const { outerProps, innerProps } = categoryProps(props);
     const onFieldClick = () => {
-      if (disabled || readonly) {
+      if (disabled || readonly || preview) {
         return;
       }
       setPopupShow(true);
@@ -373,7 +375,8 @@ export function handleBasicRender(props: any) {
           round
           closeOnClickOverlay={closeOnClickOverlay}
           {..._.pick(attrs, ['class', 'style'])}
-          {...innerProps}>
+          {...innerProps}
+        >
           <div class={bem('content-wrapper')}>
             {isRange === true
               ? renderRangeContent({

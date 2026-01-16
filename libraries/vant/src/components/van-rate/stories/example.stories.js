@@ -1,7 +1,7 @@
 import { VanRate } from '../index';
 
 export default {
-  title: 'Components/VanRate',
+  title: '组件列表/Rate 评分/示例',
   component: VanRate,
   parameters: {
     docs: {
@@ -92,9 +92,10 @@ const Template = (args, { argTypes }) => ({
         :touchable="touchable"
         @change="onChange"
         @click="onClick"
+        v-bind="args"
       />
       <div style="margin-top: 16px; color: #666;">
-        当前评分: {{ modelValue }}
+        当前评分: {{ args }}
       </div>
     </div>
   `,
@@ -166,4 +167,4 @@ Readonly.args = {
   ...Basic.args,
   readonly: true,
   modelValue: 4,
-}; 
+};

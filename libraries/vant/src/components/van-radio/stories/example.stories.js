@@ -22,10 +22,11 @@ export const Default = {
           { value: '3', text: '选项3' },
         ];
       };
+      const value = ref('1');
       return {
         args,
         dataSource,
-        value: ref('1'),
+        value,
         handleChange(value) {
           console.log('单选框值改变:', value);
         },
@@ -36,13 +37,12 @@ export const Default = {
         <van-radio-group 
           v-model="value" 
           v-bind="args" 
+          :preview="true"
           :dataSource="dataSource"
           value-field="value"
           text-field="text"
           @change="handleChange">
-          <template #item="{ current }">
-            <van-radio :name="current.value" >{{current.text}}</van-radio>
-          </template>
+
         </van-radio-group>
         <p style="margin-top: 10px;">当前选中: {{ value }}</p>
       </div>

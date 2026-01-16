@@ -429,8 +429,8 @@ namespace nasl.ui {
     onSelect: (event: { newSelection: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
 
     @Event({
-      title: '选中行变化时',
-      description: '选中行变化时触发',
+      title: '全选变化时',
+      description: '全选变化时',
     })
     onSelectAll: (event: { newSelection: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
 

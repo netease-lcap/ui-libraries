@@ -1,3 +1,4 @@
+import preview from '../../../../element-plus/.storybook/preview';
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
@@ -105,6 +106,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     disabled: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '是否预览',
+      description: '是否预览单选框组',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

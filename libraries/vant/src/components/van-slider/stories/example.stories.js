@@ -15,7 +15,7 @@ export const Default = {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     setup() {
-      const value = ref([0, 100]);
+      const value = 30
       return {
         args,
         value,
@@ -27,7 +27,7 @@ export const Default = {
     template: `
       <div style="padding: 20px;">
       {{value}}
-        <van-slider range buttonColor="#1989fa" v-model="value" v-bind="args" @change="handleChange"></van-slider>
+        <van-slider :preview="true"  buttonColor="#1989fa" v-model="value" v-bind="args" @change="handleChange"></van-slider>
         <p style="margin-top: 10px;">当前值: {{ value }}</p>
       </div>
     `,

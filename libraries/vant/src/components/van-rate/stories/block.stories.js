@@ -12,9 +12,13 @@ export default {
 export const Default = {
   name: 'Rate',
   render: () => ({
-    setup() {},
+    setup() {
+      return {
+        value: 3,
+      };
+    },
     template: `
-      <van-rate></van-rate>
+      <van-rate  v-model="value" :count="5"> </van-rate>
     `,
   }),
 };

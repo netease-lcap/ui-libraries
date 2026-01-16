@@ -146,6 +146,8 @@ export function handleFieldRender(props) {
         setSearchValue,
         filterable,
         optionSlot,
+        preview,
+        disabled,
         ...componentProps
       } = props;
       const rightIcon = clearable ? 'clear' : '';
@@ -154,7 +156,13 @@ export function handleFieldRender(props) {
       return [
         <Field
           placeholder={props.placeholder}
-          onClick={() => setShow(true)}
+          disabled={disabled}
+          onClick={() => {
+            if (preview || disabled) {
+              return;
+            }
+            setShow(true);
+          }}
           {..._.omit(outerProps, 'onUpdate:modelValue')}
           modelValue={fieldValue}
           readonly

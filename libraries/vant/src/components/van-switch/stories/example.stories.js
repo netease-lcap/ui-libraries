@@ -25,7 +25,7 @@ export const Default = {
     },
     template: `
       <div style="padding: 20px;">
-        <van-switch v-model="value" v-bind="args" @change="handleChange"></van-switch>
+        <van-switch :preview="true" v-model="value" v-bind="args" @change="handleChange"></van-switch>
         <p style="margin-top: 10px;">当前状态: {{ value ? '开启' : '关闭' }}</p>
       </div>
     `,

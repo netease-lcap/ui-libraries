@@ -1,3 +1,4 @@
+import { disableDateProps } from '../../../../element-ui/design/date-picker/hooks/useDisableDate';
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
@@ -207,6 +208,22 @@ namespace nasl.ui {
     })
     visibleOptionNum: nasl.core.Integer = 6;
 
+    @Prop({
+      group: '状态属性',
+      title: '禁用',
+      description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+    
     @Prop({
       group: '交互属性',
       title: '可搜索',

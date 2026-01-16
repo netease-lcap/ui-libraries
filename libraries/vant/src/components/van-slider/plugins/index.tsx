@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { useCallback } from '@/plugins/hooks';
 import { categoryStyles, categoryProps } from '@/utils/dom';
 import styles from '../index.module.css';
+import { previewRender } from '@/plugins/common/icon';
 
 export function handleDefaultValue(props) {
   const range = props.get('range');
@@ -38,5 +39,15 @@ export function handleWarp(props) {
     render,
     tagName: 'van-slider',
     formTagName: 'van-form-slider',
+  };
+}
+
+export function handlePreview(props) {
+  const modelValue = props.get('modelValue');
+  const text = _.isArray(modelValue) ? modelValue.join(' – ') : modelValue;
+  const render = previewRender(props, text);
+  if (!render) return {};
+  return {
+    render,
   };
 }

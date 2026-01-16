@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { Checkbox as VantCheckbox } from 'vant';
 import { useMemo } from '@/plugins/hooks';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
+import { addClass } from '@/utils';
 
 export { handleControllableValue } from '@/plugins/common/index';
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
@@ -18,7 +19,7 @@ export function handleDataSource(props) {
   const dataSource = useHandleMapField({
     textField,
     valueField,
-    label: 'test',
+    label: 'text',
     value: 'name',
     dataSource: useFormatDataSource(data),
   });
@@ -26,7 +27,11 @@ export function handleDataSource(props) {
   const dataSourceSlots = _.isNil(dataConfig)
     ? {}
     : {
-        default: () => _.map(dataSource, (item) => <VantCheckbox {...item}>{slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.text}</VantCheckbox>),
+        default: () => _.map(dataSource, (item) => (
+          <VantCheckbox {...item}>
+            {slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.text}
+          </VantCheckbox>
+          )),
       };
 
   return {
@@ -42,5 +47,16 @@ export function handleDataSource(props) {
       _.attempt(onChange, value);
       _.attempt(fn, value);
     }),
+  };
+}
+
+export function handlePreview(props) {
+  const preview = props.get('preview');
+  const className = props.get('class');
+  if (!preview) return {};
+  return {
+    direction: 'horizontal',
+    class: addClass(className, 'van-checkbox-group-preview'),
+    disabled: true,
   };
 }

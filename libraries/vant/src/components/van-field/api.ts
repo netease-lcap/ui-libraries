@@ -205,6 +205,14 @@ namespace nasl.ui {
     })
     error: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '主要属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
     // @Prop({
     //   group: '主要属性',
     //   title: '格式化函数',

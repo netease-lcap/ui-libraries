@@ -1,4 +1,5 @@
 import { Icon as VantIcon } from 'vant';
+import { VanText } from '@/index';
 
 export function handleIcon(props) {
   const clearIconName = props.get('clearIconName');
@@ -13,4 +14,12 @@ export function handleIcon(props) {
 
 export function getPropsIcon(props: any) {
   return props.name ? <VantIcon {...props} /> : null;
+}
+
+export function previewRender(props, previewText) {
+  if (!props.get('preview')) {
+    return null;
+  }
+  const text = previewText ?? props.get('modelValue');
+  return <VanText text={text} />;
 }

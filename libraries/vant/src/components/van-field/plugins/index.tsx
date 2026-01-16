@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { readonly } from '@vue/composition-api';
 import { useCallback } from '@/plugins/hooks';
 
 export { handleControllableValue } from '@/plugins/common/index';
@@ -24,5 +25,13 @@ export const handleInput = (props) => {
     onClear: () => {
       console.log('onClear');
     },
+  };
+};
+
+export const handlePreview = (props) => {
+  const preview = props.get('preview');
+  if (!preview) return {};
+  return {
+    readonly: true,
   };
 };

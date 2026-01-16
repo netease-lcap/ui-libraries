@@ -114,12 +114,17 @@ export function handleFieldRender(props) {
   const Component = props.get('render');
   const render = useCallback(
     (props, { attrs }) => {
-      const { setShow, show, value, setValue, fieldValue, clearable, mergeRef, ...componentProps } = props;
+      const { setShow, show, value, setValue, fieldValue, clearable, mergeRef, preview, ...componentProps } = props;
       const { outerProps, innerProps } = categoryProps(componentProps);
       const rightIcon = clearable ? 'clear' : '';
       return [
         <Field
-          onClick={() => setShow(true)}
+          onClick={() => {
+            if (preview) {
+              return;
+            }
+            setShow(true);
+          }}
           {..._.omit(outerProps, 'onUpdate:modelValue')}
           modelValue={fieldValue}
           readonly
