@@ -94,18 +94,17 @@ export default SelectBasicAccumulate.addPlugin({
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-            default: () =>
-              _.map(data, (item, index) => (
-                <ElOption {...item}>
-                  {optionSlot ? slots?.item?.({ index, item: item?.itemSource ?? item } as any) : item.label}
-                  {item.description && (
-                    <el-text
-                      style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
-                      color="secondary"
-                      text={item.description}
-                    />
+            default: () => _.map(data, (item, index) => (
+              <ElOption {...item}>
+                {optionSlot ? slots?.item?.({ index, item: item?.itemSource ?? item } as any) : item.label}
+                {item.description && (
+                <el-text
+                  style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
+                  color="secondary"
+                  text={item.description}
+                />
                   )}
-                </ElOption>
+              </ElOption>
               )),
           };
       return {
@@ -174,8 +173,8 @@ export default SelectBasicAccumulate.addPlugin({
       const remote = props.get('remote');
       if (!remote) return {};
       const emit = props.get('emit');
-      const remoteMethodProps = props.get('remoteMethod', () => {});
-      const onBeforeFilter = props.get('onBeforeFilter', () => {});
+      const remoteMethodProps = props.get('remoteMethod') ?? (() => {});
+      const onBeforeFilter = props.get('onBeforeFilter') ?? (() => {});
       const ref = props.get('ref');
       const remoteMethod = useCallback(
         (fn, query: string) => {

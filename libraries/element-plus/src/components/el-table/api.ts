@@ -429,6 +429,12 @@ namespace nasl.ui {
     onSelect: (event: { newSelection: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
 
     @Event({
+      title: '选中行变化时',
+      description: '选中行变化时触发',
+    })
+    onSelectAll: (event: { newSelection: nasl.collection.List<V>; items: nasl.collection.List<T> }) => any;
+
+    @Event({
       title: '分页发生变化时触发',
       description:
         '分页发生变化时触发。参数 newDataSource 表示分页后的数据。本地数据进行分页时，newDataSource 和源数据 data 会不一样。泛型 T 指表格数据类型',

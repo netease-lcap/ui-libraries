@@ -44,7 +44,7 @@ export const Example1 = {
       };
     },
     template: `
-    <el-select  ref="add" v-model="activeName" :dataSource="list" descriptionField="value">
+    <el-select suffixIcon="Setting" :filterable="true" :autoFocus="true" :remote="true" ref="add" v-model="activeName" :dataSource="list" descriptionField="value">
     
     </el-select>
 
