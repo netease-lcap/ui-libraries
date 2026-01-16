@@ -174,15 +174,18 @@ export default SelectBasicAccumulate.addPlugin({
       const remote = props.get('remote');
       if (!remote) return {};
       const emit = props.get('emit');
-      const remoteMethodProps = props.get('remoteMethod');
+      const remoteMethodProps = props.get('remoteMethod', () => {});
       const onBeforeFilter = props.get('onBeforeFilter', () => {});
       const ref = props.get('ref');
-      const remoteMethod = _.wrap(remoteMethodProps, (fn, query: string) => {
-        emit('sync:state', 'filterText', query);
-        _.attempt(onBeforeFilter, { filterText: query });
-        _.attempt(ref?.reload);
-        _.attempt(fn, query);
-      });
+      const remoteMethod = useCallback(
+        (fn, query: string) => {
+          emit('sync:state', 'filterText', query);
+          _.attempt(onBeforeFilter, { filterText: query });
+          _.attempt(ref?.reload);
+          _.attempt(remoteMethodProps, query);
+        },
+        [remoteMethodProps, onBeforeFilter],
+      );
       return {
         remoteMethod,
       };
@@ -217,18 +220,5 @@ export default SelectBasicAccumulate.addPlugin({
           },
         }),
       };
-    },
-  })
-  .addPlugin({
-    name: 'handleAutoFocus',
-    handle(props) {
-      const ref = props.get('ref');
-      const autoFocus = props.get('autoFocus');
-      useEffect(() => {
-        if (autoFocus) {
-          _.attempt(ref?.focus);
-        }
-      }, []);
-      return {};
     },
   });

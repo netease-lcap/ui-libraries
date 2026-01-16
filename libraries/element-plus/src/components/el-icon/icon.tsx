@@ -74,7 +74,7 @@ export default defineComponent({
     function renderChildren(): VNode<RendererNode, RendererElement> {
       // 处理SVG URL
       if (isSvgUrl(props.name)) {
-        return <OnlineSvgIcon name={props.name} {...props} />;
+        return <OnlineSvgIcon {...props} />;
       }
 
       let iconComponent = null;
