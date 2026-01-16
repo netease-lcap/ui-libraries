@@ -52,7 +52,7 @@ const OnlineSvgIcon = defineComponent({
     onMounted(fetchSvg);
 
     return () => (
-      <ElIconPlus>
+      <ElIconPlus {...props}>
         <span
           class="el-icon--online"
           innerHTML={svgContent.value}
@@ -74,7 +74,7 @@ export default defineComponent({
     function renderChildren(): VNode<RendererNode, RendererElement> {
       // 处理SVG URL
       if (isSvgUrl(props.name)) {
-        return <OnlineSvgIcon name={props.name} />;
+        return <OnlineSvgIcon name={props.name} {...props} />;
       }
 
       let iconComponent = null;

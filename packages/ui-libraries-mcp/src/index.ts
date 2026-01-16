@@ -54,7 +54,7 @@ export function getComponentTools() {
   return toolList.map((tool) => ({
     config: tool,
     async handler({ refId, ...arg }) {
-      eventBus.emit(`${tool.name}___${refId}`, ...Object.values(arg));
+      eventBus.emit(`${tool.name}___${refId}`, ...(Object.values(arg) as [any, any]));
       const result = await Promise.race([
         new Promise((resolve, reject) => {
           eventBus.on(`${tool.name}___${refId}_result`, (success: boolean, ...result: any) => {

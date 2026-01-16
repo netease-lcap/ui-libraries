@@ -76,6 +76,7 @@ export default SelectBasicAccumulate.addPlugin({
     name: 'handleValueNotInData',
     handle(props) {
       const selectedValuesData = props.get('selectedValuesData');
+
       const data = props.get('data', []);
       if (_.isEmpty(selectedValuesData) || _.isEmpty(data)) return {};
       return {
@@ -212,7 +213,6 @@ export default SelectBasicAccumulate.addPlugin({
         suffixIcon: getPropsIcon({
           name: suffixIcon,
           onClick: (e: Event) => {
-            e.stopPropagation();
             _.attempt(onClickSuffix, e);
           },
         }),
@@ -223,8 +223,11 @@ export default SelectBasicAccumulate.addPlugin({
     name: 'handleAutoFocus',
     handle(props) {
       const ref = props.get('ref');
+      const autoFocus = props.get('autoFocus');
       useEffect(() => {
-        ref.focus();
+        if (autoFocus) {
+          _.attempt(ref?.focus);
+        }
       }, []);
       return {};
     },

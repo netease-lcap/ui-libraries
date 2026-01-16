@@ -87,7 +87,6 @@ export default TabsAccumulate.addPlugin({
           }
         },
       });
-      console.log(valueProps,'==');
       return {
         ...valueProps,
       };
@@ -99,12 +98,20 @@ export default TabsAccumulate.addPlugin({
       const addIcon = props.get('addIcon');
       const slots = props.get('slots');
       const onEdit = props.get('onEdit', () => {});
+      const onBeforeRemove = props.get('onBeforeRemove', () => {});
+      const onAfterRemove = props.get('onAfterRemove', () => {});
       return {
         slots: _.assign(slots, {
           'add-icon': () => getPropsIcon({ name: addIcon }),
         }),
         onEdit: _.wrap(onEdit, (fn, paneName, action) => {
+          if (action === 'remove') {
+            _.attempt(onBeforeRemove, { value: paneName });
+          }
           _.attempt(fn, { value: paneName, action });
+          if (action === 'remove') {
+            _.attempt(onAfterRemove, { value: paneName });
+          }
         }),
       };
     },
