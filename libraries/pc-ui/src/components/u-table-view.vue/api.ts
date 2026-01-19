@@ -34,7 +34,7 @@ namespace nasl.ui {
       sort: UTableViewOptions<T, V, P, M>['sorting']['field'];
 
       @Prop({
-          title: '排序方式',
+          title: '排序顺序',
       })
       order: UTableViewOptions<T, V, P, M>['sorting']['order'];
 
