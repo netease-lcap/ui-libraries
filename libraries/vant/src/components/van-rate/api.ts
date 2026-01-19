@@ -1,4 +1,3 @@
-import preview from '../../../../element-plus/.storybook/preview';
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {

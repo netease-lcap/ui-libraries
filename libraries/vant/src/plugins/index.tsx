@@ -48,8 +48,8 @@ export class PluginOptions {
   };
 }
 
-export function registerComponent<T>(Component, options) {
-  return defineComponent<T>({
+export function registerComponent(Component, options) {
+  return defineComponent({
     name: options.name || 'HocBaseComponents',
     components: { Component },
     inheritAttrs: false,
