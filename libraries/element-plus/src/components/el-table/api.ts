@@ -68,14 +68,14 @@ namespace nasl.ui {
     currentPage: ElTableOptions<T, V, P, M>['currentPage'];
 
     @Prop({
-      title: '排序属性',
-    })
-    order: nasl.core.String;
-
-    @Prop({
       title: '排序字段',
     })
     sort: nasl.core.String;
+
+    @Prop({
+      title: '排序顺序',
+    })
+    order: nasl.core.String;
 
     @Prop({
       title: '单选选中值',

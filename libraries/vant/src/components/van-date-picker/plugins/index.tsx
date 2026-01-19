@@ -15,7 +15,6 @@ import {
   getValidUnit,
 } from './utils-format';
 import { categoryProps } from '@/utils/dom';
-import preview from '../../../../../element-plus/.storybook/preview';
 
 export { handleControllableValue } from '@/plugins/common/index';
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';

@@ -12,8 +12,7 @@ export function handleTagName(props) {
 }
 
 export function handlePreview(props) {
-  const render = previewRender(props);
-  console.log(props.toJS(),'tojs');
+  const render = previewRender(props, '');
   if (!render) return {};
   return {
     render,

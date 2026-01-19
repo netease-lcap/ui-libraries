@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { readonly } from '@vue/composition-api';
 import { useCallback } from '@/plugins/hooks';
 
 export { handleControllableValue } from '@/plugins/common/index';
