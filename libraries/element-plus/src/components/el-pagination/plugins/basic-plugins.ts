@@ -12,7 +12,7 @@ export default PaginationBasicAccumulate.addPlugin({
       valuePropName: 'currentPage',
     });
     const pageSizes = useMemo(() => {
-      const jsonPageSizes = _.isString(pageSizesProps) ? _.attempt(JSON.parse, pageSizesProps) : pageSizesProps;
+      const jsonPageSizes = _.isString(pageSizesProps) && pageSizesProps.trim() ? _.attempt(JSON.parse, pageSizesProps) : pageSizesProps;
       return _.isArray(jsonPageSizes) ? jsonPageSizes : [10, 20, 50];
     }, [pageSizesProps]);
     return {
@@ -24,7 +24,7 @@ export default PaginationBasicAccumulate.addPlugin({
   .addPlugin({
     name: 'handleOnChange',
     handle(props) {
-      const onChange = props.get('onChange', () => {});
+      const onChange = props.get('onChange', () => { });
       return {
         onChange: (currentPage: number, pageSize: number) => _.attempt(onChange, { currentPage, pageSize }),
       };
@@ -42,7 +42,6 @@ export default PaginationBasicAccumulate.addPlugin({
   .addPlugin({
     name: 'handleSyncState',
     handle(props) {
-      console.log(props.toJS(),'tojs==');
       const emit = props.get('emit');
       const total = props.get('total');
       const pageSize = props.get('pageSize');

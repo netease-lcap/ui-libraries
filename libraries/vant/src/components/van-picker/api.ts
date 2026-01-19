@@ -1,4 +1,3 @@
-import { disableDateProps } from '../../../../element-ui/design/date-picker/hooks/useDisableDate';
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
@@ -27,19 +26,19 @@ namespace nasl.ui {
       title: '重新加载',
       description: '清除缓存，重新加载',
     })
-    reload(): void {}
+    reload(): void { }
 
     @Method({
       title: '显示',
       description: '显示选择器',
     })
-    show(): void {}
+    show(): void { }
 
     @Method({
       title: '关闭',
       description: '关闭选择器',
     })
-    close(): void {}
+    close(): void { }
 
     @Prop({
       title: '过滤文本',
@@ -223,7 +222,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     preview: nasl.core.Boolean = false;
-    
+
     @Prop({
       group: '交互属性',
       title: '可搜索',
@@ -309,8 +308,8 @@ namespace nasl.ui {
     constructor(
       options?: Partial<
         VanFormPickerOptions<T, V, P, M, C> &
-          VanFormItemOptions &
-          Omit<VanPickerOptions<T, V, P, M, C>, keyof VanFormItemOptions>
+        VanFormItemOptions &
+        Omit<VanPickerOptions<T, V, P, M, C>, keyof VanFormItemOptions>
       >,
     ) {
       super();
@@ -323,5 +322,5 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
     C,
-  > extends ViewComponentOptions {}
+  > extends ViewComponentOptions { }
 }
