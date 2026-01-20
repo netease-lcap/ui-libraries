@@ -246,14 +246,14 @@ namespace nasl.ui {
     onEdit: (event: { value: nasl.core.String; action: 'add' | 'remove' }) => void;
 
     @Event({
-      title: '点击新增按钮或关闭',
-      description: '点击 tabs 的新增按钮或 tab 被关闭后触发',
+      title: '点击关闭前',
+      description: '点击 tabs 的 tab 被关闭前触发',
     })
     onBeforeRemove: (event: { value: nasl.core.String }) => void;
 
     @Event({
-      title: '点击新增按钮或关闭',
-      description: '点击 tabs 的新增按钮或 tab 被关闭后触发',
+      title: '点击关闭后',
+      description: '点击 tabs 的 tab 被关闭后触发',
     })
     onAfterRemove: (event: { value: nasl.core.String }) => void;
 
