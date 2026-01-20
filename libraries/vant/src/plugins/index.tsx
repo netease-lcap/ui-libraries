@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 
-import { ref, Ref, watch, provide, inject, defineComponent } from 'vue';
+import { ref, Ref, watch, provide, inject, defineComponent, unref, getCurrentInstance, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 // import create from 'zustand-vue';
@@ -60,10 +60,10 @@ export function registerComponent(Component, options) {
       const pluginHooks = plugin.getPluginMethod();
       const componentState = ref({ state: {} });
       let Render = Component;
-      const exposeRef = ref({});
-      const injectRef = inject($provide) ?? (ref({}) as Ref);
-      const provideRef = ref({});
-      Object.assign(provideRef.value, injectRef.value);
+      const exposeRef = ref({}) as Ref<any>;
+      const injectRef = inject($provide) ?? (ref({}) as Ref<any>);
+      const provideRef = ref({}) as Ref<any>;
+      Object.assign(provideRef.value, (injectRef as any)?.value || {});
       const router = useRouter?.();
       const route = useRoute?.();
       const useStore = createStore((set) => ({
@@ -73,9 +73,10 @@ export function registerComponent(Component, options) {
           ref: {},
           [$router]: router,
           [$route]: route,
+          'data-component-name': options.name,
           [$mergeRef]: _.mergeRef(exposeRef.value),
           [$tagName]: options.name,
-          [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList],
+          [$deletePropsList]: ['provide', 'inject', 'render', 'slots', 'emit', $deletePropsList, $mergeRef, $tagName],
         },
         props: {
           ...props,
@@ -93,13 +94,15 @@ export function registerComponent(Component, options) {
           return set((state) => getNewStateFn(state), tr);
         },
       }));
-      const { getState, setState, subscribe, getInitialState } = useStore;
+      const { getState, subscribe } = useStore;
       const fiberMap = new Map<string, any>([
         ['updateQueen', new Set()],
         ['getState', getState],
       ]);
       const { setValue } = getState() as any;
-      subscribe((props: any) => {
+
+      // 保存取消订阅函数，用于组件卸载时清理
+      const unsubscribe = subscribe((props: any) => {
         const ImmutableProps = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
         const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
@@ -129,6 +132,81 @@ export function registerComponent(Component, options) {
       watch(injectRef, (value) => _.defaults(provideRef.value, value), { immediate: true });
       expose(exposeRef.value);
 
+      // 组件卸载时清理资源，防止内存泄露
+      onBeforeUnmount(() => {
+        // 1. 取消 zustand store 订阅
+        unsubscribe?.();
+
+        // 2. 清理 fiberMap 中的 Fiber 对象和 Hook 链表
+        const updateQueen = fiberMap.get('updateQueen');
+        if (updateQueen instanceof Set) {
+          updateQueen.clear();
+        }
+
+        // 遍历 fiberMap，清理每个 fiber 中的 Hook 链表
+        fiberMap.forEach((value, key) => {
+          if (key !== 'updateQueen' && key !== 'getState' && typeof value === 'object') {
+            const fiber = value;
+
+            // 清理 workInProgressState Hook 链表
+            if (fiber.workInProgressState) {
+              let current = fiber.workInProgressState;
+              const visited = new Set();
+              // 断开循环链表
+              while (current && !visited.has(current)) {
+                visited.add(current);
+                const { next } = current;
+                current.next = null;
+                current.storeKey = null;
+                current.value = null;
+                current = next;
+              }
+              fiber.workInProgressState = null;
+            }
+
+            // 清理 workInProgressEffect Hook 链表
+            if (fiber.workInProgressEffect) {
+              let current = fiber.workInProgressEffect;
+              const visited = new Set();
+              // 断开循环链表
+              while (current && !visited.has(current)) {
+                visited.add(current);
+                const { next } = current;
+                current.next = null;
+                current.dep = null;
+                current.result = null;
+                current.callBack = null;
+                current = next;
+              }
+              fiber.workInProgressEffect = null;
+            }
+
+            // 清理 fiber 对象的其他引用
+            fiber.updateQueen = null;
+            fiber.getState = null;
+            fiber.setValue = null;
+            fiber.queen = null;
+          }
+        });
+
+        fiberMap.clear();
+
+        // 3. 清理 exposeRef 中的引用
+        if (exposeRef.value && typeof exposeRef.value === 'object') {
+          Object.keys(exposeRef.value).forEach((key) => {
+            delete exposeRef.value[key];
+          });
+        }
+
+        // 4. 清理 componentState
+        if (componentState.value?.state) {
+          componentState.value.state = {};
+        }
+
+        // 5. 清理 Render 引用
+        Render = null;
+      });
+
       provide($provide, provideRef);
       return () => {
         return (
@@ -136,7 +214,6 @@ export function registerComponent(Component, options) {
             {..._.omit(componentState.value.state, componentState.value.state[$deletePropsList])}
             v-slots={{ ...slots, ..._.get(componentState, 'value.state.slots', {}) }}
             ref={_.mergeRef(exposeRef.value)}
-            expose={exposeRef.value}
           />
         );
       };
