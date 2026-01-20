@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { previewRender } from '@/plugins/common/icon';
 
 export { handleControllableValue } from '@/plugins/common/index';

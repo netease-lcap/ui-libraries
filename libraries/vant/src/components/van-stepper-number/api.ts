@@ -78,6 +78,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
       title: '禁用增加按钮',
       description: '是否禁用增加按钮',
       setter: { concept: 'SwitchSetter' },
