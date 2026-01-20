@@ -37,6 +37,6 @@ export const $rootStyle = [
   'flexBasis',
   'alignSelf',
 ];
-export const $bothStyle = ['width', 'height', 'minWidth', 'maxWidth', 'minHeight', 'maxHeight'];
+export const $bothStyle = ['width', 'height', 'minWidth', 'maxWidth', 'minHeight', 'maxHeight', 'background'];
 
 export const $ide = Symbol('ide');
