@@ -195,6 +195,7 @@ pageSizes="[5,10,20,50]"
     <template #header>
     <el-text>text-Name</el-text>
     </template>
+    123
     </el-table-column>
     <el-table-column-plus prop="date" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
 

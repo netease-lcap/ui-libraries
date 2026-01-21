@@ -76,8 +76,8 @@ const Template = (args, { argTypes }) => ({
   template: `
     <div style="padding: 20px;">
       <van-rate
-        v-model="modelValue"
         :count="count"
+        :preview="true"
         :disabled="disabled"
         :readonly="readonly"
         :allow-half="allowHalf"

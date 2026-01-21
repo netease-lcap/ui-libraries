@@ -1,8 +1,14 @@
 .van-radio-group-preview {
+  &:not(:has(.van-radio[aria-checked="true"]))::before {
+    content: '-';
+  }
   .van-radio {
     margin-right: 0;
   }
   .van-radio__icon {
+    display: none;
+  }
+  .van-radio[aria-checked="false"]{
     display: none;
   }
   .van-radio__label {
@@ -10,7 +16,7 @@
     color:#000;
     cursor: default;
   }
-  .van-radio:not(:last-child) .van-radio__label::after {
-    content: ',';
-  }
+  // .van-radio:not(:last-child) .van-radio__label::after {
+  //   content: ',';
+  // }
 }

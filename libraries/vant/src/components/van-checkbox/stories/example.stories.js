@@ -17,7 +17,7 @@ export const Default = {
     setup() {
       const reff = ref('');
 
-      const value = ref([]);
+      const value = ref([1,]);
       // setTimeout(() => {
       //   value.value = ['1'];
       // }, 1000);
@@ -33,7 +33,7 @@ export const Default = {
             return;
           } else {
             aa.value++;
-            value.value = ['1','2']; 
+            value.value = [1,2]; 
           }
         },
         handleClick(event) {
@@ -97,8 +97,10 @@ export const Default = {
     },
     template: `
       <div style="padding: 20px;">
+      {{value}}
       <van-checkbox-group
           v-model="value"
+          :preview="true"
           v-bind="args"
           textField="liu_form.property1"
           valueField="liu_form.id"
