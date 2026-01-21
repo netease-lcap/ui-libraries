@@ -22,8 +22,8 @@ namespace nasl.ui {
     modelValue: nasl.core.Boolean | nasl.core.String | nasl.core.Integer;
 
     @Prop({
-      title: '激活值',
-      description: '开关打开时的值',
+      title: '禁用',
+      description: '禁用',
     })
     disabled: nasl.core.Boolean;
 

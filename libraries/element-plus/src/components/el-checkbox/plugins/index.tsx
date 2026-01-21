@@ -5,7 +5,6 @@ import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo, useCallback, useSyncState } from '@/plugins/hooks';
 import { getIsPreview, getRender, getListPreviewText } from '@/plugins/common/preview';
-import { ElPreview } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import idePlugin from './ide';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
@@ -46,14 +45,14 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
       const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
       const dataSourceSlots = useMemo(
         () => (_.isNil(dataConfig)
-            ? {}
-            : {
-                default: () => _.map(dataSource, (item) => (
-                  <ElCheckbox {...item}>
-                    {slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.label}
-                  </ElCheckbox>
-                  )),
-              }),
+          ? {}
+          : {
+            default: () => _.map(dataSource, (item) => (
+              <ElCheckbox {...item}>
+                {slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.label}
+              </ElCheckbox>
+            )),
+          }),
         [dataSource, slots, dataConfig],
       );
 
@@ -99,23 +98,13 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handlePreview',
     handle: (props) => {
-      const ref = props.get('ref');
-      const Component = props.get('render');
+      const className = props.get('class');
       const isPreview = getIsPreview(props);
-
-      const previewRender = (insProps) => {
-        const inIDE = !!props.get('data-nodepath');
-        const valueField = props.get('valueField', 'value');
-        const value = getListPreviewText('label', valueField, insProps.data, insProps.modelValue);
-        const previewText = inIDE ? '-' : value;
-        return <ElPreview text={previewText} />;
-      };
-
-      const { render, insRef } = getRender(Component, previewRender, isPreview);
+      if (!isPreview) return {};
       return {
-        ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
-        render,
-        preview: isPreview,
+        direction: 'horizontal',
+        disabled: true,
+        class: addClass(className, 'el-checkbox-group-preview'),
       };
     },
   })

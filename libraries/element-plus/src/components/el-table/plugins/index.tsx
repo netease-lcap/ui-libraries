@@ -29,13 +29,13 @@ const formatResult = _.cond([
 const TableAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElTableOptions<any, any, any, any>,
   IIdePluginBase &
-    TableProps<any> &
-    PaginationProps & {
-      onBefore:(params: any) => void;
-      onSelectAll: (selection: any[]) => any;
-      onExpandChange:(row: any, expanded: boolean) => void;
-      editTable: boolean;
-    }
+  TableProps<any> &
+  PaginationProps & {
+    onBefore:(params: any) => void;
+    onSelectAll: (selection: any[]) => any;
+    onExpandChange: (row: any, expanded: boolean) => void;
+    editTable: boolean;
+  }
 >();
 
 export default TableAccumulate.addPlugin({
@@ -126,7 +126,7 @@ export default TableAccumulate.addPlugin({
       const total = props.get('total');
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
-      const onPageChange = props.get('onPageChange', () => {});
+      const onPageChange = props.get('onPageChange', () => { });
       const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
       return {
         pageProps: {
@@ -164,7 +164,7 @@ export default TableAccumulate.addPlugin({
       const pagination = props.get('pagination');
       const setSort = props.get('setSort');
       const setOrder = props.get('setOrder');
-      const onSort = props.get('onSort', () => {});
+      const onSort = props.get('onSort', () => { });
       const onSortChange = useCallback(
         ({ prop, order }) => {
           setSort(prop);
@@ -226,13 +226,15 @@ export default TableAccumulate.addPlugin({
       const order = props.get('order');
       const sort = props.get('sort');
       const pageProps = props.get('pageProps');
-      const onBefore = props.get('onBefore', () => {});
-      const onSuccess = props.get('onSuccess', () => {});
+      const onBefore = props.get('onBefore', () => { });
+      const onSuccess = props.get('onSuccess', () => { });
       const ref = props.get('ref');
       const initialLoad = props.get('initialLoad', true);
       const defaultParams = [{ currentPage, pageSize, order, sort, pagination }];
       const rowKey = props.get('rowKey');
+      const emit = props.get('emit');
       const parentField = props.get('parentField');
+      const setCurrentPage = props.get('setCurrentPage');
       const {
         data: resultData = { list: [], total: 0 },
         run,
@@ -252,7 +254,11 @@ export default TableAccumulate.addPlugin({
         () => useDataSourceToTree(data, parentField, rowKey as string),
         [data, parentField, rowKey],
       );
-      const loadTo = useCallback((page) => reload({ currentPage: page }), [reload]);
+      const loadTo = useCallback((page = 1) => {
+        setCurrentPage(page);
+        emit('sync:state', 'currentPage', page);
+        reload({ currentPage: page });
+      }, [reload]);
       const selfRef = _.assign(ref, { reload, loadTo, data: treeData, getData: () => data });
 
       const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
@@ -331,8 +337,8 @@ export default TableAccumulate.addPlugin({
       const tableRef = useRef({});
       const render = useRender((props, { attrs, slots }) => {
         const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop
-            ? [{ ...node.props, header: node.children?.header }]
-            : []));
+          ? [{ ...node.props, header: node.children?.header }]
+          : []));
         const [selectedColumns, setSelectedColumns] = useState(columns.map((item) => item.prop));
         return (
           <div style={{ ...props.style }} class="el-table-wrapper">
@@ -374,7 +380,7 @@ export default TableAccumulate.addPlugin({
     handle(props) {
       const ref = props.get('ref');
       const emit = props.get('emit');
-      const currentChange = props.get('onCurrentChange', () => {});
+      const currentChange = props.get('onCurrentChange', () => { });
       const rowKey = props.get('rowKey');
       const getRowKey = _.match(rowKey)
         .when(
@@ -407,8 +413,8 @@ export default TableAccumulate.addPlugin({
       const ref = props.get('ref');
       const data = props.get('data');
       const emit = props.get('emit');
-      const selectionChange = props.get('onSelect', () => {});
-      const selectAllChange = props.get('onSelectAll', () => {});
+      const selectionChange = props.get('onSelect', () => { });
+      const selectAllChange = props.get('onSelectAll', () => { });
       const rowKey = props.get('rowKey');
       const getRowKey = _.match(rowKey)
         .when(
@@ -457,7 +463,7 @@ export default TableAccumulate.addPlugin({
     name: 'handleClickMcp',
     handle: (props) => {
       const refId = props.get('data-ref-id');
-      const reload = props.get('reload', () => {});
+      const reload = props.get('reload', () => { });
       useEffect(() => {
         if (window?.UiLibrariesMcp?.subscribe) {
           window.UiLibrariesMcp.subscribe('el_table__reload', refId, (...args) => {
@@ -478,8 +484,8 @@ export default TableAccumulate.addPlugin({
     handle(props) {
       const refProps = props.get('ref');
       const slots = props.get('slots');
-      const onHeaderDragenaProps = props.get('onHeaderDragend', () => {});
-      const onRowClickProps = props.get('onRowClick', () => {});
+      const onHeaderDragenaProps = props.get('onHeaderDragend', () => { });
+      const onRowClickProps = props.get('onRowClick', () => { });
 
       const onHeaderDragend = useCallback(
         _.wrap(onHeaderDragenaProps, (fn, newWidth, oldWidth, TableColumnCtx) => {
@@ -507,9 +513,9 @@ export default TableAccumulate.addPlugin({
   .addPlugin({
     name: 'handleToggleExpanded',
     handle(props) {
-      const onToggleExpanded = props.get('onToggleExpanded', () => {});
-      const onToggleTreeExpanded = props.get('onToggleTreeExpanded', () => {});
-      const onExpandChange = props.get('onExpandChange', () => {});
+      const onToggleExpanded = props.get('onToggleExpanded', () => { });
+      const onToggleTreeExpanded = props.get('onToggleTreeExpanded', () => { });
+      const onExpandChange = props.get('onExpandChange', () => { });
       return {
         onExpandChange: useCallback(
           (row, expanded) => {

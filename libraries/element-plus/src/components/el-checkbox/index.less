@@ -1,0 +1,51 @@
+.cw-checkbox-group {
+  display: inline-grid;
+  /* 使用 inline-grid 让容器宽度适应内容 */
+  grid-auto-flow: column;
+  /* 让子元素按列方向自动排列 */
+}
+
+.el-checkbox-group-vertical {
+  grid-auto-flow: row;
+  /* 让子元素按行方向自动排列 */
+}
+
+.el-checkbox-group-vertical .el-checkbox {
+  margin-right: 30px;
+}
+
+.el-checkbox-group-preview {
+  font-size: 14px;
+  line-height: 14px;
+  // 如果没有 .is-checked 元素，显示 '-'
+  &:not(:has(.is-checked))::before {
+    content: '-';
+  }
+
+  .el-checkbox.is-checked:has(+ .el-checkbox.is-checked) .el-checkbox__label::after {
+    content: ',';
+  }
+
+  .el-checkbox {
+
+    cursor: default;
+    margin: 0;
+
+    &:not(.is-checked) {
+      display: none;
+    }
+
+    .el-checkbox__input {
+      display: none;
+    }
+
+    .el-checkbox__label.el-checkbox__label {
+      cursor: default;
+      .el-text {
+        color: #606266;
+        cursor: default;
+      }
+    }
+  }
+
+}

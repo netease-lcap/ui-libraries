@@ -12,7 +12,7 @@ export default FormBasicAccumulate.addPlugin({
   name: 'handleModelValue',
   handle(props) {
     const modelValue = props.get('model') ?? {};
-    const onValidate = props.get('onValidate', () => {});
+    const onValidate = props.get('onValidate', () => { });
     const model = useRef(modelValue);
     const provide = props.get('provide');
     const ref = props.get('ref');

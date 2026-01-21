@@ -44,11 +44,11 @@ namespace nasl.ui {
     })
     handleStart(): void {}
 
-    @Method({
-      title: '移除文件',
-      description: '移除文件',
-    })
-    handleRemove(): void {}
+    // @Method({
+    //   title: '移除文件',
+    //   description: '移除文件',
+    // })
+    // handleRemove(): void {}
 
     @Method({
       title: '清空已上传文件列表',

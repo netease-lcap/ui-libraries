@@ -27,6 +27,7 @@ export const Example1 = {
     setup() {
       const activeName = ref('first');
       const tableData = async (page) => {
+        console.log(page,'===');
         const arr = [
           {
             date: '2016-05-03',
@@ -146,8 +147,7 @@ export const Example1 = {
       });
       setTimeout(() => {
         console.log('table data change');
-        tableData2.value.splice(0, 1);
-        console.log(tableData2, 'tableData2');
+        console.log(mytable, 'tableData2');
       }, 1000);
       const logCellClick = (...el) => {
         console.log(tableData2.value, 'logCellClick');

@@ -110,7 +110,8 @@ export const Example2 = {
         // console.log(model, 'model');
       };
       const handleIgnoreRules = () => {
-        ignoreRules.value = !ignoreRules.value;
+        // ignoreRules.value = !ignoreRules.value;
+        console.log(formRef.value.clearValidate());
       };
       watch(
         model,
