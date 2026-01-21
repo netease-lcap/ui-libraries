@@ -68,7 +68,7 @@ export default FormBasicAccumulate.addPlugin({
       if (window?.UiLibrariesMcp?.subscribe) {
         window.UiLibrariesMcp.subscribe('el_form__validate', refId, () => ref.validated());
         window.UiLibrariesMcp.subscribe('el_form__clearValidate', refId, () => {
-          ref.clearValidate();
+          ref?.clearValidate();
         });
       }
       return () => {

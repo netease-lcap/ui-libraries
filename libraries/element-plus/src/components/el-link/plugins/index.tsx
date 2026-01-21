@@ -31,21 +31,21 @@ export default LinkBasicAccumulate.addPlugin({
       const link = props.get('link');
       const href = props.get('href');
       const target = props.get('target');
-      const onClick = props.get('onClick');
-      const onBeforeNavigate = props.get('onBeforeNavigate', () => {});
-      const onNavigate = props.get('onNavigate', () => {});
+      const onClick = props.get('onClick') ?? (() => { });
+      const onBeforeNavigate = props.get('onBeforeNavigate', () => { });
+      const onNavigate = props.get('onNavigate', () => { });
       const router = props.get($router);
       const destinationToRouterClick = _.cond([
-        [_.matches({ target: '_blank' }), _.constant(() => {})],
+        [_.matches({ target: '_blank' }), _.constant(() => { })],
         [
           _.conforms({ destination: _.isString }),
           ({ destination, target }) => () => {
-              _.attempt(onBeforeNavigate, { to: destination });
-              router.push(destination);
-              _.attempt(onNavigate, { to: destination });
-            },
+            _.attempt(onBeforeNavigate, { to: destination });
+            router.push(destination);
+            _.attempt(onNavigate, { to: destination });
+          },
         ],
-        [_.stubTrue, _.constant(() => {})],
+        [_.stubTrue, _.constant(() => { })],
       ]);
       const routerClick = destinationToRouterClick({ destination, target });
       const isHref = !_.isNil(link) || !_.isNil(href);
@@ -78,7 +78,7 @@ export default LinkBasicAccumulate.addPlugin({
     handle(props) {
       const download = props.get('download');
       const href = props.get('href');
-      const click = props.get('onClick', () => {});
+      const click = props.get('onClick', () => { });
       const deletePropsList = props.get($deletePropsList).concat(['href', 'target']);
       if (!download) return {};
       return {

@@ -73,7 +73,7 @@ export default InputNumberBasicAccumulate.addAccumulate(idePlugin)
       const setValue = props.get('setValue');
       const slots = props.get('slots');
       const clearable = props.get('clearable');
-      const clearableSlot = clearable ? getPropsIcon({ name: 'CircleClose', onClick: () => setValue(null) }) : slots?.prefix;
+      const clearableSlot = clearable ? getPropsIcon({ name: 'CircleClose', onClick: () => setValue(null) }) : slots?.suffix;
       return {
         slots: _.assign({}, slots, {
           suffix: clearableSlot,
