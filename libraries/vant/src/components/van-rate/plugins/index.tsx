@@ -14,7 +14,6 @@ export function handleTagName(props) {
 export function handlePreview(props) {
   const value = props.get('modelValue') ?? 0;
   const render = previewRender(props, value);
-  if (!render) return {};
   return {
     render,
   };

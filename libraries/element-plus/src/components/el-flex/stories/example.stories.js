@@ -27,11 +27,12 @@ export const Default = {
       };
     },
     template: `
-      <el-flex v-bind="args" :gutter="20" @click="handleClick">
-        <div v-for="item in 20" style="width: 100px; height: 64px;background-color:#000"></div>
-        <div style="width: 100px; height: 64px;background-color:#000"></div>
-        <div style="width: 100px; height: 64px;background-color:#000"></div>
-      </el-flex>
+    <div>
+      <div style="display:flex;background:red;height:50px;flex-direction:column">
+        <div style=" height: 64px;border:1px solid #000;">2</div>
+        <div style=" height: 64px;border:1px solid #000;">2</div>
+      </div>
+    </div>
     `,
   }),
   args: {

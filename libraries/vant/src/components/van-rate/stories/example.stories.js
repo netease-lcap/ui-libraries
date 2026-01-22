@@ -77,7 +77,7 @@ const Template = (args, { argTypes }) => ({
     <div style="padding: 20px;">
       <van-rate
         :count="count"
-        :preview="true"
+        :preview="preview"
         :disabled="disabled"
         :readonly="readonly"
         :allow-half="allowHalf"
@@ -96,16 +96,20 @@ const Template = (args, { argTypes }) => ({
       />
       <div style="margin-top: 16px; color: #666;">
         当前评分: {{ args }}
+
       </div>
+      <el-button @click="onChange">切换预览</el-button>
     </div>
   `,
   methods: {
     onChange(value) {
-      console.log('评分改变:', value);
+      // this.preview = !this.preview;
+      console.log(this);
     },
     onClick(value) {
       console.log('点击评分:', value);
     },
+
   },
 });
 
@@ -116,6 +120,7 @@ Basic.args = {
   disabled: false,
   readonly: false,
   allowHalf: false,
+  preview: true,
   size: 20,
   gutter: 4,
   color: '#ffd21e',

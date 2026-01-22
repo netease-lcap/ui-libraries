@@ -157,7 +157,7 @@ export default SelectBasicAccumulate.addPlugin({
       const dataSource = props.get('data');
       const findValue = useCallback((value) => {
         return _.find(dataSource, (item) => item.label === value)?.value;
-      }, []);
+      }, [dataSource]);
       useEffect(() => {
         if (window?.UiLibrariesMcp?.subscribe) {
           window.UiLibrariesMcp.subscribe('el_select__change', refId, (value) => _.attempt(setValue, findValue(value) ?? value));

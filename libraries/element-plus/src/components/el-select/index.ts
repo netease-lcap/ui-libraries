@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/index';
 import { withFormItem } from '@/components/el-form/plugins/form-item';
+import { $deletePropsList } from '@/plugins/constants';
 import './index.less';
 
 function ElSelectRegister(BaseComponent, plugin = {}, extend = true) {
