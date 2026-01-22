@@ -216,9 +216,9 @@ namespace nasl.ui {
           { title: '月份' },
           { title: '月份范围' },
           { title: '周' },
-          { title: '多个年份' },
           { title: '多个日期' },
           { title: '多个月份' },
+          { title: '多个年份' },
         ],
       },
       onChange: [
