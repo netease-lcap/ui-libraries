@@ -339,8 +339,8 @@ namespace nasl.ui {
     onBefore: () => any;
 
     @Event({
-      title: '数据加载前触后',
-      description: '数据加载后触发',
+      title: '数据加载成功时触发',
+      description: '数据加载成功时触发',
     })
     onSuccess: () => any;
 

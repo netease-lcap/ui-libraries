@@ -267,11 +267,11 @@ namespace nasl.ui {
       which: nasl.core.Integer;
     }) => any;
 
-    @Event({
-      title: '失焦时',
-      description: '失焦时触发',
-    })
-    onBlur: (event: any) => any;
+    // @Event({
+    //   title: '失焦时',
+    //   description: '失焦时触发',
+    // })
+    // onBlur: (event: any) => any;
     @Event({
       title: '切换路由前',
       description: '使用 router 相关属性切换路由前触发',
