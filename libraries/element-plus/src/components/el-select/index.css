@@ -1,9 +1,0 @@
-.el-select .el-input__wrapper.el-input__wrapper {
-  padding: 1px 10px;
-}
-.el-select .el-input__inner.el-input__inner {
-  padding: 0;
-}
-.el-select {
-  --el-select-width: 240px;
-}
