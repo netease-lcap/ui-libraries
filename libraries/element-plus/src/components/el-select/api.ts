@@ -189,14 +189,6 @@ namespace nasl.ui {
     })
     multiple: M = false as any;
 
-    @Prop({
-      group: '主要属性',
-      title: '自动获取焦点',
-      description: '自动获取焦点',
-      setter: { concept: 'SwitchSetter' },
-    })
-    autoFocus: nasl.core.Boolean = false;
-
     @Prop<ElSelectOptions<T, V, P, M, C>, 'collapseTags'>({
       group: '主要属性',
       title: '折叠标签',
