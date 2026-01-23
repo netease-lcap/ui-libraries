@@ -112,7 +112,7 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
     handle(props) {
       const isRange = props.get('range');
       const [value, setValue] = useControllableValue(props);
-      const modelValue = (_.isNil(value) || _.isEmpty(value)) ? value : dayjs(value).toJSON();
+      const modelValue = (_.isNil(value) || _.isEmpty(value)) ? value : dayjs(value);
       const result = {
         modelValue,
         'onUpdate:modelValue': _.wrap(setValue, (fn, time: Date | null) => {
