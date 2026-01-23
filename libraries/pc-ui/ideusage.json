@@ -576,7 +576,6 @@
                 "cell": "{const type = this.getAttribute('type')?.value; const parentNode = this.getParent(); if(['index', 'radio', 'checkbox', 'dragHandler'].includes(type)) {return true;};const dependent = ['index', 'radio', 'checkbox', 'expander', 'dragHandler']; const el = parentNode.getElement(el => !dependent.includes(el.getAttribute('type')?.value)); return el === this; }"
             },
             "namedSlotOmitWrapper": ["title"],
-            "forceUpdateWhenAttributeChange": "parent",
             "disableSlotAutoFill": ["title"]
         }
     },
