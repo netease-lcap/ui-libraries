@@ -104,6 +104,7 @@ export default CheckboxAccumulate.addAccumulate(idePlugin)
       return {
         direction: 'horizontal',
         disabled: true,
+        type: 'default',
         class: addClass(className, 'el-checkbox-group-preview'),
       };
     },

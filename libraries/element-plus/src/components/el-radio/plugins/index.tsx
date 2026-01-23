@@ -105,6 +105,7 @@ export default RadioAccumulate.addAccumulate(idePlugin)
       return {
         direction: 'horizontal',
         disabled: true,
+        type: 'default',
         class: addClass(className, 'el-radio-group-preview'),
       };
     },
