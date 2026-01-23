@@ -107,7 +107,7 @@ export function registerComponent(Component, options) {
         const commitState = scheduler(pluginHooks, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
         const commitJsState = commitState.delete('ref').toJS();
-        const isRenderChange = Component !== commitState.get('render');
+        const isRenderChange = Render !== commitState.get('render');
         Render = isRenderChange ? commitJsState.render : Render;
         componentState.value.state = _.omit(commitJsState, ['render', 'ref']);
         _.assign(exposeRef.value, ref);

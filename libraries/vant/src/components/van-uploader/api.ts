@@ -256,7 +256,7 @@ namespace nasl.ui {
       description: '是否预览',
       setter: { concept: 'SwitchSetter' },
     })
-    readonly: nasl.core.Boolean = false;
+    preview: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',

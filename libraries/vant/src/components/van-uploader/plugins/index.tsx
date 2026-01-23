@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { showToast } from 'vant';
 import { useCallback, useMemo } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
+import { addClass } from '@/utils';
 
 export { handleControllableValue } from '@/plugins/common/index';
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
@@ -138,5 +139,13 @@ export function handleEvent(props) {
       },
       [onOversize, oversizeErrorMsg],
     ),
+  };
+}
+export function handlePreview(props) {
+  const preview = props.get('preview');
+  if (!preview) return {};
+  return {
+    readonly: true,
+    class: addClass(props.get('class'), 'van-uploader-cw-preview'),
   };
 }

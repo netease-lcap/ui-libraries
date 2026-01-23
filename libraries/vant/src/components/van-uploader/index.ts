@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import { withFormItem } from '@/components/van-form/plugins/form-item';
 import * as basicPlugin from './plugins';
+import './index.less';
 
 function VanUploaderRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign({}, plugin) : plugin;
