@@ -43,8 +43,14 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
     handle: (props) => {
       const type = props.get('type') ?? 'date';
       const isRange = type.includes('range');
+      const valueFormatProps = props.get('valueFormat');
       const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-      const valueFormat = props.get('valueFormat') ?? type === 'date' ? 'YYYY-MM-DD' : undefined;
+      const converter = props.get('converter');
+      const valueFormat = _.match(converter)
+        .with('string', () => valueFormatProps)
+        .with('Integer', () => 'x')
+        .with('auto', () => (type === 'date' ? 'YYYY-MM-DD' : undefined))
+        .otherwise(() => undefined);
       return {
         range: isRange,
         [$deletePropsList]: deletePropsList,
@@ -113,10 +119,12 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const isRange = props.get('range');
       const [value, setValue] = useControllableValue(props);
       const modelValue = (_.isNil(value) || _.isEmpty(value)) ? value : dayjs(value);
+      const valueFormat = props.get('valueFormat');
       const result = {
         modelValue,
         'onUpdate:modelValue': _.wrap(setValue, (fn, time: Date | null) => {
-          const modelValue = (_.isNil(time) || _.isEmpty(time)) ? time : dayjs(time).toJSON();
+          const jsonTime = (_.isNil(time) || _.isEmpty(time)) ? time : dayjs(time).toJSON();
+          const modelValue = valueFormat ? time : jsonTime;
           _.attempt(fn, modelValue);
         }),
       };
