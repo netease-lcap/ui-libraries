@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { ElSelectV2, SelectProps } from 'element-plus';
 import { CSSProperties } from 'vue';
 import { getPropsIcon } from '@/plugins/common/icon';
-import { useMemo, useCallback, useEffect } from '@/plugins/hooks';
+import { useMemo, useCallback, useEffect, useRef } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { ElOption } from '../index';
@@ -152,15 +152,19 @@ export default SelectBasicAccumulate.addPlugin({
   .addPlugin({
     name: 'handleMcp',
     handle(props) {
+      const refDataSource = useRef(props.get('data'));
       const refId = props.get('data-ref-id');
       const setValue = props.get('setValue');
       const dataSource = props.get('data');
-      const findValue = useCallback((value) => {
-        return _.find(dataSource, (item) => item.label === value)?.value;
-      }, [dataSource]);
+      refDataSource.value = dataSource;
+      const findValue = (value) => {
+        return _.find(refDataSource.value, (item) => item.label === value)?.value;
+      };
       useEffect(() => {
         if (window?.UiLibrariesMcp?.subscribe) {
-          window.UiLibrariesMcp.subscribe('el_select__change', refId, (value) => _.attempt(setValue, findValue(value) ?? value));
+          window.UiLibrariesMcp.subscribe('el_select__change', refId, (value) => {
+            _.attempt(setValue, findValue(value) ?? value);
+          });
         }
         return () => {
           if (window?.UiLibrariesMcp?.unsubscribe) {
