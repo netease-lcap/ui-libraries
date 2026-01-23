@@ -5,8 +5,8 @@ export { handleControllableValue } from '@/plugins/common/index';
 export { handleComponentInForm } from '@/components/van-form/plugins/form-item';
 
 export const handleInput = (props) => {
-  const onChangeProp = props.get('onChange', () => {});
-  const onInputProp = props.get('onInput', () => {});
+  const onChangeProp = props.get('onChange', () => { });
+  const onInputProp = props.get('onInput', () => { });
   const onInput = useCallback(
     _.wrap(onInputProp, (fn, event) => _.attempt(fn, _.get(event, 'target.value'))),
     [onInputProp],
@@ -29,8 +29,10 @@ export const handleInput = (props) => {
 
 export const handlePreview = (props) => {
   const preview = props.get('preview');
+  const modelValue = props.get('modelValue');
   if (!preview) return {};
   return {
     readonly: true,
+    modelValue: modelValue || '-',
   };
 };
