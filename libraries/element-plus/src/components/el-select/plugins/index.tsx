@@ -160,7 +160,7 @@ export default SelectBasicAccumulate.addPlugin({
       const onBeforeFilter = props.get('onBeforeFilter') ?? (() => { });
       const ref = props.get('ref');
       const remoteMethod = useCallback(
-        (fn, query: string) => {
+        (query: string) => {
           emit('sync:state', 'filterText', query);
           _.attempt(onBeforeFilter, { filterText: query });
           _.attempt(ref?.reload);
