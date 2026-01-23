@@ -14,11 +14,10 @@ export const Default = {
   render: () => ({
     setup() {
       return {
-        value: 3,
       };
     },
     template: `
-      <van-rate  v-model="value" :count="5"> </van-rate>
+      <van-rate :count="5"> </van-rate>
     `,
   }),
 };
