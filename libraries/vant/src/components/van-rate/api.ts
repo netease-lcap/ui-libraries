@@ -26,7 +26,7 @@ namespace nasl.ui {
       title: '值',
       sync: true,
       description: '评分的值',
-      setter: { concept: 'NumberInputSetter' },
+      setter: { concept: 'InputSetter' },
     })
     modelValue: nasl.core.Decimal;
 
