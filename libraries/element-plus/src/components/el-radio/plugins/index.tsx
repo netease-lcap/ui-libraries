@@ -99,25 +99,13 @@ export default RadioAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handlePreview',
     handle(props) {
-      const ref = props.get('ref');
-      const Component = props.get('render');
+      const className = props.get('class');
       const isPreview = getIsPreview(props);
-
-      const previewRender = (insProps) => {
-        const inIDE = !!props.get('data-nodepath');
-        const textField = props.get('textField', 'label');
-        const valueField = props.get('valueField', 'value');
-        const previewText = inIDE
-          ? '-'
-          : getListPreviewText(textField, valueField, insProps.data, [insProps.modelValue] as any);
-        return <ElText text={previewText} />;
-      };
-
-      const { render, insRef } = getRender(Component, previewRender, isPreview);
+      if (!isPreview) return {};
       return {
-        ref: Object.assign(ref, _.omit(insRef.value, ['reload', 'data'])),
-        render,
-        preview: isPreview,
+        direction: 'horizontal',
+        disabled: true,
+        class: addClass(className, 'el-radio-group-preview'),
       };
     },
   })
