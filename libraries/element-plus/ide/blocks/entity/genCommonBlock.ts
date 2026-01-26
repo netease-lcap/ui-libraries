@@ -250,8 +250,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         placeholder="请选择${label}"
         prefixIconName="Calendar"
         clearIconName="CircleClose"
-        format="YYYY-MM-DD"
-        valueFormat="YYYY-MM-DD"
+        converter="auto"
         modelValue={$sync(${vModel})}>
     </ElFormDatePicker>`;
   } if (propertyTypeName === 'Time') {
@@ -268,6 +267,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         placeholder="请选择${label}"
         prefixIconName="Clock"
         clearIconName="CircleClose"
+        converter="auto"
         modelValue={$sync(${vModel})}>
     </ElFormDatePicker>`;
   }
