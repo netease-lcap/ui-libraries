@@ -251,7 +251,6 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         prefixIconName="Calendar"
         clearIconName="CircleClose"
         format="YYYY-MM-DD"
-        valueFormat="YYYY-MM-DD"
         modelValue={$sync(${vModel})}>
     </ElFormDatePicker>`;
   } if (propertyTypeName === 'Time') {
