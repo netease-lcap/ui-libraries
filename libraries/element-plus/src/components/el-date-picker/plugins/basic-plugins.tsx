@@ -50,7 +50,7 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
         .with('string', () => valueFormatProps)
         .with('Integer', () => 'x')
         .with('auto', () => (type === 'date' ? 'YYYY-MM-DD' : undefined))
-        .otherwise(() => undefined);
+        .otherwise(() => (type === 'date' ? 'YYYY-MM-DD' : undefined));
       return {
         range: isRange,
         [$deletePropsList]: deletePropsList,

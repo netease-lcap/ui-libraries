@@ -4,12 +4,12 @@ import { ElRadio, ElRadioButton, RadioGroupProps } from 'element-plus';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { useMemo, useCallback, useSyncState } from '@/plugins/hooks';
-import { getIsPreview, getRender, getListPreviewText } from '@/plugins/common/preview';
+import { getIsPreview } from '@/plugins/common/preview';
 import idePlugin from './ide';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
-import { ElText } from '@/index';
+// import { ElText } from '@/index';
 import { addClass } from '@/utils';
 
 const RadioAccumulate = new PluginAccumulateTypes<nasl.ui.ElRadioGroupOptions<any, any>, RadioGroupProps>();
@@ -46,14 +46,14 @@ export default RadioAccumulate.addAccumulate(idePlugin)
       const selfRef = useMemo(() => _.assign(ref, { reload, data: dataSource }), [dataSource, reload, ref]);
       const dataSourceSlots = useMemo(
         () => (_.isNil(dataConfig)
-            ? {}
-            : {
-                default: () => _.map(dataSource, (item) => (
-                  <ElRadio {...item}>
-                    {slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.label}
-                  </ElRadio>
-                  )),
-              }),
+          ? {}
+          : {
+            default: () => _.map(dataSource, (item) => (
+              <ElRadio {...item}>
+                {slots.item ? slots.item({ item: item?.itemSource ?? item } as any) : item.label}
+              </ElRadio>
+            )),
+          }),
         [dataSource, slots, dataConfig],
       );
 
