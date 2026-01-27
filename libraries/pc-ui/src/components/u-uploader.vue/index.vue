@@ -654,7 +654,7 @@ export default {
 
                     this.emitInputEvent();
                     this.$emit('progress', {
-                        e, file, item, xhr,
+                        e, file, raw: file, item, xhr,
                     }, this);
                 },
                 onSuccess: (res) => {
@@ -700,6 +700,7 @@ export default {
                     this.$emit('success', {
                         res,
                         file,
+                        raw: file,
                         item,
                         xhr,
                     }, this);
@@ -717,6 +718,7 @@ export default {
                         e,
                         res,
                         file,
+                        raw: file,
                         item,
                         xhr,
                     }, this);
