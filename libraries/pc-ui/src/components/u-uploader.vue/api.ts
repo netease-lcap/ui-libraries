@@ -608,7 +608,7 @@ namespace nasl.ui {
         })
         onProgress: (event: {
             item: nasl.io.FileInfo;
-            file: nasl.io.File;
+            file: nasl.io.File | nasl.collection.List<nasl.io.File>;
         }) => any;
 
         @Event({
@@ -644,7 +644,7 @@ namespace nasl.ui {
         })
         onSuccess: (event: {
             item: nasl.io.FileInfo;
-            file: nasl.io.File;
+            file: nasl.io.File | nasl.collection.List<nasl.io.File>;
         }) => any;
 
         @Event({
@@ -653,7 +653,7 @@ namespace nasl.ui {
         })
         onError: (event: {
             item: nasl.io.FileInfo;
-            file: nasl.io.File;
+            file: nasl.io.File | nasl.collection.List<nasl.io.File>;
         }) => any;
 
         @Event({
