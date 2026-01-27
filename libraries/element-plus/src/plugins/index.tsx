@@ -13,8 +13,10 @@ import _ from 'lodash';
 import fp from 'lodash/fp';
 import { $deletePropsList, $provide, $tagName, $mergeRef, $router, $route } from '@/plugins/constants';
 import { scheduler } from '@/plugins/hooks';
-import '@/utils/index';
+import * as _Utils from '@/utils/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
+
+export { _Utils };
 
 export class PluginOptions {
   plugin: any[] = [];
