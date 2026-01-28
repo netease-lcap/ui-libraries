@@ -58,8 +58,8 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-            default: _.map(TreeData, renderMenuItem),
-          };
+          default: () => _.map(TreeData, renderMenuItem),
+        };
 
       return {
         [$deletePropsList]: deletePropsList,
@@ -71,15 +71,12 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handleSlotDefault',
     handle: (props) => {
-      const dataConfig = props.get('dataSource');
       const mode = props.get('mode');
-      if (dataConfig) {
-        return {};
-      }
+      const slots = props.get('slots');
+
       if (mode !== 'horizontal') {
         return {};
       }
-      const slots = props.get('slots');
 
       return {
         slots: {

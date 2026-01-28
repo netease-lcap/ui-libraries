@@ -11,7 +11,7 @@ namespace nasl.ui {
         click: true,
       },
       dataSource: {
-        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss: "!this.getAttribute('dataSource')",
         display: 3,
         loopRule: 'nth-last-child(-n+2)',
         loopElem: '.el-tabs__nav > .el-tabs__item',
