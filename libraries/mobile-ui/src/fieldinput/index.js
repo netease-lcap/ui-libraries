@@ -323,7 +323,7 @@ export default createComponent({
     },
   },
   render() {
-    const inputAlign = this.vanField?.getProp('inputAlign');
+    const inputAlign = this.vanField?.getProp?.('inputAlign');
 
     if (this.isPreview) {
       const isPassword = this.inputstyle === 'password' || this.type === 'password';
