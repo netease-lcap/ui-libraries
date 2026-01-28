@@ -5,6 +5,11 @@ import { createNamespace } from '../utils';
 const [createComponent, bem, t] = createNamespace('validator');
 
 export default createComponent({
+  provide() {
+    return {
+      vanField: this,
+    };
+  },
   mixins: [
     sync({
       valid() {
@@ -44,6 +49,12 @@ export default createComponent({
     },
   },
   methods: {
+    onFocus(event) {},
+
+    onBlur(event) {
+      this.validateVusion('blur');
+    },
+
     // exposed method
     validate(trigger) {
       return this.validateVusion(trigger).then((error) => {
