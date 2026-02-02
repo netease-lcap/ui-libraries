@@ -8,6 +8,37 @@ import { createGenScopedName, batchDepCSSInfo, lcapPlugin } from '@lcap/builder'
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
 const rootPath = process.cwd();
+
+// 自定义插件：复制mcpTool.json到dist-theme目录
+const copyMcpToolJsonPlugin = () => {
+  return {
+    name: 'copy-mcp-tool-json',
+    // 在构建结束后执行
+    async buildEnd() {
+      try {
+        // 源文件路径
+        const sourcePath = path.resolve(rootPath, 'src/mcpTool.json');
+        // 目标目录
+        const targetDir = path.resolve(rootPath, 'dist-theme');
+        // 目标文件路径
+        const targetPath = path.resolve(targetDir, 'mcpTool.json');
+
+        // 检查源文件是否存在
+        if (await fs.pathExists(sourcePath)) {
+          // 创建目标目录（如果不存在）
+          await fs.ensureDir(targetDir);
+          // 复制文件
+          await fs.copyFile(sourcePath, targetPath);
+          console.log(`✅ mcpTool.json已成功复制到: ${targetPath}`);
+        } else {
+          console.warn(`⚠️  未找到源文件: ${sourcePath}`);
+        }
+      } catch (error) {
+        console.error('❌ 复制mcpTool.json失败:', error);
+      }
+    },
+  };
+};
 // https://vite.dev/config/
 export default defineConfig(({ command }) => {
   const pkgInfo = fs.readJSONSync(path.resolve(rootPath, 'package.json'), {});
@@ -16,6 +47,8 @@ export default defineConfig(({ command }) => {
     plugins: [
       vue(),
       vueJsx(),
+      // 加入自定义复制文件插件
+      copyMcpToolJsonPlugin(),
       lcapPlugin({
         type: 'nasl.ui',
         framework: 'vue3',
