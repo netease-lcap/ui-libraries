@@ -337,8 +337,15 @@ export default {
                         this.month = this.selectedDates[0].month();
                     } else {
                         // fix: 3191090264602624
-                        this.year = minYear;
-                        this.month = minMonth;
+                        // fix: 3314839629059840
+                        const currentData = dayjs();
+                        if (maxDay.isBefore(currentData) || minDay.isAfter(currentData)) {
+                            this.year = minYear;
+                            this.month = minMonth;
+                        } else {
+                            this.year = currentData.year();
+                            this.month = currentData.month();
+                        }
                     }
                 } else {
                     // 当前日期不在配置日期范围内，重新赋值成最小日期
