@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import dayjs from 'dayjs';
 
+import { match } from 'ts-pattern';
+
 export * from './dom';
 
 function filterUnderfinedValue(object: Record<string, string>) {
@@ -47,6 +49,7 @@ _.mixin({
   stringToAscii,
   isValidTime,
   mergeRef,
+  match,
 });
 // _.mixin
 declare module 'lodash' {
@@ -57,6 +60,7 @@ declare module 'lodash' {
     stringToAscii: typeof stringToAscii;
     isValidTime: typeof isValidTime;
     mergeRef: typeof mergeRef;
+    match: typeof match;
   }
 }
 
@@ -72,4 +76,3 @@ export function transformKeys(obj: Record<string, any>): Record<string, any> {
   );
   return { el: result };
 }
-

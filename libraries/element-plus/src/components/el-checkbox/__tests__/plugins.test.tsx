@@ -375,68 +375,66 @@ describe('plugins/index.tsx', () => {
       expect(typeof plugin.handle).toBe('function');
     });
 
-    it('应该使用 renderHook 测试预览渲染', () => {
+    it('应该使用 renderHook 测试预览模式', () => {
       const plugin = plugins.getPluginMethodByName('handlePreview');
       const props = {
-        ref: {},
-        render: vi.fn(),
-        'data-nodepath': undefined,
-        valueField: 'value',
+        class: 'custom-class',
+        preview: true,
       };
 
       const { currentValue } = customRenderHook(plugin, props);
 
       expect(currentValue.value).toBeDefined();
-      expect(currentValue.value).toHaveProperty('ref');
-      expect(currentValue.value).toHaveProperty('render');
+      expect(currentValue.value).toHaveProperty('disabled');
+      expect(currentValue.value).toHaveProperty('direction');
+      expect(currentValue.value).toHaveProperty('type');
+      expect(currentValue.value).toHaveProperty('class');
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-checkbox-group-preview');
     });
 
-    it('应该使用 renderHook 测试 IDE 环境', () => {
+    it('应该使用 renderHook 测试非预览模式', () => {
       const plugin = plugins.getPluginMethodByName('handlePreview');
       const props = {
-        ref: {},
-        render: vi.fn(),
-        'data-nodepath': 'node-path',
-        valueField: 'value',
+        class: 'custom-class',
+        preview: false,
       };
 
       const { currentValue } = customRenderHook(plugin, props);
 
-      expect(currentValue.value).toBeDefined();
-      expect(currentValue.value).toHaveProperty('ref');
-      expect(currentValue.value).toHaveProperty('render');
+      expect(currentValue.value).toEqual({});
     });
 
-    it('应该使用 renderHook 测试自定义 valueField', () => {
+    it('应该使用 renderHook 测试 IDE 环境预览', () => {
       const plugin = plugins.getPluginMethodByName('handlePreview');
       const props = {
-        ref: {},
-        render: vi.fn(),
-        'data-nodepath': undefined,
-        valueField: 'id',
+        class: 'custom-class',
+        'data-nodepath': '/root/checkbox',
+        preview: true,
       };
 
       const { currentValue } = customRenderHook(plugin, props);
 
       expect(currentValue.value).toBeDefined();
-      expect(currentValue.value).toHaveProperty('ref');
-      expect(currentValue.value).toHaveProperty('render');
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-checkbox-group-preview');
     });
 
-    it('应该使用 renderHook 测试没有 render 的情况', () => {
+    it('应该合并自定义 class', () => {
       const plugin = plugins.getPluginMethodByName('handlePreview');
       const props = {
-        ref: {},
-        render: undefined,
-        'data-nodepath': undefined,
-        valueField: 'value',
+        class: 'my-custom-class',
+        preview: true,
       };
 
       const { currentValue } = customRenderHook(plugin, props);
 
-      expect(currentValue.value).toBeDefined();
-      expect(currentValue.value).toHaveProperty('ref');
-      expect(currentValue.value).toHaveProperty('render');
+      expect(currentValue.value.class).toContain('my-custom-class');
+      expect(currentValue.value.class).toContain('el-checkbox-group-preview');
     });
   });
 

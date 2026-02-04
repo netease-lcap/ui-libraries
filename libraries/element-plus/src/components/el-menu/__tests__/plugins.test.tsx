@@ -296,7 +296,7 @@ describe('el-menu plugins', () => {
         const { currentValue } = renderHook(plugin, props);
         const result = currentValue.value;
 
-        expect(result).toEqual({});
+        expect(result).toHaveProperty('slots');
       });
 
       it('应该正确处理非水平模式', () => {

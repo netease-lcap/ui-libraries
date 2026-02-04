@@ -8,6 +8,21 @@ import { createGenScopedName, batchDepCSSInfo, lcapPlugin } from '@lcap/builder'
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
 const rootPath = process.cwd();
+
+// 复制 mcpTool.json 到 dist-theme 的插件
+const copyMcpToolPlugin = () => {
+  return {
+    name: 'copy-mcp-tool',
+    writeBundle() {
+      const srcPath = path.resolve(rootPath, 'src/mcpTool.json');
+      const destPath = path.resolve(rootPath, 'dist-theme/mcpTool.json');
+
+      if (fs.existsSync(srcPath)) {
+        fs.copyFileSync(srcPath, destPath);
+      }
+    },
+  };
+};
 // https://vite.dev/config/
 export default defineConfig(({ command }) => {
   const pkgInfo = fs.readJSONSync(path.resolve(rootPath, 'package.json'), {});
@@ -16,19 +31,11 @@ export default defineConfig(({ command }) => {
     plugins: [
       vue(),
       vueJsx(),
+      copyMcpToolPlugin(),
       lcapPlugin({
         type: 'nasl.ui',
         framework: 'vue3',
         pnpm: true,
-        // ide: {
-        //   setters: {
-        //     rootPath: path.resolve(rootPath, '../../setters'),
-        //     entries: {
-        //       ExInputSetter: 'src/setters/InputSetter.vue',
-        //       ExNormalSetter: 'src/setters/NormalSetter.vue',
-        //     },
-        //   },
-        // },
         modules: {
           entries: {
             'components/el-config-provider/index': 'src/components/el-config-provider/index',

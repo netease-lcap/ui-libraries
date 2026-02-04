@@ -161,8 +161,8 @@ export default listComponentsBasicAccumulate
       const currentPage = props.get('currentPage');
       const pagination = props.get('pagination', 'none');
 
-      const onBefore = props.get('onBefore', () => {});
-      const onSuccess = props.get('onSuccess', () => {});
+      const onBefore = props.get('onBefore', () => { });
+      const onSuccess = props.get('onSuccess', () => { });
       const pageSize = props.get('pageSize');
       const pageProps = props.get('pageProps');
       const selection = props.get('selectionMode');
@@ -236,7 +236,7 @@ export default listComponentsBasicAccumulate
       const pageProps = props.get('pageProps');
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
-      const onPageChange = props.get('onPageChange', () => {});
+      const onPageChange = props.get('onPageChange', () => { });
       const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
       return {
         pageProps: {
@@ -281,7 +281,7 @@ export default listComponentsBasicAccumulate
       const className = props.get('class');
       useEffect(() => {
         if (!_.isElement(target.value) || pagination !== 'autoMore') {
-          return () => {};
+          return () => { };
         }
         const scrollHandler = () => {
           const { scrollHeight, clientHeight, scrollTop } = target.value;
@@ -314,18 +314,18 @@ export default listComponentsBasicAccumulate
       // 构建样式对象，只有当 column 大于 0 时才设置 CSS 变量
       const style = useMemo(
         () => _.assign({}, styleProps, {
-            '--row-gap': `${rowGap || 0}px`,
-            '--column-gap': `${columnGap || 0}px`,
-            '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
-          }),
+          '--row-gap': `${rowGap || 0}px`,
+          '--column-gap': `${columnGap || 0}px`,
+          '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
+        }),
         [styleProps, rowGap, columnGap, columnProps],
       );
       const className = useMemo(
         () => addClass(classNameProps, {
-            'el-list-components-plus': true,
-            isEqualWidth: equalWidth,
-            isColumn: columnProps > 0,
-          }),
+          'el-list-components-plus': true,
+          isEqualWidth: equalWidth,
+          isColumn: columnProps > 0,
+        }),
         [classNameProps, equalWidth, columnProps],
       );
       return {

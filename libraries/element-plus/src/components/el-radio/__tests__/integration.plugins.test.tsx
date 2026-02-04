@@ -382,7 +382,7 @@ describe('el-radio 插件集成测试', () => {
   });
 
   describe('第六部分：预览模式测试', () => {
-    it('应该正确生成预览文本', async () => {
+    it('应该正确设置预览模式属性', async () => {
       const plugins = RadioAccumulate.getPluginMethod({ isInDesigner: false });
       const dataSource = [
         { label: 'Option 1', value: 'o1' },
@@ -402,10 +402,13 @@ describe('el-radio 插件集成测试', () => {
 
       await waitForNextUpdate();
 
-      expect(currentValue.value.render).toBeDefined();
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-radio-group-preview');
     });
 
-    it('应该在 IDE 环境显示默认预览文本', async () => {
+    it('应该在 IDE 环境设置预览模式属性', async () => {
       const plugins = RadioAccumulate.getPluginMethod({ isInDesigner: true });
       const dataSource = [{ label: 'Test', value: 'test' }];
       const props = {
@@ -422,7 +425,10 @@ describe('el-radio 插件集成测试', () => {
 
       await waitForNextUpdate();
 
-      expect(currentValue.value.render).toBeDefined();
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-radio-group-preview');
     });
 
     it('应该正确处理空选择的预览', async () => {
@@ -441,7 +447,10 @@ describe('el-radio 插件集成测试', () => {
 
       await waitForNextUpdate();
 
-      expect(currentValue.value.render).toBeDefined();
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-radio-group-preview');
     });
 
     it('应该正确处理自定义字段的预览', async () => {
@@ -465,7 +474,10 @@ describe('el-radio 插件集成测试', () => {
 
       await waitForNextUpdate();
 
-      expect(currentValue.value.render).toBeDefined();
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-radio-group-preview');
     });
   });
 
@@ -538,7 +550,7 @@ describe('el-radio 插件集成测试', () => {
 
       expect(currentValue.value.data).toBeDefined();
       expect(currentValue.value.slots.default).toBeDefined();
-      expect(currentValue.value.class).toContain('el-radio-group-vertical');
+      expect(currentValue.value.class).toContain('el-radio-group-vertical cw-radio-group');
     });
 
     it('交叉组合：异步数据源 + 预览 + 表单环境', async () => {
@@ -569,7 +581,6 @@ describe('el-radio 插件集成测试', () => {
 
       expect(asyncDataSource).toHaveBeenCalled();
       expect(currentValue.value.data).toBeDefined();
-      expect(currentValue.value.render).toBeDefined();
       expect(currentValue.value.formTagName).toBe('el-form-radio-group');
     });
 
@@ -626,7 +637,10 @@ describe('el-radio 插件集成测试', () => {
       await waitForNextUpdate();
 
       expect(currentValue.value.data).toBeDefined();
-      expect(currentValue.value.render).toBeDefined();
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-radio-group-preview');
     });
   });
 
@@ -657,7 +671,7 @@ describe('el-radio 插件集成测试', () => {
       const dataSource = [{ label: 'Test', value: 'test' }];
       const emptyValues = [null, undefined, ''];
 
-      for (const emptyValue of emptyValues) {
+      await Promise.all(emptyValues.map(async (emptyValue) => {
         const props = {
           dataSource,
           modelValue: emptyValue,
@@ -671,7 +685,7 @@ describe('el-radio 插件集成测试', () => {
         await waitForNextUpdate();
 
         expect(currentValue.value.data).toBeDefined();
-      }
+      }));
     });
 
     it('边界测试：不存在的选择值', async () => {
@@ -682,7 +696,6 @@ describe('el-radio 插件集成测试', () => {
       const props = {
         dataSource,
         modelValue: 'nonexistent',
-        preview: true,
         slots: {},
         ref: {},
         [$deletePropsList]: [],
@@ -692,7 +705,7 @@ describe('el-radio 插件集成测试', () => {
 
       await waitForNextUpdate();
 
-      expect(currentValue.value.render).toBeDefined();
+      expect(currentValue.value.data).toBeDefined();
     });
   });
 
@@ -852,9 +865,15 @@ describe('el-radio 插件集成测试', () => {
 
       await waitForNextUpdate();
 
+      expect(currentValue.value.disabled).toBeUndefined();
+      expect(currentValue.value.class).not.toContain('el-radio-group-preview');
+
       await setValue({ preview: true });
 
-      expect(currentValue.value.render).toBeDefined();
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-radio-group-preview');
     });
 
     it('响应式测试：使用 setValue 更新字段映射', async () => {
@@ -876,7 +895,6 @@ describe('el-radio 插件集成测试', () => {
       await waitForNextUpdate();
 
       await setValue({ textField: 'name', valueField: 'id' });
-
 
       expect(currentValue.value.data).toBeDefined();
     });
@@ -918,9 +936,11 @@ describe('el-radio 插件集成测试', () => {
       await waitForNextUpdate();
 
       expect(currentValue.value.data).toBeDefined();
-      expect(currentValue.value.class).toContain('el-radio-group-vertical');
       expect(currentValue.value.style['grid-template-columns']).toBe('repeat(2, 1fr)');
-      expect(currentValue.value.render).toBeDefined();
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-radio-group-preview');
     });
   });
 
@@ -950,7 +970,10 @@ describe('el-radio 插件集成测试', () => {
       expect(asyncDataSource).toHaveBeenCalled();
       expect(currentValue.value.data).toBeDefined();
       expect(currentValue.value.modelValue).toBe('pb');
-      expect(currentValue.value.render).toBeDefined();
+      expect(currentValue.value.disabled).toBe(true);
+      expect(currentValue.value.direction).toBe('horizontal');
+      expect(currentValue.value.type).toBe('default');
+      expect(currentValue.value.class).toContain('el-radio-group-preview');
     });
 
     it('完整流程：表单环境 + border 类型 + 列布局', async () => {
@@ -989,4 +1012,3 @@ describe('el-radio 插件集成测试', () => {
     });
   });
 });
-
