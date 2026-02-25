@@ -695,6 +695,9 @@ export default {
                                     size: file[urlIndex].size,
                                     showProgress: false,
                                     url: urlTemp,
+                                    response: res,
+                                    type: file[urlIndex].type,
+                                    uid: file[urlIndex].uid !== undefined ? file[urlIndex].uid : Date.now() + this.currentValue.length,
                                 };
                                 this.currentValue.push(urlItem);
                             });
