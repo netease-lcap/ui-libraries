@@ -285,7 +285,7 @@ export default TableAccumulate.addPlugin({
         tableStyle: innerStyle,
         style,
         render: useCallback((props, { attrs, slots }) => {
-          return [
+          return (
             <div data-nodepath={nodepath} style={{ ...props.style }} class="el-table-wrapper">
               <Component
                 ref={tableRef}
@@ -295,12 +295,12 @@ export default TableAccumulate.addPlugin({
                 v-loading={props.loading}
               />
               {props.pagination && (
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                  <ElPagination {...props.pageProps} total={props?.pageProps?.total} />
-                </div>
-              )}
-            </div>,
-          ];
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                <ElPagination {...props.pageProps} total={props?.pageProps?.total} />
+              </div>
+            )}
+            </div>
+          );
         }, []),
       };
     },
