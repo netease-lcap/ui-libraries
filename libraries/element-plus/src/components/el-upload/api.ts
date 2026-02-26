@@ -42,7 +42,7 @@ namespace nasl.ui {
       title: '触发选择文件',
       description: '组件实例方法，打开文件选择器',
     })
-    handleStart(): void {}
+    handleStart(): void { }
 
     // @Method({
     //   title: '移除文件',
@@ -54,19 +54,19 @@ namespace nasl.ui {
       title: '清空已上传文件列表',
       description: '清空已上传的文件列表',
     })
-    clearFiles(): void {}
+    clearFiles(): void { }
 
     @Method({
       title: '取消上传请求',
       description: '取消上传请求',
     })
-    abort(): void {}
+    abort(): void { }
 
     @Method({
       title: '手动上传文件列表',
       description: '手动上传文件列表',
     })
-    submit(): void {}
+    submit(): void { }
 
     // @Prop({
     //   title: '文件列表',
@@ -144,6 +144,15 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     withCredentials: nasl.core.Boolean = false;
+
+
+    @Prop({
+      group: '数据属性',
+      title: '存储方式',
+      description: "",
+      bindHide: true,
+    })
+    fileConnectionGroup: () => any;
 
     // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
@@ -284,7 +293,7 @@ namespace nasl.ui {
       description: '自定义删除图标',
       setter: { concept: 'IconSetter', customIconFont: 'LCAP_ELEMENTPLUS_ICONS' },
     })
-    deleteIcon: nasl.core.String='Close';
+    deleteIcon: nasl.core.String = 'Close';
 
     @Prop({
       group: '样式属性',
@@ -467,5 +476,5 @@ namespace nasl.ui {
     }
   }
 
-  export class ElFormUploadOptions extends ViewComponentOptions {}
+  export class ElFormUploadOptions extends ViewComponentOptions { }
 }
