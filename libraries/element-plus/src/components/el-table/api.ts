@@ -437,9 +437,9 @@ namespace nasl.ui {
     @Event({
       title: '分页发生变化时触发',
       description:
-        '分页发生变化时触发。参数 newDataSource 表示分页后的数据。本地数据进行分页时，newDataSource 和源数据 data 会不一样。泛型 T 指表格数据类型',
+        '分页发生变化时触发',
     })
-    onPageChange: (event: any) => any;
+    onPageChange: (event: nasl.core.Integer) => any;
 
     @Event({
       title: '行点击时触发',

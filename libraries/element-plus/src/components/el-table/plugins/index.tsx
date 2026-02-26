@@ -126,14 +126,14 @@ export default TableAccumulate.addPlugin({
       const total = props.get('total');
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
-      const onPageChange = props.get('onPageChange', () => { });
+      const onSizechange = props.get('onPageChange', () => { });
       const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
       return {
         pageProps: {
           ...pageProps,
           layout,
           total,
-          onPageChange,
+          onSizechange,
         },
         pagination,
       };
