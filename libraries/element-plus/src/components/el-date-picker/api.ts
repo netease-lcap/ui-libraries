@@ -164,42 +164,6 @@ namespace nasl.ui {
     })
     clearable: nasl.core.Boolean = true;
 
-    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'placeholder'>({
-      group: '主要属性',
-      title: '占位符',
-      description: '非范围选择时的占位内容',
-      setter: { concept: 'InputSetter' },
-      if: (_) => !_.type.includes('range'),
-    })
-    placeholder: nasl.core.String = '';
-
-    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'startPlaceholder'>({
-      group: '主要属性',
-      title: '开始日期的占位内容',
-      description: '范围选择时开始日期的占位内容',
-      setter: { concept: 'InputSetter' },
-      if: (_) => _.type.includes('range'),
-    })
-    startPlaceholder: nasl.core.String;
-
-    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'endPlaceholder'>({
-      group: '主要属性',
-      title: '结束日期的占位内容',
-      description: '范围选择时结束日期的占位内容',
-      setter: { concept: 'InputSetter' },
-      if: (_) => _.type.includes('range'),
-    })
-    endPlaceholder: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '区间选择',
-      description: '是否支持进行时间区间选择，关闭则为时间点选择',
-      setter: { concept: 'SwitchSetter' },
-      if: (_) => false,
-    })
-    range: M = false as any;
-
     @Prop<ElDatePickerOptions<T, V, P, M, C>, 'type'>({
       group: '主要属性',
       title: '显示类型',
@@ -263,6 +227,44 @@ namespace nasl.ui {
       | 'dates'
       | 'months'
       | 'years' = 'date';
+
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'placeholder'>({
+      group: '主要属性',
+      title: '占位符',
+      description: '非范围选择时的占位内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !_.type.includes('range'),
+    })
+    placeholder: nasl.core.String = '';
+
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'startPlaceholder'>({
+      group: '主要属性',
+      title: '开始日期的占位内容',
+      description: '范围选择时开始日期的占位内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.type.includes('range'),
+    })
+    startPlaceholder: nasl.core.String;
+
+    @Prop<ElDatePickerOptions<T, V, P, M, C>, 'endPlaceholder'>({
+      group: '主要属性',
+      title: '结束日期的占位内容',
+      description: '范围选择时结束日期的占位内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.type.includes('range'),
+    })
+    endPlaceholder: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '区间选择',
+      description: '是否支持进行时间区间选择，关闭则为时间点选择',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => false,
+    })
+    range: M = false as any;
+
+
 
     @Prop({
       group: '主要属性',
@@ -545,8 +547,8 @@ namespace nasl.ui {
     constructor(
       options?: Partial<
         ElFormDatePickerOptions<T, V, P, M, C> &
-          ElFormItemProOptions &
-          Omit<ElDatePickerOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+        ElFormItemProOptions &
+        Omit<ElDatePickerOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
       >,
     ) {
       super();
@@ -559,5 +561,5 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
     C,
-  > extends ViewComponentOptions {}
+  > extends ViewComponentOptions { }
 }
