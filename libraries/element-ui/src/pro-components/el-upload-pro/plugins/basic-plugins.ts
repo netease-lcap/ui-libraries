@@ -112,6 +112,10 @@ function useUploadRequestInfo(props: MapGet, ctx: SetupContext) {
     } else {
       url = at<string>(res, urlField)[0];
     }
+       // 兼容 { Code: 200, Data: 'xxx' } 这类字符串返回格式
+    if (!url && res.Code === 200 && typeof res.Data === 'string') {
+      url = res.Data;
+    }
 
     if (!url) {
       return {
