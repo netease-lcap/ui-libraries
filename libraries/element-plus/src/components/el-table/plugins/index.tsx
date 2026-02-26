@@ -295,10 +295,10 @@ export default TableAccumulate.addPlugin({
                 v-loading={props.loading}
               />
               {props.pagination && (
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                <ElPagination {...props.pageProps} total={props?.pageProps?.total} />
-              </div>
-            )}
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                  <ElPagination {...props.pageProps} total={props?.pageProps?.total} />
+                </div>
+              )}
             </div>
           );
         }, []),
