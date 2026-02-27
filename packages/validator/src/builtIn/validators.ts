@@ -230,6 +230,10 @@ function isEmpty(value: any): boolean {
     return !value.length;
   } if (value instanceof Map) {
     return !value.size;
+  }
+  // Date 对象不能用 Object.keys 判断空，有效 Date 应视为非空
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime());
   } if (value instanceof Object) {
     return !Object.keys(value).length;
   }
@@ -251,6 +255,8 @@ function stringify(value: any): string {
     return `[${value}]`;
   } if (value instanceof Map) {
     return stringifyObject(value);
+  } if (value instanceof Date) {
+    return String(value);
   } if (value instanceof Object) {
     return stringifyMap(value);
   }

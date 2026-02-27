@@ -148,7 +148,7 @@ namespace nasl.ui {
         options: [{ title: '默认' }, { title: '边框' }, { title: '按钮' }],
       },
     })
-    type: 'default' | 'border' | 'button' = 'default';
+    type: 'default' | 'border' | 'button' = 'button';
 
     // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
     @Prop({
