@@ -17,4 +17,5 @@ export const $formItemProps = [
   'data-enable-events',
   'trigger',
   'ignoreRules',
+  'prop',
 ];

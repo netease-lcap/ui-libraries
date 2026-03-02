@@ -29,43 +29,43 @@ export default FormItemPluginAccumulate.addPlugin({
     const rules = useMemo(() => {
       if (ignoreRules) return [];
       const ideRules = _.map(rulesProps, (item: any) => {
-          if (!item.validate) return item;
+        if (!item.validate) return item;
 
-          const validate = _.isFunction(item.validate)
-            ? _.wrap(item.validate, async (fn, ...args) => {
-                const result = await fn(...args);
-                const errorMessage = result?.errorMsg;
-                if (errorMessage) throw new Error(errorMessage);
-                if (!result && _.isString(item.message)) throw new Error(item.message);
-                return result;
-              })
-            : item.validate;
+        const validate = _.isFunction(item.validate)
+          ? _.wrap(item.validate, async (fn, ...args) => {
+            const result = await fn(...args);
+            const errorMessage = result?.errorMsg;
+            if (errorMessage) throw new Error(errorMessage);
+            if (!result && _.isString(item.message)) throw new Error(item.message);
+            return result;
+          })
+          : item.validate;
 
-          const validator = new (VusionValidator as any)(undefined, localizeRules, [_.assign(item, { validate })]);
-          return {
-            // message: item.message,
-            required: item.required,
-            trigger: _.isString(item.trigger) ? item.trigger.split('+') : [trigger],
-            validator: (rule, value, callback) => {
-              return new Promise((resolve) => {
-                validator
-                  .validate(value)
-                  .then(() => {
-                    resolve(true);
-                  })
-                  .catch((errorMessage) => {
-                    callback(errorMessage);
-                    resolve({
-                      result: false,
-                      message: errorMessage,
-                    });
+        const validator = new (VusionValidator as any)(undefined, localizeRules, [_.assign(item, { validate })]);
+        return {
+          // message: item.message,
+          required: item.required,
+          trigger: _.isString(item.trigger) ? item.trigger.split('+') : [trigger],
+          validator: (rule, value, callback) => {
+            return new Promise((resolve) => {
+              validator
+                .validate(value)
+                .then(() => {
+                  resolve(true);
+                })
+                .catch((errorMessage) => {
+                  callback(errorMessage);
+                  resolve({
+                    result: false,
+                    message: errorMessage,
                   });
-              });
-            },
-          };
-        }) ?? [];
+                });
+            });
+          },
+        };
+      }) ?? [];
       return [...ideRules, ...(Array.isArray(required) ? required : [required])];
-    }, [rulesProps, trigger, ignoreRules,required]);
+    }, [rulesProps, trigger, ignoreRules, required]);
     return { rules };
   },
 });

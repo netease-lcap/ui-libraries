@@ -46,6 +46,15 @@ export default FormBasicAccumulate.addPlugin({
             () => ({ valid: false }),
           );
         },
+        validateField: async (props) => {
+          _.forEach(Object.entries(formItemList.value), ([key, item]: any) => {
+            model.value[key] = item?.getModelValue?.() ?? model.value[key];
+          });
+          return ref.validateField(props).then(
+            () => ({ valid: true }),
+            () => ({ valid: false }),
+          );
+        },
         resetForm: () => {
           ref.resetFields();
           _.values(formItemList.value).forEach((item: any) => _.attempt(item.resetField));
