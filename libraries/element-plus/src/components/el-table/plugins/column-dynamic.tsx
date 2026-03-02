@@ -33,17 +33,4 @@ export default ColumnDynamicPluginAccumulate.addAccumulate(columnPlugin)
         data,
       };
     },
-  })
-  .addPlugin({
-    name: 'handleShowInDesigner',
-    type: 'ide',
-    handle(props) {
-      const showInDesigner = props.get('showInDesigner');
-      const deletePropsList = props.get($deletePropsList)?.filter?.((item) => item !== 'data-nodepath');
-      if (!showInDesigner) return {};
-      return {
-        data: [{}],
-        [$deletePropsList]: deletePropsList,
-      };
-    },
   });

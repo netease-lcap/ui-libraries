@@ -529,7 +529,7 @@ namespace nasl.ui {
       idetype: 'container',
       structured: { slot: 'default', empty: true },
       parentAccept: "['el-table'].includes(target.tag)",
-      forceRefresh: 'parent',
+      forceRefresh: {slot: 'header', parent: true},
       forceUpdateWhenAttributeChange: true,
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
@@ -716,6 +716,7 @@ namespace nasl.ui {
       slotWrapperInlineStyle: {},
       additionalAttribute: {
         ':showInDesigner': '"true"',
+        ':dataSource': '"[{}]"',
       },
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
