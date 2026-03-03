@@ -463,7 +463,7 @@ namespace nasl.ui {
       snippetsDisplayConditions: {
         default: "this.getAncestor('el-menu')?.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",
       },
-      forceRefresh: 'parent',
+      // forceRefresh: 'parent',
     },
   })
   @Component({

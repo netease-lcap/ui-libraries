@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { MenuItemProps } from 'element-plus';
-import Collage from '@lcap/element-ui/design/icons/components/collage';
 import { $router } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import itemPlugin from './item-plugin';
@@ -31,9 +30,9 @@ export default MenuItemPluginAccumulate.addAccumulate(itemPlugin)
             window.location.href = params.externalUrl;
           },
         ],
-        [_.matches({ target: '_blank' }), _.constant(() => {})],
+        [_.matches({ target: '_blank' }), _.constant(() => { })],
         [_.matches({ isDestination: true }), (params) => () => router.push(params.destination)],
-        [_.stubTrue, _.constant(() => {})],
+        [_.stubTrue, _.constant(() => { })],
       ]);
       const isHref = !_.isNil(link) || !_.isNil(href);
       const externalUrl = link || href;

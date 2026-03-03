@@ -572,7 +572,9 @@ export const Example4 = {
     },
     template: `
     <el-table :data="testData" :tree-props="treeProps" row-key="id" @expand-change="change">
-              <el-table-column type="selection" />
+              <el-table-column type="editable" >
+              <el-form-input :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"/>
+              </el-table-column>
               <el-table-column prop="name" label="name" />
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />

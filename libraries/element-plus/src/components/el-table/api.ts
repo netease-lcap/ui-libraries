@@ -375,6 +375,22 @@ namespace nasl.ui {
     })
     sticky: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '样式属性',
+      title: '表头文字加粗',
+      description: '表头文字加粗',
+      setter: { concept: 'SwitchSetter' },
+    })
+    headerBold: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '样式属性',
+      title: '行高',
+      description: '行高',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    rowHeight: nasl.core.Integer;  
+
     @Prop<ElTableOptions<T, V, P, M>, 'stickyOffset'>({
       group: '样式属性',
       title: '表头吸顶偏移量',

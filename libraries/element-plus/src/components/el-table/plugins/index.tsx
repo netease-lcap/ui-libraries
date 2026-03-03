@@ -147,12 +147,15 @@ export default TableAccumulate.addPlugin({
       const classNames = `${stickyName} ${className}`;
       const styleProps = props.get('style') as Record<string, any>;
       const stickyOffset = props.get('stickyOffset', 8);
+      const rowStyle = props.get('rowStyle', {});
+      const rowHeight = props.get('rowHeight');
       return {
         class: classNames,
         style: {
           '--el-table-sticky-offset': `${stickyOffset}px`,
           ...styleProps,
         },
+        rowStyle: useMemo(() => _.assign(rowStyle, { height: rowHeight }), [rowHeight, rowStyle]),
       };
     },
   })
@@ -185,9 +188,11 @@ export default TableAccumulate.addPlugin({
     handle(props) {
       const textAlign = _.get(props.get('style'), 'text-align', 'left');
       const styleProps = props.get('style') as Record<string, any>;
+      const headerBold = props.get('headerBold');
       return {
         style: {
           '--cw-style-text-align': textAlign,
+          '--cw-style-header-weight': headerBold ? 600 : 400,
           ...styleProps,
         },
       } as {
