@@ -12,7 +12,7 @@ export { usePopupTheme } from '../../../plugins/use-popup-theme';
 export const useUpdateSync = createUseUpdateSync();
 
 export const useTreeSelect: NaslComponentPluginOptions = {
-  props: ['valueField', 'labelField', 'parentField', 'data', 'optionIsSlot'],
+  props: ['valueField', 'labelField', 'parentField', 'data', 'optionIsSlot', 'childrenField'],
   setup(props, ctx) {
     const valueField = props.useComputed('valueField', (v) => v || 'value');
     const textField = props.useComputed('textField', (v) => v || 'label');
