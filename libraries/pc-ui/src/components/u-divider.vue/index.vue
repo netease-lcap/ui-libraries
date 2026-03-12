@@ -2,7 +2,7 @@
     <div
         role="separator"
         :direction="direction"
-        :style="{ borderColor: borderColor, padding: direction==='column' && !title ? '0 4px' : '0' }"
+        :style="{ padding: direction==='column' && !title ? '0 4px' : '0' }"
         :class="{
             [$style.root]: true,
             [$style.dashed]: dashed !== 'a',
@@ -52,11 +52,6 @@ export default {
         title: {
             type: String,
         },
-    },
-    data: () => {
-        return {
-            borderColor: '',
-        };
     },
 };
 </script>
