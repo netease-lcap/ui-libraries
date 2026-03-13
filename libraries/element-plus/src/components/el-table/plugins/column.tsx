@@ -5,12 +5,13 @@ import { useMemo, useCallback, useEffect } from '@/plugins/hooks';
 import { ElIcon, ElCheckbox } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { $deletePropsList } from '@/plugins/constants';
+import { addClass } from '@/utils';
 
 const EditDefault = {
   name: 'editDefault',
   inheritAttrs: false,
   setup(props, { attrs, emit, expose }) {
-    const { item, slots, editChange = () => {}, setValue } = attrs;
+    const { item, slots, editChange = () => { }, setValue } = attrs;
 
     const editable = ref(false);
     const formItemRef = ref({});
@@ -47,8 +48,8 @@ const EditDefault = {
               editable: editable.value,
               isPreview: !editable.value,
             })
-            ?.map((node) => cloneVNode(node, {
-                onValidateSuccess: () => {},
+              ?.map((node) => cloneVNode(node, {
+                onValidateSuccess: () => { },
                 ref: formItemRef,
               }))
           }
@@ -91,12 +92,12 @@ export default ColumnPluginAccumulate.addPlugin({
       slots: {
         ...slots,
         default: (item: any) => slots?.default?.({
-            ...item,
-            index: item?.$index,
-            item: item?.row,
-            rowIndex: item?.$index,
-            columnIndex: item?.cellIndex,
-          }),
+          ...item,
+          index: item?.$index,
+          item: item?.row,
+          rowIndex: item?.$index,
+          columnIndex: item?.cellIndex,
+        }),
       },
     } as {
       align: string;
@@ -152,6 +153,22 @@ export default ColumnPluginAccumulate.addPlugin({
             [slots],
           ),
         },
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleTypeDraggable',
+    handle(props) {
+      const type = props.get('type');
+      if (type !== 'draggable') return {};
+      const refId = props.get('data-ref-id');
+      const className = props.get('class');
+      return {
+        slots: {
+          header: useCallback(() => null, []),
+          default: useCallback(() => <el-icon class="draggableColumns" name="Rank" />, [refId]),
+        },
+
       };
     },
   })

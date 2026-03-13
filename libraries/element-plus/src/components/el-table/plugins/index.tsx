@@ -2,6 +2,7 @@ import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-pl
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { VNode } from 'vue';
+import Sortable from 'sortablejs';
 import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect, useRender } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
@@ -228,6 +229,7 @@ export default TableAccumulate.addPlugin({
       const currentPage = props.get('currentPage');
       const pagination = props.get('pagination');
       const pageSize = props.get('pageSize');
+      const deletePropsList = props.get($deletePropsList).concat(['dataSource', 'reload', 'getFields']);
       const order = props.get('order');
       const sort = props.get('sort');
       const pageProps = props.get('pageProps');
@@ -268,6 +270,8 @@ export default TableAccumulate.addPlugin({
 
       const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
       return {
+
+        [$deletePropsList]: deletePropsList,
         ref: selfRef,
         pageProps: _.assign(pageProps, { total }),
         reload,
@@ -536,6 +540,52 @@ export default TableAccumulate.addPlugin({
           },
           [onToggleExpanded, onToggleTreeExpanded],
         ),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleSortable',
+    handle(props) {
+      const sortableInstance = useRef(null);
+      const data = props.get('data');
+      useEffect(() => {
+        const onDragStart = props.get('onDragStart', () => { });
+        const onDragEnd = props.get('onDragEnd', () => { });
+        const refId = props.get('data-ref-id');
+        const ref = props.get('ref');
+        const slots = props.get('slots');
+        const draggableColumn = _.find(_.attempt(slots?.default), (node) => _.get(node, 'props.type') === 'draggable');
+        const draggableHandle = draggableColumn ? '.el-table__cell:has(.draggableColumns)' : '.el-table__row';
+        if (!props.get('draggable')) return;
+        _.attempt(_.get(sortableInstance, 'value.destroy', () => { }));
+        const tbody = document.querySelector(`[data-ref-id="${refId}"] tbody`);
+        if (!tbody) return;
+        sortableInstance.value = Sortable.create(tbody, {
+          handle: draggableHandle, // 指定拖拽区域
+          draggable: '.el-table__row',
+          animation: 150,
+          onEnd: (evt) => {
+            _.attempt(onDragEnd, {
+              source: {
+                item: _.get(ref, `data.${evt?.oldDraggableIndex}`),
+                index: evt?.oldDraggableIndex,
+              },
+              target: {
+                item: _.get(ref, `data.${evt?.newDraggableIndex}`),
+                index: evt?.newDraggableIndex,
+              },
+            });
+          },
+          onStart(/** Event */evt) {
+            _.attempt(ref.toggleRowExpansion, _.get(ref, `data.${evt?.oldDraggableIndex}`), false);
+            _.attempt(onDragStart, {
+              item: _.get(ref, `data.${evt?.oldDraggableIndex}`),
+              index: evt?.oldDraggableIndex,
+            });
+          },
+        });
+      }, [data]);
+      return {
       };
     },
   });

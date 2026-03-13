@@ -73,7 +73,8 @@ export function registerComponent<T>(Component: any, options: any): any {
       Object.assign(provideRef.value, (injectRef as any)?.value || {});
       const router = useRouter?.();
       const route = useRoute?.();
-      const currentRefId = _.get(getCurrentInstance(), 'vnode.ref.r');
+      const currentRefId = _.get(getCurrentInstance(), 'vnode.ref.r', _.uniqueId(options.name));
+
       const uniqueId = _.isObject(currentRefId) ? _.uniqueId(options.name) : currentRefId;
       const useStore = createStore((set) => ({
         state: {

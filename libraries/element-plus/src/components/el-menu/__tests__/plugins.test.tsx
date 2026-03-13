@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { renderHook } from '@ep-test/test-utils/render-hook';
-import { $deletePropsList,$router, $route } from '@/plugins/constants';
+import { $deletePropsList, $router, $route } from '@/plugins/constants';
 
 import '@/utils/index';
 import MenuBasicAccumulate from '../plugins/basic-plugins';
@@ -9,6 +9,7 @@ import ItemPluginAccumulate from '../plugins/item-plugin';
 import MenuItemPluginAccumulate from '../plugins/menu-item';
 
 describe('el-menu plugins', () => {
+  beforeEach(() => {
     // 重置所有 mock
     vi.clearAllMocks();
   });
@@ -19,6 +20,34 @@ describe('el-menu plugins', () => {
         expect(MenuBasicAccumulate).toBeDefined();
         expect(typeof MenuBasicAccumulate.addPlugin).toBe('function');
         expect(typeof MenuBasicAccumulate.getPluginMethod).toBe('function');
+        expect(Array.isArray(MenuBasicAccumulate.Plugin)).toBe(true);
+      });
+
+      it('应该包含多个插件', () => {
+        const plugins = MenuBasicAccumulate.getPluginMethod();
+        expect(plugins).toBeDefined();
+        expect(Array.isArray(plugins)).toBe(true);
+        expect(plugins.length).toBeGreaterThan(0);
+
+        const pluginNames = ['handleDataSource', 'handleSlotDefault', 'handleRouter'];
+        pluginNames.forEach((name) => {
+          const plugin = MenuBasicAccumulate.getPluginMethodByName(name);
+          expect(plugin).toBeDefined();
+          expect(plugin?.name).toBe(name);
+        });
+      });
+    });
+
+    describe('handleDataSource 插件功能测试', () => {
+      const plugin = MenuBasicAccumulate.getPluginMethodByName('handleDataSource') as any;
+
+      it('应该正确处理插件基本结构', () => {
+        const props = {
+          dataSource: null,
+          slots: {},
+          textField: 'label',
+          valueField: 'value',
+          parentField: 'parent',
           [$deletePropsList]: [],
           ref: { current: null },
         };
@@ -46,9 +75,7 @@ describe('el-menu plugins', () => {
         const { currentValue } = renderHook(plugin, props);
         const result = currentValue.value;
 
-        const symbolKey = Object.getOwnPropertySymbols(result).find((s) =>
-          s.toString().includes('deletePropsList'),
-        ) as symbol;
+        const symbolKey = Object.getOwnPropertySymbols(result).find((s) => s.toString().includes('deletePropsList')) as symbol;
         expect(symbolKey).toBeDefined();
         expect(Array.isArray(result[symbolKey])).toBe(true);
         expect(result[symbolKey]).toEqual(

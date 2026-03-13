@@ -48,6 +48,11 @@
         "peerDependencies": {
           "vue": "2.6.12"
         }
+      },
+      "@lcap/extension-shared": {
+        "dependencies": {
+          "@babel/traverse": "^7.28.0"
+        }
       }
     }
   },

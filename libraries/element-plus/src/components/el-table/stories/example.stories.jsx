@@ -198,6 +198,7 @@ pageSizes="[5,10,20,50]"
     123
     </el-table-column>
     <el-table-column-plus prop="date" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
+    <el-table-column type="draggable"  class="myclomuns" :style="{'text-align':'left'}" />
 
 
 </el-table>
