@@ -159,6 +159,11 @@ function genSaveModalTemplate(entity: naslTypes.Entity, nameGroup: NameGroup, se
   nameGroup.vModelName = nameGroup.viewVariableInput;
 
   return `<ElDialog ref="${nameGroup.viewElementSaveModal}"
+    onClose={
+      function ${nameGroup.viewLogicModalClose}(event) {
+        $refs.${nameGroup.viewElementSaveModalForm}.resetForm()
+      }
+    }
     slotHeader={
       <>
         <ElText _if={${nameGroup.viewVariableIsUpdate}} text="修改"></ElText>
@@ -292,7 +297,7 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
   
       return <ElFlex direction="vertical" mode="block">
           ${genFilterTemplate(entity, nameGroup, selectNameGroupMap)}
-          <ElFlex alignment="center" justify="end" style="width: 100%">
+          <ElFlex alignment="center" justify="end" style="width: 100%;margin-bottom: 16px;">
               <ElButton
                   type="primary"
                   text="创 建"

@@ -412,6 +412,11 @@ export function genSaveModalTemplate(entity: naslTypes.Entity, nameGroup: NameGr
   nameGroup.vModelName = nameGroup.viewVariableInput;
 
   return `<ElDialog ref="${nameGroup.viewElementSaveModal}"
+    onClose={
+      function ${nameGroup.viewLogicModalClose}(event) {
+        $refs.${nameGroup.viewElementSaveModalForm}.resetForm()
+      }
+    }
     slotHeader={
       <>
         <ElText _if={${nameGroup.viewVariableIsUpdate}} text="修改"></ElText>
