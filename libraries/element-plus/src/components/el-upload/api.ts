@@ -382,7 +382,12 @@ namespace nasl.ui {
       title: '文件上传成功时',
       description: '文件上传成功时的钩子',
     })
-    onSuccess: (event: any) => any;
+    onSuccess: (event: {
+      filePath: nasl.core.String;
+      msg: nasl.core.String;
+      result: nasl.core.String;
+      success: nasl.core.Boolean;
+    }) => any;
 
     @Event({
       title: '文件上传失败时',
@@ -394,7 +399,12 @@ namespace nasl.ui {
       title: '文件状态改变时',
       description: '文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用',
     })
-    onChange: (event: any) => any;
+    onChange: (event: {
+      name:nasl.core.String;
+      percentage:nasl.core.Decimal;
+      status:'ready' | 'uploading' | 'success' | 'fail';
+      raw:nasl.io.File;
+    }) => any;
 
     @Event({
       title: '文件列表移除文件时',
