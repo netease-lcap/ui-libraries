@@ -10,7 +10,7 @@ export default TooltipBasicAccumulate.addPlugin({
     const popperWidth = props.get('popperWidth');
     const poperStyle = props.get('popperStyle');
     return {
-      popperstyle: _.assign(poperStyle, {
+      popperStyle: _.assign(poperStyle, {
         width: `${popperWidth}px`,
       }),
     };
