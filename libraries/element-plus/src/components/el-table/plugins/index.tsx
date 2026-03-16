@@ -149,7 +149,7 @@ export default TableAccumulate.addPlugin({
       const styleProps = props.get('style') as Record<string, any>;
       const stickyOffset = props.get('stickyOffset', 8);
       const rowStyle = props.get('rowStyle', {});
-      const rowHeight = props.get('rowHeight');
+      const rowHeight = props.get('rowHeight') ?? _.get(rowStyle, 'height', undefined);
       return {
         class: classNames,
         style: {

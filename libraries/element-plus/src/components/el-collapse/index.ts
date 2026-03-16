@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/basic-plugins';
 import itemPlugins from './plugins/item-plugins';
+import { $deletePropsList } from '@/plugins/constants';
 import './index.less';
 
 function ElCollapseRegister(BaseComponent, plugin = {}, extend = true) {
