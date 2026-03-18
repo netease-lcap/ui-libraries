@@ -108,7 +108,7 @@ export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslType
 
     return <ElFlex direction="vertical" mode="block">
         ${genFilterTemplate(entity, nameGroup, selectNameGroupMap)}
-        <ElFlex alignment="center" justify="end" style="width: 100%">
+        <ElFlex alignment="center" justify="end" style="width: 100%;margin-bottom: 16px;">
             <ElButton
                 type="primary"
                 text="创 建"
