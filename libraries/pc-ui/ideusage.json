@@ -631,7 +631,7 @@
        "ideusage": {
         "idetype": "container",
         "structured": true,
-        "forceRefresh": "transparent",
+        "forceRefresh": "parent",
         "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
         "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
         "selector": [
