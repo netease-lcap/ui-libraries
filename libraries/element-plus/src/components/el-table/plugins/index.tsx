@@ -253,6 +253,7 @@ export default TableAccumulate.addPlugin({
         defaultParams,
         formatResult,
       });
+
       const reload = (params) => {
         run({ currentPage, pageSize, order, sort, pagination, ...params });
       };

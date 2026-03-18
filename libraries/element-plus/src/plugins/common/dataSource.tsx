@@ -64,6 +64,10 @@ const handleDataSouceToFn = _.cond([
       return handleLocalPageData({ dataSource: data, ...params });
     },
   ],
+  [
+    (val: DataSourceArrayType) => _.conforms({ list: _.isArray })(val as any),
+    (dataSource: DataSourceArrayType) => async (params: any) => handleLocalPageData({ dataSource: dataSource.list, ...params, total: dataSource?.total ?? dataSource?.list?.length ?? 0 }),
+  ],
   [_.stubTrue, () => async (params: any) => handleLocalPageData({ dataSource: [], ...params })],
 ]);
 interface RequestOptions {
