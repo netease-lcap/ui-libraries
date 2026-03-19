@@ -40,7 +40,9 @@ export default listComponentsBasicAccumulate
     name: 'handleInitRender',
     handle: (props) => {
       const target = useRef(null);
-      const model = useRef(props.get('model'));
+      const propsModel = props.get('model');
+      const model = useRef(propsModel);
+      model.value = useMemo(() => propsModel, [propsModel]);
       const deletePropsList = props
         .get($deletePropsList)
         .concat($dataSourceDeleteField, 'setValue', 'clickFn', 'setCurrentPage', 'setPageSize', 'target');
@@ -191,6 +193,7 @@ export default listComponentsBasicAccumulate
         textField,
         dataSource: resultData.list as any,
       });
+      console.log(data, model, '==');
       const dataList = formMode ? model.value : data;
 
       const loadTo = useCallback((page) => reload({ currentPage: page }), [reload]);
