@@ -31,8 +31,8 @@ namespace nasl.ui {
       description: '滑块的当前值',
       docDescription: '绑定滑块的当前值，支持双向绑定。可以获取或设置滑块的数值。',
     })
-    modelValue: nasl.core.Integer;
-    constructor(options?: Partial<ElSliderOptions>) {
+    modelValue: M extends true ? nasl.collection.List<nasl.core.Integer> : nasl.core.Integer;
+    constructor(options?: Partial<ElSliderOptions<T, V, P, M, C>>) {
       super();
     }
   }
