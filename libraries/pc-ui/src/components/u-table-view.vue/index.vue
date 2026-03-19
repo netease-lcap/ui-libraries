@@ -1145,16 +1145,16 @@ export default {
                     const rootHeight = this.$el.clientHeight;
                     if (rootHeight) {
                         // 如果使用 v-show 隐藏了，无法计算
-                        const titleHeight = this.$refs.title ? this.$refs.title.offsetHeight : 0;
+                        const titleHeight = this.getElementHeight(this.$refs.title);
                         const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
-                        const headHeight = headEl ? headEl.offsetHeight : 0;
-                        const paginationHeight = this.getPaginationHeight();
-                        const footerHeight = this.$refs.footerRender ? this.$refs.footerRender.$el.offsetHeight : 0;
+                        const headHeight = headEl ? this.getElementHeight(headEl) : 0;
+                        const paginationHeight = this.getElementHeight(this.$refs.pagination);
+                        const footerHeight = this.getElementHeight(this.$refs.footerRender);
                         // 3280804555226368: 去掉padding高度，100%高度处理避免高度一直增长
                         const heightWithoutPadding = this.getWidthHeightWithoutPadding(this.$el).heightWithoutPadding;
                         const othersHeight = titleHeight + headHeight + paginationHeight + footerHeight;
                         if (this.$el.style.height === '100%') {
-                            this.bodyHeight = `calc(100% - ${othersHeight}px)`
+                            this.bodyHeight = `calc(100% - ${headHeight}px)`
                         } else {
                             this.bodyHeight = heightWithoutPadding - othersHeight;
                         }
@@ -1165,10 +1165,11 @@ export default {
 
                 // 当 root 设置了 height，设置 table 的 height，避免隐藏列时的闪烁
                 if (this.$el.style.height !== '' && this.$el.style.height !== 'auto') {
-                    const paginationHeight = this.getPaginationHeight();
-                    const footerHeight = this.$refs.footerRender ? this.$refs.footerRender.$el.offsetHeight : 0;
+                    const titleHeight = this.getElementHeight(this.$refs.title);
+                    const paginationHeight = this.getElementHeight(this.$refs.pagination);
+                    const footerHeight = this.getElementHeight(this.$refs.footerRender);
                     const heightWithoutPadding = this.getWidthHeightWithoutPadding(this.$el).heightWithoutPadding;
-                    const othersHeight = paginationHeight + footerHeight;
+                    const othersHeight = titleHeight + paginationHeight + footerHeight;
                     if (this.$el.style.height === '100%') {
                         this.tableHeight = `calc(100% - ${othersHeight}px)`
                     } else {
@@ -2719,16 +2720,15 @@ export default {
             }
             return target;
         },
-        getPaginationHeight() {
-            let paginationHeight = 0;
-            if (this.$refs.pagination) {
-                paginationHeight = this.$refs.pagination.$el.offsetHeight;
-                const paginationStyle = getComputedStyle(this.$refs.pagination.$el);
-                const marginTop = +(paginationStyle.marginTop || '').replace(/px/, '') || 0;
-                const marginBottom = +(paginationStyle.marginBottom || '').replace(/px/, '') || 0;
-                paginationHeight = paginationHeight + marginTop + marginBottom;
-            }
-            return paginationHeight;
+        getElementHeight(el) {
+            if (!el)
+                return 0;
+            el = el.$el || el;
+            const style = getComputedStyle(el);
+            const height = el.offsetHeight;
+            const marginTop = +(style.marginTop || '').replace(/px/, '') || 0;
+            const marginBottom = +(style.marginBottom || '').replace(/px/, '') || 0;
+            return height + marginTop + marginBottom;
         },
         autoMergeRow(currentData = this.currentData) {
             // 这里要再重置一下，因为表格列也会调用这个方法
