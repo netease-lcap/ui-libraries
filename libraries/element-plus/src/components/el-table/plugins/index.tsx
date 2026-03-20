@@ -1,4 +1,5 @@
 import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-plus';
+
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { VNode } from 'vue';
@@ -127,14 +128,14 @@ export default TableAccumulate.addPlugin({
       const total = props.get('total');
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
-      const onSizechange = props.get('onPageChange', () => { });
+      const onCurrentChange = props.get('onPageChange', () => { });
       const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
       return {
         pageProps: {
           ...pageProps,
           layout,
           total,
-          onSizechange,
+          onCurrentChange,
         },
         pagination,
       };
@@ -291,10 +292,10 @@ export default TableAccumulate.addPlugin({
       const styleProps = props.get('style');
       const { style, innerStyle } = categoryStyles(styleProps);
       return {
-        ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
+        ref: _.liveRef(ref, tableRef),
         tableStyle: innerStyle,
         style,
-        render: useCallback((props, { attrs, slots }) => {
+        render: useRender((props, { attrs, slots }) => {
           return (
             <div data-nodepath={nodepath} style={{ ...props.style }} class="el-table-wrapper">
               <Component
@@ -333,7 +334,7 @@ export default TableAccumulate.addPlugin({
         );
       }, []);
       return {
-        ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
+        ref: _.liveRef(ref, tableRef),
         render,
       };
     },
@@ -342,9 +343,9 @@ export default TableAccumulate.addPlugin({
     name: 'handleTableConfig',
     handle(props) {
       const columnConfig = props.get('columnConfig');
-      if (!columnConfig) return {};
       const Component = props.get('render');
       const tableRef = useRef({});
+      const ref = props.get('ref');
       const render = useRender((props, { attrs, slots }) => {
         const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop
           ? [{ ...node.props, header: node.children?.header }]
@@ -365,8 +366,10 @@ export default TableAccumulate.addPlugin({
           </div>
         );
       }, []);
+      if (!columnConfig) return {};
       return {
         render,
+        ref: _.liveRef(ref, tableRef),
       };
     },
   })
@@ -421,6 +424,7 @@ export default TableAccumulate.addPlugin({
     name: 'handleSelectedValues',
     handle(props) {
       const ref = props.get('ref');
+
       const data = props.get('data');
       const emit = props.get('emit');
       const selectionChange = props.get('onSelect', () => { });

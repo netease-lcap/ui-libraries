@@ -162,13 +162,11 @@ export default ColumnPluginAccumulate.addPlugin({
       const type = props.get('type');
       if (type !== 'draggable') return {};
       const refId = props.get('data-ref-id');
-      const className = props.get('class');
       return {
         slots: {
           header: useCallback(() => null, []),
           default: useCallback(() => <el-icon class="draggableColumns" name="Rank" />, [refId]),
         },
-
       };
     },
   })
@@ -196,7 +194,6 @@ export default ColumnPluginAccumulate.addPlugin({
   })
   .addPlugin({
     name: 'handleSelectionAndIndex',
-    type: 'ide',
     handle(props) {
       const type = props.get('type');
       const slots = props.get('slots');

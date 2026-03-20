@@ -147,7 +147,7 @@ export const Example1 = {
       });
       setTimeout(() => {
         console.log('table data change');
-        console.log(mytable, 'tableData2');
+        console.log(mytable.clearSelection, 'tableData2',mytable.value);
       }, 1000);
       const logCellClick = (...el) => {
         console.log(tableData2.value, 'logCellClick');

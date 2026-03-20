@@ -161,7 +161,7 @@ export function useEffect(callBack: (...args: any[]) => (() => void) | void, dep
     hook = {
       next: null as any,
       dep,
-      result: () => {},
+      result: () => { },
       callBack,
     };
     hook.next = hook;
@@ -219,7 +219,7 @@ export function useMemo<T>(callBack: () => T, dep: any[]): T {
   }
   return hook.result;
 }
-export function useCallback<T extends (...args: any[]) => any>(callBack: T, dep: any[]): T {
+export function useCallback<T extends(...args: any[]) => any>(callBack: T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook: EffectHook;
@@ -270,13 +270,13 @@ export function useControllableValue<T = any>(
   props: any,
   options: Options = {},
 ): [
-  T,
-  (...args: any[]) => void,
-  {
-    [key: string]: any;
-  },
-  boolean,
-] {
+    T,
+    (...args: any[]) => void,
+    {
+      [key: string]: any;
+    },
+    boolean,
+  ] {
   const instance = useMemo(() => getCurrentInstance(), []);
   const { vnode } = instance || { vnode: { props: {} } };
   const emit = props.get('emit');
@@ -286,8 +286,8 @@ export function useControllableValue<T = any>(
     defaultValuePropName = 'defaultValue',
     valuePropName = 'modelValue',
     trigger = `onUpdate:${valuePropName}`,
-    onChange: onChangeProps = () => {},
-    onValueEffect = () => {},
+    onChange: onChangeProps = () => { },
+    onValueEffect = () => { },
   } = options || {};
   const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
   const priorValue = useRef({});
@@ -295,14 +295,14 @@ export function useControllableValue<T = any>(
   const defaultValueProps = props.get(defaultValuePropName);
   const unControlledInitialValue = defaultValueProps ?? defaultValue;
   const [stateValue, setStateValue] = useState<T>(unControlledInitialValue);
-  const triggerProps = props.get(trigger) || (() => {});
+  const triggerProps = props.get(trigger) || (() => { });
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
   useEffect(() => {
-    if (priorValue.value !== propsValue && isControlled) {
+    if (!_.isEqual(priorValue.value, propsValue) && isControlled) {
       onValueEffect(propsValue);
-      priorValue.value = propsValue;
+      priorValue.value = _.cloneDeep(propsValue);
     }
-  }, [propsValue, isControlled]);
+  }, [_.cloneDeep(propsValue), isControlled]);
   const onChange = (...args: any[]) => {
     if (_.isFunction(options?.beforeChange) && !options?.beforeChange?.(...args)) {
       return;
@@ -313,7 +313,7 @@ export function useControllableValue<T = any>(
       setStateValue(args[0] as T);
     }
     emit('sync:state', valuePropName, ...args);
-    priorValue.value = _.get(args, 0, null);
+    priorValue.value = _.cloneDeep(_.get(args, 0, null));
     _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);
     options?.afterChange?.(...args);
@@ -352,13 +352,13 @@ export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap)
     const storeKey = _.uniqueId('storeKey');
     const fiber: Fiber = isMount
       ? {
-          workInProgressState: null,
-          workInProgressEffect: null,
-          updateQueen,
-          getState,
-          setValue,
-          storeKey,
-        }
+        workInProgressState: null,
+        workInProgressEffect: null,
+        updateQueen,
+        getState,
+        setValue,
+        storeKey,
+      }
       : fiberMap.get(handleFn);
     fiberNode.setCurrentFiber(fiber, isMount);
     const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookMap)), ImmutableState, ImmutableProps);
