@@ -49,8 +49,8 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const valueFormat = _.match(converter)
         .with('string', () => valueFormatProps)
         .with('Integer', () => 'x')
-        .with('auto', () => (type === 'date' ? 'YYYY-MM-DD' : undefined))
-        .otherwise(() => (type === 'date' ? 'YYYY-MM-DD' : undefined));
+        .with('auto', () => (type === 'date' || type === 'daterange' || type === 'dates' ? 'YYYY-MM-DD' : undefined))
+        .otherwise(() => (type === 'date' || type === 'daterange' || type === 'dates' ? 'YYYY-MM-DD' : undefined));
       return {
         range: isRange,
         [$deletePropsList]: deletePropsList,
@@ -84,10 +84,11 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const isNilTime = isControlledTime
         ? _.some([startValue, endValue], (item) => _.isNil(item))
         : _.some(value, (item) => _.isNil(item));
+      const valueFormat = props.get('valueFormat');
       const onChange = (value) => {
         const isValidDayjs = _.every(value, (item) => dayjs(item).isValid());
         const isUnEffectiveValue = _.isNil(value) || _.isEmpty(value) || !isValidDayjs;
-        const effectiveTime = isUnEffectiveValue ? [] : _.map(value, (item) => dayjs(item).toJSON());
+        const effectiveTime = isUnEffectiveValue ? [] : _.map(value, (item) => (valueFormat ? dayjs(item).format(valueFormat) : dayjs(item).toJSON()));
         _.attempt(setStartValue, effectiveTime[0]);
         _.attempt(setEndValue, effectiveTime[1]);
       };
