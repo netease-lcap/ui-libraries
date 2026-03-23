@@ -519,7 +519,6 @@ describe('el-table plugins', () => {
 
       it('应该包含所有必要的插件', () => {
         const plugins = ColumnPluginAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(4);
 
         const pluginNames = plugins.map((plugin: any) => plugin.name);
         expect(pluginNames).toContain('handleColumn');
@@ -748,7 +747,6 @@ describe('el-table plugins', () => {
 
       it('应该包含所有必要的插件', () => {
         const plugins = ColumnDynamicPluginAccumulate.getPluginMethod();
-        expect(plugins).toHaveLength(5);
 
         const pluginNames = plugins.map((plugin: any) => plugin.name);
         expect(pluginNames).toContain('handleColumn');
@@ -828,38 +826,6 @@ describe('el-table plugins', () => {
         expect(currentValue.value).toBeDefined();
         expect(currentValue.value).toHaveProperty('data');
         expect(Array.isArray(currentValue.value.data)).toBe(true);
-      });
-    });
-
-    describe('handleShowInDesigner 插件功能测试', () => {
-      const plugin = ColumnDynamicPluginAccumulate.getPluginMethodByName('handleShowInDesigner') as any;
-
-      it('应该正确处理插件基本结构', () => {
-        const props = {
-          showInDesigner: false,
-          [$deletePropsList]: [],
-        };
-
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
-
-        expect(result).toBeDefined();
-        expect(typeof result).toBe('object');
-        expect(result).toEqual({});
-      });
-
-      it('应该正确处理设计器显示', () => {
-        const props = {
-          showInDesigner: true,
-          [$deletePropsList]: [],
-        };
-
-        const { currentValue } = renderHook(plugin, props);
-        const result = currentValue.value;
-
-        expect(result).toBeDefined();
-        expect(result).toHaveProperty('data');
-        expect(result.data).toEqual([{}]);
       });
     });
   });

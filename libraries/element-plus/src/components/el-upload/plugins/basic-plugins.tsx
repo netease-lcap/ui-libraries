@@ -228,9 +228,13 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const DomainName = appInfo?.domainName ? { DomainName: appInfo.domainName } : {};
       const lcapTtl = getLcapTtl({ ttl, ttlValue });
       const Authorization = { Authorization: getCookie('Authorization') };
+      const fileConnectionGroupProp = props.get('fileConnectionGroup');
+      const fileConnectionGroup = fileConnectionGroupProp ? {
+        'file-connection-group': fileConnectionGroupProp,
+      } : {};
 
       return {
-        headers: _.assign(propHeaders, lcapAccessObject, DomainName, lcapTtl, Authorization),
+        headers: _.assign(propHeaders, lcapAccessObject, DomainName, lcapTtl, Authorization, fileConnectionGroup),
       };
     },
   })
@@ -314,27 +318,27 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
         : {};
 
       const pictureCardSlot = listType === 'picture-card'
-          ? {
-            trigger: (
-              <ElFlex direction="column" alignment="center">
-                <ElIcon class="el-icon--upload" name="Plus" />
-              </ElFlex>
-            ),
-          }
-          : {};
+        ? {
+          trigger: (
+            <ElFlex direction="column" alignment="center">
+              <ElIcon class="el-icon--upload" name="Plus" />
+            </ElFlex>
+          ),
+        }
+        : {};
 
       const uploadSlot = !autoUpload && showUploadButton
-          ? {
-            default: (
-              <ElButton
-                text={triggerUploadText}
-                onClick={() => {
-                  ref?.submit();
-                }}
-              />
-            ),
-          }
-          : {};
+        ? {
+          default: (
+            <ElButton
+              text={triggerUploadText}
+              onClick={() => {
+                ref?.submit();
+              }}
+            />
+          ),
+        }
+        : {};
 
       const tipSlot = hasTip ? { tip: slots.tip } : { tip: null };
 

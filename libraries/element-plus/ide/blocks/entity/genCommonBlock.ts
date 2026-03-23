@@ -274,11 +274,13 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
+  const ideVersion = dataSource.app?.ideVersion;
+  const enumValueField = ideVersion && ideVersion >= 4.3 ? 'item' : 'value';
     return `<ElFormSelect ${formItemAttrs.join(' ')}
                 clearable={true}
                 placeholder="请选择${label}"
                 textField="text"
-                valueField="item"
+                valueField="${enumValueField}"
                 dataSource={nasl.util.EnumToList<${enumTypeAnnotationStr}>()}
                 modelValue={$sync(${vModel})}>
             </ElFormSelect>`;
@@ -410,6 +412,11 @@ export function genSaveModalTemplate(entity: naslTypes.Entity, nameGroup: NameGr
   nameGroup.vModelName = nameGroup.viewVariableInput;
 
   return `<ElDialog ref="${nameGroup.viewElementSaveModal}"
+    onClose={
+      function ${nameGroup.viewLogicModalClose}(event) {
+        $refs.${nameGroup.viewElementSaveModalForm}.resetForm()
+      }
+    }
     slotHeader={
       <>
         <ElText _if={${nameGroup.viewVariableIsUpdate}} text="修改"></ElText>

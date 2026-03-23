@@ -33,7 +33,6 @@ export default defineComponent({
 
     // 下载文件方法
     const handleDownload = () => {
-
       saveAs(props.file.url, props.file.name);
     };
 

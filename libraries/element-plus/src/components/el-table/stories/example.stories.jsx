@@ -147,7 +147,7 @@ export const Example1 = {
       });
       setTimeout(() => {
         console.log('table data change');
-        console.log(mytable, 'tableData2');
+        console.log(mytable.clearSelection, 'tableData2',mytable.value);
       }, 1000);
       const logCellClick = (...el) => {
         console.log(tableData2.value, 'logCellClick');
@@ -198,6 +198,7 @@ pageSizes="[5,10,20,50]"
     123
     </el-table-column>
     <el-table-column-plus prop="date" label="Name" class="myclomuns" :style="{'text-align':'left'}" />
+    <el-table-column type="draggable"  class="myclomuns" :style="{'text-align':'left'}" />
 
 
 </el-table>
@@ -572,7 +573,9 @@ export const Example4 = {
     },
     template: `
     <el-table :data="testData" :tree-props="treeProps" row-key="id" @expand-change="change">
-              <el-table-column type="selection" />
+              <el-table-column type="editable" >
+              <el-form-input :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"/>
+              </el-table-column>
               <el-table-column prop="name" label="name" />
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />

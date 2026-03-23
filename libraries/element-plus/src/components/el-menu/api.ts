@@ -11,7 +11,7 @@ namespace nasl.ui {
         click: true,
       },
       dataSource: {
-        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss: "!this.getAttribute('dataSource')",
         display: 3,
         loopRule: 'nth-last-child(-n+2)',
         loopElem: '.el-tabs__nav > .el-tabs__item',
@@ -48,7 +48,7 @@ namespace nasl.ui {
       title: '重新加载',
       description: '清除缓存，重新加载',
     })
-    reload(): void {}
+    reload(): void { }
 
     constructor(options?: Partial<ElMenuOptions<T, V>>) {
       super();
@@ -63,7 +63,7 @@ namespace nasl.ui {
         title: '子菜单唯一标识',
       })
       index: nasl.core.String,
-    ): void {}
+    ): void { }
 
     @Method({
       title: '收起',
@@ -74,7 +74,7 @@ namespace nasl.ui {
         title: '子菜单唯一标识',
       })
       index: nasl.core.String,
-    ): void {}
+    ): void { }
   }
 
   export class ElMenuOptions<T, V> extends ViewComponentOptions {
@@ -223,7 +223,7 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     router: nasl.core.Boolean = false;
-    
+
     @Prop({
       group: '交互属性',
       title: '自动路由',
@@ -463,7 +463,12 @@ namespace nasl.ui {
       snippetsDisplayConditions: {
         default: "this.getAncestor('el-menu')?.getAttribute('mode')?.value === 'vertical' ? [0, 1, 2] : [0, 1]",
       },
-      forceRefresh: 'parent',
+      additionalAttribute: {
+        index: {
+          condition: true,
+          expr: "'\"' + this.nodePath + '\"'",
+        },
+      },
     },
   })
   @Component({

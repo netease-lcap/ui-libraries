@@ -12,7 +12,7 @@ namespace nasl.ui {
       childAccept: false,
       forceUpdateWhenAttributeChange: true,
       refreshMutationNodesWhenAttributeChange: ['formMode'],
-      useTemplateInDefaultSlot: true,
+      // useTemplateInDefaultSlot: true,
       style: [
         {
           selector: '.el-list-components__item:not(:first-child)',
@@ -43,6 +43,15 @@ namespace nasl.ui {
     })
     data: nasl.collection.List<T>;
 
+    @Prop({
+      title: '分页大小',
+    })
+    pageSize: ElTableOptions<T, V, P, M>['pageSize'];
+
+    @Prop({
+      title: '当前页数',
+    })
+    currentPage: ElTableOptions<T, V, P, M>['currentPage'];
 
 
     @Method({

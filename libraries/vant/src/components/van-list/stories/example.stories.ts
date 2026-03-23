@@ -26,16 +26,32 @@ export const Default = {
       // 模拟数据加载
       const loadData = [{}, {}, {}];
       console.log('object');
-
+      const columns = async () => new Promise((resolve) => {
+        setTimeout(() => {
+          resolve([
+            { text: '选项1', value: '1' },
+            { text: '选项2', value: '2' },
+            { text: '选项3', value: '3' },
+            { text: '选项4', value: '4' },
+            { text: '选项5', value: '5' },
+          ].flatMap((item) => [item, item, item, item, item]));
+        }, 1000);
+      });
+      //   setTimeout(
+      //   () => {
+      //     resolve([
+      //       { text: '选项1', value: '1' },
+      //       { text: '选项2', value: '2' },
+      //       { text: '选项3', value: '3' },
+      //       { text: '选项4', value: '4' },
+      //       { text: '选项5', value: '5' },
+      //     ].flatMap((item) => [item, item, item, item, item]));
+      //   },
+      //   1000,
+      // ));
       return {
         args,
-        columns: [
-          { text: '选项1', value: '1' },
-          { text: '选项2', value: '2' },
-          { text: '选项3', value: '3' },
-          { text: '选项4', value: '4' },
-          { text: '选项5', value: '5' },
-        ].flatMap((item) => [item, item, item, item, item]),
+        columns,
         list,
         loading,
         finished,
@@ -46,7 +62,7 @@ export const Default = {
         <van-list
           style="height: 400px; "
           :dataSource="columns"
-          :isCell="true"
+        :column="1" 
         >
           <template #item="item">
             <span>2</span>

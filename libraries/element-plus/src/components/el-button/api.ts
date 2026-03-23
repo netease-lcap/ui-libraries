@@ -58,7 +58,7 @@ namespace nasl.ui {
         ],
       },
     })
-    type: '' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
+    type: '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'='';
 
     @Prop({
       group: '主要属性',

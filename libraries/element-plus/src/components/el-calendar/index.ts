@@ -1,6 +1,6 @@
 import { ElCalendar as ElCalendarPlus } from 'element-plus';
 import _ from 'lodash';
-import './index.css';
+import './index.less';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/index';
 

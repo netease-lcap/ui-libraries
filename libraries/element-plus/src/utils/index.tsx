@@ -29,6 +29,15 @@ const mergeRef = (ref) => {
     return componentRef;
   };
 };
+const liveRef = (ref, proxyTarget) => {
+  _.assign(ref, proxyTarget.value);
+  return new Proxy(ref, {
+    get(target, key, receiver) {
+      if (Object.prototype.hasOwnProperty.call(target, key)) return Reflect.get(target, key, receiver);
+      return proxyTarget.value?.[key as string];
+    },
+  });
+};
 const mergeClass = (class1: string, class2: string) => {
   return `${class1 ?? ''} ${class2 ?? ''}`.trim();
 };
@@ -60,6 +69,7 @@ _.mixin({
   mergeRef,
   mergeClass,
   match,
+  liveRef,
 });
 // _.mixin
 declare module 'lodash' {
@@ -72,6 +82,7 @@ declare module 'lodash' {
     mergeRef: typeof mergeRef;
     mergeClass: typeof mergeClass;
     match: typeof match;
+    liveRef: typeof liveRef;
   }
 }
 

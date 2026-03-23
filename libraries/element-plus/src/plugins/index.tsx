@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, defineComponent, unref, getCurrentInstance, onBeforeUnmount } from 'vue';
+import { ref, Ref, watch, provide, inject, defineComponent, unref, getCurrentInstance, onBeforeUnmount, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 // import create from 'zustand-vue';
@@ -63,8 +63,8 @@ export function registerComponent<T>(Component: any, options: any): any {
     setup(props, { attrs, slots, emit, expose }) {
       const isInDesigner = Boolean(attrs['data-nodepath']) || Boolean(_.get(window, '$uilibenv.IDE_DESIGNER', false));
       const pluginHooks = options.plugin instanceof PluginAccumulateTypes
-          ? options.plugin.getPluginMethod({ isInDesigner })
-          : new PluginOptions(options).getPluginMethod();
+        ? options.plugin.getPluginMethod({ isInDesigner })
+        : new PluginOptions(options).getPluginMethod();
       const componentState = ref({ state: {} });
       let Render = Component;
       const exposeRef = ref({}) as Ref<any>;
@@ -73,7 +73,8 @@ export function registerComponent<T>(Component: any, options: any): any {
       Object.assign(provideRef.value, (injectRef as any)?.value || {});
       const router = useRouter?.();
       const route = useRoute?.();
-      const currentRefId = _.get(getCurrentInstance(), 'vnode.ref.r');
+      const currentRefId = _.get(getCurrentInstance(), 'vnode.ref.r', _.uniqueId(options.name));
+
       const uniqueId = _.isObject(currentRefId) ? _.uniqueId(options.name) : currentRefId;
       const useStore = createStore((set) => ({
         state: {

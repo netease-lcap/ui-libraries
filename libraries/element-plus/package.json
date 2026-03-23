@@ -70,8 +70,8 @@
     "vue-tsc": "^2.1.10"
   },
   "peerDependencies": {
-    "vue": "^3.5.0",
     "@lcap/ui-libraries-mcp": "workspace:*",
+    "vue": "^3.5.0",
     "vue-router": "^4.5.0"
   },
   "dependencies": {
@@ -85,6 +85,7 @@
     "lodash": "^4.17.21",
     "lodash-unified": "^1.0.3",
     "normalize.css": "^7.0.0",
+    "sortablejs": "^1.15.2",
     "ts-pattern": "^5.8.0",
     "type-fest": "^2.14.0",
     "vue-hooks-plus": "^2.2.1",

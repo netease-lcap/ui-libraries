@@ -25,13 +25,28 @@ namespace nasl.ui {
       description:
         "表单里面没有重置按钮<button type=\"reset\" />时可以使用该方法，默认重置全部字段为空，该方法会触发 reset 事件。如果表单属性 resetType='empty' 或者 reset.type='empty' 会重置为空；如果表单属性 resetType='initial' 或者 reset.type='initial' 会重置为表单初始值。",
     })
-    resetForm(): void {}
+    resetForm(): void { }
 
     @Method({
       title: '校验函数',
       description: '校验函数，包含错误文本提示等功能',
     })
     validated(): {
+      valid: nasl.core.Boolean;
+    } {
+      return {} as any;
+    }
+    @Method({
+      title: '校验函数',
+      description: '校验指定表单字段，绑定字段列表',
+    })
+    validateField(
+      @Param({
+        title: 'undefined',
+        description: '需要验证的表单项 prop',
+      })
+      props: nasl.collection.List<nasl.core.String>,
+    ): {
       valid: nasl.core.Boolean;
     } {
       return {} as any;
@@ -369,7 +384,6 @@ namespace nasl.ui {
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
-
       forceUpdateWhenAttributeChange: true,
       forceRefresh: true,
       namedSlotOmitWrapper: ['label'],
@@ -393,14 +407,13 @@ namespace nasl.ui {
     //   setter: { concept: 'InputSetter' },
     // })
     // for: nasl.core.String;
-    // @Prop<ElFormItemProOptions, 'name'>({
-    //   group: '数据属性',
-    //   title: '表单字段名称',
-    //   description: '表单字段名称',
-    //   setter: { concept: 'InputSetter' },
-    //   if: (_) => !_.useRangeValue,
-    // })
-    // name: nasl.core.String;
+    @Prop<ElFormItemProOptions, 'prop'>({
+      group: '数据属性',
+      title: '表单字段名称',
+      description: '表单字段名称',
+      setter: { concept: 'InputSetter' },
+    })
+    prop: nasl.core.String;
 
     // @Prop<ElFormItemProOptions, 'initialValue'>({
     //   group: '数据属性',

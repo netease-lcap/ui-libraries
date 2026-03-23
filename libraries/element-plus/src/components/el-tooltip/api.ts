@@ -212,6 +212,15 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
     })
     ariaLabel: nasl.core.String;
+
+
+    @Prop({
+      group: '样式属性',
+      title: '弹出宽度',
+      description: '弹出宽度,0表示自适应',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    popperWidth: nasl.core.Decimal = 0;
     
     // @Prop({
     //   group: '主要属性',

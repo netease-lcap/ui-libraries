@@ -5,6 +5,9 @@
 .el-form .el-button {
   margin-bottom: 18px;
 }
+.el-form{
+  border: 1px solid transparent;
+}
 
 
 

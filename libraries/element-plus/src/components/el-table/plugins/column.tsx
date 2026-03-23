@@ -5,12 +5,13 @@ import { useMemo, useCallback, useEffect } from '@/plugins/hooks';
 import { ElIcon, ElCheckbox } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { $deletePropsList } from '@/plugins/constants';
+import { addClass } from '@/utils';
 
 const EditDefault = {
   name: 'editDefault',
   inheritAttrs: false,
   setup(props, { attrs, emit, expose }) {
-    const { item, slots, editChange = () => {}, setValue } = attrs;
+    const { item, slots, editChange = () => { }, setValue } = attrs;
 
     const editable = ref(false);
     const formItemRef = ref({});
@@ -32,7 +33,7 @@ const EditDefault = {
             }}
             size={18}
             name="Edit"
-            style={{ marginLeft: '10px', marginBottom: '18px' }}
+            style={{ marginLeft: '10px' }}
           />
         </div>
       ) : (
@@ -47,14 +48,13 @@ const EditDefault = {
               editable: editable.value,
               isPreview: !editable.value,
             })
-            ?.map((node) => cloneVNode(node, {
-                onValidateSuccess: () => {},
+              ?.map((node) => cloneVNode(node, {
+                onValidateSuccess: () => { },
                 ref: formItemRef,
               }))
           }
           <ElIcon
             onClick={() => {
-              console.log(formItemRef?.value, 'formItemRef');
               formItemRef?.value?.validate?.()?.then(() => {
                 editable.value = false;
                 _.attempt(editChange, item);
@@ -92,12 +92,12 @@ export default ColumnPluginAccumulate.addPlugin({
       slots: {
         ...slots,
         default: (item: any) => slots?.default?.({
-            ...item,
-            index: item?.$index,
-            item: item?.row,
-            rowIndex: item?.$index,
-            columnIndex: item?.cellIndex,
-          }),
+          ...item,
+          index: item?.$index,
+          item: item?.row,
+          rowIndex: item?.$index,
+          columnIndex: item?.cellIndex,
+        }),
       },
     } as {
       align: string;
@@ -157,6 +157,20 @@ export default ColumnPluginAccumulate.addPlugin({
     },
   })
   .addPlugin({
+    name: 'handleTypeDraggable',
+    handle(props) {
+      const type = props.get('type');
+      if (type !== 'draggable') return {};
+      const refId = props.get('data-ref-id');
+      return {
+        slots: {
+          header: useCallback(() => null, []),
+          default: useCallback(() => <el-icon class="draggableColumns" name="Rank" />, [refId]),
+        },
+      };
+    },
+  })
+  .addPlugin({
     name: 'handleNodePath',
     type: 'ide',
     handle(props) {
@@ -180,7 +194,6 @@ export default ColumnPluginAccumulate.addPlugin({
   })
   .addPlugin({
     name: 'handleSelectionAndIndex',
-    type: 'ide',
     handle(props) {
       const type = props.get('type');
       const slots = props.get('slots');

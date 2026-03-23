@@ -93,7 +93,7 @@ namespace nasl.ui {
       title: '保持页码，重新加载',
       description: '保持页码，重新加载',
     })
-    reload(): void {}
+    reload(): void { }
 
     @Method({
       title: '带页码刷新',
@@ -105,7 +105,7 @@ namespace nasl.ui {
         description: '要刷新的页数',
       })
       page?: nasl.core.Integer,
-    ): void {}
+    ): void { }
 
     @Method({
       title: 'undefined',
@@ -319,6 +319,18 @@ namespace nasl.ui {
     })
     selectedValues: nasl.collection.List<V>;
 
+
+    @Prop({
+      group: '交互属性',
+      title: '表格内可拖拽',
+      description: '设置是否可以拖拽行排序',
+      docDescription: '表格行是否可拖拽放置。默认关闭',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    draggable: nasl.core.Boolean = false;
+
     // ========== 样式属性 ==========
     @Prop({
       group: '样式属性',
@@ -375,6 +387,22 @@ namespace nasl.ui {
     })
     sticky: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '样式属性',
+      title: '表头文字加粗',
+      description: '表头文字加粗',
+      setter: { concept: 'SwitchSetter' },
+    })
+    headerBold: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '样式属性',
+      title: '行高',
+      description: '行高',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    rowHeight: nasl.core.Integer;
+
     @Prop<ElTableOptions<T, V, P, M>, 'stickyOffset'>({
       group: '样式属性',
       title: '表头吸顶偏移量',
@@ -405,15 +433,15 @@ namespace nasl.ui {
     })
     spanMethod: (item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) =>
       | {
-          /**
-           * @title 合并行数
-           */
-          rowspan?: nasl.core.Integer;
-          /**
-           * @title 合并列数
-           */
-          colspan?: nasl.core.Integer;
-        }
+        /**
+         * @title 合并行数
+         */
+        rowspan?: nasl.core.Integer;
+        /**
+         * @title 合并列数
+         */
+        colspan?: nasl.core.Integer;
+      }
       | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
 
     @Event({
@@ -437,9 +465,9 @@ namespace nasl.ui {
     @Event({
       title: '分页发生变化时触发',
       description:
-        '分页发生变化时触发。参数 newDataSource 表示分页后的数据。本地数据进行分页时，newDataSource 和源数据 data 会不一样。泛型 T 指表格数据类型',
+        '分页发生变化时触发',
     })
-    onPageChange: (event: any) => any;
+    onPageChange: (event: nasl.core.Integer) => any;
 
     @Event({
       title: '行点击时触发',
@@ -501,6 +529,29 @@ namespace nasl.ui {
     })
     onHeaderDragend: (event: { newWidth: number; oldWidth: number; field: nasl.core.String }) => any;
 
+    @Event({
+      title: '拖拽开始时触发',
+      description: '拖拽开始时触发',
+    })
+    onDragStart: (event: {
+      item: T;
+      index: nasl.core.Integer;
+    }) => any;
+
+    @Event({
+      title: '拖拽结束时触发',
+      description: '拖拽结束时触发',
+    })
+    onDragEnd: (event: {
+      source: {
+        item: T;
+        index: nasl.core.Integer;
+      }; target: {
+        item: T;
+        index: nasl.core.Integer;
+      };
+    }) => any;
+
     @Slot({
       title: '表格列',
       description: '表格列',
@@ -529,7 +580,7 @@ namespace nasl.ui {
       idetype: 'container',
       structured: { slot: 'default', empty: true },
       parentAccept: "['el-table'].includes(target.tag)",
-      forceRefresh: 'parent',
+      forceRefresh: { slot: 'header', parent: true },
       forceUpdateWhenAttributeChange: true,
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],
@@ -580,10 +631,11 @@ namespace nasl.ui {
           { title: '展开列' },
           { title: '序号列' },
           { title: '编辑列' },
+          { title: '拖拽列' },
         ],
       },
     })
-    type: 'normal' | 'selection' | 'expand' | 'index' | 'editable' = 'normal';
+    type: 'normal' | 'selection' | 'expand' | 'index' | 'editable' | 'draggable' = 'normal';
 
     @Prop<ElTableColumnOptions<T, V, P, M>, 'autoIndex'>({
       group: '数据属性',
@@ -716,6 +768,7 @@ namespace nasl.ui {
       slotWrapperInlineStyle: {},
       additionalAttribute: {
         ':showInDesigner': '"true"',
+        ':dataSource': '"[{}]"',
       },
       useTemplateInDefaultSlot: true,
       namedSlotOmitWrapper: ['default'],

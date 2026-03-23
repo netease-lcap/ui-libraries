@@ -31,26 +31,21 @@ export default CollapseAccumulate.addPlugin({
 
     const dataSourceSlots = useMemo(
       () => (_.isNil(dataConfig)
-          ? {}
-          : {
-              default: () => _.map(dataSource, (item) => (
-                <ElCollapseItem
-                  {...item}
-                  v-slots={{
-                      title: ({ isActive }) => slots.title?.({ item: item?.itemSource ?? item, isActive } as any),
-                      icon: ({ isActive }) => slots.icon?.(isActive),
-                      default: () => slots.content?.({ item: item?.itemSource ?? item } as any),
-                    }}
-                />
-                )),
-            }),
+        ? {}
+        : {
+          default: () => _.map(dataSource, (item) => (
+            <ElCollapseItem
+              {...item}
+              v-slots={{
+                title: ({ isActive }) => slots.title?.({ item: item?.itemSource ?? item, isActive } as any),
+                icon: ({ isActive }) => slots.icon?.(isActive),
+                default: () => slots.content?.({ item: item?.itemSource ?? item } as any),
+              }}
+            />
+          )),
+        }),
       [dataSource, slots, dataConfig],
     );
-
-    // const displayClass = useMemo(() => {
-    //   const isEmpty = dataConfig && _.isEmpty(data);
-    //   return isEmpty ? styles.empty : '';
-    // }, [dataSource, data, dataConfig]);
 
     return {
       // class: displayClass,

@@ -1,3 +1,28 @@
+# 2026-02-01 ~ 2026-02-28
+
+## ElementPlus
+
+### Bug Fixes
+
+- fix(el-table): 修复表格插件渲染逻辑，优化返回值格式 ([b4bce21](../../commit/b4bce21))
+- fix(vant): 添加 ts-pattern 依赖并重构 van-list 组件样式 ([fc221d8](../../commit/fc221d8))
+- fix(vite): mcp json ([0b16ac5](../../commit/0b16ac5))
+
+## PcUI
+
+### Bug Fixes
+
+- fix(UCalendarView): 多选有范围设置时默认值展示 (#1334) ([8d8879b](../../commit/8d8879b))
+
+## Vant
+
+### Bug Fixes
+
+- fix(vant): 添加 ts-pattern 依赖并重构 van-list 组件样式 ([fc221d8](../../commit/fc221d8))
+
+
+---
+
 # 2026-01-01 ~ 2026-01-31
 
 ## ElementPlus

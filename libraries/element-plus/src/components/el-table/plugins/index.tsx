@@ -1,7 +1,9 @@
 import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-plus';
+
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { VNode } from 'vue';
+import Sortable from 'sortablejs';
 import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect, useRender } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
@@ -126,14 +128,14 @@ export default TableAccumulate.addPlugin({
       const total = props.get('total');
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
-      const onPageChange = props.get('onPageChange', () => { });
+      const onCurrentChange = props.get('onPageChange', () => { });
       const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
       return {
         pageProps: {
           ...pageProps,
           layout,
           total,
-          onPageChange,
+          onCurrentChange,
         },
         pagination,
       };
@@ -147,12 +149,15 @@ export default TableAccumulate.addPlugin({
       const classNames = `${stickyName} ${className}`;
       const styleProps = props.get('style') as Record<string, any>;
       const stickyOffset = props.get('stickyOffset', 8);
+      const rowStyle = props.get('rowStyle', {});
+      const rowHeight = props.get('rowHeight') ?? _.get(rowStyle, 'height', undefined);
       return {
         class: classNames,
         style: {
           '--el-table-sticky-offset': `${stickyOffset}px`,
           ...styleProps,
         },
+        rowStyle: useMemo(() => _.assign(rowStyle, { height: rowHeight }), [rowHeight, rowStyle]),
       };
     },
   })
@@ -185,9 +190,11 @@ export default TableAccumulate.addPlugin({
     handle(props) {
       const textAlign = _.get(props.get('style'), 'text-align', 'left');
       const styleProps = props.get('style') as Record<string, any>;
+      const headerBold = props.get('headerBold');
       return {
         style: {
           '--cw-style-text-align': textAlign,
+          '--cw-style-header-weight': headerBold ? 600 : 400,
           ...styleProps,
         },
       } as {
@@ -223,6 +230,7 @@ export default TableAccumulate.addPlugin({
       const currentPage = props.get('currentPage');
       const pagination = props.get('pagination');
       const pageSize = props.get('pageSize');
+      const deletePropsList = props.get($deletePropsList).concat(['dataSource', 'reload', 'getFields']);
       const order = props.get('order');
       const sort = props.get('sort');
       const pageProps = props.get('pageProps');
@@ -246,6 +254,7 @@ export default TableAccumulate.addPlugin({
         defaultParams,
         formatResult,
       });
+
       const reload = (params) => {
         run({ currentPage, pageSize, order, sort, pagination, ...params });
       };
@@ -263,6 +272,8 @@ export default TableAccumulate.addPlugin({
 
       const dataSourceResult = _.isEmpty(treeData) ? {} : { data: treeData };
       return {
+
+        [$deletePropsList]: deletePropsList,
         ref: selfRef,
         pageProps: _.assign(pageProps, { total }),
         reload,
@@ -281,11 +292,11 @@ export default TableAccumulate.addPlugin({
       const styleProps = props.get('style');
       const { style, innerStyle } = categoryStyles(styleProps);
       return {
-        ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
+        ref: _.liveRef(ref, tableRef),
         tableStyle: innerStyle,
         style,
-        render: useCallback((props, { attrs, slots }) => {
-          return [
+        render: useRender((props, { attrs, slots }) => {
+          return (
             <div data-nodepath={nodepath} style={{ ...props.style }} class="el-table-wrapper">
               <Component
                 ref={tableRef}
@@ -299,8 +310,8 @@ export default TableAccumulate.addPlugin({
                   <ElPagination {...props.pageProps} total={props?.pageProps?.total} />
                 </div>
               )}
-            </div>,
-          ];
+            </div>
+          );
         }, []),
       };
     },
@@ -323,7 +334,7 @@ export default TableAccumulate.addPlugin({
         );
       }, []);
       return {
-        ref: Object.assign(ref, _.omit(tableRef.value, ['reload', 'data'])),
+        ref: _.liveRef(ref, tableRef),
         render,
       };
     },
@@ -332,9 +343,9 @@ export default TableAccumulate.addPlugin({
     name: 'handleTableConfig',
     handle(props) {
       const columnConfig = props.get('columnConfig');
-      if (!columnConfig) return {};
       const Component = props.get('render');
       const tableRef = useRef({});
+      const ref = props.get('ref');
       const render = useRender((props, { attrs, slots }) => {
         const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop
           ? [{ ...node.props, header: node.children?.header }]
@@ -355,8 +366,10 @@ export default TableAccumulate.addPlugin({
           </div>
         );
       }, []);
+      if (!columnConfig) return {};
       return {
         render,
+        ref: _.liveRef(ref, tableRef),
       };
     },
   })
@@ -411,6 +424,7 @@ export default TableAccumulate.addPlugin({
     name: 'handleSelectedValues',
     handle(props) {
       const ref = props.get('ref');
+
       const data = props.get('data');
       const emit = props.get('emit');
       const selectionChange = props.get('onSelect', () => { });
@@ -531,6 +545,52 @@ export default TableAccumulate.addPlugin({
           },
           [onToggleExpanded, onToggleTreeExpanded],
         ),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleSortable',
+    handle(props) {
+      const sortableInstance = useRef(null);
+      const data = props.get('data');
+      useEffect(() => {
+        const onDragStart = props.get('onDragStart', () => { });
+        const onDragEnd = props.get('onDragEnd', () => { });
+        const refId = props.get('data-ref-id');
+        const ref = props.get('ref');
+        const slots = props.get('slots');
+        const draggableColumn = _.find(_.attempt(slots?.default), (node) => _.get(node, 'props.type') === 'draggable');
+        const draggableHandle = draggableColumn ? '.el-table__cell:has(.draggableColumns)' : '.el-table__row';
+        if (!props.get('draggable')) return;
+        _.attempt(_.get(sortableInstance, 'value.destroy', () => { }));
+        const tbody = document.querySelector(`[data-ref-id="${refId}"] tbody`);
+        if (!tbody) return;
+        sortableInstance.value = Sortable.create(tbody, {
+          handle: draggableHandle, // 指定拖拽区域
+          draggable: '.el-table__row',
+          animation: 150,
+          onEnd: (evt) => {
+            _.attempt(onDragEnd, {
+              source: {
+                item: _.get(ref, `data.${evt?.oldDraggableIndex}`),
+                index: evt?.oldDraggableIndex,
+              },
+              target: {
+                item: _.get(ref, `data.${evt?.newDraggableIndex}`),
+                index: evt?.newDraggableIndex,
+              },
+            });
+          },
+          onStart(/** Event */evt) {
+            _.attempt(ref.toggleRowExpansion, _.get(ref, `data.${evt?.oldDraggableIndex}`), false);
+            _.attempt(onDragStart, {
+              item: _.get(ref, `data.${evt?.oldDraggableIndex}`),
+              index: evt?.oldDraggableIndex,
+            });
+          },
+        });
+      }, [data]);
+      return {
       };
     },
   });

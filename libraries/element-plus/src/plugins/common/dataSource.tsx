@@ -28,15 +28,15 @@ export function useHandleMapField(filedInfo: {
   } = filedInfo;
   return useMemo(
     () => _.map(dataSource, (item: any) => ({
-        ...(_.isObject(item) ? item : {}),
-        [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
-        [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
-        ..._.omitBy(
-          _.mapValues(fieldsMap, (path) => _.get(item, path, undefined)),
-          _.isUndefined,
-        ),
-        itemSource: _.isString(item) ? item : undefined,
-      })),
+      ...(_.isObject(item) ? item : {}),
+      [label]: !_.isObject(item) ? item : _.get(item, textField || 'label', ''),
+      [value]: !_.isObject(item) ? item : _.get(item, valueField || 'value', ''),
+      ..._.omitBy(
+        _.mapValues(fieldsMap, (path) => _.get(item, path, undefined)),
+        _.isUndefined,
+      ),
+      itemSource: _.isString(item) ? item : undefined,
+    })),
     [label, value, textField, valueField, dataSource, fieldsMap],
   );
 }
@@ -64,6 +64,10 @@ const handleDataSouceToFn = _.cond([
       return handleLocalPageData({ dataSource: data, ...params });
     },
   ],
+  [
+    (val: DataSourceArrayType) => _.conforms({ list: _.isArray })(val as any),
+    (dataSource: DataSourceArrayType) => async (params: any) => handleLocalPageData({ dataSource: dataSource.list, ...params, total: dataSource?.total ?? dataSource?.list?.length ?? 0 }),
+  ],
   [_.stubTrue, () => async (params: any) => handleLocalPageData({ dataSource: [], ...params })],
 ]);
 interface RequestOptions {
@@ -84,8 +88,8 @@ interface RequestResult {
 const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions = {}): RequestResult => {
   const [resultData, setResult] = useState({});
   const [loading, setLoading] = useState(false);
-  const run = useRef<(...args: any[]) => void>(() => {}, false);
-  const { onBefore = () => {}, onSuccess = () => {}, formatResult = (value) => value, defaultParams = [] } = options;
+  const run = useRef<(...args: any[]) => void>(() => { }, false);
+  const { onBefore = () => { }, onSuccess = () => { }, formatResult = (value) => value, defaultParams = [] } = options;
   const { refreshDeps = [], manual = false } = options;
   const fn = useCallback(
     (...res) => {
@@ -109,8 +113,9 @@ const useRequest = (dataSource: DataSourceFunctionType, options: RequestOptions 
 };
 
 export function useRequestDataSource(dataSource: DataSourceType, options: RequestOptions = {}): RequestResult {
-  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource as any), [_.cloneDeep(dataSource)]);
-
+  // 兼容函数 cloneDeep 后 fn变成空对象isEqual相等的情况
+  const dataSourceDep = _.isFunction(dataSource) ? dataSource : _.cloneDeep(dataSource);
+  const dataSourceFn = useMemo(() => handleDataSouceToFn(dataSource as any), [dataSourceDep]);
   const resultData = useRequest(dataSourceFn, options);
   return resultData;
 }

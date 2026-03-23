@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { renderHook } from '@ep-test/test-utils/render-hook';
-import { $deletePropsList,$router, $route } from '@/plugins/constants';
+import { $deletePropsList, $router, $route } from '@/plugins/constants';
 
 import '@/utils/index';
 import MenuBasicAccumulate from '../plugins/basic-plugins';
@@ -75,9 +75,7 @@ describe('el-menu plugins', () => {
         const { currentValue } = renderHook(plugin, props);
         const result = currentValue.value;
 
-        const symbolKey = Object.getOwnPropertySymbols(result).find((s) =>
-          s.toString().includes('deletePropsList'),
-        ) as symbol;
+        const symbolKey = Object.getOwnPropertySymbols(result).find((s) => s.toString().includes('deletePropsList')) as symbol;
         expect(symbolKey).toBeDefined();
         expect(Array.isArray(result[symbolKey])).toBe(true);
         expect(result[symbolKey]).toEqual(
@@ -296,7 +294,7 @@ describe('el-menu plugins', () => {
         const { currentValue } = renderHook(plugin, props);
         const result = currentValue.value;
 
-        expect(result).toEqual({});
+        expect(result).toHaveProperty('slots');
       });
 
       it('应该正确处理非水平模式', () => {

@@ -13,7 +13,7 @@ namespace nasl.ui {
     description: '通过拖动滑块在一个固定区间内进行选择',
     group: 'Form',
   })
-  export class ElSlider extends ViewComponent {
+  export class ElSlider<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     @Prop({
       title: '预览',
       description: '是否预览',
@@ -31,13 +31,13 @@ namespace nasl.ui {
       description: '滑块的当前值',
       docDescription: '绑定滑块的当前值，支持双向绑定。可以获取或设置滑块的数值。',
     })
-    modelValue: nasl.core.Integer;
-    constructor(options?: Partial<ElSliderOptions>) {
+    modelValue: M extends true ? nasl.collection.List<nasl.core.Integer> : nasl.core.Integer;
+    constructor(options?: Partial<ElSliderOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class ElSliderOptions extends ViewComponentOptions {
+  export class ElSliderOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
     // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
@@ -46,7 +46,7 @@ namespace nasl.ui {
       description: '滑块的当前值',
       docDescription: '绑定滑块的当前值，支持双向绑定。可以获取或设置滑块的数值。',
     })
-    modelValue: nasl.core.Integer;
+    modelValue: M extends true ? nasl.collection.List<nasl.core.Integer> : nasl.core.Integer;
 
     @Prop({
       group: '数据属性',
@@ -151,7 +151,7 @@ namespace nasl.ui {
       description: '是否为范围选择',
       setter: { concept: 'SwitchSetter' },
     })
-    range: nasl.core.Boolean;
+    range: M;
 
     @Prop({
       group: '主要属性',
@@ -216,7 +216,7 @@ namespace nasl.ui {
       title: '值改变时',
       description: '值改变时触发（如果拖拽中，则只在松开鼠标后触发）',
     })
-    onChange: (value: nasl.core.Integer | nasl.core.Integer[]) => void;
+    onChange: (value: M extends true ? nasl.collection.List<nasl.core.Integer> : nasl.core.Integer) => void;
 
     @Event({
       title: '数据改变时',
@@ -251,13 +251,13 @@ namespace nasl.ui {
     description: '表单滑块',
     group: 'Form',
   })
-  export class ElFormSlider extends ViewComponent {
+  export class ElFormSlider<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     constructor(
-      options?: Partial<ElFormSliderOptions & ElFormItemProOptions & Omit<ElSliderOptions, keyof ElFormItemProOptions>>,
+      options?: Partial<ElFormSliderOptions<T, V, P, M, C> & ElFormItemProOptions & Omit<ElSliderOptions<T, V, P, M, C>, keyof ElFormItemProOptions>>,
     ) {
       super();
     }
   }
 
-  export class ElFormSliderOptions extends ViewComponentOptions {}
+  export class ElFormSliderOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions { }
 }

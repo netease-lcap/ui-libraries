@@ -1,1 +1,4 @@
 /* Input Number component custom styles */ 
+.el-input-number .el-input{
+  width: 100%;
+}
