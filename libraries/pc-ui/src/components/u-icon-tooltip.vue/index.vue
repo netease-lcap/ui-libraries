@@ -20,7 +20,7 @@
 
 <script>
 import MPopper from '../m-popper.vue';
-import pick from 'lodash/pick';
+import { pick } from 'lodash';
 
 /**
  * 默认显示一个按钮，hover 上去有提示

@@ -179,7 +179,7 @@
 </template>
 
 <script>
-import isNumber from 'lodash/isNumber';
+import { isNumber } from 'lodash';
 import FVirtualTable from './f-virtual-table.vue';
 import i18nMixin from '../../mixins/i18n';
 import KeyMap from '../../utils/keyMap';

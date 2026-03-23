@@ -66,7 +66,7 @@ import './initDayjs';
 import { DefaultFormatType, getDay } from './utils';
 import SEmpty from '../../components/s-empty.vue';
 import MEmitter from '../m-emitter.vue';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import i18nMixin from '../../mixins/i18n';
 
 export default {

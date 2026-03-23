@@ -18,7 +18,7 @@ import { sync } from '@lcap/vue2-utils';
 import MParent from '../m-parent.vue';
 import MGroupParent from '../m-group.vue/parent.vue';
 import UValidator from '../u-validator.vue';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash';
 
 export default {
     name: 'u-form',

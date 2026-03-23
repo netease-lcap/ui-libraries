@@ -1,6 +1,4 @@
-import camelCase from 'lodash/camelCase';
-import get from 'lodash/get';
-import template from 'lodash/template';
+import { camelCase, get, template } from 'lodash';
 
 import locale from '../../locale';
 

@@ -1,6 +1,8 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
+import fs from 'node:fs';
 import path from 'path';
+import { defineConfig } from 'vite';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { createVuePlugin as vue2 } from '@lcap/vite-plugin-vue2';
 import { createGenScopedName, lcapPlugin } from '@lcap/builder';
 import autoprefixer from 'autoprefixer';
@@ -8,10 +10,38 @@ import autoprefixer from 'autoprefixer';
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
 
+const DEV_XLSX_MIDDLEWARE_PATH = '/pc-ui-assets/xlsx-js-style.js';
+
+/** 开发时提供与源码一致的本地 xlsx UMD，避免 import 资源被库构建内联成 base64 */
+function serveXlsxJsStyleDev() {
+  return {
+    name: 'serve-xlsx-js-style-dev',
+    configureServer(server) {
+      server.middlewares.use(DEV_XLSX_MIDDLEWARE_PATH, (req, res, next) => {
+        if (req.method !== 'GET' && req.method !== 'HEAD') {
+          next();
+          return;
+        }
+        const fp = path.resolve(__dirname, 'src/assets/xlsx-js-style.js');
+        if (!fs.existsSync(fp)) {
+          next();
+          return;
+        }
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        res.setHeader('Cache-Control', 'no-cache');
+        fs.createReadStream(fp).pipe(res);
+      });
+    },
+  };
+}
+
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
+  const analyze = mode === 'analyze';
+
   return {
     plugins: [
+      serveXlsxJsStyleDev(),
       vue2({
         jsx: true,
         jsxOptions: {
@@ -22,6 +52,19 @@ export default defineConfig(({ command }) => {
           compositionAPI: false,
         },
       }),
+      {
+        name: 'copy-xlsx-js-style-to-dist-theme',
+        closeBundle() {
+          const from = path.resolve(__dirname, 'src/assets/xlsx-js-style.js');
+          const to = path.resolve(__dirname, 'dist-theme/xlsx-js-style.js');
+          if (!fs.existsSync(from)) {
+            console.warn('[pc-ui] 未找到 src/assets/xlsx-js-style.js，跳过复制');
+            return;
+          }
+          fs.mkdirSync(path.dirname(to), { recursive: true });
+          fs.copyFileSync(from, to);
+        },
+      },
       lcapPlugin({
         framework: 'vue2',
         pnpm: true,
@@ -221,6 +264,7 @@ export default defineConfig(({ command }) => {
       },
     },
     build: {
+      assetsInlineLimit: 0,
       cssCodeSplit: false,
       target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
       lib: {
@@ -234,15 +278,27 @@ export default defineConfig(({ command }) => {
       sourcemap: true,
       minify: true,
       rollupOptions: {
+        plugins: analyze
+          ? [
+            visualizer({
+              filename: path.resolve(__dirname, 'dist-theme/stats.html'),
+              gzipSize: true,
+              brotliSize: true,
+              open: process.env.CI !== 'true',
+              template: 'treemap',
+            }),
+          ]
+          : [],
         // 确保外部化处理那些你不想打包进库的依赖
         treehake: false,
-        external: ['vue', 'vue-router', 'vue-i18n', '@vue/composition-api'],
+        external: ['vue', 'vue-router', 'vue-i18n', '@vue/composition-api', 'lodash'],
         output: {
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           globals: {
             vue: 'Vue',
             'vue-router': 'VueRouter',
             'vue-i18n': 'VueI18n',
+            lodash: 'Lodash',
             '@vue/composition-api': 'VueCompositionAPI',
           },
           interop: 'compat',

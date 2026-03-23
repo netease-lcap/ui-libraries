@@ -1,6 +1,6 @@
 <script>
 import DataSource from '../../utils/DataSource';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash';
 import i18n from './i18n';
 import i18nMixin from '../../mixins/i18n';
 

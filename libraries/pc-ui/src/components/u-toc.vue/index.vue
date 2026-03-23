@@ -12,7 +12,7 @@ import { sync } from '@lcap/vue2-utils';
 import MSinglex from '../m-singlex.vue';
 import { getPosition, getComputedStyle, findScrollParent } from '../../utils/dom';
 import event from '../../utils/event';
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash';
 
 export default {
     name: 'u-toc',

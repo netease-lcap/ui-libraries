@@ -17,7 +17,7 @@
 
 <script>
 import MField from '../m-field.vue';
-import isNumber from 'lodash/isNumber';
+import { isNumber } from 'lodash';
 
 export default {
     name: 'u-cascade-select',

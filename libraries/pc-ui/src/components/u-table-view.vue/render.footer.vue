@@ -31,7 +31,7 @@
 <script>
 import i18nMixin from '../../mixins/i18n';
 import UTableRender from './render.table.vue';
-import isNumber from 'lodash/isNumber';
+import { isNumber } from 'lodash';
 
 const CALC_TYPES = {
   SUM: 'sum',
