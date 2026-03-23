@@ -55,35 +55,35 @@ namespace nasl.ui {
     })
     dataSource: { list: nasl.collection.List<nasl.core.Date | nasl.core.String>; total: nasl.core.Integer } | nasl.collection.List<nasl.core.Date | nasl.core.String>;
 
-    @Prop({
-      group: '数据属性',
-      title: '数据类型',
-      description: '数据源中每个数据项的类型定义，用于类型推导和属性选择',
-      docDescription: '此属性为只读，当绑定数据源后会自动识别数据项的类型T，用于在插槽中提供类型提示和属性选择器。',
-    })
-    dataSchema: T;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '数据类型',
+    //   description: '数据源中每个数据项的类型定义，用于类型推导和属性选择',
+    //   docDescription: '此属性为只读，当绑定数据源后会自动识别数据项的类型T，用于在插槽中提供类型提示和属性选择器。',
+    // })
+    // dataSchema: T;
 
-    @Prop<ElCalendarOptions<T, V, P, M, C>, 'startKey'>({
-      group: '数据属性',
-      title: '开始时间字段',
-      description: '数据内表示开始时间的字段',
-      docDescription: '数据内表示开始时间的字段，要求对应数据必须包含日期（日期/日期时间格式），**单独使用表示当天**；跟结束时间字段配合使用表示日期区间，组件根据日期区间判断展示在哪些日期内。',
-      setter: {
-        concept: 'PropertySelectSetter',
-      },
-    })
-    startKey: (item: T) => any = ((item: any) => item.startTime) as any;
+    // @Prop<ElCalendarOptions<T, V, P, M, C>, 'startKey'>({
+    //   group: '数据属性',
+    //   title: '开始时间字段',
+    //   description: '数据内表示开始时间的字段',
+    //   docDescription: '数据内表示开始时间的字段，要求对应数据必须包含日期（日期/日期时间格式），**单独使用表示当天**；跟结束时间字段配合使用表示日期区间，组件根据日期区间判断展示在哪些日期内。',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    // })
+    // startKey: (item: T) => any = ((item: any) => item.startTime) as any;
 
-    @Prop<ElCalendarOptions<T, V, P, M, C>, 'endKey'>({
-      group: '数据属性',
-      title: '结束时间字段',
-      description: '数据内表示结束时间的字段',
-      docDescription: '数据内表示结束时间的字段，要求对应数据必须包含日期（日期/日期时间格式），跟开始时间字段配合使用表示日期区间，组件根据时间区间判断展示在哪些日期内。',
-      setter: {
-        concept: 'PropertySelectSetter',
-      },
-    })
-    endKey: (item: T) => any = ((item: any) => item.endTime) as any;
+    // @Prop<ElCalendarOptions<T, V, P, M, C>, 'endKey'>({
+    //   group: '数据属性',
+    //   title: '结束时间字段',
+    //   description: '数据内表示结束时间的字段',
+    //   docDescription: '数据内表示结束时间的字段，要求对应数据必须包含日期（日期/日期时间格式），跟开始时间字段配合使用表示日期区间，组件根据时间区间判断展示在哪些日期内。',
+    //   setter: {
+    //     concept: 'PropertySelectSetter',
+    //   },
+    // })
+    // endKey: (item: T) => any = ((item: any) => item.endTime) as any;
 
     @Slot({
       title: '日期单元格',
