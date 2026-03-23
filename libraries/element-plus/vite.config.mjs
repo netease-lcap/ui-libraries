@@ -9,16 +9,32 @@ import { createGenScopedName, batchDepCSSInfo, lcapPlugin } from '@lcap/builder'
 process.env.TZ = 'Asia/Shanghai';
 const rootPath = process.cwd();
 
-// 复制 mcpTool.json 到 dist-theme 的插件
-const copyMcpToolPlugin = () => {
+// 自定义插件：复制mcpTool.json到dist-theme目录
+const copyMcpToolJsonPlugin = () => {
   return {
-    name: 'copy-mcp-tool',
-    writeBundle() {
-      const srcPath = path.resolve(rootPath, 'src/mcpTool.json');
-      const destPath = path.resolve(rootPath, 'dist-theme/mcpTool.json');
+    name: 'copy-mcp-tool-json',
+    // 在构建结束后执行
+    async buildEnd() {
+      try {
+        // 源文件路径
+        const sourcePath = path.resolve(rootPath, 'src/mcpTool.json');
+        // 目标目录
+        const targetDir = path.resolve(rootPath, 'dist-theme');
+        // 目标文件路径
+        const targetPath = path.resolve(targetDir, 'mcpTool.json');
 
-      if (fs.existsSync(srcPath)) {
-        fs.copyFileSync(srcPath, destPath);
+        // 检查源文件是否存在
+        if (await fs.pathExists(sourcePath)) {
+          // 创建目标目录（如果不存在）
+          await fs.ensureDir(targetDir);
+          // 复制文件
+          await fs.copyFile(sourcePath, targetPath);
+          console.log(`✅ mcpTool.json已成功复制到: ${targetPath}`);
+        } else {
+          console.warn(`⚠️  未找到源文件: ${sourcePath}`);
+        }
+      } catch (error) {
+        console.error('❌ 复制mcpTool.json失败:', error);
       }
     },
   };
@@ -31,7 +47,8 @@ export default defineConfig(({ command }) => {
     plugins: [
       vue(),
       vueJsx(),
-      copyMcpToolPlugin(),
+      // 加入自定义复制文件插件
+      copyMcpToolJsonPlugin(),
       lcapPlugin({
         type: 'nasl.ui',
         framework: 'vue3',
