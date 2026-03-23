@@ -43,17 +43,17 @@ namespace nasl.ui {
     })
     range: nasl.collection.List<nasl.core.Date | nasl.core.String>;
 
-    @Prop({
-      group: '数据属性',
-      title: '数据源',
-      description: '设置日历的数据来源，支持绑定集合类型变量或返回集合的逻辑',
-      docDescription:
-        '可以绑定 List<nasl.core.Date | nasl.core.String> 类型的变量，或者绑定返回 List<nasl.core.Date | nasl.core.String> 类型的逻辑。当使用数据源时，日历会根据数据动态生成日期，每个日期对应一个日期单元格。',
-      setter: {
-        concept: 'DataSourceSetter',
-      },
-    })
-    dataSource: { list: nasl.collection.List<nasl.core.Date | nasl.core.String>; total: nasl.core.Integer } | nasl.collection.List<nasl.core.Date | nasl.core.String>;
+    // @Prop({
+    //   group: '数据属性',
+    //   title: '数据源',
+    //   description: '设置日历的数据来源，支持绑定集合类型变量或返回集合的逻辑',
+    //   docDescription:
+    //     '可以绑定 List<nasl.core.Date | nasl.core.String> 类型的变量，或者绑定返回 List<nasl.core.Date | nasl.core.String> 类型的逻辑。当使用数据源时，日历会根据数据动态生成日期，每个日期对应一个日期单元格。',
+    //   setter: {
+    //     concept: 'DataSourceSetter',
+    //   },
+    // })
+    // dataSource: { list: nasl.collection.List<nasl.core.Date | nasl.core.String>; total: nasl.core.Integer } | nasl.collection.List<nasl.core.Date | nasl.core.String>;
 
     // @Prop({
     //   group: '数据属性',
