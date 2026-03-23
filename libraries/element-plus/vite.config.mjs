@@ -29,7 +29,7 @@ const copyMcpToolJsonPlugin = () => {
           await fs.ensureDir(targetDir);
           // 复制文件
           await fs.copyFile(sourcePath, targetPath);
-          console.log(`✅ mcpTool.json已成功复制到: ${targetPath}`);
+          console.log(`✅ mcpTool.json已成功复制到1: ${targetPath}`);
         } else {
           console.warn(`⚠️  未找到源文件: ${sourcePath}`);
         }
