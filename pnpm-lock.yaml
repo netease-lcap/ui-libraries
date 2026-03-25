@@ -797,9 +797,6 @@ importers:
       dompurify:
         specifier: ^2.0.15
         version: 2.4.7
-      lodash:
-        specifier: ^4.17.5
-        version: 4.17.21
       normalize.css:
         specifier: ^7.0.0
         version: 7.0.0
@@ -909,6 +906,9 @@ importers:
       jsdom:
         specifier: ^23.0.1
         version: 23.0.1
+      lodash:
+        specifier: ^4.17.5
+        version: 4.17.21
       remark-parse:
         specifier: ^11.0.0
         version: 11.0.0
