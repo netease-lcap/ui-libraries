@@ -54,10 +54,10 @@
     "swiper": "^7.4.1",
     "vue-cropper": "^0.5.8",
     "whatwg-fetch": "3.6.2",
+    "lodash": "^4.17.5",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "lodash": "^4.17.5",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@lcap/builder": "workspace:*",
