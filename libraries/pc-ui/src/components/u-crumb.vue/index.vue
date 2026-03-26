@@ -16,8 +16,7 @@
 </template>
 
 <script>
-import isFunction from 'lodash/isFunction';
-import isObject from 'lodash/isObject';
+import { isFunction, isObject } from 'lodash';
 import MParent from '../m-parent.vue';
 import { getRouteComponentOptions } from '../../utils/vue';
 import SEmpty from '../s-empty.vue';

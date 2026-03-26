@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash';
 
 export default {
     name: 'f-virtual-list',

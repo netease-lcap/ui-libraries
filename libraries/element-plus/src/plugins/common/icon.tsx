@@ -25,7 +25,7 @@ type IconResult = VNode | null;
 
 export function getPropsIcon(props: any): IconResult {
   return _.cond([
-    [_.conforms({ name: _.isString }), (props) => <ElIcon {...props} />],
+    [_.conforms({ name: (name) => _.isString(name) && !!name }), (props) => <ElIcon {...props} />],
     [_.conforms({ name: _.isNil }), _.constant(null)],
     [_.conforms({ name: (name) => _.isFunction(name?.setup) }), (props) => props.name],
     [_.stubTrue, _.constant(null)],

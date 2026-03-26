@@ -55,7 +55,7 @@
 import { sync } from '@lcap/vue2-utils';
 import i18n from './i18n';
 import i18nMixin from '../../mixins/i18n';
-import isNumber from 'lodash/isNumber';
+import { isNumber } from 'lodash';
 
 const DEFAULT_PAGE_SIZE = 20;
 

@@ -87,12 +87,11 @@ import { MGroupParent } from '../m-group.vue';
 import MField from '../m-field.vue';
 import FVirtualList from '../f-virtual-list.vue';
 import DataSource from '../../utils/DataSource';
-import debounce from 'lodash/debounce';
 import i18n from './i18n';
 import { findScrollParent } from '../../utils/dom';
 import SEmpty from '../s-empty.vue';
 import i18nMixin from '../../mixins/i18n';
-import { isFunction } from 'lodash';
+import { debounce, isFunction } from 'lodash';
 
 export default {
     name: 'u-list-view',

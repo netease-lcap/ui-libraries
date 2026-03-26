@@ -6,3 +6,7 @@
 .el-upload__preview .el-upload-list {
   margin: unset;
 }
+
+.cw-upload{
+  border: 1px solid transparent;
+}

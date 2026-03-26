@@ -52,7 +52,7 @@
 
 <script>
 import dayjs from 'dayjs';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import i18n from './i18n';
 import { getDay, DefaultFormatType } from './utils';
 import i18nMixin from '../../mixins/i18n';

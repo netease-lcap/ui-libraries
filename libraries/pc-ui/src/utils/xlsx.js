@@ -1,14 +1,85 @@
-import XLSX from 'xlsx-js-style';
+import { loadScript } from './load-script';
+
+/**
+ * 开发态（Storybook / vite dev）：由 vite.config 里中间件映射到 src/assets/xlsx-js-style.js，无需外网。
+ * 生产 UMD：与 index.js 同目录的 xlsx-js-style.js（closeBundle 复制），勿用 import 引用该文件以免被打进 base64。
+ */
+const DEV_XLSX_MIDDLEWARE_PATH = '/pc-ui-assets/xlsx-js-style.js';
+
+/**
+ * UMD 整包同步执行时，用当前 script 的地址解析与 index.js 同目录的 xlsx-js-style.js（打包后在 dist-theme 下）。
+ */
+const PC_UI_ENTRY_SCRIPT_SRC = (typeof document !== 'undefined' && document.currentScript && document.currentScript.src)
+    ? document.currentScript.src
+    : '';
+
+function getXlsxScriptSrc() {
+    if (typeof window === 'undefined') {
+        return '';
+    }
+    const xlsxSrcOverride = '__PC_UI_XLSX_SCRIPT_SRC__';
+    if (typeof window[xlsxSrcOverride] === 'string' && window[xlsxSrcOverride]) {
+        return window[xlsxSrcOverride];
+    }
+    if (PC_UI_ENTRY_SCRIPT_SRC) {
+        return new URL('xlsx-js-style.js', PC_UI_ENTRY_SCRIPT_SRC).href;
+    }
+    if (import.meta.env.DEV) {
+        return new URL(DEV_XLSX_MIDDLEWARE_PATH, window.location.origin).href;
+    }
+    const scripts = document.getElementsByTagName('script');
+    for (let i = scripts.length - 1; i >= 0; i--) {
+        const src = scripts[i].src;
+        if (src && /(?:^|\/)(index)\.js(?:\?|#|$)/i.test(src)) {
+            return new URL('xlsx-js-style.js', src).href;
+        }
+    }
+    return new URL('xlsx-js-style.js', window.location.href).href;
+}
+
+/** @type {Promise<any> | null} */
+let loadXlsxPromise = null;
+
+function loadXlsxLib() {
+    if (typeof window === 'undefined') {
+        return Promise.reject(new Error('xlsx: 仅支持浏览器环境'));
+    }
+    const w = window;
+    if (w.XLSX && w.XLSX.utils) {
+        return Promise.resolve(w.XLSX);
+    }
+    if (!loadXlsxPromise) {
+        const src = getXlsxScriptSrc();
+        if (!src) {
+            return Promise.reject(new Error('xlsx: 无法解析 xlsx-js-style.js 地址'));
+        }
+        loadXlsxPromise = loadScript(src)
+            .then(() => {
+                if (!w.XLSX || !w.XLSX.utils) {
+                    throw new Error('xlsx: 脚本已加载但 window.XLSX 不可用');
+                }
+                return w.XLSX;
+            })
+            .catch((e) => {
+                loadXlsxPromise = null;
+                throw e;
+            });
+    }
+    return loadXlsxPromise;
+}
 
 export function exportExcel(aoa, sheetName, fileName, sheetTitleData, columns, hasHeader, merges, includeStyles) {
+    const XLSX = window.XLSX;
+    if (!XLSX || !XLSX.utils) {
+        throw new Error('xlsx: 请先通过 exportExcelByXlsx 加载脚本');
+    }
     // return;
     // 若有标题，添加标题到第一行
     const sheet = XLSX.utils.json_to_sheet([]);
     aoa.forEach((row) => {
         // 默认设置为字符串
         row.forEach((cell) => {
-            if (cell)
-                cell.t = 's';
+            if (cell) cell.t = 's';
         });
     });
     // 设置列宽和行高
@@ -29,7 +100,7 @@ export function exportExcel(aoa, sheetName, fileName, sheetTitleData, columns, h
             let widthResult = 0;
             for (let j = 0; j < aoa.length; j++) {
                 if (aoa[j][i] && aoa[j][i].rect) {
-                    const width = aoa[j][i].rect.width;
+                    const { width } = aoa[j][i].rect;
                     widthResult = Math.max(widthResult, width);
                 }
             }
@@ -79,7 +150,7 @@ export function exportExcel(aoa, sheetName, fileName, sheetTitleData, columns, h
             // 根据小数位数转化为'0.00%'格式，比如一位小数就是'0.0%'
             if (value.indexOf('.') > -1) {
                 const percentLength = value.split('.')[1].length;
-                template = '0.' + new Array(percentLength - 1).fill(0).join('') + '%';
+                template = `0.${new Array(percentLength - 1).fill(0).join('')}%`;
             } else {
                 template = '0%';
             }
@@ -88,11 +159,10 @@ export function exportExcel(aoa, sheetName, fileName, sheetTitleData, columns, h
             cell.v = Number(value.substring(0, value.length - 1)) / 100;
         } else if (!isNaN(Number(value)) && value.length <= 15) {
             // 0开头的数字字符串，比如'001234'，不会被转化为数字
-            if (excludeNumberRegx.test(value))
-                return;
+            if (excludeNumberRegx.test(value)) return;
             if (value.indexOf('.') > -1) {
                 const percentLength = value.split('.')[1].length;
-                template = '0.' + new Array(percentLength).fill(0).join('');
+                template = `0.${new Array(percentLength).fill(0).join('')}`;
             } else {
                 template = '0';
             }
@@ -105,9 +175,15 @@ export function exportExcel(aoa, sheetName, fileName, sheetTitleData, columns, h
 
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, sheet, sheetName);
-    const workbookBlob = workbook2blob(wb);
+    const workbookBlob = workbook2blob(XLSX, wb);
     openDownload(workbookBlob, `${fileName}.xlsx`);
 }
+
+export async function exportExcelByXlsx(aoa, sheetName, fileName, sheetTitleData, columns, hasHeader, merges, includeStyles) {
+    await loadXlsxLib();
+    exportExcel(aoa, sheetName, fileName, sheetTitleData, columns, hasHeader, merges, includeStyles);
+}
+
 function openDownload(blob, fileName) {
     if (typeof blob === 'object' && blob instanceof Blob) {
         blob = URL.createObjectURL(blob);
@@ -118,7 +194,7 @@ function openDownload(blob, fileName) {
     const event = new MouseEvent('click');
     aLink.dispatchEvent(event);
 }
-function workbook2blob(workbook) {
+function workbook2blob(XLSX, workbook) {
     const wopts = {
         bookType: 'xlsx',
         bookSST: false,
@@ -130,8 +206,7 @@ function workbook2blob(workbook) {
     function s2ab(s) {
         const buf = new ArrayBuffer(s.length);
         const view = new Uint8Array(buf);
-        for (let i = 0; i !== s.length; ++i)
-            view[i] = s.charCodeAt(i) & 0xff;
+        for (let i = 0; i !== s.length; ++i) view[i] = s.charCodeAt(i) & 0xff;
         return buf;
     }
 

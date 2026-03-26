@@ -256,12 +256,10 @@ import DataSourceNew from '../../utils/DataSource/new';
 import { addResizeListener, removeResizeListener, findScrollParent, getRect, findXScrollParent } from '../../utils/dom';
 import { format } from '../../utils/date';
 import MEmitter from '../m-emitter.vue';
-import debounce from 'lodash/debounce';
+import { debounce, flatMap, throttle } from 'lodash';
 import UTableViewDropGhost from './drop-ghost.vue';
 import SEmpty from '../../components/s-empty.vue';
-import throttle from 'lodash/throttle';
 import i18nMixin from '../../mixins/i18n';
-import flatMap from 'lodash/flatMap';
 import { createTableHeaderExportHelper, getXslxStyle } from './helper';
 import * as xlsxUtils from '../../utils/xlsx';
 import UTableRender from './render.table.vue';
@@ -1452,7 +1450,7 @@ export default {
                     }
                 }
 
-                xlsxUtils.exportExcel(content, 'Sheet1', filename, sheetTitleData, (content[0] || []).length, hasHeader, mergesMap, includeStyles);
+                await xlsxUtils.exportExcelByXlsx(content, 'Sheet1', filename, sheetTitleData, (content[0] || []).length, hasHeader, mergesMap, includeStyles);
                 // console.timeEnd('生成文件');
             } catch (err) {
                 console.error(err);

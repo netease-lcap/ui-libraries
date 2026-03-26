@@ -18,7 +18,7 @@ import { sync } from '@lcap/vue2-utils';
 import MEmitter from '../m-emitter.vue';
 import VusionValidator from '@lcap/validator';
 import VueVusionValidator from '@lcap/validator/VuePlugin';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash';
 import SEmpty from '../../components/s-empty.vue';
 
 export default {

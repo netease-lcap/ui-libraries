@@ -47,7 +47,6 @@
     "dayjs": "^1.10.7",
     "decimal.js": "^10.4.2",
     "dompurify": "^2.0.15",
-    "lodash": "^4.17.5",
     "normalize.css": "^7.0.0",
     "online-svg-icon-vue2": "^1.2.3",
     "regenerator-runtime": "^0.13.9",
@@ -55,10 +54,10 @@
     "swiper": "^7.4.1",
     "vue-cropper": "^0.5.8",
     "whatwg-fetch": "3.6.2",
-    "xlsx-js-style": "^1.2.0",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
+    "lodash": "^4.17.5",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@lcap/builder": "workspace:*",
@@ -89,6 +88,7 @@
     "jsdom": "^23.0.1",
     "remark-parse": "^11.0.0",
     "rimraf": "^5.0.5",
+    "rollup-plugin-visualizer": "^5.12.0",
     "storybook": "^7.6.17",
     "typescript": "^5.3.3",
     "unified": "^11.0.4",
@@ -102,7 +102,8 @@
     "vusion-api": "^0.6.30"
   },
   "peerDependencies": {
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "lodash": "^4.17.5"
   },
   "scripts": {
     "dev": "npm run storybook",
@@ -119,6 +120,7 @@
     "test:dev": "vitest dev",
     "test:coverage": "vitest run --coverage",
     "preview": "vite preview",
+    "analyze": "vite build --mode analyze",
     "build:storybook": "storybook build",
     "check:api": "tsc -p tsconfig.api.json",
     "lowcode": "node ./scripts/usage-script.js"

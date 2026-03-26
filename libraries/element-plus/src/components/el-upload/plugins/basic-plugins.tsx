@@ -196,7 +196,9 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const converter = props.get('converter') || 'simple';
       const [value, setValue] = useControllableValue(props);
       const defaultFileList = getFileListByValue(value, converter, undefined);
+      const className = props.get('class', '');
       return {
+        class: `${className} cw-upload`,
         fileList: defaultFileList,
         onChange: (uploadFile: UploadFile, fileList: UploadFile[]) => {
           if (uploadFile.status === 'success') {
