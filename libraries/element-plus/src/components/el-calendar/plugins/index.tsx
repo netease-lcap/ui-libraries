@@ -66,7 +66,7 @@ export default CalendarAccumulate.addPlugin({
     const dataRef = useRef(data);
     dataRef.value = data;
     const wrapCellRender = useCallback((data) => {
-      const dataIsRender = dataRef.value.some((item) => {
+      const dataIsRender = _.find(dataRef.value, (item) => {
         if (dayjs(item?.startTime || '').isValid() && dayjs(item?.endTime || '').isValid()) {
           return dayjs(data?.day).isSame(item?.startTime, 'day')
             || dayjs(data?.day).isSame(item?.endTime, 'day')
@@ -74,9 +74,8 @@ export default CalendarAccumulate.addPlugin({
         }
         return dayjs(data?.day).isSame(item?.startTime, 'day') || dayjs(data?.day).isSame(item?.endTime, 'day');
       });
-      console.log(dataRef.value, 'dataRef.value', showInDesigner, dataIsRender);
       const isRender = showInDesigner ? true : dataIsRender;
-      return isRender ? cell(data) : null;
+      return isRender ? cell({ item: dataIsRender, ...data }) : null;
     }, [cell]);
     const dateCell = useCallback(({ data }) => {
       return (

@@ -61,9 +61,11 @@ export const Example2 = {
     <div>
       <el-calendar v-model="value" @update:modelValue="handleUpdateValue" :dataSource="dataSource">
           <template #cell="scope">
-            <span>{{ scope.item.startTime }}</span>
-            <p v-if="scope.item.apple">苹果: {{scope.item.apple}}</p>
-            <p v-if="scope.item.orange">橘子: {{scope.item.orange}}</p>
+            <div v-if="scope.item.apple">苹果: {{scope.item.apple}}</div>
+            <div v-if="scope.item.orange">橘子: {{scope.item.orange}}</div>
+        </template>
+        <template #header="{ date }">
+          <span>自定义头部内容</span>
         </template>
       </el-calendar>
     </div>
