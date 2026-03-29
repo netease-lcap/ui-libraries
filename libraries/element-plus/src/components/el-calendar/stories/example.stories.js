@@ -29,23 +29,41 @@ export const Example1 = {
 
 /* 自定义内容 */
 export const Example2 = {
-  name: '自定义内容',
+  name: '数据源',
   render: () => ({
     setup() {
       const value = ref('2025-03-14');
+      const dataSource = async () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(
+              [{
+                startTime: '2025-03-14',
+                orange: 8,
+              }, {
+                startTime: '2025-03-15',
+                apple: 1,
+              }, {
+                startTime: '2025-03-16',
+                apple: 3,
+                orange: 2,
+              }],
+            );
+          }, 1000);
+        });
+      };
       const handleUpdateValue = (v) => {
         console.log(v);
       };
-      return { value, handleUpdateValue };
+      return { value, handleUpdateValue, dataSource };
     },
     template: `
     <div>
-      <el-calendar v-model="value" @update:modelValue="handleUpdateValue">
-        <template #date-cell="{ data }">
-          <p :class="data.isSelected ? 'is-selected' : ''">
-            {{ data.day.split('-').slice(1).join('-') }}
-            {{ data.isSelected ? '✓' : '' }}
-          </p>
+      <el-calendar v-model="value" @update:modelValue="handleUpdateValue" :dataSource="dataSource">
+          <template #cell="scope">
+            <span>{{ scope.item.startTime }}</span>
+            <p v-if="scope.item.apple">苹果: {{scope.item.apple}}</p>
+            <p v-if="scope.item.orange">橘子: {{scope.item.orange}}</p>
         </template>
       </el-calendar>
     </div>

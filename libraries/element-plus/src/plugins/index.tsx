@@ -114,7 +114,7 @@ export function registerComponent<T>(Component: any, options: any): any {
 
       // 保存取消订阅函数，用于组件卸载时清理
       const unsubscribe = subscribe((props: any) => {
-        const ImmutableState = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component });
+        const ImmutableState = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component, inject: unref(injectRef) });
         const ImmutableProps = fromJS({ ...props.props });
         const commitState = scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
@@ -149,7 +149,9 @@ export function registerComponent<T>(Component: any, options: any): any {
         { deep: true, immediate: true },
       );
 
-      watch(injectRef, (value) => _.defaults(provideRef.value, value), { immediate: true });
+      watch(injectRef, (value) => {
+        Object.assign(provideRef.value, value);
+      }, { immediate: true, deep: true });
       expose(exposeRef.value);
 
       // 组件卸载时清理资源，防止内存泄露

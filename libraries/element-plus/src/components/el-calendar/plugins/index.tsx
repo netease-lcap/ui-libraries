@@ -59,19 +59,22 @@ export default CalendarAccumulate.addPlugin({
   handle: (props) => {
     const slots = props.get('slots');
     const showInDesigner = props.get('showInDesigner');
-    const cell = props.get('slotCell');
+    // const cell = props.get('slotCell');
+    const { cell = () => { },
+    } = slots;
     const data = props.get('data');
     const dataRef = useRef(data);
     dataRef.value = data;
     const wrapCellRender = useCallback((data) => {
       const dataIsRender = dataRef.value.some((item) => {
-        if (dayjs(item.startTime || '').isValid() && dayjs(item.endTime || '').isValid()) {
-          return dayjs(data.day).isSame(item.startTime, 'day')
-            || dayjs(data.day).isSame(item.endTime, 'day')
-            || (dayjs(data.day).isAfter(item.startTime, 'day') && dayjs(data.day).isBefore(item.endTime, 'day'));
+        if (dayjs(item?.startTime || '').isValid() && dayjs(item?.endTime || '').isValid()) {
+          return dayjs(data?.day).isSame(item?.startTime, 'day')
+            || dayjs(data?.day).isSame(item?.endTime, 'day')
+            || (dayjs(data?.day).isAfter(item?.startTime, 'day') && dayjs(data?.day).isBefore(item?.endTime, 'day'));
         }
-        return dayjs(data.day).isSame(item.startTime, 'day') || dayjs(data.day).isSame(item.endTime, 'day');
+        return dayjs(data?.day).isSame(item?.startTime, 'day') || dayjs(data?.day).isSame(item?.endTime, 'day');
       });
+      console.log(dataRef.value, 'dataRef.value', showInDesigner, dataIsRender);
       const isRender = showInDesigner ? true : dataIsRender;
       return isRender ? cell(data) : null;
     }, [cell]);
