@@ -6,7 +6,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
-      forceRefresh: { slot: 'cell' },
+      forceRefresh:true,
       additionalAttribute: {
         ':showInDesigner': '"true"',
       },
@@ -55,7 +55,7 @@ namespace nasl.ui {
         concept: 'DataSourceSetter',
       },
     })
-    dataSource: { list: nasl.collection.List<nasl.core.Date | nasl.core.String>; total: nasl.core.Integer } | nasl.collection.List<nasl.core.Date | nasl.core.String>;
+    dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',

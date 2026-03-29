@@ -55,7 +55,6 @@ export default DropdownBasicAccumulate.addPlugin({
               slotsDropdown: _.stubTrue,
             }),
             ({ dataSource }) => {
-              console.log('dataSource');
               return (
                 <ElDropdownMenu>
                   {dataSource.map((item) => (
@@ -72,14 +71,12 @@ export default DropdownBasicAccumulate.addPlugin({
               slotsItems: (slotsItems) => !!slotsItems,
             }),
             ({ slotsItems }) => {
-              console.log('slotsItems');
               return <ElDropdownMenu>{slotsItems()}</ElDropdownMenu>;
             },
           ],
           [
             _.stubTrue,
             ({ slotsDropdown }) => {
-              console.log('slotsDropdown');
               return slotsDropdown?.();
             },
           ],
