@@ -24,7 +24,7 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template: `
-    <el-upload converter="simple" urlField="filePath" action="/upload">
+    <el-upload converter="simple" urlField="filePath" action="/upload" fileConnectionGroup="lcap_default_connection">
       <template #trigger>
         <el-button text="点击上传" style="margin-right: 10px;"></el-button>
       </template>

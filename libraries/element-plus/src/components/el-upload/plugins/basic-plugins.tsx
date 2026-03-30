@@ -13,7 +13,8 @@ import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 type Converter = 'json' | 'simple';
 const getFileNameByURL = (url) => {
-  const match = url.match(/\/([^/]+)$/);
+  const pathOnly = url.split('?')[0];
+  const match = pathOnly.match(/\/([^/]+)$/);
   return match ? match[1] : null;
 };
 
