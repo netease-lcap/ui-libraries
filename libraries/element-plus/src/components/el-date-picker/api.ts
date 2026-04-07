@@ -600,7 +600,7 @@ namespace nasl.ui {
   > extends ViewComponent {
     constructor(
       options?: Partial<
-        ElFormDatePickerOptions<T, V, P, M, C> &
+        ElFormDatePickerOptions<T, V, P, M, C, DT> &
           ElFormItemProOptions &
           Omit<ElDatePickerOptions<T, V, P, M, C, DT>, keyof ElFormItemProOptions>
       >,
@@ -614,6 +614,18 @@ namespace nasl.ui {
     V,
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
-    C,
+    C extends 'auto' | 'string' | 'Integer',
+    DT extends
+      | 'date'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'datetimerange'
+      | 'daterange'
+      | 'yearrange'
+      | 'monthrange'
+      | 'dates'
+      | 'years'
+      | 'months',
   > extends ViewComponentOptions {}
 }
