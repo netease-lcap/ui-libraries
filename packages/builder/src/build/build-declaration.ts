@@ -95,6 +95,7 @@ function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, 
       }
 
       const classNode = np.node as babelTypes.ClassDeclaration;
+      let exportNode: babelTypes.ExportNamedDeclaration | null = null;
       if (np.parent.type !== 'ExportNamedDeclaration') {
         const exportAST: babelTypes.ExportNamedDeclaration = {
           type: 'ExportNamedDeclaration',
@@ -102,6 +103,9 @@ function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, 
           declaration: classNode,
         };
         np.replaceWith(exportAST);
+        exportNode = exportAST;
+      } else {
+        exportNode = np.parent as babelTypes.ExportNamedDeclaration;
       }
 
       const className = classNode.id?.name || '';
@@ -112,6 +116,18 @@ function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, 
 
       const superClassName = getNodeCode(classNode.superClass);
       if (superClassName.endsWith('ViewComponent')) {
+        if (exportNode && (!exportNode.leadingComments || exportNode.leadingComments.length === 0)) {
+          const blocks: string[] = getBlocks((componentInfo as any).title, (componentInfo as any).description);
+          if (blocks.length > 0) {
+            exportNode.leadingComments = [
+              {
+                type: 'CommentBlock',
+                value: `*\n${blocks.join('\n')}\n `,
+              },
+            ];
+          }
+        }
+
         classNode.body.body.forEach((n) => {
           if (n.type === 'TSDeclareMethod' && n.kind === 'method' && n.key.type === 'Identifier') {
             const methodName = n.key.name;
