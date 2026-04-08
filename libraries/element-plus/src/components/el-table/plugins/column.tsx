@@ -11,7 +11,7 @@ const EditDefault = {
   name: 'editDefault',
   inheritAttrs: false,
   setup(props, { attrs, emit, expose }) {
-    const { item, slots, editChange = () => { }, setValue } = attrs;
+    const { item, slots, editChange = () => {}, setValue } = attrs;
 
     const editable = ref(false);
     const formItemRef = ref({});
@@ -38,8 +38,8 @@ const EditDefault = {
         </div>
       ) : (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          {
-            slots.default?.({
+          {slots
+            .default?.({
               row: item.row,
               index: item.$index,
               item: item.row,
@@ -48,11 +48,10 @@ const EditDefault = {
               editable: editable.value,
               isPreview: !editable.value,
             })
-              ?.map((node) => cloneVNode(node, {
-                onValidateSuccess: () => { },
+            ?.map((node) => cloneVNode(node, {
+                onValidateSuccess: () => {},
                 ref: formItemRef,
-              }))
-          }
+              }))}
           <ElIcon
             onClick={() => {
               formItemRef?.value?.validate?.()?.then(() => {
@@ -92,12 +91,12 @@ export default ColumnPluginAccumulate.addPlugin({
       slots: {
         ...slots,
         default: (item: any) => slots?.default?.({
-          ...item,
-          index: item?.$index,
-          item: item?.row,
-          rowIndex: item?.$index,
-          columnIndex: item?.cellIndex,
-        }),
+            ...item,
+            index: item?.$index,
+            item: item?.row,
+            rowIndex: item?.$index,
+            columnIndex: item?.cellIndex,
+          }),
       },
     } as {
       align: string;
@@ -177,17 +176,16 @@ export default ColumnPluginAccumulate.addPlugin({
       const className = useMemo(() => _.uniqueId('el-table-column'), []);
       const nodePath = props.get('data-nodepath');
       const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-      useEffect(() => {
-        setTimeout(() => {
-          const node = document.querySelectorAll(`.${className}`);
-          node.forEach((item) => {
-            item.setAttribute('data-nodepath', nodePath);
-            item.setAttribute('data-nodepath-multiple', 'true');
-          });
-        }, 300);
-      }, []);
+      setTimeout(() => {
+        const node = document.querySelectorAll(`.${className}`);
+        node.forEach((item) => {
+          item.setAttribute('data-nodepath', nodePath);
+          item.setAttribute('data-nodepath-multiple', 'true');
+        });
+      }, 300);
       return {
         className,
+        key: nodePath,
         [$deletePropsList]: deletePropsList,
       };
     },
