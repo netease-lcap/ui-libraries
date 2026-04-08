@@ -12,7 +12,7 @@ import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleIcon } from '@/plugins/common/icon';
 
 const DatePickerBasicAccumulate = new PluginAccumulateTypes<
-  nasl.ui.ElDatePickerOptions<any, any, any, any, any> & {
+  nasl.ui.ElDatePickerOptions<any, any, any, any, any, any> & {
     'onUpdate:startValue':(value: string) => void;
     'onUpdate:endValue': (value: string) => void;
   },

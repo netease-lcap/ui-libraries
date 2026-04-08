@@ -150,7 +150,9 @@ namespace nasl.ui {
       sync: true,
     })
     startValue: DT extends 'daterange'
-      ? DateConverterToType<C, true>
+      ? C extends 'auto'
+        ? nasl.core.String
+        : DateConverterToType<C, true>
       : DT extends 'datetimerange' | 'yearrange' | 'monthrange'
       ? DateConverterToType<C, false>
       : null;
@@ -164,7 +166,9 @@ namespace nasl.ui {
       sync: true,
     })
     endValue: DT extends 'daterange'
-      ? DateConverterToType<C, true>
+      ? C extends 'auto'
+        ? nasl.core.String
+        : DateConverterToType<C, true>
       : DT extends 'datetimerange' | 'yearrange' | 'monthrange'
       ? DateConverterToType<C, false>
       : null;
@@ -227,18 +231,18 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '日期',value: 'date' },
-          { title: '日期范围',value: 'daterange' },
-          { title: '日期时间',value: 'datetime' },
-          { title: '日期时间范围',value: 'datetimerange' },
-          { title: '年份' ,value: 'year'},
-          { title: '年份范围',value: 'yearrange' },
-          { title: '月份' ,value: 'month'},
-          { title: '月份范围',value: 'monthrange' },
-          { title: '周' ,value: 'week'},
-          { title: '多个日期',value: 'dates' },
-          { title: '多个月份',value: 'months' },
-          { title: '多个年份',value: 'years' },
+          { title: '日期', value: 'date' },
+          { title: '日期范围', value: 'daterange' },
+          { title: '日期时间', value: 'datetime' },
+          { title: '日期时间范围', value: 'datetimerange' },
+          { title: '年份', value: 'year' },
+          { title: '年份范围', value: 'yearrange' },
+          { title: '月份', value: 'month' },
+          { title: '月份范围', value: 'monthrange' },
+          { title: '周', value: 'week' },
+          { title: '多个日期', value: 'dates' },
+          { title: '多个月份', value: 'months' },
+          { title: '多个年份', value: 'years' },
         ],
       },
       onChange: [
@@ -350,7 +354,11 @@ namespace nasl.ui {
       description: '值类型转化',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '自动',value: 'auto' }, { title: '自定义',value: 'string' }, { title: '时间戳',value: 'Integer' }],
+        options: [
+          { title: '自动', value: 'auto' },
+          { title: '自定义', value: 'string' },
+          { title: '时间戳', value: 'Integer' },
+        ],
       },
       onChange: [
         {
