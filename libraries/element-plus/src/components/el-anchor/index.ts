@@ -2,6 +2,7 @@ import { ElAnchor as ElAnchorPlus, ElAnchorLink as ElAnchorLinkPlus } from 'elem
 import _ from 'lodash';
 import AnchorItem from './el-anchor-item.vue';
 import { registerComponent } from '@/plugins';
+import { $deletePropsList } from '@/plugins/constants';
 import basicsPlugin from './plugins/basic-plugins';
 import itemPlugins from './plugins/item-plugins';
 

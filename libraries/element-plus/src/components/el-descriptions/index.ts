@@ -2,6 +2,7 @@ import { ElDescriptions as ElDescriptionsPlus, ElDescriptionsItem as ElDescripti
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicPlugin from './plugins/basic-plugins';
+import { $deletePropsList } from '@/plugins/constants';
 import itemPlugins from './plugins/item-plugins';
 import './index.css';
 

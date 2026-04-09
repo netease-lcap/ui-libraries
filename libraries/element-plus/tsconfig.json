@@ -30,7 +30,7 @@
       "@ep-test/*": ["./ep-test/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "ide/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts", "ide/**/*.ts"],
   "exclude": [
     "node_modules",
     "dist",

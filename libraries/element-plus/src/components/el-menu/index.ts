@@ -6,6 +6,7 @@ import {
 } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
+import { $deletePropsList } from '@/plugins/constants';
 import basicPlugin from './plugins/basic-plugins';
 import itemPlugin from './plugins/item-plugin';
 import menuItemPlugin from './plugins/menu-item';

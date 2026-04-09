@@ -2,6 +2,7 @@ import { ElTimeSelect as ElTimeSelectPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicPlugin from './plugins/basic-plugins';
+import { $deletePropsList } from '@/plugins/constants';
 import { withFormItem } from '@/components/el-form';
 
 function ElTimeSelectRegister(BaseComponent, plugin = {}, extend = true) {
