@@ -12,7 +12,7 @@ import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleIcon } from '@/plugins/common/icon';
 
 const DatePickerBasicAccumulate = new PluginAccumulateTypes<
-  nasl.ui.ElDatePickerOptions<any, any, any, any, any, any> & {
+  nasl.ui.ElDatePickerOptions<any, any, any, any, any> & {
     'onUpdate:startValue':(value: string) => void;
     'onUpdate:endValue': (value: string) => void;
   },
@@ -74,8 +74,8 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const isRange = props.get('range');
       const startValue = props.get('startValue') as string;
       const endValue = props.get('endValue') as string;
-      const setStartValue = props.get('onUpdate:startValue') ?? (() => { });
-      const setEndValue = props.get('onUpdate:endValue') ?? (() => { });
+      const setStartValue = props.get('onUpdate:startValue') ?? (() => {});
+      const setEndValue = props.get('onUpdate:endValue') ?? (() => {});
       const isControlledTime = props.has('startValue') && props.has('endValue');
       const [value, setValue] = useControllableValue(props);
       const isEffectiveTime = isControlledTime
@@ -88,20 +88,22 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const onChange = (value) => {
         const isValidDayjs = _.every(value, (item) => dayjs(item).isValid());
         const isUnEffectiveValue = _.isNil(value) || _.isEmpty(value) || !isValidDayjs;
-        const effectiveTime = isUnEffectiveValue ? [] : _.map(value, (item) => (valueFormat ? dayjs(item).format(valueFormat) : dayjs(item).toJSON()));
+        const effectiveTime = isUnEffectiveValue
+          ? []
+          : _.map(value, (item) => (valueFormat ? dayjs(item).format(valueFormat) : dayjs(item).toJSON()));
         _.attempt(setStartValue, effectiveTime[0]);
         _.attempt(setEndValue, effectiveTime[1]);
       };
 
       const timeValue = useMemo(
         () => getTimeValue({
-          isEffectiveTime,
-          isNilTime,
-          isControlledTime,
-          startValue,
-          endValue,
-          value,
-        }),
+            isEffectiveTime,
+            isNilTime,
+            isControlledTime,
+            startValue,
+            endValue,
+            value,
+          }),
         [isEffectiveTime, isNilTime, isControlledTime, startValue, endValue, value],
       );
       const rangeResult = {
@@ -119,12 +121,12 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
     handle(props) {
       const isRange = props.get('range');
       const [value, setValue] = useControllableValue(props);
-      const modelValue = (_.isNil(value) || _.isEmpty(value)) ? value : dayjs(value);
+      const modelValue = _.isNil(value) || _.isEmpty(value) ? value : dayjs(value);
       const valueFormat = props.get('valueFormat');
       const result = {
         modelValue,
         'onUpdate:modelValue': _.wrap(setValue, (fn, time: Date | null) => {
-          const jsonTime = (_.isNil(time) || _.isEmpty(time)) ? time : dayjs(time).toJSON();
+          const jsonTime = _.isNil(time) || _.isEmpty(time) ? time : dayjs(time).toJSON();
           const modelValue = valueFormat ? time : jsonTime;
           _.attempt(fn, modelValue);
         }),

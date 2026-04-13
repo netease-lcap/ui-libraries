@@ -2,7 +2,18 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import { ref, Ref, watch, provide, inject, defineComponent, unref, getCurrentInstance, onBeforeUnmount, onMounted } from 'vue';
+import {
+  ref,
+  Ref,
+  watch,
+  provide,
+  inject,
+  defineComponent,
+  unref,
+  getCurrentInstance,
+  onBeforeUnmount,
+  onMounted,
+} from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 // import create from 'zustand-vue';
@@ -63,8 +74,8 @@ export function registerComponent<T>(Component: any, options: any): any {
     setup(props, { attrs, slots, emit, expose }) {
       const isInDesigner = Boolean(attrs['data-nodepath']) || Boolean(_.get(window, '$uilibenv.IDE_DESIGNER', false));
       const pluginHooks = options.plugin instanceof PluginAccumulateTypes
-        ? options.plugin.getPluginMethod({ isInDesigner })
-        : new PluginOptions(options).getPluginMethod();
+          ? options.plugin.getPluginMethod({ isInDesigner })
+          : new PluginOptions(options).getPluginMethod();
       const componentState = ref({ state: {} });
       let Render = Component;
       const exposeRef = ref({}) as Ref<any>;
@@ -114,7 +125,13 @@ export function registerComponent<T>(Component: any, options: any): any {
 
       // 保存取消订阅函数，用于组件卸载时清理
       const unsubscribe = subscribe((props: any) => {
-        const ImmutableState = imMap({ ...props.props, ...props.state, ref: exposeRef.value, render: Component, inject: unref(injectRef) });
+        const ImmutableState = imMap({
+          ...props.props,
+          ...props.state,
+          ref: exposeRef.value,
+          render: Component,
+          inject: unref(injectRef),
+        });
         const ImmutableProps = fromJS({ ...props.props });
         const commitState = scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap);
         const ref = commitState.get('ref');
@@ -139,6 +156,7 @@ export function registerComponent<T>(Component: any, options: any): any {
         ([props, attrs, slots, emit]) => {
           setValue(() => ({
             props: {
+              style: {},
               ...props,
               ...attrs,
               slots,
@@ -149,9 +167,13 @@ export function registerComponent<T>(Component: any, options: any): any {
         { deep: true, immediate: true },
       );
 
-      watch(injectRef, (value) => {
-        Object.assign(provideRef.value, value);
-      }, { immediate: true, deep: true });
+      watch(
+        injectRef,
+        (value) => {
+          Object.assign(provideRef.value, value);
+        },
+        { immediate: true, deep: true },
+      );
       expose(exposeRef.value);
 
       // 组件卸载时清理资源，防止内存泄露
