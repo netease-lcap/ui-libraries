@@ -181,6 +181,11 @@ export default {
     margin-right: var(--radio-space-x);
 }
 
+.root > *:last-child {
+    /* 这个变量用来占位，防止空选择器打包后被压缩，不上报高级样式 */
+    --last-child-style-placeholder: unset;
+}
+
 .root .loadContent {
     display: flex;
     align-items: center;
