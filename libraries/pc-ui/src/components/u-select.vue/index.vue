@@ -629,6 +629,7 @@ export default {
 
     this.$on('select', ($event) => {
       if (this.multiple) {
+      console.log('===================select===================', $event);
         this.preventBlur = true;
         // 去掉appendTo判断：filterable的多选，会选择后关闭，也需要preventBlur
         this.preventRootBlur = true;
@@ -907,6 +908,11 @@ export default {
       if (!this.filterable) {
         return; // 这边必须要用 setTimeout，$nextTick 也不行，需要保证在 @select 之后完成
       }
+
+      if (this.inputBlurTimer) {
+        clearTimeout(this.inputBlurTimer);
+      }
+
       this.preventBlur = false;
       this.inputBlurTimer = setTimeout(() => {
         if (this.preventBlur) return (this.preventBlur = false);
@@ -926,6 +932,10 @@ export default {
       }, 200);
     },
     onRootBlur(e) {
+      if (this.rootBlurTimer) {
+        clearTimeout(this.rootBlurTimer);
+      }
+
       this.rootBlurTimer = setTimeout(() => {
         if ((this.$refs.input && this.$refs.input.focused) || this.preventBlur) {
           // 修复校验滞后的问题， 这里手动触发失焦 #2990019542459904
