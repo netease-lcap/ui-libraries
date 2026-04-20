@@ -12,7 +12,7 @@ namespace nasl.ui {
       childAccept: false,
       forceUpdateWhenAttributeChange: true,
       refreshMutationNodesWhenAttributeChange: ['formMode'],
-      // useTemplateInDefaultSlot: true,
+      useTemplateInDefaultSlot: true,
       style: [
         {
           selector: '.el-list-components__item:not(:first-child)',
