@@ -13,6 +13,9 @@ namespace nasl.ui {
       forceUpdateWhenAttributeChange: true,
       refreshMutationNodesWhenAttributeChange: ['formMode'],
       useTemplateInDefaultSlot: true,
+      slotWrapperInlineStyle: {
+        default: 'width: 100%;',
+      },
       style: [
         {
           selector: '.el-list-components__item:not(:first-child)',
