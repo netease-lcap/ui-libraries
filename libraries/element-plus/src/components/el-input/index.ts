@@ -1,5 +1,6 @@
 import { ElInput as ElInputPlus } from 'element-plus';
 import _ from 'lodash';
+import { $deletePropsList } from '@/plugins/constants';
 import './index.css';
 import { registerComponent } from '../../plugins';
 import basicsPlugin from './plugins/index';

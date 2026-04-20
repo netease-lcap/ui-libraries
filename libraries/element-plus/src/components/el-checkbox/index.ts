@@ -2,6 +2,7 @@ import { ElCheckbox, ElCheckboxGroup as ElCheckboxGroupPlus, ElCheckboxButton } 
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/index';
+import { $deletePropsList } from '@/plugins/constants';
 import { withFormItem } from '@/components/el-form';
 import './index.less';
 

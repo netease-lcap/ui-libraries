@@ -1,7 +1,8 @@
 import { ElTabs as ElTabsPlus, ElTabPane } from 'element-plus';
 import _ from 'lodash';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/basic-plugins';
+import { $deletePropsList } from '@/plugins/constants';
 
 function ElTabsRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;

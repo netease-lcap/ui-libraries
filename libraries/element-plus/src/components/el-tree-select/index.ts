@@ -1,7 +1,8 @@
 import { ElTreeSelect as ElTreeSelectPlus } from 'element-plus';
 import _ from 'lodash';
 import './index.css';
-import { registerComponent } from '../../plugins';
+import { registerComponent } from '@/plugins';
+import { $deletePropsList } from '@/plugins/constants';
 import basicsPlugin from './plugins/index';
 import { withFormItem } from '@/components/el-form/plugins/form-item';
 

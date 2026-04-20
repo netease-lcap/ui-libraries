@@ -2,6 +2,7 @@ import { ElCarousel as ElCarouselPlus, ElCarouselItem as ElCarouselItemPlus } fr
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/basic-plugins';
+import { $deletePropsList } from '@/plugins/constants';
 import itemPlugins from './plugins/item-plugins';
 
 function ElCarouselRegister(BaseComponent, plugin = {}, extend = true) {

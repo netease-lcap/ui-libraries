@@ -1,6 +1,7 @@
 import { ElTimeline as ElTimelinePlus, ElTimelineItem as ElTimelineItemPlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
+import { $deletePropsList } from '@/plugins/constants';
 import basicsPlugin from './plugins/basic-plugins';
 import itemPlugins from './plugins/item-plugins';
 

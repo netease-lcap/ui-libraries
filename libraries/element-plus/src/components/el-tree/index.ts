@@ -2,6 +2,7 @@ import { ElTree as ElTreePlus } from 'element-plus';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/basic-plugins';
+import { $deletePropsList } from '@/plugins/constants';
 
 function ElTreeRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;

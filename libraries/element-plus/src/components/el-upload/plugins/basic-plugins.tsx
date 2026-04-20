@@ -2,7 +2,7 @@ import { ElMessage, UploadFile, UploadRawFile, UploadContentProps } from 'elemen
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
 import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
-import { useRef, useControllableValue, useSyncState } from '@/plugins/hooks';
+import { useRef, useControllableValue, useSyncState, useMemo } from '@/plugins/hooks';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { $deletePropsList } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -13,7 +13,8 @@ import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 
 type Converter = 'json' | 'simple';
 const getFileNameByURL = (url) => {
-  const match = url.match(/\/([^/]+)$/);
+  const pathOnly = url.split('?')[0];
+  const match = pathOnly.match(/\/([^/]+)$/);
   return match ? match[1] : null;
 };
 
@@ -195,8 +196,8 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const urlField = props.get('urlField') || 'filePath';
       const converter = props.get('converter') || 'simple';
       const [value, setValue] = useControllableValue(props);
-      const defaultFileList = getFileListByValue(value, converter, undefined);
-      const className = props.get('class', '');
+      const defaultFileList = useMemo(() => getFileListByValue(value, converter, undefined), [value, converter]);
+      const className = useMemo(() => props.get('class', ''), [props]);
       return {
         class: `${className} cw-upload`,
         fileList: defaultFileList,

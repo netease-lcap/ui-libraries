@@ -193,7 +193,6 @@ export default listComponentsBasicAccumulate
         textField,
         dataSource: resultData.list as any,
       });
-      console.log(data, model, '==');
       const dataList = formMode ? model.value : data;
 
       const loadTo = useCallback((page) => reload({ currentPage: page }), [reload]);

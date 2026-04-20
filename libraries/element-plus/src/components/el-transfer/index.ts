@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/basic-plugins';
 import { withFormItem } from '@/components/el-form';
+import { $deletePropsList } from '@/plugins/constants';
 import './index.css';
 
 function ElTransferRegister(BaseComponent, plugin = {}, extend = true) {

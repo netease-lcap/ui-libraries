@@ -4,7 +4,7 @@ import { $deletePropsList, $ide } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { IIdePluginBase } from '@/types';
 
-const TimePickerIdeAccumulate = new PluginAccumulateTypes<nasl.ui.ElTimePickerOptions, IIdePluginBase>();
+const TimePickerIdeAccumulate = new PluginAccumulateTypes<nasl.ui.ElTimePickerOptions<any, any, any, any, any>, IIdePluginBase>();
 export default TimePickerIdeAccumulate.addPlugin({
   name: 'handleNodePath',
   type: 'ide',

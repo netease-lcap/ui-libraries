@@ -579,7 +579,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: { slot: 'default', empty: true },
-      parentAccept: "['el-table'].includes(target.tag)",
+      parentAccept: "['el-table','el-table-column'].includes(target.tag)",
       forceRefresh: { slot: 'header', parent: true },
       forceUpdateWhenAttributeChange: true,
       useTemplateInDefaultSlot: true,
