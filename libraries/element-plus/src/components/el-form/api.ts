@@ -25,7 +25,7 @@ namespace nasl.ui {
       description:
         "表单里面没有重置按钮<button type=\"reset\" />时可以使用该方法，默认重置全部字段为空，该方法会触发 reset 事件。如果表单属性 resetType='empty' 或者 reset.type='empty' 会重置为空；如果表单属性 resetType='initial' 或者 reset.type='initial' 会重置为表单初始值。",
     })
-    resetForm(): void { }
+    resetForm(): void {}
 
     @Method({
       title: '校验函数',
@@ -381,6 +381,10 @@ namespace nasl.ui {
       idetype: 'container',
       ignoreProperty: ['rules'],
       structured: false,
+      forbid: false,
+      suggest: {
+        name: 'el-flex',
+      },
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
