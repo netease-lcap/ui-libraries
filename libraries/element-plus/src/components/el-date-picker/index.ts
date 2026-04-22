@@ -11,6 +11,7 @@ function ElDatePickerRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 const ElDatePicker = registerComponent(ElDatePickerPlus, { plugin: basicsPlugin, name: 'el-date-picker' });
+
 const ElFormDatePicker = withFormItem(ElDatePicker, 'el-form-date-picker');
 
 export { ElDatePickerPlus, ElDatePicker, ElFormDatePicker, ElDatePickerRegister };
