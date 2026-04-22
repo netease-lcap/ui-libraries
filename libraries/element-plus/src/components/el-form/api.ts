@@ -381,7 +381,7 @@ namespace nasl.ui {
       idetype: 'container',
       ignoreProperty: ['rules'],
       structured: false,
-      forbid: false,
+      forbid: true,
       suggest: {
         name: 'el-flex',
       },
