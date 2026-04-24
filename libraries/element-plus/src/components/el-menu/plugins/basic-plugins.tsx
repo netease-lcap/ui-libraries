@@ -7,12 +7,26 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
-import { useMemo, useControllableValue, useEffect } from '@/plugins/hooks';
+import { useMemo, useControllableValue, useEffect ,useState} from '@/plugins/hooks';
 import { $deletePropsList, $router, $route } from '@/plugins/constants';
 import { ElSubMenu, ElMenuItem } from '@/components';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 import idePlugin from './ide';
+import { addClass } from '@/utils/dom';
+
+/** 从 getComputedStyle 返回的 `rgb` / `rgba` 解析 r、g、b */
+function parseCssRgbColor(color: string): { r: number; g: number; b: number } | null {
+  const m = color.match(/rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+  if (!m) return null;
+  return { r: +m[1], g: +m[2], b: +m[3] };
+}
+
+/** BT.601 感知亮度，约 0–10，越大越亮 */
+function rgbLuma601(r: number, g: number, b: number): number {
+  const luma255 = (299 * r + 587 * g + 114 * b) / 1000;
+  return (luma255 / 255) * 10;
+}
 
 const MenuBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElMenuOptions<any, any>, MenuProps>();
 export default MenuBasicAccumulate.addAccumulate(idePlugin)
@@ -58,8 +72,8 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-          default: () => _.map(TreeData, renderMenuItem),
-        };
+            default: () => _.map(TreeData, renderMenuItem),
+          };
 
       return {
         [$deletePropsList]: deletePropsList,
@@ -119,6 +133,28 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
           ...style,
           ...(style?.color ? { '--el-menu-text-color': style?.color } : {}),
         },
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleStyle',
+    handle: (props) => {
+      const refid = props.get('data-ref-id');
+      const classList = props.get('class', '');
+      const [className, setClassName] = useState('');
+      useEffect(() => {
+        const el = document.querySelector(`.el-menu[data-ref-id="${refid}"]`);
+        if (!el) return;
+        const bgColor = window.getComputedStyle(el as Element).backgroundColor;
+        const rgb = parseCssRgbColor(bgColor);
+        if (!rgb) return;
+        const luma = rgbLuma601(rgb.r, rgb.g, rgb.b);
+        const className = luma > 5 ? 'el-menu--light' : 'el-menu--dark';
+        setClassName(className);
+      }, [refid]);
+
+      return {
+        class: addClass(classList, className),
       };
     },
   });

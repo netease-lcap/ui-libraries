@@ -10,6 +10,13 @@
   flex-shrink: 0;
 }
 
+.el-menu--vertical {
+  height: 100%;
+}
+.el-menu.el-menu--dark .el-menu-item .el-text,
+.el-menu.el-menu--dark .el-sub-menu .el-text{
+  color: var(--el-menu-text-color);
+}
 .el-menu.el-menu--horizontal::before,
 .el-menu.el-menu--horizontal::after {
   content: none;

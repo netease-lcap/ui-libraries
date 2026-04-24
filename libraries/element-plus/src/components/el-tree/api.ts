@@ -151,6 +151,14 @@ namespace nasl.ui {
     })
     parentField: (item: T) => V;
 
+    @Prop({
+      group: '数据属性',
+      title: '子级值字段',
+      description: '集合的元素类型中，用于标识子级字段的的属性，支持自定义变更',
+      setter: { concept: 'PropertySelectSetter' },
+    })
+    childrenField: (item: T) => any;
+
     // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({
       group: '状态属性',

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { TreeOptionProps } from 'element-plus';
+import { TreeComponentProps } from 'element-plus';
 import {
   useRequestDataSource,
   useHandleMapField,
@@ -18,7 +18,7 @@ import { handleControllableValue } from '@/plugins/common/index';
 
 const TreeSelectBasicAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElTreeSelectOptions<any, any, any, any, any>,
-  TreeOptionProps
+  TreeComponentProps
 >();
 export default TreeSelectBasicAccumulate.addAccumulate(idePlugin)
   .addPlugin({
@@ -110,5 +110,17 @@ export default TreeSelectBasicAccumulate.addAccumulate(idePlugin)
       emit('sync:state', 'disabled', disabled);
       emit('sync:state', 'preview', preview);
       return {};
+    },
+  })
+  .addPlugin({
+    name: 'handleChildrenField',
+    handle(props) {
+      const treeProps = props.get('props') || {};
+      const childrenField = props.get('childrenField') || 'children';
+      return {
+        props: _.assign({}, treeProps, {
+          childrenField,
+        }),
+      };
     },
   });

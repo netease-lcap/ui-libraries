@@ -16,6 +16,7 @@ const ElSelect = registerComponent(ElSelectPlus, {
   plugin: basicsPlugin,
   name: 'el-select',
 });
+
 const ElFormSelect = withFormItem(ElSelect, 'el-form-select');
 
 export { ElSelect, ElOption, ElOptionGroup, ElFormSelect, ElSelectRegister, ElSelectPlus };
