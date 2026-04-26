@@ -18,17 +18,17 @@ namespace nasl.ui {
     @Prop({
       title: '值',
     })
-    modelValue: nasl.core.Time;
+    modelValue: nasl.core.Time | nasl.core.String | nasl.collection.List<nasl.core.Time> | nasl.collection.List<nasl.core.String>;
 
     @Prop({
       title: '起始值',
     })
-    startValue: nasl.core.Time;
+    startValue: nasl.core.Time | nasl.core.String;
 
     @Prop({
       title: '结束值',
     })
-    endValue: nasl.core.Time;
+    endValue: nasl.core.Time | nasl.core.String;
 
     @Prop({
       title: '禁用',
@@ -105,7 +105,11 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       if: (_) => !_.isRange,
     })
-    modelValue: nasl.core.String | nasl.core.Time;
+    modelValue:
+      | nasl.core.Time
+      | nasl.core.String
+      | nasl.collection.List<nasl.core.Time>
+      | nasl.collection.List<nasl.core.String>;
 
     @Prop<ElTimePickerOptions<T, V, P, M, C>, 'startValue'>({
       group: '数据属性',
