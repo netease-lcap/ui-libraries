@@ -1,6 +1,7 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
+  /** converter 为 auto 时绑定值仍以 Date/DateTime 为主，同时允许字符串（如 API 入参、value-format 场景） */
   type DateConverterToType<
     C extends 'auto' | 'string' | 'Integer',
     IsDate extends nasl.core.Boolean,
@@ -8,9 +9,7 @@ namespace nasl.ui {
     ? nasl.core.Integer
     : C extends 'string'
     ? nasl.core.String
-    : IsDate extends true
-    ? nasl.core.Date
-    : nasl.core.DateTime;
+    : (IsDate extends true ? nasl.core.Date : nasl.core.DateTime) | nasl.core.String;
   @IDEExtraInfo({
     order: 3,
     ideusage: {
