@@ -55,7 +55,7 @@ vi.mock('@/utils', () => ({
 
 // Mock constants
 vi.mock('@/components/el-form/constants', () => ({
-  $formProvide: Symbol('formProvide'),
+  $formProvide: '__LCAP_UI_EL_FORM_PROVIDE__',
 }));
 
 vi.mock('@/plugins/constants', () => ({
