@@ -27,7 +27,7 @@ import { scheduler } from '@/plugins/hooks';
 import * as _Utils from '@/utils/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-export { _Utils };
+export { _Utils, $provide };
 
 export class PluginOptions {
   plugin: any[] = [];
