@@ -9,7 +9,9 @@ namespace nasl.ui {
     ? nasl.core.Integer
     : C extends 'string'
     ? nasl.core.String
-    : (IsDate extends true ? nasl.core.Date : nasl.core.DateTime) | nasl.core.String;
+    : IsDate extends true
+    ? nasl.core.Date
+    : nasl.core.DateTime;
   @IDEExtraInfo({
     order: 3,
     ideusage: {
