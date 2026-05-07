@@ -1568,7 +1568,8 @@
     ".el-form:focus,.el-form._focus": "表单:获得焦点",
     ".el-form:hover,.el-form._hover": "表单:鼠标移入",
     ".el-form:not(.el-form--label-top) .el-flex-form-item>:first-child:not(.el-form-item)": "",
-    ".el-form.el-form--label-top .el-flex-form-item>:not(.el-form-item-has-label)": ""
+    ".el-form.el-form--label-top .el-flex-form-item>:not(.el-form-item-has-label)": "",
+    ".el-form.el-form-grid": ""
   },
   "ElFormCascader": {
     ".el-cascader": "级联选择器",
