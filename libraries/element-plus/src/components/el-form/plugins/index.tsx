@@ -5,6 +5,7 @@ import { $formProvide } from '@/components/el-form/constants';
 import { useRef, useEffect, useCallback } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 // import { useCallback } from '../../../plugins/hooks';
+import { addClass } from '@/utils';
 
 const FormBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElFormOptions, FormProps>();
 
@@ -12,7 +13,7 @@ export default FormBasicAccumulate.addPlugin({
   name: 'handleModelValue',
   handle(props) {
     const modelValue = props.get('model') ?? {};
-    const onValidate = props.get('onValidate', () => { });
+    const onValidate = props.get('onValidate', () => {});
     const model = useRef(modelValue);
     const provide = props.get('provide');
     const ref = props.get('ref');
@@ -68,25 +69,54 @@ export default FormBasicAccumulate.addPlugin({
       ),
     };
   },
-}).addPlugin({
-  name: 'handleMcp',
-  handle: (props) => {
-    const refId = props.get('data-ref-id');
-    const ref = props.get('ref');
-    useEffect(() => {
-      if (window?.UiLibrariesMcp?.subscribe) {
-        window.UiLibrariesMcp.subscribe('el_form__validate', refId, () => ref.validated());
-        window.UiLibrariesMcp.subscribe('el_form__clearValidate', refId, () => {
-          ref?.clearValidate();
-        });
-      }
-      return () => {
-        if (window?.UiLibrariesMcp?.unsubscribe) {
-          window.UiLibrariesMcp.unsubscribe('el_form__validate', refId);
-          window.UiLibrariesMcp.unsubscribe('el_form__clearValidate', refId);
+})
+  .addPlugin({
+    name: 'handleMcp',
+    handle: (props) => {
+      const refId = props.get('data-ref-id');
+      const ref = props.get('ref');
+      useEffect(() => {
+        if (window?.UiLibrariesMcp?.subscribe) {
+          window.UiLibrariesMcp.subscribe('el_form__validate', refId, () => ref.validated());
+          window.UiLibrariesMcp.subscribe('el_form__clearValidate', refId, () => {
+            ref?.clearValidate();
+          });
         }
-      };
-    }, []);
-    return {};
-  },
-});
+        return () => {
+          if (window?.UiLibrariesMcp?.unsubscribe) {
+            window.UiLibrariesMcp.unsubscribe('el_form__validate', refId);
+            window.UiLibrariesMcp.unsubscribe('el_form__clearValidate', refId);
+          }
+        };
+      }, []);
+      return {};
+    },
+  })
+  .addPlugin({
+    name: 'handleLayout',
+    handle(props) {
+      const layout = props.get('layout') ?? 'block';
+      const classNames = props.get('class') ?? '';
+      const inline = props.get('inline') ?? false;
+      const style = props.get('style') ?? {};
+      if (layout === 'inline') {
+        return { inline: true };
+      }
+      if (layout === 'block') {
+        return {};
+      }
+      if (layout === 'grid') {
+        return {
+          style: {
+            ...style,
+            '--el-form-columns': props.get('columns') ?? 1,
+          },
+          class: addClass(classNames, 'el-form-grid'),
+        };
+      }
+      if (inline) {
+        return { inline: true };
+      }
+      return {};
+    },
+  });

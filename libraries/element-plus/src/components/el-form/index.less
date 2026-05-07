@@ -23,3 +23,9 @@
 .el-form:not(.el-form--label-top) .el-flex-form-item>:first-child:not(.el-form-item) {
   margin-left: var(--el-flex-form-label-width);
 }
+
+.el-form.el-form-grid{
+  display: grid;
+  grid-template-columns: repeat(var(--el-form-columns), 1fr);
+  // gap: var(--el-form-item-gap);
+}

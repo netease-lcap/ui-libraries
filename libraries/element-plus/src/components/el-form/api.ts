@@ -73,12 +73,38 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '行内布局',
-      description: '是否使用行内布局模式',
-      docDescription: '开启后，表单字段会水平排列在同一行，适用于字段较少的表单。关闭后使用垂直布局，字段会垂直排列。',
-      setter: { concept: 'SwitchSetter' },
+      title: '表单布局',
+      docDescription:
+        '更改表单的布局方式。行内展示，标签与表单项在一行展示。块级展示，宽度会充满父元素。栅格展示，可设置列数。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '行内展示' }, { title: '块级展示' }, { title: '栅格展示，可设置列数' }],
+      },
+      onChange: [{ clear: ['columns'] }, { update: { columns: 1 }, if: (_) => _ === 'grid' }],
     })
-    inline: nasl.core.Boolean = false;
+    layout: 'inline' | 'block' | 'grid' = 'block';
+
+    @Prop({
+      group: '主要属性',
+      title: '列数',
+      description: '整个表单的划分列数',
+      docDescription: '整个表单的划分列数，此项需要设置表单布局为“栅格展示”。',
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 1,
+      },
+      if: (_) => _.layout === 'grid',
+    })
+    columns: nasl.core.Decimal | nasl.core.Integer = 1;
+
+    // @Prop({
+    //   group: '主要属性',
+    //   title: '行内布局',
+    //   description: '是否使用行内布局模式',
+    //   docDescription: '开启后，表单字段会水平排列在同一行，适用于字段较少的表单。关闭后使用垂直布局，字段会垂直排列。',
+    //   setter: { concept: 'SwitchSetter' },
+    // })
+    // inline: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',

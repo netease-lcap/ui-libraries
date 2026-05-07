@@ -232,9 +232,11 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const lcapTtl = getLcapTtl({ ttl, ttlValue });
       const Authorization = { Authorization: getCookie('Authorization') };
       const fileConnectionGroupProp = props.get('fileConnectionGroup');
-      const fileConnectionGroup = fileConnectionGroupProp ? {
-        'file-connection-group': fileConnectionGroupProp,
-      } : {};
+      const fileConnectionGroup = fileConnectionGroupProp
+        ? {
+            'file-connection-group': fileConnectionGroupProp,
+          }
+        : {};
 
       return {
         headers: _.assign(propHeaders, lcapAccessObject, DomainName, lcapTtl, Authorization, fileConnectionGroup),
@@ -247,6 +249,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const propData = props.get('data');
       const lcapIsCompress = props.get('lcapIsCompress');
       const viaOriginURL = props.get('viaOriginURL');
+      const url = props.get('url') || '/upload';
       const action = props.get('action') || '/upload';
 
       const formData = {
@@ -256,17 +259,17 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
 
       return {
         data: { ...(_.isPlainObject(propData) ? (propData as Record<string, any>) : {}), ...formData },
-        action,
+        action: url ?? action,
       };
     },
   })
   .addPlugin({
     name: 'handleEvent',
     handle(props) {
-      const beforeUpload = props.get('onBeforeUpload', () => { });
-      const beforeRemove = props.get('onBeforeRemove', () => { });
+      const beforeUpload = props.get('onBeforeUpload', () => {});
+      const beforeRemove = props.get('onBeforeRemove', () => {});
       const fileSizeLimit = props.get('fileSizeLimit');
-      const checkFile = props.get('checkFile', () => { });
+      const checkFile = props.get('checkFile', () => {});
       const exceed = props.get('onExceed');
       const limit = props.get('limit');
       return {
@@ -308,40 +311,40 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const showUploadButton = props.get('showUploadButton');
       const dragSlot = drag
         ? {
-          trigger: (
-            <ElFlex direction="column" alignment="center">
-              <ElIcon class="el-icon--upload" name="UploadFilled" />
-              <ElFlex class="el-upload__text" justify="center">
-                <ElText text="拖拽到此区域 或者 " />
-                <ElText text="点击上传文件" color="primary" />
+            trigger: (
+              <ElFlex direction="column" alignment="center">
+                <ElIcon class="el-icon--upload" name="UploadFilled" />
+                <ElFlex class="el-upload__text" justify="center">
+                  <ElText text="拖拽到此区域 或者 " />
+                  <ElText text="点击上传文件" color="primary" />
+                </ElFlex>
               </ElFlex>
-            </ElFlex>
-          ),
-        }
+            ),
+          }
         : {};
 
       const pictureCardSlot = listType === 'picture-card'
-        ? {
-          trigger: (
-            <ElFlex direction="column" alignment="center">
-              <ElIcon class="el-icon--upload" name="Plus" />
-            </ElFlex>
-          ),
-        }
-        : {};
+          ? {
+              trigger: (
+                <ElFlex direction="column" alignment="center">
+                  <ElIcon class="el-icon--upload" name="Plus" />
+                </ElFlex>
+              ),
+            }
+          : {};
 
       const uploadSlot = !autoUpload && showUploadButton
-        ? {
-          default: (
-            <ElButton
-              text={triggerUploadText}
-              onClick={() => {
-                ref?.submit();
-              }}
-            />
-          ),
-        }
-        : {};
+          ? {
+              default: (
+                <ElButton
+                  text={triggerUploadText}
+                  onClick={() => {
+                    ref?.submit();
+                  }}
+                />
+              ),
+            }
+          : {};
 
       const tipSlot = hasTip ? { tip: slots.tip } : { tip: null };
 
@@ -381,7 +384,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
                   ),
                 );
               }}
-              onDownload={() => { }}
+              onDownload={() => {}}
             />
           );
         },
