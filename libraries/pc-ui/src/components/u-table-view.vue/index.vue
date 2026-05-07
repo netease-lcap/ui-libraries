@@ -793,6 +793,11 @@ export default {
         this.watchValues(this.values);
         this.reHandleResize();
         addResizeListener(this.$el, this.throttleHandleResizeListener);
+        // 监听表头高度变化：表头初始渲染时可能偏高（列宽未稳定导致文字换行），
+        // 等列宽计算完毕头部高度收缩后，$el 的 ResizeObserver 感知不到，需要单独监听 headEl
+        this.$nextTick(() => {
+            this.observeHeadResize();
+        });
 
         if (this.stickHead) {
             this.scrollParentEl = findScrollParent(this.$el);
@@ -809,6 +814,10 @@ export default {
             this.scrollParentEl && this.scrollParentEl.removeEventListener('scroll', this.throttleScrollParentScroll);
             this.xScrollParentEl && this.xScrollParentEl.removeEventListener('scroll', this.throttleXScrollParentScroll);
         }
+        if (this._headResizeObserver) {
+            this._headResizeObserver.disconnect();
+            this._headResizeObserver = null;
+        }
         this.clearTimeout();
         this.enterTarget = null;
     },
@@ -817,6 +826,27 @@ export default {
             if (this.timer) {
                 clearTimeout(this.timer);
             }
+        },
+        /**
+         * 监听表头元素的高度变化
+         * 场景：微前端 tab 切换时，表头初始渲染偏高（列宽未稳定、文字换行），
+         * 列宽计算完成后头部收缩，但根节点 ResizeObserver 感知不到内部变化，需要单独监听
+         */
+        observeHeadResize() {
+            if (typeof ResizeObserver === 'undefined') return;
+            const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
+            if (!headEl) return;
+            // 已经在监听同一个元素则不重复注册
+            if (this._headResizeObserver && this._headResizeObservedEl === headEl) return;
+            // 切换了 headEl（极少数情况），先断开旧的
+            if (this._headResizeObserver) {
+                this._headResizeObserver.disconnect();
+            }
+            this._headResizeObservedEl = headEl;
+            this._headResizeObserver = new ResizeObserver(() => {
+                this.reHandleResize();
+            });
+            this._headResizeObserver.observe(headEl);
         },
         getTableContentElem() {
           return this.$el;
@@ -1145,9 +1175,12 @@ export default {
 
                 // 当 root 设置了 height，设置 table 的 height，避免隐藏列时的闪烁
                 if (this.$el.style.height !== '' && this.$el.style.height !== 'auto') {
-                    const paginationHeight = this.getPaginationHeight();
-                    const footerHeight = this.$refs.footerRender ? this.$refs.footerRender.$el.offsetHeight : 0;
-                    this.tableHeight = this.$el.offsetHeight - paginationHeight - footerHeight;
+                    const rootHeight = this.$el.offsetHeight;
+                    if (rootHeight) {
+                        const paginationHeight = this.getPaginationHeight();
+                        const footerHeight = this.$refs.footerRender ? this.$refs.footerRender.$el.offsetHeight : 0;
+                        this.tableHeight = rootHeight - paginationHeight - footerHeight;
+                    }
                 } else {
                     this.tableHeight = undefined;
                 }
