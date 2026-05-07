@@ -1,44 +1,17 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
-  type DateType =
-    | 'date'
-    | 'year'
-    | 'month'
-    | 'week'
-    | 'datetime'
-    | 'datetimerange'
-    | 'daterange'
-    | 'yearrange'
-    | 'monthrange'
-    | 'dates'
-    | 'years'
-    | 'months';
   /** converter 为 auto 时绑定值仍以 Date/DateTime 为主，同时允许字符串（如 API 入参、value-format 场景） */
-  // type DateConverterToType<
-  //   C extends 'auto' | 'string' | 'Integer',
-  //   IsDate extends nasl.core.Boolean,
-  // > = C extends 'Integer'
-  //   ? nasl.core.Integer
-  //   : C extends 'string'
-  //   ? nasl.core.String
-  //   : IsDate extends true
-  //   ? nasl.core.Date
-  //   : nasl.core.DateTime;
-
   type DateConverterToType<
     C extends 'auto' | 'string' | 'Integer',
-    DT extends DateType
+    IsDate extends nasl.core.Boolean,
   > = C extends 'Integer'
     ? nasl.core.Integer
     : C extends 'string'
     ? nasl.core.String
-    : DT extends 'date' | 'daterange' | 'dates'
-    ? nasl.core.String
-    : DT extends 'datetimerange' | 'datetime'
-    ? nasl.core.DateTime
-    : nasl.core.Date;
-
+    : IsDate extends true
+    ? nasl.core.Date
+    : nasl.core.DateTime;
   @IDEExtraInfo({
     order: 3,
     ideusage: {
@@ -58,19 +31,19 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
     C extends 'auto' | 'string' | 'Integer',
-    DT extends 
-    | 'date'
-    | 'year'
-    | 'month'
-    | 'week'
-    | 'datetime'
-    | 'datetimerange'
-    | 'daterange'
-    | 'yearrange'
-    | 'monthrange'
-    | 'dates'
-    | 'years'
-    | 'months',
+    DT extends
+      | 'date'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'datetimerange'
+      | 'datetime'
+      | 'daterange'
+      | 'yearrange'
+      | 'monthrange'
+      | 'dates'
+      | 'years'
+      | 'months',
   > extends ViewComponent {
     @Prop({
       title: '值',
@@ -116,19 +89,19 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
     C extends 'auto' | 'string' | 'Integer',
-    DT extends 
-    | 'date'
-    | 'year'
-    | 'month'
-    | 'week'
-    | 'datetime'
-    | 'datetimerange'
-    | 'daterange'
-    | 'yearrange'
-    | 'monthrange'
-    | 'dates'
-    | 'years'
-    | 'months',
+    DT extends
+      | 'date'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'datetimerange'
+      | 'datetime'
+      | 'daterange'
+      | 'yearrange'
+      | 'monthrange'
+      | 'dates'
+      | 'years'
+      | 'months',
   > extends ViewComponentOptions {
     // @Prop({
     //   group: '数据属性',
@@ -160,9 +133,15 @@ namespace nasl.ui {
       if: (_) => !_.type.includes('range'),
       sync: true,
     })
-    modelValue: DT extends 'daterange' | 'datetimerange' | 'dates' | 'years' | 'months'
-      ? nasl.collection.List<DateConverterToType<C, DT>>
-      : DateConverterToType<C, DT>;
+    modelValue: DT extends 'date'
+      ? DateConverterToType<C, true>
+      : DT extends 'datetime' | 'year' | 'month' | 'week'
+      ? DateConverterToType<C, false>
+      : DT extends 'dates'
+      ? nasl.collection.List<DateConverterToType<C, true>>
+      : DT extends 'years' | 'months'
+      ? nasl.collection.List<DateConverterToType<C, false>>
+      : null;
 
     @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'startValue'>({
       group: '数据属性',
@@ -173,7 +152,11 @@ namespace nasl.ui {
       if: (_) => _.type.includes('range'),
       sync: true,
     })
-    startValue: DateConverterToType<C, DT>;
+    startValue: DT extends 'daterange'
+      ? DateConverterToType<C, true>
+      : DT extends 'datetimerange' | 'yearrange' | 'monthrange'
+      ? DateConverterToType<C, false>
+      : null;
 
     @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'endValue'>({
       group: '数据属性',
@@ -183,7 +166,11 @@ namespace nasl.ui {
       if: (_) => _.type.includes('range'),
       sync: true,
     })
-    endValue: DateConverterToType<C,DT>
+    endValue: DT extends 'daterange'
+      ? DateConverterToType<C, true>
+      : DT extends 'datetimerange' | 'yearrange' | 'monthrange'
+      ? DateConverterToType<C, false>
+      : null;
 
     @Prop({
       group: '状态属性',
@@ -525,9 +512,7 @@ namespace nasl.ui {
       title: '值改变时',
       description: '用户确认选定的值时触发',
     })
-    onChange: (modelValue: DT extends 'daterange' | 'datetimerange' | 'dates' | 'years' | 'months'
-      ? nasl.collection.List<DateConverterToType<C, DT>>
-      : DateConverterToType<C, DT>) => void;
+    onChange: (modelValue: M extends true ? nasl.collection.List<nasl.core.Date> : nasl.core.Date) => void;
 
     @Event({
       title: '失去焦点时',
@@ -606,19 +591,19 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
     C extends 'auto' | 'string' | 'Integer',
-    DT extends 
-    | 'date'
-    | 'year'
-    | 'month'
-    | 'week'
-    | 'datetime'
-    | 'datetimerange'
-    | 'daterange'
-    | 'yearrange'
-    | 'monthrange'
-    | 'dates'
-    | 'years'
-    | 'months',
+    DT extends
+      | 'date'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'datetimerange'
+      | 'datetime'
+      | 'daterange'
+      | 'yearrange'
+      | 'monthrange'
+      | 'dates'
+      | 'years'
+      | 'months',
   > extends ViewComponent {
     constructor(
       options?: Partial<
@@ -637,18 +622,18 @@ namespace nasl.ui {
     P extends nasl.core.Boolean,
     M extends nasl.core.Boolean,
     C extends 'auto' | 'string' | 'Integer',
-    DT extends 
-    | 'date'
-    | 'year'
-    | 'month'
-    | 'week'
-    | 'datetime'
-    | 'datetimerange'
-    | 'daterange'
-    | 'yearrange'
-    | 'monthrange'
-    | 'dates'
-    | 'years'
-    | 'months',
+    DT extends
+      | 'date'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'datetimerange'
+      | 'datetime'
+      | 'daterange'
+      | 'yearrange'
+      | 'monthrange'
+      | 'dates'
+      | 'years'
+      | 'months',
   > extends ViewComponentOptions {}
 }
