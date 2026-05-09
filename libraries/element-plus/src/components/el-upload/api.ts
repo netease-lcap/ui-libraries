@@ -166,6 +166,16 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '上传地址',
+      description: '文件上传的服务器地址',
+      docDescription: '设置文件上传的服务器地址URL，支持相对路径和绝对路径。',
+      setter: { concept: 'InputSetter' },
+      if: (_) => false,
+    })
+    action: nasl.core.String = '/upload';
+
+    @Prop({
+      group: '主要属性',
       title: '文件类型',
       description: '允许上传的文件类型',
       docDescription: '设置允许上传的文件类型，支持MIME类型和文件扩展名。例如：image/*、.jpg,.png等。',
