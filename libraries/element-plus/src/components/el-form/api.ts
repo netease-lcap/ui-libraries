@@ -103,7 +103,7 @@ namespace nasl.ui {
       description: '是否使用行内布局模式',
       docDescription: '开启后，表单字段会水平排列在同一行，适用于字段较少的表单。关闭后使用垂直布局，字段会垂直排列。',
       setter: { concept: 'SwitchSetter' },
-      if: (_) => true,
+      if: (_) => false,
     })
     inline: nasl.core.Boolean = false;
 
