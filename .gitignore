@@ -4,6 +4,7 @@
 .idea
 .vscode
 .eslintcache
+.cursor
 
 # npm
 node_modules

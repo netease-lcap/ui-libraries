@@ -249,8 +249,8 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const propData = props.get('data');
       const lcapIsCompress = props.get('lcapIsCompress');
       const viaOriginURL = props.get('viaOriginURL');
-      const url = props.get('url') || '/upload';
-      const action = props.get('action') || '/upload';
+      const url = props.get('url');
+      const action = props.get('action');
 
       const formData = {
         lcapIsCompress,
@@ -259,7 +259,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
 
       return {
         data: { ...(_.isPlainObject(propData) ? (propData as Record<string, any>) : {}), ...formData },
-        action: url ?? action,
+        action: url ?? action ?? '/upload',
       };
     },
   })

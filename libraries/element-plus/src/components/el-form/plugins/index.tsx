@@ -95,7 +95,7 @@ export default FormBasicAccumulate.addPlugin({
   .addPlugin({
     name: 'handleLayout',
     handle(props) {
-      const layout = props.get('layout') ?? 'block';
+      const layout = props.get('layout');
       const classNames = props.get('class') ?? '';
       const inline = props.get('inline') ?? false;
       const style = props.get('style') ?? {};
