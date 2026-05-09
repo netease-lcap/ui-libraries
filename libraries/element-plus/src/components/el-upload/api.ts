@@ -170,7 +170,7 @@ namespace nasl.ui {
       description: '文件上传的服务器地址',
       docDescription: '设置文件上传的服务器地址URL，支持相对路径和绝对路径。',
       setter: { concept: 'InputSetter' },
-      if: (_) => false,
+      if: (_) => true,
     })
     action: nasl.core.String = '/upload';
 
