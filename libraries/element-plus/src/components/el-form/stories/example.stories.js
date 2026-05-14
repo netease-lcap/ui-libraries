@@ -816,7 +816,7 @@ export const Example11 = {
             <el-form-date-picker
               v-model="formModel.dateVal"
               prop="dateVal"
-              label="日日期选择"
+              label="日日期选日日期选择选择日日期选择日日期选日日期选择选择日日期选择择择"
               type="date"
               placeholder="选择日期"
               value-format="YYYY-MM-DD"
