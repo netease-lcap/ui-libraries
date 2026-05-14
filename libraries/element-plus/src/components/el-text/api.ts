@@ -82,7 +82,7 @@ namespace nasl.ui {
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '默认不处理' },
+          { title: '自动处理' },
           { title: '多余的文本省略' },
           { title: '强制换行且英文自动添加换行符' },
           { title: '始终不换行' },

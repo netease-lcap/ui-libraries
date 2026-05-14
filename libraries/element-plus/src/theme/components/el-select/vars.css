@@ -57,7 +57,7 @@
   --el-select-input-font-size: 14px;
 
   /**
-   * @desc 输入框宽度
+   * @desc 选择器宽度（默认与表单 `--el-form-content-width` 一致）
    * @type size
    */
   --el-select-width: 240px;

@@ -2,10 +2,20 @@
 import _ from 'lodash';
 import { FormProps } from 'element-plus';
 import { $formProvide } from '@/components/el-form/constants';
-import { useRef, useEffect, useCallback } from '@/plugins/hooks';
+import { $deletePropsList } from '@/plugins/constants';
+import { useRef, useEffect, useCallback, useRender } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 // import { useCallback } from '../../../plugins/hooks';
 import { addClass } from '@/utils';
+import ElFormQueryLayout from './form-query-layout';
+
+/** 与 NASL / 模板兼容：布尔、字符串、可能存在的 kebab 键 */
+function isQueryFormOn(props: { get: (k: string, d?: unknown) => unknown }) {
+  const a = props.get('queryForm') ?? props.get('query-form');
+  if (a === true || a === 'true' || a === 1 || a === '1') return true;
+  if (a === false || a === 'false' || a === 0 || a === '0' || a == null) return false;
+  return Boolean(a);
+}
 
 const FormBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElFormOptions, FormProps>();
 
@@ -67,6 +77,7 @@ export default FormBasicAccumulate.addPlugin({
         },
         [onValidate],
       ),
+      labelWidth: 'auto',
     };
   },
 })
@@ -103,7 +114,9 @@ export default FormBasicAccumulate.addPlugin({
         return { inline: true };
       }
       if (layout === 'block') {
-        return {};
+        return {
+          class: addClass(classNames, 'el-form-block'),
+        };
       }
       if (layout === 'grid') {
         return {
@@ -117,6 +130,47 @@ export default FormBasicAccumulate.addPlugin({
       if (inline) {
         return { inline: true };
       }
-      return {};
+      return {
+        class: addClass(classNames, 'el-form-block'),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleQueryForm',
+    order: 5,
+    handle(props) {
+      const baseDel = (props.get($deletePropsList) as unknown as string[]) ?? [];
+      const deletePropsList = baseDel.concat('queryForm');
+      const queryForm = isQueryFormOn(props);
+      const layout = props.get('layout');
+      if (!queryForm || layout === 'grid') {
+        return { [$deletePropsList]: deletePropsList };
+      }
+      const FormComponent = props.get('render') as any;
+      const render = useRender((p, { attrs, slots }) => {
+        return (
+          <FormComponent
+            {..._.assign({}, p, attrs)}
+            inline={false}
+            v-slots={{
+              ..._.omit(slots, ['default', 'actions']),
+              default: () => (
+                <ElFormQueryLayout
+                  v-slots={{
+                    default: () => slots.default?.(),
+                    actions: () => slots.actions?.(),
+                  }}
+                />
+              ),
+            }}
+          />
+        );
+      }, []);
+      return {
+        render,
+        inline: false,
+        class: addClass(props.get('class') ?? '', 'el-form--query'),
+        [$deletePropsList]: deletePropsList,
+      };
     },
   });

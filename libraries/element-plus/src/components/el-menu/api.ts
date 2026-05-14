@@ -155,12 +155,24 @@ namespace nasl.ui {
     })
     ellipsis: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '主要属性',
+      title: '显示折叠按钮',
+      description: '开启后，菜单会显示折叠按钮，点击后可以折叠收起菜单。仅在垂直模式下可用，适用于侧边栏导航。',
+      docDescription: '开启后，菜单会显示折叠按钮，点击后可以折叠收起菜单。仅在垂直模式下可用，适用于侧边栏导航。',
+      setter: { concept: 'SwitchSetter' },
+      sync: true,
+      if: (_) => _.mode === 'vertical',
+    })
+    hasCollapseButton: nasl.core.Boolean = false;
+
     @Prop<ElMenuOptions<T, V>, 'collapse'>({
       group: '主要属性',
       title: '折叠状态',
       description: '是否折叠收起菜单',
       docDescription: '开启后，菜单会折叠收起，只显示图标。仅在垂直模式下可用，适用于侧边栏导航。',
       setter: { concept: 'SwitchSetter' },
+      sync: true,
       if: (_) => _.mode === 'vertical',
     })
     collapse: nasl.core.Boolean = false;

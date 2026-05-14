@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue';
+import { ref, watch, reactive } from 'vue';
 import Component from '../index';
 // import { ElSelect, ElOption } from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
@@ -137,7 +137,7 @@ export const Example2 = {
         formRef,
         rules,
         ignoreRules,
-        handleIgnoreRules
+        handleIgnoreRules,
       };
     },
     template: `
@@ -297,4 +297,656 @@ export const Example7 = {
   args: {
     inline: true,
   },
+};
+export const Example8 = {
+  name: '表单宽度',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      const input = ref('');
+      const selectVal = ref('');
+      const cascaderVal = ref([]);
+      const dateVal = ref('');
+      const timeVal = ref('');
+      const timeSelectVal = ref('');
+      const tags = ref([]);
+      const treeSel = ref();
+      const sliderVal = ref(42);
+      const cascaderOptions = [
+        {
+          value: 'zhejiang',
+          label: '浙江',
+          children: [
+            { value: 'hangzhou', label: '杭州' },
+            { value: 'ningbo', label: '宁波' },
+          ],
+        },
+      ];
+      const treeSource = [
+        {
+          value: '1',
+          label: '一级',
+          children: [{ value: '1-1', label: '二级' }],
+        },
+      ];
+      const treeProps = { children: 'children', label: 'label', value: 'value' };
+      const mentionList = [
+        { value: 'user1', label: '用户一' },
+        { value: 'user2', label: '用户二' },
+      ];
+      return {
+        args,
+        input,
+        selectVal,
+        cascaderVal,
+        dateVal,
+        timeVal,
+        timeSelectVal,
+        tags,
+        treeSel,
+        sliderVal,
+        cascaderOptions,
+        treeSource,
+        treeProps,
+        mentionList,
+      };
+    },
+    template: `
+    <div style="padding: 8px 0;">
+      <p style="margin: 0 0 16px;color: var(--el-text-color-secondary);font-size: 13px;">
+        以下为与「表单控件默认横向宽度 240px」相关的组件（依赖 <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-input-width</code> /
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-select-width</code> /
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-date-editor-width</code> /
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-input-tag-width</code> /
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-slider-width</code>
+        等，未在下面写死 <code>width</code>，便于对齐主题变量）。
+      </p>
+
+      <el-form v-bind="args"  style="float: left;">
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:380px;">
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">输入框 · el-input · --el-input-width</div>
+            <el-input v-model="input" placeholder="请输入" />
+          </div>
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">选择器 · el-select · --el-select-width</div>
+            <el-select v-model="selectVal" placeholder="请选择" clearable>
+              <el-option label="选项一" value="1" />
+              <el-option label="选项二" value="2" />
+            </el-select>
+          </div>
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">级联 · el-cascader · --el-input-width</div>
+            <el-cascader v-model="cascaderVal" :options="cascaderOptions" placeholder="请选择" clearable />
+          </div>
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">日期 · el-date-picker · --el-date-editor-width</div>
+            <el-date-picker v-model="dateVal" type="date" converter="auto" placeholder="请选择日期" />
+          </div>
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">时间选择器 · el-time-picker · --el-date-editor-width</div>
+            <el-time-picker v-model="timeVal" prefixIconName="" placeholder="请选择时间" />
+          </div>
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">时间选择 · el-time-select（根为 Select）· --el-select-width</div>
+            <el-time-select v-model="timeSelectVal" placeholder="请选择时间" start="09:00" end="18:00" step="00:30" />
+          </div>
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">标签输入 · el-input-tag · --el-input-tag-width</div>
+            <el-input-tag v-model="tags" placeholder="输入后回车" />
+          </div>
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">提及 · el-mention · --el-input-width</div>
+            <el-mention :dataSource="mentionList" placeholder="输入 @ 提及" trigger="@" />
+          </div>
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">横向滑块 · el-slider · --el-slider-width</div>
+            <el-slider v-model="sliderVal" />
+          </div>
+          <div style="outline: 1px dashed var(--el-border-color);outline-offset:6px;padding:8px;">
+            <div style="margin-bottom:6px;font-size:12px;color:var(--el-text-color-secondary);">树形选择 · el-tree-select · --el-select-width</div>
+            <el-tree-select
+              v-model="treeSel"
+              :data="treeSource"
+              :props="treeProps"
+              node-key="value"
+              placeholder="请选择"
+            />
+          </div>
+
+        </div>
+      </el-form>
+      <el-form >
+            <el-form-select v-model="selectVal" label="select21" placeholder="请选择" clearable>
+              <el-option label="选项一" value="1" />
+              <el-option label="选项二" value="2" />
+            </el-form-select>
+      </el-form>
+    </div>
+    `,
+  }),
+  args: {
+    inline: false,
+    // labelPosition: 'left',
+  },
+};
+
+export const Example9 = {
+  name: '表单中宽度',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      const cascaderOptions = [
+        {
+          value: 'zhejiang',
+          label: '浙江',
+          children: [
+            { value: 'hangzhou', label: '杭州' },
+            { value: 'ningbo', label: '宁波' },
+          ],
+        },
+      ];
+      const treeSource = [
+        {
+          value: '1',
+          label: '一级',
+          children: [{ value: '1-1', label: '二级' }],
+        },
+      ];
+      const treeProps = { children: 'children', label: 'label', value: 'value' };
+      const mentionList = [
+        { value: 'user1', label: '用户一' },
+        { value: 'user2', label: '用户二' },
+      ];
+      const formModel = reactive({
+        input: '',
+        selectVal: '',
+        cascaderVal: [],
+        dateVal: '',
+        timePickerVal: '',
+        timeSelectVal: '',
+        tags: [],
+        treeSel: '',
+        sliderVal: 42,
+        mentionVal: '',
+        radioVal: '1',
+        checkboxVals: [],
+      });
+      return {
+        args,
+        formModel,
+        cascaderOptions,
+        treeSource,
+        treeProps,
+        mentionList,
+      };
+    },
+    template: `
+    <div style="padding: 8px 0;">
+      <p style="margin: 0 0 16px;color: var(--el-text-color-secondary);font-size: 13px;">
+        以下为与「表单控件默认横向宽度 240px」相关的组件（依赖 <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-input-width</code> /
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-select-width</code> /
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-date-editor-width</code> /
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-input-tag-width</code> /
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-slider-width</code>
+        等，未在下面写死 <code>width</code>，便于对齐主题变量）。
+      </p>
+
+     
+      <el-form :model="formModel" label-position="right">
+            <el-form-input v-model="formModel.input" prop="input" label="输入框" placeholder="请输入" clearable />
+            <el-form-select v-model="formModel.selectVal" prop="selectVal" label="选择器" placeholder="请选择" clearable>
+              <el-option label="选项一" value="1" />
+              <el-option label="选项二" value="2" />
+            </el-form-select>
+            <el-form-cascader
+              v-model="formModel.cascaderVal"
+              prop="cascaderVal"
+              label="级联选择"
+              :options="cascaderOptions"
+              placeholder="请选择"
+              clearable
+            />
+            <el-form-date-picker
+              v-model="formModel.dateVal"
+              prop="dateVal"
+              label="日期选择"
+              type="date"
+              placeholder="选择日期"
+              value-format="YYYY-MM-DD"
+              clearable
+            />
+            <el-form-time-picker
+              v-model="formModel.timePickerVal"
+              prop="timePickerVal"
+              label="时间选择器"
+              placeholder="选择时间"
+              clearable
+            />
+            <el-form-time-select
+              v-model="formModel.timeSelectVal"
+              prop="timeSelectVal"
+              label="时间选择"
+              start="08:30"
+              end="18:30"
+              step="00:15"
+              placeholder="请选择"
+              clearable
+            />
+            <el-form-input-tag v-model="formModel.tags" prop="tags" label="标签输入" placeholder="输入后回车添加标签" />
+            <el-form-mention
+              v-model="formModel.mentionVal"
+              prop="mentionVal"
+              label="提及"
+              placeholder="输入 @ 提及"
+              :dataSource="mentionList"
+            />
+            <el-form-tree-select
+              v-model="formModel.treeSel"
+              prop="treeSel"
+              label="树形选择"
+              :data="treeSource"
+              :props="treeProps"
+              placeholder="请选择"
+              clearable
+            />
+            <el-form-slider v-model="formModel.sliderVal" prop="sliderVal" label="滑块" />
+            <el-form-radio-group v-model="formModel.radioVal" prop="radioVal" label="单选组">
+              <el-radio value="1">选项一</el-radio>
+              <el-radio value="2">选项二</el-radio>
+            </el-form-radio-group>
+            <el-form-checkbox-group v-model="formModel.checkboxVals" prop="checkboxVals" label="多选组">
+              <el-checkbox value="a">选项 A</el-checkbox>
+              <el-checkbox value="b">选项 B</el-checkbox>
+            </el-form-checkbox-group>
+      </el-form>
+    </div>
+    `,
+  }),
+  args: {
+    inline: false,
+    // labelPosition: 'left',
+  },
+};
+export const Example10 = {
+  name: '行内',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      const cascaderOptions = [
+        {
+          value: 'zhejiang',
+          label: '浙江',
+          children: [
+            { value: 'hangzhou', label: '杭州' },
+            { value: 'ningbo', label: '宁波' },
+          ],
+        },
+      ];
+      const treeSource = [
+        {
+          value: '1',
+          label: '一级',
+          children: [{ value: '1-1', label: '二级' }],
+        },
+      ];
+      const treeProps = { children: 'children', label: 'label', value: 'value' };
+      const mentionList = [
+        { value: 'user1', label: '用户一' },
+        { value: 'user2', label: '用户二' },
+      ];
+      const formModel = reactive({
+        input: '',
+        selectVal: '',
+        cascaderVal: [],
+        dateVal: '',
+        timePickerVal: '',
+        timeSelectVal: '',
+        tags: [],
+        treeSel: '',
+        sliderVal: 42,
+        mentionVal: '',
+        radioVal: '1',
+        checkboxVals: [],
+      });
+      return {
+        args,
+        formModel,
+        cascaderOptions,
+        treeSource,
+        treeProps,
+        mentionList,
+      };
+    },
+    template: `
+    <div style="padding: 8px 0;">
+      <p style="margin: 0 0 12px;color: var(--el-text-color-secondary);font-size: 13px;">
+        行内布局：与块级同源令牌（首选 96px / 240px，最小 72px / 180px）。
+        横向拖拽缩小外层容器时字段先收缩，无法再收窄则换行。
+      </p>
+      <p style="margin: 0 0 16px;color: var(--el-text-color-secondary);font-size: 13px;">
+        控件宽度依赖主题变量（如
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-input-width</code>、
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-select-width</code>
+        等），与
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-form-content-width</code>
+        默认一致。
+      </p>
+
+      <div
+        style="
+          resize: horizontal;
+          overflow: auto;
+          max-width: 100%;
+          min-width: 260px;
+          padding: 12px;
+          border: 1px dashed var(--el-border-color);
+          border-radius: 4px;
+          box-sizing: border-box;
+        "
+      >
+      <el-form :model="formModel" label-position="right" layout="inline">
+            <el-form-input v-model="formModel.input" prop="input" label="输入框" placeholder="请输入" clearable />
+            <el-form-select v-model="formModel.selectVal" prop="selectVal" label="选择器" placeholder="请选择" clearable>
+              <el-option label="选项一" value="1" />
+              <el-option label="选项二" value="2" />
+            </el-form-select>
+            <el-form-cascader
+              v-model="formModel.cascaderVal"
+              prop="cascaderVal"
+              label="级联选择"
+              :options="cascaderOptions"
+              placeholder="请选择"
+              clearable
+            />
+            <el-form-date-picker
+              v-model="formModel.dateVal"
+              prop="dateVal"
+              label="日期选择"
+              type="date"
+              placeholder="选择日期"
+              value-format="YYYY-MM-DD"
+              clearable
+            />
+            <el-form-time-picker
+              v-model="formModel.timePickerVal"
+              prop="timePickerVal"
+              label="时间选择"
+              placeholder="选择时间"
+              clearable
+            />
+            <el-form-time-select
+              v-model="formModel.timeSelectVal"
+              prop="timeSelectVal"
+              label="时间选择"
+              start="08:30"
+              end="18:30"
+              step="00:15"
+              placeholder="请选择"
+              clearable
+            />
+            <el-form-input-tag v-model="formModel.tags" prop="tags" label="标签输入" placeholder="输入后回车添加标签" />
+            <el-form-mention
+              v-model="formModel.mentionVal"
+              prop="mentionVal"
+              label="提及"
+              placeholder="输入 @ 提及"
+              :dataSource="mentionList"
+            />
+            <el-form-tree-select
+              v-model="formModel.treeSel"
+              prop="treeSel"
+              label="树形选择"
+              :data="treeSource"
+              :props="treeProps"
+              placeholder="请选择"
+              clearable
+            />
+            <el-form-slider v-model="formModel.sliderVal" prop="sliderVal" label="滑块" />
+            <el-form-radio-group v-model="formModel.radioVal" prop="radioVal" label="单选组">
+              <el-radio value="1">选项一</el-radio>
+              <el-radio value="2">选项二</el-radio>
+            </el-form-radio-group>
+            <el-form-checkbox-group v-model="formModel.checkboxVals" prop="checkboxVals" label="多选组">
+              <el-checkbox value="a">选项 A</el-checkbox>
+              <el-checkbox value="b">选项 B</el-checkbox>
+            </el-form-checkbox-group>
+      </el-form>
+      </div>
+    </div>
+    `,
+  }),
+  args: {
+    inline: false,
+    // labelPosition: 'left',
+  },
+};
+
+export const Example11 = {
+  name: '栅格',
+  render: (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      const cascaderOptions = [
+        {
+          value: 'zhejiang',
+          label: '浙江',
+          children: [
+            { value: 'hangzhou', label: '杭州' },
+            { value: 'ningbo', label: '宁波' },
+          ],
+        },
+      ];
+      const treeSource = [
+        {
+          value: '1',
+          label: '一级',
+          children: [{ value: '1-1', label: '二级' }],
+        },
+      ];
+      const treeProps = { children: 'children', label: 'label', value: 'value' };
+      const mentionList = [
+        { value: 'user1', label: '用户一' },
+        { value: 'user2', label: '用户二' },
+      ];
+      const formModel = reactive({
+        input: '',
+        selectVal: '',
+        cascaderVal: [],
+        dateVal: '',
+        timePickerVal: '',
+        timeSelectVal: '',
+        tags: [],
+        treeSel: '',
+        sliderVal: 42,
+        mentionVal: '',
+        radioVal: '1',
+        checkboxVals: [],
+      });
+      return {
+        args,
+        formModel,
+        cascaderOptions,
+        treeSource,
+        treeProps,
+        mentionList,
+      };
+    },
+    template: `
+    <div style="padding: 8px 0;">
+      <p style="margin: 0 0 12px;color: var(--el-text-color-secondary);font-size: 13px;">
+        行内布局：与块级同源令牌（首选 96px / 240px，最小 72px / 180px）。
+        横向拖拽缩小外层容器时字段先收缩，无法再收窄则换行。
+      </p>
+      <p style="margin: 0 0 16px;color: var(--el-text-color-secondary);font-size: 13px;">
+        控件宽度依赖主题变量（如
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-input-width</code>、
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-select-width</code>
+        等），与
+        <code style="padding: 0 4px;background:var(--el-fill-color-light);border-radius:4px;">--el-form-content-width</code>
+        默认一致。
+      </p>
+
+      <div
+        style="
+          resize: horizontal;
+          overflow: auto;
+          max-width: 100%;
+          min-width: 260px;
+          padding: 12px;
+          border: 1px dashed var(--el-border-color);
+          border-radius: 4px;
+          box-sizing: border-box;
+        "
+      >
+      <el-form :model="formModel" label-position="right" layout="grid" columns="4">
+            <el-form-input v-model="formModel.input" prop="input" label="输入框" placeholder="请输入" clearable />
+            <el-form-select v-model="formModel.selectVal" prop="selectVal" label="选择器" placeholder="请选择" clearable>
+              <el-option label="选项一" value="1" />
+              <el-option label="选项二" value="2" />
+            </el-form-select>
+            <el-form-cascader
+              v-model="formModel.cascaderVal"
+              prop="cascaderVal"
+              label="级联选择"
+              :options="cascaderOptions"
+              placeholder="请选择"
+              clearable
+            />
+            <el-form-date-picker
+              v-model="formModel.dateVal"
+              prop="dateVal"
+              label="日日期选择"
+              type="date"
+              placeholder="选择日期"
+              value-format="YYYY-MM-DD"
+              clearable
+            />
+            <el-form-time-picker
+              v-model="formModel.timePickerVal"
+              prop="timePickerVal"
+              label="时间选择"
+              placeholder="选择时间"
+              clearable
+            />
+            <el-form-time-select
+              v-model="formModel.timeSelectVal"
+              prop="timeSelectVal"
+              label="时间选择"
+              start="08:30"
+              end="18:30"
+              step="00:15"
+              placeholder="请选择"
+              clearable
+            />
+            <el-form-input-tag v-model="formModel.tags" prop="tags" label="标签输入" placeholder="输入后回车添加标签" />
+            <el-form-mention
+              v-model="formModel.mentionVal"
+              prop="mentionVal"
+              label="提及"
+              placeholder="输入 @ 提及"
+              :dataSource="mentionList"
+            />
+            <el-form-tree-select
+              v-model="formModel.treeSel"
+              prop="treeSel"
+              label="树形选择"
+              :data="treeSource"
+              :props="treeProps"
+              placeholder="请选择"
+              clearable
+            />
+            <el-form-slider v-model="formModel.sliderVal" prop="sliderVal" label="滑块" />
+            <el-form-radio-group v-model="formModel.radioVal" prop="radioVal" label="单选组">
+              <el-radio value="1">选项一</el-radio>
+              <el-radio value="2">选项二</el-radio>
+            </el-form-radio-group>
+            <el-form-checkbox-group v-model="formModel.checkboxVals" prop="checkboxVals" label="多选组">
+              <el-checkbox value="a">选项 A</el-checkbox>
+              <el-checkbox value="b">选项 B</el-checkbox>
+            </el-form-checkbox-group>
+      </el-form>
+      </div>
+    </div>
+    `,
+  }),
+  args: {
+    inline: false,
+    // labelPosition: 'left',
+  },
+};
+
+export const Example12 = {
+  name: '查询表单（响应式列数 + 操作区）',
+  render: () => ({
+    setup() {
+      const formModel = reactive({
+        q1: '',
+        q2: '',
+        q3: '',
+        q4: '',
+        q5: '',
+      });
+      return { formModel };
+    },
+    template: `
+    <div style="padding: 8px 0;">
+      <p style="margin: 0 0 12px;color: var(--el-text-color-secondary);font-size: 13px;">
+        块级 + 查询表单：拖拽容器调整宽度。断点：宽度 ≥1200 → 4 列；992～1199 → 3 列；小于 992 → 2 列。
+        操作区同行靠右；按钮过多时整块换行仍靠右。可检查内部 <code>.el-form-query</code> 的 data-query-cols 属性。
+      </p>
+      <div
+        style="
+          resize: horizontal;
+          overflow: auto;
+          width: 1210px;
+          max-width: 100%;
+          min-width: 280px;
+          padding: 12px;
+          border: 1px dashed var(--el-border-color);
+          border-radius: 4px;
+          box-sizing: border-box;
+        "
+      >
+        <el-form :model="formModel" label-position="right" layout="block" :query-form="true">
+          <el-form-input v-model="formModel.q1" prop="q1" label="条件条件条件条件条件条件一" placeholder="请输入" clearable />
+          <el-form-input v-model="formModel.q2" prop="q2" label="条件二" placeholder="请输入" clearable />
+          <el-form-input v-model="formModel.q3" prop="q3" label="条件三" placeholder="请输入" clearable />
+          <el-form-input v-model="formModel.q4" prop="q4" label="条件四" placeholder="请输入" clearable />
+          <el-form-input v-model="formModel.q5" prop="q5" label="条件五" placeholder="请输入" clearable />
+          <template #actions>
+            <el-button type="primary">查询</el-button>
+            <el-button>重置</el-button>
+            <el-button>导出当前筛选</el-button>
+            <el-button>高级筛选</el-button>
+            <el-button>批量操作</el-button>
+          </template>
+        </el-form>
+      </div>
+      <p style="margin: 24px 0 12px;color: var(--el-text-color-secondary);font-size: 13px;">
+        对照：栅格 4 列 + 查询开关。收窄容器时列数仍为 4（不出现 3/2 列断点）。
+      </p>
+      <div
+        style="
+          resize: horizontal;
+          overflow: auto;
+          width: 520px;
+          max-width: 100%;
+          min-width: 260px;
+          padding: 12px;
+          border: 1px dashed var(--el-border-color);
+          border-radius: 4px;
+          box-sizing: border-box;
+        "
+      >
+        <el-form :model="formModel" label-position="right" layout="grid" columns="4" :query-form="true">
+          <el-form-input v-model="formModel.q1" prop="q1" label="条件一" placeholder="请输入" clearable />
+          <el-form-input v-model="formModel.q2" prop="q2" label="条件二" placeholder="请输入" clearable />
+          <el-form-input v-model="formModel.q3" prop="q3" label="条件三" placeholder="请输入" clearable />
+          <el-form-input v-model="formModel.q4" prop="q4" label="条件四" placeholder="请输入" clearable />
+        </el-form>
+      </div>
+    </div>
+    `,
+  }),
 };

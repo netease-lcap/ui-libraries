@@ -5,7 +5,7 @@ import { $deletePropsList, $router, $route } from '@/plugins/constants';
 import '@/utils/index';
 import MenuBasicAccumulate from '../plugins/basic-plugins';
 import MenuIdeAccumulate from '../plugins/ide';
-import ItemPluginAccumulate from '../plugins/item-plugin';
+import ItemPluginAccumulate from '../plugins/group-item-plugin';
 import MenuItemPluginAccumulate from '../plugins/menu-item';
 
 describe('el-menu plugins', () => {

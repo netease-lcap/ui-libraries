@@ -75,7 +75,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '表单布局',
       docDescription:
-        '更改表单的布局方式。行内展示，标签与表单项在一行展示。块级展示，宽度会充满父元素。栅格展示，可设置列数。',
+        '更改表单的布局方式。行内展示：标签与控件同一行，表单容器支持收缩与换行（窄于各字段最小宽度后换行）；块级展示：宽度占满父级；栅格展示：可设置列数。宽度令牌：`--el-form-label-width`、`--el-form-content-width`、`--el-form-label-min-width`、`--el-form-content-min-width`（定义于 `.el-form`）。表单项内容区内仅对白名单控件（如输入框、选择器、日期等）铺满宽度，单选/多选组等不强制拉满。BREAKING：`--el-form-inline-content-width` 已与内容区同源默认 240px，依赖旧行内更窄（如 220px）的页面请在主题或表单上覆盖变量。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '行内展示' }, { title: '块级展示' }, { title: '栅格展示，可设置列数' }],
@@ -83,6 +83,18 @@ namespace nasl.ui {
       onChange: [{ clear: ['columns'] }, { update: { columns: 1 }, if: (_) => _ === 'grid' }],
     })
     layout: 'inline' | 'block' | 'grid' = 'block';
+
+
+    @Prop({
+      group: '主要属性',
+      title: '查询表单',
+      description:
+        '是否启用查询表单布局。当「表单布局」为栅格时：列数仅由「列数」决定，不随容器宽度在 2/3/4 列间切换；开启本项也不会改变栅格列数。当「表单布局」为行内或块级时：按表单容器宽度响应式列数（宽度≥1200px 为 4 列，992px 以上且小于 1200px 为 3 列，宽度小于 992px 为 2 列），并可使用「操作区」插槽；操作区与表单项同行靠右，按钮过多时可整块换行仍靠右。',
+      docDescription:
+        '与「表单布局」配合：`layout` 为栅格时仅用 `columns`，无断点列数；`layout` 为行内/块级且开启本项时，用容器宽度断点与操作区插槽。操作插槽仅在非栅格且开启本项时参与布局。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    queryForm: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -191,13 +203,13 @@ namespace nasl.ui {
     @Prop<ElFormOptions, 'labelWidth'>({
       group: '样式属性',
       title: '标签宽度',
-      description: '设置表单标签的宽度',
+      description: '设置表单标签的宽度,auto 表示自动计算',
       docDescription: '统一设置所有表单字段标签的宽度。可以设置为具体数值(如"100px")或百分比(如"20%")。',
       setter: {
         concept: 'InputSetter',
       },
     })
-    labelWidth: nasl.core.String | nasl.core.Decimal;
+    labelWidth: nasl.core.String | nasl.core.Decimal='auto';
 
     // @Prop({
     //   group: '主要属性',
@@ -401,6 +413,13 @@ namespace nasl.ui {
       // ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '操作区',
+      description:
+        '查询表单的查询/重置等按钮区域。仅在开启「查询表单」且「表单布局」不为栅格时与表单项同排靠右或整块换行仍靠右；栅格布局下列数仍由「列数」决定，本插槽不参与断点列数逻辑（是否展示以运行时为准）。',
+    })
+    slotActions: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({

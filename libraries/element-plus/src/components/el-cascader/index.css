@@ -4,3 +4,9 @@
 .el-cascader .el-input__inner.el-input__inner {
   padding: 0;
 }
+.el-cascader .el-input {
+  --el-input-width: 100%;
+}
+.el-cascader{
+  width: 240px
+}
