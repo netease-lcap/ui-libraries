@@ -1,0 +1,31 @@
+packages/builder/src/build/gens/gen-nasl-component-config.ts
+  72c92555ce041daa 8-13,23-34,37-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8-ntes.7",
+  "base_commit_sha": "7ca4c1f0cb54d1a0896b7f3e8a68a960d17fb3da",
+  "prompts": {
+    "72c92555ce041daa": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9a754999-f03f-4a5d-802e-ed710c5fdf80",
+        "model": "composer-2"
+      },
+      "human_author": "刘宇阳",
+      "messages": [],
+      "total_additions": 35,
+      "total_deletions": 11,
+      "accepted_lines": 22,
+      "overriden_lines": 2,
+      "per_file_stats": {
+        "packages/builder/src/build/gens/gen-nasl-component-config.ts": {
+          "additions": 35,
+          "deletions": 11,
+          "accepted_lines": 22,
+          "overriden_lines": 2
+        }
+      }
+    }
+  }
+}
