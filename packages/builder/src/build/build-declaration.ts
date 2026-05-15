@@ -187,9 +187,13 @@ function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, 
 
           if (propInfo) {
             const blocks: string[] = getBlocks(propInfo.title, propInfo.description);
-            const setterConcept = propInfo.setter?.concept;
-            if (setterConcept === 'EnumSelectSetter' || setterConcept === 'CapsulesSetter') {
+            if (propInfo.checkLiteralType === true) {
               blocks.push(' * @checkLiteralType');
+            }
+            const deprecationRaw = typeof propInfo.deprecation === 'string' ? propInfo.deprecation.trim() : '';
+            if (deprecationRaw) {
+              const deprecationText = deprecationRaw.replace(/\*\//g, '* /').replace(/\s+/g, ' ');
+              blocks.push(` * @deprecated ${deprecationText}`);
             }
             if (blocks.length > 0) {
               n.leadingComments = [
