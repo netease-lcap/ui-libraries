@@ -1,0 +1,30 @@
+packages/builder/src/build/build-declaration.ts
+  72c92555ce041daa 190,193-196
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8-ntes.7",
+  "base_commit_sha": "3f5ebb6ee7187be7c5aa2c6b50a03b5e12568aea",
+  "prompts": {
+    "72c92555ce041daa": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9a754999-f03f-4a5d-802e-ed710c5fdf80",
+        "model": "composer-2"
+      },
+      "human_author": "刘宇阳",
+      "messages": [],
+      "total_additions": 6,
+      "total_deletions": 2,
+      "accepted_lines": 6,
+      "overriden_lines": 0,
+      "per_file_stats": {
+        "packages/builder/src/build/build-declaration.ts": {
+          "additions": 6,
+          "deletions": 2,
+          "accepted_lines": 6
+        }
+      }
+    }
+  }
+}
