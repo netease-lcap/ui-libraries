@@ -187,6 +187,10 @@ function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, 
 
           if (propInfo) {
             const blocks: string[] = getBlocks(propInfo.title, propInfo.description);
+            const setterConcept = propInfo.setter?.concept;
+            if (setterConcept === 'EnumSelectSetter' || setterConcept === 'CapsulesSetter') {
+              blocks.push(' * @checkLiteralType');
+            }
             if (blocks.length > 0) {
               n.leadingComments = [
                 {
