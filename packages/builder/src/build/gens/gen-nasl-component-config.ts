@@ -5,6 +5,12 @@ import logger from '../../utils/logger';
 import { NaslUIComponentConfig } from '../../overload';
 import { getComponentConfigByName } from '../../utils';
 
+/** api 中可写的扩展字段（未在 @nasl/types 的 PropDeclaration 中声明） */
+type PropDeclarationExt = NaslUIComponentConfig['props'][number] & {
+  hidden?: boolean;
+  if?: string;
+};
+
 export default genNaslComponent;
 
 export function processComponentConfigExtends(components: NaslUIComponentConfig[], lcapUIComponents: any[] = []) {
@@ -13,6 +19,24 @@ export function processComponentConfigExtends(components: NaslUIComponentConfig[
     if (Array.isArray(c.children)) {
       arr.push(...c.children);
     }
+
+    arr.forEach((comp) => {
+      if (!Array.isArray(comp.props)) {
+        return;
+      }
+      // eslint-disable-next-line no-param-reassign -- 将 hidden props 转换为 IDE 可用的 if / tsIf
+      comp.props = comp.props.map((prop) => {
+        const p = prop as PropDeclarationExt;
+        if (p.hidden !== true) {
+          return prop;
+        }
+        return {
+          ...prop,
+          if: '_ => false',
+          tsIf: '_ => false',
+        };
+      });
+    });
 
     return arr;
   }).flat().filter((c) => Array.isArray(c.extends) && c.extends.length > 0).forEach((component) => {
