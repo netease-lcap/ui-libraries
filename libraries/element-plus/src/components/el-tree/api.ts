@@ -11,12 +11,16 @@ namespace nasl.ui {
         loopRule: 'nth-child(n+2)',
         loopElem: '> .el-p-tree__list .el-p-tree__item',
         emptySlot: {
-          display: 'inline',
+          display: 'block',
           condition: "!this.getAttribute('dataSource')",
           accept: false,
           content: '"请绑定数据源"',
         },
+        slotWrapperInlineStyle: {
+          default: 'width:100%;',
+        },
       },
+      namedSlotOmitWrapper: ['item'],
     },
   })
   @Component({
@@ -271,7 +275,8 @@ namespace nasl.ui {
       group: '交互属性',
       title: '严格模式',
       description: '父子节点选中状态是否关联',
-      docDescription: '开启后，父子节点的选中状态不再关联，可以各自独立选中或取消。关闭后，选中父节点会自动选中所有子节点。',
+      docDescription:
+        '开启后，父子节点的选中状态不再关联，可以各自独立选中或取消。关闭后，选中父节点会自动选中所有子节点。',
       setter: { concept: 'SwitchSetter' },
     })
     checkStrictly: nasl.core.Boolean = false;

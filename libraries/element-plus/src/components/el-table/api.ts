@@ -93,7 +93,7 @@ namespace nasl.ui {
       title: '保持页码，重新加载',
       description: '保持页码，重新加载',
     })
-    reload(): void { }
+    reload(): void {}
 
     @Method({
       title: '带页码刷新',
@@ -105,7 +105,7 @@ namespace nasl.ui {
         description: '要刷新的页数',
       })
       page?: nasl.core.Integer,
-    ): void { }
+    ): void {}
 
     @Method({
       title: 'undefined',
@@ -319,7 +319,6 @@ namespace nasl.ui {
     })
     selectedValues: nasl.collection.List<V>;
 
-
     @Prop({
       group: '交互属性',
       title: '表格内可拖拽',
@@ -431,18 +430,16 @@ namespace nasl.ui {
         concept: 'AnonymousFunctionSetter',
       },
     })
-    spanMethod: (item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) =>
-      | {
-        /**
-         * @title 合并行数
-         */
-        rowspan?: nasl.core.Integer;
-        /**
-         * @title 合并列数
-         */
-        colspan?: nasl.core.Integer;
-      }
-      | ((item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => null);
+    spanMethod: (item: { row: T; column: any; rowIndex: nasl.core.Integer; columnIndex: nasl.core.Integer }) => {
+      /**
+       * @title 合并行数
+       */
+      rowspan?: nasl.core.Integer;
+      /**
+       * @title 合并列数
+       */
+      colspan?: nasl.core.Integer;
+    };
 
     @Event({
       title: '单元格点击时',
@@ -464,8 +461,7 @@ namespace nasl.ui {
 
     @Event({
       title: '分页发生变化时触发',
-      description:
-        '分页发生变化时触发',
+      description: '分页发生变化时触发',
     })
     onPageChange: (event: nasl.core.Integer) => any;
 
@@ -533,10 +529,7 @@ namespace nasl.ui {
       title: '拖拽开始时触发',
       description: '拖拽开始时触发',
     })
-    onDragStart: (event: {
-      item: T;
-      index: nasl.core.Integer;
-    }) => any;
+    onDragStart: (event: { item: T; index: nasl.core.Integer }) => any;
 
     @Event({
       title: '拖拽结束时触发',
@@ -546,7 +539,8 @@ namespace nasl.ui {
       source: {
         item: T;
         index: nasl.core.Integer;
-      }; target: {
+      };
+      target: {
         item: T;
         index: nasl.core.Integer;
       };
