@@ -7,6 +7,17 @@ function mapWidthToCols(w: number) {
   return 2;
 }
 
+function getActionsContentWidth(actionEl: HTMLElement) {
+  const { children } = actionEl;
+  if (children.length === 0) return 0;
+  let width = 0;
+  for (let i = 0; i < children.length; i++) {
+    width += (children[i] as HTMLElement).offsetWidth;
+  }
+  const actionGap = 8;
+  return width + Math.max(0, children.length - 1) * actionGap;
+}
+
 export default defineComponent({
   name: 'ElFormQueryLayout',
   setup(_, { slots }) {
@@ -28,16 +39,18 @@ export default defineComponent({
         actionsFullRow.value = false;
         return;
       }
-      const aw = actionEl.scrollWidth;
+      const aw = getActionsContentWidth(actionEl);
       const rootWidth = root.getBoundingClientRect().width;
       const gap = 16;
       const lastRight = lastItem.offsetLeft + lastItem.offsetWidth;
       const remaining = rootWidth - lastRight - gap;
       const sameRow = Math.abs(lastItem.offsetTop - actionEl.offsetTop) < 3;
-      if (sameRow && aw > remaining + 1) {
+      const needsFullRow = sameRow && aw > remaining + 1;
+      const canShareRow = aw <= remaining + 1;
+      if (actionsFullRow.value) {
+        if (canShareRow) actionsFullRow.value = false;
+      } else if (needsFullRow) {
         actionsFullRow.value = true;
-      } else {
-        actionsFullRow.value = false;
       }
     }
 
