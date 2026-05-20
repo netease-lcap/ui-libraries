@@ -110,7 +110,6 @@ export default defineComponent({
     },
     buttonSize: {
       type: String as PropType<ComponentSize>,
-      default: 'default',
     },
     customClass: {
       type: String,
