@@ -11,7 +11,7 @@ export default CardAccumulate.addPlugin({
     const provide = props.get('provide');
     const isCardWrap = _.get(inject($provide)?.value, 'isCardWrap', false);
     const shadow = props.get('shadow');
-    const shadowValue = !_.isNil(shadow) || shadow === 'auto' ? (isCardWrap ? 'never' : 'always') : shadow;
+    const shadowValue = _.isNil(shadow) || shadow === 'auto' ? (isCardWrap ? 'never' : 'always') : shadow;
     return {
       provide: Object.assign(provide, {
         isCardWrap: true,
