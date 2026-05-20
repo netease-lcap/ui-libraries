@@ -114,6 +114,7 @@ namespace nasl.ui {
       title: '行内布局',
       description: '是否使用行内布局模式',
       docDescription: '开启后，表单字段会水平排列在同一行，适用于字段较少的表单。关闭后使用垂直布局，字段会垂直排列。',
+      deprecation: '请使用「表单布局」layout="inline"属性代替',
       setter: { concept: 'SwitchSetter' },
       if: (_) => false,
     })

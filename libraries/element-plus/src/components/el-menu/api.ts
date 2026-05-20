@@ -161,7 +161,7 @@ namespace nasl.ui {
       description: '开启后，菜单会显示折叠按钮，点击后可以折叠收起菜单。仅在垂直模式下可用，适用于侧边栏导航。',
       docDescription: '开启后，菜单会显示折叠按钮，点击后可以折叠收起菜单。仅在垂直模式下可用，适用于侧边栏导航。',
       setter: { concept: 'SwitchSetter' },
-      sync: true,
+      bindHide: true,
       if: (_) => _.mode === 'vertical',
     })
     hasCollapseButton: nasl.core.Boolean = false;
