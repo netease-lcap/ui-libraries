@@ -36,7 +36,9 @@ export default defineComponent({
         `el-text--size-${props.size}`,
         `el-text--color-${props.color}`,
         `el-text--display-${props.display}`,
-        `el-text--overflow-${props.overflow ?? provide?.value?.elTextOverFlow ?? 'normal'}`,
+        `el-text--overflow-${
+          props.overflow === 'normal' || !props.overflow ? provide?.value?.elTextOverFlow : props.overflow
+        }`,
       ];
     });
 
