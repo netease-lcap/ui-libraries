@@ -24,7 +24,6 @@ export default defineComponent({
     },
     overflow: {
       type: String,
-      default: 'normal',
     },
   },
   setup(props) {
@@ -37,7 +36,7 @@ export default defineComponent({
         `el-text--size-${props.size}`,
         `el-text--color-${props.color}`,
         `el-text--display-${props.display}`,
-        `el-text--overflow-${props.overflow ?? provide?.value?.elTextOverFlow}`,
+        `el-text--overflow-${props.overflow ?? provide?.value?.elTextOverFlow ?? 'normal'}`,
       ];
     });
 
