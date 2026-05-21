@@ -37,7 +37,7 @@ export default defineComponent({
         `el-text--size-${props.size}`,
         `el-text--color-${props.color}`,
         `el-text--display-${props.display}`,
-        `el-text--overflow-${provide?.value?.elTextOverFlow ?? props.overflow}`,
+        `el-text--overflow-${props.overflow ?? provide?.value?.elTextOverFlow}`,
       ];
     });
 

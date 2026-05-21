@@ -8,6 +8,7 @@ import {
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 import { useMemo, useControllableValue, useEffect, useRender } from '@/plugins/hooks';
+import { categoryStyles } from '@/utils/dom';
 import { $deletePropsList, $router, $route } from '@/plugins/constants';
 import { ElSubMenu, ElMenuItem } from '@/components';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -146,11 +147,14 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
       });
       const Component = props.get('render');
       const hasCollapseButton = props.get('hasCollapseButton');
+
+      const styleProps = props.get('style');
+      const { style, innerStyle } = categoryStyles(styleProps);
       const CollapseButtonRender = useRender(
         (props, { attrs, slots }) => {
           return (
-            <div style={{ position: 'relative', display: 'inline-block', height: '100%' }}>
-              <Component {...props} {...attrs} v-slots={slots} />
+            <div style={{ position: 'relative', display: 'inline-block', height: '100%', ...props.style }}>
+              <Component {...props} {...attrs} style={innerStyle} v-slots={slots} />
               <div
                 class="el-menu__collapse-icon"
                 role="button"
@@ -162,8 +166,7 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
                     e.preventDefault();
                     setCollapse(!props.collapse);
                   }
-                }}
-              >
+                }}>
                 {props.collapse ? (
                   <el-icon color="rgb(134,144,156)" size="16" name="Expand" />
                 ) : (
@@ -180,6 +183,8 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
         ...renderOptions,
         collapse,
         setCollapse,
+        innerStyle,
+        style,
       };
     },
   });
