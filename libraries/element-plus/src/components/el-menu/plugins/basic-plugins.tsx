@@ -153,8 +153,11 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
       const CollapseButtonRender = useRender(
         (props, { attrs, slots }) => {
           return (
-            <div class="el-menu_wrapper" style={{ position: 'relative', display: 'block', height: '100%', ...props.style }}>
-              <Component {...props} {...attrs} style={innerStyle} v-slots={slots} />
+            <div
+              class="el-menu_wrapper"
+              style={{ position: 'relative', display: 'block', height: '100%', ...props.style }}
+            >
+              <Component {...props} {...attrs} style={props.innerStyle} v-slots={slots} />
               <div
                 class="el-menu__collapse-icon"
                 role="button"
@@ -166,7 +169,8 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
                     e.preventDefault();
                     setCollapse(!props.collapse);
                   }
-                }}>
+                }}
+              >
                 {props.collapse ? (
                   <el-icon color="rgb(134,144,156)" size="16" name="Expand" />
                 ) : (
@@ -178,13 +182,11 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
         },
         [Component],
       );
-      const renderOptions = hasCollapseButton ? { render: CollapseButtonRender } : {};
+      const renderOptions = hasCollapseButton ? { render: CollapseButtonRender, style, innerStyle } : {};
       return {
         ...renderOptions,
         collapse,
         setCollapse,
-        innerStyle,
-        style,
       };
     },
   });
