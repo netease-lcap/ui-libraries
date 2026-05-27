@@ -34,6 +34,7 @@ export {
   ElFormItemPro,
   ElFormPlus,
 };
+export { $formProvide };
 export const ElFormBasicsPlugin = basicsPlugin;
 export const ElFormItemBasicsPlugin = formItemPlugin;
 export default ElForm;

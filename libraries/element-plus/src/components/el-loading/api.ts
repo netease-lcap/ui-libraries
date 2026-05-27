@@ -4,9 +4,17 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
     ideusage: {
-      idetype: "container",
+      idetype: 'container',
       forceUpdateWhenAttributeChange: true,
-    }
+      selector: {
+        expression: 'this',
+        cssSelector: "[data-component-name='el-loading']",
+        innerCSSSelector: {
+          condition: "this.getAttribute('visible')?.value",
+          cssSelector: '.el-loading-mask',
+        },
+      },
+    },
   })
   @Component({
     title: 'Loading加载',
@@ -26,7 +34,7 @@ namespace nasl.ui {
       description: '关闭Loading',
     })
     hide(): void {}
-    
+
     constructor(options?: Partial<ElLoadingOptions>) {
       super();
     }
@@ -80,7 +88,7 @@ namespace nasl.ui {
       },
     })
     body: nasl.core.Boolean = false;
-    
+
     @Prop({
       group: '交互属性',
       title: '滚动锁定',

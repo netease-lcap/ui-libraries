@@ -163,8 +163,8 @@ export default listComponentsBasicAccumulate
       const currentPage = props.get('currentPage');
       const pagination = props.get('pagination', 'none');
 
-      const onBefore = props.get('onBefore', () => { });
-      const onSuccess = props.get('onSuccess', () => { });
+      const onBefore = props.get('onBefore', () => {});
+      const onSuccess = props.get('onSuccess', () => {});
       const pageSize = props.get('pageSize');
       const pageProps = props.get('pageProps');
       const selection = props.get('selectionMode');
@@ -238,7 +238,7 @@ export default listComponentsBasicAccumulate
       const pageProps = props.get('pageProps');
       const showTotal = props.get('showTotal');
       const showJumper = props.get('showJumper');
-      const onPageChange = props.get('onPageChange', () => { });
+      const onPageChange = props.get('onPageChange', () => {});
       const layout = `${showTotal ? 'total' : ''},prev, pager, next,${showJumper ? 'jumper' : ''},sizes,`;
       return {
         pageProps: {
@@ -256,8 +256,8 @@ export default listComponentsBasicAccumulate
       const Component = props.get('render');
       const render = useCallback((props, { attrs, slots }) => {
         return (
-          <div style={{ ...props.style, display: 'flex', flexDirection: 'column' }}>
-            <Component {...props} {...attrs} v-slots={slots} />
+          <div data-nodepath={props?.['data-nodepath']} style={{ ...props.style, display: 'flex', flexDirection: 'column', flexWrap: 'nowrap' }}>
+            <Component {..._.omit({ ...props, ...attrs }, ['data-nodepath'])} v-slots={slots} />
             {props.pagination === 'page' && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
                 <ElPagination {...props.pageProps} total={props?.pageProps?.total} />
@@ -283,7 +283,7 @@ export default listComponentsBasicAccumulate
       const className = props.get('class');
       useEffect(() => {
         if (!_.isElement(target.value) || pagination !== 'autoMore') {
-          return () => { };
+          return () => {};
         }
         const scrollHandler = () => {
           const { scrollHeight, clientHeight, scrollTop } = target.value;
@@ -316,18 +316,18 @@ export default listComponentsBasicAccumulate
       // 构建样式对象，只有当 column 大于 0 时才设置 CSS 变量
       const style = useMemo(
         () => _.assign({}, styleProps, {
-          '--row-gap': `${rowGap || 0}px`,
-          '--column-gap': `${columnGap || 0}px`,
-          '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
-        }),
+            '--row-gap': `${rowGap || 0}px`,
+            '--column-gap': `${columnGap || 0}px`,
+            '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
+          }),
         [styleProps, rowGap, columnGap, columnProps],
       );
       const className = useMemo(
         () => addClass(classNameProps, {
-          'el-list-components-plus': true,
-          isEqualWidth: equalWidth,
-          isColumn: columnProps > 0,
-        }),
+            'el-list-components-plus': true,
+            isEqualWidth: equalWidth,
+            isColumn: columnProps > 0,
+          }),
         [classNameProps, equalWidth, columnProps],
       );
       return {

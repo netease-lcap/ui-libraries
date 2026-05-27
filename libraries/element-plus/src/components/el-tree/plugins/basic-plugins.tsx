@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ElTreeV2, TreeOptionProps } from 'element-plus';
+import { ElTreeV2, TreeComponentProps } from 'element-plus';
 import {
   useRequestDataSource,
   useHandleMapField,
@@ -10,7 +10,7 @@ import { useMemo, useCallback, useControllableValue } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-const ElTreeBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElTreeOptions<any, any, any>, TreeOptionProps>();
+const ElTreeBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElTreeOptions<any, any, any>, TreeComponentProps>();
 export default ElTreeBasicAccumulate.addPlugin({
   name: 'handleDataSource',
   handle(props) {
@@ -89,6 +89,18 @@ export default ElTreeBasicAccumulate.addPlugin({
           if (showCheckbox) {
             setValue(_.get(checked, 'checkedKeys', []));
           }
+        }),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleChildrenField',
+    handle(props) {
+      const treeProps = props.get('props') || {};
+      const childrenField = props.get('childrenField') || 'children';
+      return {
+        props: _.assign({}, treeProps, {
+          childrenField,
         }),
       };
     },

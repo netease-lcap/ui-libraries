@@ -157,6 +157,14 @@ namespace nasl.ui {
 
     @Prop({
       group: '数据属性',
+      title: '子级值字段',
+      description: '集合的元素类型中，用于标识子级字段的的属性，支持自定义变更',
+      setter: { concept: 'PropertySelectSetter' },
+    })
+    childrenField: (item: T) => any;
+
+    @Prop({
+      group: '数据属性',
       title: '文本字段',
       description: '集合的元素类型中，用于显示文本的属性名称',
       setter: { concept: 'PropertySelectSetter' },
