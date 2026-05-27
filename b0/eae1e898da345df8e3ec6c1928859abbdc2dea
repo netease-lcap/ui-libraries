@@ -1,0 +1,30 @@
+libraries/pc-ui/src/theme/components/u-table-view/index.vue
+  9027e5dc09052a18 4-6,8-9,20-23,26-29,32-35,38-41,44-47,54-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8-ntes.7",
+  "base_commit_sha": "b0eae1e898da345df8e3ec6c1928859abbdc2dea",
+  "prompts": {
+    "9027e5dc09052a18": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "106123dc-cdbb-4b2a-89d4-72fb3494c3c3",
+        "model": "composer-2.5"
+      },
+      "human_author": "刘宇阳",
+      "messages": [],
+      "total_additions": 39,
+      "total_deletions": 50,
+      "accepted_lines": 27,
+      "overriden_lines": 0,
+      "per_file_stats": {
+        "libraries/pc-ui/src/theme/components/u-table-view/index.vue": {
+          "additions": 39,
+          "deletions": 50,
+          "accepted_lines": 27
+        }
+      }
+    }
+  }
+}
