@@ -173,7 +173,6 @@ export const Example1 = {
 ref="mytable"
 row-key="date"
 :dataSource="tableData"
-border
 style="height:500px"
 min-height="500px"
 v-model:currentPage="currentPage"
@@ -186,7 +185,6 @@ order="descending"
 pageSizes="[5,10,20,50]"
 :defaultPageSize="10"
 :pagination="false"
-:stripe="true"
 >
 
 

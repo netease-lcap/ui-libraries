@@ -630,6 +630,50 @@ describe('el-table plugins', () => {
 
         expect(result.sortable).toBe(false);
       });
+
+      it('可排序列同时存在 width 和 minWidth 时仅增加 minWidth', () => {
+        const props = {
+          sortable: 'custom',
+          width: '200px',
+          minWidth: '120px',
+          [$deletePropsList]: [],
+        };
+
+        const { currentValue } = renderHook(plugin, props);
+        const result = currentValue.value;
+
+        expect(result.sortable).toBe('custom');
+        expect(result.width).toBeUndefined();
+        expect(result.minWidth).toBe('140px');
+      });
+
+      it('可排序列仅有 width 时应增加 width', () => {
+        const props = {
+          sortable: 'custom',
+          width: '200px',
+          [$deletePropsList]: [],
+        };
+
+        const { currentValue } = renderHook(plugin, props);
+        const result = currentValue.value;
+
+        expect(result.width).toBe('220px');
+        expect(result.minWidth).toBeUndefined();
+      });
+
+      it('可排序列仅有 minWidth 时应增加 minWidth', () => {
+        const props = {
+          sortable: 'custom',
+          minWidth: '120px',
+          [$deletePropsList]: [],
+        };
+
+        const { currentValue } = renderHook(plugin, props);
+        const result = currentValue.value;
+
+        expect(result.width).toBeUndefined();
+        expect(result.minWidth).toBe('140px');
+      });
     });
 
     describe('handleTypeIndex 插件功能测试', () => {

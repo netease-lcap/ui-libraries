@@ -2,21 +2,9 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-shadow */
-import {
-  ref,
-  Ref,
-  watch,
-  provide,
-  inject,
-  defineComponent,
-  unref,
-  getCurrentInstance,
-  onBeforeUnmount,
-  onMounted,
-} from 'vue';
+import { ref, Ref, watch, provide, inject, defineComponent, unref, getCurrentInstance, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-// import create from 'zustand-vue';
 import { createStore } from 'zustand/vanilla';
 
 import { Map as imMap, fromJS } from 'immutable';
@@ -80,7 +68,7 @@ export function registerComponent<T>(Component: any, options: any): any {
       let Render = Component;
       const exposeRef = ref({}) as Ref<any>;
       const injectRef = inject($provide) ?? (ref({}) as Ref<any>);
-      const provideRef = ref({}) as Ref<any>;
+      const provideRef = ref({ elTextOverFlow: 'normal' }) as Ref<any>;
       Object.assign(provideRef.value, (injectRef as any)?.value || {});
       const router = useRouter?.();
       const route = useRoute?.();
@@ -170,7 +158,7 @@ export function registerComponent<T>(Component: any, options: any): any {
       watch(
         injectRef,
         (value) => {
-          Object.assign(provideRef.value, value);
+          _.defaults(provideRef.value, value);
         },
         { immediate: true, deep: true },
       );

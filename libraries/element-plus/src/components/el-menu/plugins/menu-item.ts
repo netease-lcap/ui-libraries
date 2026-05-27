@@ -2,8 +2,7 @@ import _ from 'lodash';
 import { MenuItemProps } from 'element-plus';
 import { $router } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-import itemPlugin from './item-plugin';
-import { useControllableValue } from '@/plugins/hooks';
+import itemPlugin from './group-item-plugin';
 
 const MenuItemPluginAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElMenuItemOptions,
@@ -30,9 +29,9 @@ export default MenuItemPluginAccumulate.addAccumulate(itemPlugin)
             window.location.href = params.externalUrl;
           },
         ],
-        [_.matches({ target: '_blank' }), _.constant(() => { })],
+        [_.matches({ target: '_blank' }), _.constant(() => {})],
         [_.matches({ isDestination: true }), (params) => () => router.push(params.destination)],
-        [_.stubTrue, _.constant(() => { })],
+        [_.stubTrue, _.constant(() => {})],
       ]);
       const isHref = !_.isNil(link) || !_.isNil(href);
       const externalUrl = link || href;
@@ -53,15 +52,14 @@ export default MenuItemPluginAccumulate.addAccumulate(itemPlugin)
       };
     },
   })
-  .addPlugin({
-    name: 'handleCollapse',
+ .addPlugin({
+    name: 'handleProvide',
     handle(props) {
-      const [collapse] = useControllableValue(props, {
-        defaultValuePropName: 'defaultCollapse',
-        valuePropName: 'collapse',
-      });
+      const provide = props.get('provide');
       return {
-        collapse,
+        provide: Object.assign(provide, {
+          elTextOverFlow: 'ellipsis',
+        }),
       };
     },
   });

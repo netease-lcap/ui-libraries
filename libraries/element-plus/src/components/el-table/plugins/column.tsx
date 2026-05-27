@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { ref, cloneVNode, nextTick } from 'vue';
 import _ from 'lodash';
 import { TableColumnCtx } from 'element-plus';
@@ -83,7 +84,7 @@ export default ColumnPluginAccumulate.addPlugin({
     const width = isFixedWidth ? { width: widthProps } : { minWidth: widthProps };
     const minWidth = props.get('minWidth') || _.get(props.get('style'), 'min-width', '');
     const widthObj = _.mergeWith(width, { minWidth }, (obj, src) => src || obj);
-    const align = props.get('align') || _.get(props.get('style'), 'text-align', 'left');
+    const align = props.get('align') || _.get(props.get('style'), 'textAlign', 'left');
     return {
       align,
       ...widthObj,
@@ -115,8 +116,18 @@ export default ColumnPluginAccumulate.addPlugin({
     handle(props) {
       const sortableProps = props.get('sortable');
       const sortable = useMemo(() => (sortableProps === 'custom' ? 'custom' : false), [sortableProps]);
+      const width = props.get('width');
+      const minWidth = props.get('minWidth');
+      const isSortable = sortableProps === 'custom';
+      const widthPatch = isSortable && (minWidth || width)
+          ? minWidth
+            ? { minWidth: `${parseInt(minWidth, 10) + 20}px` }
+            : { width: `${parseInt(width, 10) + 20}px` }
+          : {};
+
       return {
         sortable,
+        ...widthPatch,
       };
     },
   })

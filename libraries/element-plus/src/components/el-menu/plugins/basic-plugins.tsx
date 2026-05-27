@@ -7,7 +7,8 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
-import { useMemo, useControllableValue, useEffect } from '@/plugins/hooks';
+import { useMemo, useControllableValue, useEffect, useRender } from '@/plugins/hooks';
+import { categoryStyles } from '@/utils/dom';
 import { $deletePropsList, $router, $route } from '@/plugins/constants';
 import { ElSubMenu, ElMenuItem } from '@/components';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -58,8 +59,8 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-          default: () => _.map(TreeData, renderMenuItem),
-        };
+            default: () => _.map(TreeData, renderMenuItem),
+          };
 
       return {
         [$deletePropsList]: deletePropsList,
@@ -119,6 +120,73 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
           ...style,
           ...(style?.color ? { '--el-menu-text-color': style?.color } : {}),
         },
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleStyle',
+    handle(props) {
+      const style = props.get('style', {});
+      const backgroundColor = _.get(style, 'backgroundColor');
+      const color = _.get(style, 'color');
+      const textColor = props.get('textColor');
+      const backgroundColorProps = props.get('backgroundColor');
+      return {
+        backgroundColor: backgroundColorProps || backgroundColor,
+        textColor: textColor || color,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleCollapseModel',
+    handle: (props) => {
+      const [collapse, setCollapse] = useControllableValue(props, {
+        defaultValuePropName: 'defaultCollapse',
+        valuePropName: 'collapse',
+        defaultValue: false,
+      });
+      const Component = props.get('render');
+      const hasCollapseButton = props.get('hasCollapseButton');
+
+      const styleProps = props.get('style');
+      const { style, innerStyle } = categoryStyles(styleProps);
+      const CollapseButtonRender = useRender(
+        (props, { attrs, slots }) => {
+          return (
+            <div
+              class="el-menu_wrapper"
+              style={{ position: 'relative', display: 'block', height: '100%', ...props.style }}
+            >
+              <Component {...props} {...attrs} style={props.innerStyle} v-slots={slots} />
+              <div
+                class="el-menu__collapse-icon"
+                role="button"
+                tabindex={0}
+                aria-label={props.collapse ? '展开菜单' : '折叠菜单'}
+                onClick={() => setCollapse(!props.collapse)}
+                onKeydown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setCollapse(!props.collapse);
+                  }
+                }}
+              >
+                {props.collapse ? (
+                  <el-icon color="rgb(134,144,156)" size="16" name="Expand" />
+                ) : (
+                  <el-icon color="rgb(134,144,156)" size="16" name="Fold" />
+                )}
+              </div>
+            </div>
+          );
+        },
+        [Component],
+      );
+      const renderOptions = hasCollapseButton ? { render: CollapseButtonRender, style, innerStyle } : {};
+      return {
+        ...renderOptions,
+        collapse,
+        setCollapse,
       };
     },
   });

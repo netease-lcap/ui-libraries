@@ -1,5 +1,7 @@
-.el-form-item .el-slider {
-  width: 240px
+/* 横向滑块宽度：EP theme 未提供官方宽度变量，采用与 EP 一致的 --el-slider-* 命名便于主题覆盖 */
+.el-slider:not(.is-vertical) {
+  --el-slider-width: 240px;
+  width: var(--el-slider-width);
 }
 
 .el-slider.is-vertical{

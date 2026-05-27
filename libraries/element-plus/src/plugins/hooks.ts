@@ -1,7 +1,8 @@
 import _ from 'lodash';
-import { onMounted, onUnmounted, ref, getCurrentInstance, type Ref } from 'vue';
+import { onMounted, onUnmounted, ref, getCurrentInstance, type Ref, inject, watch } from 'vue';
 import { PluginBase, RenderFunctionWithInheritAttrs } from '@/types';
 import { componentLog } from '@/utils/curry';
+import { $provide } from '@/plugins/constants';
 // import { RenderFunctionWithInheritAttrs } from '@/types/pluginBase';
 
 const searchParamsStr = window.location.search; // 结果："?name=Alice&age=25&hobby=reading&hobby=hiking"
@@ -161,7 +162,7 @@ export function useEffect(callBack: (...args: any[]) => (() => void) | void, dep
     hook = {
       next: null as any,
       dep,
-      result: () => { },
+      result: () => {},
       callBack,
     };
     hook.next = hook;
@@ -219,7 +220,7 @@ export function useMemo<T>(callBack: () => T, dep: any[]): T {
   }
   return hook.result;
 }
-export function useCallback<T extends(...args: any[]) => any>(callBack: T, dep: any[]): T {
+export function useCallback<T extends (...args: any[]) => any>(callBack: T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook: EffectHook;
@@ -270,13 +271,13 @@ export function useControllableValue<T = any>(
   props: any,
   options: Options = {},
 ): [
-    T,
-    (...args: any[]) => void,
-    {
-      [key: string]: any;
-    },
-    boolean,
-  ] {
+  T,
+  (...args: any[]) => void,
+  {
+    [key: string]: any;
+  },
+  boolean,
+] {
   const instance = useMemo(() => getCurrentInstance(), []);
   const { vnode } = instance || { vnode: { props: {} } };
   const emit = props.get('emit');
@@ -286,8 +287,8 @@ export function useControllableValue<T = any>(
     defaultValuePropName = 'defaultValue',
     valuePropName = 'modelValue',
     trigger = `onUpdate:${valuePropName}`,
-    onChange: onChangeProps = () => { },
-    onValueEffect = () => { },
+    onChange: onChangeProps = () => {},
+    onValueEffect = () => {},
   } = options || {};
   const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
   const priorValue = useRef({});
@@ -295,7 +296,7 @@ export function useControllableValue<T = any>(
   const defaultValueProps = props.get(defaultValuePropName);
   const unControlledInitialValue = defaultValueProps ?? defaultValue;
   const [stateValue, setStateValue] = useState<T>(unControlledInitialValue);
-  const triggerProps = props.get(trigger) || (() => { });
+  const triggerProps = props.get(trigger) || (() => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
   useEffect(() => {
     if (!_.isEqual(priorValue.value, propsValue) && isControlled) {
@@ -331,6 +332,13 @@ export function useControllableValue<T = any>(
   ];
 }
 
+// export function useInject(key: string) {
+//   const injectValue = inject($provide);
+//   const injectRef = ref(injectValue[key]);
+//   watch(injectValue, (value: any) => {
+//     console.log(value, 'value');
+//   });
+// }
 const hookMap = {
   useState,
   useRef,
@@ -352,13 +360,13 @@ export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap)
     const storeKey = _.uniqueId('storeKey');
     const fiber: Fiber = isMount
       ? {
-        workInProgressState: null,
-        workInProgressEffect: null,
-        updateQueen,
-        getState,
-        setValue,
-        storeKey,
-      }
+          workInProgressState: null,
+          workInProgressEffect: null,
+          updateQueen,
+          getState,
+          setValue,
+          storeKey,
+        }
       : fiberMap.get(handleFn);
     fiberNode.setCurrentFiber(fiber, isMount);
     const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookMap)), ImmutableState, ImmutableProps);
