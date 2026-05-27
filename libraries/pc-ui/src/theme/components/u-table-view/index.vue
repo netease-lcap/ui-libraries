@@ -1,13 +1,12 @@
 <!-- 前端分页 -->
 <template>
   <u-table-view :data-source="data" pageable :page-size="10" show-sizer stripe>
-    <u-table-view-column title="用户名" field="name" width="15%"></u-table-view-column>
-    <u-table-view-column title="手机号码" field="phone" width="20%"></u-table-view-column>
-    <u-table-view-column title="地址" field="address"></u-table-view-column>
+    <u-table-view-column title="列1" field="col1" width="15%"></u-table-view-column>
+    <u-table-view-column title="列2" field="col2" width="20%"></u-table-view-column>
+    <u-table-view-column title="列3" field="col3" width="20%"></u-table-view-column>
     <u-table-view-column
-      title="最近登录时间"
-      field="loginTime"
-      formatter="placeholder | date"
+      title="列4"
+      field="col4"
       width="20%"></u-table-view-column>
   </u-table-view>
 </template>
@@ -18,53 +17,42 @@ const mockRequest = (data, timeout = 300) => new Promise((res, rej) => setTimeou
 const mockData = (() => {
   const baseData = [
     {
-      name: '张三',
-      phone: '186****7895',
-      email: 'zhangsan@163.com',
-      address: '浙江省杭州市滨江区****',
-      createdTime: 1464421931000,
-      loginTime: 1527515531000,
+      col1: '内容 A',
+      col2: '内容 B',
+      col3: '内容 C',
+      col4: 1464421931000,
     },
     {
-      name: '小明',
-      phone: '137****0283',
-      email: 'xiaoming@163.com',
-      address: '浙江省杭州市滨江区****',
-      createdTime: 1520864676000,
-      loginTime: 1552400676000,
+      col1: '内容 D',
+      col2: '内容 E',
+      col3: '内容 F',
+      col4: 1520864676000,
     },
     {
-      name: '李四',
-      phone: '188****7809',
-      email: 'lisi@163.com',
-      address: '浙江省杭州市滨江区****',
-      createdTime: 1494488730000,
-      loginTime: 1558165530000,
+      col1: '内容 G',
+      col2: '内容 H',
+      col3: '内容 I',
+      col4: 1494488730000,
     },
     {
-      name: '李华',
-      phone: '187****1214',
-      email: 'lihua@163.com',
-      address: '浙江省杭州市滨江区****',
-      createdTime: 1476073921000,
-      loginTime: 1544428081000,
+      col1: '内容 J',
+      col2: '内容 K',
+      col3: '内容 L',
+      col4: 1476073921000,
     },
     {
-      name: '王五',
-      phone: '135****0020',
-      email: 'wangwu@163.com',
-      address: '浙江省杭州市滨江区****',
-      createdTime: 1468614726000,
-      loginTime: 1531675926000,
+      col1: '内容 M',
+      col2: '内容 N',
+      col3: '内容 O',
+      col4: 1468614726000,
     },
   ];
 
   const result = [];
   for (let i = 0; i < 75; i++) {
     const item = Object.assign({}, baseData[i % 5]);
-    item.name += '-' + ((Math.random() * 20) >> 0);
-    item.createdTime += i * 1000 * 3600 * 24;
-    item.loginTime += i * 1000 * 3600 * 24;
+    item.col1 += '-' + ((Math.random() * 20) >> 0);
+    item.col4 += i * 1000 * 3600 * 24;
     result.push(item);
   }
 
