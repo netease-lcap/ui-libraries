@@ -91,7 +91,8 @@ export default defineComponent({
             '--el-form-query-cols': queryColumns.value,
           } as Record<string, string | number>
         }
-        data-query-cols={queryColumns.value}>
+        data-query-cols={queryColumns.value}
+      >
         <div class="el-form-query__fields">{slots.default?.()}</div>
         <div class={['el-form-query__actions', actionsFullRow.value ? 'el-form-query__actions--full-row' : '']}>
           {slots.actions?.()}
