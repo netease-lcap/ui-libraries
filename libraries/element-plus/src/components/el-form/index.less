@@ -38,8 +38,8 @@
       margin-left:  0!important;
     }
     .el-form-item__content {
-      flex: 0 1 240px;
-      min-width: 180px;
+      flex: 0 1 var(--el-form-content-width, 240px);
+      min-width: var(--el-form-content-min-width, 180px);
       width: auto;
 
       /* 仅对常用录入控件拉满 content；单选/多选组等非列表组件不在此列 */
