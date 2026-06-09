@@ -187,6 +187,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      childAccept:false,
       forceUpdateWhenAttributeChange: true,
       additionalAttribute: {
         ':isRequired': {

@@ -556,6 +556,7 @@ namespace nasl.ui {
       idetype: 'container',
       ignoreProperty: ['rules'],
       bindStyleSelector: '.__cw-form-compose-input',
+      childAccept:false,
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },

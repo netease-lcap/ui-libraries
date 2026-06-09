@@ -367,6 +367,7 @@ namespace nasl.ui {
         },
       },
       forceRefresh: 'parent',
+      childAccept:false,
       forceUpdateWhenAttributeChange: true,
       namedSlotOmitWrapper: ['label'],
     },
