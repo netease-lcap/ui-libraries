@@ -87,3 +87,7 @@ body{
 .el-text.el-text--display-block {
   display: block;
 }
+
+.el-text.el-text--display-inline {
+  display: inline-block;
+}

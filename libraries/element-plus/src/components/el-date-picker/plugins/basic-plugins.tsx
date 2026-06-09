@@ -3,7 +3,7 @@ import _ from 'lodash';
 import dayjs from 'dayjs';
 import { DatePickerProps } from 'element-plus';
 import { $deletePropsList } from '@/plugins/constants';
-import { useControllableValue, useMemo, useSyncState } from '@/plugins/hooks';
+import { useControllableValue, useMemo, useSyncState, useEffect } from '@/plugins/hooks';
 import { getIsPreview, getRender, getFormatDateOrTime } from '@/plugins/common/preview';
 import { ElText } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -91,9 +91,14 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
         const effectiveTime = isUnEffectiveValue
           ? []
           : _.map(value, (item) => (valueFormat ? dayjs(item).format(valueFormat) : dayjs(item).toJSON()));
+        _.attempt(setValue, effectiveTime);
         _.attempt(setStartValue, effectiveTime[0]);
         _.attempt(setEndValue, effectiveTime[1]);
       };
+      useEffect(() => {
+        if (!isRange) return;
+        _.attempt(onChange, [startValue, endValue]);
+      }, []);
 
       const timeValue = useMemo(
         () => getTimeValue({
@@ -109,7 +114,7 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const rangeResult = {
         modelValue: timeValue,
         'onUpdate:modelValue': _.wrap(setValue, (fn, time: any) => {
-          _.attempt(fn, time);
+          // _.attempt(fn, time);
           _.attempt(onChange, time);
         }),
       };

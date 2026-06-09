@@ -211,6 +211,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
+      childAccept:false,
       // additionalAttribute: {
       //   prefixIconName: '"Clock"',
       //   clearIconName: '"CircleClose"',

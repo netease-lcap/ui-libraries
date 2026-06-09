@@ -459,6 +459,7 @@ namespace nasl.ui {
       translateBindingProperty: ['hasTip'],
       forceRefresh: 'parent',
       forceUpdateWhenAttributeChange: true,
+      childAccept:false,
       additionalAttribute: {
         ':isRequired': {
           condition:

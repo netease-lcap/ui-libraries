@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { ref, cloneVNode, nextTick } from 'vue';
 import _ from 'lodash';
 import { TableColumnCtx } from 'element-plus';
@@ -115,8 +116,18 @@ export default ColumnPluginAccumulate.addPlugin({
     handle(props) {
       const sortableProps = props.get('sortable');
       const sortable = useMemo(() => (sortableProps === 'custom' ? 'custom' : false), [sortableProps]);
+      const width = props.get('width');
+      const minWidth = props.get('minWidth');
+      const isSortable = sortableProps === 'custom';
+      const widthPatch = isSortable && (minWidth || width)
+          ? minWidth
+            ? { minWidth: `${parseInt(minWidth, 10) + 20}px` }
+            : { width: `${parseInt(width, 10) + 20}px` }
+          : {};
+
       return {
         sortable,
+        ...widthPatch,
       };
     },
   })

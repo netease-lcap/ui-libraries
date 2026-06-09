@@ -134,6 +134,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
+      childAccept:false,
       ignoreProperty: ['rules'],
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
