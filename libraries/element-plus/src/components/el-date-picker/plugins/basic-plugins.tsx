@@ -74,8 +74,8 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const isRange = props.get('range');
       const startValue = props.get('startValue') as string;
       const endValue = props.get('endValue') as string;
-      const setStartValue = props.get('onUpdate:startValue') ?? (() => {});
-      const setEndValue = props.get('onUpdate:endValue') ?? (() => {});
+      const setStartValue = props.get('onUpdate:startValue') ?? (() => { });
+      const setEndValue = props.get('onUpdate:endValue') ?? (() => { });
       const isControlledTime = props.has('startValue') && props.has('endValue');
       const [value, setValue] = useControllableValue(props);
       const isEffectiveTime = isControlledTime
@@ -97,18 +97,18 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       };
       useEffect(() => {
         if (!isRange) return;
-        _.attempt(onChange, [startValue, endValue]);
+        _.attempt(onChange, [startValue, endValue].filter((el) => !_.isNil(el)));
       }, []);
 
       const timeValue = useMemo(
         () => getTimeValue({
-            isEffectiveTime,
-            isNilTime,
-            isControlledTime,
-            startValue,
-            endValue,
-            value,
-          }),
+          isEffectiveTime,
+          isNilTime,
+          isControlledTime,
+          startValue,
+          endValue,
+          value,
+        }),
         [isEffectiveTime, isNilTime, isControlledTime, startValue, endValue, value],
       );
       const rangeResult = {
