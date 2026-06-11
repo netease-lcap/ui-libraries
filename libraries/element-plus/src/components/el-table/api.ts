@@ -412,7 +412,7 @@ namespace nasl.ui {
         concept: 'AnonymousFunctionSetter',
       },
     })
-    rowStyle: (data: { row: T; index: nasl.core.Integer }) => {
+    rowStyle: (data: { row: T; rowIndex: nasl.core.Integer }) => {
       /**
        * @title 表格行背景颜色
        */
