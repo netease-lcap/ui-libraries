@@ -48,7 +48,7 @@ namespace nasl.ui {
       title: '重新加载',
       description: '清除缓存，重新加载',
     })
-    reload(): void { }
+    reload(): void {}
 
     constructor(options?: Partial<ElMenuOptions<T, V>>) {
       super();
@@ -63,7 +63,7 @@ namespace nasl.ui {
         title: '子菜单唯一标识',
       })
       index: nasl.core.String,
-    ): void { }
+    ): void {}
 
     @Method({
       title: '收起',
@@ -74,7 +74,7 @@ namespace nasl.ui {
         title: '子菜单唯一标识',
       })
       index: nasl.core.String,
-    ): void { }
+    ): void {}
   }
 
   export class ElMenuOptions<T, V> extends ViewComponentOptions {
@@ -131,7 +131,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '菜单模式',
       description: '选择菜单的布局模式',
-      docDescription: '控制菜单的布局方向。水平：菜单项水平排列，适用于顶部导航；垂直：菜单项垂直排列，适用于侧边导航。',
+      docDescription:
+        '控制菜单的布局方向。水平：菜单项水平排列，适用于顶部导航；垂直：菜单项垂直排列，适用于侧边导航。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '水平' }, { title: '垂直' }],
@@ -217,7 +218,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '触发方式',
       description: '子菜单展开的触发方式',
-      docDescription: '控制子菜单展开的触发方式。鼠标悬停：鼠标悬停时展开；鼠标点击：鼠标点击时展开。仅在水平模式下有效。',
+      docDescription:
+        '控制子菜单展开的触发方式。鼠标悬停：鼠标悬停时展开；鼠标点击：鼠标点击时展开。仅在水平模式下有效。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '鼠标悬停时' }, { title: '鼠标点击时' }],
@@ -257,7 +259,7 @@ namespace nasl.ui {
       title: '菜单激活时',
       description: '菜单激活回调',
     })
-    onSelect: (event: { index: nasl.core.String; oldIndex: nasl.core.String }) => void;
+    onSelect: (index: nasl.core.String) => void;
 
     @Event({
       title: '子菜单展开时',
@@ -424,8 +426,6 @@ namespace nasl.ui {
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
     }) => any;
-
-
 
     @Slot({
       title: '默认',
@@ -753,8 +753,6 @@ namespace nasl.ui {
       screenY: nasl.core.Integer;
       which: nasl.core.Integer;
     }) => any;
-
-
 
     @Slot({
       title: '菜单项内容',
