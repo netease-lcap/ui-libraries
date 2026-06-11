@@ -189,4 +189,15 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
         setCollapse,
       };
     },
+  })
+  .addPlugin({
+    name: 'handleOnSelect',
+    handle: (props) => {
+      const onSelect = props.get('onSelect');
+      return {
+        onSelect: (index: string, indexPath) => {
+          onSelect({ index, oldIndex: indexPath });
+        },
+      };
+    },
   });
