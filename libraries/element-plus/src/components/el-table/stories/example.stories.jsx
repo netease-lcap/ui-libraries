@@ -27,7 +27,7 @@ export const Example1 = {
     setup() {
       const activeName = ref('first');
       const tableData = async (page) => {
-        console.log(page,'===');
+        console.log(page, '===');
         const arr = [
           {
             date: '2016-05-03',
@@ -147,7 +147,7 @@ export const Example1 = {
       });
       setTimeout(() => {
         console.log('table data change');
-        console.log(mytable.clearSelection, 'tableData2',mytable.value);
+        console.log(mytable.clearSelection, 'tableData2', mytable.value);
       }, 1000);
       const logCellClick = (...el) => {
         console.log(tableData2.value, 'logCellClick');
@@ -222,14 +222,14 @@ export const Example2 = {
         ) {
           initialData.push({
             index: i + 1,
-            applicant: ['贾明', '张三', '王芳'][i % 3],
+            applicant: ['贾明', '贾明', '王芳'][i % 3],
             status: i % 3,
             channel: ['电子签署', '纸质签署', '纸质签署'][i % 3],
             email: ['w.cezkdudy@lhll.au', 'r.nmgw@peurezgn.sl', 'p.cumx@rampblpa.ru'][i % 3],
             matters: ['宣传物料制作费用', 'algolia 服务报销', '相关周边制作费', '激励奖品快递费'][i % 4],
             time: [2, 3, 1, 4][i % 4],
-            createTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
-            applyTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
+            createTime: ['2022-01-01', '2022-01-01', '2022-03-01', '2022-23-01', '2022-05-01'][i % 4],
+            applyTime: ['2022-01-01', '2022-01-01', '2022-03-01', '2022-03-01', '2022-05-01'][i % 4],
             modifyTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
             confirmTime: ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'][i % 4],
           });
@@ -278,17 +278,18 @@ v-model:selectedRowKeys="selectedRowKeys"
 @sort-change="onSortChange"
 dragSort="row"
 :selection="true"
-  bordered
+  :border="true"
   hover
   stripe
   showHeader
   size=small"
 >
-  <el-table-column prop="applicant" label="申请人" width="100" fixedPosition="left"></el-table-column>
+  <el-table-column :autoRowSpan="true" prop="applicant" label="申请人" width="100" fixedPosition="left"/>
+
   <el-table-column prop="status" label="申请状态" width="150" sorter></el-table-column>
   <el-table-column prop="channel" label="签署方式" width="200"></el-table-column>
   <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
-  <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
+  <el-table-column  :autoRowSpan="true"  prop="createTime" label="创建时间" width="160"></el-table-column>
   <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
   <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
   <el-table-column prop="confirmTime" label="确认时间" width="160"></el-table-column>
