@@ -150,8 +150,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/builder
       '@nasl/types':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.2.2
+        version: 0.2.2
       '@storybook/addon-essentials':
         specifier: ^8.4.6
         version: 8.4.7(@types/react@18.2.45)(storybook@8.4.7(prettier@3.6.2))
@@ -3407,6 +3407,9 @@ packages:
 
   '@nasl/types@0.2.0':
     resolution: {integrity: sha512-DlNgEfQ3PwoDu5uUO/7pjBe16pNXVf+ekHR4SFEr1PZf4hLKGezvxzqXb9UwxD7p928EOdQzJvqSX2Uiplx1BA==}
+
+  '@nasl/types@0.2.2':
+    resolution: {integrity: sha512-9V1mS4mNn9ObYOlQFz66auTP7w2n9MwmMxY1rvSpNtCvJzjzRPFz19dOX8vLKsw0cdlgj3pOnZuJAm8tmm6IGw==}
 
   '@ndelangen/get-tarball@3.0.9':
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==}
@@ -11942,8 +11945,8 @@ packages:
   vue-component-type-helpers@2.1.10:
     resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
 
-  vue-component-type-helpers@3.2.6:
-    resolution: {integrity: sha512-O02tnvIfOQVmnvoWwuSydwRoHjZVt8UEBR+2p4rT35p8GAy5VTlWP8o5qXfJR/GWCN0nVZoYWsVUvx2jwgdBmQ==}
+  vue-component-type-helpers@3.3.1:
+    resolution: {integrity: sha512-pu58kqxmVyEH6VfNYW1UyEfR3XAnJ27ZXT3yzXxxpjLxVzAbyC35Zk/nm/RMs7ijWnJNSd9fWkeex2OhUsx3MA==}
 
   vue-cropper@0.5.11:
     resolution: {integrity: sha512-UeA3qL2BLCTGkOEAxEsxSNFO+qLYAn6YRHv4oS32cP9lMhF1vFmnAf/z+ZamtR0/Fh3sbZeZUCLVR2Ol2/dpTQ==}
@@ -14710,6 +14713,8 @@ snapshots:
 
   '@nasl/types@0.2.0': {}
 
+  '@nasl/types@0.2.2': {}
+
   '@ndelangen/get-tarball@3.0.9':
     dependencies:
       gunzip-maybe: 1.4.2
@@ -16166,7 +16171,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.13(typescript@5.6.3)
-      vue-component-type-helpers: 3.2.6
+      vue-component-type-helpers: 3.3.1
 
   '@storybook/vue3@8.4.7(storybook@8.4.7(prettier@3.6.2))(vue@3.5.13(typescript@5.9.3))':
     dependencies:
@@ -16180,7 +16185,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.13(typescript@5.9.3)
-      vue-component-type-helpers: 3.2.6
+      vue-component-type-helpers: 3.3.1
 
   '@storybook/vue@7.6.17(@babel/core@7.28.0)(css-loader@6.9.0(webpack@5.89.0(esbuild@0.18.20)))(vue@2.6.12)':
     dependencies:
@@ -25143,7 +25148,7 @@ snapshots:
 
   vue-component-type-helpers@2.1.10: {}
 
-  vue-component-type-helpers@3.2.6: {}
+  vue-component-type-helpers@3.3.1: {}
 
   vue-cropper@0.5.11: {}
 

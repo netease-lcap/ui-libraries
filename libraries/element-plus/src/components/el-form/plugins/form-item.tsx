@@ -19,7 +19,7 @@ type FormItemProvide = {
   };
 };
 
-export function withFormItem(Component, name) {
+export function withFormItem(Component, name, sourceTagName?: string) {
   return {
     name,
     Component,
@@ -61,7 +61,7 @@ export function withFormItem(Component, name) {
           const nodePath = attrs['data-nodepath'];
           const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
           elem?.setAttribute('data-has-mutation', 'true');
-          elem?.setAttribute('data-element-tag', name.replace('el-form-', 'el-'));
+          elem?.setAttribute('data-element-tag', sourceTagName ?? name.replace('el-form-', 'el-'));
         }
       });
       watch(

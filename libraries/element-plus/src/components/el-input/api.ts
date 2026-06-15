@@ -461,6 +461,8 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      // structured: true,
+      childAccept:false,
       bindStyleSelector: '.__cw-form-compose-input',
       ignoreProperty: ['rules'],
       slotWrapperInlineStyle: {

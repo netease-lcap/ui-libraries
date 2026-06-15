@@ -383,6 +383,7 @@ namespace nasl.ui {
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
       forceUpdateWhenAttributeChange: true,
+      childAccept:false,
       additionalAttribute: {
         ':isRequired': {
           condition:

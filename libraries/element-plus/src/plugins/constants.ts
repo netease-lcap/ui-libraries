@@ -3,7 +3,7 @@ export const $dataSourceField = Symbol('dataSourceField');
 export const $labelKey = Symbol('labelKey');
 export const $valueKey = Symbol('valueKey');
 
-export const $provide = Symbol('provide');
+export const $provide = '__LCAP_UI_PROVIDE__';
 export const $inject = Symbol('inject');
 export const $formTagName = Symbol('formTagName');
 export const $tagName = Symbol('tagName');

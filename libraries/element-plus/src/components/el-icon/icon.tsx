@@ -5,6 +5,8 @@ import _ from 'lodash';
 
 export interface ElIconProps {
   name: string;
+  size: string | number;
+  color: string;
 }
 
 export const ElIconPropsDefine = {
@@ -88,7 +90,7 @@ export default defineComponent({
         }
       }
 
-      return <ElIconPlus>{iconComponent ? h(iconComponent, props) : null}</ElIconPlus>;
+      return <ElIconPlus color={props.color} size={props.size}>{iconComponent ? h(iconComponent, props) : null}</ElIconPlus>;
     }
     return () => {
       return !props.name ? null : renderChildren();

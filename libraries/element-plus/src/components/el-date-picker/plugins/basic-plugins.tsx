@@ -3,7 +3,7 @@ import _ from 'lodash';
 import dayjs from 'dayjs';
 import { DatePickerProps } from 'element-plus';
 import { $deletePropsList } from '@/plugins/constants';
-import { useControllableValue, useMemo, useSyncState } from '@/plugins/hooks';
+import { useControllableValue, useMemo, useSyncState, useEffect } from '@/plugins/hooks';
 import { getIsPreview, getRender, getFormatDateOrTime } from '@/plugins/common/preview';
 import { ElText } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -12,7 +12,7 @@ import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleIcon } from '@/plugins/common/icon';
 
 const DatePickerBasicAccumulate = new PluginAccumulateTypes<
-  nasl.ui.ElDatePickerOptions<any, any, any, any, any> & {
+  nasl.ui.ElDatePickerOptions<any, any, any, any, any, any> & {
     'onUpdate:startValue':(value: string) => void;
     'onUpdate:endValue': (value: string) => void;
   },
@@ -74,8 +74,8 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
       const isRange = props.get('range');
       const startValue = props.get('startValue') as string;
       const endValue = props.get('endValue') as string;
-      const setStartValue = props.get('onUpdate:startValue') ?? (() => {});
-      const setEndValue = props.get('onUpdate:endValue') ?? (() => {});
+      const setStartValue = props.get('onUpdate:startValue') ?? (() => { });
+      const setEndValue = props.get('onUpdate:endValue') ?? (() => { });
       const isControlledTime = props.has('startValue') && props.has('endValue');
       const [value, setValue] = useControllableValue(props);
       const isEffectiveTime = isControlledTime
@@ -91,25 +91,30 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
         const effectiveTime = isUnEffectiveValue
           ? []
           : _.map(value, (item) => (valueFormat ? dayjs(item).format(valueFormat) : dayjs(item).toJSON()));
+        _.attempt(setValue, effectiveTime);
         _.attempt(setStartValue, effectiveTime[0]);
         _.attempt(setEndValue, effectiveTime[1]);
       };
+      useEffect(() => {
+        if (!isRange) return;
+        _.attempt(onChange, [startValue, endValue].filter((el) => !_.isNil(el)));
+      }, []);
 
       const timeValue = useMemo(
         () => getTimeValue({
-            isEffectiveTime,
-            isNilTime,
-            isControlledTime,
-            startValue,
-            endValue,
-            value,
-          }),
+          isEffectiveTime,
+          isNilTime,
+          isControlledTime,
+          startValue,
+          endValue,
+          value,
+        }),
         [isEffectiveTime, isNilTime, isControlledTime, startValue, endValue, value],
       );
       const rangeResult = {
         modelValue: timeValue,
         'onUpdate:modelValue': _.wrap(setValue, (fn, time: any) => {
-          _.attempt(fn, time);
+          // _.attempt(fn, time);
           _.attempt(onChange, time);
         }),
       };

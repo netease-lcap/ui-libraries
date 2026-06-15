@@ -25,13 +25,14 @@ namespace nasl.ui {
       group: '样式属性',
       title: '阴影显示',
       description: '设置卡片阴影的显示时机',
-      docDescription: '控制卡片阴影的显示时机。总是显示：始终显示阴影；悬浮显示：鼠标悬停时显示；从不显示：不显示阴影。',
+      docDescription:
+        '控制卡片阴影的显示时机。总是显示：始终显示阴影；悬浮显示：鼠标悬停时显示；从不显示：不显示阴影。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '总是显示' }, { title: '悬浮显示' }, { title: '从不显示' }],
+        options: [{ title: '自动处理' }, { title: '总是显示' }, { title: '悬浮显示' }, { title: '从不显示' }],
       },
     })
-    shadow: 'always' | 'hover' | 'never' = 'always';
+    shadow: 'auto' | 'always' | 'hover' | 'never' = 'auto';
 
     @Slot({
       title: '默认',

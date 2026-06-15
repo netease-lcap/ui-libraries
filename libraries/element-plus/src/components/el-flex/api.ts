@@ -101,6 +101,7 @@ namespace nasl.ui {
           { title: '纵向排列', icon: 'flex-vertical', tooltip: '纵向' },
         ],
       },
+      if: (_) => _.mode !== 'block',
       onChange: [
         { update: { alignment: 'start', justify: 'start' }, if: (_) => _ === 'horizontal' },
         { update: { alignment: 'stretch', justify: 'start' }, if: (_) => _ === 'vertical' },

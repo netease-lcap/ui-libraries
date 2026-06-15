@@ -15,4 +15,14 @@ export default ItemPluginAccumulate.addPlugin({
       index: index || destination || _.uniqueId('el-menu-item-'),
     };
   },
+}).addPlugin({
+  name: 'handleProvide',
+  handle(props) {
+    const provide = props.get('provide');
+    return {
+      provide: Object.assign(provide, {
+        elTextOverFlow: 'ellipsis',
+      }),
+    };
+  },
 });
