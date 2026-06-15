@@ -28,7 +28,7 @@ export const Demo0 = {
         <el-multi-layout-item :gutter="0" style="height: 60px; width: 100%;"></el-multi-layout-item>
         <el-multi-layout-item :gutter="0" style="width: 100%;">
           <el-multi-layout :gutter="0" :wrap="false" style="width: 100%;">
-            <el-multi-layout-item :gutter="0" style="width: 200px"></el-multi-layout-item>
+            <el-multi-layout-item mode="block" :gutter="0"></el-multi-layout-item>
             <el-multi-layout-item :gutter="0" style="--custom-start: auto; flex: 1;"></el-multi-layout-item>
           </el-multi-layout>
         </el-multi-layout-item>

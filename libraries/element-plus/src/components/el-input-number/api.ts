@@ -238,6 +238,7 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       forceUpdateWhenAttributeChange: true,
+      childAccept:false,
       additionalAttribute: {
         ':isRequired': {
           condition:

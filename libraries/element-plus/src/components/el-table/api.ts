@@ -402,6 +402,27 @@ namespace nasl.ui {
     })
     rowHeight: nasl.core.Integer;
 
+    @Prop({
+      group: '样式属性',
+      title: '表格行动态样式',
+      description: '动态设置表格行背景色、字体颜色等样式',
+      docDescription: '动态设置表格行背景色、字体颜色等样式',
+      bindOpen: true,
+      setter: {
+        concept: 'AnonymousFunctionSetter',
+      },
+    })
+    rowStyle: (data: { row: T; rowIndex: nasl.core.Integer }) => {
+      /**
+       * @title 表格行背景颜色
+       */
+      backgroundColor?: nasl.core.String;
+      /**
+       * @title 表格行字体颜色
+       */
+      color?: nasl.core.String;
+    };
+
     @Prop<ElTableOptions<T, V, P, M>, 'stickyOffset'>({
       group: '样式属性',
       title: '表头吸顶偏移量',
@@ -719,6 +740,16 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     resizable: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '样式属性',
+      title: '自动合并相同数据',
+      description: '自动合并相同数据,需要设置列字段,优先级高于表格的合并规则',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    autoRowSpan: nasl.core.Boolean = false;
 
     @Event({
       title: '编辑列变化时',

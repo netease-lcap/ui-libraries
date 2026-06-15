@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { type Ref } from 'vue';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { useControllableValue, useMemo, useCallback, useRef, useEffect, useRender } from '@/plugins/hooks';
-import { ElPagination } from '@/index';
+import { ElPagination, ElForm } from '@/index';
 import { useRequestDataSource, useHandleMapField } from '@/plugins/common/dataSource';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { addClass } from '@/utils';
@@ -50,11 +50,11 @@ export default listComponentsBasicAccumulate
       const render = useRender(
         (props, { attrs, slots }) => {
           return formMode ? (
-            <el-form style={{ width: '100%' }} model={model.value}>
+            <ElForm style={{ width: '100%' }} model={model.value}>
               <div ref={target} {...attrs} {...props}>
                 {slots.default?.()}
               </div>
-            </el-form>
+            </ElForm>
           ) : (
             <div ref={target} {...attrs} {...props}>
               {slots.default?.()}

@@ -25,7 +25,7 @@
     "es",
     "lib",
     "src",
-    "manifest.json",
+    "manifest.json"libraries/mobile-ui/package.json,
     "README.md"
   ],
   "dependencies": {

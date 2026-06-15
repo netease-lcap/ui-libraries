@@ -2,9 +2,20 @@
 import _ from 'lodash';
 import { FormProps } from 'element-plus';
 import { $formProvide } from '@/components/el-form/constants';
-import { useRef, useEffect, useCallback } from '@/plugins/hooks';
+import { $deletePropsList } from '@/plugins/constants';
+import { useRef, useEffect, useCallback, useRender } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 // import { useCallback } from '../../../plugins/hooks';
+import { addClass } from '@/utils';
+import ElFormQueryLayout from './form-query-layout';
+
+/** 与 NASL / 模板兼容：布尔、字符串、可能存在的 kebab 键 */
+function isQueryFormOn(props: { get: (k: string, d?: unknown) => unknown }) {
+  const a = props.get('queryForm') ?? props.get('query-form');
+  if (a === true || a === 'true' || a === 1 || a === '1') return true;
+  if (a === false || a === 'false' || a === 0 || a === '0' || a == null) return false;
+  return Boolean(a);
+}
 
 const FormBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElFormOptions, FormProps>();
 
@@ -12,7 +23,7 @@ export default FormBasicAccumulate.addPlugin({
   name: 'handleModelValue',
   handle(props) {
     const modelValue = props.get('model') ?? {};
-    const onValidate = props.get('onValidate', () => { });
+    const onValidate = props.get('onValidate', () => {});
     const model = useRef(modelValue);
     const provide = props.get('provide');
     const ref = props.get('ref');
@@ -66,27 +77,100 @@ export default FormBasicAccumulate.addPlugin({
         },
         [onValidate],
       ),
+      labelWidth: 'auto',
     };
   },
-}).addPlugin({
-  name: 'handleMcp',
-  handle: (props) => {
-    const refId = props.get('data-ref-id');
-    const ref = props.get('ref');
-    useEffect(() => {
-      if (window?.UiLibrariesMcp?.subscribe) {
-        window.UiLibrariesMcp.subscribe('el_form__validate', refId, () => ref.validated());
-        window.UiLibrariesMcp.subscribe('el_form__clearValidate', refId, () => {
-          ref?.clearValidate();
-        });
-      }
-      return () => {
-        if (window?.UiLibrariesMcp?.unsubscribe) {
-          window.UiLibrariesMcp.unsubscribe('el_form__validate', refId);
-          window.UiLibrariesMcp.unsubscribe('el_form__clearValidate', refId);
+})
+  .addPlugin({
+    name: 'handleMcp',
+    handle: (props) => {
+      const refId = props.get('data-ref-id');
+      const ref = props.get('ref');
+      useEffect(() => {
+        if (window?.UiLibrariesMcp?.subscribe) {
+          window.UiLibrariesMcp.subscribe('el_form__validate', refId, () => ref.validated());
+          window.UiLibrariesMcp.subscribe('el_form__clearValidate', refId, () => {
+            ref?.clearValidate();
+          });
         }
+        return () => {
+          if (window?.UiLibrariesMcp?.unsubscribe) {
+            window.UiLibrariesMcp.unsubscribe('el_form__validate', refId);
+            window.UiLibrariesMcp.unsubscribe('el_form__clearValidate', refId);
+          }
+        };
+      }, []);
+      return {};
+    },
+  })
+  .addPlugin({
+    name: 'handleLayout',
+    handle(props) {
+      const layout = props.get('layout');
+      const classNames = props.get('class') ?? '';
+      const inline = props.get('inline') ?? false;
+      const style = props.get('style') ?? {};
+      if (layout === 'inline') {
+        return { inline: true };
+      }
+      if (layout === 'block') {
+        return {
+          class: addClass(classNames, 'el-form-block'),
+        };
+      }
+      if (layout === 'grid') {
+        return {
+          style: {
+            ...style,
+            '--el-form-columns': props.get('columns') ?? 1,
+          },
+          class: addClass(classNames, 'el-form-grid'),
+        };
+      }
+      if (inline) {
+        return { inline: true };
+      }
+      return {
+        class: addClass(classNames, 'el-form-block'),
       };
-    }, []);
-    return {};
-  },
-});
+    },
+  })
+  .addPlugin({
+    name: 'handleQueryForm',
+    order: 5,
+    handle(props) {
+      const baseDel = (props.get($deletePropsList) as unknown as string[]) ?? [];
+      const deletePropsList = baseDel.concat('queryForm');
+      const queryForm = isQueryFormOn(props);
+      const layout = props.get('layout');
+      if (!queryForm || layout === 'grid') {
+        return { [$deletePropsList]: deletePropsList };
+      }
+      const FormComponent = props.get('render') as any;
+      const render = useRender((p, { attrs, slots }) => {
+        return (
+          <FormComponent
+            {..._.assign({}, p, attrs)}
+            inline={false}
+            v-slots={{
+              ..._.omit(slots, ['default', 'actions']),
+              default: () => (
+                <ElFormQueryLayout
+                  v-slots={{
+                    default: () => slots.default?.(),
+                    actions: () => slots.actions?.(),
+                  }}
+                />
+              ),
+            }}
+          />
+        );
+      }, []);
+      return {
+        render,
+        inline: false,
+        class: addClass(props.get('class') ?? '', 'el-form--query'),
+        [$deletePropsList]: deletePropsList,
+      };
+    },
+  });

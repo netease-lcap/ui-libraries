@@ -6,7 +6,7 @@ import formItemPlugin from './plugins/form-item-plugin';
 import { withFormItem } from './plugins/form-item';
 import { $deletePropsList } from '@/plugins/constants';
 import { $formProvide } from './constants';
-import './index.css';
+import './index.less';
 
 function ElFormRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
@@ -33,8 +33,8 @@ export {
   ElFormItemPlus,
   ElFormItemPro,
   ElFormPlus,
+  $formProvide,
 };
-export { $formProvide };
 export const ElFormBasicsPlugin = basicsPlugin;
 export const ElFormItemBasicsPlugin = formItemPlugin;
 export default ElForm;

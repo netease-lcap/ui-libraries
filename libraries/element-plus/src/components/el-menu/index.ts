@@ -8,10 +8,10 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import { $deletePropsList } from '@/plugins/constants';
 import basicPlugin from './plugins/basic-plugins';
-import itemPlugin from './plugins/item-plugin';
+import itemPlugin from './plugins/group-item-plugin';
 import menuItemPlugin from './plugins/menu-item';
 
-import './index.css';
+import './index.less';
 
 function ElMenuRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicPlugin, plugin) : plugin;

@@ -1,5 +1,8 @@
 /**
  * @component el-form
+ *
+ * BREAKING（相对历史主题）：`--el-form-inline-content-width` 曾与块级内容区不一致（如 220px）。
+ * 现已与 `--el-form-content-width` 同源（默认 240px）。依赖「行内更窄」或依赖旧不换行行为的页面需在业务或主题中自行覆盖变量。
  */
 .el-form {
   /**
@@ -7,10 +10,40 @@
    * @type size
    */
   --el-form-label-font-size: var(--el-font-size-base);
-  
+
   /**
-   * @desc 行内内容宽度
+   * @desc 表单项标签区首选宽度（块级 / 行内左右标签一致）
    * @type size
    */
-  --el-form-inline-content-width: 220px;
+  --el-form-label-width: 96px;
+
+  /**
+   * @desc 表单项标签区最小宽度（收缩下限）
+   * @type size
+   */
+  --el-form-label-min-width: 72px;
+
+  /**
+   * @desc 表单项控件区首选宽度（与 `--el-input-width` / `--el-select-width` 等默认对齐）
+   * @type size
+   */
+  --el-form-content-width: 240px;
+
+  /**
+   * @desc 表单项控件区最小宽度（收缩下限）
+   * @type size
+   */
+  --el-form-content-min-width: 180px;
+
+  /**
+   * @desc 标签与控件区间水平间距（与 EP label 默认 padding-right 对齐，用于计算行内项 min-width）
+   * @type size
+   */
+  --el-form-label-padding-inline-end: 12px;
+
+  /**
+   * @desc 行内布局下内容区宽度令牌（与 `--el-form-content-width` 同源；保留变量名以兼容旧覆盖路径）
+   * @type size
+   */
+  --el-form-inline-content-width: var(--el-form-content-width);
 }

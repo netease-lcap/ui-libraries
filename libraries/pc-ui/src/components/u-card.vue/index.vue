@@ -62,6 +62,9 @@ export default {
     border-radius: var(--card-border-radius);
     background: var(--card-background);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 }
 
 .root[shadow="always"] {
@@ -81,9 +84,12 @@ export default {
     box-shadow: none;
 }
 
-.root[split] .head {
+/*
+ * 分割线仅作用于本卡「view 下的直接子 .head」：子选择器链与 f-scroll-view 结构一致（根>wrap>view>head），
+ * 避免 .root[split] .head 在嵌套 u-card 时误匹配内层（CSS Modules 下各实例 .head 类名相同）
+ */
+.root[split] > * > * > * > .head {
     border-bottom: var(--card-border-width) solid var(--border-color-base);
-    padding-bottom: var(--card-head-padding-y);
 }
 
 .root[border] {
@@ -106,9 +112,25 @@ export default {
     vertical-align: middle;
 }
 
+.cover,
+.head,
+.foot {
+    flex: 0 0 auto;
+}
+
 .head {
     position: relative;
-    padding: var(--card-head-padding-y) var(--card-head-padding-x) 0 var(--card-head-padding-x);
+    padding: var(--card-head-padding-y) var(--card-head-padding-x);
+}
+
+/* f-scroll-view：wrap > view，纵向 flex + 占满高度，便于内部 100% 高度与 body 伸展 */
+.scrollview > div:first-child > div:first-child {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100%;
 }
 
 .title {
@@ -125,9 +147,13 @@ export default {
 
 .body {
     clear: both;
+    flex: 1 1 auto;
+    min-height: 0;
     padding: var(--card-body-padding-y) var(--card-body-padding-x);
 }
 .scrollview {
+    flex: 1 1 auto;
     height: 100%;
+    min-height: 0;
 }
 </style>

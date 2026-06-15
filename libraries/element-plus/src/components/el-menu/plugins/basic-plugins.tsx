@@ -7,13 +7,13 @@ import {
   useFormatDataSource,
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
-import { useMemo, useControllableValue, useEffect ,useState} from '@/plugins/hooks';
+import { useMemo, useControllableValue, useEffect, useRender } from '@/plugins/hooks';
+import { categoryStyles,addClass } from '@/utils/dom';
 import { $deletePropsList, $router, $route } from '@/plugins/constants';
 import { ElSubMenu, ElMenuItem } from '@/components';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 import idePlugin from './ide';
-import { addClass } from '@/utils/dom';
 
 /** 从 getComputedStyle 返回的 `rgb` / `rgba` 解析 r、g、b */
 function parseCssRgbColor(color: string): { r: number; g: number; b: number } | null {
@@ -138,23 +138,79 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
   })
   .addPlugin({
     name: 'handleStyle',
-    handle: (props) => {
-      const refid = props.get('data-ref-id');
-      const classList = props.get('class', '');
-      const [className, setClassName] = useState('');
-      useEffect(() => {
-        const el = document.querySelector(`.el-menu[data-ref-id="${refid}"]`);
-        if (!el) return;
-        const bgColor = window.getComputedStyle(el as Element).backgroundColor;
-        const rgb = parseCssRgbColor(bgColor);
-        if (!rgb) return;
-        const luma = rgbLuma601(rgb.r, rgb.g, rgb.b);
-        const className = luma > 5 ? 'el-menu--light' : 'el-menu--dark';
-        setClassName(className);
-      }, [refid]);
-
+    handle(props) {
+      const style = props.get('style', {});
+      const backgroundColor = _.get(style, 'backgroundColor');
+      const color = _.get(style, 'color');
+      const textColor = props.get('textColor');
+      const backgroundColorProps = props.get('backgroundColor');
       return {
-        class: addClass(classList, className),
+        backgroundColor: backgroundColorProps || backgroundColor,
+        textColor: textColor || color,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleCollapseModel',
+    handle: (props) => {
+      const [collapse, setCollapse] = useControllableValue(props, {
+        defaultValuePropName: 'defaultCollapse',
+        valuePropName: 'collapse',
+        defaultValue: false,
+      });
+      const Component = props.get('render');
+      const hasCollapseButton = props.get('hasCollapseButton');
+
+      const styleProps = props.get('style');
+      const { style, innerStyle } = categoryStyles(styleProps);
+      const CollapseButtonRender = useRender(
+        (props, { attrs, slots }) => {
+          return (
+            <div
+              class="el-menu_wrapper"
+              style={{ position: 'relative', display: 'block', height: '100%', ...props.style }}
+            >
+              <Component {...props} {...attrs} style={props.innerStyle} v-slots={slots} />
+              <div
+                class="el-menu__collapse-icon"
+                role="button"
+                tabindex={0}
+                aria-label={props.collapse ? '展开菜单' : '折叠菜单'}
+                onClick={() => setCollapse(!props.collapse)}
+                onKeydown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setCollapse(!props.collapse);
+                  }
+                }}
+              >
+                {props.collapse ? (
+                  <el-icon color="rgb(134,144,156)" size="16" name="Expand" />
+                ) : (
+                  <el-icon color="rgb(134,144,156)" size="16" name="Fold" />
+                )}
+              </div>
+            </div>
+          );
+        },
+        [Component],
+      );
+      const renderOptions = hasCollapseButton ? { render: CollapseButtonRender, style, innerStyle } : {};
+      return {
+        ...renderOptions,
+        collapse,
+        setCollapse,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleOnSelect',
+    handle: (props) => {
+      const onSelect = props.get('onSelect');
+      return {
+        onSelect: (index: string, indexPath) => {
+          onSelect({ index, oldIndex: indexPath });
+        },
       };
     },
   });

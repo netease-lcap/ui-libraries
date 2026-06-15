@@ -2,6 +2,9 @@
 .el-textarea {
   --el-input-width: 240px;
 }
+.el-input {
+  width: var(--el-input-width);
+}
 .el-textarea {
-  width: 240px;
+  width: var(--el-input-width);
 }

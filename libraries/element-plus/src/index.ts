@@ -6,6 +6,7 @@ import { install } from './install';
 export * from './components';
 export * from './install';
 export * from './utils';
+export * from './plugins';
 export default {
   install,
 } as Plugin;
