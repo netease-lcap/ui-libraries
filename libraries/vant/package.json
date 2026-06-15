@@ -1,6 +1,6 @@
 {
   "name": "@lcap/vant",
-  "version": "1.2.0",
+  "version": "1.1.0",
   "author": "NetEase CodeWave FE Team",
   "main": "dist-theme/index.js",
   "module": "dist-theme/index.mjs",

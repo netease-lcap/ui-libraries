@@ -1,7 +1,7 @@
 {
   "name": "@lcap/element-ui",
   "description": "Lcap Element UI",
-  "version": "1.6.0",
+  "version": "1.5.0",
   "author": "NetEase CodeWave FE Team",
   "main": "dist-theme/index.js",
   "style": "dist-theme/index.css",
@@ -25,7 +25,7 @@
     "es",
     "lib",
     "src",
-    "manifest.json",
+    "manifest.json"libraries/mobile-ui/package.json,
     "README.md"
   ],
   "dependencies": {
