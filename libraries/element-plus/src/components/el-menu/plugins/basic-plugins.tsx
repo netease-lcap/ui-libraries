@@ -196,7 +196,7 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
       const onSelect = props.get('onSelect');
       return {
         onSelect: (index: string, indexPath) => {
-          onSelect({ index, oldIndex: indexPath });
+          _.attempt(onSelect, { index, oldIndex: indexPath });
         },
       };
     },
