@@ -8,7 +8,7 @@ import {
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 import { useMemo, useControllableValue, useEffect, useRender } from '@/plugins/hooks';
-import { categoryStyles,addClass } from '@/utils/dom';
+import { categoryStyles, addClass } from '@/utils/dom';
 import { $deletePropsList, $router, $route } from '@/plugins/constants';
 import { ElSubMenu, ElMenuItem } from '@/components';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -206,10 +206,10 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handleOnSelect',
     handle: (props) => {
-      const onSelect = props.get('onSelect');
+      const onSelect = props.get('onSelect', () => {});
       return {
         onSelect: (index: string, indexPath) => {
-          onSelect({ index, oldIndex: indexPath });
+          _.attempt(onSelect, { index, oldIndex: indexPath });
         },
       };
     },
