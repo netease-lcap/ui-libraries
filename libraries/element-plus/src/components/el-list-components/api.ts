@@ -168,13 +168,13 @@ namespace nasl.ui {
       title: '列数',
       description: '设置每行显示的组件数量',
       docDescription:
-        '控制每行排列的组件数量。设置为具体数字时，组件会按指定数量排列；为空时会根据容器宽度自适应排列并自动换行。默认值为5。',
+        '控制每行排列的组件数量。设置为具体数字时，组件会按指定数量排列；为0时会根据容器宽度自适应排列并自动换行。默认值为0。',
       setter: {
         concept: 'NumberInputSetter',
-        min: 1,
+        min: 0,
       },
     })
-    column: nasl.core.Decimal | nasl.core.Integer = 5;
+    column: nasl.core.Decimal | nasl.core.Integer = 0;
 
     @Prop({
       group: '主要属性',

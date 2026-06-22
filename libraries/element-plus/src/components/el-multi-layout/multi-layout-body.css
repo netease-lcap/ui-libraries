@@ -1,0 +1,5 @@
+.el-multi-layout-body {
+  /* height: 100%; */
+  height: 90%;
+  flex-grow: 2;
+}
