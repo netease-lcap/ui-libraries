@@ -10,7 +10,7 @@ import {
 import { useMemo, useControllableValue, useEffect, useRender } from '@/plugins/hooks';
 import { categoryStyles } from '@/utils/dom';
 import { $deletePropsList, $router, $route } from '@/plugins/constants';
-import { ElSubMenu, ElMenuItem } from '@/components';
+import { ElSubMenu, ElMenuItem,ElIcon } from '@/components';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 import idePlugin from './ide';
@@ -168,9 +168,9 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
                   }
                 }}>
                 {props.collapse ? (
-                  <el-icon color="rgb(134,144,156)" size="16" name="Expand" />
+                  <ElIcon color="rgb(134,144,156)" size="16" name="Expand" />
                 ) : (
-                  <el-icon color="rgb(134,144,156)" size="16" name="Fold" />
+                  <ElIcon color="rgb(134,144,156)" size="16" name="Fold" />
                 )}
               </div>
             </div>

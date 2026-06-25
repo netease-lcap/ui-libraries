@@ -5,6 +5,7 @@
         default-active="2"
         class="el-menu-vertical-demo"
         v-model:collapse="collapse"
+        :hasCollapseButton="true"
         @open="handleOpen"
         @click="handleClick"
         @close="handleClose"
