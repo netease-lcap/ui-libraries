@@ -10,7 +10,7 @@ import {
 import { useMemo, useControllableValue, useEffect, useRender } from '@/plugins/hooks';
 import { categoryStyles } from '@/utils/dom';
 import { $deletePropsList, $router, $route } from '@/plugins/constants';
-import { ElSubMenu, ElMenuItem } from '@/components';
+import { ElSubMenu, ElMenuItem,ElIcon } from '@/components';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 import idePlugin from './ide';
@@ -153,10 +153,7 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
       const CollapseButtonRender = useRender(
         (props, { attrs, slots }) => {
           return (
-            <div
-              class="el-menu_wrapper"
-              style={{ position: 'relative', display: 'block', height: '100%', ...props.style }}
-            >
+            <div class="el-menu_wrapper" style={{ position: 'relative', height: '100%', ...props.style }}>
               <Component {...props} {...attrs} style={props.innerStyle} v-slots={slots} />
               <div
                 class="el-menu__collapse-icon"
@@ -169,12 +166,11 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
                     e.preventDefault();
                     setCollapse(!props.collapse);
                   }
-                }}
-              >
+                }}>
                 {props.collapse ? (
-                  <el-icon color="rgb(134,144,156)" size="16" name="Expand" />
+                  <ElIcon color="rgb(134,144,156)" size="16" name="Expand" />
                 ) : (
-                  <el-icon color="rgb(134,144,156)" size="16" name="Fold" />
+                  <ElIcon color="rgb(134,144,156)" size="16" name="Fold" />
                 )}
               </div>
             </div>
@@ -187,6 +183,18 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
         ...renderOptions,
         collapse,
         setCollapse,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleOnSelect',
+    handle: (props) => {
+      const onSelect = props.get('onSelect');
+      return {
+        onSelect: (index: string, indexPath) => {
+          onSelect?.({ index, oldIndex: indexPath });
+          // _.attempt(onSelect, { index, oldIndex: indexPath });
+        },
       };
     },
   });

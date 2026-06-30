@@ -198,6 +198,9 @@ export default listComponentsBasicAccumulate
       const loadTo = useCallback((page) => reload({ currentPage: page }), [reload]);
       const selfRef = _.assign(ref, { reload, loadTo, data, getData: () => data });
       const defaultSlots = useCallback(() => {
+        if (_.isEmpty(dataList) && !loading) {
+          return <div class="el-list-components__empty">暂无数据</div>;
+        }
         return _.map(dataList, (item, index) => {
           return (
             <div
@@ -321,7 +324,7 @@ export default listComponentsBasicAccumulate
         () => _.assign({}, styleProps, {
             '--row-gap': `${rowGap || 0}px`,
             '--column-gap': `${columnGap || 0}px`,
-            '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
+            '--el-list-components-column': columnProps <= 0 ? 0 : columnProps,
           }),
         [styleProps, rowGap, columnGap, columnProps],
       );

@@ -84,7 +84,7 @@ export default ColumnPluginAccumulate.addPlugin({
     const width = isFixedWidth ? { width: widthProps } : { minWidth: widthProps };
     const minWidth = props.get('minWidth') || _.get(props.get('style'), 'min-width', '');
     const widthObj = _.mergeWith(width, { minWidth }, (obj, src) => src || obj);
-    const align = props.get('align') || _.get(props.get('style'), 'textAlign', 'left');
+    const align = props.get('align') || _.get(props.get('style'), 'text-align') || _.get(props.get('style'), 'textAlign', 'left');
     return {
       align,
       ...widthObj,

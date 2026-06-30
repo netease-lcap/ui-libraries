@@ -157,7 +157,10 @@ export default TableAccumulate.addPlugin({
           '--el-table-sticky-offset': `${stickyOffset}px`,
           ...styleProps,
         },
-        rowStyle: useMemo(() => _.assign(rowStyle, { height: `${rowHeight}px` }), [rowHeight, rowStyle]),
+        rowStyle: useMemo(
+          () => (_.isFunction(rowStyle) ? rowStyle : _.assign(rowStyle, { height: `${rowHeight}px` })),
+          [rowHeight, rowStyle],
+        ),
       };
     },
   })
@@ -593,5 +596,62 @@ export default TableAccumulate.addPlugin({
         });
       }, [data]);
       return {};
+    },
+  })
+  .addPlugin({
+    name: 'handleAutoRowSpan',
+    handle(props) {
+      const data = props.get('data') ?? [];
+      const slots = props.get('slots');
+      const mergeColumns = useMemo(() => {
+        return _.flatMap(slots.default(), (node: VNode) => {
+          const prop = node.props?.prop as string;
+          if (_.get(node, 'type.name') !== 'ElTableColumn' || !prop || !node.props?.autoRowSpan) return [];
+          return [String(prop)];
+        });
+      }, [slots]);
+
+      const rowSpanMaps = useMemo(() => {
+        const maps: Record<string, Map<number, number>> = {};
+        mergeColumns.forEach((prop: any) => {
+          const map = new Map<number, number>();
+          let count = 0;
+          for (let i = data.length - 1; i >= 0; i -= 1) {
+            const value = _.get(data[i], prop);
+            const prevValue = i > 0 ? _.get(data[i - 1], prop) : undefined;
+            if (value !== undefined && value === prevValue) {
+              map.set(i, 0);
+              count += 1;
+            } else if (count) {
+              map.set(i, count + 1);
+              count = 0;
+            }
+          }
+          maps[prop] = map;
+        });
+        return maps;
+      }, [data, mergeColumns]);
+
+      if (_.isEmpty(mergeColumns)) return {};
+
+      return {
+        spanMethod: useCallback(
+          ({ rowIndex, column }) => {
+            const prop = column?.property;
+            if (!prop || !mergeColumns.includes(prop)) {
+              return { rowspan: 1, colspan: 1 };
+            }
+            const rowspan = rowSpanMaps[prop]?.get(rowIndex);
+            if (rowspan === 0) {
+              return { rowspan: 0, colspan: 0 };
+            }
+            if (rowspan) {
+              return { rowspan, colspan: 1 };
+            }
+            return { rowspan: 1, colspan: 1 };
+          },
+          [mergeColumns, rowSpanMaps],
+        ),
+      };
     },
   });

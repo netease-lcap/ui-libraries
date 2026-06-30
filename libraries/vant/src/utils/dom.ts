@@ -11,6 +11,7 @@ export function setElStyle(style: Record<string, any>, el: HTMLElement) {
 
     el.style[key] = style[key];
   });
+  
 }
 
 export function categoryStyles(style: Record<string, string> = {}) {
