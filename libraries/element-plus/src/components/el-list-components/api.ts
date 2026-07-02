@@ -181,7 +181,7 @@ namespace nasl.ui {
       title: '均分宽度',
       description: '是否让每个组件平均分配宽度',
       docDescription:
-        '开启后，每个组件会平均分配容器宽度，宽度计算公式为：容器宽度 / 每行列数。关闭后，每个组件根据内容自适应宽度。',
+        '开启后，每个组件会平均分配容器宽度。列数大于 0 时按列数等分；列数为 0 时所有项宽度与最宽项对齐。',
       setter: {
         concept: 'SwitchSetter',
       },

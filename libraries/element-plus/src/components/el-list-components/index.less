@@ -48,17 +48,24 @@
     }
 
     .el-list-components__frag {
-      /* 强制限制宽度，防止内容撑开父容器 */
-
       min-width: calc((100% / var(--el-list-components-column)) - var(--column-gap, 0));
-      // min-width: 0;
       max-width: 100%;
-      /* 子元素宽度由内容决定，不拉伸 */
       width: 100%;
-      /* 不拉伸子元素内容 */
       justify-self: start;
-      /* 防止内部内容溢出 */
       overflow: visible;
+    }
+  }
+
+  /* column = 0 且均分：所有 item 宽度对齐为最宽项 */
+  &.isEqualWidthByMax {
+    row-gap: var(--row-gap, 0);
+    column-gap: var(--column-gap, 0);
+    gap: var(--row-gap, 0) var(--column-gap, 0);
+
+    .el-list-components__frag {
+      width: var(--el-list-components-item-width, auto);
+      flex: 0 0 var(--el-list-components-item-width, auto);
+      max-width: 100%;
     }
   }
 }

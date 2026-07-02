@@ -6,7 +6,7 @@
           v-for="(item2, index2) in item"
           :key="comKey(item2, index2)"
           :item="item2"
-          :column="column || 5"
+          :column="column || 0"
           :style="{ paddingRight: columnGap + 'px', '--cw-margin-bottom': rowGap + 'px' }"
           :equal-width="equalWidth"
           :index="comIndex(index, index2)"
@@ -87,7 +87,7 @@ export default {
     },
     column: {
       type: Number,
-      default: 5,
+      default: 0,
     },
     rowGap: {
       type: Number,
