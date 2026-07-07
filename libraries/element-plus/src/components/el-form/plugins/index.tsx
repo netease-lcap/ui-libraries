@@ -108,15 +108,16 @@ export default FormBasicAccumulate.addPlugin({
     handle(props) {
       const layout = props.get('layout');
       const classNames = props.get('class') ?? '';
+      const queryForm = isQueryFormOn(props);
       const inline = props.get('inline') ?? false;
       const style = props.get('style') ?? {};
-      if (layout === 'inline') {
-        return { inline: true };
-      }
-      if (layout === 'block') {
+      if (layout === 'block' || queryForm) {
         return {
           class: addClass(classNames, 'el-form-block'),
         };
+      }
+      if (layout === 'inline') {
+        return { inline: true };
       }
       if (layout === 'grid') {
         return {
@@ -143,7 +144,7 @@ export default FormBasicAccumulate.addPlugin({
       const deletePropsList = baseDel.concat('queryForm');
       const queryForm = isQueryFormOn(props);
       const layout = props.get('layout');
-      if (!queryForm || layout === 'grid') {
+      if (!queryForm) {
         return { [$deletePropsList]: deletePropsList };
       }
       const FormComponent = props.get('render') as any;

@@ -105,6 +105,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     hit: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '交互属性',
+      title: '背景色',
+      description: 'color属性，背景色',
+      setter: { concept: 'InputSetter' },
+    })
+    color: nasl.core.String = '';
     
     @Prop({
       group: '交互属性',

@@ -76,7 +76,7 @@ export default listComponentsBasicAccumulate
     handle: (props) => {
       const emit = props.get('emit');
       const ref = props.get('ref');
-      const [currentPage, setCurrentPage, currentPageProps] = useControllableValue(props, {
+      const [currentPage, setCurrentPage, currentPageProps] = useControllableValue<number>(props, {
         defaultValuePropName: 'defaultCurrentPage',
         defaultValue: 1,
         valuePropName: 'currentPage',
@@ -85,7 +85,7 @@ export default listComponentsBasicAccumulate
           _.attempt(ref?.reload, { currentPage, ...pageSize });
         },
       });
-      const [pageSize, setPageSize, pageSizeProps] = useControllableValue(props, {
+      const [pageSize, setPageSize, pageSizeProps] = useControllableValue<number>(props, {
         defaultValuePropName: 'defaultPageSize',
         defaultValue: 10,
         valuePropName: 'pageSize',
@@ -136,13 +136,9 @@ export default listComponentsBasicAccumulate
           const isSelectedValue = _.includes(_.concat([], value), val);
           const newValue = _.match({ selection, clearable, isSelectedValue })
             .when(_.matches({ selection: 'single', clearable: true, isSelectedValue: true }), () => undefined)
-            .when(_.matches({ selection: 'multiple', clearable: true, isSelectedValue: true }), () =>
-              _.without(value, val),
-            )
+            .when(_.matches({ selection: 'multiple', clearable: true, isSelectedValue: true }), () => _.without(value, val))
             .when(_.matches({ selection: 'single', isSelectedValue: false }), () => val)
-            .when(_.matches({ selection: 'multiple', isSelectedValue: false }), () =>
-              _.concat(value, val).filter(Boolean),
-            )
+            .when(_.matches({ selection: 'multiple', isSelectedValue: false }), () => _.concat(value, val).filter(Boolean))
             .otherwise(() => value);
           setValue(newValue);
         },
@@ -212,7 +208,8 @@ export default listComponentsBasicAccumulate
               class={addClass('el-list-components__frag', {
                 'is-selected': _.includes(_.concat([], value), _.get(item, 'value', item)),
                 'is-selectable': selection && selection !== 'none',
-              })}>
+              })}
+            >
               {_.isFunction(slots.default) ? (
                 slots.default({
                   item: item?.itemSource ?? item,
@@ -264,7 +261,8 @@ export default listComponentsBasicAccumulate
         return (
           <div
             data-nodepath={props?.['data-nodepath']}
-            style={{ ...props.style, display: 'flex', flexDirection: 'column', flexWrap: 'nowrap' }}>
+            style={{ ...props.style, display: 'flex', flexDirection: 'column', flexWrap: 'nowrap' }}
+          >
             <Component {..._.omit({ ...props, ...attrs }, ['data-nodepath'])} v-slots={slots} />
             {props.pagination === 'page' && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
@@ -357,8 +355,7 @@ export default listComponentsBasicAccumulate
       }, [isEqualWidthByMax, loading, columnProps, equalWidth]);
 
       const style = useMemo(
-        () =>
-          _.assign({}, styleProps, {
+        () => _.assign({}, styleProps, {
             '--row-gap': `${rowGap || 0}px`,
             '--column-gap': `${columnGap || 0}px`,
             '--el-list-components-column': columnProps <= 0 ? 0 : columnProps,
@@ -371,8 +368,7 @@ export default listComponentsBasicAccumulate
         [styleProps, rowGap, columnGap, columnProps, maxItemWidth],
       );
       const className = useMemo(
-        () =>
-          addClass(classNameProps, {
+        () => addClass(classNameProps, {
             'el-list-components-plus': true,
             isEqualWidth: equalWidth && columnProps > 0,
             isEqualWidthByMax,
