@@ -1,0 +1,48 @@
+libraries/pc-ui/src/components/u-tree-select-new.vue/demos/examples/ExamplesDemo13.vue
+  e81560c174a9e69e 1-117,119-162
+libraries/pc-ui/src/components/u-tree-select-new.vue/stories/examples.stories.js
+  e81560c174a9e69e 16,141-149
+libraries/pc-ui/src/components/u-tree-select-new.vue/index.vue
+  e81560c174a9e69e 346-353,474,498,501,513-515,518-519,536,538,582-584,653,656-672
+libraries/pc-ui/src/components/u-tree-select-new.vue/tests/lazy-load.test.js
+  e81560c174a9e69e 1-103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8-ntes.7",
+  "base_commit_sha": "7bafe97c83481ec976bf4369739d1545ef5ff40e",
+  "prompts": {
+    "e81560c174a9e69e": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2e930204-dc13-404a-8935-277b38f91a9c",
+        "model": "composer-2.5"
+      },
+      "human_author": "刘宇阳",
+      "messages": [],
+      "total_additions": 317,
+      "total_deletions": 8,
+      "accepted_lines": 314,
+      "overriden_lines": 0,
+      "per_file_stats": {
+        "libraries/pc-ui/src/components/u-tree-select-new.vue/demos/examples/ExamplesDemo13.vue": {
+          "additions": 162,
+          "accepted_lines": 161
+        },
+        "libraries/pc-ui/src/components/u-tree-select-new.vue/stories/examples.stories.js": {
+          "additions": 10,
+          "accepted_lines": 10
+        },
+        "libraries/pc-ui/src/components/u-tree-select-new.vue/index.vue": {
+          "additions": 42,
+          "deletions": 8,
+          "accepted_lines": 40
+        },
+        "libraries/pc-ui/src/components/u-tree-select-new.vue/tests/lazy-load.test.js": {
+          "additions": 103,
+          "accepted_lines": 103
+        }
+      }
+    }
+  }
+}
