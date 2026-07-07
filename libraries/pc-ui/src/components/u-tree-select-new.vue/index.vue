@@ -343,6 +343,14 @@ export default {
             this.loadUntilSelectedItem();
             return this.dataSourceObj;
         },
+        mergeDataSourceObj(list, type) {
+            if (Array.isArray(list) && list.length) {
+                this.trans2Obj(this.dataSourceNodeList, list, undefined, type);
+                this.dataSourceObj = { ...this.dataSourceNodeList, ...this.virtualNodeList };
+            }
+            this.loadUntilSelectedItem();
+            return this.dataSourceNodeList;
+        },
         // 从虚拟节点中收集数据
         collectFromVNodes() {
             // dirty hack：每次插槽变化时，vue都会将实例上的$slots对象重新赋值
@@ -463,6 +471,7 @@ export default {
             this.actualValue = $event;
             this.$emit('update:value', $event, this);
             this.$emit('input', $event, this);
+            this.syncDataSourceFromTreeView();
             this.$nextTick(() => {
                 if ($event !== null && $event !== undefined && !this.checkable) {
                     this.close();
@@ -486,8 +495,10 @@ export default {
                 if (Array.isArray(data) && data.length) {
                     const item = this.loadChildren(data);
                     if (item) {
+                        const childrenField = item.childrenField || this.childrenField;
                         this.load({
                             node: item,
+                            childrenField,
                         });
                     }
                 } else {
@@ -499,12 +510,13 @@ export default {
             let item;
             if (Array.isArray(list) && list.length) {
                 for (let i = 0; i < list.length; i++) {
-                    const { childrenField, isLoaded } = list[i];
-                    const children = this.$at(list[i], childrenField);
+                    const node = list[i];
+                    const childrenField = node.childrenField || this.childrenField;
+                    const children = this.$at(node, childrenField);
                     if (Array.isArray(children) && children.length) {
                         item = this.loadChildren(children);
-                    } else if (childrenField && !isLoaded) {
-                        item = list[i];
+                    } else if (!node.isLoaded && !this.$at(node, this.isLeafField)) {
+                        item = node;
                     }
                     if (item) {
                         break;
@@ -521,9 +533,9 @@ export default {
             const createLoad = (rawLoad) => async (params = {}) => {
                 const result = await rawLoad(params);
                 if (result) {
-                    const { node } = params || {};
+                    const { node, childrenField: paramsChildrenField } = params || {};
                     if (node) {
-                        const { childrenField } = node;
+                        const childrenField = paramsChildrenField || node.childrenField || this.childrenField;
                         this.$setAt(node, childrenField, result);
                         node.isLoaded = true;
                     } else {
@@ -567,6 +579,9 @@ export default {
             this.popperOpened = true; // 刚打开时，除非是没有加载，否则保留上次的 filter 过的数据
             this.$emit('open', $event, this);
             this.$emit('update:opened', true);
+            this.$nextTick(() => {
+                this.seedTreeViewDataFromSelect();
+            });
             if (this.filterable) {
                 this.filtering = true;
                 setTimeout(() => {
@@ -635,7 +650,26 @@ export default {
             this.$emit('before-load');
         },
         onLoad() {
+            this.syncDataSourceFromTreeView();
             this.$emit('load', undefined, this);
+        },
+        syncDataSourceFromTreeView() {
+            const treeView = this.$refs.treeView;
+            if (!treeView || !treeView.currentDataSource || !Array.isArray(treeView.currentDataSource.data)) {
+                return;
+            }
+            this.currentDataSource.data = treeView.currentDataSource.data;
+            this.mergeDataSourceObj(this.currentDataSource.data, 'dataSource');
+        },
+        seedTreeViewDataFromSelect() {
+            const treeView = this.$refs.treeView;
+            const selectData = this.currentDataSource && this.currentDataSource.data;
+            if (!treeView || !treeView.currentDataSource || !Array.isArray(selectData) || !selectData.length) {
+                return;
+            }
+            if (!Array.isArray(treeView.currentDataSource.data) || !treeView.currentDataSource.data.length) {
+                treeView.currentDataSource.data = selectData;
+            }
         },
         clear() {
             const oldValue = this.actualValue;
