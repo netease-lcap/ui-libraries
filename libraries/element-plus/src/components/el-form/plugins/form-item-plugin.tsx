@@ -3,7 +3,6 @@ import VusionValidator, { localizeRules } from '@lcap/validator';
 import { FormItemProps, Callback } from 'element-plus';
 import { useMemo } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-// import Message from '../../el-message/index';
 
 const FormItemPluginAccumulate = new PluginAccumulateTypes<nasl.ui.ElFormItemProOptions, FormItemProps>();
 export default FormItemPluginAccumulate.addPlugin({

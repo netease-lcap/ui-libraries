@@ -1,2 +1,8 @@
-/* 组件功能扩展插件 */
-export {};
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
+
+const RouterViewBasicAccumulate = new PluginAccumulateTypes<
+  nasl.ui.ElRouterViewOptions,
+  Record<string, any>
+>();
+
+export default RouterViewBasicAccumulate;

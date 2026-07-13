@@ -10,7 +10,7 @@ import {
 import { useMemo, useControllableValue, useEffect, useRender } from '@/plugins/hooks';
 import { categoryStyles } from '@/utils/dom';
 import { $deletePropsList, $router, $route } from '@/plugins/constants';
-import { ElSubMenu, ElMenuItem,ElIcon } from '@/components';
+import { ElSubMenu, ElMenuItem, ElIcon } from '@/components';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 import idePlugin from './ide';
@@ -118,7 +118,7 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
         defaultActive: active,
         style: {
           ...style,
-          ...(style?.color ? { '--el-menu-text-color': style?.color } : {}),
+          ...(_.get(style, 'color') ? { '--el-menu-text-color': _.get(style, 'color') } : {}),
         },
       };
     },
@@ -127,7 +127,7 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
     name: 'handleStyle',
     handle(props) {
       const style = props.get('style', {});
-      const backgroundColor = _.get(style, 'backgroundColor');
+      const backgroundColor = _.get(style, 'backgroundColor') || _.get(style, 'background-color');
       const color = _.get(style, 'color');
       const textColor = props.get('textColor');
       const backgroundColorProps = props.get('backgroundColor');
@@ -166,7 +166,8 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
                     e.preventDefault();
                     setCollapse(!props.collapse);
                   }
-                }}>
+                }}
+              >
                 {props.collapse ? (
                   <ElIcon color="rgb(134,144,156)" size="16" name="Expand" />
                 ) : (
@@ -193,7 +194,6 @@ export default MenuBasicAccumulate.addAccumulate(idePlugin)
       return {
         onSelect: (index: string, indexPath) => {
           onSelect?.({ index, oldIndex: indexPath });
-          // _.attempt(onSelect, { index, oldIndex: indexPath });
         },
       };
     },

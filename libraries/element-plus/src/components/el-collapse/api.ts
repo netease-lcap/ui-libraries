@@ -129,16 +129,16 @@ namespace nasl.ui {
     accordion: nasl.core.Boolean = false;
 
     // 2.9.10 新增
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '展开图标位置',
-    //   description: '展开图标位置',
-    //   setter: {
-    //     concept: 'EnumSelectSetter',
-    //     options: [{ title: '左' }, { title: '右' }],
-    //   },
-    // })
-    // expandIconPosition: 'left' | 'right' = 'right';
+    @Prop({
+      group: '主要属性',
+      title: '展开图标位置',
+      description: '展开图标位置',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '左' }, { title: '右' }],
+      },
+    })
+    expandIconPosition: 'left' | 'right' = 'right';
 
     @Event({
       title: '当前激活面板改变时触发',

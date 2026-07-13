@@ -188,7 +188,45 @@ describe('el-list-components 插件集成测试', () => {
 
       const { currentValue } = await renderHooks(plugins, props);
 
-      expect(currentValue.value.style['--el-list-components-column']).toBe(5);
+      expect(currentValue.value.style['--el-list-components-column']).toBe(0);
+    });
+
+    it('应该在 column=0 且均分宽度时添加 isEqualWidthByMax', async () => {
+      const plugins = listComponentsBasicAccumulate.getPluginMethod({ isInDesigner: false });
+      const emit = vi.fn();
+      const props = {
+        column: 0,
+        equalWidth: true,
+        emit,
+        slots: {},
+      };
+
+      const { currentValue } = await renderHooks(plugins, props);
+
+      expect(currentValue.value.class).toContain('isEqualWidthByMax');
+      expect(currentValue.value.class).toContain('isAutoWrap');
+      expect(currentValue.value.class).not.toContain('isColumn');
+    });
+
+    it('应该在 column=0 时应用 rowGap 和 columnGap', async () => {
+      const plugins = listComponentsBasicAccumulate.getPluginMethod({ isInDesigner: false });
+      const emit = vi.fn();
+      const props = {
+        column: 0,
+        rowGap: 12,
+        columnGap: 24,
+        emit,
+        slots: {},
+      };
+
+      const { currentValue } = await renderHooks(plugins, props);
+
+      expect(currentValue.value.class).toContain('isAutoWrap');
+      expect(currentValue.value.style['--row-gap']).toBe('12px');
+      expect(currentValue.value.style['--column-gap']).toBe('24px');
+      expect(currentValue.value.style.rowGap).toBe('12px');
+      expect(currentValue.value.style.columnGap).toBe('24px');
+      expect(currentValue.value.style.gap).toBe('12px 24px');
     });
   });
 
@@ -563,8 +601,8 @@ describe('el-list-components 插件集成测试', () => {
 
       const { currentValue } = await renderHooks(plugins, props);
 
-      // 负数应该使用默认值 5
-      expect(currentValue.value.style['--el-list-components-column']).toBe(5);
+      // 负数与 0 一样，按自适应布局处理
+      expect(currentValue.value.style['--el-list-components-column']).toBe(0);
     });
 
     it('应该添加基础类名', async () => {

@@ -351,6 +351,7 @@ export default TableAccumulate.addPlugin({
       const Component = props.get('render');
       const tableRef = useRef({});
       const ref = props.get('ref');
+      const isOmitType = ['selection', 'index', 'expand', 'draggable'];
       const render = useRender((props, { attrs, slots }) => {
         const columns = _.flatMap(slots.default(), (node) => (node.type.name === 'ElTableColumn' && node.props.prop
             ? [{ ...node.props, header: node.children?.header }]
@@ -365,7 +366,11 @@ export default TableAccumulate.addPlugin({
               {...attrs}
               v-slots={{
                 ...slots,
-                default: () => slots.default().filter((item) => selectedColumns.includes(item.props.prop)),
+                default: () => slots
+                    .default()
+                    .filter(
+                      (item) => selectedColumns.includes(item.props.prop) || isOmitType.includes(item.props.type),
+                    ),
               }}
             />
           </div>

@@ -3,7 +3,7 @@
 import _ from 'lodash';
 import { type Ref } from 'vue';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
-import { useControllableValue, useMemo, useCallback, useRef, useEffect, useRender } from '@/plugins/hooks';
+import { useControllableValue, useMemo, useCallback, useRef, useEffect, useRender, useState } from '@/plugins/hooks';
 import { ElPagination, ElForm } from '@/index';
 import { useRequestDataSource, useHandleMapField } from '@/plugins/common/dataSource';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
@@ -76,7 +76,7 @@ export default listComponentsBasicAccumulate
     handle: (props) => {
       const emit = props.get('emit');
       const ref = props.get('ref');
-      const [currentPage, setCurrentPage, currentPageProps] = useControllableValue(props, {
+      const [currentPage, setCurrentPage, currentPageProps] = useControllableValue<number>(props, {
         defaultValuePropName: 'defaultCurrentPage',
         defaultValue: 1,
         valuePropName: 'currentPage',
@@ -85,7 +85,7 @@ export default listComponentsBasicAccumulate
           _.attempt(ref?.reload, { currentPage, ...pageSize });
         },
       });
-      const [pageSize, setPageSize, pageSizeProps] = useControllableValue(props, {
+      const [pageSize, setPageSize, pageSizeProps] = useControllableValue<number>(props, {
         defaultValuePropName: 'defaultPageSize',
         defaultValue: 10,
         valuePropName: 'pageSize',
@@ -318,23 +318,63 @@ export default listComponentsBasicAccumulate
       const columnGap = props.get('columnGap');
       const classNameProps = props.get('class');
       const styleProps = props.get('style');
+      const target = props.get('target') as Ref<Element | null>;
+      const loading = props.get('loading');
+      const isEqualWidthByMax = equalWidth && columnProps <= 0;
+      const [maxItemWidth, setMaxItemWidth] = useState<number | undefined>();
 
-      // 构建样式对象，只有当 column 大于 0 时才设置 CSS 变量
+      useEffect(() => {
+        if (!isEqualWidthByMax || !target.value || !_.isElement(target?.value)) {
+          setMaxItemWidth(undefined);
+          return () => {};
+        }
+
+        const measureMaxItemWidth = () => {
+          const frags = target.value?.querySelectorAll('.el-list-components__frag');
+          if (!frags?.length) {
+            setMaxItemWidth(undefined);
+            return;
+          }
+          let maxWidth = 0;
+          frags.forEach((node) => {
+            maxWidth = Math.max(maxWidth, (node as HTMLElement).scrollWidth);
+          });
+          setMaxItemWidth(maxWidth > 0 ? maxWidth : undefined);
+        };
+
+        measureMaxItemWidth();
+        const resizeObserver = new ResizeObserver(measureMaxItemWidth);
+        resizeObserver.observe(target.value);
+        target.value.querySelectorAll('.el-list-components__frag').forEach((node) => {
+          resizeObserver.observe(node);
+        });
+
+        return () => {
+          resizeObserver.disconnect();
+        };
+      }, [isEqualWidthByMax, loading, columnProps, equalWidth]);
+
       const style = useMemo(
         () => _.assign({}, styleProps, {
             '--row-gap': `${rowGap || 0}px`,
             '--column-gap': `${columnGap || 0}px`,
             '--el-list-components-column': columnProps <= 0 ? 0 : columnProps,
+            ...(maxItemWidth
+              ? {
+                  '--el-list-components-item-width': `${maxItemWidth}px`,
+                }
+              : {}),
           }),
-        [styleProps, rowGap, columnGap, columnProps],
+        [styleProps, rowGap, columnGap, columnProps, maxItemWidth],
       );
       const className = useMemo(
         () => addClass(classNameProps, {
             'el-list-components-plus': true,
-            isEqualWidth: equalWidth,
+            isEqualWidth: equalWidth && columnProps > 0,
+            isEqualWidthByMax,
             isColumn: columnProps > 0,
           }),
-        [classNameProps, equalWidth, columnProps],
+        [classNameProps, equalWidth, columnProps, isEqualWidthByMax],
       );
       return {
         style,

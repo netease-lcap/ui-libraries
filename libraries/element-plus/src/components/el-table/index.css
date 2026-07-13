@@ -32,3 +32,9 @@
 .el-table.el-table td.el-table__cell div {
   overflow: visible;
 }
+.el-flex > .el-table-wrapper {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
