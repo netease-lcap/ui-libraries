@@ -1,7 +1,7 @@
 import { defineComponent, ref, watch, nextTick, onUnmounted } from 'vue';
 
 function mapWidthToCols(w: number) {
-  // if (w >= 1600) return 5;
+  if (w >= 1600) return 5;
   if (w >= 1200) return 4;
   if (w >= 992) return 3;
   return 2;
