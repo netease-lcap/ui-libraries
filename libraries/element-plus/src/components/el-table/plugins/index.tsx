@@ -206,27 +206,6 @@ export default TableAccumulate.addPlugin({
     },
   })
   .addPlugin({
-    name: 'handleSyncState',
-    handle(props) {
-      const emit = props.get('emit');
-      const data = props.get('data');
-      const currentPage = props.get('currentPage');
-      const pageSize = props.get('pageSize');
-      const order = props.get('order');
-      const sort = props.get('sort');
-      const pageProps = props.get('pageProps');
-      useEffect(() => {
-        emit('sync:state', 'data', data);
-        emit('sync:state', 'currentPage', currentPage);
-        emit('sync:state', 'pageSize', pageSize);
-        emit('sync:state', 'sort', sort);
-        emit('sync:state', 'order', orderMap[order]);
-        emit('sync:state', 'total', pageProps.total);
-      }, [data, currentPage, pageSize, order, sort, pageProps.total]);
-      return {};
-    },
-  })
-  .addPlugin({
     name: 'handleDataSource',
     handle(props) {
       const dataSource = props.get('dataSource');
@@ -285,6 +264,27 @@ export default TableAccumulate.addPlugin({
         loading,
         ...dataSourceResult,
       };
+    },
+  })
+  .addPlugin({
+    name: 'handleSyncState',
+    handle(props) {
+      const emit = props.get('emit');
+      const data = props.get('data');
+      const currentPage = props.get('currentPage');
+      const pageSize = props.get('pageSize');
+      const order = props.get('order');
+      const sort = props.get('sort');
+      const pageProps = props.get('pageProps');
+      useEffect(() => {
+        emit('sync:state', 'data', data);
+        emit('sync:state', 'currentPage', currentPage);
+        emit('sync:state', 'pageSize', pageSize);
+        emit('sync:state', 'sort', sort);
+        emit('sync:state', 'order', orderMap[order]);
+        emit('sync:state', 'total', pageProps.total);
+      }, [data, currentPage, pageSize, order, sort, pageProps.total]);
+      return {};
     },
   })
   .addPlugin({
