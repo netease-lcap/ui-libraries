@@ -33,6 +33,15 @@ namespace nasl.ui {
     })
     name: nasl.core.String = 'search';
 
+    @Prop({
+      group: '主要属性',
+      title: 'SVG 内容',
+      description: '直接传入 SVG 字符串进行渲染',
+      docDescription: '传入完整的 SVG 标签字符串（如 `<svg>...</svg>`），组件会将其作为 HTML 渲染。设置后优先于图标名称。',
+      setter: { concept: 'InputSetter' },
+    })
+    svg: nasl.core.String;
+
     @Event({
       title: '点击',
       description: '在元素上按下并释放任意鼠标按钮时触发。',

@@ -158,6 +158,7 @@ export default listComponentsBasicAccumulate
     name: 'handleDataSource',
     handle(props) {
       const dataSource = props.get('dataSource');
+      const emit = props.get('emit');
       const model = props.get('model');
       const formMode = props.get('formMode');
       const currentPage = props.get('currentPage');
@@ -225,6 +226,11 @@ export default listComponentsBasicAccumulate
           );
         });
       }, [dataList, slots.default, value, selection]);
+      useEffect(() => {
+        emit('sync:state', 'data', dataList);
+        emit('sync:state', 'pageSize', pageSize);
+        emit('sync:state', 'currentPage', currentPage);
+      }, [_.cloneDeep(dataList), pageSize, currentPage]);
       return {
         dataSource,
         ref: selfRef,

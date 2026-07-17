@@ -87,16 +87,16 @@ export default FormBasicAccumulate.addPlugin({
       const refId = props.get('data-ref-id');
       const ref = props.get('ref');
       useEffect(() => {
-        if (window?.UiLibrariesMcp?.subscribe) {
-          window.UiLibrariesMcp.subscribe('el_form__validate', refId, () => ref.validated());
-          window.UiLibrariesMcp.subscribe('el_form__clearValidate', refId, () => {
+        if (_.get(window, 'UiLibrariesMcp.subscribe')) {
+          _.attempt(_.get(window, 'UiLibrariesMcp.subscribe', () => {}), 'el_form__validate', refId, () => ref.validated());
+          _.attempt(_.get(window, 'UiLibrariesMcp.subscribe', () => {}), 'el_form__clearValidate', refId, () => {
             ref?.clearValidate();
           });
         }
         return () => {
-          if (window?.UiLibrariesMcp?.unsubscribe) {
-            window.UiLibrariesMcp.unsubscribe('el_form__validate', refId);
-            window.UiLibrariesMcp.unsubscribe('el_form__clearValidate', refId);
+          if (_.get(window, 'UiLibrariesMcp.unsubscribe')) {
+            _.attempt(_.get(window, 'UiLibrariesMcp.unsubscribe', () => {}), 'el_form__validate', refId);
+            _.attempt(_.get(window, 'UiLibrariesMcp.unsubscribe', () => {}), 'el_form__clearValidate', refId);
           }
         };
       }, []);
@@ -143,7 +143,7 @@ export default FormBasicAccumulate.addPlugin({
       const baseDel = (props.get($deletePropsList) as unknown as string[]) ?? [];
       const deletePropsList = baseDel.concat('queryForm');
       const queryForm = isQueryFormOn(props);
-      const layout = props.get('layout');
+      // const layout = props.get('layout');
       if (!queryForm) {
         return { [$deletePropsList]: deletePropsList };
       }
