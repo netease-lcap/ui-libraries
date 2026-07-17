@@ -4,7 +4,7 @@ import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/index';
 import formItemPlugin from './plugins/form-item-plugin';
 import { withFormItem } from './plugins/form-item';
-import { $deletePropsList } from '@/plugins/constants';
+// import { $deletePropsList } from '@/plugins/constants';
 import { $formProvide } from './constants';
 import './index.less';
 

@@ -1,4 +1,4 @@
-import { ElPagination, ElTableV2, TableProps, PaginationProps } from 'element-plus';
+import { ElPagination, TableProps, PaginationProps } from 'element-plus';
 
 import _ from 'lodash';
 import fp from 'lodash/fp';
@@ -9,7 +9,7 @@ import { $deletePropsList } from '@/plugins/constants';
 import { useRequestDataSource, useDataSourceToTree } from '@/plugins/common/dataSource';
 import { categoryStyles } from '@/utils';
 import { ElTableToolBar } from '@/components/el-table';
-import { ElForm, ElLoading } from '@/index';
+import { ElForm } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { IIdePluginBase } from '@/types/pluginBase';
 
@@ -412,7 +412,7 @@ export default TableAccumulate.addPlugin({
         )
         .when(_.isFunction, _.constant(rowKey))
         .otherwise(() => _.constant(undefined));
-      const [selectedValue, setSelectedValue] = useControllableValue(props, {
+      const [, setSelectedValue] = useControllableValue(props, {
         valuePropName: 'selectedValue',
         onValueEffect: (currentValue) => {
           ref?.store?.setCurrentRowKey(String(currentValue));
@@ -489,14 +489,23 @@ export default TableAccumulate.addPlugin({
       const refId = props.get('data-ref-id');
       const reload = props.get('reload', () => {});
       useEffect(() => {
-        if (window?.UiLibrariesMcp?.subscribe) {
-          window.UiLibrariesMcp.subscribe('el_table__reload', refId, (...args) => {
-            _.attempt(reload, ...(args as [any, any]));
-          });
+        if (_.get(window, 'UiLibrariesMcp.subscribe')) {
+          _.attempt(
+            _.get(window, 'UiLibrariesMcp.subscribe', () => {}),
+            'el_table__reload',
+            refId,
+            (...args) => {
+              _.attempt(reload, ...(args as [any, any]));
+            },
+          );
         }
         return () => {
-          if (window?.UiLibrariesMcp?.unsubscribe) {
-            window.UiLibrariesMcp.unsubscribe('el_table__reload', refId);
+          if (_.get(window, 'UiLibrariesMcp.unsubscribe')) {
+            _.attempt(
+              _.get(window, 'UiLibrariesMcp.unsubscribe', () => {}),
+              'el_table__reload',
+              refId,
+            );
           }
         };
       }, []);

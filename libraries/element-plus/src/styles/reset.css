@@ -46,7 +46,6 @@
   --el-button-primary-plain-disabled-border-color: var(--el-color-primary-light-8);
   --el-button-primary-plain-disabled-color: var(--el-color-primary-light-5);
 
-
   --el-button-success-text-color: var(--el-color-white);
   --el-button-success-bg-color: var(--el-color-success);
   --el-button-success-border-color: var(--el-color-success);
@@ -151,7 +150,6 @@
   --el-button-small-size: 24px;
   --el-button-large-size: 40px;
 }
-
 
 .el-button {
   --el-button-font-weight: var(--el-button-default-font-weight);
@@ -416,4 +414,8 @@
 
 body {
   background-color: var(--el-bg-color-page);
+}
+*，*::before,
+*::after {
+  box-sizing: border-box;
 }
