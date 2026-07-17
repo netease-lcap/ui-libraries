@@ -415,7 +415,7 @@
 body {
   background-color: var(--el-bg-color-page);
 }
-*，*::before,
+/* *，*::before,
 *::after {
   box-sizing: border-box;
-}
+} */
