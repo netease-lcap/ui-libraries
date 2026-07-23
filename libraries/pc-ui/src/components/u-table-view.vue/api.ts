@@ -347,7 +347,7 @@ namespace nasl.ui {
           },
           if: _ => _.remoteSorting === true,
       })
-      private defaultOrder: 'asc' | 'desc' = 'asc';
+      private defaultOrder: 'asc' | 'desc' = 'desc';
 
       @Prop({
           group: '数据属性',
@@ -1376,7 +1376,7 @@ namespace nasl.ui {
           },
           if: _ => _.sortable === true,
       })
-      defaultOrder: 'asc' | 'desc' = 'asc';
+      defaultOrder: 'asc' | 'desc' = 'desc';
 
       @Prop<UTableViewColumnOptions<T, V, P, M>, 'type'>({
           group: '数据属性',
@@ -1718,7 +1718,7 @@ namespace nasl.ui {
           },
           if: _ => _.sortable === true,
       })
-      defaultOrder: 'asc' | 'desc' = 'asc';
+      defaultOrder: 'asc' | 'desc' = 'desc';
 
       @Prop({
           group: '主要属性',
