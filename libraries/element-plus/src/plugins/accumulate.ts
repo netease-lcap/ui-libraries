@@ -38,13 +38,15 @@ type ConvertFieldsToString<T> = {
 type ConvertDataSourceToType<T> = {
   [K in keyof T as K extends 'dataSource' ? K : never]: DataSourceType;
 };
-// 类型函数：将 linkType 字段转换为 DataSourceType 类型
+// 类型函数：有 linkType 且尚未声明 download 时，补充 download: boolean
 type ConvertLinkTypeToDownload<T> = {
   [K in keyof T as K extends 'linkType' ? K : never]: T[K];
 } & (T extends { linkType: string }
-  ? {
-      download: boolean;
-    }
+  ? T extends { download: any }
+    ? object
+    : {
+        download: boolean;
+      }
   : object);
 type ConvertHrefAndToToType<T> = {
   [K in keyof T as K extends 'hrefAndTo' ? never : K]: T[K];
