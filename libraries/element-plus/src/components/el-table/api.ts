@@ -532,7 +532,7 @@ namespace nasl.ui {
       title: '数据加载成功时触发',
       description: '数据加载成功时触发',
     })
-    onSuccess: (event: nasl.collection.List<T>) => any;
+    onSuccess: (event: { list: nasl.collection.List<T>; total: nasl.core.Integer }) => any;
 
     @Event({
       title: '排序后',
