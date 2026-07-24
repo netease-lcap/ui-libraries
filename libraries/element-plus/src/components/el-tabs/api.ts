@@ -8,7 +8,8 @@ namespace nasl.ui {
       structured: true,
       childAccept: "target.tag === 'el-tab-pane'",
       dataSource: {
-        dismiss: "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
+        dismiss:
+          "!!this.getAttribute('routeLinkage')?.value || (!this.getAttribute('dataSource') && this.getDefaultElements().length > 0)",
         display: 3,
         loopRule: 'nth-last-child(-n+2)',
         loopElem: '.el-tabs__nav > .el-tabs__item',
@@ -19,12 +20,13 @@ namespace nasl.ui {
         label: true,
       },
       displaySlotConditions: {
-        label: "!!this.getAttribute('dataSource')",
-        content: "!!this.getAttribute('dataSource')",
+        label: "!!this.getAttribute('dataSource') && !this.getAttribute('routeLinkage')?.value",
+        content: "!!this.getAttribute('dataSource') && !this.getAttribute('routeLinkage')?.value",
       },
       additionalAttribute: {
         active: '0',
       },
+      forceUpdateWhenAttributeChange: true,
     },
   })
   @Component({
@@ -50,7 +52,43 @@ namespace nasl.ui {
   }
 
   export class ElTabsOptions<T, V> extends ViewComponentOptions {
-    @Prop({
+    @Prop<ElTabsOptions<T, V>, 'routeLinkage'>({
+      group: '数据属性',
+      title: '路由联动',
+      description: '开启后，根据路由变化自动生成/切换 Tab，点击 Tab 跳转对应路由',
+      docDescription:
+        '与静态数据源模式互斥。开启后无需手动配置标签页，路由跳转到哪 Tab 就出现在哪。Tab 仅作导航，页面缓存由 el-router-view 配置决定。Tab 标题与面包屑自动生成逻辑一致。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      onChange: [
+        {
+          update: {
+            closable: true,
+          },
+          if: (_) => _ === true,
+        },
+        {
+          clear: ['dataSource', 'addable', 'editable', 'router'],
+          if: (_) => _ === true,
+        },
+      ],
+    })
+    routeLinkage: nasl.core.Boolean = false;
+
+    @Prop<ElTabsOptions<T, V>, 'maxTabCount'>({
+      group: '数据属性',
+      title: '最大 Tab 数',
+      description: '内存保护，超出时自动关闭最早打开的 Tab',
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 1,
+      },
+      if: (_) => !!_.routeLinkage,
+    })
+    maxTabCount: nasl.core.Integer = 10;
+
+    @Prop<ElTabsOptions<T, V>, 'dataSource'>({
       group: '数据属性',
       title: '数据源',
       description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
@@ -59,14 +97,16 @@ namespace nasl.ui {
       setter: {
         concept: 'DataSourceSetter',
       },
+      if: (_) => !_.routeLinkage,
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
-    @Prop({
+    @Prop<ElTabsOptions<T, V>, 'dataSchema'>({
       group: '数据属性',
       title: '数据类型',
       description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
       docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+      if: (_) => !_.routeLinkage,
     })
     dataSchema: T;
 
@@ -78,6 +118,7 @@ namespace nasl.ui {
       setter: {
         concept: 'PropertySelectSetter',
       },
+      if: (_) => !_.routeLinkage,
     })
     titleField: (item: T) => nasl.core.String = ((item: any) => item.title) as any;
 
@@ -89,10 +130,11 @@ namespace nasl.ui {
       setter: {
         concept: 'PropertySelectSetter',
       },
+      if: (_) => !_.routeLinkage,
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
 
-    @Prop({
+    @Prop<ElTabsOptions<T, V>, 'router'>({
       group: '数据属性',
       title: '使用路由',
       description: '开启后，选项卡可设置跳转页面',
@@ -100,6 +142,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => !_.routeLinkage,
     })
     router: nasl.core.Boolean = false;
 
@@ -110,7 +153,7 @@ namespace nasl.ui {
       setter: {
         concept: 'AnonymousFunctionSetter',
       },
-      if: (_) => !!_.dataSource,
+      if: (_) => !_.routeLinkage && !!_.dataSource,
       bindOpen: true,
     })
     tabPaneProps: (current: Current<T>) => {
@@ -147,19 +190,21 @@ namespace nasl.ui {
     })
     closable: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElTabsOptions<T, V>, 'addable'>({
       group: '主要属性',
       title: '可增加',
       description: '标签页是否可增加',
       setter: { concept: 'SwitchSetter' },
+      if: (_) => !_.routeLinkage,
     })
     addable: nasl.core.Boolean = false;
 
-    @Prop({
+    @Prop<ElTabsOptions<T, V>, 'editable'>({
       group: '主要属性',
       title: '可增加且可关闭',
       description: '标签是否同时可增加和关闭',
       setter: { concept: 'SwitchSetter' },
+      if: (_) => !_.routeLinkage,
     })
     editable: nasl.core.Boolean = false;
 
@@ -171,7 +216,7 @@ namespace nasl.ui {
         concept: 'IconSetter',
         customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
       },
-      if: (_) => !!_.addable || !!_.editable,
+      if: (_) => !_.routeLinkage && (!!_.addable || !!_.editable),
     })
     addIcon: nasl.core.String;
 

@@ -7,6 +7,7 @@ export const mcpToolJson = mcpJson;
 
 export * from './dom';
 export * from './curry';
+export * from './route-meta';
 
 function filterUnderfinedValue(object: Record<string, string>) {
   return Object.fromEntries(Object.entries(object).filter(([, value]) => !_.isUndefined(value)));

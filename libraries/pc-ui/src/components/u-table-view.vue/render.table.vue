@@ -263,7 +263,7 @@ export default {
 
         sorting: Object,
         sortTrigger: { type: String, default: 'head' },
-        defaultOrder: { type: String, default: 'asc' },
+        defaultOrder: { type: String, default: 'desc' },
 
         useStickyFixed: Boolean,
         fixedRightList: Array,

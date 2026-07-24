@@ -1,7 +1,6 @@
 import { defineComponent, inject, PropType, KeepAlive } from 'vue';
 import { RouterView } from 'vue-router';
 import _ from 'lodash';
-import styles from './index.module.css';
 
 function useIsDesigner() {
   const injectedDesigner = inject<boolean>('VUE_APP_DESIGNER', false);

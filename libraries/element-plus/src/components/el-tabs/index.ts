@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import basicsPlugin from './plugins/basic-plugins';
 import { $deletePropsList } from '@/plugins/constants';
+import './index.css';
 
 function ElTabsRegister(BaseComponent, plugin = {}, extend = true) {
   const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
