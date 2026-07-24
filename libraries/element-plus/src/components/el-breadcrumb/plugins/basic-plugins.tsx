@@ -5,6 +5,7 @@ import { $router, $route } from '@/plugins/constants';
 import { ElBreadcrumbItem } from '../index';
 import { getPropsIcon } from '@/plugins/common/icon';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import { getRouteTitleItems } from '@/utils/route-meta';
 import lowCodePlugin from './low-code';
 
 const BreadcrumbAccumulate = new PluginAccumulateTypes<nasl.ui.ElBreadcrumbOptions, typeof breadcrumbProps>();
@@ -25,29 +26,7 @@ export default BreadcrumbAccumulate.addAccumulate(lowCodePlugin)
 
       const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
 
-      const routerMeta = useMemo(() => {
-        if (!routeInfo?.path) return [];
-        return _.reduce(
-          routeInfo.matched,
-          (pre: Array<{ title: string; to: string }>, curMatch) => {
-            const meta = _.assign(
-              {},
-              curMatch.meta,
-              _.get(curMatch, 'components.default.__vccOpts.meta', {}),
-              _.get(curMatch, 'components.default.meta', {}),
-            );
-            const hasPageName = meta?.crumb || meta?.name;
-            const currentPageInfo = hasPageName
-              ? {
-                  title: meta?.crumb || curMatch.name || curMatch.path,
-                  to: curMatch.path,
-                }
-              : [];
-            return pre.concat(currentPageInfo);
-          },
-          [],
-        );
-      }, [routeInfo]);
+      const routerMeta = useMemo(() => getRouteTitleItems(routeInfo), [routeInfo]);
 
       const defaultSlots = useCallback(() => {
         return routerMeta.map((item) => (

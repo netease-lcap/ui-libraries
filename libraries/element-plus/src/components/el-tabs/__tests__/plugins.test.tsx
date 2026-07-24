@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { renderHook } from '@ep-test/test-utils/render-hook';
-import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
+import { $deletePropsList, $dataSourceDeleteField, $router, $route } from '@/plugins/constants';
 import '@/utils/index';
 import TabsAccumulate from '../plugins/basic-plugins';
 
@@ -25,6 +25,8 @@ describe('el-tabs plugins', () => {
 
         const pluginNames = [
           'handleDataSource',
+          'handleValue',
+          'handleRouteLinkage',
           'handleAddIcon',
         ];
 
@@ -530,6 +532,96 @@ describe('el-tabs plugins', () => {
       it('应该正确处理不存在的插件查询', () => {
         const nonExistentPlugin = TabsAccumulate.getPluginMethodByName('nonExistent');
         expect(nonExistentPlugin).toBeUndefined();
+      });
+    });
+
+    describe('handleRouteLinkage 插件功能测试', () => {
+      const plugin = TabsAccumulate.getPluginMethodByName('handleRouteLinkage') as any;
+
+      it('未开启路由联动时应返回空对象', () => {
+        const props = {
+          routeLinkage: false,
+          slots: {},
+          class: '',
+          [$deletePropsList]: [],
+        };
+        const { currentValue } = renderHook(plugin, props);
+        expect(currentValue.value).toEqual({});
+      });
+
+      it('开启路由联动后应根据当前路由生成 Tab', () => {
+        const afterEach = vi.fn(() => () => {});
+        const push = vi.fn();
+        const mockRoute = {
+          path: '/user/profile',
+          fullPath: '/user/profile',
+          name: 'Profile',
+          matched: [
+            {
+              path: '/user',
+              name: 'User',
+              meta: { crumb: '用户中心' },
+              components: { default: { name: 'UserLayout' } },
+            },
+            {
+              path: '/user/profile',
+              name: 'Profile',
+              meta: { crumb: '个人资料' },
+              components: { default: { name: 'ProfilePage' } },
+            },
+          ],
+        };
+
+        const props = {
+          routeLinkage: true,
+          maxTabCount: 10,
+          closable: true,
+          showInDesigner: false,
+          slots: {},
+          class: '',
+          [$deletePropsList]: [],
+          [$router]: { afterEach, push },
+          [$route]: mockRoute,
+        };
+
+        const { currentValue } = renderHook(plugin, props);
+        const result = currentValue.value;
+
+        expect(result.class).toContain('el-tabs--route-linkage');
+        expect(result.closable).toBe(true);
+        expect(result.addable).toBe(false);
+        expect(result.editable).toBe(false);
+        expect(typeof result.slots.default).toBe('function');
+
+        const panes = result.slots.default();
+        expect(panes).toHaveLength(1);
+        expect(panes[0].props.name).toBe('/user/profile');
+        expect(panes[0].props.label).toBe('个人资料');
+        expect(afterEach).toHaveBeenCalled();
+      });
+
+      it('点击 Tab 时应触发路由跳转', () => {
+        const push = vi.fn();
+        const mockRoute = {
+          path: '/a',
+          fullPath: '/a',
+          matched: [{ path: '/a', name: 'A', meta: { crumb: '页面A' }, components: { default: { name: 'A' } } }],
+        };
+        const props = {
+          routeLinkage: true,
+          showInDesigner: false,
+          slots: {},
+          class: '',
+          [$deletePropsList]: [],
+          [$router]: { afterEach: vi.fn(() => () => {}), push },
+          [$route]: mockRoute,
+          onTabChange: vi.fn(),
+        };
+
+        const { currentValue } = renderHook(plugin, props);
+        expect(typeof currentValue.value.onTabChange).toBe('function');
+        currentValue.value.onTabChange('/b');
+        expect(push).toHaveBeenCalledWith('/b');
       });
     });
   });
