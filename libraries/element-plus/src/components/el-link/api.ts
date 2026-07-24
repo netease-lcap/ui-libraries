@@ -71,6 +71,16 @@ namespace nasl.ui {
     })
     linkType: 'destination' | 'download' = 'destination';
 
+    @Prop({
+      group: '交互属性',
+      title: '跳转页面',
+      description: '选择链接的跳转页面',
+      docDescription: '选择链接的跳转页面',
+      setter: { concept: 'InputSetter' },
+      if:() => false,
+    })
+    download: nasl.core.String;
+
     // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({
       group: '状态属性',
@@ -275,21 +285,13 @@ namespace nasl.ui {
     @Event({
       title: '切换路由前',
       description: '使用 router 相关属性切换路由前触发',
-  })
-  onBeforeNavigate: (event: {
-      to: nasl.core.String;
-      replace: nasl.core.Boolean;
-      append: nasl.core.Boolean;
-  }) => any;
+    })
+    onBeforeNavigate: (event: { to: nasl.core.String; replace: nasl.core.Boolean; append: nasl.core.Boolean }) => any;
 
-  @Event({
+    @Event({
       title: '切换路由后',
       description: '使用 router 相关属性切换路由后触发',
-  })
-  onNavigate: (event: {
-      to: nasl.core.String;
-      replace: nasl.core.Boolean;
-      append: nasl.core.Boolean;
-  }) => any;
+    })
+    onNavigate: (event: { to: nasl.core.String; replace: nasl.core.Boolean; append: nasl.core.Boolean }) => any;
   }
 }
