@@ -47,7 +47,7 @@ export default DescriptionsBasicAccumulate.addPlugin({
           v-slots={_.omit(Vnode.children, ['default'])}
         >
           {cloneVNode(Vnode, { contentClassName: itemClass })}
-        </ElDescriptionsItem>
+        </ElDescriptionsItem>,
       ];
     });
     return {
