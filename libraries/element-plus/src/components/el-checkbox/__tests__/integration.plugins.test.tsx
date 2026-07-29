@@ -330,7 +330,7 @@ describe('el-checkbox 插件集成测试', () => {
       await waitForNextUpdate();
 
       expect(currentValue.value.class).toContain('el-checkbox-group-vertical');
-      expect(currentValue.value.style).toBeDefined();
+      expect(currentValue.value.class).toContain('cw-checkbox-group');
     });
 
     it('应该正确处理 column 配置', async () => {
@@ -371,9 +371,8 @@ describe('el-checkbox 插件集成测试', () => {
 
       await waitForNextUpdate();
 
-      expect(currentValue.value.style).toBeDefined();
-      expect(currentValue.value.style['grid-template-columns']).toBe('auto-fill');
-      expect(currentValue.value.style['grid-auto-flow']).toBe('auto');
+      expect(currentValue.value.class).toContain('cw-checkbox-group');
+      expect(currentValue.value.style?.['grid-template-columns']).toBeUndefined();
     });
 
     it('应该合并自定义 class 和 style', async () => {

@@ -6,6 +6,13 @@
 
 .el-form {
   border: 1px solid transparent;
+  /* 按表单容器宽度（非视口）自适应表单项最大宽度 */
+  container-type: inline-size;
+  container-name: el-form;
+
+  .el-form-item {
+    --el-form-item-max-width: 400px;
+  }
 
   .el-form-item__label {
     display: inline-flex;
@@ -41,6 +48,7 @@
       flex: 0 1 var(--el-form-content-width, 240px);
       min-width: var(--el-form-content-min-width, 180px);
       width: auto;
+      max-width: var(--el-form-item-max-width, 400px);
 
       /* 仅对常用录入控件拉满 content；单选/多选组等非列表组件不在此列 */
       >.el-autocomplete,
@@ -128,7 +136,7 @@
         flex-basis: var(--el-form-label-width, 240px);
         min-width: 0;
         width: auto;
-        max-width: 400px;
+        max-width: var(--el-form-item-max-width, 400px);
 
         >.el-autocomplete,
         >.el-cascader,
@@ -183,6 +191,31 @@
   }
 }
 
+/* 表单项最大宽度：按表单容器宽度断点（非视口） */
+@container el-form (min-width: 992px) {
+  .el-form-item {
+    --el-form-item-max-width: 460px;
+  }
+}
+
+@container el-form (min-width: 1200px) {
+  .el-form-item {
+    --el-form-item-max-width: 560px;
+  }
+}
+
+@container el-form (min-width: 1440px) {
+  .el-form-item {
+    --el-form-item-max-width: 680px;
+  }
+}
+
+@container el-form (min-width: 1920px) {
+  .el-form-item {
+    --el-form-item-max-width: 800px;
+  }
+}
+
 
 .el-form.el-form--label-top .el-flex-form-item>:not(.el-form-item-has-label) {
   align-self: flex-end;
@@ -221,7 +254,7 @@
     flex-basis: var(--el-form-label-width, 240px);
     min-width: 0;
     width: 240px;
-    max-width: 400px;
+    max-width: var(--el-form-item-max-width, 400px);
 
     >.el-autocomplete,
     >.el-cascader,
