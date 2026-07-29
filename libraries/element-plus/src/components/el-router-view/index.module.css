@@ -3,7 +3,7 @@
   text-align: center;
   display: none;
 }
-.fake .fakeEmpty {
+.fake[designer] .fakeEmpty {
   background: linear-gradient(-45deg, white 25%,
   #f3f5fa 25%, #f3f5fa 50%,
   white 50%, white 75%,

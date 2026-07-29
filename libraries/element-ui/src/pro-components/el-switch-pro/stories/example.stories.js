@@ -13,6 +13,24 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-switch-pro></el-switch-pro>',
+    data: () => ({
+      value: 'open',
+    }),
+    methods: {
+      focusSwitch() {
+        this.$refs.mySwitch.focus();
+      },
+    },
+    template: `
+    <div>
+      <el-button @click="focusSwitch">聚焦开关</el-button>
+      <el-switch-pro ref="mySwitch" v-model="value" activeColor="red" activeValue="open" activeIconClass="el-icon-success" inactiveValue="close" inactiveIconClass="el-icon-error" activeText="开启" inactiveText="关闭"></el-switch-pro>
+      {{ value }}
+    </div>
+    `,
   }),
+  args: {
+    activeValue: 'open',
+    inactiveValue: 'close',
+  },
 };

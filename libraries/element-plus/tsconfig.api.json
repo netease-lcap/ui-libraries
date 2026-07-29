@@ -20,7 +20,8 @@
     "outFile": "./dist-theme/nasl.ui.ts",
     "lib": ["esnext", "dom"],
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@ep-test/*": ["./ep-test/*"]
     }
   },
   "include": [

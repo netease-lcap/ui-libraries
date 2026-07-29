@@ -179,7 +179,7 @@
 </template>
 
 <script>
-import isNumber from 'lodash/isNumber';
+import { isNumber } from 'lodash';
 import FVirtualTable from './f-virtual-table.vue';
 import i18nMixin from '../../mixins/i18n';
 import KeyMap from '../../utils/keyMap';
@@ -263,7 +263,7 @@ export default {
 
         sorting: Object,
         sortTrigger: { type: String, default: 'head' },
-        defaultOrder: { type: String, default: 'asc' },
+        defaultOrder: { type: String, default: 'desc' },
 
         useStickyFixed: Boolean,
         fixedRightList: Array,
@@ -377,7 +377,7 @@ export default {
           return this.valueField && this.$at(item, this.valueField) ? this.$at(item, this.valueField) : rowIndex;
         },
         number2Pixel(value) {
-            return isNumber(value) ? value + 'px' : '';
+            return isNumber(value) ? value + 'px' : value;
         },
         getStyle(type, columnVM, currentData) {
             const style = Object.assign({}, columnVM.$vnode.data && columnVM.$vnode.data.style);
@@ -480,12 +480,12 @@ export default {
                 return undefined;
             const inFixedLeftList = this.isInFixedList(columnVM, this.fixedLeftList);
             let isLastInList = list[columnIndex + 1] && !list[columnIndex + 1].fixed;
-            if (columnVM.$parent.isGroup) {
+            if (columnVM.$parent.isGroup && this.visibleTableHeadTrArr) {
                 const groupList = this.visibleTableHeadTrArr.find((tableHeadTr) => tableHeadTr.includes(columnVM.$parent));
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
                     const isGroupInLast = this.isLastLeftFixed(columnVM.$parent, groupVMIndex, groupList);
-                    const isLastInGroup = list[columnIndex + 1] === undefined || list[columnIndex + 1].$parent !== columnVM.$parent; // 原来组里的最后一个没有阴影，增加判断
+                    const isLastInGroup = !list[columnIndex + 1] || list[columnIndex + 1].$parent !== columnVM.$parent; // 原来组里的最后一个没有阴影，增加判断
                     isLastInList = isLastInGroup && isGroupInLast;
                 }
             }
@@ -504,12 +504,12 @@ export default {
         isFirstRightFixed(columnVM, columnIndex, list) {
             const inFixedRightList = this.isInFixedList(columnVM, this.fixedRightList);
             let isLastInList = list[columnIndex - 1] && !list[columnIndex - 1].fixed;
-            if (columnVM.$parent.isGroup) {
+            if (columnVM.$parent.isGroup && this.visibleTableHeadTrArr) {
                 const groupList = this.visibleTableHeadTrArr.find((tableHeadTr) => tableHeadTr.includes(columnVM.$parent));
                 if (groupList) {
                     const groupVMIndex = groupList.findIndex((groupVM) => groupVM === columnVM.$parent);
                     const isGroupInLast = this.isFirstRightFixed(columnVM.$parent, groupVMIndex, groupList);
-                    const isLastInGroup = list[columnIndex - 1] === undefined || list[columnIndex - 1].$parent !== columnVM.$parent;
+                    const isLastInGroup = !list[columnIndex - 1] || list[columnIndex - 1].$parent !== columnVM.$parent;
                     isLastInList = isLastInGroup && isGroupInLast;
                 }
             }
@@ -671,6 +671,7 @@ export default {
             this.scrollXEnd = e.target.scrollLeft >= e.target.scrollWidth - e.target.clientWidth;
         },
         onScrollView(data) {
+            this.$emit('scroll-view', data);
             this.hasScroll = true;
             if (!this.useStickyFixed) {
                 this.syncScrollViewScroll(data.scrollTop, data.target);

@@ -140,6 +140,7 @@ export default defineConfig(({ command }) => {
               mainSelectorMap: {
                 '.el-col': true,
               },
+              hideSelectorRegexps: [/>\*/],
             },
             ElDrawer: {
               selectorPrefixMap: {
@@ -188,6 +189,12 @@ export default defineConfig(({ command }) => {
                 '.el-p-select-option': false,
               },
             },
+            ElSwitchPro: {
+              selectorPrefixMap: {
+                'el-p-switch__wrapper': true,
+                'el-p-switch': false,
+              },
+            },
             ElCascaderPro: {
               mainSelectorMap: {
                 '.el-p-cascader': true,
@@ -233,6 +240,15 @@ export default defineConfig(({ command }) => {
               mainSelectorMap: {
                 '.el-tooltip__popper': true,
               },
+            },
+            ElFlex: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElAbsoluteLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElRow: {
+              hideSelectorRegexps: [/>\*/],
             },
           },
         },

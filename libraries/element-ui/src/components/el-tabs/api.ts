@@ -11,9 +11,9 @@ namespace nasl.ui {
       dataSource: {
         dismiss:
           "!this.getAttribute('dataSource') && this.getDefaultElements().length > 0",
-        display: 3,
+        display: 1,
         loopRule: 'nth-child(n+3)',
-        loopElem: ".el-tabs__nav > .el-tabs__item",
+        loopElem: " > .el-tabs__nav > .el-tabs__item",
         emptySlot: {
           display: 'large',
           condition: "!this.getAttribute('dataSource')",
@@ -23,6 +23,7 @@ namespace nasl.ui {
       displaySlotInline: {
         label: true,
       },
+      eventsScope: "[class^=u-tabs__header]",
       displaySlotConditions: {
         label: "!!this.getAttribute('dataSource')",
         content: "!!this.getAttribute('dataSource')",
@@ -56,7 +57,9 @@ namespace nasl.ui {
       docDescription:
         '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
-      bindOpen: true,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource:
       | { list: nasl.collection.List<T>; total: nasl.core.Integer }

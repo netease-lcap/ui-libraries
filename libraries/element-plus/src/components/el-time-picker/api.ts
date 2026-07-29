@@ -14,21 +14,39 @@ namespace nasl.ui {
     description: '用于选择某一具体时间点或某一时间段。',
     group: 'Selector',
   })
-  export class ElTimePicker extends ViewComponent {
+  export class ElTimePicker<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
     @Prop({
       title: '值',
     })
-    modelValue: nasl.core.Time;
+    modelValue: nasl.core.Time | nasl.core.String | nasl.collection.List<nasl.core.Time> | nasl.collection.List<nasl.core.String>;
 
     @Prop({
       title: '起始值',
     })
-    startValue: nasl.core.Time;
+    startValue: nasl.core.Time | nasl.core.String;
 
     @Prop({
       title: '结束值',
     })
-    endValue: nasl.core.Time;
+    endValue: nasl.core.Time | nasl.core.String;
+
+    @Prop({
+      title: '禁用',
+      description: '是否禁用组件',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '只读',
+      description: '只读状态',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean;
 
     @Method({
       title: '使组件获取焦点',
@@ -45,7 +63,7 @@ namespace nasl.ui {
     @Method({
       title: '打开时间选择器弹窗',
       description: '打开时间选择器弹窗',
-    })  
+    })
     handleOpen: () => void;
 
     @Method({
@@ -54,24 +72,32 @@ namespace nasl.ui {
     })
     handleClose: () => void;
 
-    constructor(options?: Partial<ElTimePickerOptions>) {
+    constructor(options?: Partial<ElTimePickerOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class ElTimePickerOptions extends ViewComponentOptions {
+  export class ElTimePickerOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
-      group: '数据属性',
+      group: '主要属性',
       title: '区间选择',
-      description: '是否支持进行时间区间选择，关闭则为时间点选择',
+      description: '是否启用时间区间选择',
+      docDescription: '开启后，支持选择时间区间（开始时间和结束时间）。关闭后，只能选择单个时间点。',
       setter: {
         concept: 'SwitchSetter',
       },
       onChange: [{ clear: ['startPlaceholder', 'endPlaceholder'] }],
     })
-    isRange: nasl.core.Boolean = false;
+    isRange: M = false as any;
 
-    @Prop<ElTimePickerOptions, 'modelValue'>({
+    @Prop<ElTimePickerOptions<T, V, P, M, C>, 'modelValue'>({
       group: '数据属性',
       sync: true,
       title: '值',
@@ -79,9 +105,13 @@ namespace nasl.ui {
       setter: { concept: 'InputSetter' },
       if: (_) => !_.isRange,
     })
-    modelValue: nasl.core.String | nasl.core.Time;
+    modelValue:
+      | nasl.core.Time
+      | nasl.core.String
+      | nasl.collection.List<nasl.core.Time>
+      | nasl.collection.List<nasl.core.String>;
 
-    @Prop<ElTimePickerOptions, 'startValue'>({
+    @Prop<ElTimePickerOptions<T, V, P, M, C>, 'startValue'>({
       group: '数据属性',
       title: '起始值',
       description: '默认显示的起始时间值，格式如08:08:08',
@@ -90,7 +120,7 @@ namespace nasl.ui {
     })
     startValue: nasl.core.String | nasl.core.Time;
 
-    @Prop<ElTimePickerOptions, 'endValue'>({
+    @Prop<ElTimePickerOptions<T, V, P, M, C>, 'endValue'>({
       group: '数据属性',
       title: '结束值',
       description: '默认显示的结束时间值，格式如08:08:08',
@@ -114,15 +144,13 @@ namespace nasl.ui {
       docDescription: '禁止选择部分小时选项',
       bindOpen: true,
       setter: {
-          concept: 'AnonymousFunctionSetter',
-      }
+        concept: 'AnonymousFunctionSetter',
+      },
     })
-    disabledHours: (role: nasl.core.String, comparingDate: any) => {
-      /**
-       * @title 禁止选择的小时
-       */
-      hours: nasl.collection.List<nasl.core.Integer>
-    };
+    disabledHours: (
+      timeRole: nasl.core.String,
+      comparingDate: nasl.core.String,
+    ) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -131,15 +159,14 @@ namespace nasl.ui {
       docDescription: '禁止选择部分分钟选项',
       bindOpen: true,
       setter: {
-          concept: 'AnonymousFunctionSetter',
-      }
+        concept: 'AnonymousFunctionSetter',
+      },
     })
-    disabledMinutes: (hour: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
-      /**
-       * @title 禁止选择的分钟
-       */
-      minutes: nasl.collection.List<nasl.core.Integer>
-    };
+    disabledMinutes: (
+      hour: nasl.core.Integer,
+      timeRole: nasl.core.String,
+      comparingDate: nasl.core.String,
+    ) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -148,15 +175,15 @@ namespace nasl.ui {
       docDescription: '禁止选择部分秒选项',
       bindOpen: true,
       setter: {
-          concept: 'AnonymousFunctionSetter',
-      }
+        concept: 'AnonymousFunctionSetter',
+      },
     })
-    disabledSeconds: (hour: nasl.core.Integer, minute: nasl.core.Integer, role: nasl.core.String, comparingDate: any) => {
-      /**
-       * @title 禁止选择的秒
-       */
-      seconds: nasl.collection.List<nasl.core.Integer>
-    };
+    disabledSeconds: (
+      hour: nasl.core.Integer,
+      minute: nasl.core.Integer,
+      timeRole: nasl.core.String,
+      comparingDate: nasl.core.String,
+    ) => nasl.collection.List<nasl.core.Integer>;
 
     @Prop({
       group: '主要属性',
@@ -182,37 +209,38 @@ namespace nasl.ui {
     })
     readonly: nasl.core.Boolean = false;
 
-    @Prop<ElTimePickerOptions, 'format'>({
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
+    @Prop<ElTimePickerOptions<T, V, P, M, C>, 'format'>({
       group: '主要属性',
       title: '格式化',
       description: '用于格式化时间，',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '12:09:09' },
-          { title: '12时09分09秒' },
-          { title: '12:09' },
-          { title: '12时09分' },
-        ],
+        options: [{ title: '12:09:09' }, { title: '12时09分09秒' }, { title: '12:09' }, { title: '12时09分' }],
       },
     })
     format: 'HH:mm:ss' | 'HH时mm分ss秒' | 'HH:mm' | 'HH时mm分' = 'HH:mm:ss';
 
-    @Prop<ElTimePickerOptions, 'placeholder'>({
+    @Prop<ElTimePickerOptions<T, V, P, M, C>, 'placeholder'>({
       group: '主要属性',
       title: '占位符',
       description: '非范围选择时的占位内容',
       setter: { concept: 'InputSetter' },
       if: (_) => !_.isRange,
-      sync: true,
     })
     placeholder: nasl.core.String = '请选择时间';
 
-    @Prop<ElTimePickerOptions, 'startPlaceholder'>({
+    @Prop<ElTimePickerOptions<T, V, P, M, C>, 'startPlaceholder'>({
       group: '主要属性',
       title: '起始占位符',
-      description:
-        '时间选择框无内容时的提示信息，支持自定义编辑, 在没有设置的时候使用placeholder作为右侧占位符内容',
+      description: '时间选择框无内容时的提示信息，支持自定义编辑, 在没有设置的时候使用placeholder作为右侧占位符内容',
       if: (_) => _.isRange === true,
       implicitToString: true,
       setter: {
@@ -222,7 +250,7 @@ namespace nasl.ui {
     })
     startPlaceholder: nasl.core.String = '请选择时间';
 
-    @Prop<ElTimePickerOptions, 'endPlaceholder'>({
+    @Prop<ElTimePickerOptions<T, V, P, M, C>, 'endPlaceholder'>({
       group: '主要属性',
       title: '结束占位符',
       description: '结束占位符',
@@ -236,10 +264,11 @@ namespace nasl.ui {
       title: '箭头控制',
       description: '是否使用箭头控制时间',
       setter: { concept: 'SwitchSetter' },
+      bindHide: true,
     })
     arrowControl: nasl.core.Boolean = false;
 
-    @Prop<ElTimePickerOptions, 'separator'>({
+    @Prop<ElTimePickerOptions<T, V, P, M, C>, 'separator'>({
       group: '主要属性',
       title: '分隔符',
       description: '日期分隔符，支持全局配置，默认为 -',
@@ -262,8 +291,8 @@ namespace nasl.ui {
     prefixIconName: nasl.core.String = 'Clock';
 
     @Prop({
-      title: '自定义清除图标',
-      description: '自定义清除图标',
+      title: '清除图标',
+      description: '清除图标',
       group: '主要属性',
       setter: {
         concept: 'IconSetter',
@@ -295,7 +324,7 @@ namespace nasl.ui {
       title: '改变后',
       description: '值变化时触发。',
     })
-    onChange: (event: nasl.collection.List<nasl.core.Time>) => any;
+    onChange: (event: M extends true ? nasl.collection.List<nasl.core.Time> : nasl.core.Time) => any;
 
     @Event({
       title: '失去焦点',
@@ -316,12 +345,11 @@ namespace nasl.ui {
     onClear: (event: FocusEvent) => any;
 
     @Event({
-      title: '显示',
-      description: '显示时触发',
+      title: '下拉列表显示状态变化',
+      description: '下拉列表显示状态变化时触发',
     })
     onVisibleChange: (event: nasl.core.Boolean) => any;
   }
-
 
   @IDEExtraInfo({
     ideusage: {
@@ -331,32 +359,59 @@ namespace nasl.ui {
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
       forceRefresh: 'parent',
+      childAccept:false,
       forceUpdateWhenAttributeChange: true,
       namedSlotOmitWrapper: ['label'],
     },
-    extends: [{
-      name: 'ElFormItemPro',
-      excludes: [
-        'slotDefault',
-      ],
-    }, {
-      name: 'ElTimePicker',
-    }],
+    extends: [
+      {
+        name: 'ElFormItemPro',
+        excludes: ['slotDefault'],
+      },
+      {
+        name: 'ElTimePicker',
+      },
+    ],
   })
   @Component({
     title: '表单时间选择器',
     description: '表单时间选择器',
     group: 'Form',
   })
-  export class ElFormTimePicker extends ViewComponent {
-    constructor(options?: Partial<ElFormTimePickerOptions & ElFormItemProOptions & Omit<ElTimePickerOptions, keyof ElFormItemProOptions>>) {
+  export class ElFormTimePicker<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponent {
+    constructor(
+      options?: Partial<
+        ElFormTimePickerOptions<T, V, P, M, C> &
+          ElFormItemProOptions &
+          Omit<ElTimePickerOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+      >,
+    ) {
       super();
     }
   }
 
-  export class ElFormTimePickerOptions extends ViewComponentOptions {
-    @Prop<ElFormTimePickerOptions, 'useRangeValue'>({
+  export class ElFormTimePickerOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {
+    @Prop<ElFormTimePickerOptions<T, V, P, M, C>, 'useRangeValue'>({
       group: '数据属性',
       title: '使用区间字段',
       description: '使用区间字段, 用于日期、时间、日期时间选择器开启区间选择时，托管起始值与结束值',
@@ -366,7 +421,7 @@ namespace nasl.ui {
     })
     useRangeValue: nasl.core.Boolean = false;
 
-    @Prop<ElFormTimePickerOptions, 'isRange'>({
+    @Prop<ElFormTimePickerOptions<T, V, P, M, C>, 'isRange'>({
       group: '数据属性',
       title: '区间选择',
       description: '是否支持进行时间区间选择，关闭则为时间点选择',
@@ -397,6 +452,6 @@ namespace nasl.ui {
       ],
       bindHide: true,
     })
-    isRange: nasl.core.Boolean = false;
+    isRange: M = false as any;
   }
 }

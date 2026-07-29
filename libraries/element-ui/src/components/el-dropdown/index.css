@@ -1,0 +1,15 @@
+.el-dropdown .el-icon-arrow-down {
+  transition: transform 0.3s;
+}
+
+.el-dropdown.is-opened .el-icon-arrow-down {
+  transform: rotate(180deg);
+}
+
+.el-dropdown .el-button-group {
+  display: flex;
+}
+
+.el-button-group>.el-button:not(:last-child) {
+  flex: 1;
+}

@@ -1,4 +1,4 @@
-export const $formProvide = Symbol('formProvide');
+export const $formProvide = '__LCAP_UI_EL_FORM_PROVIDE__';
 export const $formItemProps = [
   'error',
   'for',
@@ -11,8 +11,11 @@ export const $formItemProps = [
   'showMessage',
   'size',
   'isRequired',
+  'onValidateSuccess',
   'validateStatus',
   'data-nodepath',
   'data-enable-events',
-  'style',
+  'trigger',
+  'ignoreRules',
+  'prop',
 ];

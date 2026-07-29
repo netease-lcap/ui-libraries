@@ -1,5 +1,7 @@
+/* eslint-disable */
 import './global.css';
 import { defineComponent, h } from 'vue';
+import { camelCase, upperFirst } from 'lodash';
 import { renderAppPreview } from 'virtual:lcap-theme-preview-wrap.js';
 import ThemePagePreviewMap from 'virtual:lcap-theme-page-preview.js';
 import ThemeComponentPreview from 'virtual:lcap-theme-component-previews.js';
@@ -10,8 +12,61 @@ const type = searchParams.get('type');
 const group = searchParams.get('group');
 const name = searchParams.get('name');
 
+
+const registerComponentSet = new Set();
+
+export function resetThemeComponent(icons) {
+  const app = window.__app;
+  const appContext = window.__app?._context;
+
+  if (!appContext || !appContext.components) {
+    return;
+  }
+
+  const componentMap = appContext.components;
+
+  Object.keys(icons).forEach((key) => {
+    if (registerComponentSet.has(key)) {
+      return;
+    }
+
+    const component = componentMap[key] || componentMap[upperFirst(camelCase(key))];
+    if (!component) {
+      return;
+    }
+
+    const WrapperComponent = (props, { attrs, slots }) => {
+      const defaultIconProps = window.__THEME_ICONS__[key] || {};
+      const innerProps = {
+        ...defaultIconProps,
+        ...props,
+        ...attrs,
+      };
+
+      return h(component, {
+        ...innerProps,
+      }, slots);
+    };
+
+    app.component(key, WrapperComponent);
+    app.component(upperFirst(camelCase(key)), WrapperComponent);
+    registerComponentSet.add(key);
+    registerComponentSet.add(upperFirst(camelCase(key)));
+  });
+}
+
 export default defineComponent({
   name: 'ThemePreviewApp',
+  data() {
+    return {
+      renderKey: 0,
+    };
+  },
+  provide() {
+    return {
+      getRenderKey: this.getRenderKey,
+    }
+  },
   mounted() {
     sendRenderOk();
     window.addEventListener('message', this.handleMessage);
@@ -26,7 +81,12 @@ export default defineComponent({
       }
 
       const { from, type: msgType, data } = e.data;
-      if (from !== 'lcap' || msgType !== 'setTheme') {
+      if (from !== 'lcap' || (!['setTheme', 'setIcons'].includes(msgType))) {
+        return;
+      }
+
+      if (msgType === 'setIcons') {
+        this.setIcons(data);
         return;
       }
 
@@ -36,6 +96,14 @@ export default defineComponent({
       }
 
       element.textContent = data || '';
+    },
+    getRenderKey() {
+      return `uni_${this.renderKey}`;
+    },
+    setIcons(icons) {
+      window.__THEME_ICONS__ = icons;
+      resetThemeComponent(icons);
+      this.renderKey++;
     },
   },
   render() {

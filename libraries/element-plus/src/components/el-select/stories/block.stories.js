@@ -24,7 +24,7 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template: `
-      <el-select>
+      <el-select autofocus>
         <el-option value="1" label="选项1">
           <el-text text="选项1" />
         </el-option>

@@ -1,20 +1,27 @@
+import { StepProps } from 'element-plus';
 import { ElIcon } from '../../index';
 
-export function handleIcon(props) {
-  const icon = props.get('icon');
-  const slots = props.get('slots');
-  if (!icon) return {};
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-  const iconSlot = {
-    icon: () => {
-      return <ElIcon name={icon} />;
-    },
-  };
+const ElStepAccumulate = new PluginAccumulateTypes<nasl.ui.ElStepOptions, StepProps>();
+export default ElStepAccumulate.addPlugin({
+  name: 'handleIcon',
+  handle(props) {
+    const icon = props.get('icon');
+    const slots = props.get('slots');
+    if (!icon) return {};
 
-  return {
-    slots: {
-      ...slots,
-      ...iconSlot,
-    },
-  };
-}
+    const iconSlot = {
+      icon: () => {
+        return <ElIcon name={icon} />;
+      },
+    };
+
+    return {
+      slots: {
+        ...slots,
+        ...iconSlot,
+      },
+    };
+  },
+});

@@ -1,0 +1,87 @@
+.van-password-input {
+  position: relative;
+  display: flex;
+  gap: var(--password-input-gutter, 0px);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background-color: #fff;
+}
+
+.van-password-input__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--password-input-size, 35px);
+  height: var(--password-input-size, 35px);
+  color: var(--password-input-color, #1989fa);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  background-color: var(--password-input-background-color, #f2f3f5);
+  border: 1px solid var(--password-input-border-color, #ebedf0);
+  border-radius: var(--password-input-border-radius, 4px);
+  box-sizing: border-box;
+}
+
+.van-password-input__item--focus {
+  border-color: var(--password-input-color, #1989fa);
+}
+
+.van-password-input__item--error {
+  border-color: #ee0a24;
+}
+
+.van-password-input__cursor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background-color: var(--password-input-color, #1989fa);
+  border-radius: 1px;
+  transform: translate(-50%, -50%);
+  animation: van-password-input-cursor-blink 1s infinite;
+}
+
+@keyframes van-password-input-cursor-blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.van-password-input__mask {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: #323233;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.van-password-input__error-message {
+  margin-top: 8px;
+  color: #ee0a24;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+}
+
+.van-password-input--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.van-password-input--readonly {
+  pointer-events: none;
+} 

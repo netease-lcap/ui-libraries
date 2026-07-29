@@ -22,7 +22,7 @@ namespace nasl.ui {
       lastModified?: nasl.core.Integer;
       name?: nasl.core.String;
       percent?: nasl.core.Decimal;
-      raw?: File;
+      raw?: nasl.io.File;
       size?: nasl.core.Integer;
       status?: 'success' | 'fail' | 'progress' | 'waiting';
       type?: nasl.core.String;
@@ -41,6 +41,18 @@ namespace nasl.ui {
       description: '默认上传未成功上传过的所有文件',
     })
     uploadFiles(): void {}
+
+    @Method({
+      title: '清空文件列表',
+      description: '清空文件列表',
+    })
+    clearFiles(): void {}
+
+    @Method({
+      title: '取消上传',
+      description: '取消上传',
+    })
+    abort(): void {}
 
     constructor(options?: Partial<ElUploadProOptions>) {
       super();
@@ -346,7 +358,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -355,24 +367,7 @@ namespace nasl.ui {
       }>,
     ) => nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: '文件上传前设置',
-      description:
-        '如果是自动上传模式 `autoUpload=true`，表示单个文件上传之前的钩子函数，若函数返回值为 `false` 则表示不上传当前文件。如果是非自动上传模式 `autoUpload=false`，函数返回值为 `false` 时表示从上传文件中剔除当前文件。',
-      setter: { concept: 'AnonymousFunctionSetter' },
-    })
-    beforeUpload: (file: {
-      lastModified?: nasl.core.Integer;
-      name?: nasl.core.String;
-      percent?: nasl.core.Decimal;
-      raw?: File;
-      size?: nasl.core.Integer;
-      status?: 'success' | 'fail' | 'progress' | 'waiting';
-      type?: nasl.core.String;
-      uploadTime?: nasl.core.String;
-      url?: nasl.core.String;
-    }) => nasl.core.Boolean;
+
 
     @Prop({
       group: '状态属性',
@@ -432,6 +427,14 @@ namespace nasl.ui {
     })
     triggerUploadText: nasl.core.String = '选择文件';
 
+    @Prop({
+      group: '主要属性',
+      title: '是否显示已上传文件列表',
+      description: '是否显示已上传文件列表',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showFileList: nasl.core.Boolean = true;
+
     @Event({
       title: '点击取消上传时',
       description: '点击「取消上传」时触发',
@@ -455,7 +458,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -466,7 +469,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -478,13 +481,30 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
         uploadTime?: nasl.core.String;
         url?: nasl.core.String;
       };
+    }) => any;
+
+    @Event({
+      title: '文件上传前',
+      description:
+        '如果是自动上传模式 `autoUpload=true`，表示单个文件上传之前的钩子函数，若函数返回值为 `false` 则表示不上传当前文件。如果是非自动上传模式 `autoUpload=false`，函数返回值为 `false` 时表示从上传文件中剔除当前文件。<br/>`context.file` 表示当前上传的文件，`context.fileList` 表示当前文件列表，`context.response` 表示上传请求的返回数据',
+    })
+    onBeforeUpload: (event: {
+      lastModified?: nasl.core.Integer;
+      name?: nasl.core.String;
+      percent?: nasl.core.Decimal;
+      raw?: nasl.io.File;
+      size?: nasl.core.Integer;
+      status?: 'success' | 'fail' | 'progress' | 'waiting';
+      type?: nasl.core.String;
+      uploadTime?: nasl.core.String;
+      url?: nasl.core.String;
     }) => any;
 
     @Event({
@@ -497,7 +517,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -508,7 +528,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -520,7 +540,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -539,7 +559,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -558,7 +578,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -569,7 +589,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -587,7 +607,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -607,7 +627,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -638,7 +658,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;
@@ -657,7 +677,7 @@ namespace nasl.ui {
         lastModified?: nasl.core.Integer;
         name?: nasl.core.String;
         percent?: nasl.core.Decimal;
-        raw?: File;
+        raw?: nasl.io.File;
         size?: nasl.core.Integer;
         status?: 'success' | 'fail' | 'progress' | 'waiting';
         type?: nasl.core.String;

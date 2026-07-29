@@ -63,3 +63,17 @@ export const Example2 = {
 </el-result></div>`,
   }),
 };
+
+export const Example3 = {
+  name: '自定义内容',
+  render: () => ({
+    template: `
+    <el-result>
+      <template #subTitle>
+        tem is the best 22
+      </template>
+
+    </el-result>
+`,
+  }),
+};

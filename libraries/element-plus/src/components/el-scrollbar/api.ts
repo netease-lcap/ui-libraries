@@ -18,7 +18,7 @@ namespace nasl.ui {
   @Component({
     title: '滚动条',
     icon: 'Scrollbar',
-    description: '用于替换浏览器原生滚动条',
+    description: '用于替换浏览器原生滚动条，提供更美观的滚动体验',
     group: 'Navigation',
   })
   export class ElScrollbar extends ViewComponent {
@@ -30,9 +30,20 @@ namespace nasl.ui {
 
     @Method({
       title: '滚动到特定坐标',
-      description: '滚动到顶部',
+      description: '滚动到特定坐标',
     })
-    scrollTo(): void {}
+    scrollTo(
+      @Param({
+        title: '纵向距离',
+        description: '纵向距离',
+      })
+      top: nasl.core.Integer,
+      @Param({
+        title: '横向距离',
+        description: '横向距离',
+      })
+      left: nasl.core.Integer,
+    ): void {}
 
     @Method({
       title: '设置滚动条到顶部的距离',
@@ -149,7 +160,7 @@ namespace nasl.ui {
       title: '滚动时',
       description: '当滚动条滚动时触发',
     })
-    onScroll: (event: { scrollTop: number; scrollLeft: number }) => any;
+    onScroll: (event: { scrollTop: nasl.core.Integer; scrollLeft: nasl.core.Integer }) => any;
 
     @Slot({
       title: 'Default',

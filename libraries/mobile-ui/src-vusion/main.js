@@ -118,6 +118,7 @@ import '../src/tag/index.less';
 import '../src/toast/index.less';
 import '../src/tree-select/index.less';
 import '../src/uploader/index.less';
+import '../src/validator/index.less';
 import '../src/my-process/index.less';
 import '../src/process-button/index.less';
 import '../src/process-info/index.less';

@@ -1,0 +1,20 @@
+/**
+ * @component el-timeline
+ */
+.el-timeline {
+  /**
+   * @desc 节点大小 (正常)
+   * @type input
+   */
+  --el-timeline-node-size-normal: 12px;
+  /**
+   * @desc 节点大小 (大)
+   * @type input
+   */
+  --el-timeline-node-size-large: 14px;
+  /**
+   * @desc 节点颜色
+   * @type color
+   */
+  --el-timeline-node-color: var(--el-border-color-light);
+}

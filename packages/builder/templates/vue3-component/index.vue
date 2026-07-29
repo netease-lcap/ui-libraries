@@ -5,10 +5,12 @@
 <script setup lang="ts">
 export interface {{compName}}Props {
   text?: string;
+  type?: 'primary' | 'secondary' | 'default';
 }
 
 const props = withDefaults(defineProps<{{compName}}Props>(), {
   text: 'Hello',
+  type: 'default',
 });
 
 </script>

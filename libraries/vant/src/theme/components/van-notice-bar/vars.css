@@ -1,0 +1,53 @@
+/**
+ * @component van-notice-bar
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 通知栏高度
+   */
+  --van-notice-bar-height: 40px;
+  /**
+   * @type input
+   * @desc 通知栏内边距
+   */
+  --van-notice-bar-padding: 0 var(--van-padding-md);
+  /**
+   * @type input
+   * @desc 通知栏可换行内边距
+   */
+  --van-notice-bar-wrapable-padding: var(--van-padding-xs) var(--van-padding-md);
+  /**
+   * @type color
+   * @desc 通知栏文字颜色
+   */
+  --van-notice-bar-text-color: var(--van-orange-dark);
+  /**
+   * @type input
+   * @desc 通知栏字体大小
+   */
+  --van-notice-bar-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   * @desc 通知栏行高
+   */
+  --van-notice-bar-line-height: 24px;
+  /**
+   * @type color
+   * @desc 通知栏背景色
+   */
+  --van-notice-bar-background: var(--van-orange-light);
+  /**
+   * @hidden
+   * @type input
+   * @desc 通知栏图标大小
+   */
+  --van-notice-bar-icon-size: 16px;
+  /**
+   * @hidden
+   * @type input
+   * @desc 通知栏图标最小宽度
+   */
+  --van-notice-bar-icon-min-width: 24px;
+}

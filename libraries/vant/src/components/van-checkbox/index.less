@@ -1,0 +1,27 @@
+.van-checkbox-group-preview {
+  &:not(:has(.van-checkbox[aria-checked="true"]))::before {
+    content: '-';
+  }
+
+  .van-checkbox {
+    margin-right: 0;
+  }
+
+  .van-checkbox[aria-checked="false"] {
+    display: none;
+  }
+
+  .van-checkbox__icon {
+    display: none;
+  }
+
+  .van-checkbox__label {
+    color: #000;
+    cursor: default;
+    margin-left: 0;
+  }
+
+  .van-checkbox[aria-checked="true"]:has(+ .van-checkbox[aria-checked="true"]) .van-checkbox__label::after {
+      content: ',';
+    }
+  }

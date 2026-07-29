@@ -1,13 +1,12 @@
 {
   "name": "lcap-ui-monorepo",
-  "version": "3.13.0",
+  "version": "4.4.3",
   "private": true,
   "description": "Codewave Low Code AI Platform UI Components",
   "main": "index.js",
   "scripts": {
     "commit": "cz",
     "postinstall": "husky install && pnpm --filter \"./packages/*\" build",
-    "version-packages": "changeset version",
     "start": "pnpm dev:pc-ui",
     "dev:pc-ui": "pnpm --filter \"./libraries/pc-ui\" dev",
     "dev:element-ui": "pnpm --filter \"./libraries/element-ui\" dev",
@@ -17,7 +16,7 @@
     "deploy": "pnpm --filter \"./libraries/*\" deploy:one",
     "test": "pnpm --filter \"./libraries/*\" test",
     "lint": "eslint --fix",
-    "changeset": "changeset",
+    "changelog": "node scripts/changelog.mjs",
     "coverage": "pnpm --dir ./libraries/* test:coverage"
   },
   "keywords": [
@@ -49,6 +48,11 @@
         "peerDependencies": {
           "vue": "2.6.12"
         }
+      },
+      "@lcap/extension-shared": {
+        "dependencies": {
+          "@babel/traverse": "^7.28.0"
+        }
       }
     }
   },
@@ -72,12 +76,17 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-n": "^16.5.0",
     "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-refresh": "^0.4.5",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "minimist": "^1.2.8",
-    "typescript": "^5.3.3"
+    "simple-git": "^3.28.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "handlebars": "4.7.9"
   }
 }

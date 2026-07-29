@@ -1,1 +1,1 @@
-.el-tree-select {} 
+/* ElTreeSelect 根节点为 ElSelect（.el-select），宽度与本库 el-select/index.less 中的 --el-select-width: 240px 一致。 */

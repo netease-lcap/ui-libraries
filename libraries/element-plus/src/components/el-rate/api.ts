@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 8,
     ideusage: {
       idetype: 'element',
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -14,17 +15,37 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElRate extends ViewComponent {
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean;
+    @Prop({
+      title: '禁用状态',
+      description: '是否禁用评分功能',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      group: '数据属性',
+      title: '评分值',
+      description: '当前的评分值',
+    })
+    modelValue: nasl.core.Decimal;
+
     constructor(options?: Partial<ElRateOptions>) {
       super();
     }
   }
 
   export class ElRateOptions extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
-      title: '绑定值',
+      title: '评分值',
       sync: true,
-      description: '评分的值',
+      description: '当前的评分值',
+      docDescription: '绑定当前的评分值，支持双向绑定。可以获取或设置用户的评分。',
       setter: { concept: 'NumberInputSetter' },
     })
     modelValue: nasl.core.Decimal;
@@ -32,42 +53,76 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '最大分值',
-      description: '最大分值',
+      description: '评分的最大值',
+      docDescription: '设置评分的最大分值，决定显示多少个星星。默认为5颗星。',
       setter: { concept: 'NumberInputSetter' },
     })
     max: nasl.core.Integer = 5;
 
     @Prop({
-      group: '主要属性',
-      title: '禁用',
-      description: '是否为只读',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean = false;
-
-    @Prop({
       group: '数据属性',
       title: '允许半选',
-      description: '是否允许半选',
+      description: '是否允许半星评分',
+      docDescription: '开启后，允许选择半颗星，可以实现更精细的评分。例如：2.5分。',
       setter: { concept: 'SwitchSetter' },
     })
     allowHalf: nasl.core.Boolean = false;
 
     @Prop({
       group: '数据属性',
-      title: '低分界限值',
-      description: '低分和中等分数的界限值，值本身被划分在低分中',
+      title: '低分界限',
+      description: '低分和中等分的界限值',
+      docDescription: '设置低分和中等分的界限值，该值及以下被认定为低分。用于区分不同评分等级的颜色。',
       setter: { concept: 'NumberInputSetter' },
     })
     lowThreshold: nasl.core.Integer = 2;
 
     @Prop({
       group: '数据属性',
-      title: '高分界限值',
-      description: '高分和中等分数的界限值，值本身被划分在高分中',
+      title: '高分界限',
+      description: '高分和中等分的界限值',
+      docDescription: '设置高分和中等分的界限值，该值及以上被认定为高分。用于区分不同评分等级的颜色。',
       setter: { concept: 'NumberInputSetter' },
     })
     highThreshold: nasl.core.Integer = 4;
+
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
+    @Prop({
+      group: '状态属性',
+      title: '禁用状态',
+      description: '是否禁用评分功能',
+      docDescription: '开启后，评分组件将变为只读状态，用户无法进行评分操作，只能查看评分结果。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean = false;
+
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
+    @Prop({
+      group: '样式属性',
+      title: '低分颜色',
+      description: '低分星星的颜色',
+      docDescription: '设置低分评级（低分界限及以下）时星星显示的颜色。',
+      setter: { concept: 'InputSetter' },
+    })
+    lowColor: nasl.core.String = '#F7BA2A';
+
+    @Prop({
+      group: '样式属性',
+      title: '中等颜色',
+      description: '中等分星星的颜色',
+      docDescription: '设置中等评级（介于低分界限和高分界限之间）时星星显示的颜色。',
+      setter: { concept: 'InputSetter' },
+    })
+    mediumColor: nasl.core.String = '#F7BA2A';
+
+    @Prop({
+      group: '样式属性',
+      title: '高分颜色',
+      description: '高分星星的颜色',
+      docDescription: '设置高分评级（高分界限及以上）时星星显示的颜色。',
+      setter: { concept: 'InputSetter' },
+    })
+    highColor: nasl.core.String = '#F7BA2A';
 
     // @Prop({
     //   group: '主要属性',
@@ -87,7 +142,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '样式属性',
-      title: '只读未选中颜色',
+      title: '禁用未选中颜色',
       description: '只读时未选中 icon 的颜色',
       setter: { concept: 'InputSetter' },
     })
@@ -158,16 +213,20 @@ namespace nasl.ui {
     // scoreTemplate: nasl.core.String = '{value}';
 
     @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
+    @Prop({
       group: '样式属性',
       title: '尺寸',
       description: '组件尺寸',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '大' },
-          { title: '默认' },
-          { title: '小' },
-        ],
+        options: [{ title: '大' }, { title: '默认' }, { title: '小' }],
       },
     })
     size: 'large' | 'default' | 'small';
@@ -182,6 +241,15 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      forceUpdateWhenAttributeChange: true,
+      childAccept:false,
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
     },
     extends: [
       {
@@ -198,7 +266,9 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormRate extends ViewComponent {
-    constructor(options?: Partial<ElFormRateOptions & ElFormItemProOptions & Omit<ElRateOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormRateOptions & ElFormItemProOptions & Omit<ElRateOptions, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }

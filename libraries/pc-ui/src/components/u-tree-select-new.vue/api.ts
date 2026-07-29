@@ -48,7 +48,9 @@ namespace nasl.ui {
           description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
           docDescription: '支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的',
           designerValue: [{}, {}, {}],
-          bindOpen: true,
+          setter: {
+            concept: 'DataSourceSetter',
+          },
       })
       dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
@@ -298,6 +300,47 @@ namespace nasl.ui {
         settable: true,
       })
       preview: nasl.core.Boolean = false;
+
+      @Prop({
+        group: '主要属性',
+        title: '后缀图标',
+        description: '设置后缀图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+      })
+      suffixIcon: nasl.core.String;
+
+      @Prop<UTreeSelectNewOptions<T, V, M>, 'clearIcon'>({
+        group: '主要属性',
+        title: '清除图标',
+        description: '设置清除图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.clearable === true,
+      })
+      clearIcon: nasl.core.String;
+
+      @Prop({
+        group: '主要属性',
+        title: '加载图标',
+        description: '设置加载图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+      })
+      loadingIcon: nasl.core.String;
+
+      @Prop({
+        group: '主要属性',
+        title: '展开图标',
+        description: '设置展开图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+      })
+      expandIcon: nasl.core.String;
 
       @Event({
           title: '改变后',

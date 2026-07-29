@@ -3,7 +3,9 @@
 .@{prefix}-textarea {
   border: none !important;
   height: auto !important;
-
+  &.el-textarea-pro-resize textarea {
+    resize: none;
+  }
   &.cw-style-height {
     .@{prefix}-textarea__inner {
       height: var(--cw-style-height, --el-textarea-height);

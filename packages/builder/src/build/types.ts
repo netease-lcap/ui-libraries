@@ -1,9 +1,13 @@
-export type BuildMode = 'production' | 'watch';
+export type BuildMode = 'production' | 'watch' | 'staging';
 
 export interface BuildIdeOptions {
   configFile?: string;
   entry?: string;
   outDir?: string;
+  setters?: {
+    rootPath: string;
+    entries: Record<string, string>;
+  };
 }
 
 export interface Dependency {
@@ -63,6 +67,13 @@ export interface LcapBuildOptions extends LcapMetaOptions {
   modules?: boolean | Partial<Omit<BuildModulesOptions, keyof LcapMetaOptions>>;
   destDir: string;
   pnpm?: boolean;
+  /**
+   * 基础组件是否不打包，
+   * - true: 不打包
+   * - false: 打包
+   * - 'auto': 自动处理， 默认值， 基础组件支持模块化加载时打包
+   */
+  lcapUIExternal?: true | 'auto';
   dependencies?: Dependency[];
   reportCSSInfo?: {
     enabled: true; // 为 true 时才会构建 index-css-info-map.json
@@ -113,6 +124,10 @@ export interface LcapBuildOptions extends LcapMetaOptions {
        * 需要隐藏的选择器前缀列表
        */
       hideSelectorPrefixes?: Array<string>;
+      /**
+       * 需要隐藏的选择器正则列表
+       */
+      hideSelectorRegexps?: Array<RegExp>;
     }>;
     /**
      * 忽略警告列表规则

@@ -1,5 +1,5 @@
 <template>
-<div v-if="$env.VUE_APP_DESIGNER" :class="$style.root" ref="root" :border="border">
+<div v-if="$env.VUE_APP_DESIGNER" :class="$style.root" ref="root" :border="border" :line="line">
     <div v-if="title" :class="$style.title" ref="title" :style="{ textAlign: titleAlignment }" vusion-slot-name="title" vusion-slot-name-edit="title">
         <slot name="title">{{ title }}</slot>
     </div>
@@ -32,6 +32,7 @@
 
         :defaultOrder="defaultOrder"
         :sorting="sorting"
+        :sortTrigger="sortTrigger"
 
         :useStickyFixed="useStickyFixed"
         :fixedRightList="fixedRightList"
@@ -67,12 +68,37 @@
         :showHead="showHead"
         :rootWidth="rootWidth"
         :value-field="valueField"
-        :useMask="useMask">
+        :useMask="useMask"
+
+        @scroll-view="onScrollViewRenderTable">
     </u-table-designer>
+    <u-table-render-footer
+        v-if="footerCalcShow"
+        ref="footerRender"
+        :visibleColumnVMs="visibleColumnVMs"
+        :currentData="currentFooterData"
+        :currentDataSource="currentDataSource"
+        :calcType="footerCalcType"
+        :calcText="footerCalcText"
+
+        :useStickyFixed="useStickyFixed"
+        :fixedRightList="fixedRightList"
+        :fixedLeftList="fixedLeftList"
+
+        :tableWidth="tableWidth"
+        :columnVMsMap="columnVMsMap"
+
+        :line="line"
+        :ellipsis="ellipsis"
+        >
+    </u-table-render-footer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
-        :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
-        :page-size="currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
+        :total-items="currentDataSource.total" :page="currentDataSource.paging && currentDataSource.paging.number"
+        :page-size="currentDataSource.paging && currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
+        :next-icon="nextIcon"
+        :prev-icon="prevIcon"
+        :select-dropdown-icon="selectDropdownIcon"
         :size="paginationSize"
         @change="page($event.page)" @change-page-size="onChangePageSize">
     </u-pagination>
@@ -92,7 +118,7 @@
         <div :class="$style.trdragGhost" ref="trDragGhost"></div>
     </div>
 </div>
-<div v-else :class="$style.root" ref="root" :border="border"
+<div v-else :class="$style.root" ref="root" :border="border" :line="line"
     @dragend="onDragEnd($event)"
     @drop="onDrop($event)"
     @dragover="onRootDragover($event)"
@@ -130,6 +156,7 @@
 
         :defaultOrder="defaultOrder"
         :sorting="sorting"
+        :sortTrigger="sortTrigger"
 
         :useStickyFixed="useStickyFixed"
         :fixedRightList="fixedRightList"
@@ -176,13 +203,39 @@
         :currentValues="currentValues"
         :lazyLoad="lazyLoad"
         :bufferSize="bufferSize"
-        @resize="onResizerDragEnd">
+        @resize="onResizerDragEnd"
+        @scroll-view="onScrollViewRenderTable">
     </u-table-render>
+    <u-table-render-footer
+        v-if="footerCalcShow && currentData && currentData.length > 0"
+        ref="footerRender"
+        :visibleColumnVMs="visibleColumnVMs"
+        :currentData="currentFooterData"
+        :currentDataSource="currentDataSource"
+        :calcType="footerCalcType"
+        :calcText="footerCalcText"
+
+        :useStickyFixed="useStickyFixed"
+        :fixedRightList="fixedRightList"
+        :fixedLeftList="fixedLeftList"
+
+        :tableWidth="tableWidth"
+        :columnVMsMap="columnVMsMap"
+
+        :line="line"
+        :ellipsis="ellipsis"
+
+        :calcFormater="footerCalcFormater"
+        >
+    </u-table-render-footer>
     <u-table-view-drop-ghost :data="dropData"></u-table-view-drop-ghost>
     <u-pagination :class="$style.pagination" ref="pagination" v-if="usePagination && currentDataSource"
         :total-items="currentDataSource.total" :page="currentDataSource.paging.number"
         :page-size="currentDataSource.paging.size" :page-size-options="pageSizeOptions" :show-total="showTotal" :show-sizer="showSizer" :show-jumper="showJumper"
         :size="paginationSize"
+        :next-icon="nextIcon"
+        :prev-icon="prevIcon"
+        :select-dropdown-icon="selectDropdownIcon"
         :max-page="currentDataSource.paging.number"
         @change="page($event.page)" @change-page-size="onChangePageSize">
     </u-pagination>
@@ -203,17 +256,16 @@ import DataSourceNew from '../../utils/DataSource/new';
 import { addResizeListener, removeResizeListener, findScrollParent, getRect, findXScrollParent } from '../../utils/dom';
 import { format } from '../../utils/date';
 import MEmitter from '../m-emitter.vue';
-import debounce from 'lodash/debounce';
+import { debounce, flatMap, throttle } from 'lodash';
 import UTableViewDropGhost from './drop-ghost.vue';
 import SEmpty from '../../components/s-empty.vue';
-import throttle from 'lodash/throttle';
 import i18nMixin from '../../mixins/i18n';
-import flatMap from 'lodash/flatMap';
 import { createTableHeaderExportHelper, getXslxStyle } from './helper';
 import * as xlsxUtils from '../../utils/xlsx';
 import UTableRender from './render.table.vue';
 import UTableDesigner from './designer.table.vue';
 import TreeTableMixin from './tree-table-mixins';
+import UTableRenderFooter from './render.footer.vue';
 
 export default {
     name: 'u-table-view',
@@ -222,6 +274,7 @@ export default {
         SEmpty,
         UTableRender,
         UTableDesigner,
+        UTableRenderFooter,
     },
     mixins: [
       MEmitter,
@@ -380,6 +433,19 @@ export default {
         nativeScroll: { type: Boolean, default: false }, // 是否使用原生滚动条
         lazyLoad: { type: Boolean, default: false }, // 懒加载
         bufferSize: { type: Number, default: 10 },
+        prevIcon: { type: String },
+        nextIcon: { type: String },
+        selectDropdownIcon: { type: String },
+
+        footerCalcType: { type: String, default: 'sum' },
+        footerCalcText: {
+            type: String,
+            default() {
+                return this.$tt('footerCalc');
+            },
+        },
+        footerCalcShow: { type: Boolean, default: false },
+        footerCalcFormater: Function,
     },
     data() {
         return {
@@ -425,6 +491,7 @@ export default {
             tableHeadTrArr: [],
             currentPageSize: undefined,
             rootWidth: undefined,
+            exportFooterData: undefined,
         };
     },
     provide() {
@@ -447,6 +514,8 @@ export default {
             getItemColSpan: this.getItemColSpan,
             getItemRowSpan: this.getItemRowSpan,
             getTableContentElem: this.getTableContentElem,
+            filterMultiple: this.filterMultiple,
+            filterMax: this.filterMax,
         };
     },
     computed: {
@@ -501,6 +570,12 @@ export default {
         },
         isDesignerSubForm() {
             return this.$env.VUE_APP_DESIGNER && this.subForm;
+        },
+        currentFooterData() {
+            if (this.exportFooterData) {
+                return this.exportFooterData;
+            }
+            return this.currentData;
         },
     },
     watch: {
@@ -648,7 +723,10 @@ export default {
         },
         paging: {
             handler(value) {
-                if (this.currentDataSource) {
+                if (value && this.currentDataSource && !this.currentDataSource.paging) {
+                    this.currentDataSource.paging = value;
+                }
+                if (this.currentDataSource && this.currentDataSource.paging && value) {
                     if (this.currentDataSource.paging.number !== value.number || this.currentDataSource.paging.size !== value.size)
                         this.page(value.number, value.size);
                 }
@@ -713,6 +791,11 @@ export default {
         this.watchValues(this.values);
         this.reHandleResize();
         addResizeListener(this.$el, this.throttleHandleResizeListener);
+        // 监听表头高度变化：表头初始渲染时可能偏高（列宽未稳定导致文字换行），
+        // 等列宽计算完毕头部高度收缩后，$el 的 ResizeObserver 感知不到，需要单独监听 headEl
+        this.$nextTick(() => {
+            this.observeHeadResize();
+        });
 
         if (this.stickHead) {
             this.scrollParentEl = findScrollParent(this.$el);
@@ -729,6 +812,10 @@ export default {
             this.scrollParentEl && this.scrollParentEl.removeEventListener('scroll', this.throttleScrollParentScroll);
             this.xScrollParentEl && this.xScrollParentEl.removeEventListener('scroll', this.throttleXScrollParentScroll);
         }
+        if (this._headResizeObserver) {
+            this._headResizeObserver.disconnect();
+            this._headResizeObserver = null;
+        }
         this.clearTimeout();
         this.enterTarget = null;
     },
@@ -737,6 +824,27 @@ export default {
             if (this.timer) {
                 clearTimeout(this.timer);
             }
+        },
+        /**
+         * 监听表头元素的高度变化
+         * 场景：微前端 tab 切换时，表头初始渲染偏高（列宽未稳定、文字换行），
+         * 列宽计算完成后头部收缩，但根节点 ResizeObserver 感知不到内部变化，需要单独监听
+         */
+        observeHeadResize() {
+            if (typeof ResizeObserver === 'undefined') return;
+            const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
+            if (!headEl) return;
+            // 已经在监听同一个元素则不重复注册
+            if (this._headResizeObserver && this._headResizeObservedEl === headEl) return;
+            // 切换了 headEl（极少数情况），先断开旧的
+            if (this._headResizeObserver) {
+                this._headResizeObserver.disconnect();
+            }
+            this._headResizeObservedEl = headEl;
+            this._headResizeObserver = new ResizeObserver(() => {
+                this.reHandleResize();
+            });
+            this._headResizeObserver.observe(headEl);
         },
         getTableContentElem() {
           return this.$el;
@@ -880,6 +988,19 @@ export default {
             } else
                 return dataSource;
         },
+        getWidthHeightWithoutPadding(el) {
+            const style = window.getComputedStyle(el);
+            const paddingTop = parseFloat(style.paddingTop) || 0;
+            const paddingBottom = parseFloat(style.paddingBottom) || 0;
+            const paddingLeft = parseFloat(style.paddingLeft) || 0;
+            const paddingRight = parseFloat(style.paddingRight) || 0;
+            const heightWithoutPadding = el.clientHeight - paddingTop - paddingBottom;
+            const widthWithoutPadding = el.clientWidth - paddingLeft - paddingRight;
+            return {
+                heightWithoutPadding,
+                widthWithoutPadding,
+            }
+        },
 
         handleResize(reComputedWidth = true) {
             if (this.resizeBodyHeight) {
@@ -892,7 +1013,7 @@ export default {
                 // 当最外层加了border后，会导致内部的宽度大于tablewrap的宽度，会出滚动条：Bug-2792431057259520
                 // 3088409490416384：用样式设置了tablewrap的border，使用offsetWith会使外部的宽度一直往上加2px, 用clientWidth，不包含border宽度
                 let rootWidth = this.$el.clientWidth;
-                const tablewrapWidth = this.$refs.tableRender.getRefs().tablewrap && this.$refs.tableRender.getRefs().tablewrap.clientWidth;
+                const tablewrapWidth = this.$refs.tableRender && this.$refs.tableRender.getRefs().tablewrap && this.$refs.tableRender.getRefs().tablewrap.clientWidth;
                 if (tablewrapWidth) {
                     rootWidth = tablewrapWidth;
                 }
@@ -1049,14 +1170,22 @@ export default {
                  */
                 if ((this.$el.style.height !== '' && this.$el.style.height !== 'auto')
                     || (this.$el.style.maxHeight !== '' && this.$el.style.maxHeight !== 'auto')) {
-                    const rootHeight = this.$el.offsetHeight;
+                    const rootHeight = this.$el.clientHeight;
                     if (rootHeight) {
                         // 如果使用 v-show 隐藏了，无法计算
-                        const titleHeight = this.$refs.title ? this.$refs.title.offsetHeight : 0;
-                        const headEl = this.$refs.tableRender.getRefs().head;
-                        const headHeight = headEl ? headEl.offsetHeight : 0;
-                        const paginationHeight = this.getPaginationHeight();
-                        this.bodyHeight = rootHeight - titleHeight - headHeight - paginationHeight;
+                        const titleHeight = this.getElementHeight(this.$refs.title);
+                        const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
+                        const headHeight = headEl ? this.getElementHeight(headEl) : 0;
+                        const paginationHeight = this.getElementHeight(this.$refs.pagination);
+                        const footerHeight = this.getElementHeight(this.$refs.footerRender);
+                        // 3280804555226368: 去掉padding高度，100%高度处理避免高度一直增长
+                        const heightWithoutPadding = this.getWidthHeightWithoutPadding(this.$el).heightWithoutPadding;
+                        const othersHeight = titleHeight + headHeight + paginationHeight + footerHeight;
+                        if (this.$el.style.height === '100%') {
+                            this.bodyHeight = `calc(100% - ${headHeight}px)`
+                        } else {
+                            this.bodyHeight = heightWithoutPadding - othersHeight;
+                        }
                     }
                 } else {
                     this.bodyHeight = undefined;
@@ -1064,21 +1193,29 @@ export default {
 
                 // 当 root 设置了 height，设置 table 的 height，避免隐藏列时的闪烁
                 if (this.$el.style.height !== '' && this.$el.style.height !== 'auto') {
-                    const paginationHeight = this.getPaginationHeight();
-                    this.tableHeight = this.$el.offsetHeight - paginationHeight;
+                    const titleHeight = this.getElementHeight(this.$refs.title);
+                    const paginationHeight = this.getElementHeight(this.$refs.pagination);
+                    const footerHeight = this.getElementHeight(this.$refs.footerRender);
+                    const heightWithoutPadding = this.getWidthHeightWithoutPadding(this.$el).heightWithoutPadding;
+                    const othersHeight = titleHeight + paginationHeight + footerHeight;
+                    if (this.$el.style.height === '100%') {
+                        this.tableHeight = `calc(100% - ${othersHeight}px)`
+                    } else {
+                        this.tableHeight = heightWithoutPadding - othersHeight;
+                    }
                 } else {
                     this.tableHeight = undefined;
                 }
 
                 this.$emit('resize', undefined, this);
                 this.$nextTick(() => {
-                    this.$refs.tableRender.getRefs().scrollView && this.$refs.tableRender.getRefs().scrollView.handleResize();
+                    this.$refs.tableRender && this.$refs.tableRender.getRefs().scrollView && this.$refs.tableRender.getRefs().scrollView.handleResize();
                 });
             });
         },
         syncHeadScroll() {
             // this.$refs.head[0].scrollLeft = this.$refs.head[0].parentElement.scrollLeft;
-            const headEl = this.$refs.tableRender.getRefs().head;
+            const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
             if (this.xScrollParentEl && this.stickingHead && headEl && headEl.childNodes[0]) {
                 const xScrollParentEl = this.xScrollParentEl;
                 headEl.childNodes[0].style.marginLeft = '-' + xScrollParentEl.scrollLeft + 'px';
@@ -1092,7 +1229,7 @@ export default {
                 return;
             const bodyRect = getRect(bodyEl);
             const parentRect = this.scrollParentEl === window ? { top: 0, bottom: window.innerHeight } : getRect(this.scrollParentEl);
-            const headEl = this.$refs.tableRender.getRefs().head;
+            const headEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
             const headHeight = headEl && headEl.offsetHeight || 0;
 
             parentRect.top += this.stickHeadOffset;
@@ -1106,7 +1243,7 @@ export default {
             const stickingHeadTop = parentRect.top;
             const stickingHeadHeight = headHeight;
             const stickheadEl = headEl;
-            const headPlaceholderEl = this.$refs.tableRender.getRefs().headPlaceholder;
+            const headPlaceholderEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().headPlaceholder;
             if (stickheadEl) {
                 if (stickingHead) {
                     stickheadEl.setAttribute('stickingHead', true);
@@ -1122,7 +1259,7 @@ export default {
                 }
                 stickheadEl.style.top = stickingHeadTop + 'px';
                 // fix：滚动条在最右边时，置顶时表头会有偏移
-                const scorllViewEl = this.$refs.tableRender.getRefs().scrollView;
+                const scorllViewEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().scrollView;
                 stickheadEl.scrollLeft = scorllViewEl && scorllViewEl.$refs.wrap.scrollLeft;
                 if (this.syncStickHeadXScroll) {
                     this.syncHeadScroll();
@@ -1343,17 +1480,17 @@ export default {
                     }
                 }
 
-                xlsxUtils.exportExcel(content, 'Sheet1', filename, sheetTitleData, (content[0] || []).length, hasHeader, mergesMap, includeStyles);
+                await xlsxUtils.exportExcelByXlsx(content, 'Sheet1', filename, sheetTitleData, (content[0] || []).length, hasHeader, mergesMap, includeStyles);
                 // console.timeEnd('生成文件');
             } catch (err) {
                 console.error(err);
+            } finally {
+                await new Promise((res) => {
+                    setTimeout(res);
+                });
+                document.removeEventListener('click', fn, true);
+                document.removeEventListener('keydown', fn, true);
             }
-
-            await new Promise((res) => {
-                setTimeout(res);
-            });
-            document.removeEventListener('click', fn, true);
-            document.removeEventListener('keydown', fn, true);
         },
         async getRenderResult(arr = [], excludeColumns = [], hasHeader = true, includeStyles = false) {
             let mergesMap = [];
@@ -1364,7 +1501,8 @@ export default {
 
             const titleColIndexRelations = [];
             let headRows = [];
-            const headEl = this.$el.querySelector('[position=static] thead');
+            const headRef = this.$refs.tableRender && this.$refs.tableRender.getRefs().head;
+            const headEl = headRef && headRef.querySelector('thead');
             if (headEl) {
                 headRows = Array.from(headEl.childNodes).filter((tr) => tr.nodeName === 'TR');
             }
@@ -1432,7 +1570,9 @@ export default {
                 await new Promise((res) => {
                     this.$once('hook:updated', res);
                 });
-                const bodyEl = this.$el.querySelector('[position=static] tbody');
+                const bodyTableRef = this.$refs.tableRender && this.$refs.tableRender.getRefs().bodyTable;
+                const tableEl = bodyTableRef && bodyTableRef.$el;
+                const bodyEl = tableEl && tableEl.querySelector('tbody');
                 if (bodyEl) {
                     const trs = Array.from(bodyEl.childNodes).filter((tr) => tr.nodeName === 'TR');
                     const res1 = trs.map((tr, rowIndex) => Array.from(tr.childNodes).map(
@@ -1511,22 +1651,15 @@ export default {
                     colItem.rect.width = +colItem.rect.width / colspan;
                     colItem.rect.height = +colItem.rect.height / rowspan;
                 }
-                for (let i = item.col + 1; i < item.col + colspan; i++) {
-                    if (!res[item.row][i]) {
-                        res[item.row][i] = {
-                            t: 's',
-                            v: '', // 必须设置，单设置s没有效果
-                            s: colItem.s,
-                        };
-                    }
-                }
-                for (let i = item.row + 1; i < item.row + rowspan; i++) {
-                    if (!res[i][item.col]) {
-                        res[i][item.col] = {
-                            t: 's',
-                            v: '',
-                            s: colItem.s,
-                        };
+                for (let i = item.row; i < item.row + rowspan; i++) {
+                    for (let j = item.col; j < item.col + colspan; j++) {
+                         if (!res[i][j]) {
+                            res[i][j] = {
+                                t: 's',
+                                v: '', // 必须设置，单设置s没有效果
+                                s: colItem.s,
+                            };
+                         }
                     }
                 }
             });
@@ -1541,6 +1674,46 @@ export default {
                 }
             });
             // console.timeEnd('复原表格');
+
+            if (this.footerCalcShow && this.$refs.footerRender) {
+                this.exportFooterData = arr;
+                await new Promise((res) => {
+                    this.$once('hook:updated', res);
+                });
+                const footerEl = this.$refs.footerRender.$el;
+                const bodyEl = footerEl && footerEl.querySelector('tbody');
+                const trs = Array.from(bodyEl.childNodes).filter((tr) => tr.nodeName === 'TR');
+                // let footerData = this.$refs.footerRender.getCalculation(this.footerCalcType, arr) || [];
+                // 为了与主表格保持一致，将footerData转换为字符串
+                // footerData = footerData.map((item)=>item+'');
+                const footerRes = trs.map((tr, rowIndex) => Array.from(tr.childNodes).map(
+                    (node, colIndex) => {
+                        if (node.nodeName === 'TD') {
+                            let title = node.innerText;
+                            const data = {
+                                v: title,
+                            };
+                            if (includeStyles) {
+                                const style = getXslxStyle(node);
+                                Object.assign(data, {
+                                    s: style.s,
+                                    rect: style.rect,
+                                });
+                            }
+                            return data;
+                        } else {
+                            return null;
+                        }
+                    },
+                ));
+
+                const newResult = this.removeExcludeColumns(footerRes, excludeColumns, [], titleColIndexRelations);
+                res = res.concat(newResult[0]);
+                this.exportFooterData = undefined;
+                await new Promise((res) => {
+                    this.$once('hook:updated', res);
+                });
+            }
 
             return [res, mergesMap, headerRowCount];
         },
@@ -1708,6 +1881,7 @@ export default {
                 this.currentValues = values;
             }
             // 暂存选中行
+            this.checkedItems = {};
             if (this.currentData) {
                 this.currentData.forEach((item) => {
                     if (item.checked) {
@@ -1715,6 +1889,33 @@ export default {
                         this.checkedItems[label] = item;
                     }
                 });
+            }
+            // 3123124215948800: values变化后充值了item.checked状态，需要递归处理父级的半勾选状态
+            if (this.treeDisplay) {
+                Object.keys(this.checkedItems).forEach((itemKey) => {
+                    this.handleHalfCheckedForTreeDisplay(this.checkedItems[itemKey], this.treeCheckType);
+                });
+            }
+        },
+        handleHalfCheckedForTreeDisplay(item, direction = 'up+down') {
+            if (direction.includes('up')) {
+                if (item.parentPointer) {
+                    const parentItem = this.currentData.find((citem) => citem === item.parentPointer);
+                    if (parentItem && !parentItem.disabled) {
+                        const children = this.$at(parentItem, this.childrenField) || [];
+                        let checkedLength = 0;
+                        children.forEach((item) => {
+                            if (item.checked)
+                                checkedLength++;
+                            if (item.checked === null)
+                                checkedLength += 0.5;
+                        });
+                        if (checkedLength > 0 && checkedLength < children.length) {
+                            parentItem.checked = null;
+                        }
+                        this.handleHalfCheckedForTreeDisplay(parentItem, 'up');
+                    }
+                }
             }
         },
         onClickRow(e, item, rowIndex) {
@@ -2102,7 +2303,7 @@ export default {
                 // this.dragState.sourcePath === undefined，表示是拖拽节点所在表格外的其他表格，因为其他表格没有响应dragstart事件，所以sourcePath为undefined
                 if (!this.dropData && this.dragState.sourcePath === undefined) {
                     this.dropData = {
-                        dragoverElRect: this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
+                        dragoverElRect: this.$refs.tableRender && this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
                         parentElRect: this.$refs.root.getBoundingClientRect(),
                         position: 'append',
                         left: 0,
@@ -2383,7 +2584,7 @@ export default {
                     return;
                 if (this.draggable || this.acrossTableDrag) {
                     this.dropData = {
-                        dragoverElRect: this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
+                        dragoverElRect: this.$refs.tableRender && this.$refs.tableRender.getRefs().body.getBoundingClientRect(),
                         parentElRect: this.$refs.root.getBoundingClientRect(),
                         position: 'append',
                         left: 0,
@@ -2520,7 +2721,7 @@ export default {
                 Array.from(crt.children).forEach((td) => {
                     td.style.position = 'static'; // 去除sticky的情况
                 });
-                const tableEl = this.$refs.tableRender.getRefs().bodyTable.$el;
+                const tableEl = this.$refs.tableRender && this.$refs.tableRender.getRefs().bodyTable.$el;
                 const tableElCrt = tableEl.cloneNode(true);
                 const tbody = tableElCrt.getElementsByTagName('tbody')[0];
                 tbody.innerHTML = '';
@@ -2547,16 +2748,15 @@ export default {
             }
             return target;
         },
-        getPaginationHeight() {
-            let paginationHeight = 0;
-            if (this.$refs.pagination) {
-                paginationHeight = this.$refs.pagination.$el.offsetHeight;
-                const paginationStyle = getComputedStyle(this.$refs.pagination.$el);
-                const marginTop = +(paginationStyle.marginTop || '').replace(/px/, '') || 0;
-                const marginBottom = +(paginationStyle.marginBottom || '').replace(/px/, '') || 0;
-                paginationHeight = paginationHeight + marginTop + marginBottom;
-            }
-            return paginationHeight;
+        getElementHeight(el) {
+            if (!el)
+                return 0;
+            el = el.$el || el;
+            const style = getComputedStyle(el);
+            const height = el.offsetHeight;
+            const marginTop = +(style.marginTop || '').replace(/px/, '') || 0;
+            const marginBottom = +(style.marginBottom || '').replace(/px/, '') || 0;
+            return height + marginTop + marginBottom;
         },
         autoMergeRow(currentData = this.currentData) {
             // 这里要再重置一下，因为表格列也会调用这个方法
@@ -2811,6 +3011,12 @@ export default {
         getContainColumns(column) {
             if (column.$children.length) {
                 const children = column.$children.filter((childrenVM) => this.isColumnVM(childrenVM));
+                const slotVMs = column.$slots.default || [];
+                children.sort((column1, column2) => {
+                    const index1 = slotVMs.findIndex((slotVm) => slotVm === column1.$vnode);
+                    const index2 = slotVMs.findIndex((slotVm) => slotVm === column2.$vnode);
+                    return index1 - index2;
+                });
                 return flatMap(children, this.getContainColumns);
             } else {
                 return this.isColumnVM(column) ? [column] : [];
@@ -2912,6 +3118,9 @@ export default {
         // for 外部调用
         resetEdit(item) {
             item.editing = '';
+        },
+        onScrollViewRenderTable(data) {
+            this.$refs.footerRender && this.$refs.footerRender.syncScroll(data);
         },
     },
 };

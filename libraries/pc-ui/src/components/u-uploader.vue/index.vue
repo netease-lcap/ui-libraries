@@ -1,12 +1,13 @@
 <template>
 <div :class="$style.root">
-    <div v-if="draggable && !isPreview && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.draggable" :dragover="dragover" @click="select()"
-        :tabindex="readonly || disabled ? '' : 0"
+    <div v-if="draggable && !isPreview && (!readonly || $env.VUE_APP_DESIGNER)" :class="[$style.draggable, { [$style.useIcon]: !!uploadIcon }]" :dragover="dragover" @click="select()"
+        :tabindex="readonly || computedDisabled ? '' : 0"
         @drop.prevent="onDrop"
         @paste="onPaste"
         @dragover.prevent="dragover = true"
         @dragleave.prevent="dragover = false">
-        <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
+        <i-ico :name="uploadIcon" v-if="uploadIcon" notext :class="$style.uploadIcon"></i-ico>
+        <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="computedDisabled" @click.stop @change="onChange">
         <div>
             <div v-if="dragDescription" vusion-slot-name="dragDescription" :class="$style.dragDescription"><slot name="dragDescription">{{ dragDescription }}</slot></div>
             <slot></slot>
@@ -15,7 +16,7 @@
     <div v-else-if="listType !== 'card' && !isPreview && (!readonly || $env.VUE_APP_DESIGNER)" :class="$style.select" @click="select()"
         vusion-slot-name="default"
         :vusion-empty-background="$env.VUE_APP_DESIGNER && !$slots.default ? 'add-any' : false">
-        <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
+        <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="computedDisabled" @click.stop @change="onChange">
         <slot></slot>
     </div>
     <template v-if="listType !== 'card' || (uploadEnable && draggable && !readonly) ">
@@ -37,12 +38,12 @@
                                 <i-ico :name="downloadIcon" icotype="only"></i-ico>
                             </a>
                         </span>
-                        <i-ico name="remove" :class="$style.remove" v-if="!readonly && !disabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !computedDisabled && !isPreview && !$env.VUE_APP_DESIGNER" @click="remove(index)"></i-ico>
                     </div>
                       <div v-else>
                         <div :class="$style.thumb"><img :class="$style.img" v-if="listType === 'image'" :src="getUrl(item)"></div>
                         <a :class="$style.link" :href="encodeUrl(item.url)" target="_blank" download role="download">{{ item.name || item.url }}</a>
-                        <i-ico name="remove" v-if="!readonly && !disabled && !isPreview" :class="$style.remove" @click="remove(index)"></i-ico>
+                        <i-ico :name="removeIcon || 'remove'" :class="$style.remove" v-if="!readonly && !computedDisabled && !isPreview" @click="remove(index)"></i-ico>
                     </div>
                     <u-linear-progress v-if="item.showProgress && !$env.VUE_APP_DESIGNER" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                 </template>
@@ -54,16 +55,25 @@
                 <div :class="$style.mask" :multiple="multiple || readonly" :show-progress="item.showProgress">
                     <u-linear-progress v-if="item.showProgress" :class="$style.progress" :percent="item.percent"></u-linear-progress>
                     <div :class="$style.buttons">
-                        <span v-if="!readonly && !disabled && !isPreview" :class="$style.button" role="remove" @click.stop="remove(index)"></span>
-                        <span :class="$style.button" role="preview" @click.stop="onPreview(item, index)"></span>
-                        <a v-if="downLoadFilename" :class="$style.button" @click.stop :href="encodeUrl(item.url)" target="_blank" role="download" :download="downLoadFilename"></a>
-                        <a v-else :class="$style.button" :href="encodeUrl(item.url)" @click.stop target="_blank" download role="download"></a>
+                        <span v-if="!readonly && !computedDisabled && !isPreview" :class="[$style.button, { [$style.useIcon]: !!removeIcon }]" role="remove" @click.stop="remove(index)">
+                          <i-ico :name="removeIcon" v-if="removeIcon" notext :class="$style.icon"></i-ico>
+                        </span>
+                        <span :class="[$style.button, { [$style.useIcon]: !!previewIcon }]" role="preview" @click.stop="onPreview(item, index)">
+                          <i-ico :name="previewIcon" v-if="previewIcon" notext :class="$style.icon"></i-ico>
+                        </span>
+                        <a v-if="downLoadFilename" :class="[$style.button, { [$style.useIcon]: !!downloadIcon }]" @click.stop :href="encodeUrl(item.url)" target="_blank" role="download" :download="downLoadFilename">
+                          <i-ico :name="downloadIcon" v-if="downloadIcon" notext :class="$style.icon"></i-ico>
+                        </a>
+                        <a v-else :class="[$style.button, { [$style.useIcon]: !!downloadIcon }]" :href="encodeUrl(item.url)" @click.stop target="_blank" download role="download">
+                          <i-ico :name="downloadIcon" v-if="downloadIcon" notext :class="$style.icon"></i-ico>
+                        </a>
                     </div>
                 </div>
             </div>
             <div :class="$style.cardwrap" v-if="uploadEnable && !draggable && (!readonly || $env.VUE_APP_DESIGNER)">
-                <div :class="$style.card" role="select" @click="select()">
-                    <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="disabled" @click.stop @change="onChange">
+                <div :class="[$style.card, { [$style.useIcon]: !!addIcon }]" role="select" @click="select()">
+                    <i-ico :name="addIcon" v-if="addIcon" notext :class="$style.addIcon"></i-ico>
+                    <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="computedDisabled" @click.stop @change="onChange">
                 </div>
                 <div v-if="description" :class="$style.description">{{ description }}</div>
                 <f-scroll-view trigger="hover" v-if="showErrorMessage && errorMessage.length">
@@ -114,6 +124,9 @@ const SIZE_UNITS = {
 
 export default {
     name: 'u-uploader',
+    inject: {
+        formVM: { default: null },
+    },
     components: { cropper, UPreview },
     mixins: [
       MField,
@@ -125,7 +138,7 @@ export default {
         },
         readonly: 'readonly',
         preview: 'isPreview',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
         url: 'url',
       }),
     ],
@@ -146,6 +159,7 @@ export default {
         listType: { type: String, default: 'text' },
         urlField: { type: String, default: 'url' },
         autoUpload: { type: Boolean, default: true },
+        disableUpload: { type: Boolean, default: false }, // 禁用文件上传
         draggable: { type: Boolean, default: false },
         pastable: { type: Boolean, default: false },
         showFileList: { type: Boolean, default: true },
@@ -155,7 +169,7 @@ export default {
         dragDescription: {
             type: String,
             default() {
-                return '点击/拖动/粘贴文件到这里';
+                return '点击/拖动文件到这里';
             },
         },
         description: String, // 上传限制描述等
@@ -177,6 +191,10 @@ export default {
         fileType: { type: String, default: 'default' },
         iconMap: { type: Object, default: () => ({ 'doc|docx': 'file-doc', 'jpg|jpeg|png|bmp|gif|tiff|tif|webp|svg|psd|raw': 'file-jpg', pdf: 'file-pdf', xlsx: 'file-xlxs', txt: 'file-txt', 'ppt|pptx': 'file-ppt', zip: 'file-zip', csv: 'file-csv' }) },
         downloadIcon: { type: String, default: 'download' },
+        previewIcon: { type: String },
+        removeIcon: { type: String },
+        uploadIcon: { type: String },
+        addIcon: { type: String },
         fileIconSwitcher: { type: Boolean, default: true },
         downloadIconSwitcher: { type: Boolean, default: true },
         fileSize: { type: Boolean, default: true },
@@ -210,6 +228,9 @@ export default {
         };
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         uploadEnable() {
             return (this.multiple ? this.currentValue.length < this.limit : this.currentValue.length === 0) && !this.isPreview;
         },
@@ -329,14 +350,22 @@ export default {
             return !!iconInfo ? (iconInfo[1] || 'file-default') : 'file-default'
         },
         isURLEncoded(url) {
-            const decodedUrl = decodeURI(url); // 对 URL 进行解码
-            if (decodedUrl === url) {
-                return false; // URL 未被编码
-            } else {
-                return true; // URL 已被编码
+            try {
+              const decodedUrl = decodeURI(url); // 对 URL 进行解码
+              if (decodedUrl === url) {
+                  return false; // URL 未被编码
+              } else {
+                  return true; // URL 已被编码
+              }
+            } catch (err) {
+              return false;
             }
         },
         encodeUrl(url) {
+            if (typeof url !== 'string') {
+                return '';
+            }
+
             return this.isURLEncoded(url) ? url : encodeURI(url);
         },
         fromValue(value) {
@@ -359,12 +388,34 @@ export default {
                         return noFinished && this.currentValue || [];
                     }
                     const values = value.split(',');
-                    const currentValue = this.currentValue ? [...this.currentValue] : [];
-                    values.forEach((item, index) => {
-                        currentValue[index] = currentValue[index] || {};
-                        currentValue[index].url = values[index];
-                        currentValue[index].name = this.handleFileName(values[index]);
-                    });
+                    let currentValue = this.currentValue ? [...this.currentValue] : [];
+
+                    for (let i = 0; i < currentValue.length; i++) {
+                      if (values.length === 0) {
+                        currentValue = currentValue.filter((item, index) => index < i || item.status === 'uploading' || item.status === 'error');
+                        break;
+                      }
+
+                      const item = currentValue[i];
+                      if (item.status === 'uploading' || item.status === 'error') {
+                        continue;
+                      }
+
+
+                      const url = values.shift();
+                      item.url = url;
+                      item.name = this.handleFileName(url);
+                      item.status = 'success';
+                    }
+
+                    if (values.length > 0) {
+                      currentValue = currentValue.concat(values.map((url) => ({
+                        url,
+                        name: this.handleFileName(url),
+                        status: 'success',
+                      })));
+                    }
+
                     return currentValue;
                 } catch (err) {
                     return [];
@@ -382,7 +433,7 @@ export default {
                 return value;
         },
         simpleConvert(value) {
-            return value.map((x) => (x.url || '')).join(',');
+            return value.filter((x) => x.status !== 'uploading' && x.status !== 'error').map((x) => (x.url || '')).join(',');
         },
         getUrl(item) {
           const IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
@@ -391,7 +442,7 @@ export default {
           return IMAGE_REGEXP.test(url) ? url : FileImg;
         },
         select() {
-            if (this.readonly || this.disabled || this.sending || this.$env.VUE_APP_DESIGNER || !this.$refs.file) {
+            if (this.readonly || this.computedDisabled || this.sending || this.$env.VUE_APP_DESIGNER || !this.$refs.file) {
               return;
             }
 
@@ -411,7 +462,11 @@ export default {
                 }];
             }
 
-            if (!files)
+            this.$emit('select-files', {
+              files: files ? Array.from(files) : [],
+            });
+
+            if (!files || this.disableUpload)
                 return;
             // 处理开启图片编辑器
             if (this.openCropper) {
@@ -605,7 +660,7 @@ export default {
 
                     this.emitInputEvent();
                     this.$emit('progress', {
-                        e, file, item, xhr,
+                        e, file, raw: file, item, xhr,
                     }, this);
                 },
                 onSuccess: (res) => {
@@ -640,6 +695,9 @@ export default {
                                     size: file[urlIndex].size,
                                     showProgress: false,
                                     url: urlTemp,
+                                    response: res,
+                                    type: file[urlIndex].type,
+                                    uid: file[urlIndex].uid !== undefined ? file[urlIndex].uid : Date.now() + this.currentValue.length,
                                 };
                                 this.currentValue.push(urlItem);
                             });
@@ -651,12 +709,12 @@ export default {
                     this.$emit('success', {
                         res,
                         file,
+                        raw: file,
                         item,
                         xhr,
                     }, this);
                 },
                 onError: (e, res) => {
-                    console.log('error', e)
                     const item = this.currentValue[index];
                     item.status = 'error';
 
@@ -669,6 +727,7 @@ export default {
                         e,
                         res,
                         file,
+                        raw: file,
                         item,
                         xhr,
                     }, this);
@@ -733,7 +792,7 @@ export default {
         },
         onDrop(e) {
             this.dragover = false;
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
 
             if (this.openCropper) {
@@ -761,7 +820,7 @@ export default {
             this.uploadFiles(e.dataTransfer.files);
         },
         onPaste(e) {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             if (this.pastable)
                 this.uploadFiles(e.clipboardData.files);
@@ -844,7 +903,6 @@ export default {
             }
 
             const match = url.match(/\/([^/]+)$/);
-            console.log('match', match);
             return match ? match[1] : null;
         },
         emitInputEvent() {
@@ -1091,6 +1149,23 @@ content: "\e663";
       color: var(--brand-primary);
   }
 
+  .card.useIcon::before {
+    content: none;
+  }
+
+  .card.useIcon {
+    color: var(--uploader-border-color);
+    font-size: var(--uploader-card-icon-font-size);
+  }
+
+  .card.useIcon:hover {
+    color: var(--brand-primary);
+  }
+
+  .card.useIcon .addIcon {
+    font-size: inherit;
+  }
+
   .card:not(:last-child) {
       margin-right: var(--uploader-card-space);
   }
@@ -1129,6 +1204,8 @@ content: "\e663";
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
   }
 
   .button {
@@ -1186,6 +1263,14 @@ content: "\e663";
     font-smoothing: antialiased;
   }
 
+  .button.useIcon::before {
+    content: none;
+  }
+
+  .button.useIcon .icon {
+    font-size: inherit;
+  }
+
   .draggable {
       overflow: hidden;
       cursor: var(--cursor-pointer);
@@ -1205,7 +1290,7 @@ content: "\e663";
   }
 
   .draggable::before {
-    font-size: 24px;
+    font-size: var(--uploader-draggable-icon-size, 24px);
     content: "\e656";
     font-family: "lcap-ui-icons";
     font-style: normal;
@@ -1222,6 +1307,20 @@ content: "\e663";
   .draggable:focus::before,
   .draggable[dragover]::before{
       color: var(--uploader-draggable-color-hover);
+  }
+
+  .draggable.useIcon::before {
+    content: none;
+  }
+
+  .draggable.useIcon .uploadIcon {
+    font-size: var(--uploader-draggable-icon-size, 24px);
+    color: var(--uploader-draggable-icon-color);
+  }
+
+  .draggable.useIcon:hover .uploadIcon,
+  .draggable.useIcon:focus .uploadIcon {
+    color: var(--uploader-draggable-color-hover);
   }
 
   .dragDescription{

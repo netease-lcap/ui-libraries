@@ -43,10 +43,12 @@ namespace nasl.ui {
   }
 
   export class ElMessageBoxOptions extends ViewComponentOptions {
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({
-      title: '显示',
-      description: '是否显示',
-      group: '主要属性',
+      title: '显示状态',
+      description: '控制弹框的显示和隐藏',
+      docDescription: '绑定弹框的显示状态。true：显示弹框；false：隐藏弹框。支持双向绑定。',
+      group: '状态属性',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -76,7 +78,8 @@ namespace nasl.ui {
 
     @Prop<ElMessageBoxOptions, 'type'>({
       title: '弹框类型',
-      description: '消息提示、确认消息、提交内容',
+      description: '选择弹框的功能类型',
+      docDescription: '控制弹框的功能类型。消息提示：纯展示信息；确认消息：需要用户确认的操作；提交内容：需要用户输入内容。',
       group: "主要属性",
       setter: {
         concept: "EnumSelectSetter",
@@ -196,27 +199,27 @@ namespace nasl.ui {
     })
     confirmButtonText: nasl.core.String = '确定';
 
-    @Prop({
-      title: '取消按钮的加载图标',
-      description: '取消按钮的加载图标内容',
-      group: '主要属性',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
-      },
-    })
-    cancelButtonLoadingIcon: nasl.core.String;
+    // @Prop({
+    //   title: '取消按钮的加载图标',
+    //   description: '取消按钮的加载图标内容',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+    //   },
+    // })
+    // cancelButtonLoadingIcon: nasl.core.String;
 
-    @Prop({
-      title: '确认按钮的加载图标',
-      description: '确认按钮的加载图标',
-      group: '主要属性',
-      setter: {
-        concept: 'IconSetter',
-        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
-      },
-    })
-    confirmButtonLoadingIcon: nasl.core.String;
+    // @Prop({
+    //   title: '确认按钮的加载图标',
+    //   description: '确认按钮的加载图标',
+    //   group: '主要属性',
+    //   setter: {
+    //     concept: 'IconSetter',
+    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+    //   },
+    // })
+    // confirmButtonLoadingIcon: nasl.core.String;
 
     @Prop({
       title: '点击遮罩层关闭弹框',
@@ -387,13 +390,19 @@ namespace nasl.ui {
       title: '取消按钮点击后',
       description: '取消按钮点击后触发',
     })
-    onCancel: (event: {}) => any;
+    onCancel: () => any;
+
+    @Event({
+      title: '关闭前',
+      description: '关闭前触发',
+    })
+    onBeforeClose: (event: { action: 'confirm' | 'cancel' | 'close', instance: any, done: any }) => any;
 
     @Event({
       title: '关闭后',
       description: '关闭提示时触发',
     })
-    onClose: (event: {}) => any;
+    onClose: () => any;
 
     @Slot({
       title: '消息内容',

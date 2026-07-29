@@ -1,6 +1,7 @@
-import { createUseUpdateSync, $deletePropList } from '@lcap/vue2-utils';
+import { createUseUpdateSync, $deletePropList, $ref } from '@lcap/vue2-utils';
 import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
 import { isFunction } from 'lodash';
+import { getCurrentInstance } from '@vue/composition-api';
 
 export { useFormFieldClass } from '../../../plugins/use-form-field-class';
 
@@ -8,7 +9,7 @@ export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'chang
 
 export const useAutoSize: NaslComponentPluginOptions = {
   order: 1,
-  props: ['minRows', 'maxRows'],
+  props: ['minRows', 'maxRows','resize'],
   setup: (props, { h }) => {
     const size = props.useRef(['autosize', 'minRows', 'maxRows'], (autosize, minRows, maxRows) => {
       let v = autosize;
@@ -21,10 +22,44 @@ export const useAutoSize: NaslComponentPluginOptions = {
 
       return v;
     });
+    const onKeydown = props.get('onKeydown');
+    const onKeypress = props.get('onKeypress');
+    const onKeyup = props.get('onKeyup');
+    const instance = getCurrentInstance();
 
     return {
+      class: props.useComputed(['resize'], (resize = false) => {
+        const list = resize ? 'el-textarea-pro-resize' : '';
+        return list;
+      }),
+      onKeydown: (value, event) => {
+        if (isFunction(onKeydown)) {
+          onKeydown({ value, event });
+        }
+      },
+      onKeypress: (value, event) => {
+        if (isFunction(onKeypress)) {
+          onKeypress({ value, event });
+        }
+      },
+      onKeyup: (value, event) => {
+        if (isFunction(onKeyup)) {
+          onKeyup({ value, event });
+        }
+      },
       autosize: size,
       [$deletePropList]: ['minRows', 'maxRows'],
+      [$ref]: {
+        focus: () => {
+          instance?.refs?.$base?.focus();
+        },
+        blur: () => {
+          instance?.refs?.$base?.blur();
+        },
+        select: () => {
+          instance?.refs?.$base?.$el.querySelector('textarea')?.select();
+        },
+      },
     };
   },
 };

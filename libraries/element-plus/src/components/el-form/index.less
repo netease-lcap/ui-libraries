@@ -1,0 +1,347 @@
+/* el-form-item 不使用 width: fit-content，以便块级表单项占满行宽、label/content 可正确收缩 */
+
+.el-form-item~.el-button {
+  margin-bottom: 18px;
+}
+
+.el-form {
+  border: 1px solid transparent;
+  /* 按表单容器宽度（非视口）自适应表单项最大宽度 */
+  container-type: inline-size;
+  container-name: el-form;
+
+  .el-form-item {
+    --el-form-item-max-width: 400px;
+  }
+
+  .el-form-item__label {
+    display: inline-flex;
+    line-height: 16px;
+    text-align: center;
+    align-items: center;
+
+    // .el-text {
+    //   display: -webkit-box;
+    //   -webkit-box-orient: vertical;
+    //   -webkit-line-clamp: 2;
+    //   overflow: hidden;
+    //   word-break: break-word;
+    //   white-space: normal;
+    //   line-height: 16px;
+    // }
+  }
+
+
+
+  /* 块级：左/右标签时由容器控制 label、content 优选宽度与最小宽度；排除顶部标签、行内、栅格、查询表单 */
+  &:not(.el-form--label-top):not(.el-form-grid):not(.el-form--query):not(:has(.el-col)):not(.el-form--inline) {
+    .el-form-item__label {
+      flex: 1 1 0;
+      min-width: 72px;
+      width: max-content;
+      max-width: 160px;
+    }
+    .el-form-item__content[style*="margin-left: auto"] {
+      margin-left:  0!important;
+    }
+    .el-form-item__content {
+      flex: 0 1 var(--el-form-content-width, 240px);
+      min-width: var(--el-form-content-min-width, 180px);
+      width: auto;
+      max-width: var(--el-form-item-max-width, 400px);
+
+      /* 仅对常用录入控件拉满 content；单选/多选组等非列表组件不在此列 */
+      >.el-autocomplete,
+      >.el-cascader,
+      >.el-date-editor,
+      >.el-input,
+      >.el-textarea,
+      >.el-input-tag,
+      >.el-mention,
+      >.el-select,
+      >.el-slider,
+      >.el-tree-select {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+  &.el-form--inline {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .el-form-item {
+      // display: inline-flex;
+
+
+
+      .el-form-item__content {
+        width: 240px;
+
+        /* 仅对常用录入控件拉满 content；单选/多选组等非列表组件不在此列 */
+        >.el-autocomplete,
+        >.el-cascader,
+        >.el-date-editor,
+        >.el-input,
+        >.el-input-number,
+        >.el-textarea,
+        >.el-input-tag,
+        >.el-mention,
+        >.el-select,
+        >.el-slider,
+        >.el-tree-select {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+
+  &.el-form-grid,
+  &:has(.el-col) {
+    &.el-form-grid {
+      display: grid;
+      overflow: auto;
+      width: 100%;
+      grid-template-columns: repeat(var(--el-form-columns), 1fr);
+    }
+
+    // gap: var( --el-form-item-gap);
+    /* 栅格单元内：表单项与控件区横向撑满列宽 */
+    .el-form-item {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      margin-left: 16px
+    }
+
+    &:not(.el-form--label-top) {
+
+      .el-form-item__label {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: max-content;
+        min-width: 76px;
+        width: max-content;
+        max-width: 160px;
+        margin-left: 4px;
+      }
+
+      .el-form-item__content {
+        flex-grow: 1;
+        flex-shrink: 2;
+        flex-basis: var(--el-form-label-width, 240px);
+        min-width: 0;
+        width: auto;
+        max-width: var(--el-form-item-max-width, 400px);
+
+        >.el-autocomplete,
+        >.el-cascader,
+        >.el-date-editor,
+        >.el-input,
+        >.el-input-number,
+        >.el-textarea,
+        >.el-input-tag,
+        >.el-mention,
+        >.el-select,
+        >.el-slider,
+        >.el-tree-select,
+        >.el-upload,
+        >.el-transfer {
+          box-sizing: border-box;
+          flex-shrink: 1;
+          max-width: 100%;
+          min-width: 0;
+          width: 100%;
+        }
+      }
+    }
+    column-gap: 16px;
+    &.el-form--label-top {
+      .el-form-item__content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        >.el-autocomplete,
+        >.el-cascader,
+        >.el-date-editor,
+        >.el-input,
+        >.el-input-number,
+        >.el-textarea,
+        >.el-input-tag,
+        >.el-mention,
+        >.el-select,
+        >.el-slider,
+        >.el-tree-select,
+        >.el-upload,
+        >.el-transfer {
+          box-sizing: border-box;
+          flex-shrink: 1;
+          max-width: 100%;
+          min-width: 0;
+          width: 100%;
+        }
+      }
+    }
+
+  }
+}
+
+/* 表单项最大宽度：按表单容器宽度断点（非视口） */
+@container el-form (min-width: 992px) {
+  .el-form-item {
+    --el-form-item-max-width: 460px;
+  }
+}
+
+@container el-form (min-width: 1200px) {
+  .el-form-item {
+    --el-form-item-max-width: 560px;
+  }
+}
+
+@container el-form (min-width: 1440px) {
+  .el-form-item {
+    --el-form-item-max-width: 680px;
+  }
+}
+
+@container el-form (min-width: 1920px) {
+  .el-form-item {
+    --el-form-item-max-width: 800px;
+  }
+}
+
+
+.el-form.el-form--label-top .el-flex-form-item>:not(.el-form-item-has-label) {
+  align-self: flex-end;
+}
+
+
+.el-form--inline .el-flex-form-item {
+  display: inline-flex;
+}
+
+.el-form:not(.el-form--label-top) .el-flex-form-item>:first-child:not(.el-form-item) {
+  margin-left: var(--el-flex-form-label-width);
+}
+
+.el-form.el-form--query {
+  width: 100%;
+}
+
+/* 查询布局：表单项在列内横向撑满，避免沿用块级 label/content 固定宽度导致「仍像单列 block」 */
+.el-form.el-form--query:not(.el-form--label-top) {
+  .el-form-item__label {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: max-content;
+    min-width: 96px;
+    width: max-content;
+    // max-width: max-content;
+
+    max-width: 160px;
+    margin-left: 4px;
+  }
+
+  .el-form-item__content {
+    flex-grow: 1;
+    flex-shrink: 2;
+    flex-basis: var(--el-form-label-width, 240px);
+    min-width: 0;
+    width: 240px;
+    max-width: var(--el-form-item-max-width, 400px);
+
+    >.el-autocomplete,
+    >.el-cascader,
+    >.el-date-editor,
+    >.el-input,
+    >.el-input-number,
+    >.el-textarea,
+    >.el-input-tag,
+    >.el-mention,
+    >.el-select,
+    >.el-slider,
+    >.el-tree-select,
+    >.el-upload,
+    >.el-transfer {
+      box-sizing: border-box;
+      flex-shrink: 1;
+      max-width: 100%;
+      min-width: 0;
+      width: 100%;
+    }
+  }
+}
+
+.el-form.el-form--query.el-form--label-top {
+  .el-form-item__content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    >.el-autocomplete,
+    >.el-cascader,
+    >.el-date-editor,
+    >.el-input,
+    >.el-input-number,
+    >.el-textarea,
+    >.el-input-tag,
+    >.el-mention,
+    >.el-select,
+    >.el-slider,
+    >.el-tree-select,
+    >.el-upload,
+    >.el-transfer {
+      box-sizing: border-box;
+      flex-shrink: 1;
+      max-width: 100%;
+      min-width: 0;
+      width: 100%;
+    }
+  }
+}
+
+.el-form-query {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
+  column-gap: 16px;
+  box-sizing:border-box;
+  row-gap: 12px;
+  --el-form-query-cols: 4;
+  box-sizing: border-box;
+}
+
+.el-form-query__fields {
+  display: contents;
+}
+
+.el-form.el-form--query .el-form-query .el-form-item {
+  flex: 0 0 calc((100% - (var(--el-form-query-cols) - 1) * 16px) / var(--el-form-query-cols));
+  max-width: calc((100% - (var(--el-form-query-cols) - 1) * 16px) / var(--el-form-query-cols));
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.el-form-query__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-inline-start: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-bottom: 18px;
+}
+
+.el-form-query__actions--full-row {
+  flex-basis: 100%;
+  margin-inline-start: 0;
+}

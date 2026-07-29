@@ -1,5 +1,6 @@
 import 'element-plus/theme-chalk/base.css';
 import 'element-plus/dist/index.css';
+import 'normalize.css/normalize.css';
 
 import './reset.css';
 

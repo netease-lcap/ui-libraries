@@ -21,6 +21,20 @@
     color: var(--cascader-item-expander-color);
 }
 
+.select_item[has-sub].useIcon::after {
+    content: none;
+}
+
+.select_item[has-sub].useIcon > span > .icon {
+  font-size: inherit;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: var(--menu-item-size);
+  height: var(--menu-item-size);
+  line-height: var(--menu-item-size);
+  text-align: center;
+}
 
 .umenuShape{
     min-height: 200px;
@@ -71,9 +85,7 @@
 }
 
 .spinner::after{
-    position: absolute;
-    display: inline-block;
-content: "\e650";
+    content: "\e650";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -84,9 +96,22 @@ content: "\e650";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-    right: calc(var(--select-arrow-right-ratio) * var(--select-padding-x) - 2px);
-    top: 5px;
-    color: black;
-    animation: linear-spin var(--spinner-animation-duration) linear 0s infinite;
 }
 
+.spinner.useIcon::after {
+    content: none;
+}
+
+.spinner::after,
+.spinner.useIcon > .icon {
+  position: absolute;
+  display: inline-block;
+  right: calc(var(--select-arrow-right-ratio) * var(--select-padding-x) - 2px);
+  top: 5px;
+  color: black;
+  animation: linear-spin var(--spinner-animation-duration) linear 0s infinite;
+}
+
+.spinner.useIcon > .icon {
+    font-size: inherit;
+}

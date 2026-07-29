@@ -1,3 +1,10 @@
-.el-input{
-  --el-input-width:240px;
+.el-input,
+.el-textarea {
+  --el-input-width: 240px;
+}
+.el-input {
+  width: var(--el-input-width);
+}
+.el-textarea {
+  width: var(--el-input-width);
 }

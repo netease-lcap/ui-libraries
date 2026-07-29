@@ -1,14 +1,21 @@
 // import Mention from './mention.tsx';
 import { ElMention as ElMentionPlus } from 'element-plus';
+import _ from 'lodash';
 import { registerComponent } from '@/plugins';
-import * as basicPlugin from './plugins/index';
+import basicPlugin from './plugins/basic-plugins';
+import { $deletePropsList } from '@/plugins/constants';
 import { withFormItem } from '@/components/el-form/plugins/form-item';
 import './index.css';
 
-const ElMention = registerComponent(ElMentionPlus, {
-  plugin: basicPlugin,
-});
+function ElMentionRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(basicPlugin, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
+
+const ElMention = registerComponent(ElMentionPlus, { plugin: basicPlugin, name: 'el-mention' });
 
 const ElFormMention = withFormItem(ElMention, 'el-form-mention');
-export { ElMention, ElFormMention };
+
+export { ElMentionPlus, ElMention, ElFormMention, ElMentionRegister };
+export const ElMentionBasicsPlugin = basicPlugin;
 export default ElMentionPlus;

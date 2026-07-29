@@ -68,6 +68,17 @@ namespace nasl.ui {
         })
         removable: nasl.core.Boolean = false;
 
+        @Prop<ULabelOptions, 'closeIcon'>({
+            group: '主要属性',
+            title: '关闭图标',
+            description: '设置关闭图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.removable === true,
+        })
+        closeIcon: nasl.core.String = 'close';
+
         @Prop({
             group: '样式属性',
             title: '尺寸',

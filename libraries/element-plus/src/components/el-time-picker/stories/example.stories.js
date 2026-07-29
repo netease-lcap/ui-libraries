@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import ElTimePickerPro from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
@@ -19,7 +20,21 @@ export const Default = {
     components: {
       exampleDemo: ExampleDemo1,
     },
-    template: '<example-demo></example-demo>',
+    setup() {
+      const clear = (event) => {
+        console.log(event);
+      };
+      const value = ref();
+      const change = (event) => {
+        console.log(event);
+      };
+      return {
+        clear,
+        value,
+        change,
+      };
+    },
+    template: '<el-time-picker isRange @change="change" v-model="value"  placeholder="请选择时间" :clearable="true" @clear="clear($event)"></el-time-picker>',
   }),
 };
 

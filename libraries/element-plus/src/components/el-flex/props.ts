@@ -1,5 +1,5 @@
 export interface ElFlexProps {
-  mode?: 'block' | 'flex';
+  mode?: 'block' | 'flex' | 'form-flex';
   direction?: 'horizontal' | 'vertical';
   justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around';
   alignment?: 'start' | 'center' | 'end' | 'baseline' | 'stretch';
@@ -26,7 +26,7 @@ export const ElFlexPropsDefine = {
   },
   alignment: {
     type: String,
-    default: () => 'start',
+    default: () => 'normal',
   },
   wrap: {
     type: Boolean,

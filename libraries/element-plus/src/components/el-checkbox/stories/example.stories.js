@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import _ from 'lodash';
 import Component from '../index';
 // import { ElSelect, ElOption } from '../index';
+import ExampleDemo1 from '../demos/example-demo1.vue';
 
 export default {
   id: 'el-checkbox-examples',
@@ -74,77 +75,77 @@ export const Example2 = {
       };
       const dataSourceProps = ref({ dataSource: [] });
       const dataSource = () => new Promise((res) => {
-        setTimeout(() => {
-          res([
-            {
-              entity1: {
-                id: '0',
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项5',
-                fid: '1',
+          setTimeout(() => {
+            res([
+              {
+                entity1: {
+                  id: '0',
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项5',
+                  fid: '1',
+                },
               },
-            },
-            {
-              entity1: {
-                id: '1',
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项6',
-                fid: '2',
+              {
+                entity1: {
+                  id: '1',
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项6',
+                  fid: '2',
+                },
               },
-            },
-            {
-              entity1: {
-                id: '3',
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项3',
-                fid: '0',
+              {
+                entity1: {
+                  id: '3',
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项3',
+                  fid: '0',
+                },
               },
-            },
-            {
-              entity1: {
-                id: '7',
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项2',
-                fid: '1',
+              {
+                entity1: {
+                  id: '7',
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项2',
+                  fid: '1',
+                },
               },
-            },
-            {
-              entity1: {
-                id: '8',
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项1.1',
-                fid: '2',
+              {
+                entity1: {
+                  id: '8',
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项1.1',
+                  fid: '2',
+                },
               },
-            },
-            {
-              entity1: {
-                id: '9',
-                createdTime: null,
-                updatedTime: null,
-                createdBy: null,
-                updatedBy: null,
-                property1: '选项4',
-                fid: '0',
+              {
+                entity1: {
+                  id: '9',
+                  createdTime: null,
+                  updatedTime: null,
+                  createdBy: null,
+                  updatedBy: null,
+                  property1: '选项4',
+                  fid: '0',
+                },
               },
-            },
-          ]);
-        }, 1000);
-      });
+            ]);
+          }, 1000);
+        });
       const select = ref('');
       const options = ref([
         {
@@ -181,7 +182,9 @@ export const Example2 = {
         console.log('=====');
         // list.value.push({ value: 4 });
       }, 3000);
-
+      const change = (value) => {
+        console.log(value, 'value=========');
+      };
       return {
         name,
         select,
@@ -193,11 +196,18 @@ export const Example2 = {
         arr,
         handleClick,
         num,
+        change,
       };
     },
     template: `
     <div>
-     <el-checkbox-group :dataSource="dataSource" id="my1">
+      <el-checkbox-group v-model="activeName" @change="change" direction="vertical">
+        <el-checkbox label="a" value="a" ref="a" />
+        <el-checkbox label="b" value="b" ref="b" />
+        <el-checkbox label="c" value="c" ref="c" />
+        <el-checkbox label="d" value="d" ref="d" />
+      </el-checkbox-group>
+     <el-checkbox-group :dataSource="dataSource" id="my1" type="button">
         <el-checkbox label="Option1" value="Value1" />
         <el-checkbox label="Option2" value="Value2" />
         <template #item="{item}">
@@ -205,16 +215,27 @@ export const Example2 = {
         </template>
       </el-checkbox-group>
 
-     <el-checkbox-group  valueField="entity1.id" textField="entity1.property1"  :dataSource="dataSource" id="my2">
      <el-checkbox label="Option1" value="Value1" />
      <el-checkbox label="Option2" value="Value2" />
 
    </el-checkbox-group>
+
+     {{ activeName }}
 
 
       <button @click="handleClick">click</button>
     </div>
 
     `,
+  }),
+};
+
+export const Example3 = {
+  name: '不同类型',
+  render: () => ({
+    components: {
+      exampleDemo: ExampleDemo1,
+    },
+    template: '<example-demo></example-demo>',
   }),
 };

@@ -67,37 +67,67 @@ namespace nasl.ui {
     })
     cancelButtonText: nasl.core.String = '取消';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '确认按钮类型',
-    //   description: '确认按钮类型',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // confirmButtonType: nasl.core.String = 'Primary';
+    @Prop({
+      group: '主要属性',
+      title: '确认按钮类型',
+      description: '设置确认按钮类型',
+      docDescription:
+      '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮按钮。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '主要按钮' },
+          { title: '成功按钮' },
+          { title: '警告按钮' },
+          { title: '危险按钮' },
+          { title: '信息按钮' },
+          { title: '文字按钮' },
+          { title: '默认按钮' },
+        ],
+      },
+    })
+    confirmButtonType: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' | '' = 'primary';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '取消按钮类型',
-    //   description: '取消按钮类型',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // cancelButtonType: nasl.core.String = 'Text';
+    @Prop({
+      group: '主要属性',
+      title: '取消按钮类型',
+      description: '设置取消按钮类型',
+      docDescription:
+      '- 支持定义按钮样式，包括主要按钮、次要按钮、普通按钮、危险操作按钮按钮。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '主要按钮' },
+          { title: '成功按钮' },
+          { title: '警告按钮' },
+          { title: '危险按钮' },
+          { title: '信息按钮' },
+          { title: '文字按钮' },
+          { title: '默认按钮' },
+        ],
+      },
+    })
+    cancelButtonType: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text' | '' = 'text';
+    
+    @Prop({
+      title: '自定义图标',
+      description: '自定义图标',
+      group: '主要属性',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTUI_ICONS',
+        hideUploadIcon: true,
+      },
+    })
+    icon: nasl.core.String = 'el-icon-question';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Icon',
-    //   description: 'Icon',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // icon: nasl.core.String = 'el-icon-question';
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: 'Icon 颜色',
-    //   description: 'Icon 颜色',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // iconColor: nasl.core.String = '#f90';
+    @Prop({
+      group: '主要属性',
+      title: 'Icon 颜色',
+      description: 'Icon 颜色',
+      setter: { concept: 'InputSetter' },
+    })
+    iconColor: nasl.core.String = '#f90';
 
     @Prop({
       group: '主要属性',

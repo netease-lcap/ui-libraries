@@ -2,9 +2,14 @@
 import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins/index';
 import { onMounted, watch } from '@vue/composition-api';
 import { VNode } from 'vue';
+import ElIcon from '../../el-icon';
+
+export { useDataSource } from './data-source';
 
 export const useExtendsPlugin: NaslComponentPluginOptions = {
+  props: ['data', 'titleField', 'valueField', 'propsField', 'typeField', 'childrenField', 'iconField', 'toField'],
   setup: (props, { h, setupContext: ctx }) => {
+    const { get: propGet } = props;
     const defaultActiveRef = props.useRef('defaultActive');
 
     function setDefaultActiveByRouter(routerInfo) {
@@ -35,6 +40,84 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
     onMounted(() => {
       setDefaultActiveByRouter((ctx.parent as any).$route);
     });
+
+    const renderMenuItems = (item, index) => {
+      const value = item[propGet('valueField') as string || 'value'];
+      const title = item[propGet('titleField') as string || 'title'] || '';
+      const icon = item[propGet('iconField') as string || 'icon'];
+      const destination = item[propGet('toField') as string || 'to'];
+      return h('el-menu-item', {
+        key: `menuitem-${index}-${value}`,
+        attrs: {
+          destination,
+          ...item[propGet('propsField') as string || 'props'],
+        },
+      }, [
+        h(ElIcon, {
+          attrs: { name: icon },
+        }),
+        h('span', [title]),
+      ]);
+    };
+
+    const renderMenuGroup = (item, index) => {
+      const title = item[propGet('titleField') as string || 'title'] || '';
+      const getDefault = () => {
+        const children = item[propGet('childrenField') as string || 'children'];
+        if (Array.isArray(children) && children.length > 0) {
+          return children.map((child, cIndex) => renderMenuItems(child, cIndex));
+        }
+        return null;
+      };
+      return h('el-menu-item-group', {
+        key: `menugroup-${index}-${item[propGet('valueField') as string || 'value']}`,
+        attrs: {
+          ...item[propGet('propsField') as string || 'props'],
+        },
+      }, [
+        h('template', {
+          slot: 'title',
+        }, title),
+        h('template', {
+          slot: 'default',
+        }, getDefault()),
+      ]);
+    };
+
+    const renderSubMenu = (item, index) => {
+      const icon = item[propGet('iconField') as string || 'icon'];
+      const title = item[propGet('titleField') as string || 'title'] || '';
+      const getDefault = () => {
+        const children = item[propGet('childrenField') as string || 'children'];
+        if (Array.isArray(children) && children.length > 0) {
+          return children.map((child, cIndex) => {
+            if (child[propGet('typeField') as string || 'type'] === 'group') {
+              return renderMenuGroup(child, cIndex);
+            }
+            if (child[propGet('typeField') as string || 'type'] === 'submenu') {
+              return renderSubMenu(child, cIndex);
+            }
+            return renderMenuItems(child, cIndex);
+          });
+        }
+        return null;
+      };
+      return h('el-submenu', {
+        key: `submenu-${index}-${item[propGet('valueField') as string || 'value']}`,
+        attrs: {
+          ...item[propGet('itemProps') as string],
+        },
+      }, [
+        h('template', {
+          slot: 'title',
+        }, [h(ElIcon, {
+          attrs: { name: icon },
+        }), h('span', [title])]),
+        h('template', {
+          slot: 'default',
+        }, getDefault()),
+      ]);
+    };
 
     return {
       router: false,
@@ -68,9 +151,23 @@ export const useExtendsPlugin: NaslComponentPluginOptions = {
       },
       slotDefault: () => {
         const mode = props.get('mode');
+        const data = propGet('data') || [];
         const [slotDefault, slotLeft, slotRight] = props.get<Array<() => VNode[]>>(['slotDefault', 'slotLeft', 'slotRight']);
-
-        let vnodes = typeof slotDefault === 'function' ? slotDefault() : [];
+        const typeField = propGet('typeField') as string || 'type';
+        let vnodes: VNode[] = [];
+        if (Array.isArray(data) && data.length > 0) {
+          vnodes = data.map((item, i) => {
+            if (item[typeField] === 'group') {
+              return renderMenuGroup(item, i);
+            }
+            if (item[typeField] === 'submenu') {
+              return renderSubMenu(item, i);
+            }
+            return renderMenuItems(item, i);
+          });
+        } else {
+          vnodes = typeof slotDefault === 'function' ? slotDefault() : [];
+        }
         if (!Array.isArray(vnodes)) {
           vnodes = [];
         } else {

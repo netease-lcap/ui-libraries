@@ -23,3 +23,32 @@ export const Demo1 = {
     template: '<el-rate-pro iconname="icon-sugar"></el-rate-pro>',
   }),
 };
+
+
+  export const Demo2 = {
+    name: '区分颜色',
+    render: () => ({
+      data: () => ({
+        distinguishColor: true,
+        colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
+        lowThreshold: 4,
+        highThreshold:6,
+        count: 9
+      }),
+      template: '<el-rate-pro :count="count" :distinguish-color="distinguishColor" :colors="colors" :low-threshold="lowThreshold" :high-threshold="highThreshold"></el-rate-pro>',
+    }),
+  };
+  
+
+  export const Demo3 = {
+    name: '显示分数',
+    render: () => ({
+      data: () => ({
+        showText: true,
+        showScore: true,
+        scoreTemplate: '{value}biuuu',
+      }),
+      template: '<el-rate-pro :show-text="showText" :show-score="showScore" :score-template="scoreTemplate"></el-rate-pro>',
+    }),
+  };
+  

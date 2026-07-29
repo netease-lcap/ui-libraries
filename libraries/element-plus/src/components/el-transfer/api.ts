@@ -6,7 +6,8 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       displaySlotConditions: {
-        option: "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
+        option:
+          "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",
@@ -26,6 +27,7 @@ namespace nasl.ui {
       slotInlineStyle: {
         option: 'min-height: 0;',
       },
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -39,7 +41,13 @@ namespace nasl.ui {
       title: '绑定值',
       description: '当前选中的值，即目标列表的数据',
     })
-    value: nasl.collection.List<V>;
+    modelValue: nasl.collection.List<V>;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean;
 
     @Method({
       title: '重新加载',
@@ -53,28 +61,32 @@ namespace nasl.ui {
   }
 
   export class ElTransferOptions<T, V> extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description: '穿梭框的数据来源',
+      docDescription: '设置穿梭框的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       designerValue: [{}, {}, {}],
-      bindOpen: true,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: nasl.collection.List<T>;
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
-      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+      description: '数据源返回的数据结构类型',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示说明。',
     })
     dataSchema: T;
 
     @Prop({
       group: '数据属性',
       title: '文本字段',
-      description: '集合的元素类型中，用于显示文本的属性名称',
+      description: '用于显示文本的字段',
+      docDescription: '集合的元素类型中，用于显示穿梭框选项文本的属性名称，支持自定义变更。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -162,7 +174,7 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '按钮文本',
+      title: '左侧按钮文本',
       description: '穿梭按钮的文本，数组形式，长度为2，分别代表左右两个按钮的文本',
       setter: { concept: 'InputSetter' },
     })
@@ -191,6 +203,14 @@ namespace nasl.ui {
     })
     filterPlaceholder: nasl.core.String;
 
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
     // @Prop({
     //   group: '数据属性',
     //   title: '筛选方法',
@@ -211,7 +231,11 @@ namespace nasl.ui {
       title: '改变后',
       description: '右侧列表元素变化时触发，当前值和发生移动的值以及移动方向',
     })
-    onChange: (event: { value: nasl.collection.List<V>; movedValue: nasl.collection.List<V>; type: 'source' | 'target' }) => any;
+    onChange: (event: {
+      value: nasl.collection.List<V>;
+      movedValue: nasl.collection.List<V>;
+      type: 'source' | 'target';
+    }) => any;
 
     @Event({
       title: '左侧选中变化',
@@ -225,31 +249,31 @@ namespace nasl.ui {
     })
     onRightCheckChange: (event: nasl.collection.List<V>) => any;
 
-    @Event({
-      title: '滚动时',
-      description: '列表滚动时触发，bottomDistance 表示元素滚动到底部的距离。',
-    })
-    onScroll: (event: {
-      bottomDistance: nasl.core.Integer;
-      type: 'source' | 'target';
-      e: {
-        altKey: nasl.core.Boolean;
-        button: nasl.core.Integer;
-        clientX: nasl.core.Integer;
-        clientY: nasl.core.Integer;
-        ctrlKey: nasl.core.Boolean;
-        metaKey: nasl.core.Boolean;
-        movementX: nasl.core.Integer;
-        movementY: nasl.core.Integer;
-        offsetX: nasl.core.Integer;
-        offsetY: nasl.core.Integer;
-        pageX: nasl.core.Integer;
-        pageY: nasl.core.Integer;
-        screenX: nasl.core.Integer;
-        screenY: nasl.core.Integer;
-        which: nasl.core.Integer;
-      };
-    }) => any;
+    // @Event({
+    //   title: '滚动时',
+    //   description: '列表滚动时触发，bottomDistance 表示元素滚动到底部的距离。',
+    // })
+    // onScroll: (event: {
+    //   bottomDistance: nasl.core.Integer;
+    //   type: 'source' | 'target';
+    //   e: {
+    //     altKey: nasl.core.Boolean;
+    //     button: nasl.core.Integer;
+    //     clientX: nasl.core.Integer;
+    //     clientY: nasl.core.Integer;
+    //     ctrlKey: nasl.core.Boolean;
+    //     metaKey: nasl.core.Boolean;
+    //     movementX: nasl.core.Integer;
+    //     movementY: nasl.core.Integer;
+    //     offsetX: nasl.core.Integer;
+    //     offsetY: nasl.core.Integer;
+    //     pageX: nasl.core.Integer;
+    //     pageY: nasl.core.Integer;
+    //     screenX: nasl.core.Integer;
+    //     screenY: nasl.core.Integer;
+    //     which: nasl.core.Integer;
+    //   };
+    // }) => any;
 
     @Slot({
       title: '来源底部内容',
@@ -269,7 +293,8 @@ namespace nasl.ui {
       idetype: 'container',
       bindStyleSelector: '.__cw-form-compose-input',
       displaySlotConditions: {
-        option: "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
+        option:
+          "!!this.getAttribute('dataSource') && this.getAttribute('optionIsSlot') && this.getAttribute('optionIsSlot').value",
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",
@@ -282,6 +307,11 @@ namespace nasl.ui {
       additionalAttribute: {
         valueField: '"value"',
         textField: '"label"',
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
       },
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
@@ -292,12 +322,20 @@ namespace nasl.ui {
       },
       ignoreProperty: ['rules'],
       forceRefresh: 'parent',
+      childAccept:false,
       namedSlotOmitWrapper: ['label'],
     },
     extends: [
       {
         name: 'ElFormItemPro',
-        excludes: ['slotDefault', 'useRangeValue', 'startFieldName', 'endFieldName', 'startInitialValue', 'endInitialValue'],
+        excludes: [
+          'slotDefault',
+          'useRangeValue',
+          'startFieldName',
+          'endFieldName',
+          'startInitialValue',
+          'endInitialValue',
+        ],
       },
       {
         name: 'ElTransfer',
@@ -311,7 +349,9 @@ namespace nasl.ui {
   })
   export class ElFormTransfer<T, V> extends ViewComponent {
     constructor(
-      options?: Partial<ElFormTransferOptions<T, V> & ElFormItemProOptions & Omit<ElTransferOptions<T, V>, keyof ElFormItemProOptions>>,
+      options?: Partial<
+        ElFormTransferOptions<T, V> & ElFormItemProOptions & Omit<ElTransferOptions<T, V>, keyof ElFormItemProOptions>
+      >,
     ) {
       super();
     }

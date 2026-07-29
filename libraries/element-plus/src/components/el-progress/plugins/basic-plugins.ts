@@ -1,21 +1,27 @@
 /* 组件功能扩展插件 */
 import _ from 'lodash';
-import { useMemo } from '@/plugins/hooks';
+import { ProgressProps } from 'element-plus';
+import { useCallback, useSyncState } from '@/plugins/hooks';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-export function handleFormatFunction(props) {
-  const format = props.get('format');
-  const formatFunction = useMemo(() => {
-    if (!format) {
-      return null;
-    }
-    if (_.isFunction(format)) {
-      return format;
-    }
-    return () => {
-      return format;
+const ProgressBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElProgressOptions, ProgressProps>();
+export default ProgressBasicAccumulate.addPlugin({
+  name: 'handleFormatFunction',
+  handle(props) {
+    const formatProps = props.get('format', undefined);
+    const format = useCallback(
+      _.wrap(formatProps, (fn, ...args) => _.attempt(fn as any, ...args) ?? undefined),
+      [formatProps],
+    );
+
+    return {
+      format,
     };
-  }, [format]);
-  return {
-    format: formatFunction,
-  };
-}
+  },
+}).addPlugin({
+  name: 'handleSyncState',
+  handle(props) {
+    useSyncState(props, 'percentage');
+    return {};
+  },
+});

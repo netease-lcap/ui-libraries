@@ -8,7 +8,11 @@ class WebWorker {
     constructor(worker) {
         const code = worker.toString();
         const blob = new Blob([`(${code})()`]);
-        return new Worker(URL.createObjectURL(blob));
+        const blobURL = URL.createObjectURL(blob);
+        const workerInstance = new Worker(blobURL);
+        // 保存 blobURL 以便后续释放
+        workerInstance._blobURL = blobURL;
+        return workerInstance;
     }
 }
 
@@ -61,6 +65,7 @@ export default {
             second: Number(this.timer),
             worker: undefined,
             lastPauseTime: undefined,
+            blobURL: null, // 保存 Blob URL 以便释放
         };
     },
     computed: {
@@ -104,6 +109,8 @@ export default {
     },
     created() {
         const worker = new WebWorker(work);
+        // 保存 Blob URL 以便后续释放
+        this.blobURL = worker._blobURL;
         if (this.autostart) {
             worker.postMessage({
                 state: "start",
@@ -121,11 +128,28 @@ export default {
             this.second = e.data;
         };
 
-        this.$on("hook:beforeDestroy", () => {
-            worker.postMessage({ state: "stop" });
-        });
-
         this.worker = worker;
+    },
+    beforeDestroy() {
+        // 终止 Web Worker
+        if (this.worker) {
+            try {
+                this.worker.postMessage({ state: "stop" });
+                this.worker.terminate();
+            } catch (e) {
+                // 忽略错误
+            }
+            this.worker = null;
+        }
+        // 释放 Blob URL
+        if (this.blobURL) {
+            try {
+                URL.revokeObjectURL(this.blobURL);
+            } catch (e) {
+                // 忽略错误
+            }
+            this.blobURL = null;
+        }
     },
     methods: {
         start() {

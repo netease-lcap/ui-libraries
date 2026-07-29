@@ -1,0 +1,33 @@
+/**
+ * @component van-loading
+ */
+:root,
+:host {
+  /**
+   * @hidden
+   * @type color
+   * @desc 加载文字颜色
+   */
+  --van-loading-text-color: var(--van-text-color-2);
+  /**
+   * @hidden
+   * @type input
+   * @desc 加载文字字体大小
+   */
+  --van-loading-text-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   * @desc 加载旋转器颜色
+   */
+  --van-loading-spinner-color: var(--van-gray-5);
+  /**
+   * @type input
+   * @desc 加载旋转器尺寸
+   */
+  --van-loading-spinner-size: 30px;
+  /**
+   * @type input
+   * @desc 加载旋转器动画时长
+   */
+  --van-loading-spinner-duration: .8s;
+}

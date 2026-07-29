@@ -6,7 +6,6 @@ namespace nasl.ui {
     sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/image',
     ideusage: {
       idetype: 'container',
-      childAccept: false,
       // "structured": true,
       selector: {
         expression: "this.getElement(el => el.slotTarget === 'placeholder' )",
@@ -114,6 +113,14 @@ namespace nasl.ui {
     })
     initialIndex: nasl.core.Decimal;
 
+    @Prop({
+      group: '数据属性',
+      title: '是否是占位图片',
+      description: '是否是占位图片',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isPlaceholder: nasl.core.Boolean = false;
+
     @Event({
       title: '图片加载成功时',
       description: '图片加载成功触发',
@@ -179,5 +186,6 @@ namespace nasl.ui {
       description: '加载失败的内容',
     })
     slotError: () => Array<ViewComponent>;
+
   }
 }

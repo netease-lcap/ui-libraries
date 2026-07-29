@@ -2,11 +2,11 @@
 <template>
     <div>
       <div class="block">
-        <el-radio-group :shape="button ? 'button' : 'normal'" :value.sync="checkedValue" @change="onChange">
-            <el-radio value="1" allow-uncheck>选项一</el-radio>
-            <el-radio value="2">选项二</el-radio>
-            <el-radio value="3">选项三</el-radio>
-            <el-radio value="4" disabled>选项四</el-radio>
+        <el-radio-group direction="vertical"  :value.sync="checkedValue" @change="onChange">
+            <el-radio border value="1" allow-uncheck>选项一</el-radio>
+            <el-radio border value="2">选项二</el-radio>
+            <el-radio border value="3">选项三</el-radio>
+            <el-radio border value="4" >选项四</el-radio>
         </el-radio-group>
         {{ checkedValue }}
       </div>

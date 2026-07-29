@@ -1,7 +1,7 @@
 <script>
 import SEmpty from '../s-empty.vue';
 import ULoading from '../u-loading.vue';
-import { throttle } from '../../utils/throttle';
+import { throttle } from 'lodash';
 import Gap from '../../mixins/gap';
 
 export default {
@@ -95,6 +95,13 @@ export default {
         ]));
       }
 
+      const listeners = {
+        ...this.$listeners,
+      };
+
+      // 修复 scroll 事件被监听两次的问题
+      delete listeners.scroll;
+
       return h('div', {
          staticClass: this.$style.root,
          attrs: {
@@ -105,7 +112,7 @@ export default {
            nowrap: !this.wrap,
          },
          ref: 'root',
-         on: this.$listeners,
+         on: listeners,
       }, children);
     }
 };

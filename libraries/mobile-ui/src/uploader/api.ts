@@ -344,6 +344,7 @@ namespace nasl.ui {
         uid: nasl.core.Integer;
         url: nasl.core.String;
       };
+      rawFile: nasl.io.File;
     }) => void;
     @Event({
       title: '上传中',
@@ -370,6 +371,7 @@ namespace nasl.ui {
           success: nasl.core.Boolean;
         };
       };
+      rawFile: nasl.io.File;
     }) => void;
     @Event({
       title: '上传成功时',
@@ -396,6 +398,7 @@ namespace nasl.ui {
           success: nasl.core.Boolean;
         };
       };
+      rawFile: nasl.io.File;
     }) => void;
     @Event({
       title: '上传错误时',
@@ -422,6 +425,7 @@ namespace nasl.ui {
           success: nasl.core.Boolean;
         };
       };
+      rawFile: nasl.io.File;
     }) => void;
     @Slot({
       title: '配置文件上传图标'

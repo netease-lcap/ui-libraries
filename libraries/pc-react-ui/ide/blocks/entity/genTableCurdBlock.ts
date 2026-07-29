@@ -1,0 +1,130 @@
+import * as naslTypes from '@nasl/ast-mini';
+import {
+  firstLowerCase,
+  getFirstDisplayedProperty,
+  genUniqueQueryNameGroup,
+  getViewUniqueVariableNames,
+  getCurrentName,
+} from './utils';
+import { genQueryLogic, genFilterTemplate, genSaveModalTemplate } from './genCommonBlock';
+import { genTableTemplate } from './genTableBlock';
+
+export function genTableCurdBlock(entity: naslTypes.Entity, refElement: naslTypes.ViewElement) {
+  const likeComponent = refElement?.likeComponent || refElement;
+  const dataSource = entity.parentNode;
+  const module = dataSource.app;
+  const namespace = entity.getNamespace();
+  const entityName = entity.name;
+  const entityFullName = `${namespace}.${entityName}`;
+
+  const viewElementMainView = likeComponent.getViewElementUniqueName('table');
+  const nameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementMainView);
+  nameGroup.viewElementMainView = viewElementMainView;
+  nameGroup.viewElementFilterForm = likeComponent.getViewElementUniqueName('form_filter');
+  nameGroup.viewElementSaveModal = likeComponent.getViewElementUniqueName('modal_save');
+  nameGroup.viewElementSaveModalForm = likeComponent.getViewElementUniqueName('modal_save_form');
+  nameGroup.viewLogicRemove = likeComponent.getLogicUniqueName('remove');
+  nameGroup.viewLogicInit = likeComponent.getLogicUniqueName('init');
+  nameGroup.viewLogicCreate = likeComponent.getLogicUniqueName('create');
+  nameGroup.viewLogicModify = likeComponent.getLogicUniqueName('modify');
+  nameGroup.viewLogicSubmit = likeComponent.getLogicUniqueName('submit');
+  nameGroup.viewLogicUpdateSubmit = likeComponent.getLogicUniqueName('updateSubmit');
+  nameGroup.viewLogicReload = likeComponent.getLogicUniqueName('reload');
+  nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
+  nameGroup.viewVariableInput = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('input'), nameGroup.viewVariableEntity);
+  nameGroup.viewVariableFilter = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('filter'), nameGroup.viewVariableEntity);
+  nameGroup.viewVariableIsUpdate = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('isUpdate'), nameGroup.viewVariableEntity);
+  nameGroup.viewLogicModalOpened = likeComponent.getLogicUniqueName('modalOpened');
+  nameGroup.viewLogicModalClose = likeComponent.getLogicUniqueName('modalClose');
+  // 当前节点的currentName
+  nameGroup.currentName = getCurrentName(refElement);
+  if (likeComponent.getDirectoryUniqueName) {
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(entity.name?.toLowerCase());
+  }
+
+  // 收集所有和本实体关联的实体
+  const entitySet: Set<naslTypes.Entity> = new Set();
+  entitySet.add(entity);
+  const selectNameGroupMap = new Map();
+  const newLogics: Array<string> = [];
+  entity.properties.forEach((property) => {
+    if (property.relationEntity) {
+      // 有外键关联
+      const relationEntity = dataSource?.findEntityByName(property.relationEntity);
+      if (relationEntity) {
+        const displayedProperty = getFirstDisplayedProperty(relationEntity);
+        if (displayedProperty) {
+          entitySet.add(relationEntity);
+          const viewElementSelect = likeComponent.getViewElementUniqueName('select');
+          const selectNameGroup = genUniqueQueryNameGroup(module, likeComponent, viewElementSelect, false, relationEntity.name);
+          selectNameGroup.viewElementSelect = viewElementSelect;
+          // 存在多个属性关联同一个实体的情况，因此加上属性名用以唯一标识
+          const key = [property.name, relationEntity.name].join('-');
+          selectNameGroupMap.set(key, selectNameGroup);
+          const newLogic = genQueryLogic([relationEntity], selectNameGroup, false, false, false);
+          newLogics.push(newLogic);
+        }
+      }
+    }
+  });
+  const allEntities = [...entitySet];
+  const entityLogic = genQueryLogic(allEntities, nameGroup, true, true, true);
+  newLogics.push(entityLogic);
+
+  return `export function view() {
+    ${
+      nameGroup.viewDirectoryEntity
+      ? `
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableEntity}: ${entityFullName};
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableInput}: ${entityFullName};
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableFilter}: ${entityFullName};
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableIsUpdate}: Boolean;`
+      : `let ${nameGroup.viewVariableEntity}: ${entityFullName};
+        let ${nameGroup.viewVariableInput}: ${entityFullName};
+        let ${nameGroup.viewVariableFilter}: ${entityFullName};
+        let ${nameGroup.viewVariableIsUpdate}: Boolean;`
+    }
+
+    const $lifecycles = {
+        onCreated: [
+            function ${nameGroup.viewLogicInit}(event) {
+              nasl.util.Clear(${nameGroup.viewVariableFilter},'deep');
+              return;
+            },
+        ]
+    }
+
+    return <Flex direction="vertical" style="width: 100%;">
+        ${genFilterTemplate(entity, nameGroup, selectNameGroupMap)}
+        <Flex alignment="center" justify="end" style="width: 100%">
+            <Button
+                type="primary"
+                children="创 建"
+                onClick={
+                    function ${nameGroup.viewLogicCreate}(event) {
+                        ${nameGroup.viewVariableIsUpdate} = false
+                        ${nameGroup.viewVariableInput} = nasl.util.Clone(${nameGroup.viewVariableEntity});
+                        $refs.${nameGroup.viewElementSaveModal}.open()
+                    }
+                }></Button>
+        </Flex>
+        ${genTableTemplate(entity, nameGroup, { hasFilter: true, modifyable: true })}
+        ${genSaveModalTemplate(entity, nameGroup, selectNameGroupMap)}
+    </Flex>
+  }
+    export namespace app.logics {
+        ${newLogics.join('\n')}
+    }`;
+}

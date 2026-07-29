@@ -1,0 +1,61 @@
+/**
+ * @component van-search
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 搜索框内边距
+   */
+  --van-search-padding: 10px var(--van-padding-sm);
+  /**
+   * @type color
+   * @desc 搜索框背景色
+   */
+  --van-search-background: var(--van-background-2);
+  /**
+   * @type color
+   * @desc 搜索框内容背景色
+   */
+  --van-search-content-background: var(--van-background);
+  /**
+   * @type input
+   * @desc 搜索框输入框高度
+   */
+  --van-search-input-height: 34px;
+  /**
+   * @type input
+   * @desc 搜索框标签内边距
+   */
+  --van-search-label-padding: 0 5px;
+  /**
+   * @type color
+   * @desc 搜索框标签颜色
+   */
+  --van-search-label-color: var(--van-text-color);
+  /**
+   * @type input
+   * @desc 搜索框标签字体大小
+   */
+  --van-search-label-font-size: var(--van-font-size-md);
+  /**
+   * @type color
+   * @desc 搜索框左侧图标颜色
+   */
+  --van-search-left-icon-color: var(--van-gray-6);
+  /**
+   * @type input
+   * @desc 搜索框操作按钮内边距
+   */
+  --van-search-action-padding: 0 var(--van-padding-xs);
+  /**
+   * @type color
+   * @desc 搜索框操作按钮文字颜色
+   */
+  --van-search-action-text-color: var(--van-text-color);
+  /**
+   * @type input
+   * @desc 搜索框操作按钮字体大小
+   */
+  --van-search-action-font-size: var(--van-font-size-md);
+}

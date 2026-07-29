@@ -34,7 +34,7 @@ export default defineComponent({
     },
     closeIcon: {
       type: String,
-      default: '',
+      default: 'Close',
     },
     showClose: {
       type: Boolean,
@@ -62,11 +62,11 @@ export default defineComponent({
     },
     cancelButtonLoadingIcon: {
       type: String,
-      default: '',
+      default: 'Loading',
     },
     confirmButtonLoadingIcon: {
       type: String,
-      default: '',
+      default: 'Loading',
     },
     closeOnHashChange: {
       type: Boolean,
@@ -110,7 +110,6 @@ export default defineComponent({
     },
     buttonSize: {
       type: String as PropType<ComponentSize>,
-      default: 'default',
     },
     customClass: {
       type: String,
@@ -141,8 +140,8 @@ export default defineComponent({
     callback: {
       type: Function as PropType<Callback>,
     },
-    beforeClose: {
-      type: Function as PropType<(action: 'confirm' | 'cancel' | 'close', instance: any) => void>,
+    onBeforeClose: {
+      type: Function as PropType<({ action, instance, done }: { action: 'confirm' | 'cancel' | 'close', instance: any, done: () => void}) => void>,
     },
   },
 
@@ -161,8 +160,11 @@ export default defineComponent({
       const vnodes = slots.default?.() || [];
       const message = vnodes.length > 0 ? <div>{vnodes}</div> : null;
 
-      const IconComp = <ElIcon name={props.icon} />;
+      const IconComp = props.icon ? <ElIcon name={props.icon} /> : '';
       const CloseIconComp = <ElIcon name={props.closeIcon} />;
+      // 源码中需要结合cancelButtonLoading和confirmButtonLoading来判断是否显示loading图标，但是没有暴露这两个参数
+      // const CancelButtonLoadingIconComp = <ElIcon name={props.cancelButtonLoadingIcon} />;
+      // const ConfirmButtonLoadingIconComp = <ElIcon name={props.confirmButtonLoadingIcon} />;
 
       try {
         const { value } = await ElMessageBoxPlus({
@@ -173,8 +175,8 @@ export default defineComponent({
           autofocus: props.autofocus,
           cancelButtonText: props.cancelButtonText,
           confirmButtonText: props.confirmButtonText,
-          cancelButtonLoadingIcon: props.cancelButtonLoadingIcon,
-          confirmButtonLoadingIcon: props.confirmButtonLoadingIcon,
+          // cancelButtonLoadingIcon: CancelButtonLoadingIconComp,
+          // confirmButtonLoadingIcon: ConfirmButtonLoadingIconComp,
           center: props.center,
           draggable: props.draggable,
           overflow: props.overflow,
@@ -206,7 +208,7 @@ export default defineComponent({
           appendTo: props.appendTo,
           customStyle: props.customStyle,
           callback: props.callback,
-          beforeClose: props.beforeClose,
+          beforeClose: props.onBeforeClose ? (action, instance, done) => props?.onBeforeClose?.({ action, instance, done }) : undefined,
           // customClass: getCurrentInstance()?.vnode?.data?.staticClass,
         });
 

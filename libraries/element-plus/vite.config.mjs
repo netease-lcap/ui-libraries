@@ -8,6 +8,37 @@ import { createGenScopedName, batchDepCSSInfo, lcapPlugin } from '@lcap/builder'
 // 设置测试运行的时区
 process.env.TZ = 'Asia/Shanghai';
 const rootPath = process.cwd();
+
+// 自定义插件：复制mcpTool.json到dist-theme目录
+const copyMcpToolJsonPlugin = () => {
+  return {
+    name: 'copy-mcp-tool-json',
+    // 在构建结束后执行
+    async buildEnd() {
+      try {
+        // 源文件路径
+        const sourcePath = path.resolve(rootPath, 'src/mcpTool.json');
+        // 目标目录
+        const targetDir = path.resolve(rootPath, 'dist-theme');
+        // 目标文件路径
+        const targetPath = path.resolve(targetDir, 'mcpTool.json');
+
+        // 检查源文件是否存在
+        if (await fs.pathExists(sourcePath)) {
+          // 创建目标目录（如果不存在）
+          await fs.ensureDir(targetDir);
+          // 复制文件
+          await fs.copyFile(sourcePath, targetPath);
+          console.log(`✅ mcpTool.json已成功复制到1: ${targetPath}`);
+        } else {
+          console.warn(`⚠️  未找到源文件: ${sourcePath}`);
+        }
+      } catch (error) {
+        console.error('❌ 复制mcpTool.json失败:', error);
+      }
+    },
+  };
+};
 // https://vite.dev/config/
 export default defineConfig(({ command }) => {
   const pkgInfo = fs.readJSONSync(path.resolve(rootPath, 'package.json'), {});
@@ -16,15 +47,25 @@ export default defineConfig(({ command }) => {
     plugins: [
       vue(),
       vueJsx(),
+      // 加入自定义复制文件插件
+      copyMcpToolJsonPlugin(),
       lcapPlugin({
         type: 'nasl.ui',
         framework: 'vue3',
         pnpm: true,
         modules: {
           entries: {
+            'components/el-config-provider/index': 'src/components/el-config-provider/index',
             install: 'src/install',
+            utils: 'src/utils',
+            plugins: 'src/plugins',
           },
           tsconfigPath: 'tsconfig.build.json',
+        },
+        i18n: {
+          'zh-CN': './src/locale/langs/zh-cn.json',
+          'en-US': './src/locale/langs/en.json',
+          ja: './src/locale/langs/ja.json',
         },
         reportCSSInfo: {
           enabled: true,
@@ -201,23 +242,38 @@ export default defineConfig(({ command }) => {
                 'el-mention-dropdown': false,
               },
             },
-            ...batchDepCSSInfo([
-              'ElCascader',
-              'ElCheckboxGroup',
-              'ElDatePicker',
-              'ElInput',
-              'ElInputNumber',
-              'ElInputTag',
-              'ElRadioGroup',
-              'ElRate',
-              'ElSelect',
-              'ElSlider',
-              'ElSwitch',
-              'ElTimePicker',
-              'ElTimeSelect',
-              'ElTransfer',
-              'ElTreeSelect',
-            ], (oldName) => oldName.replace(/^El/, 'ElForm')),
+            ElFlex: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElAbsoluteLayout: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElRow: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ElCol: {
+              hideSelectorRegexps: [/>\*/],
+            },
+            ...batchDepCSSInfo(
+              [
+                'ElCascader',
+                'ElCheckboxGroup',
+                'ElDatePicker',
+                'ElInput',
+                'ElInputNumber',
+                'ElInputTag',
+                'ElRadioGroup',
+                'ElRate',
+                'ElSelect',
+                'ElSlider',
+                'ElSwitch',
+                'ElTimePicker',
+                'ElTimeSelect',
+                'ElTransfer',
+                'ElTreeSelect',
+              ],
+              (oldName) => oldName.replace(/^El/, 'ElForm'),
+            ),
           },
         },
       }),
@@ -226,12 +282,17 @@ export default defineConfig(({ command }) => {
       extensions: ['.js', '.ts', '.tsx', '.jsx', '.vue', '.mjs', '.cjs', '.json'],
       alias: {
         '@': path.resolve(rootPath, './src'),
+        '@ep-test': path.resolve(rootPath, './ep-test'),
+        // 'element-plus': path.resolve(rootPath, 'node_modules/element-plus'),
+        'element-plus/es': path.resolve(rootPath, 'node_modules/element-plus/es'),
+        'element-plus/lib': path.resolve(rootPath, 'node_modules/element-plus/lib'),
       },
     },
     define: {
       'process.env': {
         VUE_APP_DESIGNER: false,
         NODE_ENV: command === 'build' ? 'production' : 'development',
+        VUE_IS_DEVTOOLS: command === 'build',
       },
     },
     css: {
@@ -248,7 +309,7 @@ export default defineConfig(({ command }) => {
         cssFileName: 'index',
       },
       rollupOptions: {
-        external: ['vue', 'vue-i18n', 'vuex', 'pinia', 'vue-router'],
+        external: ['vue', 'vue-i18n', 'vuex', 'pinia', 'vue-router', '@lcap/ui-libraries-mcp'],
         output: {
           globals: {
             vue: 'Vue',
@@ -256,6 +317,7 @@ export default defineConfig(({ command }) => {
             'vue-i18n': 'VueI18n',
             vuex: 'Vuex',
             pinia: 'Pinia',
+            '@lcap/ui-libraries-mcp': 'UiLibrariesMcp',
           },
         },
       },
@@ -263,6 +325,28 @@ export default defineConfig(({ command }) => {
     },
     test: {
       environment: 'jsdom',
+      coverage: {
+        exclude: [
+          '.storybook/**',
+          'scripts/**',
+          'dist-theme/**',
+          'ep-test/**',
+          'es/**',
+          'ide/**',
+          'src/theme/**',
+          'src/styles/**',
+          'src/components/**/stories/**',
+          'src/components/**/demos/**',
+          'src/components/**/stories/**',
+          'src/components/**/demos/**',
+          'src/components/**/stories/**',
+          'src/components/**/api.ts',
+        ],
+      },
+      // 显示更详细的测试日志
+      verbose: true,
+      // 输出测试执行时间
+      reporters: ['default', 'verbose'],
     },
   };
 });

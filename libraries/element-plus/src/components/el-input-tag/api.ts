@@ -4,6 +4,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'element',
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -19,11 +20,13 @@ namespace nasl.ui {
   }
 
   export class ElInputTagOptions extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
-      title: '值',
+      title: '标签列表',
       sync: true,
-      description: '绑定值',
+      description: '当前输入的标签列表',
+      docDescription: '绑定当前输入的标签列表，支持双向绑定。每个标签为一个字符串元素。',
       setter: { concept: 'InputSetter' },
     })
     modelValue: nasl.collection.List<nasl.core.String>;
@@ -31,15 +34,19 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '最大标签数',
-      description: '可以输入的最大标签数量',
+      description: '限制输入的最大标签数量',
+      docDescription: '设置允许输入的最大标签数量，达到此数量后无法继续添加标签。',
       setter: { concept: 'NumberInputSetter' },
     })
     max: nasl.core.Integer;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
-      group: '数据属性',
+      group: '主要属性',
       title: '标签类型',
-      description: '标签类型',
+      description: '选择标签的类型主题',
+      docDescription:
+        '控制标签的视觉样式和主题色。默认：标准样式；成功：绿色主题；信息：蓝色主题；警告：橙色主题；危险：红色主题。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '默认' }, { title: '成功' }, { title: '信息' }, { title: '警告' }, { title: '危险' }],
@@ -49,8 +56,9 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '标签效果',
-      description: '标签效果',
+      title: '标签风格',
+      description: '选择标签的显示风格',
+      docDescription: '控制标签的显示风格。浅色：浅色背景；深色：深色背景；朴素：边框样式。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '浅色' }, { title: '深色' }, { title: '朴素' }],
@@ -176,6 +184,14 @@ namespace nasl.ui {
     })
     autocomplete: nasl.core.String = 'off';
 
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
     @Event({
       title: '值改变时',
       description: '绑定值被改变时触发',
@@ -222,6 +238,15 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
+      forceUpdateWhenAttributeChange: true,
+      childAccept:false,
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
     },
     extends: [
       {
@@ -238,7 +263,11 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormInputTag extends ViewComponent {
-    constructor(options?: Partial<ElFormInputTagOptions & ElFormItemProOptions & Omit<ElInputTagOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<
+        ElFormInputTagOptions & ElFormItemProOptions & Omit<ElInputTagOptions, keyof ElFormItemProOptions>
+      >,
+    ) {
       super();
     }
   }

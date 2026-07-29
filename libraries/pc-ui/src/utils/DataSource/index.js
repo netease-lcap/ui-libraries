@@ -1,6 +1,5 @@
 import Vue from 'vue';
-import get from 'lodash/get';
-import unionBy from 'lodash/unionBy';
+import { get, unionBy } from 'lodash';
 
 const isOperator = (value) => {
   const operators = [

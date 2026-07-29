@@ -1,12 +1,18 @@
 /* 组件功能扩展插件 */
 import _ from 'lodash';
+import { ResultProps } from 'element-plus';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-export function handleSlots(props) {
-  const slots = props.get('slots');
+const ResultBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElResultOptions, ResultProps>();
+export default ResultBasicAccumulate.addPlugin({
+  name: 'handleSlots',
+  handle(props) {
+    const slots = props.get('slots');
 
-  return {
-    slots: _.assign(slots, {
-      'sub-title': slots.subTitle,
-    }),
-  };
-}
+    return {
+      slots: _.assign(slots, {
+        'sub-title': slots.subTitle ?? slots['sub-title'],
+      }),
+    };
+  },
+});

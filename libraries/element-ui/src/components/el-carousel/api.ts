@@ -86,7 +86,9 @@ namespace nasl.ui {
       docDescription:
         '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
       designerValue: [{}, {}, {}],
-      bindOpen: true,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource:
       | { list: nasl.collection.List<T>; total: nasl.core.Integer }
@@ -248,7 +250,7 @@ namespace nasl.ui {
       snippets: [
         {
           title: '幻灯片',
-          code: '<el-carousel-item><el-image style="width: 100%; height: 100%" fit="cover" src="https://static-vusion.163yun.com/assets/cloud-ui/6.jpg"></el-carousel-item>',
+          code: '<el-carousel-item><el-image style="width: 100%; height: 100%" fit="cover" src="https://static-vusion.163yun.com/assets/cloud-ui/1.jpg"></el-carousel-item>',
         },
       ],
     })

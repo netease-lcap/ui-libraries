@@ -16,16 +16,21 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "emitDecoratorMetadata": true
   },
-  "include": [
-    "types/**/*",
-    "src/**/*",
-    "src-vusion/**/*"
-  ],
+  "include": ["types/**/*", "src/**/*", "src-vusion/**/*"],
   "exclude": [
     "**/*.spec.ts",
     "**/*.spec.js",
-    "node_modules"
+    "node_modules",
+    "dist-theme",
+    "cloudui",
+    "**/node_modules",
+    "**/dist",
+    "**/dist-theme",
+    "**/coverage",
+    "**/storybook-static",
+    "coverage",
+    "test"
   ]
 }

@@ -7,25 +7,25 @@ namespace nasl.ui {
       idetype: 'container',
       automate: [
         {
-          command: "WRAP_LINEAR_VERTICAL",
+          command: 'WRAP_LINEAR_VERTICAL',
           useblock: 0,
           attribute: {
-            direction: "vertical",
-            justify: "start",
-            alignment: "start",
-          }
+            direction: 'vertical',
+            justify: 'start',
+            alignment: 'start',
+          },
         },
         {
-          command: "WRAP_LINEAR_HORIZONTAL",
+          command: 'WRAP_LINEAR_HORIZONTAL',
           useblock: 0,
           attribute: {
-            direction: "horizontal",
-            justify: "start",
-            alignment: "start",
-          }
-        }
-      ]
-    }
+            direction: 'horizontal',
+            justify: 'start',
+            alignment: 'start',
+          },
+        },
+      ],
+    },
   })
   @Component({
     title: '线性布局',
@@ -52,29 +52,41 @@ namespace nasl.ui {
   }
 
   export class ElFlexOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop<ElFlexOptions, 'mode'>({
-      group: '样式属性',
+      group: '主要属性',
       title: '布局模式',
-      description: '设置布局模式',
+      description: '选择容器的布局模式',
+      docDescription: '控制容器的布局模式。块级：块级布局；弹性：弹性布局；表单弹性：表单专用弹性布局。',
       bindHide: true,
       tabKind: 'style',
       setter: {
-        concept: "CapsulesSetter",
-        options: [{
-          title: '块级',
-          icon: 'layout-block',
-          tooltip: '块级布局'
-        }, {
-          title: '弹性',
-          icon: 'layout-flex',
-          tooltip: '弹性布局'
-        }]
+        concept: 'CapsulesSetter',
+        options: [
+          {
+            title: '块级',
+            icon: 'layout-block',
+            tooltip: '块级布局',
+          },
+          {
+            title: '弹性',
+            icon: 'layout-flex',
+            tooltip: '弹性布局',
+          },
+          {
+            title: '表单弹性',
+            icon: 'layout-flex',
+            tooltip: '表单弹性布局',
+          },
+        ],
       },
-      onChange: [{
-        clear: ['justify', 'alignment', 'wrap', 'layout'],
-      }],
+      onChange: [
+        {
+          clear: ['justify', 'alignment', 'wrap', 'layout'],
+        },
+      ],
     })
-    mode: 'block' | 'flex' = 'flex';
+    mode: 'block' | 'flex' | 'form-flex' = 'flex';
 
     @Prop<ElFlexOptions, 'direction'>({
       group: '主要属性',
@@ -89,6 +101,7 @@ namespace nasl.ui {
           { title: '纵向排列', icon: 'flex-vertical', tooltip: '纵向' },
         ],
       },
+      if: (_) => _.mode !== 'block',
       onChange: [
         { update: { alignment: 'start', justify: 'start' }, if: (_) => _ === 'horizontal' },
         { update: { alignment: 'stretch', justify: 'start' }, if: (_) => _ === 'vertical' },
@@ -140,8 +153,7 @@ namespace nasl.ui {
       ],
       if: (_) => _.mode === 'flex',
     })
-    justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' =
-      'start';
+    justify: 'start' | 'center' | 'end' | 'space-between' | 'space-around' = 'start';
 
     @Prop<ElFlexOptions, 'alignment'>({
       group: '主要属性',
@@ -188,8 +200,7 @@ namespace nasl.ui {
       group: '主要属性',
       title: '换行',
       description: '设置弹性布局下子元素总宽度超出父级时子元素是否换行展示',
-      docDescription:
-        '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
+      docDescription: '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
       setter: {
         concept: 'SwitchSetter',
       },
@@ -202,13 +213,12 @@ namespace nasl.ui {
       group: '样式属性',
       title: '内容间隙',
       description: '内容块间隙大小',
-      docDescription:
-        '布局内各个组件之间的间隔，通常有收缩、无、小、正常、大，默认为正常。',
+      docDescription: '布局内各个组件之间的间隔，通常有收缩、无、小、正常、大，默认为正常。',
       tabKind: 'style',
       setter: {
         concept: 'NumberInputSetter',
       },
-      if: (_) => _.mode === 'block' || (_.mode === 'flex' && _.justify !== 'space-between' && _.justify !== 'space-around'),
+      if: (_) => _.mode === 'flex',
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 12;
 

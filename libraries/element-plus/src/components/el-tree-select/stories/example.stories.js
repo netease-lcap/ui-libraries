@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import Component from '../index';
 
 export default {
@@ -16,7 +16,7 @@ export const Example1 = {
   name: '基础用法',
   render: () => ({
     setup() {
-      const value = ref('');
+      const value = ref('ttt');
       const data = [
         {
           value: '1',
@@ -61,96 +61,177 @@ export const Example1 = {
           ],
         },
       ];
-      const dataSource = () =>
-        new Promise((res) => {
+
+      const state = reactive({
+        data: [],
+      });
+      const dataSource = () => new Promise((res) => {
           setTimeout(() => {
-            res([
+            state.data = [
               {
-                entity1: {
-                  id: 0,
-                  createdTime: null,
-                  updatedTime: null,
-                  createdBy: null,
-                  updatedBy: null,
-                  property1: '选项5',
-                  fid: 1,
+                lCAPDepartment: {
+                  id: 3150684874215168,
+                  createdTime: '2025-06-15T07:33:03.000Z',
+                  updatedTime: '2025-06-15T07:33:03.000Z',
+                  createdBy: 'DEVACC-permissionvue3',
+                  updatedBy: 'DEVACC-permissionvue3',
+                  name: '根部门',
+                  deptId: '根部门',
+                  parentDeptId: '__vue_devtool_undefined__',
+                },
+              },
+
+              {
+                lCAPDepartment: {
+                  id: 3151333764914944,
+                  createdTime: '2025-06-16T05:33:13.000Z',
+                  updatedTime: '2025-06-16T05:33:13.000Z',
+                  createdBy: 'DEVACC-permissionvue3',
+                  updatedBy: 'DEVACC-permissionvue3',
+                  name: 'test',
+                  deptId: 'test',
+                  parentDeptId: '根部门',
                 },
               },
               {
-                entity1: {
-                  id: 1,
-                  createdTime: null,
-                  updatedTime: null,
-                  createdBy: null,
-                  updatedBy: null,
-                  property1: '选项6',
-                  fid: 2,
+                lCAPDepartment: {
+                  id: 3151340777463552,
+                  createdTime: '2025-06-16T05:47:29.000Z',
+                  updatedTime: '2025-06-16T05:47:29.000Z',
+                  createdBy: 'DEVACC-permissionvue3',
+                  updatedBy: 'DEVACC-permissionvue3',
+                  name: 'hhh',
+                  deptId: 'hhh',
+                  parentDeptId: 'test',
                 },
               },
               {
-                entity1: {
-                  id: 3,
-                  createdTime: null,
-                  updatedTime: null,
-                  createdBy: null,
-                  updatedBy: null,
-                  property1: '选项3',
-                  fid: 0,
+                lCAPDepartment: {
+                  id: 3151381032042240,
+                  createdTime: '2025-06-16T07:09:23.000Z',
+                  updatedTime: '2025-06-16T07:09:23.000Z',
+                  createdBy: 'DEVACC-permissionvue3',
+                  updatedBy: 'DEVACC-permissionvue3',
+                  name: 'testggg',
+                  deptId: 'ttt',
+                  parentDeptId: '根部门',
                 },
               },
               {
-                entity1: {
-                  id: 7,
-                  createdTime: null,
-                  updatedTime: null,
-                  createdBy: null,
-                  updatedBy: null,
-                  property1: '选项2',
-                  fid: 1,
+                lCAPDepartment: {
+                  id: 3151385740492544,
+                  createdTime: '2025-06-16T07:18:58.000Z',
+                  updatedTime: '2025-06-16T07:18:58.000Z',
+                  createdBy: 'DEVACC-permissionvue3',
+                  updatedBy: 'DEVACC-permissionvue3',
+                  name: 'ttttt',
+                  deptId: 'tttttt',
+                  parentDeptId: '根部门',
                 },
               },
               {
-                entity1: {
-                  id: 8,
-                  createdTime: null,
-                  updatedTime: null,
-                  createdBy: null,
-                  updatedBy: null,
-                  property1: '选项1.1',
-                  fid: 2,
+                lCAPDepartment: {
+                  id: 3151392321216256,
+                  createdTime: '2025-06-16T07:32:21.000Z',
+                  updatedTime: '2025-06-16T07:32:21.000Z',
+                  createdBy: 'DEVACC-permissionvue3',
+                  updatedBy: 'DEVACC-permissionvue3',
+                  name: '刚刚',
+                  deptId: '刚刚',
+                  parentDeptId: '根部门',
                 },
               },
               {
-                entity1: {
-                  id: 9,
-                  createdTime: null,
-                  updatedTime: null,
-                  createdBy: null,
-                  updatedBy: null,
-                  property1: '选项4',
-                  fid: 0,
+                lCAPDepartment: {
+                  id: 3156206936421120,
+                  createdTime: '2025-06-23T02:47:43.000Z',
+                  updatedTime: '2025-06-23T02:47:43.000Z',
+                  createdBy: '__vue_devtool_undefined__',
+                  updatedBy: '__vue_devtool_undefined__',
+                  name: 'testgahah',
+                  deptId: 'hahahah',
+                  parentDeptId: '根部门',
                 },
               },
-            ]);
-          }, 1000);
+              {
+                lCAPDepartment: {
+                  id: 3157111747207168,
+                  createdTime: '2025-06-24T09:28:34.000Z',
+                  updatedTime: '2025-06-24T09:28:34.000Z',
+                  createdBy: '__vue_devtool_undefined__',
+                  updatedBy: '__vue_devtool_undefined__',
+                  name: 'tesss',
+                  deptId: 'ssssaa',
+                  parentDeptId: 'test',
+                },
+              },
+              {
+                lCAPDepartment: {
+                  id: 3157111839588352,
+                  createdTime: '2025-06-24T09:28:45.000Z',
+                  updatedTime: '2025-06-24T09:28:45.000Z',
+                  createdBy: '__vue_devtool_undefined__',
+                  updatedBy: '__vue_devtool_undefined__',
+                  name: 'gagh',
+                  deptId: 'hahajjjj',
+                  parentDeptId: 'ssssaa',
+                },
+              },
+              {
+                lCAPDepartment: {
+                  id: 3159206957522176,
+                  createdTime: '2025-06-27T08:31:17.000Z',
+                  updatedTime: '2025-06-27T08:31:17.000Z',
+                  createdBy: 'DEVACC-permissionvue3',
+                  updatedBy: 'DEVACC-permissionvue3',
+                  name: '搜噶搜噶',
+                  deptId: '嘎嘎',
+                  parentDeptId: '根部门',
+                },
+              },
+              {
+                lCAPDepartment: {
+                  id: 3159213096967424,
+                  createdTime: '2025-06-27T08:43:46.000Z',
+                  updatedTime: '2025-06-27T08:43:46.000Z',
+                  createdBy: 'DEVACC-permissionvue3',
+                  updatedBy: 'DEVACC-permissionvue3',
+                  name: '嘎嘎哈哈哈',
+                  deptId: '嘎嘎哈哈哈',
+                  parentDeptId: '根部门',
+                },
+              },
+            ];
+          }, 3000);
         });
+      dataSource();
       const defaultProps = {
         children: 'children',
         label: 'label',
         value: 'value',
       };
-      return { value, data, defaultProps, dataSource };
+      return { value, data, defaultProps, dataSource, state };
     },
     template: `
     <div>
-      <el-tree-select
-      :multiple="true" :placeholder="12" valueField="entity1.id"
-        textField="entity1.property1"
-        parentField="entity1.fid" v-model:value="activeName" :dataSource="dataSource"
-        node-key="value"
+    {{ value }}
+      <el-form-tree-select
+        :placeholder="12"
+        v-model:modelValue="value"
+        valueField="lCAPDepartment.deptId"
+        textField="lCAPDepartment.name"
+        parentField="lCAPDepartment.parentDeptId"
+        :dataSource="state.data"
+        clearable
+        @clear="console.log('clear')"
+        
         placeholder="请选择"
         style="width: 240px"
-      />
+      >
+        <template #label >
+        <div>123</div>
+         </template>
+      </el-form-tree-select>
     </div>
     `,
   }),
@@ -162,7 +243,7 @@ export const Example2 = {
   render: () => ({
     setup() {
       const value = ref([]);
-      const data = [
+      const data =async ()=> [
         {
           value: '1',
           label: 'Level one 1',
@@ -215,13 +296,14 @@ export const Example2 = {
     },
     template: `
     <div>
-      <el-form-tree-select
+      <el-tree-select
         v-model="value"
-        :data="data"
-        show-checkbox	
+        :dataSource="data"
         :props="defaultProps"
         :render-after-expand="false"
         node-key="value"
+        :default-expanded-keys="['2-2-1']"
+        :autoExpandParent="true"
         multiple
         placeholder="请选择"
         style="width: 240px"

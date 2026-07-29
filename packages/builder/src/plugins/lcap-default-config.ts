@@ -71,13 +71,13 @@ function setLibBuildConfig(options: LcapViteConfigPluginOptions, config: UserCon
     return;
   }
 
-  if (options.framework === 'vue2' && options.type === 'nasl.ui') {
-    delete globals['@vue/composition-api'];
-    const i = external.indexOf('@vue/composition-api');
-    if (i !== -1) {
-      external.splice(i, 1);
-    }
-  }
+  // if (options.framework === 'vue2' && options.type === 'nasl.ui') {
+  //   delete globals['@vue/composition-api'];
+  //   const i = external.indexOf('@vue/composition-api');
+  //   if (i !== -1) {
+  //     external.splice(i, 1);
+  //   }
+  // }
 
   config.build = {
     target: ['es2020', 'edge88', 'firefox78', 'chrome56', 'safari14'],
@@ -86,7 +86,7 @@ function setLibBuildConfig(options: LcapViteConfigPluginOptions, config: UserCon
     ...config.build,
     lib: {
       entry: 'src/index.ts',
-      formats: ['es', 'cjs', 'umd'],
+      formats: ['es', 'umd'],
       fileName: (format, entryName) => {
         switch (format) {
           case 'es':
@@ -123,6 +123,34 @@ function setLibBuildConfig(options: LcapViteConfigPluginOptions, config: UserCon
   };
 }
 
+/**
+ * 更新 HMR 配置
+ * @param config vite 配置
+ * @returns 更新后的配置
+ */
+function updateHMRConfig(config: UserConfig) {
+  if (!config.server) {
+    config.server = {};
+  }
+
+  // 允许所有 host 访问
+  (config.server as any).allowedHosts = true;
+
+  if (typeof config.server.hmr === 'boolean' && !config.server.hmr) {
+    return config;
+  }
+
+  // 远程沙箱调试需要
+  const hmr = typeof config.server.hmr === 'object' ? config.server.hmr : {};
+  delete hmr.port;
+  config.server.hmr = {
+    ...hmr,
+    path: hmr.path || '/_vite_hmr',
+  };
+
+  return config;
+}
+
 export default function lcapViteConfigPlugin(options: LcapViteConfigPluginOptions) {
   return {
     name: 'vite:lcap-default-config',
@@ -132,6 +160,10 @@ export default function lcapViteConfigPlugin(options: LcapViteConfigPluginOption
       resetLogger(config);
       addDefine(config, isBuild);
       setLibBuildConfig(options, config);
+
+      if (!isBuild) {
+        updateHMRConfig(config);
+      }
     },
   } as Plugin;
 }

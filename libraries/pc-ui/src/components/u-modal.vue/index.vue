@@ -21,7 +21,9 @@
                                 </template>
                             </slot>
                         </div>
-                        <a :class="$style.close" @click="cancel()"></a>
+                        <a :class="[$style.close, {[$style.useIcon]: closeIcon}]" @click="cancel()" >
+                            <i-ico v-if="closeIcon" :name="closeIcon" :class="$style.icon" notext></i-ico>
+                        </a>
                     </slot>
                 </div>
                 <div :class="$style.body" :icon="icon" vusion-slot-name="body" :child-cut-disabled="true">
@@ -110,6 +112,7 @@ export const UModal = {
         isFootSlotEmpty: { type: Boolean, default: false },
         showHead: { type: Boolean, default: true },
         disableRootElemShift:  { type: Boolean, default: false }, // 取消根节点移位
+        closeIcon: { type: String },
     },
     data() {
         return {
@@ -359,7 +362,15 @@ content: "\e668";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-    font-size: 12px;
+}
+
+.close.useIcon > .icon,
+.close::before {
+  font-size: var(--modal-close-icon-size, 12px);
+}
+
+.close.useIcon::before {
+  content: none;
 }
 
 .body {

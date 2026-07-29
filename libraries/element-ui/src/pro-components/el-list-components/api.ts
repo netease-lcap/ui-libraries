@@ -52,7 +52,9 @@ namespace nasl.ui {
       description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
       docDescription:
         '组件的数据源，配置内容为数据集对象或者返回数据集的逻辑。',
-      bindOpen: true,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource:
       | nasl.collection.List<T>

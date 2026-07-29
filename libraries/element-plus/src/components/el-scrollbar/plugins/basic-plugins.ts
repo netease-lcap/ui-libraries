@@ -1,8 +1,13 @@
-export const handleScrollbar = (props) => {
-  const wrapStyle = props.get('wrapStyle');
-  const viewStyle = props.get('viewStyle');
-  return {
-    wrapStyle: wrapStyle ? JSON.parse(wrapStyle) : undefined,
-    viewStyle: viewStyle ? JSON.parse(viewStyle) : undefined,
-  };
-};
+import _ from 'lodash';
+import { useMemo } from '@/plugins/hooks';
+
+// export const handleScrollbar = (props) => {
+//   const wrapStyleProps = props.get('wrapStyle');
+//   const wrapStyle = useMemo(() => _.attempt(JSON.parse, wrapStyleProps) ?? undefined, [wrapStyleProps]);
+//   const viewStyleProps = props.get('viewStyle');
+//   const viewStyle = useMemo(() => _.attempt(JSON.parse, viewStyleProps) ?? undefined, [viewStyleProps]);
+//   return {
+//     wrapStyle,
+//     viewStyle,
+//   };
+// };

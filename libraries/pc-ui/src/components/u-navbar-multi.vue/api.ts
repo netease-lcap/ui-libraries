@@ -52,7 +52,9 @@ namespace nasl.ui {
             docDescription: '支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑',
             designerValue: [{}, {}, {}],
             if: _ => _.hasDataSource === true,
-            bindOpen: true,
+            setter: {
+                concept: 'DataSourceSetter',
+            },
         })
         dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
@@ -180,6 +182,39 @@ namespace nasl.ui {
             settable: true,
         })
         disabled: nasl.core.Boolean = false;
+
+        @Prop({
+          group: '主要属性',
+          title: '展开图标',
+          description: '切换展开收起图标',
+          docDescription: '支持自定义展开图标，默认使用右箭头图标',
+          setter: {
+              concept: 'IconSetter',
+          },
+        })
+        expandIcon: nasl.core.String = 'bottom-arrow';
+
+        @Prop({
+          group: '主要属性',
+          title: '子菜单展开图标',
+          description: '切换展开收起图标',
+          docDescription: '支持自定义子菜单展开图标，默认使用右箭头图标',
+          setter: {
+              concept: 'IconSetter',
+          },
+        })
+        popupExpandIcon: nasl.core.String = 'right-arrow';
+
+        @Prop({
+          group: '主要属性',
+          title: '加载图标',
+          description: '加载图标',
+          docDescription: '支持自定义加载图标，默认使用加载图标',
+          setter: {
+              concept: 'IconSetter',
+          },
+        })
+        loadingIcon: nasl.core.String = 'loading';
 
         @Event({
             title: '选择后',

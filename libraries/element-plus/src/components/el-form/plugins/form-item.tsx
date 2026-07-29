@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import { ElFormItem } from 'element-plus';
 
-import { ref, watch, inject, Ref, getCurrentInstance, VNode, computed, onMounted, onUnmounted } from 'vue';
+import { ref, watch, inject, Ref, getCurrentInstance, VNode, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import { ElFormItemWrap } from '@/components/el-form';
 import { $formProvide, $formItemProps } from '@/components/el-form/constants';
 import { useEffect } from '@/plugins/hooks';
 import { categoryStyles } from '@/utils';
-import { $provide } from '@/plugins/constants';
+import { $provide, $formTagName } from '@/plugins/constants';
 
 type FormItemProvide = {
   [$formProvide]: {
@@ -15,10 +15,11 @@ type FormItemProvide = {
     isInForm: boolean;
     setFormitem: (key: string, value: any) => void;
     deleteFormitem: (key: string) => void;
+    preview: boolean;
   };
 };
 
-export function withFormItem(Component, name) {
+export function withFormItem(Component, name, sourceTagName?: string) {
   return {
     name,
     Component,
@@ -33,19 +34,20 @@ export function withFormItem(Component, name) {
       const componentRef = ref({});
       const myRef = ref({});
       const valueRef = ref({});
+      const formItemRef = ref({});
       const uniqueid = _.uniqueId('formItemPropName');
       const prop = computed(() => props.prop ?? uniqueid);
       const provide = inject($provide) as Ref<FormItemProvide>;
       const {
         isInForm,
-        setValue,
+        setValue = () => {},
         value = valueRef,
         setFormitem,
         deleteFormitem,
       } = provide?.value?.[$formProvide] ?? {};
       const { vnode } = getCurrentInstance() as { vnode: VNode };
-      const { props: vnodeProps } = vnode;
-      const isControlled = Object.prototype.hasOwnProperty.call(vnodeProps, 'modelValue');
+      const isControlled = _.has(vnode, 'props.modelValue');
+
       const modelValue = computed(() => (isControlled ? props?.modelValue : value?.[prop.value]));
       const style = computed(() => categoryStyles(_.assign({}, props?.style, attrs.style)));
       const onUpdateModelValue = (value) => {
@@ -59,29 +61,22 @@ export function withFormItem(Component, name) {
           const nodePath = attrs['data-nodepath'];
           const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
           elem?.setAttribute('data-has-mutation', 'true');
-          elem?.setAttribute('data-element-tag', name.replace('el-form-', 'el-'));
+          elem?.setAttribute('data-element-tag', sourceTagName ?? name.replace('el-form-', 'el-'));
         }
       });
-      // watch(
-      //   provide,
-      //   (value) => {
-      //     const { isInForm } = value?.[$formProvide] ?? {};
-      //     if (!isInForm) {
-      //       const nodePath = attrs['data-nodepath'];
-      //       onMounted(() => {
-      //         const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
-      //         elem?.setAttribute('data-has-mutation', 'true');
-      //         elem?.setAttribute('data-element-tag', name.replace('el-form-', 'el-'));
-      //       });
-      //     }
-      //   },
-      //   {
-      //     immediate: true,
-      //     deep: true,
-      //   },
-      // );
+      watch(
+        () => props?.modelValue,
+        (value) => {
+          _.attempt(setValue, prop.value, value);
+        },
+        {
+          deep: true,
+        },
+      );
+      nextTick(() => {
+        Object.assign(myRef.value, formItemRef.value, componentRef.value);
+      });
 
-      watch(componentRef, (value) => Object.assign(myRef.value, value));
       expose(myRef.value);
 
       onMounted(() => {
@@ -89,7 +84,11 @@ export function withFormItem(Component, name) {
           resetField: () => {
             onUpdateModelValue(undefined);
           },
+          getModelValue: () => {
+            return modelValue.value;
+          },
         });
+        _.attempt(setValue, prop.value, modelValue.value);
       });
       onUnmounted(() => {
         deleteFormitem?.(prop.value);
@@ -100,13 +99,15 @@ export function withFormItem(Component, name) {
           <ElFormItemWrap
             {..._.pick(_.assign({}, props, attrs, { prop: prop.value }), $formItemProps)}
             style={style.value.style}
+            class={slots.label && props.label ? 'el-form-item-has-label' : `${attrs.class ?? ''}`}
+            ref={formItemRef}
             v-slots={{
               label: slots.label,
             }}
           >
             <Component
-              {..._.omit(_.assign({}, props, attrs), $formItemProps)}
-              v-slots={slots}
+              {..._.omit(_.assign({ [$formTagName]: name }, props, attrs), $formItemProps)}
+              v-slots={_.omit(slots, ['label'])}
               style={style.value.innerStyle}
               v-on={emit}
               ref={componentRef}
@@ -122,15 +123,20 @@ export function withFormItem(Component, name) {
 export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
   const formTagName = props.get('formTagName');
+  const tagName = props.get('tagName');
   useEffect(() => {
     const inject = props.get('inject');
-    const { isInForm } = inject?.value?.[$formProvide] ?? {};
-    const isInIDE = isInForm && nodePath;
-    if (!isInIDE) return;
+    const { isInForm } = inject?.[$formProvide] ?? {};
+    if (!nodePath) return;
     const elem = document.querySelector(`[data-nodepath="${nodePath}"]`);
-    elem?.setAttribute('data-has-mutation', 'true');
-    elem?.setAttribute('data-element-tag', formTagName);
+    if (isInForm) {
+      elem?.setAttribute('data-has-mutation', 'true');
+      elem?.setAttribute('data-element-tag', formTagName);
+    } else {
+      elem?.setAttribute('data-element-tag', tagName);
+    }
   }, []);
+  return {};
 }
 
 handleComponentInForm.order = 6;

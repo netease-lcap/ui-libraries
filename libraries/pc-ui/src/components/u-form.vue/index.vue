@@ -18,7 +18,7 @@ import { sync } from '@lcap/vue2-utils';
 import MParent from '../m-parent.vue';
 import MGroupParent from '../m-group.vue/parent.vue';
 import UValidator from '../u-validator.vue';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash';
 
 export default {
     name: 'u-form',
@@ -30,6 +30,11 @@ export default {
         preview: 'preview',
       }),
     ],
+    provide() {
+        return {
+            formVM: this,
+        };
+    },
     props: {
         model: Object,
         rules: Object,
@@ -39,6 +44,7 @@ export default {
         labelSize: { type: String, default: 'normal' },
         collapsible: { type: Boolean, default: false },
         repeat: { type: [String, Number], default: null },
+        disabled: { type: Boolean, default: false },
         labelLayout: String,
         gap: {
           type: String,

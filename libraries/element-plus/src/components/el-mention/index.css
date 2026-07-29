@@ -1,6 +1,8 @@
 .el-mention {
-  width: 240px;
+  --el-input-width: 240px;
+  width: var(--el-input-width);
 }
+
 .el-mention .el-input {
   width: 100%;
 }

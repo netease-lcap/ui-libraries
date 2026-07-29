@@ -9,7 +9,8 @@
                 <s-empty v-if="!$slots.title && !title && $env.VUE_APP_DESIGNER && !!$attrs['vusion-node-path']"></s-empty>
             </div>
             <div v-if="!isInNavbar">
-                <u-loading v-if="loading" size="small"></u-loading>
+                <u-loading v-if="loading" :icon="rootVM.loadingIcon" size="small"></u-loading>
+                <i-ico v-else-if="rootVM.popupExpandIcon" :name="rootVM.popupExpandIcon" :class="[$style.expander, $style.popupExpandIcon]"></i-ico>
                 <span v-else :class="$style.expander"></span>
             </div>
         </div>
@@ -58,8 +59,8 @@
             </div>
         </m-popper>
         <template v-if="isInNavbar">
-            <i-ico v-if="loading" :class="[$style.icon, $style.iconLoading]" name="loading"></i-ico>
-            <i-ico v-else :class="$style.icon" name="bottom-arrow"></i-ico>
+            <i-ico v-if="loading" :class="[$style.icon, $style.iconLoading]" :name="rootVM.loadingIcon"></i-ico>
+            <i-ico v-else :class="$style.icon" :name="rootVM.expandIcon"></i-ico>
         </template>
     </div>
 </template>
@@ -245,7 +246,7 @@ export default {
     height: auto;
     line-height: var(--navbar-height);
     color: currentColor;
-    font-size: 14px;
+    font-size: var(--navbar-item-expand-icon-size);
     right: 6px;
     top: 0;
 }
@@ -275,7 +276,7 @@ export default {
     bottom:0;
     width:100%;
     height:var(--navbar-item-line-height);
-    background-color:currentColor;
+    background-color: var(--navbar-item-line-background);
     left:50%;
     transform:translate(-50%);
 }
@@ -312,9 +313,9 @@ export default {
 
 .expander::after {
     transition: transform var(--transition-duration-base);
-    font-size: 16px;
     display: inline-block;
-content: "\e661";
+    font-size: calc(var(--navbar-item-expand-icon-size) + 2px);
+    content: "\e661";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -327,7 +328,21 @@ content: "\e661";
     font-smoothing: antialiased;
 }
 
+.expander.popupExpandIcon {
+  transition: transform var(--transition-duration-base);
+  font-size: var(--navbar-item-expand-icon-size);
+}
+
+.expander.popupExpandIcon::after {
+  content: none;
+}
+
+.expander.popupExpandIcon svg {
+  font-size: inherit;
+}
+
 /* @TODO: replace by icon-font */
+.expander.popupExpandIcon[expanded],
 .expander[expanded]::after {
     transform: rotate(90deg);
 }

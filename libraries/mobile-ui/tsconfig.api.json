@@ -29,6 +29,7 @@
     "include": [
         "./types/**/*",
         "./src/*/api.ts",
+        "./src/typings.d.ts",
         "./src-vusion/components/*/api.ts",
     ]
 }

@@ -1,6 +1,7 @@
 import ElRadioPro from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
+import LayoutDemo from '../demos/layout-demo.vue';
 
 export default {
   id: 'el-radio-pro-examples',
@@ -31,5 +32,16 @@ export const Example2 = {
       exampleDemo: ExampleDemo2,
     },
     template: '<example-demo></example-demo>',
+  }),
+};
+
+/*  布局示例 */
+export const Example3 = {
+  name: '布局示例',
+  render: () => ({
+    components: {
+      layoutDemo: LayoutDemo,
+    },
+    template: '<layout-demo></layout-demo>',
   }),
 };

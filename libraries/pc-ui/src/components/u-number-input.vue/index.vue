@@ -1,13 +1,17 @@
 <template>
     <u-input v-if="!isPreview" ref="input" :class="$style.root" :button-display="buttonDisplay" :value="formattedValue"
-        :readonly="readonly" :disabled="disabled" :clearable="clearable"
+        :readonly="readonly" :disabled="computedDisabled" :clearable="clearable"
         @keydown.native.up.prevent="increase" @keydown.native.down.prevent="decrease" @keydown.native.enter="onEnter"
         @input="onInput" @focus="onFocus" @blur="onBlur" v-bind="$attrs" v-on="listeners" v-click-outside="handleClickOutside"
-        :hide-buttons="hideButtons" :color="formItemVM && formItemVM.color" :prefix="!!showPrefix" :suffix="!!showSuffix">
-        <span :class="$style.button" v-if="!hideButtons" :disabled="currentValue >= max" role="up" v-repeat-click="increase"
-            tabindex="-1" @keydown.prevent></span>
-        <span :class="$style.button" v-if="!hideButtons" :disabled="currentValue <= min" role="down" v-repeat-click="decrease"
-            tabindex="-1" @keydown.prevent></span>
+        :hide-buttons="hideButtons" :color="formItemVM && formItemVM.color" :prefix="!!showPrefix" :suffix="!!showSuffix" :clear-icon="clearIcon">
+        <span :class="[$style.button, {[$style.useIcon]: !!nextIcon}]" v-if="!hideButtons" :disabled="currentValue >= max" role="up" v-repeat-click="increase"
+            tabindex="-1" @keydown.prevent>
+            <i-ico :name="nextIcon" v-if="nextIcon" notext></i-ico>
+        </span>
+        <span :class="[$style.button, {[$style.useIcon]: !!prevIcon}]" v-if="!hideButtons" :disabled="currentValue <= min" role="down" v-repeat-click="decrease"
+            tabindex="-1" @keydown.prevent>
+            <i-ico :name="prevIcon" v-if="prevIcon" notext></i-ico>
+        </span>
         <slot></slot>
 
         <template #prefix>
@@ -25,14 +29,19 @@ import { sync } from '@lcap/vue2-utils';
 import MField from '../m-field.vue';
 import { repeatClick, clickOutside } from '../../directives';
 import { noopFormatter, NumberFormatter } from '../../utils/Formatters';
+import UInput from '../u-input.vue';
 import UPreview from '../u-text.vue';
 import MPreview from '../u-text.vue/preview';
 const isNil = (value) => (typeof value === 'string' && value.trim() === '') || value === null || value === undefined;
 
 export default {
     name: 'u-number-input',
-    component: {
-        UPreview
+    inject: {
+        formVM: { default: null },
+    },
+    components: {
+        UInput,
+        UPreview,
     },
     directives: { repeatClick, clickOutside },
     mixins: [
@@ -43,7 +52,7 @@ export default {
         formattedValue: 'formattedValue',
         readonly: 'readonly',
         preview: 'isPreview',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       })
     ],
     props: {
@@ -103,6 +112,21 @@ export default {
             type: String,
             default: '',
         },
+        plusIcon: {
+            type: String,
+        },
+        minusIcon: {
+            type: String,
+        },
+        upIcon: {
+            type: String,
+        },
+        downIcon: {
+            type: String,
+        },
+        clearIcon: {
+            type: String,
+        },
     },
     data() {
         // 根据初始值计算 fix 精度
@@ -161,6 +185,9 @@ export default {
         return data;
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         listeners() {
             const listeners = Object.assign({}, this.$listeners);
             ['input', 'change', 'focus', 'blur', 'update:value', 'sync:value'].forEach((prop) => {
@@ -184,6 +211,12 @@ export default {
             }
 
             return texts.join(' ');
+        },
+        prevIcon() {
+            return this.buttonDisplay === 'bothEnds' ? this.minusIcon : this.downIcon;
+        },
+        nextIcon() {
+            return this.buttonDisplay === 'bothEnds' ? this.plusIcon : this.upIcon;
         },
     },
     watch: {
@@ -327,7 +360,7 @@ export default {
          * @param {*} value 输入值
          */
         input(value) {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             value = this.fix(value);
             const oldValue = this.currentValue;
@@ -383,7 +416,7 @@ export default {
             this.preventBlur = true;
         },
         onInput(rawValue) {
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return;
             const parsedValue = isNil(rawValue) ? '' : this.currentFormatter.parse(rawValue); // 根据输入调整 fix 精度
             const currentPrecision = (this.currentPrecision = this.getCurrentPrecision(parsedValue));
@@ -569,6 +602,11 @@ content: "\e65d";
 
 .root[button-display="bothEnds"] .button[role="down"]::before {
     content: '-';
+}
+
+.root[button-display="bothEnds"] .button.useIcon::before,
+.root[button-display="tail"] .button.useIcon::before {
+  content: none;
 }
 
 .button::before {

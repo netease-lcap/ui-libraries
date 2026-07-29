@@ -1,0 +1,25 @@
+.van-absolute-layout {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  min-height: 30px;
+}
+.van-absolute-layout.van-absolute-layout__empty {
+  background: #F7F8FA;
+}
+
+.van-absolute-layout>* {
+  position: absolute !important;
+  text-decoration: inherit;
+}
+/* 在编辑器里禁用 transition，防止位置尺寸变化时候出现延迟 */
+.van-absolute-layout>[vusion-node-path]{
+  transition: none !important;
+}
+.van-absolute-layout__emptyTip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #999;
+} 

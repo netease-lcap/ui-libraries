@@ -1,68 +1,65 @@
 import _ from 'lodash';
-import { useMemo } from '@/plugins/hooks';
+import { breadcrumbProps } from 'element-plus';
+import { useMemo, useState, useCallback, useEffect } from '@/plugins/hooks';
+import { $router, $route } from '@/plugins/constants';
 import { ElBreadcrumbItem } from '../index';
-import { ElIcon } from '../../index';
-import { useCallback } from '../../../plugins/hooks';
+import { getPropsIcon } from '@/plugins/common/icon';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import { getRouteTitleItems } from '@/utils/route-meta';
+import lowCodePlugin from './low-code';
 
-export function handleAutoCrumbs(props) {
-  const auto = props.get('auto');
-  const showInDesigner = props.get('showInDesigner');
-  const slots = props.get('slots');
-  const route = props.get('route');
+const BreadcrumbAccumulate = new PluginAccumulateTypes<nasl.ui.ElBreadcrumbOptions, typeof breadcrumbProps>();
 
-  const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
+export default BreadcrumbAccumulate.addAccumulate(lowCodePlugin)
+  .addPlugin({
+    name: 'handleAutoCrumbs',
+    handle: (props) => {
+      const auto = props.get('auto');
+      const showInDesigner = props.get('showInDesigner');
+      const slots = props.get('slots');
+      const route = props.get($route);
+      const [routeInfo, setRouteInfo] = useState(route);
+      const router = props.get($router);
+      useEffect(() => {
+        router?.afterEach?.((to) => setRouteInfo(to));
+      }, []);
 
-  const routerMeta = useMemo(() => {
-    if (!route?.path) return [];
-    return _.reduce(
-      route.matched,
-      (pre: Array<{ title: string; to: string }>, curMatch) => {
-        const meta = _.assign(
-          {},
-          curMatch.meta,
-          _.get(curMatch, 'components.default.__vccOpts.meta', {}),
-          _.get(curMatch, 'components.default.meta', {}),
-        );
-        return pre.concat({
-          title: meta?.crumb || curMatch.name || curMatch.path,
-          to: curMatch.path,
-        });
-      },
-      [],
-    );
-  }, [route]);
+      const isNotAutoCrumbs = useMemo(() => !auto || showInDesigner, [auto, showInDesigner]);
 
-  const defaultSlots = useCallback(() => {
-    return routerMeta.map((item) => (
-      <ElBreadcrumbItem key={item.to} to={{ path: item.to }}>
-        {{
-          default: () => item.title,
-        }}
-      </ElBreadcrumbItem>
-    ));
-  }, [routerMeta]);
+      const routerMeta = useMemo(() => getRouteTitleItems(routeInfo), [routeInfo]);
 
-  const result = useMemo(
-    () => (!isNotAutoCrumbs
+      const defaultSlots = useCallback(() => {
+        return routerMeta.map((item) => (
+          <ElBreadcrumbItem replace={false} key={item.to} to={{ path: item.to }}>
+            {{
+              default: () => item.title,
+            }}
+          </ElBreadcrumbItem>
+        ));
+      }, [routerMeta]);
+
+      const result = useMemo(
+        () => (isNotAutoCrumbs
+            ? {}
+            : {
+                slots: _.assign({}, slots, {
+                  default: defaultSlots,
+                }),
+              }),
+        [isNotAutoCrumbs, defaultSlots, slots],
+      );
+      return result;
+    },
+  })
+  .addPlugin({
+    name: 'handleSeparatorIcon',
+    handle: (props) => {
+      const separatorIcon = props.get('separatorIcon');
+
+      return separatorIcon
         ? {
-            slots: {
-              ...slots,
-              default: defaultSlots,
-            },
+            separatorIcon: getPropsIcon({ name: separatorIcon }),
           }
-        : {}),
-    [isNotAutoCrumbs, defaultSlots, slots],
-  );
-  return result;
-}
-
-export function handleSeparatorIcon(props) {
-  const separatorIcon = props.get('separatorIcon');
-  if (!separatorIcon) return {};
-
-  const separatorIconComp = <ElIcon name={separatorIcon} />;
-
-  return {
-    separatorIcon: separatorIconComp,
-  };
-}
+        : {};
+    },
+  });

@@ -97,8 +97,9 @@ namespace nasl.ui {
             description: '原数据列表',
             sync: true,
             docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-            isDataSource: true,
-            bindOpen: true,
+            setter: {
+                concept: 'DataSourceSetter',
+            },
         })
         source: nasl.collection.List<T>;
 
@@ -108,7 +109,9 @@ namespace nasl.ui {
             description: '目标数据列表',
             sync: true,
             docDescription: '支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑。',
-            bindOpen: true,
+            setter: {
+                concept: 'DataSourceSetter',
+            },
         })
         target: nasl.collection.List<T>;
 
@@ -250,6 +253,37 @@ namespace nasl.ui {
           settable: true,
         })
         preview: nasl.core.Boolean = false;
+
+        @Prop<UTransferOptions<T, V>, 'searchIcon'>({
+            group: '主要属性',
+            title: '搜索图标',
+            description: '设置搜索图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.filterable === true,
+        })
+        searchIcon: nasl.core.String = 'search';
+
+        @Prop({
+            group: '主要属性',
+            title: '向左箭头图标',
+            description: '设置向左箭头图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        leftArrowIcon: nasl.core.String = 'left-arrow';
+
+        @Prop({
+            group: '主要属性',
+            title: '向右箭头图标',
+            description: '设置向右箭头图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        rightArrowIcon: nasl.core.String = 'right-arrow';
 
         @Event({
             title: '数据转移时',

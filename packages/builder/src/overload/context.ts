@@ -43,6 +43,7 @@ export interface OverloadComponentContext {
   themeConfig: ThemeComponentConfig;
   isWithForm: boolean;
   withFormName: string;
+  exportNames: string[];
   findNaslUIConfig: (name: string | ((c: NaslUIComponentConfig) => boolean)) => NaslUIComponentConfig | null;
 }
 
@@ -123,6 +124,7 @@ function getReleaceMap(comp, framework, prefix) {
   return {
     replaceNames: Object.keys(replaceNameMap),
     replaceTags: Object.keys(replaceTagMap),
+    exportNames: Object.values(replaceNameMap),
     replaceNameMap,
     replaceTagMap,
   };
@@ -192,7 +194,7 @@ export function getOverloadComponentContext(rootPath, { component, prefix, fork 
     },
     pkgComponentFolderPath: getComponentFloderPath(rootPath, component, env.framework, modulesInfo?.api),
     componentFolderPath: path.resolve(rootPath, `src/components/${tagName}`),
-    fork,
+    fork: fork && env.framework === 'vue2' && pkg.name !== '@lcap/element-ui',
     prefix,
     isWithForm: isWithForm(comp),
     withFormName: getWithFormName(comp.name),

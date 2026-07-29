@@ -79,8 +79,9 @@ namespace nasl.ui {
             title: '数据源',
             description: '支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑。',
             docDescription: '- 支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑。',
-            isDataSource: true,
-            bindOpen: true,
+            setter: {
+                concept: 'DataSourceSetter',
+            },
         })
         data: nasl.collection.List<T>;
 
@@ -164,6 +165,63 @@ namespace nasl.ui {
             },
         })
         clearable: nasl.core.Boolean = false;
+
+        @Prop<URegionSelectOptions<T, V>, 'clearIcon'>({
+            group: '交互属性',
+            title: '清空图标',
+            description: '设置清空图标',
+            docDescription: '设置清空图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.clearable === true,
+        })
+        clearIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '前缀图标',
+            description: '设置前缀图标',
+            docDescription: '设置前缀图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        prefixIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '后缀图标',
+            description: '设置后缀图标',
+            docDescription: '设置后缀图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        suffixIcon: nasl.core.String = 'bottom-arrow';
+
+        @Prop({
+            group: '主要属性',
+            title: '菜单展开图标',
+            description: '设置菜单展开图标',
+            docDescription: '设置菜单展开图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        menuExpandIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '加载图标',
+            description: '设置加载图标',
+            docDescription: '设置加载图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        loadingIcon: nasl.core.String = 'loading';
+
 
         @Prop({
             group: '状态属性',

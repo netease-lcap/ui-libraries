@@ -46,6 +46,51 @@ namespace nasl.ui {
         })
         showIcon: nasl.core.Boolean = true;
 
+
+        @Prop<UAlertOptions, 'infoIcon'>({
+            group: '主要属性',
+            title: '信息图标',
+            description: '设置信息图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: (_) => _.showIcon && _.type === 'info',
+        })
+        infoIcon: nasl.core.String;
+
+        @Prop<UAlertOptions, 'successIcon'>({
+            group: '主要属性',
+            title: '成功图标',
+            description: '设置成功图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: (_) => _.showIcon && _.type === 'success',
+        })
+        successIcon: nasl.core.String;
+
+        @Prop<UAlertOptions, 'warningIcon'>({
+            group: '主要属性',
+            title: '警告图标',
+            description: '设置警告图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: (_) => _.showIcon && _.type === 'warning',
+        })
+        warningIcon: nasl.core.String;
+
+        @Prop<UAlertOptions, 'errorIcon'>({
+            group: '主要属性',
+            title: '错误图标',
+            description: '设置错误图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: (_) => _.showIcon && _.type === 'error',
+        })
+        errorIcon: nasl.core.String;
+
         @Prop({
             group: '样式属性',
             title: '对其方式',
@@ -67,6 +112,17 @@ namespace nasl.ui {
             },
         })
         closeable: nasl.core.Boolean = false;
+
+        @Prop<UAlertOptions, 'closeIcon'>({
+            group: '交互属性',
+            title: '关闭图标',
+            description: '设置关闭图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: (_) => _.closeable,
+        })
+        closeIcon: nasl.core.String = 'close';
 
         @Prop({
             group: '样式属性',

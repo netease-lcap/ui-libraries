@@ -17,6 +17,7 @@
         @clear="clearValue"
         :prefix="preIcon?preIcon:undefined"
         :suffix="suffixIcon?suffixIcon:undefined"
+        :clear-icon="clearIcon?clearIcon:undefined"
         :pre-icon="preIcon"
         :suffix-icon="suffixIcon"
         :color="formItemVM && formItemVM.color">
@@ -139,6 +140,9 @@ export default {
         suffixIcon: {
             type: String,
             default: '',
+        },
+        clearIcon: {
+            type: String,
         },
         clearable: { type: Boolean, default: true },
         preview: { type: Boolean, default: false },
@@ -295,9 +299,17 @@ export default {
         },
         onUpdateStartTime(value) {
             this.$emit('update:startTime', value);
+            this.syncEmitValue();
         },
         onUpdateEndTime(value) {
             this.$emit('update:endTime', value);
+            this.syncEmitValue();
+        },
+        syncEmitValue() {
+          this.$nextTick(() => {
+            const value = this.startInputTime && this.endInputTime ? [this.startInputTime, this.endInputTime] : '';
+            this.$emit('update', value);
+          });
         },
         // blur 有很多种情况，这里放到 popper 内部统一处理
         onPopperBlur() {
