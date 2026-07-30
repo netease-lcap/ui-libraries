@@ -461,8 +461,7 @@ describe('plugins/index.tsx', () => {
       expect(currentValue.value).toHaveProperty('class');
       expect(currentValue.value.class).toContain('el-checkbox-group-vertical');
       expect(currentValue.value).toHaveProperty('style');
-      expect(currentValue.value.style).toHaveProperty('grid-template-columns');
-      expect(currentValue.value.style).toHaveProperty('grid-auto-flow');
+      expect(currentValue.value.style).toEqual({ color: 'red' });
     });
 
     it('应该使用 renderHook 测试水平方向', () => {
@@ -480,6 +479,7 @@ describe('plugins/index.tsx', () => {
       expect(currentValue.value).toHaveProperty('class');
       expect(currentValue.value.class).not.toContain('el-checkbox-group-vertical');
       expect(currentValue.value).toHaveProperty('style');
+      expect(currentValue.value.style).toEqual({ color: 'red' });
     });
 
     it('应该使用 renderHook 测试列数配置', () => {
@@ -495,6 +495,7 @@ describe('plugins/index.tsx', () => {
 
       expect(currentValue.value).toBeDefined();
       expect(currentValue.value).toHaveProperty('style');
+      expect(currentValue.value.style.display).toBe('grid');
       expect(currentValue.value.style['grid-template-columns']).toBe('repeat(3, 1fr)');
       expect(currentValue.value.style['grid-auto-flow']).toBe('row');
     });
@@ -512,9 +513,8 @@ describe('plugins/index.tsx', () => {
 
       expect(currentValue.value).toBeDefined();
       expect(currentValue.value).toHaveProperty('class');
-      expect(currentValue.value).toHaveProperty('style');
-      expect(currentValue.value.style['grid-template-columns']).toBe('auto-fill');
-      expect(currentValue.value.style['grid-auto-flow']).toBe('auto');
+      expect(currentValue.value.class).toContain('cw-checkbox-group');
+      expect(currentValue.value.style).toBeUndefined();
     });
 
     it('应该使用 renderHook 测试 undefined 的 class', () => {

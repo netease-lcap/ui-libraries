@@ -427,9 +427,6 @@ export default {
 
 <style>
 .el-list-components__frag {
-  display: flex;
-  flex-basis: auto;
-  flex-wrap: wrap;
 }
 
 .el-list-components__pagination {

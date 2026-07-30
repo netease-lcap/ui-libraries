@@ -1,13 +1,15 @@
 .cw-checkbox-group {
-  display: inline-grid;
-  /* 使用 inline-grid 让容器宽度适应内容 */
-  grid-auto-flow: column;
-  /* 让子元素按列方向自动排列 */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .el-checkbox-group-vertical {
-  grid-auto-flow: row;
-  /* 让子元素按行方向自动排列 */
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .el-checkbox-group-vertical .el-checkbox {
@@ -27,7 +29,6 @@
   }
 
   .el-checkbox {
-
     cursor: default;
     margin: 0;
 
@@ -47,5 +48,4 @@
       }
     }
   }
-
 }

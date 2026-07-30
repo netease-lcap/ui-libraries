@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { ElDescriptionsItem, DescriptionProps } from 'element-plus';
-import { cloneVNode } from 'vue';
+import { cloneVNode, Comment } from 'vue';
 import { $deletePropsList, $ide } from '@/plugins/constants';
 import { useEffect, useMemo } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -35,9 +35,11 @@ export default DescriptionsBasicAccumulate.addPlugin({
   handle(props) {
     const slots = props.get('slots');
     const defaultSlotVNode = slots?.default?.();
-    const node = _.map(defaultSlotVNode, (Vnode: any) => {
+
+    const node = _.flatMap(defaultSlotVNode, (Vnode: any) => {
+      if (Vnode.type === Comment) return [];
       const itemClass = _.uniqueId('Descriptions_');
-      return (
+      return [
         <ElDescriptionsItem
           {...Vnode.props}
           class-name={`${itemClass} ${_.get(Vnode, 'props.class', '')}`}
@@ -45,8 +47,8 @@ export default DescriptionsBasicAccumulate.addPlugin({
           v-slots={_.omit(Vnode.children, ['default'])}
         >
           {cloneVNode(Vnode, { contentClassName: itemClass })}
-        </ElDescriptionsItem>
-      );
+        </ElDescriptionsItem>,
+      ];
     });
     return {
       slots: _.assign(slots, {
