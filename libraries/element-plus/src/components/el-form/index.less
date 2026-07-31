@@ -322,7 +322,9 @@
   display: contents;
 }
 
-.el-form.el-form--query .el-form-query .el-form-item {
+/* 仅查询区顶层普通表单项占一列；form-item-group 由自身跨列样式处理 */
+.el-form.el-form--query .el-form-query .el-form-query__fields > .el-form-item:not(.el-form-item-group),
+.el-form.el-form--query .el-form-query > .el-form-item:not(.el-form-item-group) {
   flex: 0 0 calc((100% - (var(--el-form-query-cols) - 1) * 16px) / var(--el-form-query-cols));
   max-width: calc((100% - (var(--el-form-query-cols) - 1) * 16px) / var(--el-form-query-cols));
   min-width: 0;

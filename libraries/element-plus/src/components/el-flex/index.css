@@ -68,5 +68,5 @@
 .el-flex--block:has(.el-table) {
   min-width: 0;
   max-width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }

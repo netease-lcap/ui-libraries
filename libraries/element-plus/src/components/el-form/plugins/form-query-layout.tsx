@@ -33,7 +33,8 @@ export default defineComponent({
         actionsFullRow.value = false;
         return;
       }
-      const items = root.querySelectorAll('.el-form-item');
+      // 仅统计查询区顶层表单项（不含 form-item-group 内部嵌套项）
+      const items = root.querySelectorAll('.el-form-query__fields > .el-form-item');
       const lastItem = items[items.length - 1] as HTMLElement | undefined;
       if (!lastItem) {
         actionsFullRow.value = false;

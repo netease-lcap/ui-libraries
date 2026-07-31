@@ -9,6 +9,7 @@ export * from './el-cascader';
 export * from './el-checkbox';
 export * from './el-table';
 export * from './el-form';
+export * from './el-form-item-group';
 // export { ElPagination } from 'element-plus';
 export * from './el-absolute-layout';
 export * from './el-router-view';

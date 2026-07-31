@@ -963,3 +963,235 @@ export const Example12 = {
     `,
   }),
 };
+
+/** 块级 / 查询表单中使用 el-form-item-group（columns 2/3，嵌套 el-form-select 等） */
+export const Example13 = {
+  name: '表单项分组（块级 / 查询 + columns 2/3）',
+  render: () => ({
+    setup() {
+      const selectOptions = [
+        { label: '待审批', value: 0 },
+        { label: '已审批', value: 1 },
+        { label: '已拒绝', value: 2 },
+      ];
+      const formModel = reactive({
+        name: '',
+        status: '',
+        city: '',
+        type: '',
+        owner: '',
+        level: '',
+        keyword: '',
+        remark: '',
+      });
+      return { formModel, selectOptions };
+    },
+    template: `
+    <div style="padding: 8px 0;">
+      <p style="margin: 0 0 12px;color: var(--el-text-color-secondary);font-size: 13px;">
+        <code>el-form-item-group</code> 的 <code>columns</code> 表示占用 N 倍表单项宽度（非内部分列）：
+        块级为内容区约 N × 控件宽；查询表单为跨 N 列，且不超过容器宽度。内部嵌套 <code>el-form-select</code> 等。
+      </p>
+
+      <h4 style="margin: 0 0 8px;font-size: 14px;">块级表单 · columns=2（占 2 倍宽度，含必填 *）</h4>
+      <el-form :model="formModel" label-position="right" layout="block" style="margin-bottom: 28px;">
+        <el-form-input v-model="formModel.remark" prop="remark" label="备注" placeholder="普通表单项" clearable />
+        <el-form-input v-model="formModel.remark" prop="remark" label="备注" placeholder="普通表单项" clearable />
+        <el-form-input v-model="formModel.remark" prop="remark" label="备注" placeholder="普通表单项" clearable />
+        <el-form-input v-model="formModel.remark" prop="remark" label="备注" placeholder="普通表单项" clearable />
+        <el-form-item-group label="联系信息" :columns="2" :is-required="true">
+          <el-form-input v-model="formModel.name" prop="name"  placeholder="请输入" clearable />
+
+        </el-form-item-group>
+        <el-form-input v-model="formModel.remark" prop="remark" label="备注" placeholder="普通表单项" clearable />
+      </el-form>
+
+      <h4 style="margin: 0 0 8px;font-size: 14px;">块级表单 · columns=3（占 3 倍宽度）</h4>
+      <el-form :model="formModel" label-position="right" layout="block" style="margin-bottom: 28px;">
+        <el-form-item-group label="业务信息" :columns="3">
+          <el-form-select
+            v-model="formModel.owner"
+            prop="owner"
+            label="负责人"
+            placeholder="请选择"
+            clearable
+            :dataSource="selectOptions"
+          />
+          <el-form-select
+            v-model="formModel.level"
+            prop="level"
+            label="优先级"
+            placeholder="请选择"
+            clearable
+            :dataSource="selectOptions"
+          />
+          <el-form-select
+            v-model="formModel.type"
+            prop="typeB"
+            label="类型"
+            placeholder="请选择"
+            clearable
+            :dataSource="selectOptions"
+          />
+          <el-form-input v-model="formModel.name" prop="titleB" label="标题" placeholder="请输入" clearable />
+          <el-form-select
+            v-model="formModel.status"
+            prop="statusB"
+            label="状态"
+            placeholder="请选择"
+            clearable
+            :dataSource="selectOptions"
+          />
+          <el-form-select
+            v-model="formModel.city"
+            prop="cityB"
+            label="城市"
+            placeholder="请选择"
+            clearable
+            :dataSource="selectOptions"
+          />
+        </el-form-item-group>
+      </el-form>
+
+      <h4 style="margin: 0 0 8px;font-size: 14px;">查询表单 · columns=2（跨 2 列）</h4>
+      <div
+        style="
+          resize: horizontal;
+          overflow: auto;
+          width: 1210px;
+          max-width: 100%;
+          min-width: 320px;
+          padding: 12px;
+          border: 1px dashed var(--el-border-color);
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-bottom: 24px;
+        "
+      >
+        <el-form :model="formModel" label-position="right" layout="block" :query-form="true">
+          <el-form-input v-model="formModel.keyword" prop="keyword" label="关键词" placeholder="请输入" clearable />
+          <el-form-item-group label="筛选条件" :columns="2" :is-required="true">
+            <el-form-select
+              v-model="formModel.status"
+              prop="qStatus"
+              label="状态"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+            <el-form-select
+              v-model="formModel.city"
+              prop="qCity"
+              label="城市"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+            <el-form-select
+              v-model="formModel.type"
+              prop="qType"
+              label="类型"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+            <el-form-select
+              v-model="formModel.owner"
+              prop="qOwner"
+              label="负责人"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+          </el-form-item-group>
+          <template #actions>
+            <el-button type="primary">查询</el-button>
+            <el-button>重置</el-button>
+          </template>
+        </el-form>
+      </div>
+
+      <h4 style="margin: 0 0 8px;font-size: 14px;">查询表单 · columns=3（跨 3 列，不超过容器）</h4>
+      <div
+        style="
+          resize: horizontal;
+          overflow: auto;
+          width: 1210px;
+          max-width: 100%;
+          min-width: 320px;
+          padding: 12px;
+          border: 1px dashed var(--el-border-color);
+          border-radius: 4px;
+          box-sizing: border-box;
+        "
+      >
+        <el-form :model="formModel" label-position="right" layout="block" :query-form="true">
+                  <el-form-select
+              v-model="formModel.type"
+              prop="qType3"
+              label="类型"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+          <el-form-item-group label="高级筛选" :columns="2">
+            <el-form-select
+              v-model="formModel.status"
+              prop="qStatus3"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+            <el-form-select
+              v-model="formModel.city"
+              prop="qCity3"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+  
+        
+          </el-form-item-group>
+            <el-form-select
+              v-model="formModel.type"
+              prop="qType3"
+              label="类型"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+                     <el-form-select
+              v-model="formModel.type"
+              prop="qType3"
+              label="类型"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+                     <el-form-select
+              v-model="formModel.type"
+              prop="qType3"
+              label="类型"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+            <el-form-select
+              v-model="formModel.type"
+              prop="qType3"
+              label="类型"
+              placeholder="请选择"
+              clearable
+              :dataSource="selectOptions"
+            />
+          <template #actions>
+            <el-button type="primary">查询</el-button>
+            <el-button>重置</el-button>
+            <el-button>导出</el-button>
+          </template>
+        </el-form>
+      </div>
+    </div>
+    `,
+  }),
+};
