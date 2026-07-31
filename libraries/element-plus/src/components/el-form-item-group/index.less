@@ -1,0 +1,89 @@
+/* 表单项分组：columns = 占据 N 个表单项宽度（非内部分列），最大不超过容器 */
+/* 注意：含 var 的 min/calc 需 ~"" 转义，避免 Less 预计算成 100% */
+
+.el-form-item.el-form-item-group {
+  --el-form-item-group-columns: 1;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* 块级：内容区宽度 = N × 原表单控件宽度，且不超过容器 */
+.el-form:not(.el-form--query):not(.el-form-grid):not(.el-form--inline):not(:has(.el-col)) {
+  .el-form-item.el-form-item-group {
+    > .el-form-item__content {
+      flex: 0 1 ~"calc(var(--el-form-content-width, 240px) * var(--el-form-item-group-columns, 1))";
+      min-width: var(--el-form-content-min-width, 180px);
+      width: auto;
+      max-width: ~"min(100%, calc(var(--el-form-item-max-width, 400px) * var(--el-form-item-group-columns, 1)))";
+    }
+  }
+}
+
+/* 查询表单：跨 N 列（含中间 gap），最大不超过一行宽度 */
+.el-form.el-form--query .el-form-query .el-form-item.el-form-item-group {
+  flex: 0 0 ~"min(100%, calc((100% - (var(--el-form-query-cols) - 1) * 16px) / var(--el-form-query-cols) * var(--el-form-item-group-columns, 1) + (var(--el-form-item-group-columns, 1) - 1) * 16px))";
+  max-width: ~"min(100%, calc((100% - (var(--el-form-query-cols) - 1) * 16px) / var(--el-form-query-cols) * var(--el-form-item-group-columns, 1) + (var(--el-form-item-group-columns, 1) - 1) * 16px))";
+
+  > .el-form-item__content {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+/* 分组内容：横向排布内部表单控件，默认撑满分组宽度（columns 不控制内部分列） */
+.el-form-item-group__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: 16px;
+  row-gap: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  > .el-form-item {
+    flex: 1 1 auto;
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    margin-right: 0;
+
+    > .el-form-item__content {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: auto;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+
+      > .el-autocomplete,
+      > .el-cascader,
+      > .el-date-editor,
+      > .el-input,
+      > .el-input-number,
+      > .el-textarea,
+      > .el-input-tag,
+      > .el-mention,
+      > .el-select,
+      > .el-slider,
+      > .el-tree-select,
+      > .el-upload,
+      > .el-transfer {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+      }
+    }
+  }
+}
+
+/* 查询表单内：嵌套表单项不参与外层查询列 flex 占位 */
+.el-form.el-form--query .el-form-query .el-form-item-group .el-form-item {
+  flex: 1 1 auto;
+  max-width: 100%;
+  width: auto;
+  min-width: 0;
+}

@@ -32,7 +32,11 @@ export default ElTreeBasicAccumulate.addPlugin({
     const dataSourceResult = _.isEmpty(TreeData) ? {} : { data: TreeData };
     const slotItemToDefault = useMemo(() => {
       const hasItemSlot = _.isFunction(slotsProps?.item);
-      return hasItemSlot ? { default: ({ node }) => slotsProps.item({ item: node } as any) } : {};
+      return hasItemSlot
+        ? {
+            default: ({ data }) => slotsProps.item({ item: data } as any),
+          }
+        : {};
     }, [slotsProps.item]);
     const slots = _.assign(slotsProps, { ...slotItemToDefault });
 
