@@ -69,7 +69,7 @@ const EditDefault = defineComponent({
             }}
             size={18}
             name="DocumentAdd"
-            style={{ marginLeft: '10px', marginBottom: '18px' }}
+            style={{ marginLeft: '10px' }}
           />
         </div>
       );
