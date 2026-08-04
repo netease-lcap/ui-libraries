@@ -119,10 +119,10 @@ export default ColumnPluginAccumulate.addPlugin({
       const width = props.get('width');
       const minWidth = props.get('minWidth');
       const isSortable = sortableProps === 'custom';
-      const widthPatch = isSortable && (minWidth || width)
+      const widthPatch: { minWidth?: string; width?: string } = isSortable && (minWidth || width)
           ? minWidth
-            ? { minWidth: `${parseInt(minWidth, 10) + 20}px` }
-            : { width: `${parseInt(width, 10) + 20}px` }
+            ? { minWidth: `${parseInt(String(minWidth), 10) + 20}px` }
+            : { width: `${parseInt(String(width), 10) + 20}px` }
           : {};
 
       return {
