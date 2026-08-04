@@ -1,21 +1,28 @@
 /* eslint-disable no-nested-ternary */
-import { ref, cloneVNode, nextTick } from 'vue';
+import { ref, cloneVNode, defineComponent, PropType } from 'vue';
 import _ from 'lodash';
 import { TableColumnCtx } from 'element-plus';
-import { useMemo, useCallback, useEffect } from '@/plugins/hooks';
-import { ElIcon, ElCheckbox } from '@/index';
+import { useMemo, useCallback } from '@/plugins/hooks';
+import { ElIcon } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { $deletePropsList } from '@/plugins/constants';
-import { addClass } from '@/utils';
 
-const EditDefault = {
+const EditDefault = defineComponent({
   name: 'editDefault',
   inheritAttrs: false,
-  setup(props, { attrs, emit, expose }) {
-    const { item, slots, editChange = () => {}, setValue } = attrs;
+  props: {
+    item: { type: Object, required: true },
+    slots: { type: Object, required: true },
+    editChange: {
+      type: Function as PropType<(item: any) => void>,
+      default: () => {},
+    },
+  },
+  setup(props) {
+    const { item, slots, editChange } = props;
 
     const editable = ref(false);
-    const formItemRef = ref({});
+    const formItemRef = ref<{ validate:() => Promise<void> }>({ validate: () => Promise.resolve() });
     return () => {
       return !editable.value ? (
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -68,7 +75,7 @@ const EditDefault = {
       );
     };
   },
-};
+});
 const ColumnPluginAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElTableColumnOptions<any, any, any, any>,
   TableColumnCtx<any> & { editable: boolean; 'data-nodepath': string }

@@ -1,4 +1,4 @@
-import { defineComponent, watch, onBeforeUnmount, ref, PropType } from 'vue';
+import { defineComponent, watch, onBeforeUnmount, ref, PropType, VNode } from 'vue';
 import { ElMessageBox as ElMessageBoxPlus, MessageBoxInputValidator, ComponentSize, Callback } from 'element-plus';
 import { ElIcon } from '../index';
 
@@ -158,7 +158,7 @@ export default defineComponent({
 
     const openMessageBox = async () => {
       const vnodes = slots.default?.() || [];
-      const message = vnodes.length > 0 ? <div>{vnodes}</div> : null;
+      const message: string | VNode | undefined = vnodes.length > 0 ? <div>{vnodes}</div> as VNode : undefined;
 
       const IconComp = props.icon ? <ElIcon name={props.icon} /> : '';
       const CloseIconComp = <ElIcon name={props.closeIcon} />;

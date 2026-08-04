@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { $deletePropsList, $ide } from '@/plugins/constants';
 import { useEffect, useMemo } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { IIdePluginBase } from '@/types';
