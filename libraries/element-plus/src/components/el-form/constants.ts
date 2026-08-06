@@ -18,4 +18,5 @@ export const $formItemProps = [
   'trigger',
   'ignoreRules',
   'prop',
+  'colSpan',
 ];

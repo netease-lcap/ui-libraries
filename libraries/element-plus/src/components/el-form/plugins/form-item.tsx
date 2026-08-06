@@ -16,6 +16,8 @@ type FormItemProvide = {
     setFormitem: (key: string, value: any) => void;
     deleteFormitem: (key: string) => void;
     preview: boolean;
+    layout?: string;
+    columns?: number;
   };
 };
 

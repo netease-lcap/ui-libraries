@@ -100,7 +100,7 @@ export default TimePickerBasicAccumulate.addAccumulate(idePlugin)
 
       const [value, setValue] = useControllableValue(props);
       const result = {
-        modelValue: value ? getFormatTimeValue(value) : '',
+        modelValue: value ? getFormatTimeValue(value as string) : '',
         'onUpdate:modelValue': _.wrap(setValue, (fn, val: any) => {
           const modelValue = val ? new Date(dayjs(val).format()).toJSON() : undefined;
           const naslValue = val ? getNaslTimeValue(modelValue) : undefined;

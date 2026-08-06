@@ -108,6 +108,12 @@
       overflow: auto;
       width: 100%;
       grid-template-columns: repeat(var(--el-form-columns), 1fr);
+
+      /* 跨列：剩余列不足时 CSS Grid 自动换行；超过总列数时由插件钳制为总列数以撑满整行 */
+      > .el-form-item,
+      > .el-form-item-group {
+        grid-column: span var(--el-form-item-col-span, 1);
+      }
     }
 
     // gap: var( --el-form-item-gap);

@@ -6,7 +6,7 @@ import { PluginBase, DataSourceType } from '@/types';
  */
 
 // 定义 Immutable Map 类型
-type ImmutableMap<T> = {
+export type ImmutableMap<T> = {
   get<K extends keyof T>(key: K): T[K];
   get<K extends keyof T, D>(key: K, defaultValue: D): T[K] | D;
   set<K extends keyof T>(key: K, value: T[K]): ImmutableMap<T>;

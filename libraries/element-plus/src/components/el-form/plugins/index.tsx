@@ -45,6 +45,8 @@ export default FormBasicAccumulate.addPlugin({
             delete formItemList.value[key];
           },
           preview,
+          layout: props.get('layout'),
+          columns: props.get('columns') ?? 1,
         },
       }),
       ref: Object.assign(ref, {
@@ -120,10 +122,16 @@ export default FormBasicAccumulate.addPlugin({
         return { inline: true };
       }
       if (layout === 'grid') {
+        const columns = props.get('columns') ?? 1;
+        const provide = props.get('provide');
+        if (provide?.[$formProvide]) {
+          provide[$formProvide].layout = 'grid';
+          provide[$formProvide].columns = columns;
+        }
         return {
           style: {
             ...style,
-            '--el-form-columns': props.get('columns') ?? 1,
+            '--el-form-columns': columns,
           },
           class: addClass(classNames, 'el-form-grid'),
         };

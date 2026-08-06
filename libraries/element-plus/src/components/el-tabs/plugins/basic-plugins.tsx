@@ -221,7 +221,7 @@ export default TabsAccumulate.addPlugin({
         slots: _.assign({}, slots, {
           default: () => tabList.map((item) => (
             <ElTabPane key={item.name} name={item.name} label={item.title} closable={closable ?? true} />
-          )),
+            )),
         }),
         onTabChange: _.wrap(onTabChangeProps, (fn, name) => {
           _.attempt(fn, name);
