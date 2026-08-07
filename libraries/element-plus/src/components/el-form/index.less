@@ -49,7 +49,7 @@
       flex: 1 1 var(--el-form-content-width, 180px);
       min-width: var(--el-form-content-min-width, 180px);
       width: auto;
-      max-width: ~"calc(560px - var(--el-form-auto-label-width, 0px))";
+      max-width: ~"calc(var(--el-form-content-max-width, 560px) - var(--el-form-auto-label-width, 0px))";
 
       /* 仅对常用录入控件拉满 content；单选/多选组等非列表组件不在此列 */
       >.el-autocomplete,
@@ -80,8 +80,8 @@
 
 
       .el-form-item__content {
-        width: 240px;
-
+        width: var(--el-form-content-width, 240px);
+        max-width: ~"calc(var(--el-form-content-max-width, 560px) - var(--el-form-auto-label-width, 0px))";
         /* 仅对常用录入控件拉满 content；单选/多选组等非列表组件不在此列 */
         >.el-autocomplete,
         >.el-cascader,
@@ -146,7 +146,7 @@
         flex-basis: var(--el-form-label-width, 240px);
         min-width: 0;
         width: auto;
-        max-width: var(--el-form-item-max-width, 400px);
+        max-width: ~"calc(var(--el-form-content-max-width, 560px) - var(--el-form-auto-label-width, 0px))";
 
         >.el-autocomplete,
         >.el-cascader,

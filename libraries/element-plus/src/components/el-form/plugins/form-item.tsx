@@ -104,6 +104,8 @@ export function withFormItem(Component, name, sourceTagName?: string) {
             {..._.pick(_.assign({}, props, attrs, { prop: prop.value }), $formItemProps)}
             style={_.assign({}, style.value.style, {
               '--el-form-auto-label-width': formContext?.autoLabelWidth,
+              '--el-form-content-width': _.get(style, 'value.style.width', undefined),
+              '--el-form-content-max-width': _.get(style, 'value.style.width', undefined),
             })}
             class={slots.label && props.label ? 'el-form-item-has-label' : `${attrs.class ?? ''}`}
             ref={formItemRef}
