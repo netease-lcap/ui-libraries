@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ElFormItem } from 'element-plus';
+import { ElFormItem, formContextKey } from 'element-plus';
 
 import { ref, watch, inject, Ref, getCurrentInstance, VNode, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import { ElFormItemWrap } from '@/components/el-form';
@@ -40,6 +40,8 @@ export function withFormItem(Component, name, sourceTagName?: string) {
       const uniqueid = _.uniqueId('formItemPropName');
       const prop = computed(() => props.prop ?? uniqueid);
       const provide = inject($provide) as Ref<FormItemProvide>;
+      const formContext = inject(formContextKey, undefined);
+
       const {
         isInForm,
         setValue = () => {},
@@ -100,7 +102,9 @@ export function withFormItem(Component, name, sourceTagName?: string) {
         return (
           <ElFormItemWrap
             {..._.pick(_.assign({}, props, attrs, { prop: prop.value }), $formItemProps)}
-            style={style.value.style}
+            style={_.assign({}, style.value.style, {
+              '--el-form-auto-label-width': formContext?.autoLabelWidth,
+            })}
             class={slots.label && props.label ? 'el-form-item-has-label' : `${attrs.class ?? ''}`}
             ref={formItemRef}
             v-slots={{
