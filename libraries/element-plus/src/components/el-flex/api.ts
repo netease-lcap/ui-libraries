@@ -103,8 +103,8 @@ namespace nasl.ui {
       },
       if: (_) => _.mode !== 'block',
       onChange: [
-        { update: { alignment: 'start', justify: 'start' }, if: (_) => _ === 'horizontal' },
-        { update: { alignment: 'stretch', justify: 'start' }, if: (_) => _ === 'vertical' },
+        { update: { alignment: 'start', justify: 'start', wrap: true }, if: (_) => _ === 'horizontal' },
+        { update: { alignment: 'stretch', justify: 'start', wrap: false }, if: (_) => _ === 'vertical' },
       ],
       tabKind: 'style',
     })
@@ -200,7 +200,8 @@ namespace nasl.ui {
       group: '主要属性',
       title: '换行',
       description: '设置弹性布局下子元素总宽度超出父级时子元素是否换行展示',
-      docDescription: '支持控制弹性布局模式下，子元素总宽度超过父级时是否换行展示，默认开启。',
+      docDescription:
+        '支持控制弹性布局模式下，子元素超出父级时是否换行展示。主轴为横向时默认开启，纵向时默认关闭；切换主轴方向时会同步更新该默认值。',
       setter: {
         concept: 'SwitchSetter',
       },

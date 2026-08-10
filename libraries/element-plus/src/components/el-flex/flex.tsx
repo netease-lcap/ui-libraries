@@ -12,12 +12,14 @@ export default defineComponent({
     const formContext = inject(formContextKey);
 
     const style = computed(() => {
+      // 换行默认：横向 true，竖向 false；显式传入 wrap 时优先生效
+      const wrap = props.wrap ?? props.direction === 'horizontal';
       return ['flex', 'form-flex'].includes(props.mode ?? '')
         ? {
             flexDirection: props.direction === 'horizontal' ? 'row' : 'column',
             justifyContent: props.justify,
             alignItems: props.alignment,
-            flexWrap: props.wrap ? 'wrap' : 'nowrap',
+            flexWrap: wrap ? 'wrap' : 'nowrap',
             '--el-flex-form-label-width':
               formContext?.labelWidth === 'auto' ? formContext?.autoLabelWidth : formContext?.labelWidth,
             gap: `${props.gutter}px`,

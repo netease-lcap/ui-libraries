@@ -2,7 +2,7 @@ import { ElPagination, TableProps, PaginationProps } from 'element-plus';
 
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { VNode } from 'vue';
+import { VNode, nextTick } from 'vue';
 import Sortable from 'sortablejs';
 import { useMemo, useRef, useCallback, useControllableValue, useState, useEffect, useRender } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
@@ -12,6 +12,7 @@ import { ElTableToolBar } from '@/components/el-table';
 import { ElForm } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { IIdePluginBase } from '@/types/pluginBase';
+import { applyFitContentColumnWidths } from './fit-content-columns';
 
 const orderMap = {
   descending: 'desc',
@@ -618,6 +619,47 @@ export default TableAccumulate.addPlugin({
           },
         });
       }, [data]);
+      return {};
+    },
+  })
+  .addPlugin({
+    name: 'handleFitContentColumns',
+    handle(props) {
+      const data = props.get('data');
+      const slots = props.get('slots');
+      const refId = props.get('data-ref-id');
+      const columnsSignature = useMemo(() => {
+        const nodes = _.attempt(slots?.default) || [];
+        return (Array.isArray(nodes) ? nodes : [])
+          .map((node: VNode) => {
+            const p = node?.props ?? {};
+            return [p.prop, p.type, p.width, p.minWidth, _.get(p, 'style.width'), _.get(p, 'style.min-width')].join(':');
+          })
+          .join('|');
+      }, [slots]);
+
+      useEffect(() => {
+        let cancelled = false;
+        let timer: ReturnType<typeof setTimeout> | undefined;
+        const run = () => {
+          if (cancelled) return;
+          const tableRef = props.get('ref');
+          applyFitContentColumnWidths(tableRef, refId);
+        };
+        nextTick(() => {
+          // 等 EP 完成首轮布局后再测，避免仍为默认 80 时内容被拉伸导致测宽不准
+          timer = setTimeout(run, 16);
+        });
+        const onResize = _.debounce(run, 100);
+        window.addEventListener('resize', onResize);
+        return () => {
+          cancelled = true;
+          if (timer) clearTimeout(timer);
+          onResize.cancel?.();
+          window.removeEventListener('resize', onResize);
+        };
+      }, [data, columnsSignature, refId]);
+
       return {};
     },
   })

@@ -3,9 +3,10 @@ import { renderHook } from '@ep-test/test-utils/render-hook';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import '@/utils/index';
 import TableAccumulate from '../plugins/index';
-import ColumnPluginAccumulate from '../plugins/column';
+import ColumnPluginAccumulate, { FIT_CONTENT_COLUMN_CLASS } from '../plugins/column';
 import ColumnDynamicPluginAccumulate from '../plugins/column-dynamic';
 import TableToolBarAccumulate from '../plugins/table-toolbar';
+import { applyFitContentColumnWidths } from '../plugins/fit-content-columns';
 
 describe('el-table plugins', () => {
   beforeEach(() => {
@@ -37,6 +38,7 @@ describe('el-table plugins', () => {
         expect(pluginNames).toContain('handleEditTable');
         expect(pluginNames).toContain('handleTableConfig');
         expect(pluginNames).toContain('handleHeight');
+        expect(pluginNames).toContain('handleFitContentColumns');
         expect(pluginNames).toContain('handleSelectedValue');
         expect(pluginNames).toContain('handleSelectedValues');
       });
@@ -587,6 +589,137 @@ describe('el-table plugins', () => {
         expect(result.width).toBe('200px');
         expect(result.minWidth).toBe('120px');
         expect(result.align).toBe('right');
+      });
+
+      it('未设 width 与 minWidth 时应标记 fit-content 且不输出宽度', () => {
+        const props = {
+          slots: { default: vi.fn() },
+          style: {},
+          [$deletePropsList]: [],
+        };
+
+        const { currentValue } = renderHook(plugin, props);
+        const result = currentValue.value;
+
+        expect(result.width).toBeUndefined();
+        expect(result.minWidth).toBeUndefined();
+        expect(result.className).toContain(FIT_CONTENT_COLUMN_CLASS);
+      });
+
+      it('仅设置 minWidth 时不应标记 fit-content', () => {
+        const props = {
+          slots: { default: vi.fn() },
+          minWidth: '120px',
+          style: {},
+          [$deletePropsList]: [],
+        };
+
+        const { currentValue } = renderHook(plugin, props);
+        const result = currentValue.value;
+
+        expect(result.minWidth).toBe('120px');
+        expect(result.width).toBeUndefined();
+        expect(String(result.className ?? '')).not.toContain(FIT_CONTENT_COLUMN_CLASS);
+      });
+
+      it('内置列类型 selection 不应标记 fit-content', () => {
+        const props = {
+          slots: { default: vi.fn() },
+          type: 'selection',
+          style: {},
+          [$deletePropsList]: [],
+        };
+
+        const { currentValue } = renderHook(plugin, props);
+        const result = currentValue.value;
+
+        expect(String(result.className ?? '')).not.toContain(FIT_CONTENT_COLUMN_CLASS);
+      });
+
+      it('百分比 width 应转为 minWidth', () => {
+        const props = {
+          slots: { default: vi.fn() },
+          width: '30%',
+          style: {},
+          [$deletePropsList]: [],
+        };
+
+        const { currentValue } = renderHook(plugin, props);
+        const result = currentValue.value;
+
+        expect(result.width).toBeUndefined();
+        expect(result.minWidth).toBe('30%');
+        expect(String(result.className ?? '')).not.toContain(FIT_CONTENT_COLUMN_CLASS);
+      });
+    });
+
+    describe('applyFitContentColumnWidths', () => {
+      it('应按内容写回 fit-content 列宽并触发布局', () => {
+        document.body.innerHTML = `
+          <div class="el-table">
+            <table>
+              <colgroup>
+                <col name="el-table_1_column_1" />
+                <col name="el-table_1_column_2" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="el-table_1_column_1 ${FIT_CONTENT_COLUMN_CLASS}"><div class="cell">短</div></th>
+                  <th class="el-table_1_column_2"><div class="cell">固定</div></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="el-table_1_column_1 ${FIT_CONTENT_COLUMN_CLASS}"><div class="cell">很长很长很长的内容</div></td>
+                  <td class="el-table_1_column_2"><div class="cell">固定内容</div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+        const tableEl = document.querySelector('.el-table') as HTMLElement;
+        tableEl.querySelectorAll(`.${FIT_CONTENT_COLUMN_CLASS} .cell`).forEach((cell, index) => {
+          vi.spyOn(cell as HTMLElement, 'getBoundingClientRect').mockReturnValue({
+            width: index === 0 ? 40 : 220,
+            height: 23,
+            top: 0,
+            left: 0,
+            bottom: 23,
+            right: 220,
+            x: 0,
+            y: 0,
+            toJSON: () => ({}),
+          } as DOMRect);
+        });
+        const fitCol = {
+          id: 'el-table_1_column_1',
+          className: FIT_CONTENT_COLUMN_CLASS,
+          width: undefined,
+          minWidth: 80,
+          realWidth: 80,
+          realMinWidth: 80,
+        };
+        const fixedCol = {
+          id: 'el-table_1_column_2',
+          className: '',
+          width: 100,
+          realWidth: 100,
+        };
+        const doLayout = vi.fn();
+        const tableRef = {
+          $el: tableEl,
+          doLayout,
+          store: { states: { columns: { value: [fitCol, fixedCol] } } },
+        };
+
+        const changed = applyFitContentColumnWidths(tableRef);
+        expect(changed).toBe(true);
+        expect(fitCol.width).toBe('');
+        expect(fitCol.minWidth).toBe(222);
+        expect(fitCol.realMinWidth).toBe(222);
+        expect(fixedCol.width).toBe(100);
+        expect(doLayout).toHaveBeenCalled();
+        document.body.innerHTML = '';
       });
     });
 
