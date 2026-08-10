@@ -29,6 +29,7 @@ export default FormBasicAccumulate.addPlugin({
     const ref = props.get('ref');
     const formItemList = useRef({});
     const preview = props.get('preview') ?? false;
+    const labelWidth = props.get('labelWidth') || 'auto';
     return {
       model,
       provide: Object.assign(provide, {
@@ -79,7 +80,7 @@ export default FormBasicAccumulate.addPlugin({
         },
         [onValidate],
       ),
-      labelWidth: 'auto',
+      labelWidth,
     };
   },
 })
@@ -90,15 +91,33 @@ export default FormBasicAccumulate.addPlugin({
       const ref = props.get('ref');
       useEffect(() => {
         if (_.get(window, 'UiLibrariesMcp.subscribe')) {
-          _.attempt(_.get(window, 'UiLibrariesMcp.subscribe', () => {}), 'el_form__validate', refId, () => ref.validated());
-          _.attempt(_.get(window, 'UiLibrariesMcp.subscribe', () => {}), 'el_form__clearValidate', refId, () => {
-            ref?.clearValidate();
-          });
+          _.attempt(
+            _.get(window, 'UiLibrariesMcp.subscribe', () => {}),
+            'el_form__validate',
+            refId,
+            () => ref.validated(),
+          );
+          _.attempt(
+            _.get(window, 'UiLibrariesMcp.subscribe', () => {}),
+            'el_form__clearValidate',
+            refId,
+            () => {
+              ref?.clearValidate();
+            },
+          );
         }
         return () => {
           if (_.get(window, 'UiLibrariesMcp.unsubscribe')) {
-            _.attempt(_.get(window, 'UiLibrariesMcp.unsubscribe', () => {}), 'el_form__validate', refId);
-            _.attempt(_.get(window, 'UiLibrariesMcp.unsubscribe', () => {}), 'el_form__clearValidate', refId);
+            _.attempt(
+              _.get(window, 'UiLibrariesMcp.unsubscribe', () => {}),
+              'el_form__validate',
+              refId,
+            );
+            _.attempt(
+              _.get(window, 'UiLibrariesMcp.unsubscribe', () => {}),
+              'el_form__clearValidate',
+              refId,
+            );
           }
         };
       }, []);
