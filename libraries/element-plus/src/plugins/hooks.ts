@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, ref, getCurrentInstance, type Ref, inject, watc
 import { PluginBase, RenderFunctionWithInheritAttrs } from '@/types';
 import { componentLog } from '@/utils/curry';
 import { $provide } from '@/plugins/constants';
+import type { ImmutableMap } from '@/plugins/accumulate';
 // import { RenderFunctionWithInheritAttrs } from '@/types/pluginBase';
 
 const searchParamsStr = window.location.search; // 结果："?name=Alice&age=25&hobby=reading&hobby=hiking"
@@ -23,16 +24,23 @@ interface EffectHook {
   callBack?: any;
 }
 
-interface Options {
-  defaultValue?: string | number | boolean;
+interface ControllableValueOptions<T = any, ValuePropName extends string = string> {
+  defaultValue?: T;
   defaultValuePropName?: string;
-  valuePropName?: string;
+  valuePropName?: ValuePropName;
   trigger?: string;
   onChange?: (...args: any[]) => void;
   onValueEffect?: (...args: any[]) => void;
   beforeChange?: (...args: any[]) => boolean;
   afterChange?: (...args: any[]) => void;
 }
+
+/** 从 ImmutableMap 中提取 props 结构；非 ImmutableMap 时回退为 any */
+type ExtractMapProps<M> = M extends ImmutableMap<infer P> ? P : M extends { toJS(): infer P } ? P : any;
+
+/** 从 props 类型中取 valuePropName 对应字段类型 */
+type ControllableValueType<P, ValuePropName extends string> = ValuePropName extends keyof P ? P[ValuePropName] : any;
+
 interface Fiber {
   workInProgressState: Hook;
   workInProgressEffect: EffectHook;
@@ -220,7 +228,7 @@ export function useMemo<T>(callBack: () => T, dep: any[]): T {
   }
   return hook.result;
 }
-export function useCallback<T extends (...args: any[]) => any>(callBack: T, dep: any[]): T {
+export function useCallback<T extends(...args: any[]) => any>(callBack: T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook: EffectHook;
@@ -267,17 +275,27 @@ export function useSyncState(props: any, name: string) {
   return value;
 }
 
-export function useControllableValue<T = any>(
-  props: any,
-  options: Options = {},
+/**
+ * 受控 / 非受控值 Hook。
+ * 返回值类型自动推导为 props（ImmutableMap）中 `valuePropName`（默认 `modelValue`）对应字段的类型。
+ */
+export function useControllableValue<
+  M extends { get(
+key: any, ...args: any[]): any },
+  ValuePropName extends string = 'modelValue',
+  P = ExtractMapProps<M>,
+>(
+  props: M,
+  options: ControllableValueOptions<ControllableValueType<P, ValuePropName>, ValuePropName> = {},
 ): [
-  T,
+  ControllableValueType<P, ValuePropName>,
   (...args: any[]) => void,
   {
     [key: string]: any;
   },
   boolean,
 ] {
+  type ValueType = ControllableValueType<P, ValuePropName>;
   const instance = useMemo(() => getCurrentInstance(), []);
   const { vnode } = instance || { vnode: { props: {} } };
   const emit = props.get('emit');
@@ -285,17 +303,17 @@ export function useControllableValue<T = any>(
   const {
     defaultValue,
     defaultValuePropName = 'defaultValue',
-    valuePropName = 'modelValue',
+    valuePropName = 'modelValue' as ValuePropName,
     trigger = `onUpdate:${valuePropName}`,
     onChange: onChangeProps = () => {},
     onValueEffect = () => {},
   } = options || {};
   const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
-  const priorValue = useRef({});
-  const propsValue = props.get(valuePropName);
+  const priorValue = useRef<any>({});
+  const propsValue = props.get(valuePropName) as ValueType;
   const defaultValueProps = props.get(defaultValuePropName);
-  const unControlledInitialValue = defaultValueProps ?? defaultValue;
-  const [stateValue, setStateValue] = useState<T>(unControlledInitialValue);
+  const unControlledInitialValue = (defaultValueProps ?? defaultValue) as ValueType;
+  const [stateValue, setStateValue] = useState<ValueType>(unControlledInitialValue);
   const triggerProps = props.get(trigger) || (() => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
   useEffect(() => {
@@ -311,7 +329,7 @@ export function useControllableValue<T = any>(
     if (isControlled) {
       emit(trigger, ...args);
     } else {
-      setStateValue(args[0] as T);
+      setStateValue(args[0] as ValueType);
     }
     emit('sync:state', valuePropName, ...args);
     priorValue.value = _.cloneDeep(_.get(args, 0, null));

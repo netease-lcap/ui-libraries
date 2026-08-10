@@ -6,6 +6,7 @@
 
 .el-form {
   border: 1px solid transparent;
+  box-sizing: border-box;
   /* 按表单容器宽度（非视口）自适应表单项最大宽度 */
   container-type: inline-size;
   container-name: el-form;
@@ -19,36 +20,34 @@
     line-height: 16px;
     text-align: center;
     align-items: center;
-
-    // .el-text {
-    //   display: -webkit-box;
-    //   -webkit-box-orient: vertical;
-    //   -webkit-line-clamp: 2;
-    //   overflow: hidden;
-    //   word-break: break-word;
-    //   white-space: normal;
-    //   line-height: 16px;
-    // }
   }
 
 
 
   /* 块级：左/右标签时由容器控制 label、content 优选宽度与最小宽度；排除顶部标签、行内、栅格、查询表单 */
   &:not(.el-form--label-top):not(.el-form-grid):not(.el-form--query):not(:has(.el-col)):not(.el-form--inline) {
+    .el-form-item {
+      width: auto;
+      max-width: ~"calc(560px * var(--el-form-item-col-span, 1))";
+      min-width: 288px;
+    }
+
     .el-form-item__label {
-      flex: 1 1 0;
+      flex: 2 1 0;
       min-width: 72px;
       width: max-content;
       max-width: 160px;
     }
+
     .el-form-item__content[style*="margin-left: auto"] {
-      margin-left:  0!important;
+      margin-left: 0 !important;
     }
+
     .el-form-item__content {
-      flex: 0 1 var(--el-form-content-width, 240px);
+      flex: 1 1 var(--el-form-content-width, 180px);
       min-width: var(--el-form-content-min-width, 180px);
       width: auto;
-      max-width: var(--el-form-item-max-width, 400px);
+      max-width: ~"calc(var(--el-form-content-max-width, 560px) - var(--el-form-auto-label-width, 0px))";
 
       /* 仅对常用录入控件拉满 content；单选/多选组等非列表组件不在此列 */
       >.el-autocomplete,
@@ -58,6 +57,7 @@
       >.el-textarea,
       >.el-input-tag,
       >.el-mention,
+      >.el-input-number,
       >.el-select,
       >.el-slider,
       >.el-tree-select {
@@ -78,8 +78,8 @@
 
 
       .el-form-item__content {
-        width: 240px;
-
+        width: var(--el-form-content-width, 240px);
+        max-width: ~"calc(var(--el-form-content-max-width, 560px) - var(--el-form-auto-label-width, 0px))";
         /* 仅对常用录入控件拉满 content；单选/多选组等非列表组件不在此列 */
         >.el-autocomplete,
         >.el-cascader,
@@ -105,7 +105,15 @@
       display: grid;
       overflow: auto;
       width: 100%;
-      grid-template-columns: repeat(var(--el-form-columns), 1fr);
+      min-width: 0;
+      /* minmax(0, 1fr)：列宽不受子项内容/显式宽度撑开，始终按容器均分 */
+      grid-template-columns: repeat(var(--el-form-columns), minmax(0, 1fr));
+
+      /* 跨列：剩余列不足时 CSS Grid 自动换行；超过总列数时由插件钳制为总列数以撑满整行 */
+      >.el-form-item,
+      >.el-form-item-group {
+        grid-column: span var(--el-form-item-col-span, 1);
+      }
     }
 
     // gap: var( --el-form-item-gap);
@@ -136,7 +144,7 @@
         flex-basis: var(--el-form-label-width, 240px);
         min-width: 0;
         width: auto;
-        max-width: var(--el-form-item-max-width, 400px);
+        max-width: ~"calc(var(--el-form-content-max-width, 560px) - var(--el-form-auto-label-width, 0px))";
 
         >.el-autocomplete,
         >.el-cascader,
@@ -159,7 +167,9 @@
         }
       }
     }
+
     column-gap: 16px;
+
     &.el-form--label-top {
       .el-form-item__content {
         width: 100%;
@@ -195,24 +205,29 @@
 @container el-form (min-width: 992px) {
   .el-form-item {
     --el-form-item-max-width: 460px;
+    --el-form-content-width: 240px;
+
   }
 }
 
 @container el-form (min-width: 1200px) {
   .el-form-item {
     --el-form-item-max-width: 560px;
+    --el-form-content-width: 340px;
   }
 }
 
 @container el-form (min-width: 1440px) {
   .el-form-item {
     --el-form-item-max-width: 680px;
+    --el-form-content-width: 460px;
   }
 }
 
 @container el-form (min-width: 1920px) {
   .el-form-item {
     --el-form-item-max-width: 800px;
+    --el-form-content-width: 580px;
   }
 }
 
@@ -312,7 +327,7 @@
   align-items: flex-start;
   width: 100%;
   column-gap: 16px;
-  box-sizing:border-box;
+  box-sizing: border-box;
   row-gap: 12px;
   --el-form-query-cols: 4;
   box-sizing: border-box;
@@ -323,8 +338,8 @@
 }
 
 /* 仅查询区顶层普通表单项占一列；form-item-group 由自身跨列样式处理 */
-.el-form.el-form--query .el-form-query .el-form-query__fields > .el-form-item:not(.el-form-item-group),
-.el-form.el-form--query .el-form-query > .el-form-item:not(.el-form-item-group) {
+.el-form.el-form--query .el-form-query .el-form-query__fields>.el-form-item:not(.el-form-item-group),
+.el-form.el-form--query .el-form-query>.el-form-item:not(.el-form-item-group) {
   flex: 0 0 calc((100% - (var(--el-form-query-cols) - 1) * 16px) / var(--el-form-query-cols));
   max-width: calc((100% - (var(--el-form-query-cols) - 1) * 16px) / var(--el-form-query-cols));
   min-width: 0;

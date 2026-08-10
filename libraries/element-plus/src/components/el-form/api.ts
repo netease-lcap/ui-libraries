@@ -527,17 +527,19 @@ namespace nasl.ui {
     // })
     // endInitialValue: any;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '占据数',
-    //   description: '列跨越的格数, 总格式',
-    //   docDescription: '列跨越的格数。',
-    //   setter: {
-    //       concept: 'NumberInputSetter',
-    //       min: 1,
-    //   },
-    // })
-    // colSpan: nasl.core.Integer = 1;
+    @Prop({
+      group: '主要属性',
+      title: '跨列数',
+      description:
+        '栅格表单中表单项占据的列数。当前行剩余列不足时自动换行；跨列数大于表单总列数时撑满整行。',
+      docDescription:
+        '仅在父级表单「表单布局」为栅格展示时生效。默认占 1 列；设置大于 1 时可跨多列。剩余列不够放下本项时换到下一行；若跨列数超过表单「列数」，则占满整行。',
+      setter: {
+        concept: 'NumberInputSetter',
+        min: 1,
+      },
+    })
+    colSpan: nasl.core.Integer = 1;
 
     // @Prop<ElFormItemProOptions, 'help'>({
     //   group: '主要属性',

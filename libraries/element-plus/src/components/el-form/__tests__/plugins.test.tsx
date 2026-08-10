@@ -385,15 +385,17 @@ describe('plugins/form-item-plugin.tsx', () => {
       expect(Array.isArray(FormItemPluginAccumulate.Plugin)).toBe(true);
     });
 
-    it('应该包含 handlePropName 和 handleRules 插件', () => {
+    it('应该包含 handlePropName、handleRules 和 handleColSpan 插件', () => {
       const plugins = FormItemPluginAccumulate.getPluginMethod();
-      expect(plugins).toHaveLength(2);
+      expect(plugins).toHaveLength(3);
 
       const handlePropNamePlugin = FormItemPluginAccumulate.getPluginMethodByName('handlePropName');
       const handleRulesPlugin = FormItemPluginAccumulate.getPluginMethodByName('handleRules');
+      const handleColSpanPlugin = FormItemPluginAccumulate.getPluginMethodByName('handleColSpan');
 
       expect(handlePropNamePlugin).toBeDefined();
       expect(handleRulesPlugin).toBeDefined();
+      expect(handleColSpanPlugin).toBeDefined();
 
       if (handlePropNamePlugin) {
         expect(handlePropNamePlugin.name).toBe('handlePropName');
@@ -404,6 +406,47 @@ describe('plugins/form-item-plugin.tsx', () => {
         expect(handleRulesPlugin.name).toBe('handleRules');
         expect(typeof (handleRulesPlugin as any).handle).toBe('function');
       }
+
+      if (handleColSpanPlugin) {
+        expect(handleColSpanPlugin.name).toBe('handleColSpan');
+        expect(typeof (handleColSpanPlugin as any).handle).toBe('function');
+      }
+    });
+  });
+
+  describe('handleColSpan 插件功能测试', () => {
+    const plugin = FormItemPluginAccumulate.getPluginMethodByName('handleColSpan') as any;
+
+    it('应该按 colSpan 设置跨列 CSS 变量', () => {
+      const props = {
+        colSpan: 2,
+        style: {},
+        inject: { [$formProvide]: { columns: 4, layout: 'grid' } },
+      };
+
+      const { currentValue } = renderHook(plugin, props);
+      expect(currentValue.value.style['--el-form-item-col-span']).toBe(2);
+    });
+
+    it('跨列数超过表单总列数时应钳制为总列数以撑满整行', () => {
+      const props = {
+        colSpan: 6,
+        style: {},
+        inject: { [$formProvide]: { columns: 3, layout: 'grid' } },
+      };
+
+      const { currentValue } = renderHook(plugin, props);
+      expect(currentValue.value.style['--el-form-item-col-span']).toBe(3);
+    });
+
+    it('colSpan 缺省时应为 1', () => {
+      const props = {
+        style: {},
+        inject: { [$formProvide]: { columns: 4, layout: 'grid' } },
+      };
+
+      const { currentValue } = renderHook(plugin, props);
+      expect(currentValue.value.style['--el-form-item-col-span']).toBe(1);
     });
   });
 

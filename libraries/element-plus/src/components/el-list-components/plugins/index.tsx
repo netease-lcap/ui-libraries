@@ -76,7 +76,8 @@ export default listComponentsBasicAccumulate
     handle: (props) => {
       const emit = props.get('emit');
       const ref = props.get('ref');
-      const [currentPage, setCurrentPage, currentPageProps] = useControllableValue<number>(props, {
+
+      const [currentPage, setCurrentPage, currentPageProps] = useControllableValue(props, {
         defaultValuePropName: 'defaultCurrentPage',
         defaultValue: 1,
         valuePropName: 'currentPage',
@@ -85,7 +86,7 @@ export default listComponentsBasicAccumulate
           _.attempt(ref?.reload, { currentPage, ...pageSize });
         },
       });
-      const [pageSize, setPageSize, pageSizeProps] = useControllableValue<number>(props, {
+      const [pageSize, setPageSize, pageSizeProps] = useControllableValue(props, {
         defaultValuePropName: 'defaultPageSize',
         defaultValue: 10,
         valuePropName: 'pageSize',

@@ -2,7 +2,7 @@ import { ElBreadcrumbItem } from 'element-plus';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
 /* 仅在 ide 环境生效的插件 */
-export default new PluginAccumulateTypes().addPlugin({
+export default new PluginAccumulateTypes<nasl.ui.ElBreadcrumbOptions>().addPlugin({
   name: 'handleAutoDesignerDemo',
   type: 'ide',
   handle: (props) => {

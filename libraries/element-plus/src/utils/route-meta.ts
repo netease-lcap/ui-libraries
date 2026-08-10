@@ -16,7 +16,8 @@ export function getRouteTitleItems(routeInfo?: {
     path?: string;
     name?: string | symbol | null;
     meta?: Record<string, any>;
-    components?: Record<string, any>;
+    /** 与 vue-router RouteRecordNormalized.components 对齐，可为 null */
+    components?: Record<string, any> | null;
   }>;
 }): RouteTitleItem[] {
   if (!routeInfo?.path) return [];

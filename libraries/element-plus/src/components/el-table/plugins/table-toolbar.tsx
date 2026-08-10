@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { defineComponent, ref, watch, toRefs } from 'vue';
 import { ElCheckboxGroup, ElButton, ElIcon, ElFlex, ElPopover } from '@/index';
 
