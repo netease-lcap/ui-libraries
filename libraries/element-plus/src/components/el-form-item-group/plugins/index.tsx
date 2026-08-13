@@ -75,7 +75,6 @@ export default FormItemGroupAccumulate.addPlugin({
       },
       // 不参与表单自动字段校验；required 仅控制标签必填 * 号展示
       prop: undefined,
-      rules: [],
       required: Boolean(isRequired),
       slots: _.assign({}, slots, {
         default: defaultSlot,
@@ -133,7 +132,7 @@ export default FormItemGroupAccumulate.addPlugin({
         },
         [errorTipType],
       );
-
+      console.log(rulesProps, 'rulesProps');
       const validated = useCallback(async () => {
         if (ignoreValidation) {
           setValid(true);
@@ -146,7 +145,7 @@ export default FormItemGroupAccumulate.addPlugin({
         if (_.isFunction(validatingProcess)) {
           value = await validatingProcess(value);
         }
-
+        console.log(value, 'value', rulesProps);
         const validator = new (VusionValidator as any)(undefined, localizeRules, rulesProps);
         try {
           await validator.validate(value);
