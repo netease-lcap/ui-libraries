@@ -4,7 +4,7 @@ import { useEffect, useMemo } from '@/plugins/hooks';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { IIdePluginBase } from '@/types';
 
-const SliderAccumulate = new PluginAccumulateTypes<nasl.ui.ElSliderOptions, IIdePluginBase>();
+const SliderAccumulate = new PluginAccumulateTypes<nasl.ui.ElSliderOptions<any, any, any, any, any>, IIdePluginBase>();
 export default SliderAccumulate.addPlugin({
   name: 'handleNodePath',
   type: 'ide',

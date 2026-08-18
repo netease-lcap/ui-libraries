@@ -82,11 +82,7 @@ namespace nasl.ui {
         '文字与错误状态：展示错误文案，并向表单项透传 error 状态（子控件随表单项标红）。仅透传错误状态：不展示错误文案，仍透传 error 状态。文字与错误边框：展示错误文案，不透传 error 状态，仅在分组内容区显示错误边框。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '文字与错误状态' },
-          { title: '仅透传错误状态' },
-          { title: '文字与错误边框' },
-        ],
+        options: [{ title: '文字与错误状态' }, { title: '仅透传错误状态' }, { title: '文字与错误边框' }],
       },
     })
     errorTipType: 'textAndStatus' | 'statusOnly' | 'textAndBorder' = 'textAndStatus';
@@ -109,11 +105,11 @@ namespace nasl.ui {
       docDescription:
         '块级：内容区宽度约为 N × 原表单控件宽度；查询表单：跨 N 个查询列（含列间距）；栅格表单：CSS Grid 跨 N 列。内部控件默认撑满分组宽度，可单独覆盖。',
       setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '1 倍' }, { title: '2 倍' }, { title: '3 倍' }],
+        concept: 'NumberInputSetter',
+        min: 1,
       },
     })
-    columns: 1 | 2 | 3 = 1;
+    columns: nasl.core.Integer = 1;
 
     @Prop({
       group: '主要属性',
