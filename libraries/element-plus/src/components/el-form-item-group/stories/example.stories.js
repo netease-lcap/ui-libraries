@@ -284,7 +284,7 @@ export const ManualValidated = {
       const runValidate = async () => {
         // validatingValue.value = `${formModel.value.name}|${formModel.value.phone}`;
         const result = await groupRef.value?.validated?.();
-        console.log(result,'==');
+        console.log(result, '==');
         lastResult.value = result?.valid ? '通过' : '未通过';
       };
       return { formModel, groupRef, validatingValue, lastResult, runValidate };
@@ -301,6 +301,7 @@ export const ManualValidated = {
           :columns="2"
           :isRequired="true"
           :validatingValue="validatingValue"
+          :errorTipType="'textAndBorder'"
           :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]" 
         >
           <el-form-input v-model="validatingValue" prop="name" label="姓名" placeholder="请输入" clearable />
