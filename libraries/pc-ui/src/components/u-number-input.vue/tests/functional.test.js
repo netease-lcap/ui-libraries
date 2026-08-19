@@ -87,4 +87,25 @@ describe('u-number-input.vue functional tests', () => {
     });
     expect(wrapper.vm.currentValue).toBe(10);
   });
+
+  it('test decimal rounding with floating point precision', () => {
+    // 2.675 的二进制表示为 2.6749999...，原生 toFixed(2) 会得到 2.67，期望四舍五入为 2.68
+    const wrapper = mount(UNumberInput, {
+      propsData: {
+        value: 2.675,
+        precision: 0.01,
+      },
+    });
+    expect(wrapper.vm.currentValue).toBe(2.68);
+  });
+
+  it('test decimal rounding via decimalLength', () => {
+    const wrapper = mount(UNumberInput, {
+      propsData: {
+        value: 2.675,
+        decimalLength: 2,
+      },
+    });
+    expect(wrapper.vm.currentValue).toBe(2.68);
+  });
 });

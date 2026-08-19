@@ -298,7 +298,7 @@ export default {
 
             // 配置了新的精度
             if (this.decimalLength >= 0) {
-                value = parseFloat(+value.toFixed(Math.floor(this.decimalLength)));
+                value = this.decimalRound(value, this.decimalLength);
             } else if (this.precision > 0) {
                 let decimalLength = 0;
                 try {
@@ -315,10 +315,57 @@ export default {
                     console.log(error);
                 }
 
-                value = parseFloat(+value.toFixed(Math.floor(decimalLength)));
+                value = this.decimalRound(value, decimalLength);
             }
 
             return value;
+        },
+        // 十进制四舍五入，避免浮点误差（如 2.675 应得 2.68，而原生 toFixed(2) 得 2.67）
+        decimalRound(value, decimalLength) {
+            const negative = value < 0;
+            const fixed = Math.floor(decimalLength);
+            let str = Math.abs(value).toString();
+            // 展开科学计数法，例如 1.5e-7 -> 0.00000015
+            if (str.indexOf('e') !== -1 || str.indexOf('E') !== -1) {
+                const [mantissa, exp] = str.split(/e/i);
+                const expNum = parseInt(exp, 10);
+                const [intPart, decPart = ''] = mantissa.split('.');
+                const digits = intPart + decPart;
+                const pointPos = intPart.length + expNum;
+                if (pointPos <= 0) {
+                    str = '0.' + '0'.repeat(-pointPos) + digits;
+                } else if (pointPos >= digits.length) {
+                    str = digits + '0'.repeat(pointPos - digits.length);
+                } else {
+                    str = digits.slice(0, pointPos) + '.' + digits.slice(pointPos);
+                }
+            }
+
+            const [intPart, decPart = ''] = str.split('.');
+            let keep = decPart.slice(0, fixed);
+            const next = decPart[fixed];
+
+            // 需要进位时，对保留的小数部分逐位进位，溢出则整数部分 +1
+            if (next >= '5') {
+                const arr = keep.split('');
+                let carry = 1;
+                for (let i = arr.length - 1; i >= 0 && carry; i--) {
+                    const d = parseInt(arr[i], 10) + carry;
+                    if (d >= 10) {
+                        arr[i] = '0';
+                        carry = 1;
+                    } else {
+                        arr[i] = String(d);
+                        carry = 0;
+                    }
+                }
+                if (carry)
+                    return negative ? -(parseInt(intPart, 10) + 1) : parseInt(intPart, 10) + 1;
+                keep = arr.join('');
+            }
+
+            const result = fixed > 0 ? parseFloat(`${intPart}.${keep}`) : parseInt(intPart, 10);
+            return negative ? -result : result;
         },
         /**
          * 根据值计算精度
