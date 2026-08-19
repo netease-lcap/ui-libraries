@@ -93,8 +93,14 @@ const getLcapTtl = _.cond([
   [_.conforms({ ttl: isNil, ttlValue: _.isNumber }), ({ ttlValue }) => ({ 'lcap-ttl': ttlValue })],
   [_.stubTrue, ({ ttl, ttlValue }) => ({ 'lcap-ttl': ttl ? ttlValue : -1 })],
 ]);
-export function removeValueByList(list: UploadFile[]) {
-  return Array.isArray(list) ? list.map((item) => item.url).join(',') : '';
+export function removeValueByList(
+  list: UploadFile[],
+  converter: Converter = 'simple',
+  urlField = 'filePath',
+) {
+  if (!Array.isArray(list)) return converter === 'simple' ? '' : '[]';
+  // 与上传成功时 getValueByList 保持一致，避免 json/simple 格式错乱导致列表被解析成空
+  return getValueByList(list, converter, urlField);
 }
 const UploadBasicAccumulate = new PluginAccumulateTypes<
   nasl.ui.ElUploadOptions,
@@ -211,7 +217,7 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
         value,
         setValue,
         onRemove: (uploadFile, fileList) => {
-          const newValue = removeValueByList(fileList);
+          const newValue = removeValueByList(fileList, converter, urlField);
           _.attempt(setValue, newValue);
           _.attempt(onRemove, uploadFile, fileList);
         },
