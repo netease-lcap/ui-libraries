@@ -28,7 +28,9 @@ export default FormBasicAccumulate.addPlugin({
     const provide = props.get('provide');
     const ref = props.get('ref');
     const formItemList = useRef({});
+    const itemValidatedList = useRef<any>([]);
     const preview = props.get('preview') ?? false;
+    const labelWidth = props.get('labelWidth') || 'auto';
     return {
       model,
       provide: Object.assign(provide, {
@@ -40,6 +42,9 @@ export default FormBasicAccumulate.addPlugin({
           },
           setFormitem: (key, value) => {
             formItemList.value[key] = value;
+          },
+          setItemValidated: (value) => {
+            itemValidatedList.value.push(value);
           },
           deleteFormitem: (key) => {
             delete formItemList.value[key];
@@ -54,10 +59,20 @@ export default FormBasicAccumulate.addPlugin({
           _.forEach(Object.entries(formItemList.value), ([key, item]: any) => {
             model.value[key] = item?.getModelValue?.() ?? model.value[key];
           });
-          return ref.validate().then(
-            () => ({ valid: true }),
-            () => ({ valid: false }),
-          );
+          const groupValidated = _.map(itemValidatedList.value, (item) => item?.());
+          return ref
+            .validate()
+            .then(() => Promise.all(groupValidated).then((results) => {
+                // 任一分组成员返回 { valid: false } 时走异常分支
+                if (_.some(results, (item) => _.has(item, 'valid') && item.valid === false)) {
+                  return Promise.reject(results);
+                }
+                return results;
+              }))
+            .then(
+              () => ({ valid: true }),
+              () => ({ valid: false }),
+            );
         },
         validateField: async (props) => {
           _.forEach(Object.entries(formItemList.value), ([key, item]: any) => {
@@ -79,7 +94,7 @@ export default FormBasicAccumulate.addPlugin({
         },
         [onValidate],
       ),
-      labelWidth: 'auto',
+      labelWidth,
     };
   },
 })
@@ -90,15 +105,33 @@ export default FormBasicAccumulate.addPlugin({
       const ref = props.get('ref');
       useEffect(() => {
         if (_.get(window, 'UiLibrariesMcp.subscribe')) {
-          _.attempt(_.get(window, 'UiLibrariesMcp.subscribe', () => {}), 'el_form__validate', refId, () => ref.validated());
-          _.attempt(_.get(window, 'UiLibrariesMcp.subscribe', () => {}), 'el_form__clearValidate', refId, () => {
-            ref?.clearValidate();
-          });
+          _.attempt(
+            _.get(window, 'UiLibrariesMcp.subscribe', () => {}),
+            'el_form__validate',
+            refId,
+            () => ref.validated(),
+          );
+          _.attempt(
+            _.get(window, 'UiLibrariesMcp.subscribe', () => {}),
+            'el_form__clearValidate',
+            refId,
+            () => {
+              ref?.clearValidate();
+            },
+          );
         }
         return () => {
           if (_.get(window, 'UiLibrariesMcp.unsubscribe')) {
-            _.attempt(_.get(window, 'UiLibrariesMcp.unsubscribe', () => {}), 'el_form__validate', refId);
-            _.attempt(_.get(window, 'UiLibrariesMcp.unsubscribe', () => {}), 'el_form__clearValidate', refId);
+            _.attempt(
+              _.get(window, 'UiLibrariesMcp.unsubscribe', () => {}),
+              'el_form__validate',
+              refId,
+            );
+            _.attempt(
+              _.get(window, 'UiLibrariesMcp.unsubscribe', () => {}),
+              'el_form__clearValidate',
+              refId,
+            );
           }
         };
       }, []);

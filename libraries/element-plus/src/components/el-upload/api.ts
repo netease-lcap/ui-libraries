@@ -177,7 +177,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '文件类型',
-      description: '若要限制上传文件类型，请输入类型名称，格式为”.后缀名”，多个文件类型时使用英文逗号隔开。例如"jpeg,png',
+      description: '若要限制上传文件类型，请输入类型名称，格式为”.后缀名”，多个文件类型时使用英文逗号隔开。例如"jpeg,png"',
       docDescription: '设置允许上传的文件类型，支持MIME类型和文件扩展名。例如：ideo/*|image/*|media_type"等。',
       setter: { concept: 'InputSetter' },
     })

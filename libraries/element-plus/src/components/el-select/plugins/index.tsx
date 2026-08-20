@@ -43,7 +43,7 @@ export default SelectBasicAccumulate.addPlugin({
       const textField = props.get('textField') || 'label';
       const valueField = props.get('valueField') || 'value';
       const descriptionField = props.get('descriptionField') || 'description';
-      const onSuccess = props.get('onSuccess', () => { });
+      const onSuccess = props.get('onSuccess', () => {});
       const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data');
       const ref = props.get('ref');
 
@@ -76,9 +76,8 @@ export default SelectBasicAccumulate.addPlugin({
     name: 'handleValueNotInData',
     handle(props) {
       const selectedValuesData = props.get('selectedValuesData');
-
       const data = props.get('data', []);
-      if (_.isEmpty(selectedValuesData) || _.isEmpty(data)) return {};
+      if (_.isEmpty(selectedValuesData)) return {};
       return {
         data: _.unionBy(data, selectedValuesData, 'value'),
       };
@@ -94,19 +93,19 @@ export default SelectBasicAccumulate.addPlugin({
       const dataSourceSlots = _.isNil(dataConfig)
         ? {}
         : {
-          default: () => _.map(data, (item, index) => (
-            <ElOption {...item}>
-              {optionSlot ? slots?.item?.({ index, item: item?.itemSource ?? item } as any) : item.label}
-              {item.description && (
+            default: () => _.map(data, (item, index) => (
+              <ElOption {...item}>
+                {optionSlot ? slots?.item?.({ index, item: item?.itemSource ?? item } as any) : item.label}
+                {item.description && (
                 <el-text
                   style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
                   color="secondary"
                   text={item.description}
                 />
-              )}
-            </ElOption>
-          )),
-        };
+                  )}
+              </ElOption>
+              )),
+          };
       return {
         slots: _.assign({}, slots, dataSourceSlots),
       };
@@ -123,10 +122,10 @@ export default SelectBasicAccumulate.addPlugin({
       const result = useMemo(() => {
         return virtualize
           ? {
-            options: data,
-            render,
-            slots: _.omit(slots, 'default'),
-          }
+              options: data,
+              render,
+              slots: _.omit(slots, 'default'),
+            }
           : {};
       }, [virtualize, data, render]);
       return result;
@@ -140,12 +139,12 @@ export default SelectBasicAccumulate.addPlugin({
 
       return isPreview
         ? {
-          class: addClass(className, {
-            'el-select-preview': !!isPreview,
-          }),
-          disabled: !!isPreview,
-          preview: !!isPreview,
-        }
+            class: addClass(className, {
+              'el-select-preview': !!isPreview,
+            }),
+            disabled: !!isPreview,
+            preview: !!isPreview,
+          }
         : {};
     },
   })
@@ -181,8 +180,8 @@ export default SelectBasicAccumulate.addPlugin({
       const remote = props.get('remote');
       if (!remote) return {};
       const emit = props.get('emit');
-      const remoteMethodProps = props.get('remoteMethod') ?? (() => { });
-      const onBeforeFilter = props.get('onBeforeFilter') ?? (() => { });
+      const remoteMethodProps = props.get('remoteMethod') ?? (() => {});
+      const onBeforeFilter = props.get('onBeforeFilter') ?? (() => {});
       const ref = props.get('ref');
       const remoteMethod = useCallback(
         (query: string) => {
@@ -218,7 +217,7 @@ export default SelectBasicAccumulate.addPlugin({
     name: 'handleIcon',
     handle(props) {
       const suffixIcon = props.get('suffixIcon');
-      const onClickSuffix = props.get('onClickSuffix', () => { });
+      const onClickSuffix = props.get('onClickSuffix', () => {});
       return {
         suffixIcon: getPropsIcon({
           name: suffixIcon,

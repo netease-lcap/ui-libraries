@@ -156,7 +156,6 @@ export const Example2 = {
     template: `
     <div>
     <el-form :model="model" ref="formRef" :inline="true">
-    {{inputName}}
     <el-form-input  :rules="rules"  prop="input21" label="input21"  data-nodepath="input21" />
     <el-form-mention :rules="rules" :ignoreRules="ignoreRules"  v-model="inputName"  label="input21"  data-nodepath="input21" />
     <el-form-select :rules="rules" clearable  v-model="inputName"  label="input2221"  data-nodepath="input21" :dataSource="[{label:'待审批',value:0},{label:'已审批',value:1},{label:'已拒绝',value:2}]" />

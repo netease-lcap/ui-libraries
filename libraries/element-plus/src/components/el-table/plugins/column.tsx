@@ -6,6 +6,16 @@ import { useMemo, useCallback } from '@/plugins/hooks';
 import { ElIcon } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { $deletePropsList } from '@/plugins/constants';
+import { addClass } from '@/utils';
+
+/** 未设 width/minWidth 的列：按内容自适应（由表级插件测宽） */
+export const FIT_CONTENT_COLUMN_CLASS = 'el-table-column--fit-content';
+
+const BUILTIN_COLUMN_TYPES = ['selection', 'index', 'expand', 'draggable'];
+
+function isEmptySize(value: unknown) {
+  return value === undefined || value === null || value === '';
+}
 
 const EditDefault = defineComponent({
   name: 'editDefault',
@@ -84,33 +94,53 @@ export default ColumnPluginAccumulate.addPlugin({
   name: 'handleColumn',
   handle(props) {
     const slots = props.get('slots');
-    const widthProps = props.get('width') || _.get(props.get('style'), 'width', '');
+    const style = props.get('style') ?? {};
+    const widthProps = props.get('width') || _.get(style, 'width', '');
+    const minWidthProps = props.get('minWidth') || _.get(style, 'min-width', '') || _.get(style, 'minWidth', '');
+    const type = props.get('type');
+    const isBuiltInType = BUILTIN_COLUMN_TYPES.includes(type);
+    const isFitContent = !isBuiltInType && isEmptySize(widthProps) && isEmptySize(minWidthProps);
+
     const regexNumberOrPx = /^\d+$|^\d+px$/;
-    const isFixedWidth = regexNumberOrPx.test(widthProps);
-    const deletePropsList = props.get($deletePropsList).concat(isFixedWidth ? [] : 'width');
-    const width = isFixedWidth ? { width: widthProps } : { minWidth: widthProps };
-    const minWidth = props.get('minWidth') || _.get(props.get('style'), 'min-width', '');
-    const widthObj = _.mergeWith(width, { minWidth }, (obj, src) => src || obj);
-    const align = props.get('align') || _.get(props.get('style'), 'text-align') || _.get(props.get('style'), 'textAlign', 'left');
+    const isFixedWidth = regexNumberOrPx.test(String(widthProps));
+    const deletePropsList = ((props.get($deletePropsList) as string[]) ?? []).concat(isFixedWidth ? [] : 'width');
+    const align = props.get('align') || _.get(style, 'text-align') || _.get(style, 'textAlign', 'left');
+    const className = props.get('className') ?? '';
+
+    const slotsResult = {
+      ...slots,
+      default: (item: any) => slots?.default?.({
+          ...item,
+          index: item?.$index,
+          item: item?.row,
+          rowIndex: item?.$index,
+          columnIndex: item?.cellIndex,
+        }),
+    };
+
+    if (isFitContent) {
+      return {
+        align,
+        className: addClass(className, FIT_CONTENT_COLUMN_CLASS),
+        [$deletePropsList]: deletePropsList,
+        slots: slotsResult,
+      };
+    }
+
+    const width = isFixedWidth ? { width: widthProps } : widthProps ? { minWidth: widthProps } : {};
+    const widthObj = _.mergeWith(width, minWidthProps ? { minWidth: minWidthProps } : {}, (obj, src) => src || obj);
+
     return {
       align,
       ...widthObj,
       [$deletePropsList]: deletePropsList,
-      slots: {
-        ...slots,
-        default: (item: any) => slots?.default?.({
-            ...item,
-            index: item?.$index,
-            item: item?.row,
-            rowIndex: item?.$index,
-            columnIndex: item?.cellIndex,
-          }),
-      },
+      slots: slotsResult,
     } as {
       align: string;
       width?: string;
       [$deletePropsList]: string[];
       minWidth?: string;
+      className?: string;
       slots: {
         default: (item: any) => any;
         [key: string]: any;
@@ -191,18 +221,18 @@ export default ColumnPluginAccumulate.addPlugin({
     name: 'handleNodePath',
     type: 'ide',
     handle(props) {
-      const className = useMemo(() => _.uniqueId('el-table-column'), []);
+      const ideClassName = useMemo(() => _.uniqueId('el-table-column'), []);
       const nodePath = props.get('data-nodepath');
       const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
       setTimeout(() => {
-        const node = document.querySelectorAll(`.${className}`);
+        const node = document.querySelectorAll(`.${ideClassName}`);
         node.forEach((item) => {
           item.setAttribute('data-nodepath', nodePath);
           item.setAttribute('data-nodepath-multiple', 'true');
         });
       }, 300);
       return {
-        className,
+        className: addClass(props.get('className') ?? '', ideClassName),
         key: nodePath,
         [$deletePropsList]: deletePropsList,
       };

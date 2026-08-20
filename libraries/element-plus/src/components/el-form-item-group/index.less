@@ -87,3 +87,19 @@
   width: auto;
   min-width: 0;
 }
+
+/* 文字与错误边框：不透传 EP is-error，仅分组内容区标红边框 + 文案 */
+.el-form-item.el-form-item-group.el-form-item-group--error-border {
+  > .el-form-item__content {
+    outline: 1px solid var(--el-color-danger);
+    border-radius: var(--el-border-radius-base);
+  }
+}
+
+.el-form-item-group__error-tip {
+  color: var(--el-color-danger);
+  font-size: 12px;
+  line-height: 1;
+  padding-top: 4px;
+  width: 100%;
+}

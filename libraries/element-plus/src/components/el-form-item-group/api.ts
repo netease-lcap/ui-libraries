@@ -16,8 +16,24 @@ namespace nasl.ui {
   })
   @Component({
     title: '表单项分组',
+    description: '用以将多个表单项分组，通常用于表单的布局。',
+    group: 'Form',
+    icon: 'validator',
   })
   export class ElFormItemGroup extends ViewComponent {
+    @Prop({
+      title: '验证是否有效',
+    })
+    valid: nasl.core.Boolean;
+    @Method({
+      title: '校验函数',
+      description: '校验函数，包含错误文本提示等功能',
+    })
+    validated(): {
+      valid: nasl.core.Boolean;
+    } {
+      return {} as any;
+    }
     constructor(options?: Partial<ElFormItemGroupOptions>) {
       super();
     }
@@ -33,6 +49,55 @@ namespace nasl.ui {
     labelWidth: nasl.core.String | nasl.core.Decimal;
 
     @Prop({
+      group: '数据属性',
+      title: '验证值',
+      description: '临时修改验证值',
+      docDescription: '临时修改验证值',
+    })
+    validatingValue: any;
+
+    @Prop({
+      group: '数据属性',
+      title: '值预处理',
+      description: '验证前对值进行预处理',
+      docDescription: '验证前对值进行预处理',
+    })
+    validatingProcess: Function;
+
+    @Prop({
+      group: '主要属性',
+      title: '规则',
+      description: '简写格式为字符串类型，完整格式或混合格式为数组类型',
+      docDescription: '验证规则。简写格式为字符串类型，完整格式或混合格式为数组类型，详见[验证规则](#验证规则)',
+      bindHide: true,
+    })
+    rules: nasl.core.String | Array<any>;
+
+    @Prop({
+      group: '主要属性',
+      title: '错误提示类型',
+      description:
+        '校验失败时的提示方式：文字与错误状态（提示文字并透传错误状态）；仅透传错误状态（不提示文字）；文字与错误边框（提示文字、透传错误状态，分组显示错误边框）。',
+      docDescription:
+        '文字与错误状态：展示错误文案，并向表单项透传 error 状态（子控件随表单项标红）。仅透传错误状态：不展示错误文案，仍透传 error 状态。文字与错误边框：展示错误文案，透传 error 状态，仅在分组内容区显示错误边框。',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '文字与错误状态' }, { title: '仅透传错误状态' }, { title: '文字与错误边框' }],
+      },
+    })
+    errorTipType: 'textAndStatus' | 'statusOnly' | 'textAndBorder' = 'textAndStatus';
+
+    @Prop({
+      group: '主要属性',
+      title: '忽略验证',
+      docDescription: '忽略验证',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    ignoreValidation: nasl.core.Boolean = false;
+
+    @Prop({
       group: '主要属性',
       title: '列数',
       description:
@@ -40,11 +105,11 @@ namespace nasl.ui {
       docDescription:
         '块级：内容区宽度约为 N × 原表单控件宽度；查询表单：跨 N 个查询列（含列间距）；栅格表单：CSS Grid 跨 N 列。内部控件默认撑满分组宽度，可单独覆盖。',
       setter: {
-        concept: 'EnumSelectSetter',
-        options: [{ title: '1 倍' }, { title: '2 倍' }, { title: '3 倍' }],
+        concept: 'NumberInputSetter',
+        min: 1,
       },
     })
-    columns: 1 | 2 | 3 = 1;
+    columns: nasl.core.Integer = 1;
 
     @Prop({
       group: '主要属性',

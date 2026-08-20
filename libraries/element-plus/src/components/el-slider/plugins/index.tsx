@@ -9,7 +9,7 @@ import { handleControllableValue } from '@/plugins/common/index';
 import { $deletePropsList } from '@/plugins/constants';
 import { useSyncState } from '@/plugins/hooks';
 
-const SliderAccumulate = new PluginAccumulateTypes<nasl.ui.ElSliderOptions, SliderProps>();
+const SliderAccumulate = new PluginAccumulateTypes<nasl.ui.ElSliderOptions<any, any, any, any, any>, SliderProps>();
 export default SliderAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handleTagName',

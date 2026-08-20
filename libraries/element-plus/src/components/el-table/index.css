@@ -26,6 +26,11 @@
 .el-table-wrapper {
   width: 100%;
 }
+
+/* 未设 width/minWidth 的列：内容不换行，便于按内容测宽并横向滚动 */
+.el-table .el-table-column--fit-content .cell {
+  white-space: nowrap;
+}
 .el-table .el-form-item {
   margin-bottom: 0;
 }

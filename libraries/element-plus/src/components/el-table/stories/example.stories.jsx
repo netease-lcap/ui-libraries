@@ -290,7 +290,9 @@ dragSort="row"
   <el-table-column prop="email" label="邮箱地址" width="200" ellipsis></el-table-column>
   <el-table-column prop="createTime" label="创建时间" width="160"></el-table-column>
   <el-table-column prop="applyTime" label="申请时间" width="160"></el-table-column>
-  <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column>
+  <el-table-column prop="modifyTime" label="修改时间" width="160"></el-table-column
+  <el-table-column prop="confirmTime" label="确认时间" ></el-table-column>
+  <el-table-column prop="confirmTime" label="确认时间" ></el-table-column>
   <el-table-column prop="confirmTime" label="确认时间" ></el-table-column>
 </el-table>
     `,
@@ -580,5 +582,67 @@ export const Example4 = {
  
             </el-table>
 `,
+  }),
+};
+
+/** 未设 width/minWidth 的列按内容自适应：不足撑满表格，超出出现横向滚动 */
+export const ExampleFitContentColumns = {
+  name: '列宽按内容自适应',
+  render: () => ({
+    setup() {
+      const tableData = [
+        {
+          id: 1,
+          name: '短名',
+          title: '这是一段很长很长很长很长的标题文本用于撑开列宽',
+          status: '启用',
+          owner: 'Zhang',
+        },
+        {
+          id: 2,
+          name: '名称稍长一些',
+          title: '另一段更长更长更长更长更长更长更长的内容，超出容器时应出现横向滚动',
+          status: '禁用',
+          owner: 'Li Si',
+        },
+        {
+          id: 3,
+          name: 'Tom',
+          title: '短标题',
+          status: '启用',
+          owner: 'Wang',
+        },
+      ];
+      return { tableData };
+    },
+    template: `
+      <div style="padding: 8px 0;">
+        <p style="margin: 0 0 12px;color: var(--el-text-color-secondary);font-size: 13px;">
+          未设 width/minWidth 的列按内容作为最小宽度；总宽不足时撑满表格，超出时出现横向滚动。
+          已设 width 或 minWidth 的列保持原逻辑。可拖拽调整外层容器宽度验证。
+        </p>
+        <div
+          style="
+            resize: horizontal;
+            overflow: auto;
+            width: 480px;
+            max-width: 100%;
+            min-width: 240px;
+            padding: 12px;
+            border: 1px dashed var(--el-border-color);
+            border-radius: 4px;
+            box-sizing: border-box;
+          "
+        >
+          <el-table :data="tableData" border>
+            <el-table-column type="index" width="50" label="#" />
+            <el-table-column prop="name" label="名称（自适应）" />
+            <el-table-column prop="title" label="标题（自适应）" />
+            <el-table-column prop="status" label="状态（固定）" width="100" />
+            <el-table-column prop="owner" label="负责人（minWidth）" min-width="120" />
+          </el-table>
+        </div>
+      </div>
+    `,
   }),
 };
