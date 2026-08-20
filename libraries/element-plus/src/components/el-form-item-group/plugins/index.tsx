@@ -132,7 +132,6 @@ export default FormItemGroupAccumulate.addPlugin({
         },
         [errorTipType],
       );
-      console.log(rulesProps, 'rulesProps');
       const validated = useCallback(async () => {
         if (ignoreValidation) {
           setValid(true);
@@ -145,7 +144,6 @@ export default FormItemGroupAccumulate.addPlugin({
         if (_.isFunction(validatingProcess)) {
           value = await validatingProcess(value);
         }
-        console.log(value, 'value', rulesProps);
         const validator = new (VusionValidator as any)(undefined, localizeRules, rulesProps);
         try {
           await validator.validate(value);
