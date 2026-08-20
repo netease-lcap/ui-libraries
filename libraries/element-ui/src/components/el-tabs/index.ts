@@ -1,3 +1,4 @@
+import './index.css';
 import Tabs from 'element-ui/lib/tabs';
 import TabPane from 'element-ui/lib/tab-pane';
 import { registerComponent } from '@lcap/vue2-utils/plugins/index';
