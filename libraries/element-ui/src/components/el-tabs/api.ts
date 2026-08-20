@@ -23,6 +23,9 @@ namespace nasl.ui {
       displaySlotInline: {
         label: true,
       },
+      events: {
+        click: true,
+      },
       eventsScope: "[class^=u-tabs__header]",
       displaySlotConditions: {
         label: "!!this.getAttribute('dataSource')",
