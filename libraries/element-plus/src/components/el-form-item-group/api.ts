@@ -109,7 +109,7 @@ namespace nasl.ui {
         min: 1,
       },
     })
-    columns: nasl.core.Integer = 1;
+    columns: nasl.core.Integer | nasl.core.String = 1;
 
     @Prop({
       group: '主要属性',
