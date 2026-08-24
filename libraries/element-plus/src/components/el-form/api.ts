@@ -84,7 +84,6 @@ namespace nasl.ui {
     })
     layout: 'inline' | 'block' | 'grid' = 'block';
 
-
     @Prop({
       group: '主要属性',
       title: '查询表单',
@@ -107,7 +106,7 @@ namespace nasl.ui {
       },
       if: (_) => _.layout === 'grid',
     })
-    columns: nasl.core.Decimal | nasl.core.Integer = 1;
+    columns: nasl.core.Decimal | nasl.core.Integer | nasl.core.String = 1;
 
     @Prop({
       group: '主要属性',
@@ -210,7 +209,7 @@ namespace nasl.ui {
         concept: 'InputSetter',
       },
     })
-    labelWidth: nasl.core.String | nasl.core.Decimal='auto';
+    labelWidth: nasl.core.String | nasl.core.Decimal = 'auto';
 
     // @Prop({
     //   group: '主要属性',
@@ -530,8 +529,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '跨列数',
-      description:
-        '栅格表单中表单项占据的列数。当前行剩余列不足时自动换行；跨列数大于表单总列数时撑满整行。',
+      description: '栅格表单中表单项占据的列数。当前行剩余列不足时自动换行；跨列数大于表单总列数时撑满整行。',
       docDescription:
         '仅在父级表单「表单布局」为栅格展示时生效。默认占 1 列；设置大于 1 时可跨多列。剩余列不够放下本项时换到下一行；若跨列数超过表单「列数」，则占满整行。',
       setter: {
