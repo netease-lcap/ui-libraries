@@ -16,7 +16,7 @@
             <u-radio
                 :value="wrapItem.radioChecked"
                 :disabled="item.disabled"
-                @click.native="select(item, rowIndex)"
+                @click.native.stop="select(item, rowIndex)"
                 :readonly="readonly">
             </u-radio>
         </span>
