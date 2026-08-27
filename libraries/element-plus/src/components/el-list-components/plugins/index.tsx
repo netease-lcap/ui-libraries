@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import _ from 'lodash';
-import { type Ref } from 'vue';
+import { Fragment, type Ref } from 'vue';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { useControllableValue, useMemo, useCallback, useRef, useEffect, useRender, useState } from '@/plugins/hooks';
 import { ElPagination, ElForm } from '@/index';
@@ -49,16 +49,28 @@ export default listComponentsBasicAccumulate
       const formMode = props.get('formMode');
       const render = useRender(
         (props, { attrs, slots }) => {
-          return formMode ? (
-            <ElForm style={{ width: '100%' }} model={model.value}>
-              <div ref={target} {...attrs} {...props}>
-                {slots.default?.()}
-              </div>
-            </ElForm>
-          ) : (
-            <div ref={target} {...attrs} {...props}>
+          const noWrapper = Boolean(props.noWrapper ?? attrs?.noWrapper);
+          if (noWrapper) {
+            const content = <Fragment>{slots.default?.()}</Fragment>;
+            return formMode ? (
+              <ElForm style={{ width: '100%' }} model={model.value}>
+                {content}
+              </ElForm>
+            ) : (
+              content
+            );
+          }
+          const content = (
+            <div ref={target} {..._.omit(attrs, ['noWrapper'])} {..._.omit(props, ['noWrapper'])}>
               {slots.default?.()}
             </div>
+          );
+          return formMode ? (
+            <ElForm style={{ width: '100%' }} model={model.value}>
+              {content}
+            </ElForm>
+          ) : (
+            content
           );
         },
         [formMode],
@@ -162,6 +174,7 @@ export default listComponentsBasicAccumulate
       const emit = props.get('emit');
       const model = props.get('model');
       const formMode = props.get('formMode');
+      const noWrapper = Boolean(props.get('noWrapper'));
       const currentPage = props.get('currentPage');
       const pagination = props.get('pagination', 'none');
 
@@ -201,9 +214,23 @@ export default listComponentsBasicAccumulate
       const selfRef = _.assign(ref, { reload, loadTo, data, getData: () => data });
       const defaultSlots = useCallback(() => {
         if (_.isEmpty(dataList) && !loading) {
-          return <div class="el-list-components__empty">暂无数据</div>;
+          return noWrapper ? null : <div class="el-list-components__empty">暂无数据</div>;
         }
         return _.map(dataList, (item, index) => {
+          const slotContent = _.isFunction(slots.default) ? (
+            slots.default({
+              item: item?.itemSource ?? item,
+              index,
+              selected: _.includes(_.concat([], value), _.get(item, 'value', item)),
+            } as any)
+          ) : (
+            <div style={{ width: '100%' }} class="el-list-components__default-text">
+              {item.label}
+            </div>
+          );
+          if (noWrapper) {
+            return slotContent;
+          }
           return (
             <div
               onClick={() => onClick(_.get(item, 'value', item))}
@@ -212,21 +239,11 @@ export default listComponentsBasicAccumulate
                 'is-selectable': selection && selection !== 'none',
               })}
             >
-              {_.isFunction(slots.default) ? (
-                slots.default({
-                  item: item?.itemSource ?? item,
-                  index,
-                  selected: _.includes(_.concat([], value), _.get(item, 'value', item)),
-                } as any)
-              ) : (
-                <div style={{ width: '100%' }} class="el-list-components__default-text">
-                  {item.label}
-                </div>
-              )}
+              {slotContent}
             </div>
           );
         });
-      }, [dataList, slots.default, value, selection]);
+      }, [dataList, slots.default, value, selection, noWrapper, loading, onClick]);
       useEffect(() => {
         emit('sync:state', 'data', dataList);
         emit('sync:state', 'pageSize', pageSize);
@@ -265,6 +282,11 @@ export default listComponentsBasicAccumulate
     handle(props) {
       const Component = props.get('render');
       const render = useCallback((props, { attrs, slots }) => {
+        const noWrapper = Boolean(props.noWrapper ?? attrs?.noWrapper);
+        if (noWrapper) {
+          // 直接调用内层 render，并保留 noWrapper，避免再包一层 DOM
+          return Component({ ...props, ...attrs, noWrapper: true }, { attrs, slots });
+        }
         return (
           <div
             data-nodepath={props?.['data-nodepath']}
@@ -294,8 +316,9 @@ export default listComponentsBasicAccumulate
       currentPageRef.value = currentPage;
       const pagination = props.get('pagination');
       const className = props.get('class');
+      const noWrapper = Boolean(props.get('noWrapper'));
       useEffect(() => {
-        if (!_.isElement(target.value) || pagination !== 'autoMore') {
+        if (noWrapper || !_.isElement(target.value) || pagination !== 'autoMore') {
           return () => {};
         }
         const scrollHandler = () => {
@@ -308,10 +331,10 @@ export default listComponentsBasicAccumulate
         return () => {
           target.value?.removeEventListener('scroll', scrollHandler);
         };
-      }, [pagination]);
+      }, [pagination, noWrapper]);
       return {
         class: addClass(className, {
-          'el-list-components-infinite-scroll': pagination === 'autoMore',
+          'el-list-components-infinite-scroll': !noWrapper && pagination === 'autoMore',
         }),
       };
     },
@@ -319,6 +342,7 @@ export default listComponentsBasicAccumulate
   .addPlugin({
     name: 'handleColumn',
     handle(props) {
+      const noWrapper = Boolean(props.get('noWrapper'));
       const columnProps = props.get('column');
       const equalWidth = props.get('equalWidth');
       const rowGap = props.get('rowGap');
@@ -327,7 +351,7 @@ export default listComponentsBasicAccumulate
       const styleProps = props.get('style');
       const target = props.get('target') as Ref<Element | null>;
       const loading = props.get('loading');
-      const isEqualWidthByMax = equalWidth && columnProps <= 0;
+      const isEqualWidthByMax = !noWrapper && equalWidth && columnProps <= 0;
       const [maxItemWidth, setMaxItemWidth] = useState<number | undefined>();
 
       useEffect(() => {
@@ -359,10 +383,14 @@ export default listComponentsBasicAccumulate
         return () => {
           resizeObserver.disconnect();
         };
-      }, [isEqualWidthByMax, loading, columnProps, equalWidth]);
+      }, [isEqualWidthByMax, loading, columnProps, equalWidth, noWrapper]);
 
       const style = useMemo(
-        () => _.assign({}, styleProps, {
+        () => {
+          if (noWrapper) {
+            return undefined;
+          }
+          return _.assign({}, styleProps, {
             '--row-gap': `${rowGap || 0}px`,
             '--column-gap': `${columnGap || 0}px`,
             '--el-list-components-column': columnProps <= 0 ? 0 : columnProps,
@@ -371,21 +399,28 @@ export default listComponentsBasicAccumulate
                   '--el-list-components-item-width': `${maxItemWidth}px`,
                 }
               : {}),
-          }),
-        [styleProps, rowGap, columnGap, columnProps, maxItemWidth],
+          });
+        },
+        [styleProps, rowGap, columnGap, columnProps, maxItemWidth, noWrapper],
       );
       const className = useMemo(
-        () => addClass(classNameProps, {
+        () => {
+          if (noWrapper) {
+            return undefined;
+          }
+          return addClass(classNameProps, {
             'el-list-components-plus': true,
             isEqualWidth: equalWidth && columnProps > 0,
             isEqualWidthByMax,
             isColumn: columnProps > 0,
-          }),
-        [classNameProps, equalWidth, columnProps, isEqualWidthByMax],
+          });
+        },
+        [classNameProps, equalWidth, columnProps, isEqualWidthByMax, noWrapper],
       );
       return {
         style,
         class: className,
+        noWrapper,
       };
     },
   });

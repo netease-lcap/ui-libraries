@@ -177,6 +177,26 @@ describe('el-list-components 插件集成测试', () => {
       expect(currentValue.value.class).toContain('isEqualWidth');
     });
 
+    it('noWrapper 时不应添加布局 class 与列相关 style', async () => {
+      const plugins = listComponentsBasicAccumulate.getPluginMethod({ isInDesigner: false });
+      const emit = vi.fn();
+      const props = {
+        noWrapper: true,
+        column: 3,
+        equalWidth: true,
+        rowGap: 10,
+        columnGap: 20,
+        emit,
+        slots: {},
+      };
+
+      const { currentValue } = await renderHooks(plugins, props);
+
+      expect(currentValue.value.class).toBeUndefined();
+      expect(currentValue.value.style).toBeUndefined();
+      expect(currentValue.value.noWrapper).toBe(true);
+    });
+
     it('应该处理 column <= 0 的情况', async () => {
       const plugins = listComponentsBasicAccumulate.getPluginMethod({ isInDesigner: false });
       const emit = vi.fn();

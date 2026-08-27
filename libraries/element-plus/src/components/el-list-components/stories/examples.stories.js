@@ -63,6 +63,9 @@ export const Demo4 = {
   name: 'new',
 
   render: () => ({
+    components: {
+      ElListComponents: Component,
+    },
     setup() {
       const value = ref(1);
       return {
@@ -72,11 +75,39 @@ export const Demo4 = {
     template: `
     <div>
     {{value}}
-    <el-list-components-plus  v-model="value" :clearable="true" selection="multiple" :column="1" :equal-width="false" pagination="none" :total="100" :dataSource="Array.from({length: 100}, (_, i) => i + 1)" :row-gap="10" :column-gap="40">
+    <el-list-components  v-model="value" :clearable="true" selection="multiple" :column="1" :equal-width="false" pagination="none" :total="100" :dataSource="Array.from({length: 100}, (_, i) => i + 1)" :row-gap="10" :column-gap="40">
 
-    </el-list-components-plus>
+    </el-list-components>
     </div>
 
+    `,
+  }),
+};
+
+export const Demo5 = {
+  name: '无容器包裹 noWrapper',
+  render: () => ({
+    components: {
+      ElListComponents: Component,
+    },
+    setup() {
+      const list = Array.from({ length: 5 }, (_, i) => ({
+        label: `Item ${i + 1}`,
+        value: i + 1,
+      }));
+      return { list };
+    },
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div class="root">
+      
+        <el-list-components :no-wrapper="true" :data-source="list">
+          <template #default="{ item }">
+            <div>{{ item.label }}</div>
+          </template>
+        </el-list-components>
+      </div>
+      </div>
     `,
   }),
 };

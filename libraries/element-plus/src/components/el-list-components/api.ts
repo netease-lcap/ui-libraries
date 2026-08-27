@@ -97,7 +97,7 @@ namespace nasl.ui {
         concept: 'SwitchSetter',
       },
       onChange: [
-        { clear: ['dataSource', 'dataSchema', 'model', 'idField', 'textField', 'pagination', 'selectionMode'] },
+        { clear: ['dataSource', 'dataSchema', 'model', 'idField', 'textField', 'pagination', 'selectionMode', 'noWrapper'] },
       ],
     })
     formMode: nasl.core.Boolean = false;
@@ -173,6 +173,7 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
         min: 0,
       },
+      if: (_) => !_.noWrapper,
     })
     column: nasl.core.Decimal | nasl.core.Integer = 0;
 
@@ -185,8 +186,25 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => !_.noWrapper,
     })
     equalWidth: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '主要属性',
+      title: '无容器包裹',
+      description: '开启后不渲染外层容器和列表项包裹层，输出更接近裸 v-for',
+      docDescription:
+        '开启后，组件列表不再渲染外层布局容器和每项的包裹节点，插槽内容直接作为列表节点输出。开启后列数、均分宽度、自动加载更多等依赖容器的能力将不可用。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      if: (_) => !_.formMode,
+      onChange: [
+        { clear: ['column', 'equalWidth', 'pagination', 'selectionMode'] },
+      ],
+    })
+    noWrapper: nasl.core.Boolean = false;
 
     // 分页相关（联动属性组）
     @Prop({
@@ -199,7 +217,7 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '不启用' }, { title: '自动加载更多' }, { title: '分页' }],
       },
-      if: (_) => !_.formMode,
+      if: (_) => !_.formMode && !_.noWrapper,
     })
     pagination: 'none' | 'autoMore' | 'page' = 'none';
 
@@ -304,7 +322,7 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '不可选' }, { title: '单选' }, { title: '多选' }],
       },
-      if: (_) => !_.formMode,
+      if: (_) => !_.formMode && !_.noWrapper,
     })
     selectionMode: 'none' | 'single' | 'multiple' = 'none';
 
@@ -351,6 +369,7 @@ namespace nasl.ui {
       description: '设置组件行与行之间的间距',
       docDescription: '控制垂直方向上相邻两行组件之间的距离。数值越大，行间距越大。单位为像素(px)。',
       setter: { concept: 'NumberInputSetter' },
+      if: (_) => !_.noWrapper,
     })
     rowGap: nasl.core.Decimal | nasl.core.Integer = 0;
 
@@ -360,6 +379,7 @@ namespace nasl.ui {
       description: '设置组件列与列之间的间距',
       docDescription: '控制水平方向上相邻两列组件之间的距离。数值越大，列间距越大。单位为像素(px)。',
       setter: { concept: 'NumberInputSetter' },
+      if: (_) => !_.noWrapper,
     })
     columnGap: nasl.core.Decimal | nasl.core.Integer = 0;
 
