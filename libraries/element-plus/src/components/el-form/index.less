@@ -7,11 +7,11 @@
 .el-form {
   border: 1px solid transparent;
   box-sizing: border-box;
-  /* 按表单容器宽度（非视口）自适应表单项最大宽度 */
-  container-type: inline-size;
-  container-name: el-form;
-
-
+  /* 按表单容器宽度（非视口）自适应表单项最大宽度；行内布局不启用容器查询 */
+  &:not(.el-form--inline) {
+    container-type: inline-size;
+    container-name: el-form;
+  }
 
   .el-form-item {
     --el-form-item-max-width: 400px;
@@ -95,7 +95,7 @@
   &.el-form--inline {
     display: inline-flex;
     flex-wrap: wrap;
-    width: 100%;
+    max-width: 100%;
 
     .el-form-item {
       // display: inline-flex;
@@ -104,7 +104,7 @@
 
       .el-form-item__content {
         width: var(--el-form-content-width, 240px);
-        max-width: ~"calc(var(--el-form-content-max-width, 560px) - var(--el-form-auto-label-width, 0px))";
+        // max-width: ~"calc(var(--el-form-content-max-width, 560px) - var(--el-form-auto-label-width, 0px))";
 
         /* 仅对常用录入控件拉满 content；单选/多选组等非列表组件不在此列 */
         >.el-autocomplete,

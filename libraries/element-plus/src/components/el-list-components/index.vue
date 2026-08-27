@@ -41,7 +41,6 @@
     />
   </div>
 </template>
-
 <script>
 // import { sync } from '@lcap/vue2-utils';
 import ElListComponentsItem from './item.vue';
@@ -100,6 +99,10 @@ export default {
     equalWidth: {
       type: Boolean,
       default: true,
+    },
+    noWrapper: {
+      type: Boolean,
+      default: false,
     },
     idField: {
       type: String,

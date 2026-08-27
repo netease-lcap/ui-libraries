@@ -102,7 +102,7 @@ export function withFormItem(Component, name, sourceTagName?: string) {
         return (
           <ElFormItemWrap
             {..._.pick(_.assign({}, props, attrs, { prop: prop.value }), $formItemProps)}
-            style={_.assign({}, style.value.style, {
+            style={_.assign({}, _.omit(style.value.style, ['width']), {
               '--el-form-auto-label-width': formContext?.autoLabelWidth,
               '--el-form-content-width': _.get(style, 'value.style.width', undefined),
               '--el-form-content-max-width': _.get(style, 'value.style.width', undefined),
