@@ -40,6 +40,7 @@ const Template = (args) => ({
       <div style="width: 100px; height: 60px; background: #1989fa; color: white; display: flex; align-items: center; justify-content: center; border-radius: 4px;">1</div>
       <div style="width: 100px; height: 60px; background: #07c160; color: white; display: flex; align-items: center; justify-content: center; border-radius: 4px;">2</div>
       <div style="width: 100px; height: 60px; background: #ff976a; color: white; display: flex; align-items: center; justify-content: center; border-radius: 4px;">3</div>
+      <van-flex  style="margin-left: 12px; margin-right: 12px; margin-top: 13px; margin-bottom: 12px;">1234</van-flex>
     </van-flex>
   `,
 });
@@ -52,6 +53,12 @@ Default.args = {
   alignment: 'start',
   wrap: true,
   gutter: 12,
+  style: {
+    marginLeft: '12px',
+    marginRight: '12px',
+    marginTop: '12px',
+    marginBottom: '12px',
+  },
 };
 
 export const Vertical = Template.bind({});
