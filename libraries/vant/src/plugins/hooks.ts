@@ -119,14 +119,14 @@ export function useState(initialstate?) {
   };
   return [getStateValue(state), localSetValue];
 }
-export function useRef<T>(initialstate: T): Ref<T> {
+export function useRef<T = any>(initialstate: T, isRef: boolean = true): Ref<T> {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook;
   if (isMount) {
     hook = {
       next: null,
-      value: ref(initialstate),
+      value: isRef ? ref(initialstate) : { value: initialstate },
     };
     hook.next = hook;
     if (currentFiber.workInProgressState) {

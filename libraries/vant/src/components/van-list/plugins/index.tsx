@@ -61,7 +61,9 @@ export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
   const textField = props.get('textField') || 'label';
   const valueField = props.get('valueField') || 'value';
-  const deletePropsList = props.get($deletePropsList).concat($dataSourceDeleteField, ['formTagName'], 'data', 'setCurrentPage');
+  const deletePropsList = props
+    .get($deletePropsList)
+    .concat($dataSourceDeleteField, ['formTagName'], 'data', 'setCurrentPage');
   const ref = props.get('ref');
   const { data, run: reload, loading } = useRequestDataSource(dataConfig);
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(data) });
@@ -76,27 +78,34 @@ export function handleDataSource(props) {
 }
 
 export function handleDataRender(props) {
+  const currentPageRef = useRef(1);
   const data = props.get('data');
   const dataConfig = props.get('dataSource');
   const currentPage = props.get('currentPage', 1);
+  currentPageRef.value = currentPage;
   const setCurrentPage = props.get('setCurrentPage');
   const pagination = props.get('pagination');
   const loading = props.get('loading');
   const slots = props.get('slots');
   const onClick = props.get('clickFn');
   const isCell = props.get('isCell');
-  const onLoadProps = props.get('onLoad') ?? (() => { });
+  const onLoadProps = props.get('onLoad') ?? (() => {});
   const selection = props.get('selectionMode');
   const value = props.get('value');
-  const setCurrentPageFn = useCallback(_.throttle(() => {
-    setCurrentPage((currentPage = 1) => {
-      return currentPage + 1;
-    });
-  }, 1500, {
-    trailing: true,
-  }), []);
+  const setCurrentPageFn = useCallback(
+    _.throttle(
+      () => {
+        setCurrentPage(currentPageRef.value + 1);
+      },
+      1500,
+      {
+        trailing: true,
+      },
+    ),
+    [],
+  );
   const onLoad = useCallback(() => {
-    if (loading !== false || pagination === 'none') return;
+    if (loading !== false || !pagination || pagination === 'none') return;
     setCurrentPageFn();
     _.attempt(onLoadProps);
   }, [loading, pagination]);
@@ -110,28 +119,29 @@ export function handleDataRender(props) {
     }
   }, [data]);
 
-  const dataSourceSlots = _.match(dataConfig).when(_.isNil, () => ({})).otherwise(() => ({
-    default: () => _.map(dataList.value, (item, index) => (
-      <div
-        onClick={() => onClick(_.get(item, 'value', item))}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            onClick(_.get(item, 'value', item));
-          }
-        }}
-        tabIndex={0}
-        role="button"
-        class={addClass('el-list-components__frag', {
-          'is-selected': _.includes(_.concat([], value), _.get(item, 'value', item)),
-          'is-selectable': selection && selection !== 'none',
-        })}
-
-      >
-        {cellWrap(slots?.item?.({ item, index }))}
-      </div>
-    )),
-  }));
+  const dataSourceSlots = _.match(dataConfig)
+    .when(_.isNil, () => ({}))
+    .otherwise(() => ({
+      default: () => _.map(dataList.value, (item, index) => (
+        <div
+          onClick={() => onClick(_.get(item, 'value', item))}
+          onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onClick(_.get(item, 'value', item));
+              }
+            }}
+          tabIndex={0}
+          role="button"
+          class={addClass('el-list-components__frag', {
+              'is-selected': _.includes(_.concat([], value), _.get(item, 'value', item)),
+              'is-selectable': selection && selection !== 'none',
+            })}
+        >
+          {cellWrap(slots?.item?.({ item, index }))}
+        </div>
+        )),
+    }));
   return {
     slots: _.assign({}, slots, dataSourceSlots),
     onLoad,
@@ -150,18 +160,18 @@ export function handleColumn(props) {
   // 构建样式对象，只有当 column 大于 0 时才设置 CSS 变量
   const style = useMemo(
     () => _.assign({}, styleProps, {
-      '--row-gap': `${rowGap || 0}px`,
-      '--column-gap': `${columnGap || 0}px`,
-      '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
-    }),
+        '--row-gap': `${rowGap || 0}px`,
+        '--column-gap': `${columnGap || 0}px`,
+        '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
+      }),
     [styleProps, rowGap, columnGap, columnProps],
   );
   const className = useMemo(
     () => addClass(classNameProps, {
-      'el-list-components-plus': true,
-      isEqualWidth: equalWidth,
-      isColumn: columnProps > 0,
-    }),
+        'el-list-components-plus': true,
+        isEqualWidth: equalWidth,
+        isColumn: columnProps > 0,
+      }),
     [classNameProps, equalWidth, columnProps],
   );
   return {

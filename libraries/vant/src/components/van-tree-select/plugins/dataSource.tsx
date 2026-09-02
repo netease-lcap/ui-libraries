@@ -29,8 +29,8 @@ export function handleDataSource(props) {
     dataSource: useFormatDataSource(data),
     label: 'text',
     value: 'id',
-    disabledField,
     fieldsMap: {
+      disabled: disabledField,
       dot: dotField,
       badge: badgeField,
     },

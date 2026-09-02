@@ -25,10 +25,9 @@ export function handleDataSource(props) {
     label: 'text',
     textField,
     valueField,
-    disabledField,
-    // iconField,
     dataSource: useFormatDataSource(data),
     fieldsMap: {
+      disabled: disabledField,
       icon: iconField,
     },
   });
