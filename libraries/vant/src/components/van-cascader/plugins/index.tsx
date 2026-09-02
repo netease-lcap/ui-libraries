@@ -144,7 +144,8 @@ export function handleFieldRender(props) {
           lazy-render={false}
           round
           position="bottom"
-          {...innerProps}>
+          {...innerProps}
+        >
           <Component
             {..._.omit(props, [
               'value',

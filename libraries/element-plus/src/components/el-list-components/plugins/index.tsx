@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import _ from 'lodash';
-import { Fragment, type Ref } from 'vue';
+import { type Ref } from 'vue';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { useControllableValue, useMemo, useCallback, useRef, useEffect, useRender, useState } from '@/plugins/hooks';
 import { ElPagination, ElForm } from '@/index';
@@ -51,7 +51,7 @@ export default listComponentsBasicAccumulate
         (props, { attrs, slots }) => {
           const noWrapper = Boolean(props.noWrapper ?? attrs?.noWrapper);
           if (noWrapper) {
-            const content = <Fragment>{slots.default?.()}</Fragment>;
+            const content = slots.default?.();
             return formMode ? (
               <ElForm style={{ width: '100%' }} model={model.value}>
                 {content}
@@ -385,38 +385,32 @@ export default listComponentsBasicAccumulate
         };
       }, [isEqualWidthByMax, loading, columnProps, equalWidth, noWrapper]);
 
-      const style = useMemo(
-        () => {
-          if (noWrapper) {
-            return undefined;
-          }
-          return _.assign({}, styleProps, {
-            '--row-gap': `${rowGap || 0}px`,
-            '--column-gap': `${columnGap || 0}px`,
-            '--el-list-components-column': columnProps <= 0 ? 0 : columnProps,
-            ...(maxItemWidth
-              ? {
-                  '--el-list-components-item-width': `${maxItemWidth}px`,
-                }
-              : {}),
-          });
-        },
-        [styleProps, rowGap, columnGap, columnProps, maxItemWidth, noWrapper],
-      );
-      const className = useMemo(
-        () => {
-          if (noWrapper) {
-            return undefined;
-          }
-          return addClass(classNameProps, {
-            'el-list-components-plus': true,
-            isEqualWidth: equalWidth && columnProps > 0,
-            isEqualWidthByMax,
-            isColumn: columnProps > 0,
-          });
-        },
-        [classNameProps, equalWidth, columnProps, isEqualWidthByMax, noWrapper],
-      );
+      const style = useMemo(() => {
+        if (noWrapper) {
+          return undefined;
+        }
+        return _.assign({}, styleProps, {
+          '--row-gap': `${rowGap || 0}px`,
+          '--column-gap': `${columnGap || 0}px`,
+          '--el-list-components-column': columnProps <= 0 ? 0 : columnProps,
+          ...(maxItemWidth
+            ? {
+                '--el-list-components-item-width': `${maxItemWidth}px`,
+              }
+            : {}),
+        });
+      }, [styleProps, rowGap, columnGap, columnProps, maxItemWidth, noWrapper]);
+      const className = useMemo(() => {
+        if (noWrapper) {
+          return undefined;
+        }
+        return addClass(classNameProps, {
+          'el-list-components-plus': true,
+          isEqualWidth: equalWidth && columnProps > 0,
+          isEqualWidthByMax,
+          isColumn: columnProps > 0,
+        });
+      }, [classNameProps, equalWidth, columnProps, isEqualWidthByMax, noWrapper]);
       return {
         style,
         class: className,
