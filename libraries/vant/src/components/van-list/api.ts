@@ -31,18 +31,29 @@ namespace nasl.ui {
     })
     data: nasl.collection.List<T>;
 
+    @Prop({
+      title: '当前页码',
+    })
+    currentPage: nasl.core.Integer;
+
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',
     })
-    reload(): void { }
+    reload(): void {}
 
     constructor(options?: Partial<VanListOptions<T, V, P, M, C>>) {
       super();
     }
   }
 
-  export class VanListOptions<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponentOptions {
+  export class VanListOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C,
+  > extends ViewComponentOptions {
     @Prop({
       group: '数据属性',
       title: '数据源',
@@ -124,7 +135,6 @@ namespace nasl.ui {
     })
     pagination: 'none' | 'autoMore' = 'none';
 
-
     @Prop({
       group: '交互属性',
       title: '选择模式',
@@ -199,7 +209,6 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     columnGap: nasl.core.Decimal | nasl.core.Integer = 0;
-
 
     @Prop({
       group: '样式属性',
