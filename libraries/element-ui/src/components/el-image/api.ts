@@ -91,11 +91,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '开启图片预览功能',
-      description: '开启图片预览功能,用逗号分隔',
+      title: '预览图片列表',
+      description: '设置预览图片地址列表；配置后点击图片可预览，并可在多张图片间切换',
       setter: { concept: 'InputSetter' },
     })
-    previewSrcList: nasl.core.String;
+    previewSrcList: nasl.collection.List<nasl.core.String>;
 
     @Prop({
       group: '数据属性',
