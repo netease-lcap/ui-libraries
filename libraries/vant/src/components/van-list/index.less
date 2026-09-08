@@ -54,4 +54,14 @@
       overflow: visible;
     }
   }
+
+  /* 单元格模式：纵向列表，不走列数/均分宽度 */
+  &.is-cell-mode {
+    display: block;
+    gap: 0;
+
+    .van-cell.is-selected.is-selectable {
+      background-color: rgba(198, 226, 255, 0.9) !important;
+    }
+  }
 }

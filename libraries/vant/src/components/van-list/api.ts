@@ -97,7 +97,7 @@ namespace nasl.ui {
     })
     textField: (item: T) => any;
 
-    @Prop({
+    @Prop<VanListOptions<T, V, P, M, C>, 'column'>({
       group: '主要属性',
       title: '列数',
       description: '设置每行显示的组件数量',
@@ -107,10 +107,11 @@ namespace nasl.ui {
         concept: 'NumberInputSetter',
         min: 1,
       },
+      if: (_) => !_.isCell,
     })
     column: nasl.core.Decimal | nasl.core.Integer = 5;
 
-    @Prop({
+    @Prop<VanListOptions<T, V, P, M, C>, 'equalWidth'>({
       group: '主要属性',
       title: '均分宽度',
       description: '是否让每个组件平均分配宽度',
@@ -119,6 +120,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
+      if: (_) => !_.isCell,
     })
     equalWidth: nasl.core.Boolean = true;
 
@@ -135,7 +137,7 @@ namespace nasl.ui {
     })
     pagination: 'none' | 'autoMore' = 'none';
 
-    @Prop({
+    @Prop<VanListOptions<T, V, P, M, C>, 'selectionMode'>({
       group: '交互属性',
       title: '选择模式',
       description: '设置列表项的选择模式',
@@ -145,6 +147,7 @@ namespace nasl.ui {
         concept: 'EnumSelectSetter',
         options: [{ title: '不可选' }, { title: '单选' }, { title: '多选' }],
       },
+      if: (_) => !_.isCell,
     })
     selectionMode: 'none' | 'single' | 'multiple' = 'none';
 
@@ -156,7 +159,7 @@ namespace nasl.ui {
       setter: {
         concept: 'SwitchSetter',
       },
-      if: (_) => _.selectionMode !== 'none',
+      if: (_) => !_.isCell && _.selectionMode !== 'none',
     })
     clearable: nasl.core.Boolean = false;
 
@@ -187,26 +190,28 @@ namespace nasl.ui {
       docDescription:
         '绑定当前选中的列表项值。单选模式下为单个值，多选模式下为数组。当用户选择或取消选择时，此值会自动更新。',
       sync: true,
-      if: (_) => _.selectionMode !== 'none',
+      if: (_) => !_.isCell && _.selectionMode !== 'none',
     })
     modelValue: M extends true ? nasl.collection.List<V> : V;
 
     // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
-    @Prop({
+    @Prop<VanListOptions<T, V, P, M, C>, 'rowGap'>({
       group: '样式属性',
       title: '行间距',
       description: '设置组件行与行之间的间距',
       docDescription: '控制垂直方向上相邻两行组件之间的距离。数值越大，行间距越大。单位为像素(px)。',
       setter: { concept: 'NumberInputSetter' },
+      if: (_) => !_.isCell,
     })
     rowGap: nasl.core.Decimal | nasl.core.Integer = 0;
 
-    @Prop({
+    @Prop<VanListOptions<T, V, P, M, C>, 'columnGap'>({
       group: '样式属性',
       title: '列间距',
       description: '设置组件列与列之间的间距',
       docDescription: '控制水平方向上相邻两列组件之间的距离。数值越大，列间距越大。单位为像素(px)。',
       setter: { concept: 'NumberInputSetter' },
+      if: (_) => !_.isCell,
     })
     columnGap: nasl.core.Decimal | nasl.core.Integer = 0;
 

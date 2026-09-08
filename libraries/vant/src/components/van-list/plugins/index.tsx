@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { Fragment } from 'vue';
 import { Cell } from 'vant';
 import { useEffect, useMemo, useControllableValue, useRef, useCallback } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
@@ -109,7 +110,6 @@ export function handleDataRender(props) {
     setCurrentPageFn();
     _.attempt(onLoadProps);
   }, [loading, pagination]);
-  const cellWrap = isCell ? (node) => <Cell>{{ title: node }}</Cell> : (node) => node;
   const dataList = useRef(data);
   useEffect(() => {
     if (currentPage === 1) {
@@ -122,25 +122,37 @@ export function handleDataRender(props) {
   const dataSourceSlots = _.match(dataConfig)
     .when(_.isNil, () => ({}))
     .otherwise(() => ({
-      default: () => _.map(dataList.value, (item, index) => (
-        <div
-          onClick={() => onClick(_.get(item, 'value', item))}
-          onKeyDown={(e) => {
+      default: () => _.map(dataList.value, (item, index) => {
+        const itemNode = slots?.item?.({ item, index });
+        // 单元格模式：取消列数/均分宽度布局，仅用 Fragment 包裹 Cell
+        if (isCell) {
+          return (
+            <Fragment key={_.get(item, 'value', index)}>
+              <Cell>{{ title: () => itemNode }}</Cell>
+            </Fragment>
+          );
+        }
+        return (
+          <div
+            key={_.get(item, 'value', index)}
+            onClick={() => onClick(_.get(item, 'value', item))}
+            onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 onClick(_.get(item, 'value', item));
               }
             }}
-          tabIndex={0}
-          role="button"
-          class={addClass('el-list-components__frag', {
+            tabIndex={0}
+            role="button"
+            class={addClass('el-list-components__frag', {
               'is-selected': _.includes(_.concat([], value), _.get(item, 'value', item)),
               'is-selectable': selection && selection !== 'none',
             })}
-        >
-          {cellWrap(slots?.item?.({ item, index }))}
-        </div>
-        )),
+          >
+            {itemNode}
+          </div>
+        );
+      }),
     }));
   return {
     slots: _.assign({}, slots, dataSourceSlots),
@@ -150,6 +162,7 @@ export function handleDataRender(props) {
 handleDataRender.order = 5;
 
 export function handleColumn(props) {
+  const isCell = props.get('isCell');
   const columnProps = props.get('column');
   const equalWidth = props.get('equalWidth');
   const rowGap = props.get('rowGap');
@@ -157,23 +170,30 @@ export function handleColumn(props) {
   const classNameProps = props.get('class');
   const styleProps = props.get('style');
 
-  // 构建样式对象，只有当 column 大于 0 时才设置 CSS 变量
-  const style = useMemo(
-    () => _.assign({}, styleProps, {
-        '--row-gap': `${rowGap || 0}px`,
-        '--column-gap': `${columnGap || 0}px`,
-        '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
-      }),
-    [styleProps, rowGap, columnGap, columnProps],
-  );
-  const className = useMemo(
-    () => addClass(classNameProps, {
+  // 单元格模式：取消列数、均分宽度联动布局
+  const style = useMemo(() => {
+    if (isCell) return styleProps;
+    return _.assign({}, styleProps, {
+      '--row-gap': `${rowGap || 0}px`,
+      '--column-gap': `${columnGap || 0}px`,
+      '--el-list-components-column': columnProps <= 0 ? 5 : columnProps,
+    });
+  }, [isCell, styleProps, rowGap, columnGap, columnProps]);
+
+  const className = useMemo(() => {
+    if (isCell) {
+      return addClass(classNameProps, {
         'el-list-components-plus': true,
-        isEqualWidth: equalWidth,
-        isColumn: columnProps > 0,
-      }),
-    [classNameProps, equalWidth, columnProps],
-  );
+        'is-cell-mode': true,
+      });
+    }
+    return addClass(classNameProps, {
+      'el-list-components-plus': true,
+      isEqualWidth: equalWidth,
+      isColumn: columnProps > 0,
+    });
+  }, [isCell, classNameProps, equalWidth, columnProps]);
+
   return {
     style,
     class: className,
