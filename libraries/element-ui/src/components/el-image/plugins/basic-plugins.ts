@@ -8,9 +8,8 @@ import { $ref, $render, createUseUpdateSync } from '@lcap/vue2-utils';
 
 export const handleDateRange: NaslComponentPluginOptions = {
   setup: (props, { isDesigner }) => {
-    const previewSrcList = props.useComputed(['previewSrcList'], (previewSrcList: any) => {
-      const listRange = previewSrcList?.split(',');
-      return Array.isArray(listRange) ? listRange : undefined;
+    const previewSrcList = props.useComputed(['previewSrcList'], (previewSrcList: unknown) => {
+      return Array.isArray(previewSrcList) ? previewSrcList : undefined;
     });
     return {
       previewSrcList,
