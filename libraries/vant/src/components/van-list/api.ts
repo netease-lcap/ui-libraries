@@ -137,6 +137,19 @@ namespace nasl.ui {
     })
     pagination: 'none' | 'autoMore' = 'none';
 
+    @Prop<VanListOptions<T, V, P, M, C>, 'pageSize'>({
+      group: '主要属性',
+      title: '默认分页大小',
+      description: '分页过小可能会导致滚动加载更多失效',
+      setter: {
+        concept: 'NumberInputSetter',
+        precision: 0,
+        min: 1,
+      },
+      if: (_) => _.pagination !== 'none',
+    })
+    pageSize: nasl.core.Integer = 20;
+
     @Prop<VanListOptions<T, V, P, M, C>, 'selectionMode'>({
       group: '交互属性',
       title: '选择模式',
