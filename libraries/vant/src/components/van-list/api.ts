@@ -36,6 +36,11 @@ namespace nasl.ui {
     })
     currentPage: nasl.core.Integer;
 
+    @Prop({
+      title: '分页大小',
+    })
+    pageSize: nasl.core.Integer;
+
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',
