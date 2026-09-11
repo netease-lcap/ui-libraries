@@ -60,14 +60,53 @@ export const Default = {
     },
     template: `
         <van-list
-          style="height: 400px; "
           :dataSource="columns"
-        :column="1" 
+          :column="1"
         >
           <template #item="item">
             <span>2</span>
           </template>
         </van-list>
+    `,
+  }),
+};
+
+export const AutoMore = {
+  name: '滚动加载更多',
+  render: (args: any, { argTypes }: any) => ({
+    props: Object.keys(argTypes),
+    setup() {
+      const total = 45;
+      const pageSize = 10;
+      const columns = async ({ currentPage, pageSize: size }: { currentPage: number; pageSize: number }) => new Promise((resolve) => {
+        setTimeout(() => {
+          const start = (currentPage - 1) * size;
+          const list = Array.from({ length: Math.max(0, Math.min(size, total - start)) }, (_, index) => ({
+            text: `选项 ${start + index + 1}`,
+            value: String(start + index + 1),
+          }));
+          resolve({ list, total });
+        }, 400);
+      });
+
+      return {
+        args,
+        columns,
+        pageSize,
+      };
+    },
+    template: `
+      <van-list
+        :dataSource="columns"
+        pagination="autoMore"
+        :pageSize="pageSize"
+        :column="1"
+        :isCell="true"
+      >
+        <template #item="{ item }">
+          <span>{{ item.text }}</span>
+        </template>
+      </van-list>
     `,
   }),
 };

@@ -1,4 +1,5 @@
 .van-list {
+  height: var(--van-list-height, 400px);
   overflow: auto;
   color: var(--van-list-text-color,#333);
   font-size: var(--van-list-text-font-size,14px);
@@ -52,6 +53,16 @@
       justify-self: start;
       /* 防止内部内容溢出 */
       overflow: visible;
+    }
+  }
+
+  /* 单元格模式：纵向列表，不走列数/均分宽度 */
+  &.is-cell-mode {
+    display: block;
+    gap: 0;
+
+    .van-cell.is-selected.is-selectable {
+      background-color: rgba(198, 226, 255, 0.9) !important;
     }
   }
 }

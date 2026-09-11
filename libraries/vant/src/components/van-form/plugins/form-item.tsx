@@ -96,7 +96,7 @@ export function withFormItem(Component, name) {
               label: slots.label,
               input: (
                 <Component
-                  {..._.omit(_.assign({ [$formTagName]: name }, props, attrs), $formItemProps)}
+                  {..._.omit(_.assign({ [$formTagName]: name }, props, attrs), $formItemProps, 'class')}
                   v-slots={_.omit(slots, ['label'])}
                   data-nodepath={attrs['data-nodepath']}
                   style={style.value.innerStyle}
