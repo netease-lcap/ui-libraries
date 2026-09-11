@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { Fragment } from 'vue';
 import { Cell } from 'vant';
-import { useMemo, useControllableValue, useRef, useCallback } from '@/plugins/hooks';
+import { useMemo, useEffect, useControllableValue, useRef, useCallback } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { addClass } from '@/utils';
@@ -33,6 +33,9 @@ export function handlePageState(props) {
       setCurrentPage(1, { pageSize: nextSize });
     },
   });
+  emit('sync:state', 'currentPage', currentPage);
+  emit('sync:state', 'pageSize', pageSize);
+
   return {
     currentPage,
     setCurrentPage,
@@ -85,14 +88,27 @@ export function handleDataSource(props) {
   const isAutoMore = pagination === 'autoMore';
   const deletePropsList = props
     .get($deletePropsList)
-    .concat($dataSourceDeleteField, ['formTagName'], 'data', 'setCurrentPage', 'setPageSize', 'pageSize', 'currentPage', 'pagination');
+    .concat(
+      $dataSourceDeleteField,
+      ['formTagName'],
+      'data',
+      'setCurrentPage',
+      'setPageSize',
+      'pageSize',
+      'currentPage',
+      'pagination',
+    );
   const ref = props.get('ref');
   const currentPageRef = useRef(currentPage);
   const lastAppliedPageRef = useRef(0);
   const pageSizeRef = useRef(pageSize);
   pageSizeRef.value = pageSize;
 
-  const { data: resultData, run, loading } = useRequestDataSource(dataConfig, {
+  const {
+    data: resultData,
+    run,
+    loading,
+  } = useRequestDataSource(dataConfig, {
     defaultParams: [{ currentPage, pageSize, pagination: isAutoMore }],
     onBefore: (params) => {
       if (_.isNumber(params?.currentPage)) {
@@ -193,36 +209,36 @@ export function handleDataRender(props) {
     .when(_.isNil, () => ({}))
     .otherwise(() => ({
       default: () => _.map(data, (item, index) => {
-        const itemNode = slots?.item?.({ item, index });
-        // 单元格模式：取消列数/均分宽度布局，仅用 Fragment 包裹 Cell
-        if (isCell) {
+          const itemNode = slots?.item?.({ item, index });
+          // 单元格模式：取消列数/均分宽度布局，仅用 Fragment 包裹 Cell
+          if (isCell) {
+            return (
+              <Fragment key={_.get(item, 'value', index)}>
+                <Cell>{{ title: () => itemNode }}</Cell>
+              </Fragment>
+            );
+          }
           return (
-            <Fragment key={_.get(item, 'value', index)}>
-              <Cell>{{ title: () => itemNode }}</Cell>
-            </Fragment>
+            <div
+              key={_.get(item, 'value', index)}
+              onClick={() => onClick(_.get(item, 'value', item))}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onClick(_.get(item, 'value', item));
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              class={addClass('el-list-components__frag', {
+                'is-selected': _.includes(_.concat([], value), _.get(item, 'value', item)),
+                'is-selectable': selection && selection !== 'none',
+              })}
+            >
+              {itemNode}
+            </div>
           );
-        }
-        return (
-          <div
-            key={_.get(item, 'value', index)}
-            onClick={() => onClick(_.get(item, 'value', item))}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                onClick(_.get(item, 'value', item));
-              }
-            }}
-            tabIndex={0}
-            role="button"
-            class={addClass('el-list-components__frag', {
-              'is-selected': _.includes(_.concat([], value), _.get(item, 'value', item)),
-              'is-selectable': selection && selection !== 'none',
-            })}
-          >
-            {itemNode}
-          </div>
-        );
-      }),
+        }),
     }));
   return {
     slots: _.assign({}, slots, dataSourceSlots),
