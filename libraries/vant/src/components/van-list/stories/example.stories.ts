@@ -78,8 +78,8 @@ export const AutoMore = {
   render: (args: any, { argTypes }: any) => ({
     props: Object.keys(argTypes),
     setup() {
-      const total = 45;
-      const pageSize = 10;
+      const total = 245;
+      const pageSize = 30;
       const listRef = ref(null);
       const columns = async ({ currentPage, pageSize: size }: { currentPage: number; pageSize: number }) => new Promise((resolve) => {
           setTimeout(() => {
