@@ -43,6 +43,7 @@ export function handlePageState(props) {
     setPageSize,
   };
 }
+handlePageState.order = 2;
 
 export function handleSelect(props) {
   const selection = props.get('selectionMode');
