@@ -79,6 +79,7 @@ export function handleSelect(props) {
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
+  const emit = props.get('emit');
   const textField = props.get('textField') || 'label';
   const valueField = props.get('valueField') || 'value';
   const currentPage = props.get('currentPage', 1);
@@ -145,6 +146,8 @@ export function handleDataSource(props) {
         setCurrentPage(1);
         return;
       }
+      emit('sync:state', 'pageSize', nextPage);
+      emit('sync:state', 'pageSize', pageSizeRef.value);
       run({
         currentPage: nextPage,
         pageSize: pageSizeRef.value,
