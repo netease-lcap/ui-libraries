@@ -27,16 +27,18 @@ export const Default = {
       const loadData = [{}, {}, {}];
       console.log('object');
       const columns = async () => new Promise((resolve) => {
-        setTimeout(() => {
-          resolve([
-            { text: '选项1', value: '1' },
-            { text: '选项2', value: '2' },
-            { text: '选项3', value: '3' },
-            { text: '选项4', value: '4' },
-            { text: '选项5', value: '5' },
-          ].flatMap((item) => [item, item, item, item, item]));
-        }, 1000);
-      });
+          setTimeout(() => {
+            resolve(
+              [
+                { text: '选项1', value: '1' },
+                { text: '选项2', value: '2' },
+                { text: '选项3', value: '3' },
+                { text: '选项4', value: '4' },
+                { text: '选项5', value: '5' },
+              ].flatMap((item) => [item, item, item, item, item]),
+            );
+          }, 1000);
+        });
       //   setTimeout(
       //   () => {
       //     resolve([
@@ -76,27 +78,38 @@ export const AutoMore = {
   render: (args: any, { argTypes }: any) => ({
     props: Object.keys(argTypes),
     setup() {
-      const total = 45;
-      const pageSize = 10;
+      const total = 245;
+      const pageSize = 30;
+      const listRef = ref(null);
       const columns = async ({ currentPage, pageSize: size }: { currentPage: number; pageSize: number }) => new Promise((resolve) => {
-        setTimeout(() => {
-          const start = (currentPage - 1) * size;
-          const list = Array.from({ length: Math.max(0, Math.min(size, total - start)) }, (_, index) => ({
-            text: `选项 ${start + index + 1}`,
-            value: String(start + index + 1),
-          }));
-          resolve({ list, total });
-        }, 400);
-      });
+          setTimeout(() => {
+            const start = (currentPage - 1) * size;
+            const list = Array.from({ length: Math.max(0, Math.min(size, total - start)) }, (_, index) => ({
+              text: `选项 ${start + index + 1}`,
+              value: String(start + index + 1),
+            }));
+            resolve({ list, total });
+          }, 400);
+        });
+
+      const handleClick = () => {
+        console.log(listRef,'==');
+        listRef.value?.reload();
+      };
 
       return {
         args,
         columns,
         pageSize,
+        listRef,
+        handleClick,
       };
     },
     template: `
+    <div>
+    <button @click="handleClick">点击</button>
       <van-list
+      ref="listRef"
         :dataSource="columns"
         pagination="autoMore"
         :pageSize="pageSize"
@@ -107,6 +120,7 @@ export const AutoMore = {
           <span>{{ item.text }}</span>
         </template>
       </van-list>
+    </div>
     `,
   }),
 };

@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import { Fragment } from 'vue';
+import { Fragment, nextTick, getCurrentInstance } from 'vue';
 import { Cell } from 'vant';
-import { useMemo, useEffect, useControllableValue, useRef, useCallback } from '@/plugins/hooks';
+import { useMemo, useControllableValue, useRef, useCallback } from '@/plugins/hooks';
 import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { addClass } from '@/utils';
@@ -43,6 +43,7 @@ export function handlePageState(props) {
     setPageSize,
   };
 }
+handlePageState.order = 2;
 
 export function handleSelect(props) {
   const selection = props.get('selectionMode');
@@ -79,6 +80,7 @@ export function handleSelect(props) {
 
 export function handleDataSource(props) {
   const dataConfig = props.get('dataSource');
+  const emit = props.get('emit');
   const textField = props.get('textField') || 'label';
   const valueField = props.get('valueField') || 'value';
   const currentPage = props.get('currentPage', 1);
@@ -136,15 +138,28 @@ export function handleDataSource(props) {
     },
   });
 
+  const instance = useMemo(() => getCurrentInstance(), []);
+  const resetScroll = useCallback(() => {
+    const root = instance?.subTree?.el ?? instance?.vnode?.el ?? instance?.proxy?.$el ?? ref?.$el;
+    if (!(root instanceof Element)) return;
+    root.scrollTop = 0;
+  }, [instance, ref]);
+
   const reload = useCallback(
     (params = {}) => {
       const hasPage = _.has(params, 'currentPage');
       const nextPage = hasPage ? params.currentPage : 1;
       currentPageRef.value = nextPage;
+      if (nextPage <= 1) {
+        resetScroll();
+        nextTick(resetScroll);
+      }
       if (!hasPage && currentPage !== 1 && setCurrentPage) {
         setCurrentPage(1);
         return;
       }
+      emit('sync:state', 'pageSize', nextPage);
+      emit('sync:state', 'pageSize', pageSizeRef.value);
       run({
         currentPage: nextPage,
         pageSize: pageSizeRef.value,
@@ -152,7 +167,7 @@ export function handleDataSource(props) {
         ...params,
       });
     },
-    [run, isAutoMore, currentPage, setCurrentPage],
+    [run, isAutoMore, currentPage, setCurrentPage, resetScroll, emit],
   );
 
   const dataSource = useHandleMapField({ textField, valueField, dataSource: useFormatDataSource(resultData) });
