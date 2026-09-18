@@ -24,6 +24,7 @@ export { VanSidebar, VanSidebarItem } from './van-sidebar';
 export { VanSearch, VanFormSearch } from './van-search';
 export { VanRate, VanFormRate } from './van-rate';
 export { VanForm } from './van-form';
+export { VanFormItemGroup } from './van-form-item-group';
 export { VanList } from './van-list';
 export { VanFlex } from './van-flex';
 export { VanRow, VanCol } from './van-row';
