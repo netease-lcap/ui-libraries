@@ -414,7 +414,7 @@ export default {
                                     position: 'sticky',
                                     left: left + 'px',
                                     zIndex,
-                                    overflow: 'hidden',
+                                    overflow: (type === 'th' && this.resizable) ? 'visible' : 'hidden',
                                 });
                             }
                         }
@@ -434,7 +434,7 @@ export default {
                                     position: 'sticky',
                                     right: right + 'px',
                                     zIndex,
-                                    overflow: 'hidden',
+                                    overflow: (type === 'th' && this.resizable) ? 'visible' : 'hidden',
                                 });
                             }
                         }
