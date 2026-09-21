@@ -35,7 +35,10 @@ export function handleModelValue(props) {
         });
         return ref.validate().then(
           () => ({ valid: true }),
-          () => ({ valid: false }),
+          () => {
+            ref.submit();
+            return { valid: false };
+          },
         );
       },
       resetForm: () => {
