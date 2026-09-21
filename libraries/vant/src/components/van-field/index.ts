@@ -15,7 +15,7 @@ const VanField = registerComponent(VantField, {
   name: 'van-field',
 });
 
-const VanFormField = withFormItem(VanField, 'van-form-field');
+const VanFormField = withFormItem(VanField, 'van-form-field', { flattenField: true });
 
 export { VanField, VanFieldRegister, VantField, VanFormField };
 export default VanField;

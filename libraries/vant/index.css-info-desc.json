@@ -1618,6 +1618,12 @@
     ".van-picker:focus,.van-picker._focus": "选择器:获得焦点",
     ".van-picker:hover,.van-picker._hover": "选择器:鼠标移入"
   },
+  "VanFormItemGroup": {
+    ".van-form-item-group__content": "",
+    ".van-form-item-group__content:active,.van-form-item-group__content._active": "",
+    ".van-form-item-group__content:focus,.van-form-item-group__content._focus": "",
+    ".van-form-item-group__content:hover,.van-form-item-group__content._hover": ""
+  },
   "VanFormPicker": {
     ".van-cell": "单元格",
     ".van-cell--clickable": "可点击单元格",

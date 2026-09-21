@@ -17,7 +17,8 @@ type FormItemProvide = {
   };
 };
 
-export function withFormItem(Component, name) {
+export function withFormItem(Component, name, options: { flattenField?: boolean } = {}) {
+  const flattenField = Boolean(options.flattenField);
   return {
     name,
     Component,
@@ -86,6 +87,24 @@ export function withFormItem(Component, name) {
         deleteFormitem?.(propName.value);
       });
       return () => {
+        if (flattenField) {
+          return (
+            <Component
+              {..._.assign({ [$formTagName]: name }, props, attrs, { name: propName.value })}
+              class={`${name} ${_.get(attrs, 'class', '')}`}
+              style={_.assign({}, style.value.style, style.value.innerStyle)}
+              data-nodepath={attrs['data-nodepath']}
+              v-slots={slots}
+              v-on={emit}
+              ref={(el) => {
+                componentRef.value = el;
+                formItemRef.value = el;
+              }}
+              modelValue={modelValue.value}
+              onUpdate:modelValue={onUpdateModelValue}
+            />
+          );
+        }
         return (
           <VanFormItem
             {..._.pick(_.assign({}, props, attrs, { name: propName.value }), $formItemProps)}
@@ -113,6 +132,7 @@ export function withFormItem(Component, name) {
     },
   };
 }
+
 export function handleComponentInForm(props) {
   const nodePath = props.get('data-nodepath');
   const formTagName = props.get('formTagName');
