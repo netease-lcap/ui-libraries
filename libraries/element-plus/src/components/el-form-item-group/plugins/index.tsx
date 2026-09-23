@@ -4,7 +4,7 @@ import { FormItemProps } from 'element-plus';
 import { $deletePropsList } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { addClass } from '@/utils';
-import { useMemo, useCallback, useState, useEffect } from '@/plugins/hooks';
+import { useMemo, useCallback, useState, useEffect, useRef } from '@/plugins/hooks';
 import { $formProvide } from '@/components/el-form/constants';
 
 const FormItemGroupAccumulate = new PluginAccumulateTypes<nasl.ui.ElFormItemGroupOptions, FormItemProps>();
@@ -132,7 +132,7 @@ export default FormItemGroupAccumulate.addPlugin({
         },
         [errorTipType],
       );
-      const validated = useCallback(async () => {
+      const validated = async () => {
         if (ignoreValidation) {
           setValid(true);
           applyErrorTipUI(true);
@@ -158,7 +158,7 @@ export default FormItemGroupAccumulate.addPlugin({
           emit?.('sync:state', 'valid', false);
           return { valid: false };
         }
-      }, [ignoreValidation, rulesProps, validatingValue, validatingProcess, applyErrorTipUI, emit]);
+      };
 
       useEffect(() => {
         emit?.('sync:state', 'valid', valid);
@@ -192,12 +192,14 @@ export default FormItemGroupAccumulate.addPlugin({
   .addPlugin({
     name: 'handleGroupValidated',
     handle(props) {
+      const validated = props.get('validated');
+      const validatedFn = useRef(() => {});
+      validatedFn.value = validated;
       useEffect(() => {
         const inject = props.get('inject');
         const { isInForm, setItemValidated } = inject?.[$formProvide] ?? {};
         if (!isInForm) return;
-        const validated = props.get('validated');
-        setItemValidated(() => validated());
+        setItemValidated(() => validatedFn.value());
       }, []);
       return {};
     },
