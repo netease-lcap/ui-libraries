@@ -1,0 +1,31 @@
+/**
+ * @component van-rate
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 评分图标大小
+   */
+  --van-rate-icon-size: 20px;
+  /**
+   * @type input
+   * @desc 评分图标间距
+   */
+  --van-rate-icon-gutter: var(--van-padding-base);
+  /**
+   * @type color
+   * @desc 评分图标空状态颜色
+   */
+  --van-rate-icon-void-color: var(--van-gray-5);
+  /**
+   * @type color
+   * @desc 评分图标满状态颜色
+   */
+  --van-rate-icon-full-color: var(--van-danger-color);
+  /**
+   * @type color
+   * @desc 评分图标禁用状态颜色
+   */
+  --van-rate-icon-disabled-color: var(--van-gray-5);
+}

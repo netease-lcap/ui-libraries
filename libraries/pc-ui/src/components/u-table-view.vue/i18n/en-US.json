@@ -3,5 +3,9 @@
     "error": "Failed to load. Please try again",
     "empty": "No data",
     "loadMore": "Load more",
-    "noMore": "No more items"
+    "noMore": "No more items",
+    "footerCalc": "Total",
+    "footerCalcMax": "Max",
+    "footerCalcMin": "Min",
+    "footerCalcAverage": "Average"
 }

@@ -194,6 +194,11 @@ export default {
     type: Boolean,
     default: true,
   },
+  /** 是否显示已上传文件列表 */
+  showFileList: {
+    type: Boolean,
+    default: true,
+  },
   /** 是否在请求时间超过 300ms 后显示模拟进度。上传进度有模拟进度和真实进度两种。一般大小的文件上传，真实的上传进度只有 0 和 100，不利于交互呈现，因此组件内置模拟上传进度。真实上传进度一般用于大文件上传。 */
   useMockProgress: {
     type: Boolean,

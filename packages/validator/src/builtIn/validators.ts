@@ -25,6 +25,7 @@ export const validators = {
   max: maxImpl,
   range: rangeImplement,
   pattern,
+  regex,
   is: (value: any, arg: any): boolean => value === arg,
   isNot: (value: any, arg: any): boolean => value !== arg,
   equals: (value: any, arg: any): boolean => isEqual(value, arg),
@@ -229,6 +230,10 @@ function isEmpty(value: any): boolean {
     return !value.length;
   } if (value instanceof Map) {
     return !value.size;
+  }
+  // Date 对象不能用 Object.keys 判断空，有效 Date 应视为非空
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime());
   } if (value instanceof Object) {
     return !Object.keys(value).length;
   }
@@ -250,6 +255,8 @@ function stringify(value: any): string {
     return `[${value}]`;
   } if (value instanceof Map) {
     return stringifyObject(value);
+  } if (value instanceof Date) {
+    return String(value);
   } if (value instanceof Object) {
     return stringifyMap(value);
   }
@@ -291,6 +298,24 @@ function pattern(
     flags += 'i';
   }
   return new RegExp(regExp.source, flags).test(value);
+}
+
+function regex(
+  value: any,
+  reg: {
+    pattern: string;
+    flags?: string;
+  },
+): boolean {
+  if (value === null || value === undefined) {
+    return false;
+  }
+
+  try {
+    return new RegExp(reg.pattern, reg.flags).test(value);
+  } catch (error) {
+    return false;
+  }
 }
 
 export default validators;

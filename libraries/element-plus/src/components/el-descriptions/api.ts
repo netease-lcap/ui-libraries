@@ -4,10 +4,10 @@ namespace nasl.ui {
   @IDEExtraInfo({
     order: 8,
     ideusage: {
-      "idetype": "container",
-      "structured": true,
-      "childAccept": "target.tag === 'el-descriptions-item'"
-    }
+      idetype: 'container',
+      structured: true,
+      childAccept: "target.tag === 'el-descriptions-item'",
+    },
   })
   @Component({
     title: '描述列表',
@@ -22,30 +22,12 @@ namespace nasl.ui {
   }
 
   export class ElDescriptionsOptions extends ViewComponentOptions {
-    @Prop({
-      group: '状态属性',
-      title: '是否有边框',
-      description: '是否带有边框',
-      setter: { concept: 'SwitchSetter' },
-    })
-    border: nasl.core.Boolean = false;
-
-    @Prop({
-      group: '数据属性',
-      title: '一行描述列表项的数量',
-      description: '一行描述列表项的数量',
-      setter: {
-        concept: 'NumberInputSetter',
-        precision: 0,
-        min: 1,
-      },
-    })
-    column: nasl.core.Decimal = 3;
-
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '排列方向',
-      description: '排列的方向',
+      description: '描述列表的排列方向',
+      docDescription: '控制描述列表项的排列方向。垂直：标签和内容垂直排列；水平：标签和内容水平排列。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '垂直' }, { title: '水平' }],
@@ -55,14 +37,38 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '列数',
+      description: '每行显示的列表项数量',
+      docDescription: '设置每行显示的描述列表项数量，用于控制列表的布局密度。',
+      setter: {
+        concept: 'NumberInputSetter',
+        precision: 0,
+        min: 1,
+      },
+    })
+    column: nasl.core.Decimal = 3;
+
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
+    @Prop({
+      group: '样式属性',
       title: '列表尺寸',
-      description: '列表的尺寸',
+      description: '选择列表的尺寸大小',
+      docDescription: '控制描述列表的整体尺寸。默认：标准尺寸；大型：宽松型列表；小型：紧凑型列表。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{title: '默认' }, { title: '大型' }, { title: '小型' }],
+        options: [{ title: '默认' }, { title: '大型' }, { title: '小型' }],
       },
     })
     size: '' | 'large' | 'small' = '';
+
+    @Prop({
+      group: '样式属性',
+      title: '显示边框',
+      description: '是否显示边框',
+      docDescription: '开启后，描述列表会显示边框，使内容区分更明显。',
+      setter: { concept: 'SwitchSetter' },
+    })
+    border: nasl.core.Boolean = false;
 
     @Slot({
       title: '标题',
@@ -96,24 +102,24 @@ namespace nasl.ui {
 
   @IDEExtraInfo({
     ideusage: {
-      "idetype": "container",
-      "forceRefresh": "parent",
-      "parentAccept": "target.tag === 'el-descriptions'",
-      "selector": [
+      idetype: 'container',
+      forceRefresh: 'parent',
+      parentAccept: "target.tag === 'el-descriptions'",
+      selector: [
         {
-          "expression": "this",
-          "cssSelector": ".el-descriptions__cell"
+          expression: 'this',
+          cssSelector: '.el-descriptions__cell',
         },
         {
-          "expression": "this.getElement(el => el.slotTarget === 'label')",
-          "cssSelector": ".el-descriptions__cell"
+          expression: "this.getElement(el => el.slotTarget === 'label')",
+          cssSelector: '.el-descriptions__cell',
         },
         {
-          "expression": "this.getElement(el => el.slotTarget === 'content')",
-          "cssSelector": ".el-descriptions__cell"
-        }
+          expression: "this.getElement(el => el.slotTarget === 'content')",
+          cssSelector: '.el-descriptions__cell',
+        },
       ],
-    }
+    },
   })
   @Component({
     title: '描述列表项',
@@ -131,6 +137,7 @@ namespace nasl.ui {
       group: '样式属性',
       title: '列的数量',
       description: '往右侧占据列的数量',
+      bindHide: true,
       setter: {
         concept: 'NumberInputSetter',
         precision: 0,
@@ -143,10 +150,11 @@ namespace nasl.ui {
       group: '样式属性',
       title: '跨越行数',
       description: '单元格应该跨越的行数',
-      setter: { 
+      bindHide: true,
+      setter: {
         concept: 'NumberInputSetter',
         precision: 0,
-        min: 1, 
+        min: 1,
       },
     })
     rowspan: nasl.core.Integer = 1;

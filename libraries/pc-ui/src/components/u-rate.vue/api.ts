@@ -90,6 +90,28 @@ namespace nasl.ui {
         tooltips: nasl.collection.List<nasl.core.String> = ['极差','失望','一般','满意','惊喜'];
 
         @Prop({
+          group: '主要属性',
+          title: '未选中图标',
+          description: '未选中图标',
+          docDescription: '未选中图标',
+          setter: {
+            concept: 'IconSetter',
+          },
+        })
+        unCheckedIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '选中图标',
+            description: '选中图标',
+            docDescription: '选中图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        checkedIcon: nasl.core.String;
+
+        @Prop({
             group: '交互属性',
             title: '可半选',
             description: '是否允许半选',

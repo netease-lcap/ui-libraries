@@ -245,7 +245,7 @@ export default createComponent({
   },
   render() {
     const ifLimit = this.ifLimit;
-    const inputAlign = this.vanField?.getProp('inputAlign');
+    const inputAlign = this.vanField?.getProp?.('inputAlign');
 
     if (this.isPreview) {
       return (

@@ -39,8 +39,26 @@
             @click="select(itemVM)">
         </a>
     </nav>
-    <div v-show="!hideButtons && !(!loop && selectedIndex === 0)" :class="$style.button" findname="realpostion" :vusion-index="selectedIndex" role="prev" @click="prev()"></div>
-    <div v-show="!hideButtons && !(!loop && selectedIndex === itemVMs.length - 1)" :class="$style.button"  findname="realpostion" :vusion-index="selectedIndex" role="next" @click="next()"></div>
+    <div
+      v-show="!hideButtons && !(!loop && selectedIndex === 0)"
+      :class="[$style.button, { [$style.useIcon]: !!prevIcon }]"
+      findname="realpostion"
+      :vusion-index="selectedIndex"
+      role="prev"
+      @click="prev()"
+    >
+      <i-ico v-if="prevIcon" :name="prevIcon"></i-ico>
+    </div>
+    <div
+      v-show="!hideButtons && !(!loop && selectedIndex === itemVMs.length - 1)"
+      :class="[$style.button, { [$style.useIcon]: !!nextIcon }]"
+      findname="realpostion"
+      :vusion-index="selectedIndex"
+      role="next"
+      @click="next()"
+    >
+      <i-ico v-if="nextIcon" :name="nextIcon"></i-ico>
+    </div>
 </div>
 </template>
 
@@ -83,6 +101,8 @@ export default {
         }, // duration: { type: Number, default: 1000, validator: (value) => Number.isInteger(value) && value >= 0 },
         router: { type: Boolean, default: false },
         hideButtons: { type: Boolean, default: false },
+        prevIcon: { type: String },
+        nextIcon: { type: String },
     },
     data() {
         return { animating: true };
@@ -209,6 +229,7 @@ export default {
     top: 50%;
     transform: translateY(calc(-50%));
     display: none;
+    cursor: var(--cursor-pointer);
 }
 .root:hover .button {
     display: block;
@@ -269,6 +290,16 @@ content: "\e664";
     top: 36%;
     left: 52%;
     transform: translate(-50%, -50%);
+}
+
+.root:hover .button.useIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button.useIcon::before {
+  content: none;
 }
 
 .root .loadContent {

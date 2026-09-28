@@ -75,21 +75,18 @@ export default function registerIElement(methods, options = {}) {
   initInspector();
 
   /**
-   * 计算审查器位置，并发送 iElementRect 信息
+   * 更新审查器显示（公共函数）
+   * @param {DOMRect|Object} rect - 元素的位置和尺寸信息
+   * @param {string} hoveredElementSelector - 元素选择器字符串
    */
-  function computeInspector() {
-    const el = tempElement;
-    if (!el) {
+  function updateInspector(rect, hoveredElementSelector) {
+    if (!rect) {
       INSPECTOR.style.display = 'none';
       return;
     }
 
-    const rect = el.getBoundingClientRect();
-    const hoveredElementSelector = el.tagName.toLowerCase() + Array.from(el.classList)
-      .filter((cls) => !/^cw-css-rule|^ide-custom-component|^_|vusion|s-empty|_fake|_empty|[dD]esigner|cw-style/.test(cls))
-      .map((cls) => `.${cls}`)
-      .join('');
-    if (!options.addPopoverManually) {
+    // 设置 INSPECTOR 的 popover 内容
+    if (!options.addPopoverManually && INSPECTOR.children[0]) {
       INSPECTOR.children[0].children[0].textContent = hoveredElementSelector;
       INSPECTOR.children[0].children[1].textContent = `${rect.width.toFixed(1)}px × ${rect.height.toFixed(1)}px`;
 
@@ -117,6 +114,25 @@ export default function registerIElement(methods, options = {}) {
       },
     };
     options.postMessage(payload);
+  }
+
+  /**
+   * 计算审查器位置，并发送 iElementRect 信息
+   */
+  function computeInspector() {
+    const el = tempElement;
+    if (!el) {
+      INSPECTOR.style.display = 'none';
+      return;
+    }
+
+    const rect = el.getBoundingClientRect();
+    const hoveredElementSelector = el.tagName.toLowerCase() + Array.from(el.classList)
+      .filter((cls) => !/^cw-css-rule|^ide-custom-component|^_|vusion|s-empty|_fake|_empty|[dD]esigner|cw-style/.test(cls))
+      .map((cls) => `.${cls}`)
+      .join('');
+
+    updateInspector(rect, hoveredElementSelector);
   }
 
   /**
@@ -190,9 +206,12 @@ export default function registerIElement(methods, options = {}) {
   }
 
   /**
-   * 计算 nodepath 下的主选择器的 query 字符串
+   * 计算主选择器字符串（通用版本）
+   * @param {string} componentNodePath - 组件节点路径（可选，如果不提供则使用闭包中的 componentNodePath）
+   * @param {Object} mainSelectorMapParam - 主选择器映射对象（可选，如果不提供则使用闭包中的 mainSelectorMap）
+   * @returns {string} 主选择器字符串
    */
-  function computeMainSelectorStr() {
+  function computeMainSelectorStrGeneric(componentNodePath, mainSelectorMap) {
     if (!componentNodePath) return Object.keys(mainSelectorMap).join(',');
 
     let nodePathStr = `[data-nodepath="${componentNodePath}"]`;
@@ -222,6 +241,13 @@ export default function registerIElement(methods, options = {}) {
       output.push(`${nodePathStr}${value ? '' : ' '}${key}`);
     });
     return output.join(',');
+  }
+
+  /**
+   * 计算 nodepath 下的主选择器的 query 字符串（使用闭包中的变量）
+   */
+  function computeMainSelectorStr() {
+    return computeMainSelectorStrGeneric(componentNodePath, mainSelectorMap);
   }
 
   methods.inspectElement = (data) => {
@@ -263,8 +289,15 @@ export default function registerIElement(methods, options = {}) {
     computeInspector();
   };
 
-  function getRelatedElement(el, relation) {
-    if (!el) return undefined;
+  /**
+   * 获取相关元素（通用版本）
+   * @param {Element} el - 当前元素
+   * @param {string} relation - 关系类型
+   * @param {string} mainSelectorStr - 主选择器字符串（可选，如果不提供则使用闭包中的 mainSelectorStr）
+   * @returns {Element|undefined} 相关元素
+   */
+  function getRelatedElementGeneric(el, relation, mainSelectorStr) {
+    if (!el || !mainSelectorStr) return undefined;
 
     if (relation === 'self') {
       return el;
@@ -282,6 +315,16 @@ export default function registerIElement(methods, options = {}) {
       return el.querySelector(mainSelectorStr);
     }
     return undefined;
+  }
+
+  /**
+   * 获取相关元素（使用闭包中的 mainSelectorStr）
+   * @param {Element} el - 当前元素
+   * @param {string} relation - 关系类型
+   * @returns {Element|undefined} 相关元素
+   */
+  function getRelatedElement(el, relation) {
+    return getRelatedElementGeneric(el, relation, mainSelectorStr);
   }
 
   function getIElementResult() {
@@ -338,6 +381,242 @@ export default function registerIElement(methods, options = {}) {
 
   methods.hideInspector = () => {
     INSPECTOR.style.display = 'none';
+  };
+
+  /**
+   * 高亮指定的 CSS 规则元素（通过 rect 信息）
+   * @param {Object} payload - 包含 rect 和 hoveredElementSelector 的对象
+   */
+  methods.highlightCssNode = (payload) => {
+    if (!payload || !payload.rect) {
+      methods.hideInspector();
+      return;
+    }
+
+    // 确保 INSPECTOR 已初始化
+    initInspector();
+
+    const { rect, hoveredElementSelector } = payload;
+    updateInspector(rect, hoveredElementSelector);
+  };
+
+  /**
+   * 在指定作用域内查找匹配选择器的元素（通用版本）
+   * @param {string} selector - CSS 选择器
+   * @param {string} scopeSelectorStr - 作用域选择器字符串
+   * @param {Object} mainSelectorMap - 主选择器映射
+   * @param {string} state - 状态：'none' | 'hover' | 'active' | 'focus'
+   * @returns {Element|null} 匹配的元素
+   */
+  function findElementBySelectorInScope(selector, scopeSelectorStr, mainSelectorMap, state) {
+    const statePattern = /:(hover|active|focus)|\._(hover|active|focus)/g;
+    const selectorParts = selector.split(',').map((s) => s.trim()).filter((s) => s);
+
+    try {
+      if (scopeSelectorStr && scopeSelectorStr.trim()) {
+        const mainSelectorParts = scopeSelectorStr.split(',').map((s) => s.trim()).filter((s) => s);
+
+        for (const mainSelectorPart of mainSelectorParts) {
+          const rootElements = Array.from(document.querySelectorAll(mainSelectorPart));
+
+          for (const rootEl of rootElements) {
+            for (const selectorPart of selectorParts) {
+              try {
+                const baseSelectorForQuery = selectorPart.replace(statePattern, '');
+                const hasStateInSelector = /:(hover|active|focus)|\._(hover|active|focus)/.test(selectorPart);
+
+                if (hasStateInSelector && state && state !== 'none') {
+                  if (!rootEl.classList.contains(`_${state}`)) {
+                    rootEl.classList.add(`_${state}`);
+                  }
+                }
+
+                try {
+                  if (rootEl.matches(selectorPart)) {
+                    return rootEl;
+                  }
+                } catch (matchError) {
+                  console.warn('[theme] matches failed for rootEl with selector:', selectorPart, matchError);
+                }
+
+                const candidates = rootEl.querySelectorAll ? Array.from(rootEl.querySelectorAll(baseSelectorForQuery)) : [];
+
+                for (const el of candidates) {
+                  if (el === rootEl) {
+                    // eslint-disable-next-line no-continue
+                    continue;
+                  }
+
+                  if (hasStateInSelector && state && state !== 'none') {
+                    if (!el.classList.contains(`_${state}`)) {
+                      el.classList.add(`_${state}`);
+                    }
+                  }
+
+                  try {
+                    if (el.matches(selectorPart)) {
+                      return el;
+                    }
+                  } catch (matchError) {
+                    console.warn('[theme] matches failed for selector:', selectorPart, matchError);
+                  }
+                }
+              } catch (e) {
+                console.warn('[theme] Error querying selector:', selectorPart, e);
+                // eslint-disable-next-line no-continue
+                continue;
+              }
+            }
+          }
+        }
+      } else {
+        for (const selectorPart of selectorParts) {
+          try {
+            const baseSelectorForQuery = selectorPart.replace(statePattern, '');
+            const matchedEl = document.querySelector(baseSelectorForQuery);
+            if (matchedEl) {
+              if (state && state !== 'none' && !matchedEl.classList.contains(`_${state}`)) {
+                matchedEl.classList.add(`_${state}`);
+              }
+              if (matchedEl.matches(selectorPart)) {
+                return matchedEl;
+              }
+            }
+          } catch (e) {
+            console.warn('[theme] Error querying selector in document:', selectorPart, e);
+            // eslint-disable-next-line no-continue
+            continue;
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('[theme] Error finding element by selector:', e);
+    }
+
+    return null;
+  }
+
+  // 辅助函数：将 DOMRect 转换为可序列化的纯对象
+  function rectToPlainObject(rect) {
+    if (!rect) return null;
+    return {
+      x: rect.x || 0,
+      y: rect.y || 0,
+      left: rect.left || 0,
+      top: rect.top || 0,
+      right: rect.right || 0,
+      bottom: rect.bottom || 0,
+      width: rect.width || 0,
+      height: rect.height || 0,
+    };
+  }
+
+  // 辅助函数：将 rects 数组转换为可序列化的纯对象数组
+  function rectsToPlainObjects(rects) {
+    if (!rects || !Array.isArray(rects)) return [];
+    return rects.map((rect) => rectToPlainObject(rect));
+  }
+
+  methods.findElementBySelector = (payload) => {
+    try {
+      const {
+        selector,
+        mainSelectorMap: payloadMainSelectorMap,
+        selectors: allSelectors,
+        state,
+        nodePath, // 在主题设置中可能为空或不存在
+        requestId, // 用于标识请求，会在返回时保留
+      } = payload;
+
+      // 在主题设置中，如果没有 nodePath，直接使用 mainSelectorMap 计算主选择器字符串
+      const mainSelectorStr = computeMainSelectorStrGeneric(nodePath || '', payloadMainSelectorMap || {});
+
+      // 查找匹配的元素
+      const matchedElement = findElementBySelectorInScope(selector, mainSelectorStr, payloadMainSelectorMap || {}, state);
+
+      if (!matchedElement) {
+        console.warn('[theme] No element matched selector:', selector, 'mainSelectorStr:', mainSelectorStr);
+        const result = { target: null, rects: [], has: { parent: false, prev: false, next: false, children: false } };
+        // 如果存在 requestId，自动发送结果
+        if (requestId !== undefined) {
+          options.postMessage({
+            from: 'lcap-theme',
+            type: 'findElementBySelectorResult',
+            data: { ...result, requestId },
+          });
+        }
+        return result;
+      }
+
+      // 设置 selected.element 以便 hoverIElement 和 switchIElement 能正常工作
+      if (matchedElement) {
+        selected.element = matchedElement;
+        componentNodePath = nodePath || '';
+        mainSelectorMap = { ...(payloadMainSelectorMap || {}) };
+        // selectors = allSelectors || [];
+      }
+
+      // 应用状态类（如果存在）
+      const hasStateClass = state && state !== 'none';
+      if (hasStateClass && !matchedElement.classList.contains(`_${state}`)) {
+        matchedElement.classList.add(`_${state}`);
+      }
+
+      // 获取 rects 并转换为可序列化的纯对象
+      const clientRects = Array.from(matchedElement.getClientRects()).filter((r) => r.width > 0 && r.height > 0);
+      const rects = clientRects.length > 0
+        ? rectsToPlainObjects(clientRects)
+        : (() => {
+          const boundingRect = matchedElement.getBoundingClientRect();
+          return [rectToPlainObject(boundingRect)];
+        })();
+
+      // 计算 hasInfo
+      const has = {
+        parent: !!getRelatedElementGeneric(matchedElement, 'parent', mainSelectorStr),
+        prev: !!getRelatedElementGeneric(matchedElement, 'prev', mainSelectorStr),
+        next: !!getRelatedElementGeneric(matchedElement, 'next', mainSelectorStr),
+        children: !!getRelatedElementGeneric(matchedElement, 'children', mainSelectorStr),
+      };
+
+      // 返回可序列化的对象
+      const result = {
+        target: nodePath || 'rootview',
+        rects,
+        has,
+      };
+
+      // 将 result 转换为纯 JSON 可序列化对象
+      const serializableResult = JSON.parse(JSON.stringify(result));
+
+      // 如果存在 requestId，自动发送结果（用于主题设置模式）
+      if (requestId !== undefined) {
+        options.postMessage({
+          from: 'lcap-theme',
+          type: 'findElementBySelectorResult',
+          data: { ...serializableResult, requestId },
+        });
+      }
+
+      return serializableResult;
+    } catch (error) {
+      console.error('[theme] Error in findElementBySelector:', error);
+      const errorResult = {
+        target: null,
+        rects: [],
+        has: { parent: false, prev: false, next: false, children: false },
+        error: error.message,
+      };
+      // 如果存在 requestId，自动发送错误结果
+      if (payload?.requestId !== undefined) {
+        options.postMessage({
+          from: 'lcap-theme',
+          type: 'findElementBySelectorResult',
+          data: { ...errorResult, requestId: payload.requestId },
+        });
+      }
+      return errorResult;
+    }
   };
 
   return {

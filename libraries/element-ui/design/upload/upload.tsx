@@ -69,6 +69,7 @@ export default defineComponent({
       imageViewerProps: props.imageViewerProps,
       fileListDisplay: props.fileListDisplay,
       onRemove: onInnerRemove,
+      showFileList: props.showFileList,
     }));
 
     const dragProps = computed<UploadDragEvents>(() => ({
@@ -113,6 +114,9 @@ export default defineComponent({
   },
 
   methods: {
+    abort() {
+      this.cancelUpload({});
+    },
     renderTrigger() {
       const { UploadIcon } = this.icons;
       const getDefaultTrigger = () => {

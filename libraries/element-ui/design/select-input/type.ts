@@ -126,6 +126,10 @@ export interface ElSelectInputProps {
    */
   suffix?: string | ElNode;
   /**
+   * 组件前置图标
+   */
+  prefixIcon?: ElNode;
+  /**
    * 组件后置图标
    */
   suffixIcon?: ElNode;

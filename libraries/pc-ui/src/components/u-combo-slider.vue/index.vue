@@ -14,7 +14,7 @@
             </slot>
         </div>
         <u-slider :class="$style.slider" @mousedown.native="onMousedown" :value="currentValue" @input="onInput" @slide="onSlide"
-            :min="min" :max="max" :step="step" :precision="precision" :range="range" :readonly="readonly" :disabled="disabled"
+            :min="min" :max="max" :step="step" :precision="precision" :range="range" :readonly="readonly" :disabled="computedDisabled"
             :show-tooltip="showTooltip" :tooltip="tooltip" :placement="placement" :multiple="multiple"
         ></u-slider>
          <!-- @override: 增加数值显示 -->
@@ -27,7 +27,7 @@
     <u-number-input :class="$style.input" :value="currentValue" @change="onInput($event.value, 'numberInput')" @validate="onValidate"
         :min="numberMin" :max="numberMax" :step="step || 1" :precision="precision"
         :formatter="formatter" :hide-buttons="hideButtons"
-        :readonly="readonly" :disabled="disabled" v-if="!multiple"
+        :readonly="readonly" :disabled="computedDisabled" v-if="!multiple"
     ></u-number-input>
     <slot>
         <!-- @override: 增加单位显示 -->
@@ -47,6 +47,9 @@ import { NumberFormatter } from '../../utils/Formatters';
 
 export default {
     name: 'u-combo-slider',
+    inject: {
+        formVM: { default: null },
+    },
     components: { SEmpty },
     mixins: [
       MField,
@@ -55,7 +58,7 @@ export default {
         value: 'currentValue',
         readonly: 'readonly',
         preview: 'isPreview',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       })
     ],
     components: {
@@ -95,6 +98,9 @@ export default {
         return { currentValue: this.value, isMousedown: false };
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         numberMin() {
             return Math.max(
                 this.min,

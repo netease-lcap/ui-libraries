@@ -102,6 +102,10 @@ export interface ElPaginationProps {
    */
   totalContent?: boolean | ElNode;
   /**
+   * 只有一页时是否隐藏
+   */
+  hideOnSinglePage?: boolean;
+  /**
    * 当前页或分页大小发生变化时触发
    */
   onChange?: (pageInfo: PageInfo) => void;

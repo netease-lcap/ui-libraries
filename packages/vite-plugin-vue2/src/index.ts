@@ -139,9 +139,8 @@ export function createVuePlugin(rawOptions: VueViteOptions = {}): Plugin {
 
     async transform(code, id) {
       const { filename, query } = parseVueRequest(id);
-      const [filepath] = id.split('?');
 
-      if (options.jsx && jsxFilter(filepath)) return transformVueJsx(code, id, options.jsxOptions, options.jsxBabelPlugins);
+      if (options.jsx && (!query.vue || query.type === 'script') && jsxFilter(id)) return transformVueJsx(code, id, options.jsxOptions, options.jsxBabelPlugins);
 
       if ((!query.vue && !filter(filename)) || query.raw) return;
 

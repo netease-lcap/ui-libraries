@@ -16,12 +16,16 @@ export const Example1 = {
   name: '基础用法',
   render: () => ({
     setup() {
-      const value = ref(null);
-      return { value };
+      const value = ref(4);
+      const rateRef = ref();
+      setTimeout(() => {
+        console.log(rateRef,'rate===');
+      }, 1000);
+      return { value, rateRef };
     },
     template: `
     <div>
-      <el-rate v-model="value" />
+      <el-rate ref="rateRef" v-model="value" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"/>
     </div>
     `,
   }),

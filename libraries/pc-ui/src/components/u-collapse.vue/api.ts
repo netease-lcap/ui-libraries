@@ -76,6 +76,17 @@ namespace nasl.ui {
         })
         disabled: nasl.core.Boolean = false;
 
+        @Prop({
+            group: '主要属性',
+            title: '展开图标',
+            description: '切换展开收起图标',
+            docDescription: '支持自定义展开图标，默认使用右箭头图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        expandIcon: nasl.core.String = 'right-arrow';
+
         @Event({
             title: '展开时',
             description: '展开此面板时触发',

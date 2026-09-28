@@ -24,7 +24,7 @@ export const Default = {
   name: '基础示例',
   render: () => ({
     template: `
-    <el-checkbox-group>
+    <el-checkbox-group type="button">
       <el-checkbox label="选项1" value="1" >
         <el-text text="选项1" />
       </el-checkbox>

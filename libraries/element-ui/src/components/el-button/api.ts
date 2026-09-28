@@ -113,7 +113,7 @@ namespace nasl.ui {
       description: '是否加载中状态',
       setter: { concept: 'SwitchSetter' },
     })
-    private loading: nasl.core.Boolean = false;
+    loading: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',

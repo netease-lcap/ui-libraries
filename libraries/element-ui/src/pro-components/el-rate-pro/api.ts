@@ -8,7 +8,8 @@ namespace nasl.ui {
       idetype: 'element',
       additionalAttribute: {
         ':showText': '"false"',
-      }
+      },
+      forceUpdateWhenAttributeChange: true,
     }
   })
   @Component({
@@ -80,8 +81,41 @@ namespace nasl.ui {
       title: '展示辅助文本',
       description: '是否显示对应的辅助文字',
       setter: { concept: 'SwitchSetter' },
+      onChange: [
+        {
+          update: {
+            showScore: false,
+          },
+          if: (_) => _,
+        },
+      ],
     })
     showText: nasl.core.Boolean = false;
+
+    @Prop<ElRateProOptions, 'showScore'>({
+      group: '主要属性',
+      title: '展示分数',
+      description: '是否显示分数, 与 展示辅助文本 互斥',
+      setter: { concept: 'SwitchSetter' },
+      onChange: [
+        {
+          update: {
+            showText: false,
+          },
+          if: (_) => _,
+        },
+      ],
+    })
+    showScore: nasl.core.Boolean = false;
+
+    @Prop<ElRateProOptions, 'scoreTemplate'>({
+      group: '主要属性',
+      title: '分数模板',
+      description: '分数模板',
+      setter: { concept: 'InputSetter' },
+      if: _ => _.showScore,
+    })
+    scoreTemplate: nasl.core.String = '{value}';
 
     @Prop<ElRateProOptions, 'texts'>({
       group: '主要属性',
@@ -112,13 +146,60 @@ namespace nasl.ui {
     })
     size: nasl.core.String = '24px';
 
-    @Prop({
-      group: '样式属性',
+    // 是否区分颜色
+    @Prop<ElRateProOptions, 'distinguishColor'>({
+      group: '主要属性',
+      title: '是否区分颜色',
+      description: '是否区分颜色',
+      setter: { concept: 'SwitchSetter' },
+    })
+    distinguishColor: nasl.core.Boolean = false;
+
+    @Prop<ElRateProOptions, 'color'>({
+      group: '主要属性',
       title: '图标颜色',
       description: '评分图标的颜色，样式中默认为 #ED7B2F。一个值表示设置选中高亮的五角星颜色，示例：[选中颜色]。数组则表示分别设置 选中高亮的五角星颜色 和 未选中暗灰的五角星颜色，[选中颜色，未选中颜色]。示例：["#ED7B2F", "#E3E6EB"]。',
       setter: { concept: 'InputSetter' },
+      if: _ => !_.distinguishColor,
     })
     color: nasl.core.String | nasl.collection.List<nasl.core.String> = '#ED7B2F';
+
+
+    @Prop<ElRateProOptions, 'colors'>({
+      group: '主要属性',
+      title: '图标颜色',
+      description: 'icon的颜色。传入数组，共有 3 个元素，为 3 个分段所对应的颜色',
+      setter: { concept: 'InputSetter' },
+      if: _ => _.distinguishColor,
+    })
+    colors: nasl.collection.List<nasl.core.String> = ['#99A9BF', '#F7BA2A', '#FF9900'];
+
+    @Prop<ElRateProOptions, 'lowThreshold'>({
+      group: '主要属性',
+      title: '低分界限值',
+      description: '低分界限值',
+      setter: { concept: 'NumberInputSetter' },
+      if: _ => _.distinguishColor,
+    })
+    lowThreshold: nasl.core.Decimal = 2;
+
+    @Prop<ElRateProOptions, 'highThreshold'>({
+      group: '主要属性',
+      title: '高分界限值',
+      description: '高分界限值',
+      setter: { concept: 'NumberInputSetter' },
+      if: _ => _.distinguishColor,
+    })
+    highThreshold: nasl.core.Decimal = 4;
+
+    @Prop<ElRateProOptions, 'voidColor'>({
+      group: '主要属性',
+      title: '未选中颜色',
+      description: '未选中颜色',
+      setter: { concept: 'InputSetter' },
+      if: _ => _.distinguishColor,
+    })
+    voidColor: nasl.core.String = '#99A9BF';
 
     @Event({
       title: '改变后',

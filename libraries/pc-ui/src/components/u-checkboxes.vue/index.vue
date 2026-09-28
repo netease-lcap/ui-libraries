@@ -1,6 +1,6 @@
 <template>
-<div 
-  :class="$style.root" 
+<div
+  :class="$style.root"
   :style="getStyle()"
   :direction="direction"
   :isSetColumn="isSetColumn">
@@ -10,7 +10,7 @@
       v-if="checkAll"
       label="check-all"
       :value="all"
-      :disabled="disabled"
+      :disabled="computedDisabled"
       :readonly="readonly"
       :style="{ display: checkAllDisplay }"
       :preview="isPreview"
@@ -24,7 +24,7 @@
       :key="index"
       :text="$at2(node, textField)"
       :label="$at2(node, valueField)"
-      :disabled="node.disabled"
+      :disabled="node.disabled || computedDisabled"
       :readonly="node.readonly"
       :designer="$env.VUE_APP_DESIGNER"
       :node="node"
@@ -57,6 +57,9 @@ import UPreview from '../u-text.vue/preview.vue';
 
 export default {
   name: "u-checkboxes",
+  inject: {
+    formVM: { default: null },
+  },
   childName: "u-checkbox",
   components: {
     UCheckbox,
@@ -82,7 +85,7 @@ export default {
       allChecked: 'all',
       readonly: 'readonly',
       preview: 'isPreview',
-      disabled: 'disabled',
+      disabled: 'computedDisabled',
     }),
   ],
   props: {
@@ -135,6 +138,9 @@ export default {
     },
   },
   computed: {
+    computedDisabled() {
+      return this.disabled || (this.formVM && this.formVM.disabled);
+    },
     // 除了全选checkbox以外的子实例
     itemVMsExcludesCheckAll() {
       return this.itemVMs.filter((vm) => vm.label !== "check-all");
@@ -175,7 +181,7 @@ export default {
       }
     },
     canCheck($event) {
-      if (this.readonly || this.disabled || this.isPreview) return false;
+      if (this.readonly || this.computedDisabled || this.isPreview) return false;
       const value = $event.value;
       const label = $event.itemVM.label;
       if (label === "check-all") return true;
@@ -293,8 +299,8 @@ export default {
               display: 'grid',
               gridTemplateColumns: `repeat(${this.column}, calc(100% / ${this.column}))`
           }
-      } 
-      
+      }
+
       this.isSetColumn = isSetColumn
       return styles
     },

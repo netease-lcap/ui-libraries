@@ -18,14 +18,40 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElInputPro extends ViewComponent {
-    constructor(options?: Partial<ElInputProOptions>) {
-      super();
-    }
-
     @Prop({
       title: '值',
     })
     value: nasl.core.String;
+
+    @Method({
+      title: '聚焦',
+      description: '聚焦',
+    })
+    focus(): void {}
+
+    @Method({
+      title: '失去焦点',
+      description: '失去焦点',
+    })
+    blur(): void {}
+
+    @Method({
+      title: '选择',
+      description: '选择',
+    })
+    select(): void {}
+
+    @Method({
+      title: '清空',
+      description: '清空',
+    })
+    clear(): void {}
+
+    constructor(options?: Partial<ElInputProOptions>) {
+      super();
+    }
+
+
   }
 
   export class ElInputProOptions extends ViewComponentOptions {
@@ -34,7 +60,8 @@ namespace nasl.ui {
       sync: true,
       title: '值',
       description: '输入框的值',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'InputSetter' ,
+      },
     })
     value: nasl.core.String;
 
@@ -184,6 +211,22 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
+      title: '显示字数统计',
+      description: '是否在输入框右侧显示字数统计',
+      setter: { concept: 'SwitchSetter' },
+    })
+    showLimitNumber: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '最小长度',
+      description: '最小长度',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    minlength: nasl.core.Decimal;
+
+    @Prop({
+      group: '主要属性',
       title: '名称',
       description: '名称',
       setter: { concept: 'InputSetter' },
@@ -214,14 +257,7 @@ namespace nasl.ui {
     })
     showClearIconOnEmpty: nasl.core.Boolean = false;
 
-    @Prop<ElInputProOptions, 'showLimitNumber'>({
-      group: '主要属性',
-      title: '显示字数统计',
-      description: '是否在输入框右侧显示字数统计',
-      setter: { concept: 'SwitchSetter' },
-      if: _ => !!_.maxlength
-    })
-    showLimitNumber: nasl.core.Boolean = false;
+
 
     @Prop({
       group: '主要属性',
@@ -295,11 +331,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: 'Tips',
+      title: '输入框下方提示文本',
       description: '输入框下方提示文本，会根据不同的 `status` 呈现不同的样式。',
       setter: { concept: 'InputSetter' },
     })
-    private tips: nasl.core.String;
+    tips: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -463,6 +499,8 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElInputGroupPro extends ViewComponent {
+ 
+
     constructor(options?: Partial<ElInputGroupProOptions>) {
       super();
     }

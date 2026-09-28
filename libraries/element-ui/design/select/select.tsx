@@ -635,6 +635,7 @@ export default defineComponent({
           {...{
             props: {
               autoWidth: this.autoWidth,
+              autofocus: this.autofocus,
               borderless: this.borderless,
               readonly: this.readonly,
               allowInput: this.isFilterable,

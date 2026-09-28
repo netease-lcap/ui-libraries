@@ -12,12 +12,12 @@ export default {
                 uid: '1',
                 name: 'breakfast.png',
                 status: 'success',
-                url: 'https://static-vusion.163yun.com/assets/breakfast.png',
+                url: 'https://static-vusion.nos.lcap.163yun.com/assets/breakfast.png',
             }, {
                 uid: '2',
                 name: 'salad.png',
                 status: 'success',
-                url: 'https://static-vusion.163yun.com/assets/salad.png',
+                url: 'https://static-vusion.nos.lcap.163yun.com/assets/salad.png',
             }],
         };
     },

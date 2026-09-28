@@ -49,6 +49,18 @@ namespace nasl.ui {
     group: 'Navigation',
   })
   export class ElDropdown<T, V> extends ViewComponent {
+    @Prop({
+      title: '是否禁用',
+      description: '是否禁用',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '数据',
+      description: '下拉菜单的数据',
+    })
+    data: nasl.collection.List<T>;
+
     @Method({
       title: '重新加载',
       description: '清除缓存，重新加载',
@@ -61,21 +73,24 @@ namespace nasl.ui {
   }
 
   export class ElDropdownOptions<T, V> extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
-      docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      description: '下拉菜单的数据来源',
+      docDescription: '设置下拉菜单的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       designerValue: [{}, {}, {}],
-      bindOpen: true,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
     @Prop({
       group: '数据属性',
       title: '数据类型',
-      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
+      description: '数据源返回的数据结构类型',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示说明。',
     })
     dataSchema: T;
 
@@ -99,7 +114,7 @@ namespace nasl.ui {
       },
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
-    
+
     @Prop({
       group: '数据属性',
       title: '禁用字段',
@@ -109,8 +124,8 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    disabledField: (item: T) => nasl.core.Boolean = ((item: any) => item.disabled);
-    
+    disabledField: (item: T) => nasl.core.Boolean = (item: any) => item.disabled;
+
     @Prop({
       group: '数据属性',
       title: '分隔字段',
@@ -120,7 +135,7 @@ namespace nasl.ui {
         concept: 'PropertySelectSetter',
       },
     })
-    dividedField: (item: T) => nasl.core.Boolean = ((item: any) => item.divided);
+    dividedField: (item: T) => nasl.core.Boolean = (item: any) => item.divided;
 
     // @Prop({
     //   group: '数据属性',
@@ -237,7 +252,7 @@ namespace nasl.ui {
       description: '触发下拉的行为',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [{ title: '鼠标悬停' }, { title: '点击' }, { title: '上下文菜单' }],
+        options: [{ title: '鼠标悬停' }, { title: '点击' }, { title: '右键点击' }],
       },
     })
     trigger: 'hover' | 'click' | 'contextmenu' = 'hover';
@@ -295,7 +310,23 @@ namespace nasl.ui {
       title: '点击左侧按钮时',
       description: '下拉触发元素呈现为按钮组时，点击左侧按钮的回调',
     })
-    onClick: (event: {}) => any;
+    onClick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
 
     @Event({
       title: '点击下拉项时',
@@ -396,6 +427,22 @@ namespace nasl.ui {
       title: '点击',
       description: '在元素上按下并释放任意鼠标按钮时触发。',
     })
-    onClick: (event: MouseEvent) => any;
+    onClick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => any;
   }
 }

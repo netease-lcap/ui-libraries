@@ -25,7 +25,7 @@
 
 <script>
 
-import isObject from 'lodash/isObject';
+import { isObject } from 'lodash';
 
 export default {
     name: 'u-table-view-filters-popper',

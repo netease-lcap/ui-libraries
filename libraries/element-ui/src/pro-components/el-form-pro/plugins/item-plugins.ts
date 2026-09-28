@@ -51,9 +51,6 @@ const useRules = ({ useComputed }: MapGet) => {
 
     return map(v, (item) => {
       return {
-        // required: item.required,
-        // message: item.message,
-        // ...item,
         trigger: 'all',
         validator: (val) => {
           const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);

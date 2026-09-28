@@ -28,6 +28,7 @@ export interface CommonDisplayFileProps {
   fileListDisplay?: ElUploadProps['fileListDisplay'];
   onRemove?: (p: UploadRemoveContext) => void;
   imageViewerProps?: ImageViewerProps;
+  showFileList?: boolean;
 }
 
 export type UploadProps = ElUploadProps;

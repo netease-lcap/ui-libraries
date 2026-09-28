@@ -1,0 +1,4 @@
+/* 路由联动模式：内容由 el-router-view 渲染，隐藏 Tab 面板内容区 */
+.el-tabs.el-tabs--route-linkage > .el-tabs__content {
+  display: none;
+}

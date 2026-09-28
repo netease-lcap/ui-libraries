@@ -1,0 +1,15 @@
+/**
+ * @component el-loading
+ */
+:root {
+  /**
+   * @desc 加载中图标大小
+   * @type input
+   */
+  --el-loading-spinner-size: 42px;
+  /**
+   * @desc 全屏加载中图标大小
+   * @type input
+   */
+  --el-loading-fullscreen-spinner-size: 50px;
+}

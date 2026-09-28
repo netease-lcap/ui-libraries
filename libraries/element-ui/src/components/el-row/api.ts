@@ -87,6 +87,14 @@ namespace nasl.ui {
       tabKind: 'style',
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 0;
+    
+    @Prop({
+      group: '主要属性',
+      title: '自定义标签',
+      description: '自定义元素标签',
+      setter: { concept: 'InputSetter' },
+    })
+    tag: nasl.core.String = 'div';
 
     @Slot({
       title: '自定义默认内容',

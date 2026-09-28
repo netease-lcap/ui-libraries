@@ -18,9 +18,10 @@
                     && !!$attrs['vusion-node-path']
                 "
             ></s-empty>
-            <i-ico v-if="loading" :class="$style.iconLoading" name="loading"></i-ico>
+            <i-ico v-if="loading" :class="$style.iconLoading" :name="loadingIcon"></i-ico>
+            <i-ico v-else-if="type !== 'more' && expandIcon" :class="[$style.icon, $style.expandIcon]" :name="expandIcon"></i-ico>
             <i :class="$style.icon" v-else-if="type !== 'more'"></i>
-            <i-ico name="more" v-else :class="$style.iconMore"></i-ico>
+            <i-ico :name="moreIcon" v-else :class="$style.iconMore"></i-ico>
         </div>
         <m-popper
             ref="popper"
@@ -131,6 +132,10 @@ export default {
         targetField: { type: String, default: 'target' },
         initialLoad: { type: Boolean, default: true },
         collapsibleField: { type: String, default: 'collapsible' },
+        loadingIcon: { type: String, default: 'loading' },
+        moreIcon: { type: String, default: 'more' },
+        expandIcon: { type: String },
+        menuExpandIcon: { type: String },
     },
     data() {
         return {
@@ -473,7 +478,7 @@ export default {
     top: 50%;
     right: 0;
     transform: translateY(-50%);
-    font-size: 18px;
+    font-size: calc(var(--dropdown-expand-icon-size, 14px) + 4px);
 }
 
 .icon::before {
@@ -493,6 +498,22 @@ export default {
 }
 
 .opened .icon::before{
+  transform: rotate(180deg);
+}
+
+.icon.expandIcon {
+  font-size: var(--dropdown-expand-icon-size, 14px);
+}
+
+.icon.expandIcon svg {
+  transition: transform var(--transition-duration-base);
+}
+
+.icon.expandIcon::before {
+  content: none;
+}
+
+.opened .icon.expandIcon svg {
   transform: rotate(180deg);
 }
 

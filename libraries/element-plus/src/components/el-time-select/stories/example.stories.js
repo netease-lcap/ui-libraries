@@ -32,7 +32,8 @@ export const Example1 = {
       };
     },
     template: `
-    <el-time-select v-model="time"  start="09:00" end="12:00"></el-time-select>
+    <el-time-select  start="09:00" end="12:00" clearable       clearIconName="CircleClose"> </el-time-select>
+    
 
     `,
   }),

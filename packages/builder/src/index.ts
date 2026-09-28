@@ -13,11 +13,11 @@ export {
   parseComponentAPI,
   parseCssVars,
   parseCssVarsOld,
-  transformTsFunc2NaslLogic,
+  transformFunc2NaslLogic as transformTsFunc2NaslLogic,
 } from './nasl';
 
 export {
-  transformExpression2nasl,
+  transformExpression2Nasl,
   transformTsType2Nasl,
   transformFunc2Nasl,
   transformTSX2Nasl,

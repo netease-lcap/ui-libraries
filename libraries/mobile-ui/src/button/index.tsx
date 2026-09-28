@@ -342,4 +342,24 @@ Button.props = {
   link: [String, Function]
 };
 
-export default createComponent<ButtonProps, ButtonEvents, ButtonSlots>(Button);
+const ButtonComponent = createComponent<ButtonProps, ButtonEvents, ButtonSlots>(Button);
+
+export default createComponent({
+  props: Button.props,
+  inject: {
+    vanForm: {
+      default: null,
+    },
+  },
+  render(h) {
+    return h(ButtonComponent as any, {
+      props: {
+        ...(this as any).$props,
+        disabled: (this as any).vanForm?.disabled || (this as any).$props.disabled,
+      },
+      attrs: (this as any).$attrs,
+      on: (this as any).$listeners || {},
+      scopedSlots: (this as any).$scopedSlots,
+    }, (this as any).$slots.default);
+  },
+});

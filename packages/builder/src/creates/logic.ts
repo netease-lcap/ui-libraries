@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import { camelCase, upperFirst } from 'lodash';
+import { camelCase } from 'lodash';
 import path from 'path';
 import pc from 'picocolors';
 import prompts from 'prompts';
@@ -101,8 +101,8 @@ export async function createLogic(rootPath: string, metaInfo: ProjectMetaInfo, o
   fs.writeFileSync(logicFilePath, `${content}\n${logicCode}`, 'utf-8');
 }
 
-export async function executeCreateLogic(rootPath: string, metaInfo: ProjectMetaInfo) {
-  const options = await getCreateLogicOptions(rootPath, metaInfo);
+export async function executeCreateLogic(rootPath: string, metaInfo: ProjectMetaInfo, prompt: any) {
+  const options = prompt ?? await getCreateLogicOptions(rootPath, metaInfo);
 
   if (!options) {
     return;

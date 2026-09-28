@@ -134,6 +134,24 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       };
     };
 
+    // 校验指定字段
+    const validateField = async (fields: string[]) => {
+      if (
+        !instance ||
+        !instance.refs ||
+        !instance.refs.$base ||
+        !Array.isArray(fields) ||
+        !fields.every((item) => typeof item === 'string')
+      ) {
+        return { valid: false };
+      }
+
+      const result = await (instance.refs.$base as any).validate({ fields });
+      return {
+        valid: result === true,
+      };
+    };
+
     provide<FormExtendsContext>(FORM_CONTEXT, {
       labelWidth,
       labelEllipsis: useComputed('labelEllipsis', (v) => !!v),
@@ -215,6 +233,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       [$deletePropList]: ['onReset'],
       [$ref]: {
         validate,
+        validateField,
         resetForm,
         setFormData,
         getFormData,

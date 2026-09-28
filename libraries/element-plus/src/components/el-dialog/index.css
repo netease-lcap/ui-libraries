@@ -1,0 +1,13 @@
+/* 非全屏弹框限制最大高度，超高时由 body 内部滚动 */
+.el-dialog:not(.is-fullscreen) {
+  max-height: var(--el-dialog-max-height, 80vh);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.el-dialog:not(.is-fullscreen) .el-dialog__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}

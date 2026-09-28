@@ -1,51 +1,52 @@
 import fs from 'fs-extra';
 import path from 'path';
+import os from 'os';
+import * as YAML from 'yaml';
+import {
+  getProjectInfo as getExtensionProjectMeta,
+  getSourceSchema,
+  getLcapUIComponentList,
+  type ExtensionProjectInfo as ProjectMetaInfo,
+  type ProjectLibUIInfo,
+} from '../shared';
 
-function getFrameWorkKind(pkgInfo, rootPath) {
-  if (!pkgInfo) {
-    pkgInfo = fs.readJSONSync(path.resolve(rootPath, 'package.json'));
+export { getExtensionProjectMeta, getSourceSchema, getLcapUIComponentList };
+
+export type { ProjectMetaInfo, ProjectLibUIInfo };
+
+export function getLcapConfig() {
+  const lcapConfigPath = path.resolve(os.homedir(), '.lcaprc');
+
+  if (!fs.existsSync(lcapConfigPath)) {
+    return null;
   }
 
-  if (pkgInfo.peerDependencies && Object.keys(pkgInfo.peerDependencies).includes('@tarojs/taro')) {
-    return 'taro';
-  }
+  const yaml = fs.readFileSync(lcapConfigPath, 'utf-8');
+  const config = YAML.parse(yaml);
 
-  if (pkgInfo.peerDependencies && Object.keys(pkgInfo.peerDependencies).includes('react')) {
-    return 'react';
-  }
-
-  if (
-    pkgInfo.peerDependencies
-    && pkgInfo.peerDependencies.vue
-    && (pkgInfo.peerDependencies.vue.startsWith('3.') || pkgInfo.peerDependencies.vue.startsWith('^3.'))
-  ) {
-    return 'vue3';
-  }
-
-  if (
-    pkgInfo.peerDependencies
-    && pkgInfo.peerDependencies.vue
-    && (pkgInfo.peerDependencies.vue.startsWith('2.') || pkgInfo.peerDependencies.vue.startsWith('^2.'))
-  ) {
-    return 'vue2';
-  }
-
-  return '';
+  return config;
 }
 
-export interface ProjectMetaInfo {
-  framework: 'vue2' | 'react' | 'vue3' | 'taro';
-  name: string;
-  version: string;
+export function updateLcapConfg(config) {
+  const lcapConfig = getLcapConfig();
+  Object.keys(config).forEach((key) => {
+    if (lcapConfig[key]) {
+      lcapConfig[key] = config[key];
+    }
+  });
+
+  const yaml = YAML.stringify(lcapConfig);
+  fs.writeFileSync(path.resolve(os.homedir(), '.lcaprc'), yaml);
 }
 
-export function getExtensionProjectMeta(rootPath: string) {
-  const pkgInfo = fs.readJSONSync(path.resolve(rootPath, 'package.json'));
-  const framework = getFrameWorkKind(pkgInfo, rootPath);
+export function updatePackageInfo(rootPath: string, pkgInfo: any) {
+  const pkgPath = path.resolve(rootPath, 'package.json');
+  const pkg = fs.readJSONSync(pkgPath);
+  Object.keys(pkgInfo).forEach((key) => {
+    if (pkg[key]) {
+      pkg[key] = pkgInfo[key];
+    }
+  });
 
-  return {
-    framework,
-    name: pkgInfo.name,
-    version: pkgInfo.version,
-  } as ProjectMetaInfo;
+  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
 }

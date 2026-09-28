@@ -87,7 +87,7 @@ namespace nasl.ui {
       description: '是否显示冒号',
       setter: { concept: 'SwitchSetter' },
     })
-    private colon: nasl.core.Boolean = true;
+    colon: nasl.core.Boolean = true;
 
     @Prop({
       group: '样式属性',
@@ -155,6 +155,8 @@ namespace nasl.ui {
     ideusage: {
       "idetype": "container",
       "parentAccept": "target.tag === 'el-descriptions'",
+      forceRefresh: 'parent',
+      bindStyleAttr: 'itemStyle',
       "selector": [
         {
           "expression": "this.getElement(el => el.slotTarget === 'label')",

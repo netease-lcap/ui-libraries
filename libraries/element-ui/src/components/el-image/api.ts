@@ -6,7 +6,6 @@ namespace nasl.ui {
     sourceDocURL: 'https://element.eleme.io/#/zh-CN/component/image',
     ideusage: {
       idetype: 'container',
-      childAccept: false,
       // "structured": true,
       selector: {
         expression: "this.getElement(el => el.slotTarget === 'placeholder' )",
@@ -92,11 +91,11 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '开启图片预览功能',
-      description: '开启图片预览功能,用逗号分隔',
+      title: '预览图片列表',
+      description: '设置预览图片地址列表；配置后点击图片可预览，并可在多张图片间切换',
       setter: { concept: 'InputSetter' },
     })
-    previewSrcList: nasl.core.String;
+    previewSrcList: nasl.collection.List<nasl.core.String>;
 
     @Prop({
       group: '数据属性',
@@ -113,6 +112,14 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     initialIndex: nasl.core.Decimal;
+
+    @Prop({
+      group: '数据属性',
+      title: '是否是占位图片',
+      description: '是否是占位图片',
+      setter: { concept: 'SwitchSetter' },
+    })
+    isPlaceholder: nasl.core.Boolean = false;
 
     @Event({
       title: '图片加载成功时',
@@ -179,5 +186,6 @@ namespace nasl.ui {
       description: '加载失败的内容',
     })
     slotError: () => Array<ViewComponent>;
+
   }
 }

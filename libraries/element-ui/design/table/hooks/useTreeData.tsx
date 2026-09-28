@@ -48,13 +48,6 @@ export default function useTreeData(props: ElEnhancedTableProps, context: SetupC
     onExpandFoldIconClick,
   } = useTreeDataExpand(props, context, { store, dataSource, rowDataKeys });
 
-  const checkedColumn = computed(() => columns.value.find((col) => col.colKey === 'row-select'));
-
-  watch(checkedColumn, (column) => {
-    if (!store.value || !checkedColumn.value) return;
-    store.value.updateDisabledState(dataSource.value, column, rowDataKeys.value);
-  });
-
   function getFoldIcon(h: CreateElement, context: PrimaryTableCellParams<TableRowData>) {
     const params = { ...context, type: 'fold' };
     const defaultFoldIcon = t(global.value.treeExpandAndFoldIcon, h, params) || <MinusRectangleIcon />;
@@ -84,6 +77,13 @@ export default function useTreeData(props: ElEnhancedTableProps, context: SetupC
     },
     { immediate: true },
   );
+
+  const checkedColumn = computed(() => columns.value.find((col) => col.colKey === 'row-select'));
+
+  watch(checkedColumn, (column) => {
+    if (!store.value || !checkedColumn.value) return;
+    store.value.updateDisabledState(dataSource.value, column, rowDataKeys.value);
+  });
 
   onUnmounted(() => {
     if (!props.tree) return;
@@ -116,9 +116,9 @@ export default function useTreeData(props: ElEnhancedTableProps, context: SetupC
 
   function getTreeNodeStyle(level: number) {
     if (level === undefined) return;
-    const indent = props.tree?.indent === undefined ? 24 : props.tree?.indent;
+    const indent = props.tree?.indent === undefined ? 16 : props.tree?.indent;
     // 默认 1px 是为了临界省略
-    return indent ? { paddingLeft: `${level * indent || 1}px` } : {};
+    return indent ? { paddingLeft: `${(level * indent || 1) + (level > 0 ? 24 : 0)}px` } : {};
   }
 
   /**

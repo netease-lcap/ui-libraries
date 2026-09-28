@@ -68,7 +68,7 @@ export default {
 .root:first-child {
     border-top-left-radius: var(--border-radius-base);
     border-bottom-left-radius: var(--border-radius-base);
-    border-left-color: var(--border-color-base);
+    border-left-color: var(--capsules-capsule-border-color);
 }
 
 .root:last-child {

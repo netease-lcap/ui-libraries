@@ -13,6 +13,7 @@
         :placeholder="placeholder"
         :prefix="preIcon ? preIcon : undefined"
         :suffix="suffixIcon ? suffixIcon : undefined"
+        :clear-icon="clearIcon ? clearIcon : undefined"
         :color="formItemVM && formItemVM.color"
         @click.stop="toggle(true)"
         @update:value="onInput($event)"
@@ -91,6 +92,9 @@ export default {
         suffixIcon: {
             type: String,
             default: '',
+        },
+        clearIcon: {
+            type: String,
         },
         date: [String, Number, Date],
         value: [String, Number, Date], // 优先使用

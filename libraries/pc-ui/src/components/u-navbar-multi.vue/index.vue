@@ -90,6 +90,9 @@ export default {
         targetField: { type: String, default: 'target' },
         initialLoad: { type: Boolean, default: true },
         collapsibleField: { type: String, default: 'collapsible' },
+        expandIcon: { type: String, default: 'bottom-arrow' },
+        popupExpandIcon: { type: String },
+        loadingIcon: { type: String, default: 'loading' },
     },
     data() {
         return {

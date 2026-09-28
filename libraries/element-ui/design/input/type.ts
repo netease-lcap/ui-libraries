@@ -66,6 +66,10 @@ export interface ElInputProps<T = InputValue> {
    */
   maxlength?: string | number;
   /**
+   * 最小输入长度
+   */
+  minlength?: string | number;
+  /**
    * 名称
    * @default ''
    */

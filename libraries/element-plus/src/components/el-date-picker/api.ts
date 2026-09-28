@@ -1,6 +1,17 @@
 /// <reference types="@nasl/types" />
 
 namespace nasl.ui {
+  /** converter 为 auto 时绑定值仍以 Date/DateTime 为主，同时允许字符串（如 API 入参、value-format 场景） */
+  type DateConverterToType<
+    C extends 'auto' | 'string' | 'Integer',
+    IsDate extends nasl.core.Boolean,
+  > = C extends 'Integer'
+    ? nasl.core.Integer
+    : C extends 'string'
+    ? nasl.core.String
+    : IsDate extends true
+    ? nasl.core.Date
+    : nasl.core.DateTime;
   @IDEExtraInfo({
     order: 3,
     ideusage: {
@@ -14,28 +25,84 @@ namespace nasl.ui {
     description: '用于选择某一具体日期或某一段日期区间。',
     group: 'Selector',
   })
-  export class ElDatePicker extends ViewComponent {
+  export class ElDatePicker<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C extends 'auto' | 'string' | 'Integer',
+    DT extends
+      | 'date'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'datetimerange'
+      | 'datetime'
+      | 'daterange'
+      | 'yearrange'
+      | 'monthrange'
+      | 'dates'
+      | 'years'
+      | 'months',
+  > extends ViewComponent {
     @Prop({
       title: '值',
     })
-    modelValue: ElDatePickerOptions['modelValue'];
+    modelValue: ElDatePickerOptions<T, V, P, M, C, DT>['modelValue'];
 
     @Prop({
       title: '起始值',
     })
-    startValue: ElDatePickerOptions['startValue'];
+    startValue: ElDatePickerOptions<T, V, P, M, C, DT>['startValue'];
 
     @Prop({
       title: '结束值',
     })
-    endValue: ElDatePickerOptions['endValue'];
+    endValue: ElDatePickerOptions<T, V, P, M, C, DT>['endValue'];
 
-    constructor(options?: Partial<ElDatePickerOptions>) {
+    @Prop({
+      title: '只读',
+      description: '只读状态',
+    })
+    readonly: nasl.core.Boolean;
+
+    @Prop({
+      title: '禁用',
+      description: '是否禁用按钮',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '预览',
+      description: '是否预览',
+    })
+    preview: nasl.core.Boolean;
+
+    constructor(options?: Partial<ElDatePickerOptions<T, V, P, M, C, DT>>) {
       super();
     }
   }
 
-  export class ElDatePickerOptions extends ViewComponentOptions {
+  export class ElDatePickerOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C extends 'auto' | 'string' | 'Integer',
+    DT extends
+      | 'date'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'datetimerange'
+      | 'datetime'
+      | 'daterange'
+      | 'yearrange'
+      | 'monthrange'
+      | 'dates'
+      | 'years'
+      | 'months',
+  > extends ViewComponentOptions {
     // @Prop({
     //   group: '数据属性',
     //   title: '区间选择',
@@ -56,27 +123,42 @@ namespace nasl.ui {
     // })
     // range: nasl.core.Boolean = false;
 
-    @Prop<ElDatePickerOptions, 'modelValue'>({
+    // ========== 数据来源相关属性 ==========
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'modelValue'>({
       group: '数据属性',
-      title: '值',
-      description: '选中值',
+      title: '选中值',
+      description: '当前选中的日期值',
+      docDescription: '绑定当前选中的日期值，支持双向绑定。仅在非区间选择模式下有效。',
       setter: { concept: 'InputSetter' },
       if: (_) => !_.type.includes('range'),
       sync: true,
     })
-    modelValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    modelValue: DT extends 'date'
+      ? DateConverterToType<C, true>
+      : DT extends 'datetime' | 'year' | 'month' | 'week'
+      ? DateConverterToType<C, false>
+      : DT extends 'dates'
+      ? nasl.collection.List<DateConverterToType<C, true>>
+      : DT extends 'years' | 'months'
+      ? nasl.collection.List<DateConverterToType<C, false>>
+      : null;
 
-    @Prop<ElDatePickerOptions, 'startValue'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'startValue'>({
       group: '数据属性',
       title: '起始值',
-      description: '开始日期',
+      description: '区间选择的开始日期',
+      docDescription: '绑定日期区间的开始日期值，支持双向绑定。仅在区间选择模式下有效。',
       setter: { concept: 'InputSetter' },
       if: (_) => _.type.includes('range'),
       sync: true,
     })
-    startValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    startValue: DT extends 'daterange'
+      ? DateConverterToType<C, true>
+      : DT extends 'datetimerange' | 'yearrange' | 'monthrange'
+      ? DateConverterToType<C, false>
+      : null;
 
-    @Prop<ElDatePickerOptions, 'endValue'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'endValue'>({
       group: '数据属性',
       title: '结束值',
       description: '结束日期',
@@ -84,7 +166,11 @@ namespace nasl.ui {
       if: (_) => _.type.includes('range'),
       sync: true,
     })
-    endValue: nasl.core.String | nasl.core.Integer | nasl.core.Date | nasl.core.DateTime;
+    endValue: DT extends 'daterange'
+      ? DateConverterToType<C, true>
+      : DT extends 'datetimerange' | 'yearrange' | 'monthrange'
+      ? DateConverterToType<C, false>
+      : null;
 
     @Prop({
       group: '状态属性',
@@ -101,6 +187,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     disabled: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
 
     @Prop({
       group: '样式属性',
@@ -129,52 +223,25 @@ namespace nasl.ui {
     })
     clearable: nasl.core.Boolean = true;
 
-    @Prop<ElDatePickerOptions, 'placeholder'>({
-      group: '主要属性',
-      title: '占位符',
-      description: '非范围选择时的占位内容',
-      setter: { concept: 'InputSetter' },
-      if: (_) => !_.type.includes('range'),
-    })
-    placeholder: nasl.core.String = '';
-
-    @Prop<ElDatePickerOptions, 'startPlaceholder'>({
-      group: '主要属性',
-      title: '开始日期的占位内容',
-      description: '范围选择时开始日期的占位内容',
-      setter: { concept: 'InputSetter' },
-      if: (_) => _.type.includes('range'),
-    })
-    startPlaceholder: nasl.core.String;
-
-    @Prop<ElDatePickerOptions, 'endPlaceholder'>({
-      group: '主要属性',
-      title: '结束日期的占位内容',
-      description: '范围选择时结束日期的占位内容',
-      setter: { concept: 'InputSetter' },
-      if: (_) => _.type.includes('range'),
-    })
-    endPlaceholder: nasl.core.String;
-
-    @Prop<ElDatePickerOptions, 'type'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'type'>({
       group: '主要属性',
       title: '显示类型',
       description: '显示类型',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
-          { title: '年份' },
-          { title: '多个年份' },
-          { title: '月份' },
-          { title: '多个月份' },
-          { title: '日期' },
-          { title: '多个日期' },
-          { title: '日期时间' },
-          { title: '周' },
-          { title: '日期时间范围' },
-          { title: '日期范围' },
-          { title: '月份范围' },
-          { title: '年份范围' },
+          { title: '日期', value: 'date' },
+          { title: '日期范围', value: 'daterange' },
+          { title: '日期时间', value: 'datetime' },
+          { title: '日期时间范围', value: 'datetimerange' },
+          { title: '年份', value: 'year' },
+          { title: '年份范围', value: 'yearrange' },
+          { title: '月份', value: 'month' },
+          { title: '月份范围', value: 'monthrange' },
+          { title: '周', value: 'week' },
+          { title: '多个日期', value: 'dates' },
+          { title: '多个月份', value: 'months' },
+          { title: '多个年份', value: 'years' },
         ],
       },
       onChange: [
@@ -186,27 +253,89 @@ namespace nasl.ui {
           clear: ['startValue', 'endValue'],
           if: (_) => !_.includes('range'),
         },
+        {
+          if: (_) => _.includes('range') || _.includes('s'),
+          update: {
+            range: true,
+          },
+        },
+        {
+          update: {
+            valueFormat: 'YYYY-MM-DD',
+          },
+          if: (_) => _ === 'date',
+        },
+        {
+          if: (_) => !_.includes('range') && !_.includes('s'),
+          update: {
+            range: false,
+          },
+        },
       ],
     })
-    type:
-      | 'year'
-      | 'years'
-      | 'month'
-      | 'months'
-      | 'date'
-      | 'dates'
-      | 'datetime'
-      | 'week'
-      | 'datetimerange'
-      | 'daterange'
-      | 'monthrange'
-      | 'yearrange' = 'date';
+    type: DT;
+
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'placeholder'>({
+      group: '主要属性',
+      title: '占位符',
+      description: '非范围选择时的占位内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => !_.type.includes('range'),
+    })
+    placeholder: nasl.core.String = '';
+
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'startPlaceholder'>({
+      group: '主要属性',
+      title: '开始日期的占位内容',
+      description: '范围选择时开始日期的占位内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.type.includes('range'),
+    })
+    startPlaceholder: nasl.core.String;
+
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'endPlaceholder'>({
+      group: '主要属性',
+      title: '结束日期的占位内容',
+      description: '范围选择时结束日期的占位内容',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.type.includes('range'),
+    })
+    endPlaceholder: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '区间选择',
+      description: '是否支持进行时间区间选择，关闭则为时间点选择',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => false,
+    })
+    range: M = false as any;
+
+    @Prop({
+      group: '主要属性',
+      title: '最小日期',
+      description: '最小日期',
+      setter: { concept: 'InputSetter' },
+      if: (_) => _.type.includes('datetime'),
+    })
+    minDate: nasl.core.Date;
+
+    @Prop({
+      group: '主要属性',
+      title: '最大日期',
+      description: '最大日期',
+      setter: { concept: 'InputSetter' },
+    })
+    maxDate: nasl.core.Date;
 
     @Prop({
       group: '主要属性',
       title: '显示在输入框中的格式',
       description: '显示在输入框中的格式',
-      setter: { concept: 'InputSetter' },
+      setter: {
+        concept: 'InputSetter',
+        autoClear: true,
+      },
     })
     format: nasl.core.String = 'YYYY-MM-DD';
 
@@ -218,31 +347,36 @@ namespace nasl.ui {
     })
     rangeSeparator: nasl.core.String = '-';
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '选择器打开时默认显示的时间',
-    //   description: '可选，选择器打开时默认显示的时间',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // defaultValue: Date | [Date, Date];
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '选中日期时的当日内具体时刻',
-    //   description: '范围选择时选中日期所使用的当日内具体时刻',
-    //   setter: { concept: 'InputSetter' },
-    // })
-    // defaultTime: Date | [Date, Date];
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'converter'>({
+      group: '主要属性',
+      title: '值类型转化',
+      description: '值类型转化',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [
+          { title: '自动', value: 'auto' },
+          { title: '自定义', value: 'string' },
+          { title: '时间戳', value: 'Integer' },
+        ],
+      },
+      onChange: [
+        {
+          clear: ['valueFormat'],
+        },
+      ],
+    })
+    converter: C = 'auto' as any;
 
     @Prop({
       group: '主要属性',
       title: '绑定值的格式',
       description: '可选，绑定值的格式，例如：YYYY-MM-DD。 不指定则绑定值为 Date 对象',
       setter: { concept: 'InputSetter' },
+      if: (_) => _.converter === 'string',
     })
     valueFormat: nasl.core.String;
 
-    @Prop<ElDatePickerOptions, 'dateFormat'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'dateFormat'>({
       group: '主要属性',
       title: '下拉列表中显示的日期格式',
       description: '可选，时间选择器下拉列表中显示的日期格式',
@@ -251,7 +385,7 @@ namespace nasl.ui {
     })
     dateFormat: nasl.core.String;
 
-    @Prop<ElDatePickerOptions, 'timeFormat'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'timeFormat'>({
       group: '主要属性',
       title: '下拉列表中显示的时间格式',
       description: '可选，时间选择器下拉列表中显示的时间格式',
@@ -260,7 +394,7 @@ namespace nasl.ui {
     })
     timeFormat: nasl.core.String;
 
-    @Prop<ElDatePickerOptions, 'unlinkPanels'>({
+    @Prop<ElDatePickerOptions<T, V, P, M, C, DT>, 'unlinkPanels'>({
       group: '主要属性',
       title: '取消两个日期面板之间的联动',
       description: '在范围选择器里取消两个日期面板之间的联动',
@@ -269,27 +403,27 @@ namespace nasl.ui {
     })
     unlinkPanels: nasl.core.Boolean = false;
 
-    // @Prop({
-    //   title: '前缀图标',
-    //   description: '前缀图标',
-    //   group: '主要属性',
-    //   setter: {
-    //     concept: 'IconSetter',
-    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
-    //   },
-    // })
-    // prefixIcon: nasl.core.String;
+    @Prop({
+      title: '前缀图标',
+      description: '前缀图标',
+      group: '主要属性',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+      },
+    })
+    prefixIconName: nasl.core.String;
 
-    // @Prop({
-    //   title: '清除图标',
-    //   description: '自定义清除图标',
-    //   group: '主要属性',
-    //   setter: {
-    //     concept: 'IconSetter',
-    //     customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
-    //   },
-    // })
-    // clearIcon: nasl.core.String;
+    @Prop({
+      title: '清除图标',
+      description: '自定义清除图标',
+      group: '主要属性',
+      setter: {
+        concept: 'IconSetter',
+        customIconFont: 'LCAP_ELEMENTPLUS_ICONS',
+      },
+    })
+    clearIconName: nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -378,19 +512,19 @@ namespace nasl.ui {
       title: '值改变时',
       description: '用户确认选定的值时触发',
     })
-    onChange: (modelValue: any) => void;
+    onChange: (modelValue: M extends true ? nasl.collection.List<nasl.core.Date> : nasl.core.Date) => void;
 
     @Event({
       title: '失去焦点时',
       description: '在组件 Input 失去焦点时触发',
     })
-    onBlur: (event: any) => void;
+    onBlur: (event: FocusEvent) => void;
 
     @Event({
       title: '获得焦点时',
       description: '在组件 Input 获得焦点时触发',
     })
-    onFocus: (event: any) => void;
+    onFocus: (event: FocusEvent) => void;
 
     @Event({
       title: '清空时',
@@ -402,13 +536,13 @@ namespace nasl.ui {
       title: '日历所选日期更改时',
       description: '在日历所选日期更改时触发',
     })
-    onCalendarChange: (modelValue: any) => void;
+    onCalendarChange: (modelValue: nasl.core.Date | nasl.collection.List<nasl.core.Date>) => void;
 
     @Event({
       title: '日期面板改变时',
       description: '当日期面板改变时触发',
     })
-    onPanelChange: (date: any, view?: nasl.core.String) => void;
+    onPanelChange: (date: nasl.core.Date | nasl.collection.List<nasl.core.Date>, view?: nasl.core.String) => void;
 
     @Event({
       title: '下拉列表出现/消失时',
@@ -421,12 +555,20 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       ignoreProperty: ['rules'],
-      bindStyleAttr: 'inputStyle',
       bindStyleSelector: '.__cw-form-compose-input',
+      childAccept:false,
       slotWrapperInlineStyle: {
         label: 'display: inline-block;',
       },
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
       forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: true,
       namedSlotOmitWrapper: ['label'],
     },
     extends: [
@@ -444,15 +586,55 @@ namespace nasl.ui {
     description: '表单日期选择器',
     group: 'Form',
   })
-  export class ElFormDatePicker extends ViewComponent {
+  export class ElFormDatePicker<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C extends 'auto' | 'string' | 'Integer',
+    DT extends
+      | 'date'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'datetimerange'
+      | 'datetime'
+      | 'daterange'
+      | 'yearrange'
+      | 'monthrange'
+      | 'dates'
+      | 'years'
+      | 'months',
+  > extends ViewComponent {
     constructor(
       options?: Partial<
-        ElFormDatePickerOptions & ElFormItemProOptions & Omit<ElDatePickerOptions, keyof ElFormItemProOptions>
+        ElFormDatePickerOptions<T, V, P, M, C, DT> &
+          ElFormItemProOptions &
+          Omit<ElDatePickerOptions<T, V, P, M, C, DT>, keyof ElFormItemProOptions>
       >,
     ) {
       super();
     }
   }
 
-  export class ElFormDatePickerOptions extends ViewComponentOptions {}
+  export class ElFormDatePickerOptions<
+    T,
+    V,
+    P extends nasl.core.Boolean,
+    M extends nasl.core.Boolean,
+    C extends 'auto' | 'string' | 'Integer',
+    DT extends
+      | 'date'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'datetimerange'
+      | 'datetime'
+      | 'daterange'
+      | 'yearrange'
+      | 'monthrange'
+      | 'dates'
+      | 'years'
+      | 'months',
+  > extends ViewComponentOptions {}
 }

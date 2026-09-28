@@ -47,6 +47,7 @@ export default function localizeRules(locale: string) {
       trigger: 'input+blur',
       message: localized.pattern,
     } as Rule,
+    regex: { trigger: 'input+blur', message: localized.pattern } as Rule,
     is: { trigger: 'blur', message: localized.is } as Rule,
     isNot: { trigger: 'blur', message: localized.isNot } as Rule,
     equals: { trigger: 'blur', message: localized.equals } as Rule,

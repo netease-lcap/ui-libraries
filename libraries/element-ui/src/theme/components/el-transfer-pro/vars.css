@@ -188,46 +188,46 @@
    * @desc 传输组件通用高度
    * @type size
    */
-  --el-transfer-common-height: 200px;
+  --el-transfer-common-height: 288px;
 
   /**
    * @desc 传输组件带搜索框高度
    * @type size
    */
-  --el-transfer-with-search-height: 240px;
+  --el-transfer-with-search-height: 328px;
 
   /**
    * @hidden
    * @desc 传输组件带分页高度
    * @type size
    */
-  --el-transfer-with-pagination-height: 240px;
+  --el-transfer-with-pagination-height: 328px;
 
   /**
    * @desc 传输组件带页脚高度
    * @type size
    */
-  --el-transfer-with-footer-height: 248px;
+  --el-transfer-with-footer-height: 336px;
 
   /**
    * @desc 传输组件带页脚和分页高度
    * @type size
    */
-  --el-transfer-with-footer-both-height: 288px;
+  --el-transfer-with-footer-both-height: 376px;
 
   /**
    * @hidden
    * @desc 传输组件带分页和搜索框高度
    * @type size
    */
-  --el-transfer-with-both-height: 280px;
+  --el-transfer-with-both-height: 368px;
 
   /**
    * @hidden
    * @desc 传输组件带所有功能高度
    * @type size
    */
-  --el-transfer-with-all-height: 328px;
+  --el-transfer-with-all-height: 416px;
 
   /**
    * @hidden

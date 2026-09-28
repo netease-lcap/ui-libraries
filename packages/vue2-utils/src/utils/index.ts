@@ -7,18 +7,19 @@ export function listToTree(data: any[], options: {
   childrenField: string;
 }) {
   const { valueField, parentField, childrenField } = options;
-  const map: Record<string | number, any> = data.reduce((acc, item) => {
-    const id = get(item, valueField);
-    if (id) {
-      acc[id] = item;
-    }
+  const map: Record<string | number, any> = {};
 
-    if (!get(item, childrenField)) {
+  data.forEach((item) => {
+    const children = get(item, childrenField);
+    if (children) {
       set(item, childrenField, []);
     }
 
-    return acc;
-  }, {});
+    const id = get(item, valueField);
+    if (id) {
+      map[id] = item;
+    }
+  });
 
   const tree: any[] = [];
 
@@ -29,7 +30,13 @@ export function listToTree(data: any[], options: {
     if (!parent) {
       tree.push(item);
     } else {
-      const children = get(parent, childrenField);
+      let children = get(parent, childrenField);
+
+      if (!children) {
+        children = [];
+        set(parent, childrenField, children);
+      }
+
       children.push(item);
     }
   });

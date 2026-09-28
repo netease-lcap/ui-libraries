@@ -14,5 +14,15 @@
     "skipLibCheck": true,
     "baseUrl": "."
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "input",
+    "templates",
+    "**/node_modules",
+    "**/lib",
+    "**/input",
+    "**/templates"
+  ]
 }

@@ -15,6 +15,7 @@
             :loading="loading"
             :error="error"
             :filterable="filterable"
+            :search-icon="searchIcon"
             :filter-size="filterSize"
             :placeholder="placeholder"
             :clearable="clearable"
@@ -38,7 +39,7 @@
             <u-button
                 color="primary"
                 shape="square"
-                icon="left-arrow"
+                :icon="leftArrowIcon"
                 role="reverse"
                 :class="$style.button"
                 :disabled="!targetValues.length || disabled"
@@ -47,7 +48,7 @@
             <u-button
                 color="primary"
                 shape="square"
-                icon="right-arrow"
+                :icon="rightArrowIcon"
                 role="forward"
                 :class="$style.button"
                 :disabled="!sourceValues.length || disabled"
@@ -68,6 +69,7 @@
             :loading="loading"
             :error="error"
             :filterable="filterable"
+            :search-icon="searchIcon"
             :filter-size="filterSize"
             :placeholder="placeholder"
             :clearable="clearable"
@@ -134,6 +136,9 @@ export default {
         disabled: UListView.props.disabled,
         preview: { type: Boolean, default: false },
         optionIsSlot: { type: Boolean, default: false },
+        searchIcon: { type: String, default: 'search' },
+        leftArrowIcon: { type: String, default: 'left-arrow' },
+        rightArrowIcon: { type: String, default: 'right-arrow' },
     },
     data() {
         return { sourceValues: [], targetValues: [] };

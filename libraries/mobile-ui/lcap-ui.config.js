@@ -283,6 +283,12 @@ module.exports = {
       alias: '胶囊',
     },
     {
+      group: 'Form',
+      show: true,
+      name: 'validator',
+      alias: '验证器',
+    },
+    {
       group: 'Selector',
       show: true,
       name: 'pickerson',

@@ -8,6 +8,7 @@ namespace nasl.ui {
       events: {
         click: true,
       },
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -17,6 +18,33 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElTreeSelect<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    @Prop({
+      title: '数据',
+      description: '树形结构的数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Prop({
+      title: '选中值',
+      description: '当前选中的树节点值',
+    })
+    modelValue: M extends true ? nasl.collection.List<V> : V;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '禁用组件',
+      description: '是否禁用组件',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean;
     constructor(options?: Partial<ElTreeSelectOptions<T, V, P, M, C>>) {
       super();
     }
@@ -29,35 +57,24 @@ namespace nasl.ui {
     M extends nasl.core.Boolean,
     C,
   > extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '禁用组件',
-      description: '是否禁用组件',
-      setter: { concept: 'SwitchSetter' },
-    })
-    disabled: nasl.core.Boolean;
 
-    @Prop({
-      group: '主要属性',
-      title: '是否可搜索',
-      description:
-        '是否可搜索，默认搜索规则不区分大小写，全文本任意位置匹配。如果默认搜索规则不符合业务需求，可以更为使用 `filter` 自定义过滤规则',
-      setter: { concept: 'SwitchSetter' },
-    })
-    filterable: nasl.core.Boolean = false;
+
+
 
     @Prop({
       group: '主要属性',
       title: '占位符',
-      description: '占位符',
+      description: '输入框为空时的提示文本',
+      docDescription: '设置输入框为空时显示的占位符文本，用于提示用户应该选择什么内容。',
       setter: { concept: 'InputSetter' },
     })
     placeholder: nasl.core.String;
 
     @Prop({
       group: '主要属性',
-      title: '为空的内容',
-      description: '当下拉列表为空时显示的内容。',
+      title: '无数据文本',
+      description: '树为空时显示的文本',
+      docDescription: '当树形选择器没有数据时显示的提示文本。',
       setter: { concept: 'InputSetter' },
     })
     noDataText: any;
@@ -107,7 +124,9 @@ namespace nasl.ui {
       title: '数据源',
       description: '树数据',
       designerValue: [{}, {}, {}],
-      bindOpen: true,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
@@ -172,7 +191,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '点击节点支持展开收起',
-      description: '是否支持点击节点也能展开收起',
+      description: '是否在点击节点的时候选中节点，默认值为 false，即只有在点击复选框时才会选中节点。',
       setter: { concept: 'SwitchSetter' },
     })
     expandOnClickNode: nasl.core.Boolean = true;
@@ -200,6 +219,15 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     showCheckbox: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '主要属性',
+      title: '是否可搜索',
+      description:
+        '是否可搜索，默认搜索规则不区分大小写，全文本任意位置匹配。如果默认搜索规则不符合业务需求，可以更为使用 `filter` 自定义过滤规则',
+      setter: { concept: 'SwitchSetter' },
+    })
+    filterable: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -252,10 +280,34 @@ namespace nasl.ui {
       description: '默认选中的节点的 key 的数组, 仅首次生效',
       setter: { concept: 'InputSetter' },
     })
-    defaultCheckedKeys: nasl.collection.List<V> = [];
+    defaultCheckedKeys: nasl.collection.List<V>;
+
+    @Prop({
+      group: '主要属性',
+      title: '默认展开的节点',
+      description: '默认展开的节点的 key 的数组, 仅首次生效',
+      setter: { concept: 'InputSetter' },
+    })
+    defaultExpandedKeys: nasl.collection.List<V>;
+
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '状态属性',
+      title: '禁用组件',
+      description: '是否禁用组件',
+      setter: { concept: 'SwitchSetter' },
+    })
+    disabled: nasl.core.Boolean;
 
     @Event({
-      title: '改变时',
+      title: '复选框被点击的时',
       description: '节点选中状态变化时触发',
     })
     checkChange: (value: M extends true ? nasl.collection.List<V> : V) => any;
@@ -277,6 +329,19 @@ namespace nasl.ui {
         label: nasl.core.String;
       };
     }) => any;
+
+
+    @Event({
+      title: '数据加载成功时触发',
+      description: '数据加载成功时触发',
+    })
+    onSuccess: () => any;
+
+    @Event({
+      title: '清空时触发',
+      description: '清空时触发',
+    })
+    onClear: () => any;
 
     @Event({
       title: '节点选中状态改变时',
@@ -309,6 +374,15 @@ namespace nasl.ui {
       ignoreProperty: ['rules'],
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
+      forceUpdateWhenAttributeChange: true,
+      childAccept:false,
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
     },
     extends: [
       {
@@ -333,7 +407,9 @@ namespace nasl.ui {
   > extends ViewComponent {
     constructor(
       options?: Partial<
-        ElTreeSelectOptions<T, V, P, M, C> & Omit<ElTreeSelectOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
+        ElFormTreeSelectOptions<T, V, P, M, C> &
+          ElFormItemProOptions &
+          Omit<ElTreeSelectOptions<T, V, P, M, C>, keyof ElFormItemProOptions>
       >,
     ) {
       super();

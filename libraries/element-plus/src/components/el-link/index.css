@@ -1,1 +1,8 @@
 /* Link component custom styles */ 
+.el-link > .el-icon {
+    margin-right: 6px;
+}
+
+.el-link .el-link__right-icon {
+  margin-left: 6px;
+}

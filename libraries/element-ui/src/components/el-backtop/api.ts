@@ -32,7 +32,7 @@ namespace nasl.ui {
       description: '触发滚动的对象',
       setter: { concept: 'InputSetter' },
     })
-    private target: nasl.core.String = '';
+    target: nasl.core.String = '';
 
     @Prop({
       group: '主要属性',

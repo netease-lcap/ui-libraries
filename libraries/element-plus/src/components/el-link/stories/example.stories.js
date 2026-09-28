@@ -20,7 +20,7 @@ export const Example1 = {
     },
     template: `
     <div>
-      <el-link href="https://element-plus.org" target="_blank">默认链接</el-link>
+      <el-link :download="true" href="http://minio-api.codewave-test.163yun.com/lowcode-static/user/cstest/1758278217982_1dfafea5607a4aa0a2946af72422b969.png" target="_blank">默认链接</el-link>
       <el-link type="primary">主要链接</el-link>
       <el-link type="success">成功链接</el-link>
       <el-link type="warning">警告链接</el-link>
@@ -81,3 +81,32 @@ export const Example3 = {
     `,
   }),
 }; 
+
+/* 右图标按钮 */
+export const Example6 = {
+  name: '图标按钮',
+  render: () => ({
+    setup() {
+      const rightIcon = ref('Clock');
+      const changeRightIcon = () => {
+        rightIcon.value = rightIcon.value === 'Clock' ? undefined : 'Clock';
+      };
+      const handleClick = () => {
+        console.log('点击了按钮');
+      };
+      return {
+        rightIcon,
+        changeRightIcon,
+        handleClick,
+      };
+    },
+    template: `
+    <div>
+      <el-link icon="Clock" :rightIcon="rightIcon" @click="handleClick">链接</el-link>
+      <div>
+        <el-link type="primary" @click="changeRightIcon">切换rightIcon</el-link>
+      </div>
+    </div>
+    `,
+  }),
+};

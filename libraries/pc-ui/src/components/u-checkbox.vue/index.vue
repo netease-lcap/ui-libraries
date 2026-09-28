@@ -60,7 +60,7 @@ export default {
             return listeners;
         },
         currentDisabled() {
-            return this.disabled || (this.parentVM && this.parentVM.disabled) || (this.parentVM && this.parentVM.exceedMax() && !this.currentValue);
+            return this.disabled || (this.parentVM && this.parentVM.computedDisabled) || (this.parentVM && this.parentVM.exceedMax() && !this.currentValue);
         },
         status() {
             if (this.currentValue === true) {

@@ -1,5 +1,5 @@
 export interface ElFlexProps {
-  mode?: 'block' | 'flex';
+  mode?: 'block' | 'flex' | 'form-flex';
   direction?: 'horizontal' | 'vertical';
   justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around';
   alignment?: 'start' | 'center' | 'end' | 'baseline' | 'stretch';
@@ -26,11 +26,12 @@ export const ElFlexPropsDefine = {
   },
   alignment: {
     type: String,
-    default: () => 'start',
+    default: () => 'normal',
   },
   wrap: {
     type: Boolean,
-    default: true,
+    // 未显式设置时由组件按 direction 解析：横向 true，竖向 false
+    default: undefined,
   },
   gutter: {
     type: Number,

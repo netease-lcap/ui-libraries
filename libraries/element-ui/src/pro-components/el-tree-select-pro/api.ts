@@ -17,6 +17,7 @@ namespace nasl.ui {
         displayData: "\"[{value: '', label: ''}, {value:'1', label: ' '}, {value:'2', label: ' '}]\"",
         propertyName: ":dataSource",
       },
+      ignoreProperty: ['filterable'],
       additionalAttribute: {
         valueField: '"value"',
         textField: '"label"',
@@ -67,7 +68,9 @@ namespace nasl.ui {
       docDescription:
         '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的',
       designerValue: [{}, {}, {}],
-      bindOpen: true,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource:
       | nasl.collection.List<T>

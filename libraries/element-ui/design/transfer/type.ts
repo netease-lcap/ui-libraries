@@ -57,6 +57,10 @@ export interface ElTransferProps<T extends DataOption = DataOption> {
    */
   operation?: Array<string | ElNode> | ElNode<{ direction: 'left' | 'right' }>;
   /**
+   * 自定义操作按钮
+   */
+  operationButton?: ElNode<{ direction: 'left' | 'right'; key: string; disabled: boolean; onClick: () => void }>;
+  /**
    * 分页配置，值为空则不显示。具体 API 参考分页组件。值类型为数组，表示可分别控制源列表和目标列表分页组件
    */
   pagination?: PaginationProps | Array<PaginationProps>;

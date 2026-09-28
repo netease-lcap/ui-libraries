@@ -4,6 +4,9 @@
       v-model="value"
       type="dates"
       placeholder="Pick a day2"
+  
+      minDate="2025-01-01"
+         maxDate="2025-01-03" 
       @change="onChange"
       @calendar-change="calendarChange" />
   </div>

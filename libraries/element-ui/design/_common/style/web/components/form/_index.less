@@ -57,15 +57,21 @@
     &--right {
       text-align: right;
     }
-
-    &--required {
-      label::before {
-        display: inline-block;
-        margin-right: @form-label-margin-right-required;
-        color: @form-color-error;
-        line-height: @form-label-line-height;
-        content: "*";
-      }
+    
+    &--required:not(&--required-right) label:before {
+      display: inline-block;
+      margin-right: @form-label-margin-right-required;
+      color: @form-color-error;
+      line-height: @form-label-line-height;
+      content: "*";
+    }
+  
+    &--required-right label:after {
+      display: inline-block;
+      margin-right: @form-label-margin-right-required;
+      color: @form-color-error;
+      line-height: @form-label-line-height;
+      content: "*";
     }
 
     &--colon {

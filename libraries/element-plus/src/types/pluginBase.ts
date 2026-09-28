@@ -1,7 +1,10 @@
-import type { Ref, VNode } from 'vue';
-import { $deletePropsList } from '@/plugins/constants';
+import type { VNode } from 'vue';
+import type { RouteLocationNormalized, Router } from 'vue-router';
+import { $deletePropsList, $ide, $formTagName, $tagName, $route, $router } from '@/plugins/constants';
 
-type ref = Ref;
+type ref = {
+  [key: string]: any;
+};
 
 type slot = {
   default: () => any;
@@ -29,5 +32,23 @@ export type PluginBase = {
   inject: inject;
   emit: emit;
   render: render;
+  showInDesigner: boolean;
+  [$route]: RouteLocationNormalized;
+  [$router]: Router;
+  style: Record<string, any>;
+  class: string;
+  ['data-ref-id']: string;
 };
+
 export type GetOptionsType<T> = T extends { new (options?: infer O): any } ? O : never;
+export interface IIdePluginBase {
+  ['data-nodepath']: string;
+  ['vusion-d2c-id']: string;
+  ['class']: string;
+  [$formTagName]: string;
+
+  [$tagName]: string;
+}
+export type RenderFunctionWithInheritAttrs = ((selfProps: any, context: { attrs: any,slots: any }) => VNode) & {
+  inheritAttrs?: boolean;
+};

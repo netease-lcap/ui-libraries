@@ -1,0 +1,8 @@
+.el-multi-layout-sidebar {
+  flex-shrink: 0;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  box-sizing: border-box;
+}

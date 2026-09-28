@@ -290,22 +290,20 @@ namespace nasl.ui {
           title: '前缀图标',
           docDescription: '选择并展示前缀图标',
           setter: {
-              concept: 'EnumSelectSetter',
-              options: [{ title: '日历' }, { title: '暂无' }],
+              concept: 'IconSetter',
           },
       })
-      preIcon: 'calendar' | '' = 'calendar';
+      preIcon: nasl.core.String = 'calendar';
 
       @Prop({
           group: '主要属性',
           title: '后缀图标',
           docDescription: '选择并展示后缀图标',
           setter: {
-              concept: 'EnumSelectSetter',
-              options: [{ title: '日历' }, { title: '暂无' }],
+              concept: 'IconSetter',
           },
       })
-      suffixIcon: 'calendar' | '' = '';
+      suffixIcon: nasl.core.String = '';
 
       @Prop({
           group: '主要属性',
@@ -329,6 +327,17 @@ namespace nasl.ui {
           },
       })
       clearable: nasl.core.Boolean;
+
+      @Prop<UDateTimePickerOptions, 'clearIcon'>({
+          group: '交互属性',
+          title: '清除图标',
+          description: '设置清除图标',
+          setter: {
+              concept: 'IconSetter',
+          },
+          if: _ => _.clearable === true,
+      })
+      clearIcon: nasl.core.String;
 
       @Prop({
             group: '数据属性',

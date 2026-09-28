@@ -481,7 +481,7 @@ namespace nasl.ui {
     //   title: '进度改变时',
     //   description: '发送进度改变时触发，在上传进度条时使用',
     // })
-    // onProgress: (event: { item: File; file: nasl.core.String }) => any;
+    // onProgress: (event: { item: nasl.io.File; file: nasl.core.String }) => any;
 
     // @Event({
     //   title: '文件数量超额',
@@ -502,19 +502,19 @@ namespace nasl.ui {
     //   title: '文件大小超额',
     //   description: '文件大小超额时触发',
     // })
-    // onSizeExceed: (event: { maxSize: nasl.core.Decimal; size: nasl.core.Decimal; message: nasl.core.String; name: nasl.core.String; file: File }) => any;
+    // onSizeExceed: (event: { maxSize: nasl.core.Decimal; size: nasl.core.Decimal; message: nasl.core.String; name: nasl.core.String; file: nasl.io.File }) => any;
 
     // @Event({
     //   title: '上传成功时',
     //   description: '上传成功时触发',
     // })
-    // onSuccess: (event: { item: File; file: nasl.core.String }) => any;
+    // onSuccess: (event: { item: nasl.io.File; file: nasl.core.String }) => any;
 
     // @Event({
     //   title: '上传错误时',
     //   description: '上传报错时触发',
     // })
-    // onError: (event: { item: File; file: nasl.core.String }) => any;
+    // onError: (event: { item: nasl.io.File; file: nasl.core.String }) => any;
 
     @Event({
       title: '删除时',
@@ -525,7 +525,7 @@ namespace nasl.ui {
         url: nasl.core.String;
         name: nasl.core.String;
       };
-      item: File;
+      item: nasl.io.File;
       index: nasl.core.Integer;
     }) => any;
 

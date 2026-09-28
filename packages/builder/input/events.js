@@ -34,6 +34,6 @@ window.addEventListener('message', (event) => {
   const { from, type, data } = event.data;
   if (from !== 'lcap') return;
 
-  return methods[type](data);
+  return methods[type]?.(data);
 });
 

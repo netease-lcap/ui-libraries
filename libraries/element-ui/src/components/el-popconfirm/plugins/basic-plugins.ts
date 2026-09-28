@@ -1,6 +1,6 @@
 import type { MapGet } from '@lcap/vue2-utils/plugins/types';
 import { $deletePropList, type NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
-import _, { camelCase, isFunction } from 'lodash';
+import _, { camelCase, isFunction, isUndefined } from 'lodash';
 import {
   getCurrentInstance,
   onMounted, onUpdated,
@@ -69,6 +69,23 @@ export const usePopperClass = {
 
         return cssRuleClassName;
       }),
+    };
+  },
+};
+
+export const useIcon = {
+  setup(props) {
+    const icon = props.useComputed('icon', (name) => {
+      if (isUndefined(name)) {
+        return 'el-icon-question';
+      }
+      if (!name) {
+        return '';
+      }
+      return name.includes('el-icon-') ? name : `el-icon-${name}`;
+    });
+    return {
+      icon,
     };
   },
 };

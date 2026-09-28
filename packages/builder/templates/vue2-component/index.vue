@@ -9,6 +9,10 @@ export default {
     text: {
       type: String,
       default: 'Hello'
+    },
+    type: {
+      type: String,
+      default: 'default'
     }
   }
 };

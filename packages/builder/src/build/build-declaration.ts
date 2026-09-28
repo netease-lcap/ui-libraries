@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable global-require */
-import * as babel from '@babel/core';
 import * as babelTypes from '@babel/types';
 import generate from '@babel/generator';
 import traverse from '@babel/traverse';
@@ -10,7 +9,7 @@ import { cloneDeep } from 'lodash';
 import { execSync } from '../utils/exec';
 import logger from '../utils/logger';
 import { LcapBuildOptions } from './types';
-import { getNodeCode, getSlotName } from '../utils/babel-utils';
+import { getNodeCode, getSlotName, babelParser } from '../shared';
 import { type NaslUIComponentConfig } from '../overload';
 
 function putComponentMap(components: NaslUIComponentConfig[], componentMap: Record<string, NaslUIComponentConfig> = {}) {
@@ -96,6 +95,7 @@ function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, 
       }
 
       const classNode = np.node as babelTypes.ClassDeclaration;
+      let exportNode: babelTypes.ExportNamedDeclaration | null = null;
       if (np.parent.type !== 'ExportNamedDeclaration') {
         const exportAST: babelTypes.ExportNamedDeclaration = {
           type: 'ExportNamedDeclaration',
@@ -103,6 +103,9 @@ function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, 
           declaration: classNode,
         };
         np.replaceWith(exportAST);
+        exportNode = exportAST;
+      } else {
+        exportNode = np.parent as babelTypes.ExportNamedDeclaration;
       }
 
       const className = classNode.id?.name || '';
@@ -113,6 +116,18 @@ function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, 
 
       const superClassName = getNodeCode(classNode.superClass);
       if (superClassName.endsWith('ViewComponent')) {
+        if (exportNode && (!exportNode.leadingComments || exportNode.leadingComments.length === 0)) {
+          const blocks: string[] = getBlocks((componentInfo as any).title, (componentInfo as any).description);
+          if (blocks.length > 0) {
+            exportNode.leadingComments = [
+              {
+                type: 'CommentBlock',
+                value: `*\n${blocks.join('\n')}\n `,
+              },
+            ];
+          }
+        }
+
         classNode.body.body.forEach((n) => {
           if (n.type === 'TSDeclareMethod' && n.kind === 'method' && n.key.type === 'Identifier') {
             const methodName = n.key.name;
@@ -172,6 +187,14 @@ function addExportAndComment(ast: babelTypes.File, componentMap: Record<string, 
 
           if (propInfo) {
             const blocks: string[] = getBlocks(propInfo.title, propInfo.description);
+            if (propInfo.checkLiteralType === true) {
+              blocks.push(' * @checkLiteralType');
+            }
+            const deprecationRaw = typeof propInfo.deprecation === 'string' ? propInfo.deprecation.trim() : '';
+            if (deprecationRaw) {
+              const deprecationText = deprecationRaw.replace(/\*\//g, '* /').replace(/\s+/g, ' ');
+              blocks.push(` * @deprecated ${deprecationText}`);
+            }
             if (blocks.length > 0) {
               n.leadingComments = [
                 {
@@ -275,16 +298,7 @@ function addExtendsClassProperties(ast: babelTypes.File, componentMap: Record<st
 }
 
 function transformTsCode(tsCode: string, componentMap: Record<string, NaslUIComponentConfig>, componentList: NaslUIComponentConfig[]) {
-  const ast = babel.parse(tsCode, {
-    filename: 'result.ts',
-    presets: [require('@babel/preset-typescript')],
-    plugins: [
-      [require('@babel/plugin-proposal-decorators'), { legacy: true }],
-      // 'babel-plugin-parameter-decorator'
-    ],
-    rootMode: 'root',
-    root: __dirname,
-  }) as babelTypes.File;
+  const ast = babelParser.parse(tsCode) as babelTypes.File;
 
   addExportAndComment(ast, componentMap);
   addExtendsClassProperties(ast, componentMap, componentList);

@@ -15,12 +15,15 @@ export const ElDescriptionsCell = defineComponent({
       setStyle(props.style, className);
     });
 
-    watch(() => props.style, (newStyle) => {
-      setStyle(newStyle, className);
-    });
+    watch(
+      () => props.style,
+      (newStyle) => {
+        setStyle(newStyle, className);
+      },
+    );
 
     return () => {
-      return <span class={className}></span>;
+      return <span class={className} />;
     };
   },
 });
@@ -28,7 +31,7 @@ export const ElDescriptionsCell = defineComponent({
 function setStyle(style: Record<string, string>, className: string) {
   const node = document.querySelector(`.${className}`)?.closest('.el-descriptions__cell');
   if (!node || !style) return;
-  Object.keys(style).forEach(key => {
+  Object.keys(style).forEach((key) => {
     (node as HTMLElement).style[key] = style[key];
   });
 }

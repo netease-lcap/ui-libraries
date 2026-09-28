@@ -19,11 +19,13 @@ export default {
 export const Example1 = {
   name: '基础用法',
   render: () => ({
-    template: `<div><el-tag>标签一</el-tag>
-<el-tag type="success">标签二</el-tag>
-<el-tag type="info">标签三</el-tag>
-<el-tag type="warning">标签四</el-tag>
-<el-tag type="danger">标签五</el-tag></div>`,
+    template: `<div>
+    <el-input style="margin: 10px 0;"/>
+    <br />
+    <el-tag type="info" closable>年均范围 200~400</el-tag>
+    <el-tag type="info" closable>产品名称: 张梦燕</el-tag>
+    <el-tag type="info" closable>销售部门: 工程事业部</el-tag>
+</div>`,
   }),
 };
 

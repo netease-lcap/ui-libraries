@@ -205,6 +205,14 @@ const ColorGroups = [
     ],
     mapToken: [],
   },
+  {
+    key: 'logoColor',
+    type: 'Color',
+    name: 'Logo颜色',
+    desc: '',
+    seedToken: ['--el-logo-color'],
+    mapToken: [],
+  },
 ];
 
 const SizeGroups = [

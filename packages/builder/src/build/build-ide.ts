@@ -7,7 +7,9 @@ import {
   loadConfigFromFile,
   mergeConfig,
 } from 'vite';
+import { execSync } from 'child_process';
 import type { BuildIdeOptions, LcapBuildOptions } from './types';
+import logger from '../utils/logger';
 
 export async function viteBuildIde(options: BuildIdeOptions, rootPath: string, watch?: boolean, send?: (msg: string) => void) {
   const pkg = await fs.readJSON(path.join(rootPath, 'package.json'));
@@ -85,6 +87,7 @@ export async function viteBuildIde(options: BuildIdeOptions, rootPath: string, w
     configFile: false,
     envFile: false,
     ...buildConfig,
+    mode: watch ? 'staging' : 'production',
   });
 }
 
@@ -107,7 +110,75 @@ const isExistEntry = (entry, rootPath) => {
   }) !== -1;
 };
 
+const settersFolder = 'setters';
+function buildSetters(options: LcapBuildOptions) {
+  if (!options.ide?.setters) {
+    return;
+  }
+
+  const { rootPath, entries } = options.ide.setters;
+
+  if (!fs.existsSync(path.resolve(rootPath))) {
+    logger.warn(`[builder] setters root path ${rootPath} not exists`);
+    return;
+  }
+
+  const setters = {};
+
+  Object.entries(entries).forEach(([key, entry]) => {
+    if (fs.existsSync(path.resolve(rootPath, entry))) {
+      setters[key] = entry;
+    } else {
+      logger.warn(`[builder] setters entry ${entry} not exists`);
+    }
+  });
+
+  if (Object.keys(setters).length === 0) {
+    logger.warn('[builder] setters entries is empty');
+    return;
+  }
+
+  fs.writeFileSync(path.resolve(rootPath, 'setters.json'), JSON.stringify(setters, null, 2));
+
+  execSync('npm run build', {
+    cwd: rootPath,
+  });
+
+  // 拷贝 setters 到 dist 目录
+  const targetPath = path.resolve(rootPath, 'dist');
+  const destPath = path.resolve(options.rootPath, options.destDir, settersFolder);
+
+  fs.copySync(targetPath, destPath);
+
+  interface Setter {
+    name: string;
+    js: string;
+    css?: string;
+  }
+
+  const setterList: Setter[] = Object.keys(setters).map((key) => {
+    const setter: Setter = {
+      name: key,
+      js: `${options.destDir}/${settersFolder}/${key}.js`,
+    };
+
+    const cssPath = `${options.destDir}/${settersFolder}/${key}.css`;
+
+    if (fs.existsSync(path.resolve(options.rootPath, cssPath))) {
+      setter.css = cssPath;
+    }
+
+    return setter;
+  });
+
+  fs.writeFileSync(path.resolve(options.rootPath, options.destDir, 'setters.json'), JSON.stringify(setterList, null, 2));
+}
+
 export async function buildIDE(options: LcapBuildOptions, watch: boolean = false, send?: (msg: string) => void) {
+  if (options.ide?.setters) {
+    await buildSetters(options);
+  }
+
   const DEFUALT_IDE_OPTIONS = {
     entry: 'ide/index',
     outDir: `${options.destDir}/ide`,

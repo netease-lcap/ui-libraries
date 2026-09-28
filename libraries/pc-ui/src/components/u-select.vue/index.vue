@@ -123,11 +123,8 @@
           </span>
           <span
             :class="$style.tag"
-            v-if="
-              selectedVMs.length - collapseCounter >= 1 &&
-              selectedVMs.length !== 1
-            "
-            :style="{ 'vertical-align': 'middle', 'padding-right': '6px' }">
+            v-if="selectedVMs.length - collapseCounter >= 1"
+            :style="{ 'padding-right': '6px', maxWidth: '100%' }">
             <span :class="$style['tag-text']"
               >+{{ selectedVMs.length - collapseCounter }}...</span
             >
@@ -170,8 +167,10 @@
         clearable &&
         !!(filterable ? filterText || currentText : currentText)
       "
-      :class="$style.clearable"
-      @click.stop="clear"></span>
+      :class="[$style.clearable, { [$style.useIcon]: !!clearIcon }]"
+      @click.stop="clear">
+      <i-ico :name="clearIcon" v-if="clearIcon"></i-ico>
+    </span>
     <m-popper
       :class="$style.popper"
       ref="popper"
@@ -214,7 +213,7 @@
             <component
               :is="ChildComponent"
               v-for="(item, index) in currentData"
-              v-if="item !== undefined || item !== null"
+              v-if="item !== undefined && item !== null"
               :key="
                 filterable
                   ? $at2(item, valueField) + '_' + index
@@ -308,6 +307,9 @@ import i18nMixin from '../../mixins/i18n';
 
 export default {
     name: 'u-select',
+    inject: {
+        formVM: { default: null },
+    },
     component: {
         'u-select-item-all-check': AllCheck,
     },
@@ -389,6 +391,7 @@ export default {
     isItemDisplay: { type: Boolean, default: true },
     autoCheckSelectedValue: { type: Boolean, default: true },
     optionIsSlot: { type: Boolean, default: false },
+    clearIcon: { type: String },
   },
   data() {
     return {
@@ -415,7 +418,7 @@ export default {
   computed: {
     currentDisabled() {
       if (this.isPreview) return false;
-      if (this.disabled) return true;
+      if (this.disabled || (this.formVM && this.formVM.disabled)) return true;
       else if (this.emptyDisabled)
         return this.currentData
           ? !this.currentData.length
@@ -568,7 +571,7 @@ export default {
           for (let i = 0; i < this.selectedVMs.length - 1; i++) {
             if (this.$refs[`item_${i}`]) {
               this.$refs[`item_${i}`][0].style.display = 'inline-block';
-              this.$refs[`item_${i}`][0].style['vertical-align'] = 'middle';
+              // this.$refs[`item_${i}`][0].style['vertical-align'] = 'middle';
               const itemWidth =
                 this.$refs[`item_${i}`][0].offsetWidth + marginWidth;
 
@@ -585,7 +588,7 @@ export default {
               const lastItem = this.$refs[`item_${this.selectedVMs.length - 1}`];
               if (lastItem) {
                 lastItem[0].style.display = 'inline-block';
-                lastItem[0].style['vertical-align'] = 'middle';
+                // lastItem[0].style['vertical-align'] = 'middle';
                 lastAddElementWidth = lastItem[0].offsetWidth;
               }
               // 加上 “+N” 的宽度后判断最后一个是否显示
@@ -595,18 +598,21 @@ export default {
             }
 
             // 隐藏掉超出输入框长度的元素
-            if (
-              this.collapseCounter === this.selectedVMs.length ||
-              this.selectedVMs.length === 1
-            )
-              return;
+            // 防止时序错误导致错误渲染，所以注释
+            // if (
+            //   this.collapseCounter === this.selectedVMs.length ||
+            //   this.selectedVMs.length === 1
+            // )
+            //   return;
+
             for (
-              let i = this.collapseCounter;
+              let i = 0;
               i < this.selectedVMs.length;
               i++
             ) {
+              const display = i >= this.collapseCounter ? 'none' : 'inline-block';
               this.$nextTick(() => {
-                this.$refs[`item_${i}`][0].style.display = 'none';
+                this.$refs[`item_${i}`][0].style.display = display;
               });
             }
           });
@@ -623,6 +629,7 @@ export default {
 
     this.$on('select', ($event) => {
       if (this.multiple) {
+      console.log('===================select===================', $event);
         this.preventBlur = true;
         // 去掉appendTo判断：filterable的多选，会选择后关闭，也需要preventBlur
         this.preventRootBlur = true;
@@ -801,8 +808,10 @@ export default {
       this.popperOpened = true; // 刚打开时，除非是没有加载，否则保留上次的 filter 过的数据
 
       // 多选时，打开时更新过滤条件
-      if (this.filterable && this.currentDataSource && this.multiple) {
-        this.currentDataSource.filter(this.filtering);
+      if (this.hasFilter && this.closedClearFilter) {
+        this.resetFilterList();
+        this.hasFilter = false;
+        this.closedClearFilter = false;
       }
 
       if (
@@ -827,12 +836,18 @@ export default {
       if (this.loadMoreNoopTimer) {
         clearTimeout(this.loadMoreNoopTimer);
       }
+      // 多选时，关闭时更新过滤条件，打开后更新防止重复请求和闪动
+      if (this.hasFilter) {
+        this.closedClearFilter = true;
+      }
+
       this.popperOpened = false;
       this.focusedVM = undefined;
       this.preventRootBlur = false;
       this.preventBlur = false;
       clearTimeout(this.inputBlurTimer);
       clearTimeout(this.rootBlurTimer);
+
       this.$emit('close', $event, this);
       this.$emit('update:opened', false);
     },
@@ -893,6 +908,11 @@ export default {
       if (!this.filterable) {
         return; // 这边必须要用 setTimeout，$nextTick 也不行，需要保证在 @select 之后完成
       }
+
+      if (this.inputBlurTimer) {
+        clearTimeout(this.inputBlurTimer);
+      }
+
       this.preventBlur = false;
       this.inputBlurTimer = setTimeout(() => {
         if (this.preventBlur) return (this.preventBlur = false);
@@ -912,6 +932,10 @@ export default {
       }, 200);
     },
     onRootBlur(e) {
+      if (this.rootBlurTimer) {
+        clearTimeout(this.rootBlurTimer);
+      }
+
       this.rootBlurTimer = setTimeout(() => {
         if ((this.$refs.input && this.$refs.input.focused) || this.preventBlur) {
           // 修复校验滞后的问题， 这里手动触发失焦 #2990019542459904
@@ -994,7 +1018,7 @@ export default {
           }
         }, 0);
       } else {
-        if (this.filterable && this.filterText === '') {
+        if (this.filterable && this.filterText === '' && !this.compositionInputing) {
           if (!this.selectedVMs.length) return;
           const lastItemVM = this.selectedVMs[this.selectedVMs.length - 1];
           this.select(lastItemVM, false);

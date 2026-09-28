@@ -67,9 +67,45 @@ export default createComponent({
     },
     filterCSSVarInStyle(staticStyle) {
       const style = {};
+      // 允许透传的css属性
+      const allowedCSSKey = [
+        'width',
+        'height',
+        'color',
+        'font-size',
+        'font-style',
+        'font-weight',
+        'text-decoration',
+
+        'background',
+        'background-color',
+        'background-image',
+        'background-size',
+        'background-position',
+        'background-repeat',
+
+        'border',
+        'border-color',
+        'border-width',
+        'border-radius',
+        'border-style',
+
+        'margin',
+        'margin-top',
+        'margin-bottom',
+        'margin-left',
+        'margin-right',
+
+        'padding',
+        'padding-top',
+        'padding-bottom',
+        'padding-left',
+        'padding-right',
+      ];
+
       for (const key in staticStyle) {
         if (Object.prototype.hasOwnProperty.call(staticStyle, key)) {
-          if (/^--/.test(key)) {
+          if (/^--/.test(key) || allowedCSSKey.includes(key)) {
             const value = staticStyle[key];
             style[key] = value;
           }

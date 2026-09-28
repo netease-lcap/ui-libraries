@@ -1,29 +1,35 @@
 import _ from 'lodash';
-import { useControllableValue } from '@/plugins/hooks';
-import { ElIcon } from '../../index';
+import { DialogProps } from 'element-plus';
+import { useCallback, useControllableValue } from '@/plugins/hooks';
+import { getPropsIcon } from '@/plugins/common/icon';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-export function handleDialogRef(props) {
-  const [value, setValue, valueProps] = useControllableValue(props);
-  const ref = props.get('ref');
-  const closeIcon = props.get('closeIcon');
-  const onBeforeClose = props.get('onBeforeClose');
+const DialogBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElDialogOptions, DialogProps>();
 
-  const closeIconComp = _.isNil(closeIcon) ? closeIcon : <ElIcon name={closeIcon} />;
+export default DialogBasicAccumulate.addPlugin({
+  name: 'handleDialogRef',
+  handle: (props) => {
+    const [, setValue, valueProps] = useControllableValue(props);
+    const ref = props.get('ref');
+    const closeIcon = props.get('closeIcon');
+    const onBeforeClose = props.get('onBeforeClose', (done) => _.attempt(done));
 
-  const beforeClose = _.isNil(onBeforeClose)
-    ? onBeforeClose
-    : _.wrap(onBeforeClose, (fn, ...args) => {
-        _.attempt(fn, ...args);
-      });
+    const beforeClose = useCallback(
+      _.wrap(onBeforeClose, (fn, done) => {
+        _.attempt(fn, done);
+        _.attempt(done as any);
+      }),
+      [onBeforeClose],
+    );
+    return {
+      ...valueProps,
+      ref: _.assign({}, ref, {
+        open: () => setValue(true),
+        close: () => setValue(false),
+      }),
 
-  return {
-    ...valueProps,
-    ref: {
-      ...ref,
-      open: () => setValue(true),
-      close: () => setValue(false),
-    },
-    closeIcon: closeIconComp,
-    beforeClose,
-  };
-}
+      closeIcon: getPropsIcon({ name: closeIcon }),
+      beforeClose,
+    };
+  },
+});

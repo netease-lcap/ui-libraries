@@ -194,7 +194,7 @@ function genEditComponent(entity: naslTypes.Entity, property: naslTypes.EntityPr
         }>
     </UDateTimePicker>`;
   } else {
-    const namespaceArr = propertyTypeNamespace.split('.');
+    const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
     const type = namespaceArr.pop();
     if (type === 'enums') {
       const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
@@ -249,9 +249,7 @@ function genTableEditColumnTemplate(entity: naslTypes.Entity, property: naslType
       </ULinearLayout>
     }
     slotExpander={
-      (current) => <UTableViewExpander
-          item={current.item}>
-      </UTableViewExpander>
+      (current) => <UTableViewExpander></UTableViewExpander>
     }
     ${genEditComponent(entity, property, nameGroup, selectNameGroupMap)}>
   </UTableViewColumn>`;
@@ -280,9 +278,7 @@ export function genEditTableTemplate(entity: naslTypes.Entity, nameGroup: NameGr
             <UText text="序号"></UText>
         }
         slotExpander={
-            (current) => <UTableViewExpander
-                item={current.item}>
-            </UTableViewExpander>
+            (current) => <UTableViewExpander></UTableViewExpander>
         }>
       </UTableViewColumn>
       ${properties.map((property) => `${genTableEditColumnTemplate(entity, property, nameGroup, selectNameGroupMap)}`).join('\n')}
@@ -304,9 +300,7 @@ export function genEditTableTemplate(entity: naslTypes.Entity, nameGroup: NameGr
               </ULinearLayout>
           }
           slotExpander={
-              (current) => <UTableViewExpander
-                  item={current.item}>
-              </UTableViewExpander>
+              (current) => <UTableViewExpander></UTableViewExpander>
           }>
       </UTableViewColumn>
   </UTableView>`;
@@ -374,6 +368,9 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
   nameGroup.viewVariableFilter = getViewUniqueVariableNames(likeComponent.getVariableUniqueName('filter'), nameGroup.viewVariableEntity);
   // 当前节点的currentName
   nameGroup.currentName = getCurrentName(refElement);
+  if (likeComponent.getDirectoryUniqueName) {
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(entity.name?.toLowerCase());
+  }
 
   // 收集所有和本实体关联的实体
   const entitySet: Set<naslTypes.Entity> = new Set();
@@ -405,9 +402,25 @@ export function genTableEditBlock(entity: naslTypes.Entity, refElement: naslType
   newLogics.push(entityLogic);
 
   return `export function view() {
-      let ${nameGroup.viewVariableEntity}: ${entityFullName};
-      let ${nameGroup.viewVariableInput}: ${entityFullName};
-      let ${nameGroup.viewVariableFilter}: ${entityFullName};
+      ${
+        nameGroup.viewDirectoryEntity
+        ? `
+        $Variable({
+          directory: ${nameGroup.viewDirectoryEntity},
+        })
+        let ${nameGroup.viewVariableEntity}: ${entityFullName};
+        $Variable({
+          directory: ${nameGroup.viewDirectoryEntity},
+        })
+        let ${nameGroup.viewVariableInput}: ${entityFullName};
+        $Variable({
+          directory: ${nameGroup.viewDirectoryEntity},
+        })
+        let ${nameGroup.viewVariableFilter}: ${entityFullName};`
+        : `let ${nameGroup.viewVariableEntity}: ${entityFullName};
+        let ${nameGroup.viewVariableInput}: ${entityFullName};
+        let ${nameGroup.viewVariableFilter}: ${entityFullName};`
+      }
 
       const $lifecycles = {
           onCreated: [

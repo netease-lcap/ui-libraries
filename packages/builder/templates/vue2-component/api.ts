@@ -1,6 +1,6 @@
 /// <reference types="@nasl/types" />
 namespace extensions.{{pkgName}}.viewComponents {
-  const { Component, Prop, ViewComponent, Slot, Method, Event, ViewComponentOptions } = nasl.ui;
+  const { Component, Prop, ViewComponent, Slot, Method, Param, Event, ViewComponentOptions } = nasl.ui;
 
   @ExtensionComponent({
     type: '{{type}}',
@@ -19,7 +19,7 @@ namespace extensions.{{pkgName}}.viewComponents {
   }
 
   export class {{compName}}Options extends ViewComponentOptions {
-     @Prop({
+    @Prop({
       title: '内容',
       description: '显示文本',
       setter: {
@@ -27,5 +27,15 @@ namespace extensions.{{pkgName}}.viewComponents {
       }
     })
     text: nasl.core.String = '';
+
+    @Prop({
+      title: '类型',
+      description: '类型',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '主要' }, { title: '次要' }, { title: '默认' }]
+      }
+    })
+    type: 'primary' | 'secondary' | 'default' = 'default';
   }
 }

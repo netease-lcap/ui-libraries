@@ -1,0 +1,17 @@
+.el-multi-layout-main-head {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  padding: 16px;
+  background: #fff;
+  border-bottom: 1px solid var(--el-border-color);
+  height: max-content;
+}
+.el-multi-layout-main-head:not(:has(*)) {
+  padding: 0;
+  border-bottom: none;
+  background: transparent;
+}

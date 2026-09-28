@@ -66,7 +66,7 @@
   width: var(--tabs-item-height);
   line-height: var(--tabs-item-height);
   text-align: center;
-  font-size: 22px;
+  font-size: calc(var(--tabs-control-icon-size, 16px) + 6px);
   bottom: 2px;
   color: rgba(0, 0, 0, 0.25);
   transition: color var(--transition-duration-base);
@@ -138,12 +138,34 @@ content: "\e64c";
   font-smoothing: antialiased;
 }
 
+.prev.useIcon,
+.next.useIcon {
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.prev.useIcon::before,
+.next.useIcon::before {
+  content: none;
+}
+
+.prev.useIcon .icon,
+.next.useIcon .icon {
+  font-size: var(--tabs-control-icon-size, 16px);
+}
+
 .nav[scrollable] .scroll-view {
   margin: 0 var(--tabs-item-height);
 }
 
 .nav[scrollable] .prev, .nav[scrollable] .next {
   display: block;
+}
+
+.nav[scrollable] .prev.useIcon,
+.nav[scrollable] .next.useIcon {
+  display: flex;
 }
 
 .item {
@@ -376,6 +398,14 @@ content: "\e663";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
+}
+
+.close.useIcon::before {
+  content: none;
+}
+
+.close.useIcon .icon {
+  font-size: inherit;
 }
 
 .body {

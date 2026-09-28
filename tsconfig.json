@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "jsx": "preserve",
     "target": "esnext",
     "module": "esnext",
@@ -9,9 +8,24 @@
     "noEmit": true,
     "noImplicitThis": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noImplicitAny": false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
-  "exclude": ["**/templates/*", "**/node_modules/*", "**/dist/*", "node_modules", "**/storybook-static/*"]
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/dist-theme",
+    "**/es",
+    "**/coverage",
+    "**/storybook-static",
+    "**/templates",
+    "**/.git",
+    "**/*.tgz",
+    "libraries/**/design",
+    "libraries/**/cloudui",
+    "packages/**/lib",
+    "packages/**/input"
+  ]
 }

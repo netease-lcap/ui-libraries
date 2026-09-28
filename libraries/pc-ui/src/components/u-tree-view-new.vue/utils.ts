@@ -1,4 +1,4 @@
-import { get as _get } from 'lodash';
+import { get as _get, isNil } from 'lodash';
 
 function forEachTreeData<T>(
   data: T[],
@@ -157,6 +157,32 @@ export function isDisabled<T, V extends string | number>(
   }
 
   return disabled;
+}
+
+export function getSelectNodeValues<T, V extends string | number>(
+  data: T[],
+  value: V,
+  { valueField, childrenField, disabledField },
+) {
+  if (isNil(value)) {
+    return [];
+  }
+
+  const dataMap: Record<V, undefined | { item: T; parent: T }> = getDataMap(data, { valueField, childrenField });
+  const values: V[] = [value];
+
+  let v = value;
+  while (true) {
+    const parent = dataMap[v]?.parent;
+    if (!parent) {
+      break;
+    }
+
+    v = _get(parent, valueField) as V;
+    values.push(v);
+  }
+
+  return values;
 }
 
 export function filterParentValues<T, V extends string | number>(

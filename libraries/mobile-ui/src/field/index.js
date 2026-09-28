@@ -27,6 +27,37 @@ import VusionValidator from '@lcap/validator';
 const [createComponent, bem, t] = createNamespace('field');
 const comSet = new Set(['van-fieldinput','van-fieldtextarea','van-fieldnumber']);
 
+function traverseSetDisabled(vnodes) {
+  vnodes.forEach((vnode) => {
+    if (vnode.componentOptions && [
+      'van-fieldinput',
+      'van-fieldtextarea',
+      'van-fieldnumber',
+      'van-stepper-new',
+      'van-slider',
+      'van-rate',
+      'van-pickerson',
+      'van-area',
+      'van-cascader',
+      'van-datetime-picker',
+      'van-calendar',
+      'van-radio-group',
+      'van-checkbox-group',
+      'van-uploader',
+    ].includes(vnode.componentOptions.tag)) {
+      vnode.componentOptions.propsData.disabled = true;
+    }
+
+    if (vnode.componentOptions && vnode.componentOptions.children) {
+      traverseSetDisabled(vnode.componentOptions.children);
+    }
+
+    if (vnode.children) {
+      traverseSetDisabled(vnode.children);
+    }
+  });
+}
+
 export default createComponent({
   inheritAttrs: false,
   mixins: [
@@ -136,6 +167,10 @@ export default createComponent({
       type: Boolean,
       default: false,
     },
+    ignoreValidation: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -150,22 +185,12 @@ export default createComponent({
     value() {
       this.updateValue(this.value);
       this.resetValidation();
-      // this.validateWithTrigger('onChange');
+
       this.validateWithTriggerVusion('change');
       this.$nextTick(this.adjustSize);
     },
   },
   created() {
-    // try {
-    //   this.validatorVuF = new VusionValidator(
-    //     this.$options.validators,
-    //     this.$options.rules,
-    //     this.rules || [],
-    //     this
-    //   );
-    // } catch (e) {
-    //   console.log('初始化validator失败');
-    // }
   },
   mounted() {
     this.updateValue(this.value, this.formatTrigger);
@@ -188,7 +213,7 @@ export default createComponent({
           this.$options.validators,
           this.$options.rules,
           this.rules || [],
-          this
+          this,
         );
         console.log('更新validator成功');
       } catch (e) {
@@ -375,6 +400,10 @@ export default createComponent({
       return message;
     },
     runRulesVusion(rules, trigger = '') {
+      if (this.ignoreValidation) {
+        return Promise.resolve();
+      }
+
       const value = this.formValue;
       return this.validatorVuF
         .validate(value, trigger, { label: this.label || t('validateLabel') })
@@ -383,58 +412,6 @@ export default createComponent({
           this.validateFailed = true;
           this.validateMessage = error;
         });
-    },
-    runRules(rules) {
-      return rules.reduce(
-        (promise, rule) =>
-          promise.then(() => {
-            if (this.validateFailed) {
-              return;
-            }
-
-            let value = this.formValue;
-
-            if (rule.formatter) {
-              value = rule.formatter(value, rule);
-            }
-
-            if (!this.runSyncRule(value, rule)) {
-              this.validateFailed = true;
-              this.validateMessage = this.getRuleMessage(value, rule);
-              return;
-            }
-
-            if (rule.validator) {
-              return this.runValidator(value, rule).then((result) => {
-                if (result === false) {
-                  this.validateFailed = true;
-                  this.validateMessage = this.getRuleMessage(value, rule);
-                }
-              });
-            }
-          }),
-        Promise.resolve()
-      );
-    },
-
-    validate(rules = this.rules) {
-      return new Promise((resolve) => {
-        if (!rules) {
-          resolve();
-        }
-
-        this.resetValidation();
-        this.runRules(rules).then(() => {
-          if (this.validateFailed) {
-            resolve({
-              name: this.name,
-              message: this.validateMessage,
-            });
-          } else {
-            resolve();
-          }
-        });
-      });
     },
 
     validateVusion(rules = this.rules, trigger) {
@@ -457,36 +434,8 @@ export default createComponent({
       });
     },
 
-    validateWithTrigger(trigger) {
-      if (this.vanForm && this.rules) {
-        const defaultTrigger = this.vanForm.validateTrigger === trigger;
-        const rules = this.rules.filter((rule) => {
-          if (rule.trigger) {
-            return rule.trigger === trigger;
-          }
-
-          return defaultTrigger;
-        });
-
-        if (rules.length) {
-          this.validate(rules);
-        }
-      }
-    },
     validateWithTriggerVusion(trigger) {
       if (this.vanForm && this.rules) {
-        // const defaultTrigger = this.vanForm.validateTrigger === trigger;
-        // const rules = this.rules.filter((rule) => {
-        //   if (rule.trigger) {
-        //     return rule.trigger === trigger;
-        //   }
-
-        //   return defaultTrigger;
-        // });
-
-        // if (rules.length) {
-        //   this.validate(rules);
-        // }
         this.validateVusion(this.rules, trigger);
       }
     },
@@ -571,7 +520,7 @@ export default createComponent({
       this.focused = false;
       this.updateValue(this.value, 'onBlur');
       this.$emit('blur', event);
-      // this.validateWithTrigger('onBlur');
+
       this.validateWithTriggerVusion('blur');
       this.$nextTick(this.adjustSize);
       resetScroll();
@@ -669,6 +618,12 @@ export default createComponent({
       const ifDesigner = this.$env && this.$env.VUE_APP_DESIGNER;
       if (inputSlot) {
         const ifInput = comSet.has(inputSlot[0]?.componentOptions?.tag);
+
+        // 禁用时，设置输入框禁用
+        if (disabled && inputSlot && inputSlot.length > 0) {
+          traverseSetDisabled(inputSlot);
+        }
+
         return ifInput ? (
           inputSlot
         ) : (

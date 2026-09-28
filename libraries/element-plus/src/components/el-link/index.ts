@@ -1,8 +1,17 @@
 import { ElLink as ElLinkPlus } from 'element-plus';
+import _ from 'lodash';
 import './index.css';
-import { registerComponent } from '../../plugins';
-import * as basicsPlugin from './plugins/index';
+import { registerComponent } from '@/plugins';
+import { $deletePropsList } from '@/plugins/constants';
+import basicsPlugin from './plugins/index';
 
-const ElLink = registerComponent(ElLinkPlus, { plugin: basicsPlugin });
-export { ElLinkPlus, ElLink };
+function ElLinkRegister(BaseComponent, plugin = {}, extend = true) {
+  const componentPlugin = extend ? _.assign(basicsPlugin, plugin) : plugin;
+  return registerComponent(BaseComponent, { plugin: componentPlugin });
+}
+
+const ElLink = registerComponent(ElLinkPlus, { plugin: basicsPlugin, name: 'el-link' });
+
+export { ElLinkPlus, ElLink, ElLinkRegister };
+export const ElLinkBasicsPlugin = basicsPlugin;
 export default ElLink;

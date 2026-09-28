@@ -48,7 +48,9 @@ namespace nasl.ui {
             title: '数据源',
             description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
             designerValue: [{}],
-            bindOpen: true,
+            setter: {
+                concept: 'DataSourceSetter',
+            },
         })
         dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
@@ -89,6 +91,26 @@ namespace nasl.ui {
             },
         })
         interval: nasl.core.Integer = 4000;
+
+        @Prop({
+            group: '主要属性',
+            title: '切换上一张图标',
+            description: '设置切换上一张图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        prevIcon: nasl.core.String = 'left-arrow';
+
+        @Prop({
+            group: '主要属性',
+            title: '切换下一张图标',
+            description: '设置切换下一张图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        nextIcon: nasl.core.String = 'right-arrow';
 
         @Event({
             title: '选择前',

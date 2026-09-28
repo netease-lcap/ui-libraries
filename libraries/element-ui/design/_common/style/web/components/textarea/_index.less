@@ -52,6 +52,10 @@
     display: flex;
     column-gap: @textarea-tips-gap;
     justify-content: space-between;
+    position: absolute;
+    right: var(--el-comp-paddingLR-s);
+    left: 0;
+    transform: translateY(calc(-100% - calc(calc(var(--el-comp-size-m) - var(--el-line-height-body-medium)) / 2)));
   }
 
   &__info_wrapper_align {

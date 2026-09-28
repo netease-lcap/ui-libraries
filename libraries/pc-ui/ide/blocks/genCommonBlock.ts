@@ -30,7 +30,7 @@ function genWhereExpression(entity: naslTypes.Entity) {
  * @param {*} supportFilter
  * @returns
  */
-export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: NameGroup, supportSort: boolean, supportFilter: boolean): string {
+function genOldQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: NameGroup, supportSort: boolean, supportFilter: boolean): string {
   allEntities = Array.from(allEntities);
   const entity = allEntities.shift();
   if (!entity) {
@@ -51,13 +51,64 @@ export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: N
     return `.LEFT_JOIN(${namespace}.${relationEntity.name}Entity, ${relationEntity.name} => ON(${onExpressions}))`;
   }).join('\n')}
   ${supportFilter && properties.length ? `.WHERE(${genWhereExpression(entity)})` : ''}
-        ${supportSort ? '.ORDER_BY([sort, order])' : ''}
-        .SELECT({
-            ${entityLowerName}: ${entity.name},
-            ${allEntities.map((relationEntity) => `${firstLowerCase(relationEntity.name)}: ${relationEntity.name}`).join(',')}
-        })), page, size)
-        return result;
+    .SELECT({
+        ${entityLowerName}: ${entity.name},
+        ${allEntities.map((relationEntity) => `${firstLowerCase(relationEntity.name)}: ${relationEntity.name}`).join(',')}
+    })
+    ${supportSort ? '.ORDER_BY([sort, order])' : ''}), page, size)
+    return result;
     }`;
+}
+
+/**
+ * 生成新的查询逻辑。IDE 4.0以上
+ * @param allEntities
+ * @param nameGroup
+ * @param supportSort
+ * @param supportFilter
+ * @returns
+ */
+function genNewQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: NameGroup, supportSort: boolean, supportFilter: boolean): string {
+  allEntities = Array.from(allEntities);
+  const entity = allEntities.shift();
+  if (!entity) {
+    return '';
+  }
+  const namespace = entity.getNamespace();
+  const entityLowerName = firstLowerCase(entity.name);
+  const properties = entity.properties.filter((property) => property?.display.inFilter);
+  return `export function ${nameGroup.logic}(page: Long, size: Long${supportSort ? ', sort: String, order: String' : ''}${supportFilter ? `, filter: ${namespace}.${entity.name}` : ''}) {
+        let result;
+        result = PAGINATE(FROM(${namespace}.${entity.name}Entity, ${entity.name} => $()
+        ${allEntities.map((relationEntity) => {
+    const onExpressions = entity.properties
+      ?.filter((property) => property.relationEntity === relationEntity.name)
+      .map((leftProperty) => {
+        return `${entity.name}.${leftProperty.name} == ${relationEntity.name}.${leftProperty.relationProperty}`;
+      }).join('&&');
+    return `.LEFT_JOIN(${namespace}.${relationEntity.name}Entity, ${relationEntity.name} => ON(${onExpressions})`;
+  }).join('\n')}
+  ${supportFilter && properties.length ? `.WHERE(${genWhereExpression(entity)})` : ''}
+    .SELECT({
+        ${entityLowerName}: ${entity.name},
+        ${allEntities.map((relationEntity) => `${firstLowerCase(relationEntity.name)}: ${relationEntity.name}`).join(',\n')}
+    })
+    ${supportSort ? '.ORDER_BY((resultItem)=>[[resultItem[sort], order]])' : ''})${allEntities.map(()=>`)`).join('')}, page, size);
+    return result;
+    }`;
+}
+
+export function genQueryLogic(allEntities: Array<naslTypes.Entity>, nameGroup: NameGroup, supportSort: boolean, supportFilter: boolean): string {
+  const entity = allEntities[0];
+  if (!entity) {
+    return '';
+  }
+  const ideVersion = entity.app?.ideVersion;
+  const ideVersions = ideVersion?.split('.');
+  if (ideVersions && ideVersions.length >= 2 && Number(ideVersions[0]) >= 4) {
+    return genNewQueryLogic(allEntities, nameGroup, supportSort, supportFilter);
+  }
+  return genOldQueryLogic(allEntities, nameGroup, supportSort, supportFilter);
 }
 
 /**
@@ -210,7 +261,7 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
         emptyValueIsNull={true}>
     </UDateTimePicker>`;
   }
-  const namespaceArr = propertyTypeNamespace.split('.');
+  const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;
@@ -223,6 +274,44 @@ export function genPropertyEditableTemplate(entity: naslTypes.Entity, property: 
             </USelect>`;
   }
   return `<UInput value={$sync(${vModel})} placeholder="请输入${label}" emptyValueIsNull={true}></UInput>`;
+}
+
+type MinMaxString = `${'min' | 'max'}(${string})`;
+/**
+ * 类型守卫函数，判断字符串是否符合min/max格式
+ */
+function isMinMaxString(str: string): str is MinMaxString {
+  return /^(min|max)\([-+]?\d+\)$/.test(str);
+}
+
+/**
+ * 解析带min/max前缀的数字字符串，确保结果在 JS 安全整数范围内
+ * @param str - 格式为 "min(数字)" 或 "max(数字)" 的字符串
+ * @returns 处理后的安全整数
+ */
+function parseSafeNumberRule(str: string): string {
+  const match = str.match(/^(min|max)\(([-+]?\d+)\)$/);
+  if (!match) {
+    return str;
+  }
+  const [, prefix, numStr] = match;
+  try {
+    // 使用BigInt确保精度
+    const bigNum = BigInt(numStr);
+    const minSafe = BigInt(Number.MIN_SAFE_INTEGER);
+    const maxSafe = BigInt(Number.MAX_SAFE_INTEGER);
+    let safeNumber;
+    if (bigNum < minSafe) {
+      safeNumber = Number.MIN_SAFE_INTEGER;
+    } else if (bigNum > maxSafe) {
+      safeNumber = Number.MAX_SAFE_INTEGER;
+    } else {
+      safeNumber = Number(bigNum); // 转换回number
+    }
+    return `${prefix}(${safeNumber})`;
+  } catch (error) {
+    return str;
+  }
 }
 
 /**
@@ -244,10 +333,14 @@ export function genFormItemsTemplate(entity: naslTypes.Entity, properties: Array
     const rules: Array<string> = [];
     if (options.needRules && property.rules && property.rules.length) {
       property.rules.forEach((rule) => {
+        let curRule = rule;
         if (!rule.endsWith(')')) {
-          rule += '()';
+          curRule += '()';
         }
-        rules.push(`nasl.validation.${rule}`);
+        if (isMinMaxString(curRule)) {
+          curRule = parseSafeNumberRule(curRule);
+        }
+        rules.push(`nasl.validation.${curRule}`);
       });
     }
     if (required) rules.push('nasl.validation.required()');

@@ -1,5 +1,5 @@
 <template>
-<u-cascader filterable :data-source="[
+<u-cascader filterable clearable :data-source="[
     { text: '理学', value: '理学', children: [
         { text: '物理学', value: '物理学', children: [
             { text: '理论物理', value: '理论物理' },
@@ -26,7 +26,9 @@
             { text: '机械设计及理论', value: '机械设计及理论', disabled: true },
             { text: '车辆工程', value: '车辆工程', disabled: true },
         ] },
-    ] },
+    ],
+},
+    { text: '文学', value: '文学', loading: true },
 ]">
 </u-cascader>
 </template>

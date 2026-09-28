@@ -104,7 +104,13 @@
    * @desc 滑块轨道高度
    * @type size
    */
-  --el-slider-rail-track-step-size: var(--el-size-2);
+  --el-slider-rail-track-step-size: 6px;
+
+  /**
+   * @desc 滑块刻度线背景色
+   * @type color
+   */
+  --el-slider-stop-background: #fff;
 
   /**
    * @desc 滑块高度
@@ -129,18 +135,6 @@
    * @type size
    */
   --el-slider-vertical-mark-width: 18px;
-
-  /**
-   * @desc 滑块刻度线宽度
-   * @type size
-   */
-  --el-slider-stop-width: 1px;
-
-  /**
-   * @desc 滑块刻度线高度
-   * @type size
-   */
-  --el-slider-stop-height: var(--el-size-2);
 
   /**
    * @desc 滑块中心线宽度

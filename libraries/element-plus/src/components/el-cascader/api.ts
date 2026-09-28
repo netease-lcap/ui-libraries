@@ -22,6 +22,7 @@ namespace nasl.ui {
       slotInlineStyle: {
         option: 'min-height: 0;',
       },
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -31,6 +32,48 @@ namespace nasl.ui {
     group: 'Selector',
   })
   export class ElCascader<T, V, P extends nasl.core.Boolean, M extends nasl.core.Boolean, C> extends ViewComponent {
+    @Prop({
+      title: '禁用组件',
+      description: '是否禁用组件',
+    })
+    disabled: nasl.core.Boolean;
+
+    @Prop({
+      title: '过滤文本',
+      description: '过滤文本',
+    })
+    filterText: nasl.core.String;
+
+    @Prop({
+      title: '数据',
+      description: '级联选择器的数据',
+    })
+    data: nasl.collection.List<T>;
+
+    @Method({
+      title: '重新加载',
+      description: '重新加载',
+    })
+    reload(): void {}
+
+    @Method({
+      title: '打开',
+      description: '打开',
+    })
+    open(): void {}
+
+    @Method({
+      title: '关闭',
+      description: '关闭',
+    })
+    close(): void {}
+
+    @Method({
+      title: '重置字段',
+      description: '重置字段',
+    })
+    resetField(): void {}
+
     constructor(options?: Partial<ElCascaderOptions<T, V, P, M, C>>) {
       super();
     }
@@ -67,21 +110,15 @@ namespace nasl.ui {
     // })
     // borderless: nasl.core.Boolean = false;
 
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
-      group: '主要属性',
-      title: '是否可清空',
-      description: '是否可以清空选项',
+      group: '交互属性',
+      title: '可清空',
+      description: '是否允许清空已选择的选项',
+      docDescription: '开启后，选择器会显示清空按钮，用户可以清空已选择的选项。',
       setter: { concept: 'SwitchSetter' },
     })
     clearable: nasl.core.Boolean = false;
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '允许用户创建新条目',
-    //   description: '是否允许用户创建新条目，需配合 filterable 使用',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // creatable: nasl.core.Boolean = false;
 
     @Prop({
       group: '主要属性',
@@ -108,6 +145,16 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     filterable: nasl.core.Boolean = false;
+
+    @Prop<ElCascaderOptions<T, V, P, M, C>, 'remote'>({
+      group: '交互属性',
+      title: '远程搜索',
+      description: '是否开启远程搜索',
+      docDescription: '开启后，组件不会过滤选项，而是改变当前组件.filterText属性，用户自行实现搜索逻辑。',
+      setter: { concept: 'SwitchSetter' },
+      if: (_) => !!_.filterable,
+    })
+    remote: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '主要属性',
@@ -139,6 +186,9 @@ namespace nasl.ui {
       title: '数据源',
       description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
       docDescription: '支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑',
+      setter: {
+        concept: 'DataSourceSetter',
+      },
     })
     dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
@@ -192,7 +242,7 @@ namespace nasl.ui {
       description: '选中值。支持语法糖 `v-model`。',
       setter: { concept: 'InputSetter' },
     })
-    modelValue: M extends true ? (C extends '' ? nasl.collection.List<V> : nasl.core.String) : V;
+    modelValue: M extends true ? nasl.collection.List<nasl.collection.List<V>> : nasl.collection.List<V>;
 
     // @Prop<ElCascaderOptions<T, V, P, M, C>, 'childrenField'>({
     //   group: '数据属性',
@@ -468,6 +518,14 @@ namespace nasl.ui {
     // })
     // onBlur: (event: any) => any;
 
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
     @Event({
       title: '选中值变化时',
       description:
@@ -632,6 +690,11 @@ namespace nasl.ui {
       additionalAttribute: {
         valueField: '"value"',
         textField: '"text"',
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
       },
       dataSource: {
         dismiss: "!this.getAttribute('dataSource')",
@@ -643,6 +706,7 @@ namespace nasl.ui {
       },
       ignoreProperty: ['rules'],
       forceRefresh: 'parent',
+      forceUpdateWhenAttributeChange: true,
       namedSlotOmitWrapper: ['label'],
     },
     extends: [

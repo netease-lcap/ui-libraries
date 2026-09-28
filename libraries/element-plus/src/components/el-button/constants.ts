@@ -10,5 +10,5 @@ export const $PopconfirmProps = [
   'persistent',
   'width',
   'title',
-  'icon',
+  'popconfirmIcon',
 ];

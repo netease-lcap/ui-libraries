@@ -25902,13 +25902,18 @@
   position: relative;
   top: -0.5px;
 }
+.el-descriptions-item__label.has-colon {
+  > div {
+    display: inline-flex;
+  }
+}
 .el-descriptions-item__label.is-bordered-label {
   font-weight: bold;
   color: var(--color-text-secondary);
   background: var(--descriptions-item-bordered-label-background);
 }
 .el-descriptions-item__label:not(.is-bordered-label) {
-  margin-right: 10px;
+  padding-right: 10px;
 }
 .el-descriptions-item__content {
   word-break: break-word;
@@ -26020,7 +26025,7 @@
   background: var(--descriptions-item-bordered-label-background);
 }
 .el-descriptions-item__label:not(.is-bordered-label) {
-  margin-right: 10px;
+  padding-right: 10px;
 }
 .el-descriptions-item__content {
   word-break: break-word;

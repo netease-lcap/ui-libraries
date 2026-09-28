@@ -3,7 +3,6 @@ import {
 } from '@vue/composition-api';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { TimeIcon as ElTimeIcon } from '@element-ui-icons';
 
 import TimePickerPanel from './panel/time-picker-panel';
 import ElSelectInput, { SelectInputFocusContext } from '../select-input';
@@ -12,7 +11,6 @@ import type { InputProps } from '../input';
 // hooks
 import useVModel from '../hooks/useVModel';
 import { useConfig, usePrefixClass } from '../hooks/useConfig';
-import { useGlobalIcon } from '../hooks/useGlobalIcon';
 import useFormDisabled from '../hooks/useFormDisabled';
 
 import props from './props';
@@ -26,7 +24,6 @@ export default defineComponent({
   setup(props, ctx) {
     const { classPrefix } = useConfig('classPrefix');
     const componentName = usePrefixClass('time-picker');
-    const { TimeIcon } = useGlobalIcon({ TimeIcon: ElTimeIcon });
     const { formDisabled } = useFormDisabled();
 
     const currentValue = ref('');
@@ -119,12 +116,10 @@ export default defineComponent({
       isShowPanel,
       global,
       currentValue,
-      TimeIcon,
       isDisabled,
     };
   },
   render() {
-    const { TimeIcon } = this;
     return (
       <div class={this.componentName}>
         <ElSelectInput
@@ -140,7 +135,6 @@ export default defineComponent({
               allowInput: !this.readonly && this.allowInput,
               readonly: this.readonly,
               class: this.inputClasses,
-              suffixIcon: () => <TimeIcon />,
               popupVisible: this.isShowPanel,
               placeholder: !this.innerValue ? this.placeholder || this.global.placeholder : undefined,
               value: this.isShowPanel ? this.currentValue : this.innerValue ?? undefined,

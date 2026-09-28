@@ -1,0 +1,14 @@
+.van-uploader-cw-preview {
+  // 如果没有 .van-uploader__preview 元素，显示 '-'
+  &:not(:has(.van-uploader__preview))::before {
+    content: '-';
+  }
+
+  .van-uploader__upload {
+    display: none;
+  }
+  .van-uploader__preview-delete{
+    display: none;
+  }
+
+}

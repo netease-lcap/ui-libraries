@@ -10,6 +10,10 @@ export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'chang
 export const useValue: NaslComponentPluginOptions = {
   setup: (props) => {
     const focused = shallowRef(false);
+    const onEnter = props.get('onEnter');
+    const onKeydown = props.get('onKeydown');
+    const onKeypress = props.get('onKeypress');
+    const onKeyup = props.get('onKeyup');
     return {
       value: props.useComputed('value', (v) => (isNil(v) ? undefined : v)),
       class: computed(() => {
@@ -42,6 +46,26 @@ export const useValue: NaslComponentPluginOptions = {
         const onBlur = props.get('onBlur');
         if (isFunction(onBlur)) {
           onBlur(...args);
+        }
+      },
+      onEnter: (value, event) => {
+        if (isFunction(onEnter)) {
+          onEnter({ value, event });
+        }
+      },
+      onKeydown: (value, event) => {
+        if (isFunction(onKeydown)) {
+          onKeydown({ value, event });
+        }
+      },
+      onKeypress: (value, event) => {
+        if (isFunction(onKeypress)) {
+          onKeypress({ value, event });
+        }
+      },
+      onKeyup: (value, event) => {
+        if (isFunction(onKeyup)) {
+          onKeyup({ value, event });
         }
       },
     };

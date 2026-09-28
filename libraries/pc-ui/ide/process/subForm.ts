@@ -89,9 +89,7 @@ function genTableColumnTemplate(
         </UValidator>
     }
     slotExpander={
-        (current) => <UTableViewExpander
-            item={current.item}>
-        </UTableViewExpander>
+        (current) => <UTableViewExpander></UTableViewExpander>
     }>
   </UTableViewColumn>`;
 }
@@ -232,8 +230,7 @@ export function genSubFormStencilTemplate(
                   fixed={true}
                   slotTitle={ <UText text="序号"></UText> }
                   slotExpander={
-                      (current) => <UTableViewExpander item={current.item}>
-                      </UTableViewExpander>
+                      (current) => <UTableViewExpander></UTableViewExpander>
                   }>
                 </UTableViewColumn>
                 ${properties
@@ -270,8 +267,7 @@ export function genSubFormStencilTemplate(
                       </ULinearLayout>
                   }
                   slotExpander={
-                      (current) => <UTableViewExpander item={current.item}>
-                      </UTableViewExpander>
+                      (current) => <UTableViewExpander></UTableViewExpander>
                   }>
                 </UTableViewColumn>
               </UTableView>
@@ -443,7 +439,7 @@ function genPropertyEditableTemplate(
         emptyValueIsNull={true}>
     </UDateTimePicker>`;
   }
-  const namespaceArr = propertyTypeNamespace.split('.');
+  const namespaceArr = typeof propertyTypeNamespace === 'string' ? propertyTypeNamespace.split('.') : [];
   const type = namespaceArr.pop();
   if (type === 'enums') {
     const enumTypeAnnotationStr = `${propertyTypeNamespace}.${propertyTypeName}`;

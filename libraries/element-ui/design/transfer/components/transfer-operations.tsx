@@ -25,6 +25,9 @@ export default mixins(classPrefixMixins, getGlobalIconMixins()).extend({
         Array<string | ElNode> | ElNode<{ direction: 'left' | 'right' }>
       >,
     },
+    operationButton: {
+      type: Function,
+    }
   },
   methods: {
     moveToRight() {
@@ -78,33 +81,58 @@ export default mixins(classPrefixMixins, getGlobalIconMixins()).extend({
       }
       return renderContent;
     },
-  },
-  render(h) {
-    const { leftDisabled, rightDisabled } = this.$props;
-    return (
-      <div class={`${this.componentName}__operations`}>
+    _renderRightOperationButton(h: CreateElement) {
+      const { rightDisabled } = this.$props;
+      const key = rightDisabled ? 'right-outline' : 'right-base';
+      const onClick = this.moveToRight;
+
+      if (typeof this.operationButton === 'function') {
+        return this.operationButton(h, { direction: 'right', key, disabled: rightDisabled, onClick });
+      }
+
+      return (
         <Button
           variant="outline"
           size="small"
           shape={typeof this.operation?.[1] === 'string' ? 'rectangle' : 'square'}
-          key={rightDisabled ? 'right-outline' : 'right-base'}
+          key={key}
           disabled={rightDisabled}
-          onClick={this.moveToRight}
+          onClick={onClick}
           icon={this.getIcon('right')}
         >
           {this._renderButton(h, 'right')}
         </Button>
+      );;
+    },
+    _renderLeftOperationButton(h: CreateElement) {
+      const { leftDisabled } = this.$props;
+      const key = leftDisabled ? 'left-outline' : 'left-base';
+      const onClick = this.moveToLeft;
+
+      if (typeof this.operationButton === 'function') {
+        return this.operationButton(h, { direction: 'left', key, disabled: leftDisabled, onClick });
+      }
+
+      return (
         <Button
           variant="outline"
-          key={leftDisabled ? 'left-outline' : 'left-base'}
+          key={key}
           size="small"
           shape={typeof this.operation?.[0] === 'string' ? 'rectangle' : 'square'}
           disabled={leftDisabled}
-          onClick={this.moveToLeft}
+          onClick={onClick}
           icon={this.getIcon('left')}
         >
           {this._renderButton(h, 'left')}
         </Button>
+      );
+    },
+  },
+  render(h) {
+    return (
+      <div class={`${this.componentName}__operations`}>
+        {this._renderRightOperationButton(h)}
+        {this._renderLeftOperationButton(h)}
       </div>
     );
   },

@@ -25,6 +25,12 @@ namespace nasl.ui {
       super();
     }
 
+    @Prop({
+      title: '显示状态',
+      description: '控制抽屉的显示和隐藏',
+    })
+    modelValue: nasl.core.Boolean;
+
     @Method({
       title: '显示弹框',
       description: '显示弹框',
@@ -51,28 +57,32 @@ namespace nasl.ui {
   }
 
   export class ElDrawerOptions extends ViewComponentOptions {
+    // ========== 涉及组件的可用、不可用、加载等状态 ==========
     @Prop({
       group: '状态属性',
       sync: true,
-      title: '显示',
-      description: '是否显示 Drawer',
+      title: '显示状态',
+      description: '控制抽屉的显示和隐藏',
+      docDescription: '绑定抽屉的显示状态。true：显示抽屉；false：隐藏抽屉。支持双向绑定，可以通过程序控制抽屉的开关。',
       setter: { concept: 'SwitchSetter' },
     })
     modelValue: nasl.core.Boolean = false;
 
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
-      group: '主要属性',
-      title: 'Drawer 自身是否插入至 body 元素上',
-      description:
-        'Drawer 自身是否插入至 body 元素上。嵌套的 Drawer 必须指定该属性并赋值为 true',
+      group: '交互属性',
+      title: '插入到body',
+      description: '是否将抽屉插入到body元素',
+      docDescription: '开启后，抽屉会被插入到body元素上，避免被父元素的样式影响。嵌套抽屉必须开启此选项。',
       setter: { concept: 'SwitchSetter' },
     })
     appendToBody: nasl.core.Boolean = false;
 
     @Prop({
-      group: '主要属性',
-      title: '是否滚动锁定',
-      description: '是否在 Drawer 出现时将 body 滚动锁定',
+      group: '交互属性',
+      title: '滚动锁定',
+      description: '是否在抽屉显示时锁定页面滚动',
+      docDescription: '开启后，当抽屉显示时会锁定背景页面的滚动，防止用户滚动背景内容。',
       setter: { concept: 'SwitchSetter' },
     })
     lockScroll: nasl.core.Boolean = true;
@@ -108,7 +118,6 @@ namespace nasl.ui {
       setter: { concept: 'NumberInputSetter' },
     })
     openDelay: nasl.core.Decimal = 0;
-
 
     @Prop({
       group: '主要属性',
@@ -157,12 +166,7 @@ namespace nasl.ui {
       description: 'Drawer 打开的方向',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '从右往左开' },
-          { title: '从左往右开' },
-          { title: '从上往下开' },
-          { title: '从下往上开' },
-        ],
+        options: [{ title: '从右往左开' }, { title: '从左往右开' }, { title: '从上往下开' }, { title: '从下往上开' }],
       },
     })
     direction: 'rtl' | 'ltr' | 'ttb' | 'btt' = 'rtl';
@@ -187,8 +191,7 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '控制是否显示 header 栏',
-      description:
-        '控制是否显示 header 栏, 默认为 true, 当此项为 false 时, title attribute 和 title slot 均不生效',
+      description: '控制是否显示 header 栏, 默认为 true, 当此项为 false 时, title attribute 和 title slot 均不生效',
       setter: { concept: 'SwitchSetter' },
     })
     withHeader: nasl.core.Boolean = true;
@@ -213,31 +216,31 @@ namespace nasl.ui {
       title: 'Drawer 打开的回调',
       description: 'Drawer 打开的回调',
     })
-    onOpen: (event: any) => any;
+    onOpen: () => any;
 
     @Event({
       title: 'Drawer 打开动画结束时的回调',
       description: 'Drawer 打开动画结束时的回调',
     })
-    onOpened: (event: any) => any;
+    onOpened: () => any;
 
     @Event({
       title: '关闭前的回调',
       description: '关闭前的回调，会暂停 Drawer 的关闭',
     })
-    onBeforeClose: (event: any) => any;
+    onBeforeClose: (event: Function) => any;
 
     @Event({
       title: 'Drawer 关闭的回调',
       description: 'Drawer 关闭的回调',
     })
-    onClose: (event: any) => any;
+    onClose: () => any;
 
     @Event({
       title: 'Drawer 关闭动画结束时的回调',
       description: 'Drawer 关闭动画结束时的回调',
     })
-    onClosed: (event: any) => any;
+    onClosed: () => any;
 
     @Slot({
       title: 'Drawer 的内容',

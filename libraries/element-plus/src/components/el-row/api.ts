@@ -25,10 +25,12 @@ namespace nasl.ui {
   }
 
   export class ElRowOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '横轴对齐',
-      description: '横轴对齐方式',
+      description: '内容在横轴的对齐方式',
+      docDescription: '控制栅格内容在横轴（水平方向）的对齐方式。左对齐、居中对齐、右对齐、平均分布等。',
       setter: {
         concept: 'CapsulesSetter',
         options: [
@@ -53,7 +55,8 @@ namespace nasl.ui {
     @Prop({
       group: '主要属性',
       title: '纵轴对齐',
-      description: 'flex 布局下的纵轴对齐方式',
+      description: '内容在纵轴的对齐方式',
+      docDescription: '控制栅格内容在纵轴（垂直方向）的对齐方式。顶对齐、垂直居中、底对齐。',
       setter: {
           concept: 'CapsulesSetter',
           options: [{ title: '顶对齐', icon: 'horizontal-alignment-start', tooltip: '顶对齐' }, { title: '垂直居中', icon: 'horizontal-alignment-center', tooltip: '垂直居中' }, { title: '底对齐', icon: 'horizontal-alignment-end', tooltip: '底对齐' }],
@@ -61,18 +64,21 @@ namespace nasl.ui {
     })
     align: 'top' | 'middle' | 'bottom' = 'top';
 
+    // ========== 关于尺寸大小、间距、边框、颜色的设置 ==========
     @Prop({
-      group: '主要属性',
+      group: '样式属性',
       title: '列间隔',
-      description: '列间隔',
+      description: '栅格列之间的间隔距离',
+      docDescription: '设置栅格列之间的间隔距离，单位为像素。',
       setter: { concept: 'NumberInputSetter' },
     })
     gutter: nasl.core.Decimal | nasl.core.Integer = 0;
 
     @Prop({
-      group: '主要属性',
-      title: '标签',
-      description: '标签',
+      group: '样式属性',
+      title: 'HTML标签',
+      description: '自定义渲染的HTML标签',
+      docDescription: '设置自定义的HTML标签名，默认为div。',
       setter: { concept: 'InputSetter' },
     })
     tag: nasl.core.String = 'div';

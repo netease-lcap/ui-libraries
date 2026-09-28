@@ -25,5 +25,16 @@
     "noImplicitAny": false
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "dist-theme",
+    "coverage",
+    "**/node_modules",
+    "**/dist",
+    "**/dist-theme",
+    "**/storybook-static",
+    "test"
+  ],
   "references": []
 }

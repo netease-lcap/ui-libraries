@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import cloneDeep from 'lodash/cloneDeep';
 import filter from 'lodash/filter';
+import lodashGet from 'lodash/get';
 
 import {
   TransferListOptionBase, TransferItemOption, ElTransferProps, TransferValue, DataOption,
@@ -96,17 +97,23 @@ function getTransferData(
     const labelKey = keys?.label || 'label';
     const valueKey = keys?.value || 'value';
     const disabledKey = keys?.disabled || 'disabled';
-    if (transferDataItem[labelKey] === undefined) {
+
+    const label = lodashGet(transferDataItem, labelKey);
+    const value = lodashGet(transferDataItem, valueKey);
+    const disabled = lodashGet(transferDataItem, disabledKey);
+
+    if (label === undefined) {
       throw `${labelKey} is not in DataOption ${JSON.stringify(transferDataItem)}`;
     }
-    if (transferDataItem[valueKey] === undefined) {
+    if (value === undefined) {
       throw `${valueKey} is not in DataOption ${JSON.stringify(transferDataItem)}`;
     }
+
     const result: TransferItemOption = {
-      label: transferDataItem[labelKey] as string,
-      value: transferDataItem[valueKey],
-      key: `key__value_${transferDataItem[valueKey]}_index_${index}`,
-      disabled: transferDataItem[disabledKey] ?? false,
+      label,
+      value,
+      key: `key__value_${value}_index_${index}`,
+      disabled: disabled ?? false,
       data: transferDataItem,
     };
     if (isTreeMode && transferDataItem.children) {

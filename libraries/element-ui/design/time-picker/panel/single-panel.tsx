@@ -148,7 +148,14 @@ export default defineComponent({
           el = Number(el) + 12;
         }
 
-        params[colIdx] = Number(el);
+        params.forEach((v, idx) => {
+          if (idx === colIdx) {
+            params[idx] = Number(el);
+          } else if (idx > colIdx) {
+            params[idx] = 59;
+          }
+        });
+
         return !props.disableTime?.(...params, { partial: position.value || 'start' })?.[col]?.includes(Number(el));
       }
       return true;
@@ -180,7 +187,16 @@ export default defineComponent({
               t = Number(t) + 12;
             }
 
-            params[colIdx] = Number(t);
+            params.forEach((v, idx) => {
+              if (idx === colIdx) {
+                params[idx] = Number(t);
+              } else if (idx > 2) { // 毫秒
+                params[idx] = 999;
+              } else if (idx > colIdx) { // 分钟、秒
+                params[idx] = 59;
+              }
+            });
+
             return !props
               .disableTime?.(...params, { partial: position.value || 'start' })
               ?.[col]?.includes(Number(t));

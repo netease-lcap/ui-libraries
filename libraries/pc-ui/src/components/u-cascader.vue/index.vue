@@ -1,25 +1,26 @@
 <template>
-    <div :class="$style.root" :clearable="clearable && !!currentValue" :opened="currentOpened"
+    <div :class="[$style.root, {[$style.useIcon]: !!suffixIcon}]" :clearable="clearable && !!currentValue" :opened="currentOpened"
         @keydown.up.prevent="$refs.popper.currentOpened ? shift(-1) : open()"
         @keydown.down.prevent="$refs.popper.currentOpened ? shift(+1) : open()"
         @keydown.left.prevent="horizontalShift(-1)"
         @keydown.right.prevent="horizontalShift(+1)"
         @keydown.esc.stop="close()"
         @keydown.enter="$refs.popper.currentOpened ? onEnter() : open()"
-        :disabled="disabled"
+        :disabled="computedDisabled"
         :readonly="readonly"
         :preview="isPreview">
         <span v-if="isPreview">{{ currentValue || '--' }}</span>
         <u-input v-if="!isPreview" :class="$style.input" :opened="currentOpened"
             :placeholder="placeholder" :readonly="!filterable || readonly"
-            :value="currentValue" :disabled="disabled"
+            :value="currentValue" :disabled="computedDisabled"
             @focus="focus" @blur="blur"
             @input="onInput"
             @clear="clear"
+            :prefix="prefixIcon"
             :color="formItemVM && formItemVM.color"
             :autofocus="autofocus"
             ref="input">
-            <m-popper v-if="!disabled && !readonly && !isPreview" :class="$style.popperShape" ref="popper"
+            <m-popper v-if="!computedDisabled && !readonly && !isPreview" :class="$style.popperShape" ref="popper"
                 @mousedown.stop.prevent
                 @open="getSubComponents(true)" @close="resetInput">
                 <div v-if="loading" :class="$style.loading"><u-loading></u-loading></div>
@@ -35,6 +36,8 @@
                         :is-input="isInput"
                         :lazy="lazy"
                         :opened="currentOpened"
+                        :expand-icon="menuExpandIcon"
+                        :loading-icon="loadingIcon"
                         :field="field"
                         :data="item"
                         :change-on-select="changeOnSelect"
@@ -44,7 +47,10 @@
                 </template>
             </m-popper>
         </u-input>
-        <span v-show="clearable && currentValue && !disabled && !readonly && !isPreview" :class="$style.clearable" @click="clear" @mousedown.prevent></span>
+        <span v-show="clearable && currentValue && !computedDisabled && !readonly && !isPreview" :class="[$style.clearable, {[$style.useIcon]: !!clearIcon}]" @click="clear" @mousedown.prevent>
+          <i-ico :name="clearIcon" v-if="clearIcon" notext :class="$style.icon"></i-ico>
+        </span>
+        <i-ico :name="suffixIcon" notext :class="$style.icon" v-if="suffixIcon && !isPreview"></i-ico>
     </div>
 </template>
 
@@ -52,13 +58,17 @@
 import { sync } from '@lcap/vue2-utils';
 import UCascaderItem from './item.vue';
 import MField from '../m-field.vue';
+import UInput from '../u-input.vue';
 import MPreview from '../u-text.vue/preview';
 import SupportDataSource from '../../mixins/support.datasource';
 import treeDataSource from '../../mixins/tree.datasource';
 
 export default {
     name: 'u-cascader',
-    components: { UCascaderItem },
+    inject: {
+        formVM: { default: null },
+    },
+    components: { UCascaderItem, UInput },
     mixins: [
       MField,
       SupportDataSource,
@@ -82,7 +92,7 @@ export default {
         readonly: 'readonly',
         preview: 'isPreview',
         opened: 'currentOpened',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       }),
     ],
     props: {
@@ -119,6 +129,22 @@ export default {
         filterHightlighterColor: {
             type: String,
         },
+        clearIcon: {
+            type: String,
+            default: 'close',
+        },
+        menuExpandIcon: {
+            type: String,
+        },
+        prefixIcon: {
+            type: String,
+        },
+        suffixIcon: {
+            type: String,
+        },
+        loadingIcon: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -137,6 +163,9 @@ export default {
         };
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         dynamicStyle() {
             if (this.filterHightlighterColor) {
                 return {
@@ -212,7 +241,7 @@ export default {
             }
             this.currentData = data;
             this.allMergeText = this.getMergeText(this.currentData);
-            this.getSubComponents();
+            this.getSubComponents(this.currentOpened);
             if (this.useArrayLikeValue) {
                 this.updateFromArrayLikeValue(this.lastRealValueArray);
                 if (!this.showFinalValue)
@@ -240,7 +269,7 @@ export default {
         this.autofocus && this.$refs.input.focus();
         this.extractCssVariables();
         // 在编辑器里不要打开
-        if (!this.$env.VUE_APP_DESIGNER && this.currentData.length) {
+        if (!this.$env.VUE_APP_DESIGNER && this.opened) {
             this.currentOpened = this.opened;
             this.toggle(this.opened);
         }
@@ -517,7 +546,7 @@ export default {
             this.$refs.popper && this.$refs.popper.toggle(opened);
         },
         clear(...args) {
-            if (this.readonly || this.disabled || this.isPreview) {
+            if (this.readonly || this.computedDisabled || this.isPreview) {
                 return;
             }
             this.currentValue = this.handleEmptyValue('');

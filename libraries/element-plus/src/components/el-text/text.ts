@@ -1,10 +1,6 @@
-import {
-  computed,
-  defineComponent,
-  getCurrentInstance,
-  h,
-  Slot,
-} from 'vue';
+import { computed, defineComponent, getCurrentInstance, h, Slot, inject, Ref } from 'vue';
+
+import { $provide } from '@/plugins/constants';
 import './index.css';
 
 export default defineComponent({
@@ -28,11 +24,11 @@ export default defineComponent({
     },
     overflow: {
       type: String,
-      default: 'normal',
     },
   },
   setup(props) {
     const instance = getCurrentInstance();
+    const provide = inject($provide) as Ref<any>;
     const classList = computed(() => {
       return [
         'el-text',
@@ -40,7 +36,9 @@ export default defineComponent({
         `el-text--size-${props.size}`,
         `el-text--color-${props.color}`,
         `el-text--display-${props.display}`,
-        `el-text--overflow-${props.overflow}`,
+        `el-text--overflow-${
+          props.overflow === 'normal' || !props.overflow ? provide?.value?.elTextOverFlow : props.overflow
+        }`,
       ];
     });
 
@@ -50,9 +48,13 @@ export default defineComponent({
       if (childrenNodes) {
         content = childrenNodes;
       }
-      return h('span', {
-        class: classList.value,
-      }, [content]);
+      return h(
+        'span',
+        {
+          class: classList.value,
+        },
+        [content],
+      );
     };
   },
 });

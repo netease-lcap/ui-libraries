@@ -237,22 +237,20 @@ namespace nasl.ui {
           title: '前缀图标',
           docDescription: '支持配置选择框前缀图标，仅支持时间图标',
           setter: {
-              concept: 'EnumSelectSetter',
-              options: [{ title: '时间' }, { title: '暂无' }],
+              concept: 'IconSetter',
           },
       })
-      preIcon: 'time' | '' = 'time';
+      preIcon: nasl.core.String = 'time';
 
       @Prop({
           group: '主要属性',
           title: '后缀图标',
           docDescription: '支持配置选择框后缀图标，仅支持时间图标',
           setter: {
-              concept: 'EnumSelectSetter',
-              options: [{ title: '时间' }, { title: '暂无' }],
+              concept: 'IconSetter',
           },
       })
-      suffixIcon: 'time' | '' = '';
+      suffixIcon: nasl.core.String = '';
 
       @Prop({
           group: '主要属性',
@@ -276,6 +274,17 @@ namespace nasl.ui {
           },
       })
       clearable: nasl.core.Boolean = true;
+
+      @Prop<UTimePickerOptions, 'clearIcon'>({
+          group: '交互属性',
+          title: '清除图标',
+          description: '设置清除图标',
+          setter: {
+              concept: 'IconSetter',
+          },
+          if: _ => _.clearable === true,
+      })
+      clearIcon: nasl.core.String;
 
       @Prop({
           group: '状态属性',

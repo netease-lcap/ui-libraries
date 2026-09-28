@@ -3,5 +3,7 @@
 }
 
 .el-date-editor {
+  /* 默认与表单 `--el-form-content-width`（240px）一致 */
   --el-date-editor-width: 240px;
+  flex: unset;
 }

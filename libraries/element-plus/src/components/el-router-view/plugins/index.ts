@@ -1,2 +1,3 @@
-export * from './basic-plugins';
-// export * from './low-code';
+import basicPlugin from './basic-plugins';
+
+export default basicPlugin;

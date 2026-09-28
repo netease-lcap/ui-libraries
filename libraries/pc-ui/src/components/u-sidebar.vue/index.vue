@@ -108,6 +108,7 @@ export default {
         showCollapseIcon: { type: Boolean, default: true },
         expandIcon: { type: String, default: 'expand' },
         foldIcon: { type: String, default: 'fold' },
+        groupExpandIcon: { type: String, default: 'right-arrow' },
     },
     data() {
         return {
@@ -383,7 +384,7 @@ export default {
 .root {
     width: 100%;
     user-select: none;
-    border-right: 1px solid #E9E9EB;
+    border-right: 1px solid var(--sidebar-border-right-color);
     background: var(--sidebar-background);
     height: 100%;
     /* overflow: auto; */

@@ -5,6 +5,7 @@ namespace nasl.ui {
     order: 4,
     ideusage: {
       idetype: 'element',
+      forceUpdateWhenAttributeChange: 'preview',
     },
   })
   @Component({
@@ -20,12 +21,15 @@ namespace nasl.ui {
   }
 
   export class ElMentionOptions<T, V> extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
       group: '数据属性',
       title: '数据源',
-      description: '数据源',
+      description: '提及列表的数据来源',
+      docDescription: '设置提及列表的数据来源，支持动态绑定集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      designerValue: [{}, {}, {}],
       setter: {
-        concept: 'InputSetter',
+        concept: 'DataSourceSetter',
       },
     })
     dataSource: nasl.collection.List<T>;
@@ -33,16 +37,16 @@ namespace nasl.ui {
     @Prop({
       group: '数据属性',
       title: '数据类型',
-      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
-      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示。',
+      description: '数据源返回的数据结构类型',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示说明。',
     })
     dataSchema: T;
 
     @Prop<ElMentionOptions<T, V>, 'textField'>({
       group: '数据属性',
       title: '文本字段',
-      description: '集合的元素类型中，用于显示文本的属性名称',
-      docDescription: '集合的元素类型中，用于显示文本的属性名称，支持自定义变更。',
+      description: '用于显示文本的字段',
+      docDescription: '集合的元素类型中，用于显示提及选项文本的属性名称，支持自定义变更。',
       setter: {
         concept: 'PropertySelectSetter',
       },
@@ -52,18 +56,20 @@ namespace nasl.ui {
     @Prop<ElMentionOptions<T, V>, 'valueField'>({
       group: '数据属性',
       title: '值字段',
-      description: '集合的元素类型中，用于标识选中值的属性',
-      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
+      description: '用于标识选中值的字段',
+      docDescription: '集合的元素类型中，用于标识提及选中值的属性名称，支持自定义变更。',
       setter: {
         concept: 'PropertySelectSetter',
       },
     })
     valueField: (item: T) => V = ((item: any) => item.value) as any;
 
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '设置弹出位置	',
-      description: '设置弹出位置	',
+      title: '弹出位置',
+      description: '提及列表的弹出位置',
+      docDescription: '设置提及列表的弹出位置。上：输入框上方；下：输入框下方。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [{ title: '上' }, { title: '下' }],
@@ -73,8 +79,9 @@ namespace nasl.ui {
 
     @Prop({
       group: '主要属性',
-      title: '偏移量',
-      description: '偏移量',
+      title: '偏移距离',
+      description: '弹出列表的偏移距离',
+      docDescription: '设置提及列表相对于输入框的偏移距离，单位为像素。',
       setter: {
         concept: 'NumberInputSetter',
       },
@@ -101,6 +108,14 @@ namespace nasl.ui {
     })
     prefix: nasl.core.String = '@';
 
+    @Prop({
+      group: '状态属性',
+      title: '预览',
+      description: '是否预览',
+      setter: { concept: 'SwitchSetter' },
+    })
+    preview: nasl.core.Boolean = false;
+
     @Event({
       title: '搜索建议项',
       description: '搜索建议项时触发',
@@ -119,9 +134,18 @@ namespace nasl.ui {
     ideusage: {
       idetype: 'container',
       structured: true,
+      childAccept:false,
       ignoreProperty: ['rules'],
       forceRefresh: 'parent',
       namedSlotOmitWrapper: ['label'],
+      forceUpdateWhenAttributeChange: true,
+      additionalAttribute: {
+        ':isRequired': {
+          condition:
+            "(!this.getAttribute('isRequired')?.value) && (this.getAttribute('rules')?.rules || []).find(r => r.calleeName === 'filled')",
+          value: '"true"',
+        },
+      },
     },
     extends: [
       {
@@ -138,7 +162,11 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormMention<T, V> extends ViewComponent {
-    constructor(options?: Partial<ElFormMentionOptions<T, V> & ElFormItemProOptions & Omit<ElMentionOptions<T, V>, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<
+        ElFormMentionOptions<T, V> & ElFormItemProOptions & Omit<ElMentionOptions<T, V>, keyof ElFormItemProOptions>
+      >,
+    ) {
       super();
     }
   }

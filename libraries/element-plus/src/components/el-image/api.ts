@@ -22,24 +22,52 @@ namespace nasl.ui {
     group: 'Display',
   })
   export class ElImage extends ViewComponent {
+    @Prop({
+      title: '图片地址',
+      description: '图片的URL地址',
+    })
+    src: nasl.core.String;
     constructor(options?: Partial<ElImageOptions>) {
       super();
     }
   }
 
   export class ElImageOptions extends ViewComponentOptions {
+    // ========== 数据来源相关属性 ==========
     @Prop({
-      group: '主要属性',
+      group: '数据属性',
       title: '图片地址',
-      description: '图片源，同原生',
+      description: '图片的URL地址',
+      docDescription: '设置要显示的图片URL地址，支持相对路径和绝对路径。',
       setter: { concept: 'ImageSetter' },
     })
     src: nasl.core.String = '';
 
     @Prop({
+      group: '数据属性',
+      title: '预览列表',
+      description: '预览图片的URL列表',
+      docDescription: '设置开启图片预览功能后的预览图片URL列表，多个URL用逗号分隔。',
+      setter: { concept: 'InputSetter', autoClear: true },
+    })
+    previewSrcList: nasl.core.String = '';
+
+    @Prop({
+      group: '数据属性',
+      title: '初始索引',
+      description: '预览时的初始图片索引',
+      docDescription: '设置打开预览时显示的初始图片索引值，从0开始计数。',
+      setter: { concept: 'NumberInputSetter', min: 0 },
+    })
+    initialIndex: nasl.core.String | nasl.core.Decimal;
+
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
+    @Prop({
       group: '主要属性',
-      title: '如何适应容器框的fit选项',
-      description: '确定图片如何适应容器框，同原生 [object-fit]',
+      title: '适应方式',
+      description: '图片适应容器的方式',
+      docDescription:
+        '控制图片如何适应容器。拉伸：拉伸填满；适应：保持比例适应；填充：保持比例填充；原尺寸：原始大小；适应（小图）：小于容器时原尺寸。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -54,26 +82,12 @@ namespace nasl.ui {
     })
     fit: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down' | '' = '';
 
+    // ========== 涉及可选的交互操作和操作效果相关属性 ==========
     @Prop({
-      group: '主要属性',
-      title: '图片预览的初始图片Index值',
-      description: '图片预览初始图片index',
-      setter: { concept: 'NumberInputSetter', min: 0 },
-    })
-    initialIndex: nasl.core.String | nasl.core.Decimal;
-
-    @Prop({
-      group: '主要属性',
-      title: '开启图片预览功能',
-      description: '开启图片预览功能,用逗号分隔',
-      setter: { concept: 'InputSetter' },
-    })
-    previewSrcList: nasl.core.String = '';
-
-    @Prop({
-      group: '主要属性',
-      title: '点击遮罩关闭预览 ',
-      description: '控制点击遮罩层是否关闭预览弹窗',
+      group: '交互属性',
+      title: '点击遮罩关闭',
+      description: '点击遮罩层是否关闭预览',
+      docDescription: '开启后，用户可以点击背景遮罩层来关闭图片预览。',
       setter: { concept: 'SwitchSetter' },
     })
     hideOnClickModal: nasl.core.Boolean = false;
@@ -85,7 +99,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     infinite: nasl.core.Boolean = true;
-
 
     @Prop({
       group: '主要属性',
@@ -102,7 +115,6 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     lazy: nasl.core.Boolean = false;
-
 
     @Event({
       title: '图片预览',
@@ -126,7 +138,7 @@ namespace nasl.ui {
       title: '图片预览切换时',
       description: '图片预览切换时',
     })
-    onSwitch: (index: nasl.core.Integer) => any;
+    onSwitchChange: (index: nasl.core.Integer) => any;
 
     @Event({
       title: '图片预览关闭时',
@@ -134,47 +146,47 @@ namespace nasl.ui {
     })
     onClose: (event: {}) => any;
 
-    // @Event({
-    //   title: '点击',
-    //   description: '在元素上按下并释放任意鼠标按钮时触发。',
-    // })
-    // onClick: (event: MouseEvent) => any;
+    @Event({
+      title: '点击',
+      description: '在元素上按下并释放任意鼠标按钮时触发。',
+    })
+    onClick: (event: MouseEvent) => any;
 
-    // @Event({
-    //   title: '双击',
-    //   description: '在元素上双击鼠标按钮时触发。',
-    // })
-    // onDblclick: (event: MouseEvent) => any;
+    @Event({
+      title: '双击',
+      description: '在元素上双击鼠标按钮时触发。',
+    })
+    onDblclick: (event: MouseEvent) => any;
 
-    // @Event({
-    //   title: '右键点击',
-    //   description: '在右键菜单显示前触发。',
-    // })
-    // onContextmenu: (event: MouseEvent) => any;
+    @Event({
+      title: '右键点击',
+      description: '在右键菜单显示前触发。',
+    })
+    onContextmenu: (event: MouseEvent) => any;
 
-    // @Event({
-    //   title: '鼠标按下',
-    //   description: '在元素上按下任意鼠标按钮时触发。',
-    // })
-    // onMousedown: (event: MouseEvent) => any;
+    @Event({
+      title: '鼠标按下',
+      description: '在元素上按下任意鼠标按钮时触发。',
+    })
+    onMousedown: (event: MouseEvent) => any;
 
-    // @Event({
-    //   title: '鼠标释放',
-    //   description: '在元素上释放任意鼠标按钮时触发。',
-    // })
-    // onMouseup: (event: MouseEvent) => any;
+    @Event({
+      title: '鼠标释放',
+      description: '在元素上释放任意鼠标按钮时触发。',
+    })
+    onMouseup: (event: MouseEvent) => any;
 
-    // @Event({
-    //   title: '鼠标移入',
-    //   description: '鼠标移入元素时触发。',
-    // })
-    // onMouseenter: (event: MouseEvent) => any;
+    @Event({
+      title: '鼠标移入',
+      description: '鼠标移入元素时触发。',
+    })
+    onMouseenter: (event: MouseEvent) => any;
 
-    // @Event({
-    //   title: '鼠标移出',
-    //   description: '鼠标移出元素时触发。',
-    // })
-    // onMouseleave: (event: MouseEvent) => any;
+    @Event({
+      title: '鼠标移出',
+      description: '鼠标移出元素时触发。',
+    })
+    onMouseleave: (event: MouseEvent) => any;
 
     @Slot({
       title: '图片未加载的占位内容',
@@ -334,4 +346,3 @@ namespace nasl.ui {
     onRotate: (deg: nasl.core.Decimal) => any;
   }
 }
-

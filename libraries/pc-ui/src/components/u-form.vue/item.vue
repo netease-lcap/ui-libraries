@@ -146,8 +146,6 @@ export default {
             if (this.repeat > 1) {
                 return {
                     width: (span / this.repeat) * 100 + '%',
-                    // 平台到制品应用nasl格式解析中，会有4px的空白字符存在于标签与标签之间.
-                    'margin-left': -(4 * (this.repeat - 1) / this.repeat) + 'px',
                 };
             }
             if (this.repeat > 0) {

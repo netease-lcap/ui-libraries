@@ -17,6 +17,10 @@ export default mixins(getGlobalIconMixins()).extend({
       type: String,
       default: '',
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
     search: {
       type: [Boolean, Object] as PropType<SearchOption>,
     },
@@ -55,6 +59,7 @@ export default mixins(getGlobalIconMixins()).extend({
           value={searchValue}
           onChange={handleChange}
           on-enter={handleEnter}
+          disabled={this.disabled}
           placeholder={placeholder}
         >
           <SearchIcon slot="suffix-icon" />

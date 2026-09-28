@@ -8,7 +8,7 @@ export const ElSwitchPro = registerComponent(Switch, plugins, {
   name: TAG_NAME,
   nativeEvents: [],
   slotNames: [],
-  methodNames: [],
+  methodNames: ['focus'],
   model: {
     prop: 'value',
     event: 'update:value',

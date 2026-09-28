@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash';
 import { addResizeListener, removeResizeListener } from '../../utils/dom';
 
 export default {

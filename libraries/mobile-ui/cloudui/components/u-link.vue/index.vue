@@ -57,9 +57,17 @@ export default {
             else if (this.$router && this.to !== undefined)
                 res = encodeUrl(this.$router.resolve(this.to, this.$route, this.append).href);
 
+            // 如果是跳转页面，则拼接页面路径前缀，
             // $formatMicroFrontRouterPath 定义在 lcap-pc-template
-            if (this.$formatMicroFrontRouterPath)
-                res = this.$formatMicroFrontRouterPath(res);
+            if (!this.download && this.$formatMicroFrontRouterPath) {
+              res = this.$formatMicroFrontRouterPath(res);
+            }
+
+            // 如果是下载链接，则拼接接口和静态资源路径，
+            // $formatMicroFrontUrl 定义在 lcap-pc-template
+            if (this.download && this.$formatMicroFrontUrl) {
+              res = this.$formatMicroFrontUrl(res);
+            }
 
             return res;
         },

@@ -50,6 +50,17 @@ namespace nasl.ui {
         })
         showHead: nasl.core.Boolean = true;
 
+        @Prop<UDrawerOptions, 'closeIcon'>({
+            group: '主要属性',
+            title: '关闭图标',
+            description: '设置关闭图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.showHead === true,
+        })
+        closeIcon: nasl.core.String;
+
         @Prop({
             group: '主要属性',
             title: '显示底部栏',

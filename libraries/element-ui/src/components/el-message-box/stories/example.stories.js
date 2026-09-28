@@ -42,18 +42,57 @@ export const Example1 = {
       cancel() {
         console.log('cancel');
       },
+      beforeClose(action, instance, done) {
+        console.log('before-close');
+        if (action === 'confirm') {
+          instance.confirmButtonLoading = true;
+          instance.confirmButtonText = '执行中...';
+          setTimeout(() => {
+            done();
+            setTimeout(() => {
+              instance.confirmButtonLoading = false;
+            }, 300);
+          }, 3000);
+        } else {
+          done();
+        }
+      }
     },
     template: `<div>
       <el-button type="text" @click="open1">点击打开 Alert Message Box</el-button>
       <el-button type="text" @click="open2">点击打开 Confirm Message Box</el-button>
       <el-button type="text" @click="open3">点击打开 Prompt Message Box</el-button>
-      <el-message-box :visible.sync="visible1" title="提示" @close="close" @confirm="confirm" @cancel="cancel">
+      <el-message-box :visible.sync="visible1" title="提示"
+         @close="close" 
+         @confirm="confirm" 
+         @cancel="cancel"
+      >
         哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
       </el-message-box>
-      <el-message-box :visible.sync="visible2" type="confirm" :showCancelButton="true" :showClose="true" title="提示" @close="close" @confirm="confirm" @cancel="cancel">
+      <el-message-box 
+        :visible.sync="visible2" 
+        type="confirm" 
+        :showCancelButton="true" 
+        :showClose="true" 
+        title="提示" 
+        @close="close" 
+        @confirm="confirm" 
+        @cancel="cancel">
         哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
       </el-message-box>
-       <el-message-box :visible.sync="visible3" type="prompt" inputPlaceholder="请输入内容" :showCancelButton="true" :showClose="true" title="提示" @close="close" @confirm="confirm" @cancel="cancel">
+       <el-message-box 
+        :visible.sync="visible3" 
+        type="prompt" 
+        inputPlaceholder="请输入内容"
+        :closeOnClickModal="false"
+        :closeOnPressEscape="false"
+        :showCancelButton="true" 
+        :showClose="true" 
+        title="提示" 
+        @close="close" 
+        @before-close="beforeClose"
+        @confirm="confirm" 
+        @cancel="cancel">
         请输入内容
       </el-message-box>
     </div>`,

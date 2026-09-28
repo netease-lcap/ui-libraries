@@ -17,15 +17,17 @@
         @dragleave="onDragLeave($event)"
         @dragend="onDragEnd($event)"
         @drop="onDrop($event)">
-        <u-loading v-if="loading" :class="$style.loading" size="small"></u-loading>
-        <div :class="$style.expander"
+        <u-loading v-if="loading" :icon="rootVM.loadingIcon" :class="$style.loading" size="small"></u-loading>
+        <div :class="[$style.expander, { [$style.useIcon]: !!rootVM.expandIcon }]"
             ref="clickExpander"
             v-else-if="hasChildren || nodeVMs.length || (node && !$at(node, rootVM.isLeafField) && rootVM.currentDataSource && rootVM.currentDataSource.load && !rootVM.parentField)"
             :expand-trigger="rootVM.expandTrigger" :expanded="currentExpanded"
             @click="rootVM.expandTrigger === 'click-expander' && ($event.stopPropagation(), toggle())"
             :check-controlled="rootVM.checkControlled"
             :style="{ width : expanderWidth? expanderWidth + 'px':'' }"
-            :dragover="expanderDragover"></div>
+            :dragover="expanderDragover">
+            <i-ico :name="rootVM.expandIcon" notext :class="$style.icon" v-if="rootVM.expandIcon"></i-ico>
+        </div>
         <div :class="$style.text" :style="{ marginLeft : expanderWidth? expanderWidth + 'px':'' }" :draggable="draggable || rootVM.draggable">
             <u-checkbox v-if="rootVM.checkable" :value="currentChecked" :disabled="currentDisabled" :readonly="currentReadOnly" @check="check($event.value)" @click.native.stop></u-checkbox>
             <span vusion-slot-name="item">
@@ -242,11 +244,16 @@ export default {
             return this.rootVM && this.rootVM.paddingLeft || 0;
         },
         childrenNodeRenderedIf() {
-            const childrenExist = this.rootVM.ifExpanded && !this.childrenRendered && this.node && !this.node.childrenRendered ? this.currentExpanded : true
+            const childrenExist = this.rootVM.ifExpanded && !this.childrenRendered && this.node && !this.node.childrenRendered ? this.currentExpanded : true;
+
+            if (this.renderOptimize && childrenExist && this.rootVM.getSelectNodeValues().includes(this.value)) {
+              return true;
+            }
+
             return this.renderOptimize ? childrenExist && this.currentExpanded : childrenExist
         },
         childrenNodeRenderedShow() {
-            return this.renderOptimize ? true : this.currentExpanded
+            return this.currentExpanded
         },
         filterOptions() {
             const { filterText, field, textField, matchMethod, caseSensitive } = this.rootVM;
@@ -289,7 +296,10 @@ export default {
     created() {
         this.renderSelectedVm();
     },
-
+    beforeDestroy() {
+        // 清理定时器
+        this.clearExpanderTimer();
+    },
     methods: {
         select() {
             if (this.currentDisabled || this.currentReadOnly)
@@ -638,22 +648,24 @@ export default {
                         this.expanderTimer = setInterval(() => {
                             this.currentExpanded = !this.currentExpanded;
                             if (!(Math.abs(this.startPosition.x - e.x) <= 5 && Math.abs(this.startPosition.y - e.y) <= 5)) {
-                                clearTimeout(this.expanderTimer);
+                                clearInterval(this.expanderTimer);
                                 this.expanderTimer = null;
                             }
                         }, 1500);
                     }
                     this.expanderDragover = true;
                 } else {
-                    clearTimeout(this.expanderTimer);
+                    clearInterval(this.expanderTimer);
                     this.expanderTimer = null;
                     this.expanderDragover = false;
                 }
             }
         },
         clearExpanderTimer() {
-            clearTimeout(this.expanderTimer);
-            this.expanderTimer = null;
+            if (this.expanderTimer) {
+                clearInterval(this.expanderTimer);
+                this.expanderTimer = null;
+            }
             this.expanderDragover = false;
         },
     },
@@ -713,6 +725,14 @@ content: "\e679";
 
 .expander[dragover] {
     color: var(--tree-view-node-expander-color-hover);
+}
+
+.expander.useIcon::before {
+  content: none;
+}
+
+.expander.useIcon > .icon {
+  font-size: inherit;
 }
 
 .loading {

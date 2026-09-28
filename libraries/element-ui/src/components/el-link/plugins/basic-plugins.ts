@@ -1,10 +1,49 @@
 /* 组件功能扩展插件 */
 import { createProp2Default } from '@lcap/vue2-utils/plugins/common/text';
-
-import { createVueRouterNavigate } from '@lcap/vue2-utils/plugins/index';
+import type { NaslComponentPluginOptions, Slot } from '@lcap/vue2-utils/plugins/types';
+import { createVueRouterNavigate, $deletePropList } from '@lcap/vue2-utils/plugins/index';
+import ElIcon from '../../el-icon';
+import { isEmptyVNodes } from '@/utils/vnode';
+import styles from '../index.module.css';
 
 export { useLink } from '@lcap/vue2-utils/plugins/index';
 
 export const useText2Default = createProp2Default('text');
 
 export const clickHref = createVueRouterNavigate();
+
+export const useIcon: NaslComponentPluginOptions = {
+  props: ['iconPosition'],
+  order: 10,
+  setup(props, { h }) {
+    return {
+      slotDefault: () => {
+        const slotDefault = props.get<Slot>('slotDefault');
+        const icon = props.get<string>('icon');
+        const iconPosition = props.get<string>('iconPosition');
+
+        if (!icon) {
+          return slotDefault();
+        }
+
+        const iconNode = h(ElIcon, { attrs: { name: icon } });
+        const vnodes = slotDefault ? slotDefault() : [];
+
+        if (isEmptyVNodes(vnodes)) {
+          return iconNode;
+        }
+
+        if (iconPosition === 'right') {
+          if (!iconNode.data) {
+            iconNode.data = {};
+          }
+
+          iconNode.data.class = 'el-icon--right';
+          return h('span', { class: styles.spanwrap }, [h('span', vnodes), iconNode]);
+        }
+        return h('span', { class: styles.spanwrap }, [iconNode, h('span', vnodes)]);
+      },
+      [$deletePropList]: ['icon'],
+    };
+  },
+};

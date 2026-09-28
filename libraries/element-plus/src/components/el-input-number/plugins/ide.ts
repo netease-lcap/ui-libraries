@@ -1,22 +1,24 @@
 import _ from 'lodash';
 import { $deletePropsList, $ide } from '@/plugins/constants';
 import { useEffect, useMemo } from '@/plugins/hooks';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import { IIdePluginBase } from '@/types';
 
-export function handleNodePath(props) {
-  const nodePath = props.get('data-nodepath');
-  const myClass = props.get('class', '');
-  const deletePropsList = props.get($deletePropsList).concat('data-nodepath');
-  const nodeId = useMemo(() => _.uniqueId('InputNumber_'), []);
-  useEffect(() => {
-    const node = document.querySelector(`.${nodeId}`);
-    const inputNumberElement = node?.closest('.el-input-number');
-    inputNumberElement?.setAttribute('data-nodepath', nodePath);
-  }, []);
-  return {
-    class: `${myClass} ${nodeId}`,
-    [$deletePropsList]: deletePropsList,
-    formTagName: 'el-form-input-number',
-  };
-}
-
-handleNodePath.type = $ide;
+const InputNumberIdeAccumulate = new PluginAccumulateTypes<nasl.ui.ElInputNumberOptions, IIdePluginBase>();
+export default InputNumberIdeAccumulate.addPlugin({
+  name: 'handleNodePath',
+  type: 'ide',
+  handle: (props) => {
+    const nodePath = props.get('data-nodepath');
+    const myClass = props.get('class', '');
+    const nodeId = useMemo(() => _.uniqueId('InputNumber_'), []);
+    useEffect(() => {
+      const node = document.querySelector(`.${nodeId}`);
+      const inputNumberElement = node?.closest('.el-input-number') ?? node;
+      inputNumberElement?.setAttribute('data-nodepath', nodePath);
+    }, []);
+    return {
+      class: `${myClass} ${nodeId}`,
+    };
+  },
+});

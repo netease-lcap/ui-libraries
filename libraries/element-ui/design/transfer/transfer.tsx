@@ -257,6 +257,7 @@ export default mixins(getConfigReceiverMixins('transfer')).extend({
           right-disabled={
             this.disabledOption[SOURCE] || this.rightButtonDisabled || this.checkedValue[SOURCE].length === 0
           }
+          operation-button={this.operationButton}
           operation={this.operation}
           onMoveToRight={this.transferToRight}
           onMoveToLeft={this.transferToLeft}

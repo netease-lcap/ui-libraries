@@ -15,7 +15,8 @@
     align-items: center;
   }
   &__control {
-    overflow-y: hidden;
+    /* 不太清楚这个hidden加了干嘛的， 现在会导致textare没有滚动条 */
+    // overflow-y: hidden;
     box-sizing: border-box;
     width: 100%;
     min-width: 0; // for flex-shrink in field__button

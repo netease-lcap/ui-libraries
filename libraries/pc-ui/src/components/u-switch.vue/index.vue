@@ -1,5 +1,5 @@
 <template>
-<label v-if="!isPreview" :class="$style.root" :with-text="withText" :checked="currentValue" :readonly="readonly" :disabled="disabled" @click="toggle()"
+<label v-if="!isPreview" :class="$style.root" :with-text="withText" :checked="currentValue" :readonly="readonly" :disabled="computedDisabled" @click="toggle()"
     tabindex="0" @keydown.space.prevent @keyup.space.prevent="toggle()"
     @focus="onFocus" @blur="onBlur" v-on="listeners">
     <span :class="$style.button"></span>
@@ -23,6 +23,9 @@ import i18nMixin from '../../mixins/i18n';
 
 export default {
     name: 'u-switch',
+    inject: {
+        formVM: { default: null },
+    },
     mixins: [
       MField,
       MPreview,
@@ -31,7 +34,7 @@ export default {
         value: 'currentValue',
         readonly: 'readonly',
         preview: 'isPreview',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       }),
     ],
     components: {
@@ -50,6 +53,9 @@ export default {
         return { currentValue: this.value };
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         listeners() {
             const listeners = Object.assign({}, this.$listeners);
             ['focus', 'blur', 'update:value'].forEach((prop) => {
@@ -75,7 +81,7 @@ export default {
         },
         toggle(value) {
             // Check if enabled
-            if (this.readonly || this.disabled)
+            if (this.readonly || this.computedDisabled)
                 return; // Method overloading
             if (value === undefined)
                 value = !this.currentValue; // Prevent replication

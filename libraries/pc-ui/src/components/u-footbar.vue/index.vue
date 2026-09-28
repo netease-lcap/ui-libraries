@@ -9,7 +9,7 @@
 <script>
 import event from '../../utils/event';
 import { findScrollParent } from '../../utils/dom';
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash';
 
 export default {
     name: 'u-footbar',

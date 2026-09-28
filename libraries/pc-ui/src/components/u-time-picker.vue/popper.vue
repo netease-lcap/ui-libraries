@@ -263,6 +263,36 @@ export default {
         this.setPopperWidth();
     },
     methods: {
+        normalizeTime(time, minUnit = 'second', type = 'start') {
+          if (!time) {
+            return time;
+          }
+
+          const arr = time.split(':');
+
+          if (minUnit === 'second' && arr.length === 3) {
+            return time;
+          }
+
+          if (minUnit === 'minute' && arr.length === 2) {
+            return time;
+          }
+
+          const fillTime = type === 'start' ? '00' : '59';
+          const targetLen = minUnit === 'second' ? 3 : 2;
+
+          if (arr.length < targetLen) {
+            while (arr.length < targetLen) {
+              arr.push(fillTime);
+            }
+          } else {
+            while (arr.length > targetLen) {
+              arr.pop();
+            }
+          }
+
+          return arr.join(':');
+        },
         /**
          * @method isOutOfRange(time) 是否超出规定的时间范围
          * @public
@@ -270,14 +300,20 @@ export default {
          * @return {boolean|Time} time 如果没有超出时间范围，则返回false；如果超出时间范围，则返回范围边界的时间
          */
         isOutOfRange(time) {
-            const minTime = this.finalMinTime;
-            const maxTime = this.finalMaxTime; // minTime && time < minTime && minTime，先判断是否为空，再判断是否超出范围，如果超出则返回范围边界的时间
-            if (minTime > maxTime)
+            let minTime = this.finalMinTime;
+            let maxTime = this.finalMaxTime; // minTime && time < minTime && minTime，先判断是否为空，再判断是否超出范围，如果超出则返回范围边界的时间
+
+            if (minTime > maxTime || !time) {
                 return time;
+            }
+
+            const t = this.normalizeTime(time, this.minUnit);
+            minTime = this.normalizeTime(minTime, this.minUnit);
+            maxTime = this.normalizeTime(maxTime, this.minUnit, 'end');
 
             return (
-                (minTime && time < minTime && minTime)
-                || (maxTime && time > maxTime && maxTime)
+                (minTime && t < minTime && minTime)
+                || (maxTime && t > maxTime && maxTime)
             );
         },
         getTime(hour, minute, second) {

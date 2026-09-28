@@ -88,6 +88,7 @@ export function getChangeEventByValue(v: TimePickerValue | TimeRangeValue, range
   } else if (Array.isArray(v)) {
     changeEvent.startValue = getNaslTimeValue(v[0], format);
     changeEvent.endValue = getNaslTimeValue(v[1], format);
+    changeEvent.value = [changeEvent.startValue, changeEvent.endValue];
   }
 
   return changeEvent;

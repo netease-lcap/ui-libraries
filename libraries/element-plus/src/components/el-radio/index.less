@@ -1,0 +1,42 @@
+.cw-radio-group {
+  display: inline-grid; /* 使用 inline-grid 让容器宽度适应内容 */
+  grid-auto-flow: column; /* 让子元素按列方向自动排列 */
+}
+.el-radio-group-vertical {
+  grid-auto-flow: row; /* 让子元素按行方向自动排列 */
+}
+.el-radio-group-vertical .el-radio {
+  margin-right: 30px;
+}
+.el-radio-group-preview {
+  font-size: 14px;
+  line-height: 14px;
+  &:not(:has(.el-radio.is-checked))::before {
+    content: '-';
+  }
+  .el-radio.is-checked:has(+ .el-radio.is-checked) .el-radio__label::after {
+    content: ',';
+  }
+  .el-radio {
+
+    cursor: default;
+    margin: 0;
+
+    &:not(.is-checked) {
+      display: none;
+    }
+
+    .el-radio__input {
+      display: none;
+    }
+
+    .el-radio__label.el-radio__label {
+      cursor: default;
+      color: #606266;
+      .el-text {
+        color: #606266;
+        cursor: default;
+      }
+    }
+  }
+}

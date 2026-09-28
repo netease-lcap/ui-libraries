@@ -20,7 +20,14 @@
             </slot>
         </div>
         <u-loading v-if="!hiddenText && loading" :class="$style.loading" size="small"></u-loading>
-        <span v-else-if="!hiddenText &&currentCollapsible" :class="$style.expander"
+        <i-ico
+          v-else-if="!hiddenText && currentCollapsible && rootVM.groupExpandIcon"
+          :class="[$style.expander, $style.groupExpandIcon]"
+          :name="rootVM.groupExpandIcon"
+          :expanded="currentExpanded"
+          @click="rootVM.expandTrigger === 'click-expander' && !rootVM.currentCollapse && ($event.stopPropagation(), toggle())"
+        ></i-ico>
+        <span v-else-if="!hiddenText && currentCollapsible" :class="$style.expander"
             :expanded="currentExpanded"
             @click="rootVM.expandTrigger === 'click-expander' && !rootVM.currentCollapse && ($event.stopPropagation(), toggle())"
         ></span>
@@ -38,6 +45,7 @@
         @before-open="$event=>collapsible === false && $event.preventDefault()"
         @update:opened="toggle($event)"
         :offset="popperOffset"
+        @click="$event.stopPropagation()"
     >
         <div :class="$style.body">
             <u-sidebar-item
@@ -491,9 +499,9 @@ export default {
 
 .expander::after {
     transition: transform var(--transition-duration-base);
-    font-size: 16px;
+    font-size: calc(var(--sidebar-group-expand-icon-size, 14px) + 2px);
     display: inline-block;
-content: "\e661";
+    content: "\e661";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -509,6 +517,19 @@ content: "\e661";
 /* @TODO: replace by icon-font */
 .normalRoot .expander[expanded]::after {
     transform: rotate(90deg);
+}
+
+.expander.groupExpandIcon {
+  font-size: var(--sidebar-group-expand-icon-size, 14px);
+  transition: transform var(--transition-duration-base);
+}
+
+.expander.groupExpandIcon::after {
+  content: none;
+}
+
+.normalRoot .expander.groupExpandIcon[expanded] {
+  transform: rotate(90deg);
 }
 
 .normalRoot[mini] .head {

@@ -5,6 +5,7 @@ import ExamplesDemo1 from '../demos/examples/ExamplesDemo1.vue';
 import ExamplesDemo2 from '../demos/examples/ExamplesDemo2.vue';
 import ExamplesDemo3 from '../demos/examples/ExamplesDemo3.vue';
 import ExamplesDemo4 from '../demos/examples/ExamplesDemo4.vue';
+import ExamplesDemoCardIssuesDebug from '../demos/examples/ExamplesDemoCardIssuesDebug.vue';
 
 Vue.use(CloudUI);
 
@@ -55,5 +56,16 @@ export const Demo3 = {
       DeprecatedDemo: ExamplesDemo4,
     },
     template: '<deprecated-demo />',
+  }),
+};
+
+/** 三项问题回归调试：嵌套分割线 / 头部内边距+分割线 / 定高内线性布局 */
+export const DemoDebugCardIssues = {
+  name: 'Demo-[调试]三项回归',
+  render: () => ({
+    components: {
+      CardIssuesDebugDemo: ExamplesDemoCardIssuesDebug,
+    },
+    template: '<card-issues-debug-demo />',
   }),
 };

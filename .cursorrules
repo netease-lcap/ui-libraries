@@ -1,0 +1,27 @@
+# Git Commit Messages
+When generating git commit messages, always write them in Chinese (Simplified Chinese).
+生成 git commit 信息时，始终使用中文（简体中文）。
+
+# Commit Message Format
+- Use conventional commit format: type(scope): description
+- 使用约定式提交格式：类型(范围): 描述
+- Common types:
+  - feat: 新功能
+  - fix: 修复 bug
+  - docs: 文档更新
+  - style: 代码格式调整（不影响功能）
+  - refactor: 重构代码
+  - perf: 性能优化
+  - test: 测试相关
+  - build: 构建工具或者外部依赖包的修改
+  - ci: CI 配置文件和脚本的修改
+  - chore: 构建过程或辅助工具的变动
+  - revert: 撤销某次提交
+
+# Examples
+feat(el-button): 添加按钮点击功能
+fix(el-menu): 修复菜单展开状态异常的问题
+docs(readme): 更新安装说明文档
+refactor(utils): 重构工具函数，提升代码可读性
+perf(el-table): 优化表格渲染性能
+

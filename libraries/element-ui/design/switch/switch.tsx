@@ -103,6 +103,13 @@ export default mixins(classPrefixMixins).extend({
       immediate: true,
     },
   },
+  mounted() {
+    // 监听回车事件
+    document.addEventListener('keydown', this.focusTrigger);
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.focusTrigger);
+  },
   methods: {
     handleToggle(): void {
       const checked = this.value === this.activeValue ? this.inactiveValue : this.activeValue;
@@ -114,6 +121,14 @@ export default mixins(classPrefixMixins).extend({
         return;
       }
       this.handleToggle();
+    },
+    focusTrigger(event: KeyboardEvent): void {
+      if (event.key !== 'Enter') return;
+      if (document.activeElement !== this.$refs.innerInput) return;
+      this.toggle();
+    },
+    focus(): void {
+      (this.$refs.innerInput as HTMLElement)?.focus();
     },
   },
   render(): VNode {
@@ -132,6 +147,7 @@ export default mixins(classPrefixMixins).extend({
 
     return (
       <div class={classes} disabled={disabled} onClick={toggle}>
+        <input disabled={disabled} ref="innerInput" type="checkbox" name="" true-value="true" class="el-switch__input"></input>
         <span class={nodeClasses}>{loadingContent}</span>
         <div class={contentClasses}>{switchContent}</div>
       </div>

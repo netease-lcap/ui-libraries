@@ -10,15 +10,16 @@ import {
   generateComponentFile,
   generateThemeFile,
   forkComponent,
-  setAllAPI,
 } from '../overload';
+import { replaceAllTagName } from '../overload/utils';
 
 const semver = require('semver');
 
 function transformAPITsFile(context: OverloadComponentContext) {
   const filePath = path.resolve(context.componentFolderPath, 'api.ts');
   let code = fs.readFileSync(filePath, 'utf-8').toString();
-  code = transformAPITs(code, context);
+  code = transformAPITs(code, context, true);
+  code = replaceAllTagName(code, context.replaceTagMap);
   fs.writeFileSync(filePath, code, 'utf-8');
 }
 
@@ -50,7 +51,6 @@ export default async (rootPath, { fork, component, prefix }) => {
     await generateComponentFile(context);
     await generateThemeFile(context);
     await forkComponent(context);
-    await setAllAPI(context);
     resetIdeVersion(context);
     logger.success('重载组件成功');
   } catch (e) {

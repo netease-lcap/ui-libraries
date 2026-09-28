@@ -27,8 +27,6 @@ export default {
 
 const css = postcss.parse(fs.readFileSync(path.resolve(themeCSSFolder, 'el-empty.css'), 'utf-8'));
 
-fs.writeFileSync('test.json', JSON.stringify(css.nodes, null, 2));
-
 function getCSSVars(tagName) {
   const cssFilePath = path.resolve(themeCSSFolder, `${tagName}.css`);
   const relativeCSSFilePath = `element-plus/theme-chalk${cssFilePath.substring(themeCSSFolder.length)}`;
@@ -41,6 +39,7 @@ function getCSSVars(tagName) {
     node.type === 'rule' && (
       node.selector === `.${tagName}`
       || node.selector.includes(`.${tagName},`)
+      || node.selector.includes(`:root`)
     )
   ));
 

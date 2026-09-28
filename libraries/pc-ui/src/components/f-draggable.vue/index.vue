@@ -69,6 +69,9 @@ export default {
     },
     beforeDestroy() {
         this.sourceEl && this.sourceEl.removeEventListener('mousedown', this.onMouseDown);
+        // 确保清理 window 事件监听器（防止在拖拽过程中组件被销毁导致的内存泄漏）
+        window.removeEventListener('mousemove', this.onMouseMove);
+        window.removeEventListener('mouseup', this.onMouseUp);
         this.childVM = this.childVM && this.childVM.$destroy();
     },
     methods: {

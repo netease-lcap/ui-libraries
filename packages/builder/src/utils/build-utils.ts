@@ -4,12 +4,13 @@ import { cloneDeep } from 'lodash';
 
 const DefaultFrameWorkOutputConfig: Record<string, { external: string[]; globals: Record<string, string>;}> = {
   vue2: {
-    external: ['vue', 'vue-router', 'vue-i18n', '@vue/composition-api'],
+    external: ['vue', 'vue-router', 'vue-i18n', '@vue/composition-api', '@vue/composition-api/dist/vue-composition-api.mjs'],
     globals: {
       vue: 'Vue',
       'vue-router': 'VueRouter',
       'vue-i18n': 'VueI18n',
       '@vue/composition-api': 'VueCompositionAPI',
+      '@vue/composition-api/dist/vue-composition-api.mjs': 'VueCompositionAPI',
     },
   },
   react: {

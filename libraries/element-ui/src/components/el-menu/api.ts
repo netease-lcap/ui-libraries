@@ -32,8 +32,8 @@ namespace nasl.ui {
     description: '为网站提供导航功能的菜单。',
     group: 'Navigation',
   })
-  export class ElMenu extends ViewComponent {
-    constructor(options?: Partial<ElMenuOptions>) {
+  export class ElMenu<T, V> extends ViewComponent {
+    constructor(options?: Partial<ElMenuOptions<T, V>>) {
       super();
     }
 
@@ -46,7 +46,7 @@ namespace nasl.ui {
         title: '子菜单唯一标识'
       })
       index: nasl.core.String
-    ): void {}
+    ): void { }
 
     @Method({
       title: '收起',
@@ -57,11 +57,125 @@ namespace nasl.ui {
         title: '子菜单唯一标识'
       })
       index: nasl.core.String,
-    ): void {}
+    ): void { }
   }
 
-  export class ElMenuOptions extends ViewComponentOptions {
-    @Prop<ElMenuOptions, 'mode'>({
+  export class ElMenuOptions<T, V> extends ViewComponentOptions {
+    @Prop<ElMenuOptions<T, V>, 'hasDataSource'>({
+      group: '数据属性',
+      title: '数据源配置',
+      bindHide: true,
+      setter: {
+        concept: 'SwitchSetter',
+      },
+      onChange: [
+        { clear: ['dataSource', 'dataSchema', 'titleField', 'valueField', 'iconField', 'childrenField', 'typeField', 'itemProps'] }
+      ],
+    })
+    hasDataSource: nasl.core.Boolean = false;
+
+    @Prop<ElMenuOptions<T, V>, 'dataSource'>({
+      group: '数据属性',
+      title: '数据源',
+      description: '展示数据的输入源，可设置为集合类型变量（List<T>）或输出参数为集合类型的逻辑。',
+      docDescription: '支持动态绑定集合类型变量（List\<T>）或输出参数为集合类型的逻辑',
+      designerValue: [{}, {}, {}],
+      if: _ => _.hasDataSource === true,
+      setter: {
+        concept: 'DataSourceSetter',
+      },
+    })
+    dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
+
+    @Prop<ElMenuOptions<T, V>, 'dataSchema'>({
+      group: '数据属性',
+      title: '数据类型',
+      description: '数据源返回的数据结构的类型，自动识别类型进行展示说明',
+      docDescription: '该属性为只读状态，当数据源动态绑定集合List<T>后，会自动识别T的类型并进行展示',
+      if: _ => _.hasDataSource === true,
+    })
+    dataSchema: T;
+
+    @Prop<ElMenuOptions<T, V>, 'titleField'>({
+      group: '数据属性',
+      title: '标题字段',
+      description: '集合的元素类型中，用于显示标题的属性名称，默认为title',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+      if: _ => _.hasDataSource === true,
+    })
+    titleField: (item: T) => any = ((item: any) => item.text) as any;
+
+    @Prop<ElMenuOptions<T, V>, 'valueField'>({
+      group: '数据属性',
+      title: '值字段',
+      description: '集合的元素类型中，用于标识选中值的属性， 默认为value',
+      docDescription: '集合的元素类型中，用于标识选中值的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+      if: _ => _.hasDataSource === true,
+    })
+    valueField: (item: T) => V = ((item: any) => item.value) as any;
+
+    @Prop<ElMenuOptions<T, V>, 'iconField'>({
+      group: '数据属性',
+      title: '图标属性字段',
+      description: '集合的元素类型中，用于图标的属性名称， 默认为icon',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+      if: _ => _.hasDataSource === true,
+    })
+    iconField: (item: T) => any = ((item: any) => item.icon) as any;
+
+    @Prop<ElMenuOptions<T, V>, 'toField'>({
+      group: '数据属性',
+      title: '跳转链接字段',
+      description: '集合的元素类型中，用于跳转链接的属性名称',
+      setter: {
+          concept: 'PropertySelectSetter',
+      },
+      if: _ => _.hasDataSource === true,
+    })
+    toField: (item: T) => any = ((item: any)  => item.to) as any;
+
+    @Prop<ElMenuOptions<T, V>, 'propsField'>({
+      group: '数据属性',
+      title: '菜单项属性字段',
+      description: '集合的元素类型中，用于菜单项的属性名称, 默认为props',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+      if: _ => _.hasDataSource === true,
+    })
+    propsField: (item: T) => any = ((item: any) => item.itemProps) as any;
+
+    @Prop<ElMenuOptions<T, V>, 'typeField'>({
+      group: '数据属性',
+      title: '组件标识属性字段',
+      description: '标识当前配置属于什么组件，默认值为 type，【需要注意的是「组件标识」可选值有 item、submenu、group，默认为 item】',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+      if: _ => _.hasDataSource === true,
+    })
+    typeField: (item: T) => any = ((item: any) => item.to) as any;
+
+    @Prop<ElMenuOptions<T, V>, 'childrenField'>({
+      group: '数据属性',
+      title: '子节点字段',
+      description: '集合的元素类型中，用于标识子节点的属性， 默认为children',
+      docDescription: '集合的元素类型中，用于标识子级字段的属性，支持自定义变更',
+      setter: {
+        concept: 'PropertySelectSetter',
+      },
+      if: _ => _.hasDataSource === true,
+    })
+    childrenField: (item: T) => any;
+
+    @Prop<ElMenuOptions<T, V>, 'mode'>({
       group: '主要属性',
       title: '模式',
       description: '模式',
@@ -78,7 +192,7 @@ namespace nasl.ui {
     })
     mode: 'horizontal' | 'vertical' = 'vertical';
 
-    @Prop<ElMenuOptions, 'collapse'>({
+    @Prop<ElMenuOptions<T, V>, 'collapse'>({
       group: '主要属性',
       title: '折叠状态',
       description: '是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）',

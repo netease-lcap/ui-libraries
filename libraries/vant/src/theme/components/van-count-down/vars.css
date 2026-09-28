@@ -1,0 +1,21 @@
+/**
+ * @component van-count-down
+ */
+:root,
+:host {
+  /**
+   * @type color
+   * @desc 倒计时文字颜色
+   */
+  --van-count-down-text-color: var(--van-text-color);
+  /**
+   * @type input
+   * @desc 倒计时字体大小
+   */
+  --van-count-down-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   * @desc 倒计时行高
+   */
+  --van-count-down-line-height: var(--van-line-height-md);
+}

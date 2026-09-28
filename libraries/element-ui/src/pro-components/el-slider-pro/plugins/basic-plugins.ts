@@ -5,10 +5,9 @@ import type { NaslComponentPluginOptions } from '@lcap/vue2-utils/plugins';
 export const useUpdateSync = createUseUpdateSync([{ name: 'value', event: 'change' }]);
 
 export const useExtendprops: NaslComponentPluginOptions = {
-  props: ['showLabelTooltip', 'unit'],
+  props: ['showLabelTooltip', 'unit', 'marks'],
   setup({ get: propGet, useComputed }, { h }) {
-    const currentLabel = useComputed(['showLabelTooltip'], (showLabelTooltip) => {
-      const unit = propGet('unit');
+    const currentLabel = useComputed(['showLabelTooltip', 'unit'], (showLabelTooltip, unit) => {
       if (showLabelTooltip === undefined || showLabelTooltip === null || showLabelTooltip) {
         if (unit) {
           return `\${value}${unit}`;
@@ -17,10 +16,10 @@ export const useExtendprops: NaslComponentPluginOptions = {
       }
       return false;
     });
-    const currentMarks = useComputed(['marks'], (value) => {
+
+    const currentMarks = useComputed(['marks', 'unit'], (value, unit) => {
       if (Array.isArray(value)) {
         const markMap = {};
-        const unit = propGet('unit');
         value.forEach((valueItem) => {
           markMap[valueItem] = unit ? `${valueItem}${unit}` : `${valueItem}`;
         });

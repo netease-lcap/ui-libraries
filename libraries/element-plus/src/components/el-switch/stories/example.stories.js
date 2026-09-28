@@ -51,7 +51,7 @@ export const Example3 = {
       const value = ref(true);
       return { value };
     },
-    template: `
+    template: `ƒ
     <div>
       <el-switch
         v-model="value"
@@ -101,4 +101,4 @@ export const Example5 = {
     </div>
     `,
   }),
-}; 
+};

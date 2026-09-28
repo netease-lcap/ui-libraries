@@ -20,6 +20,19 @@ const preview: Preview = {
       },
       defaultViewport: 'iphone14promax',
     },
+    backgrounds: {
+      default: 'light',
+      values: [
+        {
+          name: 'light',
+          value: '#f8f8fa',
+        },
+        {
+          name: 'dark',
+          value: '#333333',
+        },
+      ],
+    },
   },
 };
 

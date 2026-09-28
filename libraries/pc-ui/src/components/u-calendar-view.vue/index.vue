@@ -66,7 +66,7 @@ import './initDayjs';
 import { DefaultFormatType, getDay } from './utils';
 import SEmpty from '../../components/s-empty.vue';
 import MEmitter from '../m-emitter.vue';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import i18nMixin from '../../mixins/i18n';
 
 export default {
@@ -335,6 +335,17 @@ export default {
                     if (this.selectedDates[0]) {
                         this.year = this.selectedDates[0].year();
                         this.month = this.selectedDates[0].month();
+                    } else {
+                        // fix: 3191090264602624
+                        // fix: 3314839629059840
+                        const currentData = dayjs();
+                        if (maxDay.isBefore(currentData) || minDay.isAfter(currentData)) {
+                            this.year = minYear;
+                            this.month = minMonth;
+                        } else {
+                            this.year = currentData.year();
+                            this.month = currentData.month();
+                        }
                     }
                 } else {
                     // 当前日期不在配置日期范围内，重新赋值成最小日期
@@ -645,10 +656,12 @@ export default {
                 const endDate = getDay(endTime, null);
                 if (!startDate)
                     return false;
-                if (endDate) {
+                // 3127312172495360: 开始时间是在当前比较的这天里，就应该是合法的。
+                if (date.format(DefaultFormatType) === startDate.format(DefaultFormatType)) {
+                    return true;
+                } else if (endDate) {
                     return date.isSameOrBefore(endDate) && date.isSameOrAfter(startDate);
                 }
-                return date.format(DefaultFormatType) === startDate.format(DefaultFormatType);
             });
             if (!validData.length)
                 return {};

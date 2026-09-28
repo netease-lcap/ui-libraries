@@ -1,23 +1,26 @@
 import _ from 'lodash';
+import { useCallback } from '@/plugins/hooks';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
+import { ElLoadingProps } from '../props';
 
-export function handleCloseEvents(props) {
-  const onBeforeClose = props.get('onBeforeClose');
-  const onClosed = props.get('onClosed');
+const LoadingBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElLoadingOptions, ElLoadingProps>();
 
-  const beforeClose = _.isNil(onBeforeClose)
-    ? onBeforeClose
-    : _.wrap(onBeforeClose, (fn, done) => {
-        _.attempt(fn, done);
-      });
-
-  const closed = _.isNil(onClosed)
-    ? onClosed
-    : _.wrap(onClosed, (fn, done) => {
-        _.attempt(fn, done);
-      });
-
-  return {
-    beforeClose,
-    closed,
-  };
-}
+export default LoadingBasicAccumulate.addPlugin({
+  name: 'handleCloseEvents',
+  handle(props) {
+    const onBeforeClose = props.get('onBeforeClose', () => {});
+    const onClosed = props.get('onClosed', () => {});
+    const beforeClose = useCallback(
+      _.wrap(onBeforeClose, (fn, ...args) => _.attempt(fn as any, ...args)),
+      [onBeforeClose],
+    );
+    const closed = useCallback(
+      _.wrap(onClosed, (fn, ...args) => _.attempt(fn as any, ...args)),
+      [onClosed],
+    );
+    return {
+      beforeClose,
+      closed,
+    };
+  },
+});

@@ -288,6 +288,7 @@ export default mixins(getConfigReceiverMixins<Vue, PaginationConfig>('pagination
   },
 
   render() {
+    if (this.hideOnSinglePage && this.pageCount === 1) return null as unknown as JSX.Element;
     const {
       PageFirstIcon,
       PageLastIcon,

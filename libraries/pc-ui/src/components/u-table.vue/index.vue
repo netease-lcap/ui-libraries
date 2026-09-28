@@ -113,23 +113,6 @@ export default {
 .root tbody > tr:last-child:hover > td::after {
     display: none;
 } */
-/** 固定列position: sticky，th，td的border没有效果，所以改成box-shadow */
-.root[line] th {
-    box-shadow: inset 0 1px 0 var(--table-view-border-color), inset 0 -1px 0 var(--table-view-border-color), inset 1px 0 0 var(--table-view-border-color);
-}
-.root[line] th:last-child {
-    /**上、右、下、左 */
-    box-shadow: inset 0 1px 0 var(--table-view-border-color), inset -1px 0 0 var(--table-view-border-color), inset 0 -1px 0 var(--table-view-border-color), inset 1px 0 0 var(--table-view-border-color);
-}
-.root[line] td {
-    box-shadow: inset 1px 0 0 var(--table-view-border-color);
-}
-.root[line] td:last-child {
-    box-shadow: inset 1px 0 0 var(--table-view-border-color), inset -1px 0 0 var(--table-view-border-color);
-}
-.root[line] th, .root[line] thead tr {
-    border-bottom: none;
-}
 
 /* 下一个大版本放开 */
 .root[striped] thead tr {

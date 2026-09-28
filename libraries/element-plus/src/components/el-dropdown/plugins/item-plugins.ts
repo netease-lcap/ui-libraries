@@ -2,28 +2,15 @@ import { h } from 'vue';
 import _ from 'lodash';
 import { $deletePropsList } from '@/plugins/constants';
 import ElIcon from '../../el-icon/index';
+import { PluginAccumulateTypes } from '@/plugins/accumulate';
 
-// export function useExtendsPlugin(props) {
-//   const slots = props.get('slots');
+const DropdownItemBasicAccumulate = new PluginAccumulateTypes<nasl.ui.ElDropdownItemOptions, object>();
 
-//   return {
-//     slots: {
-//       ...slots,
-//       default: () => {
-//         const icon = props.get('icon');
-//         const vnodes: any[] = _.isFunction(slots.default) ? slots.default() : [];
-//         if (icon) {
-//           vnodes.unshift(h(ElIcon, { name: icon }));
-//         }
-//         return vnodes;
-//       },
-//     },
-//     [$deletePropsList]: ['icon'],
-//   };
-// }
-
-export function handleItemPlugin(props) {
-  return {
-    [$deletePropsList]: ['icon'],
-  };
-}
+export default DropdownItemBasicAccumulate.addPlugin({
+  name: 'handleItemPlugin',
+  handle(props) {
+    return {
+      [$deletePropsList]: ['icon'],
+    };
+  },
+});

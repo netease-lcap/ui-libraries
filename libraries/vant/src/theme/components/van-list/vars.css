@@ -1,0 +1,26 @@
+/**
+ * @component van-list
+ */
+:root,
+:host {
+  /**
+   * @type color
+   * @desc 列表文字颜色
+   */
+  --van-list-text-color: var(--van-text-color-2);
+  /**
+   * @type input
+   * @desc 列表文字字体大小
+   */
+  --van-list-text-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   * @desc 列表文字行高
+   */
+  --van-list-text-line-height: 50px;
+  /**
+   * @type input
+   * @desc 列表加载图标大小
+   */
+  --van-list-loading-icon-size: 16px;
+}

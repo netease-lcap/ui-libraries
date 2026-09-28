@@ -42,7 +42,7 @@ export default mixins(classPrefixMixins).extend({
         xmlns="http://www.w3.org/2000/svg"
         style={this.overlayStyle}
       >
-        <path d="M3.75 5.7998L7.99274 10.0425L12.2361 5.79921" stroke="black" stroke-opacity="0.9" stroke-width="1.3" />
+        <path d="M3.75 5.7998L7.99274 10.0425L12.2361 5.79921" stroke="currentcolor" stroke-opacity="0.9" stroke-width="1.3" />
       </svg>
     );
   },

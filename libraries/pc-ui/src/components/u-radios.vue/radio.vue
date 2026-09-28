@@ -55,7 +55,7 @@ export default {
             return this.parentVM ? this.parentVM.selectedVM === this : this.value;
         },
         currentDisabled() {
-            return this.disabled || (this.parentVM && this.parentVM.disabled);
+            return this.disabled || (this.parentVM && this.parentVM.computedDisabled);
         },
         currentReadonly() {
             return this.readonly || (this.parentVM && this.parentVM.readonly);

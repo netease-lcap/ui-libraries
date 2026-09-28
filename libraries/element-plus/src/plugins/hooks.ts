@@ -1,25 +1,46 @@
 import _ from 'lodash';
-import { onMounted, onUnmounted, ref, getCurrentInstance } from 'vue';
-import { PluginBase } from '@/types';
+import { onMounted, onUnmounted, ref, getCurrentInstance, type Ref, inject, watch } from 'vue';
+import { PluginBase, RenderFunctionWithInheritAttrs } from '@/types';
+import { componentLog } from '@/utils/curry';
+import { $provide } from '@/plugins/constants';
+import type { ImmutableMap } from '@/plugins/accumulate';
+// import { RenderFunctionWithInheritAttrs } from '@/types/pluginBase';
+
+const searchParamsStr = window.location.search; // 结果："?name=Alice&age=25&hobby=reading&hobby=hiking"
+const params = new URLSearchParams(searchParamsStr);
+const compDebugId = params.get('compDebugId'); // 单值参数："Alice"
 
 interface Hook {
   next: Hook;
   storeKey: symbol;
+  isSetValue?: boolean;
+  value?: any;
 }
 
 interface EffectHook {
   next: EffectHook;
   dep: any[];
   result: any;
+  callBack?: any;
 }
 
-interface Options {
-  defaultValue?: string | number | boolean;
+interface ControllableValueOptions<T = any, ValuePropName extends string = string> {
+  defaultValue?: T;
   defaultValuePropName?: string;
-  valuePropName?: string;
+  valuePropName?: ValuePropName;
   trigger?: string;
   onChange?: (...args: any[]) => void;
+  onValueEffect?: (...args: any[]) => void;
+  beforeChange?: (...args: any[]) => boolean;
+  afterChange?: (...args: any[]) => void;
 }
+
+/** 从 ImmutableMap 中提取 props 结构；非 ImmutableMap 时回退为 any */
+type ExtractMapProps<M> = M extends ImmutableMap<infer P> ? P : M extends { toJS(): infer P } ? P : any;
+
+/** 从 props 类型中取 valuePropName 对应字段类型 */
+type ControllableValueType<P, ValuePropName extends string> = ValuePropName extends keyof P ? P[ValuePropName] : any;
+
 interface Fiber {
   workInProgressState: Hook;
   workInProgressEffect: EffectHook;
@@ -76,14 +97,14 @@ const getStateValue = _.cond([
   [_.isObject, (state) => state],
   [_.stubTrue, (state) => state],
 ]);
-export function useState(initialstate?) {
+export function useState<T = any>(initialstate?: T): [T, (value: T | ((prevState: T) => T)) => void] {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
 
-  let hook;
+  let hook: Hook;
   if (isMount) {
     hook = {
-      next: null,
+      next: null as any,
       storeKey: Symbol('storeKey'),
       isSetValue: false,
     };
@@ -98,19 +119,18 @@ export function useState(initialstate?) {
     currentFiber.workInProgressState = currentFiber.workInProgressState.next;
   }
   const state = hook?.isSetValue ? currentFiber.getState().state[hook?.storeKey] : initialstate;
-  const localSetValue = (value) => {
-    // console.log(value, 'value-data');
+  const localSetValue = (value: T | ((prevState: T) => T)) => {
+    if (!currentFiber) return;
+    const state = hook?.isSetValue ? currentFiber?.getState?.()?.state?.[hook?.storeKey] : initialstate;
     hook.isSetValue = true;
-    const state = currentFiber.getState().state[hook?.storeKey];
-    // console.log(state, 'state-data');
     // TODO 判断是否相等
     // if (_.isEqual(value, state)) {
     //   return;
     // }
     const getValue = _.isFunction(value) ? value(getStateValue(state)) : value;
-    currentFiber.updateQueen.add({ [hook.storeKey]: getValue });
+    currentFiber?.updateQueen?.add({ [hook.storeKey]: getValue });
     _.defer(() => {
-      if (currentFiber.updateQueen.size) {
+      if (currentFiber?.updateQueen?.size) {
         const deleteQueue = Array.from(currentFiber.updateQueen);
         const comit = Array.from(currentFiber.updateQueen).reduce((pre, cur) => ({ ...pre, ...cur }), {});
         currentFiber.setValue(comit);
@@ -120,14 +140,15 @@ export function useState(initialstate?) {
   };
   return [getStateValue(state), localSetValue];
 }
-export function useRef(initialstate) {
+export function useRef<T = any>(initialstate: T, isRef: boolean = true): Ref<T> {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
-  let hook;
+  let hook: Hook;
   if (isMount) {
     hook = {
-      next: null,
-      value: ref(initialstate),
+      next: null as any,
+      storeKey: Symbol('storeKey'),
+      value: isRef ? ref(initialstate) : { value: initialstate },
     };
     hook.next = hook;
     if (currentFiber.workInProgressState) {
@@ -141,13 +162,13 @@ export function useRef(initialstate) {
   }
   return hook.value;
 }
-export function useEffect(callBack, dep) {
+export function useEffect(callBack: (...args: any[]) => (() => void) | void, dep: any[]): void {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
-  let hook;
+  let hook: EffectHook;
   if (isMount) {
     hook = {
-      next: null,
+      next: null as any,
       dep,
       result: () => {},
       callBack,
@@ -160,33 +181,34 @@ export function useEffect(callBack, dep) {
     currentFiber.workInProgressEffect = hook;
     onMounted(() => {
       const result = callBack(...dep);
-      hook.result = _.isFunction(result) ? result : () => {};
+      hook.result = result;
     });
     onUnmounted(() => {
-      _.attempt(hook.result);
+      if (_.isFunction(hook.result)) {
+        hook.result();
+      }
     });
   } else {
     hook = currentFiber.workInProgressEffect.next;
     currentFiber.workInProgressEffect = currentFiber.workInProgressEffect.next;
-    const isSameDep = _.every(dep, (item, index) => Object.is(item, _.get(hook, `dep.${index}`)));
+    const isSameDep = _.every(dep, (item, index) => _.isEqual(item, _.get(hook, `dep.${index}`)));
     if (!_.isEmpty(dep) && !isSameDep) {
       const result = callBack(...dep);
-      hook.result = _.isFunction(result) ? result : () => {};
+      hook.result = result;
       hook.dep = dep;
     }
   }
-  return null;
 }
 
-export function useMemo(callBack, dep) {
+export function useMemo<T>(callBack: () => T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
-  let hook;
+  let hook: EffectHook;
   if (isMount) {
     hook = {
-      next: null,
+      next: null as any,
       dep,
-      result: null,
+      result: null as T,
     };
     hook.next = hook;
     if (currentFiber.workInProgressEffect) {
@@ -198,7 +220,7 @@ export function useMemo(callBack, dep) {
   } else {
     hook = currentFiber.workInProgressEffect.next;
     currentFiber.workInProgressEffect = currentFiber.workInProgressEffect.next;
-    const isSameDep = _.every(dep, (item, index) => Object.is(item, _.get(hook, `dep.${index}`)));
+    const isSameDep = _.every(dep, (item, index) => _.isEqual(item, _.get(hook, `dep.${index}`)));
     if (!_.isEmpty(dep) && !isSameDep) {
       hook.result = callBack();
       hook.dep = dep;
@@ -206,14 +228,15 @@ export function useMemo(callBack, dep) {
   }
   return hook.result;
 }
-export function useCallback(callBack, dep) {
+export function useCallback<T extends(...args: any[]) => any>(callBack: T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
-  let hook;
+  let hook: EffectHook;
   if (isMount) {
     hook = {
-      next: null,
+      next: null as any,
       dep,
+      result: null,
       callBack,
     };
     hook.next = hook;
@@ -234,41 +257,87 @@ export function useCallback(callBack, dep) {
   }
   return hook.callBack;
 }
+export function useRender(
+  callBack: (props: any, { attrs, slots }: { attrs: any; slots: any }) => any,
+  dep: any[],
+  inheritAttrs: boolean = false,
+): RenderFunctionWithInheritAttrs {
+  const render = useCallback(callBack, dep) as RenderFunctionWithInheritAttrs;
+  render.inheritAttrs = inheritAttrs;
+  return render;
+}
+export function useSyncState(props: any, name: string) {
+  const emit = props.get('emit');
+  const value = props.get(name);
+  useEffect(() => {
+    emit('sync:state', name, value);
+  }, [value]);
+  return value;
+}
 
-export function useControllableValue(props: any, options: Options = {}) {
+/**
+ * 受控 / 非受控值 Hook。
+ * 返回值类型自动推导为 props（ImmutableMap）中 `valuePropName`（默认 `modelValue`）对应字段的类型。
+ */
+export function useControllableValue<
+  M extends { get(
+key: any, ...args: any[]): any },
+  ValuePropName extends string = 'modelValue',
+  P = ExtractMapProps<M>,
+>(
+  props: M,
+  options: ControllableValueOptions<ControllableValueType<P, ValuePropName>, ValuePropName> = {},
+): [
+  ControllableValueType<P, ValuePropName>,
+  (...args: any[]) => void,
+  {
+    [key: string]: any;
+  },
+  boolean,
+] {
+  type ValueType = ControllableValueType<P, ValuePropName>;
   const instance = useMemo(() => getCurrentInstance(), []);
-  const { vnode } = instance;
+  const { vnode } = instance || { vnode: { props: {} } };
   const emit = props.get('emit');
   const vProps = vnode.props || {};
   const {
     defaultValue,
     defaultValuePropName = 'defaultValue',
-    valuePropName = 'modelValue',
+    valuePropName = 'modelValue' as ValuePropName,
     trigger = `onUpdate:${valuePropName}`,
     onChange: onChangeProps = () => {},
+    onValueEffect = () => {},
   } = options || {};
   const isControlled = Object.prototype.hasOwnProperty.call(vProps, valuePropName);
-  const propsValue = props.get(valuePropName);
+  const priorValue = useRef<any>({});
+  const propsValue = props.get(valuePropName) as ValueType;
   const defaultValueProps = props.get(defaultValuePropName);
-  const initialValue = useMemo(() => {
-    const controlledInitialValue = propsValue ?? defaultValueProps ?? defaultValue;
-    const uncontrolledInitialValue = defaultValueProps ?? defaultValue;
-    return isControlled ? controlledInitialValue : uncontrolledInitialValue;
-  }, [isControlled, propsValue, defaultValueProps, defaultValue]);
-  const [stateValue, setStateValue] = useState(initialValue);
-  const triggerProps = props.get(trigger, () => {});
+  const unControlledInitialValue = (defaultValueProps ?? defaultValue) as ValueType;
+  const [stateValue, setStateValue] = useState<ValueType>(unControlledInitialValue);
+  const triggerProps = props.get(trigger) || (() => {});
   const triggerPropsList = _.isArray(triggerProps) ? triggerProps : [triggerProps];
-
-  const onChange = (...args) => {
+  useEffect(() => {
+    if (!_.isEqual(priorValue.value, propsValue) && isControlled) {
+      onValueEffect(propsValue);
+      priorValue.value = _.cloneDeep(propsValue);
+    }
+  }, [_.cloneDeep(propsValue), isControlled]);
+  const onChange = (...args: any[]) => {
+    if (_.isFunction(options?.beforeChange) && !options?.beforeChange?.(...args)) {
+      return;
+    }
     if (isControlled) {
       emit(trigger, ...args);
     } else {
-      setStateValue(...args);
+      setStateValue(args[0] as ValueType);
     }
+    emit('sync:state', valuePropName, ...args);
+    priorValue.value = _.cloneDeep(_.get(args, 0, null));
     _.forEach(triggerPropsList, (item) => _.attempt(item, ...args));
     _.attempt(onChangeProps, ...args);
+    options?.afterChange?.(...args);
   };
-  const value = useMemo(() => (isControlled ? propsValue : stateValue), [stateValue, isControlled]);
+  const value = isControlled ? propsValue : stateValue;
 
   return [
     value,
@@ -281,14 +350,33 @@ export function useControllableValue(props: any, options: Options = {}) {
   ];
 }
 
-export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
+// export function useInject(key: string) {
+//   const injectValue = inject($provide);
+//   const injectRef = ref(injectValue[key]);
+//   watch(injectValue, (value: any) => {
+//     console.log(value, 'value');
+//   });
+// }
+const hookMap = {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+};
+
+export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap) {
   const updateQueen = fiberMap.get('updateQueen');
   const getState = fiberMap.get('getState');
-  const setValue = getState().setvalue;
-  return pluginHooks?.reduce((ImmutableProps, handleFn) => {
+  const { setValue } = getState() as any;
+  if (ImmutableState?.get?.('data-ref-id') === compDebugId) {
+    console.group('scheduler');
+  }
+  return pluginHooks?.reduce((ImmutableState, pluginHook) => {
+    const handleFn = _.isFunction(pluginHook) ? pluginHook : pluginHook.handle;
     const isMount = !fiberMap.has(handleFn);
     const storeKey = _.uniqueId('storeKey');
-    const fiber = isMount
+    const fiber: Fiber = isMount
       ? {
           workInProgressState: null,
           workInProgressEffect: null,
@@ -299,85 +387,9 @@ export function scheduler(pluginHooks, ImmutableProps, fiberMap) {
         }
       : fiberMap.get(handleFn);
     fiberNode.setCurrentFiber(fiber, isMount);
-    const result = _.attempt(_.bind(handleFn, fiber), ImmutableProps);
+    const result = _.attempt(_.bind(handleFn, _.assign(fiber, hookMap)), ImmutableState, ImmutableProps);
     fiberMap.set(handleFn, fiber);
-    return ImmutableProps.merge(result);
-  }, ImmutableProps);
+    componentLog(compDebugId, handleFn, ImmutableState, result);
+    return ImmutableState.merge(result);
+  }, ImmutableState);
 }
-
-// 合并类型数组中的所有类型
-type MergeTypes<T extends any[]> = T extends [infer First, ...infer Rest] ? First & MergeTypes<Rest> : object;
-
-// 定义主类型，接受一个可选的泛型数组
-type AccumulateTypes<T extends any[] = []> = {
-  // 添加新类型的方法
-  add<U>(): AccumulateTypes<[...T, U]>;
-  // 获取当前累积的所有类型，返回准确的类型映射
-  getMapTypes(): {
-    get<K extends keyof MergeTypes<T>>(key: K): MergeTypes<T>[K];
-  } & Map<keyof MergeTypes<T>, MergeTypes<T>[keyof MergeTypes<T>]>;
-  getTypes(): MergeTypes<T>;
-};
-
-// 创建 AccumulateTypes 实例的辅助函数
-export function createAccumulateTypes<T extends any[] = []>(): AccumulateTypes<T> {
-  return {
-    add<U>(): AccumulateTypes<[...T, U]> {
-      return createAccumulateTypes<[...T, U]>();
-    },
-    getMapTypes(): {
-      get<K extends keyof MergeTypes<T>>(key: K): MergeTypes<T>[K];
-    } & Map<keyof MergeTypes<T>, MergeTypes<T>[keyof MergeTypes<T>]> {
-      return null as any;
-    },
-    getTypes(): MergeTypes<T> {
-      return null as any as MergeTypes<T>; // 类型转换，实际使用时不会返回 null
-    },
-  };
-}
-
-export function createPluginAccumulateTypes<T>(): AccumulateTypes<[T, PluginBase]> {
-  return createAccumulateTypes<[T, PluginBase]>();
-}
-
-// 定义主类型，接受一个可选的泛型数组
-
-// 创建 AccumulateTypes 实例的辅助函数
-type omit<T, K extends keyof T> = {
-  [P in Exclude<keyof T, K>]: T[P];
-};
-export type GetAccumulatedMapType<T> = T extends AccumulateTypes<infer U> ? ReturnType<T['getMapTypes']> : never;
-export type GetAccumulatedType<T> = T extends AccumulateTypes<infer U> ? ReturnType<T['getTypes']> : never;
-
-type add = {
-  a: string;
-};
-type add2 = {
-  b: number;
-};
-type add3 = {
-  c: boolean;
-  $deletePropsList: 'a' | 'b';
-};
-// 使用示例
-
-const typeAccumulator = createAccumulateTypes<[add]>();
-const withString = typeAccumulator.add<add2>();
-const withStringAndNumber = withString.add<add3>();
-
-// 获取累积的类型: string | number | boolean
-
-type AccumulatedTypea = GetAccumulatedMapType<typeof withStringAndNumber>;
-type AccumulatedTypea2 = GetAccumulatedType<typeof withStringAndNumber>;
-function getType(params: omit<AccumulatedTypea2, AccumulatedTypea2['$deletePropsList']>) {
-  // const f = params.b;
-  const f = params.c;
-  console.log(f);
-}
-function getMapType(params: AccumulatedTypea) {
-  const f = params.get('c');
-  console.log(f);
-}
-// const c: AccumulatedTypea = {};
-
-// var f=c.get('a')

@@ -109,7 +109,7 @@ namespace nasl.ui {
       emptyBackground: 'add-sub',
       snippets: [{
         title: '子选项',
-        code: '<van-tab title="标签页">内容</van-tab>'
+        code: '<van-tab><template #title><van-text text="标签"></van-text></template>内容</van-tab>'
       }]
     })
     slotDefault: () => Array<VanTab>;

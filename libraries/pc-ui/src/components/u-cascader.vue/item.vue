@@ -5,14 +5,17 @@
                 <u-menu-item v-for="(item, index) in data" :key="index" :ref="index"
                     :has-sub="hasSub(item)"
                     :disabled="item.disabled"
-                    :class="$style.select_item"
+                    :class="[$style.select_item, { [$style.useIcon]: !!expandIcon }]"
                     :select="index === umenuIndex"
                     @click="clickMenuitem(item, index)">
                     <span v-if="item.highlighterHtml" v-html="item.highlighterHtml"></span>
                     <template v-else>
                         {{ $at(item, field) }}
                     </template>
-                    <span :class="$style.spinner" v-if="item.loading"></span>
+                    <i-ico :name="expandIcon" notext :class="$style.icon" v-if="expandIcon && hasSub(item)"></i-ico>
+                    <span :class="[$style.spinner, { [$style.useIcon]: !!loadingIcon }]" v-if="item.loading">
+                      <i-ico :name="loadingIcon" notext :class="$style.icon" v-if="loadingIcon"></i-ico>
+                    </span>
                 </u-menu-item>
             </u-menu>
     </f-scroll-view>
@@ -37,6 +40,12 @@ export default {
         changeOnSelect: {
             type: Boolean,
             default: false,
+        },
+        expandIcon: {
+            type: String,
+        },
+        loadingIcon: {
+            type: String,
         },
     },
     data() {

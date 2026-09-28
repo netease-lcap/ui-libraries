@@ -1,5 +1,6 @@
 <template>
 <u-transfer show-head
+    filterable
     source-title="左列表"
     target-title="右列表"
     :source="source"

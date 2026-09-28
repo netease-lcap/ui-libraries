@@ -49,14 +49,6 @@ namespace nasl.ui {
         private dataType: nasl.core.String = 'json';
 
         @Prop({
-            title: '是否可以粘贴',
-            setter: {
-                concept: 'SwitchSetter',
-            },
-        })
-        private pastable: nasl.core.Boolean = false;
-
-        @Prop({
             group: '数据属性',
             title: '值',
             description: '当前文件列表',
@@ -241,6 +233,17 @@ namespace nasl.ui {
         fileSize: nasl.core.Boolean = true;
 
         @Prop({
+          group: '高级属性',
+          title: '禁用文件上传',
+          description: '开启后，选择文件后将不会上传文件, 仅触发选择文件事件',
+          docDescription: '开启后，选择文件后将不会上传文件, 仅触发选择文件事件',
+          setter: {
+            concept: 'SwitchSetter',
+          },
+        })
+        disableUpload: nasl.core.Boolean = false;
+
+        @Prop({
             group: '高级属性',
             title: '请求 headers',
             docDescription: '请求头',
@@ -407,7 +410,7 @@ namespace nasl.ui {
             docDescription: '拖拽位置的文字指引',
             implicitToString: true,
         })
-        dragDescription: nasl.core.String = '点击/拖动/粘贴文件到这里';
+        dragDescription: nasl.core.String = '点击/拖动文件到这里';
 
         @Prop({
             group: '主要属性',
@@ -419,7 +422,7 @@ namespace nasl.ui {
             },
             bindOpen: true,
         })
-        checkFile: (file: File) => nasl.core.String;
+        checkFile: (fileInfo: nasl.io.FileInfo) => nasl.core.String;
 
         @Prop({
             group: '主要属性',
@@ -477,6 +480,54 @@ namespace nasl.ui {
         })
         lcapIsCompress: nasl.core.Boolean;
 
+        @Prop<UUploaderOptions, 'previewIcon'>({
+            group: '主要属性',
+            title: '预览图标',
+            description: '预览图标',
+            docDescription: '预览图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.listType === 'card',
+        })
+        previewIcon: nasl.core.String;
+
+
+        @Prop<UUploaderOptions, 'addIcon'>({
+            group: '主要属性',
+            title: '添加图标',
+            description: '添加图标',
+            docDescription: '添加图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.listType === 'card',
+        })
+        addIcon: nasl.core.String = 'add';
+
+        @Prop<UUploaderOptions, 'uploadIcon'>({
+            group: '主要属性',
+            title: '上传图标',
+            description: '上传图标',
+            docDescription: '上传图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.draggable === true,
+        })
+        uploadIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '删除图标',
+            description: '删除图标',
+            docDescription: '删除图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        removeIcon: nasl.core.String = 'remove';
+
         @Prop({
             group: '交互属性',
             title: '可拖拽',
@@ -486,6 +537,18 @@ namespace nasl.ui {
             },
         })
         draggable: nasl.core.Boolean = false;
+
+        @Prop<UUploaderOptions, 'pastable'>({
+          group: '交互属性',
+          title: '是否可以粘贴',
+          description: '开启后支持粘贴上传文件，默认关闭',
+          docDescription: '开启后支持粘贴上传文件，默认关闭',
+          setter: {
+              concept: 'SwitchSetter',
+          },
+          if: _ => _.draggable === true,
+        })
+        pastable: nasl.core.Boolean = false;
 
         @Prop({
             group: '状态属性',
@@ -524,11 +587,19 @@ namespace nasl.ui {
         preview: nasl.core.Boolean = false;
 
         @Event({
+          title: '选择文件时',
+          description: '选择文件时触发'
+        })
+        onSelectFiles: (event: {
+            files: nasl.collection.List<nasl.io.File>;
+        }) => any;
+
+        @Event({
             title: '上传前',
             description: '上传前触发',
         })
         onBeforeUpload: (event: {
-            file: nasl.core.String;
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -536,8 +607,9 @@ namespace nasl.ui {
             description: '发送进度改变时触发，在上传进度条时使用',
         })
         onProgress: (event: {
-            item: File;
+            item: nasl.io.FileInfo;
             file: nasl.core.String;
+            raw: nasl.io.File | nasl.collection.List<nasl.io.File>
         }) => any;
 
         @Event({
@@ -545,7 +617,7 @@ namespace nasl.ui {
             description: '文件数量超额时触发',
         })
         onCountExceed: (event: {
-            files: nasl.collection.List<File>;
+            files: nasl.collection.List<nasl.io.File>;
             value: {
                 url: nasl.core.String;
                 name: nasl.core.String;
@@ -564,7 +636,7 @@ namespace nasl.ui {
             size: nasl.core.Decimal | nasl.core.Integer;
             message: nasl.core.String;
             name: nasl.core.String;
-            file: File;
+            file: nasl.io.File;
         }) => any;
 
         @Event({
@@ -572,8 +644,9 @@ namespace nasl.ui {
             description: '上传成功时触发',
         })
         onSuccess: (event: {
-            item: File;
+            item: nasl.io.FileInfo;
             file: nasl.core.String;
+            raw: nasl.io.File | nasl.collection.List<nasl.io.File>
         }) => any;
 
         @Event({
@@ -581,8 +654,9 @@ namespace nasl.ui {
             description: '上传报错时触发',
         })
         onError: (event: {
-            item: File;
+            item: nasl.io.FileInfo;
             file: nasl.core.String;
+            raw: nasl.io.File | nasl.collection.List<nasl.io.File>
         }) => any;
 
         @Event({
@@ -594,7 +668,7 @@ namespace nasl.ui {
                 url: nasl.core.String;
                 name: nasl.core.String;
             },
-            item: File,
+            item: nasl.io.FileInfo,
             index: nasl.core.Integer;
         }) => any;
 

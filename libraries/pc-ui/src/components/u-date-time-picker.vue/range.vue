@@ -18,6 +18,7 @@
         @clear="clearValue"
         :pre-icon="preIcon"
         :suffix-icon="suffixIcon"
+        :clear-icon="clearIcon ? clearIcon : undefined"
         :color="formItemVM && formItemVM.color">
     </u-range-input>
     <m-popper :class="$style.popper" ref="popper" :append-to="appendTo" :disabled="disabled || readonly" :placement="placement"
@@ -120,6 +121,7 @@ export default {
             default: 'calendar',
         },
         suffixIcon: { type: String },
+        clearIcon: { type: String },
         disabled: { type: Boolean, default: false },
         placeholder: {
             type: String,

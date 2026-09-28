@@ -576,7 +576,6 @@
                 "cell": "{const type = this.getAttribute('type')?.value; const parentNode = this.getParent(); if(['index', 'radio', 'checkbox', 'dragHandler'].includes(type)) {return true;};const dependent = ['index', 'radio', 'checkbox', 'expander', 'dragHandler']; const el = parentNode.getElement(el => !dependent.includes(el.getAttribute('type')?.value)); return el === this; }"
             },
             "namedSlotOmitWrapper": ["title"],
-            "forceUpdateWhenAttributeChange": "parent",
             "disableSlotAutoFill": ["title"]
         }
     },
@@ -632,7 +631,7 @@
        "ideusage": {
         "idetype": "container",
         "structured": true,
-        "forceRefresh": "transparent",
+        "forceRefresh": "parent",
         "childAccept": "['u-table-view-column', 'u-table-view-column-dynamic'].includes(target.tag)",
         "parentAccept": "['u-table-view', 'u-table-view-column-group'].includes(target.tag)",
         "selector": [
@@ -671,7 +670,8 @@
             },
             "displaySlotConditions": {
                 "empty": false
-            }
+            },
+            "ignoreProperty": ["pageSize"]
         }
     },
     {
@@ -685,7 +685,8 @@
                     "condition": "!this.getAttribute('dataSource')",
                     "accept": "target.concept === 'Entity'"
                 }
-            }
+            },
+            "ignoreProperty": ["pageSize"]
         }
     },
     {
@@ -953,7 +954,7 @@
             "idetype": "container",
             "structured": true,
             "childAccept":"target.tag === 'u-tab'",
-            "ignoreProperty": ["loadOnActive"],
+            "ignoreProperty": ["loadOnActive", "readonly"],
             "additionalAttribute": {
               ":loadOnActive": "\"false\""
             },
@@ -1003,6 +1004,7 @@
             "idetype": "container",
             "structured": true,
             "childAccept":"target.tag === 'u-selectable-step'",
+            "ignoreProperty": ["readonly"],
             "displaySlotConditions": {
                 "title": false,
                 "desc": false
@@ -1020,6 +1022,7 @@
         "ideusage": {
             "idetype": "container",
             "parentAccept":"target.tag === 'u-selectable-steps'",
+            "ignoreProperty": ["readonly"],
             "selector": [
                 {
                     "expression": "this.getElement(el => el.slotTarget === 'title')",
@@ -1067,7 +1070,7 @@
                 "loopRule": "nth-last-child(-n+2)",
                 "loopElem": "div[class^='u-select_item']"
             },
-            "translateBindingProperty": ["value", "placeholder"],
+            "translateBindingProperty": ["placeholder"],
             "additionalAttribute": {
                 "autofocus": "\"false\"",
                 "appendTo": "\"body\""

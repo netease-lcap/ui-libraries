@@ -2,9 +2,7 @@ import {
   defineComponent, watch, computed, ref,
 } from '@vue/composition-api';
 import dayjs from 'dayjs';
-import { CalendarIcon as ElCalendarIcon } from '@element-ui-icons';
 import { usePrefixClass } from '../hooks/useConfig';
-import { useGlobalIcon } from '../hooks/useGlobalIcon';
 
 import props from './date-range-picker-props';
 import { DateValue, DateRangePickerPartial } from './type';
@@ -29,7 +27,6 @@ export default defineComponent({
   props,
   setup(props, { emit }) {
     const COMPONENT_NAME = usePrefixClass('date-range-picker');
-    const { CalendarIcon } = useGlobalIcon({ CalendarIcon: ElCalendarIcon });
     const { formDisabled } = useFormDisabled();
 
     const {
@@ -428,7 +425,6 @@ export default defineComponent({
       dateRangePickerRangeInputProps,
       popupVisible,
       panelProps,
-      CalendarIcon,
       isDisabled,
     };
   },
@@ -440,16 +436,7 @@ export default defineComponent({
       dateRangePickerRangeInputProps,
       popupVisible,
       panelProps,
-      CalendarIcon,
     } = this;
-
-    const renderSuffixIcon = () => {
-      if (this.suffixIcon) return this.suffixIcon;
-      if (this.$scopedSlots.suffixIcon) return this.$scopedSlots.suffixIcon;
-      if (this.$scopedSlots['suffix-icon']) return this.$scopedSlots['suffix-icon'];
-
-      return () => <CalendarIcon />;
-    };
 
     return (
       <div class={COMPONENT_NAME}>
@@ -462,7 +449,6 @@ export default defineComponent({
           readonly={this.readonly}
           popupProps={dateRangePickerPopupProps}
           rangeInputProps={{
-            suffixIcon: renderSuffixIcon(),
             ...dateRangePickerRangeInputProps,
           }}
           popupVisible={popupVisible}

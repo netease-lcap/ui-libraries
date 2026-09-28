@@ -1,0 +1,71 @@
+/**
+ * @component van-index-bar
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 索引栏侧边栏层级
+   */
+  --van-index-bar-sidebar-z-index: 2;
+  /**
+   * @type input
+   * @desc 索引栏索引字体大小
+   */
+  --van-index-bar-index-font-size: var(--van-font-size-xs);
+  /**
+   * @type input
+   * @desc 索引栏索引行高
+   */
+  --van-index-bar-index-line-height: var(--van-line-height-xs);
+  /**
+   * @type color
+   * @desc 索引栏索引激活状态颜色
+   */
+  --van-index-bar-index-active-color: var(--van-primary-color);
+  /**
+   * @type input
+   * @desc 索引锚点层级
+   */
+  --van-index-anchor-z-index: 1;
+  /**
+   * @type input
+   * @desc 索引锚点内边距
+   */
+  --van-index-anchor-padding: 0 var(--van-padding-md);
+  /**
+   * @type color
+   * @desc 索引锚点文字颜色
+   */
+  --van-index-anchor-text-color: var(--van-text-color);
+  /**
+   * @type input
+   * @desc 索引锚点字体粗细
+   */
+  --van-index-anchor-font-weight: var(--van-font-bold);
+  /**
+   * @type input
+   * @desc 索引锚点字体大小
+   */
+  --van-index-anchor-font-size: var(--van-font-size-md);
+  /**
+   * @type input
+   * @desc 索引锚点行高
+   */
+  --van-index-anchor-line-height: 32px;
+  /**
+   * @type input
+   * @desc 索引锚点背景色
+   */
+  --van-index-anchor-background: transparent;
+  /**
+   * @type color
+   * @desc 索引锚点粘性状态文字颜色
+   */
+  --van-index-anchor-sticky-text-color: var(--van-primary-color);
+  /**
+   * @type color
+   * @desc 索引锚点粘性状态背景色
+   */
+  --van-index-anchor-sticky-background: var(--van-background-2);
+}

@@ -70,6 +70,18 @@ namespace nasl.ui {
       }
     })
     private inputAlign: 'left' | 'center' | 'right' = 'left';
+
+    @Prop({
+      group: '状态属性',
+      title: '禁用',
+      description: '置灰显示，且禁止任何交互（焦点、点击、选择、输入等）',
+      setter: {
+        concept: "SwitchSetter"
+      },
+      settable: true,
+    })
+    disabled: nasl.core.Boolean = false;
+
     @Event({
       title: '验证通过',
       description: '提交表单且验证通过后触发'
@@ -190,7 +202,16 @@ namespace nasl.ui {
       description: '设置验证规则，简写格式为字符串类型，完整格式或混合格式为数组类型',
       bindHide: true
     })
-    rules: nasl.collection.List<nasl.core.String>;
+    rules: nasl.core.String;
+    @Prop({
+      group: '主要属性',
+      title: '忽略验证',
+      description: '是否忽略验证',
+      setter: {
+        concept: "SwitchSetter"
+      }
+    })
+    ignoreValidation: nasl.core.Boolean = false;
     @Prop({
       group: '样式属性',
       title: '显示底边框',
@@ -200,6 +221,7 @@ namespace nasl.ui {
       }
     })
     border: nasl.core.Boolean = true;
+
     @Slot({
       title: '组件插槽',
       description: '插入自定义输入框'

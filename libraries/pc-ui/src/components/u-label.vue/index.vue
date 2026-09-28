@@ -1,7 +1,8 @@
 <template>
 <span :class="$style.root" v-on="$listeners" :type="type" :selected="selected" @click="handleClick()">
     <span vusion-slot-name-edit="text"><slot>{{ text }}</slot></span>
-    <span v-if="removable" :class="$style.remove" @click.stop="remove()"></span>
+    <i-ico v-if="removable && closeIcon" :class="[$style.remove, $style.closeIcon]" :name="closeIcon" @click.stop="remove()"></i-ico>
+    <span v-else-if="removable" :class="$style.remove" @click.stop="remove()"></span>
 </span>
 </template>
 
@@ -20,6 +21,7 @@ export default {
         text: String,
         removable: { type: Boolean, default: false },
         type: { type: String, default: 'filled' }, // 填充or线性 line
+        closeIcon: { type: String },
     },
     methods: {
         remove() {
@@ -70,6 +72,15 @@ content: "\e663";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
+}
+
+.remove.closeIcon {
+  font-size: inherit;
+  display: inline-block;
+}
+
+.remove.closeIcon::before {
+    content: none;
 }
 
 .root[color="primary"] {

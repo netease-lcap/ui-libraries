@@ -120,6 +120,28 @@ namespace nasl.ui {
 
         @Prop({
             group: '主要属性',
+            title: '上一页图标',
+            description: '上一页图标',
+            docDescription: '上一页图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        prevIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '下一页图标',
+            description: '下一页图标',
+            docDescription: '下一页图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+        })
+        nextIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
             title: '显示总条数',
             setter: {
                 concept: 'SwitchSetter',
@@ -137,6 +159,15 @@ namespace nasl.ui {
             },
         })
         showSizer: nasl.core.Boolean = false;
+
+        @Prop<UPaginationOptions, 'selectDropdownIcon'>({
+            group: '主要属性',
+            title: '选择器展开图标',
+            description: '选择器展开图标',
+            docDescription: '选择器展开图标',
+            if: (_) => _.showSizer,
+        })
+        selectDropdownIcon: nasl.core.String;
 
         @Prop({
             group: '主要属性',

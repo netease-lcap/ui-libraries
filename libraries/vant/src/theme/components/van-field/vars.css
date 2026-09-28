@@ -1,0 +1,101 @@
+/**
+ * @component van-field
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 字段标签宽度
+   */
+  --van-field-label-width: 6.2em;
+  /**
+   * @type color
+   * @desc 字段标签颜色
+   */
+  --van-field-label-color: var(--van-text-color);
+  /**
+   * @type input
+   * @desc 字段标签右边距
+   */
+  --van-field-label-margin-right: var(--van-padding-sm);
+  /**
+   * @type color
+   * @desc 字段输入框文字颜色
+   */
+  --van-field-input-text-color: var(--van-text-color);
+  /**
+   * @type color
+   * @desc 字段输入框错误文字颜色
+   */
+  --van-field-input-error-text-color: var(--van-danger-color);
+  /**
+   * @type color
+   * @desc 字段输入框禁用状态文字颜色
+   */
+  --van-field-input-disabled-text-color: var(--van-text-color-3);
+  /**
+   * @type color
+   * @desc 字段占位符文字颜色
+   */
+  --van-field-placeholder-text-color: var(--van-text-color-3);
+  /**
+   * @type input
+   * @desc 字段图标大小
+   */
+  --van-field-icon-size: 18px;
+  /**
+   * @type input
+   * @desc 字段清除图标大小
+   */
+  --van-field-clear-icon-size: 18px;
+  /**
+   * @type color
+   * @desc 字段清除图标颜色
+   */
+  --van-field-clear-icon-color: var(--van-gray-5);
+  /**
+   * @type color
+   * @desc 字段右侧图标颜色
+   */
+  --van-field-right-icon-color: var(--van-gray-6);
+  /**
+   * @type color
+   * @desc 字段错误信息颜色
+   */
+  --van-field-error-message-color: var(--van-danger-color);
+  /**
+   * @type input
+   * @desc 字段错误信息字体大小
+   */
+  --van-field-error-message-font-size: 12px;
+  /**
+   * @type input
+   * @desc 字段文本域最小高度
+   */
+  --van-field-text-area-min-height: 60px;
+  /**
+   * @type color
+   * @desc 字段字数限制颜色
+   */
+  --van-field-word-limit-color: var(--van-gray-7);
+  /**
+   * @type input
+   * @desc 字段字数限制字体大小
+   */
+  --van-field-word-limit-font-size: var(--van-font-size-sm);
+  /**
+   * @type input
+   * @desc 字段字数限制行高
+   */
+  --van-field-word-limit-line-height: 16px;
+  /**
+   * @type color
+   * @desc 字段禁用状态文字颜色
+   */
+  --van-field-disabled-text-color: var(--van-text-color-3);
+  /**
+   * @type color
+   * @desc 字段必填标记颜色
+   */
+  --van-field-required-mark-color: var(--van-red);
+}

@@ -23,18 +23,21 @@ namespace nasl.ui {
   }
 
   export class ElTagOptions extends ViewComponentOptions {
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
-      title: '文本',
-      description: '标签内容',
+      title: '标签文本',
+      description: '标签显示的文本内容',
+      docDescription: '设置标签显示的文本内容，用于标记和分类。',
       setter: { concept: 'InputSetter' },
     })
     text: nasl.core.String = '';
 
     @Prop({
       group: '主要属性',
-      title: '类型',
-      description: 'type属性，可选择标签的类型',
+      title: '标签类型',
+      description: '选择标签的类型和主题色',
+      docDescription: '控制标签的视觉样式和主题色。主要：蓝色主题；成功：绿色主题；信息：灰色主题；警告：橙色主题；危险：红色主题。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -47,16 +50,6 @@ namespace nasl.ui {
       },
     })
     type: 'primary' | 'success' | 'info' | 'warning' | 'danger' = 'primary';
-
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '背景色',
-    //   description: 'color属性，可以设置标签背景色',
-    //   setter: {
-    //     concept: 'InputSetter'
-    //   },
-    // })
-    // color: nasl.core.String = '';
 
     @Prop({
       group: '主要属性',
@@ -112,6 +105,14 @@ namespace nasl.ui {
       setter: { concept: 'SwitchSetter' },
     })
     hit: nasl.core.Boolean = false;
+
+    @Prop({
+      group: '交互属性',
+      title: '背景色',
+      description: 'color属性，背景色',
+      setter: { concept: 'InputSetter' },
+    })
+    color: nasl.core.String = '';
     
     @Prop({
       group: '交互属性',
@@ -125,13 +126,45 @@ namespace nasl.ui {
       title: '点击',
       description: '点击 Tag 时触发的事件',
     })
-    onClick: (event: MouseEvent) => void;
+    onClick: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
 
     @Event({
       title: '关闭',
       description: '关闭 Tag 时触发的事件',
     })
-    onClose: (event: MouseEvent) => void;
+    onClose: (event: {
+      altKey: nasl.core.Boolean;
+      button: nasl.core.Integer;
+      clientX: nasl.core.Integer;
+      clientY: nasl.core.Integer;
+      ctrlKey: nasl.core.Boolean;
+      metaKey: nasl.core.Boolean;
+      movementX: nasl.core.Integer;
+      movementY: nasl.core.Integer;
+      offsetX: nasl.core.Integer;
+      offsetY: nasl.core.Integer;
+      pageX: nasl.core.Integer;
+      pageY: nasl.core.Integer;
+      screenX: nasl.core.Integer;
+      screenY: nasl.core.Integer;
+      which: nasl.core.Integer;
+    }) => void;
   }
   
   @IDEExtraInfo({
@@ -198,7 +231,7 @@ namespace nasl.ui {
       title: '点击',
       description: '点击 Check Tag 时触发的事件',
     })
-    onChange: (event: MouseEvent) => void;
+    onChange: (event: { value: nasl.core.Boolean }) => void;
   }
   
   

@@ -590,6 +590,8 @@ export default mixins(
           value={inputTextValue}
           onInput={this.handleInput}
           title={this.disabled ? inputTextValue : undefined}
+          minLength={this.minlength}
+          maxLength={this.maxlength}
         />
         {this.autoWidth && (
           <span ref="inputPreRef" class={`${this.classPrefix}-input__input-pre`}>

@@ -1,0 +1,71 @@
+/**
+ * @component van-dropdown-menu
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 下拉菜单高度
+   */
+  --van-dropdown-menu-height: 48px;
+  /**
+   * @type color
+   * @desc 下拉菜单背景色
+   */
+  --van-dropdown-menu-background: var(--van-background-2);
+  /**
+   * @type input
+   * @desc 下拉菜单阴影
+   */
+  --van-dropdown-menu-shadow: 0 2px 12px rgba(100, 101, 102, .12);
+  /**
+   * @type input
+   * @desc 下拉菜单标题字体大小
+   */
+  --van-dropdown-menu-title-font-size: 15px;
+  /**
+   * @type color
+   * @desc 下拉菜单标题文字颜色
+   */
+  --van-dropdown-menu-title-text-color: var(--van-text-color);
+  /**
+   * @type color
+   * @desc 下拉菜单标题激活状态文字颜色
+   */
+  --van-dropdown-menu-title-active-text-color: var(--van-primary-color);
+  /**
+   * @type color
+   * @desc 下拉菜单标题禁用状态文字颜色
+   */
+  --van-dropdown-menu-title-disabled-text-color: var(--van-text-color-2);
+  /**
+   * @type input
+   * @desc 下拉菜单标题内边距
+   */
+  --van-dropdown-menu-title-padding: 0 var(--van-padding-xs);
+  /**
+   * @type input
+   * @desc 下拉菜单标题行高
+   */
+  --van-dropdown-menu-title-line-height: var(--van-line-height-lg);
+  /**
+   * @type color
+   * @desc 下拉菜单选项激活状态颜色
+   */
+  --van-dropdown-menu-option-active-color: var(--van-primary-color);
+  /**
+   * @type color
+   * @desc 下拉菜单选项禁用状态颜色
+   */
+  --van-dropdown-menu-option-disabled-color: var(--van-text-color-3);
+  /**
+   * @type input
+   * @desc 下拉菜单内容最大高度
+   */
+  --van-dropdown-menu-content-max-height: 80%;
+  /**
+   * @type input
+   * @desc 下拉菜单项目层级
+   */
+  --van-dropdown-item-z-index: 10;
+}

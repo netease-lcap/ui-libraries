@@ -1,4 +1,5 @@
-/* Input Tag component custom styles */ 
-.el-input-tag{
-  --el-input-tag-width:240px;
+/* Input Tag：与 theme 中 --el-input-tag-width 一致 */
+.el-input-tag {
+  --el-input-tag-width: 240px;
+  width: var(--el-input-tag-width);
 }

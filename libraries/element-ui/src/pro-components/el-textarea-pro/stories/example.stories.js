@@ -75,7 +75,7 @@ export const MaxMin = {
   render: () => ({
     template: `
       <div>
-        <el-textarea-pro :maxlength="12"  :allowInputOverMax="true"></el-textarea-pro>
+        <el-textarea-pro :maxlength="12" showWordLimit  :allowInputOverMax="true"></el-textarea-pro>
       </div>
     `,
   }),

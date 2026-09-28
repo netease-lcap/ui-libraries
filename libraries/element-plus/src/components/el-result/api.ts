@@ -20,26 +20,12 @@ namespace nasl.ui {
   }
 
   export class ElResultOptions extends ViewComponentOptions {
-    @Prop({
-      group: '主要属性',
-      title: '标题',
-      description: '标题',
-      setter: { concept: 'InputSetter' },
-    })
-    private title: nasl.core.String;
-
-    @Prop({
-      group: '主要属性',
-      title: '二级标题',
-      description: '二级标题',
-      setter: { concept: 'InputSetter' },
-    })
-    private subTitle: nasl.core.String;
-
+    // ========== 展示类型/内容/效果/方式相关属性 ==========
     @Prop({
       group: '主要属性',
       title: '图标类型',
-      description: '图标类型',
+      description: '选择结果的图标类型',
+      docDescription: '控制结果页面显示的图标类型。成功：绿色勾选图标；警告：橙色警告图标；信息：蓝色信息图标；错误：红色错误图标。',
       setter: {
         concept: 'EnumSelectSetter',
         options: [
@@ -51,6 +37,24 @@ namespace nasl.ui {
       },
     })
     icon: 'success' | 'warning' | 'info' | 'error' = 'info';
+
+    @Prop({
+      group: '主要属性',
+      title: '主标题',
+      description: '结果页面的主标题',
+      docDescription: '设置结果页面的主标题文本，用于说明操作结果。',
+      setter: { concept: 'InputSetter' },
+    })
+    private title: nasl.core.String;
+
+    @Prop({
+      group: '主要属性',
+      title: '副标题',
+      description: '结果页面的副标题',
+      docDescription: '设置结果页面的副标题文本，用于提供详细说明或补充信息。',
+      setter: { concept: 'InputSetter' },
+    })
+    private subTitle: nasl.core.String;
 
     // @Slot({
     //   title: '图标',

@@ -220,6 +220,67 @@ namespace nasl.ui {
         })
         hideButtons: nasl.core.Boolean = false;
 
+        @Prop<UNumberInputOptions, 'buttonDisplay'>({
+            group: '主要属性',
+            title: '按钮样式',
+            description: '按钮样式',
+            docDescription: '按钮样式',
+            setter: {
+                concept: 'EnumSelectSetter',
+                options: [{ title: '尾部' }, { title: '两端' }],
+            },
+            if: _ => !_.hideButtons,
+        })
+        buttonDisplay: 'tail' | 'bothEnds' = 'tail';
+
+        @Prop({
+            group: '主要属性',
+            title: '加号按钮图标',
+            description: '加号按钮图标',
+            docDescription: '加号按钮图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.buttonDisplay === 'bothEnds',
+        })
+        plusIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '减号按钮图标',
+            description: '减号按钮图标',
+            docDescription: '减号按钮图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.buttonDisplay === 'bothEnds',
+        })
+        minusIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '上箭头按钮图标',
+            description: '上箭头按钮图标',
+            docDescription: '上箭头按钮图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.buttonDisplay === 'tail',
+        })
+        upIcon: nasl.core.String;
+
+        @Prop({
+            group: '主要属性',
+            title: '下箭头按钮图标',
+            description: '下箭头按钮图标',
+            docDescription: '下箭头按钮图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: _ => _.buttonDisplay === 'tail',
+        })
+        downIcon: nasl.core.String;
+
         @Prop({
             group: '交互属性',
             title: '可清除',
@@ -230,6 +291,17 @@ namespace nasl.ui {
             },
         })
         clearable: nasl.core.Boolean;
+
+        @Prop<UNumberInputOptions, 'clearIcon'>({
+            group: '交互属性',
+            title: '清除图标',
+            description: '设置清除图标',
+            setter: {
+                concept: 'IconSetter',
+            },
+            if: (_) => _.clearable,
+        })
+        clearIcon: nasl.core.String;
 
         @Prop({
             group: '状态属性',

@@ -3,5 +3,9 @@
     "error": "加载失败，请重试",
     "empty": "暂无数据",
     "loadMore": "加载更多",
-    "noMore": "没有更多了"
+    "noMore": "没有更多了",
+    "footerCalc": "合计",
+    "footerCalcMax": "最大值",
+    "footerCalcMin": "最小值",
+    "footerCalcAverage": "平均值"
 }

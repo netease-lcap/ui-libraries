@@ -17,9 +17,14 @@ export { useFormFieldClass } from '../../../plugins/use-form-field-class';
 export { usePopupTheme } from '../../../plugins/use-popup-theme';
 
 function useTimePickerValue(props: MapGet) {
-  const valueRef = props.useRef<TimePickerValue | TimeRangeValue>(['value', 'startValue', 'endValue', 'range', 'format'], (v, startValue, endValue, range, format) => {
+  const valueRef = props.useRef(['value', 'startValue', 'endValue', 'range', 'format'], (v, startValue, endValue, range, format) => {
     if (!range) {
       return getFormatTimeValue(v, format);
+    }
+
+    if (v && !startValue && !endValue) {
+      const values = (Array.isArray(v) ? v : [v]);
+      return [getFormatTimeValue(values[0], format), getFormatTimeValue(values[1], format)];
     }
 
     return [getFormatTimeValue(startValue, format), getFormatTimeValue(endValue, format)];
@@ -103,7 +108,7 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
     ], (
       autoWidth = false,
       align = 'left',
-      prefixIcon,
+      prefixIcon = 'el-icon-time',
       suffixIcon,
     ) => {
       const inputStyleProps: any = {
@@ -112,11 +117,11 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
       };
 
       if (prefixIcon) {
-        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon } });
+        inputStyleProps.prefixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: prefixIcon }, class: 'el-p-icon' });
       }
 
       if (suffixIcon) {
-        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon } });
+        inputStyleProps.suffixIcon = (h: CreateElement) => h('el-icon', { attrs: { name: suffixIcon }, class: 'el-p-icon' });
       }
 
       return inputStyleProps;
@@ -194,9 +199,9 @@ export const useExtensPlugin: NaslComponentPluginOptions = {
         if (range) {
           onUpdateStartTime(changeEvent.startValue);
           onUpdateEndTime(changeEvent.endValue);
-        } else {
-          onUpdateValue(changeEvent.value);
         }
+
+        onUpdateValue(changeEvent.value);
 
         if (isFunction(onChange)) {
           onChange(changeEvent);

@@ -43,7 +43,7 @@
    * @desc 表头背景颜色
    * @type color
    */
-  --el-table-header-bg-color: var(--el-bg-color);
+  --el-table-header-bg-color: #f5f7fa;
 
   /**
    * @desc 固定框阴影

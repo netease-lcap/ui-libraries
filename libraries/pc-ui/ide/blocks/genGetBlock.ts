@@ -40,6 +40,9 @@ export function genGetBlock(entity: naslTypes.Entity, refElement: naslTypes.View
   const nameGroup: NameGroup = {};
   nameGroup.viewVariableEntity = likeComponent.getVariableUniqueName(firstLowerCase(entity.name));
   nameGroup.viewLogicLoad = likeComponent.getLogicUniqueName('load');
+  if (likeComponent.getDirectoryUniqueName) {
+    nameGroup.viewDirectoryEntity = likeComponent.getDirectoryUniqueName(entity.name?.toLowerCase());
+  }
   const idProperties = getAllEntityPromaryKeyProperty(entity);
   let viewParamIds: Array<{name:string, type: string}> = [];
   viewParamIds = idProperties.map((property) => {
@@ -51,7 +54,15 @@ export function genGetBlock(entity: naslTypes.Entity, refElement: naslTypes.View
   });
 
   return `export function view(${viewParamIds.map((param) => `${param.name}: ${param.type}`).join(', ')}) {
-    let ${nameGroup.viewVariableEntity}: ${entityFullName};
+    ${
+      nameGroup.viewDirectoryEntity
+      ? `
+      $Variable({
+        directory: ${nameGroup.viewDirectoryEntity},
+      })
+      let ${nameGroup.viewVariableEntity}: ${entityFullName};`
+      : `let ${nameGroup.viewVariableEntity}: ${entityFullName};`
+    }
 
     const $lifecycles = {
         onCreated: [

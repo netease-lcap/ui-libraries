@@ -30,7 +30,9 @@
                                         </template>
                                     </slot>
                                 </div>
-                                <a :class="$style.close" @click="cancel()"></a>
+                                <a :class="[$style.close, {[$style.useIcon]: closeIcon}]" @click="cancel()" >
+                                    <i-ico v-if="closeIcon" :name="closeIcon" :class="$style.icon" notext></i-ico>
+                                </a>
                             </slot>
                         </div>
                         <div :class="$style.body" vusion-slot-name="body" :child-cut-disabled="true" :style="{height: bodyHeight}">
@@ -108,6 +110,9 @@ export default {
         hideMask: {
             type: Boolean,
             default: false,
+        },
+        closeIcon: {
+            type: String,
         },
     },
     data() {
@@ -242,12 +247,20 @@ content: "\e668";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-    font-size: var(--drawer-close-size);
-    line-height: 0.8;
 }
 
 .close:hover {
     color: var(--drawer-close-color-hover);
+}
+
+.close.useIcon > .icon,
+.close::before {
+  font-size: var(--drawer-close-size);
+  line-height: 0.8;
+}
+
+.close.useIcon::before {
+    content: none;
 }
 
 .body {

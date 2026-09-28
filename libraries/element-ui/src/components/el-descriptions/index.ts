@@ -3,8 +3,9 @@ import DescriptionsItem from 'element-ui/lib/descriptions-item';
 import { registerComponent } from '@lcap/vue2-utils/plugins/index';
 import { normalizeArray } from '@lcap/vue2-utils/plugins/utils';
 import * as plugins from './plugins';
+import { get } from 'lodash';
 
-const { getSlots } = Descriptions.methods;
+const { getSlots, getOptionProps } = Descriptions.methods;
 Descriptions.methods.getSlots = function (vnode) {
   const slots = getSlots.call(this, vnode);
   const scopedSlots = vnode.data && vnode.data.scopedSlots ? vnode.data.scopedSlots : {};
@@ -27,6 +28,14 @@ Descriptions.methods.getSlots = function (vnode) {
   });
 
   return { ...slots };
+};
+
+Descriptions.methods.getOptionProps = function (vnode) {
+  const props = getOptionProps.call(this, vnode);
+  const itemStyle = get(vnode, 'data.attrs.itemStyle', {});
+  props.contentStyle = { ...itemStyle, ...props.contentStyle };
+  props.labelStyle = { ...itemStyle, ...props.labelStyle };
+  return props;
 };
 
 export const ElDescriptions = registerComponent(Descriptions, plugins, {

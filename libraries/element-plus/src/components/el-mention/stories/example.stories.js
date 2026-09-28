@@ -27,7 +27,7 @@ export const Default = {
       };
     },
     template: `
-      <div style="width: 300px;">
+      <div style="width: 300px;" >
         <el-mention
           :dataSource="suggestions"
         />

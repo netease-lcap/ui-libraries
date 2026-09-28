@@ -1,0 +1,300 @@
+:root,
+:host {
+
+  --van-black: #000;
+  --van-white: #fff;
+  /**
+   * @title 灰色-1
+   * @type color
+   */
+  --van-gray-1: #f7f8fa;
+  /**
+   * @title 灰色-2
+   * @type color
+   */
+  --van-gray-2: #f2f3f5;
+  /**
+   * @title 灰色-3
+   * @type color
+   */
+  --van-gray-3: #ebedf0;
+  /**
+   * @title 灰色-4
+   * @type color
+   */
+  --van-gray-4: #dcdee0;
+  /**
+   * @title 灰色-5
+   * @type color
+   */
+  --van-gray-5: #c8c9cc;
+  /**
+   * @title 灰色-6
+   * @type color
+   */
+  --van-gray-6: #969799;
+  /**
+   * @title 灰色-7
+   * @type color
+   */
+  --van-gray-7: #646566;
+  /**
+   * @title 灰色-8
+   * @type color
+   */
+  --van-gray-8: #323233;
+  /**
+   * @title 红色
+   * @type color
+   */
+  --van-red: #ee0a24;
+  /**
+   * @title 蓝色
+   * @type color
+   */
+  --van-blue: #1989fa;
+  /**
+   * @title 橙色
+   * @type color
+   */
+  --van-orange: #ff976a;
+  /**
+   * @title 橙色-深色
+   * @type color
+   */
+  --van-orange-dark: #ed6a0c;
+  /**
+   * @title 橙色-浅色
+   * @type color
+   */
+  --van-orange-light: #fffbe8;
+  /**
+   * @title 绿色
+   * @type color
+   */
+  --van-green: #07c160;
+
+
+  /**
+   * @title 渐变-红色
+   * @type input
+   */
+  --van-gradient-red: linear-gradient(to right, #ff6034, #ee0a24);
+  /**
+   * @title 渐变-橙色
+   * @type input
+   */
+  --van-gradient-orange: linear-gradient(to right, #ffd01e, #ff8917);
+
+
+  /**
+   * @title 主色
+   * @type color
+   */
+  --van-primary-color: var(--van-blue);
+  /**
+   * @title 成功色
+   * @type color
+   */
+  --van-success-color: var(--van-green);
+  /**
+   * @title 危险色
+   * @type color
+   */
+  --van-danger-color: var(--van-red);
+  /**
+   * @title 警告色
+   * @type color
+   */
+  --van-warning-color: var(--van-orange);
+
+  /**
+   * @title 文本色-基础
+   * @type color
+   */
+  --van-text-color: var(--van-gray-8);
+  /**
+   * @title 文本色-次级
+   * @type color
+   */
+  --van-text-color-2: var(--van-gray-6);
+  /**
+   * @title 文本色-辅助
+   * @type color
+   */
+  --van-text-color-3: var(--van-gray-5);
+  /**
+   * @title 激活色
+   * @type color
+   */
+  --van-active-color: var(--van-gray-2);
+  /**
+   * @title 激活色-透明度
+   * @type input
+   */
+  --van-active-opacity: 0.6;
+  /**
+   * @title 禁用色-透明度
+   * @type input
+   */
+  --van-disabled-opacity: 0.5;
+  /**
+   * @title 背景色-基础
+   * @type color
+   */
+  --van-background: var(--van-gray-1);
+  /**
+   * @title 背景色-2
+   * @type color
+   */
+  --van-background-2: var(--van-white);
+  /**
+   * @title 背景色-3
+   * @type color
+   */
+  --van-background-3: var(--van-white);
+
+  /**
+   * @title 内边距-基础
+   * @type size
+   */
+  --van-padding-base: 4px;
+  /**
+   * @title 内边距-xs
+   * @type size
+   */
+  --van-padding-xs: 8px;
+  /**
+   * @title 内边距-sm
+   * @type size
+   */
+  --van-padding-sm: 12px;
+  /**
+   * @title 内边距-md
+   * @type size
+   */
+  --van-padding-md: 16px;
+  /**
+   * @title 内边距-lg
+   * @type size
+   */
+  --van-padding-lg: 24px;
+  /**
+   * @title 内边距-xl
+   * @type size
+   */
+  --van-padding-xl: 32px;
+
+  /**
+   * @title 字体-粗体
+   * @type input
+   */
+  --van-font-bold: 600;
+  /**
+   * @title 字体-xs
+   * @type size
+   */
+  --van-font-size-xs: 10px;
+  /**
+   * @title 字体-sm
+   * @type size
+   */
+  --van-font-size-sm: 12px;
+  /**
+   * @title 字体-md
+   * @type size
+   */
+  --van-font-size-md: 14px;
+  /**
+   * @title 字体-lg
+   * @type size
+   */
+  --van-font-size-lg: 16px;
+  /**
+   * @title 行高-xs
+   * @type size
+   */
+  --van-line-height-xs: 14px;
+  /**
+   * @title 行高-sm
+   * @type size
+   */
+  --van-line-height-sm: 18px;
+  /**
+   * @title 行高-md
+   * @type size
+   */
+  --van-line-height-md: 20px;
+  /**
+   * @title 行高-lg
+   * @type size
+   */
+  --van-line-height-lg: 22px;
+
+  /**
+   * @title 基础字体
+   * @type input
+   */
+  --van-base-font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui',
+    'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+
+  /**
+   * @title 价格字体
+   * @type input
+   */
+  --van-price-font: avenir-heavy, 'PingFang SC', helvetica neue, arial,
+    sans-serif;
+
+  /**
+   * @title 动效时长-基础
+   * @type input
+   */
+  --van-duration-base: 0.3s;
+  /**
+   * @title 动效时长-快速
+   * @type input
+   */
+  --van-duration-fast: 0.2s;
+  /**
+   * @title 动效函数-缓出
+   * @type input
+   */
+  --van-ease-out: ease-out;
+  /**
+   * @title 动效函数-缓入
+   * @type input
+   */
+  --van-ease-in: ease-in;
+
+  /**
+   * @title 边框色
+   * @type color
+   */
+  --van-border-color: var(--van-gray-3);
+  /**
+   * @title 边框宽度
+   * @type size
+   */
+  --van-border-width: 1px;
+  /**
+   * @title 圆角-sm
+   * @type size
+   */
+  --van-radius-sm: 2px;
+  /**
+   * @title 圆角-md
+   * @type size
+   */
+  --van-radius-md: 4px;
+  /**
+   * @title 圆角-lg
+   * @type size
+   */
+  --van-radius-lg: 8px;
+  /**
+   * @title 圆角-最大
+   * @type size
+   */
+  --van-radius-max: 999px;
+}

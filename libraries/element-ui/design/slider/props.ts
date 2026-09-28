@@ -45,6 +45,8 @@ export default {
   },
   /** 双游标滑块 */
   range: Boolean,
+  /** 是否显示步长 */
+  showStep: Boolean,
   /** 步长 */
   step: {
     type: Number,

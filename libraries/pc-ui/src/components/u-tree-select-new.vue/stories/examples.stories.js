@@ -13,6 +13,7 @@ import ExamplesDemo9 from '../demos/examples/ExamplesDemo9.vue';
 import ExamplesDemo10 from '../demos/examples/ExamplesDemo10.vue';
 import ExamplesDemo11 from '../demos/examples/ExamplesDemo11.vue';
 import ExamplesDemo12 from '../demos/examples/ExamplesDemo12.vue';
+import ExamplesDemo13 from '../demos/examples/ExamplesDemo13.vue';
 
 Vue.use(CloudUI);
 
@@ -133,6 +134,15 @@ export const 筛选方式 = {
   render: () => ({
     components: {
       DeprecatedDemo: ExamplesDemo12,
+    },
+    template: '<deprecated-demo />',
+  }),
+};
+
+export const 函数数据源懒加载回显调试 = {
+  render: () => ({
+    components: {
+      DeprecatedDemo: ExamplesDemo13,
     },
     template: '<deprecated-demo />',
   }),

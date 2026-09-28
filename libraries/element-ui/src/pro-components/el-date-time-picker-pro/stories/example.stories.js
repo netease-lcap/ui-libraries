@@ -15,7 +15,7 @@ export const Default = {
   render: () => ({
     data() {
       return {
-        value: '2024-08-02',
+        value: '2025-04-31',
         height: '44px',
       };
     },
@@ -30,7 +30,7 @@ export const Default = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-time-picker-pro style="width: 260px" :style="{ height: height }" :class="`el-text`" class="el-temp" @confirm="confirm" max-date="2024-08-15 12:12:12" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
+    template: '<el-date-time-picker-pro style="width: 260px"  :style="{ height: height }" :class="`el-text`" class="el-temp" @confirm="confirm" min-date="2025-04-22 10:38:39" :value.sync="value" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
   }),
 };
 
@@ -39,8 +39,9 @@ export const Range = {
   render: () => ({
     data() {
       return {
-        startValue: '2024-08-02',
-        endValue: '2024-10-02',
+        startValue: null,
+        endValue: null,
+        values: '2025-04-22 10:38:39',
       };
     },
     methods: {
@@ -54,6 +55,58 @@ export const Range = {
         console.log('sync', name, value);
       },
     },
-    template: '<el-date-time-picker-pro max-date="2024-08-15 12:12:12" time-format="HH:mm"  @confirm="confirm" :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" @sync:state="handleSyncState" @change="handleChange(`change`, $event)" @focus="handleChange(`focus`, $event)" @pick="handleChange(`pick`, $event)"></el-date-time-picker-pro>',
+    template: `
+      <div>
+        <el-date-time-picker-pro min-date="2025-04-22 10:38:39" time-format="HH:mm"   @confirm="confirm" :enablePresets="true" align="center" :allowInput="true"  presetsPlacement="left" :range="true" :startValue.sync="startValue" :endValue.sync="endValue" :value.sync="values" @sync:state="handleSyncState" @change="handleChange('change', $event)" @focus="handleChange('focus', $event)" @pick="handleChange('pick', $event)"></el-date-time-picker-pro>
+        <p>startValue: {{ startValue }}</p>
+        <p>endValue: {{ endValue }}</p>
+        <p>values: {{ values }}</p>
+      </div>
+    `,
   }),
 };
+
+export const Focus = {
+  name: '自动聚焦示例',
+  render: () => ({
+    data() {
+      return {
+        value: '2025-04-31',
+        height: '44px',
+      };
+    },
+    methods: {
+      handleChange(name, e) {
+        console.log(name, e);
+      },
+      confirm(context) {
+        console.log(context);
+      },
+      handleSyncState(name, value) {
+        console.log('sync', name, value);
+      },
+      focusClick() {
+        console.log('focus', this.$refs.picker);
+        // return;
+        this.$refs.picker.focus();
+      }
+    },
+    template: `
+      <div>
+        <el-date-time-picker-pro 
+        style="width: 260px"
+        ref="picker"
+        :class="el-text" 
+        class="el-temp" 
+        @confirm="confirm" 
+        min-date="2025-04-22 10:38:39" 
+        :value.sync="value" 
+        @sync:state="handleSyncState" 
+        @change="handleChange('change', $event)" @focus="handleChange('focus', $event)" @pick="handleChange('pick', $event)"
+      ></el-date-time-picker-pro>
+        <button @click="focusClick">点击聚焦</button>
+        </div>
+    `,
+  }),
+};
+

@@ -141,14 +141,14 @@ namespace nasl.ui {
     })
     openDelay: nasl.core.Decimal = 0;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '手动控制',
-    //   description:
-    //     '手动控制模式，设置为 true 后，mouseenter 和 mouseleave 事件将不会生效',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // manual: nasl.core.Boolean = false;
+    @Prop({
+      group: '主要属性',
+      title: '手动控制',
+      description:
+        '手动控制模式，设置为 true 后，mouseenter 和 mouseleave 事件将不会生效',
+      setter: { concept: 'SwitchSetter' },
+    })
+    manual: nasl.core.Boolean = false;
 
     // @Prop({
     //   group: '样式属性',
@@ -158,13 +158,13 @@ namespace nasl.ui {
     // })
     // popperClass: nasl.core.String;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '鼠标进入',
-    //   description: '鼠标是否可进入到 tooltip 中',
-    //   setter: { concept: 'SwitchSetter' },
-    // })
-    // enterable: nasl.core.Boolean = true;
+    @Prop({
+      group: '主要属性',
+      title: '鼠标进入',
+      description: '鼠标是否可进入到 tooltip 中',
+      setter: { concept: 'SwitchSetter' },
+    })
+    enterable: nasl.core.Boolean = true;
 
     @Prop({
       group: '主要属性',
@@ -174,14 +174,14 @@ namespace nasl.ui {
     })
     hideAfter: nasl.core.Decimal = 0;
 
-    // @Prop({
-    //   group: '主要属性',
-    //   title: '聚焦导航',
-    //   description:
-    //     'Tooltip 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)',
-    //   setter: { concept: 'NumberInputSetter' },
-    // })
-    // tabindex: nasl.core.Decimal = 0;
+    @Prop({
+      group: '主要属性',
+      title: '聚焦导航',
+      description:
+        'Tooltip 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)',
+      setter: { concept: 'NumberInputSetter' },
+    })
+    tabindex: nasl.core.Decimal = 0;
 
     @Slot({
       title: 'Default',

@@ -1,0 +1,30 @@
+/**
+ * @component el-badge
+ */
+.el-badge {
+  /**
+   * @desc 徽章背景颜色
+   * @type color
+   */
+  --el-badge-bg-color: var(--el-color-danger);
+  /**
+   * @desc 徽章圆角
+   * @type input
+   */
+  --el-badge-radius: 10px;
+  /**
+   * @desc 徽章字体大小
+   * @type input
+   */
+  --el-badge-font-size: 12px;
+  /**
+   * @desc 徽章内边距
+   * @type input
+   */
+  --el-badge-padding: 6px;
+  /**
+   * @desc 徽章大小
+   * @type input
+   */
+  --el-badge-size: 18px;
+}

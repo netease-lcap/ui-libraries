@@ -64,7 +64,7 @@ const Template = (args) => ({
   },
   template: `
     <div style="width: 500px; margin: 20px;">
-      <el-slider v-bind="args" />
+      <el-form-slider v-bind="args" />
     </div>
   `,
 });

@@ -23,6 +23,16 @@ export default {
 export const Default = {
   name: '基础示例',
   render: () => ({
-    template: '<el-select-pro></el-select-pro>',
+    methods: {
+      log(value) {
+        console.log(value, 'log');
+      },
+    },
+    template: `<el-select-pro @change="log">
+            <el-option-pro value="1" label="1"></el-option-pro>
+            <el-option-pro value="2" label="2"></el-option-pro>
+            <el-option-pro value="3" label="3"></el-option-pro>
+
+          </el-select-pro>`,
   }),
 };

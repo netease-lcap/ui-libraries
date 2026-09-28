@@ -28,7 +28,18 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["src/theme/**/*.ts", "src/theme/**/*.tsx"],
+  "exclude": [
+    "src/theme/**/*.ts",
+    "src/theme/**/*.tsx",
+    "node_modules",
+    "dist",
+    "dist-theme",
+    "coverage",
+    "**/node_modules",
+    "**/dist",
+    "**/dist-theme",
+    "**/storybook-static"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -3,7 +3,7 @@
         v-if="!isPreview"
         :class="$style.root"
         :readonly="readonly"
-        :disabled="disabled"
+        :disabled="computedDisabled"
         :style="{ width, height }"
         :color="currentColor || (formItemVM && formItemVM.color)"
         :focus="focused"
@@ -19,7 +19,7 @@
             :value="currentValue"
             v-focus="autofocus"
             :readonly="readonly"
-            :disabled="disabled"
+            :disabled="computedDisabled"
             @input="onInput"
             @focus="onFocus"
             @blur="onBlur"
@@ -30,7 +30,7 @@
             :maxlength="maxlength"
         ></textarea>
         <slot></slot>
-        <span v-if="clearable && !valueEmpty" :class="$style.clearable" @click.stop="clear"></span>
+        <span v-if="showClear" :class="$style.clearable" @click.stop="clear"></span>
         <f-dragger @dragstart="onDragStart" @drag="onDrag">
             <div ref="handle" :class="$style.handle" v-show="resize !== 'none'" :resize="resize"></div>
         </f-dragger>

@@ -10,6 +10,7 @@
     --brand-primary-lighter: #bbd4ff;
     --brand-primary-light: #5c98ff;
     --brand-primary: #337eff;
+    --brand-logo-color: var(--brand-primary);
     --brand-primary-dark: #1168ff;
     --brand-primary-darker: #004bcc;
     --brand-primary-darkest: #003eaa;
@@ -281,6 +282,7 @@
     --collapse-item-expander-color-disabled: var(--brand-disabled-dark); /* @type color */ /* @desc 面板项展开箭头颜色（禁用状态）,如：#223325 */
     --collapse-item-expander-font-size: 18px; /* @desc 面板项展开箭头大小,如：1px */
     --collapse-item-content-padding: 20px; /* @desc 面板项内容区内边距,如：1px */
+    --collapse-item-expander-expand-transform: rotate(90deg); /* @desc 面板项展开箭头旋转角度,如：rotate(90deg) */
     --collapse-transition-duration: var(--transition-duration-base); /* @desc 面板展开动画快慢参数,如：0.2s */
 
     --collapse-item-head-padding-small: 6px 8px 6px 32px; /* @hidden */
@@ -323,6 +325,7 @@
     --navbar-group-color-hover: white;/* @type color */ /* @desc 导航栏分组悬浮字体颜色 */
 
     --navbar-divider-line-background: transparent;/* @type color */ /* @desc 导航栏菜单项分隔线颜色 */
+    --navbar-item-expand-icon-size: 14px;/* @desc 导航栏菜单项展开图标大小 */
 
     --navbar-item-color-inverse: white;/* @hidden */
     --navbar-item-line-transition-duration: 0.5s;/* @hidden */
@@ -361,6 +364,7 @@
 
     /* @component u-sidebar */
     --sidebar-background: #ffffff; /* @desc 侧边栏背景色,如：#223325 */ /* @type color */ /* @excludeTags u-sidebar-item,u-sidebar-group,u-sidebar-divider */ /* @depStaticStyles { "u-sidebar": ["background-color"] } */
+    --sidebar-border-right-color: #E9E9EB; /* @desc 侧边栏右边框颜色,如：#223325 */ /* @type color */ /* @excludeTags u-sidebar-item,u-sidebar-group,u-sidebar-divider */
     --sidebar-item-height: 54px; /* @group 项 */ /* @desc 侧边栏项高度,如：1px */ /* @prefix sidebar-item */ /* @excludeTags u-sidebar-divider */ /* @depStaticStyles { "u-sidebar-item": ["height"] } */
     --sidebar-item-padding-left: 30px; /* @group 项 */ /* @desc 侧边栏项左边距,如：1px */ /* @prefix sidebar-item */ /* @excludeTags u-sidebar-divider */ /* @depStaticStyles { "u-sidebar-item": ["padding-left"] } */
     --sidebar-item-background: #ffffff; /* @group 项 */ /* @desc 侧边栏项背景色,如：#223325 */ /* @prefix sidebar-item */ /* @type color */ /* @excludeTags u-sidebar-divider */ /* @depStaticStyles { "u-sidebar-item": ["background-color"] } */
@@ -393,6 +397,7 @@
     --sidebar-divider-margin-y: 8px; /* @group 分隔符 */ /* @desc 侧边栏分隔符左外边距,如：1px */ /* @prefix sidebar-divider */ /* @excludeTags u-sidebar-item,u-sidebar-group */ /* @depStaticStyles { "u-sidebar-divider": ["margin-top", "margin-bottom"] } */
     --sidebar-divider-height: var(--border-width-base); /* @group 分隔符 */ /* @desc 侧边栏分隔符高度,如：1px */ /* @prefix sidebar-divider */ /* @excludeTags u-sidebar-item,u-sidebar-group */ /* @depStaticStyles { "u-sidebar-divider": ["height"] } */
     --sidebar-divider-background: #3d4654; /* @group 分隔符 */ /* @desc 侧边栏分隔符背景色,如：#223325 */ /* @type color */ /* @prefix sidebar-divider */ /* @excludeTags u-sidebar-item,u-sidebar-group */ /* @depStaticStyles { "u-sidebar-divider": ["background-color"] } */
+    --sidebar-group-expand-icon-size: 14px; /* @group 分组 */ /* @desc 侧边栏分组头部展开图标大小,如：14px */ /* @prefix sidebar-group */
 
     --sidebar-width: 240px; /* @hidden */
     --sidebar-background-inverse: #2b333f; /* @hidden */
@@ -847,6 +852,8 @@
     --dropdown-color-text-active: var(--dropdown-color-text); /* @type color */ /* @desc 下拉菜单字体颜色（激活状态）,如 #223325 */
     --dropdown-color-text-disabled: var(--font-disabled-color); /* @type color */ /* @desc 下拉菜单字体颜色（禁用状态）,如 #223325 */
     --dropdown-popper-width: 100%; /* @desc 下拉弹层宽度,如 1px */
+    --dropdown-expand-icon-size: 14px; /* @desc 下拉菜单展开图标大小,如 16px */
+
     /*
      * ========================
      *   数据
@@ -876,6 +883,10 @@
     --table-view-drag-cursor-disabled: not-allowed; /* @desc 拖拽鼠标样式（禁用状态） */ /* @excludeElTags td,th */
     --table-view-drag-color-disabled: #ccc; /* @desc 拖拽图标颜色（禁用状态） */ /* @excludeElTags td,th */
     --table-view-column-sticky-zindex: 99; /* @desc 表格固定列zIndex,如 1 */ /* @excludeElTags td,th */
+    --table-view-footer-calc-background: #f7f8fa; /* @type color */ /* @group 内容区 */ /* @prefix table-view */ /* @desc 表格合计行背景色,如 #22325 */ /* @excludeElTags th */
+    --table-view-resizer-border-color: var(--table-view-border-color); /* @type color */ /* @group 表头 */ /* @prefix table-view */ /* @desc 表格内容区边框颜色,如 #223325 */ /* @excludeElTags td */
+    --table-view-td-color-disabled: var(--text-color-disabled); /* @type color */ /* @group 内容区 */ /* @prefix table-view */ /* @desc 表格列内容区字体颜色（禁用状态）,如 #223325 */ /* @excludeElTags th */
+    --table-view-td-background-color-disabled: #f5f5f5; /* @type color */ /* @group 内容区 */ /* @prefix table-view */ /* @desc 表格列内容区背景色（禁用状态）,如 #223325 */ /* @excludeElTags th */
 
     --table-view-head-background: #f7f8fa; /* @hidden */
     --table-view-head-title-sortable-hover: #eef2f8; /* @hidden */
@@ -1447,6 +1458,7 @@
     --uploader-draggable-border-color-hover: var(--brand-primary); /* @type color */ /* @desc 拖拽上传文件窗口边框颜色（hover状态）,如 #223325 */ /* @depAttrs { "draggable": [true] } */
     --uploader-draggable-border-radius: var(--border-radius-large); /* @desc 拖拽上传文件窗口圆角大小,如 1px */ /* @depAttrs { "draggable": [true] } */
     --uploader-draggable-padding: 12px 0 20px; /* @desc 拖拽上传文件窗口内边距大小,如 1px */ /* @depAttrs { "draggable": [true] } */
+    --uploader-draggable-icon-size: 24px; /* @desc 拖拽上传文件窗口图标大小,如 1px */ /* @depAttrs { "draggable": [true] } */
 
     --uploader-list-image-margin-top: 6px; /* @hidden */
     --uploader-draggable-color: #666; /* @hidden */
@@ -1499,6 +1511,7 @@
     --tabs-item-close-margin-left: var(--space-small); /* @desc tab项关闭按钮左侧间距,如 1px */ /* @prefix tabs */
     --tabs-item-close-color: var(--color-light); /* @type color */ /* @desc tab项关闭按钮颜色,如 #223325 */ /* @prefix tabs */
     --tabs-item-close-hover-color: var(--color-base); /* @type color */ /* @desc tab项关闭按钮悬停颜色,如 #223325 */ /* @prefix tabs */
+    --tabs-control-icon-size: 16px; /* @desc tab项控制按钮图标大小,如 1px */ /* @prefix tabs */
 
     --tabs-item-background-disabled: transparent; /* @hidden */
     --tabs-item-height-small: 30px; /* @hidden */
@@ -1780,6 +1793,7 @@
     --modal-dialog-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3); /* @desc 弹窗阴影效果,如 1px */
     --modal-title-font-size: var(--font-size-large); /* @desc 弹窗标题的字号,如 1px */
     --modal-close-right: 24px; /* @desc  弹窗关闭按钮的右边距,如 1px */
+    --modal-close-icon-size: 12px; /* @desc 弹窗关闭按钮的图标大小,如 1px */
     --modal-close-color: var(--gray-dark);  /* @type color */ /* @desc 弹窗关闭按钮的颜色,如 #223325 */
     --modal-close-color-hover: var(--gray-darker);  /* @type color */ /* @desc 弹窗关闭按钮的颜色（hover状态）,如 #223325 */
     --modal-body-margin: 25px 24px; /* @desc 弹窗内容区的外间距,如 1px */

@@ -1,5 +1,11 @@
 <template>
-    <div :class="[$style.root, isPreview ? $style.preview : '', isPreview && !$env.VUE_APP_DESIGNER ? $style.disEvent: '']"
+    <div
+        :class="[
+          $style.root,
+          isPreview ? $style.preview : '',
+          isPreview && !$env.VUE_APP_DESIGNER ? $style.disEvent: '',
+          { [$style.useIcon]: !!suffixIcon }
+        ]"
         :color="color || formItemVM && formItemVM.color"
         :readonly="readonly"
         :disabled="currentDisabled"
@@ -63,8 +69,9 @@
           </u-input>
         </div>
         <span v-if="clearable && (!!checkableValue || !!selectedItem)"
-            :class="$style.clearable"
+            :class="[$style.clearable, { [$style.useIcon]: !!clearIcon }]"
             @click.stop="clear">
+            <i-ico :name="clearIcon" :class="$style.icon" v-if="clearIcon"></i-ico>
         </span>
         <m-popper ref="popper"
             :class="$style.popper"
@@ -104,7 +111,7 @@
                 :expand-trigger="!checkable ? 'click-expander': expandTrigger"
                 :initial-load="initialLoad"
                 :readonly="readonly"
-                :disabled="disabled"
+                :disabled="computedDisabled"
                 :expander-width="expanderWidth"
                 :filterable="filterable"
                 :filter-text="filterText"
@@ -113,6 +120,8 @@
                 :caseSensitive="caseSensitive"
                 :showEmpty="showEmpty"
                 :hiddenMask="hiddenMask"
+                :loading-icon="loadingIcon"
+                :expand-icon="expandIcon"
                 @change="$emit('change', $event, this)"
                 @before-select="$emit('before-select', $event, this)"
                 @select="$emit('select', $event, this)"
@@ -130,6 +139,7 @@
                 <slot></slot>
             </u-tree-view-new>
         </m-popper>
+        <i-ico :name="suffixIcon" notext :class="$style.icon" v-if="suffixIcon && !isPreview"></i-ico>
     </div>
 </template>
 
@@ -143,6 +153,9 @@ import MPreview from '../u-text.vue/preview';
 
 export default {
     name: 'u-tree-select-new',
+    inject: {
+        formVM: { default: null },
+    },
     childName: 'u-tree-view-node-new',
     components: { SEmpty },
     mixins: [
@@ -153,7 +166,7 @@ export default {
         readonly: 'readonly',
         preview: 'isPreview',
         opened: 'popperOpened',
-        disabled: 'disabled',
+        disabled: 'computedDisabled',
       }),
     ],
     props: {
@@ -210,6 +223,10 @@ export default {
         renderOptimize: { type: Boolean, default: false },
         showEmpty: { type: Boolean, default: true },
         hiddenMask: { type: Boolean, default: false },
+        loadingIcon: { type: String, default: 'loading' },
+        expandIcon: { type: String },
+        suffixIcon: { type: String },
+        clearIcon: { type: String },
     },
     data() {
         return {
@@ -231,8 +248,11 @@ export default {
         };
     },
     computed: {
+        computedDisabled() {
+            return this.disabled || (this.formVM && this.formVM.disabled);
+        },
         currentDisabled() {
-            if (this.disabled)
+            if (this.computedDisabled)
                 return true;
             else if (this.emptyDisabled)
                 return this.currentData ? !this.currentData.length : !this.itemVMs.length;
@@ -322,6 +342,14 @@ export default {
             }
             this.loadUntilSelectedItem();
             return this.dataSourceObj;
+        },
+        mergeDataSourceObj(list, type) {
+            if (Array.isArray(list) && list.length) {
+                this.trans2Obj(this.dataSourceNodeList, list, undefined, type);
+                this.dataSourceObj = { ...this.dataSourceNodeList, ...this.virtualNodeList };
+            }
+            this.loadUntilSelectedItem();
+            return this.dataSourceNodeList;
         },
         // 从虚拟节点中收集数据
         collectFromVNodes() {
@@ -443,6 +471,7 @@ export default {
             this.actualValue = $event;
             this.$emit('update:value', $event, this);
             this.$emit('input', $event, this);
+            this.syncDataSourceFromTreeView();
             this.$nextTick(() => {
                 if ($event !== null && $event !== undefined && !this.checkable) {
                     this.close();
@@ -466,8 +495,10 @@ export default {
                 if (Array.isArray(data) && data.length) {
                     const item = this.loadChildren(data);
                     if (item) {
+                        const childrenField = item.childrenField || this.childrenField;
                         this.load({
                             node: item,
+                            childrenField,
                         });
                     }
                 } else {
@@ -479,12 +510,13 @@ export default {
             let item;
             if (Array.isArray(list) && list.length) {
                 for (let i = 0; i < list.length; i++) {
-                    const { childrenField, isLoaded } = list[i];
-                    const children = this.$at(list[i], childrenField);
+                    const node = list[i];
+                    const childrenField = node.childrenField || this.childrenField;
+                    const children = this.$at(node, childrenField);
                     if (Array.isArray(children) && children.length) {
                         item = this.loadChildren(children);
-                    } else if (childrenField && !isLoaded) {
-                        item = list[i];
+                    } else if (!node.isLoaded && !this.$at(node, this.isLeafField)) {
+                        item = node;
                     }
                     if (item) {
                         break;
@@ -501,9 +533,9 @@ export default {
             const createLoad = (rawLoad) => async (params = {}) => {
                 const result = await rawLoad(params);
                 if (result) {
-                    const { node } = params || {};
+                    const { node, childrenField: paramsChildrenField } = params || {};
                     if (node) {
-                        const { childrenField } = node;
+                        const childrenField = paramsChildrenField || node.childrenField || this.childrenField;
                         this.$setAt(node, childrenField, result);
                         node.isLoaded = true;
                     } else {
@@ -547,6 +579,9 @@ export default {
             this.popperOpened = true; // 刚打开时，除非是没有加载，否则保留上次的 filter 过的数据
             this.$emit('open', $event, this);
             this.$emit('update:opened', true);
+            this.$nextTick(() => {
+                this.seedTreeViewDataFromSelect();
+            });
             if (this.filterable) {
                 this.filtering = true;
                 setTimeout(() => {
@@ -615,7 +650,26 @@ export default {
             this.$emit('before-load');
         },
         onLoad() {
+            this.syncDataSourceFromTreeView();
             this.$emit('load', undefined, this);
+        },
+        syncDataSourceFromTreeView() {
+            const treeView = this.$refs.treeView;
+            if (!treeView || !treeView.currentDataSource || !Array.isArray(treeView.currentDataSource.data)) {
+                return;
+            }
+            this.currentDataSource.data = treeView.currentDataSource.data;
+            this.mergeDataSourceObj(this.currentDataSource.data, 'dataSource');
+        },
+        seedTreeViewDataFromSelect() {
+            const treeView = this.$refs.treeView;
+            const selectData = this.currentDataSource && this.currentDataSource.data;
+            if (!treeView || !treeView.currentDataSource || !Array.isArray(selectData) || !selectData.length) {
+                return;
+            }
+            if (!Array.isArray(treeView.currentDataSource.data) || !treeView.currentDataSource.data.length) {
+                treeView.currentDataSource.data = selectData;
+            }
         },
         clear() {
             const oldValue = this.actualValue;
@@ -722,6 +776,25 @@ export default {
 }
 
 .clearable::before {
+    content: "\e66e";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.clearable.useIcon::before {
+  content: none;
+}
+
+.clearable.useIcon > .icon,
+.clearable::before {
   display: block;
   opacity: 0;
   position: absolute;
@@ -732,21 +805,11 @@ export default {
   line-height: 1;
   height: 1em;
   margin: auto;
-content: "\e66e";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
   cursor: var(--cursor-pointer);
   color: #a7afbb;
 }
 
+.root[clearable]:hover .clearable.useIcon > .icon,
 .root[clearable]:hover .clearable::before {
   opacity: 1;
 }
@@ -755,19 +818,9 @@ content: "\e66e";
   cursor: text;
 }
 
+.root.useIcon > .icon,
 .root::after {
   position: absolute;
-content: "\e65d";
-    font-family: "lcap-ui-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-decoration: inherit;
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
   font-size: var(--tree-select-new-arrow-size);
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x));
   top: 0;
@@ -778,10 +831,37 @@ content: "\e65d";
   color: var(--tree-select-new-arrow-color);
   transition: transform var(--tree-select-new-transition-duration-base);
 }
+
+.root::after {
+    content: "\e65d";
+    font-family: "lcap-ui-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.root.useIcon::after {
+  content: none;
+}
+
+.root.useIcon > .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.root[opened].useIcon > .icon,
 .root[opened]::after {
   transform: rotate(-180deg);
 }
 
+.root[clearable].useIcon > .icon,
 .root[clearable]::after {
   display: none;
 }
@@ -882,6 +962,8 @@ content: "\e663";
 .root[size$="mini"] .item {
   padding: 0 var(--tree-select-new-padding-x-mini);
 }
+
+.root[size$="mini"].useIcon > .icon,
 .root[size$="mini"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-mini));
 }
@@ -908,6 +990,8 @@ content: "\e663";
 .root[size$="small"] .item {
   padding: 0 var(--tree-select-new-padding-x-small);
 }
+
+.root[size$="small"].useIcon > .icon,
 .root[size$="small"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-small));
 }
@@ -938,9 +1022,12 @@ content: "\e663";
 .root[size$="normal"] .item {
   padding: 0 var(--tree-select-new-padding-x);
 }
+
+.root[size$="normal"].useIcon > .icon,
 .root[size$="normal"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x));
 }
+
 .root[size^="normal"] {
   height: var(--tree-select-new-height);
   line-height: calc(var(--tree-select-new-height) - var(--tree-select-new-border-width) * 2);
@@ -964,9 +1051,12 @@ content: "\e663";
 .root[size$="medium"] .item {
   padding: 0 var(--tree-select-new-padding-x-medium);
 }
+
+.root[size$="medium"].useIcon > .icon,
 .root[size$="medium"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-medium));
 }
+
 .root[size^="medium"] {
   height: var(--tree-select-new-height-medium);
   line-height: calc(
@@ -994,9 +1084,12 @@ content: "\e663";
 .root[size$="large"] .item {
   padding: 0 var(--tree-select-new-padding-x-large);
 }
+
+.root[size$="large"].useIcon > .icon,
 .root[size$="large"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-large));
 }
+
 .root[size^="large"] {
   height: var(--tree-select-new-height-large);
   line-height: calc(
@@ -1024,9 +1117,12 @@ content: "\e663";
 .root[size$="huge"] .item {
   padding: 0 var(--tree-select-new-padding-x-huge);
 }
+
+.root[size$="huge"].useIcon > .icon,
 .root[size$="huge"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-huge));
 }
+
 .root[size^="huge"] {
   height: var(--tree-select-new-height-huge);
   line-height: calc(var(--tree-select-new-height-huge) - var(--tree-select-new-border-width) * 2);
@@ -1117,6 +1213,8 @@ content: "\e663";
 .root[width="mini"] .item {
   padding: 0 var(--tree-select-new-padding-x-mini);
 }
+
+.root[width="mini"].useIcon > .icon,
 .root[width="mini"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-mini));
 }
@@ -1143,6 +1241,8 @@ content: "\e663";
 .root[width="small"] .item {
   padding: 0 var(--tree-select-new-padding-x-small);
 }
+
+.root[width="small"].useIcon > .icon,
 .root[width="small"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-small));
 }
@@ -1173,6 +1273,8 @@ content: "\e663";
 .root[width="normal"] .item {
   padding: 0 var(--tree-select-new-padding-x);
 }
+
+.root[width="normal"].useIcon > .icon,
 .root[width="normal"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x));
 }
@@ -1199,9 +1301,12 @@ content: "\e663";
 .root[width="medium"] .item {
   padding: 0 var(--tree-select-new-padding-x-medium);
 }
+
+.root[width="medium"].useIcon > .icon,
 .root[width="medium"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-medium));
 }
+
 .root[height="medium"] {
   height: var(--tree-select-new-height-medium);
   line-height: calc(
@@ -1229,9 +1334,12 @@ content: "\e663";
 .root[width="large"] .item {
   padding: 0 var(--tree-select-new-padding-x-large);
 }
+
+.root[width="large"].useIcon > .icon,
 .root[width="large"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-large));
 }
+
 .root[height="large"] {
   height: var(--tree-select-new-height-large);
   line-height: calc(
@@ -1259,9 +1367,12 @@ content: "\e663";
 .root[width="huge"] .item {
   padding: 0 var(--tree-select-new-padding-x-huge);
 }
+
+.root[width="huge"].useIcon > .icon,
 .root[width="huge"]::after {
   right: calc(var(--tree-select-new-arrow-right-ratio) * var(--tree-select-new-padding-x-huge));
 }
+
 .root[height="huge"] {
   height: var(--tree-select-new-height-huge);
   line-height: calc(var(--tree-select-new-height-huge) - var(--tree-select-new-border-width) * 2);

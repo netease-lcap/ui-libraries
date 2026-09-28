@@ -1,0 +1,14 @@
+.el-icon-wrapper {
+  display: inline-block;
+  text-align: center;
+  &.el-icon-wrapper-left {
+    display: inline-flex;
+    align-items: center;
+  }
+  .el-text {
+    font-style: initial;
+    font-size: 14px;
+  }
+}
+
+

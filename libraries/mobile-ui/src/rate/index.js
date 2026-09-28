@@ -51,11 +51,11 @@ export default createComponent({
     },
     icon: {
       type: String,
-      default: 'star',
+      default: 'star1',
     },
     voidIcon: {
       type: String,
-      default: 'star-o',
+      default: 'star1',
     },
     count: {
       type: [Number, String],

@@ -1,0 +1,51 @@
+/**
+ * @component van-checkbox-group
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 复选框尺寸
+   */
+  --van-checkbox-size: 20px;
+  /**
+   * @type color
+   * @desc 复选框边框颜色
+   */
+  --van-checkbox-border-color: var(--van-gray-5);
+  /**
+   * @type input
+   * @desc 复选框过渡动画时长
+   */
+  --van-checkbox-duration: var(--van-duration-fast);
+  /**
+   * @type input
+   * @desc 复选框标签边距
+   */
+  --van-checkbox-label-margin: var(--van-padding-xs);
+  /**
+   * @type color
+   * @desc 复选框标签颜色
+   */
+  --van-checkbox-label-color: var(--van-text-color);
+  /**
+   * @type color
+   * @desc 复选框选中图标颜色
+   */
+  --van-checkbox-checked-icon-color: var(--van-primary-color);
+  /**
+   * @type color
+   * @desc 复选框禁用图标颜色
+   */
+  --van-checkbox-disabled-icon-color: var(--van-gray-5);
+  /**
+   * @type color
+   * @desc 复选框禁用标签颜色
+   */
+  --van-checkbox-disabled-label-color: var(--van-text-color-3);
+  /**
+   * @type color
+   * @desc 复选框禁用背景色
+   */
+  --van-checkbox-disabled-background: var(--van-border-color);
+}

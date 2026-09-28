@@ -57,6 +57,10 @@ export default {
   maxlength: {
     type: [String, Number] as PropType<ElInputProps['maxlength']>,
   },
+  /** 最小输入长度 */
+  minlength: {
+    type: [String, Number] as PropType<ElInputProps['minlength']>,
+  },
   /** 名称 */
   name: {
     type: String,

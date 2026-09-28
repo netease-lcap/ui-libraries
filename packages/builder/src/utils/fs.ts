@@ -26,3 +26,17 @@ export function copy(sourceFolder, destinationFolder, replaceList: Array<{ reg: 
     }
   });
 }
+
+const suffixes = ['.ts', '.tsx', '.js', '.jsx'];
+
+export function getPath(filePath: string) {
+  const ext = suffixes.find((s) => {
+    return fs.existsSync(filePath + s);
+  });
+
+  if (!ext) {
+    return null;
+  }
+
+  return filePath + ext;
+}

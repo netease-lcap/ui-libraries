@@ -1,0 +1,26 @@
+/**
+ * @component van-signature
+ */
+:root,
+:host {
+  /**
+   * @type input
+   * @desc 签名组件内边距
+   */
+  --van-signature-padding: var(--van-padding-xs);
+  /**
+   * @type input
+   * @desc 签名组件内容高度
+   */
+  --van-signature-content-height: 200px;
+  /**
+   * @type color
+   * @desc 签名组件内容背景色
+   */
+  --van-signature-content-background: var(--van-background-2);
+  /**
+   * @type input
+   * @desc 签名组件内容边框
+   */
+  --van-signature-content-border: 1px dotted #dadada;
+}

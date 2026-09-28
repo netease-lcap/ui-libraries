@@ -49,7 +49,7 @@ export default mixins(classPrefixMixins).extend({
       inputFormat: null,
       inputPlaceholder: '',
       inputTheme: 'column',
-      showSteps: false,
+      // showStep: false,
       // 表单控制禁用态时的变量
       formDisabled: undefined,
     };
@@ -97,7 +97,7 @@ export default mixins(classPrefixMixins).extend({
       const {
         min, max, rangeDiff, step,
       } = this;
-      if (!this.showSteps || min > max) return [];
+      if (!this.showStep || min > max) return [];
       if (this.step === 0) {
         console.warn('[Element Warn][Slider]step should not be 0.');
         return [];
@@ -467,7 +467,7 @@ export default mixins(classPrefixMixins).extend({
               ></ElSliderButton>
             )}
 
-            {this.showSteps && (
+            {this.showStep && (
               <div class={`${this.componentName}__stops`}>
                 {this.steps.map((item: any, key) => {
                   if (item.position === 0 || item.position === 100) return null;

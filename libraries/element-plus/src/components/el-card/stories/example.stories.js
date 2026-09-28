@@ -26,6 +26,13 @@ export const Example1 = {
           <el-input  />
         </template>
         <p v-for="o in 4" :key="o" class="text item">{{ '列表项目 ' + o }}</p>
+           <el-card style="max-width: 480px" data-nodepath="123">
+        <template #header>
+          <el-input  />
+        </template>
+        <p v-for="o in 4" :key="o" class="text item">{{ '列表项目 ' + o }}</p>
+        <template #footer>页脚内容</template>
+      </el-card>
         <template #footer>页脚内容</template>
       </el-card>
     </div>

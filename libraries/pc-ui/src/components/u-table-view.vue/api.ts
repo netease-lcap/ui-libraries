@@ -34,7 +34,7 @@ namespace nasl.ui {
       sort: UTableViewOptions<T, V, P, M>['sorting']['field'];
 
       @Prop({
-          title: '排序方式',
+          title: '排序顺序',
       })
       order: UTableViewOptions<T, V, P, M>['sorting']['order'];
 
@@ -200,7 +200,9 @@ namespace nasl.ui {
           description: '展示数据的输入源，可设置为数据集对象或者返回数据集的逻辑',
           docDescription: '表格展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
           designerValue: [{}, {}, {}],
-          bindOpen: true,
+          setter: {
+            concept: 'DataSourceSetter',
+          },
       })
       dataSource: { list: nasl.collection.List<T>; total: nasl.core.Integer } | nasl.collection.List<T>;
 
@@ -345,7 +347,7 @@ namespace nasl.ui {
           },
           if: _ => _.remoteSorting === true,
       })
-      private defaultOrder: 'asc' | 'desc' = 'asc';
+      private defaultOrder: 'asc' | 'desc' = 'desc';
 
       @Prop({
           group: '数据属性',
@@ -513,6 +515,57 @@ namespace nasl.ui {
           },
       })
       ellipsis: nasl.core.Boolean = false;
+
+      @Prop({
+        group: '主要属性',
+        title: '显示表尾计算行',
+        description: '是否在表尾显示功能行。默认关闭',
+        setter: {
+            concept: 'SwitchSetter',
+        },
+        onChange: [{
+            clear: ['footerCalcType', 'footerCalcText', 'footerCalcFormater'],
+            if: (_) => _ === false,
+          }],
+     })
+     footerCalcShow: nasl.core.Boolean = false;
+      
+     @Prop({
+        group: '主要属性',
+        title: '表尾计算行第一列文本',
+        description: '表尾计算行第一列文本',
+        if: _ => _.footerCalcShow === true,
+     })
+     footerCalcText: nasl.core.String = '合计';
+
+     @Prop({
+        group: '主要属性',
+        title: '表尾计算行功能选项',
+        description: '表尾计算行功能选项。默认求和',
+        setter: {
+            concept: 'EnumSelectSetter',
+            options: [
+                { title: '求和' },
+                { title: '最大值' },
+                { title: '最小值' },
+                { title: '平均值' },
+            ],
+        },
+        if: _ => _.footerCalcShow === true,
+     })
+     footerCalcType: 'sum' | 'max' | 'min' | 'average' = 'sum';
+
+     @Prop({
+        group: '主要属性',
+        title: '表尾计算行格式设置',
+        description: '可为计算结果设置格式，如增加前后缀等。默认不设置',
+        bindOpen: true,
+        setter: {
+            concept: 'AnonymousFunctionSetter',
+        },
+        if: _ => _.footerCalcShow === true,
+      })
+      footerCalcFormater: (item: {value:nasl.core.Integer | nasl.core.Decimal | nasl.core.String , index: nasl.core.Integer}) => nasl.core.String;
 
       @Prop({
           group: '交互属性',
@@ -708,6 +761,17 @@ namespace nasl.ui {
       nativeScroll: nasl.core.Boolean = false;
 
       @Prop({
+        group: '交互属性',
+        title: '排序触发方式',
+        docDescription: '表格排序的触发方式。默认"点击表头"。',
+        setter: {
+            concept: 'EnumSelectSetter',
+            options: [{ title: '点击表头' }, { title: '点击图标' }],
+        },
+      })
+      sortTrigger: 'head' | 'icon' = 'head';
+
+      @Prop({
           group: '状态属性',
           title: '初始即加载',
           description: '设置初始时是否立即加载',
@@ -892,6 +956,39 @@ namespace nasl.ui {
          */
         color?: nasl.core.String
       };
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'prevIcon'>({
+        group: '交互属性',
+        title: '上一页图标',
+        description: '设置上一页图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.pagination === true,
+      })
+      prevIcon: nasl.core.String;
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'nextIcon'>({
+        group: '交互属性',
+        title: '下一页图标',
+        description: '设置下一页图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.pagination === true,
+      })
+      nextIcon: nasl.core.String;
+
+      @Prop<UTableViewOptions<T, V, P, M>, 'selectDropdownIcon'>({
+        group: '交互属性',
+        title: '选择下拉图标',
+        description: '设置选择下拉图标',
+        setter: {
+          concept: 'IconSetter',
+        },
+        if: _ => _.pagination === true && _.showSizer === true,
+      })
+      selectDropdownIcon: nasl.core.String;
 
       @Event({
           title: '加载前',
@@ -1251,6 +1348,9 @@ namespace nasl.ui {
           title: '值字段',
           description: 'data 项中的字段',
           docDescription: '数据项中对应的字段名，如createdTime',
+          setter: {
+            concept: 'PropertySelectSetter',
+          },
       })
       field: (item: T) => any;
 
@@ -1276,7 +1376,7 @@ namespace nasl.ui {
           },
           if: _ => _.sortable === true,
       })
-      defaultOrder: 'asc' | 'desc' = 'asc';
+      defaultOrder: 'asc' | 'desc' = 'desc';
 
       @Prop<UTableViewColumnOptions<T, V, P, M>, 'type'>({
           group: '数据属性',
@@ -1482,7 +1582,9 @@ namespace nasl.ui {
           tooltipLink: 'https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/05.%E8%A1%A8%E6%A0%BC/100.%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC.html',
           docDescription: '表格展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
           designerValue: [{}, {}, {}],
-          bindOpen: true,
+          setter: {
+              concept: 'DataSourceSetter',
+          },
       })
       dataSource: nasl.collection.List<T> | { list: nasl.collection.List<T>; total: nasl.core.Integer };
 
@@ -1567,7 +1669,9 @@ namespace nasl.ui {
           tooltipLink: 'https://help.lcap.163yun.com/99.%E5%8F%82%E8%80%83/40.%E9%A1%B5%E9%9D%A2IDE/30.%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6/05.PC%E9%A1%B5%E9%9D%A2%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6/05.%E8%A1%A8%E6%A0%BC/100.%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC.html',
           docDescription: '表格展示的数据。数据源可以绑定变量或者逻辑。变量或逻辑的返回值可以是数组，也可以是对象。对象格式为{list:[], total:10}',
           designerValue: [{}],
-          bindOpen: true,
+          setter: {
+              concept: 'DataSourceSetter',
+          },
       })
       dataSource: { list: nasl.collection.List<T1>; total: nasl.core.Integer } | nasl.collection.List<T1>;
 
@@ -1614,7 +1718,7 @@ namespace nasl.ui {
           },
           if: _ => _.sortable === true,
       })
-      defaultOrder: 'asc' | 'desc' = 'asc';
+      defaultOrder: 'asc' | 'desc' = 'desc';
 
       @Prop({
           group: '主要属性',
@@ -1711,7 +1815,7 @@ namespace nasl.ui {
               },
           ],
       })
-      slotDefault: SlotType<() => Array<UTableViewColumn<T, V, P, M> | ViewComponent>>;
+      slotDefault: () => Array<UTableViewColumn<T, V, P, M> | ViewComponent>;
 
       @Slot({
           title: '标题',

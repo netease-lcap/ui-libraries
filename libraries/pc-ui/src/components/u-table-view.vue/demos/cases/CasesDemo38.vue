@@ -4,6 +4,7 @@
     <u-text>静态列</u-text>
     <u-button @click="show=!show">显隐 {{ show }}</u-button>
     <u-button color="primary" @click="() => $refs.tableView.exportExcel()">导出 Excel</u-button>
+    <u-button color="primary" @click="() => $refs.tableView.exportExcel('', '', '', '', '', [], true)">导出 Excel 带样式</u-button>
     <u-table-view line :data-source="data" :default-column-width="100" ref="tableView" configurable>
         <u-table-view-column type="checkbox" title="选择" fixed></u-table-view-column>
         <u-table-view-column title="地址" field="address" fixed ></u-table-view-column>
@@ -31,6 +32,10 @@
         <u-table-view-column title="创建日期与登录日期表头合并" :col-span="2" field="loginTime" formatter="placeholder | date" width="10%" fixed></u-table-view-column>
         <u-table-view-column field="loginTime" formatter="placeholder | date" width="10%"></u-table-view-column>
         <u-table-view-column title="地址" field="address" fixed></u-table-view-column>
+        <u-table-view-column-group title="用户信息111">
+            <u-table-view-column title="用户名111" field="name" :auto-row-span="true" :hidden="!show"></u-table-view-column>
+            <u-table-view-column title="手机号码111" field="phone"></u-table-view-column>
+        </u-table-view-column-group>
     </u-table-view>
    
     <u-text>动态列加载</u-text>

@@ -14,6 +14,9 @@ export interface NameGroup {
 }
 
 export const filterProperty = (key) => (property: naslTypes.EntityProperty) => {
+  if (property.typeAnnotation?.typeKind === 'anonymousStructure') {
+    return false;
+  }
   if (property.display) {
     return property.display[key];
   }
@@ -60,6 +63,7 @@ export function genUniqueQueryNameGroup(
   suffix: string = '',
 ) {
   const result: NameGroup = {};
+  componentName = componentName?.replace(/_/g, '');
   result.viewLogicLoad = view?.getLogicUniqueName?.(`load${defaultInView ? '' : capFirstLetter(componentName)}${suffix ? capFirstLetter(suffix) : ''}`);
   result.logic = scope?.getLogicUniqueName?.(
     `load${capFirstLetter(view.name)}${componentName ? capFirstLetter(componentName) : ''}${suffix ? capFirstLetter(suffix) : ''}`,

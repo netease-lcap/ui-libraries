@@ -17,36 +17,36 @@ export default {
 /*  基础的、简洁的标签页。 */
 export const Example1 = {
   name: '基础用法',
-  render: () => ({
+  render: (args, { parameters }) => ({
     setup() {
-      const activeName = ref('first');
+      const { globalConfig } = parameters;
+      const activeName = ref('');
       const name = ref('myName');
-      const list = [1, 2, 3];
+      const add=ref()
+      const list = globalConfig.asyncData();
 
       const handleClick = (tab) => {
         console.log(tab);
       };
       setTimeout(() => {
-        name.value = 'newName';
-        activeName.value = 'second';
+        // name.value = 'newName';
+        activeName.value = '电子签署';
+        console.log(add.value.toggleMenu(), 'add');
+        console.log(add.value, 'add');
       }, 3000);
 
       return {
         name,
+        add,
         activeName,
         list,
         handleClick,
       };
     },
     template: `
-    <el-form-select v-model="activeName" multiple>
-      <el-option
-        v-for="item in list"
-        key="item.value"
-        label="item.label"
-        value="item.value"
-      />
-    </el-form-select>
+    <el-select suffixIcon="Setting" :filterable="true" :autoFocus="true" :remote="true" ref="add" v-model="activeName" :dataSource="list" descriptionField="value">
+    
+    </el-select>
 
     `,
   }),
@@ -56,30 +56,67 @@ export const Example2 = {
   name: '异步函数',
   render: () => ({
     setup() {
-      const activeName = ref('first');
+      const activeName = ref([1, 2]);
       const name = ref('myName');
-      const list = ref([{ value: 1, label: '1' }, { value: 2, label: '2' }, { value: 3, label: '3' }]);
+      const list = ref([{ value: 1, label: '1' }]);
+      setTimeout(() => {
+        list.value = [
+          { value: 2, label: '2' },
+          { value: 3, label: '3' },
+        ];
+      }, 3000);
       // const list = ref([1, 2, 3]);
-list.value = async () => {
+      // list.value = async () => {
+      //         return new Promise((res) => {
+      //           setTimeout(() => {
+      //             const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+
+      //             const value = ref();
+      //             const options = Array.from({ length: 1000 }).map((_, idx) => ({
+      //               value: `Option ${idx + 1}`,
+      //               label: `${initials[idx % 10]}${idx}`,
+      //             }));
+      //             res(options);
+      //             // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
+      //           }, 1000);
+      //         });
+      //       };
+      const listFn = ref(() => {
+        console.log('listFn');
         return new Promise((res) => {
           setTimeout(() => {
-            const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-
-            const value = ref();
-            const options = Array.from({ length: 1000 }).map((_, idx) => ({
-              value: `Option ${idx + 1}`,
-              label: `${initials[idx % 10]}${idx}`,
-            }));
-            res(options);
-            // res([{ value: 1 }, { value: 2 }, { value: 3, 'data-nodepath': 'aabb' }]);
+            res([
+              {
+                label: '1',
+                value: 1,
+              },
+              {
+                label: '2',
+                value: 2,
+              },
+            ]);
           }, 1000);
         });
-      };
+      });
+      setTimeout(() => {
+        listFn.value = () => {
+          console.log('listFn2');
+          return new Promise((res) => {
+            setTimeout(() => {
+              res(list.value);
+            }, 1000);
+          });
+        };
+      }, 3000);
       const select = ref('');
 
       const handleClick = (tab) => {
-        console.log(tab, '====');
-        select.value.reload();
+        list.value.push({ value: 4, label: '4' });
+        // console.log(tab, '====');
+        // select.value.reload();
+      };
+      const handleChange = (val) => {
+        list.value = list.value.filter((item) => item.value !== 1);
       };
 
       setTimeout(() => {
@@ -96,17 +133,22 @@ list.value = async () => {
         activeName,
         list,
         handleClick,
+        handleChange,
+        listFn,
       };
     },
     template: `
     <div>
-    <el-select ref="select" v-model="activeName"  clearable :dataSource="list" multiple >
-     <el-option label="item.value" :value="item.value" :name="name" / >
+    <el-table :data="list">
+    <el-table-column prop="value" label="value" />
+    <el-table-column prop="label" label="label" />
+    </el-table>
+    <el-select :preview="true" class="my-select"   ref="select" v-model="activeName"  clearable :dataSource="listFn" multiple >
 
     </el-select>
     {{ activeName }}
     <button @click="handleClick">click</button>
-    
+    <button @click="handleChange">change</button>
     </div>
 
     `,
@@ -122,6 +164,7 @@ export const Example3 = {
     template: `
     <el-select 
       data-nodepath="08aee5f1fb524428a44a7a0ccb7861bf" 
+      ref="add"
       data-enable-events="click" 
       noDataText="没有数据"
       key="component-08aee5f1fb524428a44a7a0ccb7861bf" 

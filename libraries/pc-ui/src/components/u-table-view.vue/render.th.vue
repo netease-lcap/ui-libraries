@@ -58,6 +58,8 @@ export default {
         'onResizerDragStart',
         'onResizerDrag',
         'onResizerDragEnd',
+        'filterMultiple',
+        'filterMax',
     ],
     props: {
         columnVM: Object,

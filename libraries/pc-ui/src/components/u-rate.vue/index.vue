@@ -1,10 +1,13 @@
 <template>
 <div v-if="!isPreview" :class="$style.root" @mouseleave="onMouseleave" :readonly="readonly">
-    <span :class="$style.item" v-for="i in currentMax" :key="i" :status="getFullStatus(i)"
+    <span :class="[$style.item, {[$style.useIcon]: !!getIcon(i <= currentValue)}]" v-for="i in currentMax" :key="i" :status="getFullStatus(i)"
         @mousemove="onMousemove(i, $event)"
         @click="select(i)" :half="getHalfStatus(i)"
         ref="star">
-        <span :class="$style.mask" :style="{width: decimalWidth + '%'}"></span>
+        <i-ico :name="getIcon(i <= currentValue)" v-if="getIcon(i <= currentValue)" notext :style="{fontSize: 'inherit'}"></i-ico>
+        <span :class="[$style.mask, {[$style.useIcon]: !!checkedIcon}]" :style="{width: decimalWidth + '%'}">
+          <i-ico :name="checkedIcon" v-if="checkedIcon" notext :style="{fontSize: 'inherit'}"></i-ico>
+        </span>
         <u-popup :class="$style.popup" v-if="showTooltip && !$env.VUE_APP_DESIGNER" trigger="manual" :opened="hoverIndex === i" :placement="placement">
             {{ tooltips[tooltipIndex] }}
         </u-popup>
@@ -52,6 +55,8 @@ export default {
         showValue: { type: Boolean, default: false },
         preview: { type: Boolean, default: false },
         placement: { type: String, default: 'top' },
+        unCheckedIcon: { type: String },
+        checkedIcon: { type: String },
         tooltips: {
             type: Array,
             default() {
@@ -103,6 +108,9 @@ export default {
         },
     },
     methods: {
+        getIcon(checked) {
+            return checked ? this.checkedIcon : this.unCheckedIcon;
+        },
         onMousemove(i, $event) {
             if (this.readonly) {
                 return false;
@@ -208,6 +216,10 @@ content: "\e64a";
     opacity: 1;
 }
 
+.item.useIcon::before {
+    content: none;
+}
+
 .mask {
     position: absolute;
     height: 100%;
@@ -219,7 +231,7 @@ content: "\e64a";
     transition: all .3s;
 }
 .mask::before {
-content: "\e64a";
+    content: "\e64a";
     font-family: "lcap-ui-icons";
     font-style: normal;
     font-weight: normal;
@@ -230,6 +242,10 @@ content: "\e64a";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
+}
+
+.mask.useIcon::before {
+    content: none;
 }
 
 .text {

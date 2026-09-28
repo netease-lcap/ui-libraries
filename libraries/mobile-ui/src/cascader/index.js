@@ -464,7 +464,7 @@ export default createComponent({
         // console.log(option);
 
         const Text =
-          this.slots('option', { option, selected: isSelected, ...option }) ||
+          this.slots('option', { option, item: option, selected: isSelected, ...option }) ||
           (isInDesigner ? (
             <EmptyCol></EmptyCol>
           ) : (

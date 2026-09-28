@@ -1,8 +1,9 @@
-import { defineComponent, watch, onBeforeUnmount, getCurrentInstance, ComponentInternalInstance } from 'vue';
+import { defineComponent, watch, onBeforeUnmount, getCurrentInstance, nextTick } from 'vue';
 import { ElMessage as ElMessagePlus, MessageHandler } from 'element-plus';
 import { setElStyle } from '../../utils/dom';
 import { ElIcon } from '../index';
 
+// TODO
 export default defineComponent({
   name: 'ElMessage',
   props: {
@@ -46,43 +47,53 @@ export default defineComponent({
       type: Number,
       default: 1,
     },
+    msgContent: {
+      type: String,
+      default: '消息内容',
+    },
   },
 
-  setup(props, { slots, emit, expose }) {
+  setup(props, { slots, emit, expose, attrs }) {
     let messageHandler: MessageHandler | null = null;
-    let instance: ComponentInternalInstance | null = null;
 
     const closeMessage = () => {
       if (messageHandler) {
         const handler = messageHandler;
-        instance = null;
         messageHandler = null;
         handler?.close();
       }
     };
 
     const openMessage = () => {
-      if (instance) {
-        closeMessage();
+      // if (messageHandler) {
+      //   closeMessage();
+      // }
+
+      const iconComp = props.icon ? <ElIcon name={props.icon} class={`el-message__icon el-icon-${props.type}`} /> : '';
+
+      const messageId = `el-message-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+      // grouping 功能不支持 VNode 类型的消息，如果启用了 grouping，使用字符串类型的 message
+      let message: string | any;
+      if (props.grouping) {
+        message = props.msgContent;
+      } else {
+        // 不使用 grouping 时, 使用 VNode 格式（插槽形式）
+        const vnodes = slots.default?.() || [];
+        message = (
+          <div class="el-message__content">
+            {vnodes}
+          </div>
+        );
       }
 
-      const vnodes = slots.default?.() || [];
-      const message = (
-        <div class="el-message__content">
-          {props.icon && (
-            <ElIcon
-              name={props.icon}
-              class={`el-message__icon el-icon-${props.type}`}
-            />
-          )}
-          {vnodes}
-        </div>
-      );
+      const classNames = attrs?.class;
+      const styleAttrs = attrs?.style;
 
       messageHandler = ElMessagePlus({
         type: props.type,
         plain: props.plain,
-        icon: props.icon,
+        icon: iconComp,
         duration: props.duration,
         showClose: props.showClose,
         center: props.center,
@@ -91,27 +102,21 @@ export default defineComponent({
         repeatNum: props.repeatNum,
         message,
         iconClass: props.icon ? 'el-message--custom-icon' : '',
+        customClass: `${messageId} ${classNames}`,
         onClose: () => {
           emit('update:visible', false);
           emit('close');
         },
-      }as any);
-      instance = getCurrentInstance()!;
-      if (!instance) {
-        return;
-      }
+      } as any);
+      // 确保 DOM 已渲染完成
+      nextTick(() => {
+        if (messageHandler && styleAttrs) {
+          const messageEl = document.querySelector(`.${messageId}`) as HTMLElement;
 
-      const { ctx } = instance as any;
-      // 处理样式
-      if (ctx.$el) {
-        if (instance?.data?.staticStyle) {
-          setElStyle(instance.data.staticStyle, ctx.$el);
+          if (messageEl && typeof styleAttrs === 'object') {
+            setElStyle(styleAttrs, messageEl);
+          }
         }
-        if (instance?.data?.style) {
-          setElStyle(instance.data.style, ctx.$el);
-        }
-      }
-      ctx.$nextTick(() => {
         emit('open');
       });
     };

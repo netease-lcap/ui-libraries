@@ -1,4 +1,4 @@
-import Component from '../index';
+// import Component from '../index';
 import ExampleDemo1 from '../demos/example-demo1.vue';
 import ExampleDemo2 from '../demos/example-demo2.vue';
 import ExampleDemo3 from '../demos/example-demo3.vue';
@@ -10,7 +10,7 @@ import ExampleDemo7 from '../demos/example-demo7.vue';
 export default {
   id: 'el-row-examples',
   title: '组件列表/Row 行容器/示例',
-  component: Component,
+  // component: Component,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'padded',

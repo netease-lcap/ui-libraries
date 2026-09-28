@@ -19,7 +19,7 @@ export default {
 
     computed: {
         linkConfigs() {
-            return {
+            const config = {
                 content: this.value,
                 backgroundColor: this.configs.completed ? '#26BD71' : '#999999',
                 approximate: 400,
@@ -27,9 +27,17 @@ export default {
                 toDir: this.configs.toDir,
                 showLineSeg: false,
                 waypoints: this.configs.waypoints,
-                showContent: true,
+                showContent: this.configs.conditionFlow,
                 showAdd: false
             };
+            if (this.configs.conditionFlow) {
+                Object.assign(config, {
+                    branchInfo: {
+                        branchName: this.node.title,
+                    },
+                })
+            }
+            return config;
         },
         value() {
             return this.node.flowValue;

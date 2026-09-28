@@ -1,7 +1,13 @@
 import { defineComponent, ref, watch } from 'vue';
+import { vLoading } from 'element-plus';
 
 export default defineComponent({
   name: 'ElLoading',
+  directives: {
+    loading: {
+      ...vLoading,
+    },
+  },
   props: {
     visible: {
       type: Boolean,
@@ -40,6 +46,12 @@ export default defineComponent({
     customClass: {
       type: String,
     },
+    beforeClose: {
+      type: Function,
+    },
+    closed: {
+      type: Function,
+    },
   },
   setup(props, { slots, expose }) {
     const isVisible = ref(false);
@@ -53,8 +65,9 @@ export default defineComponent({
       svg: props.svg,
       svgViewBox: props.svgViewBox,
       customClass: props.customClass,
+      beforeClose: props.beforeClose,
+      closed: props.closed,
     });
-
     const show = () => {
       isVisible.value = true;
     };

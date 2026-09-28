@@ -61,6 +61,11 @@ export default {
     type: Boolean,
     default: undefined,
   },
+  /** 必填符号（*）的位置，值为 left 表示在标签前面，值为 right 表示在标签后面 */
+  requiredMarkPosition: {
+    type: String as PropType<ElFormProps['requiredMarkPosition']>,
+    default: 'left' as ElFormProps['requiredMarkPosition'],
+  },
   /** 重置表单的方式，值为 empty 表示重置表单为空，值为 initial 表示重置表单数据为初始值 */
   resetType: {
     type: String as PropType<ElFormProps['resetType']>,

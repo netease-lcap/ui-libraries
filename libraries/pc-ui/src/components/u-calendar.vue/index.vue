@@ -111,7 +111,7 @@
 const MS_OF_DAY = 24 * 3600 * 1000;
 import i18n from './i18n';
 import { format, transformDate, ChangeDate } from '../../utils/date';
-import { prevMonth, nextMonth, prevYear, nextYear } from './util';
+import { prevMonth, nextMonth, prevYear, nextYear, prevDate, nextDate } from './util';
 import YearPage from './yearpage';
 import i18nMixin from '../../mixins/i18n';
 
@@ -528,38 +528,37 @@ export default {
             this.showDate = this.transformDate(this.showDate);
             const date = this.showDate;
             const month = date.getMonth();
-            const mfirst = new Date(date);
-            mfirst.setDate(1);
+            const year = date.getFullYear();
+            const mfirst = new Date(year, month, 1);
             mfirst.setHours(0, 0, 0, 0);
-            let mfirstTime = +mfirst;
-            // 如果1号是星期天，前面再加7天
+            /*
+             * 网格起点：回溯到当周周日列（与原逻辑一致）。
+             * 必须用日历加减（prevDate），勿用固定 86400000ms——在 DST 地区（如澳洲）日与 UTC 时差变化会导致与自然日错位、星期格列整体偏一天。
+             */
+            let gridStart;
             if (mfirst.getDay() === 0) {
-                mfirstTime = mfirstTime - 7 * MS_OF_DAY;
+                gridStart = prevDate(mfirst, 7);
             } else {
-                mfirstTime = mfirstTime - mfirst.getDay() * MS_OF_DAY;
+                gridStart = prevDate(mfirst, mfirst.getDay());
             }
-            const nfirst = new Date(mfirst);
-            nfirst.setMonth(month + 1);
-            nfirst.setDate(1);
+            gridStart.setHours(0, 0, 0, 0);
+            const nfirst = new Date(year, month + 1, 1);
+            nfirst.setHours(0, 0, 0, 0);
             const nfirstTime = +nfirst;
             let lastTime
                 = nfirstTime + (((7 - nfirst.getDay()) % 7) - 1) * MS_OF_DAY;
-            let num = 0;
-            let tmpTime;
-            let tmp;
-            do {
-                tmpTime = mfirstTime + num++ * MS_OF_DAY;
-                tmp = new Date(tmpTime);
-                this.days_.push(tmp);
-            } while (tmpTime < lastTime);
-            // 补齐6行
+            let cursor = new Date(gridStart.getTime());
+            while (cursor.getTime() < lastTime) {
+                this.days_.push(new Date(cursor.getTime()));
+                cursor = nextDate(cursor, 1);
+            }
+            // 补齐6行（仍按自然日递进，避免 DST 毫秒误差累积）
             if (this.days_.length < 6 * 7) {
                 lastTime = lastTime + (6 * 7 - this.days_.length) * MS_OF_DAY;
-                do {
-                    tmpTime = mfirstTime + num++ * MS_OF_DAY;
-                    tmp = new Date(tmpTime);
-                    this.days_.push(tmp);
-                } while (tmpTime < lastTime);
+                while (cursor.getTime() < lastTime) {
+                    this.days_.push(new Date(cursor.getTime()));
+                    cursor = nextDate(cursor, 1);
+                }
             }
         },
         /**

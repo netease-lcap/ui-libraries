@@ -26,7 +26,10 @@
       </el-icon-plus>
       <el-icon v-if="iconComponent && icon" :name="icon" :class="typeClass" />
       <div class="el-message__content">
-        <slot></slot>
+        <p v-show="!grouping">
+          <slot></slot>
+        </p>
+        <p v-show="grouping" v-html="msgContent"></p>
       </div>
       <el-icon-plus v-if="showClose" :class="el-message__closeBtn">
         <Close />
