@@ -39,6 +39,27 @@ const isSvgUrl = (name) => {
   return name && name?.indexOf('/') !== -1 && /\.svg/i.test(name);
 };
 
+// 校验URL是否安全，避免SSRF：仅允许http/https协议，且禁止访问内网及云元数据地址
+const isSafeSvgUrl = (name: string): boolean => {
+  try {
+    const url = new URL(name, typeof window !== 'undefined' ? window.location.href : undefined);
+    if (!/^https?:$/.test(url.protocol)) return false;
+    const hostname = url.hostname.toLowerCase();
+    if (
+      hostname === 'localhost' ||
+      hostname === '169.254.169.254' ||
+      /^(127\.|10\.|192\.168\.|0\.0\.0\.0)/.test(hostname) ||
+      /^172\.(1[6-9]|2\d|3[0-1])\./.test(hostname) ||
+      hostname === '::1'
+    ) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 // 在线SVG组件
 const OnlineSvgIcon = defineComponent({
   name: 'OnlineSvgIcon',
