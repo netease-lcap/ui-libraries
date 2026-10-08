@@ -1,16 +1,13 @@
 import _ from 'lodash';
-import VusionValidator, { localizeRules } from '@lcap/validator';
 import { FormItemProps } from 'element-plus';
 import { $deletePropsList } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { addClass } from '@/utils';
-import { useMemo, useCallback, useState, useEffect, useRef } from '@/plugins/hooks';
+import { useMemo, useCallback, useState, useEffect } from '@/plugins/hooks';
 import { $formProvide } from '@/components/el-form/constants';
+import FormItemPluginAccumulate, { convertFormItemRules } from '@/components/el-form/plugins/form-item-plugin';
 
 const FormItemGroupAccumulate = new PluginAccumulateTypes<nasl.ui.ElFormItemGroupOptions, FormItemProps>();
-
-/** 布局侧剥离的字段绑定属性；校验由 handleGroupValidation 自行处理，不交给 EP 自动触发 */
-const LAYOUT_STRIP_PROPS = ['prop', 'ignoreRules', 'trigger', 'isRequired'] as const;
 
 const VALIDATE_DELETE_PROPS = [
   'validatingValue',
@@ -18,16 +15,56 @@ const VALIDATE_DELETE_PROPS = [
   'errorTipType',
   'muted',
   'ignoreValidation',
-  'rules',
 ] as const;
 
 type ErrorTipType = 'textAndStatus' | 'statusOnly' | 'textAndBorder';
 
 function resolveErrorTipType(raw: unknown): ErrorTipType {
   if (raw === 'statusOnly' || raw === 'textAndBorder' || raw === 'textAndStatus') return raw;
-  // 兼容旧 muted：message → 仅透传状态；all → 按文字与边框静默透传（不展示 UI）已废弃，回退默认
   if (raw === 'message') return 'statusOnly';
   return 'textAndStatus';
+}
+
+function resolveValidateMessage(error: unknown, fallback = '校验失败') {
+  if (_.isError(error)) return error.message || fallback;
+  if (_.isString(error) && error) return error;
+  return String(error ?? fallback);
+}
+
+function execNativeRules(rules: any[], value: any) {
+  return (rules ?? []).reduce((promise, rule) => {
+    return promise.then(() => {
+      if (!rule?.validator) {
+        if (rule?.required && (value === undefined || value === null || value === '')) {
+          return Promise.reject(new Error(rule.message || '表单项不得为空'));
+        }
+        return undefined;
+      }
+      return new Promise((resolve, reject) => {
+        let settled = false;
+        const done = (err?: unknown) => {
+          if (settled) return;
+          settled = true;
+          if (err) reject(err instanceof Error ? err : new Error(resolveValidateMessage(err)));
+          else resolve(true);
+        };
+        try {
+          const result = rule.validator(rule, value, done);
+          if (result && typeof result.then === 'function') {
+            result.then((r) => {
+              if (r === false || r?.result === false) {
+                done(r?.message || rule.message || '校验失败');
+                return;
+              }
+              done();
+            }, done);
+          }
+        } catch (err) {
+          done(err);
+        }
+      });
+    });
+  }, Promise.resolve());
 }
 
 export default FormItemGroupAccumulate.addPlugin({
@@ -42,7 +79,6 @@ export default FormItemGroupAccumulate.addPlugin({
 
     const inject = props.get('inject');
     const formColumns = Number(inject?.[$formProvide]?.columns);
-    // 栅格表单：与 form-item colSpan 一致，超过总列数时撑满整行
     const gridColSpan = useMemo(() => {
       if (Number.isFinite(formColumns) && formColumns > 0) {
         return Math.min(columns, formColumns);
@@ -56,7 +92,7 @@ export default FormItemGroupAccumulate.addPlugin({
     const slots = props.get('slots') ?? {};
     const deletePropsList = ((props.get($deletePropsList) as unknown as string[]) ?? []).concat([
       'columns',
-      ...LAYOUT_STRIP_PROPS,
+      'isRequired',
     ]);
 
     const defaultSlot = useMemo(
@@ -68,13 +104,9 @@ export default FormItemGroupAccumulate.addPlugin({
       class: addClass(classNames, ['el-form-item-group', `el-form-item-group--span-${columns}`]),
       style: {
         ...(_.isPlainObject(style) ? style : {}),
-        // columns：块级/查询中占用 N 倍表单项宽度（非内部分列）
         '--el-form-item-group-columns': columns,
-        // 栅格表单跨列（.el-form-grid 下使用 --el-form-item-col-span）
         '--el-form-item-col-span': gridColSpan,
       },
-      // 不参与表单自动字段校验；required 仅控制标签必填 * 号展示
-      prop: undefined,
       required: Boolean(isRequired),
       slots: _.assign({}, slots, {
         default: defaultSlot,
@@ -83,10 +115,12 @@ export default FormItemGroupAccumulate.addPlugin({
     };
   },
 })
+  .addPlugin(FormItemPluginAccumulate.getPluginMethodByName('handlePropName') as any)
   .addPlugin({
     name: 'handleGroupValidation',
     handle(props) {
       const rulesProps = props.get('rules');
+      const trigger = props.get('trigger') ?? 'blur';
       const ignoreValidation = props.get('ignoreValidation') ?? false;
       const validatingValue = props.get('validatingValue');
       const validatingProcess = props.get('validatingProcess');
@@ -94,12 +128,14 @@ export default FormItemGroupAccumulate.addPlugin({
       const emit = props.get('emit');
       const ref = props.get('ref') ?? {};
       const classNames = props.get('class') ?? '';
-      const slots = props.get('slots') ?? {};
+      const uniqueId = useMemo(() => _.uniqueId('formItemPropName'), []);
+      const prop = props.get('prop') ?? uniqueId;
+      const inject = props.get('inject');
+      const { setValue } = inject?.[$formProvide] ?? {};
 
       const [valid, setValid] = useState(true);
       const [error, setError] = useState<string | undefined>(undefined);
       const [validateStatus, setValidateStatus] = useState<'' | 'error' | 'success' | undefined>(undefined);
-      /** textAndBorder：不透传 EP 状态时的本地错误文案 */
       const [borderTipMessage, setBorderTipMessage] = useState<boolean | undefined>(undefined);
 
       const applyErrorTipUI = useCallback(
@@ -112,47 +148,97 @@ export default FormItemGroupAccumulate.addPlugin({
           }
           const msg = message || '校验失败';
           if (errorTipType === 'statusOnly') {
-            // 不提示文字 + 透传错误状态
             setError(undefined);
             setValidateStatus('error');
             setBorderTipMessage(undefined);
             return;
           }
           if (errorTipType === 'textAndBorder') {
-            // 提示文字 + 不透传错误状态 + 分组错误边框
             setError(msg);
             setValidateStatus(undefined);
             setBorderTipMessage(true);
             return;
           }
-          // textAndStatus：提示文字 + 透传错误状态
           setError(msg);
           setValidateStatus('error');
           setBorderTipMessage(undefined);
         },
         [errorTipType],
       );
+
+      const rules = useMemo(() => {
+        if (ignoreValidation) return [];
+        return _.map(convertFormItemRules(rulesProps, trigger), (rule: any) => {
+          if (!rule?.validator) return rule;
+          const originValidator = rule.validator;
+          return {
+            ...rule,
+            validator: (nativeRule, value, callback) => {
+              return Promise.resolve(
+                originValidator(nativeRule, value, (err) => {
+                  if (err) applyErrorTipUI(false, resolveValidateMessage(err));
+                  else applyErrorTipUI(true);
+                  callback?.(err);
+                }),
+              ).then(
+                (res) => {
+                  if (res === false || res?.result === false) {
+                    applyErrorTipUI(false, res?.message || nativeRule?.message);
+                  } else {
+                    applyErrorTipUI(true);
+                  }
+                  return res;
+                },
+                (err) => {
+                  applyErrorTipUI(false, resolveValidateMessage(err));
+                  throw err;
+                },
+              );
+            },
+          };
+        });
+      }, [rulesProps, trigger, ignoreValidation, applyErrorTipUI]);
+
+      const resolveValue = useCallback(async () => {
+        let value = validatingValue;
+        if (_.isFunction(validatingProcess)) {
+          value = await validatingProcess(value);
+        }
+        return value;
+      }, [validatingValue, validatingProcess]);
+
+      useEffect(() => {
+        let cancelled = false;
+        (async () => {
+          const value = await resolveValue();
+          if (!cancelled) setValue?.(prop, value);
+        })();
+        return () => {
+          cancelled = true;
+        };
+      }, [resolveValue, prop, setValue]);
+
       const validated = async () => {
+        const value = await resolveValue();
+        setValue?.(prop, value);
         if (ignoreValidation) {
           setValid(true);
           applyErrorTipUI(true);
           emit?.('sync:state', 'valid', true);
           return { valid: true };
         }
-
-        let value = validatingValue;
-        if (_.isFunction(validatingProcess)) {
-          value = await validatingProcess(value);
-        }
-        const validator = new (VusionValidator as any)(undefined, localizeRules, rulesProps);
         try {
-          await validator.validate(value);
+          if (typeof ref.validate === 'function') {
+            await ref.validate();
+          } else {
+            await execNativeRules(rules, value);
+          }
           setValid(true);
           applyErrorTipUI(true);
           emit?.('sync:state', 'valid', true);
           return { valid: true };
         } catch (errorMessage) {
-          const message = _.isError(errorMessage) ? errorMessage.message : String(errorMessage ?? '校验失败');
+          const message = resolveValidateMessage(errorMessage);
           setValid(false);
           applyErrorTipUI(false, message);
           emit?.('sync:state', 'valid', false);
@@ -171,14 +257,13 @@ export default FormItemGroupAccumulate.addPlugin({
       const showErrorBorder = errorTipType === 'textAndBorder' && Boolean(borderTipMessage);
 
       return {
-        // 仍不向 EP 注册 rules/prop，避免表单 validate / blur 自动触发；仅手动 validated
-        prop: undefined,
-        rules: [],
+        prop,
+        rules,
         error,
         validated,
         validateStatus,
+        showMessage: errorTipType !== 'statusOnly',
         class: addClass(classNames, showErrorBorder ? 'el-form-item-group--error-border' : ''),
-
         ref: Object.assign(ref, {
           validated,
           get valid() {
@@ -187,20 +272,5 @@ export default FormItemGroupAccumulate.addPlugin({
         }),
         [$deletePropsList]: deletePropsList,
       };
-    },
-  })
-  .addPlugin({
-    name: 'handleGroupValidated',
-    handle(props) {
-      const validated = props.get('validated');
-      const validatedFn = useRef(() => {});
-      validatedFn.value = validated;
-      useEffect(() => {
-        const inject = props.get('inject');
-        const { isInForm, setItemValidated } = inject?.[$formProvide] ?? {};
-        if (!isInForm) return;
-        setItemValidated(() => validatedFn.value());
-      }, []);
-      return {};
     },
   });

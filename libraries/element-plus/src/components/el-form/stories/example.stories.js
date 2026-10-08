@@ -20,7 +20,7 @@ export const Example1 = {
   name: '基础用法',
   render: () => ({
     setup() {
-      const activeName = ref('first');
+      const activeName = ref();
       const formRef = ref();
       const name = ref('myName');
       const state = ref({
@@ -31,7 +31,7 @@ export const Example1 = {
 
       const handleClick = (tab) => {
         console.log(formRef);
-        formRef.value.validate();
+        formRef.value.validated();
       };
       // setTimeout(() => {
       //   name.value = 'newName';
@@ -52,13 +52,28 @@ export const Example1 = {
     template: `
     <div>
     {{model}}
-    <el-form :model="model" ref="formRef">
-      <el-form-input style="border: 1px solid red;"  label="input21" :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
-      <el-form-input style="border: 1px solid red;"  label="input21" :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"  />
+    <el-form :model="model" ref="formRef" :scrollToError="true" style="height: 190px;overflow:auto">
+   <el-form-item-group
+          ref="groupRef"
+          label="联系信息"
+          :columns="2"
+          :isRequired="true"
+          :validatingValue="activeName"
+          :errorTipType="'textAndBorder'"
+          :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]" 
+        >
+          <el-form-input  label="input21"   />
+    </el-form-item-group>
+      <el-form-input  label="input21"   />
+      <el-form-input  label="input21"   />
+      <el-form-input  label="input21"   />
+      <el-form-input  label="input21"   />
+      <el-form-input  label="input21"   />
+      <el-form-input  label="input21"   />
       <el-form-date-picker label="日期选择" type="daterange" converter="auto" placeholder="请选择日期" :range="true" v-model:startValue="state.start" v-model:endValue="state.end" :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"> </el-form-date-picker>
-      <el-button @click="handleClick">Submit</el-button>
 
     </el-form>
+      <el-button @click="handleClick">Submit</el-button>
  
     </div>
 

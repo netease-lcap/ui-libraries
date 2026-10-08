@@ -10,7 +10,7 @@ function ElFormItemGroupRegister(BaseComponent, plugin = {}, extend = true) {
   return registerComponent(BaseComponent, { plugin: componentPlugin });
 }
 
-/** 基于 ElFormItem 的表单项分组：无字段绑定；校验仅通过 validatingValue + validated() 手动触发 */
+/** 基于 ElFormItem 的表单项分组：与 form-item 相同，通过 rules 走 EP 原生校验 */
 const ElFormItemGroup = registerComponent(ElFormItemPlus, {
   plugin: basicsPlugin,
   name: 'el-form-item-group',
