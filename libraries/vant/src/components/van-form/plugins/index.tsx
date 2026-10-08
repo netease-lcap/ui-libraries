@@ -33,13 +33,24 @@ export function handleModelValue(props) {
         _.forEach(Object.entries(formItemList.value), ([key, item]: any) => {
           model.value[key] = item?.getModelValue?.() ?? model.value[key];
         });
-        return ref.validate().then(
-          () => ({ valid: true }),
-          () => {
-            ref.submit();
-            return { valid: false };
-          },
+        const groupValidated = _.map(
+          formItemList.value,
+          (item: any) => typeof item?.validated === 'function' && item?.validated?.(),
         );
+
+        return ref
+          .validate()
+          .then(() => Promise.all(groupValidated).then((results) => {
+              // 任一分组成员返回 { valid: false } 时走异常分支
+              if (_.some(results, (item) => _.has(item, 'valid') && item.valid === false)) {
+                return Promise.reject(results);
+              }
+              return results;
+            }))
+          .then(
+            () => ({ valid: true }),
+            () => ({ valid: false }),
+          );
       },
       resetForm: () => {
         ref.resetValidation();

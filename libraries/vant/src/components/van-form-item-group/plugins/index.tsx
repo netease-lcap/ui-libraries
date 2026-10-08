@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@lcap/validator';
-import { useCallback, useState, useControllableValue, useEffect } from '@/plugins/hooks';
+import { useCallback, useState, useControllableValue, useEffect, useRef } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { $formProvide } from '@/components/van-form/constants';
 import { addClass } from '@/utils';
@@ -13,6 +13,7 @@ export function handleValidateValue(props) {
   const deletePropsList = (props.get($deletePropsList) ?? []).concat(['value', 'originRules']);
   return {
     originRules,
+    rules: [],
     [$deletePropsList]: deletePropsList,
   };
 }
@@ -36,6 +37,7 @@ export function handleValidated(props) {
   const ref = props.get('ref') ?? {};
   const value = props.get('value');
   const rulesProps = props.get('originRules') ?? [];
+  const validatedFn = useRef(() => {});
   const name = props.get('name');
   const inject = props.get('inject');
   const [valid, setValid] = useState(true);
@@ -57,11 +59,11 @@ export function handleValidated(props) {
       return { valid: false };
     }
   }, [rulesProps, value, emit]);
+  validatedFn.value = validated;
 
   useEffect(() => {
     emit?.('sync:state', 'valid', valid);
   }, [valid]);
-
   useEffect(() => {
     const { setFormitem, deleteFormitem, isInForm, setValue } = inject?.value?.[$formProvide] ?? {};
     if (!isInForm) return undefined;
@@ -69,11 +71,12 @@ export function handleValidated(props) {
     setFormitem?.(name, {
       getModelValue: () => value,
       resetField: () => {},
-      validated,
+      validated: () => {
+        return validatedFn.value();
+      },
     });
     return () => deleteFormitem?.(name);
   }, [name, value, validated, inject]);
-
   return {
     errorMessage,
     ref: Object.assign(ref, {
