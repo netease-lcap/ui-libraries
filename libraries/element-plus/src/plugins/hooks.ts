@@ -228,7 +228,7 @@ export function useMemo<T>(callBack: () => T, dep: any[]): T {
   }
   return hook.result;
 }
-export function useCallback<T extends(...args: any[]) => any>(callBack: T, dep: any[]): T {
+export function useCallback<T extends (...args: any[]) => any>(callBack: T, dep: any[]): T {
   const currentFiber = fiberNode.getCurrentFiber();
   const isMount = fiberNode.getIsMount();
   let hook: EffectHook;
@@ -280,8 +280,7 @@ export function useSyncState(props: any, name: string) {
  * 返回值类型自动推导为 props（ImmutableMap）中 `valuePropName`（默认 `modelValue`）对应字段的类型。
  */
 export function useControllableValue<
-  M extends { get(
-key: any, ...args: any[]): any },
+  M extends { get(key: any, ...args: any[]): any },
   ValuePropName extends string = 'modelValue',
   P = ExtractMapProps<M>,
 >(
@@ -349,6 +348,12 @@ key: any, ...args: any[]): any },
     isControlled,
   ];
 }
+export function useCurrentInstanceValue(name: string) {
+  const instance = useMemo(() => getCurrentInstance(), []);
+  const { vnode } = instance || { vnode: { props: {} } };
+  const vProps = vnode.props || {};
+  return _.get(vProps, name);
+}
 
 // export function useInject(key: string) {
 //   const injectValue = inject($provide);
@@ -363,6 +368,7 @@ const hookMap = {
   useEffect,
   useMemo,
   useCallback,
+  useCurrentInstanceValue,
 };
 
 export function scheduler(pluginHooks, ImmutableState, ImmutableProps, fiberMap) {
