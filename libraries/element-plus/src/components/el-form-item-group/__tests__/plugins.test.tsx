@@ -11,10 +11,12 @@ vi.mock('@lcap/validator', () => {
       this.rules = rules;
     }
     validate(value: any) {
-      if (this.rules === 'required' || (Array.isArray(this.rules) && this.rules.some((r) => r?.required))) {
-        if (value === undefined || value === null || value === '') {
-          return Promise.reject('表单项不得为空');
-        }
+      const ruleList = Array.isArray(this.rules) ? this.rules : [this.rules];
+      const isRequired = ruleList.some(
+        (r) => r === 'required' || r?.required || r?.validate === 'required' || r?.validate === 'filled',
+      );
+      if (isRequired && (value === undefined || value === null || value === '')) {
+        return Promise.reject('表单项不得为空');
       }
       if (typeof this.rules === 'string' && this.rules.includes('required') && !value) {
         return Promise.reject('必填');
@@ -33,14 +35,16 @@ describe('el-form-item-group plugins', () => {
     vi.clearAllMocks();
   });
 
-  it('应包含布局与校验插件', () => {
+  it('应包含布局、prop 与校验插件', () => {
     const layout = FormItemGroupAccumulate.getPluginMethodByName('handleFormItemGroupLayout');
+    const propName = FormItemGroupAccumulate.getPluginMethodByName('handlePropName');
     const validate = FormItemGroupAccumulate.getPluginMethodByName('handleGroupValidation');
     expect(layout?.name).toBe('handleFormItemGroupLayout');
+    expect(propName?.name).toBe('handlePropName');
     expect(validate?.name).toBe('handleGroupValidation');
   });
 
-  it('默认 1 列，不参与表单自动字段校验', () => {
+  it('默认 1 列，isRequired 仅控制必填星号', () => {
     const plugin = FormItemGroupAccumulate.getPluginMethodByName('handleFormItemGroupLayout') as any;
     const { currentValue } = renderHook(plugin, {
       columns: undefined,
@@ -52,12 +56,9 @@ describe('el-form-item-group plugins', () => {
 
     expect(currentValue.value.class).toContain('el-form-item-group');
     expect(currentValue.value.style['--el-form-item-group-columns']).toBe(1);
-    expect(currentValue.value.rules).toEqual([]);
-    expect(currentValue.value.prop).toBeUndefined();
     expect(currentValue.value.required).toBe(false);
-    expect(currentValue.value[$deletePropsList]).toEqual(
-      expect.arrayContaining(['columns', 'prop', 'ignoreRules', 'trigger', 'isRequired']),
-    );
+    expect(currentValue.value[$deletePropsList]).toEqual(expect.arrayContaining(['columns', 'isRequired']));
+    expect(currentValue.value[$deletePropsList]).not.toEqual(expect.arrayContaining(['prop']));
   });
 
   it('isRequired 仅控制必填 * 号展示，不产生校验规则', () => {
@@ -72,8 +73,6 @@ describe('el-form-item-group plugins', () => {
     });
 
     expect(currentValue.value.required).toBe(true);
-    expect(currentValue.value.rules).toEqual([]);
-    expect(currentValue.value.prop).toBeUndefined();
   });
 
   it('支持 2、3 列', () => {
@@ -113,7 +112,7 @@ describe('el-form-item-group plugins', () => {
   describe('handleGroupValidation', () => {
     const plugin = FormItemGroupAccumulate.getPluginMethodByName('handleGroupValidation') as any;
 
-    it('应暴露 validated，且默认不注册 EP rules/prop', () => {
+    it('应暴露 validated，并把 NASL rules 转成 EP 原生 rules', () => {
       const { currentValue } = renderHook(plugin, {
         rules: 'required',
         validatingValue: '',
@@ -122,18 +121,15 @@ describe('el-form-item-group plugins', () => {
         [$deletePropsList]: [],
       });
 
-      expect(currentValue.value.prop).toBeUndefined();
-      expect(currentValue.value.rules).toEqual([]);
+      expect(typeof currentValue.value.prop).toBe('string');
+      expect(Array.isArray(currentValue.value.rules)).toBe(true);
+      expect(currentValue.value.rules.length).toBeGreaterThan(0);
+      expect(typeof currentValue.value.rules[0].validator).toBe('function');
       expect(typeof currentValue.value.ref.validated).toBe('function');
       expect(currentValue.value[$deletePropsList]).toEqual(
-        expect.arrayContaining([
-          'validatingValue',
-          'validatingProcess',
-          'errorTipType',
-          'ignoreValidation',
-          'rules',
-        ]),
+        expect.arrayContaining(['validatingValue', 'validatingProcess', 'errorTipType', 'ignoreValidation']),
       );
+      expect(currentValue.value[$deletePropsList]).not.toEqual(expect.arrayContaining(['rules']));
     });
 
     it('validated 应以 validatingValue 校验失败（默认文字与错误状态）', async () => {
@@ -244,7 +240,7 @@ describe('el-form-item-group plugins', () => {
       await currentValue.value.ref.validated();
       await waitForNextUpdate();
       expect(currentValue.value.validateStatus).toBeUndefined();
-      expect(currentValue.value.error).toBeUndefined();
+      expect(currentValue.value.error).toBeTruthy();
       expect(currentValue.value.class).toContain('el-form-item-group--error-border');
     });
   });

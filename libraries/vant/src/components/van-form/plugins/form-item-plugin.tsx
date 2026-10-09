@@ -2,6 +2,48 @@ import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import { useMemo } from '@/plugins/hooks';
 
+export function convertVanFormItemRules(
+  rulesProps,
+  getValidateValueHolder?: { current?: (fieldValue?: any) => any },
+) {
+  const list = _.isString(rulesProps) ? [{ validate: rulesProps, required: true }] : rulesProps ?? [];
+  return (
+    _.map(list, (item) => {
+      if (!item?.validate) return item;
+
+      const validate = _.isFunction(item.validate)
+        ? _.wrap(item.validate, async (fn, ...args) => {
+            const result = await fn(...args);
+            const errorMessage = result?.errorMsg;
+            if (errorMessage) throw new Error(errorMessage);
+            if (!result && _.isString(item.message)) throw new Error(item.message);
+            return result;
+          })
+        : item.validate;
+
+      const validator = new (VusionValidator as any)(undefined, localizeRules, [_.assign({}, item, { validate })]);
+      return {
+        message: item.message,
+        validator: async (value) => {
+          const getter = getValidateValueHolder?.current;
+          const validateValue = getter ? getter(value) : _.get(value, 'value', value);
+          const result = await new Promise((resolve) => {
+            validator
+              .validate(validateValue)
+              .then(() => {
+                resolve(true);
+              })
+              .catch(() => {
+                resolve(false);
+              });
+          });
+          return result;
+        },
+      };
+    }) ?? []
+  );
+}
+
 export function handlePropName(props) {
   const nameProps = props.get('name');
   const uniqueId = useMemo(() => _.uniqueId('formItemPropName'), []);
@@ -18,26 +60,6 @@ export function handleSlotToInputSlot(props) {
 export function handleRules(props) {
   const rulesProps = props.get('rules') ?? [];
 
-  const rules = useMemo(() => {
-    const ideRules = _.map(rulesProps, (item) => ({
-        message: item.message,
-        required: item.required,
-        validator: async (value, rule, callback) => {
-          const validator = new (VusionValidator as any)(undefined, localizeRules, [item]);
-          const result = await new Promise((resolve) => {
-            validator
-              .validate(_.get(value, 'value', value))
-              .then(() => {
-                resolve(true);
-              })
-              .catch((errorMessage) => {
-                resolve(false);
-              });
-          });
-          return result;
-        },
-      })) ?? [];
-    return ideRules;
-  }, [rulesProps]);
+  const rules = useMemo(() => convertVanFormItemRules(rulesProps), [rulesProps]);
   return { rules };
 }

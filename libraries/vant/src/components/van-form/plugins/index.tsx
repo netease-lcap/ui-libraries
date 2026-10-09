@@ -43,7 +43,7 @@ export function handleModelValue(props) {
       },
       resetForm: () => {
         ref.resetValidation();
-        _.values(formItemList.value).forEach((item) => _.attempt(item.resetField));
+        _.values(formItemList.value).forEach((item: any) => _.attempt(item.resetField));
       },
     }),
   };

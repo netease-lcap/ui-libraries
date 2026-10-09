@@ -50,7 +50,7 @@ const Template = (args) => ({
     };
   },
   template: `
-    <van-form  ref="form" @submit="formSubmit">
+    <van-form  ref="form" @submit="formSubmit" :scroll-to-error="true" style="height: 100px;overflow: auto;" >
       {{fieldValue}}输入框
       <van-form-field
              :rules="[{validate: 'filled',message: '表单项不得为空',trigger: 'input+blur',required: true}]"

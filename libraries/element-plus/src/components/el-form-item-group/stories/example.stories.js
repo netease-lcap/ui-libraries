@@ -272,29 +272,33 @@ export const QueryFormColumns = {
   }),
 };
 
-/** 分组手动校验：值固定为 validatingValue，仅 validated() 触发 */
+/** 分组校验：与 form-item 相同，NASL rules 转成 EP 原生 rules，validatingValue 写入表单 model */
 export const ManualValidated = {
   name: '手动 validated 校验',
   render: () => ({
     setup() {
       const formModel = ref({ name: '', phone: '' });
       const groupRef = ref(null);
+      const formRef = ref(null);
       const validatingValue = ref('');
       const lastResult = ref('');
       const runValidate = async () => {
-        // validatingValue.value = `${formModel.value.name}|${formModel.value.phone}`;
         const result = await groupRef.value?.validated?.();
         console.log(result, '==');
         lastResult.value = result?.valid ? '通过' : '未通过';
       };
-      return { formModel, groupRef, validatingValue, lastResult, runValidate };
+      const runFormValidate = async () => {
+        const result = await formRef.value?.validated?.();
+        lastResult.value = result?.valid ? '表单通过' : '表单未通过';
+      };
+      return { formModel, groupRef, formRef, validatingValue, lastResult, runValidate, runFormValidate };
     },
     template: `
     <div style="padding: 8px 0;">
       <p style="margin: 0 0 12px;color: var(--el-text-color-secondary);font-size: 13px;">
-        分组校验值固定为 <code>validatingValue</code>，不会随表单 blur/submit 自动校验，只能调用 <code>validated()</code>。
+        分组把 <code>rules</code> 转成 EP 原生校验，校验值为 <code>validatingValue</code>。可调用分组 <code>validated()</code> 或表单 <code>validated()</code>。
       </p>
-      <el-form :model="formModel" label-position="right" layout="block">
+      <el-form ref="formRef" :model="formModel" label-position="right" layout="block">
         <el-form-item-group
           ref="groupRef"
           label="联系信息"
@@ -309,6 +313,7 @@ export const ManualValidated = {
         </el-form-item-group>
         <div style="margin-top: 12px; display: flex; gap: 8px; align-items: center;">
           <el-button type="primary" @click="runValidate">校验分组</el-button>
+          <el-button @click="runFormValidate">校验表单</el-button>
           <span style="color: var(--el-text-color-secondary);font-size: 13px;">
             validatingValue = 「{{ validatingValue || '空' }}」；结果：{{ lastResult || '-' }}
           </span>

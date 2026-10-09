@@ -1,18 +1,51 @@
 import _ from 'lodash';
-import VusionValidator, { localizeRules } from '@lcap/validator';
-import { useCallback, useState, useControllableValue, useEffect } from '@/plugins/hooks';
+import { useCallback, useState, useEffect, useMemo, useRef } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { $formProvide } from '@/components/van-form/constants';
 import { addClass } from '@/utils';
-import { handlePropName, handleSlotToInputSlot, handleRules } from '@/components/van-form/plugins/form-item-plugin';
+import {
+  handlePropName,
+  handleSlotToInputSlot,
+  convertVanFormItemRules,
+} from '@/components/van-form/plugins/form-item-plugin';
 
-export { handlePropName, handleSlotToInputSlot, handleRules };
+export { handlePropName, handleSlotToInputSlot };
+
+function resolveValidateMessage(error: unknown, fallback = '校验失败') {
+  if (_.isError(error)) return error.message || fallback;
+  if (_.isString(error) && error) return error;
+  if (error && typeof error === 'object' && 'message' in (error as any) && (error as any).message) {
+    return String((error as any).message);
+  }
+  return String(error ?? fallback);
+}
+
+function execVanRules(rules: any[], value: any) {
+  return (rules ?? []).reduce((promise, rule) => {
+    return promise.then(() => {
+      if (!rule?.validator) {
+        if (rule?.required && (value === undefined || value === null || value === '')) {
+          return Promise.reject(new Error(rule.message || '表单项不得为空'));
+        }
+        return undefined;
+      }
+      return Promise.resolve(rule.validator(value, rule)).then((result) => {
+        if (result === false) {
+          return Promise.reject(new Error(rule.message || '校验失败'));
+        }
+        return result;
+      });
+    });
+  }, Promise.resolve());
+}
 
 export function handleValidateValue(props) {
-  const originRules = props.get('rules') ?? [];
-  const deletePropsList = (props.get($deletePropsList) ?? []).concat(['value', 'originRules']);
+  const value = props.get('value');
+  const emit = props.get('emit');
+  const deletePropsList = (props.get($deletePropsList) ?? []).concat(['value']);
   return {
-    originRules,
+    modelValue: _.get(value, 'value', value),
+    'onUpdate:modelValue': (next) => emit?.('update:value', next),
     [$deletePropsList]: deletePropsList,
   };
 }
@@ -35,28 +68,41 @@ export function handleValidated(props) {
   const emit = props.get('emit');
   const ref = props.get('ref') ?? {};
   const value = props.get('value');
-  const rulesProps = props.get('originRules') ?? [];
+  const rulesProps = props.get('rules') ?? [];
   const name = props.get('name');
   const inject = props.get('inject');
   const [valid, setValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+
+  const currentValue = _.get(value, 'value', value);
+  const currentValueRef = useRef(currentValue);
+  currentValueRef.value = currentValue;
+  const getValidateValueHolder = useRef<{ current?:(fieldValue?: any) => any }>({
+    current: undefined,
+  });
+  getValidateValueHolder.value.current = () => currentValueRef.value;
+  const rules = useMemo(() => convertVanFormItemRules(rulesProps, getValidateValueHolder.value), [rulesProps]);
 
   const validated = useCallback(async () => {
-    const validator = new (VusionValidator as any)(undefined, localizeRules, rulesProps);
+    const { setValue } = inject?.value?.[$formProvide] ?? {};
+    setValue?.(name, currentValue);
     try {
-      await validator.validate(_.get(value, 'value', value));
+      if (typeof ref.validate === 'function') {
+        const error = await ref.validate();
+        if (error) {
+          throw error;
+        }
+      } else {
+        await execVanRules(rules, currentValue);
+      }
       setValid(true);
-      setErrorMessage('');
       emit?.('sync:state', 'valid', true);
       return { valid: true };
     } catch (err) {
-      const message = _.isError(err) ? err.message : String(err ?? '校验失败');
       setValid(false);
-      setErrorMessage(message);
       emit?.('sync:state', 'valid', false);
-      return { valid: false };
+      return { valid: false, message: resolveValidateMessage(err) };
     }
-  }, [rulesProps, value, emit]);
+  }, [currentValue, emit, inject, name, ref, rules]);
 
   useEffect(() => {
     emit?.('sync:state', 'valid', valid);
@@ -65,17 +111,16 @@ export function handleValidated(props) {
   useEffect(() => {
     const { setFormitem, deleteFormitem, isInForm, setValue } = inject?.value?.[$formProvide] ?? {};
     if (!isInForm) return undefined;
-    setValue?.(name, value);
+    setValue?.(name, currentValue);
     setFormitem?.(name, {
-      getModelValue: () => value,
+      getModelValue: () => currentValue,
       resetField: () => {},
-      validated,
     });
     return () => deleteFormitem?.(name);
-  }, [name, value, validated, inject]);
-
+  }, [name, currentValue, inject]);
   return {
-    errorMessage,
+    rules,
+    modelValue: currentValue,
     ref: Object.assign(ref, {
       validated,
       get valid() {

@@ -2,7 +2,7 @@ import { Form as VantForm, Field } from 'vant';
 import _ from 'lodash';
 import { registerComponent } from '@/plugins';
 import * as basicPlugin from './plugins';
-import * as formItemPlugin from './plugins/form-item-plugin';
+import { handlePropName, handleSlotToInputSlot, handleRules } from './plugins/form-item-plugin';
 import './index.css';
 
 function VanFormRegister(BaseComponent, plugin = {}, extend = true) {
@@ -16,7 +16,7 @@ const VanForm = registerComponent(VantForm, {
 });
 
 const VanFormItem = registerComponent(Field, {
-  plugin: formItemPlugin,
+  plugin: { handlePropName, handleSlotToInputSlot, handleRules },
   name: 'van-form-item',
 });
 

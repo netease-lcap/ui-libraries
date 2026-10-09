@@ -6,6 +6,47 @@ import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { $formProvide } from '@/components/el-form/constants';
 import { $deletePropsList } from '@/plugins/constants';
 
+export function convertFormItemRules(rulesProps: any, trigger = 'blur') {
+  const list = _.isString(rulesProps) ? [{ validate: rulesProps, required: true, trigger }] : rulesProps ?? [];
+  return (
+    _.map(list, (item: any) => {
+      if (!item?.validate) return item;
+
+      const validate = _.isFunction(item.validate)
+        ? _.wrap(item.validate, async (fn, ...args) => {
+            const result = await fn(...args);
+            const errorMessage = result?.errorMsg;
+            if (errorMessage) throw new Error(errorMessage);
+            if (!result && _.isString(item.message)) throw new Error(item.message);
+            return result;
+          })
+        : item.validate;
+
+      const validator = new (VusionValidator as any)(undefined, localizeRules, [_.assign({}, item, { validate })]);
+      return {
+        required: item.required,
+        trigger: _.isString(item.trigger) ? item.trigger.split('+') : [trigger],
+        validator: (rule, value, callback) => {
+          return new Promise((resolve) => {
+            validator
+              .validate(value)
+              .then(() => {
+                resolve(true);
+              })
+              .catch((errorMessage) => {
+                callback(errorMessage);
+                resolve({
+                  result: false,
+                  message: errorMessage,
+                });
+              });
+          });
+        },
+      };
+    }) ?? []
+  );
+}
+
 const FormItemPluginAccumulate = new PluginAccumulateTypes<nasl.ui.ElFormItemProOptions, FormItemProps>();
 export default FormItemPluginAccumulate.addPlugin({
   name: 'handlePropName',
@@ -30,42 +71,7 @@ export default FormItemPluginAccumulate.addPlugin({
 
       const rules = useMemo(() => {
         if (ignoreRules) return [];
-        const ideRules = _.map(rulesProps, (item: any) => {
-          if (!item.validate) return item;
-
-          const validate = _.isFunction(item.validate)
-            ? _.wrap(item.validate, async (fn, ...args) => {
-              const result = await fn(...args);
-              const errorMessage = result?.errorMsg;
-              if (errorMessage) throw new Error(errorMessage);
-              if (!result && _.isString(item.message)) throw new Error(item.message);
-              return result;
-            })
-            : item.validate;
-
-          const validator = new (VusionValidator as any)(undefined, localizeRules, [_.assign(item, { validate })]);
-          return {
-            // message: item.message,
-            required: item.required,
-            trigger: _.isString(item.trigger) ? item.trigger.split('+') : [trigger],
-            validator: (rule, value, callback) => {
-              return new Promise((resolve) => {
-                validator
-                  .validate(value)
-                  .then(() => {
-                    resolve(true);
-                  })
-                  .catch((errorMessage) => {
-                    callback(errorMessage);
-                    resolve({
-                      result: false,
-                      message: errorMessage,
-                    });
-                  });
-              });
-            },
-          };
-        }) ?? [];
+        const ideRules = convertFormItemRules(rulesProps, trigger);
         return [...ideRules, ...(Array.isArray(required) ? required : [required])];
       }, [rulesProps, trigger, ignoreRules, required]);
       return { rules };

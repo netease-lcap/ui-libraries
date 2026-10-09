@@ -4,7 +4,7 @@
         :tabindex="readonly || computedDisabled ? '' : 0"
         @drop.prevent="onDrop"
         @paste="onPaste"
-        @dragover.prevent="dragover = true"
+        @dragover.prevent="onDragover"
         @dragleave.prevent="dragover = false">
         <i-ico :name="uploadIcon" v-if="uploadIcon" notext :class="$style.uploadIcon"></i-ico>
         <input :class="$style.file" ref="file" type="file" :name="name" :accept="accept" :multiple="multiple" :readonly="readonly" :disabled="computedDisabled" @click.stop @change="onChange">
@@ -790,9 +790,16 @@ export default {
             this.emitInputEvent();
             this.$emit('clear', { value: this.currentValue }, this);
         },
+        onDragover() {
+            // 禁用文件上传时，不展示拖拽激活态，避免用户误以为可拖拽上传
+            if (this.disableUpload)
+                return;
+
+            this.dragover = true;
+        },
         onDrop(e) {
             this.dragover = false;
-            if (this.readonly || this.computedDisabled)
+            if (this.readonly || this.computedDisabled || this.disableUpload)
                 return;
 
             if (this.openCropper) {
@@ -820,7 +827,7 @@ export default {
             this.uploadFiles(e.dataTransfer.files);
         },
         onPaste(e) {
-            if (this.readonly || this.computedDisabled)
+            if (this.readonly || this.computedDisabled || this.disableUpload)
                 return;
             if (this.pastable)
                 this.uploadFiles(e.clipboardData.files);
