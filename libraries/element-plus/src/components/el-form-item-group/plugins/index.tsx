@@ -228,11 +228,7 @@ export default FormItemGroupAccumulate.addPlugin({
           return { valid: true };
         }
         try {
-          if (typeof ref.validate === 'function') {
-            await ref.validate();
-          } else {
-            await execNativeRules(rules, value);
-          }
+          await execNativeRules(rules, value);
           setValid(true);
           applyErrorTipUI(true);
           emit?.('sync:state', 'valid', true);
@@ -255,7 +251,7 @@ export default FormItemGroupAccumulate.addPlugin({
       ]);
 
       const showErrorBorder = errorTipType === 'textAndBorder' && Boolean(borderTipMessage);
-
+      console.log(rules, 'rules');
       return {
         prop,
         rules,
