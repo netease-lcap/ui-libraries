@@ -336,13 +336,16 @@ export default {
       }
     },
   },
-  mounted() {
+  async mounted() {
     if (this.$env && this.$env.VUE_APP_DESIGNER) {
       this.observerwh = new MutationObserver(this.pwd);
       this.observerwh.observe(this.$refs.body, {
           attributes: true, childList: true, subtree: true
       });
     }
+
+    // 等待DOM完全渲染后再计算宽度
+    await this.$nextTick();
 
     if (this.iffall) {
       this.init();
