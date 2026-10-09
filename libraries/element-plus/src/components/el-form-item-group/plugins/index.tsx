@@ -173,6 +173,7 @@ export default FormItemGroupAccumulate.addPlugin({
           const originValidator = rule.validator;
           return {
             ...rule,
+            trigger: [],
             validator: (nativeRule, value, callback) => {
               return Promise.resolve(
                 originValidator(nativeRule, value, (err) => {
