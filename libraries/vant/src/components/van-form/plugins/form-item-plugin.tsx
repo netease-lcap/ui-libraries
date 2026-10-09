@@ -2,7 +2,10 @@ import _ from 'lodash';
 import VusionValidator, { localizeRules } from '@lcap/validator';
 import { useMemo } from '@/plugins/hooks';
 
-export function convertVanFormItemRules(rulesProps) {
+export function convertVanFormItemRules(
+  rulesProps,
+  getValidateValueHolder?: { current?: (fieldValue?: any) => any },
+) {
   const list = _.isString(rulesProps) ? [{ validate: rulesProps, required: true }] : rulesProps ?? [];
   return (
     _.map(list, (item) => {
@@ -21,11 +24,12 @@ export function convertVanFormItemRules(rulesProps) {
       const validator = new (VusionValidator as any)(undefined, localizeRules, [_.assign({}, item, { validate })]);
       return {
         message: item.message,
-        required: item.required,
         validator: async (value) => {
+          const getter = getValidateValueHolder?.current;
+          const validateValue = getter ? getter(value) : _.get(value, 'value', value);
           const result = await new Promise((resolve) => {
             validator
-              .validate(_.get(value, 'value', value))
+              .validate(validateValue)
               .then(() => {
                 resolve(true);
               })

@@ -1,16 +1,15 @@
 import _ from 'lodash';
-import { useCallback, useState, useEffect, useMemo } from '@/plugins/hooks';
+import { useCallback, useState, useEffect, useMemo, useRef } from '@/plugins/hooks';
 import { $deletePropsList } from '@/plugins/constants';
 import { $formProvide } from '@/components/van-form/constants';
 import { addClass } from '@/utils';
 import {
   handlePropName,
   handleSlotToInputSlot,
-  handleRules,
   convertVanFormItemRules,
 } from '@/components/van-form/plugins/form-item-plugin';
 
-export { handlePropName, handleSlotToInputSlot, handleRules };
+export { handlePropName, handleSlotToInputSlot };
 
 function resolveValidateMessage(error: unknown, fallback = '校验失败') {
   if (_.isError(error)) return error.message || fallback;
@@ -74,8 +73,14 @@ export function handleValidated(props) {
   const inject = props.get('inject');
   const [valid, setValid] = useState(true);
 
-  const rules = useMemo(() => convertVanFormItemRules(rulesProps), [rulesProps]);
   const currentValue = _.get(value, 'value', value);
+  const currentValueRef = useRef(currentValue);
+  currentValueRef.value = currentValue;
+  const getValidateValueHolder = useRef<{ current?:(fieldValue?: any) => any }>({
+    current: undefined,
+  });
+  getValidateValueHolder.value.current = () => currentValueRef.value;
+  const rules = useMemo(() => convertVanFormItemRules(rulesProps, getValidateValueHolder.value), [rulesProps]);
 
   const validated = useCallback(async () => {
     const { setValue } = inject?.value?.[$formProvide] ?? {};
@@ -113,8 +118,8 @@ export function handleValidated(props) {
     });
     return () => deleteFormitem?.(name);
   }, [name, currentValue, inject]);
-
   return {
+    rules,
     modelValue: currentValue,
     ref: Object.assign(ref, {
       validated,
