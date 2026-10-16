@@ -71,12 +71,15 @@ export const Demo2 = {
       handleClick(c) {
         console.log('click');
       },
+      handleScroll(event) {
+        console.log('scroll', event);
+      },
     },
     template: `
-      <el-flex mode="block" direction="vertical">
-        <div style="min-width: 100px; height: 64px;background-color:#ddd"></div>
-        <div style="min-width: 100px; height: 64px;background-color:#ddd"></div>
-        <div style="min-width: 100px; height: 64px;background-color:#ddd"></div>
+      <el-flex @scroll="handleScroll" mode="block" direction="vertical" style="height: 300px;overflow-y: auto;background:red">
+        <div style="min-width: 100px; height: 364px;background-color:#ddd"></div>
+        <div style="min-width: 100px; height: 364px;background-color:#ddd"></div>
+        <div style="min-width: 100px; height: 364px;background-color:#ddd"></div>
       </el-flex>
     `,
   }),
