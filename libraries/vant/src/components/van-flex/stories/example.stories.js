@@ -85,3 +85,21 @@ Block.args = {
   ...Default.args,
   mode: 'block',
 };
+
+export const Scroll = {
+  name: '滚动事件',
+  render: () => ({
+    methods: {
+      handleScroll(event) {
+        console.log('scroll', event);
+      },
+    },
+    template: `
+      <van-flex @scroll="handleScroll" mode="block" direction="vertical" style="height: 300px;overflow-y: auto;background:red">
+        <div style="min-width: 100px; height: 364px;background-color:#ddd"></div>
+        <div style="min-width: 100px; height: 364px;background-color:#ddd"></div>
+        <div style="min-width: 100px; height: 364px;background-color:#ddd"></div>
+      </van-flex>
+    `,
+  }),
+};
