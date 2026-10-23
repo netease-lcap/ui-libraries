@@ -245,6 +245,9 @@ export default {
             treeSelectTip: '请绑定数据源或插入树选择器节点',
             virtualNodeList: [],
             dataSourceNodeList: [],
+            loadAttemptedValues: new Set(),
+            loadLoading: false,
+            loadRequestToken: 0,
         };
     },
     computed: {
@@ -301,6 +304,7 @@ export default {
             this.$emit('update', this.value, this);
         },
         actualValue() {
+            this.resetLoadAttempts();
             this.loadUntilSelectedItem();
         },
         data() {
@@ -339,9 +343,14 @@ export default {
             if (Array.isArray(list) && list.length) {
                 this.dataSourceObj = {};
                 this.trans2Obj(this.dataSourceObj, list, undefined, type);
+                if (type === 'dataSource') {
+                    // 先同步节点列表并合并虚拟节点，避免 loadUntilSelectedItem 查到上一次数据的残留节点
+                    this.dataSourceNodeList = this.dataSourceObj;
+                    this.dataSourceObj = { ...this.dataSourceNodeList, ...this.virtualNodeList };
+                }
             }
             this.loadUntilSelectedItem();
-            return this.dataSourceObj;
+            return type === 'dataSource' ? this.dataSourceNodeList : this.dataSourceObj;
         },
         mergeDataSourceObj(list, type) {
             if (Array.isArray(list) && list.length) {
@@ -484,46 +493,85 @@ export default {
         },
         handleData() {
             this.currentDataSource = this.normalizeDataSource(this.dataSource || this.data);
+            this.loadRequestToken += 1;
+            this.loadLoading = false;
+            this.resetLoadAttempts();
+            // 换数据源时先清掉旧数据条目，只保留静态虚拟节点
+            this.dataSourceNodeList = [];
+            this.dataSourceObj = { ...this.virtualNodeList };
             this.dataSourceNodeList = this.handleDataSourceObj(this.currentDataSource.data, 'dataSource');
             this.dataSourceObj = { ...this.dataSourceNodeList, ...this.virtualNodeList };
         },
-        // 如果有选中值，且没有被查到，且数据可以加载
+        resetLoadAttempts() {
+            this.loadAttemptedValues = new Set();
+        },
+        selectedValues() {
+            const { actualValue } = this;
+            if (actualValue === undefined || actualValue === null) {
+                return [];
+            }
+            if (!Array.isArray(actualValue)) {
+                return this.checkable && actualValue === '' ? [] : [actualValue];
+            }
+            // 多选时 [] 是空选，空项不参与选中项补加载
+            return actualValue.filter((value) => value !== undefined && value !== null && value !== '');
+        },
+        findSelectedEntry(value) {
+            return this.$at(this.dataSourceObj, value) || this.$at(this.dataSourceNodeList, value);
+        },
+        nodeKey(node) {
+            const value = this.$at(node, this.valueField);
+            return value === undefined || value === null ? node : String(value);
+        },
+        // 多选要逐项判断，不能把整个数组当成一个 key 去查
+        missingSelectedValues() {
+            return this.selectedValues().filter((value) => !this.findSelectedEntry(value));
+        },
+        // 如果有选中的值还没加载到，且数据可以加载，则继续加载对应层级的节点
         loadUntilSelectedItem() {
             const { load, data } = this.currentDataSource || {};
-            // 如果有选中值，且没有被查到，且数据可以加载
-            if (this.actualValue !== undefined && this.actualValue !== null && !this.selectedItem && load) {
-                if (Array.isArray(data) && data.length) {
-                    const item = this.loadChildren(data);
-                    if (item) {
-                        const childrenField = item.childrenField || this.childrenField;
-                        this.load({
-                            node: item,
-                            childrenField,
-                        });
-                    }
-                } else {
-                    this.load();
-                }
+            if (!load || !this.missingSelectedValues().length) {
+                return;
+            }
+            if (!Array.isArray(data) || !data.length) {
+                this.load();
+                return;
+            }
+            // parentField 是扁平整表模式：tree-view-new 在 parentField 下不渲染按节点加载的展开器
+            // （u-tree-view-new.vue/node.vue），这里也不能用 load({node}) 补，否则会把整表结果重复挂到节点 children 上
+            if (this.parentField) {
+                return;
+            }
+            const item = this.loadChildren(data);
+            if (item) {
+                const childrenField = item.childrenField || this.childrenField;
+                this.load({
+                    node: item,
+                    childrenField,
+                });
             }
         },
+        // 按层查找还没加载过的节点，避免整表数据源/重复节点造成来回加载
         loadChildren(list) {
-            let item;
-            if (Array.isArray(list) && list.length) {
-                for (let i = 0; i < list.length; i++) {
-                    const node = list[i];
-                    const childrenField = node.childrenField || this.childrenField;
-                    const children = this.$at(node, childrenField);
-                    if (Array.isArray(children) && children.length) {
-                        item = this.loadChildren(children);
-                    } else if (!node.isLoaded && !this.$at(node, this.isLeafField)) {
-                        item = node;
-                    }
-                    if (item) {
-                        break;
-                    }
+            if (!Array.isArray(list) || !list.length) {
+                return;
+            }
+            const attempted = this.loadAttemptedValues;
+            const queue = [...list];
+            for (let i = 0; i < queue.length; i++) {
+                const node = queue[i];
+                const nodeKey = this.nodeKey(node);
+                const childrenField = node.childrenField || this.childrenField;
+                const children = this.$at(node, childrenField);
+                if (Array.isArray(children) && children.length) {
+                    // 已加载出子节点的父节点不再重复加载，但仍要向下层查找未命中的选中值
+                    queue.push(...children);
+                    continue;
+                }
+                if (!attempted.has(nodeKey) && !node.isLoaded && !this.$at(node, this.isLeafField)) {
+                    return node;
                 }
             }
-            return item;
         },
         normalizeDataSource(dataSource) {
             const final = {
@@ -632,17 +680,38 @@ export default {
                 this.$refs.input.blur();
         },
         load(params) {
-            if (!this.currentDataSource.load)
+            if (!this.currentDataSource.load || this.loadLoading)
                 return;
-            this.currentDataSource.load(params).then(() => {
-                if(!Array.isArray(this.currentDataSource.data) || this.currentDataSource.data.length === 0) {
+            const dataSource = this.currentDataSource;
+            const token = this.loadRequestToken + 1;
+            this.loadRequestToken = token;
+            this.loadLoading = true;
+            dataSource.load(params).then(() => {
+                if (token !== this.loadRequestToken) {
+                    return;
+                }
+                this.loadLoading = false;
+                if (params && params.node) {
+                    // 只有加载成功才记为已尝试，失败后下一次触发仍会重试
+                    this.loadAttemptedValues.add(this.nodeKey(params.node));
+                }
+                if(!Array.isArray(dataSource.data) || dataSource.data.length === 0) {
+                  // 加载结果为空时也清掉旧数据条目，避免旧选中项继续回显
+                  this.dataSourceNodeList = [];
+                  this.dataSourceObj = { ...this.virtualNodeList };
                   return;
                 }
-                this.dataSourceNodeList = this.handleDataSourceObj(this.currentDataSource.data, 'dataSource');
+                this.dataSourceNodeList = this.handleDataSourceObj(dataSource.data, 'dataSource');
                 this.dataSourceObj = { ...this.dataSourceNodeList, ...this.virtualNodeList };
+            }, () => {
+                if (token === this.loadRequestToken) {
+                    this.loadLoading = false;
+                }
             });
         },
         reload() {
+            this.resetLoadAttempts();
+            this.loadLoading = false;
             this.load();
             this.$refs.treeView && this.$refs.treeView.reload();
         },
