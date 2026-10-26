@@ -245,6 +245,7 @@ export default {
             treeSelectTip: '请绑定数据源或插入树选择器节点',
             virtualNodeList: [],
             dataSourceNodeList: [],
+            loadAttemptedValues: new Set(),
         };
     },
     computed: {
@@ -301,6 +302,7 @@ export default {
             this.$emit('update', this.value, this);
         },
         actualValue() {
+            this.resetLoadAttempts();
             this.loadUntilSelectedItem();
         },
         data() {
@@ -339,9 +341,14 @@ export default {
             if (Array.isArray(list) && list.length) {
                 this.dataSourceObj = {};
                 this.trans2Obj(this.dataSourceObj, list, undefined, type);
+                if (this.checkable && type === 'dataSource') {
+                    // 多选逐项查值前先同步节点列表，避免查到上一次数据的残留节点
+                    this.dataSourceNodeList = this.dataSourceObj;
+                    this.dataSourceObj = { ...this.dataSourceNodeList, ...this.virtualNodeList };
+                }
             }
             this.loadUntilSelectedItem();
-            return this.dataSourceObj;
+            return this.checkable && type === 'dataSource' ? this.dataSourceNodeList : this.dataSourceObj;
         },
         mergeDataSourceObj(list, type) {
             if (Array.isArray(list) && list.length) {
@@ -484,29 +491,65 @@ export default {
         },
         handleData() {
             this.currentDataSource = this.normalizeDataSource(this.dataSource || this.data);
+            this.resetLoadAttempts();
             this.dataSourceNodeList = this.handleDataSourceObj(this.currentDataSource.data, 'dataSource');
             this.dataSourceObj = { ...this.dataSourceNodeList, ...this.virtualNodeList };
         },
-        // 如果有选中值，且没有被查到，且数据可以加载
+        resetLoadAttempts() {
+            this.loadAttemptedValues = new Set();
+        },
+        selectedValues() {
+            const { actualValue } = this;
+            if (actualValue === undefined || actualValue === null) {
+                return [];
+            }
+            if (!Array.isArray(actualValue)) {
+                return this.checkable && actualValue === '' ? [] : [actualValue];
+            }
+            return actualValue.filter((value) => value !== undefined && value !== null && value !== '');
+        },
+        findSelectedEntry(value) {
+            return this.$at(this.dataSourceObj, value) || this.$at(this.dataSourceNodeList, value);
+        },
+        nodeKey(node) {
+            const value = this.$at(node, this.valueField);
+            return value === undefined || value === null ? node : String(value);
+        },
+        missingSelectedValues() {
+            return this.selectedValues().filter((value) => !this.findSelectedEntry(value));
+        },
+        // 单选保持原逻辑；多选逐项找选中值，只有确实缺失时才继续补加载
         loadUntilSelectedItem() {
             const { load, data } = this.currentDataSource || {};
-            // 如果有选中值，且没有被查到，且数据可以加载
-            if (this.actualValue !== undefined && this.actualValue !== null && !this.selectedItem && load) {
-                if (Array.isArray(data) && data.length) {
-                    const item = this.loadChildren(data);
-                    if (item) {
-                        const childrenField = item.childrenField || this.childrenField;
-                        this.load({
-                            node: item,
-                            childrenField,
-                        });
-                    }
-                } else {
-                    this.load();
+            if (!load) {
+                return;
+            }
+            const multi = this.checkable && (Array.isArray(this.actualValue) || this.actualValue === '');
+            if (multi) {
+                if (!this.missingSelectedValues().length) {
+                    return;
                 }
+            } else if (this.actualValue === undefined || this.actualValue === null || this.selectedItem) {
+                return;
+            }
+            if (!Array.isArray(data) || !data.length) {
+                this.load();
+                return;
+            }
+            // 多选 + parentField 是整表扁平模式，tree-view 本身不支持按 node 懒加载
+            if (multi && this.parentField) {
+                return;
+            }
+            const item = this.loadChildren(data, multi);
+            if (item) {
+                const childrenField = item.childrenField || this.childrenField;
+                this.load({
+                    node: item,
+                    childrenField,
+                });
             }
         },
-        loadChildren(list) {
+        loadChildren(list, useAttempt) {
             let item;
             if (Array.isArray(list) && list.length) {
                 for (let i = 0; i < list.length; i++) {
@@ -514,8 +557,8 @@ export default {
                     const childrenField = node.childrenField || this.childrenField;
                     const children = this.$at(node, childrenField);
                     if (Array.isArray(children) && children.length) {
-                        item = this.loadChildren(children);
-                    } else if (!node.isLoaded && !this.$at(node, this.isLeafField)) {
+                        item = this.loadChildren(children, useAttempt);
+                    } else if ((!useAttempt || !this.loadAttemptedValues.has(this.nodeKey(node))) && !node.isLoaded && !this.$at(node, this.isLeafField)) {
                         item = node;
                     }
                     if (item) {
@@ -635,6 +678,10 @@ export default {
             if (!this.currentDataSource.load)
                 return;
             this.currentDataSource.load(params).then(() => {
+                if (params && params.node) {
+                    // 只有成功才记为已尝试，失败后下一次触发仍会重试
+                    this.loadAttemptedValues.add(this.nodeKey(params.node));
+                }
                 if(!Array.isArray(this.currentDataSource.data) || this.currentDataSource.data.length === 0) {
                   return;
                 }
@@ -643,6 +690,7 @@ export default {
             });
         },
         reload() {
+            this.resetLoadAttempts();
             this.load();
             this.$refs.treeView && this.$refs.treeView.reload();
         },
