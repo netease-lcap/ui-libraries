@@ -8,7 +8,7 @@ import { $deletePropsList, $dataSourceDeleteField } from '@/plugins/constants';
 import { useRequestDataSource, useHandleMapField, useFormatDataSource } from '@/plugins/common/dataSource';
 import { ElOption } from '../index';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
-import { ElPreview } from '@/index';
+import { ElPreview, ElText } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
 import { handleComponentInForm } from '@/components/el-form/plugins/form-item';
 import { handleControllableValue } from '@/plugins/common/index';
@@ -97,7 +97,7 @@ export default SelectBasicAccumulate.addPlugin({
               <ElOption {...item}>
                 {optionSlot ? slots?.item?.({ index, item: item?.itemSource ?? item } as any) : item.label}
                 {item.description && (
-                <el-text
+                <ElText
                   style={{ display: 'block', height: '14px', lineHeight: '14px' } as CSSProperties}
                   color="secondary"
                   text={item.description}

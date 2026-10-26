@@ -2,7 +2,7 @@ import { ElMessage, UploadFile, UploadRawFile, UploadContentProps } from 'elemen
 import _ from 'lodash';
 import isNil from 'lodash/isNil';
 import { ElDialog, ElFlex, ElIcon, ElText, ElButton } from '@/components/index';
-import { useRef, useControllableValue, useSyncState, useMemo } from '@/plugins/hooks';
+import { useRef, useControllableValue, useSyncState, useMemo, useState, useEffect } from '@/plugins/hooks';
 import { getIsPreview, getRender } from '@/plugins/common/preview';
 import { $deletePropsList } from '@/plugins/constants';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -202,23 +202,37 @@ export default UploadBasicAccumulate.addAccumulate(idePlugin)
       const urlField = props.get('urlField') || 'filePath';
       const converter = props.get('converter') || 'simple';
       const [value, setValue] = useControllableValue(props);
-      const defaultFileList = useMemo(() => getFileListByValue(value, converter, undefined), [value, converter]);
+      const [innerFileList, setInnerFileList] = useState(getFileListByValue(value, converter, undefined));
+      const selfValueRef = useRef(value);
       const className = useMemo(() => props.get('class', ''), [props]);
+
+      useEffect(() => {
+        if (value === selfValueRef.value) return;
+        selfValueRef.value = value;
+        setInnerFileList(getFileListByValue(value, converter, undefined));
+      }, [value, converter]);
+
+      const commitValue = (fileList: UploadFile[]) => {
+        const newValue = getValueByList(fileList, converter, urlField);
+        selfValueRef.value = newValue;
+        _.attempt(setValue, newValue);
+      };
+
       return {
         class: `${className} cw-upload`,
-        fileList: defaultFileList,
+        fileList: innerFileList,
         onChange: (uploadFile: UploadFile, fileList: UploadFile[]) => {
+          setInnerFileList(fileList);
           if (uploadFile.status === 'success') {
-            const newValue = getValueByList(fileList, converter, urlField);
-            _.attempt(setValue, newValue);
+            commitValue(fileList);
           }
           _.attempt(onChange, uploadFile, fileList);
         },
         value,
         setValue,
         onRemove: (uploadFile, fileList) => {
-          const newValue = removeValueByList(fileList, converter, urlField);
-          _.attempt(setValue, newValue);
+          setInnerFileList(fileList);
+          commitValue(fileList);
           _.attempt(onRemove, uploadFile, fileList);
         },
       };
