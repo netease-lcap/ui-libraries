@@ -73,6 +73,43 @@ describe('el-upload 插件集成测试', () => {
       expect(currentValue.value.onRemove).toBeDefined();
       expect(typeof currentValue.value.onRemove).toBe('function');
     });
+
+    it('多文件依次成功时不应丢掉仍在上传的文件', async () => {
+      const plugins = UploadBasicAccumulate.getPluginMethod({ isInDesigner: false });
+      const { currentValue, waitForNextUpdate } = await renderHooks(plugins, {
+        converter: 'simple',
+        urlField: 'filePath',
+      });
+
+      const file1 = {
+        name: 'a.png',
+        uid: 1,
+        status: 'success',
+        url: 'http://cdn.example.com/a.png',
+        response: { filePath: 'http://cdn.example.com/a.png' },
+      };
+      const file2 = { name: 'b.png', uid: 2, status: 'uploading' };
+
+      currentValue.value.onChange(file1, [file1, file2]);
+      await waitForNextUpdate();
+
+      expect(currentValue.value.fileList).toHaveLength(2);
+      expect(currentValue.value.fileList.map((item) => item.name)).toEqual(['a.png', 'b.png']);
+
+      const file2success = {
+        name: 'b.png',
+        uid: 2,
+        status: 'success',
+        url: 'http://cdn.example.com/b.png',
+        response: { filePath: 'http://cdn.example.com/b.png' },
+      };
+      currentValue.value.onChange(file2success, [file1, file2success]);
+      await waitForNextUpdate();
+
+      expect(currentValue.value.fileList).toHaveLength(2);
+      expect(currentValue.value.value).toContain('a.png');
+      expect(currentValue.value.value).toContain('b.png');
+    });
   });
 
   describe('handleRequestHeaders - 请求头处理', () => {
