@@ -316,9 +316,9 @@ namespace nasl.ui {
       title: '最小日期',
       description: '最小日期',
       setter: { concept: 'InputSetter' },
-      if: (_) => _.type.includes('datetime'),
+      // if: (_) => _.type.includes('datetime'),
     })
-    minDate: nasl.core.Date;
+    minDate: nasl.core.Date | nasl.core.String;
 
     @Prop({
       group: '主要属性',
@@ -326,7 +326,7 @@ namespace nasl.ui {
       description: '最大日期',
       setter: { concept: 'InputSetter' },
     })
-    maxDate: nasl.core.Date;
+    maxDate: nasl.core.Date | nasl.core.String;
 
     @Prop({
       group: '主要属性',
