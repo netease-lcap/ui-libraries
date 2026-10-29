@@ -316,7 +316,7 @@ namespace nasl.ui {
       title: '最小日期',
       description: '最小日期',
       setter: { concept: 'InputSetter' },
-      if: (_) => _.type.includes('datetime'),
+      // if: (_) => _.type.includes('datetime'),
     })
     minDate: nasl.core.Date;
 
