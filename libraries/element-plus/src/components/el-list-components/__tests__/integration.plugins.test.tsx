@@ -482,6 +482,54 @@ describe('el-list-components 插件集成测试', () => {
       expect(currentValue.value.class).toContain('el-list-components-infinite-scroll');
     });
 
+    it('autoMore 在 list 达到 total 后应标记 finished', async () => {
+      const plugins = listComponentsBasicAccumulate.getPluginMethod({ isInDesigner: false });
+      const dataSource = vi.fn().mockResolvedValue({
+        list: [
+          { label: 'Item 1', value: '1' },
+          { label: 'Item 2', value: '2' },
+        ],
+        total: 2,
+      });
+      const props = {
+        dataSource,
+        pagination: 'autoMore',
+        pageSize: 2,
+        currentPage: 1,
+        emit: vi.fn(),
+        slots: {},
+      };
+
+      const { currentValue, waitForNextUpdate } = await renderHooks(plugins, props);
+      await waitForNextUpdate();
+
+      expect(currentValue.value.finished).toBe(true);
+    });
+
+    it('autoMore 在 list 未达到 total 时不应 finished', async () => {
+      const plugins = listComponentsBasicAccumulate.getPluginMethod({ isInDesigner: false });
+      const dataSource = vi.fn().mockResolvedValue({
+        list: [
+          { label: 'Item 1', value: '1' },
+          { label: 'Item 2', value: '2' },
+        ],
+        total: 10,
+      });
+      const props = {
+        dataSource,
+        pagination: 'autoMore',
+        pageSize: 2,
+        currentPage: 1,
+        emit: vi.fn(),
+        slots: {},
+      };
+
+      const { currentValue, waitForNextUpdate } = await renderHooks(plugins, props);
+      await waitForNextUpdate();
+
+      expect(currentValue.value.finished).toBe(false);
+    });
+
     it('应该处理异步数据源', async () => {
       const plugins = listComponentsBasicAccumulate.getPluginMethod({ isInDesigner: false });
       const emit = vi.fn();
