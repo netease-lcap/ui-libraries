@@ -209,6 +209,10 @@ export default listComponentsBasicAccumulate
         dataSource: resultData.list as any,
       });
       const dataList = formMode ? model.value : data;
+      const total = Number(_.get(resultData, 'total'));
+      const finished =
+        pagination !== 'autoMore' ||
+        (!_.isNil(resultData) && Number.isFinite(total) && data.length >= total);
 
       const loadTo = useCallback((page) => reload({ currentPage: page }), [reload]);
       const selfRef = _.assign(ref, { reload, loadTo, data, getData: () => data });
@@ -254,6 +258,7 @@ export default listComponentsBasicAccumulate
         ref: selfRef,
         pageProps: _.assign(pageProps, { total: resultData.total }),
         loading,
+        finished,
         slots: _.assign({}, slots, { default: defaultSlots }),
       };
     },
@@ -317,11 +322,18 @@ export default listComponentsBasicAccumulate
       const pagination = props.get('pagination');
       const className = props.get('class');
       const noWrapper = Boolean(props.get('noWrapper'));
+      const loading = props.get('loading');
+      const finished = props.get('finished');
+      const loadingRef = useRef(loading);
+      const finishedRef = useRef(finished);
+      loadingRef.value = loading;
+      finishedRef.value = finished;
       useEffect(() => {
         if (noWrapper || !_.isElement(target.value) || pagination !== 'autoMore') {
           return () => {};
         }
         const scrollHandler = () => {
+          if (loadingRef.value || finishedRef.value) return;
           const { scrollHeight, clientHeight, scrollTop } = target.value;
           if (scrollHeight - scrollTop - clientHeight <= 50) {
             setCurrentPage?.(currentPageRef.value + 1);
