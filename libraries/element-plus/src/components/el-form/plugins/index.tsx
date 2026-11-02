@@ -62,13 +62,15 @@ export default FormBasicAccumulate.addPlugin({
           const groupValidated = _.map(itemValidatedList.value, (item) => item?.());
           return ref
             .validate()
-            .then(() => Promise.all(groupValidated).then((results) => {
+            .then(() =>
+              Promise.all(groupValidated).then((results) => {
                 // 任一分组成员返回 { valid: false } 时走异常分支
                 if (_.some(results, (item) => _.has(item, 'valid') && item.valid === false)) {
                   return Promise.reject(results);
                 }
                 return results;
-              }))
+              }),
+            )
             .then(
               () => ({ valid: true }),
               () => ({ valid: false }),
@@ -84,7 +86,7 @@ export default FormBasicAccumulate.addPlugin({
           );
         },
         resetForm: () => {
-          ref.resetFields();
+          _.attempt(_.get(ref, 'resetField', () => {}));
           _.values(formItemList.value).forEach((item: any) => _.attempt(item.resetField));
         },
       }),
