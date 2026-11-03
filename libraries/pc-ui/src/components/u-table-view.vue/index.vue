@@ -2788,6 +2788,18 @@ export default {
             const rowSpans = key === undefined ? undefined : this.autoRowSpan[rowIndex];
             return rowSpans ? rowSpans[key] : undefined;
         },
+        /**
+         * 数据里手写的合并配置（item.rowSpan / item.colSpan）里的列下标，按列配置里的原始列顺序解释。
+         * 渲染时拿到的是可见列下标，这里换算回原始下标：列被隐藏后换算不到那一列，合并就不生效，
+         * 不会因为可见列下标前移而把合并迁移到后面的列上。
+         */
+        getOriginColumnIndex(columnIndex) {
+            const columnVM = this.visibleColumnVMs && this.visibleColumnVMs[columnIndex];
+            if (!columnVM || !this.columnVMs)
+                return undefined;
+            const originColumnIndex = this.columnVMs.indexOf(columnVM);
+            return originColumnIndex === -1 ? undefined : originColumnIndex;
+        },
         autoMergeRow(currentData = this.currentData) {
             // 这里要再重置一下，因为表格列也会调用这个方法
             this.autoRowSpan = [];
@@ -2813,7 +2825,8 @@ export default {
         },
         getItemColSpan(item, rowIndex, columnIndex) {
             if (Array.isArray(item.colSpan)) {
-                const config = item.colSpan.find((configItem) => configItem[0] === columnIndex);
+                // item.colSpan 里的列下标按原始列解释，列被隐藏时不生效、不迁移
+                const config = item.colSpan.find((configItem) => configItem[0] === this.getOriginColumnIndex(columnIndex));
                 if (config) {
                     for (let i = 1; i < config[1]; i++) {
                         if (!this.autoColSpan[rowIndex]) {
@@ -2830,7 +2843,8 @@ export default {
         },
         getItemRowSpan(item, rowIndex, columnIndex) {
             if (Array.isArray(item.rowSpan)) {
-                const config = item.rowSpan.find((configItem) => configItem[0] === columnIndex);
+                // item.rowSpan 里的列下标按原始列解释，列被隐藏时不生效、不迁移
+                const config = item.rowSpan.find((configItem) => configItem[0] === this.getOriginColumnIndex(columnIndex));
                 if (config) {
                     const key = this.getColumnIndexMergeKey(columnIndex);
                     for (let i = 1; i < config[1]; i++) {

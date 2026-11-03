@@ -55,6 +55,7 @@ import CasesDemo51 from '../demos/cases/CasesDemo51.vue';
 import CasesDemo52 from '../demos/cases/CasesDemo52.vue';
 import CasesDemo53 from '../demos/cases/CasesDemo53.vue';
 import CasesDemo54 from '../demos/cases/CasesDemo54.vue';
+import CasesDemo55 from '../demos/cases/CasesDemo55.vue';
 
 Vue.use(CloudUI);
 
@@ -553,6 +554,15 @@ export const Demo53 = {
   render: () => ({
     components: {
       DeprecatedDemo: CasesDemo54,
+    },
+    template: '<deprecated-demo />',
+  }),
+};
+
+export const Demo54 = {
+  render: () => ({
+    components: {
+      DeprecatedDemo: CasesDemo55,
     },
     template: '<deprecated-demo />',
   }),
