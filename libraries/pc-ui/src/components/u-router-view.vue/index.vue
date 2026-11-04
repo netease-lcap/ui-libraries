@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.fake" v-if="$env.VUE_APP_DESIGNER" :designer="$env.VUE_APP_DESIGNER && designer">
         <div :class="$style.fakeRouter">
-          <router-view></router-view>
+          <router-view :key="routerKey"></router-view>
         </div>
         <div :class="$style.fakeEmpty">
           <span>此容器为子页面呈现占位，可在子页面编辑内容</span>
@@ -17,9 +17,9 @@
           </div>
         </div>
     </div>
-    <router-view v-else-if="disableKeepAlive"></router-view>
+    <router-view v-else-if="disableKeepAlive" :key="routerKey"></router-view>
     <keep-alive v-else :include="keepAliveInclude" :exclude="keepAliveExclude" :max="keepAliveMax">
-        <router-view></router-view>
+        <router-view :key="routerKey"></router-view>
     </keep-alive>
 </template>
 
@@ -38,6 +38,7 @@ export default {
         keepAliveInclude: { type: [Array, String, RegExp] },
         keepAliveExclude: { type: [Array, String, RegExp] },
         keepAliveMax: { type: Number },
+        routerKey: { type: String },
     },
 };
 </script>
