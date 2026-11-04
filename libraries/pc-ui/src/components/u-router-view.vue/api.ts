@@ -53,5 +53,15 @@ namespace nasl.ui {
             if: (_) => !_.disableKeepAlive,
         })
         keepAliveMax: nasl.core.Integer;
+
+        @Prop<URouterViewOptions, 'routerKey'>({
+            title: '子页面 key',
+            description: '设置后，该值变化时会重新创建子页面组件(不设置则保持原有行为)',
+            setter: {
+                concept: 'InputSetter',
+            },
+            bindOpen: true,
+        })
+        routerKey: nasl.core.String;
     }
 }
