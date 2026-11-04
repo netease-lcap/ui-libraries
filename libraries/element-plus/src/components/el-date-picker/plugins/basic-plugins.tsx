@@ -126,7 +126,7 @@ export default DatePickerBasicAccumulate.addAccumulate(idePlugin)
     handle(props) {
       const isRange = props.get('range');
       const [value, setValue] = useControllableValue(props);
-      const modelValue = _.isNil(value) || _.isEmpty(value) ? value : dayjs(value);
+      const modelValue = _.isNil(value) || _.isEmpty(value) ? value : dayjs(value as string);
       const valueFormat = props.get('valueFormat');
       const result = {
         modelValue,

@@ -84,7 +84,7 @@ export default FormBasicAccumulate.addPlugin({
           );
         },
         resetForm: () => {
-          ref.resetFields();
+          _.attempt(_.get(ref, 'resetField', () => {}));
           _.values(formItemList.value).forEach((item: any) => _.attempt(item.resetField));
         },
       }),
