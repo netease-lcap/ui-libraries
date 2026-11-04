@@ -50,6 +50,9 @@ export default TableAccumulate.addPlugin({
       defaultValuePropName: 'defaultField',
       defaultValue: '',
       valuePropName: 'field',
+      onChange: (sort) => {
+        emit('sync:state', 'sort', sort);
+      },
     });
     const [order, setOrder] = useControllableValue(props, {
       defaultValuePropName: 'defaultOrder',
