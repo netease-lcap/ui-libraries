@@ -32,14 +32,25 @@ export default SwitchAccumulate.addAccumulate(idePlugin)
     handle: handleControllableValue,
   })
   .addPlugin({
-    name: 'handleEmptyValue',
+    name: 'handleSwitchValue',
     handle(props) {
-      const activeValue = props.get('activeValue');
-      const inactiveValue = props.get('inactiveValue');
       const isEmpty = (value) => value === '' || _.isNil(value);
+      const activeValue = isEmpty(props.get('activeValue')) ? true : props.get('activeValue');
+      const inactiveValue = isEmpty(props.get('inactiveValue')) ? false : props.get('inactiveValue');
+      const modelValue = props.get('modelValue');
+      const matched = modelValue === activeValue || modelValue === inactiveValue;
+      const onUpdateModelValue = props.get('onUpdate:modelValue');
+      // 值对不上时先按关闭值渲染，避免 ElSwitch 在 setup 里同步 emit。
+      // 同步 emit 会让表单立刻重绘，el-zoom-in-top 过渡此时还没有组件实例。
+      useEffect(() => {
+        if (!matched) {
+          _.attempt(onUpdateModelValue, inactiveValue);
+        }
+      }, []);
       return {
-        activeValue: isEmpty(activeValue) ? true : activeValue,
-        inactiveValue: isEmpty(inactiveValue) ? false : inactiveValue,
+        activeValue,
+        inactiveValue,
+        ...(matched ? {} : { modelValue: inactiveValue }),
       };
     },
   })
