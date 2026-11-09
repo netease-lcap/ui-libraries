@@ -636,7 +636,9 @@ export default TableAccumulate.addPlugin({
         return (Array.isArray(nodes) ? nodes : [])
           .map((node: VNode) => {
             const p = node?.props ?? {};
-            return [p.prop, p.type, p.width, p.minWidth, _.get(p, 'style.width'), _.get(p, 'style.min-width')].join(':');
+            return [p.prop, p.type, p.width, p.minWidth, _.get(p, 'style.width'), _.get(p, 'style.min-width')].join(
+              ':',
+            );
           })
           .join('|');
       }, [slots]);
@@ -720,6 +722,18 @@ export default TableAccumulate.addPlugin({
           },
           [mergeColumns, rowSpanMaps],
         ),
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleEmptySlot',
+    handle(props) {
+      const showEmpty = props.get('showEmpty');
+      const slots = props.get('slots');
+      const deletePropsList = props.get($deletePropsList).concat(['showEmpty']);
+      return {
+        [$deletePropsList]: deletePropsList,
+        slots: showEmpty ? slots : _.omit(slots, ['empty']),
       };
     },
   });

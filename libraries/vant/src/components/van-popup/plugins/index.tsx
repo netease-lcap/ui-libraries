@@ -22,3 +22,10 @@ export function handlePopupRef(props) {
     beforeClose,
   };
 }
+
+export function handlePopupAppendTo(props) {
+  const teleport = props.get('teleport', 'reference');
+  return {
+    teleport: teleport === 'reference' ? undefined : teleport,
+  };
+}

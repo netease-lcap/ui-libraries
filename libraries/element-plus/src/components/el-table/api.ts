@@ -14,6 +14,10 @@ namespace nasl.ui {
           slot: 'expandedRow',
           expression: "!this.getAttribute('hasExpandedRow')?.value",
         },
+        {
+          slot: 'empty',
+          expression: "!this.getAttribute('showEmpty')?.value",
+        },
       ],
       events: {
         click: true,
@@ -285,6 +289,17 @@ namespace nasl.ui {
       },
     })
     initialLoad: nasl.core.Boolean = true;
+
+    @Prop({
+      group: '状态属性',
+      title: '自定义空数据',
+      description: '开启后可自定义表格无数据时的展示内容',
+      docDescription: '开启后，表格无数据时展示自定义内容；关闭后使用默认空状态。',
+      setter: {
+        concept: 'SwitchSetter',
+      },
+    })
+    showEmpty: nasl.core.Boolean = false;
 
     @Prop({
       group: '状态属性',
@@ -588,6 +603,12 @@ namespace nasl.ui {
       ],
     })
     slotDefault: () => Array<ViewComponent>;
+
+    @Slot({
+      title: '空数据',
+      description: '表格无数据时展示的内容',
+    })
+    slotEmpty: () => Array<ViewComponent>;
   }
 
   @IDEExtraInfo({
