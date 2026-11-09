@@ -55,7 +55,7 @@ namespace nasl.ui {
       title: '激活值',
       description: '开关打开时的值',
       docDescription: '设置开关打开（激活）时的值。可以是布尔值true、字符串或数字，用于自定义开关的开启状态值。',
-      setter: { concept: 'InputSetter',placeholder: '空值表示true' },
+      setter: { concept: 'InputSetter' },
     })
     activeValue: nasl.core.Boolean | nasl.core.String | nasl.core.Integer = true;
 
@@ -64,7 +64,7 @@ namespace nasl.ui {
       title: '非激活值',
       description: '开关关闭时的值',
       docDescription: '设置开关关闭（非激活）时的值。可以是布尔值false、字符串或数字，用于自定义开关的关闭状态值。',
-      setter: { concept: 'InputSetter',placeholder: '空值表示false' },
+      setter: { concept: 'InputSetter' },
     })
     inactiveValue: nasl.core.Boolean | nasl.core.String | nasl.core.Integer = false;
 
@@ -141,11 +141,7 @@ namespace nasl.ui {
       docDescription: '控制开关的整体尺寸。大：宽松型开关；默认：标准尺寸；小：紧凑型开关。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '大' },
-          { title: '默认' },
-          { title: '小' },
-        ],
+        options: [{ title: '大' }, { title: '默认' }, { title: '小' }],
       },
     })
     size: 'large' | 'default' | 'small';
@@ -187,7 +183,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      childAccept:false,
+      childAccept: false,
       forceUpdateWhenAttributeChange: true,
       additionalAttribute: {
         ':isRequired': {
@@ -204,7 +200,6 @@ namespace nasl.ui {
       {
         name: 'ElSwitch',
       },
-  
     ],
   })
   @Component({
@@ -213,7 +208,9 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormSwitch extends ViewComponent {
-    constructor(options?: Partial<ElFormSwitchOptions & ElFormItemProOptions & Omit<ElSwitchOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormSwitchOptions & ElFormItemProOptions & Omit<ElSwitchOptions, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }
