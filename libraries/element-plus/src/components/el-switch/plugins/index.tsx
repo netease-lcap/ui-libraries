@@ -34,9 +34,8 @@ export default SwitchAccumulate.addAccumulate(idePlugin)
   .addPlugin({
     name: 'handleSwitchValue',
     handle(props) {
-      const isEmpty = (value) => value === '' || _.isNil(value);
-      const activeValue = isEmpty(props.get('activeValue')) ? true : props.get('activeValue');
-      const inactiveValue = isEmpty(props.get('inactiveValue')) ? false : props.get('inactiveValue');
+      const activeValue = props.get('activeValue');
+      const inactiveValue = props.get('inactiveValue');
       const modelValue = props.get('modelValue');
       const matched = modelValue === activeValue || modelValue === inactiveValue;
       const onUpdateModelValue = props.get('onUpdate:modelValue');
