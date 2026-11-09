@@ -32,6 +32,18 @@ export default SwitchAccumulate.addAccumulate(idePlugin)
     handle: handleControllableValue,
   })
   .addPlugin({
+    name: 'handleEmptyValue',
+    handle(props) {
+      const activeValue = props.get('activeValue');
+      const inactiveValue = props.get('inactiveValue');
+      const isEmpty = (value) => value === '' || _.isNil(value);
+      return {
+        activeValue: isEmpty(activeValue) ? true : activeValue,
+        inactiveValue: isEmpty(inactiveValue) ? false : inactiveValue,
+      };
+    },
+  })
+  .addPlugin({
     name: 'handlePreview',
     handle(props) {
       const ref = props.get('ref');

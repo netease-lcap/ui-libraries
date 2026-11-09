@@ -55,7 +55,7 @@ namespace nasl.ui {
       title: '激活值',
       description: '开关打开时的值',
       docDescription: '设置开关打开（激活）时的值。可以是布尔值true、字符串或数字，用于自定义开关的开启状态值。',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'InputSetter',placeholder: '空值表示true' },
     })
     activeValue: nasl.core.Boolean | nasl.core.String | nasl.core.Integer = true;
 
@@ -64,7 +64,7 @@ namespace nasl.ui {
       title: '非激活值',
       description: '开关关闭时的值',
       docDescription: '设置开关关闭（非激活）时的值。可以是布尔值false、字符串或数字，用于自定义开关的关闭状态值。',
-      setter: { concept: 'InputSetter' },
+      setter: { concept: 'InputSetter',placeholder: '空值表示false' },
     })
     inactiveValue: nasl.core.Boolean | nasl.core.String | nasl.core.Integer = false;
 
