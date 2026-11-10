@@ -93,10 +93,11 @@ export const Example5 = {
     },
     template: `
     <div>
-      <el-switch
+      <el-form-switch
         v-model="value"
         active-value="100"
-        inactive-value="0"
+        inactiveValue=""
+
       />
     </div>
     `,

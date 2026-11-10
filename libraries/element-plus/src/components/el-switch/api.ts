@@ -141,11 +141,7 @@ namespace nasl.ui {
       docDescription: '控制开关的整体尺寸。大：宽松型开关；默认：标准尺寸；小：紧凑型开关。',
       setter: {
         concept: 'EnumSelectSetter',
-        options: [
-          { title: '大' },
-          { title: '默认' },
-          { title: '小' },
-        ],
+        options: [{ title: '大' }, { title: '默认' }, { title: '小' }],
       },
     })
     size: 'large' | 'default' | 'small';
@@ -187,7 +183,7 @@ namespace nasl.ui {
   @IDEExtraInfo({
     ideusage: {
       idetype: 'container',
-      childAccept:false,
+      childAccept: false,
       forceUpdateWhenAttributeChange: true,
       additionalAttribute: {
         ':isRequired': {
@@ -204,7 +200,6 @@ namespace nasl.ui {
       {
         name: 'ElSwitch',
       },
-  
     ],
   })
   @Component({
@@ -213,7 +208,9 @@ namespace nasl.ui {
     group: 'Form',
   })
   export class ElFormSwitch extends ViewComponent {
-    constructor(options?: Partial<ElFormSwitchOptions & ElFormItemProOptions & Omit<ElSwitchOptions, keyof ElFormItemProOptions>>) {
+    constructor(
+      options?: Partial<ElFormSwitchOptions & ElFormItemProOptions & Omit<ElSwitchOptions, keyof ElFormItemProOptions>>,
+    ) {
       super();
     }
   }

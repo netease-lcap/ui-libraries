@@ -203,6 +203,18 @@ namespace nasl.ui {
     })
     safeAreaInsetBottom: nasl.core.Boolean = false;
 
+    @Prop({
+      group: '主要属性',
+      title: '弹出层位置依据',
+      description: `设置弹出层依据哪个元素定位位置，可选值：'body'表示添加到 document.body，'reference'表示添加到参考元素中。`,
+      docDescription: '设置弹出层添加到哪个元素',
+      setter: {
+        concept: 'EnumSelectSetter',
+        options: [{ title: '引用元素下' }, { title: '全局body' }],
+      },
+    })
+    teleport: 'reference' | 'body' = 'reference';
+
     @Event({
       title: '点击弹出层',
       description: '点击弹出层时触发'

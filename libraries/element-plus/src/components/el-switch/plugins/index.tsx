@@ -32,6 +32,28 @@ export default SwitchAccumulate.addAccumulate(idePlugin)
     handle: handleControllableValue,
   })
   .addPlugin({
+    name: 'handleSwitchValue',
+    handle(props) {
+      const activeValue = props.get('activeValue');
+      const inactiveValue = props.get('inactiveValue');
+      const modelValue = props.get('modelValue');
+      const matched = modelValue === activeValue || modelValue === inactiveValue;
+      const onUpdateModelValue = props.get('onUpdate:modelValue');
+      // 值对不上时先按关闭值渲染，避免 ElSwitch 在 setup 里同步 emit。
+      // 同步 emit 会让表单立刻重绘，el-zoom-in-top 过渡此时还没有组件实例。
+      useEffect(() => {
+        if (!matched) {
+          _.attempt(onUpdateModelValue, inactiveValue);
+        }
+      }, []);
+      return {
+        activeValue,
+        inactiveValue,
+        ...(matched ? {} : { modelValue: inactiveValue }),
+      };
+    },
+  })
+  .addPlugin({
     name: 'handlePreview',
     handle(props) {
       const ref = props.get('ref');
