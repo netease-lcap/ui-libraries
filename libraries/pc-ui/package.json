@@ -46,7 +46,7 @@
     "countup.js": "^1.9.3",
     "dayjs": "^1.10.7",
     "decimal.js": "^10.4.2",
-    "dompurify": "^2.0.15",
+    "dompurify": "^3.4.17",
     "normalize.css": "^7.0.0",
     "online-svg-icon-vue2": "^1.2.3",
     "regenerator-runtime": "^0.13.9",
@@ -54,7 +54,7 @@
     "swiper": "^7.4.1",
     "vue-cropper": "^0.5.8",
     "whatwg-fetch": "3.6.2",
-    "lodash": "^4.17.5",
+    "lodash": "^4.18.1",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
@@ -103,7 +103,7 @@
   },
   "peerDependencies": {
     "vue": "^2.6.12",
-    "lodash": "^4.17.5"
+    "lodash": "^4.18.1"
   },
   "scripts": {
     "dev": "npm run storybook",
