@@ -344,6 +344,12 @@ namespace nasl.ui {
     onClear: () => any;
 
     @Event({
+      title: '搜索时',
+      description: '可搜索时，输入搜索文字触发',
+    })
+    onSearch: (event: { filterText: nasl.core.String }) => any;
+
+    @Event({
       title: '节点选中状态改变时',
       description: '节点选中状态改变时触发',
     })

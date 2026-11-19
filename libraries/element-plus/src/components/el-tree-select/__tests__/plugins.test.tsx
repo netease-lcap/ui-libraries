@@ -27,6 +27,7 @@ describe('el-tree-select plugins', () => {
         expect(pluginNames).toContain('handleComponentInForm');
         expect(pluginNames).toContain('handleControllableValue');
         expect(pluginNames).toContain('handlePreview');
+        expect(pluginNames).toContain('handleSearch');
       });
     });
 
