@@ -378,6 +378,7 @@ export const Example3 = {
         :props="defaultProps"
         :render-after-expand="false"
         node-key="value"
+        filterable
         show-checkbox
         multiple
         placeholder="请选择"

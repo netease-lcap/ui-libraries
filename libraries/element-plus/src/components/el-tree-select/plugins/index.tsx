@@ -7,7 +7,7 @@ import {
   useDataSourceToTree,
 } from '@/plugins/common/dataSource';
 import { $deletePropsList } from '@/plugins/constants';
-import { useMemo } from '@/plugins/hooks';
+import { useCallback, useMemo } from '@/plugins/hooks';
 import { getIsPreview, getRender, getTreePreviewText } from '@/plugins/common/preview';
 import { ElPreview } from '@/index';
 import { PluginAccumulateTypes } from '@/plugins/accumulate';
@@ -69,6 +69,25 @@ export default TreeSelectBasicAccumulate.addAccumulate(idePlugin)
         ref: selfRef,
         loading,
         ...dataSourceResult,
+      };
+    },
+  })
+  .addPlugin({
+    name: 'handleSearch',
+    handle(props) {
+      const onSearch = props.get('onSearch');
+      const ref = props.get('ref');
+      const deletePropsList = props.get($deletePropsList).concat('onSearch');
+      const filterMethod = useCallback(
+        (keyword = '') => {
+          _.attempt(onSearch, { filterText: keyword });
+          _.attempt(ref?.filter, keyword);
+        },
+        [onSearch, ref],
+      );
+      return {
+        [$deletePropsList]: deletePropsList,
+        filterMethod,
       };
     },
   })
